@@ -26,9 +26,16 @@ export default function Home() {
                 className="group block"
               >
                 <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/15 hover:border-white/20 transition-all duration-200">
-                  <h2 className="font-display text-lg font-semibold text-white mb-2 group-hover:text-pe-light transition-colors leading-snug">
-                    {deck.title}
-                  </h2>
+                  <div className="flex items-start justify-between gap-2">
+                    <h2 className="font-display text-lg font-semibold text-white mb-2 group-hover:text-pe-light transition-colors leading-snug">
+                      {deck.title}
+                    </h2>
+                    {deck.private && (
+                      <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wider text-white/40 border border-white/15 rounded px-1.5 py-0.5">
+                        Private
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-white/50 mb-4 line-clamp-2">
                     {deck.description}
                   </p>

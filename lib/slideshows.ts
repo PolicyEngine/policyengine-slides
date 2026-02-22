@@ -17,6 +17,7 @@ export function getAllSlideshowMetadata(): SlideshowMetadata[] {
     date: s.date,
     location: s.location,
     speakers: s.speakers,
+    private: s.private,
     slideCount: flattenSlides(s.slides).length,
   }));
 }

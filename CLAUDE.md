@@ -52,6 +52,12 @@ bun run new-slideshow <id> <title> # Scaffold new slideshow
 3. Update `slideshows/my-talk/config.ts` with slide imports
 4. Register in `lib/slideshows.ts`
 
+## Private slideshows
+
+- Set `private: true` in a slideshow's `config.ts` to require a password before viewing
+- Set the `NEXT_PUBLIC_PRIVATE_PASSWORD` env var (in Vercel and locally) to define the password
+- Private decks show a "Private" badge on the home page card grid
+
 ## Style guidelines
 
 - **Sentence case** for all headings and UI text

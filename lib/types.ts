@@ -21,6 +21,7 @@ export interface SlideshowConfig {
   location?: string;
   footerText?: string;
   speakers?: SpeakerInfo[];
+  private?: boolean;
   slides: SlideConfig[];
 }
 
@@ -31,6 +32,7 @@ export interface SlideshowMetadata {
   date: string;
   location?: string;
   speakers?: SpeakerInfo[];
+  private?: boolean;
   slideCount: number;
 }
 
