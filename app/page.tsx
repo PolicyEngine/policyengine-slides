@@ -4,29 +4,12 @@ import Link from 'next/link';
 
 export default function Home() {
   const decks = getAllSlideshowMetadata().sort((a, b) => {
-    // Sort newest first by date string
     return b.date.localeCompare(a.date);
   });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pe-darker via-pe-dark to-pe-teal/80">
-      <header className="px-12 py-10 flex items-center justify-between">
-        <Image
-          src="/logos/white.svg"
-          alt="PolicyEngine"
-          width={220}
-          height={60}
-          className="opacity-90"
-        />
-        <a
-          href="https://policyengine.org"
-          className="text-white/60 hover:text-white/90 transition-colors text-sm font-medium"
-        >
-          policyengine.org
-        </a>
-      </header>
-
-      <main className="px-12 pb-16">
+      <main className="px-12 py-12">
         <div className="max-w-6xl mx-auto">
           <h1 className="font-display text-5xl font-bold text-white mb-3 tracking-tight">
             Presentations
