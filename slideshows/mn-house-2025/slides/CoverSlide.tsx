@@ -1,4 +1,3 @@
-import React from 'react';
 import Slide from '@/components/core/Slide';
 import SlideTitle from '@/components/layout/SlideTitle';
 

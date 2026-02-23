@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import { MouseEvent } from 'react';
 
 interface FullscreenButtonProps {
   iframeId: string;
 }
 
 export default function FullscreenButton({ iframeId }: FullscreenButtonProps) {
-  const handleFullscreen = async (e: React.MouseEvent) => {
+  const handleFullscreen = async (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 

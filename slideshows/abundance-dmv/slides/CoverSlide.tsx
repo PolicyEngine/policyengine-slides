@@ -1,4 +1,3 @@
-import React from 'react';
 import Slide from '@/components/core/Slide';
 import Image from 'next/image';
 

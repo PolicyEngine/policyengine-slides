@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import Slide from '@/components/core/Slide';
 import { useSlideshowContextSafe } from '@/components/core/SlideshowContext';
