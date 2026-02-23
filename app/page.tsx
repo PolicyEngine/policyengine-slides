@@ -1,4 +1,5 @@
 import { getAllSlideshowMetadata } from '@/lib/slideshows';
+import { formatDate } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -54,7 +55,7 @@ export default function Home() {
                       ))}
                     </div>
                     <div className="flex items-center gap-3 text-xs text-white/40">
-                      <span>{deck.date}</span>
+                      <span>{formatDate(deck.date)}</span>
                       <span>{deck.slideCount} slides</span>
                     </div>
                   </div>

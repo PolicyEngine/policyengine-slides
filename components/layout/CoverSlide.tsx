@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Slide from '@/components/core/Slide';
 import { useSlideshowContextSafe } from '@/components/core/SlideshowContext';
-import { SpeakerInfo } from '@/lib/types';
+import { SpeakerInfo, formatDate } from '@/lib/types';
 
 interface CoverSlideProps {
   title?: string;
@@ -62,7 +62,7 @@ export default function CoverSlide({
 
         <div className="opacity-60 text-center text-white pt-2">
           {resolvedEvent && <p className="capitalize">{resolvedEvent}</p>}
-          {resolvedDate && <p>{resolvedDate}</p>}
+          {resolvedDate && <p>{resolvedDate.includes('-') ? formatDate(resolvedDate) : resolvedDate}</p>}
         </div>
       </div>
     </Slide>

@@ -6,6 +6,21 @@ export interface SpeakerInfo {
   photo: string;
 }
 
+/**
+ * Format an ISO date string (YYYY-MM-DD) for display.
+ * Returns e.g. "February 21, 2026" or "February 2026" if day is 01.
+ */
+export function formatDate(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  const monthName = monthNames[month - 1] ?? '';
+  if (day === 1) return `${monthName} ${year}`;
+  return `${monthName} ${day}, ${year}`;
+}
+
 export interface SlideEntry {
   component: ComponentType<{ buildStep?: number }>;
   builds?: number;

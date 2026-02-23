@@ -29,7 +29,7 @@ export const aiWebinarConfig: SlideshowConfig = {
   id: 'ai-webinar',
   title: 'Automating tax and benefit policy modeling with multi-agent AI',
   description: 'How we built a system that transforms a policy request into a complete, tested pull request in 90 minutes',
-  date: 'February 2026',
+  date: '2026-02-01',
   footerText: 'AI Webinar \u00b7 February 2026',
   speakers: [
     speakers['max-ghenis'],
