@@ -35,16 +35,14 @@ export const ${id.replace(/-([a-z])/g, (_, c) => c.toUpperCase())}Config: Slides
 };
 `;
 
-const coverContent = `import React from 'react';
-import CoverSlideTemplate from '@/components/layout/CoverSlide';
+const coverContent = `import CoverSlideTemplate from '@/components/layout/CoverSlide';
 
 export default function CoverSlide() {
   return <CoverSlideTemplate />;
 }
 `;
 
-const endContent = `import React from 'react';
-import EndSlideTemplate from '@/components/layout/EndSlide';
+const endContent = `import EndSlideTemplate from '@/components/layout/EndSlide';
 
 export default function EndSlide() {
   return <EndSlideTemplate />;

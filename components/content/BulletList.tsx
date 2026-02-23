@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface BulletItem {
   text: string;
   subtext?: string;

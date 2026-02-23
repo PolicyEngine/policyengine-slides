@@ -1,5 +1,3 @@
-import React from 'react';
-
 const IconDefs = () => (
   <defs>
     <g id="icon-clipboard">

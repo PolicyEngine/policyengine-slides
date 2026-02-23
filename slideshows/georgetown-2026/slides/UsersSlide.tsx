@@ -3,8 +3,14 @@ import SlideTitle from '@/components/layout/SlideTitle';
 import SlideHeader from '@/components/layout/SlideHeader';
 import Image from 'next/image';
 
+interface Organization {
+  name: string;
+  logo: string;
+  smaller?: boolean;
+}
+
 export default function UsersSlide() {
-  const organizations = [
+  const organizations: Organization[] = [
     { name: 'Prenatal-to-3 Policy Impact Center', logo: '/logos/organizations/pn3policy.png' },
     { name: 'Niskanen Center', logo: '/logos/organizations/niskanen-center.png' },
     { name: 'Joint Economic Committee', logo: '/logos/organizations/jec.png' },
@@ -43,7 +49,7 @@ export default function UsersSlide() {
               <Image
                 src={org.logo}
                 alt={org.name}
-                width={(org as any).smaller ? 80 : 120}
+                width={org.smaller ? 80 : 120}
                 height={70}
                 className="object-contain"
               />
