@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
 import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
+import { buildSlideUrl } from '@/lib/slide-url';
 
 interface SlideshowViewerProps {
   config: SlideshowConfig;
@@ -33,7 +34,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   }, [searchParams, totalSteps]);
 
   useEffect(() => {
-    const url = `/${config.id}${currentStep > 0 ? `?slide=${currentStep}` : ''}`;
+    const url = buildSlideUrl(window.location.href, currentStep);
     window.history.replaceState(null, '', url);
   }, [currentStep, config.id]);
 

@@ -43,6 +43,7 @@ lib/
 bun dev                           # Dev server at localhost:3000
 bun run build                     # Production build
 bun run new-slideshow <id> <title> # Scaffold new slideshow
+bun run export <id> [output.pdf]  # Export slideshow to PDF
 ```
 
 ## Adding a new slideshow
