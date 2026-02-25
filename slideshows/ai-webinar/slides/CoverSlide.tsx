@@ -1,6 +1,6 @@
 import React from 'react';
 import Slide from '@/components/core/Slide';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 
 const speakers = [
   { name: 'Max Ghenis', title: 'CEO', photo: '/headshots/max-ghenis.png' },

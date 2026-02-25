@@ -1,7 +1,7 @@
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 import { IconFileText, IconChartBar, IconUsers, IconRefresh, IconArrowRight } from '@tabler/icons-react';
 
 const stages = [

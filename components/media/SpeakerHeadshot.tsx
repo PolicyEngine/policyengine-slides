@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 import { SpeakerInfo } from '@/lib/types';
 
 interface SpeakerHeadshotProps {
