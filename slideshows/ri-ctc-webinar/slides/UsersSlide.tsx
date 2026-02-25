@@ -1,7 +1,7 @@
 import Slide from '@/components/core/Slide';
 import SlideTitle from '@/components/layout/SlideTitle';
 import SlideHeader from '@/components/layout/SlideHeader';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 
 export default function UsersSlide() {
   const organizations = [

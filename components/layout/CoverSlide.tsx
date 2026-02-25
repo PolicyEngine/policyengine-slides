@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 import Slide from '@/components/core/Slide';
 import { useSlideshowContextSafe } from '@/components/core/SlideshowContext';
 import { SpeakerInfo, formatDate } from '@/lib/types';

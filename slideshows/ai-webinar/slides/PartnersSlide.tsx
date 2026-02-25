@@ -2,7 +2,7 @@ import React from 'react';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 
 const organizations: { name: string; logo?: string; smaller?: boolean; textLogo?: string }[] = [
   { name: 'Prenatal-to-3 Policy Impact Center', logo: '/logos/organizations/pn3policy.png' },

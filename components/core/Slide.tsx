@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 import { useSlideshowContextSafe } from './SlideshowContext';
 
 export interface SlideProps {

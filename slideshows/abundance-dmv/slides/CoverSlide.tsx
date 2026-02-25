@@ -1,5 +1,5 @@
 import Slide from '@/components/core/Slide';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 
 export default function CoverSlide() {
   return (
