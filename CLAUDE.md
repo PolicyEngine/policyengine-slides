@@ -59,6 +59,15 @@ bun run export <id> [output.pdf]  # Export slideshow to PDF
 - Set the `NEXT_PUBLIC_PRIVATE_PASSWORD` env var (in Vercel and locally) to define the password
 - Private decks show a "Private" badge on the home page card grid
 
+## Hosting and basePath
+
+- **basePath**: `/slides` (configured in `next.config.js`). All URLs on production are `/slides/...`
+- **Served via Vercel rewrite** from `policyengine.org/slides/*` → `policyengine-slides.vercel.app/slides/*`
+- **Images**: Use `BasePathImage` (not `next/image` directly). `next/image` with `unoptimized: true` + `basePath` doesn't prepend basePath to `<img src>`. `BasePathImage` wraps `next/image` and uses `resolveImageSrc()` to fix this.
+- **URL updates**: Use `buildSlideUrl()` from `lib/slide-url.ts` (not manual string building) to preserve basePath in `window.history.replaceState`.
+- **`.env.local` is gitignored** — Vercel CLI creates this with OIDC tokens; never commit it.
+- **After deploying**: Check `curl -sI <url> | grep age` — if stale, run `bunx vercel --prod --force`.
+
 ## Style guidelines
 
 - **Sentence case** for all headings and UI text
