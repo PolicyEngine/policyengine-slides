@@ -14,10 +14,10 @@ export default function OurApproachSlide() {
         <div className="grid grid-cols-3 gap-8">
           {/* Policies Column */}
           <div>
-            <div className="bg-[#319795] text-white text-center py-6 rounded-t-lg mb-6">
+            <div className="bg-pe-500 text-white text-center py-6 rounded-t-lg mb-6">
               <h2 className="text-4xl font-bold">Policies</h2>
             </div>
-            <ul className="space-y-3 text-xl text-[#2C7A7B]">
+            <ul className="space-y-3 text-xl text-pe-600">
               <li className="flex items-start gap-2">
                 <span className="mt-1">•</span>
                 <span>Federal income &amp; payroll tax</span>
@@ -39,10 +39,10 @@ export default function OurApproachSlide() {
 
           {/* Households Column */}
           <div>
-            <div className="bg-[#2C7A7B] text-white text-center py-6 rounded-t-lg mb-6">
+            <div className="bg-pe-600 text-white text-center py-6 rounded-t-lg mb-6">
               <h2 className="text-4xl font-bold">Households</h2>
             </div>
-            <ul className="space-y-3 text-xl text-[#2C7A7B]">
+            <ul className="space-y-3 text-xl text-pe-600">
               <li className="flex items-start gap-2">
                 <span className="mt-1">•</span>
                 <span>CPS ASEC foundation</span>
@@ -64,10 +64,10 @@ export default function OurApproachSlide() {
 
           {/* Dynamics Column */}
           <div>
-            <div className="bg-[#234E52] text-white text-center py-6 rounded-t-lg mb-6">
+            <div className="bg-pe-800 text-white text-center py-6 rounded-t-lg mb-6">
               <h2 className="text-4xl font-bold">Dynamics</h2>
             </div>
-            <ul className="space-y-3 text-xl text-[#2C7A7B]">
+            <ul className="space-y-3 text-xl text-pe-600">
               <li className="flex items-start gap-2">
                 <span className="mt-1">•</span>
                 <span>Labor supply elasticities</span>
@@ -79,17 +79,17 @@ export default function OurApproachSlide() {
         {/* Bottom row with methodology */}
         <div className="grid grid-cols-3 gap-8 mt-8">
           <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-lg italic text-[#026AA2] font-semibold">
+            <p className="text-lg italic text-pe-blue-700 font-semibold">
               Legislative references &amp; thousands of unit tests
             </p>
           </div>
           <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-lg italic text-[#026AA2] font-semibold">
+            <p className="text-lg italic text-pe-blue-700 font-semibold">
               Machine learning calibration for accuracy
             </p>
           </div>
           <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-lg italic text-[#026AA2] font-semibold">
+            <p className="text-lg italic text-pe-blue-700 font-semibold">
               CBO-based behavioral assumptions
             </p>
           </div>

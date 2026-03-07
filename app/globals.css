@@ -1,69 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 @import "tailwindcss";
+@import "@policyengine/design-system/tokens.css";
 
 @theme {
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: var(--pe-font-family-primary);
+  --font-sans: var(--pe-font-family-primary);
+  --font-mono: var(--pe-font-family-mono);
 
-  --color-pe-teal: #319795;
-  --color-pe-dark: #1D4044;
+  --color-pe-teal: var(--pe-color-primary-500);
+  --color-pe-dark: var(--pe-color-primary-900);
   --color-pe-darker: #0D2F33;
-  --color-pe-light: #E6FFFA;
+  --color-pe-light: var(--pe-color-primary-50);
   --color-pe-amber: #E8913A;
 
-  --color-pe-50: #E6FFFA;
-  --color-pe-100: #B2F5EA;
-  --color-pe-200: #81E6D9;
-  --color-pe-300: #4FD1C5;
-  --color-pe-400: #38B2AC;
-  --color-pe-500: #319795;
-  --color-pe-600: #2C7A7B;
-  --color-pe-700: #285E61;
-  --color-pe-800: #234E52;
-  --color-pe-900: #1D4044;
+  --color-pe-50: var(--pe-color-primary-50);
+  --color-pe-100: var(--pe-color-primary-100);
+  --color-pe-200: var(--pe-color-primary-200);
+  --color-pe-300: var(--pe-color-primary-300);
+  --color-pe-400: var(--pe-color-primary-400);
+  --color-pe-500: var(--pe-color-primary-500);
+  --color-pe-600: var(--pe-color-primary-600);
+  --color-pe-700: var(--pe-color-primary-700);
+  --color-pe-800: var(--pe-color-primary-800);
+  --color-pe-900: var(--pe-color-primary-900);
+
+  --color-pe-blue-700: var(--pe-color-blue-700);
 }
 
 /* ==================== DESIGN TOKENS (from @policyengine/design-system) ==================== */
 :root {
-  /* Primary palette */
-  --pe-teal: #319795;
-  --pe-teal-light: #38B2AC;
-  --pe-teal-dark: #2C7A7B;
-  --pe-dark: #1D4044;
+  /* Primary palette — aliased from design-system tokens */
+  --pe-teal: var(--pe-color-primary-500);
+  --pe-teal-light: var(--pe-color-primary-400);
+  --pe-teal-dark: var(--pe-color-primary-600);
+  --pe-dark: var(--pe-color-primary-900);
   --pe-darker: #0D2F33;
-  --pe-light: #E6FFFA;
+  --pe-light: var(--pe-color-primary-50);
 
-  /* Amber accent */
+  /* Amber accent (not in design-system — slide-specific) */
   --pe-amber: #E8913A;
   --pe-amber-light: #F0A85C;
   --pe-amber-dark: #C87A2E;
 
   /* Text (from design system) */
-  --text-primary: #000000;
-  --text-secondary: #5A5A5A;
-  --text-tertiary: #9CA3AF;
-  --text-inverse: #FFFFFF;
+  --text-primary: var(--pe-color-text-primary);
+  --text-secondary: var(--pe-color-text-secondary);
+  --text-tertiary: var(--pe-color-text-tertiary);
+  --text-inverse: var(--pe-color-text-inverse);
 
   /* Backgrounds */
-  --slide-bg: #FFFFFF;
-  --bg-card: #FFFFFF;
-  --bg-secondary: #F5F9FF;
-  --bg-tertiary: #F1F5F9;
+  --slide-bg: var(--pe-color-bg-primary);
+  --bg-card: var(--pe-color-bg-primary);
+  --bg-secondary: var(--pe-color-bg-secondary);
+  --bg-tertiary: var(--pe-color-bg-tertiary);
 
   /* Borders (from design system) */
-  --border-light: #E2E8F0;
-  --border-medium: #CBD5E1;
+  --border-light: var(--pe-color-border-light);
+  --border-medium: var(--pe-color-border-medium);
 
   /* Shadows (from design system) */
   --shadow-light: rgba(16, 24, 40, 0.05);
   --shadow-medium: rgba(16, 24, 40, 0.1);
 
   /* Semantic */
-  --success: #22C55E;
-  --warning: #FEC601;
-  --error: #EF4444;
+  --success: var(--pe-color-success);
+  --warning: var(--pe-color-warning);
+  --error: var(--pe-color-error);
 }
 
 * {
