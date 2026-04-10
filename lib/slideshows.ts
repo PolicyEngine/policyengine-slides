@@ -6,8 +6,10 @@ import { mnHouse2025Config } from '@/slideshows/mn-house-2025/config';
 import { riCtcWebinarConfig } from '@/slideshows/ri-ctc-webinar/config';
 import { modelScopeConfig } from '@/slideshows/model-scope/config';
 import { georgetown2026Config } from '@/slideshows/georgetown-2026/config';
+import { cio4goodPanelConfig } from '@/slideshows/cio4good-panel/config';
 
 export const slideshows: SlideshowConfig[] = [
+  cio4goodPanelConfig,
   aiWebinarConfig,
   abundanceDmvConfig,
   vanderbilt2025Config,
