@@ -27,7 +27,7 @@ export default function EvolutionSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Under the hood of the three stages from earlier</SlideTitle>
+        <SlideTitle>How we went from copy-paste to 100 parallel agents</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-3 gap-5 mt-6">
