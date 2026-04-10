@@ -1,5 +1,6 @@
 import { SlideshowConfig } from '@/lib/types';
 import CoverSlide from './slides/CoverSlide';
+import ContextSlide from './slides/ContextSlide';
 import EvolutionSlide from './slides/EvolutionSlide';
 import SkillsSlide from './slides/SkillsSlide';
 import LessonsSlide from './slides/LessonsSlide';
@@ -13,6 +14,7 @@ export const cio4goodWorkshopConfig: SlideshowConfig = {
   location: 'CIO4Good Summit Workshop',
   slides: [
     CoverSlide,
+    ContextSlide,
     EvolutionSlide,
     SkillsSlide,
     LessonsSlide,
