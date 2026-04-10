@@ -7,9 +7,9 @@ export default function CaseStudySlide() {
     <Slide>
       <SlideHeader>
         <p className="text-sm font-semibold uppercase tracking-widest text-[var(--pe-teal)] mb-1">Case study</p>
-        <SlideTitle>No. 10 needed to model a universal basic income — in days, not months</SlideTitle>
+        <SlideTitle>PolicyEngine at 10 Downing Street</SlideTitle>
         <p className="text-xl text-gray-600 mt-2">
-          From &ldquo;we can&rsquo;t answer this&rdquo; to real-time policy scoring for the Prime Minister&rsquo;s office.
+          Our CTO spent six months as an Innovation Fellow with 10DS, the No. 10 data science team.
         </p>
       </SlideHeader>
 
@@ -17,15 +17,15 @@ export default function CaseStudySlide() {
         {[
           {
             label: 'The problem',
-            desc: "Existing UK government models took weeks to score a proposal and couldn't handle novel designs. No. 10 needed rapid, transparent analysis to advise on policy options during live negotiations.",
+            desc: "When the policy process moves fast, there isn't always time for the full analytical process. Decision-makers needed faster access to evidence on how reforms affect living standards and local area incomes.",
           },
           {
-            label: 'What we did',
-            desc: "We encoded 100+ UK tax and benefit rules as open-source, version-controlled code. No. 10 analysts ran scenarios directly — adjusting parameters, seeing distributional results in seconds, no Python required.",
+            label: 'What they built',
+            desc: "The 10DS team built 10ds-microsim on top of PolicyEngine — rapidly estimating impacts of reforms on living standards, local area incomes, and distributional outcomes. Intensively validated against official forecasts.",
           },
           {
-            label: 'The result',
-            desc: "PolicyEngine UK is now used regularly for analytical advice to the PM. No. 10 has begun integrating it with macroeconomic models. The same platform serves researchers, think tanks, and the public.",
+            label: 'Why open source mattered',
+            desc: "Because our code is freely available, 10DS could adapt it to their needs, validate against internal benchmarks, and build infrastructure around it — without proprietary licensing or black-box constraints.",
           },
         ].map((item, i) => (
           <div key={i} className="rounded-xl p-6" style={{ background: 'linear-gradient(180deg, #f5fffc 0%, #ebfffb 100%)' }}>
