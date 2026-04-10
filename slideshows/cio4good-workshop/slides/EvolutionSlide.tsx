@@ -18,7 +18,7 @@ const stages = [
   {
     label: 'Stage 3',
     title: 'Parallel multi-agent',
-    desc: 'An orchestrator dispatches 100+ Codex agents in parallel, each encoding a different regulation in its own git worktree. Human review at the end, not every step.',
+    desc: 'An orchestrator dispatches 100+ AI agents in parallel — like sending 100 interns to each work on one regulation independently. Human review at the end, not every step.',
     timeframe: '2026',
   },
 ];
@@ -27,7 +27,7 @@ export default function EvolutionSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Three stages — each required rethinking how we structure work</SlideTitle>
+        <SlideTitle>Under the hood of the three stages from earlier</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-3 gap-5 mt-6">

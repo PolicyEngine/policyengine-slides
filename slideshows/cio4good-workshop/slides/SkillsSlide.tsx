@@ -41,6 +41,7 @@ export default function SkillsSlide() {
               { name: 'create-dashboard', desc: 'Plans, builds, and deploys a policy analysis dashboard from a description' },
               { name: 'fix-pr', desc: 'Reads review comments, applies fixes, re-runs tests' },
               { name: 'gmail', desc: 'Drafts and sends emails following org patterns and tone' },
+              { name: '(yours?)', desc: 'Vendor security review, grant compliance check, intake triage — same pattern, your domain knowledge' },
             ].map((s) => (
               <div key={s.name} className="flex items-start gap-3">
                 <code className="text-sm bg-gray-100 px-2 py-1 rounded font-mono text-[var(--pe-teal)] whitespace-nowrap mt-0.5">{s.name}</code>

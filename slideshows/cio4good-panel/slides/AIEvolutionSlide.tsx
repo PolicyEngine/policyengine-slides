@@ -49,7 +49,7 @@ export default function AIEvolutionSlide() {
 
       <div className="mt-6 pl-5 border-l-4 border-[var(--pe-teal)]">
         <p className="text-lg text-gray-700">
-          <strong className="text-gray-800">The question now:</strong> How do we create feedback loops for AI the way we would with a well-designed performance management system for human employees?
+          <strong className="text-gray-800">The question now:</strong> How do we create feedback loops for AI the way we would with a well-designed performance management system for human employees? <span className="text-gray-400 italic">&mdash; more on how we built this in the workshop</span>
         </p>
       </div>
     </Slide>

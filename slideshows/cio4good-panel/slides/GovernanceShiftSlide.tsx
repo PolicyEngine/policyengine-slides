@@ -14,14 +14,14 @@ export default function GovernanceShiftSlide() {
 
       <div className="grid grid-cols-2 gap-6 mt-6">
         <div className="border border-gray-200 rounded-xl p-6">
-          <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Data governance</h3>
-          <p className="text-sm font-semibold uppercase tracking-widest text-gray-400 mb-4">Where most orgs are today</p>
-          <ul className="space-y-3 text-base text-gray-600">
-            <li>What data can we share? Who has access?</li>
-            <li>How do we protect sensitive information?</li>
-            <li>How do we structure data for quality?</li>
-          </ul>
-          <p className="text-sm text-gray-400 mt-4 italic">Important, but not the whole picture.</p>
+          <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Example: why we created Axiom</h3>
+          <p className="text-base text-gray-600 leading-relaxed mb-3">
+            Our AI capabilities outgrew our organizational structure. We could suddenly encode <em>all</em> law &mdash; not just tax and benefits &mdash; but that mission was bigger than one nonprofit.
+          </p>
+          <p className="text-base text-gray-600 leading-relaxed mb-3">
+            So we spun out a second foundation (Axiom) dedicated to machine-readable legal infrastructure. That wasn&rsquo;t a data governance decision. It was a <strong>mission governance</strong> decision &mdash; how do we direct these new capabilities toward the biggest possible impact?
+          </p>
+          <p className="text-sm text-gray-400 mt-2 italic">The tools forced us to think bigger about what our mission even is.</p>
         </div>
 
         <div className="rounded-xl p-6 text-white" style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}>

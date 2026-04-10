@@ -29,18 +29,15 @@ export default function OrgTransformSlide() {
         </div>
 
         <div className="space-y-5">
-          <div className="border border-gray-200 rounded-xl p-6">
-            <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Axiom: rethinking structure across orgs</h3>
-            <p className="text-base text-gray-700 leading-relaxed">
-              We&rsquo;re launching the Axiom Foundation to encode policy rules at scale using AI. It&rsquo;s pushed us to rethink organizational structure not just within PolicyEngine but across organizations — how do you coordinate mission-driven work when AI agents do much of the execution?
-            </p>
-          </div>
           <div className="rounded-xl p-6 text-white" style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}>
             <h3 className="text-xl font-bold leading-tight mb-3">
               Eventually, we&rsquo;re all just guiding AIs to promote our mission
             </h3>
-            <p className="text-base text-white/80 leading-relaxed">
+            <p className="text-base text-white/80 leading-relaxed mb-4">
               The organizational question becomes: how do you define mission precisely enough to be the harness? And how do you build the feedback loops?
+            </p>
+            <p className="text-base text-white/60 leading-relaxed">
+              Budget, staffing, org structure — all of it follows from how well you answer that question.
             </p>
           </div>
         </div>
