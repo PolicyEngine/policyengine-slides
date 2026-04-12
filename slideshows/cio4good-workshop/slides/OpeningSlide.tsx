@@ -20,6 +20,10 @@ export default function OpeningSlide() {
             and see household-level impacts instantly. Used by No.&nbsp;10 Downing Street, Brookings,
             and Congressional committees.
           </p>
+          <p className="text-base text-gray-600 leading-relaxed mt-2">
+            Everyone uses AI coding tools daily — <strong>$60K/week in AI tokens</strong>. Max is
+            #1 globally on the Straude leaderboard by 6×; the next closest spends ~$10K/week.
+          </p>
         </div>
 
         <div className="border border-gray-200 rounded-xl p-6">

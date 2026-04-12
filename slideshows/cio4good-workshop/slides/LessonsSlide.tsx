@@ -12,8 +12,8 @@ const lessons = [
     desc: "If the process lives in someone's head, AI can't help you. Documentation is the unlock — not the model. The work of making your rules explicit is 80% of the value.",
   },
   {
-    title: 'Run it for real, not as a demo',
-    desc: "Pilots that don't touch real work teach you nothing. Find one volunteer who will actually use the output for something that matters. That's where you'll learn what to fix.",
+    title: 'Make the CEO use coding agents',
+    desc: "The CIO's job is to close the awareness gap between what AI can actually do and what leadership imagines. That gap compounds every month. The fastest fix is a hands-on demo that makes it personal.",
   },
   {
     title: 'The divergence is a signal, not a problem',

@@ -13,7 +13,7 @@ export default function TeamImpactSlide() {
         {[
           {
             title: 'Productivity divergence',
-            desc: "We required everyone to use AI tools from the start. The people who lean in get 5–10x. The people who don't, don't. That variation is now the strongest signal in hiring and role design.",
+            desc: "We required everyone to use AI tools from the start. The people who lean in get 5–10x. The people who don't, don't. We put AI usage into performance reviews and planning cycles — it puts people out of their comfort zone, and makes them feel more accomplished.",
           },
           {
             title: 'Products shifted',
@@ -21,7 +21,7 @@ export default function TeamImpactSlide() {
           },
           {
             title: 'Budget rebalanced',
-            desc: '$20k+/week in AI tokens. Bigger portions of total budget going to tools rather than payroll — but the tools amplify each person. It\'s new leverage, not replacement.',
+            desc: '$60K/week in AI tokens. Bigger portions of total budget going to tools rather than payroll — but the tools amplify each person. It\'s new leverage, not replacement.',
           },
         ].map((item, i) => (
           <div key={i} className="border border-gray-200 rounded-xl p-6">
