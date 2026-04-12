@@ -1,53 +1,48 @@
 import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
 
 export default function OpeningSlide() {
   return (
     <Slide>
-      <SlideHeader>
-        <SlideTitle>PolicyEngine&apos;s AI design journey</SlideTitle>
-        <p className="text-xl text-gray-600 mt-1">
-          How a 10-person nonprofit went from copy-paste to a 100-agent pipeline
-        </p>
-      </SlideHeader>
-
-      <div className="grid grid-cols-3 gap-5 mt-6">
-        <div className="border border-gray-200 rounded-xl p-6">
-          <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Who we are</h3>
-          <p className="text-base text-gray-600 leading-relaxed">
-            Open-source nonprofit. We build tax and benefit simulations — model any policy reform
-            and see household-level impacts instantly. Used by No.&nbsp;10 Downing Street, Brookings,
-            and Congressional committees.
+      <div className="flex gap-10 h-full items-stretch mt-4">
+        {/* Left: the hook */}
+        <div className="w-1/2 flex flex-col justify-center">
+          <p className="text-3xl text-gray-700 leading-snug italic">
+            &ldquo;Think about why you chose your organization over a corporate job, a government job,
+            another nonprofit.&rdquo;
           </p>
-          <p className="text-base text-gray-600 leading-relaxed mt-2">
-            Everyone uses AI coding tools daily — <strong>$60K/week in AI tokens</strong>. Max is
-            #1 globally on the Straude leaderboard by 6×; the next closest spends ~$10K/week.
+          <p className="text-3xl text-gray-800 font-semibold leading-snug mt-6">
+            You&apos;re here because the mission matters.
           </p>
         </div>
 
-        <div className="border border-gray-200 rounded-xl p-6">
-          <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Our constraint</h3>
-          <p className="text-base text-gray-600 leading-relaxed">
-            ~10 people. Entirely software. No large data team. Thousands of federal and state
-            policy rules — each one needing to be turned into working, tested, citable code.
-          </p>
-        </div>
+        {/* Right: the provocation */}
+        <div className="w-1/2 flex flex-col gap-4">
+          <div className="rounded-xl p-7 text-white flex-1" style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}>
+            <h3 className="font-mono text-xl font-bold mb-5 leading-snug">
+              Now — have you updated your ambitions to match what&apos;s possible?
+            </h3>
+            <div className="space-y-3">
+              {[
+                'Our mission: make every public policy in the world computable',
+                '10-person team, $60K/week in AI coding agents',
+                '#1 globally on Straude by 6× — next closest is ~$10K/week',
+                'Encoding tax and benefit rules across dozens of jurisdictions at a pace that would have required 50 engineers two years ago',
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span className="text-[var(--pe-teal)] font-bold mt-0.5 flex-shrink-0">&#8594;</span>
+                  <p className="text-base text-white/85 leading-relaxed">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className="rounded-xl p-6 text-white" style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}>
-          <h3 className="font-mono text-lg font-bold mb-2">The question we asked</h3>
-          <p className="text-base text-white/80 leading-relaxed">
-            Can AI do this work reliably? And if so, what does the <em>organization</em> around that AI
-            need to look like? That is what the next few slides are about.
-          </p>
+          <div className="pl-5 border-l-4 border-[var(--pe-teal)]">
+            <p className="text-base text-gray-600 leading-relaxed">
+              This talk is about the <strong className="text-gray-800">organizational decisions</strong> that
+              made it possible — not the technology.
+            </p>
+          </div>
         </div>
-      </div>
-
-      <div className="mt-6 pl-5 border-l-4 border-[var(--pe-teal)]">
-        <p className="text-lg text-gray-700">
-          <strong>Spoiler:</strong> yes — but only once we stopped treating AI like a magic search engine
-          and started designing the work around it.
-        </p>
       </div>
     </Slide>
   );
