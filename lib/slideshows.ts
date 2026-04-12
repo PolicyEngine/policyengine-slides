@@ -7,11 +7,13 @@ import { riCtcWebinarConfig } from '@/slideshows/ri-ctc-webinar/config';
 import { modelScopeConfig } from '@/slideshows/model-scope/config';
 import { georgetown2026Config } from '@/slideshows/georgetown-2026/config';
 import { cio4goodPanelConfig } from '@/slideshows/cio4good-panel/config';
+import { cio4goodTalkConfig } from '@/slideshows/cio4good-talk/config';
 import { cio4goodWorkshopConfig } from '@/slideshows/cio4good-workshop/config';
 
 export const slideshows: SlideshowConfig[] = [
   cio4goodWorkshopConfig,
   cio4goodPanelConfig,
+  cio4goodTalkConfig,
   aiWebinarConfig,
   abundanceDmvConfig,
   vanderbilt2025Config,
