@@ -4,20 +4,20 @@ import SlideTitle from '@/components/layout/SlideTitle';
 
 const lessons = [
   {
-    title: 'Structure the work, not just the prompt',
-    desc: "The bottleneck isn't AI capability — it's how you break work into chunks an agent can execute reliably. Documentation, evals, and feedback loops matter more than clever prompts.",
+    title: 'Pick one broken workflow, not a strategy',
+    desc: "AI strategy documents are a distraction. Find the most painful, most-repeated task your team does and start there. The insight comes from doing, not planning.",
   },
   {
-    title: 'Skills over agents',
-    desc: "Don't start by building an autonomous agent. Start with a skill — one well-defined task with clear instructions. Skills compose into agents naturally once the pieces work.",
+    title: 'Write down the rules before automating them',
+    desc: "If the process lives in someone's head, AI can't help you. Documentation is the unlock — not the model. The work of making your rules explicit is 80% of the value.",
   },
   {
-    title: 'Embrace the divergence',
-    desc: "Your team will split into people who run with AI and people who resist. That's information, not a problem. Use it to reshape roles, not to force uniformity.",
+    title: 'Run it for real, not as a demo',
+    desc: "Pilots that don't touch real work teach you nothing. Find one volunteer who will actually use the output for something that matters. That's where you'll learn what to fix.",
   },
   {
-    title: 'Think bigger about your mission',
-    desc: "AI didn't just make us faster. It made us split into two organizations and rethink what's possible. If your ambition hasn't changed, you're probably underusing the tools.",
+    title: 'The divergence is a signal, not a problem',
+    desc: "When you give everyone AI access, some people run with it and some don't. That split tells you more about role fit and ambition than any org chart review. Use it.",
   },
 ];
 
@@ -25,7 +25,7 @@ export default function LessonsSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Design lessons</SlideTitle>
+        <SlideTitle>What I&apos;d tell you to try first</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-5 mt-6">
