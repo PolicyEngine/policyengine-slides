@@ -1,5 +1,9 @@
 import { SlideshowConfig } from '@/lib/types';
+// Phase 1: context and early wins
 import OpeningSlide from './slides/OpeningSlide';
+import EarlyWinsSlide from './slides/EarlyWinsSlide';
+import BridgeSlide from './slides/BridgeSlide';
+// Phase 2: encoding evolution (from ai-webinar)
 import ScaleChallengeSlide from '../ai-webinar/slides/ScaleChallengeSlide';
 import SolutionOverviewSlide from '../ai-webinar/slides/SolutionOverviewSlide';
 import Evo1SinglePromptSlide from '../ai-webinar/slides/Evo1SinglePromptSlide';
@@ -9,9 +13,11 @@ import Evo4ValidationSlide from '../ai-webinar/slides/Evo4ValidationSlide';
 import Evo5SkillsSlide from '../ai-webinar/slides/Evo5SkillsSlide';
 import Evo6FullWorkflowSlide from '../ai-webinar/slides/Evo6FullWorkflowSlide';
 import ResultsSlide from '../ai-webinar/slides/ResultsSlide';
+// Phase 3: what it changed
+import AxiomSlide from './slides/AxiomSlide';
+import PolicyBenchSlide from './slides/PolicyBenchSlide';
 import SkillsSlide from './slides/SkillsSlide';
 import TeamImpactSlide from './slides/TeamImpactSlide';
-import PolicyBenchSlide from './slides/PolicyBenchSlide';
 import LessonsSlide from './slides/LessonsSlide';
 import EndSlide from './slides/EndSlide';
 
@@ -22,7 +28,11 @@ export const cio4goodWorkshopConfig: SlideshowConfig = {
   date: 'April 2026',
   location: 'CIO4Good Summit Workshop',
   slides: [
+    // Phase 1: context and early wins (Max block 1)
     OpeningSlide,
+    EarlyWinsSlide,
+    BridgeSlide,
+    // Phase 2: encoding evolution (Max block 2)
     ScaleChallengeSlide,
     SolutionOverviewSlide,
     Evo1SinglePromptSlide,
@@ -32,9 +42,11 @@ export const cio4goodWorkshopConfig: SlideshowConfig = {
     Evo5SkillsSlide,
     Evo6FullWorkflowSlide,
     ResultsSlide,
+    // Phase 3: what it changed
+    AxiomSlide,
+    PolicyBenchSlide,
     SkillsSlide,
     TeamImpactSlide,
-    PolicyBenchSlide,
     LessonsSlide,
     EndSlide,
   ],
