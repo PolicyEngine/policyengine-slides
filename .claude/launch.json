@@ -5,7 +5,8 @@
       "name": "policyengine-slides",
       "runtimeExecutable": "bun",
       "runtimeArgs": ["dev"],
-      "port": 3000
+      "port": 3335,
+      "autoPort": false
     }
   ]
 }
