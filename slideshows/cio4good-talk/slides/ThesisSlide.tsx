@@ -1,47 +1,56 @@
 import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
 
 export default function ThesisSlide() {
   return (
     <Slide>
-      <div className="max-w-7xl">
-        <SlideHeader>
-          <div className="space-y-5">
-            <span className="inline-flex items-center rounded-full bg-slate-900/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.18em] text-pe-teal">
-              CIO4Good panel
-            </span>
-            <SlideTitle className="max-w-5xl text-pe-dark">
-              AI is most useful when it runs against your real rules and data.
-            </SlideTitle>
-          </div>
-        </SlideHeader>
+      <div className="flex gap-10 h-full items-stretch mt-4">
+        {/* Left: the hook */}
+        <div className="w-1/2 flex flex-col justify-center space-y-6">
+          <p className="text-3xl text-gray-700 leading-snug italic">
+            &ldquo;Think about why you chose your organization over a corporate
+            job, a government job, another nonprofit.&rdquo;
+          </p>
+          <p className="text-3xl text-gray-800 font-semibold leading-snug">
+            You&apos;re here because the mission matters to you.
+          </p>
+          <p className="text-2xl text-gray-600 leading-relaxed">
+            Now &mdash; have you updated your ambitions to match what&apos;s
+            possible?
+          </p>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-[1.2fr,0.85fr] md:items-start">
-          <div className="space-y-8 text-2xl leading-relaxed text-slate-600">
-            <p>
-              At PolicyEngine, we use AI to turn legislative text into working
-              policy logic, simulation inputs, and reviewable analysis.
+        {/* Right: PolicyEngine as proof */}
+        <div className="w-1/2 flex flex-col gap-5">
+          <div
+            className="rounded-xl p-7 text-white flex-1 flex flex-col justify-between"
+            style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}
+          >
+            <p className="text-sm font-semibold uppercase tracking-widest text-white/50 mb-4">
+              Our answer at PolicyEngine
             </p>
-
-            <div className="accent-block">
-              <p className="text-2xl font-semibold leading-relaxed text-pe-dark">
-                The bottleneck is rarely model access. It is whether the
-                organization is legible enough for humans and machines to work
-                from the same source of truth.
-              </p>
+            <div className="space-y-4">
+              {[
+                'Mission: make every public policy in the world computable',
+                '10-person team — the mission is impossible at human scale',
+                'AI made it not insane to try',
+                '$60K/week in coding agents; #1 globally on Straude by 6×',
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span className="text-[var(--pe-teal)] font-bold mt-0.5 flex-shrink-0">
+                    &#8594;
+                  </span>
+                  <p className="text-base text-white/85 leading-relaxed">{item}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="content-card p-8">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              What I will cover
+          <div className="pl-5 border-l-4 border-[var(--pe-teal)]">
+            <p className="text-base text-gray-600 leading-relaxed">
+              I want to talk about the{' '}
+              <strong className="text-gray-800">organizational decisions</strong>{' '}
+              that made it possible &mdash; not the technology.
             </p>
-            <ul className="slide-list text-xl text-slate-800">
-              <li>A real case study from PolicyEngine</li>
-              <li>What AI actually needed from our data, documents, and workflows</li>
-              <li>How to make this an operating model, not a side project</li>
-            </ul>
           </div>
         </div>
       </div>
