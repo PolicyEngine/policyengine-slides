@@ -4,7 +4,6 @@ import TitleSlide from './slides/TitleSlide';
 import ThesisSlide from './slides/ThesisSlide';
 import WhatWeDoSlide from '../cio4good-workshop/slides/WhatWeDoSlide';
 import AIEvolutionSlide from '../cio4good-panel/slides/AIEvolutionSlide';
-import CaseStudySlide from '../cio4good-panel/slides/CaseStudySlide';
 import FoundationsSlide from './slides/FoundationsSlide';
 import OperatingModelSlide from './slides/OperatingModelSlide';
 import GovernanceShiftSlide from '../cio4good-panel/slides/GovernanceShiftSlide';
@@ -24,12 +23,11 @@ export const cio4goodTalkConfig: SlideshowConfig = {
     ThesisSlide,          // 2. "Think about why you chose your org..."
     WhatWeDoSlide,        // 3. PolicyEngine in 30 seconds + screenshot
     AIEvolutionSlide,     // 4. Three stages: AI for dev → AI in products → building for AIs
-    CaseStudySlide,       // 5. No. 10 Downing Street + AI shift
-    FoundationsSlide,     // 6. What AI needed from the org
-    OperatingModelSlide,  // 7. Governance + builder loop + adoption
-    GovernanceShiftSlide, // 8. Mission governance + Axiom
-    StatuteToggleSlide,   // 9. Same law, two representations (toggle)
-    OutcomesSlide,        // 10. Internal capacity + mission delivery
-    StartHereSlide,       // 11. Pick one bottleneck, make it legible, give it an owner
+    FoundationsSlide,     // 5. Open everything, require tools, build the harness
+    OperatingModelSlide,  // 6. If I were a CIO
+    GovernanceShiftSlide, // 7. Two missions — Axiom
+    StatuteToggleSlide,   // 8. Same law, two representations (toggle)
+    OutcomesSlide,        // 9. What changes about the people
+    StartHereSlide,       // 10. Closer — callback to thesis
   ],
 };
