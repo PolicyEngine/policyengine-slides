@@ -42,10 +42,10 @@ export default function WhatWeDoSlide() {
 
         <div className="content-card overflow-hidden">
           <Image
-            src="/images/app-v2-demo.png"
-            alt="PolicyEngine web application"
-            width={1200}
-            height={800}
+            src="/screenshots/pe-winners-losers.png"
+            alt="PolicyEngine distributional analysis showing winners and losers by income decile"
+            width={1600}
+            height={1200}
             className="w-full h-full object-cover object-top"
             priority
           />
