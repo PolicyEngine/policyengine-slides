@@ -6,33 +6,41 @@ export default function GovernanceShiftSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>From governing data to governing how AI serves the mission</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">
-          We occupy a privileged position — open source, open data, minimal user data. That let us skip ahead to the governance questions coming for everyone.
-        </p>
+        <SlideTitle>AI doesn&apos;t just serve the mission &mdash; it changes what the mission can be</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-6 mt-6">
         <div className="border border-gray-200 rounded-xl p-6">
-          <h3 className="font-mono text-lg font-bold text-gray-800 mb-2">Example: why we created Axiom</h3>
+          <h3 className="font-mono text-lg font-bold text-gray-800 mb-3">Two missions, not one</h3>
           <p className="text-base text-gray-600 leading-relaxed mb-3">
-            Our AI capabilities outgrew our organizational structure. We could suddenly encode <em>all</em> law &mdash; not just tax and benefits &mdash; but that mission was bigger than one nonprofit.
+            Democratizing policy analysis is a big mission. Making the world&apos;s
+            rules computable is a different big mission. Before AI, we couldn&apos;t
+            seriously pursue both. Now we can &mdash; but not inside one organization.
           </p>
           <p className="text-base text-gray-600 leading-relaxed mb-3">
-            So we spun out a second foundation (Axiom) dedicated to machine-readable legal infrastructure. That wasn&rsquo;t a data governance decision. It was a <strong>mission governance</strong> decision &mdash; how do we direct these new capabilities toward the biggest possible impact?
+            So we created the Axiom Foundation to encode rules at scale, while
+            PolicyEngine stays focused on helping people understand what those
+            rules mean for them. Each mission gets the scope and leadership it
+            deserves.
           </p>
-          <p className="text-sm text-gray-400 mt-2 italic">The tools forced us to think bigger about what our mission even is.</p>
+          <p className="text-base text-gray-700 leading-relaxed font-semibold">
+            AI didn&apos;t just help us do our mission faster. It forced us to
+            ask: are we thinking about the right mission? And is one org the
+            right shape to pursue it?
+          </p>
         </div>
 
         <div className="rounded-xl p-6 text-white" style={{ background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)' }}>
-          <h3 className="font-mono text-lg font-bold mb-2">Mission governance</h3>
-          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--pe-teal)] mb-4 opacity-80">Where CIOs can lead next</p>
-          <ul className="space-y-3 text-base text-white/85">
-            <li>How do we put AI resources to work toward our mission?</li>
-            <li>How do we define mission precisely enough to guide AI agents?</li>
-            <li>How do we build feedback loops — like performance management, but for AI?</li>
+          <h3 className="font-mono text-lg font-bold mb-2">The question for your org</h3>
+          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--pe-teal)] mb-4 opacity-80">Building missions, not just serving them</p>
+          <ul className="space-y-4 text-base text-white/85">
+            <li>What would you attempt if your capacity tripled overnight?</li>
+            <li>Is that still the same mission &mdash; or is it a bigger one that needs its own structure?</li>
+            <li>How do you define each mission precisely enough to guide the AI agents pursuing it?</li>
           </ul>
-          <p className="text-sm text-white/50 mt-4 italic">This is the frontier CIOs can shape.</p>
+          <p className="text-sm text-white/50 mt-5 italic">
+            Sometimes the right move is to think entire organizations, not just tools.
+          </p>
         </div>
       </div>
     </Slide>
