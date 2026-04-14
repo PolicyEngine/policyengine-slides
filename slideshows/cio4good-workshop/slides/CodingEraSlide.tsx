@@ -9,7 +9,7 @@ const milestones = [
     what: 'Autocomplete for policy logic — faster boilerplate, but no real understanding of the domain.',
   },
   {
-    year: '2023',
+    year: '2022',
     tool: 'ChatGPT',
     what: 'Copy-paste workflow: paste a block of model output into ChatGPT, ask it to analyze. Useful but manual and disconnected.',
   },
