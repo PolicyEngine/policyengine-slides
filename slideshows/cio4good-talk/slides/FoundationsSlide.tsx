@@ -5,18 +5,18 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const foundations = [
   {
     eyebrow: 'Foundation 01',
-    title: 'Structured data',
-    copy: 'If your data lives in spreadsheets and email attachments, AI can\u2019t help you at scale. Clean entities, stable definitions, and datasets that can be re-run and audited.',
+    title: 'Open everything up',
+    copy: 'Our entire codebase is open source on GitHub. That means every AI agent can see every file, every rule, every test. The more legible your work is, the more AI can do with it.',
   },
   {
     eyebrow: 'Foundation 02',
-    title: 'Legible documents',
-    copy: 'Your policies, procedures, and references need to be something both humans and machines can trace back to the same source. If the knowledge is in someone\u2019s head, AI can\u2019t use it.',
+    title: 'Require the tools',
+    copy: 'We put everyone on Claude Code or Codex from the start. Not optional. The variation in adoption told us more about role fit and ambition than anything else.',
   },
   {
     eyebrow: 'Foundation 03',
-    title: 'Skilled workflows',
-    copy: 'A repeatable loop for building, reviewing, and shipping \u2014 with named owners who maintain it. Not a graveyard of abandoned tools two years from now.',
+    title: 'Build the harness',
+    copy: 'Imagine you suddenly had 5x the staff. What would you actually tell them to do? That\u2019s the question AI forces. The mission statement becomes the performance management system.',
   },
 ];
 

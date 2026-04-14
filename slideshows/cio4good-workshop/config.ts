@@ -25,6 +25,7 @@ import SkillsSlide from './slides/SkillsSlide';
 // Post-exercise: strategic implications (Max + Brian, Section 6)
 import StrategicImplicationsSlide from './slides/StrategicImplicationsSlide';
 import AxiomSlide from './slides/AxiomSlide';
+import StatuteToggleSlide from './slides/StatuteToggleSlide';
 import PolicyBenchSlide from './slides/PolicyBenchSlide';
 import TeamImpactSlide from './slides/TeamImpactSlide';
 import LessonsSlide from './slides/LessonsSlide';
@@ -63,7 +64,8 @@ export const cio4goodWorkshopConfig: SlideshowConfig = {
     // --- Post-exercise: strategic implications (Max + Brian) ---
     StrategicImplicationsSlide, // 17. Panel callback + 3 questions
     AxiomSlide,           // 18. AI changed the size of the mission
-    PolicyBenchSlide,     // 19. What AI can't do alone
+    StatuteToggleSlide,   // 19. Same law, two representations
+    PolicyBenchSlide,     // 20. What AI can't do alone
     TeamImpactSlide,      // 20. Budget, performance reviews, divergence
     LessonsSlide,         // 21. 4 takeaways
     EndSlide,             // 22. Close
