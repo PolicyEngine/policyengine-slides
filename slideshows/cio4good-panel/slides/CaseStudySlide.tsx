@@ -9,7 +9,7 @@ export default function CaseStudySlide() {
         <p className="text-sm font-semibold uppercase tracking-widest text-[var(--pe-teal)] mb-1">Case study</p>
         <SlideTitle>PolicyEngine at 10 Downing Street</SlideTitle>
         <p className="text-xl text-gray-600 mt-2">
-          Our CTO spent six months as an Innovation Fellow with 10DS, the No. 10 data science team.
+          Our CTO is an Innovation Fellow with 10DS, the No. 10 data science team.
         </p>
       </SlideHeader>
 
