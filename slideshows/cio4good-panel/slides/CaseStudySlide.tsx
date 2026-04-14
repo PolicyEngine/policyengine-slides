@@ -21,11 +21,11 @@ export default function CaseStudySlide() {
           },
           {
             label: 'What they built',
-            desc: "The 10DS team built 10ds-microsim on top of PolicyEngine — rapidly estimating impacts of reforms on living standards, local area incomes, and distributional outcomes. Intensively validated against official forecasts.",
+            desc: "The 10DS team built 10ds-microsim on top of PolicyEngine \u2014 rapidly estimating impacts of reforms on living standards, local area incomes, and distributional outcomes. Validated against official forecasts.",
           },
           {
-            label: 'Why open source mattered',
-            desc: "Because our code is freely available, 10DS could adapt it to their needs, validate against internal benchmarks, and build infrastructure around it — without proprietary licensing or black-box constraints.",
+            label: 'The AI shift',
+            desc: "We spent a year building a new frontend. Now 10DS largely uses AI with our model on the backend \u2014 answering questions directly or building custom interfaces. We have to adapt: the value is the computation engine, not the UI we built around it.",
           },
         ].map((item, i) => (
           <div key={i} className="rounded-xl p-6" style={{ background: 'linear-gradient(180deg, #f5fffc 0%, #ebfffb 100%)' }}>
