@@ -22,9 +22,9 @@ const columns = [
   {
     title: 'Adoption',
     items: [
-      'Interfaces non-technical staff could interrogate and challenge',
-      'Outputs with citations, assumptions, and review hooks',
-      'AI framed as shared capacity, not a special technical toy',
+      'Leadership has to use the tools, not just approve them \u2014 otherwise you\u2019re setting strategy blind',
+      'Give people a sandbox and real problems, not a training course and a policy memo',
+      'Expect divergence \u2014 use it as a signal, but take responsibility for bringing people along',
     ],
   },
 ];

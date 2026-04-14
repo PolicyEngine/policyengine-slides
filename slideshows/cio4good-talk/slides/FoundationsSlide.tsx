@@ -6,17 +6,17 @@ const foundations = [
   {
     eyebrow: 'Foundation 01',
     title: 'Structured data',
-    copy: 'Clean entities, stable definitions, and datasets that can be re-run and audited.',
+    copy: 'If your data lives in spreadsheets and email attachments, AI can\u2019t help you at scale. Clean entities, stable definitions, and datasets that can be re-run and audited.',
   },
   {
     eyebrow: 'Foundation 02',
     title: 'Legible documents',
-    copy: 'Policies, assumptions, and references that humans and machines can trace back to the same source.',
+    copy: 'Your policies, procedures, and references need to be something both humans and machines can trace back to the same source. If the knowledge is in someone\u2019s head, AI can\u2019t use it.',
   },
   {
     eyebrow: 'Foundation 03',
     title: 'Skilled workflows',
-    copy: 'A repeatable loop for building, reviewing, and shipping results without losing context.',
+    copy: 'A repeatable loop for building, reviewing, and shipping \u2014 with named owners who maintain it. Not a graveyard of abandoned tools two years from now.',
   },
 ];
 

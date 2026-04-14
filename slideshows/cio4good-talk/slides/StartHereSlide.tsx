@@ -5,18 +5,18 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const steps = [
   {
     eyebrow: 'Step 01',
-    title: 'Pick one workflow',
-    copy: 'Choose a concrete, high-friction task where better structure would obviously save time or improve quality.',
+    title: 'Pick one real bottleneck',
+    copy: 'Not an AI strategy doc. A concrete task that\u2019s painful, repeated, and everyone agrees is slow \u2014 client intake, grant reporting, compliance checks, donor matching.',
   },
   {
     eyebrow: 'Step 02',
-    title: 'Name one source of truth',
-    copy: 'Make the rules, documents, and data behind that workflow legible and versioned.',
+    title: 'Make the knowledge legible',
+    copy: 'If the process lives in someone\u2019s head or scattered across spreadsheets, write it down. That documentation work is 80% of the value \u2014 AI or not.',
   },
   {
     eyebrow: 'Step 03',
-    title: 'Require one review loop',
-    copy: 'Keep humans in the loop with tests, citations, and a clear owner for final judgment.',
+    title: 'Give it an owner',
+    copy: 'Someone has to maintain this. Not a committee \u2014 a named person who reviews outputs, updates the instructions, and decides when it\u2019s good enough to trust.',
   },
 ];
 

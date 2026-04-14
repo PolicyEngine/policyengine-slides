@@ -39,9 +39,9 @@ export default function SkillsSlide() {
               { name: 'encode-policy', desc: 'Reads a statute, encodes parameters + formulas + tests as working code' },
               { name: 'review-work', desc: 'Validates a change against the original source documents and quality standards' },
               { name: 'create-dashboard', desc: 'Plans, builds, and deploys a policy analysis report from a plain description' },
-              { name: 'apply-feedback', desc: 'Reads review comments, applies fixes, re-runs tests' },
-              { name: 'draft-email', desc: 'Drafts and sends emails following org patterns and tone' },
-              { name: '(yours?)', desc: 'Vendor review, grant compliance check, intake triage — same pattern, your domain knowledge' },
+              { name: 'match-client', desc: 'Match a legal query to the right licensed professional from a roster (DC Bar does this today)' },
+              { name: 'triage-intake', desc: 'Route a student or client request to the right support path based on eligibility and history' },
+              { name: '(yours?)', desc: 'Grant compliance review, board memo drafting, donor research, program evaluation — same pattern' },
             ].map((s) => (
               <div key={s.name} className="flex items-start gap-3">
                 <code className="text-sm bg-gray-100 px-2 py-1 rounded font-mono text-[var(--pe-teal)] whitespace-nowrap mt-0.5">{s.name}</code>
