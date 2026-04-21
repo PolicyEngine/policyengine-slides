@@ -8,7 +8,7 @@ export default function AskSlide() {
       <SlideHeader>
         <SlideTitle>Discussion</SlideTitle>
       </SlideHeader>
-      <div className="mt-8 max-w-5xl space-y-8 text-lg leading-relaxed">
+      <div className="mt-8 grid grid-cols-2 gap-x-12 gap-y-8 text-lg leading-relaxed">
         <div>
           <div className="text-xl font-semibold text-pe-dark mb-2">For Lars</div>
           <div className="text-gray-700">

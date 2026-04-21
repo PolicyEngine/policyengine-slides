@@ -35,7 +35,7 @@ export default function LimitsSlide() {
       <SlideHeader>
         <SlideTitle>What this does <span className="text-amber-600">not</span> solve &mdash; yet</SlideTitle>
       </SlideHeader>
-      <div className="mt-8 max-w-6xl space-y-5">
+      <div className="mt-8 space-y-5">
         {CATEGORIES.map((cat) => (
           <div key={cat.title} className="border-l-4 border-amber-500 pl-5 py-1">
             <div className="text-xl font-semibold text-pe-dark">{cat.title}</div>
@@ -46,7 +46,7 @@ export default function LimitsSlide() {
           </div>
         ))}
       </div>
-      <div className="mt-6 max-w-5xl text-base text-gray-600 leading-relaxed italic">
+      <div className="mt-6 text-base text-gray-600 leading-relaxed italic">
         Being explicit about these lets the replication packet describe what
         varies and what does not, instead of the packet promising bit-exact
         where the underlying computation is stochastic.
