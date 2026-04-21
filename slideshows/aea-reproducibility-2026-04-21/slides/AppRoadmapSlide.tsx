@@ -9,7 +9,7 @@ const PHASES: Phase[] = [
   {
     phase: 'Already implemented in the stack',
     items: [
-      { text: 'policyengine-us-data publishes a hashed h5 artifact, data manifest, and calibration log for each certified release' },
+      { text: 'policyengine-us-data publishes a hashed h5 artifact and data manifest for each certified release' },
       { text: 'policyengine.py has a certified bundle layer plus a per-simulation TRO layer' },
       { text: 'The model/data compatibility contract now lives in a release bundle instead of in loose package pins' },
       { text: 'TRACE objects already carry the key hashes: bundle, wheel, manifest, and dataset artifact' },

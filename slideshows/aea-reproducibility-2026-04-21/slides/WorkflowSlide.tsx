@@ -39,7 +39,12 @@ write_results_with_trace_tro(
               Replicator validates and replays
             </div>
             <CodeBlock title="bash">
-              <pre className="text-sm leading-relaxed">{`$ pip install "policyengine[us]" jsonschema
+              <pre className="text-sm leading-relaxed">{`# install line comes from the cited bundle manifest
+$ pip install \\
+    policyengine==4.3.0 \\
+    policyengine-us==1.653.3 \\
+    policyengine-us-data==1.73.0 \\
+    jsonschema
 $ policyengine trace-tro-validate \\
     results.trace.tro.jsonld
 ok: results.trace.tro.jsonld
@@ -48,7 +53,7 @@ ok: results.trace.tro.jsonld
 # 1. sha256(bundle TRO) matches bundle_tro_url
 # 2. sha256(results.json) matches the TRO
 # 3. sha256(reform.json) matches the TRO
-# 4. rerunning uses the same certified h5`}</pre>
+# 4. rerunning installs the exact cited bundle`}</pre>
             </CodeBlock>
           </div>
         </div>

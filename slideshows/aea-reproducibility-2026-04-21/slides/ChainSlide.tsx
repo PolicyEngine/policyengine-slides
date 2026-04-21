@@ -20,9 +20,9 @@ const LAYERS = [
   {
     layer: '3. Calibrated microdata artifact',
     artifact: 'enhanced_cps_2024.h5 on HuggingFace + DataReleaseManifest',
-    addresses: 'SHA-256 of the h5, build fingerprint, calibration log',
+    addresses: 'SHA-256 of the h5 + published data release manifest',
     detail:
-      'This is the public replay boundary. A replicator reuses the frozen h5; they do not need to rebuild the imputation pipeline to reproduce the published run.',
+      'This is the public replay boundary. A replicator reuses the frozen h5; they do not need to rebuild the imputation pipeline to reproduce the published run. Calibration logs can accompany a release, but they are not yet part of the same immutable certified contract.',
   },
   {
     layer: '2. Rules bundle',
