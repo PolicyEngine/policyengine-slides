@@ -4,20 +4,20 @@ import SlideTitle from '@/components/layout/SlideTitle';
 
 const lessons = [
   {
-    title: 'Pick one broken workflow, not a strategy',
-    desc: "AI strategy documents are a distraction. Find the most painful, most-repeated task your team does and start there. The insight comes from doing, not planning.",
+    title: 'Start with one repeated workflow',
+    desc: "Pick a document-heavy task that happens every week and already has a clear owner. Strategy becomes real when it attaches to a workflow people can point to.",
   },
   {
-    title: 'Write down the rules before automating them',
-    desc: "If the process lives in someone's head, AI can't help you. Documentation is the unlock — not the model. The work of making your rules explicit is 80% of the value.",
+    title: 'Make the workflow legible first',
+    desc: "If the process lives in people's heads, AI cannot help much. Source docs, examples, review criteria, and fallback rules are the real foundation.",
   },
   {
-    title: 'Make the CEO use coding agents',
-    desc: "The CIO's job is to close the awareness gap between what AI can actually do and what leadership imagines. That gap compounds every month. The fastest fix is a hands-on demo that makes it personal.",
+    title: 'Create an opportunity mindset, not a fear spiral',
+    desc: "This is a cultural change problem as much as a technical one. People need permission, budget, and examples that make the upside concrete before they will change how they work.",
   },
   {
-    title: 'The divergence is a signal, not a problem',
-    desc: "When you give everyone AI access, some people run with it and some don't. That split tells you more about role fit and ambition than any org chart review. Use it.",
+    title: 'Measure reliability before you scale',
+    desc: "Evals turn AI from a cool demo into an accountable system. Define what good looks like for your mission, then benchmark the model and the workflow against it.",
   },
 ];
 
@@ -25,7 +25,7 @@ export default function LessonsSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>What I&apos;d tell you to try first</SlideTitle>
+        <SlideTitle>What I&apos;d tell a CIO to do next</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-5 mt-6">

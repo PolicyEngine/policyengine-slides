@@ -6,21 +6,21 @@ export default function AxiomSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>When the ambition outgrows the org</SlideTitle>
+        <SlideTitle>When AI changes the size of the mission</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-8 mt-6">
         <div className="flex flex-col gap-5">
           <div className="border border-gray-200 rounded-xl p-6">
-            <h3 className="font-mono text-lg font-bold text-gray-800 mb-3">The realization</h3>
+            <h3 className="font-mono text-lg font-bold text-gray-800 mb-3">The shift</h3>
             <p className="text-base text-gray-600 leading-relaxed">
-              AI encoding worked so well that we asked: what if we did this for{' '}
-              <em>every</em> policy? Not just tax and benefits — every rule that
-              affects how society works.
+              Once the encoding workflow started working, the question stopped being{' '}
+              <em>&ldquo;how do we cover more tax and benefit programs?&rdquo;</em> and became{' '}
+              <em>&ldquo;what if every rule could become machine-readable?&rdquo;</em>
             </p>
             <p className="text-base text-gray-600 leading-relaxed mt-3">
-              That ambition didn&apos;t fit inside a policy research nonprofit.
-              It needed its own mission, its own scope, its own leadership.
+              That is a bigger mission than one policy research nonprofit. It forced us to separate
+              the infrastructure mission from the application mission.
             </p>
           </div>
 
@@ -50,22 +50,22 @@ export default function AxiomSlide() {
           <div className="rounded-xl p-6" style={{ background: 'linear-gradient(180deg, #f5fffc 0%, #ebfffb 100%)' }}>
             <h3 className="font-mono text-lg font-bold text-gray-800 mb-3">The CIO lesson</h3>
             <p className="text-base text-gray-700 leading-relaxed">
-              AI didn&apos;t just make us faster at our existing mission. It expanded
-              what we thought was possible, which forced us to rethink our entire
-              organizational structure.
+              AI didn&apos;t just make us faster at the existing mission. It expanded what felt
+              tractable, which forced us to rethink scope, ownership, and how different teams should
+              be organized around the work.
             </p>
             <p className="text-base text-gray-700 leading-relaxed mt-3">
-              If AI is working well for you, expect this: the scope of what
-              you can accomplish will outgrow your current org design. That&apos;s
-              a feature, not a bug.
+              If AI is working well for you, expect this: the scope of what you can accomplish may
+              outgrow your current org design. That&apos;s a leadership question before it&apos;s a
+              tooling question.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-[var(--pe-teal)]">
             <p className="text-lg text-gray-700 leading-relaxed">
-              <strong className="text-gray-800">Have you updated your ambitions</strong> to
-              match what&apos;s possible? That question from the opening isn&apos;t
-              hypothetical — we had to answer it, and it changed everything.
+              <strong className="text-gray-800">AI success creates strategy pressure.</strong>{' '}
+              Once the work gets cheaper and faster, leadership has to decide whether to do the same
+              mission better or attempt a larger one.
             </p>
           </div>
         </div>

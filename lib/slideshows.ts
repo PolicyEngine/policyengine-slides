@@ -9,8 +9,10 @@ import { georgetown2026Config } from '@/slideshows/georgetown-2026/config';
 import { cio4goodPanelConfig } from '@/slideshows/cio4good-panel/config';
 import { cio4goodTalkConfig } from '@/slideshows/cio4good-talk/config';
 import { cio4goodWorkshopConfig } from '@/slideshows/cio4good-workshop/config';
+import { aeaReproducibilityConfig } from '@/slideshows/aea-reproducibility-2026-04-21/config';
 
 export const slideshows: SlideshowConfig[] = [
+  aeaReproducibilityConfig,
   cio4goodWorkshopConfig,
   cio4goodPanelConfig,
   cio4goodTalkConfig,

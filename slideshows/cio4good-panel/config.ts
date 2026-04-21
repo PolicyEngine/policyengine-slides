@@ -12,7 +12,7 @@ export const cio4goodPanelConfig: SlideshowConfig = {
   id: 'cio4good-panel',
   title: 'Building data foundations for policy impact',
   description: 'How open-source infrastructure turns policy rules into public goods',
-  date: 'April 2026',
+  date: '2026-04-01',
   location: 'CIO4Good Summit',
   slides: [
     CoverSlide,
