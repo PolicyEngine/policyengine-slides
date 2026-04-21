@@ -4,39 +4,39 @@ import SlideTitle from '@/components/layout/SlideTitle';
 
 const LAYERS = [
   {
-    layer: '5. Per-run artifact',
-    artifact: 'TRACE TRO (JSON-LD)',
-    addresses: 'SHA-256 composition fingerprint over 1-4',
+    layer: '5. Run-level citation',
+    artifact: 'Simulation TRO (JSON-LD)',
+    addresses: 'Pins the bundle TRO + reform JSON + results JSON',
     detail:
-      'Canonical TROv 0.1 vocabulary + pe: namespace for certification metadata. SHACL-validatable. Ships CI run URL and git SHA.',
+      'This is what the paper cites. It answers: what exact reform was run, what exact results were published, and what exact frozen bundle were those chained to?',
   },
   {
     layer: '4. Certified release bundle',
     artifact: 'policyengine.py CountryReleaseManifest',
-    addresses: 'Pins model version + certified data package version',
+    addresses: 'Pins one rules bundle to one certified data artifact',
     detail:
-      'Ships inside each policyengine.py wheel. Runtime refuses to mix a model with data it was not certified against.',
+      'Ships inside each policyengine.py wheel. Runtime is supposed to refuse mixing a model with data it was not certified against.',
   },
   {
-    layer: '3. Data artifact',
+    layer: '3. Calibrated microdata artifact',
     artifact: 'enhanced_cps_2024.h5 on HuggingFace + DataReleaseManifest',
     addresses: 'SHA-256 of the h5, build fingerprint, calibration log',
     detail:
-      'Every upload is content-addressed. The manifest records the upstream microdata vintages and the deterministic build pipeline that produced this h5.',
+      'This is the public replay boundary. A replicator reuses the frozen h5; they do not need to rebuild the imputation pipeline to reproduce the published run.',
   },
   {
-    layer: '2. Model code',
-    artifact: 'policyengine-us / policyengine-uk on PyPI',
-    addresses: 'Semver + PyPI immutability + published wheel SHA-256',
+    layer: '2. Rules bundle',
+    artifact: 'policyengine-us / policyengine-uk code + parameters',
+    addresses: 'Wheel SHA-256 + parameter tree + reform semantics',
     detail:
-      'Variables, parameters, and reforms are open-source. Version pin in requirements reproduces the computation logic exactly.',
+      'Variables, parameters, and reforms live here. This layer should answer Tara’s “did the rules change?” question without conflating it with microdata drift.',
   },
   {
-    layer: '1. Input microdata',
+    layer: '1. Raw inputs and calibration targets',
     artifact: 'CPS, ACS, SCF, IRS-PUF, SIPP, ORG, IRS SOI targets',
     addresses: 'Upstream provider fingerprints where available; checked-in CSVs where not',
     detail:
-      'Open data (CPS, ACS, SOI) is fetched and hash-verified. Restricted data (IRS-PUF, SIPP) stays behind licensing; public replicators use checked-in calibration targets as a proxy.',
+      'Open inputs can be hash-verified. Restricted inputs stay behind licensing. Public packets should cite their downstream contribution through the calibrated h5 and calibration log, not pretend the raw data is redistributable.',
   },
 ];
 
@@ -44,7 +44,7 @@ export default function ChainSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>The provenance chain</SlideTitle>
+        <SlideTitle>The provenance split that matters</SlideTitle>
       </SlideHeader>
       <div className="mt-8 space-y-4">
         {LAYERS.map((row) => (

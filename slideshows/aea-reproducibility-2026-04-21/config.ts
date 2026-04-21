@@ -10,13 +10,13 @@ import AskSlide from './slides/AskSlide';
 
 export const aeaReproducibilityConfig: SlideshowConfig = {
   id: 'aea-reproducibility-2026-04-21',
-  title: 'PolicyEngine reproducibility architecture',
+  title: 'Reproducing a PolicyEngine result',
   description:
     'Working meeting with Lars Vilhuber (AEA Data Editor), Tara Watson, John Sabelhaus, and the PolicyEngine team',
   date: '2026-04-21',
   location: 'Virtual meeting',
   footerText:
-    'PolicyEngine \u00b7 Reproducibility architecture \u00b7 April 21, 2026',
+    'PolicyEngine \u00b7 Reproducing a result \u00b7 April 21, 2026',
   speakers: [speakers['max-ghenis']],
   private: true,
   slides: [

@@ -14,19 +14,19 @@ export default function WhyThisMattersSlide() {
           size="md"
           items={[
             {
-              text: 'A PolicyEngine result depends on four moving parts: model code, parameters, input microdata, and a calibrated weight vector',
+              text: 'A microsimulation result can move because the rules changed, because the calibrated microdata changed, or because both changed',
               subtext:
-                'Any one of those drifts and the number changes. A version pin on the package alone is not enough.',
+                "That is Tara's Brookings concern and John's code-plus-data point in one sentence. A package version alone does not tell you which layer moved.",
             },
             {
-              text: 'AEA, QJE, AER, and a growing share of journals now require a replication package that reproduces results bit-exact',
+              text: 'For AEA-style reproducibility, the defensible claim is narrower than “rebuild the whole microsim stack from raw data”',
               subtext:
-                'What counts as "bit-exact" for a stochastic microsim is exactly what this meeting is about.',
+                'A reviewer should be able to replay the published result against a frozen rules bundle and a frozen calibrated household file, even when raw licensed inputs remain private.',
             },
             {
-              text: 'PolicyEngine is becoming a citable common good',
+              text: 'PolicyEngine results already enter public policy debate',
               subtext:
-                'Brookings, Budget Lab at Yale, CRFB, MN House, OBR Scotland, and the AI Policy Brief Factory all cite specific runs. The citations need to be durable.',
+                'Brookings and CRFB already appear in the website citations section. The next bar is a citation that stays interpretable after later model and data releases.',
             },
           ]}
         />

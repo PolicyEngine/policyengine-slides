@@ -4,8 +4,8 @@ import { speakers } from '@/lib/speakers';
 export default function TitleSlide() {
   return (
     <CoverSlide
-      title="PolicyEngine reproducibility architecture"
-      subtitle="Content-addressed provenance from raw microdata to published result"
+      title="Reproducing a PolicyEngine result"
+      subtitle="Separating rules, calibrated microdata, and run-level citations"
       speakers={[speakers['max-ghenis']]}
       event="Working meeting with Lars Vilhuber, Tara Watson, John Sabelhaus"
       date="April 21, 2026"

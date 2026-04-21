@@ -7,37 +7,48 @@ type Phase = { phase: string; items: Item[] };
 
 const PHASES: Phase[] = [
   {
-    phase: 'In place today',
+    phase: 'Already implemented in the stack',
     items: [
-      { text: 'policyengine-us-data ships TROs in canonical TROv 0.1 (us-data PR #746)' },
-      { text: 'policyengine.py exposes trace-tro and trace-tro-validate CLIs (pe.py PR #314 aligns namespace)' },
-      { text: 'household-api-docs documents the API + Python flow (docs PR #7)' },
-      { text: 'TROs carry CI run URL + git SHA + wheel SHA + h5 SHA' },
+      { text: 'policyengine-us-data publishes a hashed h5 artifact, data manifest, and calibration log for each certified release' },
+      { text: 'policyengine.py has a certified bundle layer plus a per-simulation TRO layer' },
+      { text: 'The model/data compatibility contract now lives in a release bundle instead of in loose package pins' },
+      { text: 'TRACE objects already carry the key hashes: bundle, wheel, manifest, and dataset artifact' },
     ],
   },
   {
-    phase: 'Next: bring it into the app',
+    phase: 'Landing now',
     items: [
       {
-        text: '"Cite this result" button on every policyengine.org simulation page',
+        text: 'Household docs need to teach the split clearly: API/Python usage on one side, reproducibility artifacts on the other',
         subtext:
-          'Downloads a .trace.tro.jsonld pinned to the exact model + data that rendered the page; includes the reform JSON, year, and impact summary as a results-TRO',
+          'That is what PR #7 is for once the routing and mobile-navigation regressions are fixed.',
       },
       {
-        text: 'Version badges on results',
-        subtext: '"model us@1.653.3 · data@1.78.2 · h5 sha256:abc123..."',
+        text: 'trace-tro-validate should work from the documented install line',
+        subtext:
+          'The validator depends on jsonschema; that should not be a footnote in the replication workflow.',
       },
-      { text: 'Shareable permalinks that hash to the same TRO' },
-      { text: '"Replicate in Colab" button that opens a notebook with pip install lines prefilled' },
-      { text: 'In-app TRO validator: paste a TRO, get a diff against the runtime bundle' },
+      {
+        text: 'The narrative itself should separate rules changes from microdata changes',
+        subtext:
+          'That is the main story Tara, John, and Lars are reacting to.',
+      },
     ],
   },
   {
-    phase: 'Later',
+    phase: 'What the app should expose next',
     items: [
-      { text: 'Integrate with Zenodo / OSF DOIs for durable citation' },
-      { text: 'SHACL validation wired into CI (today we validate via JSON Schema; TROv ships SHACL shapes)' },
-      { text: 'Contribute the microsim-reproducibility-packet template to AEA/QJE if Lars is interested' },
+      {
+        text: '"Cite this result" export on every simulation page',
+        subtext:
+          'Downloads the run-level TRO plus results.json, chained to the exact rules bundle and exact calibrated h5 that rendered the page.',
+      },
+      {
+        text: 'A visible version badge that separates rules from data',
+        subtext: '"rules us@1.653.3 · data enhanced_cps_2024.h5@1.78.2 · h5 sha256:abc123..."',
+      },
+      { text: 'A diff view that answers: did the result move because rules changed, data changed, or both?' },
+      { text: '"Replicate in Colab" / notebook button with the correct install line and immutable bundle URL' },
     ],
   },
 ];
