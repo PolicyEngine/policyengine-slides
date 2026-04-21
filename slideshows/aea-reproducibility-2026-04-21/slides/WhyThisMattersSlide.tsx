@@ -14,9 +14,14 @@ export default function WhyThisMattersSlide() {
           size="md"
           items={[
             {
+              text: 'This is a very active project',
+              subtext:
+                'Since April 14, policyengine-us merged 109 PRs and policyengine-us-data merged 39. Themes included broader CHIP and Medicaid coverage, richer EITC and ACA calibration targets by state and AGI, marketplace imputation work, and RNG/reproducibility fixes in the data pipeline. Those changes interact: once the microdata is recalibrated to fit the improved health and tax targets together, EITC simulations can move too.',
+            },
+            {
               text: 'A microsimulation result can move because the rules changed, because the calibrated microdata changed, or because both changed',
               subtext:
-                "That is Tara's Brookings concern and John's code-plus-data point in one sentence. A package version alone does not tell you which layer moved.",
+                "Tara's Brookings question and John's code-plus-data point are the same reproducibility problem: a package version alone does not tell you which layer moved.",
             },
             {
               text: 'For AEA-style reproducibility, the defensible claim is narrower than “rebuild the whole microsim stack from raw data”',
@@ -26,7 +31,7 @@ export default function WhyThisMattersSlide() {
             {
               text: 'PolicyEngine results already enter public policy debate',
               subtext:
-                'Brookings and CRFB already appear in the website citations section. The next bar is a citation that stays interpretable after later model and data releases.',
+                'Relevant users already include CRFB, Georgetown, BEA, and 10 Downing Street. The next bar is a citation that stays interpretable after later model and data releases.',
             },
           ]}
         />

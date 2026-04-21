@@ -4,25 +4,11 @@ import SlideTitle from '@/components/layout/SlideTitle';
 
 const LAYERS = [
   {
-    layer: '5. Run-level citation',
-    artifact: 'Simulation TRO (JSON-LD)',
-    addresses: 'Pins the bundle TRO + reform JSON + results JSON',
+    layer: '1. Raw inputs and calibration targets',
+    artifact: 'CPS, ACS, SCF, IRS-PUF, SIPP, ORG, IRS SOI targets',
+    addresses: 'Upstream provider fingerprints where available; checked-in CSVs where not',
     detail:
-      'This is what the paper cites. It answers: what exact reform was run, what exact results were published, and what exact frozen bundle were those chained to?',
-  },
-  {
-    layer: '4. Certified release bundle',
-    artifact: 'policyengine.py CountryReleaseManifest',
-    addresses: 'Pins one rules bundle to one certified data artifact',
-    detail:
-      'Ships inside each policyengine.py wheel. Runtime is supposed to refuse mixing a model with data it was not certified against.',
-  },
-  {
-    layer: '3. Calibrated microdata artifact',
-    artifact: 'enhanced_cps_2024.h5 on HuggingFace + DataReleaseManifest',
-    addresses: 'SHA-256 of the h5 + published data release manifest',
-    detail:
-      'This is the public replay boundary. A replicator reuses the frozen h5; they do not need to rebuild the imputation pipeline to reproduce the published run. Calibration logs can accompany a release, but they are not yet part of the same immutable certified contract.',
+      'Open inputs can be hash-verified. Restricted inputs stay behind licensing. Public packets should cite their downstream contribution through the calibrated h5 and calibration log, not pretend the raw data is redistributable.',
   },
   {
     layer: '2. Rules bundle',
@@ -32,11 +18,25 @@ const LAYERS = [
       'Variables, parameters, and reforms live here. This layer should answer Tara’s “did the rules change?” question without conflating it with microdata drift.',
   },
   {
-    layer: '1. Raw inputs and calibration targets',
-    artifact: 'CPS, ACS, SCF, IRS-PUF, SIPP, ORG, IRS SOI targets',
-    addresses: 'Upstream provider fingerprints where available; checked-in CSVs where not',
+    layer: '3. Calibrated microdata artifact',
+    artifact: 'enhanced_cps_2024.h5 on HuggingFace + DataReleaseManifest',
+    addresses: 'SHA-256 of the h5 + published data release manifest',
     detail:
-      'Open inputs can be hash-verified. Restricted inputs stay behind licensing. Public packets should cite their downstream contribution through the calibrated h5 and calibration log, not pretend the raw data is redistributable.',
+      'This is the public replay boundary. A replicator reuses the frozen h5; they do not need to rebuild the imputation pipeline to reproduce the published run. Calibration logs can accompany a release, but they are not yet part of the same immutable certified contract.',
+  },
+  {
+    layer: '4. Certified release bundle',
+    artifact: 'policyengine.py CountryReleaseManifest',
+    addresses: 'Pins one rules bundle to one certified data artifact',
+    detail:
+      'Ships inside each policyengine.py wheel. Runtime is supposed to refuse mixing a model with data it was not certified against.',
+  },
+  {
+    layer: '5. Run-level citation',
+    artifact: 'Simulation TRO (JSON-LD)',
+    addresses: 'Pins the bundle TRO + reform JSON + results JSON',
+    detail:
+      'This is what the paper cites. It answers: what exact reform was run, what exact results were published, and what exact frozen bundle were those chained to?',
   },
 ];
 

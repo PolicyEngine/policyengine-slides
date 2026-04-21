@@ -21,10 +21,15 @@ export default function WorkflowSlide() {
 # 1. Start from the certified rules + data bundle
 bundle_tro = ...  # shipped / CI-generated bundle TRO
 
-# 2. Run the reform and materialize the paper's results.json
-results = ...  # ResultsJson for the published tables/figures
+# 2. Materialize the result. "results" can be aggregates
+#    for the paper's tables/figures, OR the full per-
+#    household simulation frame (parquet/HDF5) for
+#    downstream distributional work, OR both.
+results = ...
 
-# 3. Emit the citable simulation TRO
+# 3. Emit the citable simulation TRO. Any file passed is
+#    content-hashed, so the TRO pins whichever artifacts
+#    the paper wants replicators to cite.
 write_results_with_trace_tro(
     results,
     "results.json",
@@ -41,9 +46,9 @@ write_results_with_trace_tro(
             <CodeBlock title="bash">
               <pre className="text-sm leading-relaxed">{`# install line comes from the cited bundle manifest
 $ pip install \\
-    policyengine==4.3.0 \\
+    policyengine==4.3.1 \\
     policyengine-us==1.653.3 \\
-    policyengine-us-data==1.73.0 \\
+    policyengine-us-data==1.85.2 \\
     jsonschema
 $ policyengine trace-tro-validate \\
     results.trace.tro.jsonld
@@ -57,12 +62,15 @@ ok: results.trace.tro.jsonld
             </CodeBlock>
           </div>
         </div>
-        <div className="text-lg text-gray-600 leading-relaxed max-w-5xl">
-          The paper cites the simulation TRO. That object chains the reform and
-          results onto a certified bundle TRO, which separately pins the rules
-          bundle and the frozen calibrated microdata artifact under the canonical{' '}
-          <span className="font-mono text-sm">https://w3id.org/trace/trov/0.1#</span>{' '}
-          vocabulary that any third-party validator can consume.
+        <div className="text-base text-gray-600 leading-relaxed max-w-6xl">
+          The paper cites the simulation TRO, which chains reform + results onto
+          a certified bundle TRO under canonical{' '}
+          <span className="font-mono text-xs">https://w3id.org/trace/trov/0.1#</span>.
+          Shipping the full per-household weighted frame (a few MB of parquet)
+          lets replicators compute any custom split or subgroup aggregate —
+          state &times; child count, income deciles, any variable PolicyEngine
+          calculates — without rerunning the simulation or touching the raw
+          licensed microdata.
         </div>
       </div>
     </Slide>

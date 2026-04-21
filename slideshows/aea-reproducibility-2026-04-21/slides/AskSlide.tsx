@@ -12,10 +12,11 @@ export default function AskSlide() {
         <div>
           <div className="text-xl font-semibold text-pe-dark mb-2">For Lars</div>
           <div className="text-gray-700">
-            If a packet separately pins the rules bundle, the calibrated h5,
-            and the run-level results TRO, is that enough for an AEA-style
-            replication package without redistributing restricted raw
-            microdata? If not, what is missing?
+            The split maps onto AEA's own code + data vocabulary: rules bundle
+            is the code, calibrated h5 is the data, run-level TRO is the
+            citation that binds them. If a packet separately pins all three
+            without redistributing restricted raw inputs, is that enough for
+            an AEA replication package? If not, what is missing?
           </div>
         </div>
         <div>
@@ -30,9 +31,12 @@ export default function AskSlide() {
         <div>
           <div className="text-xl font-semibold text-pe-dark mb-2">For John</div>
           <div className="text-gray-700">
-            Is the right transparency boundary the frozen calibrated h5 plus
-            calibration log, or do we need more of the upstream imputation
-            pipeline exposed before the packet feels scientifically legible?
+            Should the default citation ship the full per-household weighted
+            simulation frame, not just the paper's aggregates? That turns any
+            downstream researcher's custom split (state &times; child count,
+            income deciles, a variable not in the paper) into re-aggregation
+            rather than a rerun. What else does the artifact need to be
+            scientifically legible?
           </div>
         </div>
         <div>
