@@ -5,7 +5,7 @@ export default function CrfbSsDemoSlide() {
     <Slide showFooter={false} fullBleed>
       <iframe
         src="https://www.policyengine.org/us/taxation-of-benefits-reforms"
-        className="w-full h-full border-0 block"
+        className="w-full h-full border-0 block pointer-events-none"
         title="CRFB Social Security TOB impacts"
       />
     </Slide>

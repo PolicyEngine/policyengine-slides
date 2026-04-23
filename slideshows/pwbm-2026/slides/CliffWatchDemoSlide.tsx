@@ -5,7 +5,7 @@ export default function CliffWatchDemoSlide() {
     <Slide showFooter={false} fullBleed>
       <iframe
         src="https://www.policyengine.org/us/cliff-watch"
-        className="w-full h-full border-0 block"
+        className="w-full h-full border-0 block pointer-events-none"
         title="Cliff-Watch"
       />
     </Slide>
