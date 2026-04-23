@@ -9,6 +9,7 @@ export interface SlideProps {
   isCover?: boolean;
   isEnd?: boolean;
   footerText?: string;
+  fullBleed?: boolean;
 }
 
 export default function Slide({
@@ -18,6 +19,7 @@ export default function Slide({
   isCover = false,
   isEnd = false,
   footerText,
+  fullBleed = false,
 }: SlideProps) {
   const ctx = useSlideshowContextSafe();
   const resolvedFooterText = footerText ?? ctx?.footerText ?? '';
@@ -40,17 +42,21 @@ export default function Slide({
         </div>
       )}
 
-      <div className={`
-        absolute inset-0
-        ${isCover || isEnd ? 'flex items-center justify-center' : 'pt-24 pb-28'}
-      `}>
+      {fullBleed ? (
+        <div className="absolute inset-0">{children}</div>
+      ) : (
         <div className={`
-          w-full h-full
-          ${isCover || isEnd ? 'max-w-6xl px-20 flex flex-col justify-center' : 'px-16'}
+          absolute inset-0
+          ${isCover || isEnd ? 'flex items-center justify-center' : 'pt-24 pb-28'}
         `}>
-          {children}
+          <div className={`
+            w-full h-full
+            ${isCover || isEnd ? 'max-w-6xl px-20 flex flex-col justify-center' : 'px-16'}
+          `}>
+            {children}
+          </div>
         </div>
-      </div>
+      )}
 
       {showFooter && !isCover && !isEnd && (
         <div className="absolute bottom-0 left-0 right-0 h-20 gradient-footer flex items-center justify-between px-16">
