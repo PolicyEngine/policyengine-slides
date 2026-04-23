@@ -14,6 +14,7 @@ import ValidationSlide from './slides/ValidationSlide';
 import PartnersSlide from './slides/PartnersSlide';
 import CliffWatchDemoSlide from './slides/CliffWatchDemoSlide';
 import MicrodataPipelineSlide from './slides/MicrodataPipelineSlide';
+import CalibrationTechSlide from './slides/CalibrationTechSlide';
 import ReproducibilitySlide from './slides/ReproducibilitySlide';
 import OBBBADemoSlide from './slides/OBBBADemoSlide';
 import BehavioralResponseSlide from './slides/BehavioralResponseSlide';
@@ -47,6 +48,7 @@ export const pwbm2026Config: SlideshowConfig = {
 
     DataDividerSlide,
     MicrodataPipelineSlide,
+    CalibrationTechSlide,
     ReproducibilitySlide,
     OBBBADemoSlide,
 
