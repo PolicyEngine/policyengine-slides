@@ -19,17 +19,18 @@ export default function AxiomFutureSlide() {
         <div className="flex flex-col gap-5">
           <div className="content-card p-6">
             <h3 className="font-mono text-lg font-bold text-gray-800 mb-3">
-              The shift
+              Two missions, not one
             </h3>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Once rule encoding starts to scale, the question stops being
-              &ldquo;how do we cover more programs?&rdquo; and becomes
-              &ldquo;what if public rules themselves become open infrastructure?&rdquo;
+              Democratizing policy analysis is a big mission. Making public
+              rules computable is a different big mission. Before AI, we could
+              not seriously pursue both. Now we can, but not inside one
+              application.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mt-4">
-              That is bigger than one microsimulation model, and bigger than one
-              institution. It points toward shared standards, validation, and
-              interoperability.
+              So Axiom becomes the rule-encoding infrastructure layer, while
+              PolicyEngine stays focused on helping people understand what those
+              rules mean for households, budgets, and incentives.
             </p>
           </div>
 

@@ -57,10 +57,10 @@ export const pwbm2026Config: SlideshowConfig = {
     CrfbSsDemoSlide,
 
     AIDividerSlide,
-    AIInternalWorkflowSlide,
+    HouseholdAIDemoSlide,
     AIInequalitySlide,
     AIResearchSlide,
-    HouseholdAIDemoSlide,
+    AIInternalWorkflowSlide,
     AxiomFutureSlide,
 
     QuestionsSlide,
