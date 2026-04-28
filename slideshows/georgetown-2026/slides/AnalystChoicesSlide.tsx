@@ -52,10 +52,10 @@ export default function AnalystChoicesSlide() {
                 key={index}
                 className="flex items-center gap-4 text-xl"
               >
-                <div className="w-48 text-right font-semibold text-[#319795]">
+                <div className="w-48 text-right font-semibold text-pe-500">
                   {choice.category}
                 </div>
-                <div className="w-4 h-4 rounded-full bg-[#319795]" />
+                <div className="w-4 h-4 rounded-full bg-pe-500" />
                 <div className="text-gray-700">
                   {choice.options}
                 </div>

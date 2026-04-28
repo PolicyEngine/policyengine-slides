@@ -14,7 +14,7 @@ export default function DataSourcesSlide() {
           <div className="grid grid-cols-2 gap-12">
             {/* Tax Data Column */}
             <div>
-              <div className="bg-[#319795] text-white text-center py-4 rounded-t-lg mb-6">
+              <div className="bg-pe-500 text-white text-center py-4 rounded-t-lg mb-6">
                 <h2 className="text-3xl font-bold">IRS Tax Data</h2>
                 <p className="text-lg opacity-80">(Public Use File)</p>
               </div>
@@ -44,7 +44,7 @@ export default function DataSourcesSlide() {
 
             {/* Survey Data Column */}
             <div>
-              <div className="bg-[#2C7A7B] text-white text-center py-4 rounded-t-lg mb-6">
+              <div className="bg-pe-600 text-white text-center py-4 rounded-t-lg mb-6">
                 <h2 className="text-3xl font-bold">CPS Survey Data</h2>
                 <p className="text-lg opacity-80">(Current Population Survey)</p>
               </div>
@@ -74,7 +74,7 @@ export default function DataSourcesSlide() {
           </div>
 
           <div className="mt-10 text-center">
-            <div className="inline-block bg-[#234E52] text-white px-8 py-4 rounded-lg text-2xl font-semibold">
+            <div className="inline-block bg-pe-800 text-white px-8 py-4 rounded-lg text-2xl font-semibold">
               PolicyEngine uses both, with machine learning
             </div>
           </div>

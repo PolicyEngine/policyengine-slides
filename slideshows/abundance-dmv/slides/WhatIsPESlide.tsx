@@ -2,23 +2,24 @@ import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { IconScale, IconUsers, IconTrendingUp } from '@tabler/icons-react';
+import { colors } from '@policyengine/design-system/tokens/colors';
 
 const pillars = [
   {
     icon: IconScale,
-    color: '#319795',
+    color: colors.primary[500],
     title: 'Policies',
     items: ['Federal income & payroll tax', 'State income tax (all 50 + DC)', 'CTC, EITC, SNAP, Medicaid, SSI, ACA', 'Thousands of unit-tested rules'],
   },
   {
     icon: IconUsers,
-    color: '#2C7A7B',
+    color: colors.primary[600],
     title: 'Households',
     items: ['Census CPS foundation', 'Enhanced with IRS, ACS, SCF data', 'State-specific datasets', 'ML-calibrated to official aggregates'],
   },
   {
     icon: IconTrendingUp,
-    color: '#234E52',
+    color: colors.primary[800],
     title: 'Dynamics',
     items: ['Labor supply elasticities', 'CBO-based behavioral assumptions', 'How people respond to incentives'],
   },

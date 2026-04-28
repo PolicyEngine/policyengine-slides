@@ -14,7 +14,7 @@ export default function FlowchartSlide() {
           <iframe
             src="https://policyengine.github.io/flowchart/?variable=universal_childcare_entitlement&country=UK"
             className="w-full h-full rounded-lg shadow-lg"
-            style={{ border: '1px solid #ccc' }}
+            style={{ border: '1px solid var(--pe-color-border-medium)' }}
             title="Universal Childcare Entitlement Flowchart"
           />
         </div>
