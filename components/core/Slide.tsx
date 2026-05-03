@@ -38,6 +38,8 @@ export default function Slide({
             width={350}
             height={100}
             className="opacity-100"
+            priority
+            style={{ height: 'auto' }}
           />
         </div>
       )}
@@ -66,6 +68,7 @@ export default function Slide({
             width={180}
             height={50}
             className="opacity-90"
+            style={{ height: 'auto' }}
           />
           {resolvedFooterText && (
             <div className="text-white text-sm opacity-90 font-medium">

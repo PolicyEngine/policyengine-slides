@@ -11,8 +11,12 @@ import { cio4goodTalkConfig } from '@/slideshows/cio4good-talk/config';
 import { cio4goodWorkshopConfig } from '@/slideshows/cio4good-workshop/config';
 import { aeaReproducibilityConfig } from '@/slideshows/aea-reproducibility-2026-04-21/config';
 import { pwbm2026Config } from '@/slideshows/pwbm-2026/config';
+import { eagxdc2026Config } from '@/slideshows/eagxdc-2026/config';
+import { codeForAmerica2026Config } from '@/slideshows/code-for-america-2026/config';
 
 export const slideshows: SlideshowConfig[] = [
+  codeForAmerica2026Config,
+  eagxdc2026Config,
   pwbm2026Config,
   aeaReproducibilityConfig,
   cio4goodWorkshopConfig,

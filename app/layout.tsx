@@ -4,6 +4,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'PolicyEngine Slides',
   description: 'Presentation decks from PolicyEngine',
+  icons: {
+    icon: '/slides/logos/profile_teal.svg',
+  },
 };
 
 export default function RootLayout({
