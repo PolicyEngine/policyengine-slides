@@ -9,7 +9,7 @@ interface Row {
   netTop1: string;
   mktChange: string;
   netChange: string;
-  dampening: string;
+  ratio: string;
   fedRevDelta: string;
 }
 
@@ -21,7 +21,7 @@ const rows: Row[] = [
     netTop1: '21.3%',
     mktChange: '—',
     netChange: '—',
-    dampening: '—',
+    ratio: '0.80',
     fedRevDelta: '—',
   },
   {
@@ -31,7 +31,7 @@ const rows: Row[] = [
     netTop1: '24.2%',
     mktChange: '+3.7 pp',
     netChange: '+3.0 pp',
-    dampening: '20%',
+    ratio: '0.80',
     fedRevDelta: '−$98B',
   },
   {
@@ -41,7 +41,7 @@ const rows: Row[] = [
     netTop1: '30.6%',
     mktChange: '+11.7 pp',
     netChange: '+9.4 pp',
-    dampening: '20%',
+    ratio: '0.80',
     fedRevDelta: '−$234B',
   },
   {
@@ -51,7 +51,7 @@ const rows: Row[] = [
     netTop1: '37.3%',
     mktChange: '+20.0 pp',
     netChange: '+16.0 pp',
-    dampening: '20%',
+    ratio: '0.80',
     fedRevDelta: '−$335B',
   },
 ];
@@ -70,14 +70,15 @@ export default function IncomeShiftSlide() {
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-9 mt-7 items-center">
         <div>
           <div className="text-5xl font-black leading-tight text-pe-dark">
-            The post-tax top-1% share moves{' '}
-            <span className="text-pe-teal">about 20% less</span> than the
-            pre-tax share.
+            The current system{' '}
+            <span className="text-pe-teal">passes the shock through.</span>
           </div>
           <p className="text-lg text-gray-600 leading-relaxed mt-6">
-            That ratio is roughly constant across shift sizes. Federal income
-            tax rises with capital concentration, but payroll receipts fall by
-            more, so combined federal income + payroll revenue declines.
+            Post-tax top-1% share stays at ~80% of pre-tax across every
+            shift level — the baseline ratio is preserved, not improved on.
+            Federal income tax rises with capital concentration but payroll
+            receipts fall by more, so combined federal income + payroll
+            revenue declines.
           </p>
           <p className="text-sm text-gray-500 italic mt-4">
             policyengine.org/us/ai-inequality/income-shift
@@ -92,7 +93,7 @@ export default function IncomeShiftSlide() {
                 <th className="pb-1 px-2 text-center" colSpan={2}>
                   Top 1% income share
                 </th>
-                <th className="pb-3 text-right" rowSpan={2}>Dampening</th>
+                <th className="pb-3 text-right" rowSpan={2}>Post / Pre</th>
                 <th className="pb-3 text-right" rowSpan={2}>Δ Fed inc + payroll</th>
               </tr>
               <tr className="border-b border-gray-200 text-[10px] uppercase tracking-wider text-gray-400">
@@ -135,7 +136,7 @@ export default function IncomeShiftSlide() {
                     )}
                   </td>
                   <td className="py-3 text-right text-lg font-mono font-bold text-pe-teal">
-                    {row.dampening}
+                    {row.ratio}
                   </td>
                   <td className="py-3 text-right text-lg font-mono font-bold text-amber-700">
                     {row.fedRevDelta}
@@ -145,7 +146,7 @@ export default function IncomeShiftSlide() {
             </tbody>
           </table>
           <p className="text-[11px] text-gray-500 mt-3 italic">
-            Dampening = 1 − (Δ post-tax top 1% / Δ pre-tax top 1%). Last
+            Post / Pre = post-tax top-1% share ÷ pre-tax top-1% share. Last
             column = change in federal income tax + payroll tax (employee +
             employer + self-employment), vs baseline.
           </p>
