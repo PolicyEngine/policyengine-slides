@@ -5,7 +5,7 @@ Monorepo for all PolicyEngine presentation decks.
 ## Stack
 
 - **Next.js 14** + TypeScript + Tailwind CSS
-- **Design tokens** from `@policyengine/design-system`
+- **Design tokens** from `@policyengine/ui-kit`
 - **Fonts**: Inter (everything), JetBrains Mono (code) — matches design system
 - **Icons**: `@tabler/icons-react` (never emoji)
 
