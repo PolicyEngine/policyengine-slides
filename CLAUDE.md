@@ -4,8 +4,8 @@ Monorepo for all PolicyEngine presentation decks.
 
 ## Stack
 
-- **Next.js 14** + TypeScript + Tailwind CSS
-- **Design tokens** from `@policyengine/ui-kit`
+- **Next.js 16** + React 19 + TypeScript + Tailwind CSS v4
+- **Design tokens** from `@policyengine/ui-kit` (`@import "@policyengine/ui-kit/theme.css"` in `app/globals.css`). Slide markup uses legacy `pe-*` Tailwind classes (e.g. `bg-pe-teal`, `text-pe-500`); these alias to the ui-kit teal scale via the `@theme {}` block in `globals.css`.
 - **Fonts**: Inter (everything), JetBrains Mono (code) — matches design system
 - **Icons**: `@tabler/icons-react` (never emoji)
 
