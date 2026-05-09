@@ -5,3 +5,5 @@ out/
 .vercel
 .env.local
 .gitnexus
+tsconfig.tsbuildinfo
+*.tsbuildinfo
