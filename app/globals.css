@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==================== DESIGN TOKENS (from @policyengine/design-system) ==================== */
+/* ==================== DESIGN TOKENS (from @policyengine/ui-kit) ==================== */
 :root {
   /* Primary palette */
   --pe-teal: #319795;
