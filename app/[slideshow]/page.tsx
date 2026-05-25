@@ -5,6 +5,8 @@ export function generateStaticParams() {
   return getAllSlideshowMetadata().map(s => ({ slideshow: s.id }));
 }
 
-export default function Page({ params }: { params: { slideshow: string } }) {
-  return <SlideshowPage slideshowId={params.slideshow} />;
+export default async function Page({ params }: { params: Promise<{ slideshow: string }> }) {
+  const { slideshow } = await params;
+
+  return <SlideshowPage slideshowId={slideshow} />;
 }
