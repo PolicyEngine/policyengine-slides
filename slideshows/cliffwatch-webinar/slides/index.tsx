@@ -8,7 +8,6 @@ import {
   IconArrowRight,
   IconChartLine,
   IconMap2,
-  IconSearch,
   IconUsersGroup,
 } from '@tabler/icons-react';
 import type { ComponentType, CSSProperties, ReactNode } from 'react';
@@ -33,27 +32,19 @@ function Header({
   eyebrow,
   title,
   body,
-  compact = false,
 }: {
   eyebrow: string;
   title: string;
   body?: string;
-  compact?: boolean;
 }) {
   return (
     <SlideHeader>
       <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-pe-teal">
         {eyebrow}
       </p>
-      {compact ? (
-        <h1 className="font-display max-w-[1040px] text-4xl font-bold leading-tight tracking-normal text-pe-dark">
-          {title}
-        </h1>
-      ) : (
-        <SlideTitle className="max-w-[1040px] text-pe-dark tracking-normal">
-          {title}
-        </SlideTitle>
-      )}
+      <SlideTitle className="max-w-[1040px] text-pe-dark tracking-normal">
+        {title}
+      </SlideTitle>
       {body && (
         <p className="mt-3 max-w-[920px] text-xl leading-relaxed text-gray-600">
           {body}
@@ -293,215 +284,6 @@ export function ProductFrameSlide() {
                 <IconArrowRight className="h-8 w-8" stroke={1.8} />
               </div>
             )}
-          </div>
-        ))}
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function DemoFlowSlide() {
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="What to watch for"
-        title="A cliff is the moment resources stop rising with earnings."
-        body="The chart makes the tradeoff visible: income keeps moving right, but net resources flatten or fall."
-        compact
-      />
-
-      <div className="grid min-w-0 grid-cols-[1.05fr_0.95fr] gap-7">
-        <div className="content-card p-5">
-          <svg viewBox="0 0 560 300" className="h-[250px] w-full" role="img" aria-label="Illustrative benefit cliff chart">
-            <line x1="54" y1="246" x2="520" y2="246" stroke="#CBD5E1" strokeWidth="2" />
-            <line x1="54" y1="34" x2="54" y2="246" stroke="#CBD5E1" strokeWidth="2" />
-            <text x="288" y="286" textAnchor="middle" className="fill-slate-500 text-sm font-semibold">
-              Earnings
-            </text>
-            <text x="18" y="145" textAnchor="middle" transform="rotate(-90 18 145)" className="fill-slate-500 text-sm font-semibold">
-              Net resources
-            </text>
-
-            <rect x="300" y="52" width="72" height="194" rx="8" fill="rgba(232, 145, 58, 0.13)" />
-            <path
-              d="M64 226 C138 210 196 178 252 136 C282 113 305 95 322 83 L344 138 C386 134 438 112 506 76"
-              fill="none"
-              stroke="var(--pe-teal)"
-              strokeWidth="8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="344" cy="138" r="9" fill="var(--pe-amber)" />
-            <path d="M320 82 L344 138" stroke="var(--pe-amber)" strokeWidth="5" strokeLinecap="round" />
-            <line x1="344" y1="138" x2="444" y2="138" stroke="var(--pe-amber)" strokeWidth="2" strokeDasharray="5 6" />
-            <text x="452" y="143" className="fill-slate-700 text-base font-bold">
-              cliff
-            </text>
-            <text x="336" y="42" textAnchor="middle" className="fill-pe-amber text-sm font-bold uppercase tracking-widest">
-              transition
-            </text>
-          </svg>
-        </div>
-
-        <div className="flex flex-col justify-center gap-5">
-          <div className="border-l-4 border-pe-teal pl-5">
-            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              First, find the income band.
-            </h3>
-            <p className="mt-2 text-lg leading-relaxed text-gray-600">
-              Where does the line bend, flatten, or drop?
-            </p>
-          </div>
-          <div className="border-l-4 border-pe-amber pl-5">
-            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              Then, name the rule.
-            </h3>
-            <p className="mt-2 text-lg leading-relaxed text-gray-600">
-              Which benefit phase-out, eligibility cutoff, or tax interaction changed?
-            </p>
-          </div>
-          <div className="border-l-4 border-pe-amber pl-5">
-            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              Finally, compare alternatives.
-            </h3>
-            <p className="mt-2 text-lg leading-relaxed text-gray-600">
-              A different place or policy design can smooth the same transition.
-            </p>
-          </div>
-        </div>
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function DemoPlaceholderSlide() {
-  const fields = [
-    ['Household', 'Single parent with two children'],
-    ['Place', 'DC, then one comparison state'],
-    ['Income path', '$0 to $80K in wage income'],
-    ['Question', 'Where does the next dollar stop helping?'],
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="Example scenario"
-        title="Start with a household people can picture."
-        body="A concrete family makes the chart easier to read and the policy question easier to discuss."
-      />
-
-      <div className="grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
-        <div className="content-card p-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
-            Primary demo path
-          </p>
-          <div className="mt-5 divide-y divide-slate-200">
-            {fields.map(([label, value]) => (
-              <div key={label} className="grid grid-cols-[140px_1fr] gap-4 py-3">
-                <p className="text-sm font-bold uppercase tracking-wider text-slate-500">
-                  {label}
-                </p>
-                <p className="text-lg font-semibold leading-snug text-pe-dark">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-2xl bg-pe-dark p-7 text-white shadow-sm">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
-              Live URL
-            </p>
-            <p className="mt-5 break-words text-4xl font-black leading-tight tracking-normal">
-              policyengine.org/us/cliff-watch
-            </p>
-          </div>
-          <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/75">
-            Change one assumption at a time so the audience can see what moves
-            the cliff.
-          </p>
-        </div>
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function ChartReadingSlide() {
-  const readingSteps = [
-    {
-      title: 'Follow income',
-      body: 'Read left to right: what happens as earnings rise?',
-      tone: colors.teal,
-    },
-    {
-      title: 'Watch net resources',
-      body: 'Look for ranges where resources flatten or drop.',
-      tone: colors.teal,
-    },
-    {
-      title: 'Name the driver',
-      body: 'Connect the visible cliff to the program transition underneath.',
-      tone: colors.amber,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="Reading the chart"
-        title="Teach the chart before debating the policy."
-        body="A simple reading pattern keeps the demo accessible for people who do not live in marginal tax rate charts."
-      />
-
-      <div className="grid min-w-0 grid-cols-3 gap-5">
-        {readingSteps.map((step, index) => (
-          <div key={step.title} className="content-card p-5">
-            <StepNumber value={`${index + 1}`} tone={step.tone} />
-            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              {step.title}
-            </h3>
-            <p className="mt-3 text-lg leading-relaxed text-gray-600">{step.body}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-7 content-card bg-slate-50 p-6">
-        <div className="flex items-start gap-4">
-          <IconSearch className="mt-1 h-8 w-8 shrink-0 text-pe-teal" stroke={1.8} />
-          <p className="text-2xl font-semibold leading-relaxed text-gray-700">
-            At this income range, the household gains earnings but loses enough
-            support that the next dollar is partly or fully offset.
-          </p>
-        </div>
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function TakeawaysSlide() {
-  const takeaways = [
-    'Cliffs appear when programs are modeled together.',
-    'Household examples make the tradeoff concrete.',
-    'Audience questions can become the next CliffWatch scenarios.',
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="Takeaways"
-        title="Three ideas to repeat before Q&A."
-      />
-
-      <div className="space-y-5">
-        {takeaways.map((takeaway, index) => (
-          <div
-            key={takeaway}
-            className="content-card flex items-center gap-5 p-6"
-          >
-            <StepNumber value={`${index + 1}`} tone={index === 1 ? colors.amber : colors.teal} />
-            <p className="text-3xl font-black leading-tight tracking-normal text-pe-dark">
-              {takeaway}
-            </p>
           </div>
         ))}
       </div>
