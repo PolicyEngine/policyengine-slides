@@ -2,8 +2,9 @@ import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
 import TitleSlide from './slides/TitleSlide';
 import OutlineSlide from './slides/OutlineSlide';
-import CraftScaledSlide from './slides/CraftScaledSlide';
-import TwoAIConversationsSlide from './slides/TwoAIConversationsSlide';
+import CboScaleSlide from './slides/CboScaleSlide';
+import ParadigmShiftSlide from './slides/ParadigmShiftSlide';
+import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
 import {
   ProgressDividerSlide,
   MicrosimDividerSlide,
@@ -42,8 +43,9 @@ export const cbo2026Config: SlideshowConfig = {
     TitleSlide,
     OutlineSlide,
 
-    CraftScaledSlide,
-    TwoAIConversationsSlide,
+    CboScaleSlide,
+    ParadigmShiftSlide,
+    HowWeGetThereSlide,
 
     ProgressDividerSlide,
     PolicyBenchSlide,
