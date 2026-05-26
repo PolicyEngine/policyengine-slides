@@ -13,6 +13,11 @@
 @theme {
   --font-display: var(--font-sans);
 
+  /* Tailwind v4 spacing utilities resolve through --spacing. The ui-kit
+   * token import defines custom --spacing-* aliases but not the base unit,
+   * so p-*, m-*, gap-*, space-*, w-*, and h-* utilities collapse without it. */
+  --spacing: 0.25rem;
+
   /* The ui-kit theme.css declares `--text-*: initial;` and defines only
    * text-xs..text-4xl. Restore the larger sizes used by slide titles,
    * matching Tailwind's default scale (rem-based). */
@@ -89,23 +94,25 @@
   --error: var(--color-error);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--slide-bg);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--slide-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 /* ==================== SLIDE FOUNDATIONS ====================
@@ -171,9 +178,11 @@ a {
 }
 
 /* ==================== TYPOGRAPHY ==================== */
-h1, h2, h3 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: -0.035em;
+@layer base {
+  h1, h2, h3 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.035em;
+  }
 }
 
 .display-text {

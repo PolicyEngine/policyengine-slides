@@ -1,8 +1,6 @@
 import Slide from '@/components/core/Slide';
 import CoverSlideTemplate from '@/components/layout/CoverSlide';
 import EndSlideTemplate from '@/components/layout/EndSlide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
@@ -12,84 +10,104 @@ import {
   IconMessageQuestion,
   IconRoute,
   IconSearch,
-  IconSparkles,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import type { ReactNode } from 'react';
+import type { ComponentType, CSSProperties, ReactNode } from 'react';
 
 const colors = {
   teal: 'var(--pe-teal)',
-  tealDark: 'var(--pe-teal-dark)',
   amber: 'var(--pe-amber)',
   dark: 'var(--pe-dark)',
-  slate: '#475569',
   blue: '#2563eb',
   rose: '#f97373',
   gold: '#d99a2b',
 };
 
-function Eyebrow({ children }: { children: ReactNode }) {
+function WebinarSlide({ children }: { children: ReactNode }) {
   return (
-    <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-pe-teal">
-      {children}
-    </p>
+    <Slide>
+      <div className="mx-auto flex h-full max-w-[1120px] flex-col overflow-hidden">
+        {children}
+      </div>
+    </Slide>
   );
 }
 
-function PresenterCue({ children }: { children: ReactNode }) {
+function Header({
+  eyebrow,
+  title,
+  body,
+}: {
+  eyebrow: string;
+  title: string;
+  body?: string;
+}) {
   return (
-    <p className="mt-5 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-sm font-semibold uppercase tracking-wider text-slate-500">
-      {children}
-    </p>
+    <header className="shrink-0">
+      <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-pe-teal">
+        {eyebrow}
+      </p>
+      <h1 className="max-w-[1040px] text-4xl font-black leading-tight tracking-normal text-pe-dark">
+        {title}
+      </h1>
+      {body && (
+        <p className="mt-3 max-w-[920px] text-lg leading-relaxed text-gray-600">
+          {body}
+        </p>
+      )}
+      <div className="mt-4 h-1.5 w-28 rounded-full bg-gradient-to-r from-pe-teal to-pe-amber" />
+    </header>
   );
 }
 
-function OutlineCard({
+function Card({
   label,
   title,
   body,
   tone = colors.teal,
+  icon: Icon,
 }: {
-  label: string;
+  label?: string;
   title: string;
   body: string;
   tone?: string;
+  icon?: ComponentType<{ className?: string; stroke?: number; style?: CSSProperties }>;
 }) {
   return (
     <div
-      className="content-card min-h-[220px] p-6"
-      style={{ borderLeftColor: tone }}
+      className="min-w-0 rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
+      style={{ borderTop: `4px solid ${tone}` }}
     >
-      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: tone }}>
-        {label}
-      </p>
-      <h3 className="mt-4 text-2xl font-black leading-tight text-pe-dark">{title}</h3>
-      <p className="mt-4 text-lg leading-relaxed text-gray-600">{body}</p>
+      <div className="mb-4 flex items-center gap-3">
+        {Icon && (
+          <div
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+            style={{ backgroundColor: `${tone}18` }}
+          >
+            <Icon className="h-6 w-6" style={{ color: tone }} stroke={1.8} />
+          </div>
+        )}
+        {label && (
+          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: tone }}>
+            {label}
+          </p>
+        )}
+      </div>
+      <h3 className="text-xl font-black leading-tight tracking-normal text-pe-dark">
+        {title}
+      </h3>
+      <p className="mt-3 text-base leading-relaxed text-gray-600">{body}</p>
     </div>
   );
 }
 
-function FlowStep({
-  number,
-  title,
-  body,
-  tone,
-}: {
-  number: string;
-  title: string;
-  body: string;
-  tone: string;
-}) {
+function StepNumber({ value, tone }: { value: string; tone: string }) {
   return (
-    <div className="content-card p-5" style={{ borderLeftColor: tone }}>
-      <div
-        className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl text-lg font-black text-white"
-        style={{ backgroundColor: tone }}
-      >
-        {number}
-      </div>
-      <h3 className="text-xl font-black leading-tight text-pe-dark">{title}</h3>
-      <p className="mt-3 text-base leading-relaxed text-gray-600">{body}</p>
+    <div
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-lg font-black text-white"
+      style={{ backgroundColor: tone }}
+    >
+      {value}
     </div>
   );
 }
@@ -98,7 +116,7 @@ export function TitleSlide() {
   return (
     <CoverSlideTemplate
       title="CliffWatch Webinar"
-      subtitle="Demo outline for benefit cliffs, household scenarios, and live exploration"
+      subtitle="Benefit cliffs, household scenarios, and live exploration"
       speakers={[
         {
           ...speakers['daphne-hansell'],
@@ -118,160 +136,121 @@ export function TitleSlide() {
 export function AgendaSlide() {
   const agenda = [
     {
-      label: '1',
-      title: 'Why cliffs matter',
-      body: 'Frame the policy problem, the audience pain point, and what CliffWatch makes visible.',
+      title: 'Set the stakes',
+      body: 'Why cliffs matter, and why they are hard to see without a household-level model.',
       tone: colors.rose,
     },
     {
-      label: '2',
-      title: 'What CliffWatch does',
-      body: 'Walk through the product mental model before touching the live interface.',
-      tone: colors.blue,
-    },
-    {
-      label: '3',
-      title: 'Live demo',
-      body: 'Run selected household scenarios, compare states, and explain the chart in plain language.',
+      title: 'Demo CliffWatch',
+      body: 'Start with one household, read the result, then change one assumption.',
       tone: colors.teal,
     },
     {
-      label: '4',
-      title: 'Discussion',
-      body: 'Invite questions on policy design, use cases, and follow-up analyses participants want next.',
+      title: 'Collect next questions',
+      body: 'Turn audience reactions into scenarios, comparisons, and follow-up analysis.',
       tone: colors.gold,
     },
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Run of show</Eyebrow>
-        <SlideTitle>Keep the first half crisp so the demo has room to breathe.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          Draft timing: 10 minutes of framing, 25 minutes of demo, 15 minutes of
-          discussion. Adjust once the final webinar length is locked.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Run of show"
+        title="A short setup, then a live exploration."
+        body="The slides are just the rails. Most of the webinar should happen in CliffWatch."
+      />
 
-      <div className="mt-8 grid grid-cols-4 gap-6">
-        {agenda.map((item) => (
-          <OutlineCard
-            key={item.label}
-            label={item.label}
-            title={item.title}
-            body={item.body}
-            tone={item.tone}
-          />
+      <div className="mt-9 grid min-w-0 grid-cols-3 gap-5">
+        {agenda.map((item, index) => (
+          <div key={item.title} className="flex min-w-0 flex-col gap-4">
+            <StepNumber value={`${index + 1}`} tone={item.tone} />
+            <Card title={item.title} body={item.body} tone={item.tone} />
+          </div>
         ))}
       </div>
-
-      <PresenterCue>
-        Fill in final webinar length, audience assumptions, and handoff points.
-      </PresenterCue>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function CliffProblemSlide() {
   const points = [
     {
-      title: 'Households experience programs together',
-      body: 'Taxes, credits, health coverage, food assistance, child care, and cash benefits stack in ways that are hard to see program by program.',
+      title: 'Programs stack',
+      body: 'Families experience taxes, credits, health coverage, food assistance, child care, and cash benefits together.',
       icon: IconUsersGroup,
       tone: colors.teal,
     },
     {
-      title: 'Cliffs hide in income ranges',
-      body: 'A raise can trigger eligibility losses or phase-outs that make the next dollar worth little, nothing, or less than nothing.',
+      title: 'Raises can backfire',
+      body: 'Eligibility losses and phase-outs can make the next dollar of earnings worth little, nothing, or less than nothing.',
       icon: IconChartLine,
       tone: colors.rose,
     },
     {
-      title: 'State choices change the picture',
-      body: 'The same household can face very different marginal incentives depending on state rules and local policy design.',
+      title: 'Place matters',
+      body: 'The same household can face a different cliff profile when state rules and local policy choices change.',
       icon: IconMap2,
       tone: colors.blue,
     },
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Problem framing</Eyebrow>
-        <SlideTitle>Benefit cliffs are a systems problem, not a single-program bug.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          Use this slide to name the problem before showing the tool. The goal
-          is to make the demo feel inevitable rather than decorative.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Why cliffs matter"
+        title="Benefit cliffs are a systems problem, not a single-program bug."
+        body="CliffWatch starts from the household budget constraint, then shows where program interactions create sharp tradeoffs."
+      />
 
-      <div className="mt-8 grid grid-cols-3 gap-7">
-        {points.map((point) => {
-          const Icon = point.icon;
-          return (
-            <div
-              key={point.title}
-              className="content-card p-7"
-              style={{ borderLeftColor: point.tone }}
-            >
-              <div
-                className="mb-7 flex h-16 w-16 items-center justify-center rounded-2xl"
-                style={{ backgroundColor: `${point.tone}18` }}
-              >
-                <Icon className="h-9 w-9" style={{ color: point.tone }} stroke={1.8} />
-              </div>
-              <h3 className="text-2xl font-black leading-tight text-pe-dark">{point.title}</h3>
-              <p className="mt-5 text-lg leading-relaxed text-gray-600">{point.body}</p>
-            </div>
-          );
-        })}
+      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+        {points.map((point) => (
+          <Card
+            key={point.title}
+            title={point.title}
+            body={point.body}
+            tone={point.tone}
+            icon={point.icon}
+          />
+        ))}
       </div>
-
-      <PresenterCue>
-        Add one concrete household story or audience-relevant example.
-      </PresenterCue>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function ProductFrameSlide() {
   const frames = [
     {
-      label: 'Question',
-      title: 'Where do cliffs appear?',
-      body: 'Start from a household, geography, and income range instead of an isolated program rule.',
+      label: '1',
+      title: 'Choose a household',
+      body: 'Set family structure, state, and an income range.',
       tone: colors.blue,
     },
     {
-      label: 'Evidence',
-      title: 'What changes at each income point?',
-      body: 'Use marginal and net-resource views to see which programs drive the sharpest changes.',
+      label: '2',
+      title: 'Find the cliff',
+      body: 'See where net resources flatten or fall as earnings rise.',
       tone: colors.teal,
     },
     {
-      label: 'Action',
-      title: 'What should analysts investigate next?',
-      body: 'Turn the live demo into policy questions, scenario requests, and follow-up modeling work.',
+      label: '3',
+      title: 'Ask what drives it',
+      body: 'Identify which program changes create the sharpest transitions.',
       tone: colors.gold,
     },
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Product mental model</Eyebrow>
-        <SlideTitle>CliffWatch turns program interactions into a navigable map.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          This is the bridge from policy framing to the live interface. Keep it
-          conceptual; the next slides can carry the details.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="What CliffWatch does"
+        title="CliffWatch turns program interactions into a navigable map."
+        body="The product flow is intentionally simple: define a household, scan the income path, and inspect the drivers."
+      />
 
-      <div className="mt-10 grid grid-cols-[1fr_72px_1fr_72px_1fr] items-stretch gap-2">
+      <div className="mt-10 grid min-w-0 grid-cols-[1fr_48px_1fr_48px_1fr] items-stretch gap-3">
         {frames.map((frame, index) => (
-          <div key={frame.label} className="contents">
-            <OutlineCard
+          <div key={frame.title} className="contents">
+            <Card
               label={frame.label}
               title={frame.title}
               body={frame.body}
@@ -279,303 +258,237 @@ export function ProductFrameSlide() {
             />
             {index < frames.length - 1 && (
               <div className="flex items-center justify-center text-gray-300">
-                <IconArrowRight className="h-10 w-10" stroke={1.8} />
+                <IconArrowRight className="h-8 w-8" stroke={1.8} />
               </div>
             )}
           </div>
         ))}
       </div>
-
-      <div className="accent-block mt-9">
-        <p className="text-2xl font-semibold leading-relaxed text-gray-700">
-          Suggested phrase: “We built this so you can see the full household
-          budget constraint before debating a single policy lever.”
-        </p>
-      </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function DemoFlowSlide() {
   const steps = [
     {
-      title: 'Open CliffWatch',
-      body: 'Orient viewers to the page, controls, and the question the first scenario will answer.',
+      title: 'Start with one story',
+      body: 'Pick a household people can picture quickly.',
       tone: colors.teal,
     },
     {
-      title: 'Choose household',
-      body: 'Set household composition, state, and income sweep. Narrate only the choices that matter.',
-      tone: colors.blue,
-    },
-    {
-      title: 'Read the cliff',
-      body: 'Point to the steepest income ranges, then unpack the program interactions underneath.',
+      title: 'Name the steep spot',
+      body: 'Point to the income band where resources flatten or fall.',
       tone: colors.rose,
     },
     {
-      title: 'Compare and discuss',
-      body: 'Change one assumption, compare the result, and tee up audience questions.',
+      title: 'Change one thing',
+      body: 'Switch state, household composition, or income range.',
       tone: colors.gold,
     },
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Live demo choreography</Eyebrow>
-        <SlideTitle>One scenario, one insight, one variation.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          The live demo should feel guided, not like a product tour. This slide
-          is the speaking outline for Daphne and Max.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Demo choreography"
+        title="One scenario, one insight, one variation."
+        body="A focused demo will be more useful than a tour of every control."
+      />
 
-      <div className="mt-7 grid grid-cols-4 gap-5">
+      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
         {steps.map((step, index) => (
-          <FlowStep
-            key={step.title}
-            number={`${index + 1}`}
-            title={step.title}
-            body={step.body}
-            tone={step.tone}
-          />
+          <div key={step.title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <StepNumber value={`${index + 1}`} tone={step.tone} />
+            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              {step.title}
+            </h3>
+            <p className="mt-3 text-lg leading-relaxed text-gray-600">{step.body}</p>
+          </div>
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-7">
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <IconRoute className="h-8 w-8 text-pe-teal" stroke={1.8} />
-            <h3 className="text-2xl font-black text-pe-dark">Presenter split</h3>
-          </div>
-          <ul className="slide-list text-lg text-gray-700">
-            <li>Daphne: household story, state choice, chart reading.</li>
-            <li>Max: model context, policy implications, audience Q&A.</li>
-          </ul>
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-4 flex items-center gap-3">
-            <IconChecklist className="h-8 w-8 text-pe-teal" stroke={1.8} />
-            <h3 className="text-2xl font-black text-pe-dark">Before going live</h3>
-          </div>
-          <ul className="slide-list text-lg text-gray-700">
-            <li>Lock one primary scenario and one backup scenario.</li>
-            <li>Preload the page and confirm any shareable links.</li>
-          </ul>
-        </div>
+      <div className="mt-7 grid min-w-0 grid-cols-2 gap-5">
+        <Card
+          title="Daphne leads the household walkthrough"
+          body="Frame the scenario, make the selections, and narrate what changes on the chart."
+          tone={colors.teal}
+          icon={IconRoute}
+        />
+        <Card
+          title="Max connects it to policy design"
+          body="Translate the cliff into policy questions and pull audience reactions into the discussion."
+          tone={colors.blue}
+          icon={IconChecklist}
+        />
       </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function DemoPlaceholderSlide() {
-  return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Demo workspace</Eyebrow>
-        <SlideTitle>Use this slide as the handoff into the live CliffWatch page.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          Keep the slide visible while introducing the demo, then open the live
-          tool in a new tab if the iframe is too constrained for the webinar.
-        </p>
-      </SlideHeader>
+  const fields = [
+    ['Household', 'Single parent with two children'],
+    ['Place', 'DC, then one comparison state'],
+    ['Income path', '$0 to $80K in wage income'],
+    ['Question', 'Where does the next dollar stop helping?'],
+  ];
 
-      <div className="mt-5 grid h-[calc(100vh-320px)] grid-cols-[0.78fr_1.22fr] gap-7">
-        <div className="space-y-5">
-          <div className="content-card p-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
-              Primary scenario
-            </p>
-            <h3 className="mt-3 text-2xl font-black text-pe-dark">
-              [Add household, state, and income range]
-            </h3>
-            <p className="mt-4 text-lg leading-relaxed text-gray-600">
-              Note the reason this scenario matters for the webinar audience.
-            </p>
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Live demo handoff"
+        title="Open CliffWatch with one prepared scenario."
+        body="Use the slide only as the launch point, then move into the live page."
+      />
+
+      <div className="mt-8 grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
+        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
+            Primary demo path
+          </p>
+          <div className="mt-5 divide-y divide-slate-200">
+            {fields.map(([label, value]) => (
+              <div key={label} className="grid grid-cols-[140px_1fr] gap-4 py-3">
+                <p className="text-sm font-bold uppercase tracking-wider text-slate-500">
+                  {label}
+                </p>
+                <p className="text-lg font-semibold leading-snug text-pe-dark">{value}</p>
+              </div>
+            ))}
           </div>
-          <div className="content-card p-6" style={{ borderLeftColor: colors.gold }}>
-            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: colors.gold }}>
-              Backup scenario
-            </p>
-            <h3 className="mt-3 text-2xl font-black text-pe-dark">
-              [Add alternate household or state]
-            </h3>
-            <p className="mt-4 text-lg leading-relaxed text-gray-600">
-              Use if the first thread runs short or the audience asks for a
-              different comparison.
-            </p>
-          </div>
-          <PresenterCue>
-            Live URL: policyengine.org/us/cliff-watch
-          </PresenterCue>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
-          <iframe
-            src="https://www.policyengine.org/us/cliff-watch"
-            title="CliffWatch"
-            className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/85 to-transparent p-5">
-            <p className="text-sm font-semibold text-gray-700">
-              If embedded controls feel tight, switch to the live browser tab.
+        <div className="flex flex-col justify-between rounded-lg bg-pe-dark p-7 text-white shadow-sm">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+              Live URL
+            </p>
+            <p className="mt-5 break-words text-4xl font-black leading-tight tracking-normal">
+              policyengine.org/us/cliff-watch
             </p>
           </div>
+          <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/75">
+            Keep one backup scenario ready, but only use it if discussion needs
+            a contrast.
+          </p>
         </div>
       </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function ChartReadingSlide() {
   const readingSteps = [
     {
-      label: 'X-axis',
-      title: 'Income path',
-      body: 'Name the income range and the household decision the range represents.',
+      title: 'Follow income',
+      body: 'Read left to right: what happens as earnings rise?',
       tone: colors.blue,
     },
     {
-      label: 'Y-axis',
-      title: 'Net resources or marginal rate',
-      body: 'Explain whether the chart is showing total resources or the value of the next dollar.',
+      title: 'Watch net resources',
+      body: 'Look for ranges where resources flatten or drop.',
       tone: colors.teal,
     },
     {
-      label: 'Drivers',
-      title: 'Programs changing at the cliff',
-      body: 'Identify the program changes before moving to interpretation or reform ideas.',
+      title: 'Name the driver',
+      body: 'Connect the visible cliff to the program transition underneath.',
       tone: colors.rose,
     },
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Chart narration</Eyebrow>
-        <SlideTitle>Teach viewers how to read the result before debating it.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          This keeps the live demo accessible for people who are not already
-          fluent in marginal tax rate charts.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Reading the chart"
+        title="Teach the chart before debating the policy."
+        body="A simple reading pattern keeps the demo accessible for people who do not live in marginal tax rate charts."
+      />
 
-      <div className="mt-8 grid grid-cols-[0.95fr_1.05fr] gap-8">
-        <div className="space-y-5">
-          {readingSteps.map((step) => (
-            <OutlineCard
-              key={step.label}
-              label={step.label}
-              title={step.title}
-              body={step.body}
-              tone={step.tone}
-            />
-          ))}
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
-          <div className="mb-6 flex items-center gap-4">
-            <IconSearch className="h-10 w-10 text-pe-teal" stroke={1.8} />
-            <h3 className="text-3xl font-black text-pe-dark">Narration template</h3>
+      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+        {readingSteps.map((step, index) => (
+          <div key={step.title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <StepNumber value={`${index + 1}`} tone={step.tone} />
+            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              {step.title}
+            </h3>
+            <p className="mt-3 text-lg leading-relaxed text-gray-600">{step.body}</p>
           </div>
-          <div className="space-y-6 text-2xl leading-relaxed text-gray-700">
-            <p>“At roughly [income band], this household loses [program/support].”</p>
-            <p>“That means the next dollar of earnings is worth [interpretation].”</p>
-            <p>“The policy question is whether we want this transition to be smoother.”</p>
-          </div>
+        ))}
+      </div>
+
+      <div className="mt-7 rounded-lg border border-slate-200 bg-slate-50 p-6">
+        <div className="flex items-start gap-4">
+          <IconSearch className="mt-1 h-8 w-8 shrink-0 text-pe-teal" stroke={1.8} />
+          <p className="text-2xl font-semibold leading-relaxed text-gray-700">
+            At this income range, the household gains earnings but loses enough
+            support that the next dollar is partly or fully offset.
+          </p>
         </div>
       </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function TakeawaysSlide() {
   const takeaways = [
-    {
-      title: 'Cliffs are visible only when programs are modeled together',
-      body: 'CliffWatch is useful because it gives the household-level view rather than isolated eligibility rules.',
-    },
-    {
-      title: 'Good demos make the policy choice concrete',
-      body: 'The strongest scenarios connect a visible chart change to an understandable household decision.',
-    },
-    {
-      title: 'The webinar should collect follow-up questions',
-      body: 'Audience requests can become the next scenarios, comparisons, or public analyses.',
-    },
+    'Cliffs appear when programs are modeled together.',
+    'Household examples make the tradeoff concrete.',
+    'Audience questions can become the next CliffWatch scenarios.',
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>What viewers should leave with</Eyebrow>
-        <SlideTitle>Three takeaways to repeat in the closing minutes.</SlideTitle>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Takeaways"
+        title="Three ideas to repeat before Q&A."
+      />
 
-      <div className="mt-10 space-y-6">
+      <div className="mt-9 space-y-5">
         {takeaways.map((takeaway, index) => (
-          <div key={takeaway.title} className="content-card flex items-start gap-7 p-7">
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-pe-light text-2xl font-black text-pe-teal">
-              {index + 1}
-            </div>
-            <div>
-              <h3 className="text-3xl font-black leading-tight text-pe-dark">
-                {takeaway.title}
-              </h3>
-              <p className="mt-3 text-xl leading-relaxed text-gray-600">{takeaway.body}</p>
-            </div>
+          <div
+            key={takeaway}
+            className="flex items-center gap-5 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+          >
+            <StepNumber value={`${index + 1}`} tone={index === 1 ? colors.rose : colors.teal} />
+            <p className="text-3xl font-black leading-tight tracking-normal text-pe-dark">
+              {takeaway}
+            </p>
           </div>
         ))}
       </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
 export function DiscussionSlide() {
   const questions = [
-    'Which household scenarios would help you explain cliffs to your stakeholders?',
-    'Which states, programs, or reforms should CliffWatch make easier to compare?',
-    'What would make the tool useful for your team after the webinar?',
+    'Which household scenario would you want to test first?',
+    'Which state or program comparison would change the conversation?',
+    'What would make CliffWatch useful for your team after today?',
   ];
 
   return (
-    <Slide>
-      <SlideHeader>
-        <Eyebrow>Discussion prompts</Eyebrow>
-        <SlideTitle>Invite the audience to turn the demo into the next analysis.</SlideTitle>
-        <p className="mt-3 max-w-5xl text-xl leading-relaxed text-gray-600">
-          Use this slide if Q&A needs structure. It can also capture follow-up
-          work for the PolicyEngine team.
-        </p>
-      </SlideHeader>
+    <WebinarSlide>
+      <Header
+        eyebrow="Discussion"
+        title="Turn the demo into audience-driven analysis."
+        body="Use these prompts if Q&A needs structure, or skip directly to audience questions."
+      />
 
-      <div className="mt-8 grid grid-cols-[1fr_0.85fr] gap-8">
-        <div className="space-y-6">
-          {questions.map((question, index) => (
-            <div key={question} className="content-card flex items-start gap-5 p-6">
-              <IconMessageQuestion className="mt-1 h-9 w-9 flex-shrink-0 text-pe-teal" stroke={1.8} />
-              <p className="text-2xl font-semibold leading-relaxed text-gray-700">
-                {question}
-              </p>
-              <span className="ml-auto text-sm font-bold text-gray-300">Q{index + 1}</span>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
-          <IconSparkles className="mb-6 h-12 w-12 text-pe-teal" stroke={1.8} />
-          <h3 className="text-3xl font-black leading-tight text-pe-dark">
-            Optional close
-          </h3>
-          <p className="mt-5 text-2xl leading-relaxed text-gray-700">
-            “If CliffWatch makes one thing clear, it is that cliffs are design
-            choices we can measure. Once they are visible, we can ask better
-            questions about how to smooth them.”
-          </p>
-        </div>
+      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+        {questions.map((question, index) => (
+          <div key={question} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <IconMessageQuestion className="h-9 w-9 text-pe-teal" stroke={1.8} />
+            <p className="mt-5 text-xl font-semibold leading-relaxed text-gray-700">
+              {question}
+            </p>
+            <p className="mt-8 text-sm font-bold uppercase tracking-widest text-slate-400">
+              Question {index + 1}
+            </p>
+          </div>
+        ))}
       </div>
-    </Slide>
+    </WebinarSlide>
   );
 }
 
