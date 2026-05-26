@@ -37,7 +37,7 @@ export const cbo2026Config: SlideshowConfig = {
   location: 'Congressional Budget Office',
   footerText: 'PolicyEngine · CBO · May 2026',
   speakers: [speakers['max-ghenis']],
-  private: true,
+  private: false,
   slides: [
     TitleSlide,
     OutlineSlide,

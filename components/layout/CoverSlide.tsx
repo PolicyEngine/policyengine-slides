@@ -43,8 +43,8 @@ export default function CoverSlide({
         {speakers && speakers.length > 0 && (
           <div className="flex items-center justify-center gap-16 mt-4">
             {speakers.map((speaker, i) => (
-              <div key={i} className="text-center">
-                <div className="w-28 h-28 relative overflow-hidden rounded-full border-2 border-white/40 mx-auto mb-3">
+              <div key={i} className="flex flex-col items-center text-center">
+                <div className="w-28 h-28 relative overflow-hidden rounded-full border-2 border-white/40 mb-3">
                   <Image
                     src={speaker.photo}
                     alt={speaker.name}
