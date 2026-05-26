@@ -3,6 +3,7 @@ import { speakers } from '@/lib/speakers';
 import {
   AgendaSlide,
   CliffProblemSlide,
+  DemoLinkSlide,
   DiscussionSlide,
   ProductFrameSlide,
   TitleSlide,
@@ -31,6 +32,7 @@ export const cliffwatchWebinarConfig: SlideshowConfig = {
     AgendaSlide,
     CliffProblemSlide,
     ProductFrameSlide,
+    DemoLinkSlide,
     DiscussionSlide,
     WrapSlide,
   ],

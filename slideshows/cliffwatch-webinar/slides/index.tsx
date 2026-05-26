@@ -291,6 +291,30 @@ export function ProductFrameSlide() {
   );
 }
 
+export function DemoLinkSlide() {
+  return (
+    <WebinarSlide>
+      <div className="flex h-full flex-col justify-center">
+        <p className="mb-5 text-sm font-semibold uppercase tracking-widest text-pe-teal">
+          Demo
+        </p>
+        <h1 className="font-display text-7xl font-bold leading-tight tracking-normal text-pe-dark">
+          Demo
+        </h1>
+        <div className="mt-8 h-1.5 w-32 rounded-full bg-gradient-to-r from-pe-teal to-pe-amber" />
+        <a
+          className="mt-10 block break-words text-4xl font-black leading-tight tracking-normal text-pe-dark underline decoration-pe-teal decoration-4 underline-offset-8"
+          href="https://policyengine.org/us/cliff-watch"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          policyengine.org/us/cliff-watch
+        </a>
+      </div>
+    </WebinarSlide>
+  );
+}
+
 export function DiscussionSlide() {
   const policyQuestions = [
     {
