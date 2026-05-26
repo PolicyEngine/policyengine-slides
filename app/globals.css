@@ -3,6 +3,11 @@
 @import "tailwindcss";
 @import "@policyengine/ui-kit/theme.css";
 
+@source "../app";
+@source "../components";
+@source "../slideshows";
+@source "../lib";
+
 /* ==================== TAILWIND THEME EXTENSIONS ====================
  * The ui-kit theme.css already provides --color-teal-50..900, --color-blue-*,
  * --font-sans (Inter), and --font-mono (JetBrains Mono). The slides repo has
@@ -89,10 +94,12 @@
   --error: var(--color-error);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
 body {
