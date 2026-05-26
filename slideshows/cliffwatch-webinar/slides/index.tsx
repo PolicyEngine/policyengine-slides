@@ -266,7 +266,7 @@ export function ProductFrameSlide() {
     },
     {
       label: '3',
-      title: 'Ask what drives it',
+      title: 'See what drives it',
       body: 'Identify which program changes create the sharpest transitions.',
       tone: colors.amber,
     },
