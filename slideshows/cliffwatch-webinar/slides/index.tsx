@@ -8,7 +8,6 @@ import {
   IconArrowRight,
   IconChartLine,
   IconMap2,
-  IconMessageQuestion,
   IconSearch,
   IconUsersGroup,
 } from '@tabler/icons-react';
@@ -511,29 +510,45 @@ export function TakeawaysSlide() {
 }
 
 export function DiscussionSlide() {
-  const questions = [
-    'Which household scenario would you want to test first?',
-    'Which state or program comparison would change the conversation?',
-    'What would make CliffWatch useful for your team after today?',
+  const policyQuestions = [
+    {
+      title: 'Where is the cutoff?',
+      body: 'Find the income range where eligibility ends or support drops sharply.',
+      tone: colors.teal,
+    },
+    {
+      title: 'How steep is the phase-out?',
+      body: 'See whether the household keeps more of each additional dollar earned.',
+      tone: colors.amber,
+    },
+    {
+      title: 'What would smooth it?',
+      body: 'Compare designs that preserve work incentives while protecting support.',
+      tone: colors.dark,
+    },
   ];
 
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Discussion"
-        title="Turn the demo into audience-driven analysis."
-        body="Use these prompts if Q&A needs structure, or skip directly to audience questions."
+        eyebrow="Policy design"
+        title="Once the cliff is visible, the choices get concrete."
+        body="CliffWatch turns a hidden budget constraint into questions policymakers can evaluate."
       />
 
       <div className="grid min-w-0 grid-cols-3 gap-5">
-        {questions.map((question, index) => (
-          <div key={question} className="content-card p-6">
-            <IconMessageQuestion className="h-9 w-9 text-pe-teal" stroke={1.8} />
-            <p className="mt-5 text-xl font-semibold leading-relaxed text-gray-700">
-              {question}
-            </p>
-            <p className="mt-8 text-sm font-bold uppercase tracking-widest text-slate-400">
-              Question {index + 1}
+        {policyQuestions.map((question, index) => (
+          <div
+            key={question.title}
+            className="content-card p-6"
+            style={{ borderLeftColor: question.tone }}
+          >
+            <StepNumber value={`${index + 1}`} tone={question.tone} />
+            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              {question.title}
+            </h3>
+            <p className="mt-3 text-lg leading-relaxed text-gray-600">
+              {question.body}
             </p>
           </div>
         ))}
