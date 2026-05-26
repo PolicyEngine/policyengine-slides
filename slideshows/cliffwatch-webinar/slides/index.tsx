@@ -136,18 +136,21 @@ export function TitleSlide() {
 export function AgendaSlide() {
   const agenda = [
     {
-      title: 'Set the stakes',
-      body: 'Why cliffs matter, and why they are hard to see without a household-level model.',
+      number: '01',
+      title: 'Follow net resources',
+      body: 'Find ranges where total resources flatten or fall as earnings rise.',
       tone: colors.rose,
     },
     {
-      title: 'Demo CliffWatch',
-      body: 'Start with one household, read the result, then change one assumption.',
+      number: '02',
+      title: 'Name the program change',
+      body: 'Connect each sharp turn to the phase-out, cutoff, or tax interaction underneath.',
       tone: colors.teal,
     },
     {
-      title: 'Collect next questions',
-      body: 'Turn audience reactions into scenarios, comparisons, and follow-up analysis.',
+      number: '03',
+      title: 'Compare policy design',
+      body: 'Change places or household assumptions to see which cliffs are policy choices.',
       tone: colors.gold,
     },
   ];
@@ -155,16 +158,28 @@ export function AgendaSlide() {
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Run of show"
-        title="A short setup, then a live exploration."
-        body="The slides are just the rails. Most of the webinar should happen in CliffWatch."
+        eyebrow="Core question"
+        title="When does a raise stop helping?"
+        body="We’ll follow one household across the income path and use CliffWatch to see where policy turns extra earnings into a cliff."
       />
 
-      <div className="mt-9 grid min-w-0 grid-cols-3 gap-5">
-        {agenda.map((item, index) => (
-          <div key={item.title} className="flex min-w-0 flex-col gap-4">
-            <StepNumber value={`${index + 1}`} tone={item.tone} />
-            <Card title={item.title} body={item.body} tone={item.tone} />
+      <div className="mt-10 flex max-w-4xl flex-col gap-6">
+        {agenda.map((item) => (
+          <div key={item.title} className="flex items-baseline gap-6">
+            <span
+              className="font-mono text-4xl font-bold opacity-80"
+              style={{ color: item.tone }}
+            >
+              {item.number}
+            </span>
+            <div>
+              <h3 className="text-2xl font-bold leading-tight text-gray-800">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-lg leading-relaxed text-gray-500">
+                {item.body}
+              </p>
+            </div>
           </div>
         ))}
       </div>
