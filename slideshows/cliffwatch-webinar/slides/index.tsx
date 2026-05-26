@@ -1,6 +1,8 @@
 import Slide from '@/components/core/Slide';
 import CoverSlideTemplate from '@/components/layout/CoverSlide';
 import EndSlideTemplate from '@/components/layout/EndSlide';
+import SlideHeader from '@/components/layout/SlideHeader';
+import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
@@ -16,9 +18,6 @@ const colors = {
   teal: 'var(--pe-teal)',
   amber: 'var(--pe-amber)',
   dark: 'var(--pe-dark)',
-  blue: '#2563eb',
-  rose: '#f97373',
-  gold: '#d99a2b',
 };
 
 function WebinarSlide({ children }: { children: ReactNode }) {
@@ -35,26 +34,33 @@ function Header({
   eyebrow,
   title,
   body,
+  compact = false,
 }: {
   eyebrow: string;
   title: string;
   body?: string;
+  compact?: boolean;
 }) {
   return (
-    <header className="shrink-0">
+    <SlideHeader>
       <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-pe-teal">
         {eyebrow}
       </p>
-      <h1 className="max-w-[1040px] text-4xl font-black leading-tight tracking-normal text-pe-dark">
-        {title}
-      </h1>
+      {compact ? (
+        <h1 className="font-display max-w-[1040px] text-4xl font-bold leading-tight tracking-normal text-pe-dark">
+          {title}
+        </h1>
+      ) : (
+        <SlideTitle className="max-w-[1040px] text-pe-dark tracking-normal">
+          {title}
+        </SlideTitle>
+      )}
       {body && (
-        <p className="mt-3 max-w-[920px] text-lg leading-relaxed text-gray-600">
+        <p className="mt-3 max-w-[920px] text-xl leading-relaxed text-gray-600">
           {body}
         </p>
       )}
-      <div className="mt-4 h-1.5 w-28 rounded-full bg-gradient-to-r from-pe-teal to-pe-amber" />
-    </header>
+    </SlideHeader>
   );
 }
 
@@ -73,8 +79,8 @@ function Card({
 }) {
   return (
     <div
-      className="min-w-0 rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
-      style={{ borderTop: `4px solid ${tone}` }}
+      className="content-card min-w-0 p-6"
+      style={{ borderLeftColor: tone }}
     >
       <div className="mb-4 flex items-center gap-3">
         {Icon && (
@@ -102,7 +108,7 @@ function Card({
 function StepNumber({ value, tone }: { value: string; tone: string }) {
   return (
     <div
-      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-lg font-black text-white"
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white"
       style={{ backgroundColor: tone }}
     >
       {value}
@@ -140,8 +146,8 @@ export function AgendaSlide() {
         body="The household earns more, but an eligibility rule changes all at once, so total resources can flatten or fall."
       />
 
-      <div className="mt-6 grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
-        <div className="flex flex-col justify-between rounded-lg bg-pe-dark p-6 text-white shadow-sm">
+      <div className="grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
+        <div className="flex flex-col justify-between rounded-2xl bg-pe-dark p-6 text-white shadow-sm">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
               Basic idea
@@ -158,7 +164,7 @@ export function AgendaSlide() {
           </p>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="content-card p-5">
           <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
             Simple Medicaid example
           </p>
@@ -174,8 +180,8 @@ export function AgendaSlide() {
             <div className="flex items-center justify-center text-slate-300">
               <IconArrowRight className="h-8 w-8" stroke={1.8} />
             </div>
-            <div className="rounded-lg border border-red-100 bg-red-50 p-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-red-500">
+            <div className="rounded-lg border border-pe-amber/30 bg-pe-amber/10 p-4">
+              <p className="text-sm font-bold uppercase tracking-widest text-pe-amber">
                 $1 over the limit
               </p>
               <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
@@ -211,13 +217,13 @@ export function CliffProblemSlide() {
       title: 'Raises can backfire',
       body: 'Eligibility losses and phase-outs can make the next dollar of earnings worth little, nothing, or less than nothing.',
       icon: IconChartLine,
-      tone: colors.rose,
+      tone: colors.amber,
     },
     {
       title: 'Place matters',
       body: 'The same household can face a different cliff profile when state rules and local policy choices change.',
       icon: IconMap2,
-      tone: colors.blue,
+      tone: colors.dark,
     },
   ];
 
@@ -229,7 +235,7 @@ export function CliffProblemSlide() {
         body="CliffWatch starts from the household budget constraint, then shows where program interactions create sharp tradeoffs."
       />
 
-      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+      <div className="grid min-w-0 grid-cols-3 gap-5">
         {points.map((point) => (
           <Card
             key={point.title}
@@ -250,7 +256,7 @@ export function ProductFrameSlide() {
       label: '1',
       title: 'Choose a household',
       body: 'Set family structure, state, and an income range.',
-      tone: colors.blue,
+      tone: colors.teal,
     },
     {
       label: '2',
@@ -262,7 +268,7 @@ export function ProductFrameSlide() {
       label: '3',
       title: 'Ask what drives it',
       body: 'Identify which program changes create the sharpest transitions.',
-      tone: colors.gold,
+      tone: colors.amber,
     },
   ];
 
@@ -274,7 +280,7 @@ export function ProductFrameSlide() {
         body="The product flow is intentionally simple: define a household, scan the income path, and inspect the drivers."
       />
 
-      <div className="mt-10 grid min-w-0 grid-cols-[1fr_48px_1fr_48px_1fr] items-stretch gap-3">
+      <div className="grid min-w-0 grid-cols-[1fr_48px_1fr_48px_1fr] items-stretch gap-3">
         {frames.map((frame, index) => (
           <div key={frame.title} className="contents">
             <Card
@@ -302,11 +308,12 @@ export function DemoFlowSlide() {
         eyebrow="What to watch for"
         title="A cliff is the moment resources stop rising with earnings."
         body="The chart makes the tradeoff visible: income keeps moving right, but net resources flatten or fall."
+        compact
       />
 
-      <div className="mt-7 grid min-w-0 grid-cols-[1.05fr_0.95fr] gap-7">
-        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-          <svg viewBox="0 0 560 300" className="h-[300px] w-full" role="img" aria-label="Illustrative benefit cliff chart">
+      <div className="grid min-w-0 grid-cols-[1.05fr_0.95fr] gap-7">
+        <div className="content-card p-5">
+          <svg viewBox="0 0 560 300" className="h-[250px] w-full" role="img" aria-label="Illustrative benefit cliff chart">
             <line x1="54" y1="246" x2="520" y2="246" stroke="#CBD5E1" strokeWidth="2" />
             <line x1="54" y1="34" x2="54" y2="246" stroke="#CBD5E1" strokeWidth="2" />
             <text x="288" y="286" textAnchor="middle" className="fill-slate-500 text-sm font-semibold">
@@ -316,7 +323,7 @@ export function DemoFlowSlide() {
               Net resources
             </text>
 
-            <rect x="300" y="52" width="72" height="194" rx="8" fill="rgba(249, 115, 115, 0.13)" />
+            <rect x="300" y="52" width="72" height="194" rx="8" fill="rgba(232, 145, 58, 0.13)" />
             <path
               d="M64 226 C138 210 196 178 252 136 C282 113 305 95 322 83 L344 138 C386 134 438 112 506 76"
               fill="none"
@@ -325,13 +332,13 @@ export function DemoFlowSlide() {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="344" cy="138" r="9" fill="#f97373" />
-            <path d="M320 82 L344 138" stroke="#f97373" strokeWidth="5" strokeLinecap="round" />
-            <line x1="344" y1="138" x2="444" y2="138" stroke="#f97373" strokeWidth="2" strokeDasharray="5 6" />
+            <circle cx="344" cy="138" r="9" fill="var(--pe-amber)" />
+            <path d="M320 82 L344 138" stroke="var(--pe-amber)" strokeWidth="5" strokeLinecap="round" />
+            <line x1="344" y1="138" x2="444" y2="138" stroke="var(--pe-amber)" strokeWidth="2" strokeDasharray="5 6" />
             <text x="452" y="143" className="fill-slate-700 text-base font-bold">
               cliff
             </text>
-            <text x="336" y="42" textAnchor="middle" className="fill-red-500 text-sm font-bold uppercase tracking-widest">
+            <text x="336" y="42" textAnchor="middle" className="fill-pe-amber text-sm font-bold uppercase tracking-widest">
               transition
             </text>
           </svg>
@@ -346,7 +353,7 @@ export function DemoFlowSlide() {
               Where does the line bend, flatten, or drop?
             </p>
           </div>
-          <div className="border-l-4 border-[#f97373] pl-5">
+          <div className="border-l-4 border-pe-amber pl-5">
             <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
               Then, name the rule.
             </h3>
@@ -384,8 +391,8 @@ export function DemoPlaceholderSlide() {
         body="A concrete family makes the chart easier to read and the policy question easier to discuss."
       />
 
-      <div className="mt-8 grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
-        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
+        <div className="content-card p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
             Primary demo path
           </p>
@@ -401,7 +408,7 @@ export function DemoPlaceholderSlide() {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between rounded-lg bg-pe-dark p-7 text-white shadow-sm">
+        <div className="flex flex-col justify-between rounded-2xl bg-pe-dark p-7 text-white shadow-sm">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
               Live URL
@@ -425,7 +432,7 @@ export function ChartReadingSlide() {
     {
       title: 'Follow income',
       body: 'Read left to right: what happens as earnings rise?',
-      tone: colors.blue,
+      tone: colors.teal,
     },
     {
       title: 'Watch net resources',
@@ -435,7 +442,7 @@ export function ChartReadingSlide() {
     {
       title: 'Name the driver',
       body: 'Connect the visible cliff to the program transition underneath.',
-      tone: colors.rose,
+      tone: colors.amber,
     },
   ];
 
@@ -447,9 +454,9 @@ export function ChartReadingSlide() {
         body="A simple reading pattern keeps the demo accessible for people who do not live in marginal tax rate charts."
       />
 
-      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+      <div className="grid min-w-0 grid-cols-3 gap-5">
         {readingSteps.map((step, index) => (
-          <div key={step.title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <div key={step.title} className="content-card p-5">
             <StepNumber value={`${index + 1}`} tone={step.tone} />
             <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
               {step.title}
@@ -459,7 +466,7 @@ export function ChartReadingSlide() {
         ))}
       </div>
 
-      <div className="mt-7 rounded-lg border border-slate-200 bg-slate-50 p-6">
+      <div className="mt-7 content-card bg-slate-50 p-6">
         <div className="flex items-start gap-4">
           <IconSearch className="mt-1 h-8 w-8 shrink-0 text-pe-teal" stroke={1.8} />
           <p className="text-2xl font-semibold leading-relaxed text-gray-700">
@@ -486,13 +493,13 @@ export function TakeawaysSlide() {
         title="Three ideas to repeat before Q&A."
       />
 
-      <div className="mt-9 space-y-5">
+      <div className="space-y-5">
         {takeaways.map((takeaway, index) => (
           <div
             key={takeaway}
-            className="flex items-center gap-5 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+            className="content-card flex items-center gap-5 p-6"
           >
-            <StepNumber value={`${index + 1}`} tone={index === 1 ? colors.rose : colors.teal} />
+            <StepNumber value={`${index + 1}`} tone={index === 1 ? colors.amber : colors.teal} />
             <p className="text-3xl font-black leading-tight tracking-normal text-pe-dark">
               {takeaway}
             </p>
@@ -518,9 +525,9 @@ export function DiscussionSlide() {
         body="Use these prompts if Q&A needs structure, or skip directly to audience questions."
       />
 
-      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
+      <div className="grid min-w-0 grid-cols-3 gap-5">
         {questions.map((question, index) => (
-          <div key={question} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+          <div key={question} className="content-card p-6">
             <IconMessageQuestion className="h-9 w-9 text-pe-teal" stroke={1.8} />
             <p className="mt-5 text-xl font-semibold leading-relaxed text-gray-700">
               {question}
