@@ -5,10 +5,8 @@ import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
   IconChartLine,
-  IconChecklist,
   IconMap2,
   IconMessageQuestion,
-  IconRoute,
   IconSearch,
   IconUsersGroup,
 } from '@tabler/icons-react';
@@ -284,57 +282,73 @@ export function ProductFrameSlide() {
 }
 
 export function DemoFlowSlide() {
-  const steps = [
-    {
-      title: 'Start with one story',
-      body: 'Pick a household people can picture quickly.',
-      tone: colors.teal,
-    },
-    {
-      title: 'Name the steep spot',
-      body: 'Point to the income band where resources flatten or fall.',
-      tone: colors.rose,
-    },
-    {
-      title: 'Change one thing',
-      body: 'Switch state, household composition, or income range.',
-      tone: colors.gold,
-    },
-  ];
-
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Demo choreography"
-        title="One scenario, one insight, one variation."
-        body="A focused demo will be more useful than a tour of every control."
+        eyebrow="What to watch for"
+        title="A cliff is the moment resources stop rising with earnings."
+        body="The chart makes the tradeoff visible: income keeps moving right, but net resources flatten or fall."
       />
 
-      <div className="mt-8 grid min-w-0 grid-cols-3 gap-5">
-        {steps.map((step, index) => (
-          <div key={step.title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <StepNumber value={`${index + 1}`} tone={step.tone} />
-            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              {step.title}
-            </h3>
-            <p className="mt-3 text-lg leading-relaxed text-gray-600">{step.body}</p>
-          </div>
-        ))}
-      </div>
+      <div className="mt-7 grid min-w-0 grid-cols-[1.05fr_0.95fr] gap-7">
+        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+          <svg viewBox="0 0 560 300" className="h-[300px] w-full" role="img" aria-label="Illustrative benefit cliff chart">
+            <line x1="54" y1="246" x2="520" y2="246" stroke="#CBD5E1" strokeWidth="2" />
+            <line x1="54" y1="34" x2="54" y2="246" stroke="#CBD5E1" strokeWidth="2" />
+            <text x="288" y="286" textAnchor="middle" className="fill-slate-500 text-sm font-semibold">
+              Earnings
+            </text>
+            <text x="18" y="145" textAnchor="middle" transform="rotate(-90 18 145)" className="fill-slate-500 text-sm font-semibold">
+              Net resources
+            </text>
 
-      <div className="mt-7 grid min-w-0 grid-cols-2 gap-5">
-        <Card
-          title="Daphne leads the household walkthrough"
-          body="Frame the scenario, make the selections, and narrate what changes on the chart."
-          tone={colors.teal}
-          icon={IconRoute}
-        />
-        <Card
-          title="Max connects it to policy design"
-          body="Translate the cliff into policy questions and pull audience reactions into the discussion."
-          tone={colors.blue}
-          icon={IconChecklist}
-        />
+            <rect x="300" y="52" width="72" height="194" rx="8" fill="rgba(249, 115, 115, 0.13)" />
+            <path
+              d="M64 226 C138 210 196 178 252 136 C282 113 305 95 322 83 L344 138 C386 134 438 112 506 76"
+              fill="none"
+              stroke="var(--pe-teal)"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle cx="344" cy="138" r="9" fill="#f97373" />
+            <path d="M320 82 L344 138" stroke="#f97373" strokeWidth="5" strokeLinecap="round" />
+            <line x1="344" y1="138" x2="444" y2="138" stroke="#f97373" strokeWidth="2" strokeDasharray="5 6" />
+            <text x="452" y="143" className="fill-slate-700 text-base font-bold">
+              cliff
+            </text>
+            <text x="336" y="42" textAnchor="middle" className="fill-red-500 text-sm font-bold uppercase tracking-widest">
+              transition
+            </text>
+          </svg>
+        </div>
+
+        <div className="flex flex-col justify-center gap-5">
+          <div className="border-l-4 border-pe-teal pl-5">
+            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              First, find the income band.
+            </h3>
+            <p className="mt-2 text-lg leading-relaxed text-gray-600">
+              Where does the line bend, flatten, or drop?
+            </p>
+          </div>
+          <div className="border-l-4 border-[#f97373] pl-5">
+            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              Then, name the rule.
+            </h3>
+            <p className="mt-2 text-lg leading-relaxed text-gray-600">
+              Which benefit phase-out, eligibility cutoff, or tax interaction changed?
+            </p>
+          </div>
+          <div className="border-l-4 border-pe-amber pl-5">
+            <h3 className="text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              Finally, compare alternatives.
+            </h3>
+            <p className="mt-2 text-lg leading-relaxed text-gray-600">
+              A different place or policy design can smooth the same transition.
+            </p>
+          </div>
+        </div>
       </div>
     </WebinarSlide>
   );
@@ -351,9 +365,9 @@ export function DemoPlaceholderSlide() {
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Live demo handoff"
-        title="Open CliffWatch with one prepared scenario."
-        body="Use the slide only as the launch point, then move into the live page."
+        eyebrow="Example scenario"
+        title="Start with a household people can picture."
+        body="A concrete family makes the chart easier to read and the policy question easier to discuss."
       />
 
       <div className="mt-8 grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
@@ -383,8 +397,8 @@ export function DemoPlaceholderSlide() {
             </p>
           </div>
           <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/75">
-            Keep one backup scenario ready, but only use it if discussion needs
-            a contrast.
+            Change one assumption at a time so the audience can see what moves
+            the cliff.
           </p>
         </div>
       </div>
