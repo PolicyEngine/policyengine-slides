@@ -13,8 +13,10 @@ import { aeaReproducibilityConfig } from '@/slideshows/aea-reproducibility-2026-
 import { pwbm2026Config } from '@/slideshows/pwbm-2026/config';
 import { eagxdc2026Config } from '@/slideshows/eagxdc-2026/config';
 import { codeForAmerica2026Config } from '@/slideshows/code-for-america-2026/config';
+import { cbo2026Config } from '@/slideshows/cbo-2026/config';
 
 export const slideshows: SlideshowConfig[] = [
+  cbo2026Config,
   codeForAmerica2026Config,
   eagxdc2026Config,
   pwbm2026Config,
