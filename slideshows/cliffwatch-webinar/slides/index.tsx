@@ -132,54 +132,68 @@ export function TitleSlide() {
 }
 
 export function AgendaSlide() {
-  const agenda = [
-    {
-      number: '01',
-      title: 'Follow net resources',
-      body: 'Find ranges where total resources flatten or fall as earnings rise.',
-      tone: colors.rose,
-    },
-    {
-      number: '02',
-      title: 'Name the program change',
-      body: 'Connect each sharp turn to the phase-out, cutoff, or tax interaction underneath.',
-      tone: colors.teal,
-    },
-    {
-      number: '03',
-      title: 'Compare policy design',
-      body: 'Change places or household assumptions to see which cliffs are policy choices.',
-      tone: colors.gold,
-    },
-  ];
-
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Core question"
-        title="When does a raise stop helping?"
-        body="We’ll follow one household across the income path and use CliffWatch to see where policy turns extra earnings into a cliff."
+        eyebrow="What is a cliff?"
+        title="A cliff turns a small raise into a big loss."
+        body="The household earns more, but an eligibility rule changes all at once, so total resources can flatten or fall."
       />
 
-      <div className="mt-10 flex max-w-4xl flex-col gap-6">
-        {agenda.map((item) => (
-          <div key={item.title} className="flex items-baseline gap-6">
-            <span
-              className="font-mono text-4xl font-bold opacity-80"
-              style={{ color: item.tone }}
-            >
-              {item.number}
-            </span>
-            <div>
-              <h3 className="text-2xl font-bold leading-tight text-gray-800">
-                {item.title}
-              </h3>
-              <p className="mt-1 text-lg leading-relaxed text-gray-500">
-                {item.body}
+      <div className="mt-6 grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
+        <div className="flex flex-col justify-between rounded-lg bg-pe-dark p-6 text-white shadow-sm">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+              Basic idea
+            </p>
+            <p className="mt-5 text-4xl font-black leading-tight tracking-normal">
+              Earn $1 more.
+              <br />
+              Lose Medicaid.
+            </p>
+          </div>
+          <p className="mt-7 text-lg leading-relaxed text-white/75">
+            CliffWatch helps show where more income stops helping and which rule
+            is driving the drop.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
+            Simple Medicaid example
+          </p>
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-stretch gap-4">
+            <div className="rounded-lg border border-teal-100 bg-teal-50 p-4">
+              <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
+                At or below the limit
+              </p>
+              <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
+                Medicaid coverage
+              </p>
+            </div>
+            <div className="flex items-center justify-center text-slate-300">
+              <IconArrowRight className="h-8 w-8" stroke={1.8} />
+            </div>
+            <div className="rounded-lg border border-red-100 bg-red-50 p-4">
+              <p className="text-sm font-bold uppercase tracking-widest text-red-500">
+                $1 over the limit
+              </p>
+              <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
+                No Medicaid
               </p>
             </div>
           </div>
-        ))}
+
+          <div className="mt-5 border-l-4 border-pe-amber pl-5">
+            <h3 className="text-xl font-black leading-tight tracking-normal text-pe-dark">
+              The cliff is the gap between wages and resources.
+            </h3>
+            <p className="mt-2 text-base leading-relaxed text-gray-600">
+              The paycheck rises a little, but the lost coverage can be worth
+              much more.
+            </p>
+          </div>
+        </div>
       </div>
     </WebinarSlide>
   );
