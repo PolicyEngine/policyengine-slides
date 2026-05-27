@@ -44,6 +44,7 @@ import AnalysisLogosSlide from './slides/AnalysisLogosSlide';
 import PolicyAnalysisSlide from './slides/PolicyAnalysisSlide';
 import ClaudePluginSlide from './slides/ClaudePluginSlide';
 import ClaudeComparisonSlide from './slides/ClaudeComparisonSlide';
+import UKChatPrototypeSlide from './slides/UKChatPrototypeSlide';
 import PredictAllSlide from './slides/PredictAllSlide';
 import MarketsMockSlide from './slides/MarketsMockSlide';
 import ClosingSlide from './slides/ClosingSlide';
@@ -124,6 +125,7 @@ export const cbo2026Config: SlideshowConfig = {
     PolicyAnalysisSlide,
     ClaudePluginSlide,
     ClaudeComparisonSlide,
+    UKChatPrototypeSlide,
     PredictAllSlide,
     MarketsMockSlide,
     ClosingSlide,
