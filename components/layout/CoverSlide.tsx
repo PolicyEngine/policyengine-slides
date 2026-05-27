@@ -53,7 +53,7 @@ export default function CoverSlide({
                   />
                 </div>
                 <p className="text-xl font-semibold text-white">{speaker.name}</p>
-                <p className="text-sm text-white/70 font-light">{speaker.title}</p>
+                <p className="text-sm text-white/70 font-light whitespace-pre-line">{speaker.title}</p>
               </div>
             ))}
           </div>

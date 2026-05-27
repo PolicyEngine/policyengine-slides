@@ -9,7 +9,7 @@ export default function TitleSlide() {
       speakers={[
         {
           ...speakers['max-ghenis'],
-          title: 'Co-founder & CEO, PolicyEngine  ·  Founder & CEO, Axiom',
+          title: 'Co-founder & CEO, PolicyEngine\nFounder & CEO, Axiom Foundation',
         },
       ]}
       event="Congressional Budget Office"

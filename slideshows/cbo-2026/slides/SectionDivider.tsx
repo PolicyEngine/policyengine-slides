@@ -63,3 +63,43 @@ export const InfraDividerSlide = () => (
     subtitle="Many institutions, each adding evidence — and the bigger picture that is starting to come into view."
   />
 );
+
+export const RulesDividerSlide = () => (
+  <SectionDivider
+    number="1"
+    title="Rules"
+    subtitle="Encoded law as the foundation — what we have today, what AI is doing to it, and where Axiom takes it next."
+  />
+);
+
+export const ModelsDividerSlide = () => (
+  <SectionDivider
+    number="2"
+    title="Models"
+    subtitle="Microsimulation, calibrated data, behavior — and how AI is changing each."
+  />
+);
+
+export const DataDividerSlide = () => (
+  <SectionDivider
+    number="2"
+    title="Data"
+    subtitle="Comprehensive, accurate microdata — fused with machine learning and reweighted to administrative truth."
+  />
+);
+
+export const TheoryDividerSlide = () => (
+  <SectionDivider
+    number="3"
+    title="Theory"
+    subtitle="Behavioral responses — elasticities, take-up, and where LLMs are starting to help us study them."
+  />
+);
+
+export const AnalysisDividerSlide = () => (
+  <SectionDivider
+    number="4"
+    title="Analysis"
+    subtitle="Putting it together — interpretation, context, and what becomes possible at scale."
+  />
+);

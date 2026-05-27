@@ -5,41 +5,42 @@ import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
-const IFRAME_URL = 'https://policybench.org';
+// TODO: replace with the live Axiom app URL when ready.
+const IFRAME_URL = 'https://axiom-foundation.org';
 
-export default function PolicyBenchSlide() {
+export default function AxiomDemoSlide() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>AI cannot calculate taxes and benefits accurately today</SlideTitle>
+        <SlideTitle>Enter: Axiom Foundation</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-4 h-[calc(100vh-300px)]">
+      <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
         <div className="flex flex-col gap-4">
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">PolicyBench.org</div>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              Frontier models are evaluated on basic tax-and-transfer
-              calculations — the building blocks of any microsimulation model.
+            <div className="slide-tag mb-3">What you are about to see</div>
+            <p className="text-base text-gray-700 leading-relaxed">
+              The Axiom app is one interface into the encoded-rules substrate
+              &mdash; how a human (or an AI agent) finds a statute, inspects
+              its parameters, traces its citations, and runs it.
             </p>
           </div>
 
-          <div className="content-card p-5 text-center">
-            <div className="stat-number text-6xl text-pe-teal">1 in 3</div>
-            <p className="text-lg text-gray-700 mt-1">to</p>
-            <div className="stat-number text-6xl text-pe-teal">1 in 7</div>
-            <p className="text-base text-gray-700 leading-relaxed mt-3">
-              basic calculations wrong, depending on the accuracy threshold.
+          <div className="content-card p-5">
+            <div className="slide-tag mb-3">For CBO specifically</div>
+            <p className="text-base text-gray-700 leading-relaxed">
+              The same rules CBO maintains internally could live on this
+              substrate. Same neutrality, same review discipline &mdash; with
+              the encoding burden carried as a public good and AI grounded in
+              one canonical source.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-            <p className="text-base text-gray-700 leading-relaxed">
-              AI is impressive at code, search, and summarization. It is not a
-              substitute for analyst judgment, institutional knowledge, or
-              quality-control processes.
+            <p className="text-sm text-gray-600 leading-relaxed italic">
+              Live walkthrough.
             </p>
           </div>
         </div>
@@ -50,7 +51,7 @@ export default function PolicyBenchSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="PolicyBench"
+            title="Axiom"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -82,7 +83,7 @@ export default function PolicyBenchSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="PolicyBench (expanded)"
+              title="Axiom (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />

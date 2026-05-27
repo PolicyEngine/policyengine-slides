@@ -5,41 +5,43 @@ import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
-const IFRAME_URL = 'https://policybench.org';
+const IFRAME_URL = 'https://llm-econ-beliefs.vercel.app/';
 
-export default function PolicyBenchSlide() {
+export default function LLMBeliefsSlide() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>AI cannot calculate taxes and benefits accurately today</SlideTitle>
+        <SlideTitle>What do LLMs believe about elasticities?</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-4 h-[calc(100vh-300px)]">
+      <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
         <div className="flex flex-col gap-4">
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">PolicyBench.org</div>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              Frontier models are evaluated on basic tax-and-transfer
-              calculations — the building blocks of any microsimulation model.
+            <div className="slide-tag mb-3">LLM econ beliefs</div>
+            <p className="text-base text-gray-800 leading-relaxed">
+              We elicit point estimates, uncertainty, and literature anchors
+              for canonical parameters &mdash; Frisch elasticity, ETI,
+              discount factor, capital share, Armington elasticities &mdash;
+              across many models, side by side.
             </p>
           </div>
 
-          <div className="content-card p-5 text-center">
-            <div className="stat-number text-6xl text-pe-teal">1 in 3</div>
-            <p className="text-lg text-gray-700 mt-1">to</p>
-            <div className="stat-number text-6xl text-pe-teal">1 in 7</div>
-            <p className="text-base text-gray-700 leading-relaxed mt-3">
-              basic calculations wrong, depending on the accuracy threshold.
+          <div className="content-card p-5">
+            <div className="slide-tag mb-3">Why this is useful</div>
+            <p className="text-base text-gray-700 leading-relaxed">
+              The variation across models surfaces real disagreement in the
+              literature that a single meta-analysis number tends to flatten.
+              When models converge, we have a signal. When they diverge, we
+              have a question worth investigating.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-            <p className="text-base text-gray-700 leading-relaxed">
-              AI is impressive at code, search, and summarization. It is not a
-              substitute for analyst judgment, institutional knowledge, or
-              quality-control processes.
+            <p className="text-sm text-gray-700 leading-relaxed italic">
+              Not a substitute for the empirical work. A new instrument that
+              runs at the speed of inference.
             </p>
           </div>
         </div>
@@ -50,7 +52,7 @@ export default function PolicyBenchSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="PolicyBench"
+            title="LLM econ beliefs"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -82,7 +84,7 @@ export default function PolicyBenchSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="PolicyBench (expanded)"
+              title="LLM econ beliefs (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />

@@ -5,23 +5,27 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const sections = [
   {
     number: '1',
-    title: 'Where AI is',
-    detail: 'What current models can and cannot do, where they are useful inside a modeling shop today, and how fast that has been moving.',
+    title: 'Rules',
+    detail:
+      'Encoded law — what we have, how AI is helping us scale it, and where Axiom takes it next.',
   },
   {
     number: '2',
-    title: 'How PolicyEngine and Axiom work',
-    detail: 'Three layers — rules (encoded law, increasingly via Axiom as a public good), calibrated data, behavioral dynamics — and where AI is changing how each is built.',
+    title: 'Data',
+    detail:
+      'Calibrated microdata — fused with machine learning, reweighted to administrative totals, now moving to a new paradigm.',
   },
   {
     number: '3',
-    title: 'Uncertainty',
-    detail: 'Parameter versus model uncertainty, domains of validity, and the backtesting we are setting up.',
+    title: 'Theory',
+    detail:
+      'Behavioral responses — elasticities, take-up, and where LLMs are starting to help us study them.',
   },
   {
     number: '4',
-    title: 'The community is scaling',
-    detail: 'What the wider community of policy forecasters is already producing — and the bigger picture it points toward: dramatically more evidence for the people setting policy.',
+    title: 'Analysis',
+    detail:
+      'Putting it together — how the rules, data, and theory turn into projections worth acting on.',
   },
 ];
 
@@ -32,18 +36,18 @@ export default function OutlineSlide() {
         <SlideTitle>What we&apos;ll cover</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-2 gap-6">
+      <div className="mt-10 grid grid-cols-4 gap-5">
         {sections.map((section) => (
-          <div key={section.number} className="content-card p-8">
-            <div className="flex items-baseline gap-4">
-              <span className="font-mono text-5xl font-bold text-pe-teal">
+          <div key={section.number} className="content-card p-6">
+            <div className="flex items-baseline gap-3 mb-3">
+              <span className="font-mono text-4xl font-bold text-pe-teal">
                 {section.number}
               </span>
-              <h3 className="font-mono text-2xl font-bold text-gray-800">
+              <h3 className="font-mono text-xl font-bold text-gray-800">
                 {section.title}
               </h3>
             </div>
-            <p className="text-lg text-gray-600 leading-relaxed mt-3">
+            <p className="text-base text-gray-600 leading-relaxed">
               {section.detail}
             </p>
           </div>

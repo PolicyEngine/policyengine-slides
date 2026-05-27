@@ -8,21 +8,55 @@ import EverySeriesForecastSlide from './slides/EverySeriesForecastSlide';
 import CrossScaleSlide from './slides/CrossScaleSlide';
 import ScaleAccuracySlide from './slides/ScaleAccuracySlide';
 import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
+import ProjectionApparatusSlide from './slides/ProjectionApparatusSlide';
 import {
-  ProgressDividerSlide,
-  MicrosimDividerSlide,
-  UncertaintyDividerSlide,
-  InfraDividerSlide,
+  RulesDividerSlide,
+  DataDividerSlide,
+  TheoryDividerSlide,
+  AnalysisDividerSlide,
 } from './slides/SectionDivider';
+// Rules section
+import RulesScopeSlide from './slides/RulesScopeSlide';
+import CliffWatchSlide from './slides/CliffWatchSlide';
+import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import PolicyBenchSlide from './slides/PolicyBenchSlide';
-import AIUsesTodaySlide from './slides/AIUsesTodaySlide';
-import AITrajectorySlide from './slides/AITrajectorySlide';
+import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
+import Evo1SinglePromptSlide from './slides/Evo1SinglePromptSlide';
+import Evo2PipelineSlide from './slides/Evo2PipelineSlide';
+import Evo3ParallelSlide from './slides/Evo3ParallelSlide';
+import Evo4ValidationSlide from './slides/Evo4ValidationSlide';
+import Evo5SkillsSlide from './slides/Evo5SkillsSlide';
+import Evo6FullWorkflowSlide from './slides/Evo6FullWorkflowSlide';
+import AxiomIntroSlide from './slides/AxiomIntroSlide';
+import AxiomDemoSlide from './slides/AxiomDemoSlide';
+// Data section
+import DataChallengeSlide from './slides/DataChallengeSlide';
+import ObbbaExplorerSlide from './slides/ObbbaExplorerSlide';
+import ImputationSlide from './slides/ImputationSlide';
+import CalibrationSlide from './slides/CalibrationSlide';
+import MicroplexSlide from './slides/MicroplexSlide';
+// Theory section
+import TheoryApproachSlide from './slides/TheoryApproachSlide';
+import LLMBeliefsSlide from './slides/LLMBeliefsSlide';
+import LLMETISlide from './slides/LLMETISlide';
+// Analysis section
+import AnalysisLogosSlide from './slides/AnalysisLogosSlide';
+import PolicyAnalysisSlide from './slides/PolicyAnalysisSlide';
+import ClaudePluginSlide from './slides/ClaudePluginSlide';
+import ClaudeComparisonSlide from './slides/ClaudeComparisonSlide';
+import PredictAllSlide from './slides/PredictAllSlide';
+import MarketsMockSlide from './slides/MarketsMockSlide';
+import ClosingSlide from './slides/ClosingSlide';
+// Existing slides — to be reworked into Theory / Analysis sections.
+// Parked here so they are still reachable while the new content gets built.
 import PEOverviewSlide from './slides/PEOverviewSlide';
 import CoverageSlide from './slides/CoverageSlide';
 import DataPipelineSlide from './slides/DataPipelineSlide';
 import ValidationSlide from './slides/ValidationSlide';
 import RulesAsCodeSlide from './slides/RulesAsCodeSlide';
 import TANFExampleSlide from './slides/TANFExampleSlide';
+import AIUsesTodaySlide from './slides/AIUsesTodaySlide';
+import AITrajectorySlide from './slides/AITrajectorySlide';
 import ParamVsModelSlide from './slides/ParamVsModelSlide';
 import DebtGdpSlide from './slides/DebtGdpSlide';
 import BacktestingSlide from './slides/BacktestingSlide';
@@ -43,39 +77,56 @@ export const cbo2026Config: SlideshowConfig = {
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
+    // Opening
     TitleSlide,
     OutlineSlide,
-
     CboScaleSlide,
     ScaleOpportunitySlide,
     EverySeriesForecastSlide,
     CrossScaleSlide,
     ScaleAccuracySlide,
     HowWeGetThereSlide,
+    ProjectionApparatusSlide,
 
-    ProgressDividerSlide,
+    // Section 1 — Rules
+    RulesDividerSlide,
+    RulesScopeSlide,
+    CliffWatchSlide,
+    WhoUsesItSlide,
     PolicyBenchSlide,
-    AIUsesTodaySlide,
-    AITrajectorySlide,
+    BridgeToEvolutionSlide,
+    Evo1SinglePromptSlide,
+    Evo2PipelineSlide,
+    Evo3ParallelSlide,
+    Evo4ValidationSlide,
+    Evo5SkillsSlide,
+    Evo6FullWorkflowSlide,
+    AxiomIntroSlide,
+    AxiomDemoSlide,
 
-    MicrosimDividerSlide,
-    PEOverviewSlide,
-    CoverageSlide,
-    DataPipelineSlide,
-    ValidationSlide,
-    RulesAsCodeSlide,
-    TANFExampleSlide,
+    // Section 2 — Data
+    DataDividerSlide,
+    DataChallengeSlide,
+    ObbbaExplorerSlide,
+    ImputationSlide,
+    CalibrationSlide,
+    MicroplexSlide,
 
-    UncertaintyDividerSlide,
-    ParamVsModelSlide,
-    DebtGdpSlide,
-    BacktestingSlide,
+    // Section 3 — Theory
+    TheoryDividerSlide,
+    TheoryApproachSlide,
+    LLMBeliefsSlide,
+    LLMETISlide,
 
-    InfraDividerSlide,
-    DifferentPiecesSlide,
-    ConditionalForecastsSlide,
-    ConductorsSlide,
-    CommunityClosingSlide,
+    // Section 4 — Analysis
+    AnalysisDividerSlide,
+    AnalysisLogosSlide,
+    PolicyAnalysisSlide,
+    ClaudePluginSlide,
+    ClaudeComparisonSlide,
+    PredictAllSlide,
+    MarketsMockSlide,
+    ClosingSlide,
 
     QuestionsSlide,
   ],
