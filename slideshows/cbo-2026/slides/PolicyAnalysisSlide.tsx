@@ -42,13 +42,13 @@ export default function PolicyAnalysisSlide() {
           </div>
         </div>
 
-        <div className="content-card overflow-hidden rounded-xl border border-gray-200">
+        <div className="content-card overflow-hidden rounded-xl border border-gray-200 bg-white">
           <Image
             src="/screenshots/policy-analysis-report.png"
             alt="AI-generated policy analysis report in PolicyEngine"
             width={1600}
             height={915}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-auto object-contain"
             priority
           />
         </div>
