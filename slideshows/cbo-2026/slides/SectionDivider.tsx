@@ -59,7 +59,7 @@ export const UncertaintyDividerSlide = () => (
 export const InfraDividerSlide = () => (
   <SectionDivider
     number="4"
-    title="A shared forecasting infrastructure"
-    subtitle="Different institutions, different pieces, one community of forecasters."
+    title="A community already scaling"
+    subtitle="Many institutions, each adding evidence — and the bigger picture that is starting to come into view."
   />
 );

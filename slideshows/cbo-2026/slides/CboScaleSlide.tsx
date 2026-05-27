@@ -9,48 +9,41 @@ export default function CboScaleSlide() {
         <SlideTitle>The scale of what CBO does</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+      <div className="mt-12 grid grid-cols-[0.9fr_1.1fr] gap-10 items-center">
         <div className="space-y-6">
           <div className="content-card p-8 text-center">
-            <div className="stat-number text-7xl text-pe-teal">~2,500</div>
+            <div className="stat-number text-5xl leading-tight text-pe-teal">
+              Tens of thousands
+            </div>
             <div className="text-xl font-semibold text-gray-800 mt-3">
-              distinct predictions per year
+              projection and estimate cells annually
             </div>
             <div className="text-base text-gray-500 mt-2 leading-snug">
-              Baseline budget + economic projections + cost estimates
+              Baseline series-years + bill-year-category estimate cells
             </div>
           </div>
 
           <div className="content-card p-8 text-center">
-            <div className="stat-number text-7xl text-pe-teal">600–800</div>
+            <div className="stat-number text-7xl text-pe-teal">~1,000</div>
             <div className="text-xl font-semibold text-gray-800 mt-3">
-              bills scored annually
+              public cost estimates annually
             </div>
             <div className="text-base text-gray-500 mt-2 leading-snug">
-              Out of ~10,000 introduced per Congress
+              600–800 non-suspension estimates + about 400 suspension estimates
             </div>
           </div>
         </div>
 
         <div className="space-y-6">
           <p className="text-2xl text-gray-800 leading-relaxed">
-            Each prediction requires extraordinary craft: behavioral models,
-            microsimulation, private data, decades of institutional knowledge.
+            Each cell reflects extraordinary craft: behavioral models,
+            microsimulation, private data, decades of institutional knowledge,
+            and layered quality control.
           </p>
 
-          <div className="accent-block">
-            <p className="text-xl text-gray-800 leading-relaxed">
-              And it represents well under{' '}
-              <span className="font-semibold text-pe-teal">0.1%</span> of the
-              data points the federal government will actually publish this
-              year.
-            </p>
-          </div>
-
-          <p className="text-base text-gray-500 italic leading-relaxed">
-            BLS alone maintains ~2,500 series. Census ACS covers 40,000+
-            geographies. The federal statistical system produces millions of
-            data points annually.
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Together, they are some of the most carefully produced quantitative
+            information in the federal government.
           </p>
         </div>
       </div>

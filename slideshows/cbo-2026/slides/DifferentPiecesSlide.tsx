@@ -3,7 +3,7 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
 const pieces = [
-  { who: 'Statutory authorities', what: 'Encoded law', detail: 'Federal, state, local rules as machine-readable parameters with citations.' },
+  { who: 'Axiom + statutory authorities', what: 'Encoded law', detail: 'Federal, state, and local rules as machine-readable parameters with citations — a public good every modeler can build on.' },
   { who: 'Census, BLS, IRS, CBO', what: 'Ground-truth statistics', detail: 'Published, scheduled, authoritative series the whole community can resolve forecasts against.' },
   { who: 'PolicyEngine, TPC, ITEP, others', what: 'Microsim engines', detail: 'Mechanistic rules + calibrated microdata, open-source and reproducible.' },
   { who: 'CBO, JCT, Treasury', what: 'Behavioral and longitudinal models', detail: 'Macro feedback, lifetime projections, private microdata under strict governance.' },
@@ -15,7 +15,7 @@ export default function DifferentPiecesSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Different institutions hold different pieces</SlideTitle>
+        <SlideTitle>The forecasting community, today</SlideTitle>
       </SlideHeader>
 
       <div className="mt-8 space-y-3">
@@ -29,7 +29,7 @@ export default function DifferentPiecesSlide() {
       </div>
 
       <p className="mt-8 text-xl text-gray-600 italic max-w-5xl">
-        Nobody holds all the pieces. The interesting question is how they fit together.
+        No single institution covers it all. Together, the community already produces more evidence than any one of us could alone &mdash; and that capacity is growing fast.
       </p>
     </Slide>
   );

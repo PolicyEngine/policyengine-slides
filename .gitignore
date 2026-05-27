@@ -7,3 +7,4 @@ out/
 .gitnexus
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+.env*.local

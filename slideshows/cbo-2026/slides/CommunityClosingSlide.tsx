@@ -15,12 +15,12 @@ export default function CommunityClosingSlide() {
         </p>
 
         <p className="text-3xl text-gray-900 leading-relaxed font-light">
-          AI lets us do that at more scale, more conditionally, and with more calibration.
+          AI lets the community produce dramatically more evidence &mdash; at more scale, more conditionally, more calibrated against reality.
         </p>
 
         <div className="accent-block">
           <p className="text-2xl text-gray-800 leading-relaxed">
-            The work is not choosing a policy.
+            The work is not choosing the policy.
           </p>
           <p className="text-2xl text-gray-800 leading-relaxed mt-2">
             The work is knowing what each policy will actually do &mdash; so the people who do choose can align outcomes with what they are trying to achieve.

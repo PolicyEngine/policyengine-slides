@@ -10,8 +10,8 @@ const sections = [
   },
   {
     number: '2',
-    title: 'How PolicyEngine works',
-    detail: 'Rules, data, behavior — and where AI is changing how we build each layer.',
+    title: 'How PolicyEngine and Axiom work',
+    detail: 'Three layers — rules (encoded law, increasingly via Axiom as a public good), calibrated data, behavioral dynamics — and where AI is changing how each is built.',
   },
   {
     number: '3',
@@ -20,8 +20,8 @@ const sections = [
   },
   {
     number: '4',
-    title: 'A shared forecasting infrastructure',
-    detail: 'A sketch of how different institutions could plug in, with CBO\'s contributions becoming more valuable, not less.',
+    title: 'The community is scaling',
+    detail: 'What the wider community of policy forecasters is already producing — and the bigger picture it points toward: dramatically more evidence for the people setting policy.',
   },
 ];
 

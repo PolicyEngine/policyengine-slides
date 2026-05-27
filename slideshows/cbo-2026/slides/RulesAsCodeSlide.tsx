@@ -54,6 +54,15 @@ export default function RulesAsCodeSlide() {
           </div>
         ))}
       </div>
+
+      <div className="mt-8 accent-block max-w-5xl">
+        <p className="text-lg text-gray-700 leading-relaxed">
+          <span className="font-semibold text-pe-dark">Axiom</span> is the
+          501(c)(3) we are standing up to do this layer as a public good
+          &mdash; machine-readable federal, state, and local law that every
+          modeler, including CBO, can build on.
+        </p>
+      </div>
     </Slide>
   );
 }

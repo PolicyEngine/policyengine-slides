@@ -3,7 +3,10 @@ import { speakers } from '@/lib/speakers';
 import TitleSlide from './slides/TitleSlide';
 import OutlineSlide from './slides/OutlineSlide';
 import CboScaleSlide from './slides/CboScaleSlide';
-import ParadigmShiftSlide from './slides/ParadigmShiftSlide';
+import ScaleOpportunitySlide from './slides/ScaleOpportunitySlide';
+import EverySeriesForecastSlide from './slides/EverySeriesForecastSlide';
+import CrossScaleSlide from './slides/CrossScaleSlide';
+import ScaleAccuracySlide from './slides/ScaleAccuracySlide';
 import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
 import {
   ProgressDividerSlide,
@@ -44,7 +47,10 @@ export const cbo2026Config: SlideshowConfig = {
     OutlineSlide,
 
     CboScaleSlide,
-    ParadigmShiftSlide,
+    ScaleOpportunitySlide,
+    EverySeriesForecastSlide,
+    CrossScaleSlide,
+    ScaleAccuracySlide,
     HowWeGetThereSlide,
 
     ProgressDividerSlide,

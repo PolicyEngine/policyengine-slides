@@ -6,32 +6,32 @@ export default function ConditionalForecastsSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>A sketch: continuously-updated, conditional forecasts</SlideTitle>
+        <SlideTitle>One direction this is heading: conditional forecasts at scale</SlideTitle>
       </SlideHeader>
 
       <div className="mt-10 grid grid-cols-[1.2fr_0.8fr] gap-10">
         <div className="space-y-6">
           <div>
-            <div className="slide-tag mb-2">The structure</div>
+            <div className="slide-tag mb-2">The shape</div>
             <p className="text-xl text-gray-800 leading-relaxed">
-              Calibrated forecasts on agreed-upon cells of public government data &mdash; BLS, BEA, Census, SOI, CBO baselines &mdash; and on specific policy parameters.
+              Calibrated forecasts on public government data &mdash; BLS, BEA, Census, SOI, CBO baselines &mdash; and on specific policy parameters, produced and updated by whichever institutions are best positioned to do so.
             </p>
           </div>
 
           <div>
-            <div className="slide-tag mb-2">The conditional shape</div>
+            <div className="slide-tag mb-2">Conditional structure</div>
             <p className="text-xl text-gray-800 leading-relaxed font-mono">
               given <span className="text-pe-teal">policy state X</span>, what is <span className="text-pe-amber">outcome Y</span> at time T?
             </p>
             <p className="text-lg text-gray-600 leading-relaxed mt-3">
-              Each model runs only inside its domain of validity. The conditional structure gives policymakers what a lookup table cannot, without anyone forcing the model into a regime it cannot stand behind.
+              Each model runs only inside its domain of validity. The conditional form gives policymakers what a lookup table cannot, without anyone forcing a model into a regime it cannot stand behind.
             </p>
           </div>
 
           <div>
             <div className="slide-tag mb-2">The discipline</div>
             <p className="text-xl text-gray-800 leading-relaxed">
-              Resolution against reality on every publication. Calibration scores published openly. Honest about what each model can and cannot say.
+              Resolution against reality on every publication. Calibration tracked openly. Honest about what each model can and cannot say.
             </p>
           </div>
         </div>
