@@ -47,6 +47,7 @@ import ClaudeComparisonSlide from './slides/ClaudeComparisonSlide';
 import UKChatPrototypeSlide from './slides/UKChatPrototypeSlide';
 import PredictAllSlide from './slides/PredictAllSlide';
 import MarketsMockSlide from './slides/MarketsMockSlide';
+import AIInequalitySlide from './slides/AIInequalitySlide';
 import ClosingSlide from './slides/ClosingSlide';
 // Existing slides — to be reworked into Theory / Analysis sections.
 // Parked here so they are still reachable while the new content gets built.
@@ -128,6 +129,7 @@ export const cbo2026Config: SlideshowConfig = {
     UKChatPrototypeSlide,
     PredictAllSlide,
     MarketsMockSlide,
+    AIInequalitySlide,
     ClosingSlide,
 
     QuestionsSlide,
