@@ -106,8 +106,8 @@ function Card({
 export function TitleSlide() {
   return (
     <CoverSlideTemplate
-      title="CliffWatch Webinar"
-      subtitle="Benefit cliffs, PolicyEngine coverage, and live examples"
+      title="CliffWatch"
+      subtitle="Mapping benefit cliffs with PolicyEngine"
       speakers={[
         {
           ...speakers['daphne-hansell'],
@@ -118,7 +118,7 @@ export function TitleSlide() {
           title: 'CEO',
         },
       ]}
-      event="PolicyEngine webinar"
+      event="PolicyEngine"
       date="2026-05-29"
     />
   );
@@ -146,8 +146,8 @@ export function AgendaSlide() {
             </p>
           </div>
           <p className="mt-7 text-lg leading-relaxed text-white/75">
-            CliffWatch helps show where more income stops helping and which rule
-            is driving the drop.
+            CliffWatch maps where more income stops helping and which rule
+            drives the drop.
           </p>
         </div>
 
@@ -204,7 +204,7 @@ export function DemoLinkSlide() {
           loading="eager"
           referrerPolicy="no-referrer-when-downgrade"
           src={cliffwatchDemoUrl}
-          title="CliffWatch demo"
+          title="CliffWatch"
         />
       </div>
     </Slide>
@@ -236,20 +236,20 @@ export function LegacyCliffChartSlide() {
 export function ExamplesSlide() {
   const examples = [
     {
-      title: 'A household near the limit',
-      body: 'Show how one extra dollar can trigger a health, food, or tax-credit change.',
+      title: 'Small raises can trigger large losses',
+      body: 'A household near an eligibility limit can lose health coverage, food assistance, or refundable credits faster than wages rise.',
       icon: IconUsersGroup,
       tone: colors.teal,
     },
     {
-      title: 'The same household elsewhere',
-      body: 'Compare states to show how policy choices reshape the cliff.',
+      title: 'State policy changes the cliff',
+      body: 'The same family can face different cliff locations and sizes depending on state rules.',
       icon: IconMap2,
       tone: colors.dark,
     },
     {
-      title: 'The program driver',
-      body: 'Trace the drop to Medicaid, SNAP, refundable credits, or another rule.',
+      title: 'Program interactions stack',
+      body: 'Medicaid, SNAP, childcare subsidies, refundable credits, and taxes can combine into one visible drop.',
       icon: IconListCheck,
       tone: colors.amber,
     },
@@ -259,8 +259,8 @@ export function ExamplesSlide() {
     <WebinarSlide>
       <Header
         eyebrow="Examples"
-        title="Use CliffWatch to make cliffs concrete."
-        body="Start with one household, compare one place-specific policy choice, and identify the rule behind the drop."
+        title="CliffWatch turns cliffs into concrete household results."
+        body="Total resources vary across earnings, states, and programs."
       />
 
       <div className="grid min-w-0 grid-cols-3 gap-5">
@@ -281,26 +281,26 @@ export function ExamplesSlide() {
 export function NextStepsSlide() {
   const nextSteps = [
     {
-      title: 'Expand the coverage map',
-      body: 'Keep adding and validating benefits, tax credits, and state-specific rules that shape cliff behavior.',
+      title: 'More programs and states',
+      body: 'Deeper coverage captures the state and local rules that often determine whether a household hits a cliff.',
       icon: IconMap2,
       tone: colors.teal,
     },
     {
-      title: 'Build a scenario library',
-      body: 'Turn common household examples into reusable starting points for partners and follow-up analysis.',
+      title: 'Validated household scenarios',
+      body: 'Representative examples make the largest cliffs easier to reproduce and compare.',
       icon: IconFileAnalytics,
       tone: colors.amber,
     },
     {
-      title: 'Trace policy drivers',
-      body: 'Identify which program interactions create the largest cliffs and which reforms smooth them.',
+      title: 'Policy driver attribution',
+      body: 'Each drop can be tied back to the programs, thresholds, and phase-outs that create it.',
       icon: IconSearch,
       tone: colors.dark,
     },
     {
-      title: 'Share research outputs',
-      body: 'Publish findings that make cliffs easier to compare across households, states, and programs.',
+      title: 'Reusable findings',
+      body: 'Published analyses help agencies and researchers target reforms where cliffs are largest.',
       icon: IconChartLine,
       tone: colors.teal,
     },
@@ -309,9 +309,9 @@ export function NextStepsSlide() {
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Next steps"
-        title="The next phase is better cliff coverage and reusable findings."
-        body="The research path is to improve coverage, validate the biggest cliffs, and make the results reusable."
+        eyebrow="Research agenda"
+        title="CliffWatch makes cliffs easier to find, compare, and fix."
+        body="Better coverage and validated scenarios make the largest cliffs visible across households, states, and programs."
       />
 
       <div className="grid min-w-0 grid-cols-2 gap-5">
@@ -333,7 +333,7 @@ export function WrapSlide() {
   return (
     <EndSlideTemplate
       message="Thank you"
-      subtitle="Questions and scenario requests"
+      subtitle={cliffwatchLabel}
       links={[
         { label: cliffwatchLabel, url: cliffwatchUrl },
         { label: 'policyengine.org', url: 'https://policyengine.org' },
