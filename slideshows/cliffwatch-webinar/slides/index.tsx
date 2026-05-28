@@ -216,7 +216,6 @@ export function LegacyCliffChartSlide() {
       <Header
         eyebrow="Cliff work over time"
         title="We have been tracking cliffs for years."
-        body="The earlier PolicyEngine app already showed net income and marginal tax-rate cliffs. CliffWatch is the latest, cleaner iteration."
       />
 
       <div className="content-card relative min-h-0 flex-1 overflow-hidden bg-[#a8d9e3] p-0">
@@ -228,10 +227,6 @@ export function LegacyCliffChartSlide() {
           className="h-full min-h-[460px] w-full object-contain object-center"
           priority
         />
-
-        <div className="absolute bottom-4 right-4 rounded-lg border border-white/70 bg-white/90 px-4 py-3 text-sm font-semibold text-gray-600 shadow-sm">
-          Legacy PolicyEngine app, 2023
-        </div>
       </div>
     </WebinarSlide>
   );
