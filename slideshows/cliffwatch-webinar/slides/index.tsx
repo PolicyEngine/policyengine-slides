@@ -18,6 +18,9 @@ const colors = {
   dark: 'var(--pe-dark)',
 };
 
+const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
+const cliffwatchDemoLabel = 'policyengine.org/us/cliffwatch?max=100000';
+
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
     <Slide>
@@ -293,25 +296,34 @@ export function ProductFrameSlide() {
 
 export function DemoLinkSlide() {
   return (
-    <WebinarSlide>
-      <div className="flex h-full flex-col justify-center">
-        <p className="mb-5 text-sm font-semibold uppercase tracking-widest text-pe-teal">
-          Demo
-        </p>
-        <h1 className="font-display text-7xl font-bold leading-tight tracking-normal text-pe-dark">
-          Demo
-        </h1>
-        <div className="mt-8 h-1.5 w-32 rounded-full bg-gradient-to-r from-pe-teal to-pe-amber" />
-        <a
-          className="mt-10 block break-words text-4xl font-black leading-tight tracking-normal text-pe-dark underline decoration-pe-teal decoration-4 underline-offset-8"
-          href="https://policyengine.org/us/cliff-watch"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          policyengine.org/us/cliff-watch
-        </a>
+    <Slide showFooter={false} fullBleed>
+      <div
+        className="pointer-events-auto relative h-full w-full bg-white"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <iframe
+          className="h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          src={cliffwatchDemoUrl}
+          title="CliffWatch demo"
+        />
+        <div className="absolute left-6 top-6 z-10 rounded-md bg-white/95 px-4 py-3 shadow-lg ring-1 ring-gray-200 backdrop-blur">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-pe-teal">
+            Demo
+          </p>
+          <a
+            className="block break-words text-base font-black leading-tight tracking-normal text-pe-dark underline decoration-pe-teal decoration-2 underline-offset-4"
+            href={cliffwatchDemoUrl}
+            onClick={(event) => event.stopPropagation()}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {cliffwatchDemoLabel}
+          </a>
+        </div>
       </div>
-    </WebinarSlide>
+    </Slide>
   );
 }
 
@@ -369,7 +381,7 @@ export function WrapSlide() {
       message="Thank you"
       subtitle="Questions and scenario requests"
       links={[
-        { label: 'policyengine.org/us/cliff-watch', url: 'https://policyengine.org/us/cliff-watch' },
+        { label: cliffwatchDemoLabel, url: cliffwatchDemoUrl },
         { label: 'policyengine.org', url: 'https://policyengine.org' },
       ]}
     />
