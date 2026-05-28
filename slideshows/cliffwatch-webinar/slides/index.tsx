@@ -8,12 +8,9 @@ import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
   IconChartLine,
-  IconCode,
-  IconDatabase,
   IconFileAnalytics,
   IconListCheck,
   IconMap2,
-  IconScale,
   IconSearch,
   IconUsersGroup,
 } from '@tabler/icons-react';
@@ -211,62 +208,6 @@ export function DemoLinkSlide() {
         />
       </div>
     </Slide>
-  );
-}
-
-export function PolicyEngineIntroSlide() {
-  const platformLayers = [
-    {
-      label: 'Rules',
-      title: 'Rules as code',
-      body: 'Tax and benefit law encoded as readable, tested Python and YAML.',
-      tone: colors.teal,
-      icon: IconCode,
-    },
-    {
-      label: 'Data',
-      title: 'Representative households',
-      body: 'Public microdata calibrated to official totals so analyses scale beyond one example.',
-      tone: colors.amber,
-      icon: IconDatabase,
-    },
-    {
-      label: 'Reforms',
-      title: 'Policy comparisons',
-      body: 'Change a parameter or formula and compare the result against the same baseline.',
-      tone: colors.dark,
-      icon: IconScale,
-    },
-    {
-      label: 'Outputs',
-      title: 'Actionable results',
-      body: 'Budget cost, poverty, inequality, winners and losers, and marginal tax rates.',
-      tone: colors.teal,
-      icon: IconChartLine,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="PolicyEngine"
-        title="PolicyEngine is open-source tax and benefit simulation."
-        body="It turns policy rules and household data into transparent estimates of how public policy affects people and budgets."
-      />
-
-      <div className="grid min-w-0 grid-cols-4 gap-4">
-        {platformLayers.map((layer) => (
-          <Card
-            key={layer.title}
-            label={layer.label}
-            title={layer.title}
-            body={layer.body}
-            tone={layer.tone}
-            icon={layer.icon}
-          />
-        ))}
-      </div>
-    </WebinarSlide>
   );
 }
 
