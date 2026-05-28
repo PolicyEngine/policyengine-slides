@@ -23,7 +23,8 @@ const colors = {
 };
 
 const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
-const cliffwatchDemoLabel = 'policyengine.org/us/cliffwatch?max=100000';
+const cliffwatchUrl = 'https://www.policyengine.org/us/cliffwatch';
+const cliffwatchLabel = 'policyengine.org/us/cliffwatch';
 
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
@@ -344,7 +345,7 @@ export function WrapSlide() {
       message="Thank you"
       subtitle="Questions and scenario requests"
       links={[
-        { label: cliffwatchDemoLabel, url: cliffwatchDemoUrl },
+        { label: cliffwatchLabel, url: cliffwatchUrl },
         { label: 'policyengine.org', url: 'https://policyengine.org' },
       ]}
     />
