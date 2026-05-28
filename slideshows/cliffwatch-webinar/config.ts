@@ -1,5 +1,6 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
+import PartnersSlide from '../pwbm-2026/slides/PartnersSlide';
 import {
   AgendaSlide,
   CoverageTrackerSlide,
@@ -9,7 +10,6 @@ import {
   NextStepsSlide,
   PolicyEngineIntroSlide,
   TitleSlide,
-  TrustedBySlide,
   WrapSlide,
 } from './slides';
 
@@ -38,7 +38,7 @@ export const cliffwatchWebinarConfig: SlideshowConfig = {
     LegacyCliffChartSlide,
     ExamplesSlide,
     DemoLinkSlide,
-    TrustedBySlide,
+    PartnersSlide,
     NextStepsSlide,
     WrapSlide,
   ],

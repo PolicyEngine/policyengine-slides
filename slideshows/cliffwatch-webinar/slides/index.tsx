@@ -7,9 +7,7 @@ import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
-  IconBuildingBank,
   IconChartLine,
-  IconChecklist,
   IconCode,
   IconDatabase,
   IconFileAnalytics,
@@ -17,7 +15,6 @@ import {
   IconMap2,
   IconScale,
   IconSearch,
-  IconShieldCheck,
   IconUsersGroup,
 } from '@tabler/icons-react';
 import type { ComponentType, CSSProperties, ReactNode } from 'react';
@@ -31,32 +28,6 @@ const colors = {
 const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
 const cliffwatchDemoLabel = 'policyengine.org/us/cliffwatch?max=100000';
 const coverageTrackerUrl = 'https://www.policyengine.org/us/model/rules/coverage';
-
-const trustedOrganizations: {
-  name: string;
-  logo: string;
-  width?: number;
-  height?: number;
-  className?: string;
-}[] = [
-  { name: 'Brookings Institution', logo: '/logos/organizations/brookings.svg', width: 150 },
-  { name: 'Joint Economic Committee', logo: '/logos/organizations/jec.png' },
-  {
-    name: 'Committee for a Responsible Federal Budget',
-    logo: '/logos/organizations/crfb.png',
-    width: 135,
-    className: 'invert',
-  },
-  { name: '10 Downing Street', logo: '/logos/organizations/10-downing-street.png' },
-  { name: 'Foundation for Government Accountability', logo: '/logos/organizations/fga.png', width: 100 },
-  { name: 'Bureau of Economic Analysis', logo: '/logos/organizations/bea.png' },
-  { name: 'NBER', logo: '/logos/organizations/nber.png', width: 145 },
-  { name: 'Atlanta Fed', logo: '/logos/organizations/atlanta-fed.png', width: 125 },
-  { name: 'Niskanen Center', logo: '/logos/organizations/niskanen-center.png' },
-  { name: 'American Enterprise Institute', logo: '/logos/organizations/aei.png' },
-  { name: 'MyFriendBen', logo: '/logos/organizations/myfriendben.png' },
-  { name: 'Amplifi', logo: '/logos/organizations/amplifi.png' },
-];
 
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
@@ -372,7 +343,7 @@ export function ExamplesSlide() {
       <Header
         eyebrow="Examples"
         title="Use CliffWatch to make cliffs concrete."
-        body="A good example shows the household story, the place-specific policy choice, and the rule behind the drop."
+        body="Start with one household, compare one place-specific policy choice, and identify the rule behind the drop."
       />
 
       <div className="grid min-w-0 grid-cols-3 gap-5">
@@ -395,68 +366,6 @@ export function ExamplesSlide() {
           Start with a household near a program cutoff, then change one
           assumption.
         </p>
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function TrustedBySlide() {
-  const evidence = [
-    {
-      label: 'Policy analysis',
-      title: 'Used and cited by major policy institutions',
-      detail: 'Brookings, JEC, CRFB, FGA, No. 10, Niskanen, AEI, and others.',
-      icon: IconBuildingBank,
-    },
-    {
-      label: 'Validation',
-      title: 'Compared with external models',
-      detail: 'NBER TAXSIM and Atlanta Fed Policy Rules Database pressure-test the same open engine.',
-      icon: IconShieldCheck,
-    },
-    {
-      label: 'Production',
-      title: 'Benefit navigators use our API',
-      detail: 'Partners use PolicyEngine calculations in real public-benefit workflows.',
-      icon: IconChecklist,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="Who uses PolicyEngine?"
-        title="Researchers, governments, and navigators trust the same open rules engine."
-        body="This slide is the credibility bridge before we discuss where CliffWatch research goes next."
-      />
-
-      <div className="grid min-w-0 grid-cols-3 gap-4">
-        {evidence.map((item) => (
-          <Card
-            key={item.label}
-            label={item.label}
-            title={item.title}
-            body={item.detail}
-            icon={item.icon}
-          />
-        ))}
-      </div>
-
-      <div className="mt-5 grid grid-cols-6 gap-x-7 gap-y-5 px-4">
-        {trustedOrganizations.map((org) => (
-          <div
-            key={org.name}
-            className="flex h-12 items-center justify-center"
-          >
-            <Image
-              src={org.logo}
-              alt={org.name}
-              width={org.width ?? 105}
-              height={org.height ?? 48}
-              className={`max-h-11 object-contain ${org.className ?? ''}`}
-            />
-          </div>
-        ))}
       </div>
     </WebinarSlide>
   );
@@ -494,8 +403,8 @@ export function NextStepsSlide() {
     <WebinarSlide>
       <Header
         eyebrow="Next steps"
-        title="CliffWatch turns the demo into a research agenda."
-        body="After the webinar, the work is to improve coverage, validate the biggest cliffs, and make the results reusable."
+        title="The next phase is better cliff coverage and reusable findings."
+        body="The research path is to improve coverage, validate the biggest cliffs, and make the results reusable."
       />
 
       <div className="grid min-w-0 grid-cols-2 gap-5">
