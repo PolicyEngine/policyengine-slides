@@ -274,16 +274,6 @@ export function ExamplesSlide() {
           />
         ))}
       </div>
-
-      <div className="mt-6 rounded-2xl bg-pe-dark p-6 text-white">
-        <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
-          Live example
-        </p>
-        <p className="mt-3 text-3xl font-black leading-tight tracking-normal">
-          Start with a household near a program cutoff, then change one
-          assumption.
-        </p>
-      </div>
     </WebinarSlide>
   );
 }
