@@ -13,7 +13,6 @@ import {
   IconCode,
   IconDatabase,
   IconFileAnalytics,
-  IconGitBranch,
   IconListCheck,
   IconMap2,
   IconScale,
@@ -316,87 +315,6 @@ export function CoverageTrackerSlide() {
         />
       </div>
     </Slide>
-  );
-}
-
-export function SimulationMechanicsSlide() {
-  const steps = [
-    {
-      label: '1',
-      title: 'Start with households',
-      body: 'Inputs describe income, family structure, state, and other circumstances.',
-      icon: IconUsersGroup,
-      tone: colors.teal,
-    },
-    {
-      label: '2',
-      title: 'Run rules as code',
-      body: 'Tax and benefit formulas calculate eligibility, amounts, phase-outs, and taxes.',
-      icon: IconCode,
-      tone: colors.dark,
-    },
-    {
-      label: '3',
-      title: 'Compare outcomes',
-      body: 'The same household can be evaluated under different earnings, states, or reforms.',
-      icon: IconGitBranch,
-      tone: colors.amber,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="How the simulation works"
-        title="PolicyEngine calculates the full household budget constraint."
-        body="CliffWatch repeatedly simulates the same household as earnings rise, then highlights where total resources drop."
-      />
-
-      <div className="grid min-w-0 grid-cols-[1fr_44px_1fr_44px_1fr] items-stretch gap-3">
-        {steps.map((step, index) => (
-          <div key={step.title} className="contents">
-            <Card
-              label={step.label}
-              title={step.title}
-              body={step.body}
-              tone={step.tone}
-              icon={step.icon}
-            />
-            {index < steps.length - 1 && (
-              <div className="flex items-center justify-center text-gray-300">
-                <IconArrowRight className="h-8 w-8" stroke={1.8} />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 grid min-w-0 grid-cols-[0.9fr_1.1fr] gap-5">
-        <div className="rounded-2xl bg-pe-dark p-6 text-white">
-          <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
-            CliffWatch loop
-          </p>
-          <p className="mt-4 text-3xl font-black leading-tight tracking-normal">
-            Raise earnings,
-            <br />
-            recalculate resources,
-            <br />
-            find the drop.
-          </p>
-        </div>
-
-        <div className="content-card p-6">
-          <h3 className="text-xl font-black leading-tight tracking-normal text-pe-dark">
-            The chart is not a separate model.
-          </h3>
-          <p className="mt-3 text-lg leading-relaxed text-gray-600">
-            It is the PolicyEngine tax and benefit engine run many times over
-            the same scenario, with the drivers exposed so the cliff can be
-            traced back to specific programs.
-          </p>
-        </div>
-      </div>
-    </WebinarSlide>
   );
 }
 
