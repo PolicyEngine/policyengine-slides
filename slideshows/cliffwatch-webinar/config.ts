@@ -1,10 +1,10 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
 import WhatIsPESlide from '../abundance-dmv/slides/WhatIsPESlide';
+import ModelBreadthSlide from '../pwbm-2026/slides/ModelBreadthSlide';
 import PartnersSlide from '../pwbm-2026/slides/PartnersSlide';
 import {
   AgendaSlide,
-  CoverageTrackerSlide,
   DemoLinkSlide,
   ExamplesSlide,
   LegacyCliffChartSlide,
@@ -34,7 +34,7 @@ export const cliffwatchWebinarConfig: SlideshowConfig = {
     TitleSlide,
     AgendaSlide,
     WhatIsPESlide,
-    CoverageTrackerSlide,
+    ModelBreadthSlide,
     LegacyCliffChartSlide,
     ExamplesSlide,
     DemoLinkSlide,

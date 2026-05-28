@@ -24,7 +24,6 @@ const colors = {
 
 const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
 const cliffwatchDemoLabel = 'policyengine.org/us/cliffwatch?max=100000';
-const coverageTrackerUrl = 'https://www.policyengine.org/us/model/rules/coverage';
 
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
@@ -205,25 +204,6 @@ export function DemoLinkSlide() {
           referrerPolicy="no-referrer-when-downgrade"
           src={cliffwatchDemoUrl}
           title="CliffWatch demo"
-        />
-      </div>
-    </Slide>
-  );
-}
-
-export function CoverageTrackerSlide() {
-  return (
-    <Slide showFooter={false} fullBleed>
-      <div
-        className="pointer-events-auto relative h-full w-full bg-white"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <iframe
-          className="block h-full w-full border-0"
-          loading="eager"
-          referrerPolicy="no-referrer-when-downgrade"
-          src={coverageTrackerUrl}
-          title="PolicyEngine model coverage tracker"
         />
       </div>
     </Slide>
