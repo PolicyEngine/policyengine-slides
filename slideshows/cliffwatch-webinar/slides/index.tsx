@@ -7,7 +7,10 @@ import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
   IconChartLine,
+  IconCode,
+  IconDatabase,
   IconMap2,
+  IconScale,
   IconUsersGroup,
 } from '@tabler/icons-react';
 import type { ComponentType, CSSProperties, ReactNode } from 'react';
@@ -94,17 +97,6 @@ function Card({
         {title}
       </h3>
       <p className="mt-3 text-base leading-relaxed text-gray-600">{body}</p>
-    </div>
-  );
-}
-
-function StepNumber({ value, tone }: { value: string; tone: string }) {
-  return (
-    <div
-      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white"
-      style={{ backgroundColor: tone }}
-    >
-      {value}
     </div>
   );
 }
@@ -314,47 +306,55 @@ export function DemoLinkSlide() {
 }
 
 export function DiscussionSlide() {
-  const policyQuestions = [
+  const platformLayers = [
     {
-      title: 'Where is the cutoff?',
-      body: 'Find the income range where eligibility ends or support drops sharply.',
+      label: 'Rules',
+      title: 'Rules as code',
+      body: 'Tax and benefit law encoded as readable, tested Python and YAML.',
       tone: colors.teal,
+      icon: IconCode,
     },
     {
-      title: 'How steep is the phase-out?',
-      body: 'See whether the household keeps more of each additional dollar earned.',
+      label: 'Data',
+      title: 'Representative households',
+      body: 'Public microdata calibrated to official totals so analyses scale beyond one example.',
       tone: colors.amber,
+      icon: IconDatabase,
     },
     {
-      title: 'What would smooth it?',
-      body: 'Compare designs that preserve work incentives while protecting support.',
+      label: 'Reforms',
+      title: 'Policy comparisons',
+      body: 'Change a parameter or formula and compare the result against the same baseline.',
       tone: colors.dark,
+      icon: IconScale,
+    },
+    {
+      label: 'Outputs',
+      title: 'Actionable results',
+      body: 'Budget cost, poverty, inequality, winners and losers, and marginal tax rates.',
+      tone: colors.teal,
+      icon: IconChartLine,
     },
   ];
 
   return (
     <WebinarSlide>
       <Header
-        eyebrow="Policy design"
-        title="Once the cliff is visible, the choices get concrete."
-        body="CliffWatch turns a hidden budget constraint into questions policymakers can evaluate."
+        eyebrow="PolicyEngine"
+        title="PolicyEngine is open-source tax and benefit simulation."
+        body="It turns policy rules and household data into transparent estimates of how public policy affects people and budgets."
       />
 
-      <div className="grid min-w-0 grid-cols-3 gap-5">
-        {policyQuestions.map((question, index) => (
-          <div
-            key={question.title}
-            className="content-card p-6"
-            style={{ borderLeftColor: question.tone }}
-          >
-            <StepNumber value={`${index + 1}`} tone={question.tone} />
-            <h3 className="mt-5 text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              {question.title}
-            </h3>
-            <p className="mt-3 text-lg leading-relaxed text-gray-600">
-              {question.body}
-            </p>
-          </div>
+      <div className="grid min-w-0 grid-cols-4 gap-4">
+        {platformLayers.map((layer) => (
+          <Card
+            key={layer.title}
+            label={layer.label}
+            title={layer.title}
+            body={layer.body}
+            tone={layer.tone}
+            icon={layer.icon}
+          />
         ))}
       </div>
     </WebinarSlide>
