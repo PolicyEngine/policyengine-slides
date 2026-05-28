@@ -1,4 +1,5 @@
 import Slide from '@/components/core/Slide';
+import Image from '@/components/core/BasePathImage';
 import CoverSlideTemplate from '@/components/layout/CoverSlide';
 import EndSlideTemplate from '@/components/layout/EndSlide';
 import SlideHeader from '@/components/layout/SlideHeader';
@@ -6,11 +7,18 @@ import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
 import {
   IconArrowRight,
+  IconBuildingBank,
   IconChartLine,
+  IconChecklist,
   IconCode,
   IconDatabase,
+  IconFileAnalytics,
+  IconGitBranch,
+  IconListCheck,
   IconMap2,
   IconScale,
+  IconSearch,
+  IconShieldCheck,
   IconUsersGroup,
 } from '@tabler/icons-react';
 import type { ComponentType, CSSProperties, ReactNode } from 'react';
@@ -23,6 +31,33 @@ const colors = {
 
 const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
 const cliffwatchDemoLabel = 'policyengine.org/us/cliffwatch?max=100000';
+const coverageTrackerUrl = 'https://www.policyengine.org/us/model/rules/coverage';
+
+const trustedOrganizations: {
+  name: string;
+  logo: string;
+  width?: number;
+  height?: number;
+  className?: string;
+}[] = [
+  { name: 'Brookings Institution', logo: '/logos/organizations/brookings.svg', width: 150 },
+  { name: 'Joint Economic Committee', logo: '/logos/organizations/jec.png' },
+  {
+    name: 'Committee for a Responsible Federal Budget',
+    logo: '/logos/organizations/crfb.png',
+    width: 135,
+    className: 'invert',
+  },
+  { name: '10 Downing Street', logo: '/logos/organizations/10-downing-street.png' },
+  { name: 'Foundation for Government Accountability', logo: '/logos/organizations/fga.png', width: 100 },
+  { name: 'Bureau of Economic Analysis', logo: '/logos/organizations/bea.png' },
+  { name: 'NBER', logo: '/logos/organizations/nber.png', width: 145 },
+  { name: 'Atlanta Fed', logo: '/logos/organizations/atlanta-fed.png', width: 125 },
+  { name: 'Niskanen Center', logo: '/logos/organizations/niskanen-center.png' },
+  { name: 'American Enterprise Institute', logo: '/logos/organizations/aei.png' },
+  { name: 'MyFriendBen', logo: '/logos/organizations/myfriendben.png' },
+  { name: 'Amplifi', logo: '/logos/organizations/amplifi.png' },
+];
 
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
@@ -105,7 +140,7 @@ export function TitleSlide() {
   return (
     <CoverSlideTemplate
       title="CliffWatch Webinar"
-      subtitle="Benefit cliffs, household scenarios, and live exploration"
+      subtitle="Benefit cliffs, PolicyEngine coverage, and live examples"
       speakers={[
         {
           ...speakers['daphne-hansell'],
@@ -190,102 +225,6 @@ export function AgendaSlide() {
   );
 }
 
-export function CliffProblemSlide() {
-  const points = [
-    {
-      title: 'Programs stack',
-      body: 'Families experience taxes, credits, health coverage, food assistance, child care, and cash benefits together.',
-      icon: IconUsersGroup,
-      tone: colors.teal,
-    },
-    {
-      title: 'Raises can backfire',
-      body: 'Eligibility losses and phase-outs can make the next dollar of earnings worth little, nothing, or less than nothing.',
-      icon: IconChartLine,
-      tone: colors.amber,
-    },
-    {
-      title: 'Place matters',
-      body: 'The same household can face a different cliff profile when state rules and local policy choices change.',
-      icon: IconMap2,
-      tone: colors.dark,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="Why cliffs matter"
-        title="Benefit cliffs are a systems problem, not a single-program bug."
-        body="CliffWatch starts from the household budget constraint, then shows where program interactions create sharp tradeoffs."
-      />
-
-      <div className="grid min-w-0 grid-cols-3 gap-5">
-        {points.map((point) => (
-          <Card
-            key={point.title}
-            title={point.title}
-            body={point.body}
-            tone={point.tone}
-            icon={point.icon}
-          />
-        ))}
-      </div>
-    </WebinarSlide>
-  );
-}
-
-export function ProductFrameSlide() {
-  const frames = [
-    {
-      label: '1',
-      title: 'Choose a household',
-      body: 'Set family structure, state, and an income range.',
-      tone: colors.teal,
-    },
-    {
-      label: '2',
-      title: 'Find the cliff',
-      body: 'See where net resources flatten or fall as earnings rise.',
-      tone: colors.teal,
-    },
-    {
-      label: '3',
-      title: 'See what drives it',
-      body: 'Identify which program changes create the sharpest transitions.',
-      tone: colors.amber,
-    },
-  ];
-
-  return (
-    <WebinarSlide>
-      <Header
-        eyebrow="What CliffWatch does"
-        title="CliffWatch turns program interactions into a navigable map."
-        body="The product flow is intentionally simple: define a household, scan the income path, and inspect the drivers."
-      />
-
-      <div className="grid min-w-0 grid-cols-[1fr_48px_1fr_48px_1fr] items-stretch gap-3">
-        {frames.map((frame, index) => (
-          <div key={frame.title} className="contents">
-            <Card
-              label={frame.label}
-              title={frame.title}
-              body={frame.body}
-              tone={frame.tone}
-            />
-            {index < frames.length - 1 && (
-              <div className="flex items-center justify-center text-gray-300">
-                <IconArrowRight className="h-8 w-8" stroke={1.8} />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </WebinarSlide>
-  );
-}
-
 export function DemoLinkSlide() {
   return (
     <Slide showFooter={false} fullBleed>
@@ -305,7 +244,7 @@ export function DemoLinkSlide() {
   );
 }
 
-export function DiscussionSlide() {
+export function PolicyEngineIntroSlide() {
   const platformLayers = [
     {
       label: 'Rules',
@@ -354,6 +293,344 @@ export function DiscussionSlide() {
             body={layer.body}
             tone={layer.tone}
             icon={layer.icon}
+          />
+        ))}
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function CoverageTrackerSlide() {
+  const takeaways = [
+    'Federal, state, and local rules are tracked in one public model surface.',
+    'Programs link back to parameters, variables, tests, and computation trees.',
+    'The same coverage powers household examples and population-level analysis.',
+  ];
+
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="What we cover"
+        title="The coverage tracker shows what PolicyEngine models."
+        body="Instead of treating the model as a black box, we publish which rules are implemented and how each one connects to code."
+      />
+
+      <div className="grid min-h-0 min-w-0 flex-1 grid-cols-[1.15fr_0.85fr] gap-6">
+        <div
+          className="content-card min-h-0 overflow-hidden p-0"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <iframe
+            className="block h-full min-h-[390px] w-full border-0"
+            loading="eager"
+            referrerPolicy="no-referrer-when-downgrade"
+            src={coverageTrackerUrl}
+            title="PolicyEngine model coverage tracker"
+          />
+        </div>
+
+        <div className="flex min-h-0 flex-col gap-4">
+          <div className="content-card p-5">
+            <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
+              Live model inventory
+            </p>
+            <h3 className="mt-3 text-2xl font-black leading-tight tracking-normal text-pe-dark">
+              Coverage is inspectable before the demo starts.
+            </h3>
+            <p className="mt-3 text-base leading-relaxed text-gray-600">
+              The tracker is the bridge from "what does PolicyEngine cover?" to
+              "which rule is causing this cliff?"
+            </p>
+          </div>
+
+          <div className="content-card p-5">
+            <h3 className="text-lg font-black leading-tight tracking-normal text-pe-dark">
+              What to point out
+            </h3>
+            <ul className="mt-4 space-y-3 text-base leading-relaxed text-gray-600">
+              {takeaways.map((takeaway) => (
+                <li key={takeaway} className="flex items-start gap-3">
+                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-pe-teal" />
+                  <span>{takeaway}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function SimulationMechanicsSlide() {
+  const steps = [
+    {
+      label: '1',
+      title: 'Start with households',
+      body: 'Inputs describe income, family structure, state, and other circumstances.',
+      icon: IconUsersGroup,
+      tone: colors.teal,
+    },
+    {
+      label: '2',
+      title: 'Run rules as code',
+      body: 'Tax and benefit formulas calculate eligibility, amounts, phase-outs, and taxes.',
+      icon: IconCode,
+      tone: colors.dark,
+    },
+    {
+      label: '3',
+      title: 'Compare outcomes',
+      body: 'The same household can be evaluated under different earnings, states, or reforms.',
+      icon: IconGitBranch,
+      tone: colors.amber,
+    },
+  ];
+
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="How the simulation works"
+        title="PolicyEngine calculates the full household budget constraint."
+        body="CliffWatch repeatedly simulates the same household as earnings rise, then highlights where total resources drop."
+      />
+
+      <div className="grid min-w-0 grid-cols-[1fr_44px_1fr_44px_1fr] items-stretch gap-3">
+        {steps.map((step, index) => (
+          <div key={step.title} className="contents">
+            <Card
+              label={step.label}
+              title={step.title}
+              body={step.body}
+              tone={step.tone}
+              icon={step.icon}
+            />
+            {index < steps.length - 1 && (
+              <div className="flex items-center justify-center text-gray-300">
+                <IconArrowRight className="h-8 w-8" stroke={1.8} />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 grid min-w-0 grid-cols-[0.9fr_1.1fr] gap-5">
+        <div className="rounded-2xl bg-pe-dark p-6 text-white">
+          <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+            CliffWatch loop
+          </p>
+          <p className="mt-4 text-3xl font-black leading-tight tracking-normal">
+            Raise earnings,
+            <br />
+            recalculate resources,
+            <br />
+            find the drop.
+          </p>
+        </div>
+
+        <div className="content-card p-6">
+          <h3 className="text-xl font-black leading-tight tracking-normal text-pe-dark">
+            The chart is not a separate model.
+          </h3>
+          <p className="mt-3 text-lg leading-relaxed text-gray-600">
+            It is the PolicyEngine tax and benefit engine run many times over
+            the same scenario, with the drivers exposed so the cliff can be
+            traced back to specific programs.
+          </p>
+        </div>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function LegacyCliffChartSlide() {
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Cliff work over time"
+        title="We have been tracking cliffs for years."
+        body="The earlier PolicyEngine app already showed net income and marginal tax-rate cliffs. CliffWatch is the latest, cleaner iteration."
+      />
+
+      <div className="content-card relative min-h-0 flex-1 overflow-hidden bg-[#a8d9e3] p-0">
+        <Image
+          src="/screenshots/cliffwatch-legacy-cliff-chart.png"
+          alt="Legacy PolicyEngine app screenshots showing net income and marginal tax rate cliff charts"
+          width={1600}
+          height={1074}
+          className="h-full min-h-[460px] w-full object-contain object-center"
+          priority
+        />
+
+        <div className="absolute bottom-4 right-4 rounded-lg border border-white/70 bg-white/90 px-4 py-3 text-sm font-semibold text-gray-600 shadow-sm">
+          Legacy PolicyEngine app, 2023
+        </div>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function ExamplesSlide() {
+  const examples = [
+    {
+      title: 'A household near the limit',
+      body: 'Show how one extra dollar can trigger a health, food, or tax-credit change.',
+      icon: IconUsersGroup,
+      tone: colors.teal,
+    },
+    {
+      title: 'The same household elsewhere',
+      body: 'Compare states to show how policy choices reshape the cliff.',
+      icon: IconMap2,
+      tone: colors.dark,
+    },
+    {
+      title: 'The program driver',
+      body: 'Trace the drop to Medicaid, SNAP, refundable credits, or another rule.',
+      icon: IconListCheck,
+      tone: colors.amber,
+    },
+  ];
+
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Examples"
+        title="Use CliffWatch to make cliffs concrete."
+        body="A good example shows the household story, the place-specific policy choice, and the rule behind the drop."
+      />
+
+      <div className="grid min-w-0 grid-cols-3 gap-5">
+        {examples.map((example) => (
+          <Card
+            key={example.title}
+            title={example.title}
+            body={example.body}
+            tone={example.tone}
+            icon={example.icon}
+          />
+        ))}
+      </div>
+
+      <div className="mt-6 rounded-2xl bg-pe-dark p-6 text-white">
+        <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+          Live example
+        </p>
+        <p className="mt-3 text-3xl font-black leading-tight tracking-normal">
+          Start with a household near a program cutoff, then change one
+          assumption.
+        </p>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function TrustedBySlide() {
+  const evidence = [
+    {
+      label: 'Policy analysis',
+      title: 'Used and cited by major policy institutions',
+      detail: 'Brookings, JEC, CRFB, FGA, No. 10, Niskanen, AEI, and others.',
+      icon: IconBuildingBank,
+    },
+    {
+      label: 'Validation',
+      title: 'Compared with external models',
+      detail: 'NBER TAXSIM and Atlanta Fed Policy Rules Database pressure-test the same open engine.',
+      icon: IconShieldCheck,
+    },
+    {
+      label: 'Production',
+      title: 'Benefit navigators use our API',
+      detail: 'Partners use PolicyEngine calculations in real public-benefit workflows.',
+      icon: IconChecklist,
+    },
+  ];
+
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Who uses PolicyEngine?"
+        title="Researchers, governments, and navigators trust the same open rules engine."
+        body="This slide is the credibility bridge before we discuss where CliffWatch research goes next."
+      />
+
+      <div className="grid min-w-0 grid-cols-3 gap-4">
+        {evidence.map((item) => (
+          <Card
+            key={item.label}
+            label={item.label}
+            title={item.title}
+            body={item.detail}
+            icon={item.icon}
+          />
+        ))}
+      </div>
+
+      <div className="mt-5 grid grid-cols-6 gap-x-7 gap-y-5 px-4">
+        {trustedOrganizations.map((org) => (
+          <div
+            key={org.name}
+            className="flex h-12 items-center justify-center"
+          >
+            <Image
+              src={org.logo}
+              alt={org.name}
+              width={org.width ?? 105}
+              height={org.height ?? 48}
+              className={`max-h-11 object-contain ${org.className ?? ''}`}
+            />
+          </div>
+        ))}
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function NextStepsSlide() {
+  const nextSteps = [
+    {
+      title: 'Expand the coverage map',
+      body: 'Keep adding and validating benefits, tax credits, and state-specific rules that shape cliff behavior.',
+      icon: IconMap2,
+      tone: colors.teal,
+    },
+    {
+      title: 'Build a scenario library',
+      body: 'Turn common household examples into reusable starting points for partners and follow-up analysis.',
+      icon: IconFileAnalytics,
+      tone: colors.amber,
+    },
+    {
+      title: 'Trace policy drivers',
+      body: 'Identify which program interactions create the largest cliffs and which reforms smooth them.',
+      icon: IconSearch,
+      tone: colors.dark,
+    },
+    {
+      title: 'Share research outputs',
+      body: 'Publish findings that make cliffs easier to compare across households, states, and programs.',
+      icon: IconChartLine,
+      tone: colors.teal,
+    },
+  ];
+
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Next steps"
+        title="CliffWatch turns the demo into a research agenda."
+        body="After the webinar, the work is to improve coverage, validate the biggest cliffs, and make the results reusable."
+      />
+
+      <div className="grid min-w-0 grid-cols-2 gap-5">
+        {nextSteps.map((step) => (
+          <Card
+            key={step.title}
+            title={step.title}
+            body={step.body}
+            tone={step.tone}
+            icon={step.icon}
           />
         ))}
       </div>

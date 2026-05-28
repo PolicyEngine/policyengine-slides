@@ -2,11 +2,15 @@ import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
 import {
   AgendaSlide,
-  CliffProblemSlide,
+  CoverageTrackerSlide,
   DemoLinkSlide,
-  DiscussionSlide,
-  ProductFrameSlide,
+  ExamplesSlide,
+  LegacyCliffChartSlide,
+  NextStepsSlide,
+  PolicyEngineIntroSlide,
+  SimulationMechanicsSlide,
   TitleSlide,
+  TrustedBySlide,
   WrapSlide,
 } from './slides';
 
@@ -30,10 +34,14 @@ export const cliffwatchWebinarConfig: SlideshowConfig = {
   slides: [
     TitleSlide,
     AgendaSlide,
-    CliffProblemSlide,
-    ProductFrameSlide,
+    PolicyEngineIntroSlide,
+    CoverageTrackerSlide,
+    SimulationMechanicsSlide,
+    LegacyCliffChartSlide,
+    ExamplesSlide,
     DemoLinkSlide,
-    DiscussionSlide,
+    TrustedBySlide,
+    NextStepsSlide,
     WrapSlide,
   ],
 };
