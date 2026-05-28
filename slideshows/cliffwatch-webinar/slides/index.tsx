@@ -301,64 +301,21 @@ export function PolicyEngineIntroSlide() {
 }
 
 export function CoverageTrackerSlide() {
-  const takeaways = [
-    'Federal, state, and local rules are tracked in one public model surface.',
-    'Programs link back to parameters, variables, tests, and computation trees.',
-    'The same coverage powers household examples and population-level analysis.',
-  ];
-
   return (
-    <WebinarSlide>
-      <Header
-        eyebrow="What we cover"
-        title="The coverage tracker shows what PolicyEngine models."
-        body="Instead of treating the model as a black box, we publish which rules are implemented and how each one connects to code."
-      />
-
-      <div className="grid min-h-0 min-w-0 flex-1 grid-cols-[1.15fr_0.85fr] gap-6">
-        <div
-          className="content-card min-h-0 overflow-hidden p-0"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <iframe
-            className="block h-full min-h-[390px] w-full border-0"
-            loading="eager"
-            referrerPolicy="no-referrer-when-downgrade"
-            src={coverageTrackerUrl}
-            title="PolicyEngine model coverage tracker"
-          />
-        </div>
-
-        <div className="flex min-h-0 flex-col gap-4">
-          <div className="content-card p-5">
-            <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
-              Live model inventory
-            </p>
-            <h3 className="mt-3 text-2xl font-black leading-tight tracking-normal text-pe-dark">
-              Coverage is inspectable before the demo starts.
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-gray-600">
-              The tracker is the bridge from "what does PolicyEngine cover?" to
-              "which rule is causing this cliff?"
-            </p>
-          </div>
-
-          <div className="content-card p-5">
-            <h3 className="text-lg font-black leading-tight tracking-normal text-pe-dark">
-              What to point out
-            </h3>
-            <ul className="mt-4 space-y-3 text-base leading-relaxed text-gray-600">
-              {takeaways.map((takeaway) => (
-                <li key={takeaway} className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-pe-teal" />
-                  <span>{takeaway}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+    <Slide showFooter={false} fullBleed>
+      <div
+        className="pointer-events-auto relative h-full w-full bg-white"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <iframe
+          className="block h-full w-full border-0"
+          loading="eager"
+          referrerPolicy="no-referrer-when-downgrade"
+          src={coverageTrackerUrl}
+          title="PolicyEngine model coverage tracker"
+        />
       </div>
-    </WebinarSlide>
+    </Slide>
   );
 }
 
