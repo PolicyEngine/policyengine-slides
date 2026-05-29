@@ -112,10 +112,10 @@ function CliffExampleChart() {
     { y: 365, label: '$0' },
   ];
   const xLabels = [
-    { x: 90, label: '$0' },
-    { x: 380, label: '$20,000' },
-    { x: 610, label: '$40,000' },
-    { x: 870, label: '$60,000' },
+    { x: 105, label: '$0' },
+    { x: 405, label: '$20,000' },
+    { x: 630, label: '$40,000' },
+    { x: 880, label: '$60,000' },
   ];
 
   return (
@@ -126,12 +126,12 @@ function CliffExampleChart() {
       viewBox="0 0 1000 430"
     >
       <rect width="1000" height="430" fill="#F8FAFC" />
-      <rect x="388" y="36" width="380" height="329" fill="#F8D9D9" opacity="0.86" />
+      <rect x="405" y="36" width="365" height="329" fill="#F8D9D9" opacity="0.86" />
 
       {gridLines.map((line) => (
         <g key={line.label}>
           <line
-            x1="80"
+            x1="105"
             x2="985"
             y1={line.y}
             y2={line.y}
@@ -140,7 +140,7 @@ function CliffExampleChart() {
             strokeWidth="1.5"
           />
           <text
-            x="70"
+            x="95"
             y={line.y + 8}
             fill="#667085"
             fontSize="18"
@@ -151,8 +151,8 @@ function CliffExampleChart() {
         </g>
       ))}
 
-      <line x1="80" x2="985" y1="365" y2="365" stroke="#CBD5E1" strokeWidth="2" />
-      <line x1="80" x2="80" y1="36" y2="365" stroke="#CBD5E1" strokeWidth="2" />
+      <line x1="105" x2="985" y1="365" y2="365" stroke="#CBD5E1" strokeWidth="2" />
+      <line x1="105" x2="105" y1="36" y2="365" stroke="#CBD5E1" strokeWidth="2" />
 
       {xLabels.map((label) => (
         <text
@@ -168,7 +168,7 @@ function CliffExampleChart() {
       ))}
 
       <text
-        x="610"
+        x="640"
         y="420"
         fill="#667085"
         fontSize="17"
@@ -187,13 +187,13 @@ function CliffExampleChart() {
 
       <polyline
         fill="none"
-        points="80,250 135,240 260,226 335,210 380,196 384,282 500,260 610,236 720,210 840,187 985,160"
+        points="105,250 160,240 285,226 360,210 405,196 409,282 520,260 630,236 740,210 860,187 985,160"
         stroke="#111827"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="4"
       />
-      <circle cx="380" cy="196" r="8" fill="#DC2626" stroke="#FFFFFF" strokeWidth="4" />
+      <circle cx="405" cy="196" r="8" fill="#DC2626" stroke="#FFFFFF" strokeWidth="4" />
     </svg>
   );
 }
@@ -228,56 +228,19 @@ export function AgendaSlide() {
         body="The household earns more, but an eligibility rule changes all at once, so total resources can flatten or fall."
       />
 
-      <div className="flex min-h-0 flex-1 flex-col gap-5">
-        <div className="content-card min-h-0 flex-1 overflow-hidden p-0">
-          <CliffExampleChart />
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="mb-5 max-w-5xl">
+          <p className="text-3xl font-black leading-tight tracking-normal text-pe-dark">
+            Earn $1 more. Lose Medicaid.
+          </p>
+          <p className="mt-2 text-lg leading-relaxed text-gray-600">
+            The paycheck rises a little, but the lost coverage can be worth much
+            more.
+          </p>
         </div>
 
-        <div className="grid grid-cols-[0.72fr_1.28fr] gap-5">
-          <div className="rounded-2xl bg-pe-dark p-6 text-white shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
-              Basic idea
-            </p>
-            <p className="mt-5 text-4xl font-black leading-tight tracking-normal">
-              Earn $1 more.
-              <br />
-              Lose Medicaid.
-            </p>
-          </div>
-
-          <div className="content-card p-5">
-            <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
-              Simple Medicaid example
-            </p>
-            <div className="mt-4 grid grid-cols-2 items-stretch gap-4">
-              <div className="rounded-lg border border-teal-100 bg-teal-50 p-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
-                  At or below the limit
-                </p>
-                <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
-                  Medicaid coverage
-                </p>
-              </div>
-              <div className="rounded-lg border border-pe-amber/30 bg-pe-amber/10 p-4">
-                <p className="text-sm font-bold uppercase tracking-widest text-pe-amber">
-                  $1 over the limit
-                </p>
-                <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
-                  No Medicaid
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 border-l-4 border-pe-amber pl-5">
-              <h3 className="text-lg font-black leading-tight tracking-normal text-pe-dark">
-                The cliff is the gap between wages and resources.
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                The paycheck rises a little, but the lost coverage can be worth
-                much more.
-              </p>
-            </div>
-          </div>
+        <div className="min-h-0 flex-1 overflow-hidden">
+          <CliffExampleChart />
         </div>
       </div>
     </WebinarSlide>
