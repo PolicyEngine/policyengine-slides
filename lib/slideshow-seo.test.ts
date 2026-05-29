@@ -30,7 +30,7 @@ describe('slideshow SEO URLs', () => {
       expect(url.startsWith('https://policyengine.org/slides/')).toBe(true);
       expect(url.endsWith('/og')).toBe(true);
     }
-    expect(md.twitter?.card).toBe('summary_large_image');
+    expect((md.twitter as { card?: string }).card).toBe('summary_large_image');
   });
 });
 

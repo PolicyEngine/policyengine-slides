@@ -18,6 +18,11 @@
 @theme {
   --font-display: var(--font-sans);
 
+  /* Tailwind v4 spacing utilities resolve through --spacing. The ui-kit
+   * token import defines custom --spacing-* aliases but not the base unit,
+   * so p-*, m-*, gap-*, space-*, w-*, and h-* utilities collapse without it. */
+  --spacing: 0.25rem;
+
   /* The ui-kit theme.css declares `--text-*: initial;` and defines only
    * text-xs..text-4xl. Restore the larger sizes used by slide titles,
    * matching Tailwind's default scale (rem-based). */
@@ -178,9 +183,11 @@ a {
 }
 
 /* ==================== TYPOGRAPHY ==================== */
-h1, h2, h3 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: -0.035em;
+@layer base {
+  h1, h2, h3 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.035em;
+  }
 }
 
 .display-text {

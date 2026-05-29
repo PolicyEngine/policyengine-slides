@@ -1,6 +1,6 @@
 import { getAllSlideshowMetadata } from '@/lib/slideshows';
 import { formatDate } from '@/lib/types';
-import Image from 'next/image';
+import Image from '@/components/core/BasePathImage';
 import Link from 'next/link';
 
 export default function Home() {
