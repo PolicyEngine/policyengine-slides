@@ -6,7 +6,6 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
 import {
-  IconArrowRight,
   IconChartLine,
   IconFileAnalytics,
   IconListCheck,
@@ -104,6 +103,101 @@ function Card({
   );
 }
 
+function CliffExampleChart() {
+  const gridLines = [
+    { y: 36, label: '$80,000' },
+    { y: 118, label: '$60,000' },
+    { y: 201, label: '$40,000' },
+    { y: 283, label: '$20,000' },
+    { y: 365, label: '$0' },
+  ];
+  const xLabels = [
+    { x: 90, label: '$0' },
+    { x: 380, label: '$20,000' },
+    { x: 610, label: '$40,000' },
+    { x: 870, label: '$60,000' },
+  ];
+
+  return (
+    <svg
+      aria-label="Benefit cliff chart showing annual resources dropping sharply near $20,000 in wages"
+      className="h-full w-full"
+      role="img"
+      viewBox="0 0 1000 430"
+    >
+      <rect width="1000" height="430" fill="#F8FAFC" />
+      <rect x="388" y="36" width="380" height="329" fill="#F8D9D9" opacity="0.86" />
+
+      {gridLines.map((line) => (
+        <g key={line.label}>
+          <line
+            x1="80"
+            x2="985"
+            y1={line.y}
+            y2={line.y}
+            stroke="#E3DCD2"
+            strokeDasharray="5 7"
+            strokeWidth="1.5"
+          />
+          <text
+            x="70"
+            y={line.y + 8}
+            fill="#667085"
+            fontSize="18"
+            textAnchor="end"
+          >
+            {line.label}
+          </text>
+        </g>
+      ))}
+
+      <line x1="80" x2="985" y1="365" y2="365" stroke="#CBD5E1" strokeWidth="2" />
+      <line x1="80" x2="80" y1="36" y2="365" stroke="#CBD5E1" strokeWidth="2" />
+
+      {xLabels.map((label) => (
+        <text
+          key={label.label}
+          x={label.x}
+          y="395"
+          fill="#667085"
+          fontSize="18"
+          textAnchor="middle"
+        >
+          {label.label}
+        </text>
+      ))}
+
+      <text
+        x="610"
+        y="420"
+        fill="#667085"
+        fontSize="17"
+        textAnchor="middle"
+      >
+        Annual household wages and salaries
+      </text>
+      <text
+        fill="#667085"
+        fontSize="17"
+        textAnchor="middle"
+        transform="translate(28 214) rotate(-90)"
+      >
+        Annual amount ($)
+      </text>
+
+      <polyline
+        fill="none"
+        points="80,250 135,240 260,226 335,210 380,196 384,282 500,260 610,236 720,210 840,187 985,160"
+        stroke="#111827"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="4"
+      />
+      <circle cx="380" cy="196" r="8" fill="#DC2626" stroke="#FFFFFF" strokeWidth="4" />
+    </svg>
+  );
+}
+
 export function TitleSlide() {
   return (
     <CoverSlideTemplate
@@ -134,9 +228,13 @@ export function AgendaSlide() {
         body="The household earns more, but an eligibility rule changes all at once, so total resources can flatten or fall."
       />
 
-      <div className="grid min-w-0 grid-cols-[0.95fr_1.05fr] gap-6">
-        <div className="flex flex-col justify-between rounded-2xl bg-pe-dark p-6 text-white shadow-sm">
-          <div>
+      <div className="flex min-h-0 flex-1 flex-col gap-5">
+        <div className="content-card min-h-0 flex-1 overflow-hidden p-0">
+          <CliffExampleChart />
+        </div>
+
+        <div className="grid grid-cols-[0.72fr_1.28fr] gap-5">
+          <div className="rounded-2xl bg-pe-dark p-6 text-white shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
               Basic idea
             </p>
@@ -146,46 +244,39 @@ export function AgendaSlide() {
               Lose Medicaid.
             </p>
           </div>
-          <p className="mt-7 text-lg leading-relaxed text-white/75">
-            CliffWatch maps where more income stops helping and which rule
-            drives the drop.
-          </p>
-        </div>
 
-        <div className="content-card p-5">
-          <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
-            Simple Medicaid example
-          </p>
-          <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-stretch gap-4">
-            <div className="rounded-lg border border-teal-100 bg-teal-50 p-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
-                At or below the limit
-              </p>
-              <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
-                Medicaid coverage
-              </p>
-            </div>
-            <div className="flex items-center justify-center text-slate-300">
-              <IconArrowRight className="h-8 w-8" stroke={1.8} />
-            </div>
-            <div className="rounded-lg border border-pe-amber/30 bg-pe-amber/10 p-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-pe-amber">
-                $1 over the limit
-              </p>
-              <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
-                No Medicaid
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-5 border-l-4 border-pe-amber pl-5">
-            <h3 className="text-xl font-black leading-tight tracking-normal text-pe-dark">
-              The cliff is the gap between wages and resources.
-            </h3>
-            <p className="mt-2 text-base leading-relaxed text-gray-600">
-              The paycheck rises a little, but the lost coverage can be worth
-              much more.
+          <div className="content-card p-5">
+            <p className="text-xs font-bold uppercase tracking-widest text-pe-teal">
+              Simple Medicaid example
             </p>
+            <div className="mt-4 grid grid-cols-2 items-stretch gap-4">
+              <div className="rounded-lg border border-teal-100 bg-teal-50 p-4">
+                <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
+                  At or below the limit
+                </p>
+                <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
+                  Medicaid coverage
+                </p>
+              </div>
+              <div className="rounded-lg border border-pe-amber/30 bg-pe-amber/10 p-4">
+                <p className="text-sm font-bold uppercase tracking-widest text-pe-amber">
+                  $1 over the limit
+                </p>
+                <p className="mt-3 text-2xl font-black leading-tight text-pe-dark">
+                  No Medicaid
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 border-l-4 border-pe-amber pl-5">
+              <h3 className="text-lg font-black leading-tight tracking-normal text-pe-dark">
+                The cliff is the gap between wages and resources.
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                The paycheck rises a little, but the lost coverage can be worth
+                much more.
+              </p>
+            </div>
           </div>
         </div>
       </div>
