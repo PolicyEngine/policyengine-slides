@@ -36,7 +36,7 @@ export const cio4goodWorkshopConfig: SlideshowConfig = {
   title: 'PolicyEngine: from simple wins to strategic implications',
   description:
     'Workshop support deck — early wins, Evo1-Evo6 encoding journey, skills exercise, strategic implications',
-  date: 'April 2026',
+  date: '2026-04-01',
   location: 'CIO4Good Summit Workshop',
   slides: [
     // --- Max block 1 (after Brian's LLM intro) ---

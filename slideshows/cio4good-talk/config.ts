@@ -15,7 +15,7 @@ export const cio4goodTalkConfig: SlideshowConfig = {
   id: 'cio4good-talk',
   title: 'Making organizations legible to AI',
   description: 'CIO4Good panel talk — from legislative text to runnable analysis',
-  date: 'April 14, 2026',
+  date: '2026-04-14',
   location: 'CIO4Good Panel',
   speakers: [speakers['max-ghenis']],
   slides: [
