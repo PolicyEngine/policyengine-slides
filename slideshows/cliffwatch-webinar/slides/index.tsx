@@ -22,6 +22,7 @@ const colors = {
   dark: 'var(--pe-dark)',
 };
 
+const coverageTrackerUrl = 'https://www.policyengine.org/us/model/rules/coverage';
 const cliffwatchDemoUrl = 'https://www.policyengine.org/us/cliffwatch?max=100000';
 const cliffwatchUrl = 'https://www.policyengine.org/us/cliffwatch';
 const cliffwatchLabel = 'policyengine.org/us/cliffwatch';
@@ -189,6 +190,20 @@ export function AgendaSlide() {
         </div>
       </div>
     </WebinarSlide>
+  );
+}
+
+export function CoverageTrackerSlide() {
+  return (
+    <Slide showFooter={false} fullBleed>
+      <iframe
+        className="block h-full w-full border-0 pointer-events-none"
+        loading="eager"
+        referrerPolicy="no-referrer-when-downgrade"
+        src={coverageTrackerUrl}
+        title="PolicyEngine coverage tracker"
+      />
+    </Slide>
   );
 }
 
