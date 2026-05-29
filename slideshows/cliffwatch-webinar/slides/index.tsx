@@ -198,6 +198,142 @@ function CliffExampleChart() {
   );
 }
 
+function CliffSmoothingChart() {
+  const gridLines = [
+    { y: 58, label: 'Higher' },
+    { y: 170, label: '' },
+    { y: 282, label: '' },
+    { y: 394, label: 'Lower' },
+  ];
+  const xTicks = [
+    { x: 108, label: '100% FPL' },
+    { x: 338, label: '200% FPL' },
+    { x: 568, label: '300% FPL' },
+    { x: 798, label: '400% FPL' },
+    { x: 982, label: '500% FPL' },
+  ];
+
+  return (
+    <svg
+      aria-label="ACA premium tax credit example showing a cliff at 400 percent FPL and a smoother enhanced premium tax credit schedule"
+      className="h-full w-full"
+      role="img"
+      viewBox="0 0 1080 470"
+    >
+      <rect width="1080" height="470" fill="#FFFFFF" />
+
+      {gridLines.map((line) => (
+        <g key={`${line.y}-${line.label}`}>
+          <line
+            x1="108"
+            x2="1000"
+            y1={line.y}
+            y2={line.y}
+            stroke="#E3DCD2"
+            strokeDasharray="5 7"
+            strokeWidth="1.5"
+          />
+          {line.label && (
+            <text
+              x="92"
+              y={line.y + 7}
+              fill="#667085"
+              fontSize="17"
+              textAnchor="end"
+            >
+              {line.label}
+            </text>
+          )}
+        </g>
+      ))}
+
+      <line x1="108" x2="1000" y1="394" y2="394" stroke="#CBD5E1" strokeWidth="2" />
+      <line x1="108" x2="108" y1="58" y2="394" stroke="#CBD5E1" strokeWidth="2" />
+      <line
+        x1="798"
+        x2="798"
+        y1="58"
+        y2="394"
+        stroke={colors.amber}
+        strokeDasharray="8 9"
+        strokeWidth="2.5"
+      />
+      <text
+        x="798"
+        y="38"
+        fill={colors.amber}
+        fontSize="18"
+        fontWeight="700"
+        textAnchor="middle"
+      >
+        400% FPL
+      </text>
+
+      {xTicks.map((tick) => (
+        <g key={tick.label}>
+          <line x1={tick.x} x2={tick.x} y1="394" y2="402" stroke="#CBD5E1" strokeWidth="2" />
+          <text
+            x={tick.x}
+            y="428"
+            fill="#667085"
+            fontSize="16"
+            textAnchor="middle"
+          >
+            {tick.label}
+          </text>
+        </g>
+      ))}
+
+      <text
+        x="554"
+        y="460"
+        fill="#667085"
+        fontSize="17"
+        textAnchor="middle"
+      >
+        Household income as a share of the federal poverty level
+      </text>
+      <text
+        fill="#667085"
+        fontSize="17"
+        textAnchor="middle"
+        transform="translate(30 226) rotate(-90)"
+      >
+        Premium tax credit amount
+      </text>
+
+      <path
+        d="M108 100 C230 120 350 150 470 188 C610 233 710 278 798 328 L798 394 L1000 394"
+        fill="none"
+        stroke="#2F9C95"
+        strokeLinecap="round"
+        strokeWidth="5"
+      />
+      <path
+        d="M108 104 C230 122 350 151 470 188 C610 233 735 280 860 327 C925 351 970 371 1000 386"
+        fill="none"
+        stroke="#E69526"
+        strokeLinecap="round"
+        strokeWidth="5"
+      />
+      <circle cx="798" cy="328" r="7" fill="#2F9C95" stroke="#FFFFFF" strokeWidth="4" />
+      <circle cx="798" cy="394" r="7" fill="#2F9C95" stroke="#FFFFFF" strokeWidth="4" />
+
+      <g transform="translate(135 72)">
+        <rect x="0" y="0" width="360" height="78" rx="10" fill="#F8FAFC" stroke="#E2E8F0" />
+        <line x1="22" x2="70" y1="28" y2="28" stroke="#2F9C95" strokeLinecap="round" strokeWidth="5" />
+        <text x="86" y="34" fill={colors.dark} fontSize="18" fontWeight="700">
+          Prior cutoff
+        </text>
+        <line x1="22" x2="70" y1="56" y2="56" stroke="#E69526" strokeLinecap="round" strokeWidth="5" />
+        <text x="86" y="62" fill={colors.dark} fontSize="18" fontWeight="700">
+          Enhanced PTC schedule
+        </text>
+      </g>
+    </svg>
+  );
+}
+
 export function TitleSlide() {
   return (
     <CoverSlideTemplate
@@ -277,6 +413,51 @@ export function DemoLinkSlide() {
         />
       </div>
     </Slide>
+  );
+}
+
+export function SmoothingCliffsSlide() {
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Removing cliffs"
+        title="A cliff disappears when the cutoff becomes a slope."
+        body="One mechanism is replacing a hard eligibility cutoff with a gradual phaseout."
+      />
+
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="mb-5 grid grid-cols-3 gap-8 border-y border-slate-200 py-5">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
+              Before
+            </p>
+            <p className="mt-2 text-xl font-black leading-tight tracking-normal text-pe-dark">
+              ACA premium tax credits ended at 400% FPL.
+            </p>
+          </div>
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
+              Policy change
+            </p>
+            <p className="mt-2 text-xl font-black leading-tight tracking-normal text-pe-dark">
+              Inflation Reduction Act enhanced premium tax credits smooth the schedule.
+            </p>
+          </div>
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-pe-teal">
+              Result
+            </p>
+            <p className="mt-2 text-xl font-black leading-tight tracking-normal text-pe-dark">
+              The 400% FPL cliff is eliminated in this example.
+            </p>
+          </div>
+        </div>
+
+        <div className="min-h-0 flex-1 overflow-hidden">
+          <CliffSmoothingChart />
+        </div>
+      </div>
+    </WebinarSlide>
   );
 }
 

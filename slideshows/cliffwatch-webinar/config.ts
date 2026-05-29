@@ -9,6 +9,7 @@ import {
   ExamplesSlide,
   LegacyCliffChartSlide,
   NextStepsSlide,
+  SmoothingCliffsSlide,
   TitleSlide,
   WrapSlide,
 } from './slides';
@@ -38,6 +39,7 @@ export const cliffwatchWebinarConfig: SlideshowConfig = {
     LegacyCliffChartSlide,
     ExamplesSlide,
     DemoLinkSlide,
+    SmoothingCliffsSlide,
     PartnersSlide,
     NextStepsSlide,
     WrapSlide,
