@@ -15,8 +15,10 @@ import { eagxdc2026Config } from '@/slideshows/eagxdc-2026/config';
 import { codeForAmerica2026Config } from '@/slideshows/code-for-america-2026/config';
 import { cliffwatchWebinarConfig } from '@/slideshows/cliffwatch-webinar/config';
 import { cbo2026Config } from '@/slideshows/cbo-2026/config';
+import { civicBuilders2026Config } from '@/slideshows/civic-builders-2026/config';
 
 export const slideshows: SlideshowConfig[] = [
+  civicBuilders2026Config,
   cliffwatchWebinarConfig,
   cbo2026Config,
   codeForAmerica2026Config,
