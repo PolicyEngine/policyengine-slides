@@ -5,7 +5,7 @@ import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 
-const IFRAME_URL = "https://axiom-foundation.org";
+const IFRAME_URL = "https://rulespec-graph-viewer.vercel.app/";
 
 export default function AxiomDemoSlide() {
   const [expanded, setExpanded] = useState(false);
@@ -13,7 +13,7 @@ export default function AxiomDemoSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>The law itself, as open code</SlideTitle>
+        <SlideTitle>Determinism: the law itself, as an open graph</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
@@ -21,24 +21,22 @@ export default function AxiomDemoSlide() {
           <div className="content-card p-5">
             <div className="slide-tag mb-3">Axiom</div>
             <p className="text-base text-gray-800 leading-relaxed">
-              An open, machine-readable home for encoded law &mdash; find a
-              statute, inspect its parameters, trace it back to the citation,
-              and run it.
+              Every statute encoded as open, executable code &mdash; and linked
+              into a graph you can walk, rule to rule, citation to citation.
             </p>
           </div>
 
           <div className="content-card p-5">
             <div className="slide-tag mb-3">What changed</div>
             <p className="text-base text-gray-700 leading-relaxed">
-              AI now reads the statute and encodes it directly &mdash; section
-              by section, citation by citation. The work that took us years per
-              country becomes a public good anyone can build on.
+              AI does the encoding now, so the graph keeps growing &mdash; far
+              past what any team could ever hand-build, and exact every time.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
             <p className="text-base text-gray-700 leading-relaxed italic">
-              Live walkthrough.
+              Live &mdash; the Axiom rule graph.
             </p>
           </div>
         </div>
@@ -49,7 +47,7 @@ export default function AxiomDemoSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="Axiom"
+            title="Axiom rule graph viewer"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -81,7 +79,7 @@ export default function AxiomDemoSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="Axiom (expanded)"
+              title="Axiom rule graph viewer (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />
