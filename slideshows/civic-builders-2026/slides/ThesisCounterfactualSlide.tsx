@@ -6,42 +6,42 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 
 const IFRAME_URL =
-  "https://app.thesisinstitute.org/unemployment-rate-may-2026-first-print";
+  "https://app.thesisinstitute.org/medicaid-call-wait-mar-2027-work-req-deadline-delayed";
 
-export default function ThesisDemoSlide() {
+export default function ThesisCounterfactualSlide() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Slide>
       <SlideHeader>
         <SlideTitle>
-          Prediction: the number before it&apos;s published
+          And forecasting a policy that hasn&apos;t happened
         </SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
         <div className="flex flex-col gap-4">
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">Thesis</div>
+            <div className="slide-tag mb-3">Counterfactual</div>
             <p className="text-base text-gray-800 leading-relaxed">
-              A live, sourced forecast of an official statistic &mdash; here,
-              next month&apos;s unemployment rate &mdash; with every input
-              traceable, so you see why the number lands where it does.
+              Medicaid call-center wait times in March 2027 &mdash; if the
+              work-requirement deadline slips. A number for a world that
+              doesn&apos;t exist yet.
             </p>
           </div>
 
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">The aim</div>
+            <div className="slide-tag mb-3">Why it matters</div>
             <p className="text-base text-gray-700 leading-relaxed">
-              Agents read the evidence and assemble the forecast. Every
-              government metric, kept current &mdash; not a static report, a
-              living number.
+              This is the question policymakers actually ask: what happens if we
+              change the rule? Prediction, conditioned on a policy &mdash; the
+              same engine, pointed at the future.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
             <p className="text-base text-gray-700 leading-relaxed italic">
-              A forecast you can interrogate.
+              Prediction meets policy.
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function ThesisDemoSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="Thesis forecast — unemployment rate"
+            title="Thesis forecast — Medicaid call wait under a counterfactual"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -84,7 +84,7 @@ export default function ThesisDemoSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="Thesis forecast — unemployment rate (expanded)"
+              title="Thesis forecast — Medicaid call wait under a counterfactual (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />

@@ -43,7 +43,7 @@ export default function AxiomSlide() {
           }}
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal">
-            A second mission
+            Agents &rarr; determinism
           </p>
 
           <h2 className="text-4xl font-bold text-white leading-none">Axiom</h2>

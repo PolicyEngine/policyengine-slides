@@ -9,7 +9,8 @@ import RealizationSlide from "./slides/RealizationSlide";
 import AxiomSlide from "./slides/AxiomSlide";
 import AxiomDemoSlide from "./slides/AxiomDemoSlide";
 import ThesisDemoSlide from "./slides/ThesisDemoSlide";
-import StackSlide from "./slides/StackSlide";
+import ThesisCounterfactualSlide from "./slides/ThesisCounterfactualSlide";
+import SplitSlide from "./slides/SplitSlide";
 import AsksSlide from "./slides/AsksSlide";
 import EndSlide from "./slides/EndSlide";
 
@@ -17,7 +18,7 @@ export const civicBuilders2026Config: SlideshowConfig = {
   id: "civic-builders-2026",
   title: "The open engine for taxes and benefits",
   description:
-    "A civic-tech demo: PolicyEngine computes taxes and benefits for any household and reform — and a look at the massively scalable digital public goods agents can now build (Axiom, populace, Thesis).",
+    "A civic-tech demo: PolicyEngine computes taxes and benefits for any household and reform — and how agents now scale that into massive digital public goods: determinism (Axiom) and prediction (Thesis).",
   date: "2026-06-17",
   location: "Civic Builders Demo Night, Washington, DC",
   footerText: "PolicyEngine · Civic Builders Demo Night · June 17, 2026",
@@ -33,12 +34,13 @@ export const civicBuilders2026Config: SlideshowConfig = {
     WhatIsPESlide, // 3. What PolicyEngine is
     CliffWatchSlide, // 4. Live embed — benefit cliffs
     ObbbaExplorerSlide, // 5. Live embed — who wins/loses under a real law
-    RealizationSlide, // 6. The turn — agents → scalable digital public goods
-    AxiomSlide, // 7. Agents encode the world's rules (concept)
-    AxiomDemoSlide, // 8. Live embed — Axiom
-    ThesisDemoSlide, // 9. Live embed — Thesis forecast
-    StackSlide, // 10. The stack + the pattern (Axiom · populace · Thesis)
-    AsksSlide, // 11. What I'm looking for tonight
-    EndSlide, // 12. Thank you
+    RealizationSlide, // 6. The turn — agents → public goods; determinism + prediction
+    AxiomSlide, // 7. Determinism: agents encode the law (concept)
+    AxiomDemoSlide, // 8. Live embed — Axiom rule graph
+    ThesisDemoSlide, // 9. Live embed — Thesis forecast (unemployment)
+    ThesisCounterfactualSlide, // 10. Live embed — Thesis under a counterfactual
+    SplitSlide, // 11. The split — Axiom (determinism) + Thesis (prediction) + the call
+    AsksSlide, // 12. What I'm looking for tonight
+    EndSlide, // 13. Thank you
   ],
 };
