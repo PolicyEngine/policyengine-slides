@@ -169,8 +169,25 @@ async function main() {
     for (let i = 1; i <= totalSteps; i++) {
       console.log(`Capturing step ${i}/${totalSteps}...`);
       if (i > 1) {
-        await page.keyboard.press("ArrowRight");
-        await new Promise((r) => setTimeout(r, 800));
+        // Dispatch the advance key on `document` rather than page.keyboard so
+        // that an embedded iframe holding keyboard focus (e.g. a scrollytelling
+        // demo) can't swallow it — otherwise the deck never advances and the
+        // same slide is captured repeatedly.
+        await page.evaluate(() => {
+          const el = document.activeElement;
+          if (el && el.tagName === "IFRAME") el.blur();
+          document.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key: "ArrowRight",
+              code: "ArrowRight",
+              keyCode: 39,
+              which: 39,
+              bubbles: true,
+            }),
+          );
+        });
+        // Give the next slide (including any live embed) time to paint.
+        await new Promise((r) => setTimeout(r, 2500));
       }
       await fixImages(page);
       await hideNav(page);
