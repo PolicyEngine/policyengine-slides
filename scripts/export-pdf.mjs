@@ -187,7 +187,9 @@ async function main() {
           );
         });
         // Give the next slide (including any live embed) time to paint.
-        await new Promise((r) => setTimeout(r, 2500));
+        // Heavier embeds (e.g. the Thesis conditional comparison, which loads
+        // several forecast cells) need a few seconds to finish rendering.
+        await new Promise((r) => setTimeout(r, 5000));
       }
       await fixImages(page);
       await hideNav(page);
