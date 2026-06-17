@@ -1,43 +1,49 @@
-import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
-import { IconScale, IconUsers, IconArrowsShuffle, type Icon } from '@tabler/icons-react';
+import Slide from "@/components/core/Slide";
+import SlideHeader from "@/components/layout/SlideHeader";
+import SlideTitle from "@/components/layout/SlideTitle";
+import {
+  IconScale,
+  IconUsers,
+  IconArrowsShuffle,
+  type Icon,
+} from "@tabler/icons-react";
 
-const pillars: { icon: Icon; color: string; title: string; items: string[] }[] = [
-  {
-    icon: IconScale,
-    color: 'var(--pe-teal)',
-    title: 'Rules',
-    items: [
-      'Federal + payroll tax',
-      'State income tax: all 50 + DC',
-      'CTC, EITC, SNAP, Medicaid, SSI, ACA',
-      'Thousands of unit-tested parameters',
-    ],
-  },
-  {
-    icon: IconUsers,
-    color: 'var(--pe-teal-dark)',
-    title: 'Households',
-    items: [
-      'Census survey foundation',
-      'Enhanced with IRS, ACS, SCF data',
-      'Calibrated to official totals',
-      'Or enter any household yourself',
-    ],
-  },
-  {
-    icon: IconArrowsShuffle,
-    color: 'var(--pe-dark)',
-    title: 'Reforms',
-    items: [
-      'Change any parameter',
-      'Budget cost or savings',
-      'Poverty and inequality',
-      'Winners and losers by group',
-    ],
-  },
-];
+const pillars: { icon: Icon; color: string; title: string; items: string[] }[] =
+  [
+    {
+      icon: IconScale,
+      color: "var(--pe-teal)",
+      title: "Rules",
+      items: [
+        "Federal + payroll tax",
+        "State income tax: all 50 + DC",
+        "CTC, EITC, SNAP, Medicaid, SSI, ACA",
+        "Thousands of unit-tested parameters",
+      ],
+    },
+    {
+      icon: IconUsers,
+      color: "var(--pe-teal-dark)",
+      title: "Households",
+      items: [
+        "Census survey foundation",
+        "Enhanced with IRS, ACS, SCF data",
+        "Calibrated to official totals",
+        "Or enter any household yourself",
+      ],
+    },
+    {
+      icon: IconArrowsShuffle,
+      color: "var(--pe-dark)",
+      title: "Reforms",
+      items: [
+        "Change any parameter",
+        "Budget cost or savings",
+        "Poverty and inequality",
+        "Winners and losers by group",
+      ],
+    },
+  ];
 
 export default function WhatIsPESlide() {
   return (
@@ -76,8 +82,9 @@ export default function WhatIsPESlide() {
 
       <div className="accent-block mt-7">
         <p className="text-lg text-gray-700 leading-relaxed">
-          Five years open source. Used by governments, Congress, researchers, and
-          benefit navigators &mdash; from 10 Downing Street to US statehouses.
+          Five years open source. Used by governments, Congress, researchers,
+          and benefit navigators &mdash; from 10 Downing Street to US
+          statehouses.
         </p>
       </div>
     </Slide>

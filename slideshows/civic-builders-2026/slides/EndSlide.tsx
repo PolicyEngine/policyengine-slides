@@ -1,9 +1,11 @@
-import Slide from '@/components/core/Slide';
+import Slide from "@/components/core/Slide";
 
 export default function EndSlide() {
   return (
     <Slide isEnd>
-      <h1 className="font-display text-6xl font-bold mb-4 text-center">Thank you</h1>
+      <h1 className="font-display text-6xl font-bold mb-4 text-center">
+        Thank you
+      </h1>
 
       <p className="text-2xl opacity-80 mb-8 text-center">
         Find me in the breakouts &mdash; let&apos;s build on shared rules.
