@@ -6,7 +6,7 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 
 const IFRAME_URL =
-  "https://app.thesisinstitute.org/medicaid-call-wait-mar-2027-work-req-deadline-delayed";
+  "https://app.thesisinstitute.org/compare/medicaid-work-req-wait-mar-2027";
 
 export default function ThesisCounterfactualSlide() {
   const [expanded, setExpanded] = useState(false);
@@ -14,34 +14,33 @@ export default function ThesisCounterfactualSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>
-          And forecasting a policy that hasn&apos;t happened
-        </SlideTitle>
+        <SlideTitle>Both ways the policy could go, side by side</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
         <div className="flex flex-col gap-4">
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">Counterfactual</div>
+            <div className="slide-tag mb-3">Conditional comparison</div>
             <p className="text-base text-gray-800 leading-relaxed">
-              Medicaid call-center wait times in March 2027 &mdash; if the
-              work-requirement deadline slips. A number for a world that
-              doesn&apos;t exist yet.
+              Medicaid call-center wait in March 2027, forecast both ways at
+              once &mdash; if the work-requirement deadline holds, and if it
+              slips &mdash; plus how likely each is.
             </p>
           </div>
 
           <div className="content-card p-5">
             <div className="slide-tag mb-3">Why it matters</div>
             <p className="text-base text-gray-700 leading-relaxed">
-              This is the question policymakers actually ask: what happens if we
-              change the rule? Prediction, conditioned on a policy &mdash; the
-              same engine, pointed at the future.
+              Policymakers don&apos;t ask for one number &mdash; they ask for
+              the gap between two futures. The ~11-minute spread here is about
+              1.8 million person-hours of waiting a month, riding on one policy
+              state.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
             <p className="text-base text-gray-700 leading-relaxed italic">
-              Prediction meets policy.
+              Both arms, one page.
             </p>
           </div>
         </div>
@@ -52,7 +51,7 @@ export default function ThesisCounterfactualSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="Thesis forecast — Medicaid call wait under a counterfactual"
+            title="Thesis — Medicaid work-requirement conditional comparison"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -84,7 +83,7 @@ export default function ThesisCounterfactualSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="Thesis forecast — Medicaid call wait under a counterfactual (expanded)"
+              title="Thesis — Medicaid work-requirement conditional comparison (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />
