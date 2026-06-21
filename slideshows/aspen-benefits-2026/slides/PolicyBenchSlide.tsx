@@ -6,7 +6,7 @@ type Row = { model: string; exact: number; rank: number };
 
 const top: Row[] = [
   { model: "GPT-5.5", exact: 80.3, rank: 1 },
-  { model: "Gemini 3.1 Pro", exact: 77.8, rank: 2 },
+  { model: "Gemini 3.1 Pro Preview", exact: 77.8, rank: 2 },
   { model: "Claude Opus 4.7", exact: 77.3, rank: 3 },
 ];
 const bottom: Row = { model: "GPT-5.4 nano", exact: 62.2, rank: 13 };
@@ -47,6 +47,9 @@ function Bar({ row, lead }: { row: Row; lead?: boolean }) {
   );
 }
 
+// Offline fallback: a static leaderboard for the PolicyBench slide. The live
+// deck wires PolicyBenchEmbedSlide (an iframe of policybench.org) instead; swap
+// this in via config.ts if the venue blocks the live embed. Not dead code.
 export default function PolicyBenchSlide() {
   return (
     <Slide>

@@ -32,8 +32,8 @@ export default function PolicyBenchEmbedSlide() {
             <p className="text-base text-gray-700 leading-relaxed">
               The best gets about four in five figures to the dollar; multi-step
               amounts like income tax sit near a coin flip. Slice accuracy by
-              program, live &mdash; every wrong cell was the model&apos;s, not
-              PolicyEngine&apos;s.
+              program, live &mdash; every wrong cell we hand-checked was the
+              model&apos;s, not PolicyEngine&apos;s.
             </p>
           </div>
 

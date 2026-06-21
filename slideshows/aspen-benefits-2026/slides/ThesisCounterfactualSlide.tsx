@@ -32,9 +32,8 @@ export default function ThesisCounterfactualSlide() {
             <div className="slide-tag mb-3">Why it matters</div>
             <p className="text-base text-gray-700 leading-relaxed">
               Policymakers don&apos;t ask for one number &mdash; they ask for
-              the gap between two futures. The ~11-minute spread here is about
-              1.8 million person-hours of waiting a month, riding on one policy
-              state.
+              the gap between two futures, and how likely each is. This
+              forecasts the same metric both ways the deadline could land.
             </p>
           </div>
 

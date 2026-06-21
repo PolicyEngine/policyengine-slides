@@ -19,7 +19,7 @@ const sources: { icon: Icon; who: string; corpus: string }[] = [
   {
     icon: IconRouteAltLeft,
     who: "Navigators & service design",
-    corpus: "Frontline cases — where enrollment breaks and cliffs bite.",
+    corpus: "Frontline cases — where enrollment breaks and benefit cliffs show up.",
   },
   {
     icon: IconChartHistogram,
@@ -34,7 +34,7 @@ const sources: { icon: Icon; who: string; corpus: string }[] = [
   {
     icon: IconUsers,
     who: "Community",
-    corpus: "The reality of the benefits cliff, in people's own words.",
+    corpus: "Lived experience of benefit cliffs, in people's own words.",
   },
 ];
 
