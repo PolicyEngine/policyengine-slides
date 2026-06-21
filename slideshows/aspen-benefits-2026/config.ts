@@ -19,7 +19,7 @@ export const aspenBenefits2026Config: SlideshowConfig = {
   id: "aspen-benefits-2026",
   title: "Policy analysis in the age of AI",
   description:
-    "A lightning talk for the Aspen Benefits Leadership Forum: AI makes policy analysis abundant, households and the policy community already ask it about benefits, and it's only as accurate as what we ground it in. Live demos of PolicyEngine (CliffWatch, OBBBA), PolicyBench, Axiom, and Thesis — and a call on the corpora this room produces.",
+    "AI makes policy analysis abundant — and only as accurate as what we ground it in. Live PolicyEngine, PolicyBench, Axiom, and Thesis demos, and a call on the corpora this room produces.",
   date: "2026-06-22",
   location: "Aspen Benefits Leadership Forum, Chicago",
   footerText: "Aspen Benefits Leadership Forum · June 2026",
