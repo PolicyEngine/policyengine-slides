@@ -13,7 +13,7 @@ export default function PolicyBenchEmbedSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Now ask a model the same questions, unaided</SlideTitle>
+        <SlideTitle>But on taxes and benefits, the best model still misses</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">

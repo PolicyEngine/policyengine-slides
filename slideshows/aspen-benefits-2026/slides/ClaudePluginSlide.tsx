@@ -5,43 +5,40 @@ import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 
-const IFRAME_URL =
-  "https://app.thesisinstitute.org/unemployment-rate-may-2026-first-print";
+const IFRAME_URL = "https://policyengine.org/us/claude-plugin";
 
-export default function ThesisDemoSlide() {
+export default function ClaudePluginSlide() {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>
-          Thesis: the number before it&apos;s published
-        </SlideTitle>
+        <SlideTitle>Analysis, by anyone: the Claude plugin</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
         <div className="flex flex-col gap-4">
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">Prediction</div>
+            <div className="slide-tag mb-3">Claude plugin</div>
             <p className="text-base text-gray-800 leading-relaxed">
-              A live, sourced forecast of an official statistic &mdash; here,
-              next month&apos;s unemployment rate &mdash; with every input
-              traceable, so you see why the number lands where it does.
+              Anyone asks a policy question in plain English; Claude calls
+              PolicyEngine under the hood, runs the microsimulation, and returns
+              the answer with the assumptions and caveats visible.
             </p>
           </div>
 
           <div className="content-card p-5">
-            <div className="slide-tag mb-3">The aim</div>
+            <div className="slide-tag mb-3">Who uses it</div>
             <p className="text-base text-gray-700 leading-relaxed">
-              Agents read the evidence and assemble the forecast. Every
-              government metric, kept current &mdash; not a static report, a
-              living number.
+              Researchers run more analyses through the plugin than through our
+              web apps. The bottleneck was never the model &mdash; it was the
+              interface for asking the question.
             </p>
           </div>
 
           <div className="pl-5 border-l-4 border-pe-teal mt-auto">
             <p className="text-base text-gray-700 leading-relaxed italic">
-              A forecast you can interrogate.
+              The agent conducts; the engine computes.
             </p>
           </div>
         </div>
@@ -52,7 +49,7 @@ export default function ThesisDemoSlide() {
         >
           <iframe
             src={IFRAME_URL}
-            title="Thesis forecast — unemployment rate"
+            title="PolicyEngine Claude plugin"
             className="absolute inset-0 h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -84,7 +81,7 @@ export default function ThesisDemoSlide() {
           >
             <iframe
               src={IFRAME_URL}
-              title="Thesis forecast — unemployment rate (expanded)"
+              title="PolicyEngine Claude plugin (expanded)"
               className="w-full h-full border-0"
               referrerPolicy="no-referrer-when-downgrade"
             />
