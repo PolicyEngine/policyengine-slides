@@ -7,11 +7,11 @@ import SlideTitle from "@/components/layout/SlideTitle";
 // ~every 7 months (≈4 months in 2024–25). Points below are METR's published
 // anchors; the newest models are not yet plotted.
 const POINTS = [
-  { model: "GPT-2", horizon: "2 sec", x: 145, y: 266, labelRight: false },
+  { model: "GPT-2", horizon: "3 sec", x: 145, y: 257, labelRight: false },
   { model: "GPT-4", horizon: "~5 min", x: 515, y: 161, labelRight: false },
   { model: "Claude 3.7 Sonnet", horizon: "~50 min", x: 705, y: 113, labelRight: true, ly: 128 },
   { model: "o3", horizon: "~2 hr", x: 745, y: 95, labelRight: true, ly: 95 },
-  { model: "Opus 4.6", horizon: "~12 hr", x: 790, y: 57, labelRight: true, ly: 58 },
+  { model: "Claude Opus 4.5", horizon: "~5 hr", x: 790, y: 75, labelRight: true, ly: 76 },
 ];
 
 const GRID = [
@@ -54,8 +54,8 @@ export default function MetrSlide() {
         ))}
 
         {/* projection (dashed) */}
-        <line x1={790} y1={57} x2={895} y2={24} stroke="var(--pe-amber)" strokeWidth={2.5} strokeDasharray="7 6" opacity={0.85} />
-        <text x={900} y={22} fontSize={14} fill="var(--pe-amber-dark)" fontStyle="italic">
+        <line x1={790} y1={75} x2={895} y2={28} stroke="var(--pe-amber)" strokeWidth={2.5} strokeDasharray="7 6" opacity={0.85} />
+        <text x={900} y={26} fontSize={14} fill="var(--pe-amber-dark)" fontStyle="italic">
           if the trend holds
         </text>
 

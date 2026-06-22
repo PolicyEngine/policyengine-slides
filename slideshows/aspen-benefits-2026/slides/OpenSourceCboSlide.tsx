@@ -22,7 +22,7 @@ const cards: { icon: Icon; tag: string; body: string }[] = [
   {
     icon: IconRobot,
     tag: "The public reaches us through agents",
-    body: "Researchers now run more analyses through our Claude plugin than through our web apps. The bottleneck was never the model — it was the interface for asking the question.",
+    body: "More and more, people reach us through agents — Claude calling PolicyEngine under the hood to answer a question. So we built for that, and for agents that do the analysis on their own.",
   },
 ];
 
