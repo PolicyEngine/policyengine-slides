@@ -10,7 +10,7 @@ export default function EndStateDeterministicSlide() {
         <div className="slide-tag mb-3" style={{ fontSize: "0.7rem" }}>
           The end state &middot; determinism
         </div>
-        <SlideTitle>Every policy, computable</SlideTitle>
+        <SlideTitle>Our current world, made computable</SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-6 mt-1">
@@ -51,8 +51,8 @@ export default function EndStateDeterministicSlide() {
 
       <div className="accent-block mt-8">
         <p className="text-xl font-semibold text-gray-700 leading-relaxed">
-          A computable layer for all of policy &mdash; and all the context around
-          it, ready for any agent to use.
+          Not just the law &mdash; the whole of our current world, made
+          computable, ready for any agent to use.
         </p>
       </div>
     </Slide>

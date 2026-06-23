@@ -7,9 +7,9 @@ export default function EndSlide() {
         We&apos;re not building for what is. We&apos;re building for what will be.
       </h1>
 
-      <p className="text-2xl opacity-80 mb-9 text-center max-w-3xl">
-        Call it understanding policy, or policy analysis &mdash; or something we
-        don&apos;t have a name for yet.
+      <p className="text-2xl opacity-80 mb-9 text-center max-w-4xl">
+        Beyond policy understanding, simulation, forecasting, analysis &mdash;
+        even immersion &mdash; toward something we don&apos;t yet have a name for.
       </p>
 
       <div className="opacity-70 text-center space-y-2">
