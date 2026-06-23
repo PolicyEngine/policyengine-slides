@@ -52,8 +52,8 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     PolicyBenchEmbedSlide, // 4. But on taxes and benefits, the best model misses
     LeverageSlide, // 5. Our response: use AI to make AI better at policy
     TodayDividerSlide, // 6. SECTION — Policy analysis today
-    PolicyEngineSlide, // 7. PolicyEngine (live) — open tool for anyone; building for people enables agents
-    TwoQuestionsSlide, // 8. Two questions: what is the law vs what a change does
+    TwoQuestionsSlide, // 7. Two questions: what is the law vs what a change does (general frame)
+    PolicyEngineSlide, // 8. PolicyEngine (live) — open tool for anyone; building for people enables agents
     UsersBucketedSlide, // 9. Organizations use PolicyEngine for both deterministic and predictive analysis
     CliffWatchSlide, // 10. determinism today: where benefits cliff
     ObbbaExplorerSlide, // 11. prediction today: who wins/loses under a law
