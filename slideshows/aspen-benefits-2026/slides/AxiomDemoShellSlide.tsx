@@ -16,54 +16,27 @@ export default function AxiomDemoShellSlide() {
         <SlideTitle>A backend for a new civic technology</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
-        <div className="flex flex-col gap-4">
-          <div className="content-card p-5">
-            <div className="slide-tag mb-3">What you&apos;re seeing</div>
-            <p className="text-base text-gray-800 leading-relaxed">
-              A glimpse of what the broader community can build when
-              comprehensive rules as code sit behind it &mdash; the scope of
-              what becomes possible.
-            </p>
-          </div>
-
-          <div className="content-card p-5">
-            <div className="slide-tag mb-3">What we&apos;re building</div>
-            <p className="text-base text-gray-700 leading-relaxed">
-              Axiom is the open backend for a civic technology anchored in the
-              rule of law &mdash; taking democracy into the AI era.
-            </p>
-          </div>
-
-          <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-            <p className="text-base text-gray-700 leading-relaxed italic">
-              The law, computable. The platform, open.
-            </p>
-          </div>
-        </div>
-
-        <div
-          className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto"
-          onClick={(e) => e.stopPropagation()}
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto mt-4 w-full h-[calc(100vh-280px)]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <iframe
+          src={IFRAME_URL}
+          title="Axiom demo shell"
+          className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#17343A]/12 via-transparent to-transparent pointer-events-none" />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(true);
+          }}
+          className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition-colors"
         >
-          <iframe
-            src={IFRAME_URL}
-            title="Axiom demo shell"
-            className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#17343A]/12 via-transparent to-transparent pointer-events-none" />
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded(true);
-            }}
-            className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition-colors"
-          >
-            Expand
-          </button>
-        </div>
+          Expand
+        </button>
       </div>
 
       {expanded && (
