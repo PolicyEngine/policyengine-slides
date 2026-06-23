@@ -13,58 +13,30 @@ export default function FinbotSnapSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Or just ask: a grounded chatbot for SNAP</SlideTitle>
+        <SlideTitle>Or just ask: a grounded chatbot</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.7fr_1.3fr] gap-7 mt-4 h-[calc(100vh-300px)]">
-        <div className="flex flex-col gap-4">
-          <div className="content-card p-5">
-            <div className="slide-tag mb-3">Grounded chatbot</div>
-            <p className="text-base text-gray-800 leading-relaxed">
-              Ask a SNAP question in plain English. The encoded rules answer it
-              &mdash; grounded and correct, not guessed.
-            </p>
-          </div>
-
-          <div className="content-card p-5">
-            <div className="slide-tag mb-3">Why it matters</div>
-            <p className="text-base text-gray-700 leading-relaxed">
-              All that complexity, boiled down to the right answer for one
-              family &mdash; exactly what PolicyBench showed models can&apos;t do
-              on their own.
-            </p>
-          </div>
-
-          <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-            <p className="text-base text-gray-700 leading-relaxed italic">
-              The full rule graph, or a plain answer &mdash; same rules behind
-              both.
-            </p>
-          </div>
-        </div>
-
-        <div
-          className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto"
-          onClick={(e) => e.stopPropagation()}
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto mt-4 w-full h-[calc(100vh-280px)]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <iframe
+          src={IFRAME_URL}
+          title="FinBot — grounded SNAP chatbot"
+          className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#17343A]/12 via-transparent to-transparent pointer-events-none" />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(true);
+          }}
+          className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition-colors"
         >
-          <iframe
-            src={IFRAME_URL}
-            title="FinBot — grounded SNAP chatbot"
-            className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#17343A]/12 via-transparent to-transparent pointer-events-none" />
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded(true);
-            }}
-            className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition-colors"
-          >
-            Expand
-          </button>
-        </div>
+          Expand
+        </button>
       </div>
 
       {expanded && (
