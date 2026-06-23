@@ -33,6 +33,10 @@ export const aspenBenefits2026Config: SlideshowConfig = {
   date: "2026-06-22",
   location: "Aspen Benefits Leadership Forum, Chicago",
   footerText: "Aspen Benefits Leadership Forum · June 2026",
+  partnerLogo: {
+    src: "/logos/axiom-foundation-white.svg",
+    alt: "Axiom Foundation",
+  },
   speakers: [
     {
       ...speakers["max-ghenis"],
