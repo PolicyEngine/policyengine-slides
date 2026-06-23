@@ -1,22 +1,45 @@
 import Slide from "@/components/core/Slide";
+import Image from "@/components/core/BasePathImage";
 
 export default function EndSlide() {
   return (
-    <Slide isEnd>
-      <h1 className="font-display text-5xl font-bold mb-5 text-center leading-tight max-w-4xl">
-        We&apos;re not building for what is. We&apos;re building for what will be.
-      </h1>
+    <Slide>
+      <div className="grid grid-cols-[0.92fr_1.08fr] gap-10 h-full items-center">
+        {/* Left: the quote */}
+        <div className="flex flex-col">
+          <p className="font-display text-4xl font-bold text-pe-dark leading-snug tracking-tight">
+            &ldquo;The work of social justice is standing in a future space and
+            pulling the present towards it.&rdquo;
+          </p>
 
-      <p className="text-2xl opacity-80 mb-9 text-center max-w-4xl">
-        Beyond policy understanding, simulation, forecasting, analysis &mdash;
-        even immersion &mdash; toward something we don&apos;t yet have a name for.
-      </p>
+          <div className="mt-7">
+            <p className="text-xl font-semibold text-pe-teal-dark">
+              &mdash; Peter Gabel
+            </p>
+            <p className="text-base text-gray-500 mt-1">
+              as Rebecca Vallas put it in yesterday&apos;s opening session.
+            </p>
+          </div>
 
-      <div className="opacity-70 text-center space-y-2">
-        <p className="text-xl font-semibold">
-          policyengine.org &middot; axiom-foundation.org
-        </p>
-        <p className="text-lg">max@policyengine.org</p>
+          <p className="text-sm text-gray-400 mt-10">
+            policyengine.org &middot; axiom-foundation.org &middot;
+            max@policyengine.org
+          </p>
+        </div>
+
+        {/* Right: the METR slope — the help that's coming */}
+        <div className="flex flex-col items-center">
+          <Image
+            src="/charts/metr-time-horizon.png"
+            alt="METR: the length of task a frontier model can complete, climbing exponentially"
+            width={2750}
+            height={1087}
+            className="w-full h-auto object-contain max-h-[380px]"
+          />
+          <p className="text-xs text-gray-400 mt-2">
+            Source: METR &middot; metr.org/time-horizons
+          </p>
+        </div>
       </div>
     </Slide>
   );
