@@ -16,9 +16,6 @@ export default function EndSlide() {
             <p className="text-xl font-semibold text-pe-teal-dark">
               &mdash; Peter Gabel
             </p>
-            <p className="text-base text-gray-500 mt-1">
-              as Rebecca Vallas put it in yesterday&apos;s opening session.
-            </p>
           </div>
 
           <p className="text-sm text-gray-400 mt-10">

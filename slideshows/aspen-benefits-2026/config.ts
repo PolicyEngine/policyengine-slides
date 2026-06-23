@@ -1,6 +1,11 @@
 import { SlideshowConfig } from "@/lib/types";
 import { speakers } from "@/lib/speakers";
 import CoverSlide from "./slides/CoverSlide";
+import {
+  TodayDividerSlide,
+  DeterministicDividerSlide,
+  PredictiveDividerSlide,
+} from "./slides/SectionDividers";
 import MetrSlide from "./slides/MetrSlide";
 import AIUsageSlide from "./slides/AIUsageSlide";
 import PolicyBenchEmbedSlide from "./slides/PolicyBenchEmbedSlide";
@@ -40,19 +45,22 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     AIUsageSlide, // 3. And usage is exploding — what people ask AI about
     PolicyBenchEmbedSlide, // 4. But on taxes and benefits, the best model misses
     LeverageSlide, // 5. Our response: use AI to make AI better at policy
-    PolicyEngineSlide, // 6. PolicyEngine (live) — open tool for anyone; building for people enables agents
-    TwoQuestionsSlide, // 7. Two questions: what is the law vs what a change does
-    UsersBucketedSlide, // 8. Who builds on us, split the same way
-    CliffWatchSlide, // 9. Act 1 — determinism today: where benefits cliff
-    ObbbaExplorerSlide, // 10. Act 1 — prediction today: who wins/loses under a law
-    ClaudePluginSlide, // 11. The turn — analysis by anyone, via agents
-    HowMuchLawSlide, // 12. More law than any team can hand-encode → Axiom
-    AxiomIntroSlide, // 13. Axiom — start from the statute (+ Ariel handoff)
-    AxiomDemoSlide, // 14. LIVE — Axiom rule graph
-    ThinkBiggerSlide, // 15. Think bigger than the budget line → Thesis
-    ThesisCounterfactualSlide, // 16. LIVE — Thesis Medicaid counterfactual
-    EndStateDeterministicSlide, // 17. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 18. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 19. Close — building for what will be
+    TodayDividerSlide, // 6. SECTION — Policy analysis today
+    PolicyEngineSlide, // 7. PolicyEngine (live) — open tool for anyone; building for people enables agents
+    TwoQuestionsSlide, // 8. Two questions: what is the law vs what a change does
+    UsersBucketedSlide, // 9. Organizations use PolicyEngine for both deterministic and predictive analysis
+    CliffWatchSlide, // 10. determinism today: where benefits cliff
+    ObbbaExplorerSlide, // 11. prediction today: who wins/loses under a law
+    ClaudePluginSlide, // 12. The turn — analysis by anyone, via agents
+    DeterministicDividerSlide, // 13. SECTION — A future for deterministic policy analysis (rules as code)
+    HowMuchLawSlide, // 14. More law than any team can hand-encode → Axiom
+    AxiomIntroSlide, // 15. Axiom — start from the statute (+ Ariel handoff)
+    AxiomDemoSlide, // 16. LIVE — Axiom rule graph
+    PredictiveDividerSlide, // 17. SECTION — A future for predictive policy analysis
+    ThinkBiggerSlide, // 18. Think bigger than the budget line → Thesis
+    ThesisCounterfactualSlide, // 19. LIVE — Thesis Medicaid counterfactual
+    EndStateDeterministicSlide, // 20. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 21. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 22. Close — Peter Gabel quote + the METR slope
   ],
 };
