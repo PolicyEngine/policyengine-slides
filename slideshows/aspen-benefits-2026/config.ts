@@ -19,6 +19,7 @@ import ClaudePluginSlide from "./slides/ClaudePluginSlide";
 import HowMuchLawSlide from "./slides/HowMuchLawSlide";
 import AxiomIntroSlide from "./slides/AxiomIntroSlide";
 import AxiomDemoSlide from "./slides/AxiomDemoSlide";
+import FinbotSnapSlide from "./slides/FinbotSnapSlide";
 import AxiomDemoShellSlide from "./slides/AxiomDemoShellSlide";
 import ThinkBiggerSlide from "./slides/ThinkBiggerSlide";
 import ThesisCounterfactualSlide from "./slides/ThesisCounterfactualSlide";
@@ -61,12 +62,13 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     HowMuchLawSlide, // 14. More law than any team can hand-encode → Axiom
     AxiomIntroSlide, // 15. Axiom — start from the statute (+ Ariel handoff)
     AxiomDemoSlide, // 16. LIVE — Axiom rule graph
-    AxiomDemoShellSlide, // 17. LIVE — Axiom demo shell: scope for the community / civic tech
-    PredictiveDividerSlide, // 18. SECTION — A future for predictive policy analysis
-    ThinkBiggerSlide, // 19. Think bigger than the budget line → Thesis
-    ThesisCounterfactualSlide, // 20. LIVE — Thesis Medicaid counterfactual
-    EndStateDeterministicSlide, // 21. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 22. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 23. Close — Peter Gabel quote + the METR slope
+    FinbotSnapSlide, // 17. LIVE — grounded SNAP chatbot (boil it down to the right answer)
+    AxiomDemoShellSlide, // 18. LIVE — Axiom demo shell: scope for the community / civic tech
+    PredictiveDividerSlide, // 19. SECTION — A future for predictive policy analysis
+    ThinkBiggerSlide, // 20. Think bigger than the budget line → Thesis
+    ThesisCounterfactualSlide, // 21. LIVE — Thesis Medicaid counterfactual
+    EndStateDeterministicSlide, // 22. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 23. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 24. Close — Peter Gabel quote + the METR slope
   ],
 };
