@@ -22,6 +22,7 @@ import AxiomIntroSlide from "./slides/AxiomIntroSlide";
 import AxiomDemoSlide from "./slides/AxiomDemoSlide";
 import FinbotSnapSlide from "./slides/FinbotSnapSlide";
 import AxiomDemoShellSlide from "./slides/AxiomDemoShellSlide";
+import ForecastsTodaySlide from "./slides/ForecastsTodaySlide";
 import ThinkBiggerSlide from "./slides/ThinkBiggerSlide";
 import ThesisChildPovertySlide from "./slides/ThesisChildPovertySlide";
 import ThesisCounterfactualSlide from "./slides/ThesisCounterfactualSlide";
@@ -67,12 +68,13 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     FinbotSnapSlide, // 17. LIVE — grounded SNAP chatbot (boil it down to the right answer)
     AxiomDemoShellSlide, // 18. LIVE — Axiom demo shell: scope for the community / civic tech
     PredictiveDividerSlide, // 19. SECTION — A future for predictive policy analysis
-    ThinkBiggerSlide, // 20. Think bigger than the budget line → Thesis
-    ThesisChildPovertySlide, // 21. LIVE — Thesis child-poverty (SPM) forecast under current law
-    ThesisCounterfactualSlide, // 22. LIVE — Thesis Medicaid counterfactual (both ways)
-    PullingThePresentDividerSlide, // 23. SECTION — Pulling the present (the synthesis / end states)
-    EndStateDeterministicSlide, // 24. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 25. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 26. Close — Peter Gabel quote + the METR slope
+    ForecastsTodaySlide, // 20. Today: models (incl. PolicyEngine) produce 10s–100s thousands of budget projections
+    ThinkBiggerSlide, // 21. Think bigger — other outcomes, millions of forecasters → a better benefit system
+    ThesisChildPovertySlide, // 22. LIVE — Thesis child-poverty (SPM) forecast under current law
+    ThesisCounterfactualSlide, // 23. LIVE — Thesis Medicaid counterfactual (both ways)
+    PullingThePresentDividerSlide, // 24. SECTION — Pulling the present (the synthesis / end states)
+    EndStateDeterministicSlide, // 25. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 26. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 27. Close — Peter Gabel quote + the METR slope
   ],
 };

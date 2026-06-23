@@ -10,14 +10,15 @@ export default function ThinkBiggerSlide() {
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-6 mt-2 items-stretch">
-        <div className="content-card p-6">
+        <div className="content-card p-6 flex flex-col justify-center">
           <div className="slide-tag mb-3" style={{ fontSize: "0.7rem" }}>
-            What scoring covers today
+            The outcomes that matter
           </div>
           <p className="text-lg text-gray-700 leading-relaxed">
-            CBO scores a handful of outcomes &mdash; mostly the cost. But the
-            questions that decide whether a program works for families aren&apos;t
-            only cost.
+            Whether a family takes up a benefit. The call-center wait a Medicaid
+            work requirement creates. Whether someone actually gets helped
+            &mdash; the things that decide if the system works, none of them
+            measured in dollars.
           </p>
         </div>
 
@@ -28,21 +29,24 @@ export default function ThinkBiggerSlide() {
               "linear-gradient(180deg, var(--pe-dark) 0%, var(--pe-darker) 100%)",
           }}
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-3">
-            The shift
+          <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-2">
+            The leap
+          </p>
+          <p className="font-display text-6xl font-bold text-white leading-none mb-3">
+            Millions
           </p>
           <p className="text-lg leading-relaxed text-white/90">
-            Forecast every outcome &mdash; take-up, customer experience, the
-            call-center wait a Medicaid work requirement creates &mdash; each
-            with honest uncertainty.
+            of credible forecasters &mdash; AI agents that now match the best
+            humans &mdash; reading the evidence and forecasting every outcome,
+            not just the budget.
           </p>
         </div>
       </div>
 
       <div className="accent-block mt-7">
         <p className="text-xl font-semibold text-gray-700 leading-relaxed">
-          AI forecasters now match some of the best humans &mdash; so an agent
-          can read the evidence and assemble the forecast.
+          Millions of expert-grade forecasts, on the outcomes families live
+          &mdash; enough to guide us toward a better benefits system.
         </p>
       </div>
     </Slide>
