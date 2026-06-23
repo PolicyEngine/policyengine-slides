@@ -11,7 +11,6 @@ import UsersBucketedSlide from "./slides/UsersBucketedSlide";
 import CliffWatchSlide from "./slides/CliffWatchSlide";
 import ObbbaExplorerSlide from "./slides/ObbbaExplorerSlide";
 import ClaudePluginSlide from "./slides/ClaudePluginSlide";
-import ClaudeComparisonSlide from "./slides/ClaudeComparisonSlide";
 import HowMuchLawSlide from "./slides/HowMuchLawSlide";
 import AxiomIntroSlide from "./slides/AxiomIntroSlide";
 import AxiomDemoSlide from "./slides/AxiomDemoSlide";
@@ -47,14 +46,13 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     CliffWatchSlide, // 9. Act 1 — determinism today: where benefits cliff
     ObbbaExplorerSlide, // 10. Act 1 — prediction today: who wins/loses under a law
     ClaudePluginSlide, // 11. The turn — analysis by anyone, via agents
-    ClaudeComparisonSlide, // 12. Same prompt, with/without the model
-    HowMuchLawSlide, // 13. More law than any team can hand-encode → Axiom
-    AxiomIntroSlide, // 14. Axiom — start from the statute (+ Ariel handoff)
-    AxiomDemoSlide, // 15. LIVE — Axiom rule graph
-    ThinkBiggerSlide, // 16. Think bigger than the budget line → Thesis
-    ThesisCounterfactualSlide, // 17. LIVE — Thesis Medicaid counterfactual
-    EndStateDeterministicSlide, // 18. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 19. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 20. Close — building for what will be
+    HowMuchLawSlide, // 12. More law than any team can hand-encode → Axiom
+    AxiomIntroSlide, // 13. Axiom — start from the statute (+ Ariel handoff)
+    AxiomDemoSlide, // 14. LIVE — Axiom rule graph
+    ThinkBiggerSlide, // 15. Think bigger than the budget line → Thesis
+    ThesisCounterfactualSlide, // 16. LIVE — Thesis Medicaid counterfactual
+    EndStateDeterministicSlide, // 17. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 18. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 19. Close — building for what will be
   ],
 };
