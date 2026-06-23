@@ -15,8 +15,8 @@ import AxiomIntroSlide from "./slides/AxiomIntroSlide";
 import AxiomDemoSlide from "./slides/AxiomDemoSlide";
 import ThinkBiggerSlide from "./slides/ThinkBiggerSlide";
 import ThesisCounterfactualSlide from "./slides/ThesisCounterfactualSlide";
-import TwoTrajectoriesSlide from "./slides/TwoTrajectoriesSlide";
-import WhatTheRoomProducesSlide from "./slides/WhatTheRoomProducesSlide";
+import EndStateDeterministicSlide from "./slides/EndStateDeterministicSlide";
+import EndStatePredictiveSlide from "./slides/EndStatePredictiveSlide";
 import EndSlide from "./slides/EndSlide";
 
 export const aspenBenefits2026Config: SlideshowConfig = {
@@ -49,8 +49,8 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     AxiomDemoSlide, // 13. LIVE — Axiom rule graph
     ThinkBiggerSlide, // 14. Think bigger than the budget line → Thesis
     ThesisCounterfactualSlide, // 15. LIVE — Thesis Medicaid counterfactual
-    TwoTrajectoriesSlide, // 16. Two trajectories: Axiom (the law) + Thesis (outcomes)
-    WhatTheRoomProducesSlide, // 17. Your expertise grounds the agents
-    EndSlide, // 18. Close
+    EndStateDeterministicSlide, // 16. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 17. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 18. Close — building for what will be
   ],
 };
