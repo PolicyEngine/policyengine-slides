@@ -5,7 +5,7 @@ import MetrSlide from "./slides/MetrSlide";
 import AIUsageSlide from "./slides/AIUsageSlide";
 import PolicyBenchEmbedSlide from "./slides/PolicyBenchEmbedSlide";
 import LeverageSlide from "./slides/LeverageSlide";
-import OpenSourceCboSlide from "./slides/OpenSourceCboSlide";
+import PolicyEngineSlide from "./slides/PolicyEngineSlide";
 import TwoQuestionsSlide from "./slides/TwoQuestionsSlide";
 import UsersBucketedSlide from "./slides/UsersBucketedSlide";
 import CliffWatchSlide from "./slides/CliffWatchSlide";
@@ -40,7 +40,7 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     AIUsageSlide, // 3. And usage is exploding — what people ask AI about
     PolicyBenchEmbedSlide, // 4. But on taxes and benefits, the best model misses
     LeverageSlide, // 5. Our response: use AI to make AI better at policy
-    OpenSourceCboSlide, // 6. Where we come at this from — the open-source CBO
+    PolicyEngineSlide, // 6. PolicyEngine (live) — open tool for anyone; building for people enables agents
     TwoQuestionsSlide, // 7. Two questions: what is the law vs what a change does
     UsersBucketedSlide, // 8. Who builds on us, split the same way
     CliffWatchSlide, // 9. Act 1 — determinism today: where benefits cliff
