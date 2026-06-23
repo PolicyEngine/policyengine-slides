@@ -2,7 +2,9 @@ import { SlideshowConfig } from "@/lib/types";
 import { speakers } from "@/lib/speakers";
 import CoverSlide from "./slides/CoverSlide";
 import MetrSlide from "./slides/MetrSlide";
+import AIUsageSlide from "./slides/AIUsageSlide";
 import PolicyBenchEmbedSlide from "./slides/PolicyBenchEmbedSlide";
+import LeverageSlide from "./slides/LeverageSlide";
 import OpenSourceCboSlide from "./slides/OpenSourceCboSlide";
 import TwoQuestionsSlide from "./slides/TwoQuestionsSlide";
 import UsersBucketedSlide from "./slides/UsersBucketedSlide";
@@ -36,21 +38,23 @@ export const aspenBenefits2026Config: SlideshowConfig = {
   slides: [
     CoverSlide, // 1. Policy analysis in the age of AI
     MetrSlide, // 2. AI can do exponentially longer work — design for the slope
-    PolicyBenchEmbedSlide, // 3. But on taxes and benefits, the best model misses
-    OpenSourceCboSlide, // 4. Where we come at this from — the open-source CBO
-    TwoQuestionsSlide, // 5. Two questions: what is the law vs what a change does
-    UsersBucketedSlide, // 6. Who builds on us, split the same way
-    CliffWatchSlide, // 7. Act 1 — determinism today: where benefits cliff
-    ObbbaExplorerSlide, // 8. Act 1 — prediction today: who wins/loses under a law
-    ClaudePluginSlide, // 9. The turn — analysis by anyone, via agents
-    ClaudeComparisonSlide, // 10. Same prompt, with/without the model
-    HowMuchLawSlide, // 11. More law than any team can hand-encode → Axiom
-    AxiomIntroSlide, // 12. Axiom — start from the statute (+ Ariel handoff)
-    AxiomDemoSlide, // 13. LIVE — Axiom rule graph
-    ThinkBiggerSlide, // 14. Think bigger than the budget line → Thesis
-    ThesisCounterfactualSlide, // 15. LIVE — Thesis Medicaid counterfactual
-    EndStateDeterministicSlide, // 16. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 17. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 18. Close — building for what will be
+    AIUsageSlide, // 3. And usage is exploding — what people ask AI about
+    PolicyBenchEmbedSlide, // 4. But on taxes and benefits, the best model misses
+    LeverageSlide, // 5. Our response: use AI to make AI better at policy
+    OpenSourceCboSlide, // 6. Where we come at this from — the open-source CBO
+    TwoQuestionsSlide, // 7. Two questions: what is the law vs what a change does
+    UsersBucketedSlide, // 8. Who builds on us, split the same way
+    CliffWatchSlide, // 9. Act 1 — determinism today: where benefits cliff
+    ObbbaExplorerSlide, // 10. Act 1 — prediction today: who wins/loses under a law
+    ClaudePluginSlide, // 11. The turn — analysis by anyone, via agents
+    ClaudeComparisonSlide, // 12. Same prompt, with/without the model
+    HowMuchLawSlide, // 13. More law than any team can hand-encode → Axiom
+    AxiomIntroSlide, // 14. Axiom — start from the statute (+ Ariel handoff)
+    AxiomDemoSlide, // 15. LIVE — Axiom rule graph
+    ThinkBiggerSlide, // 16. Think bigger than the budget line → Thesis
+    ThesisCounterfactualSlide, // 17. LIVE — Thesis Medicaid counterfactual
+    EndStateDeterministicSlide, // 18. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 19. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 20. Close — building for what will be
   ],
 };
