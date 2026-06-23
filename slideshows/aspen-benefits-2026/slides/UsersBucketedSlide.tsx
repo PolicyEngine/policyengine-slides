@@ -23,7 +23,7 @@ const determinism: Org[] = [
   { name: "Amplifi", logo: "/logos/organizations/amplifi.png" },
   { name: "Atlanta Fed", logo: "/logos/organizations/atlanta-fed.png" },
   { name: "Living Wage Calculator", logo: "/logos/organizations/living-wage-calculator.png" },
-  { name: "Gary Community Ventures", logo: "/logos/organizations/gary-community-ventures.png" },
+  { name: "Bureau of Economic Analysis", logo: "/logos/organizations/bea.png" },
   { name: "Fund for Guaranteed Income", logo: "/logos/organizations/f4gi.png" },
 ];
 
@@ -85,7 +85,7 @@ export default function UsersBucketedSlide() {
             What is the law &middot; determinism
           </div>
           <p className="text-sm text-gray-500 mb-1">
-            Benefit-access tools computing current-law eligibility and amounts.
+            Computing current law &mdash; eligibility, amounts, and distribution.
           </p>
           <LogoGrid orgs={determinism} />
         </div>
