@@ -15,11 +15,15 @@ const determinism: Org[] = [
   { name: "MyFriendBen", logo: "/logos/organizations/myfriendben.png", inRoom: true },
   { name: "Mirza", logo: "/logos/organizations/mirza.png", inRoom: true },
   { name: "Starlight", logo: "/logos/organizations/starlight.png", inRoom: true },
+  {
+    name: "Student Basic Needs Coalition",
+    logo: "/logos/organizations/student-basic-needs-coalition.png",
+    inRoom: true,
+  },
   { name: "Amplifi", logo: "/logos/organizations/amplifi.png" },
   { name: "Atlanta Fed", logo: "/logos/organizations/atlanta-fed.png" },
   { name: "Living Wage Calculator", logo: "/logos/organizations/living-wage-calculator.png" },
   { name: "Gary Community Ventures", logo: "/logos/organizations/gary-community-ventures.png" },
-  { name: "Mothers Outreach Network", logo: "/logos/organizations/mothers-outreach-network.png" },
   { name: "Fund for Guaranteed Income", logo: "/logos/organizations/f4gi.png" },
 ];
 
@@ -32,7 +36,10 @@ const prediction: Org[] = [
   { name: "10 Downing Street", logo: "/logos/organizations/10-downing-street.png" },
   { name: "NBER", logo: "/logos/organizations/nber.png" },
   { name: "Joint Economic Committee", logo: "/logos/organizations/jec.png", smaller: true },
-  { name: "Center for Growth and Opportunity", logo: "/logos/organizations/cgo.jpg" },
+  {
+    name: "Mothers Outreach Network",
+    logo: "/logos/organizations/mothers-outreach-network.png",
+  },
 ];
 
 function LogoGrid({ orgs }: { orgs: Org[] }) {

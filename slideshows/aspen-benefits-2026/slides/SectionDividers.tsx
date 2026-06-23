@@ -46,3 +46,7 @@ export const DeterministicDividerSlide = () => (
 export const PredictiveDividerSlide = () => (
   <SectionDivider number="3" title="A future for predictive policy analysis" />
 );
+
+export const PullingThePresentDividerSlide = () => (
+  <SectionDivider number="4" title="Pulling the present" />
+);

@@ -5,6 +5,7 @@ import {
   TodayDividerSlide,
   DeterministicDividerSlide,
   PredictiveDividerSlide,
+  PullingThePresentDividerSlide,
 } from "./slides/SectionDividers";
 import MetrSlide from "./slides/MetrSlide";
 import AIUsageSlide from "./slides/AIUsageSlide";
@@ -67,8 +68,9 @@ export const aspenBenefits2026Config: SlideshowConfig = {
     PredictiveDividerSlide, // 19. SECTION — A future for predictive policy analysis
     ThinkBiggerSlide, // 20. Think bigger than the budget line → Thesis
     ThesisCounterfactualSlide, // 21. LIVE — Thesis Medicaid counterfactual
-    EndStateDeterministicSlide, // 22. End state, determinism: all policy computable + the room's context
-    EndStatePredictiveSlide, // 23. End state, prediction: experience effects -> immersive storytelling
-    EndSlide, // 24. Close — Peter Gabel quote + the METR slope
+    PullingThePresentDividerSlide, // 22. SECTION — Pulling the present (the synthesis / end states)
+    EndStateDeterministicSlide, // 23. End state, determinism: all policy computable + the room's context
+    EndStatePredictiveSlide, // 24. End state, prediction: experience effects -> immersive storytelling
+    EndSlide, // 25. Close — Peter Gabel quote + the METR slope
   ],
 };
