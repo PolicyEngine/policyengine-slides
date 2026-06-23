@@ -42,7 +42,7 @@ export default function ThinkBiggerSlide() {
       <div className="accent-block mt-7">
         <p className="text-xl font-semibold text-gray-700 leading-relaxed">
           AI forecasters now match some of the best humans &mdash; so an agent
-          can read the evidence and assemble the forecast. We call this Thesis.
+          can read the evidence and assemble the forecast.
         </p>
       </div>
     </Slide>
