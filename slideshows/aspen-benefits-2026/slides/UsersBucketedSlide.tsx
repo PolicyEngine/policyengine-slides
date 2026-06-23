@@ -52,7 +52,10 @@ export default function UsersBucketedSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Who builds on us &mdash; split the same way</SlideTitle>
+        <SlideTitle>
+          Organizations use PolicyEngine for both deterministic and predictive
+          analysis
+        </SlideTitle>
       </SlideHeader>
 
       <div className="grid grid-cols-2 gap-7 mt-1">
