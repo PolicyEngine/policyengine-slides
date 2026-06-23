@@ -30,6 +30,9 @@ export default function CoverSlide() {
             <p className="text-lg text-white/70 font-light">
               Co-founder and CEO, PolicyEngine
             </p>
+            <p className="text-lg text-white/70 font-light">
+              Founder and CEO, Axiom Foundation
+            </p>
           </div>
         </div>
 
