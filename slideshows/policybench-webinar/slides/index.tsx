@@ -7,10 +7,13 @@ import { speakers } from "@/lib/speakers";
 import {
   IconBuildingBank,
   IconChecks,
+  IconCircleCheckFilled,
+  IconCircleXFilled,
   IconListSearch,
   IconLock,
   IconRobot,
   IconScale,
+  IconSparkles,
   IconWorld,
 } from "@tabler/icons-react";
 import type { ComponentType, CSSProperties, ReactNode } from "react";
@@ -51,6 +54,85 @@ const BREAKDOWN = [
   { name: "SNAP", exact: 76.8 },
   { name: "Eligibility flags", exact: 97, label: "95–99%" },
 ];
+
+// Real GPT-5.5 answers from the June 2026 run, scored against PolicyEngine.
+// Both are "federal income tax before refundable credits" for a married couple.
+// A: OH, ~$95k (wages + pension) — exact. B: OK, two kids, ~$92k — off by $2,223
+// (GPT used the old $2,000-per-child credit and missed 2026's overtime deduction).
+const CHAT_EXAMPLES = [
+  {
+    tag: "Household A",
+    household: "Ohio · married, filing jointly · ~$95k (wages + a pension)",
+    question: "What’s their 2026 federal income tax?",
+    answer: "$7,031",
+    truth: "$7,031",
+    correct: true,
+    verdict: "Exact — to the dollar",
+    why: "",
+  },
+  {
+    tag: "Household B",
+    household: "Oklahoma · married, two kids · ~$92k earned",
+    question: "What’s their 2026 federal income tax?",
+    answer: "$2,723",
+    truth: "$500",
+    correct: false,
+    verdict: "Off by $2,223",
+    why: "Old $2,000 child credit, missed a 2026 deduction",
+  },
+];
+
+function ChatCard({
+  ex,
+  revealed,
+}: {
+  ex: (typeof CHAT_EXAMPLES)[number];
+  revealed: boolean;
+}) {
+  const tone = ex.correct ? colors.teal : colors.amber;
+  const Verdict = ex.correct ? IconCircleCheckFilled : IconCircleXFilled;
+  return (
+    <div
+      className="content-card flex min-w-0 flex-col p-6"
+      style={{ borderLeftColor: revealed ? tone : colors.dark }}
+    >
+      <div className="flex items-center gap-2">
+        <IconSparkles className="h-5 w-5 text-pe-dark" stroke={1.8} />
+        <span className="text-base font-bold text-pe-dark">ChatGPT</span>
+        <span className="ml-auto text-xs font-semibold uppercase tracking-widest text-gray-400">
+          {ex.tag}
+        </span>
+      </div>
+      <p className="mt-3 text-sm font-semibold text-gray-500">{ex.household}</p>
+      <div className="mt-4 max-w-[90%] self-end rounded-2xl rounded-br-sm bg-slate-100 px-4 py-2 text-base text-gray-700">
+        {ex.question}
+      </div>
+      <div className="mt-3 self-start rounded-2xl rounded-bl-sm border border-slate-200 bg-white px-5 py-3">
+        <span className="font-mono text-4xl font-black tabular-nums text-pe-dark">
+          {ex.answer}
+        </span>
+      </div>
+      {revealed && (
+        <div className="mt-5 flex items-start gap-3 border-t border-slate-200 pt-4">
+          <Verdict className="h-7 w-7 shrink-0" style={{ color: tone }} />
+          <div className="min-w-0">
+            <p className="text-base font-black text-pe-dark">
+              PolicyEngine: {ex.truth}
+            </p>
+            <p className="text-sm font-bold" style={{ color: tone }}>
+              {ex.verdict}
+            </p>
+            {ex.why && (
+              <p className="mt-0.5 text-xs font-medium text-gray-500">
+                {ex.why}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function WebinarSlide({ children }: { children: ReactNode }) {
   return (
@@ -200,6 +282,56 @@ export function QuestionSlide() {
       <div className="mt-auto border-t border-slate-200 pt-6">
         <p className="text-2xl font-black leading-snug tracking-normal text-pe-dark">
           A real answer needs the exact number — not a close one.
+        </p>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function GuessSlide() {
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="Spot the error"
+        title="One of these is right. One isn’t."
+        body="We gave GPT-5.5 — the model behind ChatGPT — two households and asked for their 2026 federal income tax. No tools, just the prompt. One answer is exact to the dollar. The other is way off."
+      />
+      <div className="flex min-h-0 flex-1 items-center">
+        <div className="grid w-full min-w-0 grid-cols-2 gap-6">
+          {CHAT_EXAMPLES.map((ex) => (
+            <ChatCard key={ex.tag} ex={ex} revealed={false} />
+          ))}
+        </div>
+      </div>
+      <div className="border-t border-slate-200 pt-5">
+        <p className="text-2xl font-black tracking-normal text-pe-dark">
+          Can you guess which?
+        </p>
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function RevealSlide() {
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="The reveal"
+        title="Same model, same confidence — only one is right."
+      />
+      <div className="flex min-h-0 flex-1 items-center">
+        <div className="grid w-full min-w-0 grid-cols-2 gap-6">
+          {CHAT_EXAMPLES.map((ex) => (
+            <ChatCard key={ex.tag} ex={ex} revealed={true} />
+          ))}
+        </div>
+      </div>
+      <div className="border-t border-slate-200 pt-5">
+        <p className="text-2xl font-black leading-snug tracking-normal text-pe-dark">
+          Nothing in the answer tells you which to trust —{" "}
+          <span className="text-pe-teal">
+            so we measured how often each model is right.
+          </span>
         </p>
       </div>
     </WebinarSlide>

@@ -2,6 +2,8 @@ import { SlideshowConfig } from "@/lib/types";
 import { speakers } from "@/lib/speakers";
 import {
   CoverSlide,
+  GuessSlide,
+  RevealSlide,
   QuestionSlide,
   SetupSlide,
   LeaderboardSlide,
@@ -13,6 +15,8 @@ import {
   NextSlide,
   EndSlide,
 } from "./slides";
+import WhatIsPESlide from "@/slideshows/civic-builders-2026/slides/WhatIsPESlide";
+import WhoUsesItSlide from "@/slideshows/cbo-2026/slides/WhoUsesItSlide";
 
 export const policybenchWebinarConfig: SlideshowConfig = {
   id: "policybench-webinar",
@@ -24,11 +28,15 @@ export const policybenchWebinarConfig: SlideshowConfig = {
   speakers: [speakers["max-ghenis"]],
   slides: [
     CoverSlide,
+    GuessSlide,
+    RevealSlide,
     QuestionSlide,
     SetupSlide,
     LeaderboardSlide,
     BreakdownSlide,
     ThesisSlide,
+    WhatIsPESlide,
+    WhoUsesItSlide,
     CredibilitySlide,
     DemoSlide,
     OpenSlide,
