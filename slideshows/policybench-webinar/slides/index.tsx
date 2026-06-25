@@ -5,18 +5,29 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
+  IconAdjustments,
   IconBuildingBank,
   IconChecks,
+  IconChevronRight,
   IconCircleCheckFilled,
   IconCircleXFilled,
+  IconFileText,
+  IconGauge,
   IconListSearch,
   IconLock,
   IconRobot,
   IconScale,
   IconSparkles,
+  IconUsersGroup,
   IconWorld,
+  IconWorldSearch,
 } from "@tabler/icons-react";
-import type { ComponentType, CSSProperties, ReactNode } from "react";
+import {
+  Fragment,
+  type ComponentType,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 
 const colors = {
   teal: "var(--pe-teal)",
@@ -58,12 +69,19 @@ const BREAKDOWN = [
 // Real GPT-5.5 answers from the June 2026 run, scored against PolicyEngine.
 // Both are "federal income tax before refundable credits" for a married couple.
 // A: OH, ~$95k (wages + pension) — exact. B: OK, two kids, ~$92k — off by $2,223
-// (GPT used the old $2,000-per-child credit and missed 2026's overtime deduction).
+// (GPT used the old $2,000-per-child credit and missed the overtime deduction).
 const CHAT_EXAMPLES = [
   {
     tag: "Household A",
-    household: "Ohio · married, filing jointly · ~$95k (wages + a pension)",
-    question: "What’s their 2026 federal income tax?",
+    household: "Ohio · married filing jointly · 2 adults · no children",
+    facts: [
+      "$62,725 wages + $32,200 taxable pension = $94,925 AGI",
+      "Head age 61, spouse age 57; both have employer-sponsored insurance",
+      "Spouse is hourly at $19/hour, 40 usual hours/week",
+      "No listed child, education, or other nonrefundable credits",
+    ],
+    question:
+      "Output: federal income tax after nonrefundable credits, before refundable credits.",
     answer: "$7,031",
     truth: "$7,031",
     correct: true,
@@ -72,13 +90,21 @@ const CHAT_EXAMPLES = [
   },
   {
     tag: "Household B",
-    household: "Oklahoma · married, two kids · ~$92k earned",
-    question: "What’s their 2026 federal income tax?",
+    household: "Oklahoma · married filing jointly · 2 adults · 2 children",
+    facts: [
+      "$92,000 wages + $3 taxable interest = $92,003 AGI",
+      "Children are ages 10 and 9; both qualify for child-related tax rules",
+      "Head is hourly at $27/hour, 65 usual hours/week",
+      "$14,839 FLSA overtime premium listed in the prompt",
+      "$12,415 mortgage interest + $8,464 real estate taxes listed",
+    ],
+    question:
+      "Output: federal income tax after nonrefundable credits, before refundable credits.",
     answer: "$2,723",
     truth: "$500",
     correct: false,
     verdict: "Off by $2,223",
-    why: "Old $2,000 child credit, missed a 2026 deduction",
+    why: "Used $2,000 child credits and omitted the overtime deduction",
   },
 ];
 
@@ -103,12 +129,23 @@ function ChatCard({
           {ex.tag}
         </span>
       </div>
-      <p className="mt-3 text-sm font-semibold text-gray-500">{ex.household}</p>
-      <div className="mt-4 max-w-[90%] self-end rounded-2xl rounded-br-sm bg-slate-100 px-4 py-2 text-base text-gray-700">
+      <p className="mt-3 text-sm font-black text-gray-600">{ex.household}</p>
+      <ul className="mt-3 space-y-1.5 text-sm font-medium leading-snug text-gray-600">
+        {ex.facts.map((fact) => (
+          <li key={fact} className="flex gap-2">
+            <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-pe-teal" />
+            <span>{fact}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-4 max-w-[95%] self-end rounded-2xl rounded-br-sm bg-slate-100 px-4 py-2 text-sm font-semibold leading-snug text-gray-700">
         {ex.question}
       </div>
       <div className="mt-3 self-start rounded-2xl rounded-bl-sm border border-slate-200 bg-white px-5 py-3">
-        <span className="font-mono text-4xl font-black tabular-nums text-pe-dark">
+        <p className="mb-1 text-xs font-bold uppercase tracking-widest text-gray-400">
+          GPT-5.5
+        </p>
+        <span className="font-mono text-3xl font-black tabular-nums text-pe-dark">
           {ex.answer}
         </span>
       </div>
@@ -303,11 +340,6 @@ export function GuessSlide() {
           ))}
         </div>
       </div>
-      <div className="border-t border-slate-200 pt-5">
-        <p className="text-2xl font-black tracking-normal text-pe-dark">
-          Can you guess which?
-        </p>
-      </div>
     </WebinarSlide>
   );
 }
@@ -315,24 +347,13 @@ export function GuessSlide() {
 export function RevealSlide() {
   return (
     <WebinarSlide>
-      <Header
-        eyebrow="The reveal"
-        title="Same model, same confidence — only one is right."
-      />
+      <Header eyebrow="The reveal" title="Same model. Only one is right." />
       <div className="flex min-h-0 flex-1 items-center">
         <div className="grid w-full min-w-0 grid-cols-2 gap-6">
           {CHAT_EXAMPLES.map((ex) => (
             <ChatCard key={ex.tag} ex={ex} revealed={true} />
           ))}
         </div>
-      </div>
-      <div className="border-t border-slate-200 pt-5">
-        <p className="text-2xl font-black leading-snug tracking-normal text-pe-dark">
-          Nothing in the answer tells you which to trust —{" "}
-          <span className="text-pe-teal">
-            so we measured how often each model is right.
-          </span>
-        </p>
       </div>
     </WebinarSlide>
   );
@@ -351,6 +372,112 @@ export function SetupSlide() {
         <Stat value="100" label="US households" />
         <Stat value="18" label="Tax & benefit outputs" />
         <Stat value="0" label="Tools" />
+      </div>
+    </WebinarSlide>
+  );
+}
+
+const METHOD_STEPS = [
+  {
+    icon: IconUsersGroup,
+    n: "1",
+    label: "Sample households",
+    desc: "Representative US households drawn from PolicyEngine’s microdata.",
+    tone: colors.teal,
+  },
+  {
+    icon: IconFileText,
+    n: "2",
+    label: "Build the prompt",
+    desc: "Each household’s attributes become one natural-language prompt.",
+    tone: colors.teal,
+  },
+  {
+    icon: IconScale,
+    n: "3",
+    label: "Score vs PolicyEngine",
+    desc: "The model returns every output at once; we grade each to the dollar.",
+    tone: colors.teal,
+  },
+  {
+    icon: IconListSearch,
+    n: "4",
+    label: "Audit the misses",
+    desc: "A second model diagnoses each difference — and confirms PolicyEngine, not the model, is right.",
+    tone: colors.amber,
+  },
+  {
+    icon: IconAdjustments,
+    n: "5",
+    label: "Weight & aggregate",
+    desc: "Results reweighted several ways for the final leaderboard.",
+    tone: colors.dark,
+  },
+];
+
+function FlowStep({
+  icon: Icon,
+  n,
+  label,
+  desc,
+  tone,
+}: {
+  icon: ComponentType<{
+    className?: string;
+    stroke?: number;
+    style?: CSSProperties;
+  }>;
+  n: string;
+  label: string;
+  desc: string;
+  tone: string;
+}) {
+  return (
+    <div className="flex flex-1 flex-col items-center text-center">
+      <div
+        className="relative mb-3 flex h-16 w-16 items-center justify-center rounded-2xl"
+        style={{ backgroundColor: `${tone}14` }}
+      >
+        <Icon className="h-8 w-8" style={{ color: tone }} stroke={1.8} />
+        <span
+          className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-black text-white"
+          style={{ backgroundColor: tone }}
+        >
+          {n}
+        </span>
+      </div>
+      <h3 className="text-base font-black leading-tight tracking-normal text-pe-dark">
+        {label}
+      </h3>
+      <p className="mt-1.5 text-xs font-medium leading-snug text-gray-500">
+        {desc}
+      </p>
+    </div>
+  );
+}
+
+export function MethodFlowSlide() {
+  return (
+    <WebinarSlide>
+      <Header
+        eyebrow="How it works"
+        title="From a microdata household to a scored leaderboard."
+        body="One comprehensive prompt per household, graded against PolicyEngine — with a second model auditing every difference."
+      />
+      <div className="flex min-h-0 flex-1 items-center">
+        <div className="flex w-full items-start justify-between gap-1">
+          {METHOD_STEPS.map((s, i) => (
+            <Fragment key={s.label}>
+              <FlowStep {...s} />
+              {i < METHOD_STEPS.length - 1 && (
+                <IconChevronRight
+                  className="mt-5 h-7 w-7 shrink-0 self-start text-slate-300"
+                  stroke={2}
+                />
+              )}
+            </Fragment>
+          ))}
+        </div>
       </div>
     </WebinarSlide>
   );
@@ -386,7 +513,7 @@ export function BreakdownSlide() {
       <Header
         eyebrow="Where they break"
         title="Models nail eligibility, but miss the math."
-        body="Multi-step dollar calculations — income tax especially — are far harder than a yes/no eligibility decision. Best-model exact-match rate by output type:"
+        body="Multi-step dollar calculations — income tax especially — are far harder than a yes/no eligibility decision. Overall exact-match rate by output type:"
       />
       <div className="mt-4 flex min-h-0 flex-1 flex-col justify-center gap-5">
         {BREAKDOWN.map((p) => (
@@ -538,28 +665,67 @@ export function OpenSlide() {
 export function NextSlide() {
   const cards = [
     {
-      title: "A protected held-out set",
-      body: "Today’s public benchmark exposes its prompts, so a held-out split will measure models without leakage.",
-      icon: IconLock,
+      title: "More households and programs",
+      body: "Scale from 100 households to thousands, across every program PolicyEngine models — down to state-level policies.",
+      icon: IconUsersGroup,
       tone: colors.teal,
+    },
+    {
+      title: "Web and tool use",
+      body: "Let models search and use tools, not just reason from the prompt — does looking up the rules close the gap?",
+      icon: IconWorldSearch,
+      tone: colors.amber,
+    },
+    {
+      title: "A protected held-out set",
+      body: "Today’s prompts are public; a held-out split will measure models without leakage.",
+      icon: IconLock,
+      tone: colors.dark,
+    },
+  ];
+  return (
+    <WebinarSlide>
+      <Header eyebrow="What’s next" title="Broaden the benchmark." />
+      <div className="grid min-w-0 grid-cols-3 gap-5">
+        {cards.map((c) => (
+          <Card
+            key={c.title}
+            title={c.title}
+            body={c.body}
+            tone={c.tone}
+            icon={c.icon}
+          />
+        ))}
+      </div>
+    </WebinarSlide>
+  );
+}
+
+export function AgentPathSlide() {
+  const cards = [
+    {
+      title: "PolicyEngine as a tool",
+      body: "Give models the PolicyEngine function to call. Early tests hit 100% accuracy — the engine does the math.",
+      icon: IconRobot,
+      tone: colors.teal,
+    },
+    {
+      title: "Then it’s cost and latency",
+      body: "With the engine, accuracy is solved — so the benchmark shifts to the price and speed of the agent-plus-tool path.",
+      icon: IconGauge,
+      tone: colors.amber,
     },
     {
       title: "More countries",
       body: "The UK is already live; the same harness extends to every system PolicyEngine models.",
       icon: IconWorld,
-      tone: colors.amber,
-    },
-    {
-      title: "Agents that call the engine",
-      body: "The interesting frontier is not the model alone — it is the model wired to a deterministic calculator.",
-      icon: IconRobot,
       tone: colors.dark,
     },
   ];
   return (
     <WebinarSlide>
       <Header
-        eyebrow="What’s next"
+        eyebrow="The frontier"
         title="From a leaderboard to a reference for AI on policy."
       />
       <div className="grid min-w-0 grid-cols-3 gap-5">

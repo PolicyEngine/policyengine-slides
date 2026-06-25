@@ -6,6 +6,7 @@ import {
   RevealSlide,
   QuestionSlide,
   SetupSlide,
+  MethodFlowSlide,
   LeaderboardSlide,
   BreakdownSlide,
   ThesisSlide,
@@ -13,6 +14,7 @@ import {
   DemoSlide,
   OpenSlide,
   NextSlide,
+  AgentPathSlide,
   EndSlide,
 } from "./slides";
 import WhatIsPESlide from "@/slideshows/civic-builders-2026/slides/WhatIsPESlide";
@@ -32,6 +34,7 @@ export const policybenchWebinarConfig: SlideshowConfig = {
     RevealSlide,
     QuestionSlide,
     SetupSlide,
+    MethodFlowSlide,
     LeaderboardSlide,
     BreakdownSlide,
     ThesisSlide,
@@ -41,6 +44,7 @@ export const policybenchWebinarConfig: SlideshowConfig = {
     DemoSlide,
     OpenSlide,
     NextSlide,
+    AgentPathSlide,
     EndSlide,
   ],
 };
