@@ -148,7 +148,10 @@ async function main() {
     // 3. Open slideshow
     const url = `http://localhost:${port}/slides/${id}`;
     console.log(`Opening ${url}`);
-    browser = await puppeteer.launch({ headless: true });
+    browser = await puppeteer.launch({
+      headless: true,
+      protocolTimeout: 60_000,
+    });
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080 });
     await page.goto(url, { waitUntil: "networkidle0", timeout: 30_000 });
@@ -191,10 +194,27 @@ async function main() {
         // several forecast cells) need a few seconds to finish rendering.
         await new Promise((r) => setTimeout(r, 5000));
       }
-      await fixImages(page);
-      await hideNav(page);
-      await new Promise((r) => setTimeout(r, 200));
-      const shot = await page.screenshot({ type: "png", encoding: "base64" });
+      // The fixImages/screenshot CDP calls intermittently throw a transient
+      // "detached Frame" or "captureScreenshot timed out" mid-transition.
+      // Retry the (post-advance) capture so one flake doesn't kill the export.
+      let shot;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          await fixImages(page);
+          await hideNav(page);
+          await new Promise((r) => setTimeout(r, 200));
+          shot = await page.screenshot({ type: "png", encoding: "base64" });
+          break;
+        } catch (err) {
+          if (attempt === 3) throw err;
+          console.log(
+            `  step ${i} capture attempt ${attempt} failed (${
+              err.message.split("\n")[0]
+            }); retrying...`,
+          );
+          await new Promise((r) => setTimeout(r, 1500));
+        }
+      }
       screenshots.push(shot);
     }
 
