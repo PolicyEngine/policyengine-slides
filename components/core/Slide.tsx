@@ -62,14 +62,29 @@ export default function Slide({
 
       {showFooter && !isCover && !isEnd && (
         <div className="absolute bottom-0 left-0 right-0 h-20 gradient-footer flex items-center justify-between px-16">
-          <Image
-            src="/logos/white.svg"
-            alt="PolicyEngine"
-            width={180}
-            height={50}
-            className="opacity-90"
-            style={{ height: 'auto' }}
-          />
+          <div className="flex items-center gap-5">
+            <Image
+              src="/logos/white.svg"
+              alt="PolicyEngine"
+              width={180}
+              height={50}
+              className="opacity-90"
+              style={{ height: 'auto' }}
+            />
+            {ctx?.partnerLogo && (
+              <>
+                <span className="h-7 w-px bg-white/25" aria-hidden="true" />
+                <Image
+                  src={ctx.partnerLogo.src}
+                  alt={ctx.partnerLogo.alt}
+                  width={1180}
+                  height={440}
+                  className="opacity-90"
+                  style={{ height: '40px', width: 'auto' }}
+                />
+              </>
+            )}
+          </div>
           {resolvedFooterText && (
             <div className="text-white text-sm opacity-90 font-medium">
               {resolvedFooterText}

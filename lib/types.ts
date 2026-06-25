@@ -35,6 +35,8 @@ export interface SlideshowConfig {
   date: string;
   location?: string;
   footerText?: string;
+  /** Optional co-brand wordmark shown next to the PolicyEngine logo in the footer. */
+  partnerLogo?: { src: string; alt: string };
   speakers?: SpeakerInfo[];
   private?: boolean;
   slides: SlideConfig[];

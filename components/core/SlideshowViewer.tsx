@@ -81,6 +81,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
     date: config.date,
     location: config.location,
     footerText,
+    partnerLogo: config.partnerLogo,
     currentSlide: currentStepData?.slideIndex ?? 0,
     buildStep: currentStepData?.buildStep ?? 1,
     totalSteps,
