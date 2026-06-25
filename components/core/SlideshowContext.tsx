@@ -8,6 +8,7 @@ export interface SlideshowContextValue {
   date: string;
   location?: string;
   footerText: string;
+  partnerLogo?: { src: string; alt: string };
   currentSlide: number;
   buildStep: number;
   totalSteps: number;

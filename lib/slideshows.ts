@@ -17,8 +17,10 @@ import { cliffwatchWebinarConfig } from "@/slideshows/cliffwatch-webinar/config"
 import { cbo2026Config } from "@/slideshows/cbo-2026/config";
 import { civicBuilders2026Config } from "@/slideshows/civic-builders-2026/config";
 import { policybenchWebinarConfig } from "@/slideshows/policybench-webinar/config";
+import { aspenBenefits2026Config } from "@/slideshows/aspen-benefits-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  aspenBenefits2026Config,
   policybenchWebinarConfig,
   civicBuilders2026Config,
   cliffwatchWebinarConfig,
