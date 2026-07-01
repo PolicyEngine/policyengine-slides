@@ -669,9 +669,9 @@ export function ResultsArcRefitSlide() {
 
 export function GeographyAccuracySlide() {
   const rows = [
-    { level: "National", targets: "478", share: "19.94", loss: "6.18" },
-    { level: "State", targets: "7,815", share: "67.85", loss: "4.88" },
-    { level: "Congressional district", targets: "24,340", share: "12.21", loss: "9.07" },
+    { level: "National", targets: "478", objectiveWeightShare: "19.94", loss: "6.18" },
+    { level: "State", targets: "7,815", objectiveWeightShare: "67.85", loss: "4.88" },
+    { level: "Congressional district", targets: "24,340", objectiveWeightShare: "12.21", loss: "9.07" },
   ];
   return (
     <SlideFrame
@@ -685,7 +685,7 @@ export function GeographyAccuracySlide() {
         <div className="grid grid-cols-[1.8fr_1fr_1fr_1fr] bg-slate-50 px-6 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pe-dark">
           <div>Geographic level</div>
           <div className="text-right">Targets</div>
-          <div className="text-right">Share of total loss</div>
+          <div className="text-right">Objective weight share</div>
           <div className="text-right">Populace loss</div>
         </div>
         {rows.map((r) => (
@@ -695,7 +695,7 @@ export function GeographyAccuracySlide() {
           >
             <div className="font-semibold text-pe-dark">{r.level}</div>
             <div className="text-right tabular-nums">{r.targets}</div>
-            <div className="text-right tabular-nums text-slate-500">{r.share}%</div>
+            <div className="text-right tabular-nums text-slate-500">{r.objectiveWeightShare}%</div>
             <div className="text-right font-bold tabular-nums text-pe-teal">{r.loss}%</div>
           </div>
         ))}
