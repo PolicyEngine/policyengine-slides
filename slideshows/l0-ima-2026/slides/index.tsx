@@ -83,18 +83,48 @@ function SectionSlide({
 }: {
   section: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }) {
   return (
     <Slide className="bg-pe-light">
       <div className="flex h-full flex-col justify-center">
         <SlideTitle kicker={section}>{title}</SlideTitle>
-        <p className="max-w-4xl text-2xl leading-snug text-slate-600">
-          {subtitle}
-        </p>
+        {subtitle && (
+          <p className="max-w-4xl text-2xl leading-snug text-slate-600">
+            {subtitle}
+          </p>
+        )}
       </div>
     </Slide>
   );
+}
+
+/* ------------------------------------------------------------------ */
+/* Section dividers — title only, no body text                        */
+/* ------------------------------------------------------------------ */
+
+export function SectionModelSlide() {
+  return <SectionSlide section="Part 1" title="What PolicyEngine models" />;
+}
+
+export function SectionSupportSlide() {
+  return <SectionSlide section="Part 2" title="Constructing the support" />;
+}
+
+export function SectionCalibrationSlide() {
+  return <SectionSlide section="Part 3" title="Calibration" />;
+}
+
+export function SectionPruningSlide() {
+  return <SectionSlide section="Part 4" title="Simple pruning methods" />;
+}
+
+export function SectionL0Slide() {
+  return <SectionSlide section="Part 5" title="L0 regularization" />;
+}
+
+export function SectionNextStepsSlide() {
+  return <SectionSlide section="Part 6" title="Next steps" />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -148,8 +178,9 @@ export function PolicyGoalSlide() {
         <div>
           <p className="max-w-2xl text-2xl leading-snug text-slate-600">
             PolicyEngine runs live tax-and-benefit simulations in the United States and the
-            United Kingdom. Analysts ask the same reform question nationally, by state or region,
-            and by local constituency.
+            United Kingdom, encoding 80,000+ policy parameters across federal, state, and local
+            levels in the US, with the UK modeled in comparable detail. Analysts ask the same
+            reform question nationally, by state or region, and by local constituency.
           </p>
           <p className="mt-6 max-w-2xl text-xl leading-snug text-slate-500">
             Each answer needs microdata that represents that geography, not a national average
@@ -246,7 +277,7 @@ export function LedgerSlide() {
               "Ledger re-expresses published values; it never reconciles, ages, or imputes.",
             ]}
           />
-          <p className="mt-7 text-base text-slate-400">
+          <p className="mt-7 text-lg text-slate-400">
             Current run: 37,053 Ledger facts compile to 32,633 active targets, including 24,340
             congressional-district targets.
           </p>
@@ -354,38 +385,48 @@ export function SamplingQuestionSlide() {
 
 export function BaselinesSlide() {
   return (
-    <SlideFrame header={<SlideTitle kicker="Five completed arms">Where does selection enter the workflow?</SlideTitle>}>
-      <div className="grid grid-cols-5 gap-4">
-        <ContentCard title="Informed L0" accent="teal">
-          <p className="text-base leading-snug text-slate-600">
-            Hard-concrete gates select records and fit weights jointly.
-          </p>
-        </ContentCard>
-        <ContentCard title="L0 + refit" accent="teal">
-          <p className="text-base leading-snug text-slate-600">
-            Keep selected records, remove gates, and refit ordinary calibration weights.
-          </p>
-        </ContentCard>
-        <ContentCard title="Dense no-L0" accent="teal">
-          <p className="text-base leading-snug text-slate-600">
-            Fit ordinary calibration weights on the full candidate universe.
+    <SlideFrame header={<SlideTitle kicker="Baselines">Three simple ways to shrink the dataset</SlideTitle>}>
+      <div className="grid grid-cols-3 gap-5">
+        <ContentCard title="Full candidate dataset" accent="teal">
+          <p className="text-lg leading-snug text-slate-600">
+            Keep every record and fit ordinary calibration weights on the whole candidate universe —
+            the reference point, not a deployable budget.
           </p>
         </ContentCard>
         <ContentCard title="Random + reweight" accent="slate">
-          <p className="text-base leading-snug text-slate-600">
-            Draw a random subset first, then fit weights on that fixed subset.
+          <p className="text-lg leading-snug text-slate-600">
+            Draw a random subset to the record budget, then fit fresh calibration weights on that
+            fixed subset.
           </p>
         </ContentCard>
-        <ContentCard title="Dense sample" accent="amber">
-          <p className="text-base leading-snug text-slate-600">
-            Randomly keep dense calibrated weights and scale them back to total mass.
+        <ContentCard title="Random + rescale" accent="amber">
+          <p className="text-lg leading-snug text-slate-600">
+            Draw a random subset, keep its dense calibrated weights, and rescale them back to the
+            population total — no refit.
           </p>
         </ContentCard>
       </div>
+    </SlideFrame>
+  );
+}
 
-      <p className="mt-7 max-w-5xl text-xl leading-snug text-slate-500">
-        Targets and candidate universe stay fixed, so the comparison isolates where selection enters.
-      </p>
+export function L0ArmsSlide() {
+  return (
+    <SlideFrame header={<SlideTitle kicker="L0 arms">Two target-informed L0 selectors</SlideTitle>}>
+      <div className="grid grid-cols-2 gap-6">
+        <ContentCard title="L0" accent="teal">
+          <p className="text-xl leading-snug text-slate-600">
+            Hard-concrete gates select records and fit their weights jointly; the L0 penalty sets an
+            exact retained count. The gated weights are published directly.
+          </p>
+        </ContentCard>
+        <ContentCard title="L0 + refit" accent="teal">
+          <p className="text-xl leading-snug text-slate-600">
+            Keep the records L0 selected, drop the gates, and refit ordinary calibration weights on
+            that subset — selection from L0, weights from the shared calibrator.
+          </p>
+        </ContentCard>
+      </div>
     </SlideFrame>
   );
 }
@@ -424,10 +465,6 @@ export function TranslationSlide() {
       }
     >
       <TranslationTable />
-      <p className="mt-7 max-w-5xl text-xl leading-snug text-slate-500">
-        The same machinery that prunes a network prunes a microdataset: records replace weights, and
-        the retained-record count replaces the count of active weights.
-      </p>
     </SlideFrame>
   );
 }
@@ -437,20 +474,15 @@ export function L0MathSlide() {
     <SlideFrame
       header={
         <SlideTitle kicker="Our method · training objective">
-          L0 adds two terms to the calibration loss
+          L0 is the same loss, plus a penalty for keeping records
         </SlideTitle>
       }
     >
-      <div className="grid grid-cols-2 gap-8">
+      <div className="mx-auto w-full max-w-4xl">
         <EquationCard
           title="What the optimizer minimizes"
-          equation="\begin{aligned}\mathcal{L}(w,\alpha)=\;&\mathcal{L}_{\mathrm{cal}}(w\odot z)\\[2pt]&+\;\lambda_{L_0}\textstyle\sum_i \Pr(z_i\neq 0)\\[2pt]&+\;\lambda_{L_2}\,\tfrac{1}{n}\textstyle\sum_i\!\left(\tfrac{w_i}{w_{0,i}}\right)^{2}\end{aligned}"
-          note="The first term is the shared calibration loss, on gated weights. The L0 term prices open gates (λ_L0 sets the retained count via an outer bisection); the L2 term, with a hard weight cap, controls concentration."
-        />
-        <EquationCard
-          title="Estimate and publication"
-          equation="\hat{t}_j=\sum_i M_{ji}\,w_i\,z_i"
-          note="A record contributes only through its gate. At publication, gates are evaluated deterministically: the result is an ordinary sparse microdataset with calibrated positive weights."
+          equation="\mathcal{L}(w,\alpha)=\underbrace{\frac{\sum_j \omega_j\,\min\!\left(\left|\frac{\hat{t}_j-t_j}{s_j}\right|,\,c\right)}{\sum_j \omega_j}}_{\text{shared calibration loss}}\;+\;\lambda_{L_0}\textstyle\sum_i \Pr(z_i\neq 0)"
+          note="The first term is exactly the shared calibration loss, now on gated estimates — a record contributes only through its gate z_i. The added L0 term prices the expected number of kept records, and λ_L0 sets the retained count. At publication the gates are evaluated deterministically, giving an ordinary sparse dataset with calibrated positive weights."
         />
       </div>
     </SlideFrame>
@@ -465,22 +497,21 @@ export function ExperimentDesignSlide() {
   return (
     <SlideFrame
       header={
-        <SlideTitle kicker="Experiment design">
-          One frozen input, the full Populace target surface
+        <SlideTitle kicker="Calibration">
+          Calibrating at this scale needs gradient descent
         </SlideTitle>
       }
     >
-      <div className="grid grid-cols-4 gap-5">
-        <StatNumber value="337,704" label="households" sublabel="three-year ASEC support" />
-        <StatNumber value="5" label="method arms" sublabel="L0, dense, random baselines" />
-        <StatNumber value="57,240" label="retained" sublabel="matched record count" />
-        <StatNumber value="32,633" label="targets" sublabel="all fit and scored" />
+      <div className="grid grid-cols-2 gap-6">
+        <StatNumber value="337,704" label="candidate records" sublabel="three-year ASEC support, cloned" />
+        <StatNumber value="32,633" label="calibration targets" sublabel="nested national → state → district" />
       </div>
       <ContentCard className="mt-8" accent="teal">
         <p className="text-2xl leading-snug text-slate-700">
-          All methods share the candidate frame, Populace production loss, target weights, and
-          scoring path; only record selection differs. The headline experiment fits and scores the
-          full materialized surface, including validation and district targets.
+          Calibration finds a weight for every record so the weighted dataset reproduces every
+          published target. At this scale — hundreds of thousands of records against tens of
+          thousands of hierarchical targets — classical survey calibration does not fit, so we
+          minimize a single loss by gradient descent.
         </p>
       </ContentCard>
     </SlideFrame>
@@ -491,35 +522,36 @@ export function CalibrationObjectiveSlide() {
   return (
     <SlideFrame
       header={
-        <SlideTitle kicker="Experiment · shared objective">
-          All methods are scored by the same loss
+        <SlideTitle kicker="The loss">
+          The calibration loss, weighted by target
         </SlideTitle>
       }
     >
-      <div className="grid grid-cols-[1.15fr_0.85fr] items-center gap-10">
+      <div className="grid grid-cols-[1.05fr_0.95fr] items-center gap-10">
         <EquationCard
           title="The calibration loss: capped weighted MAPE"
           equation="\mathcal{L}_{\mathrm{cal}}(w)=\frac{\sum_j \omega_j\,\min\!\left(\left|\frac{\hat{t}_j-t_j}{s_j}\right|,\,c\right)}{\sum_j \omega_j}"
           note="Relative error puts count and dollar targets on one scale; the cap c limits any single hard-to-fit target. The reported runs use the production value c = 1."
         />
         <div>
-          <div className="mb-3 text-base font-bold uppercase tracking-[0.16em] text-pe-teal">
-            Held fixed across every method
+          <div className="mb-4 text-base font-bold uppercase tracking-[0.16em] text-pe-teal">
+            How the target weights ω are set
           </div>
-          <div className="space-y-2.5">
-            {["Informed L0", "L0 + refit", "Dense no-L0", "Random + reweight", "Dense sample, scaled"].map((m) => (
-              <div
-                key={m}
-                className="rounded-md border border-slate-200 bg-slate-50 px-4 py-2.5 text-lg font-medium text-pe-dark"
-              >
-                {m}
+          <div className="space-y-3">
+            {[
+              "Each target joins a count basis (indicators, enrollment, recipients, return counts) or an amount basis (dollar totals).",
+              "Within a basis, weight ∝ √|target| — larger aggregates count more, but sublinearly — then normalized to mean one.",
+              "The two bases are rescaled to contribute equal total weight, so dollar cells do not swamp the count targets.",
+              "A final step sets the mean weight to one; only the relative weights enter the loss.",
+            ].map((t, i) => (
+              <div key={i} className="flex gap-3 text-lg leading-snug text-slate-600">
+                <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-pe-teal/10 text-sm font-bold text-pe-teal">
+                  {i + 1}
+                </span>
+                <span>{t}</span>
               </div>
             ))}
           </div>
-          <p className="mt-5 text-lg leading-snug text-slate-500">
-            Same targets, same loss, same weight bounds. Only the sampler changes, so the comparison
-            isolates selection.
-          </p>
         </div>
       </div>
     </SlideFrame>
@@ -534,23 +566,23 @@ export function ResultsArcBaselinesSlide() {
     <SlideFrame
       header={
         <SlideTitle kicker="Main result · where we start">
-          Two reference points before we prune cleverly
+          Keeping everything, versus a naive rescale
         </SlideTitle>
       }
     >
       <div className="grid h-full grid-cols-[0.78fr_1.22fr] items-center gap-10">
         <div>
           <p className="text-2xl leading-snug text-slate-600">
-            Keep every record and calibrate (dense no-L0) and you reach 5.07% on the full Populace
-            surface. Naively prune to 57,240 at random and refit weights on that subset, and you get
-            7.55%.
+            Keep every record and calibrate — the full candidate dataset — and you reach 5.07% on the
+            full Populace surface. It uses all 337,704 records, so it is a reference, not a deployable
+            budget.
           </p>
           <p className="mt-6 text-xl leading-snug text-slate-500">
-            Dense uses all 337,704 records, so it is a reference, not a deployable budget. The question
-            is how close a 57,240-record file can get.
+            Take a random 57,240-record sample, keep its dense weights, and just rescale them to the
+            population total with no refit, and the loss is 24.24%.
           </p>
         </div>
-        <LossBars revealed={["dense_full", "random_reweight"]} />
+        <LossBars revealed={["full", "rescale"]} />
       </div>
     </SlideFrame>
   );
@@ -560,23 +592,23 @@ export function ResultsArcScaledSlide() {
   return (
     <SlideFrame
       header={
-        <SlideTitle kicker="Main result · skip the reweighting?">
-          The reweighting was doing the work
+        <SlideTitle kicker="Main result · the reweighting">
+          Refitting the random sample does the work
         </SlideTitle>
       }
     >
       <div className="grid h-full grid-cols-[0.78fr_1.22fr] items-center gap-10">
         <div>
           <p className="text-2xl leading-snug text-slate-600">
-            Take the same random sample but keep the dense weights and just rescale them to the
-            population total, with no refit. Loss jumps to 24.24%.
+            Take the same random 57,240-record sample, but this time refit calibration weights on it.
+            The loss drops from 24.24% to 7.55%.
           </p>
           <p className="mt-6 text-xl leading-snug text-slate-500">
-            So the gain from random + reweight came from re-fitting the weights on the retained subset,
-            not from the sample itself.
+            So the gain came from re-fitting the weights on the retained subset, not from the random
+            sample itself.
           </p>
         </div>
-        <LossBars revealed={["dense_full", "random_reweight", "dense_scaled"]} />
+        <LossBars revealed={["full", "rescale", "reweight"]} />
       </div>
     </SlideFrame>
   );
@@ -586,7 +618,7 @@ export function ResultsArcL0Slide() {
   return (
     <SlideFrame
       header={
-        <SlideTitle kicker="Main result · the informed selector: L0">
+        <SlideTitle kicker="Main result · L0 alone">
           A target-informed selector &mdash; yet it underperforms
         </SlideTitle>
       }
@@ -594,16 +626,15 @@ export function ResultsArcL0Slide() {
       <div className="grid h-full grid-cols-[0.78fr_1.22fr] items-center gap-10">
         <div>
           <p className="text-2xl leading-snug text-slate-600">
-            Informed L0 chooses the 57,240 records jointly with their gated weights. It should beat a
-            blind random sample. But the raw gated weights score 9.86% &mdash; worse than random +
-            reweight.
+            L0 chooses the 57,240 records jointly with their gated weights. It should beat a blind
+            random sample &mdash; but the raw gated weights score 9.86%, worse than random + reweight.
           </p>
           <p className="mt-6 text-xl leading-snug text-slate-500">
             The gates select the support well, but the gated weights they return are not publication
             weights.
           </p>
         </div>
-        <LossBars revealed={["dense_full", "random_reweight", "dense_scaled", "l0_gated"]} />
+        <LossBars revealed={["full", "rescale", "reweight", "l0"]} />
       </div>
     </SlideFrame>
   );
@@ -613,7 +644,7 @@ export function ResultsArcRefitSlide() {
   return (
     <SlideFrame
       header={
-        <SlideTitle kicker="Main result · refit once more">
+        <SlideTitle kicker="Main result · L0 + refit">
           Refit the selected records and L0 wins
         </SlideTitle>
       }
@@ -622,15 +653,15 @@ export function ResultsArcRefitSlide() {
         <div>
           <p className="text-2xl leading-snug text-slate-600">
             Keep the records the gates chose, drop the gates, and refit ordinary calibration weights on
-            that subset. Loss drops to 4.74% &mdash; below dense no-L0&rsquo;s 5.07%, and well below every
-            sampling baseline.
+            that subset. Loss drops to 4.74% &mdash; below the full candidate dataset&rsquo;s 5.07%, and
+            well below every sampling baseline.
           </p>
           <p className="mt-6 text-xl leading-snug text-slate-500">
             L0&rsquo;s value is <span className="font-bold text-pe-dark">support selection</span>,
-            realized only after the post-selection refit.
+            realized only after one more calibration pass.
           </p>
         </div>
-        <LossBars revealed={["dense_full", "random_reweight", "dense_scaled", "l0_gated", "l0_refit"]} />
+        <LossBars revealed={["full", "rescale", "reweight", "l0", "l0_refit"]} />
       </div>
     </SlideFrame>
   );
@@ -638,45 +669,36 @@ export function ResultsArcRefitSlide() {
 
 export function GeographyAccuracySlide() {
   const rows = [
-    { level: "National", targets: "478", median: "1.30", mean: "20.12", max: "557" },
-    { level: "State", targets: "7,815", median: "0.31", mean: "86.36", max: "122,712" },
-    { level: "Congressional district", targets: "24,340", median: "1.48", mean: "85.29", max: "162,496" },
+    { level: "National", targets: "478", share: "19.94", loss: "6.18" },
+    { level: "State", targets: "7,815", share: "67.85", loss: "4.88" },
+    { level: "Congressional district", targets: "24,340", share: "12.21", loss: "9.07" },
   ];
   return (
     <SlideFrame
       header={
         <SlideTitle kicker="Main result · by geography">
-          The refit fit holds at every geographic level
+          The fit holds at every geographic level
         </SlideTitle>
       }
     >
       <div className="overflow-hidden rounded-lg border border-slate-200">
-        <div className="grid grid-cols-[1.6fr_1fr_1fr_1fr_1fr] bg-slate-50 px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-pe-dark">
+        <div className="grid grid-cols-[1.8fr_1fr_1fr_1fr] bg-slate-50 px-6 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pe-dark">
           <div>Geographic level</div>
           <div className="text-right">Targets</div>
-          <div className="text-right">Median ARE</div>
-          <div className="text-right">Mean ARE</div>
-          <div className="text-right">Max ARE</div>
+          <div className="text-right">Share of total loss</div>
+          <div className="text-right">Populace loss</div>
         </div>
         {rows.map((r) => (
           <div
             key={r.level}
-            className="grid grid-cols-[1.6fr_1fr_1fr_1fr_1fr] border-t border-slate-100 px-6 py-3 text-lg text-slate-700"
+            className="grid grid-cols-[1.8fr_1fr_1fr_1fr] border-t border-slate-100 px-6 py-4 text-xl text-slate-700"
           >
             <div className="font-semibold text-pe-dark">{r.level}</div>
             <div className="text-right tabular-nums">{r.targets}</div>
-            <div className="text-right font-bold tabular-nums text-pe-teal">{r.median}%</div>
-            <div className="text-right tabular-nums text-slate-500">{r.mean}%</div>
-            <div className="text-right tabular-nums text-slate-500">{r.max}%</div>
+            <div className="text-right tabular-nums text-slate-500">{r.share}%</div>
+            <div className="text-right font-bold tabular-nums text-pe-teal">{r.loss}%</div>
           </div>
         ))}
-        <div className="grid grid-cols-[1.6fr_1fr_1fr_1fr_1fr] border-t-2 border-slate-200 bg-pe-light/40 px-6 py-3 text-lg font-bold text-pe-dark">
-          <div>All scored targets</div>
-          <div className="text-right tabular-nums">32,633</div>
-          <div className="text-right tabular-nums text-pe-teal">0.89%</div>
-          <div className="text-right tabular-nums">84.64%</div>
-          <div className="text-right tabular-nums">162,496%</div>
-        </div>
       </div>
     </SlideFrame>
   );
@@ -746,25 +768,43 @@ export function FutureWorkSlide() {
         </ContentCard>
         <ContentCard title="Contrast penalty designs" accent="teal">
           <p className="text-lg leading-snug text-slate-600">
-            Compare the L0 penalty against an{" "}
-            <span className="font-bold text-pe-dark">L1 penalty</span> as an alternative
-            sparsity-inducing selector, and sweep the{" "}
-            <span className="font-bold text-pe-dark">
+            Sweep the
               &lambda;<sub>L2</sub> penalty and weight cap against &lambda;<sub>L0</sub>
-            </span>{" "}
             to trace the accuracy&ndash;concentration trade-off.
           </p>
         </ContentCard>
         <ContentCard title="Complete the comparator set" accent="amber">
           <p className="text-lg leading-snug text-slate-600">
-            Add PPS survey-weight sampling, categorical-margin raking panels, and longer dense
-            convergence checks under the same Populace loss.
+            Ensure robustness comparing against other calibration approaches (eg. IPF, combinatorial optimization)
+            on tractable subsets of the calibration problem where their assumptions hold.
           </p>
         </ContentCard>
         <ContentCard title="Targeted robustness" accent="slate">
           <p className="text-lg leading-snug text-slate-600">
             Keep family holdouts separate from the headline fit; use them to test robustness, not as the
             production objective.
+          </p>
+        </ContentCard>
+      </div>
+    </SlideFrame>
+  );
+}
+
+export function PlatformFutureWorkSlide() {
+  return (
+    <SlideFrame header={<SlideTitle kicker="Future work">Where production-ready microdata takes PolicyEngine</SlideTitle>}>
+      <div className="grid grid-cols-2 gap-6">
+        <ContentCard title="Even more granular calibration and analysis" accent="teal">
+          <p className="text-xl leading-snug text-slate-600">
+            Push calibration below the current surface now that a sparse, deployable 
+            file can carry that much geographic detail. The immidiate next level is state
+            legislative districs.
+          </p>
+        </ContentCard>
+        <ContentCard title="Populace as a multi-country platform" accent="teal">
+          <p className="text-xl leading-snug text-slate-600">
+            Make Populace a platform that expands easily to build calibrated microdata for many 
+            other countries, reusing the same frame, calibration, and pruning pipeline.
           </p>
         </ContentCard>
       </div>

@@ -136,14 +136,14 @@ function FormatCard({
   const ring = accent === "teal" ? "border-pe-teal" : "border-slate-300";
   const dot = accent === "teal" ? "bg-pe-teal" : "bg-slate-400";
   return (
-    <div className={`flex flex-col rounded-lg border-2 ${ring} bg-white p-6 shadow-sm`}>
+    <div className={`flex flex-col rounded-lg border-2 ${ring} bg-white p-8 shadow-sm`}>
       <div className="mb-3 flex items-center gap-3">
         <span className={`h-3 w-3 rounded-full ${dot}`} />
         <span className="text-2xl font-extrabold text-pe-dark">{format}</span>
       </div>
-      <p className="mb-4 text-base leading-snug text-slate-600">{tagline}</p>
+      <p className="mb-6 text-lg leading-snug text-slate-600">{tagline}</p>
       {children}
-      <p className="mt-4 text-sm leading-snug text-slate-500">{footer}</p>
+      <p className="mt-6 text-base leading-snug text-slate-500">{footer}</p>
     </div>
   );
 }
