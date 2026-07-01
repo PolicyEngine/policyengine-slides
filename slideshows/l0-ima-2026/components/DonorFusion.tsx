@@ -16,7 +16,7 @@ export default function DonorFusion({ className = "" }: DonorFusionProps) {
     <div className={`rounded-lg border border-slate-200 bg-white p-7 shadow-sm ${className}`}>
       {/* Survey spine */}
       <div className="rounded-lg border-2 border-pe-teal bg-pe-light/60 px-5 py-4">
-        <div className="text-xl font-extrabold text-pe-dark">CPS ASEC spine · 3 years pooled &amp; aged · doubled</div>
+        <div className="text-xl font-extrabold text-pe-dark">CPS ASEC spine · 3 years pooled &amp; aged · doubled side imputed with tax records</div>
         <div className="mt-1 text-base text-slate-600">
           three CPS ASEC vintages aged to one period — more households &amp; variability, same survey design
         </div>

@@ -288,6 +288,58 @@ export function LedgerSlide() {
   );
 }
 
+export function TargetSurfaceSlide() {
+  const rows = [
+    { family: "IRS Statistics of Income", code: "irs_soi", geo: "National, state, district", targets: "31,350" },
+    { family: "Census population estimates", code: "census_pep", geo: "National, state", targets: "936" },
+    { family: "Medicaid and CHIP, CMS", code: "cms_medicaid", geo: "National, state", targets: "102" },
+    { family: "ACA marketplace, CMS", code: "cms_aca", geo: "State", targets: "102" },
+    { family: "SNAP, USDA", code: "usda_snap", geo: "National, state", targets: "52" },
+    { family: "State tax collections, Census STC", code: "census_stc", geo: "State", targets: "44" },
+    { family: "TANF, HHS ACF", code: "hhs_acf_tanf", geo: "National, state", targets: "30" },
+    { family: "Social Security supplement, SSA", code: "ssa_supplement", geo: "National", targets: "6" },
+    { family: "JCT tax expenditures", code: "jct", geo: "National", targets: "5" },
+    { family: "CBO revenue projections", code: "cbo", geo: "National", targets: "5" },
+    { family: "Medicare, CMS", code: "cms_medicare", geo: "National", targets: "1" },
+  ];
+  return (
+    <SlideFrame
+      header={
+        <SlideTitle kicker="Targets">The target surface, by source family</SlideTitle>
+      }
+    >
+      <div className="overflow-hidden rounded-lg border border-slate-200">
+        <div className="grid grid-cols-[2fr_1.2fr_0.6fr] bg-slate-50 px-6 py-2.5 text-sm font-bold uppercase tracking-[0.12em] text-pe-dark">
+          <div>Target family</div>
+          <div>Geographic level</div>
+          <div className="text-right">Targets</div>
+        </div>
+        {rows.map((r) => (
+          <div
+            key={r.code}
+            className="grid grid-cols-[2fr_1.2fr_0.6fr] items-baseline border-t border-slate-100 px-6 py-2.5 text-base text-slate-700"
+          >
+            <div>
+              <span className="font-semibold text-pe-dark">{r.family}</span>{" "}
+              <span className="font-mono text-xs text-slate-400">{r.code}</span>
+            </div>
+            <div className="text-slate-600">{r.geo}</div>
+            <div className="text-right font-medium tabular-nums">{r.targets}</div>
+          </div>
+        ))}
+        <div className="grid grid-cols-[2fr_1.2fr_0.6fr] border-t-2 border-slate-200 bg-pe-light/40 px-6 py-2.5 text-base font-bold text-pe-dark">
+          <div>Total</div>
+          <div />
+          <div className="text-right tabular-nums text-pe-teal">32,633</div>
+        </div>
+      </div>
+      <p className="mt-5 text-base text-slate-400">
+        24,340 congressional-district, 7,815 state, and 478 national targets across eleven source families.
+      </p>
+    </SlideFrame>
+  );
+}
+
 export function PopulaceValueSlide() {
   return (
     <SlideFrame header={<SlideTitle kicker="Populace">A population is a weighted sampling frame</SlideTitle>}>
@@ -657,7 +709,7 @@ export function ResultsArcRefitSlide() {
             well below every sampling baseline.
           </p>
           <p className="mt-6 text-xl leading-snug text-slate-500">
-            L0&rsquo;s value is <span className="font-bold text-pe-dark">support selection</span>,
+            L0&rsquo;s value is support selection,
             realized only after one more calibration pass.
           </p>
         </div>
@@ -823,5 +875,12 @@ export function TakeawaySlide() {
 }
 
 export function QuestionsSlide() {
-  return <EndSlide />;
+  return (
+    <EndSlide
+      qr={{
+        src: "/images/l0-ima-2026/qr-populace-l0.png",
+        caption: "Read the paper — populace.dev/papers/l0",
+      }}
+    />
+  );
 }

@@ -31,6 +31,7 @@ import {
   SectionPruningSlide,
   SectionSupportSlide,
   TakeawaySlide,
+  TargetSurfaceSlide,
   TitleSlide,
   WeightLayoutBothSlide,
   WeightLayoutWideSlide,
@@ -57,6 +58,7 @@ export const l0Ima2026Config: SlideshowConfig = {
     // § 2 · Constructing the support
     SectionSupportSlide,
     LedgerSlide,
+    TargetSurfaceSlide,
     PopulaceValueSlide,
     PipelineSlide,
     RepresentativenessSlide,

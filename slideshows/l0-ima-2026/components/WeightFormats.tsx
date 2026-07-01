@@ -29,7 +29,7 @@ export default function WeightFormats({ showLong = true, className = "" }: Weigh
         accent="slate"
         format="UK: Wide format"
         tagline="Each record carries one weight per subnational area."
-        footer="Weight columns for overlapping areas can disagree."
+        footer="Weight columns for overlapping areas can disagree. Local policy variation results introduce innacuracy in calculated values."
       >
         <table className="w-full border-collapse text-center text-lg">
           <thead>
