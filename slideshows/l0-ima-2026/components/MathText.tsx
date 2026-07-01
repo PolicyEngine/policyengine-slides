@@ -1,21 +1,11 @@
+import katex from "katex";
+
 interface MathTextProps {
+  /** LaTeX source. Rendered with KaTeX (throwOnError off, so bad input degrades gracefully). */
   tex: string;
+  /** Display math (block, centered) vs. inline math. */
   display?: boolean;
   className?: string;
-}
-
-function readableTex(tex: string): string {
-  return tex
-    .replace(/\\begin\{aligned\}/g, "")
-    .replace(/\\end\{aligned\}/g, "")
-    .replace(/\\\\\[2pt\]/g, "\n")
-    .replace(/\\\\/g, "\n")
-    .replace(/\\;/g, " ")
-    .replace(/\\,/g, " ")
-    .replace(/\\!/g, "")
-    .replace(/\\textstyle/g, "")
-    .replace(/\\tfrac/g, "\\frac")
-    .trim();
 }
 
 export default function MathText({
@@ -23,17 +13,25 @@ export default function MathText({
   display = false,
   className = "",
 }: MathTextProps) {
-  const text = readableTex(tex);
+  const html = katex.renderToString(tex, {
+    displayMode: display,
+    throwOnError: false,
+    strict: "ignore",
+  });
 
   if (display) {
     return (
-      <pre
-        className={`whitespace-pre-wrap break-words text-center font-mono leading-snug ${className}`}
-      >
-        {text}
-      </pre>
+      <div
+        className={`katex-fit max-w-full overflow-x-auto text-center ${className}`}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     );
   }
 
-  return <span className={`font-mono ${className}`}>{text}</span>;
+  return (
+    <span
+      className={className}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }

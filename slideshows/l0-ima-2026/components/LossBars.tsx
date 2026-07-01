@@ -13,12 +13,14 @@ interface Method {
 
 // Same bars, order and colours as the objective-frontier figure. Bars are
 // revealed in narrative order into these fixed, labelled slots.
+// Fixed left-to-right slots, revealed in narrative order: the three baselines
+// first, then the two L0 arms. Empty slots stay blank until their bar is revealed.
 const METHODS: Method[] = [
-  { key: "l0_gated", label: "L0 gated", loss: 9.86, color: "#6B7280" },
+  { key: "full", label: "Full candidate dataset", loss: 5.07, color: "#0F766E" },
+  { key: "rescale", label: "Random+rescale", loss: 24.24, color: "#F59E0B" },
+  { key: "reweight", label: "Random+reweight", loss: 7.55, color: "#64748B" },
+  { key: "l0", label: "L0", loss: 9.86, color: "#6B7280" },
   { key: "l0_refit", label: "L0 + refit", loss: 4.74, color: "#14B8A6" },
-  { key: "dense_full", label: "Dense full", loss: 5.07, color: "#0F766E" },
-  { key: "random_reweight", label: "Random + reweight", loss: 7.55, color: "#64748B" },
-  { key: "dense_scaled", label: "Dense sample scaled", loss: 24.24, color: "#F59E0B" },
 ];
 
 const TICKS = [0, 5, 10, 15, 20, 25];
@@ -100,37 +102,35 @@ export default function LossBars({ revealed, className = "" }: LossBarsProps) {
             </div>
           </div>
 
-          {/* x-axis tick marks: a short vertical line centred under each bar */}
+          {/* x-axis tick marks: a short vertical line centred under each
+              revealed bar only, so empty slots stay clean. */}
           <div className="flex">
             {METHODS.map((m) => (
               <div key={`tick-${m.key}`} className="flex flex-1 justify-center">
-                <div className="h-2 w-px bg-black" />
+                {revealed.includes(m.key) && <div className="h-2 w-px bg-black" />}
               </div>
             ))}
           </div>
 
           {/* x-axis labels: right end anchored at each bar centre, hanging
               down-left at 30deg so they never overlap the bars (matplotlib
-              rotation=30, ha='right'). */}
+              rotation=30, ha='right'). Only revealed bars are labelled. */}
           <div className="flex" style={{ height: 96 }}>
             {METHODS.map((m) => (
               <div key={m.key} className="relative flex-1">
-                <span
-                  className="absolute right-1/2 top-2 whitespace-nowrap text-sm text-black"
-                  style={{ transformOrigin: "top right", transform: "rotate(-30deg)" }}
-                >
-                  {m.label}
-                </span>
+                {revealed.includes(m.key) && (
+                  <span
+                    className="absolute right-1/2 top-2 whitespace-nowrap text-sm text-black"
+                    style={{ transformOrigin: "top right", transform: "rotate(-30deg)" }}
+                  >
+                    {m.label}
+                  </span>
+                )}
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      <p className="mt-2 text-center text-xs text-slate-400">
-        337,704 candidate households; 32,633 targets; L0-selected and sampled baselines retain 57,240
-        records
-      </p>
     </div>
   );
 }
