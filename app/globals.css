@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @import "@policyengine/ui-kit/theme.css";
+@import "katex/dist/katex.min.css";
 
 @source "../app";
 @source "../components";
@@ -356,6 +357,24 @@ a {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== KATEX (MATH) ====================
+ * KaTeX display math defaults to a 1em block margin and can render wider
+ * than its container. Our equation cards supply their own padding and want
+ * the formula centered and clipped/scrollable rather than pushing layout.
+ * ===================================================== */
+.katex-display {
+  margin: 0;
+}
+
+.katex-fit {
+  /* Let a wide display formula scale down to fit instead of overflowing. */
+  display: block;
+}
+
+.katex-fit .katex-display > .katex {
+  white-space: normal;
 }
 
 /* ==================== SVG DIAGRAM STYLES ==================== */
