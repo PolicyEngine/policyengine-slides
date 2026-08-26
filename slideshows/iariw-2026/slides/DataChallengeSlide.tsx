@@ -17,7 +17,7 @@ export default function DataChallengeSlide() {
           microdata needs to be{' '}
           <span className="font-medium text-pe-teal">comprehensive</span>{' '}
           enough to cover the relevant variables and{' '}
-          <span className="font-medium text-pe-teal">accurate</span> enough to
+          <span className="font-medium text-pe-teal">accurate</span>{' '}enough to
           reproduce administrative totals.
         </p>
 

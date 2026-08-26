@@ -131,7 +131,7 @@ export default function Evo6FullWorkflowSlide() {
         <div className="w-[35%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              The complete pipeline: <strong>12 agents</strong> and <strong>6 skills</strong> working together. One command triggers the entire workflow&mdash;from issue creation to a draft PR ready for human review.
+              The complete pipeline: <strong>12 agents</strong> and <strong>6 skills</strong>{' '}working together. One command triggers the entire workflow&mdash;from issue creation to a draft PR ready for human review.
             </p>
           </div>
 

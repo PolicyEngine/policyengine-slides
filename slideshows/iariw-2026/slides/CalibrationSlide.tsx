@@ -14,7 +14,7 @@ export default function CalibrationSlide() {
           <div>
             <div className="slide-tag mb-2">The method</div>
             <p className="text-lg text-gray-800 leading-relaxed">
-              <span className="font-semibold">Gradient descent</span> over
+              <span className="font-semibold">Gradient descent</span>{' '}over
               household weights, optimizing simultaneously against published
               administrative targets &mdash; tax authority tables, statistical
               office series, census tabulations, program totals.
