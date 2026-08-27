@@ -10,30 +10,36 @@ const speaker = {
   title: 'Co-founder & CEO, PolicyEngine\nFounder & CEO, Axiom Foundation',
 };
 
-/** Hybrid cover: PolicyEngine teal meets Axiom paper. */
+/**
+ * Hybrid cover: two parallel halves — PolicyEngine teal, Axiom paper —
+ * mirrored layout, wordmarks at identical height, and the title reading
+ * across the seam: "From open models" → "to executable law".
+ */
 export default function TitleSlide() {
   return (
     <Slide fullBleed showFooter={false}>
-      <div className="absolute inset-0 grid grid-cols-[1.08fr_0.92fr]">
-        {/* PolicyEngine side */}
-        <div className="gradient-bg relative flex flex-col justify-center px-20">
-          <div className="absolute top-12 left-20">
+      <div className="absolute inset-0 grid grid-cols-2">
+        {/* PolicyEngine half */}
+        <div className="gradient-bg flex flex-col px-16 pt-24 pb-14">
+          <div className="h-[140px] flex items-center justify-center">
             <Image
               src="/logos/white.svg"
               alt="PolicyEngine"
-              width={260}
-              height={74}
+              width={350}
+              height={100}
               priority
-              style={{ height: 'auto' }}
+              style={{ height: '64px', width: 'auto' }}
             />
           </div>
 
-          <h1 className="font-display text-6xl font-bold text-white leading-tight max-w-xl">
-            From open models to executable law
-          </h1>
+          <div className="mt-20 text-right pr-8">
+            <h1 className="font-display text-6xl font-bold text-white whitespace-nowrap">
+              From open models
+            </h1>
+          </div>
 
-          <div className="mt-12 flex items-center gap-5">
-            <div className="w-24 h-24 relative overflow-hidden rounded-full border-2 border-white/40 shrink-0">
+          <div className="mt-auto flex items-center gap-5">
+            <div className="w-20 h-20 relative overflow-hidden rounded-full border-2 border-white/40 shrink-0">
               <Image
                 src={speaker.photo}
                 alt={speaker.name}
@@ -42,63 +48,66 @@ export default function TitleSlide() {
               />
             </div>
             <div>
-              <p className="text-2xl font-semibold text-white">
+              <p className="text-xl font-semibold text-white">
                 {speaker.name}
               </p>
-              <p className="text-base text-white/70 font-light whitespace-pre-line leading-snug mt-1">
+              <p className="text-sm text-white/70 font-light whitespace-pre-line leading-snug mt-1">
                 {speaker.title}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Axiom side */}
-        <div className="relative bg-[#f8f5ef] flex flex-col items-center justify-center px-16 text-center">
-          <Image
-            src="/logos/axiom-foundation.svg"
-            alt="The Axiom Foundation"
-            width={1026}
-            height={363}
-            priority
-            style={{ width: '300px', height: 'auto' }}
-          />
-
-          <p className="font-mono text-sm uppercase tracking-[0.28em] text-[#8a3d08] mt-6">
-            The world&apos;s rules, encoded
-          </p>
-
-          <div className="w-16 h-px bg-[#b45309]/30 my-10" />
-
-          <p className="text-lg text-gray-700">
-            New technologies for evidence-based policy making
-          </p>
-          <p className="text-sm text-gray-500 mt-1">
-            IARIW&ndash;CAPE workshop &middot; UCLouvain Saint-Louis, Brussels
-            &middot; {formatDate('2026-08-27')}
-          </p>
-
-          <div className="absolute bottom-12 left-0 right-0 flex items-center justify-center gap-10">
+        {/* Axiom half */}
+        <div className="bg-[#f8f5ef] flex flex-col px-16 pt-24 pb-14">
+          <div className="h-[140px] flex items-center justify-center">
             <Image
-              src="/logos/iariw/cape.png"
-              alt="CAPE — Center for Applied Public Economics"
-              width={640}
-              height={233}
-              style={{ height: '32px', width: 'auto' }}
+              src="/logos/axiom-foundation.svg"
+              alt="The Axiom Foundation"
+              width={1026}
+              height={363}
+              priority
+              style={{ height: '84px', width: 'auto' }}
             />
-            <Image
-              src="/logos/iariw/beamm.png"
-              alt="BEAMM"
-              width={640}
-              height={129}
-              style={{ height: '24px', width: 'auto' }}
-            />
-            <Image
-              src="/logos/iariw/uclouvain-saint-louis.jpg"
-              alt="UCLouvain Saint-Louis Bruxelles"
-              width={640}
-              height={360}
-              style={{ height: '36px', width: 'auto' }}
-            />
+          </div>
+
+          <div className="mt-20 text-left pl-8">
+            <h1 className="font-display text-6xl font-bold text-[#17343a] whitespace-nowrap">
+              to executable law
+            </h1>
+          </div>
+
+          <div className="mt-auto">
+            <p className="text-lg text-gray-700">
+              New technologies for evidence-based policy making
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              IARIW&ndash;CAPE workshop &middot; UCLouvain Saint-Louis,
+              Brussels &middot; {formatDate('2026-08-27')}
+            </p>
+            <div className="mt-6 flex items-center gap-9">
+              <Image
+                src="/logos/iariw/cape.png"
+                alt="CAPE — Center for Applied Public Economics"
+                width={640}
+                height={233}
+                style={{ height: '30px', width: 'auto' }}
+              />
+              <Image
+                src="/logos/iariw/beamm.png"
+                alt="BEAMM"
+                width={640}
+                height={129}
+                style={{ height: '22px', width: 'auto' }}
+              />
+              <Image
+                src="/logos/iariw/uclouvain-saint-louis.jpg"
+                alt="UCLouvain Saint-Louis Bruxelles"
+                width={640}
+                height={360}
+                style={{ height: '34px', width: 'auto' }}
+              />
+            </div>
           </div>
         </div>
       </div>
