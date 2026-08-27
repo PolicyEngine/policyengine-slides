@@ -55,6 +55,36 @@ export const DemoPeBeSlide = () => (
   />
 );
 
+export const ChronicleTargetsStaticSlide = () => (
+  <ScreenshotSlide
+    title="Chronicle, drilled to source"
+    url="microcosm.institute"
+    src="/screenshots/iariw-2026/chronicle-targets.png"
+    alt="Target diagnostics page for Microcosm Belgium"
+    caption="252 statistics, 254 targets for Belgium alone — each drills to the Chronicle fact and the publisher behind it."
+  />
+);
+
+export const AxiomCliffStaticSlide = () => (
+  <ScreenshotSlide
+    title="The cliff analyzer"
+    url="axiom.org/snap"
+    src="/screenshots/iariw-2026/axiom-cliff.png"
+    alt="Axiom benefits cliff explorer with SNAP allotment and marginal rate charts"
+    caption="A New York single adult: the SNAP allotment falls to a hard cliff near $2,100 of monthly earnings, and the marginal rate spikes past the cliff threshold — computed from the encoded rules, reform sliders on the left."
+  />
+);
+
+export const AxiomChatbotStaticSlide = () => (
+  <ScreenshotSlide
+    title="The chatbot"
+    url="axiom.org/chatbot"
+    src="/screenshots/iariw-2026/axiom-chatbot.png"
+    alt="Axiom chatbot: a benefits assistant powered by the Axiom rules engine"
+    caption="Every amount and eligibility verdict is computed against the encoded rules; the language model narrates. The toggle compares side-by-side with plain AI."
+  />
+);
+
 export const MicrocosmDashboardSlide = () => (
   <ScreenshotSlide
     title="The data, anchored in public"

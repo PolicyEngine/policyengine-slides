@@ -2,7 +2,7 @@
 
 IARIW–CAPE workshop "New technologies for evidence-based policy making"
 Thursday 27 August 2026 · 14:40–15:30 · Room P02, UCLouvain Saint-Louis, Brussels
-Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 48 slides, ~42 presented
+Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 54 slides, ~44 presented
 
 **Room:** IARIW measurement economists; Koen Algoed (Director General, Budget and Finance,
 Flemish Region) and Jean-Baptiste Traversa (head of microsimulation modelling, FPS Finance)
@@ -21,7 +21,7 @@ the five, demoing each → the loop that matters most → roundtable hand-off.
    Denmark conformant-everywhere with certified = no (81 open dependencies) IS the story.
    Never say "certified" as a positive claim about any program.
 3. Facts register rows moved: 103 programs, 332 repos, 133 contributors, 4,693 test files,
-   team of 8. Chronicle: 148 source packages, 40 publishers (verified on main 2026-08-27).
+   team of 8. Chronicle: 171,855 facts from 40 official publishers (verified on main 2026-08-27).
 
 **Held — never say aloud:** the 15 July 2026 Belgian PIT reform cross-engine estimates
 (Tom sees them first; Max's gate). Statistics Belgium conversations. Anything about other
@@ -36,12 +36,12 @@ modeling groups' publication records.
 | 14:40 | Opening | 1–3 | 3 |
 | 14:43 | The question sequence | 4–8 | 6 |
 | 14:49 | Five primitives + history + roadmap | 9–11 | 4 |
-| 14:53 | 1 · Axiom | 12–27 (skip 22–25 if live demo works) | 13 |
-| 15:06 | 2 · Chronicle | 28–29 | 2 |
-| 15:08 | 3 · Microcosm | 30–37 (skip 36 if live) | 6.5 |
-| 15:14 | 4 · PolicyEngine | 38–43 (skip 42 if live) | 6 |
-| 15:20 | 5 · Together | 44–48 | 5.5 |
-| 15:26 | Buffer + questions | — | 4 |
+| 14:53 | 1 · Axiom (app, cliff analyzer, chatbot) | 12–31 (skip statics 22–25, 27, 29) | 16 |
+| 15:09 | 2 · Chronicle | 32–35 (skip 35) | 3 |
+| 15:12 | 3 · Microcosm | 36–43 (skip 42) | 6 |
+| 15:18 | 4 · PolicyEngine | 44–49 (skip 48) | 5 |
+| 15:23 | 5 · Together | 50–54 | 5 |
+| 15:28 | Buffer | — | 2 |
 
 Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
 slides (22–25, 36, 42) are presented ONLY if the network dies.
@@ -128,7 +128,20 @@ Live iframe in-deck (Expand button), or the preloaded tab. Beats: field view (10
 provisions, five clusters) → open a provision → "Read the law" (CIR 92 text beside the
 RuleSpec rule, effective dates) → the computation graph. See DEMO-SCRIPT.md.
 
-### 26 · Belgian income tax, validated against EUROMOD (2m — the rules feedback loop)
+### 26 · DEMO — the cliff analyzer (1.5m; 27 is the fallback)
+axiom.org/snap: a New York single adult, earnings swept $0–4,000/month. Run reform: the SNAP
+allotment falls to a hard cliff near $2,100 and the marginal rate spikes past the cliff
+threshold. Drag a reform slider — the cliff moves. Same encodings that score budgets,
+answering a caseworker's question.
+
+### 28 · DEMO — the chatbot (2m; 29 is the fallback)
+axiom.org/chatbot: run the suggested single-parent SNAP question, then tick "Compare
+side-by-side with plain AI" — the PolicyBench failure and the fix on one screen. The language
+model narrates; the rules engine does the arithmetic, with citations. (The page's own copy
+says "certified rulespec-us" — don't repeat the word aloud; slide 31 gives the precise
+certification state.)
+
+### 30 · Belgian income tax, validated against EUROMOD (2m — the rules feedback loop)
 23/23 in-scope BE_2025 policies conformant; 33 suites, 156 household comparisons; zero
 unexplained mismatches. All 40 raw disagreements dispositioned: 33 filed as findings for the
 EUROMOD team's review on the public EC-JRC tracker, 7 explained residuals on our side
@@ -137,7 +150,7 @@ grateful exists; cross-checks flow both directions. PIT arc merged on main; depe
 child benefits held at the signed-corpus release frontier. NEVER "perfect match" or
 certified language.
 
-### 27 · Complete is not certified (2m — the honesty machinery)
+### 31 · Complete is not certified (2m — the honesty machinery)
 Certified = computed(conformant AND exercised AND closed AND executable), no flag set by hand
 [CERTIFIED.md v3]. Today: 13 programs, 10 conformant, ZERO certified. Denmark: matches
 EUROMOD on every case, blockers empty — certified = no, 81 open dependencies. US tariff:
@@ -145,28 +158,30 @@ EUROMOD on every case, blockers empty — certified = no, 81 open dependencies. 
 For officials: this is the answer to "why trust an AI-built model" — you don't; you check
 the certificate.
 
-### 28–29 · Chronicle (2m)
+### 32–34 · Chronicle (3m — 34 is the live drill, 35 its fallback)
 Divider, then: official statistics as source-backed facts — typed values with units,
-geography, period, and lineage to the source artifact. 148 source packages from 40 official
-publishers [chronicle main, verified 2026-08-27]. The Belgian shelf built in a week: Statbel
+geography, period, and lineage to the source artifact. 171,855 facts from 40 official
+publishers [chronicle main bundle, verified 2026-08-27]. Then the live drill (34): open a
+Belgian statistic on the targets page and trace it to its publisher — the 171,855 is the
+headline number on that slide. The Belgian shelf built in a week: Statbel
 fiscal income by €1,000 class, SPF Finances/ONSS/ONEM totals, Eurostat national accounts,
 FPB outlook, JRC EUROMOD baselines. The loop: Microcosm calibrates ONLY to sums of Chronicle
 facts — every target traces to a publisher; surveys enter as validation only.
 
-### 30–31 · Microcosm divider → the data challenge (1m)
+### 36–37 · Microcosm divider → the data challenge (1m)
 Comprehensive AND accurate. US: no single survey has everything. The European inversion:
 Belgian registers are linked — the constraint is release, which is why BEAMM invests in
 synthesis. Both directions converge on calibration targets + validation services.
 
-### 32 · Imputation (45s)
+### 38 · Imputation (45s)
 Quantile regression forests, full conditional distributions, tails included. AI reads survey
 documentation and catches definitional mismatches.
 
-### 33 · Calibration (45s)
+### 39 · Calibration (45s)
 Gradient descent over household weights against thousands of published targets. AI ingests
 targets, reconciles schemas; analysts decide what goes live.
 
-### 34 · Microcosm-BE (2m)
+### 40 · Microcosm-BE (2m)
 The recipe on Belgium [sealed v0.5 artifacts]: 57,240 household records, 254 targets (sums of
 Chronicle facts), mean |error| 1.84%, 242/254 within 5%. The EUROMOD column ledger: all 182
 substantive output columns — 10 matched, 143 explained, 29 named gaps, 0 unclassified.
@@ -174,39 +189,39 @@ Provenance line said straight: US survey donor pool, reweighted; Belgian donor p
 planned upgrade. If SILC comes up: CAPE holds access — the acceptance test can run on their
 machines.
 
-### 35 · DEMO — the calibration dashboard, live (1.5m; slide 36 is the fallback)
+### 41 · DEMO — the calibration dashboard, live (1.5m; slide 42 is the fallback)
 Every target published with its error; 96.1% within 10% on the live page. "You don't have to
 take my word for any of this — it's a website."
 
-### 37 · Microplex (30s) — CUT FIRST IF LONG
+### 43 · Microplex (30s) — CUT FIRST IF LONG
 Where the US data layer heads: multi-spine, automated target discovery, promote-on-review,
 versioned public releases.
 
-### 38–39 · PolicyEngine divider → PolicyEngine today (1.5m)
+### 44–45 · PolicyEngine divider → PolicyEngine today (1.5m)
 The model that composes the primitives. Open source since June 2021 (AGPL-3.0); 95,000+
 parameters, 5,500+ variables, 4,693 test files, 103 programs; 133 contributors. No 10's data
 science team built 10ds-microsim on it; MOUs with NBER (open source TAXSIM emulator) and the
 Atlanta Fed (Policy Rules Database). For this room: an open EUROMOD-family stack for the US
 and UK, built in public.
 
-### 40 · Who uses it (30s) — CUT IF LONG
+### 46 · Who uses it (30s) — CUT IF LONG
 Logo wall. One sentence and move.
 
-### 41 · DEMO — a Belgian reform, live (~3m; slide 42 is the fallback)
+### 47 · DEMO — a Belgian reform, live (~3m; slide 48 is the fallback)
 policyengine.org/be in-deck: move the top bracket rate, watch budget/Gini/poverty recompute
 (155 precomputed cells, 28 CIR 92 parameters); scroll to "The population, checked" — both
 engines against administrative truth, misses in red with named mechanisms.
 
-### 43 · policyengine.py (1m — works offline)
+### 49 · policyengine.py (1m — works offline)
 The same models as a Python package: a UK household in four lines; the same call for the US
 with a reform attached. This is the interface the Belgian work targets.
 
-### 44–45 · Together divider → Conductors, not oracles (2m)
+### 50–51 · Together divider → Conductors, not oracles (2m)
 The model routes to verified tools and integrates calibrated outputs; analyst judgment lives
 at every routing decision. The judgment-to-mechanism loop: intuition becomes mechanism over
 time.
 
-### 46 · The loop that matters most (2m)
+### 52 · The loop that matters most (2m)
 Every primitive has its gauge; the one that ranks them all is whether forecasts resolve
 against reality. The measurable question: when the stack covers a new country — Belgium took
 weeks because Microcosm calibrates to official statistics — do calibrated agents predict
@@ -214,12 +229,12 @@ outcomes there better? We intend to score that. And the deeper point for 16:00: 
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
-### 47 · It takes all of us (1.5m)
+### 53 · It takes all of us (1.5m)
 Model-building has always been about making consequences visible before the choice.
 Statistical offices, EUROMOD, BEAMM, ministries, open models — each doing what it does best.
 "Which is exactly what the roundtable is about — see you at 16:00."
 
-### 48 · Thank you / QR (leave up)
+### 54 · Thank you / QR (leave up)
 QR → axiom.org. Links: axiom.org · policyengine.org/be · both GitHub orgs.
 
 ---

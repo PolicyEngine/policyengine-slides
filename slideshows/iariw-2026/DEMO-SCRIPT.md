@@ -1,11 +1,16 @@
 # Live demo script — IARIW 2026 (~8 min inside the 14:40–15:30 talk)
 
-The deck embeds the LIVE apps directly: slide 21 (Axiom App, Belgium), slide 35 (calibration
-dashboard), and slide 41 (policyengine.org/be) are live iframes with an Expand button — you
-can drive the whole demo without leaving the deck. Preloaded browser tabs remain the smoother
-option for deep interaction; use whichever feels better in the moment. Every beat also has
-static screenshot slides right after it (22–25, 36, 42). If the network dies mid-beat,
-advance and keep talking.
+The deck embeds the LIVE apps directly, each with an Expand button: slide 21 (Axiom App,
+Belgium), 26 (cliff analyzer, axiom.org/snap), 28 (chatbot, axiom.org/chatbot), 34
+(Chronicle targets drill), 41 (calibration dashboard), 47 (policyengine.org/be). You can
+drive the whole demo without leaving the deck; preloaded tabs remain smoother for deep
+interaction. Every beat has static screenshot slides right after it (22–25, 27, 29, 35, 42,
+48). If the network dies mid-beat, advance and keep talking.
+
+Cliff analyzer beat: Run reform → point at the allotment cliff near $2,100 and the
+marginal-rate spike → drag the earned income deduction slider → the cliff moves.
+Chatbot beat: run the single-parent SNAP suggestion → tick "Compare side-by-side with plain
+AI" → grounded vs plain on one screen. Never repeat the page's "certified" wording aloud.
 
 ## Before the talk (10 min, on venue wifi or hotspot)
 
@@ -16,6 +21,8 @@ advance and keep talking.
    - https://axiom.org/validation
    - https://policyengine.org/be
    - https://microcosm.institute/calibration/dashboard/microcosm?country=be
+   - https://axiom.org/snap  (cliff analyzer)
+   - https://axiom.org/chatbot  (chatbot — send one warm-up question so the backend is hot)
 2. On policyengine.org/be: confirm the yellow provenance banner renders and the
    "Society-wide impacts" tab shows €0.00B at baseline.
 3. Phone hotspot ready as backup. If neither works, the deck carries every beat.
