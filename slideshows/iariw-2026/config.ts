@@ -9,7 +9,8 @@ import ScorekeeperScaleSlide from './slides/ScorekeeperScaleSlide';
 import WhatIfEveryBillSlide from './slides/WhatIfEveryBillSlide';
 import WhatIfEverySeriesSlide from './slides/WhatIfEverySeriesSlide';
 import CrossScaleSlide from './slides/CrossScaleSlide';
-import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
+import ScaleAccuracySlide from './slides/ScaleAccuracySlide';
+import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
 import PolicyBenchSlide from './slides/PolicyBenchSlide';
 // The spine
 import FivePrimitivesSlide from './slides/FivePrimitivesSlide';
@@ -69,6 +70,7 @@ import {
 } from './slides/DemoLiveSlides2';
 // 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
+import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
 import ClosingLoopSlide from './slides/ClosingLoopSlide';
 import CommunityClosingSlide from './slides/CommunityClosingSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
@@ -98,7 +100,8 @@ export const iariw2026Config: SlideshowConfig = {
     WhatIfEveryBillSlide,
     WhatIfEverySeriesSlide,
     CrossScaleSlide,
-    ForecastUncertaintySlide,
+    ScaleAccuracySlide,
+    HowWeGetThereSlide,
     PolicyBenchSlide,
 
     // The spine: what do we arm the AI with?
@@ -156,6 +159,7 @@ export const iariw2026Config: SlideshowConfig = {
     TogetherDividerSlide,
     ConductorsSlide,
     ClosingLoopSlide,
+    ForecastUncertaintySlide,
     CommunityClosingSlide,
     QuestionsSlide,
   ],

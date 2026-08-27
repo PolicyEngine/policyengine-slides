@@ -35,11 +35,9 @@ export default function ClosingLoopSlide() {
 
           <div className="accent-block">
             <p className="text-xl text-gray-800 leading-relaxed">
-              And policy takes a different shape when baseline conditions
-              change quickly. If you assign any real probability to rapid
-              AI-driven change, the question for this community is how policy
-              analysis arms policymakers to respond &mdash; a thread for the
-              roundtable at 16:00.
+              Every forecast published with its reasoning, graded when the
+              official number lands &mdash; for AI agents and human
+              researchers on the same scoreboard.
             </p>
           </div>
         </div>
