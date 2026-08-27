@@ -5,27 +5,28 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const sections = [
   {
     number: '1',
-    title: 'Rules',
-    detail:
-      'Law as executable code — the encoder, the Axiom Foundation, and a Belgian income tax validated against EUROMOD.',
+    title: 'Axiom',
+    detail: 'The rules, executable — verified against EUROMOD in Belgium.',
   },
   {
     number: '2',
-    title: 'Data',
-    detail:
-      'Populations you can simulate on — imputation, calibration to administrative totals, and Microcosm-BE.',
+    title: 'Chronicle',
+    detail: 'Official statistics as source-backed facts.',
   },
   {
     number: '3',
-    title: 'Live',
-    detail:
-      'Browse the encoded law, run a Belgian reform, score a policy in a few lines of Python.',
+    title: 'Microcosm',
+    detail: 'The world at micro level, calibrated to administrative truth.',
   },
   {
     number: '4',
-    title: 'Where this goes',
-    detail:
-      'Conductors, forecast uncertainty, and what it takes for these tools to enter public administrations.',
+    title: 'PolicyEngine',
+    detail: 'The model that composes them — live, in the browser and in Python.',
+  },
+  {
+    number: '5',
+    title: 'Together',
+    detail: 'Judgment, uncertainty, and the loop that matters most.',
   },
 ];
 
@@ -33,21 +34,21 @@ export default function OutlineSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>What we&apos;ll cover</SlideTitle>
+        <SlideTitle>Five primitives, five demos</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-4 gap-5">
+      <div className="mt-10 grid grid-cols-5 gap-4">
         {sections.map((section) => (
-          <div key={section.number} className="content-card p-6">
+          <div key={section.number} className="content-card p-5">
             <div className="flex items-baseline gap-3 mb-3">
               <span className="font-mono text-4xl font-bold text-pe-teal">
                 {section.number}
               </span>
-              <h3 className="font-mono text-xl font-bold text-gray-800">
+              <h3 className="font-mono text-lg font-bold text-gray-800">
                 {section.title}
               </h3>
             </div>
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               {section.detail}
             </p>
           </div>

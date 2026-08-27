@@ -34,6 +34,11 @@ forecasts of the AI era itself diverge by orders of magnitude.
 
 ## Slide-by-slide
 
+> ⚠️ Superseded 2026-08-27: the deck was restructured around Max's five-primitives arc
+> (questions → what do we arm the AI with? → Axiom / Chronicle / Microcosm / PolicyEngine /
+> Together, each with its feedback loop and demo). SPEAKER-NOTES.md carries the current
+> 48-slide structure and timing; the sections below describe the earlier format-led cut.
+
 ### Opening + question sequence (8 slides, ~8 min)
 1. **TitleSlide** — cover, partner context (IARIW–CAPE workshop).
 2. **BridgeSlide** — "Tom just showed you the platform." Same craft, shared stack directions.

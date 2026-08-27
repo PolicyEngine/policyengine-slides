@@ -13,15 +13,16 @@ export default function WhatIfEverySeriesSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>What if every statistical series had a forecast?</SlideTitle>
+        <SlideTitle>What if every outcome had an estimate?</SlideTitle>
       </SlideHeader>
 
       <div className="mt-8 grid grid-cols-[1fr_1fr] gap-10 items-stretch">
         <div className="space-y-5 flex flex-col justify-center">
           <p className="text-2xl text-gray-800 leading-relaxed">
-            A national statistical system already publishes millions of public
-            cells: series, geographies, income groups, industries, programs,
-            and years. This room produces many of them.
+            A fiscal score is one number. Policy also moves poverty,
+            inequality, regions, take-up &mdash; and statistical systems
+            already publish millions of cells that could each carry a
+            forecast. This room produces many of them.
           </p>
 
           <div className="content-card p-7">

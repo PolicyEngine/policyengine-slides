@@ -32,34 +32,42 @@ export default function SectionDivider({
   );
 }
 
-export const RulesDividerSlide = () => (
+export const AxiomDividerSlide = () => (
   <SectionDivider
     number="1"
-    title="Rules"
-    subtitle="Law as executable code — what exists today, how AI encodes it, and how EUROMOD keeps us honest in Belgium."
+    title="Axiom"
+    subtitle="The rules, executable — how AI encodes law, and how EUROMOD keeps us honest in Belgium."
   />
 );
 
-export const DataDividerSlide = () => (
+export const ChronicleDividerSlide = () => (
   <SectionDivider
     number="2"
-    title="Data"
-    subtitle="Populations calibrated to administrative truth — and what that looks like for Belgium."
+    title="Chronicle"
+    subtitle="Official statistics as source-backed facts, with lineage to every publisher."
   />
 );
 
-export const LiveDividerSlide = () => (
+export const MicrocosmDividerSlide = () => (
   <SectionDivider
     number="3"
-    title="Live"
-    subtitle="Browse the law, run a reform, score a policy in a few lines of Python."
+    title="Microcosm"
+    subtitle="The world at micro level — populations calibrated to administrative truth."
   />
 );
 
-export const FutureDividerSlide = () => (
+export const EngineDividerSlide = () => (
   <SectionDivider
     number="4"
-    title="Where this goes"
-    subtitle="Conductors, uncertainty, and entering public administrations."
+    title="PolicyEngine"
+    subtitle="The model that composes them — in the browser, and in a few lines of Python."
+  />
+);
+
+export const TogetherDividerSlide = () => (
+  <SectionDivider
+    number="5"
+    title="Together"
+    subtitle="Judgment, uncertainty, and the loop that matters most."
   />
 );

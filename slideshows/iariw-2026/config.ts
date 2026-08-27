@@ -1,23 +1,27 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
+// Opening
 import TitleSlide from './slides/TitleSlide';
 import BridgeSlide from './slides/BridgeSlide';
 import CraftScaledSlide from './slides/CraftScaledSlide';
+// The question sequence
 import WhatIfEveryBillSlide from './slides/WhatIfEveryBillSlide';
 import WhatIfEverySeriesSlide from './slides/WhatIfEverySeriesSlide';
 import CrossScaleSlide from './slides/CrossScaleSlide';
-import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
+import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
+import PolicyBenchSlide from './slides/PolicyBenchSlide';
+// The spine
+import FivePrimitivesSlide from './slides/FivePrimitivesSlide';
+import HistorySlide from './slides/HistorySlide';
 import OutlineSlide from './slides/OutlineSlide';
 import {
-  RulesDividerSlide,
-  DataDividerSlide,
-  LiveDividerSlide,
-  FutureDividerSlide,
+  AxiomDividerSlide,
+  ChronicleDividerSlide,
+  MicrocosmDividerSlide,
+  EngineDividerSlide,
+  TogetherDividerSlide,
 } from './slides/SectionDivider';
-// Section 1 — Rules
-import PEOverviewSlide from './slides/PEOverviewSlide';
-import WhoUsesItSlide from './slides/WhoUsesItSlide';
-import PolicyBenchSlide from './slides/PolicyBenchSlide';
+// 1 — Axiom
 import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
 import Evo1SinglePromptSlide from './slides/Evo1SinglePromptSlide';
 import Evo2PipelineSlide from './slides/Evo2PipelineSlide';
@@ -28,13 +32,19 @@ import Evo6FullWorkflowSlide from './slides/Evo6FullWorkflowSlide';
 import AxiomIntroSlide from './slides/AxiomIntroSlide';
 import BelgiumParitySlide from './slides/BelgiumParitySlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
-// Section 2 — Data
+// 2 — Chronicle
+import ChronicleSlide from './slides/ChronicleSlide';
+// 3 — Microcosm
 import DataChallengeSlide from './slides/DataChallengeSlide';
 import ImputationSlide from './slides/ImputationSlide';
 import CalibrationSlide from './slides/CalibrationSlide';
 import MicrocosmBESlide from './slides/MicrocosmBESlide';
 import MicroplexSlide from './slides/MicroplexSlide';
-// Section 3 — Live (demo beats + fallback screenshots)
+// 4 — PolicyEngine
+import PEOverviewSlide from './slides/PEOverviewSlide';
+import WhoUsesItSlide from './slides/WhoUsesItSlide';
+import DemoPySlide from './slides/DemoPySlide';
+// Live embeds + static fallbacks
 import {
   DemoAxiomBrowseSlide,
   DemoAxiomProvisionSlide,
@@ -48,10 +58,9 @@ import {
   DemoPeBeLiveSlide,
   DemoDashboardLiveSlide,
 } from './slides/DemoLiveSlides';
-import DemoPySlide from './slides/DemoPySlide';
-// Section 4 — Where this goes
+// 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
-import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
+import ClosingLoopSlide from './slides/ClosingLoopSlide';
 import CommunityClosingSlide from './slides/CommunityClosingSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
 
@@ -70,17 +79,21 @@ export const iariw2026Config: SlideshowConfig = {
     TitleSlide,
     BridgeSlide,
     CraftScaledSlide,
+
+    // The question sequence
     WhatIfEveryBillSlide,
     WhatIfEverySeriesSlide,
     CrossScaleSlide,
-    HowWeGetThereSlide,
+    ForecastUncertaintySlide,
+    PolicyBenchSlide,
+
+    // The spine: what do we arm the AI with?
+    FivePrimitivesSlide,
+    HistorySlide,
     OutlineSlide,
 
-    // Section 1 — Rules
-    RulesDividerSlide,
-    PEOverviewSlide,
-    WhoUsesItSlide,
-    PolicyBenchSlide,
+    // 1 — Axiom (the rules)
+    AxiomDividerSlide,
     BridgeToEvolutionSlide,
     Evo1SinglePromptSlide,
     Evo2PipelineSlide,
@@ -89,11 +102,20 @@ export const iariw2026Config: SlideshowConfig = {
     Evo5SkillsSlide,
     Evo6FullWorkflowSlide,
     AxiomIntroSlide,
+    DemoAxiomLiveSlide,
+    DemoAxiomBrowseSlide,
+    DemoAxiomProvisionSlide,
+    DemoAxiomGraphSlide,
+    DemoAxiomValidationSlide,
     BelgiumParitySlide,
     CertificationLadderSlide,
 
-    // Section 2 — Data
-    DataDividerSlide,
+    // 2 — Chronicle (official statistics)
+    ChronicleDividerSlide,
+    ChronicleSlide,
+
+    // 3 — Microcosm (the world at micro level)
+    MicrocosmDividerSlide,
     DataChallengeSlide,
     ImputationSlide,
     CalibrationSlide,
@@ -102,21 +124,18 @@ export const iariw2026Config: SlideshowConfig = {
     MicrocosmDashboardSlide,
     MicroplexSlide,
 
-    // Section 3 — Live (embedded apps; static screenshots follow as fallbacks)
-    LiveDividerSlide,
-    DemoAxiomLiveSlide,
-    DemoAxiomBrowseSlide,
-    DemoAxiomProvisionSlide,
-    DemoAxiomGraphSlide,
-    DemoAxiomValidationSlide,
+    // 4 — PolicyEngine (the model)
+    EngineDividerSlide,
+    PEOverviewSlide,
+    WhoUsesItSlide,
     DemoPeBeLiveSlide,
     DemoPeBeSlide,
     DemoPySlide,
 
-    // Section 4 — Where this goes
-    FutureDividerSlide,
+    // 5 — Together
+    TogetherDividerSlide,
     ConductorsSlide,
-    ForecastUncertaintySlide,
+    ClosingLoopSlide,
     CommunityClosingSlide,
     QuestionsSlide,
   ],
