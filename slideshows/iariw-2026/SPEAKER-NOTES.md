@@ -2,7 +2,7 @@
 
 IARIW–CAPE workshop "New technologies for evidence-based policy making"
 Thursday 27 August 2026 · 14:40–15:30 · Room P02, UCLouvain Saint-Louis, Brussels
-Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 57 slides, ~47 presented
+Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 59 slides, ~48 presented
 
 **Room:** IARIW measurement economists; Koen Algoed (Director General, Budget and Finance,
 Flemish Region) and Jean-Baptiste Traversa (head of microsimulation modelling, FPS Finance)
@@ -40,8 +40,7 @@ modeling groups' publication records.
 | 15:09 | 2 · Chronicle | 34–37 (skip 37) | 3 |
 | 15:12 | 3 · Microcosm | 38–45 (skip 44) | 6 |
 | 15:18 | 4 · PolicyEngine | 46–51 (skip 50) | 5 |
-| 15:23 | 5 · Thesis / together + the closing forecast beat | 52–57 | 6 |
-| 15:29 | Buffer | — | 1 |
+| 15:23 | 5 · Thesis / together + the closing forecast beat | 52–59 (skip 56) | 7 |
 
 Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
 slides (22–25, 36, 42) are presented ONLY if the network dies.
@@ -105,12 +104,12 @@ Landing: AI is impressive at code, search, summarization. It is not a substitute
 "So what would the AI need? What do we arm it with?"
 
 ### 11 · What do we arm the AI with? (2m — the spine slide)
-Five primitives, each a project, each with a feedback loop:
-1 rules → Axiom (loop: oracles, zero unexplained mismatches) · 2 official statistics →
-Chronicle (loop: completeness + lineage) · 3 the world at micro level → Microcosm (loop:
-published calibration error, surveys held out) · 4 a model → PolicyEngine (loop: cross-engine
-agreement + users) · 5 judgment → Thesis (loop: forecasts that resolve — the most important).
-Landing: the same primitives norm AIs AND human researchers.
+Five primitives, stated as NEEDS — no project names yet (the wordmark reveal is slide 13):
+1 understand the policy rules (loop: oracles, zero unexplained mismatches) · 2 ready access
+to official statistics (loop: completeness + lineage) · 3 the world at micro level (loop:
+published calibration error, surveys held out) · 4 a model that computes reforms (loop:
+cross-engine agreement + users) · 5 judgment to put it together (loop: forecasts that
+resolve — the most important). Landing: the same primitives norm AIs AND human researchers.
 
 ### 12 · Six years under one roof (1.5m)
 The history: PolicyEngine since 2021 built the first four together — encoded US/UK rules (by
@@ -119,8 +118,9 @@ engine, the web app (still there, no longer the center). The realization behind 
 each layer deserves its own name, users, and feedback loop — Axiom, Chronicle, Microcosm,
 PolicyEngine as the model that composes them, and Thesis scoring the forecasts.
 
-### 13 · Five primitives, five demos (30s)
-The roadmap. "Let's walk them."
+### 13 · Five primitives, five demos (45s — the reveal)
+The roadmap, now with the wordmarks: Axiom · chronicle · microcosm · PolicyEngine · thesis
+institute. "Each of these has a name, a public surface, and a demo. Let's walk them."
 
 ### 14–21 · Axiom divider → encoder evolution (30s + ~40s each Evo, ~5m)
 Divider, then the pivot: AI can't compute policy, it can help build the substrate that does.
@@ -170,12 +170,13 @@ EUROMOD on every case, blockers empty — certified = no, 81 open dependencies. 
 For officials: this is the answer to "why trust an AI-built model" — you don't; you check
 the certificate.
 
-### 34–36 · Chronicle (3m — 36 is the live drill, 37 its fallback)
+### 34–36 · Chronicle (3m — 36 is the live site, 37 its fallback)
 Divider, then: official statistics as source-backed facts — typed values with units,
-geography, period, and lineage to the source artifact. 171,855 facts from 40 official
-publishers [chronicle main bundle, verified 2026-08-27]. Then the live drill (36): open a
-Belgian statistic on the targets page and trace it to its publisher — the 171,855 is the
-headline number on that slide. The Belgian shelf built in a week: Statbel
+geography, period, and lineage to the source artifact. 171,855 facts ingested from 40
+official publishers [chronicle main bundle, verified 2026-08-27]. Then chronicle.institute
+live (36): "a record of what official sources printed, and when" — the witnessed first-print
+journal (39,173 store facts on screen; values recorded as published, never reconciled or
+modeled). Say both numbers precisely: 171,855 ingested; 39,173 in the witnessed store. The Belgian shelf built in a week: Statbel
 fiscal income by €1,000 class, SPF Finances/ONSS/ONEM totals, Eurostat national accounts,
 FPB outlook, JRC EUROMOD baselines. The loop: Microcosm calibrates ONLY to sums of Chronicle
 facts — every target traces to a publisher; surveys enter as validation only.
@@ -243,7 +244,13 @@ We intend to score that. And the deeper point for 16:00: policy takes
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
-### 55 · And if the baseline itself moves? (1.5m — the closing forecast beat)
+### 55 · DEMO — Thesis bill analyses (1.5m; 56 is the fallback)
+app.thesisinstitute.org/bills: "start from the bill, derive the outcomes" — each analysis
+reads a bill's provisions, separates countersignable goals from likely effects, and maps
+candidate outcome metrics against the live forecast registry. The opening question, made
+practice. Labeled prototype; say so.
+
+### 57 · And if the baseline itself moves? (1.5m — the closing forecast beat)
 Everything before this slide matters regardless of how the economy evolves; if conditions
 change quickly, being nimble matters more. The chart: professional forecasters disagree less
 than ever about long-run growth (SPF 10-year IQR 0.2pp, half its 1990s level) — but asked
@@ -253,12 +260,12 @@ just GDP but unemployment, wage inequality, and the capital income share move, p
 will need even better tools — and AI can help, if we arm it in turn. "After the break, I'm
 looking forward to discussing what those tools can improve in policymaking."
 
-### 56 · It takes all of us (1.5m)
+### 58 · It takes all of us (1.5m)
 Model-building has always been about making consequences visible before the choice.
 Statistical offices, EUROMOD, BEAMM, ministries, open models — each doing what it does best.
 "Which is exactly what the roundtable is about — see you at 16:00."
 
-### 57 · Thank you / QR (leave up)
+### 59 · Thank you / QR (leave up)
 QR → axiom.org. Links: axiom.org · policyengine.org/be · both GitHub orgs.
 
 ---

@@ -7,8 +7,8 @@ import LiveAppSlide from './LiveAppSlide';
 export const ChronicleLiveSlide = () => (
   <LiveAppSlide
     title="Chronicle, live"
-    url="https://microcosm.institute/calibration/dashboard/microcosm/targets?country=be"
-    displayUrl="microcosm.institute"
+    url="https://chronicle.institute"
+    displayUrl="chronicle.institute"
   >
     <div className="content-card p-5 text-center">
       <div className="stat-number text-6xl">171,855</div>
@@ -16,25 +16,53 @@ export const ChronicleLiveSlide = () => (
         official statistics ingested as facts
       </p>
       <p className="text-sm text-gray-500 mt-2 leading-snug">
-        from 40 official publishers, with lineage to every source
+        from 40 official publishers &mdash; 39,173 of them in the witnessed
+        first-print store on screen
       </p>
     </div>
 
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
       <p className="text-base text-gray-700 leading-relaxed">
-        The Belgian target surface, drilled to source &mdash; every statistic
-        Microcosm calibrates to traces to the Chronicle fact and the publisher
-        behind it.
+        A record of what official sources printed, and when &mdash;
+        first-print values with provenance, revision history, and a stable
+        address for every fact. Recorded as published; never reconciled,
+        imputed, or modeled.
       </p>
     </div>
 
     <div className="pl-5 border-l-4 border-pe-teal mt-auto">
       <p className="text-sm text-gray-600 leading-relaxed italic">
-        The store itself is a public repo:{' '}
+        Also a public repo:{' '}
         <span className="font-mono not-italic">
           github.com/PolicyEngine/chronicle
         </span>
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
+export const ThesisLiveSlide = () => (
+  <LiveAppSlide
+    title="Thesis: start from the bill, derive the outcomes"
+    url="https://app.thesisinstitute.org/bills"
+    displayUrl="app.thesisinstitute.org/bills"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        Each analysis reads a bill&apos;s provisions, separates what its
+        authors would sign their names to from what the text does regardless,
+        and maps candidate outcome metrics against the live forecast registry.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">The loop, closing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        This is where the opening question becomes practice: bills in, scored
+        forecasts out &mdash; every prediction graded when the official number
+        lands. A prototype, labeled as one.
       </p>
     </div>
   </LiveAppSlide>

@@ -57,11 +57,21 @@ export const DemoPeBeSlide = () => (
 
 export const ChronicleTargetsStaticSlide = () => (
   <ScreenshotSlide
-    title="Chronicle, drilled to source"
-    url="microcosm.institute"
-    src="/screenshots/iariw-2026/chronicle-targets.png"
-    alt="Target diagnostics page for Microcosm Belgium"
-    caption="252 statistics, 254 targets for Belgium alone — each drills to the Chronicle fact and the publisher behind it."
+    title="Chronicle"
+    url="chronicle.institute"
+    src="/screenshots/iariw-2026/chronicle-site.png"
+    alt="Chronicle: a record of what official sources printed, and when"
+    caption="The witnessed journal: first-print values with provenance and revision history — 39,173 store facts from 58 archived source packages."
+  />
+);
+
+export const ThesisBillsStaticSlide = () => (
+  <ScreenshotSlide
+    title="Thesis: bill analyses"
+    url="app.thesisinstitute.org/bills"
+    src="/screenshots/iariw-2026/thesis-bills.png"
+    alt="Thesis bill analyses: start from the bill, derive the outcomes"
+    caption="Each bill's provisions mapped to candidate outcome metrics against the live forecast registry — countersignable goals separated from likely effects."
   />
 );
 
