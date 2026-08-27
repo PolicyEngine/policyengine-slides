@@ -1,11 +1,11 @@
 # Live demo script — IARIW 2026 (~8 min inside the 14:40–15:30 talk)
 
-The deck embeds the LIVE apps directly, each with an Expand button: slide 22 (Axiom App,
-Belgium), 27 (cliff analyzer, axiom.org/snap), 29 (chatbot, axiom.org/chatbot), 35
-(Chronicle targets drill), 42 (calibration dashboard), 48 (policyengine.org/be). You can
+The deck embeds the LIVE apps directly, each with an Expand button: slide 23 (Axiom App,
+Belgium), 28 (cliff analyzer, axiom.org/snap), 30 (chatbot, axiom.org/chatbot), 36
+(Chronicle targets drill), 43 (calibration dashboard), 49 (policyengine.org/be). You can
 drive the whole demo without leaving the deck; preloaded tabs remain smoother for deep
-interaction. Every beat has static screenshot slides right after it (23–26, 28, 30, 36, 43,
-49). If the network dies mid-beat, advance and keep talking.
+interaction. Every beat has static screenshot slides right after it (24–27, 29, 31, 37, 44,
+50). If the network dies mid-beat, advance and keep talking.
 
 Cliff analyzer beat: Run reform → point at the allotment cliff near $2,100 and the
 marginal-rate spike → drag the earned income deduction slider → the cliff moves.
