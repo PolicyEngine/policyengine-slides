@@ -9,3 +9,4 @@ tsconfig.tsbuildinfo
 *.tsbuildinfo
 .env*.local
 slideshows/*/*.pdf
+.env*

@@ -2,7 +2,7 @@
 
 IARIW–CAPE workshop "New technologies for evidence-based policy making"
 Thursday 27 August 2026 · 14:40–15:30 · Room P02, UCLouvain Saint-Louis, Brussels
-Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 62 slides, ~50 presented
+Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 65 slides, ~50 presented
 
 **Room:** IARIW measurement economists; Koen Algoed (Director General, Budget and Finance,
 Flemish Region) and Jean-Baptiste Traversa (head of microsimulation modelling, FPS Finance)
@@ -39,11 +39,12 @@ modeling groups' publication records.
 | 14:55 | 1 · Axiom (app, cliff analyzer, chatbot) | 14–33 (skip statics 24–27, 29, 31) | 14 |
 | 15:09 | 2 · Chronicle | 34–37 (skip 37) | 3 |
 | 15:12 | 3 · Microcosm | 38–45 (skip 44) | 6 |
-| 15:18 | 4 · PolicyEngine | 46–51 (skip 50) | 5 |
-| 15:23 | 5 · Thesis → 6 · Looking forward | 52–62 (skip 56, 58) | 7 |
+| 15:18 | 4 · PolicyEngine | 46–52 (skip 51) | 5 |
+| 15:23 | 5 · Thesis → 6 · Looking forward | 53–65 (skip 57, 59) | 7 |
 
-Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
-slides (22–25, 36, 42) are presented ONLY if the network dies.
+Cut-first if long: Microplex (45), WhoUsesIt (49), CountryScope (48), and skim Evo3/Evo5.
+Static screenshot slides (24–27, 29, 31, 37, 44, 51, 57, 59) are presented ONLY if the
+network dies.
 
 ---
 
@@ -217,24 +218,31 @@ science team built 10ds-microsim on it; MOUs with NBER (open source TAXSIM emula
 Atlanta Fed (Policy Rules Database). For this room: an open EUROMOD-family stack for the US
 and UK, built in public.
 
-### 48 · Who uses it (30s) — CUT IF LONG
+### 48 · The models, by country (1m) — CUT IF LONG
+Depth by country, counted from each repository's main branch today: US 5,956 parameter
+files / 5,981 variables (defining the 95,000+ dated parameter values); UK 597/872; Canada
+395/393; Israel and Nigeria community seeds; Belgium via Axiom — 107 encoded provisions.
+The point: depth follows demand, and the encoder evolution changes the arithmetic — the
+Belgian provisions arrived in weeks, verified against EUROMOD.
+
+### 49 · Who uses it (30s) — CUT IF LONG
 Logo wall. One sentence and move.
 
-### 49 · DEMO — a Belgian reform, live (~3m; slide 50 is the fallback)
+### 50 · DEMO — a Belgian reform, live (~3m; slide 51 is the fallback)
 policyengine.org/be in-deck: move the top bracket rate, watch budget/Gini/poverty recompute
 (155 precomputed cells, 28 CIR 92 parameters); scroll to "The population, checked" — both
 engines against administrative truth, misses in red with named mechanisms.
 
-### 51 · policyengine.py (1m — works offline)
+### 52 · policyengine.py (1m — works offline)
 The same models as a Python package: a UK household in four lines; the same call for the US
 with a reform attached. This is the interface the Belgian work targets.
 
-### 52–53 · Thesis divider → Conductors, not oracles (2m)
+### 53–54 · Thesis divider → Conductors, not oracles (2m)
 The model routes to verified tools and integrates calibrated outputs; analyst judgment lives
 at every routing decision. The judgment-to-mechanism loop: intuition becomes mechanism over
 time.
 
-### 54 · The loop that matters most (2m)
+### 55 · The loop that matters most (2m)
 Every primitive has its gauge; the one that ranks them all is whether forecasts resolve
 against reality — which is what Thesis exists to do: open forecasts of public outcomes,
 every prediction published with its reasoning and graded when the official number lands.
@@ -244,7 +252,7 @@ We intend to score that. And the deeper point for 16:00: policy takes
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
-### 55 · DEMO — a baseline Thesis forecast: SPM child poverty (1.5m; 56 is the fallback)
+### 56 · DEMO — a baseline Thesis forecast: SPM child poverty (1.5m; 57 is the fallback)
 app.thesisinstitute.org/spm-child-poverty-2025: a live forecast cell on a published
 government data point — the 2025 SPM child poverty rate with an 80% interval, the Census
 history, and the agent's full reasoning trace (assumptions AND caveats in the open; the
@@ -252,30 +260,43 @@ trace may show prototype infra notes — that transparency is the design). Grade
 Census publishes in September. Start here so the bills demo lands as "the same machinery,
 pointed at legislation."
 
-### 57 · DEMO — Thesis bill analyses (1.5m; 58 is the fallback)
+### 58 · DEMO — Thesis bill analyses (1.5m; 59 is the fallback)
 app.thesisinstitute.org/bills: "start from the bill, derive the outcomes" — each analysis
 reads a bill's provisions, separates countersignable goals from likely effects, and maps
 candidate outcome metrics against the live forecast registry. The opening question, made
 practice. Labeled prototype; say so.
 
-### 59 · Looking forward (divider, 15s)
+### 60 · Looking forward (divider, 15s)
 
-### 60 · And if the baseline itself moves? (1.5m — the closing forecast beat)
+### 61 · The five, as one stack (45s — the layered recap)
+The vertical recap: Axiom and Chronicle side by side at the bottom (the two substrates) →
+Microcosm builds on both (the construction layer, highlighted) → PolicyEngine composes them
+→ Thesis, dotted, on top — the newest layer, deciding which questions matter. One breath per
+layer; the audience has now seen a demo of each.
+
+### 62 · And if the baseline itself moves? (45s — the setup)
 Everything before this slide matters regardless of how the economy evolves; if conditions
-change quickly, being nimble matters more. The chart: professional forecasters disagree less
-than ever about long-run growth (SPF 10-year IQR 0.2pp, half its 1990s level) — but asked
-specifically about AI, economists and forecasters see room for major impact (+0.07pp to
-+30pp of annual growth) [Philadelphia Fed SPF; AI Frontiers compilation]. Landing: if not
-just GDP but unemployment, wage inequality, and the capital income share move, policymakers
-will need even better tools — and AI can help, if we arm it in turn. "After the break, I'm
-looking forward to discussing what those tools can improve in policymaking."
+change quickly, being nimble matters more. The punchline first: professional forecasters
+don't think it will — SPF 10-year growth disagreement is down to a 0.2pp IQR, half its 1990s
+level [Philadelphia Fed SPF]. Beat. "But that's the unconditional question."
 
-### 61 · It takes all of us (1.5m)
+### 63 · Asked about AI specifically, the range explodes (1m — the closing forecast beat)
+The right panel appears: published estimates of AI's growth effect span +0.07pp to +30pp of
+annual growth — three orders of magnitude wider than the baseline disagreement [AI Frontiers
+compilation]. The expert survey behind the Yale Budget Lab's fiscal scenarios (Karger et
+al. 2026 — 69 economists, 52 AI experts, 38 superforecasters, fielded Oct 2025–Feb 2026)
+shows the same shape: median economists near trend unconditionally, materially higher
+conditional on rapid AI progress. Landing: if not just GDP but unemployment, wage
+inequality, and the capital income share move, policymakers will need even better tools —
+and AI can help, if we arm it in turn. "After the break, I'm looking forward to discussing
+what those tools can improve in policymaking."
+
+### 64 · It takes all of us (1.5m)
 Model-building has always been about making consequences visible before the choice.
 Statistical offices, EUROMOD, BEAMM, ministries, open models — each doing what it does best.
 "Which is exactly what the roundtable is about — see you at 16:00."
 
-### 62 · Thank you / QR (leave up)
+### 65 · Thank you / QR (leave up)
 QR → axiom.org. Links: axiom.org · policyengine.org/be · both GitHub orgs.
 
 ---

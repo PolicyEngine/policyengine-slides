@@ -45,6 +45,7 @@ import MicrocosmBESlide from './slides/MicrocosmBESlide';
 import MicroplexSlide from './slides/MicroplexSlide';
 // 4 — PolicyEngine
 import PEOverviewSlide from './slides/PEOverviewSlide';
+import CountryScopeSlide from './slides/CountryScopeSlide';
 import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import DemoPySlide from './slides/DemoPySlide';
 // Live embeds + static fallbacks
@@ -75,7 +76,11 @@ import {
 } from './slides/DemoLiveSlides2';
 // 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
-import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
+import StackRecapSlide from './slides/StackRecapSlide';
+import {
+  ForecastSpfSlide,
+  ForecastAiRangeSlide,
+} from './slides/ForecastUncertaintySlide';
 import ClosingLoopSlide from './slides/ClosingLoopSlide';
 import CommunityClosingSlide from './slides/CommunityClosingSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
@@ -155,6 +160,7 @@ export const iariw2026Config: SlideshowConfig = {
     // 4 — PolicyEngine (the model)
     EngineDividerSlide,
     PEOverviewSlide,
+    CountryScopeSlide,
     WhoUsesItSlide,
     DemoPeBeLiveSlide,
     DemoPeBeSlide,
@@ -169,7 +175,9 @@ export const iariw2026Config: SlideshowConfig = {
     ThesisLiveSlide,
     ThesisBillsStaticSlide,
     LookingForwardDividerSlide,
-    ForecastUncertaintySlide,
+    StackRecapSlide,
+    ForecastSpfSlide,
+    ForecastAiRangeSlide,
     CommunityClosingSlide,
     QuestionsSlide,
   ],
