@@ -67,7 +67,7 @@ export const EngineDividerSlide = () => (
 export const TogetherDividerSlide = () => (
   <SectionDivider
     number="5"
-    title="Together"
-    subtitle="Judgment, uncertainty, and the loop that matters most."
+    title="Thesis"
+    subtitle="Putting it together — open forecasts of public outcomes, scored against reality."
   />
 );

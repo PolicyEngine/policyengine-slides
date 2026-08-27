@@ -65,7 +65,8 @@ export default function HistorySlide() {
           <p className="text-lg leading-relaxed text-white/85">
             So the rules layer became the Axiom Foundation, the fact store
             became Chronicle, the population layer became Microcosm &mdash;
-            and PolicyEngine is the model that composes them.
+            PolicyEngine is the model that composes them, and Thesis scores
+            the forecasts against reality.
           </p>
         </div>
       </div>

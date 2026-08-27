@@ -29,8 +29,8 @@ const primitives = [
   },
   {
     n: '5',
-    need: 'Judgment to put it together',
-    project: 'Expertise, discretion, uncertainty',
+    need: 'Judgment to put it together — expertise, discretion, uncertainty',
+    project: 'Thesis',
     loop: 'Loop: forecasts that resolve against reality — the most important one.',
   },
 ];

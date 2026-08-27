@@ -25,8 +25,8 @@ const sections = [
   },
   {
     number: '5',
-    title: 'Together',
-    detail: 'Judgment, uncertainty, and the loop that matters most.',
+    title: 'Thesis',
+    detail: 'Judgment and uncertainty — open forecasts, scored against reality.',
   },
 ];
 
