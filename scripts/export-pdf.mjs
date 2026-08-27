@@ -208,7 +208,12 @@ async function main() {
           } catch {
             // ignore — live-iframe slides have no basePath images to fix
           }
-          await hideNav(page);
+          try {
+            await hideNav(page);
+          } catch {
+            // same detached-frame class as fixImages; nav is usually already
+            // hidden from the prior step, so never let this kill the capture
+          }
           await new Promise((r) => setTimeout(r, 200));
           shot = await page.screenshot({ type: "png", encoding: "base64" });
           break;
