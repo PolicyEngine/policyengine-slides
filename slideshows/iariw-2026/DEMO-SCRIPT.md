@@ -2,10 +2,11 @@
 
 The deck embeds the LIVE apps directly, each with an Expand button: slide 23 (Axiom App,
 Belgium), 28 (cliff analyzer, axiom.org/snap), 30 (chatbot, axiom.org/chatbot), 36
-(Chronicle targets drill), 43 (calibration dashboard), 49 (policyengine.org/be). You can
-drive the whole demo without leaving the deck; preloaded tabs remain smoother for deep
-interaction. Every beat has static screenshot slides right after it (24–27, 29, 31, 37, 44,
-50). If the network dies mid-beat, advance and keep talking.
+(chronicle.institute), 43 (calibration dashboard), 49 (policyengine.org/be), 55 (Thesis
+bill analyses, app.thesisinstitute.org/bills). You can drive the whole demo without leaving
+the deck; preloaded tabs remain smoother for deep interaction. Every beat has static
+screenshot slides right after it (24–27, 29, 31, 37, 44, 50, 56). If the network dies
+mid-beat, advance and keep talking.
 
 Cliff analyzer beat: Run reform → point at the allotment cliff near $2,100 and the
 marginal-rate spike → drag the earned income deduction slider → the cliff moves.
@@ -21,8 +22,10 @@ AI" → grounded vs plain on one screen. Never repeat the page's "certified" wor
    - https://axiom.org/validation
    - https://policyengine.org/be
    - https://microcosm.institute/calibration/dashboard/microcosm?country=be
+   - https://chronicle.institute
    - https://axiom.org/snap  (cliff analyzer)
    - https://axiom.org/chatbot  (chatbot — send one warm-up question so the backend is hot)
+   - https://app.thesisinstitute.org/bills
 2. On policyengine.org/be: confirm the yellow provenance banner renders and the
    "Society-wide impacts" tab shows €0.00B at baseline.
 3. Phone hotspot ready as backup. If neither works, the deck carries every beat.

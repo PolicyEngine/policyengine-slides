@@ -6,31 +6,26 @@ const primitives = [
   {
     n: '1',
     need: 'Understand the policy rules',
-    project: 'Axiom',
     loop: 'Loop: oracles — external engines re-run every encoding; zero unexplained mismatches.',
   },
   {
     n: '2',
     need: 'Ready access to official statistics',
-    project: 'Chronicle',
     loop: 'Loop: completeness against what publishers release, with lineage to every source.',
   },
   {
     n: '3',
     need: 'The world at a micro level',
-    project: 'Microcosm',
     loop: 'Loop: calibration error published per target; surveys held out for validation.',
   },
   {
     n: '4',
     need: 'A model that computes reforms',
-    project: 'PolicyEngine',
     loop: 'Loop: cross-engine agreement, and a community that uses the results.',
   },
   {
     n: '5',
     need: 'Judgment to put it together — expertise, discretion, uncertainty',
-    project: 'Thesis',
     loop: 'Loop: forecasts that resolve against reality — the most important one.',
   },
 ];
@@ -52,10 +47,9 @@ export default function FivePrimitivesSlide() {
             <div className="font-mono text-3xl font-bold text-pe-teal leading-none">
               {p.n}
             </div>
-            <p className="text-base text-gray-700 leading-snug mt-3">
+            <p className="text-lg font-bold text-pe-dark leading-snug mt-3">
               {p.need}
             </p>
-            <h3 className="text-xl font-bold text-pe-dark mt-2">{p.project}</h3>
             <p className="text-sm text-gray-500 leading-snug mt-auto pt-4">
               {p.loop}
             </p>

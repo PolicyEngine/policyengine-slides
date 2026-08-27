@@ -57,6 +57,7 @@ import {
   ChronicleTargetsStaticSlide,
   AxiomCliffStaticSlide,
   AxiomChatbotStaticSlide,
+  ThesisBillsStaticSlide,
 } from './slides/DemoSlides';
 import {
   DemoAxiomLiveSlide,
@@ -67,6 +68,7 @@ import {
   ChronicleLiveSlide,
   AxiomCliffLiveSlide,
   AxiomChatbotLiveSlide,
+  ThesisLiveSlide,
 } from './slides/DemoLiveSlides2';
 // 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
@@ -159,6 +161,8 @@ export const iariw2026Config: SlideshowConfig = {
     TogetherDividerSlide,
     ConductorsSlide,
     ClosingLoopSlide,
+    ThesisLiveSlide,
+    ThesisBillsStaticSlide,
     ForecastUncertaintySlide,
     CommunityClosingSlide,
     QuestionsSlide,
