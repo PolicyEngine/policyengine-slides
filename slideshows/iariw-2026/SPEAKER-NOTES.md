@@ -2,7 +2,7 @@
 
 IARIW–CAPE workshop "New technologies for evidence-based policy making"
 Thursday 27 August 2026 · 14:40–15:30 · Room P02, UCLouvain Saint-Louis, Brussels
-Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 62 slides, ~50 presented
+Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 66 slides, ~52 presented
 
 **Room:** IARIW measurement economists; Koen Algoed (Director General, Budget and Finance,
 Flemish Region) and Jean-Baptiste Traversa (head of microsimulation modelling, FPS Finance)
@@ -11,8 +11,9 @@ Tom Truyts has just finished the BEAMM talk and demo (13:45–14:35).
 
 **The arc:** the CBO questions, generalized → in an era where conditions may change fast,
 you'd need AI for all of it → but AI alone fails (PolicyBench) → so what do we arm it with?
-Five primitives, each with a feedback loop → brief history (six years under one roof) → walk
-the five, demoing each → the loop that matters most → roundtable hand-off.
+Five primitives, each making a different kind of claim and carrying its own public harness →
+brief history (six years under one roof) → walk the five, demoing each → recap the stack and
+show how the harnesses interlock → roundtable hand-off.
 
 **⚠️ Numbers that changed from the CBO deck, verified 2026-08-26:**
 1. PolicyBench: "1 in 3 to 1 in 7" is stale. Published v1.1 board (32 models): best 88.7%
@@ -29,21 +30,24 @@ modeling groups' publication records.
 
 ---
 
-## Timing map (45 min)
+## Timing map (45 min + 5 min buffer / questions)
 
 | Clock | Section | Slides | Minutes |
 |---|---|---|---|
 | 14:40 | Opening | 1–3 | 3 |
-| 14:43 | Scorekeeper scale + questions + how we get there | 4–10 | 8 |
-| 14:51 | Five primitives + history + roadmap | 11–13 | 4 |
-| 14:55 | 1 · Axiom (app, cliff analyzer, chatbot) | 14–33 (skip statics 24–27, 29, 31) | 14 |
-| 15:09 | 2 · Chronicle | 34–37 (skip 37) | 3 |
-| 15:12 | 3 · Microcosm | 38–45 (skip 44) | 6 |
-| 15:18 | 4 · PolicyEngine | 46–51 (skip 50) | 5 |
-| 15:23 | 5 · Thesis → 6 · Looking forward | 52–62 (skip 56, 58) | 7 |
+| 14:43 | Scorekeeper scale + questions + how we get there | 4–10 | 7 |
+| 14:50 | Five primitives + history + roadmap | 11–13 | 3 |
+| 14:53 | 1 · Axiom (app, cliff analyzer, chatbot) | 14–33 (skip statics 24–27, 29, 31) | 12 |
+| 15:05 | 2 · Chronicle | 34–37 (skip 37) | 3 |
+| 15:08 | 3 · Microcosm | 38–45 (skip 45) | 5 |
+| 15:13 | 4 · PolicyEngine | 46–53 (skip 48, 52) | 5 |
+| 15:18 | 5 · Thesis → 6 · Looking forward | 54–66 (skip 58, 60) | 7 |
 
-Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
-slides (22–25, 36, 42) are presented ONLY if the network dies.
+**Default 45-minute path:** static screenshots (24–27, 29, 31, 37, 45, 52, 58, 60)
+are presented ONLY if the network dies; skip WhoUsesIt (48); click through Evo2, Evo3, and
+Evo5 (17, 18, 20) in about 20 seconds each; cap the district map and the two US examples
+(42, 49, 50) at 30 seconds each; cap each Thesis demo (57, 59) at 30 seconds. If discussion
+runs long, cut slide 40, then slide 53.
 
 ---
 
@@ -104,12 +108,15 @@ Landing: AI is impressive at code, search, summarization. It is not a substitute
 "So what would the AI need? What do we arm it with?"
 
 ### 11 · What do we arm the AI with? (2m — the spine slide)
-Five primitives, stated as NEEDS — no project names yet (the wordmark reveal is slide 13):
-1 understand the policy rules (loop: oracles, zero unexplained mismatches) · 2 ready access
-to official statistics (loop: completeness + lineage) · 3 the world at micro level (loop:
-published calibration error, surveys held out) · 4 a model that computes reforms (loop:
-cross-engine agreement + users) · 5 judgment to put it together (loop: forecasts that
-resolve — the most important). Landing: the same primitives norm AIs AND human researchers.
+Five primitives, stated as NEEDS — no project names yet (the wordmark reveal is slide 13).
+Introduce the shared noun here: a **public harness** is the feedback loop that grades whether
+each kind of claim is getting it right. 1 understand the policy rules (harness: deterministic
+checks + external oracles + AI judge) · 2 ready access to official statistics (harness: receipt
+integrity + time witnesses) · 3 the world at micro level (harness: aggregate calibration +
+record-level evals) · 4 a model that computes reforms (harness: explained divergence against
+external models) · 5 judgment to put it together (harness: forecasts that resolve against
+first prints). Landing: you cannot grade a witness, a population, a derivation, and a forecast
+on one scale; the same public discipline norms AI agents and human researchers alike.
 
 ### 12 · Six years under one roof (1.5m)
 The history: PolicyEngine since 2021 built the first four together — encoded US/UK rules (by
@@ -194,7 +201,14 @@ documentation and catches definitional mismatches.
 Gradient descent over household weights against thousands of published targets. AI ingests
 targets, reconciles schemas; analysts decide what goes live.
 
-### 42 · Microcosm-BE (2m)
+### 42 · 30,000 calibration targets make national policy local (1.5m)
+The 32,633-target research surface adds geographic grain: 24,340 congressional-district cells,
+7,815 state cells, and 478 national cells. That is what makes an output like this 436-district
+OBBBA map possible: the model can retain local variation while still fitting public aggregates.
+Say the lineage precisely: this companion-paper map uses district-calibrated eCPS 1.73.0
+research files; it is not a claim about the current certified Microcosm release.
+
+### 43 · Microcosm-BE (2m)
 The recipe on Belgium [sealed v0.5 artifacts]: 57,240 household records, 254 targets (sums of
 Chronicle facts), mean |error| 1.84%, 242/254 within 5%. The EUROMOD column ledger: all 182
 substantive output columns — 10 matched, 143 explained, 29 named gaps, 0 unclassified.
@@ -202,13 +216,9 @@ Provenance line said straight: US survey donor pool, reweighted; Belgian donor p
 planned upgrade. If SILC comes up: CAPE holds access — the acceptance test can run on their
 machines.
 
-### 43 · DEMO — the calibration dashboard, live (1.5m; slide 44 is the fallback)
+### 44 · DEMO — the calibration dashboard, live (1.5m; slide 45 is the fallback)
 Every target published with its error; 96.1% within 10% on the live page. "You don't have to
 take my word for any of this — it's a website."
-
-### 45 · Microplex (30s) — CUT FIRST IF LONG
-Where the US data layer heads: multi-spine, automated target discovery, promote-on-review,
-versioned public releases.
 
 ### 46–47 · PolicyEngine divider → PolicyEngine today (1.5m)
 The model that composes the primitives. Open source since June 2021 (AGPL-3.0); 95,000+
@@ -220,21 +230,32 @@ and UK, built in public.
 ### 48 · Who uses it (30s) — CUT IF LONG
 Logo wall. One sentence and move.
 
-### 49 · DEMO — a Belgian reform, live (~3m; slide 50 is the fallback)
+### 49 · DEMO — Cliff Watch (45s)
+policyengine.org/us/cliffwatch: sweep earnings and see where interacting benefit rules create
+high marginal effective tax rates. This is the household-facing trace of the same encoded
+rules — a concrete case where the model harness must explain the mechanism, not merely return
+an answer.
+
+### 50 · DEMO — OBBBA Household Explorer (45s)
+policyengine.org/us/obbba-household-explorer: take one household and decompose the law
+provision by provision. The same model and microdata that produce national and district totals
+also produce a legible case-level explanation.
+
+### 51 · DEMO — a Belgian reform, live (~3m; slide 52 is the fallback)
 policyengine.org/be in-deck: move the top bracket rate, watch budget/Gini/poverty recompute
 (155 precomputed cells, 28 CIR 92 parameters); scroll to "The population, checked" — both
 engines against administrative truth, misses in red with named mechanisms.
 
-### 51 · policyengine.py (1m — works offline)
+### 53 · policyengine.py (1m — works offline)
 The same models as a Python package: a UK household in four lines; the same call for the US
 with a reform attached. This is the interface the Belgian work targets.
 
-### 52–53 · Thesis divider → Conductors, not oracles (2m)
+### 54–55 · Thesis divider → Conductors, not oracles (1m on the default path)
 The model routes to verified tools and integrates calibrated outputs; analyst judgment lives
 at every routing decision. The judgment-to-mechanism loop: intuition becomes mechanism over
 time.
 
-### 54 · The loop that matters most (2m)
+### 56 · The loop that matters most (45s on the default path)
 Every primitive has its gauge; the one that ranks them all is whether forecasts resolve
 against reality — which is what Thesis exists to do: open forecasts of public outcomes,
 every prediction published with its reasoning and graded when the official number lands.
@@ -244,7 +265,7 @@ We intend to score that. And the deeper point for 16:00: policy takes
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
-### 55 · DEMO — a baseline Thesis forecast: SPM child poverty (1.5m; 56 is the fallback)
+### 57 · DEMO — a baseline Thesis forecast: SPM child poverty (30s; 58 is the fallback)
 app.thesisinstitute.org/spm-child-poverty-2025: a live forecast cell on a published
 government data point — the 2025 SPM child poverty rate with an 80% interval, the Census
 history, and the agent's full reasoning trace (assumptions AND caveats in the open; the
@@ -252,30 +273,48 @@ trace may show prototype infra notes — that transparency is the design). Grade
 Census publishes in September. Start here so the bills demo lands as "the same machinery,
 pointed at legislation."
 
-### 57 · DEMO — Thesis bill analyses (1.5m; 58 is the fallback)
+### 59 · DEMO — Thesis bill analyses (30s; 60 is the fallback)
 app.thesisinstitute.org/bills: "start from the bill, derive the outcomes" — each analysis
 reads a bill's provisions, separates countersignable goals from likely effects, and maps
 candidate outcome metrics against the live forecast registry. The opening question, made
 practice. Labeled prototype; say so.
 
-### 59 · Looking forward (divider, 15s)
+### 61 · The five blocks form one stack (30s — section 6 recap)
+Read bottom to top: Axiom supplies executable rules and Chronicle supplies witnessed facts;
+Microcosm turns them into a representative world; PolicyEngine composes rules and entities;
+Thesis asks what happens next. The point is architectural: each block can improve and be
+audited independently, while the arrows make the dependencies explicit.
 
-### 60 · And if the baseline itself moves? (1.5m — the closing forecast beat)
-Everything before this slide matters regardless of how the economy evolves; if conditions
-change quickly, being nimble matters more. The chart: professional forecasters disagree less
-than ever about long-run growth (SPF 10-year IQR 0.2pp, half its 1990s level) — but asked
-specifically about AI, economists and forecasters see room for major impact (+0.07pp to
-+30pp of annual growth) [Philadelphia Fed SPF; AI Frontiers compilation]. Landing: if not
-just GDP but unemployment, wage inequality, and the capital income share move, policymakers
-will need even better tools — and AI can help, if we arm it in turn. "After the break, I'm
-looking forward to discussing what those tools can improve in policymaking."
+### 62 · Different claims, different public tests (45s)
+Now make the harnesses explicit. Axiom grades fidelity to law; Chronicle grades whether a
+receipt is intact and timely; Microcosm publishes calibration and record-level evals;
+PolicyEngine explains divergence against external models; Thesis resolves forecasts against
+Chronicle's first prints. The harnesses interlock — Chronicle resolves Thesis, Microcosm feeds
+PolicyEngine, Axiom supplies both rules and answer keys.
 
-### 61 · It takes all of us (1.5m)
+### 63 · Professional forecasters do not expect the baseline to move (45s)
+First show only the SPF panel. The 2026Q1 median forecast for average US real GDP growth over
+the next decade is 2.1%; all 25 responses fit between 1.8% and 2.5%, with a 0.2pp IQR. That is
+the baseline institutions are actually pricing: no visible break in trend.
+
+### 64 · Condition on rapid AI, and the range opens up (1m)
+Now layer in the AI-specific evidence. In the Karger et al./Forecasting Research Institute
+survey, economists, AI experts, and superforecasters all put the unconditional 2030 GDP-growth
+median at 2.5%. Conditional on rapid AI capability progress, those medians rose to 3.3%, 3.7%,
+and 3.7%, with much wider uncertainty. Economists assigned the rapid scenario only 14% mean
+probability (61.4% to moderate-or-rapid combined). Their rapid-scenario 2030 median also moves
+labor-force participation from 61.0% unconditional to 59.3%, and the top-10% wealth share from
+73.2% to 75.0%. Be precise: these were capability scenarios, not adoption scenarios. Yale's
+Budget Lab did not field the survey; it modeled selected Karger inputs through its fiscal and
+economic outlook framework. Landing: we do not need to choose one AI future to justify the stack;
+we need infrastructure that can recompute each conditional one.
+
+### 65 · It takes all of us (30s)
 Model-building has always been about making consequences visible before the choice.
 Statistical offices, EUROMOD, BEAMM, ministries, open models — each doing what it does best.
 "Which is exactly what the roundtable is about — see you at 16:00."
 
-### 62 · Thank you / QR (leave up)
+### 66 · Thank you / QR (leave up)
 QR → axiom.org. Links: axiom.org · policyengine.org/be · both GitHub orgs.
 
 ---

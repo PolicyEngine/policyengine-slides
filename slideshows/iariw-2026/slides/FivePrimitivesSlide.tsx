@@ -6,27 +6,27 @@ const primitives = [
   {
     n: '1',
     need: 'Understand the policy rules',
-    loop: 'Loop: oracles — external engines re-run every encoding; zero unexplained mismatches.',
+    harness: 'Harness: encode gate + computed certification.',
   },
   {
     n: '2',
     need: 'Ready access to official statistics',
-    loop: 'Loop: completeness against what publishers release, with lineage to every source.',
+    harness: 'Harness: receipt integrity + dual-time witnesses.',
   },
   {
     n: '3',
     need: 'The world at a micro level',
-    loop: 'Loop: calibration error published per target; surveys held out for validation.',
+    harness: 'Harness: published aggregates + record-level evals.',
   },
   {
     n: '4',
     need: 'A model that computes reforms',
-    loop: 'Loop: cross-engine agreement, and a community that uses the results.',
+    harness: 'Harness: explained divergence + oracle suite.',
   },
   {
     n: '5',
     need: 'Judgment to put it together — expertise, discretion, uncertainty',
-    loop: 'Loop: forecasts that resolve against reality — the most important one.',
+    harness: 'Harness: resolution + calibration scoring.',
   },
 ];
 
@@ -36,8 +36,8 @@ export default function FivePrimitivesSlide() {
       <SlideHeader>
         <SlideTitle>What do we arm the AI with?</SlideTitle>
         <p className="text-xl text-gray-600 mt-2">
-          Five primitives &mdash; each with a feedback loop for whether it is
-          getting it right
+          Five primitives &mdash; each with a public harness: a feedback loop
+          that grades whether it is getting it right.
         </p>
       </SlideHeader>
 
@@ -51,7 +51,7 @@ export default function FivePrimitivesSlide() {
               {p.need}
             </p>
             <p className="text-sm text-gray-500 leading-snug mt-auto pt-4">
-              {p.loop}
+              {p.harness}
             </p>
           </div>
         ))}

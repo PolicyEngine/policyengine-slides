@@ -2,12 +2,13 @@
 
 The deck embeds the LIVE apps directly, each with an Expand button: slide 23 (Axiom App,
 Belgium), 28 (cliff analyzer, axiom.org/snap), 30 (chatbot, axiom.org/chatbot), 36
-(chronicle.institute), 43 (calibration dashboard), 49 (policyengine.org/be), 55 (Thesis
-baseline forecast, app.thesisinstitute.org/spm-child-poverty-2025), 57 (Thesis bill
-analyses, app.thesisinstitute.org/bills). You can drive the whole demo without leaving the
-deck; preloaded tabs remain smoother for deep interaction. Every beat has static screenshot
-slides right after it (24–27, 29, 31, 37, 44, 50, 56, 58). If the network dies mid-beat,
-advance and keep talking.
+(chronicle.institute), 44 (calibration dashboard), 49 (PolicyEngine Cliff Watch), 50
+(OBBBA Household Explorer), 51 (policyengine.org/be), 57 (Thesis baseline forecast,
+app.thesisinstitute.org/spm-child-poverty-2025), and 59 (Thesis bill analyses,
+app.thesisinstitute.org/bills). You can drive the whole demo without leaving the deck;
+preloaded tabs remain smoother for deep interaction. Static screenshot fallbacks follow the
+core beats (24–27, 29, 31, 37, 45, 52, 58, 60). If the network dies mid-beat, advance and
+keep talking.
 
 Cliff analyzer beat: Run reform → point at the allotment cliff near $2,100 and the
 marginal-rate spike → drag the earned income deduction slider → the cliff moves.
@@ -21,6 +22,8 @@ AI" → grounded vs plain on one screen. Never repeat the page's "certified" wor
    - https://axiom.org/axiom?country=be  (Belgium field view)
    - https://axiom.org/axiom/graph?compose=be  (composition graph)
    - https://axiom.org/validation
+   - https://www.policyengine.org/us/cliffwatch
+   - https://www.policyengine.org/us/obbba-household-explorer
    - https://policyengine.org/be
    - https://microcosm.institute/calibration/dashboard/microcosm?country=be
    - https://chronicle.institute
@@ -47,24 +50,31 @@ AI" → grounded vs plain on one screen. Never repeat the page's "certified" wor
 
 Fallback slides: "Browse the encoded law" → "The law at the node" → "The computation graph".
 
-## Beat 2 — policyengine.org/be (≈3 min)
+## Beat 2 — two US examples (≈1.5 min)
 
 | Step | Do | Say |
 |---|---|---|
-| 2.1 | Switch to policyengine.org/be; point at the banner | "Everything here is labeled: Axiom rules engine, Microcosm-BE v0.5, 2025 law — and the provenance line states the US donor pool and the planned Belgian upgrade." |
-| 2.2 | Drag "Top bracket rate" 50% → 55% | "One statute parameter — art. 130 CIR 92. Budget impact, Gini, poverty recompute from 155 precomputed cells across 28 encoded parameters." |
-| 2.3 | Click "Reset to current law" | — |
-| 2.4 | Scroll to "The population, checked" | "The same population, computed by both engines against administrative truth. The misses are shown in red, not hidden — each carries a named mechanism in the cross-engine ledger." |
+| 2.1 | Show policyengine.org/us/cliffwatch; sweep earnings | "The model traces where interacting rules create a cliff — not just the answer, but the mechanism and the marginal rate around it." |
+| 2.2 | Show policyengine.org/us/obbba-household-explorer; pick a household | "The same law that produces a national score decomposes provision by provision for one household. Aggregate and case-level explanations come from the same model." |
+
+## Beat 3 — policyengine.org/be (≈3 min)
+
+| Step | Do | Say |
+|---|---|---|
+| 3.1 | Switch to policyengine.org/be; point at the banner | "Everything here is labeled: Axiom rules engine, Microcosm-BE v0.5, 2025 law — and the provenance line states the US donor pool and the planned Belgian upgrade." |
+| 3.2 | Drag "Top bracket rate" 50% → 55% | "One statute parameter — art. 130 CIR 92. Budget impact, Gini, poverty recompute from 155 precomputed cells across 28 encoded parameters." |
+| 3.3 | Click "Reset to current law" | — |
+| 3.4 | Scroll to "The population, checked" | "The same population, computed by both engines against administrative truth. The misses are shown in red, not hidden — each carries a named mechanism in the cross-engine ledger." |
 
 Fallback slide: "A Belgian reform, computed".
 
-## Beat 3 — policyengine.py (≈1 min, works offline)
+## Beat 4 — policyengine.py (≈1 min, works offline)
 
 Stay on the code slide in the deck (no network needed). Walk the two calls:
 a UK household in four lines; the same call for the US with a reform attached.
 "This is the interface the Belgian work targets — the apps and the notebook run the same package."
 
-## Beat 4 — if time allows (≈1 min)
+## Beat 5 — if time allows (≈1 min)
 
 | Step | Do | Say |
 |---|---|---|
