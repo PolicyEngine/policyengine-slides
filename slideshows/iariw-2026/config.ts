@@ -52,12 +52,20 @@ import {
   DemoAxiomValidationSlide,
   DemoPeBeSlide,
   MicrocosmDashboardSlide,
+  ChronicleTargetsStaticSlide,
+  AxiomCliffStaticSlide,
+  AxiomChatbotStaticSlide,
 } from './slides/DemoSlides';
 import {
   DemoAxiomLiveSlide,
   DemoPeBeLiveSlide,
   DemoDashboardLiveSlide,
 } from './slides/DemoLiveSlides';
+import {
+  ChronicleLiveSlide,
+  AxiomCliffLiveSlide,
+  AxiomChatbotLiveSlide,
+} from './slides/DemoLiveSlides2';
 // 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
 import ClosingLoopSlide from './slides/ClosingLoopSlide';
@@ -107,12 +115,18 @@ export const iariw2026Config: SlideshowConfig = {
     DemoAxiomProvisionSlide,
     DemoAxiomGraphSlide,
     DemoAxiomValidationSlide,
+    AxiomCliffLiveSlide,
+    AxiomCliffStaticSlide,
+    AxiomChatbotLiveSlide,
+    AxiomChatbotStaticSlide,
     BelgiumParitySlide,
     CertificationLadderSlide,
 
     // 2 — Chronicle (official statistics)
     ChronicleDividerSlide,
     ChronicleSlide,
+    ChronicleLiveSlide,
+    ChronicleTargetsStaticSlide,
 
     // 3 — Microcosm (the world at micro level)
     MicrocosmDividerSlide,

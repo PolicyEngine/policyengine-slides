@@ -27,8 +27,10 @@ export default function ChronicleSlide() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="content-card p-5 text-center">
-              <div className="stat-number text-5xl">148</div>
-              <p className="text-base text-gray-700 mt-1">source packages</p>
+              <div className="stat-number text-5xl">171,855</div>
+              <p className="text-base text-gray-700 mt-1">
+                facts ingested to date
+              </p>
             </div>
             <div className="content-card p-5 text-center">
               <div className="stat-number text-5xl">40</div>
