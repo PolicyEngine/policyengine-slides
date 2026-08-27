@@ -22,6 +22,7 @@ import {
   MicrocosmDividerSlide,
   EngineDividerSlide,
   TogetherDividerSlide,
+  LookingForwardDividerSlide,
 } from './slides/SectionDivider';
 // 1 — Axiom
 import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
@@ -57,6 +58,7 @@ import {
   ChronicleTargetsStaticSlide,
   AxiomCliffStaticSlide,
   AxiomChatbotStaticSlide,
+  ThesisSpmStaticSlide,
   ThesisBillsStaticSlide,
 } from './slides/DemoSlides';
 import {
@@ -68,6 +70,7 @@ import {
   ChronicleLiveSlide,
   AxiomCliffLiveSlide,
   AxiomChatbotLiveSlide,
+  ThesisForecastLiveSlide,
   ThesisLiveSlide,
 } from './slides/DemoLiveSlides2';
 // 5 — Together
@@ -161,8 +164,11 @@ export const iariw2026Config: SlideshowConfig = {
     TogetherDividerSlide,
     ConductorsSlide,
     ClosingLoopSlide,
+    ThesisForecastLiveSlide,
+    ThesisSpmStaticSlide,
     ThesisLiveSlide,
     ThesisBillsStaticSlide,
+    LookingForwardDividerSlide,
     ForecastUncertaintySlide,
     CommunityClosingSlide,
     QuestionsSlide,

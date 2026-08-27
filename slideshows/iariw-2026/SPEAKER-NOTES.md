@@ -2,7 +2,7 @@
 
 IARIW–CAPE workshop "New technologies for evidence-based policy making"
 Thursday 27 August 2026 · 14:40–15:30 · Room P02, UCLouvain Saint-Louis, Brussels
-Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 59 slides, ~48 presented
+Deck: policyengine.org/slides/iariw-2026 (local: /slides/iariw-2026) · 62 slides, ~50 presented
 
 **Room:** IARIW measurement economists; Koen Algoed (Director General, Budget and Finance,
 Flemish Region) and Jean-Baptiste Traversa (head of microsimulation modelling, FPS Finance)
@@ -40,7 +40,7 @@ modeling groups' publication records.
 | 15:09 | 2 · Chronicle | 34–37 (skip 37) | 3 |
 | 15:12 | 3 · Microcosm | 38–45 (skip 44) | 6 |
 | 15:18 | 4 · PolicyEngine | 46–51 (skip 50) | 5 |
-| 15:23 | 5 · Thesis / together + the closing forecast beat | 52–59 (skip 56) | 7 |
+| 15:23 | 5 · Thesis → 6 · Looking forward | 52–62 (skip 56, 58) | 7 |
 
 Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
 slides (22–25, 36, 42) are presented ONLY if the network dies.
@@ -244,13 +244,23 @@ We intend to score that. And the deeper point for 16:00: policy takes
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
-### 55 · DEMO — Thesis bill analyses (1.5m; 56 is the fallback)
+### 55 · DEMO — a baseline Thesis forecast: SPM child poverty (1.5m; 56 is the fallback)
+app.thesisinstitute.org/spm-child-poverty-2025: a live forecast cell on a published
+government data point — the 2025 SPM child poverty rate with an 80% interval, the Census
+history, and the agent's full reasoning trace (assumptions AND caveats in the open; the
+trace may show prototype infra notes — that transparency is the design). Graded when the
+Census publishes in September. Start here so the bills demo lands as "the same machinery,
+pointed at legislation."
+
+### 57 · DEMO — Thesis bill analyses (1.5m; 58 is the fallback)
 app.thesisinstitute.org/bills: "start from the bill, derive the outcomes" — each analysis
 reads a bill's provisions, separates countersignable goals from likely effects, and maps
 candidate outcome metrics against the live forecast registry. The opening question, made
 practice. Labeled prototype; say so.
 
-### 57 · And if the baseline itself moves? (1.5m — the closing forecast beat)
+### 59 · Looking forward (divider, 15s)
+
+### 60 · And if the baseline itself moves? (1.5m — the closing forecast beat)
 Everything before this slide matters regardless of how the economy evolves; if conditions
 change quickly, being nimble matters more. The chart: professional forecasters disagree less
 than ever about long-run growth (SPF 10-year IQR 0.2pp, half its 1990s level) — but asked
@@ -260,12 +270,12 @@ just GDP but unemployment, wage inequality, and the capital income share move, p
 will need even better tools — and AI can help, if we arm it in turn. "After the break, I'm
 looking forward to discussing what those tools can improve in policymaking."
 
-### 58 · It takes all of us (1.5m)
+### 61 · It takes all of us (1.5m)
 Model-building has always been about making consequences visible before the choice.
 Statistical offices, EUROMOD, BEAMM, ministries, open models — each doing what it does best.
 "Which is exactly what the roundtable is about — see you at 16:00."
 
-### 59 · Thank you / QR (leave up)
+### 62 · Thank you / QR (leave up)
 QR → axiom.org. Links: axiom.org · policyengine.org/be · both GitHub orgs.
 
 ---

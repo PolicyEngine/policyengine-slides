@@ -42,6 +42,33 @@ export const ChronicleLiveSlide = () => (
   </LiveAppSlide>
 );
 
+export const ThesisForecastLiveSlide = () => (
+  <LiveAppSlide
+    title="A baseline forecast: SPM child poverty, 2025"
+    url="https://app.thesisinstitute.org/spm-child-poverty-2025"
+    displayUrl="app.thesisinstitute.org"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        A live forecast cell on a published government data point: the
+        Supplemental Poverty Measure child poverty rate for 2025, with an 80%
+        interval, the Census history behind it, and the analyst agent&apos;s
+        full reasoning trace.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">How it resolves</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        When the Census Bureau publishes the 2025 rate in September, the
+        forecast is graded and the score goes on the public record &mdash;
+        per forecast, per agent.
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
 export const ThesisLiveSlide = () => (
   <LiveAppSlide
     title="Thesis: start from the bill, derive the outcomes"
