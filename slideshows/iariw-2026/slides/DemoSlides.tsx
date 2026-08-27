@@ -65,6 +65,16 @@ export const ChronicleTargetsStaticSlide = () => (
   />
 );
 
+export const ThesisSpmStaticSlide = () => (
+  <ScreenshotSlide
+    title="A baseline forecast: SPM child poverty, 2025"
+    url="app.thesisinstitute.org"
+    src="/screenshots/iariw-2026/thesis-spm.png"
+    alt="Thesis forecast page for the 2025 SPM child poverty rate"
+    caption="Captured 27 Aug: 13.0% with an 80% interval of 11.9%-14.3%, alongside the Census history and the agent's full reasoning trace - graded when the official number lands in September 2026."
+  />
+);
+
 export const ThesisBillsStaticSlide = () => (
   <ScreenshotSlide
     title="Thesis: bill analyses"

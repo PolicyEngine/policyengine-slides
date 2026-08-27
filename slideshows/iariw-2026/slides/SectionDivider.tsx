@@ -71,3 +71,11 @@ export const TogetherDividerSlide = () => (
     subtitle="Putting it together — open forecasts of public outcomes, scored against reality."
   />
 );
+
+export const LookingForwardDividerSlide = () => (
+  <SectionDivider
+    number="6"
+    title="Looking forward"
+    subtitle="If the baseline moves — and what that asks of policy analysis."
+  />
+);
