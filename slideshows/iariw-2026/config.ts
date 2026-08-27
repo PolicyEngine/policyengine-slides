@@ -3,6 +3,10 @@ import { speakers } from '@/lib/speakers';
 import TitleSlide from './slides/TitleSlide';
 import BridgeSlide from './slides/BridgeSlide';
 import CraftScaledSlide from './slides/CraftScaledSlide';
+import WhatIfEveryBillSlide from './slides/WhatIfEveryBillSlide';
+import WhatIfEverySeriesSlide from './slides/WhatIfEverySeriesSlide';
+import CrossScaleSlide from './slides/CrossScaleSlide';
+import HowWeGetThereSlide from './slides/HowWeGetThereSlide';
 import OutlineSlide from './slides/OutlineSlide';
 import {
   RulesDividerSlide,
@@ -39,6 +43,11 @@ import {
   DemoPeBeSlide,
   MicrocosmDashboardSlide,
 } from './slides/DemoSlides';
+import {
+  DemoAxiomLiveSlide,
+  DemoPeBeLiveSlide,
+  DemoDashboardLiveSlide,
+} from './slides/DemoLiveSlides';
 import DemoPySlide from './slides/DemoPySlide';
 // Section 4 — Where this goes
 import ConductorsSlide from './slides/ConductorsSlide';
@@ -61,6 +70,10 @@ export const iariw2026Config: SlideshowConfig = {
     TitleSlide,
     BridgeSlide,
     CraftScaledSlide,
+    WhatIfEveryBillSlide,
+    WhatIfEverySeriesSlide,
+    CrossScaleSlide,
+    HowWeGetThereSlide,
     OutlineSlide,
 
     // Section 1 — Rules
@@ -85,15 +98,18 @@ export const iariw2026Config: SlideshowConfig = {
     ImputationSlide,
     CalibrationSlide,
     MicrocosmBESlide,
+    DemoDashboardLiveSlide,
     MicrocosmDashboardSlide,
     MicroplexSlide,
 
-    // Section 3 — Live (fallback screenshots mirror the demo beats)
+    // Section 3 — Live (embedded apps; static screenshots follow as fallbacks)
     LiveDividerSlide,
+    DemoAxiomLiveSlide,
     DemoAxiomBrowseSlide,
     DemoAxiomProvisionSlide,
     DemoAxiomGraphSlide,
     DemoAxiomValidationSlide,
+    DemoPeBeLiveSlide,
     DemoPeBeSlide,
     DemoPySlide,
 

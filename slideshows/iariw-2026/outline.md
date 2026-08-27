@@ -34,11 +34,18 @@ forecasts of the AI era itself diverge by orders of magnitude.
 
 ## Slide-by-slide
 
-### Opening (4 slides, ~5 min)
+### Opening + question sequence (8 slides, ~8 min)
 1. **TitleSlide** — cover, partner context (IARIW–CAPE workshop).
 2. **BridgeSlide** — "Tom just showed you the platform." Same craft, shared stack directions.
 3. **CraftScaledSlide** — the craft, scaled: what agents change and what they don't.
-4. **OutlineSlide** — Rules / Data / Live / Where this goes.
+4. **WhatIfEveryBillSlide** — what if every bill had a score? (>300k cells; six Belgian
+   parliaments beyond the one US legislature).
+5. **WhatIfEverySeriesSlide** — what if every statistical series had a forecast? (>10m cells).
+6. **CrossScaleSlide** — what if you cross them? (>100b bill-statistic-year cells; which cells
+   deserve estimates, bands, or out-of-domain marks).
+7. **HowWeGetThereSlide** — two compounding tracks: build the apparatus with AI, then equip AI
+   to run it at scale.
+8. **OutlineSlide** — Rules / Data / Live / Where this goes.
 
 ### Section 1 — Rules (~14 min)
 5. **RulesDivider**
@@ -65,11 +72,14 @@ forecasts of the AI era itself diverge by orders of magnitude.
     (matched / explained / gap); provenance line (US donor pool, Belgian donor = planned upgrade).
 23. **MicroplexSlide** — where the data layer heads next (brief).
 
-### Section 3 — Live (~8 min demo; fallback slides mirror each beat)
+### Section 3 — Live (~9 min; live embedded apps with Expand, static screenshots as fallbacks)
 24. **DemoDivider** — the three beats.
-25. **DemoAxiomSlide** — fallback: axiom.org browse → provision → RuleSpec → computation graph.
-26. **DemoPeBeSlide** — fallback: policyengine.org/be Belgian PIT reform simulator.
-27. **DemoPySlide** — policyengine.py in two lines (code slide; works offline).
+25. **DemoAxiomLiveSlide** — LIVE iframe: the Axiom App, Belgium (app.axiom-foundation.org).
+26. Static fallbacks: browse → provision → RuleSpec/graph → validation screenshots.
+27. **DemoPeBeLiveSlide** — LIVE iframe: policyengine.org/be reform simulator (+ static fallback).
+28. **DemoPySlide** — policyengine.py in a few lines (code slide; works offline).
+(The data section also carries **DemoDashboardLiveSlide** — the live calibration dashboard —
+with its static screenshot right after as the fallback.)
 
 ### Section 4 — Where this goes (~8 min)
 28. **FutureDivider**

@@ -1,7 +1,11 @@
 # Live demo script — IARIW 2026 (~8 min inside the 14:40–15:30 talk)
 
-Every beat has a fallback screenshot slide in the deck (section 3), in the same order.
-If the network dies mid-beat, advance to the matching slide and keep talking.
+The deck embeds the LIVE apps directly: slide 32 (Axiom App, Belgium), slide 37
+(policyengine.org/be), and slide 28 (calibration dashboard) are live iframes with an Expand
+button — you can drive the whole demo without leaving the deck. Preloaded browser tabs remain
+the smoother option for deep interaction; use whichever feels better in the moment.
+Every beat also has a static screenshot slide right after it. If the network dies mid-beat,
+advance one slide and keep talking.
 
 ## Before the talk (10 min, on venue wifi or hotspot)
 
