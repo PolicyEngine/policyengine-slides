@@ -40,7 +40,7 @@ modeling groups' publication records.
 | 15:09 | 2 · Chronicle | 32–35 (skip 35) | 3 |
 | 15:12 | 3 · Microcosm | 36–43 (skip 42) | 6 |
 | 15:18 | 4 · PolicyEngine | 44–49 (skip 48) | 5 |
-| 15:23 | 5 · Together | 50–54 | 5 |
+| 15:23 | 5 · Thesis / together | 50–54 | 5 |
 | 15:28 | Buffer | — | 2 |
 
 Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
@@ -97,15 +97,15 @@ Five primitives, each a project, each with a feedback loop:
 1 rules → Axiom (loop: oracles, zero unexplained mismatches) · 2 official statistics →
 Chronicle (loop: completeness + lineage) · 3 the world at micro level → Microcosm (loop:
 published calibration error, surveys held out) · 4 a model → PolicyEngine (loop: cross-engine
-agreement + users) · 5 judgment — expertise, discretion, uncertainty (loop: forecasts that
-resolve — the most important). Landing: the same primitives norm AIs AND human researchers.
+agreement + users) · 5 judgment → Thesis (loop: forecasts that resolve — the most important).
+Landing: the same primitives norm AIs AND human researchers.
 
 ### 10 · Six years under one roof (1.5m)
 The history: PolicyEngine since 2021 built the first four together — encoded US/UK rules (by
 hand, increasingly AI), microdata imputed + calibrated to official statistics, the simulation
 engine, the web app (still there, no longer the center). The realization behind the split:
 each layer deserves its own name, users, and feedback loop — Axiom, Chronicle, Microcosm,
-with PolicyEngine as the model that composes them.
+PolicyEngine as the model that composes them, and Thesis scoring the forecasts.
 
 ### 11 · Five primitives, five demos (30s)
 The roadmap. "Let's walk them."
@@ -223,9 +223,11 @@ time.
 
 ### 52 · The loop that matters most (2m)
 Every primitive has its gauge; the one that ranks them all is whether forecasts resolve
-against reality. The measurable question: when the stack covers a new country — Belgium took
-weeks because Microcosm calibrates to official statistics — do calibrated agents predict
-outcomes there better? We intend to score that. And the deeper point for 16:00: policy takes
+against reality — which is what Thesis exists to do: open forecasts of public outcomes,
+every prediction published with its reasoning and graded when the official number lands.
+The measurable question: when the stack covers a new country — Belgium took weeks because
+Microcosm calibrates to official statistics — does Thesis predict outcomes there better?
+We intend to score that. And the deeper point for 16:00: policy takes
 a different shape when baseline conditions change quickly; if you assign real probability to
 that, how does this community arm policymakers to respond?
 
