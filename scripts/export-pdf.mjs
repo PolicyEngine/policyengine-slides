@@ -200,7 +200,14 @@ async function main() {
       let shot;
       for (let attempt = 1; attempt <= 3; attempt++) {
         try {
-          await fixImages(page);
+          // fixImages only rewrites basePath-less <img> srcs; on slides with
+          // cross-origin iframes its evaluate can hit a permanently detached
+          // child frame, so a failure here must not block the screenshot.
+          try {
+            await fixImages(page);
+          } catch {
+            // ignore — live-iframe slides have no basePath images to fix
+          }
           await hideNav(page);
           await new Promise((r) => setTimeout(r, 200));
           shot = await page.screenshot({ type: "png", encoding: "base64" });
