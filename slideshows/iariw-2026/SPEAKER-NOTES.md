@@ -43,7 +43,7 @@ modeling groups' publication records.
 | 15:20 | 5 · Together | 44–48 | 5.5 |
 | 15:26 | Buffer + questions | — | 4 |
 
-Cut-first if long: Microplex (37), WhoUsesIt (39), and skim Evo3/Evo5. Static screenshot
+Cut-first if long: Microplex (37), WhoUsesIt (40), and skim Evo3/Evo5. Static screenshot
 slides (22–25, 36, 42) are presented ONLY if the network dies.
 
 ---
@@ -153,20 +153,20 @@ fiscal income by €1,000 class, SPF Finances/ONSS/ONEM totals, Eurostat nationa
 FPB outlook, JRC EUROMOD baselines. The loop: Microcosm calibrates ONLY to sums of Chronicle
 facts — every target traces to a publisher; surveys enter as validation only.
 
-### 30 · The data challenge (1m)
+### 30–31 · Microcosm divider → the data challenge (1m)
 Comprehensive AND accurate. US: no single survey has everything. The European inversion:
 Belgian registers are linked — the constraint is release, which is why BEAMM invests in
 synthesis. Both directions converge on calibration targets + validation services.
 
-### 31 · Imputation (45s)
+### 32 · Imputation (45s)
 Quantile regression forests, full conditional distributions, tails included. AI reads survey
 documentation and catches definitional mismatches.
 
-### 32 · Calibration (45s)
+### 33 · Calibration (45s)
 Gradient descent over household weights against thousands of published targets. AI ingests
 targets, reconciles schemas; analysts decide what goes live.
 
-### 33 · Microcosm-BE (2m)
+### 34 · Microcosm-BE (2m)
 The recipe on Belgium [sealed v0.5 artifacts]: 57,240 household records, 254 targets (sums of
 Chronicle facts), mean |error| 1.84%, 242/254 within 5%. The EUROMOD column ledger: all 182
 substantive output columns — 10 matched, 143 explained, 29 named gaps, 0 unclassified.
@@ -174,25 +174,25 @@ Provenance line said straight: US survey donor pool, reweighted; Belgian donor p
 planned upgrade. If SILC comes up: CAPE holds access — the acceptance test can run on their
 machines.
 
-### 34 · DEMO — the calibration dashboard, live (1.5m; slide 35 is the fallback)
+### 35 · DEMO — the calibration dashboard, live (1.5m; slide 36 is the fallback)
 Every target published with its error; 96.1% within 10% on the live page. "You don't have to
 take my word for any of this — it's a website."
 
-### 36 (fallback) / 37 · Microplex (30s) — CUT FIRST IF LONG
+### 37 · Microplex (30s) — CUT FIRST IF LONG
 Where the US data layer heads: multi-spine, automated target discovery, promote-on-review,
 versioned public releases.
 
-### 38 · PolicyEngine today (1.5m)
+### 38–39 · PolicyEngine divider → PolicyEngine today (1.5m)
 The model that composes the primitives. Open source since June 2021 (AGPL-3.0); 95,000+
 parameters, 5,500+ variables, 4,693 test files, 103 programs; 133 contributors. No 10's data
 science team built 10ds-microsim on it; MOUs with NBER (open source TAXSIM emulator) and the
 Atlanta Fed (Policy Rules Database). For this room: an open EUROMOD-family stack for the US
 and UK, built in public.
 
-### 39 · Who uses it (30s) — CUT IF LONG
+### 40 · Who uses it (30s) — CUT IF LONG
 Logo wall. One sentence and move.
 
-### 40 · DEMO — a Belgian reform, live (~3m; slide 42 is the fallback)
+### 41 · DEMO — a Belgian reform, live (~3m; slide 42 is the fallback)
 policyengine.org/be in-deck: move the top bracket rate, watch budget/Gini/poverty recompute
 (155 precomputed cells, 28 CIR 92 parameters); scroll to "The population, checked" — both
 engines against administrative truth, misses in red with named mechanisms.
