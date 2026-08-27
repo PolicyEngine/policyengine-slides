@@ -2,11 +2,11 @@
 
 The deck embeds the LIVE apps directly, each with an Expand button: slide 23 (Axiom App,
 Belgium), 28 (cliff analyzer, axiom.org/snap), 30 (chatbot, axiom.org/chatbot), 36
-(chronicle.institute), 43 (calibration dashboard), 49 (policyengine.org/be), 55 (Thesis
-baseline forecast, app.thesisinstitute.org/spm-child-poverty-2025), 57 (Thesis bill
+(chronicle.institute), 43 (calibration dashboard), 50 (policyengine.org/be), 56 (Thesis
+baseline forecast, app.thesisinstitute.org/spm-child-poverty-2025), 58 (Thesis bill
 analyses, app.thesisinstitute.org/bills). You can drive the whole demo without leaving the
 deck; preloaded tabs remain smoother for deep interaction. Every beat has static screenshot
-slides right after it (24–27, 29, 31, 37, 44, 50, 56, 58). If the network dies mid-beat,
+slides right after it (24–27, 29, 31, 37, 44, 51, 57, 59). If the network dies mid-beat,
 advance and keep talking.
 
 Cliff analyzer beat: Run reform → point at the allotment cliff near $2,100 and the
