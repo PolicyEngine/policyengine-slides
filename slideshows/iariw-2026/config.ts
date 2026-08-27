@@ -4,6 +4,7 @@ import { speakers } from '@/lib/speakers';
 import TitleSlide from './slides/TitleSlide';
 import BridgeSlide from './slides/BridgeSlide';
 import CraftScaledSlide from './slides/CraftScaledSlide';
+import ScorekeeperScaleSlide from './slides/ScorekeeperScaleSlide';
 // The question sequence
 import WhatIfEveryBillSlide from './slides/WhatIfEveryBillSlide';
 import WhatIfEverySeriesSlide from './slides/WhatIfEverySeriesSlide';
@@ -80,6 +81,10 @@ export const iariw2026Config: SlideshowConfig = {
   date: '2026-08-27',
   location: 'IARIW–CAPE workshop, UCLouvain Saint-Louis, Brussels',
   footerText: 'PolicyEngine · IARIW–CAPE workshop · August 2026',
+  partnerLogo: {
+    src: '/logos/axiom-foundation-white.svg',
+    alt: 'The Axiom Foundation',
+  },
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
@@ -89,6 +94,7 @@ export const iariw2026Config: SlideshowConfig = {
     CraftScaledSlide,
 
     // The question sequence
+    ScorekeeperScaleSlide,
     WhatIfEveryBillSlide,
     WhatIfEverySeriesSlide,
     CrossScaleSlide,
