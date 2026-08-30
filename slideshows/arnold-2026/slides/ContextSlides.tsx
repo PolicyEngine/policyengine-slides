@@ -189,9 +189,9 @@ const pipeline = [
     odds: "30%",
   },
   {
-    ask: "NSF CSSI Elements — microsimulation infrastructure",
+    ask: "NSF CSSI Elements",
     amount: "$600k",
-    stage: "Submitted December 2025; late in the FY26 decision cycle",
+    stage: "Submitted December 2025; late in FY26 cycle",
     odds: "20%",
   },
   {
@@ -201,7 +201,7 @@ const pipeline = [
     odds: "10%",
   },
   {
-    ask: "Checks and Balances in an Automated Society (EIP × CIP) — two applications",
+    ask: "EIP × CIP Checks and Balances — two applications",
     amount: "$675k",
     stage: "Submitted July 21; in review",
     odds: "40%",
@@ -213,7 +213,7 @@ const pipeline = [
     odds: "30%",
   },
   {
-    ask: "Stevens / AIRC policy-lab consulting (earned revenue)",
+    ask: "Stevens/AIRC policy-lab consulting (earned)",
     amount: "$150k / 6 mo",
     stage: "Contract initiated August 12; in Stevens contracting",
     odds: "70%",
@@ -225,7 +225,7 @@ const pipeline = [
     odds: "55%",
   },
   {
-    ask: "Multi-year institutional ask — core support for the Axiom Foundation",
+    ask: "Multi-year institutional ask (Axiom core support)",
     amount: "—",
     stage: "Under review; pitch expected October",
     odds: "50%",
@@ -251,20 +251,20 @@ export function PipelineSlide() {
         <SlideTitle>What&apos;s in process &mdash; with our odds</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-8 content-card overflow-hidden">
+      <div className="mt-5 content-card overflow-hidden">
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-gray-200">
-              <th className="px-6 py-3 text-xs uppercase tracking-wide text-gray-500 font-semibold">
+              <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold">
                 Ask
               </th>
-              <th className="px-6 py-3 text-xs uppercase tracking-wide text-gray-500 font-semibold">
+              <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold">
                 Amount
               </th>
-              <th className="px-6 py-3 text-xs uppercase tracking-wide text-gray-500 font-semibold">
+              <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold">
                 Stage
               </th>
-              <th className="px-6 py-3 text-xs uppercase tracking-wide text-gray-500 font-semibold text-right">
+              <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold text-right">
                 Our estimate
               </th>
             </tr>
@@ -272,14 +272,16 @@ export function PipelineSlide() {
           <tbody>
             {pipeline.map((row) => (
               <tr key={row.ask} className="border-b border-gray-100">
-                <td className="px-6 py-3 text-lg text-gray-800">{row.ask}</td>
-                <td className="px-6 py-3 font-mono text-lg text-pe-teal font-bold whitespace-nowrap">
+                <td className="px-5 py-1 text-[15px] leading-snug text-gray-800">
+                  {row.ask}
+                </td>
+                <td className="px-5 py-1 font-mono text-[15px] text-pe-teal font-bold whitespace-nowrap">
                   {row.amount}
                 </td>
-                <td className="px-6 py-3 text-base text-gray-600">
+                <td className="px-5 py-1 text-sm leading-snug text-gray-600">
                   {row.stage}
                 </td>
-                <td className="px-6 py-3 font-mono text-lg text-gray-800 text-right">
+                <td className="px-5 py-1 font-mono text-[15px] text-gray-800 text-right">
                   {row.odds}
                 </td>
               </tr>
@@ -288,7 +290,7 @@ export function PipelineSlide() {
         </table>
       </div>
 
-      <p className="mt-6 text-base text-gray-500 italic max-w-5xl">
+      <p className="mt-3 text-sm text-gray-500 italic max-w-5xl">
         Subjective probabilities, updated as we learn &mdash; the same
         discipline Thesis applies to official statistics.
       </p>
