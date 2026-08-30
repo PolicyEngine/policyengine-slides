@@ -207,6 +207,18 @@ const pipeline = [
     odds: "40%",
   },
   {
+    ask: "Lightcone Commons (S-process) — two applications",
+    amount: "~$3M",
+    stage: "Submitted August 24; editable through ~October",
+    odds: "30%",
+  },
+  {
+    ask: "Stevens / AIRC policy-lab consulting (earned revenue)",
+    amount: "$150k / 6 mo",
+    stage: "Contract initiated August 12; in Stevens contracting",
+    odds: "70%",
+  },
+  {
     ask: "Invited application, AI-philanthropy foundation",
     amount: "$2M",
     stage: "Application due this week",
