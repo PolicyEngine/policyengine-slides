@@ -292,7 +292,8 @@ export function PipelineSlide() {
 
       <p className="mt-3 text-sm text-gray-500 italic max-w-5xl">
         Subjective probabilities, updated as we learn &mdash; the same
-        discipline Thesis applies to official statistics.
+        discipline Thesis applies to official statistics. Smaller and UK-side
+        asks not shown; full inventory on request.
       </p>
     </Slide>
   );
