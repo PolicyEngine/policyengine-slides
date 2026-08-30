@@ -191,13 +191,13 @@ const pipeline = [
   {
     ask: "NSF CSSI Elements — microsimulation infrastructure",
     amount: "$600k",
-    stage: "Submitted December 2025; in review",
-    odds: "25%",
+    stage: "Submitted December 2025; late in the FY26 decision cycle",
+    odds: "20%",
   },
   {
     ask: "NSF CSSI Framework",
     amount: "up to $5M",
-    stage: "Drafting for the next cycle",
+    stage: "Drafting for the December 1 deadline",
     odds: "10%",
   },
   {
