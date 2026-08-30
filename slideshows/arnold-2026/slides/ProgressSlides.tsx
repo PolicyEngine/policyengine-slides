@@ -26,9 +26,9 @@ export const DistrictSlide = () => (
     </Card>
     <Card tag="Straight talk on calibration">
       The current default release is calibrated to national and state totals.
-      The August build carries the first 436 district population targets, and
-      IRS SOI district income is specced on main &mdash; full district rows are
-      expected in the next release.
+      The August build carries the first 436 district population targets, with
+      IRS SOI district income following &mdash; full district rows are expected
+      in the next release.
     </Card>
     <Card tag="Through December">
       Spending runs through December 31, with the final hand-off report and
@@ -57,8 +57,9 @@ export const TariffSlide = () => (
     <Card tag="Cross-model dividend">
       Yale and TPC diverged about 1.3 points on the average tariff rate this
       spring; our decomposition attributes essentially all of it to the weight
-      year &mdash; 1.34 points, with a 0.08-point residual &mdash; and we shared
-      the result with both teams. Working paper: axiom.org/tariff/paper.
+      year &mdash; 1.34 points, with an offsetting 0.08-point residual &mdash;
+      and we shared the result with both teams. Working paper:
+      axiom.org/tariff/paper.
     </Card>
   </LiveAppSlide>
 );
@@ -101,8 +102,8 @@ export const SnapQcSlide = () => (
     </Card>
     <Card tag="Grounded in exact replay">
       The rules engine reproduces the recorded benefit computation for all 6,081
-      cases in seven states&apos; FY 2024 QC files &mdash; every stage, to the
-      dollar, at zero tolerance.
+      cases in seven states&apos; FY 2024 QC files &mdash; every stage in the QC
+      record, to the dollar, at zero tolerance.
     </Card>
     <Card tag="Forecast discipline">
       A pre-registered prediction at the FY 2026 policy boundary is on the

@@ -42,7 +42,7 @@ export const ScorecardStaticSlide = () => (
     title="PolicyEngine Scorecard"
     url="policyengine.org/scorecard"
     src="/screenshots/arnold-2026/scorecard.png"
-    alt="PolicyEngine Scorecard vs Urban Institute's State of the Safety Net"
+    alt="PolicyEngine Scorecard beside Urban Institute's State of the Safety Net"
     caption="Published estimates beside PolicyEngine's counterpart — comparable, constructed, or concept mismatch; held-out record shown separately."
   />
 );

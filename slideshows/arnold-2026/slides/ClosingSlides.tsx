@@ -29,6 +29,11 @@ const loops = [
     loop: "Forecasts graded against reality — 35 of 45 witnessed resolutions in interval",
     where: "thesisinstitute.org",
   },
+  {
+    layer: "Corollary",
+    loop: "Inherits the checks below — nothing of its own to publish yet",
+    where: "earliest stage",
+  },
 ];
 
 export function LoopsRecapSlide() {
@@ -73,7 +78,7 @@ export function LoopsRecapSlide() {
 
       <div className="accent-block mt-8 max-w-5xl">
         <p className="text-xl text-gray-800 leading-relaxed">
-          Certified is computed, never set by hand &mdash; and the scoreboard
+          Certified is computed, never set by hand &mdash; and the dashboard
           publishes whatever the computation says. That discipline is what lets
           AI do more of the work without anyone taking its word for it.
         </p>
@@ -92,8 +97,8 @@ export function NextSlide() {
       <p className="mt-8 text-2xl text-gray-900 leading-relaxed font-light max-w-5xl">
         Charlie&apos;s August note named the frame: near-term projects that
         close gaps in tax data and modeling capability, toward capital-taxation
-        options ready to be enacted &mdash; in his words &mdash; by the end of
-        2028. Three capabilities decide how those options score:
+        options &ldquo;sufficiently ready to be enacted by the end of
+        2028.&rdquo; Three capabilities decide how those options score:
       </p>
 
       <div className="mt-8 grid grid-cols-3 gap-6">

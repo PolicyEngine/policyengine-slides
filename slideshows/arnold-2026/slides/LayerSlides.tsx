@@ -107,8 +107,8 @@ export const ThesisLiveSlide = () => (
     </Card>
     <Card tag="Worth clicking">
       The calibration page: interval coverage, CRPS against a persistence
-      baseline, and the witnessed-custody rules that keep the scoreboard from
-      grading itself on a curve.
+      baseline, and the witnessed-custody rules that keep the calibration page
+      from grading itself on a curve.
     </Card>
   </LiveAppSlide>
 );

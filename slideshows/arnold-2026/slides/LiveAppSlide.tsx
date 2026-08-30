@@ -54,7 +54,6 @@ export default function LiveAppSlide({
             src={url}
             title={title}
             className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#17343A]/12 via-transparent to-transparent pointer-events-none" />
