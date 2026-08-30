@@ -189,6 +189,18 @@ const pipeline = [
     odds: "30%",
   },
   {
+    ask: "NSF CSSI Elements — microsimulation infrastructure",
+    amount: "$600k",
+    stage: "Submitted December 2025; in review",
+    odds: "25%",
+  },
+  {
+    ask: "NSF CSSI Framework",
+    amount: "up to $5M",
+    stage: "Drafting for the next cycle",
+    odds: "10%",
+  },
+  {
     ask: "Invited application, AI-philanthropy foundation",
     amount: "$2M",
     stage: "Application due this week",
