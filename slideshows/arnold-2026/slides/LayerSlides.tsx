@@ -24,7 +24,7 @@ export const ScorecardLiveSlide = () => (
   >
     <Card tag="What you're seeing">
       Urban&apos;s State of the Safety Net beside PolicyEngine&apos;s
-      counterpart &mdash; 24,717 published cells, each pair labeled, with a
+      counterpart &mdash; 24,717 unsuppressed cells, each pair labeled, with a
       held-out record that only counts numbers PolicyEngine never calibrated
       toward.
     </Card>

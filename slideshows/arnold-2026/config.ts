@@ -54,9 +54,8 @@ export const arnold2026Config: SlideshowConfig = {
   id: "arnold-2026",
   title: "Six projects, one chain of checks",
   description:
-    "Arnold Ventures check-in — the stack, its feedback loops, and progress on districts, tariffs, Social Security, and SNAP QC",
+    "Private funder check-in — the stack, its feedback loops, and current progress",
   date: "2026-09-01",
-  location: "Arnold Ventures check-in (Google Meet)",
   footerText: "Arnold Ventures check-in · September 2026",
   partnerLogo: {
     src: "/logos/axiom-foundation-white.svg",

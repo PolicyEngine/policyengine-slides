@@ -29,7 +29,7 @@ export const GraphStaticSlide = () => (
 
 export const CalibrationStaticSlide = () => (
   <ScreenshotSlide
-    title="Microcosm calibration dashboard"
+    title="Microcosm (working name) calibration dashboard"
     url="microcosm.institute"
     src="/screenshots/arnold-2026/calibration-dashboard-us.png"
     alt="Microcosm US calibration dashboard"
@@ -99,7 +99,7 @@ export const TariffStaticSlide = () => (
 
 export const ChronicleStaticSlide = () => (
   <ScreenshotSlide
-    title="Chronicle"
+    title="Chronicle (working name)"
     url="chronicle.institute"
     src="/screenshots/arnold-2026/chronicle.png"
     alt="Chronicle — a record of what official sources printed, and when"

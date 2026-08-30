@@ -46,7 +46,7 @@ export const TariffSlide = () => (
     <Card tag="What's encoded">
       The full Harmonized Tariff Schedule &mdash; 13,790 rated lines with every
       2025&ndash;26 action layered on top, each cell carrying its authority
-      chain (and the IEEPA refund wave computable by date).
+      chain (and IEEPA actions, including refund scenarios, computable by date).
     </Card>
     <Card tag="The check">
       216 million row-level comparisons against the Yale Budget Lab&apos;s
@@ -55,10 +55,10 @@ export const TariffSlide = () => (
       is not certified.
     </Card>
     <Card tag="Cross-model dividend">
-      Yale and TPC diverged 1.7 points on the average tariff rate this spring;
-      our replication decomposed it &mdash; almost entirely the weight year
-      &mdash; and we shared the result with both teams. Working paper:
-      axiom.org/tariff/paper.
+      Yale and TPC diverged about 1.3 points on the average tariff rate this
+      spring; our decomposition attributes essentially all of it to the weight
+      year &mdash; 1.34 points, with a 0.08-point residual &mdash; and we shared
+      the result with both teams. Working paper: axiom.org/tariff/paper.
     </Card>
   </LiveAppSlide>
 );
@@ -82,7 +82,7 @@ export const SocialSecuritySlide = () => (
     <Card tag="Your threads">
       Hana&apos;s generation-level incidence view is on the roadmap; the $100k
       cap&apos;s survivor composition is exactly what person-level histories
-      unlock. Next stop: Gopi&apos;s February LTSS convening.
+      unlock. Next stop: Gopi Shah Goda&apos;s February LTSS convening.
     </Card>
   </LiveAppSlide>
 );

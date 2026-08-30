@@ -35,7 +35,7 @@ export function LoopsRecapSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Every layer grades itself, in public</SlideTitle>
+        <SlideTitle>Every layer publishes its own checks, in public</SlideTitle>
       </SlideHeader>
 
       <div className="mt-8 content-card overflow-hidden">
@@ -91,9 +91,9 @@ export function NextSlide() {
 
       <p className="mt-8 text-2xl text-gray-900 leading-relaxed font-light max-w-5xl">
         Charlie&apos;s August note named the frame: near-term projects that
-        close gaps in tax data and modeling capability, with capital-taxation
-        options scoreable by 2028. Three capabilities decide how those options
-        score:
+        close gaps in tax data and modeling capability, toward capital-taxation
+        options ready to be enacted &mdash; in his words &mdash; by the end of
+        2028. Three capabilities decide how those options score:
       </p>
 
       <div className="mt-8 grid grid-cols-3 gap-6">

@@ -3,7 +3,6 @@
 import Image from "@/components/core/BasePathImage";
 import Slide from "@/components/core/Slide";
 import { speakers } from "@/lib/speakers";
-import { formatDate } from "@/lib/types";
 
 const speaker = {
   ...speakers["max-ghenis"],
@@ -79,7 +78,7 @@ export default function TitleSlide() {
               With Ariel Kennan, President, Axiom Foundation
             </p>
             <p className="text-sm text-gray-500 mt-1">
-              Arnold Ventures check-in &middot; {formatDate("2026-09-01")}
+              Arnold Ventures check-in &middot; September 1, 2026
             </p>
           </div>
         </div>

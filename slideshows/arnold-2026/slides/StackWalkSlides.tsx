@@ -265,7 +265,7 @@ export const StackPeSlide = () => (
         The Scorecard: estimates from Urban, JCT, TPC, CBO, PWBM, and state
         fiscal notes beside PolicyEngine&apos;s counterpart &mdash; each pair
         labeled comparable, constructed, or concept mismatch. The metric is
-        explained divergence, never wins.
+        explained divergence, not a scoreboard.
       </>
     }
   />
@@ -339,10 +339,10 @@ export const StackMicrocosmSlide = () => (
     focus="microcosm"
     status={
       <>
-        The data under PolicyEngine&apos;s US model today &mdash; calibrated
-        synthetic people and households in one national file, filtered by state
-        and congressional district. Private by construction. This is the layer
-        the district grant funds.
+        Working name. The data under PolicyEngine&apos;s US model today &mdash;
+        calibrated synthetic people and households in one national file,
+        filtered by state and congressional district. Private by construction.
+        This is the layer the district grant funds.
       </>
     }
     ambition={
@@ -413,7 +413,7 @@ export const StackCorollarySlide = () => (
     loop={
       <>
         Inherited from below: conformance checks against independent records,
-        with verdicts issued only where the checks pass &mdash; never
+        with results issued only where the checks pass &mdash; never
         self-certified.
       </>
     }

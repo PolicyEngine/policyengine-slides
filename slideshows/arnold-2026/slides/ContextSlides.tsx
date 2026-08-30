@@ -13,7 +13,7 @@ const avGrants = [
     years: "2023–24",
     title: "Labor supply responses",
     amount: "$85,200",
-    body: "Built the behavioral-response machinery — elasticity-based labor supply adjustments that now ride along in every dynamic score PolicyEngine produces.",
+    body: "Built the behavioral-response machinery — elasticity-based labor supply adjustments that underpin PolicyEngine's dynamic scores.",
   },
   {
     years: "2024–25",
@@ -195,9 +195,9 @@ const pipeline = [
     odds: "55%",
   },
   {
-    ask: "Multi-year institutional ask (Axiom Foundation)",
+    ask: "Multi-year institutional ask — core support for the Axiom Foundation",
     amount: "—",
-    stage: "In principal review; pitch expected October",
+    stage: "Under review; pitch expected October",
     odds: "50%",
   },
   {
@@ -207,9 +207,9 @@ const pipeline = [
     odds: "40%",
   },
   {
-    ask: "CAPE / BEAMM EU consortium (our share TBD)",
+    ask: "CAPE / BEAMM EU consortium",
     amount: "—",
-    stage: "Consortium bid pending",
+    stage: "Consortium bid pending; our share TBD",
     odds: "30%",
   },
 ];

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
