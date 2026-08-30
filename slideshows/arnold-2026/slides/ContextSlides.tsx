@@ -201,6 +201,12 @@ const pipeline = [
     odds: "10%",
   },
   {
+    ask: "Checks and Balances in an Automated Society (EIP × CIP) — two applications",
+    amount: "$675k",
+    stage: "Submitted July 21; in review",
+    odds: "40%",
+  },
+  {
     ask: "Invited application, AI-philanthropy foundation",
     amount: "$2M",
     stage: "Application due this week",
