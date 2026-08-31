@@ -23,7 +23,7 @@ import { createServer } from "net";
 const [id, outputArg] = process.argv.slice(2);
 if (!id) {
   console.error("Usage: bun run export <slideshow-id> [output-path]");
-  console.error('Example: bun run export abundance-dmv ~/Desktop/slides.pdf');
+  console.error("Example: bun run export abundance-dmv ~/Desktop/slides.pdf");
   process.exit(1);
 }
 const OUTPUT = outputArg || `${id}.pdf`;
@@ -156,6 +156,26 @@ async function main() {
     await page.setViewport({ width: 1920, height: 1080 });
     await page.goto(url, { waitUntil: "networkidle0", timeout: 30_000 });
     await new Promise((r) => setTimeout(r, 3000));
+
+    // Private decks render a client-side password gate. Unlock it with
+    // NEXT_PUBLIC_PRIVATE_PASSWORD from the environment (empty when unset,
+    // which matches the gate's fallback when the env var isn't defined).
+    const gated = await page.$('input[type="password"]');
+    if (gated) {
+      const pw = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD ?? "";
+      console.log("Password gate detected — submitting configured password");
+      await page.evaluate((value) => {
+        const input = document.querySelector('input[type="password"]');
+        const setter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype,
+          "value",
+        ).set;
+        setter.call(input, value);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.closest("form").requestSubmit();
+      }, pw);
+      await new Promise((r) => setTimeout(r, 2000));
+    }
 
     // 4. Detect total steps
     let totalSteps = await getTotalSteps(page);
