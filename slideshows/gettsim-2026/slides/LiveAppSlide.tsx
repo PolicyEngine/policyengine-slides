@@ -11,11 +11,9 @@ interface LiveAppSlideProps {
   url: string;
   displayUrl?: string;
   /**
-   * Captured screenshot shown by default when provided. The embedded apps
-   * can paint a blank document when framed (storage-partitioned third-party
-   * context), so the live iframe only mounts when the presenter clicks
-   * "Go live" — and one more click returns to the capture if the venue
-   * embed misbehaves.
+   * Captured screenshot the presenter can switch to with one click when
+   * the live embed misbehaves — the embedded apps can paint a blank
+   * document when framed (storage-partitioned third-party context).
    */
   fallbackSrc?: string;
   /** Side-column content (cards, notes). */
@@ -38,7 +36,7 @@ export default function LiveAppSlide({
   sideWidth = '0.62fr',
 }: LiveAppSlideProps) {
   const [expanded, setExpanded] = useState(false);
-  const [live, setLive] = useState(!fallbackSrc);
+  const [live, setLive] = useState(true);
 
   return (
     <Slide>

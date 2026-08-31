@@ -46,16 +46,6 @@ export const DemoAxiomValidationSlide = () => (
   />
 );
 
-export const ScorecardStaticSlide = () => (
-  <ScreenshotSlide
-    title="The scorecard: the rules, graded"
-    url="axiom.org/scorecard"
-    src="/screenshots/gettsim-2026/axiom-scorecard.png"
-    alt="Axiom scorecard: per-jurisdiction encoded coverage"
-    caption="122K provisions indexed across 154 jurisdictions — US federal and all 50 states, UK, Belgium, Canada, New Zealand — each with its rule count, linked to source. Captured 31 Aug from the live page."
-  />
-);
-
 export const CalibrationDashboardStaticSlide = () => (
   <ScreenshotSlide
     title="The calibration dashboard"

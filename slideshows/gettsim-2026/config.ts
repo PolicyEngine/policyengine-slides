@@ -26,11 +26,11 @@ import {
   DemoAxiomProvisionSlide,
   DemoAxiomGraphSlide,
   DemoAxiomValidationSlide,
-  ScorecardStaticSlide,
   CalibrationDashboardStaticSlide,
 } from './slides/DemoSlides';
 import {
   DemoAxiomLiveSlide,
+  ScorecardLiveSlide,
   CalibrationLiveSlide,
 } from './slides/DemoLiveSlides';
 // 3 — Verifiable: the harness at every layer
@@ -87,7 +87,7 @@ export const gettsim2026Config: SlideshowConfig = {
     BelgiumParitySlide,
     CertificationLadderSlide,
     HarnessLayersSlide,
-    ScorecardStaticSlide,
+    ScorecardLiveSlide,
     CalibrationLiveSlide,
     CalibrationDashboardStaticSlide,
 
