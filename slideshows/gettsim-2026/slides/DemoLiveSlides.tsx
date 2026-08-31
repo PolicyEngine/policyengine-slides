@@ -9,17 +9,17 @@ import LiveAppSlide from './LiveAppSlide';
 
 export const DemoAxiomLiveSlide = () => (
   <LiveAppSlide
-    title="The Axiom App: Belgium, live"
-    url="https://app.axiom-foundation.org/?country=be"
+    title="The Axiom App, live"
+    url="https://app.axiom-foundation.org/"
     displayUrl="axiom.org"
-    fallbackSrc="/screenshots/iariw-2026/axiom-browse.png"
+    fallbackSrc="/screenshots/gettsim-2026/axiom-app.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
       <p className="text-base text-gray-700 leading-relaxed">
-        107 Belgian provisions, clustered federal, Flanders, Wallonia,
-        Brussels, and German-speaking community. Each node is a rule encoded
-        from the statute.
+        The US corpus &mdash; 3,309 provisions across federal and all 50
+        states, clustered by jurisdiction. Each node is a rule encoded from
+        the statute; the country picker switches corpora, Belgium included.
       </p>
     </div>
 
