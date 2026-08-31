@@ -2,16 +2,13 @@ import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
 // Opening
 import TitleSlide from './slides/TitleSlide';
-import PEOverviewSlide from './slides/PEOverviewSlide';
-import CountryScopeSlide from './slides/CountryScopeSlide';
-import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import CraftScaledSlide from './slides/CraftScaledSlide';
 import {
-  EncodingDividerSlide,
-  ExecutableDividerSlide,
-  VerifiableDividerSlide,
+  RulesDividerSlide,
+  DataDividerSlide,
+  MicrosimDividerSlide,
 } from './slides/SectionDivider';
-// 1 — Encoding: the evolution of AI-assisted encoding
+// 1 — Rules: AI-assisted encoding and the Axiom rules engine
 import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
 import Evo1SinglePromptSlide from './slides/Evo1SinglePromptSlide';
 import Evo2PipelineSlide from './slides/Evo2PipelineSlide';
@@ -19,7 +16,6 @@ import Evo3ParallelSlide from './slides/Evo3ParallelSlide';
 import Evo4ValidationSlide from './slides/Evo4ValidationSlide';
 import Evo5SkillsSlide from './slides/Evo5SkillsSlide';
 import Evo6FullWorkflowSlide from './slides/Evo6FullWorkflowSlide';
-// 2 — Executable: the Axiom rules engine
 import AxiomIntroSlide from './slides/AxiomIntroSlide';
 import {
   DemoAxiomBrowseSlide,
@@ -33,10 +29,14 @@ import {
   ScorecardLiveSlide,
   CalibrationLiveSlide,
 } from './slides/DemoLiveSlides';
-// 3 — Verifiable: the harness at every layer
 import BelgiumParitySlide from './slides/BelgiumParitySlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
+// 2 — Data: the calibration harness under the microdata
 import HarnessLayersSlide from './slides/HarnessLayersSlide';
+// 3 — Microsimulation: PolicyEngine, graded
+import PEOverviewSlide from './slides/PEOverviewSlide';
+import CountryScopeSlide from './slides/CountryScopeSlide';
+import WhoUsesItSlide from './slides/WhoUsesItSlide';
 // Closing
 import ClosingSlide from './slides/ClosingSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
@@ -45,7 +45,7 @@ export const gettsim2026Config: SlideshowConfig = {
   id: 'gettsim-2026',
   title: 'AI-driven rules engine development',
   description:
-    'Encoding statutes into executable, verifiable rules — AI-assisted encoding, the Axiom rules engine, and the validation harness at every layer',
+    'Rules, data, microsimulation — AI-assisted encoding and the Axiom rules engine, the calibrated microdata underneath, and PolicyEngine graded against external scorekeepers',
   date: '2026-09-03',
   location: 'GETTSIM workshop, Digital Hub Bonn',
   footerText: 'PolicyEngine · GETTSIM workshop · September 2026',
@@ -58,13 +58,10 @@ export const gettsim2026Config: SlideshowConfig = {
   slides: [
     // Opening
     TitleSlide,
-    PEOverviewSlide,
-    CountryScopeSlide,
-    WhoUsesItSlide,
     CraftScaledSlide,
 
-    // 1 — Encoding
-    EncodingDividerSlide,
+    // 1 — Rules
+    RulesDividerSlide,
     BridgeToEvolutionSlide,
     Evo1SinglePromptSlide,
     Evo2PipelineSlide,
@@ -72,24 +69,27 @@ export const gettsim2026Config: SlideshowConfig = {
     Evo4ValidationSlide,
     Evo5SkillsSlide,
     Evo6FullWorkflowSlide,
-
-    // 2 — Executable
-    ExecutableDividerSlide,
     AxiomIntroSlide,
     DemoAxiomLiveSlide,
     DemoAxiomBrowseSlide,
     DemoAxiomProvisionSlide,
     DemoAxiomGraphSlide,
-
-    // 3 — Verifiable
-    VerifiableDividerSlide,
     DemoAxiomValidationSlide,
     BelgiumParitySlide,
     CertificationLadderSlide,
-    HarnessLayersSlide,
-    ScorecardLiveSlide,
+
+    // 2 — Data
+    DataDividerSlide,
     CalibrationLiveSlide,
     CalibrationDashboardStaticSlide,
+    HarnessLayersSlide,
+
+    // 3 — Microsimulation
+    MicrosimDividerSlide,
+    PEOverviewSlide,
+    CountryScopeSlide,
+    WhoUsesItSlide,
+    ScorecardLiveSlide,
 
     // Closing
     ClosingSlide,

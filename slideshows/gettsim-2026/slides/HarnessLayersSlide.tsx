@@ -5,10 +5,10 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const layers = [
   {
     layer: 'The rules',
-    harness: 'The scorecard',
-    url: 'axiom.org/scorecard',
+    harness: 'The validation scoreboard',
+    url: 'axiom.org/validation',
     detail:
-      'Per-jurisdiction coverage of the encoded law — provisions indexed, citations extracted, RuleSpec rules linked back to their source — with conformance and certification computed from the harness, never set by hand.',
+      'Cross-engine conformance published per program — provisions indexed, citations extracted, RuleSpec rules linked back to their source — with conformance and certification computed from the harness, never set by hand.',
   },
   {
     layer: 'The data',
@@ -48,8 +48,8 @@ export default function HarnessLayersSlide() {
 
       <div className="accent-block mt-6 max-w-5xl">
         <p className="text-lg text-gray-800 leading-relaxed">
-          Trust is a URL you can open and re-run &mdash; the next two slides
-          are those URLs.
+          Trust is a URL you can open and re-run &mdash; and the
+          microsimulation built on these layers is graded the same way.
         </p>
       </div>
     </Slide>

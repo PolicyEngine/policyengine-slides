@@ -32,26 +32,26 @@ export default function SectionDivider({
   );
 }
 
-export const EncodingDividerSlide = () => (
+export const RulesDividerSlide = () => (
   <SectionDivider
     number="1"
-    title="Encoding"
-    subtitle="How AI encodes law — six stages of evolution, from a single failing prompt to a governed multi-agent workflow."
+    title="Rules"
+    subtitle="How AI encodes law — six stages of evolution — and the Axiom rules engine: statute text, machine-readable rules, and the computation graph, published together."
   />
 );
 
-export const ExecutableDividerSlide = () => (
+export const DataDividerSlide = () => (
   <SectionDivider
     number="2"
-    title="Executable"
-    subtitle="The Axiom rules engine — statute text, machine-readable rules, and the computation graph, published together."
+    title="Data"
+    subtitle="Microcosm — the microdata underneath the models, calibrated to what the statistical agencies publish, with every target and its error in the open."
   />
 );
 
-export const VerifiableDividerSlide = () => (
+export const MicrosimDividerSlide = () => (
   <SectionDivider
     number="3"
-    title="Verifiable"
-    subtitle="A harness at every layer — validation the model that wrote the rules never gets to grade."
+    title="Microsimulation"
+    subtitle="PolicyEngine — rules plus data at population scale, graded against external scorekeepers."
   />
 );
