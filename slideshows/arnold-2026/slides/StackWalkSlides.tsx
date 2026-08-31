@@ -17,21 +17,24 @@ function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
   switch (layer) {
     case "corollary":
       return (
-        <span
-          className={`text-[17px] font-semibold tracking-tight text-[#17343a] ${cls}`}
-        >
-          <span className="font-mono">&#8866;</span> Corollary
-        </span>
+        <Image
+          src="/logos/corollary-wordmark.svg"
+          alt="Corollary"
+          width={540}
+          height={150}
+          className={cls}
+          style={{ height: "16px", width: "auto" }}
+        />
       );
     case "thesis":
       return (
         <Image
-          src="/logos/thesis-institute.png"
-          alt="The Thesis Institute"
-          width={532}
-          height={112}
+          src="/logos/thesis-wordmark.svg"
+          alt="Thesis"
+          width={93}
+          height={28}
           className={cls}
-          style={{ height: "18px", width: "auto" }}
+          style={{ height: "17px", width: "auto" }}
         />
       );
     case "policyengine":
@@ -48,34 +51,34 @@ function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
     case "microcosm":
       return (
         <Image
-          src="/logos/microcosm.png"
+          src="/logos/microcosm-wordmark.svg"
           alt="Microcosm"
-          width={532}
-          height={112}
+          width={5245}
+          height={726}
           className={cls}
-          style={{ height: "18px", width: "auto" }}
+          style={{ height: "14px", width: "auto" }}
         />
       );
     case "axiom":
       return (
         <Image
-          src="/logos/axiom-foundation.svg"
-          alt="The Axiom Foundation"
-          width={1026}
-          height={363}
+          src="/logos/axiom-wordmark-bare.svg"
+          alt="Axiom"
+          width={964}
+          height={244}
           className={cls}
-          style={{ height: "18px", width: "auto" }}
+          style={{ height: "15px", width: "auto" }}
         />
       );
     case "chronicle":
       return (
         <Image
-          src="/logos/chronicle.png"
+          src="/logos/chronicle-wordmark.svg"
           alt="Chronicle"
-          width={532}
-          height={112}
+          width={6162}
+          height={818}
           className={cls}
-          style={{ height: "18px", width: "auto" }}
+          style={{ height: "14px", width: "auto" }}
         />
       );
   }
