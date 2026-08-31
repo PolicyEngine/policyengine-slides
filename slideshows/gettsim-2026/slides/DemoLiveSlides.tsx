@@ -12,6 +12,7 @@ export const DemoAxiomLiveSlide = () => (
     title="The Axiom App: Belgium, live"
     url="https://app.axiom-foundation.org/?country=be"
     displayUrl="axiom.org"
+    fallbackSrc="/screenshots/iariw-2026/axiom-browse.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
@@ -45,6 +46,7 @@ export const CalibrationLiveSlide = () => (
     title="The calibration dashboard, live"
     url="https://microcosm.institute/calibration/dashboard/microcosm?country=be"
     displayUrl="microcosm.institute"
+    fallbackSrc="/screenshots/iariw-2026/calibration-dashboard-be.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
