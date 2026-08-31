@@ -342,10 +342,10 @@ export const StackMicrocosmSlide = () => (
     focus="microcosm"
     status={
       <>
-        Working name. The data under PolicyEngine&apos;s US model today &mdash;
-        calibrated synthetic people and households in one national file,
-        filtered by state and congressional district. Private by construction.
-        This is the layer the district grant funds.
+        Preview, under a working name. The data under PolicyEngine&apos;s US
+        model today &mdash; calibrated synthetic people and households in one
+        national file, filtered by state and congressional district. Private by
+        construction. This is the layer the district grant funds.
       </>
     }
     ambition={
@@ -359,7 +359,9 @@ export const StackMicrocosmSlide = () => (
       <>
         The calibration dashboard: 5,659 national and state targets in the July
         28 US release, 95.7% within 10% of the administrative value &mdash;
-        every target published with its error, nothing summarized away.
+        every target published with its error, nothing summarized away. The
+        calibration now under way passes 30,000 targets, congressional-district
+        rows included.
       </>
     }
   />
@@ -372,9 +374,10 @@ export const StackThesisSlide = () => (
     focus="thesis"
     status={
       <>
-        In formation. AI agents publish probabilistic forecasts of official
-        statistics and bill outcomes with their full reasoning, preregistered
-        &mdash; so the future is never in the training data.
+        Preview, ahead of announcement. AI agents publish probabilistic
+        forecasts of official statistics and bill outcomes with their full
+        reasoning, preregistered &mdash; so the future is never in the training
+        data.
       </>
     }
     ambition={
