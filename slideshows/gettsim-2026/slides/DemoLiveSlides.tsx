@@ -40,37 +40,6 @@ export const DemoAxiomLiveSlide = () => (
   </LiveAppSlide>
 );
 
-export const ScorecardLiveSlide = () => (
-  <LiveAppSlide
-    title="The scorecard: the rules, graded live"
-    url="https://app.axiom-foundation.org/scorecard"
-    displayUrl="axiom.org/scorecard"
-  >
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">What you are seeing</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        122K provisions indexed across 154 jurisdictions &mdash; US federal
-        and all 50 states, UK, Belgium, Canada, New Zealand, Denmark &mdash;
-        each with its rule count, linked to source.
-      </p>
-    </div>
-
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">Why it matters</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        Status is computed from the validation harness &mdash; and the
-        registry publishes whatever the computation says, gaps included.
-      </p>
-    </div>
-
-    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-      <p className="text-sm text-gray-600 leading-relaxed italic">
-        The scoreboard grades itself honestly &mdash; that is the point.
-      </p>
-    </div>
-  </LiveAppSlide>
-);
-
 export const CalibrationLiveSlide = () => (
   <LiveAppSlide
     title="The calibration dashboard, live"
