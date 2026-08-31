@@ -36,7 +36,7 @@ export const AxiomDividerSlide = () => (
   <SectionDivider
     number="1"
     title="Axiom"
-    subtitle="The rules, executable — how AI encodes law, and how EUROMOD keeps us honest in Belgium."
+    subtitle="The rules, executable — verified against EUROMOD. Harness: deterministic gates, external oracles, and computed certification."
   />
 );
 
@@ -44,7 +44,7 @@ export const ChronicleDividerSlide = () => (
   <SectionDivider
     number="2"
     title="Chronicle"
-    subtitle="Official statistics as source-backed facts, with lineage to every publisher."
+    subtitle="Official statistics as source-backed facts. Harness: receipt integrity and dual-time witnesses."
   />
 );
 
@@ -52,7 +52,7 @@ export const MicrocosmDividerSlide = () => (
   <SectionDivider
     number="3"
     title="Microcosm"
-    subtitle="The world at micro level — populations calibrated to administrative truth."
+    subtitle="The world at micro level. Harness: published-aggregate calibration and record-level evals."
   />
 );
 
@@ -60,7 +60,7 @@ export const EngineDividerSlide = () => (
   <SectionDivider
     number="4"
     title="PolicyEngine"
-    subtitle="The model that composes them — in the browser, and in a few lines of Python."
+    subtitle="The model that composes them. Harness: explained divergence against external models and an oracle suite."
   />
 );
 
@@ -68,7 +68,7 @@ export const TogetherDividerSlide = () => (
   <SectionDivider
     number="5"
     title="Thesis"
-    subtitle="Putting it together — open forecasts of public outcomes, scored against reality."
+    subtitle="Judgment under uncertainty. Harness: resolution against Chronicle’s first prints and calibration scoring."
   />
 );
 

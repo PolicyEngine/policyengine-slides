@@ -15,7 +15,7 @@ Workshop: "New technologies for evidence-based policy making" (co-located with t
   roundtable on AI tools entering public administrations), CAPE researchers, possibly EC/JRC people.
 - EUROMOD is the shared reference point. Community-of-modelers framing throughout — never
   vendor-vs-incumbent, never argue with anyone's claims. Euros where possible.
-- A live demo (~8 min) sits inside the talk; every demo beat has a fallback screenshot slide.
+- A live demo (~8 min) sits inside the talk; core demo beats have fallback screenshot slides.
 - 16:00 roundtable follows — the closing should hand off to its themes (transparency, trust,
   what it takes for these tools to enter public administrations).
 
@@ -36,8 +36,8 @@ forecasts of the AI era itself diverge by orders of magnitude.
 
 > ⚠️ Superseded 2026-08-27: the deck was restructured around Max's five-primitives arc
 > (questions → what do we arm the AI with? → Axiom / Chronicle / Microcosm / PolicyEngine /
-> Together, each with its feedback loop and demo). SPEAKER-NOTES.md carries the current
-> 48-slide structure and timing; the sections below describe the earlier format-led cut.
+> Thesis, each with its public harness and demo). SPEAKER-NOTES.md carries the current
+> 68-slide structure and timing; the sections below describe the earlier format-led cut.
 
 ### Opening + question sequence (8 slides, ~8 min)
 1. **TitleSlide** — cover, partner context (IARIW–CAPE workshop).
@@ -75,34 +75,39 @@ forecasts of the AI era itself diverge by orders of magnitude.
 22. **MicrocosmBESlide** — Microcosm-BE: Belgian population calibrated to Belgian admin +
     national-accounts targets (sums of Chronicle facts); the EUROMOD column ledger
     (matched / explained / gap); provenance line (US donor pool, Belgian donor = planned upgrade).
-23. **MicroplexSlide** — where the data layer heads next (brief).
+23. **DistrictCalibrationMapSlide** — the 32,633-target research surface adds 24,340 district
+    cells, enabling a 436-district OBBBA impact map; research-file lineage stated explicitly.
 
 ### Section 3 — Live (~9 min; live embedded apps with Expand, static screenshots as fallbacks)
 24. **DemoDivider** — the three beats.
 25. **DemoAxiomLiveSlide** — LIVE iframe: the Axiom App, Belgium (app.axiom-foundation.org).
 26. Static fallbacks: browse → provision → RuleSpec/graph → validation screenshots.
-27. **DemoPeBeLiveSlide** — LIVE iframe: policyengine.org/be reform simulator (+ static fallback).
-28. **DemoPySlide** — policyengine.py in a few lines (code slide; works offline).
+27. **CliffWatchLiveSlide** — LIVE iframe: where interacting programs create benefit cliffs.
+28. **ObbbaExplorerLiveSlide** — LIVE iframe: provision-level impacts for one household.
+29. **DemoPeBeLiveSlide** — LIVE iframe: policyengine.org/be reform simulator (+ static fallback).
+30. **DemoPySlide** — policyengine.py in a few lines (code slide; works offline).
 (The data section also carries **DemoDashboardLiveSlide** — the live calibration dashboard —
 with its static screenshot right after as the fallback.)
 
 ### Section 4 — Where this goes (~8 min)
 28. **FutureDivider**
 29. **ConductorsSlide** — conductors, not oracles.
-30. **ForecastUncertaintySlide** — optional closing beat: when credible AI-era growth forecasts
-    span orders of magnitude, evidence infrastructure's job shifts from defending one number to
-    letting a ministry recompute the present. (Skippable live.)
-31. **CommunityClosingSlide** — it takes all of us: stat offices, EUROMOD, BEAMM, ministries,
+30. **StackRecapSlide** — section 6 opens with the five blocks as one dependency stack.
+31. **HarnessRecapSlide** — each layer makes a different claim, so each has a different public test.
+32. **BaselineForecastSlide** — professional forecasters still price a stable long-run baseline.
+33. **ForecastUncertaintySlide** — condition on rapid AI capabilities and expert medians—and
+    uncertainty—open up; Karger/FRI survey distinguished from Yale Budget Lab modeling.
+34. **CommunityClosingSlide** — it takes all of us: stat offices, EUROMOD, BEAMM, ministries,
     open models. Hands off to the 16:00 roundtable themes.
-32. **QuestionsSlide** — links.
+35. **QuestionsSlide** — links.
 
 ## Cut from cbo-2026
 
 CBO-specific opening (CboScaleSlide, ScaleOpportunity/EverySeriesForecast/CrossScale/ScaleAccuracy/
-HowWeGetThere/ProjectionApparatus — US-forecasting agency framing), CliffWatch, Theory section
+HowWeGetThere/ProjectionApparatus — US-forecasting agency framing), Theory section
 (LLMBeliefs, LLMETI), Analysis section (AnalysisLogos, PolicyAnalysis, ClaudePlugin,
 ClaudeComparison, UKChatPrototype, PredictAll, MarketsMock, AIInequality), WhoUsesIt (folded into
-PEOverview), ObbbaExplorer (Max presents the OBBBA paper elsewhere at IARIW), parked legacy slides.
+PEOverview), and parked legacy slides.
 
 ## Claim gates (standing)
 
