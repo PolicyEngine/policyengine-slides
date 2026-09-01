@@ -1,6 +1,12 @@
 "use client";
 
 import LiveAppSlide from "./LiveAppSlide";
+import Slide from "@/components/core/Slide";
+import SlideHeader from "@/components/layout/SlideHeader";
+import SlideTitle from "@/components/layout/SlideTitle";
+import { resolveImageSrc } from "@/lib/base-path-image";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 /** Progress since we last talked: districts, tariffs, Social Security, SNAP QC. */
 
@@ -14,27 +20,57 @@ function Card({ tag, children }: { tag: string; children: React.ReactNode }) {
 }
 
 export const DistrictSlide = () => (
-  <LiveAppSlide
-    title="Your grant at work — the district layer"
-    url="https://www.policyengine.org/us/snap-district-map"
-    displayUrl="policyengine.org/us/snap-district-map"
-  >
-    <Card tag="Live today">
-      436 congressional districts in the API and app &mdash; district maps, the
-      NJ child tax credit calculator&apos;s district tab, the state legislative
-      tracker. One national file, filtered by state and district.
-    </Card>
-    <Card tag="Straight talk on calibration">
-      The current default release is calibrated to national and state totals.
-      The August build carries the first 436 district population targets, with
-      IRS SOI district income following &mdash; full district rows are expected
-      in the next release.
-    </Card>
-    <Card tag="Through December">
-      Spending runs through December 31, with the final hand-off report and
-      dashboard link due then.
-    </Card>
-  </LiveAppSlide>
+  <Slide>
+    <SlideHeader>
+      <div className="flex items-baseline justify-between">
+        <SlideTitle>Your grant at work &mdash; the district layer</SlideTitle>
+        <span className="font-mono text-lg text-pe-teal">
+          IARIW 2026, Brussels
+        </span>
+      </div>
+    </SlideHeader>
+
+    <div
+      className="grid gap-7 mt-4 h-[calc(100vh-300px)]"
+      style={{ gridTemplateColumns: "0.62fr 1.38fr" }}
+    >
+      <div className="flex flex-col gap-4">
+        <Card tag="Live today">
+          436 congressional districts in the API and app &mdash; district maps,
+          the NJ child tax credit calculator&apos;s district tab, the state
+          legislative tracker. One national file, filtered by state and
+          district.
+        </Card>
+        <Card tag="Calibration">
+          The current default release is calibrated to national and state
+          totals; the calibration now under way passes 30,000 targets,
+          congressional-district rows included.
+        </Card>
+        <Card tag="Two papers last week">
+          The OBBBA analysis of household and geographic variation &mdash;
+          results by state and congressional district &mdash; and a methods
+          paper on the imputation machinery beneath the calibrated file. Final
+          hand-off report and dashboard link due December 31.
+        </Card>
+      </div>
+
+      <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white flex flex-col">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={resolveImageSrc(
+            "/screenshots/arnold-2026/obbba-district-map.png",
+            BASE_PATH,
+          )}
+          alt="OBBBA average household net income change in 2026, by congressional district"
+          className="w-full h-full object-contain p-4"
+        />
+        <div className="px-5 py-3 border-t border-gray-100 text-sm text-gray-600">
+          OBBBA&apos;s average household net income change in 2026, by
+          congressional district &mdash; from the paper presented at IARIW.
+        </div>
+      </div>
+    </div>
+  </Slide>
 );
 
 export const TariffSlide = () => (
