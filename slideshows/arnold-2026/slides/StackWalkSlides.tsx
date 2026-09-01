@@ -69,7 +69,7 @@ const missions: Record<LayerKey, string> = {
 };
 
 const loops: Record<LayerKey, string> = {
-  corollary: "inherits the checks below",
+  corollary: "the market, on top of the checks below",
   thesis: "every forecast graded against the official first print",
   policyengine:
     "every score set beside the published one, divergence explained",
@@ -456,9 +456,10 @@ export const StackCorollarySlide = () => (
     }
     loop={
       <>
-        Inherited from below: conformance checks against independent records,
-        with results issued only where the checks pass &mdash; never
-        self-certified.
+        The market: Corollary is the for-profit layer, so its products are
+        graded by whether anyone pays for them &mdash; on top of the checks
+        inherited from below, with results issued only where those checks pass,
+        never self-certified.
       </>
     }
   />
