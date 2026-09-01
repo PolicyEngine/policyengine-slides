@@ -8,6 +8,7 @@ import {
   FundingSlide,
   PipelineSlide,
 } from "../arnold-2026/slides/ContextSlides";
+import AgendaSlide from "../arnold-2026/slides/AgendaSlide";
 import ScaleSlide from "../arnold-2026/slides/ScaleSlide";
 import {
   StackIntroSlide,
@@ -67,6 +68,7 @@ export const arnold2026ShortConfig: SlideshowConfig = {
   slides: [
     // Their threads first
     TitleSlide,
+    AgendaSlide,
     DistrictSlide,
     SocialSecuritySlide,
     SnapQcSlide,
@@ -75,6 +77,7 @@ export const arnold2026ShortConfig: SlideshowConfig = {
     // Why the stack, the stack, its checks, the ask
     ScaleSlide,
     { component: StackIntroSlide, builds: 7 },
+    GraphRandSlide,
     NextSlide,
     QuestionsSlide,
 
@@ -83,7 +86,6 @@ export const arnold2026ShortConfig: SlideshowConfig = {
     StackPeSlide,
     ScorecardLiveSlide,
     StackAxiomSlide,
-    GraphRandSlide,
     StackChronicleSlide,
     ChronicleLiveSlide,
     StackMicrocosmSlide,

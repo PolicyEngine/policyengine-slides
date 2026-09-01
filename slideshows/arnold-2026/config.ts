@@ -8,6 +8,7 @@ import {
   FundingSlide,
   PipelineSlide,
 } from "./slides/ContextSlides";
+import AgendaSlide from "./slides/AgendaSlide";
 import ScaleSlide from "./slides/ScaleSlide";
 import {
   StackIntroSlide,
@@ -62,6 +63,7 @@ export const arnold2026Config: SlideshowConfig = {
   slides: [
     // Scene-setting
     TitleSlide,
+    AgendaSlide,
     PartnershipSlide,
     WhoUsesSlide,
     FundingSlide,
