@@ -73,7 +73,7 @@ export const arnold2026Config: SlideshowConfig = {
     // The problem, then the stack walk: each layer lit in turn,
     // with its live surface right after
     ScaleSlide,
-    { component: StackIntroSlide, builds: 7 },
+    { component: StackIntroSlide, builds: 6 },
     StackPeSlide,
     ScorecardLiveSlide,
     StackAxiomSlide,

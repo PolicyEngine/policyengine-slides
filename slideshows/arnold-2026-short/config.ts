@@ -77,7 +77,7 @@ export const arnold2026ShortConfig: SlideshowConfig = {
 
     // Why the stack, the stack, its checks, the ask
     ScaleSlide,
-    { component: StackIntroSlide, builds: 7 },
+    { component: StackIntroSlide, builds: 6 },
     GraphRandSlide,
     ScorecardLiveSlide,
     ThesisLiveSlide,

@@ -247,10 +247,10 @@ function Arrow({ dashed = false }: { dashed?: boolean }) {
   );
 }
 
-/** Builds bottom-up, one project per step; the closing line is step 7. */
+/** Builds bottom-up, one project per step; the closing line is step 6. */
 export function StackIntroSlide() {
   const ctx = useSlideshowContextSafe();
-  const step = ctx?.buildStep ?? 7;
+  const step = ctx?.buildStep ?? 6;
   const on = (n: number) => step >= n;
   return (
     <Slide>
@@ -267,8 +267,6 @@ export function StackIntroSlide() {
           <div>Mission</div>
           <div>Feedback loop</div>
         </div>
-        <IntegratedRow layer="corollary" visible={on(7)} dotted />
-        <Arrow dashed />
         <IntegratedRow layer="thesis" visible={on(5)} dotted />
         <Arrow />
         <IntegratedRow layer="policyengine" visible={on(4)} />
