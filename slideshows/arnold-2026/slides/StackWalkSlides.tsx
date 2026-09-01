@@ -84,6 +84,16 @@ function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
   }
 }
 
+const megagoals: Record<LayerKey, string> = {
+  corollary: "products that follow from the rules",
+  thesis: "forecast all government statistics, under current law and reforms",
+  policyengine: "replicate all policy scores with flexible open-source models",
+  microcosm:
+    "build society in miniature, calibrated to all official statistics",
+  axiom: "encode the world's rules",
+  chronicle: "collect all official statistics",
+};
+
 const oneLiners: Record<LayerKey, string> = {
   corollary: "products that follow from the rules — applications on top",
   thesis: "judgment and uncertainty — forecasts scored against reality",
@@ -225,7 +235,7 @@ export function StackIntroSlide() {
                 <span className="text-lg font-bold text-pe-dark">{w.name}</span>
                 <span className="text-base text-gray-600">
                   {" "}
-                  &mdash; {oneLiners[w.layer]}
+                  &mdash; {megagoals[w.layer]}
                 </span>
               </div>
             </div>
