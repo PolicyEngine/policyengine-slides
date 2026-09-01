@@ -267,7 +267,7 @@ export function StackIntroSlide() {
           <div>Mission</div>
           <div>Feedback loop</div>
         </div>
-        <IntegratedRow layer="corollary" visible={on(6)} dotted />
+        <IntegratedRow layer="corollary" visible={on(7)} dotted />
         <Arrow dashed />
         <IntegratedRow layer="thesis" visible={on(5)} dotted />
         <Arrow />
@@ -282,7 +282,7 @@ export function StackIntroSlide() {
 
       <div
         className={`accent-block mt-4 max-w-6xl mx-auto transition-opacity duration-500 ${
-          on(7) ? "animate-fade-in-up opacity-100" : "opacity-0"
+          on(6) ? "animate-fade-in-up opacity-100" : "opacity-0"
         }`}
       >
         <p className="text-base text-gray-800 leading-relaxed">
