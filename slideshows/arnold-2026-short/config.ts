@@ -80,8 +80,8 @@ export const arnold2026ShortConfig: SlideshowConfig = {
     { component: StackIntroSlide, builds: 6 },
     GraphRandSlide,
     ScorecardLiveSlide,
-    ThesisLiveSlide,
     AiIncomeShiftSlide,
+    ThesisLiveSlide,
     NextSlide,
     QuestionsSlide,
 
