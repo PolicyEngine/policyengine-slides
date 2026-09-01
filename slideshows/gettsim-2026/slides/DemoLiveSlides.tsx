@@ -44,8 +44,8 @@ export const DemoAxiomLiveSlide = () => (
 export const ScorecardLiveSlide = () => (
   <LiveAppSlide
     title="The scorecard: the model, graded"
-    url="https://policyengine-scorecard.vercel.app/"
-    displayUrl="policyengine-scorecard.vercel.app"
+    url="https://www.policyengine.org/scorecard"
+    displayUrl="policyengine.org/scorecard"
     fallbackSrc="/screenshots/gettsim-2026/scorecard-sotsn.png"
   >
     <div className="content-card p-5">
