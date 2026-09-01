@@ -10,7 +10,7 @@ const beats = [
   },
   {
     n: 2,
-    title: "Six projects, one chain of checks",
+    title: "Five projects, one chain of checks",
     body: "The stack, each layer with the loop that grades it — and Axiom live.",
   },
   {
