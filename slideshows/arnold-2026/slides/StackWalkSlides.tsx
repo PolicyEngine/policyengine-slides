@@ -232,9 +232,10 @@ export function StackIntroSlide() {
           ))}
           <div className="accent-block mt-3">
             <p className="text-base text-gray-800 leading-relaxed">
-              For each: where it stands, where it&apos;s going, and the feedback
-              loop that keeps it honest. The district grant funds
-              PolicyEngine&apos;s data layer &mdash; number 4.
+              The primitives of policy analysis in the AI era. For each: where
+              it stands, where it&apos;s going, and the feedback loop that keeps
+              it honest. The district grant funds PolicyEngine&apos;s data layer
+              &mdash; number 4.
             </p>
           </div>
         </div>
