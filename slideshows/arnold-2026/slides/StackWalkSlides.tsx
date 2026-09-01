@@ -259,8 +259,9 @@ export const StackPeSlide = () => (
     }
     ambition={
       <>
-        Any reform, any question, on the fly &mdash; for analysts, agencies, and
-        AI agents, with the same rules and data underneath.
+        Replicate all policy scores with flexible open-source models &mdash; any
+        reform, any question, on the fly, for analysts, agencies, and AI agents,
+        with the same rules and data underneath.
       </>
     }
     loop={
@@ -289,9 +290,9 @@ export const StackAxiomSlide = () => (
     }
     ambition={
       <>
-        The reference encoding of the law &mdash; the layer models, government
-        tools, and AI agents all read from, instead of each re-implementing the
-        statute.
+        Encode the world&rsquo;s rules &mdash; the reference encoding models,
+        government tools, and AI agents all read from, instead of each
+        re-implementing the statute.
       </>
     }
     loop={
@@ -320,11 +321,11 @@ export const StackChronicleSlide = () => (
     }
     ambition={
       <>
-        Official statistics as sourced, dated, machine-readable facts &mdash;
-        recorded as published, never reconciled or modeled. The ground truth the
-        rest of the stack calibrates and grades against &mdash; and, next, each
-        fact tied to the concepts Axiom encodes, so the record and the law share
-        one vocabulary.
+        Collect all official statistics &mdash; sourced, dated,
+        machine-readable, recorded as published, never reconciled or modeled.
+        The ground truth the rest of the stack calibrates and grades against
+        &mdash; and, next, each fact tied to the concepts Axiom encodes, so the
+        record and the law share one vocabulary.
       </>
     }
     loop={
@@ -352,9 +353,10 @@ export const StackMicrocosmSlide = () => (
     }
     ambition={
       <>
-        Every cell of the simulated world traceable to the administrative total
-        it was calibrated against &mdash; households first, other unit families
-        (like import entries for tariff analysis) joining the same discipline.
+        Build society in miniature, calibrated to all official statistics
+        &mdash; every cell traceable to the administrative total behind it;
+        households first, other unit families (like import entries for tariff
+        analysis) joining the same discipline.
       </>
     }
     loop={
@@ -384,9 +386,9 @@ export const StackThesisSlide = () => (
     }
     ambition={
       <>
-        Forecast accuracy as the end-to-end test of the whole stack: when a new
-        country or program comes online, do resolved forecasts get better? The
-        track record is the product.
+        Forecast all government statistics, under current law and under reforms
+        &mdash; accuracy as the end-to-end test of the whole stack: when a new
+        country or program comes online, do resolved forecasts get better?
       </>
     }
     loop={
