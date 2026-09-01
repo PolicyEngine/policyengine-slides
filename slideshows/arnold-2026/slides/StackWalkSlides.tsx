@@ -267,7 +267,7 @@ export const StackPeSlide = () => (
         The Scorecard: estimates from Urban, JCT, TPC, CBO, PWBM, and state
         fiscal notes beside PolicyEngine&apos;s counterpart &mdash; each pair
         labeled comparable, constructed, or concept mismatch. The metric is
-        explained divergence, not a scoreboard.
+        explained divergence.
       </>
     }
   />
@@ -298,7 +298,7 @@ export const StackAxiomSlide = () => (
         About 900,000 household cases checked against independent calculators
         and records &mdash; PolicyEngine, SPSD/M, EUROMOD, SNAP QC files &mdash;
         on a public dashboard. Certified is computed, never set by hand; today
-        it reads 0 of 13, and publishing that honestly is the point.
+        it reads 0 of 13.
       </>
     }
   />

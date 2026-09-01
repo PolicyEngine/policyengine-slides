@@ -45,11 +45,10 @@ export default function ScaleSlide() {
 
       <div className="accent-block mt-10 max-w-5xl">
         <p className="text-xl text-gray-800 leading-relaxed">
-          Not a claim that every bill deserves a formal score &mdash; a scale
-          check on the information legislatures could ask for. Closing the gap
-          takes apparatus: encoded rules, calibrated data, and verification that
-          scales with both. That apparatus is what your grants have been
-          building.
+          Legislatures could ask for orders of magnitude more scores than anyone
+          can produce today. Closing that gap takes apparatus &mdash; encoded
+          rules, calibrated data, verification that scales with both. That
+          apparatus is what your grants have been building.
         </p>
       </div>
     </Slide>
