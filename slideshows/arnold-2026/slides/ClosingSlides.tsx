@@ -91,44 +91,43 @@ export function NextSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>The near-term picture</SlideTitle>
+        <SlideTitle>The next twelve months</SlideTitle>
       </SlideHeader>
 
       <p className="mt-8 text-2xl text-gray-900 leading-relaxed font-light max-w-5xl">
-        Charlie&apos;s August note named the frame: near-term projects that
-        close gaps in tax data and modeling capability, toward capital-taxation
-        options &ldquo;sufficiently ready to be enacted by the end of
-        2028.&rdquo; Three capabilities decide how those options score:
+        Three lanes &mdash; and where the near-term frame from Charlie&apos;s
+        August note sits in them.
       </p>
 
       <div className="mt-8 grid grid-cols-3 gap-6">
         <div className="content-card p-6">
           <div className="text-2xl font-bold text-pe-dark mb-3">
-            Capital income and wealth
+            Close the gaps that decide how scores land
           </div>
           <p className="text-base text-gray-700 leading-relaxed">
-            In the calibrated population itself &mdash; so distributional claims
-            about capital taxation rest on data anchored to administrative
-            totals.
+            Capital income and wealth in the calibrated population, realization
+            responses, incidence by state and district &mdash; the layer your
+            grant built, extended to the capital side, every estimate published
+            beside other models&apos; where a published score exists.
           </p>
         </div>
         <div className="content-card p-6">
           <div className="text-2xl font-bold text-pe-dark mb-3">
-            Realization responses
+            Finish the migration
           </div>
           <p className="text-base text-gray-700 leading-relaxed">
-            Behavioral machinery for capital gains &mdash; the difference
-            between a static score and one CBO would recognize.
+            PolicyEngine onto Axiom&apos;s encodings; congressional-district
+            rows into the calibration now under way; the Social Security
+            dynamics layer through its scoring protocol.
           </p>
         </div>
         <div className="content-card p-6">
           <div className="text-2xl font-bold text-pe-dark mb-3">
-            Incidence by state and district
+            Grade everything
           </div>
           <p className="text-base text-gray-700 leading-relaxed">
-            The district layer your current grant built, extended to the capital
-            side &mdash; every estimate published beside other models&apos;
-            where a published score exists.
+            Thesis forecasts under current law and under reforms, resolving
+            annually; the Scorecard growing beside every published score.
           </p>
         </div>
       </div>
