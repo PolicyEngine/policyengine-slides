@@ -33,7 +33,9 @@ import {
 } from './slides/DemoLiveSlides';
 import BelgiumParitySlide from './slides/BelgiumParitySlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
-// 2 — Data: the calibration harness under the microdata
+// 2 — Data: how Microcosm builds the microdata, and the harness under it
+import MicrodataPipelineSlide from './slides/MicrodataPipelineSlide';
+import MicrocosmBESlide from './slides/MicrocosmBESlide';
 import HarnessLayersSlide from './slides/HarnessLayersSlide';
 // 3 — Microsimulation: PolicyEngine, graded
 import PEOverviewSlide from './slides/PEOverviewSlide';
@@ -84,6 +86,8 @@ export const gettsim2026Config: SlideshowConfig = {
 
     // 2 — Data
     DataDividerSlide,
+    MicrodataPipelineSlide,
+    MicrocosmBESlide,
     CalibrationLiveSlide,
     CalibrationDashboardStaticSlide,
     HarnessLayersSlide,
