@@ -176,7 +176,7 @@ export const AiIncomeShiftSlide = () => (
       apportioned by households&apos; existing realized capital income, where
       the Budget Lab apportions by SCF-imputed assets. Closing that gap means
       capital income and wealth in the calibrated population, plus realization
-      responses &mdash; the near-term picture, next.
+      responses &mdash; the near-term picture that closes.
     </Card>
   </LiveAppSlide>
 );
