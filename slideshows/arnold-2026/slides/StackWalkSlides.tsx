@@ -36,7 +36,15 @@ const marks: Record<LayerKey, { src: string; alt: string; height: number }> = {
 };
 
 // Plain <img>: next/image never completed loading these SVGs in the deck.
-function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
+function Wordmark({
+  layer,
+  faded,
+  scale = 1,
+}: {
+  layer: LayerKey;
+  faded: boolean;
+  scale?: number;
+}) {
   const m = marks[layer];
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -44,7 +52,7 @@ function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
       src={resolveImageSrc(m.src, BASE_PATH)}
       alt={m.alt}
       className={faded ? "opacity-30 grayscale" : ""}
-      style={{ height: `${m.height}px`, width: "auto" }}
+      style={{ height: `${m.height * scale}px`, width: "auto" }}
     />
   );
 }
@@ -172,14 +180,40 @@ function WalkSlide({
   );
 }
 
-const walkOrder: { n: number; layer: LayerKey; name: string }[] = [
-  { n: 1, layer: "policyengine", name: "PolicyEngine" },
-  { n: 2, layer: "axiom", name: "Axiom" },
-  { n: 3, layer: "chronicle", name: "Chronicle" },
-  { n: 4, layer: "microcosm", name: "Microcosm" },
-  { n: 5, layer: "thesis", name: "Thesis" },
-  { n: 6, layer: "corollary", name: "Corollary" },
-];
+function IntegratedRow({
+  layer,
+  dotted = false,
+}: {
+  layer: LayerKey;
+  dotted?: boolean;
+}) {
+  return (
+    <div
+      className={`w-full rounded-xl px-7 py-3 flex items-center gap-8 ${
+        dotted
+          ? "border-2 border-dashed border-gray-300 bg-white"
+          : "border border-gray-300 bg-gray-50"
+      }`}
+    >
+      <div className="w-52 shrink-0 flex items-center">
+        <Wordmark layer={layer} faded={false} scale={1.7} />
+      </div>
+      <div className="text-xl text-gray-800 leading-snug">
+        {megagoals[layer]}
+      </div>
+    </div>
+  );
+}
+
+function Arrow({ dashed = false }: { dashed?: boolean }) {
+  return (
+    <div
+      className={`text-base leading-none ${dashed ? "text-gray-300" : "text-gray-400"}`}
+    >
+      {dashed ? "┊" : "↑"}
+    </div>
+  );
+}
 
 export function StackIntroSlide() {
   return (
@@ -188,32 +222,27 @@ export function StackIntroSlide() {
         <SlideTitle>Six projects, one stack</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-4 grid grid-cols-[0.85fr_1.15fr] gap-8 items-start">
-        <StackDiagram />
-        <div className="flex flex-col gap-2">
-          {walkOrder.map((w) => (
-            <div key={w.layer} className="flex items-baseline gap-4">
-              <span className="font-mono text-xl font-bold text-pe-teal w-6 shrink-0 text-right">
-                {w.n}
-              </span>
-              <div>
-                <span className="text-lg font-bold text-pe-dark">{w.name}</span>
-                <span className="text-base text-gray-600">
-                  {" "}
-                  &mdash; {megagoals[w.layer]}
-                </span>
-              </div>
-            </div>
-          ))}
-          <div className="accent-block mt-3">
-            <p className="text-base text-gray-800 leading-relaxed">
-              The primitives of policy analysis in the AI era. For each: where
-              it stands, where it&apos;s going, and the feedback loop that keeps
-              it honest. The district grant funds PolicyEngine&apos;s data layer
-              &mdash; number 4.
-            </p>
-          </div>
-        </div>
+      <div className="mt-4 flex flex-col items-center gap-1.5 max-w-5xl mx-auto">
+        <IntegratedRow layer="corollary" dotted />
+        <Arrow dashed />
+        <IntegratedRow layer="thesis" dotted />
+        <Arrow />
+        <IntegratedRow layer="policyengine" />
+        <Arrow />
+        <IntegratedRow layer="microcosm" />
+        <Arrow />
+        <IntegratedRow layer="chronicle" />
+        <Arrow />
+        <IntegratedRow layer="axiom" />
+      </div>
+
+      <div className="accent-block mt-5 max-w-5xl mx-auto">
+        <p className="text-base text-gray-800 leading-relaxed">
+          The primitives of policy analysis in the AI era. For each: where it
+          stands, where it&apos;s going, and the feedback loop that keeps it
+          honest. The district grant funds PolicyEngine&apos;s data layer
+          &mdash; Microcosm.
+        </p>
       </div>
     </Slide>
   );
