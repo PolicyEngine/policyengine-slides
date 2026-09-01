@@ -41,13 +41,17 @@ import ChronicleSlide from './slides/ChronicleSlide';
 import DataChallengeSlide from './slides/DataChallengeSlide';
 import ImputationSlide from './slides/ImputationSlide';
 import CalibrationSlide from './slides/CalibrationSlide';
+import DistrictCalibrationMapSlide from './slides/DistrictCalibrationMapSlide';
 import MicrocosmBESlide from './slides/MicrocosmBESlide';
-import MicroplexSlide from './slides/MicroplexSlide';
 // 4 — PolicyEngine
 import PEOverviewSlide from './slides/PEOverviewSlide';
 import CountryScopeSlide from './slides/CountryScopeSlide';
 import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import DemoPySlide from './slides/DemoPySlide';
+import {
+  CliffWatchLiveSlide,
+  ObbbaExplorerLiveSlide,
+} from './slides/PolicyEngineExamplesSlides';
 // Live embeds + static fallbacks
 import {
   DemoAxiomBrowseSlide,
@@ -77,10 +81,9 @@ import {
 // 5 — Together
 import ConductorsSlide from './slides/ConductorsSlide';
 import StackRecapSlide from './slides/StackRecapSlide';
-import {
-  ForecastSpfSlide,
-  ForecastAiRangeSlide,
-} from './slides/ForecastUncertaintySlide';
+import HarnessRecapSlide from './slides/HarnessRecapSlide';
+import BaselineForecastSlide from './slides/BaselineForecastSlide';
+import ForecastUncertaintySlide from './slides/ForecastUncertaintySlide';
 import ClosingLoopSlide from './slides/ClosingLoopSlide';
 import CommunityClosingSlide from './slides/CommunityClosingSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
@@ -152,16 +155,18 @@ export const iariw2026Config: SlideshowConfig = {
     DataChallengeSlide,
     ImputationSlide,
     CalibrationSlide,
+    DistrictCalibrationMapSlide,
     MicrocosmBESlide,
     DemoDashboardLiveSlide,
     MicrocosmDashboardSlide,
-    MicroplexSlide,
 
     // 4 — PolicyEngine (the model)
     EngineDividerSlide,
     PEOverviewSlide,
     CountryScopeSlide,
     WhoUsesItSlide,
+    CliffWatchLiveSlide,
+    ObbbaExplorerLiveSlide,
     DemoPeBeLiveSlide,
     DemoPeBeSlide,
     DemoPySlide,
@@ -176,8 +181,9 @@ export const iariw2026Config: SlideshowConfig = {
     ThesisBillsStaticSlide,
     LookingForwardDividerSlide,
     StackRecapSlide,
-    ForecastSpfSlide,
-    ForecastAiRangeSlide,
+    HarnessRecapSlide,
+    BaselineForecastSlide,
+    ForecastUncertaintySlide,
     CommunityClosingSlide,
     QuestionsSlide,
   ],
