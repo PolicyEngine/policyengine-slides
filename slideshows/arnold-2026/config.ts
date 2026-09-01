@@ -58,8 +58,8 @@ export const arnold2026Config: SlideshowConfig = {
   date: "2026-09-01",
   footerText: "Arnold Ventures check-in · September 2026",
   partnerLogo: {
-    src: "/logos/axiom-foundation-white.svg",
-    alt: "The Axiom Foundation",
+    src: "/logos/axiom-wordmark-bare-white.svg",
+    alt: "Axiom",
   },
   speakers: [speakers["max-ghenis"]],
   private: true,

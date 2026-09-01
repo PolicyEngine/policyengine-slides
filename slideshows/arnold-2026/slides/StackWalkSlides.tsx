@@ -139,10 +139,9 @@ function StackDiagram({ focus }: { focus?: LayerKey }) {
       <div className="text-gray-400 text-sm leading-none">↑</div>
       <Box layer="microcosm" focus={focus} />
       <div className="text-gray-400 text-sm leading-none">↑</div>
-      <div className="grid grid-cols-2 gap-2 w-full">
-        <Box layer="axiom" focus={focus} />
-        <Box layer="chronicle" focus={focus} />
-      </div>
+      <Box layer="chronicle" focus={focus} />
+      <div className="text-gray-400 text-sm leading-none">↑</div>
+      <Box layer="axiom" focus={focus} />
     </div>
   );
 }
@@ -322,7 +321,9 @@ export const StackChronicleSlide = () => (
       <>
         Official statistics as sourced, dated, machine-readable facts &mdash;
         recorded as published, never reconciled or modeled. The ground truth the
-        rest of the stack calibrates and grades against.
+        rest of the stack calibrates and grades against &mdash; and, next, each
+        fact tied to the concepts Axiom encodes, so the record and the law share
+        one vocabulary.
       </>
     }
     loop={
