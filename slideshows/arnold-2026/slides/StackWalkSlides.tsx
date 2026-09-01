@@ -78,6 +78,14 @@ const loops: Record<LayerKey, string> = {
   chronicle: "every first print witnessed, checkable offline",
 };
 
+const loopUrls: Partial<Record<LayerKey, string>> = {
+  axiom: "axiom.org/validation",
+  chronicle: "chronicle.institute/verify",
+  microcosm: "microcosm.institute/calibration/dashboard",
+  policyengine: "policyengine.org/scorecard",
+  thesis: "app.thesisinstitute.org/calibration",
+};
+
 const oneLiners: Record<LayerKey, string> = {
   corollary: "products that follow from the rules — applications on top",
   thesis: "judgment and uncertainty — forecasts scored against reality",
@@ -217,7 +225,14 @@ function IntegratedRow({
       <div className="text-lg text-pe-dark font-semibold leading-snug">
         {missions[layer]}
       </div>
-      <div className="text-sm text-gray-600 leading-snug">{loops[layer]}</div>
+      <div>
+        <div className="text-sm text-gray-600 leading-snug">{loops[layer]}</div>
+        {loopUrls[layer] && (
+          <div className="font-mono text-xs text-pe-teal mt-1">
+            {loopUrls[layer]}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
