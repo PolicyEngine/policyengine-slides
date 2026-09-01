@@ -58,16 +58,6 @@ function Wordmark({
   );
 }
 
-const megagoals: Record<LayerKey, string> = {
-  corollary: "products that follow from the rules",
-  thesis: "forecast all government statistics, under current law and reforms",
-  policyengine: "replicate all policy scores with flexible open-source models",
-  microcosm:
-    "build society in miniature, calibrated to all official statistics",
-  axiom: "encode the world's rules",
-  chronicle: "collect all official statistics",
-};
-
 const missions: Record<LayerKey, string> = {
   corollary: "the products that follow from the rules",
   thesis:
