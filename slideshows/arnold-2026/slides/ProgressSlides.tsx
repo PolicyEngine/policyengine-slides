@@ -103,23 +103,29 @@ export const TariffSlide = () => (
 export const SocialSecuritySlide = () => (
   <LiveAppSlide
     title="Social Security — the run-through you asked for"
-    url="https://www.policyengine.org/us/taxation-of-benefits-reforms/"
-    displayUrl="policyengine.org/us/taxation-of-benefits-reforms"
+    url="https://microcosm.institute/dynamics"
+    displayUrl="microcosm.institute/dynamics"
   >
     <Card tag="Cross-sectional, shipped">
       CRFB&apos;s benefit-taxation designs scored year by year through 2100
-      &mdash; revenue, trust-fund split, and distribution &mdash; on this public
-      dashboard, with the paper alongside.
+      &mdash; revenue, trust-fund split, and distribution &mdash; on the public
+      dashboard at policyengine.org/us/taxation-of-benefits-reforms.
     </Card>
-    <Card tag="Dynamic, first estimates">
-      The dynamic layer&apos;s first estimates are up at
-      microcosm.institute/dynamics &mdash; person-level histories, the machinery
-      that survivor-benefit composition and claiming questions actually need.
+    <Card tag="Dynamic — the harness comes first">
+      The longitudinal layer is specified before it is built: one weight per
+      full trajectory, transitions as conditional models, sensitivity surfaces
+      instead of 75-year point forecasts, and a scoring protocol under which
+      every claim resolves against administrative publications, backtests with
+      leakage control, or computes exactly from statute. Contributions merge
+      only on held-out score.
     </Card>
-    <Card tag="Your threads">
-      Hana&apos;s generation-level incidence view is on the roadmap; the $100k
-      cap&apos;s survivor composition is exactly what person-level histories
-      unlock. Next stop: Gopi Shah Goda&apos;s February LTSS convening.
+    <Card tag="A preview of how the bigger changes land">
+      No trajectory has been scored against administrative outcomes yet, and the
+      page says so. The same discipline built the cross-sectional file (0.038
+      holdout loss, against 0.317 for the enhanced CPS it replaced).
+      Person-level histories are what Hana&apos;s generation-level view and the
+      $100k cap&apos;s survivor composition run on; next stop, Gopi Shah
+      Goda&apos;s February convening.
     </Card>
   </LiveAppSlide>
 );
