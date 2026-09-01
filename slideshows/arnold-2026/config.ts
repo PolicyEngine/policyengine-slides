@@ -50,7 +50,7 @@ import {
 
 export const arnold2026Config: SlideshowConfig = {
   id: "arnold-2026",
-  title: "Six projects, one chain of checks",
+  title: "Five projects, one chain of checks",
   description:
     "Private funder check-in — the stack, its feedback loops, and current progress",
   date: "2026-09-01",

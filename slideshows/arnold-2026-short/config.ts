@@ -55,7 +55,7 @@ import {
  */
 export const arnold2026ShortConfig: SlideshowConfig = {
   id: "arnold-2026-short",
-  title: "Six projects, one chain of checks",
+  title: "Five projects, one chain of checks",
   description:
     "Private funder check-in — the conversation cut: their threads, the stack, one ask",
   date: "2026-09-01",

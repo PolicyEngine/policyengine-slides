@@ -255,7 +255,7 @@ export function StackIntroSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Six projects, one chain of checks</SlideTitle>
+        <SlideTitle>Five projects, one chain of checks</SlideTitle>
       </SlideHeader>
 
       <div className="mt-3 flex flex-col items-center gap-1 max-w-6xl mx-auto">
