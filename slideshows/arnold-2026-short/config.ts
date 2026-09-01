@@ -31,11 +31,7 @@ import {
   SocialSecuritySlide,
   SnapQcSlide,
 } from "../arnold-2026/slides/ProgressSlides";
-import {
-  LoopsRecapSlide,
-  NextSlide,
-  QuestionsSlide,
-} from "../arnold-2026/slides/ClosingSlides";
+import { NextSlide, QuestionsSlide } from "../arnold-2026/slides/ClosingSlides";
 import {
   AppendixDividerSlide,
   GraphStaticSlide,
@@ -78,8 +74,7 @@ export const arnold2026ShortConfig: SlideshowConfig = {
 
     // Why the stack, the stack, its checks, the ask
     ScaleSlide,
-    StackIntroSlide,
-    LoopsRecapSlide,
+    { component: StackIntroSlide, builds: 7 },
     NextSlide,
     QuestionsSlide,
 

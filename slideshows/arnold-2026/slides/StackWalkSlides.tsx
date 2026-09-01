@@ -2,6 +2,7 @@ import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { resolveImageSrc } from "@/lib/base-path-image";
+import { useSlideshowContextSafe } from "@/components/core/SlideshowContext";
 
 /**
  * The stack walk: one overview with the six layers numbered in walk order,
@@ -65,6 +66,30 @@ const megagoals: Record<LayerKey, string> = {
     "build society in miniature, calibrated to all official statistics",
   axiom: "encode the world's rules",
   chronicle: "collect all official statistics",
+};
+
+const missions: Record<LayerKey, string> = {
+  corollary: "the products that follow from the rules",
+  thesis:
+    "every government statistic, forecast under current law and every reform",
+  policyengine: "every policy score, replicated in the open",
+  microcosm: "society in miniature, calibrated to every official statistic",
+  axiom: "a computable layer for all law",
+  chronicle: "every official statistic, recorded as first published",
+};
+
+const loops: Record<LayerKey, string> = {
+  corollary: "inherits the checks below — nothing of its own to publish yet",
+  thesis:
+    "forecasts graded against reality — 35 of 45 witnessed resolutions in interval",
+  policyengine:
+    "the Scorecard beside JCT, CBO, TPC, Urban, PWBM — explained divergence",
+  microcosm:
+    "5,659 calibration targets published with their errors — 95.7% within 10%",
+  axiom:
+    "~900k household cases checked against independent engines and records",
+  chronicle:
+    "first prints witnessed by two timestamp authorities, checkable offline",
 };
 
 const oneLiners: Record<LayerKey, string> = {
@@ -182,25 +207,31 @@ function WalkSlide({
 
 function IntegratedRow({
   layer,
+  visible,
   dotted = false,
 }: {
   layer: LayerKey;
+  visible: boolean;
   dotted?: boolean;
 }) {
   return (
     <div
-      className={`w-full rounded-xl px-7 py-3 flex items-center gap-8 ${
+      className={`w-full rounded-xl px-6 py-2.5 grid items-center gap-6 transition-opacity duration-500 ${
+        visible ? "animate-fade-in-up opacity-100" : "opacity-0"
+      } ${
         dotted
           ? "border-2 border-dashed border-gray-300 bg-white"
           : "border border-gray-300 bg-gray-50"
       }`}
+      style={{ gridTemplateColumns: "11rem 1.1fr 1fr" }}
     >
-      <div className="w-52 shrink-0 flex items-center">
-        <Wordmark layer={layer} faded={false} scale={1.7} />
+      <div className="flex items-center">
+        <Wordmark layer={layer} faded={false} scale={1.6} />
       </div>
-      <div className="text-xl text-gray-800 leading-snug">
-        {megagoals[layer]}
+      <div className="text-lg text-pe-dark font-semibold leading-snug">
+        {missions[layer]}
       </div>
+      <div className="text-sm text-gray-600 leading-snug">{loops[layer]}</div>
     </div>
   );
 }
@@ -208,40 +239,53 @@ function IntegratedRow({
 function Arrow({ dashed = false }: { dashed?: boolean }) {
   return (
     <div
-      className={`text-base leading-none ${dashed ? "text-gray-300" : "text-gray-400"}`}
+      className={`text-sm leading-none ${dashed ? "text-gray-300" : "text-gray-400"}`}
     >
       {dashed ? "┊" : "↑"}
     </div>
   );
 }
 
+/** Builds bottom-up, one project per step; the closing line is step 7. */
 export function StackIntroSlide() {
+  const ctx = useSlideshowContextSafe();
+  const step = ctx?.buildStep ?? 7;
+  const on = (n: number) => step >= n;
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Six projects, one stack</SlideTitle>
+        <div className="flex items-baseline justify-between">
+          <SlideTitle>Six projects, one chain of checks</SlideTitle>
+          <span className="text-sm uppercase tracking-wide text-gray-500 font-semibold">
+            mission · what grades it, in public
+          </span>
+        </div>
       </SlideHeader>
 
-      <div className="mt-4 flex flex-col items-center gap-1.5 max-w-5xl mx-auto">
-        <IntegratedRow layer="corollary" dotted />
+      <div className="mt-3 flex flex-col items-center gap-1 max-w-6xl mx-auto">
+        <IntegratedRow layer="corollary" visible={on(6)} dotted />
         <Arrow dashed />
-        <IntegratedRow layer="thesis" dotted />
+        <IntegratedRow layer="thesis" visible={on(5)} dotted />
         <Arrow />
-        <IntegratedRow layer="policyengine" />
+        <IntegratedRow layer="policyengine" visible={on(4)} />
         <Arrow />
-        <IntegratedRow layer="microcosm" />
+        <IntegratedRow layer="microcosm" visible={on(3)} />
         <Arrow />
-        <IntegratedRow layer="chronicle" />
+        <IntegratedRow layer="chronicle" visible={on(2)} />
         <Arrow />
-        <IntegratedRow layer="axiom" />
+        <IntegratedRow layer="axiom" visible={on(1)} />
       </div>
 
-      <div className="accent-block mt-5 max-w-5xl mx-auto">
+      <div
+        className={`accent-block mt-4 max-w-6xl mx-auto transition-opacity duration-500 ${
+          on(7) ? "animate-fade-in-up opacity-100" : "opacity-0"
+        }`}
+      >
         <p className="text-base text-gray-800 leading-relaxed">
-          The primitives of policy analysis in the AI era. For each: where it
-          stands, where it&apos;s going, and the feedback loop that keeps it
-          honest. The district grant funds PolicyEngine&apos;s data layer
-          &mdash; Microcosm.
+          The primitives of policy analysis in the AI era, each publishing its
+          own checks. Certified is computed, never set by hand, and the
+          dashboard publishes whatever the computation says. The district grant
+          funds PolicyEngine&apos;s data layer &mdash; Microcosm.
         </p>
       </div>
     </Slide>

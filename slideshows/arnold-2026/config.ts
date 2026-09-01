@@ -31,11 +31,7 @@ import {
   SocialSecuritySlide,
   SnapQcSlide,
 } from "./slides/ProgressSlides";
-import {
-  LoopsRecapSlide,
-  NextSlide,
-  QuestionsSlide,
-} from "./slides/ClosingSlides";
+import { NextSlide, QuestionsSlide } from "./slides/ClosingSlides";
 import {
   AppendixDividerSlide,
   GraphStaticSlide,
@@ -74,7 +70,7 @@ export const arnold2026Config: SlideshowConfig = {
     // The problem, then the stack walk: each layer lit in turn,
     // with its live surface right after
     ScaleSlide,
-    StackIntroSlide,
+    { component: StackIntroSlide, builds: 7 },
     StackPeSlide,
     ScorecardLiveSlide,
     StackAxiomSlide,
@@ -94,7 +90,6 @@ export const arnold2026Config: SlideshowConfig = {
     SnapQcSlide,
 
     // Close
-    LoopsRecapSlide,
     NextSlide,
     QuestionsSlide,
 
