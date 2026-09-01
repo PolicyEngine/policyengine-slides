@@ -1,7 +1,7 @@
 import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
-import Image from "@/components/core/BasePathImage";
+import { resolveImageSrc } from "@/lib/base-path-image";
 
 /**
  * The stack walk: one overview with the six layers numbered in walk order,
@@ -12,76 +12,41 @@ import Image from "@/components/core/BasePathImage";
 type LayerKey =
   "corollary" | "thesis" | "policyengine" | "microcosm" | "axiom" | "chronicle";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+const marks: Record<LayerKey, { src: string; alt: string; height: number }> = {
+  corollary: {
+    src: "/logos/corollary-wordmark.svg",
+    alt: "Corollary",
+    height: 16,
+  },
+  thesis: { src: "/logos/thesis-wordmark.svg", alt: "Thesis", height: 17 },
+  policyengine: { src: "/logos/teal.svg", alt: "PolicyEngine", height: 20 },
+  microcosm: {
+    src: "/logos/microcosm-wordmark.svg",
+    alt: "Microcosm",
+    height: 14,
+  },
+  axiom: { src: "/logos/axiom-wordmark-bare.svg", alt: "Axiom", height: 15 },
+  chronicle: {
+    src: "/logos/chronicle-wordmark.svg",
+    alt: "Chronicle",
+    height: 14,
+  },
+};
+
+// Plain <img>: next/image never completed loading these SVGs in the deck.
 function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
-  const cls = faded ? "opacity-30 grayscale" : "";
-  switch (layer) {
-    case "corollary":
-      return (
-        <Image
-          src="/logos/corollary-wordmark.svg"
-          alt="Corollary"
-          width={540}
-          height={150}
-          className={cls}
-          style={{ height: "16px", width: "auto" }}
-        />
-      );
-    case "thesis":
-      return (
-        <Image
-          src="/logos/thesis-wordmark.svg"
-          alt="Thesis"
-          width={93}
-          height={28}
-          className={cls}
-          style={{ height: "17px", width: "auto" }}
-        />
-      );
-    case "policyengine":
-      return (
-        <Image
-          src="/logos/teal.svg"
-          alt="PolicyEngine"
-          width={350}
-          height={100}
-          className={cls}
-          style={{ height: "20px", width: "auto" }}
-        />
-      );
-    case "microcosm":
-      return (
-        <Image
-          src="/logos/microcosm-wordmark.svg"
-          alt="Microcosm"
-          width={5245}
-          height={726}
-          className={cls}
-          style={{ height: "14px", width: "auto" }}
-        />
-      );
-    case "axiom":
-      return (
-        <Image
-          src="/logos/axiom-wordmark-bare.svg"
-          alt="Axiom"
-          width={964}
-          height={244}
-          className={cls}
-          style={{ height: "15px", width: "auto" }}
-        />
-      );
-    case "chronicle":
-      return (
-        <Image
-          src="/logos/chronicle-wordmark.svg"
-          alt="Chronicle"
-          width={6162}
-          height={818}
-          className={cls}
-          style={{ height: "14px", width: "auto" }}
-        />
-      );
-  }
+  const m = marks[layer];
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={resolveImageSrc(m.src, BASE_PATH)}
+      alt={m.alt}
+      className={faded ? "opacity-30 grayscale" : ""}
+      style={{ height: `${m.height}px`, width: "auto" }}
+    />
+  );
 }
 
 const megagoals: Record<LayerKey, string> = {
