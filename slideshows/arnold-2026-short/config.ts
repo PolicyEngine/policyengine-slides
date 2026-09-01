@@ -31,6 +31,7 @@ import {
   TariffSlide,
   SocialSecuritySlide,
   SnapQcSlide,
+  AiIncomeShiftSlide,
 } from "../arnold-2026/slides/ProgressSlides";
 import { NextSlide, QuestionsSlide } from "../arnold-2026/slides/ClosingSlides";
 import {
@@ -80,6 +81,7 @@ export const arnold2026ShortConfig: SlideshowConfig = {
     GraphRandSlide,
     ScorecardLiveSlide,
     ThesisLiveSlide,
+    AiIncomeShiftSlide,
     NextSlide,
     QuestionsSlide,
 

@@ -153,3 +153,30 @@ export const SnapQcSlide = () => (
     </Card>
   </LiveAppSlide>
 );
+
+export const AiIncomeShiftSlide = () => (
+  <LiveAppSlide
+    title="AI and the tax base — the roundtable question"
+    url="https://www.policyengine.org/us/ai-inequality/income-shift"
+    displayUrl="policyengine.org/us/ai-inequality/income-shift"
+  >
+    <Card tag="The July 30 companion">
+      The Budget Lab&apos;s Slow, Moderate, and Rapid AI scenarios run through
+      PolicyEngine at 2030 &mdash; who gains, who loses, and what happens to the
+      tax base under each.
+    </Card>
+    <Card tag="The spread">
+      Published estimates of AI&apos;s growth effect differ by more than two
+      orders of magnitude. That is the case for scoring policy against many
+      futures rather than one &mdash; and for grading the calls afterward, which
+      is what Thesis does.
+    </Card>
+    <Card tag="The gap this exposes">
+      The write-up&apos;s own known limits: the incremental capital flow is
+      apportioned by households&apos; existing realized capital income, where
+      the Budget Lab apportions by SCF-imputed assets. Closing that gap means
+      capital income and wealth in the calibrated population, plus realization
+      responses &mdash; the near-term picture, next.
+    </Card>
+  </LiveAppSlide>
+);
