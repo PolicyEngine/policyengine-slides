@@ -240,15 +240,18 @@ export function StackIntroSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <div className="flex items-baseline justify-between">
-          <SlideTitle>Six projects, one chain of checks</SlideTitle>
-          <span className="text-sm uppercase tracking-wide text-gray-500 font-semibold">
-            mission · what grades it, in public
-          </span>
-        </div>
+        <SlideTitle>Six projects, one chain of checks</SlideTitle>
       </SlideHeader>
 
       <div className="mt-3 flex flex-col items-center gap-1 max-w-6xl mx-auto">
+        <div
+          className="w-full px-6 grid gap-6 text-xs uppercase tracking-wide text-gray-500 font-semibold"
+          style={{ gridTemplateColumns: "11rem 1.1fr 1fr" }}
+        >
+          <div />
+          <div>Mission</div>
+          <div>Feedback loop</div>
+        </div>
         <IntegratedRow layer="corollary" visible={on(6)} dotted />
         <Arrow dashed />
         <IntegratedRow layer="thesis" visible={on(5)} dotted />
