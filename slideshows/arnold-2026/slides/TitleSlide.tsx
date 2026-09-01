@@ -32,7 +32,7 @@ export default function TitleSlide() {
 
           <div className="mt-20 text-right pr-8">
             <h1 className="font-display text-5xl font-bold text-white whitespace-nowrap">
-              Six projects,
+              Five projects,
             </h1>
           </div>
 

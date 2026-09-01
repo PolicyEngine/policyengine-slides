@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import Image from '@/components/core/BasePathImage';
-import { useSlideshowContextSafe } from './SlideshowContext';
+import React, { ReactNode } from "react";
+import Image from "@/components/core/BasePathImage";
+import { useSlideshowContextSafe } from "./SlideshowContext";
 
 export interface SlideProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ export interface SlideProps {
 
 export default function Slide({
   children,
-  className = '',
+  className = "",
   showFooter = true,
   isCover = false,
   isEnd = false,
@@ -22,14 +22,16 @@ export default function Slide({
   fullBleed = false,
 }: SlideProps) {
   const ctx = useSlideshowContextSafe();
-  const resolvedFooterText = footerText ?? ctx?.footerText ?? '';
+  const resolvedFooterText = footerText ?? ctx?.footerText ?? "";
 
   return (
-    <div className={`
+    <div
+      className={`
       relative w-screen h-screen flex flex-col
-      ${isCover || isEnd ? 'gradient-bg text-white justify-center items-center' : 'bg-white'}
+      ${isCover || isEnd ? "gradient-bg text-white justify-center items-center" : "bg-white"}
       ${className}
-    `}>
+    `}
+    >
       {(isCover || isEnd) && (
         <div className="absolute top-16 left-1/2 -translate-x-1/2">
           <Image
@@ -39,7 +41,7 @@ export default function Slide({
             height={100}
             className="opacity-100"
             priority
-            style={{ height: 'auto' }}
+            style={{ height: "auto" }}
           />
         </div>
       )}
@@ -47,14 +49,18 @@ export default function Slide({
       {fullBleed ? (
         <div className="absolute inset-0">{children}</div>
       ) : (
-        <div className={`
+        <div
+          className={`
           absolute inset-0
-          ${isCover || isEnd ? 'flex items-center justify-center' : 'pt-24 pb-28'}
-        `}>
-          <div className={`
+          ${isCover || isEnd ? "flex items-center justify-center" : "pt-24 pb-28"}
+        `}
+        >
+          <div
+            className={`
             w-full h-full
-            ${isCover || isEnd ? 'max-w-6xl px-20 flex flex-col justify-center' : 'px-16'}
-          `}>
+            ${isCover || isEnd ? "max-w-6xl px-20 flex flex-col justify-center" : "px-16"}
+          `}
+          >
             {children}
           </div>
         </div>
@@ -69,7 +75,7 @@ export default function Slide({
               width={180}
               height={50}
               className="opacity-90"
-              style={{ height: 'auto' }}
+              style={{ height: "auto" }}
             />
             {ctx?.partnerLogo && (
               <>
@@ -80,7 +86,7 @@ export default function Slide({
                   width={1180}
                   height={440}
                   className="opacity-90"
-                  style={{ height: '40px', width: 'auto' }}
+                  style={{ height: "24px", width: "auto" }}
                 />
               </>
             )}

@@ -38,7 +38,7 @@ export const ScorecardLiveSlide = () => (
 
 export const GraphRandSlide = () => (
   <LiveAppSlide
-    title="The law as a graph, live"
+    title="Axiom, live — the law as a graph"
     url="https://axiom.org/graph"
     displayUrl="axiom.org"
   >

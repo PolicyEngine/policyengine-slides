@@ -1,7 +1,8 @@
 import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
-import Image from "@/components/core/BasePathImage";
+import { resolveImageSrc } from "@/lib/base-path-image";
+import { useSlideshowContextSafe } from "@/components/core/SlideshowContext";
 
 /**
  * The stack walk: one overview with the six layers numbered in walk order,
@@ -12,84 +13,85 @@ import Image from "@/components/core/BasePathImage";
 type LayerKey =
   "corollary" | "thesis" | "policyengine" | "microcosm" | "axiom" | "chronicle";
 
-function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
-  const cls = faded ? "opacity-30 grayscale" : "";
-  switch (layer) {
-    case "corollary":
-      return (
-        <Image
-          src="/logos/corollary-wordmark.svg"
-          alt="Corollary"
-          width={540}
-          height={150}
-          className={cls}
-          style={{ height: "16px", width: "auto" }}
-        />
-      );
-    case "thesis":
-      return (
-        <Image
-          src="/logos/thesis-wordmark.svg"
-          alt="Thesis"
-          width={93}
-          height={28}
-          className={cls}
-          style={{ height: "17px", width: "auto" }}
-        />
-      );
-    case "policyengine":
-      return (
-        <Image
-          src="/logos/teal.svg"
-          alt="PolicyEngine"
-          width={350}
-          height={100}
-          className={cls}
-          style={{ height: "20px", width: "auto" }}
-        />
-      );
-    case "microcosm":
-      return (
-        <Image
-          src="/logos/microcosm-wordmark.svg"
-          alt="Microcosm"
-          width={5245}
-          height={726}
-          className={cls}
-          style={{ height: "14px", width: "auto" }}
-        />
-      );
-    case "axiom":
-      return (
-        <Image
-          src="/logos/axiom-wordmark-bare.svg"
-          alt="Axiom"
-          width={964}
-          height={244}
-          className={cls}
-          style={{ height: "15px", width: "auto" }}
-        />
-      );
-    case "chronicle":
-      return (
-        <Image
-          src="/logos/chronicle-wordmark.svg"
-          alt="Chronicle"
-          width={6162}
-          height={818}
-          className={cls}
-          style={{ height: "14px", width: "auto" }}
-        />
-      );
-  }
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+const marks: Record<LayerKey, { src: string; alt: string; height: number }> = {
+  corollary: {
+    src: "/logos/corollary-wordmark.svg",
+    alt: "Corollary",
+    height: 16,
+  },
+  thesis: { src: "/logos/thesis-wordmark.svg", alt: "Thesis", height: 17 },
+  policyengine: { src: "/logos/teal.svg", alt: "PolicyEngine", height: 20 },
+  microcosm: {
+    src: "/logos/microcosm-wordmark.svg",
+    alt: "Microcosm",
+    height: 14,
+  },
+  axiom: { src: "/logos/axiom-wordmark-bare.svg", alt: "Axiom", height: 15 },
+  chronicle: {
+    src: "/logos/chronicle-wordmark.svg",
+    alt: "Chronicle",
+    height: 14,
+  },
+};
+
+// Plain <img>: next/image never completed loading these SVGs in the deck.
+function Wordmark({
+  layer,
+  faded,
+  scale = 1,
+}: {
+  layer: LayerKey;
+  faded: boolean;
+  scale?: number;
+}) {
+  const m = marks[layer];
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={resolveImageSrc(m.src, BASE_PATH)}
+      alt={m.alt}
+      className={faded ? "opacity-30 grayscale" : ""}
+      style={{ height: `${m.height * scale}px`, width: "auto" }}
+    />
+  );
 }
 
+const missions: Record<LayerKey, string> = {
+  corollary: "the products that follow from the rules",
+  thesis:
+    "every government statistic, forecast under current law and every reform",
+  policyengine: "every policy score, replicated in the open",
+  microcosm: "society in miniature, calibrated to every official statistic",
+  axiom: "a computable layer for all law",
+  chronicle: "every official statistic, recorded as first published",
+};
+
+const loops: Record<LayerKey, string> = {
+  corollary: "the market, on top of the checks below",
+  thesis: "every forecast graded against the official first print",
+  policyengine:
+    "every score set beside the published one, divergence explained",
+  microcosm: "every calibration target published with its error",
+  axiom: "compared against every independent engine and record",
+  chronicle: "every first print witnessed, checkable offline",
+};
+
+const loopUrls: Partial<Record<LayerKey, string>> = {
+  axiom: "axiom.org/validation",
+  chronicle: "chronicle.institute/verify",
+  microcosm: "microcosm.institute/calibration/dashboard",
+  policyengine: "policyengine.org/scorecard",
+  thesis: "app.thesisinstitute.org/calibration",
+};
+
 const oneLiners: Record<LayerKey, string> = {
-  corollary: "applications and delivery on top of the stack",
+  corollary: "products that follow from the rules — applications on top",
   thesis: "judgment and uncertainty — forecasts scored against reality",
   policyengine: "the model that composes them — any reform, any question",
   microcosm: "the world at micro level, calibrated to administrative truth",
-  axiom: "the rules, executable — every value cited, every clause dated",
+  axiom: "computable law — every value cited, every clause dated",
   chronicle: "official statistics as sourced, dated, machine-readable facts",
 };
 
@@ -139,10 +141,9 @@ function StackDiagram({ focus }: { focus?: LayerKey }) {
       <div className="text-gray-400 text-sm leading-none">↑</div>
       <Box layer="microcosm" focus={focus} />
       <div className="text-gray-400 text-sm leading-none">↑</div>
-      <div className="grid grid-cols-2 gap-2 w-full">
-        <Box layer="axiom" focus={focus} />
-        <Box layer="chronicle" focus={focus} />
-      </div>
+      <Box layer="chronicle" focus={focus} />
+      <div className="text-gray-400 text-sm leading-none">↑</div>
+      <Box layer="axiom" focus={focus} />
     </div>
   );
 }
@@ -198,47 +199,96 @@ function WalkSlide({
   );
 }
 
-const walkOrder: { n: number; layer: LayerKey; name: string }[] = [
-  { n: 1, layer: "policyengine", name: "PolicyEngine" },
-  { n: 2, layer: "axiom", name: "Axiom" },
-  { n: 3, layer: "chronicle", name: "Chronicle" },
-  { n: 4, layer: "microcosm", name: "Microcosm" },
-  { n: 5, layer: "thesis", name: "Thesis" },
-  { n: 6, layer: "corollary", name: "Corollary" },
-];
+function IntegratedRow({
+  layer,
+  visible,
+  dotted = false,
+}: {
+  layer: LayerKey;
+  visible: boolean;
+  dotted?: boolean;
+}) {
+  return (
+    <div
+      className={`w-full rounded-xl px-6 py-2.5 grid items-center gap-6 transition-opacity duration-500 ${
+        visible ? "animate-fade-in-up opacity-100" : "opacity-0"
+      } ${
+        dotted
+          ? "border-2 border-dashed border-gray-300 bg-white"
+          : "border border-gray-300 bg-gray-50"
+      }`}
+      style={{ gridTemplateColumns: "11rem 1.1fr 1fr" }}
+    >
+      <div className="flex items-center">
+        <Wordmark layer={layer} faded={false} scale={1.6} />
+      </div>
+      <div className="text-lg text-pe-dark font-semibold leading-snug">
+        {missions[layer]}
+      </div>
+      <div>
+        <div className="text-sm text-gray-600 leading-snug">{loops[layer]}</div>
+        {loopUrls[layer] && (
+          <div className="font-mono text-xs text-pe-teal mt-1">
+            {loopUrls[layer]}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
+function Arrow({ dashed = false }: { dashed?: boolean }) {
+  return (
+    <div
+      className={`text-sm leading-none ${dashed ? "text-gray-300" : "text-gray-400"}`}
+    >
+      {dashed ? "┊" : "↑"}
+    </div>
+  );
+}
+
+/** Builds bottom-up, one project per step; the closing line is step 6. */
 export function StackIntroSlide() {
+  const ctx = useSlideshowContextSafe();
+  const step = ctx?.buildStep ?? 6;
+  const on = (n: number) => step >= n;
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Six projects, one stack</SlideTitle>
+        <SlideTitle>Five projects, one chain of checks</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-4 grid grid-cols-[0.85fr_1.15fr] gap-8 items-start">
-        <StackDiagram />
-        <div className="flex flex-col gap-2">
-          {walkOrder.map((w) => (
-            <div key={w.layer} className="flex items-baseline gap-4">
-              <span className="font-mono text-xl font-bold text-pe-teal w-6 shrink-0 text-right">
-                {w.n}
-              </span>
-              <div>
-                <span className="text-lg font-bold text-pe-dark">{w.name}</span>
-                <span className="text-base text-gray-600">
-                  {" "}
-                  &mdash; {oneLiners[w.layer]}
-                </span>
-              </div>
-            </div>
-          ))}
-          <div className="accent-block mt-3">
-            <p className="text-base text-gray-800 leading-relaxed">
-              For each: where it stands, where it&apos;s going, and the feedback
-              loop that keeps it honest. The district grant funds
-              PolicyEngine&apos;s data layer &mdash; number 4.
-            </p>
-          </div>
+      <div className="mt-3 flex flex-col items-center gap-1 max-w-6xl mx-auto">
+        <div
+          className="w-full px-6 grid gap-6 text-xs uppercase tracking-wide text-gray-500 font-semibold"
+          style={{ gridTemplateColumns: "11rem 1.1fr 1fr" }}
+        >
+          <div />
+          <div>Mission</div>
+          <div>Feedback loop</div>
         </div>
+        <IntegratedRow layer="thesis" visible={on(5)} dotted />
+        <Arrow />
+        <IntegratedRow layer="policyengine" visible={on(4)} />
+        <Arrow />
+        <IntegratedRow layer="microcosm" visible={on(3)} />
+        <Arrow />
+        <IntegratedRow layer="chronicle" visible={on(2)} />
+        <Arrow />
+        <IntegratedRow layer="axiom" visible={on(1)} />
+      </div>
+
+      <div
+        className={`accent-block mt-4 max-w-6xl mx-auto transition-opacity duration-500 ${
+          on(6) ? "animate-fade-in-up opacity-100" : "opacity-0"
+        }`}
+      >
+        <p className="text-base text-gray-800 leading-relaxed">
+          The primitives of policy analysis in the AI era, each publishing its
+          own checks. Certified is computed, never set by hand, and the
+          dashboard publishes whatever the computation says. The district grant
+          funds PolicyEngine&apos;s data layer &mdash; Microcosm.
+        </p>
       </div>
     </Slide>
   );
@@ -259,8 +309,9 @@ export const StackPeSlide = () => (
     }
     ambition={
       <>
-        Any reform, any question, on the fly &mdash; for analysts, agencies, and
-        AI agents, with the same rules and data underneath.
+        Replicate all policy scores with flexible open-source models &mdash; any
+        reform, any question, on the fly, for analysts, agencies, and AI agents,
+        with the same rules and data underneath.
       </>
     }
     loop={
@@ -268,7 +319,7 @@ export const StackPeSlide = () => (
         The Scorecard: estimates from Urban, JCT, TPC, CBO, PWBM, and state
         fiscal notes beside PolicyEngine&apos;s counterpart &mdash; each pair
         labeled comparable, constructed, or concept mismatch. The metric is
-        explained divergence, not a scoreboard.
+        explained divergence.
       </>
     }
   />
@@ -277,7 +328,7 @@ export const StackPeSlide = () => (
 export const StackAxiomSlide = () => (
   <WalkSlide
     n={2}
-    title="Axiom — the rules, executable"
+    title="Axiom — computable law"
     focus="axiom"
     status={
       <>
@@ -289,9 +340,9 @@ export const StackAxiomSlide = () => (
     }
     ambition={
       <>
-        The reference encoding of the law &mdash; the layer models, government
-        tools, and AI agents all read from, instead of each re-implementing the
-        statute.
+        Encode the world&rsquo;s rules &mdash; the reference encoding models,
+        government tools, and AI agents all read from, instead of each
+        re-implementing the statute.
       </>
     }
     loop={
@@ -299,7 +350,7 @@ export const StackAxiomSlide = () => (
         About 900,000 household cases checked against independent calculators
         and records &mdash; PolicyEngine, SPSD/M, EUROMOD, SNAP QC files &mdash;
         on a public dashboard. Certified is computed, never set by hand; today
-        it reads 0 of 13, and publishing that honestly is the point.
+        it reads 0 of 13.
       </>
     }
   />
@@ -320,9 +371,11 @@ export const StackChronicleSlide = () => (
     }
     ambition={
       <>
-        Official statistics as sourced, dated, machine-readable facts &mdash;
-        recorded as published, never reconciled or modeled. The ground truth the
-        rest of the stack calibrates and grades against.
+        Collect all official statistics &mdash; sourced, dated,
+        machine-readable, recorded as published, never reconciled or modeled.
+        The ground truth the rest of the stack calibrates and grades against
+        &mdash; and, next, each fact tied to the concepts Axiom encodes, so the
+        record and the law share one vocabulary.
       </>
     }
     loop={
@@ -350,9 +403,10 @@ export const StackMicrocosmSlide = () => (
     }
     ambition={
       <>
-        Every cell of the simulated world traceable to the administrative total
-        it was calibrated against &mdash; households first, other unit families
-        (like import entries for tariff analysis) joining the same discipline.
+        Build society in miniature, calibrated to all official statistics
+        &mdash; every cell traceable to the administrative total behind it;
+        households first, other unit families (like import entries for tariff
+        analysis) joining the same discipline.
       </>
     }
     loop={
@@ -382,9 +436,9 @@ export const StackThesisSlide = () => (
     }
     ambition={
       <>
-        Forecast accuracy as the end-to-end test of the whole stack: when a new
-        country or program comes online, do resolved forecasts get better? The
-        track record is the product.
+        Forecast all government statistics, under current law and under reforms
+        &mdash; accuracy as the end-to-end test of the whole stack: when a new
+        country or program comes online, do resolved forecasts get better?
       </>
     }
     loop={
@@ -404,9 +458,9 @@ export const StackCorollarySlide = () => (
     focus="corollary"
     status={
       <>
-        Earliest stage &mdash; scoping. The delivery layer for parties whose
-        rules are private: contracts and agreements that reference public law,
-        situated against the open graph.
+        Earliest stage &mdash; scoping, as a for-profit. The delivery layer for
+        parties whose rules are private: contracts and agreements that reference
+        public law, situated against the open graph.
       </>
     }
     ambition={
@@ -418,9 +472,10 @@ export const StackCorollarySlide = () => (
     }
     loop={
       <>
-        Inherited from below: conformance checks against independent records,
-        with results issued only where the checks pass &mdash; never
-        self-certified.
+        The market: Corollary is the for-profit layer, so its products are
+        graded by whether anyone pays for them &mdash; on top of the checks
+        inherited from below, with results issued only where those checks pass,
+        never self-certified.
       </>
     }
   />

@@ -75,8 +75,12 @@ const organizations: { name: string; logo: string; smaller?: boolean }[] = [
   },
   { name: "MyFriendBen", logo: "/logos/organizations/myfriendben.png" },
   { name: "Amplifi", logo: "/logos/organizations/amplifi.png" },
-  { name: "Mirza", logo: "/logos/organizations/mirza.png" },
-  { name: "Starlight", logo: "/logos/organizations/starlight.png" },
+  { name: "Mirza", logo: "/logos/organizations/mirza.png", smaller: true },
+  {
+    name: "Starlight",
+    logo: "/logos/organizations/starlight.png",
+    smaller: true,
+  },
 ];
 
 export function WhoUsesSlide() {
@@ -97,7 +101,7 @@ export function WhoUsesSlide() {
             <Image
               src={org.logo}
               alt={org.name}
-              width={org.smaller ? 110 : 150}
+              width={org.smaller ? 95 : 150}
               height={85}
               className="object-contain"
             />
@@ -180,67 +184,56 @@ const pipeline = [
     ask: "Public Benefit Innovation Fund, round 2",
     amount: "$1.64M",
     stage: "Finalist; decision expected early September",
-    odds: "70%",
   },
   {
     ask: "NSF POSE Phase II",
     amount: "$1.5M",
     stage: "Submitting September 1",
-    odds: "30%",
   },
   {
     ask: "NSF CSSI Elements",
     amount: "$600k",
     stage: "Submitted December 2025; late in FY26 cycle",
-    odds: "20%",
   },
   {
     ask: "NSF CSSI Framework",
     amount: "up to $5M",
     stage: "Drafting for the December 1 deadline",
-    odds: "10%",
   },
   {
     ask: "EIP × CIP Checks and Balances — two applications",
     amount: "$675k",
     stage: "Submitted July 21; in review",
-    odds: "40%",
   },
   {
     ask: "Lightcone Commons (S-process) — two applications",
     amount: "~$3M",
     stage: "Submitted August 24; editable through ~October",
-    odds: "30%",
   },
   {
     ask: "Stevens/AIRC policy-lab consulting (earned)",
     amount: "$150k / 6 mo",
     stage: "Contract initiated August 12; in Stevens contracting",
-    odds: "70%",
   },
   {
     ask: "Invited application, AI-philanthropy foundation",
     amount: "$2M",
     stage: "Application due this week",
-    odds: "55%",
   },
   {
     ask: "Multi-year institutional ask (Axiom core support)",
     amount: "—",
     stage: "Under review; pitch expected October",
-    odds: "50%",
   },
   {
     ask: "Nuffield Foundation (UK)",
     amount: "£300k",
     stage: "Drafting",
-    odds: "40%",
   },
   {
     ask: "CAPE / BEAMM EU consortium",
     amount: "—",
     stage: "Consortium bid pending; our share TBD",
-    odds: "30%",
   },
 ];
 
@@ -248,7 +241,7 @@ export function PipelineSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>What&apos;s in process &mdash; with our odds</SlideTitle>
+        <SlideTitle>What&apos;s in process</SlideTitle>
       </SlideHeader>
 
       <div className="mt-5 content-card overflow-hidden">
@@ -264,9 +257,6 @@ export function PipelineSlide() {
               <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold">
                 Stage
               </th>
-              <th className="px-5 py-1 text-xs uppercase tracking-wide text-gray-500 font-semibold text-right">
-                Our estimate
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -281,9 +271,6 @@ export function PipelineSlide() {
                 <td className="px-5 py-1 text-sm leading-snug text-gray-600">
                   {row.stage}
                 </td>
-                <td className="px-5 py-1 font-mono text-[15px] text-gray-800 text-right">
-                  {row.odds}
-                </td>
               </tr>
             ))}
           </tbody>
@@ -291,9 +278,8 @@ export function PipelineSlide() {
       </div>
 
       <p className="mt-3 text-sm text-gray-500 italic max-w-5xl">
-        Subjective probabilities, updated as we learn &mdash; the same
-        discipline Thesis applies to official statistics. Smaller and UK-side
-        asks not shown; full inventory on request.
+        Smaller and UK-side asks not shown; full inventory, with our probability
+        estimates, on request.
       </p>
     </Slide>
   );

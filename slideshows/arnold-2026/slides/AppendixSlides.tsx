@@ -93,7 +93,7 @@ export const TariffStaticSlide = () => (
     url="axiom.org/tariff/schedule"
     src="/screenshots/arnold-2026/tariff-schedule.png"
     alt="Tariff schedule and coverage browser"
-    caption="13,790 rated HTS lines with statutory rate text and named coverage status — incomplete and not certified, and it says so."
+    caption="13,790 rated HTS lines with statutory rate text and named coverage status — incomplete and not certified."
   />
 );
 

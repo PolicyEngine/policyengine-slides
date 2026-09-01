@@ -21,9 +21,11 @@ import { aspenBenefits2026Config } from "@/slideshows/aspen-benefits-2026/config
 import { l0Ima2026Config } from "@/slideshows/l0-ima-2026/config";
 import { iariw2026Config } from "@/slideshows/iariw-2026/config";
 import { arnold2026Config } from "@/slideshows/arnold-2026/config";
+import { arnold2026ShortConfig } from "@/slideshows/arnold-2026-short/config";
 
 export const slideshows: SlideshowConfig[] = [
   arnold2026Config,
+  arnold2026ShortConfig,
   iariw2026Config,
   l0Ima2026Config,
   aspenBenefits2026Config,
