@@ -69,17 +69,13 @@ const missions: Record<LayerKey, string> = {
 };
 
 const loops: Record<LayerKey, string> = {
-  corollary: "inherits the checks below — nothing of its own to publish yet",
-  thesis:
-    "forecasts graded against reality — 35 of 45 witnessed resolutions in interval",
+  corollary: "inherits the checks below",
+  thesis: "every forecast graded against the official first print",
   policyengine:
-    "the Scorecard beside JCT, CBO, TPC, Urban, PWBM — explained divergence",
-  microcosm:
-    "5,659 calibration targets published with their errors — 95.7% within 10%",
-  axiom:
-    "~900k household cases checked against independent engines and records",
-  chronicle:
-    "first prints witnessed by two timestamp authorities, checkable offline",
+    "every score set beside the published one, divergence explained",
+  microcosm: "every calibration target published with its error",
+  axiom: "compared against every independent engine and record",
+  chronicle: "every first print witnessed, checkable offline",
 };
 
 const oneLiners: Record<LayerKey, string> = {
