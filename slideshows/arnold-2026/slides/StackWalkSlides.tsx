@@ -85,11 +85,11 @@ function Wordmark({ layer, faded }: { layer: LayerKey; faded: boolean }) {
 }
 
 const oneLiners: Record<LayerKey, string> = {
-  corollary: "applications and delivery on top of the stack",
+  corollary: "products that follow from the rules — applications on top",
   thesis: "judgment and uncertainty — forecasts scored against reality",
   policyengine: "the model that composes them — any reform, any question",
   microcosm: "the world at micro level, calibrated to administrative truth",
-  axiom: "the rules, executable — every value cited, every clause dated",
+  axiom: "computable law — every value cited, every clause dated",
   chronicle: "official statistics as sourced, dated, machine-readable facts",
 };
 
@@ -276,7 +276,7 @@ export const StackPeSlide = () => (
 export const StackAxiomSlide = () => (
   <WalkSlide
     n={2}
-    title="Axiom — the rules, executable"
+    title="Axiom — computable law"
     focus="axiom"
     status={
       <>
@@ -405,9 +405,9 @@ export const StackCorollarySlide = () => (
     focus="corollary"
     status={
       <>
-        Earliest stage &mdash; scoping. The delivery layer for parties whose
-        rules are private: contracts and agreements that reference public law,
-        situated against the open graph.
+        Earliest stage &mdash; scoping, as a for-profit. The delivery layer for
+        parties whose rules are private: contracts and agreements that reference
+        public law, situated against the open graph.
       </>
     }
     ambition={
