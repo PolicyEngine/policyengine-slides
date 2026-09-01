@@ -6,7 +6,7 @@ const beats = [
   {
     n: 1,
     title: "The threads you've raised",
-    body: "The district grant, Social Security, SNAP payment errors, tariffs.",
+    body: "The district grant, AI and the tax base, Social Security, SNAP payment errors, tariffs.",
   },
   {
     n: 2,

@@ -146,8 +146,8 @@ export function NextSlide() {
 export function QuestionsSlide() {
   return (
     <EndSlide
-      message="Thank you"
-      subtitle="Sara, Hana, Charlie — over to you"
+      message="Every number traceable. Every call graded."
+      subtitle="Policy analysis for the AI era, built in public. Sara, Hana, Charlie — over to you."
       links={[
         {
           label: "policyengine.org/scorecard",
