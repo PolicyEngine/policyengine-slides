@@ -74,13 +74,6 @@ export default function PEOverviewSlide() {
           </div>
         </div>
       </div>
-
-      <div className="mt-8 accent-block max-w-5xl">
-        <p className="text-xl text-gray-800 leading-relaxed">
-          Think of it as an open EUROMOD-family stack for the US and UK, built
-          in public.
-        </p>
-      </div>
     </Slide>
   );
 }

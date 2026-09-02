@@ -75,6 +75,73 @@ export const ValidationLiveSlide = () => (
   </LiveAppSlide>
 );
 
+export const PEAppLiveSlide = () => (
+  <LiveAppSlide
+    title="The PolicyEngine app, live"
+    url="https://www.policyengine.org/us"
+    displayUrl="policyengine.org"
+    fallbackSrc="/screenshots/gettsim-2026/pe-app-us.png"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        The public front door: compute any household&apos;s taxes and
+        benefits, or design a reform and see its budgetary, distributional,
+        and poverty impacts &mdash; US and UK.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">Why it matters</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        Every number traces to the same open rules and calibrated data the
+        rest of this talk is about &mdash; free, no login, same engine the
+        researchers use.
+      </p>
+    </div>
+
+    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
+      <p className="text-sm text-gray-600 leading-relaxed italic">
+        Live walkthrough &mdash; the capture is one click away if the
+        network does not cooperate.
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
+export const StateTrackerLiveSlide = () => (
+  <LiveAppSlide
+    title="The state legislative tracker, live"
+    url="https://www.policyengine.org/us/bill-tracker"
+    displayUrl="policyengine.org/us/bill-tracker"
+    fallbackSrc="/screenshots/gettsim-2026/state-tracker.png"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        State tax and benefit bills across all 50 states, each scored as it
+        moves: fiscal impact, winners and losers, district-level analysis.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">Why it matters</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        AI agents read the bill text, locate the parameters, and run the
+        microsimulation &mdash; the same encode-and-verify loop, pointed at
+        legislation as it is introduced.
+      </p>
+    </div>
+
+    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
+      <p className="text-sm text-gray-600 leading-relaxed italic">
+        Live walkthrough &mdash; the capture is one click away if the
+        network does not cooperate.
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
 export const ScorecardLiveSlide = () => (
   <LiveAppSlide
     title="The scorecard: the model, graded"

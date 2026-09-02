@@ -22,6 +22,8 @@ import AxiomIntroSlide from './slides/AxiomIntroSlide';
 import {
   DemoAxiomLiveSlide,
   ValidationLiveSlide,
+  PEAppLiveSlide,
+  StateTrackerLiveSlide,
   ScorecardLiveSlide,
   CalibrationLiveSlide,
 } from './slides/DemoLiveSlides';
@@ -87,6 +89,8 @@ export const gettsim2026Config: SlideshowConfig = {
     PEOverviewSlide,
     CountryScopeSlide,
     WhoUsesItSlide,
+    PEAppLiveSlide,
+    StateTrackerLiveSlide,
     ScorecardLiveSlide,
 
     // Closing
