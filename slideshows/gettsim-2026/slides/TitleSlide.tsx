@@ -6,7 +6,7 @@ import { speakers } from '@/lib/speakers';
 
 const speaker = {
   ...speakers['pavel-makarchuk'],
-  title: 'Chief of Staff, PolicyEngine',
+  title: 'Director of Product, The Axiom Foundation',
 };
 
 /**
