@@ -9,7 +9,6 @@ export default function Evo2PipelineSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 2: core pipeline</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">4 agents, sequential</p>
       </SlideHeader>
 
       <div className="flex gap-8 h-[calc(100vh-280px)]">

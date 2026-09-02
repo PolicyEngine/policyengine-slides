@@ -52,7 +52,6 @@ export default function Evo6FullWorkflowSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 6: full workflow</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">Complete pipeline &mdash; one command to a draft PR in ~90 minutes</p>
       </SlideHeader>
 
       <div className="flex gap-6 h-[calc(100vh-280px)]">

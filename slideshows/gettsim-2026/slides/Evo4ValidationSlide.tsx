@@ -9,7 +9,6 @@ export default function Evo4ValidationSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 4: validation loop</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">8 agents with CI feedback</p>
       </SlideHeader>
 
       <div className="flex gap-8 h-[calc(100vh-280px)]">

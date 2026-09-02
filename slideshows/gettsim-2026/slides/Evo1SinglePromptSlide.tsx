@@ -9,7 +9,6 @@ export default function Evo1SinglePromptSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 1: single prompt</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">70% error rate</p>
       </SlideHeader>
 
       <div className="flex gap-8 h-[calc(100vh-280px)]">

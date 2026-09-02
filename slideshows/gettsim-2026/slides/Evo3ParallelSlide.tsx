@@ -9,7 +9,6 @@ export default function Evo3ParallelSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 3: parallel execution</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">5 agents, 40% error rate</p>
       </SlideHeader>
 
       <div className="flex gap-8 h-[calc(100vh-280px)]">

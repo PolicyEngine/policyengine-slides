@@ -45,7 +45,6 @@ export default function Evo5SkillsSlide() {
     <Slide>
       <SlideHeader>
         <SlideTitle>Evolution step 5: modular skills</SlideTitle>
-        <p className="text-xl text-gray-600 mt-2">15% error rate &mdash; reusable knowledge modules</p>
       </SlideHeader>
 
       <div className="flex gap-8 h-[calc(100vh-280px)]">
