@@ -45,13 +45,3 @@ export const DemoAxiomValidationSlide = () => (
     caption="Cross-engine comparisons published for anyone to re-run — the model that wrote the rules never grades its own work."
   />
 );
-
-export const CalibrationDashboardStaticSlide = () => (
-  <ScreenshotSlide
-    title="The calibration dashboard"
-    url="microcosm.institute/calibration/dashboard"
-    src="/screenshots/iariw-2026/calibration-dashboard-be.png"
-    alt="Microcosm Belgium calibration dashboard"
-    caption="Every calibration target published with its error — the provenance line states the US donor pool and the planned Belgian upgrade."
-  />
-);

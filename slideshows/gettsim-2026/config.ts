@@ -24,7 +24,6 @@ import {
   DemoAxiomProvisionSlide,
   DemoAxiomGraphSlide,
   DemoAxiomValidationSlide,
-  CalibrationDashboardStaticSlide,
 } from './slides/DemoSlides';
 import {
   DemoAxiomLiveSlide,
@@ -89,7 +88,6 @@ export const gettsim2026Config: SlideshowConfig = {
     MicrodataPipelineSlide,
     MicrocosmBESlide,
     CalibrationLiveSlide,
-    CalibrationDashboardStaticSlide,
     HarnessLayersSlide,
 
     // 3 — Microsimulation
