@@ -9,7 +9,7 @@ import LiveAppSlide from './LiveAppSlide';
 
 export const DemoAxiomLiveSlide = () => (
   <LiveAppSlide
-    title="The Axiom App, live"
+    title="The Axiom App"
     url="https://app.axiom-foundation.org/"
     displayUrl="axiom.org"
     fallbackSrc="/screenshots/gettsim-2026/axiom-app.png"
@@ -77,7 +77,7 @@ export const ValidationLiveSlide = () => (
 
 export const PEAppLiveSlide = () => (
   <LiveAppSlide
-    title="The PolicyEngine app, live"
+    title="The PolicyEngine app"
     url="https://www.policyengine.org/us"
     displayUrl="policyengine.org"
     fallbackSrc="/screenshots/gettsim-2026/pe-app-us.png"
@@ -111,7 +111,7 @@ export const PEAppLiveSlide = () => (
 
 export const UKChatLiveSlide = () => (
   <LiveAppSlide
-    title="PolicyEngine UK chat, live"
+    title="PolicyEngine UK chat"
     url="https://policyengine-uk-chat.vercel.app/uk/chat"
     displayUrl="policyengine-uk-chat.vercel.app"
     fallbackSrc="/screenshots/gettsim-2026/uk-chat.png"
@@ -145,7 +145,7 @@ export const UKChatLiveSlide = () => (
 
 export const StateTrackerLiveSlide = () => (
   <LiveAppSlide
-    title="The state legislative tracker, live"
+    title="The state legislative tracker"
     url="https://www.policyengine.org/us/bill-tracker"
     displayUrl="policyengine.org/us/bill-tracker"
     fallbackSrc="/screenshots/gettsim-2026/state-tracker.png"
@@ -212,7 +212,7 @@ export const ScorecardLiveSlide = () => (
 
 export const CalibrationLiveSlide = () => (
   <LiveAppSlide
-    title="The calibration dashboard, live"
+    title="The calibration dashboard"
     url="https://microcosm.institute/calibration/dashboard/microcosm?country=be"
     displayUrl="microcosm.institute"
     fallbackSrc="/screenshots/iariw-2026/calibration-dashboard-be.png"
