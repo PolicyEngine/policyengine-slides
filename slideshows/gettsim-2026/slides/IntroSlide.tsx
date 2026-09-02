@@ -5,18 +5,18 @@ import Image from '@/components/core/BasePathImage';
 
 const orgs = [
   {
-    logo: '/logos/teal.svg',
-    logoAlt: 'PolicyEngine',
-    logoHeight: '44px',
-    what: 'Free, open source software to compute the impact of public policy — tax-benefit models used by researchers, governments, and benefit-access builders.',
-    role: 'The microsimulation layer',
-  },
-  {
     logo: '/logos/axiom-foundation.svg',
     logoAlt: 'The Axiom Foundation',
     logoHeight: '44px',
     what: 'A nonprofit encoding statutes into executable, verifiable rules — every value citing its authority, every rule traced back to the law.',
     role: 'The rules layer',
+  },
+  {
+    logo: '/logos/teal.svg',
+    logoAlt: 'PolicyEngine',
+    logoHeight: '44px',
+    what: 'Free, open source software to compute the impact of public policy — tax-benefit models used by researchers, governments, and benefit-access builders.',
+    role: 'The microsimulation layer',
   },
 ];
 

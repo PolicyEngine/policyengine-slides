@@ -31,13 +31,13 @@ export default function TitleSlide() {
             />
           </div>
 
-          <div className="mt-20 text-right pr-8">
+          <div className="flex-1 flex items-center justify-end pr-8">
             <h1 className="font-display text-5xl font-bold text-white whitespace-nowrap">
               Encoding statutes
             </h1>
           </div>
 
-          <div className="mt-auto flex items-center gap-5">
+          <div className="h-[88px] flex items-center gap-5">
             <div className="w-20 h-20 relative overflow-hidden rounded-full border-2 border-white/40 shrink-0">
               <Image
                 src={speaker.photo}
@@ -70,13 +70,13 @@ export default function TitleSlide() {
             />
           </div>
 
-          <div className="mt-20 text-left pl-8">
+          <div className="flex-1 flex items-center justify-start pl-8">
             <h1 className="font-display text-5xl font-bold text-[#17343a] whitespace-nowrap">
               into executable rules
             </h1>
           </div>
 
-          <div className="mt-auto">
+          <div className="h-[88px] flex flex-col justify-center">
             <p className="text-lg text-gray-700">
               AI-driven rules engine development &mdash; executable,
               verifiable rules

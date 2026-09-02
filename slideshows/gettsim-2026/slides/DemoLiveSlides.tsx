@@ -3,8 +3,8 @@
 import LiveAppSlide from './LiveAppSlide';
 
 /**
- * Live demo slides — the actual apps, embedded with Expand. The static
- * screenshot slides that follow each beat are the no-network fallback.
+ * Live demo slides — the actual apps, embedded with Expand. Each carries a
+ * captured screenshot behind the Show capture toggle for the no-network case.
  */
 
 export const DemoAxiomLiveSlide = () => (
@@ -36,6 +36,40 @@ export const DemoAxiomLiveSlide = () => (
       <p className="text-sm text-gray-600 leading-relaxed italic">
         Live walkthrough &mdash; screenshots follow if the network does not
         cooperate.
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
+export const ValidationLiveSlide = () => (
+  <LiveAppSlide
+    title="Validation, in the open"
+    url="https://axiom.org/validation"
+    displayUrl="axiom.org/validation"
+    fallbackSrc="/screenshots/gettsim-2026/axiom-validation.png"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        902,239 households checked against four independent engines
+        &mdash; PolicyEngine, Statistics Canada&apos;s SPSD/M, USDA SNAP
+        quality-control records among them &mdash; published for anyone to
+        re-run.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">Why it matters</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        The model that wrote the rules never grades its own work. Every
+        disagreement is dispositioned, and findings flow both directions.
+      </p>
+    </div>
+
+    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
+      <p className="text-sm text-gray-600 leading-relaxed italic">
+        Live walkthrough &mdash; the capture is one click away if the
+        network does not cooperate.
       </p>
     </div>
   </LiveAppSlide>
