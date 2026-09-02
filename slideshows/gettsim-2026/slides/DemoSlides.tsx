@@ -6,16 +6,6 @@ import ScreenshotSlide from './ScreenshotSlide';
  * (shared with the iariw-2026 deck).
  */
 
-export const DemoAxiomBrowseSlide = () => (
-  <ScreenshotSlide
-    title="Browse the encoded law"
-    url="axiom.org"
-    src="/screenshots/iariw-2026/axiom-browse.png"
-    alt="Axiom App field view of Belgian provisions"
-    caption="Belgium in the Axiom App: 107 provisions across the federal, Flanders, Wallonia, Brussels, and German-speaking community clusters."
-  />
-);
-
 export const DemoAxiomProvisionSlide = () => (
   <ScreenshotSlide
     title="The law at the node"
