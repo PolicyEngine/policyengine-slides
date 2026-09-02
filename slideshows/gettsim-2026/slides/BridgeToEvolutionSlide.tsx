@@ -20,7 +20,7 @@ export default function BridgeToEvolutionSlide() {
         <div className="accent-block">
           <p className="text-2xl text-gray-800 leading-relaxed">
             Over the last three years we have evolved how AI assists with the
-            encoding work itself &mdash; from a single prompt that often
+            encoding work itself: from a single prompt that often
             failed to a multi-agent pipeline that produces tested,
             citation-backed PRs.
           </p>

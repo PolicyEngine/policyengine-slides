@@ -130,13 +130,13 @@ export default function Evo6FullWorkflowSlide() {
         <div className="w-[35%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              The complete pipeline: <strong>12 agents</strong> and <strong>6 skills</strong>{' '}working together. One command triggers the entire workflow&mdash;from issue creation to a draft PR ready for human review.
+              The complete pipeline: <strong>12 agents</strong> and <strong>6 skills</strong>{' '}working together. One command triggers the entire workflow, from issue creation to a draft PR ready for human review.
             </p>
           </div>
 
           <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl mb-3">
             <span className="text-emerald-800 font-bold text-base">What it produces: </span>
-            <span className="text-emerald-700 text-base">11 parameter files, 8 variable files, 65 test cases, 1 complete PR&mdash;all in ~90 minutes.</span>
+            <span className="text-emerald-700 text-base">11 parameter files, 8 variable files, 65 test cases, 1 complete PR, all in ~90 minutes.</span>
           </div>
 
           <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl mb-3">
@@ -161,7 +161,7 @@ export default function Evo6FullWorkflowSlide() {
 
           <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl">
             <p className="text-amber-800 font-semibold text-base">
-              The orchestrator never writes code&mdash;it invokes agents and checks quality gates.
+              The orchestrator never writes code: it invokes agents and checks quality gates.
             </p>
           </div>
         </div>

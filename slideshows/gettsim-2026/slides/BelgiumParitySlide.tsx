@@ -34,7 +34,7 @@ export default function BelgiumParitySlide() {
             residuals.
           </p>
           <p className="text-lg text-gray-500 italic mt-4">
-            EUROMOD is the reference we are glad exists &mdash; the
+            EUROMOD is the reference we are glad exists. The
             cross-checks flow both directions.
           </p>
         </div>
@@ -47,8 +47,8 @@ export default function BelgiumParitySlide() {
             Worked example
           </div>
           <p className="text-xl text-gray-700 leading-relaxed">
-            The Belgian PIT arc &mdash; couples, pensions, self-employment,
-            and replacement-income pipelines &mdash; is merged on main.
+            The Belgian PIT arc (couples, pensions, self-employment,
+            and replacement-income pipelines) is merged on main.
             Dependants and child benefits are encoded, held at the
             signed-corpus release frontier.
           </p>

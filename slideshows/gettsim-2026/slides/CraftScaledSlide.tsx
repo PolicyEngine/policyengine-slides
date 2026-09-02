@@ -65,15 +65,15 @@ export default function CraftScaledSlide() {
         </p>
         <p className="text-2xl leading-relaxed font-light">
           Thousands of AI agents can now poke at every piece of that craft
-          &mdash; encoding, testing, cross-checking &mdash; at a scale no
+          (encoding, testing, cross-checking) at a scale no
           individual analyst can match.
         </p>
       </div>
 
       <div className="accent-block mt-6">
         <p className="text-xl text-gray-800 leading-relaxed">
-          The question for this talk: what does that scale make possible
-          &mdash; and how do we keep the output verifiable?
+          The question for this talk: what does that scale make possible,
+          and how do we keep the output verifiable?
         </p>
       </div>
     </Slide>

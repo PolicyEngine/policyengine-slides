@@ -119,7 +119,7 @@ export default function Evo5SkillsSlide() {
         <div className="w-[40%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              We introduced <strong>skills</strong>&mdash;reusable knowledge modules that agents load on demand. Instead of repeating instructions in every prompt, we extracted shared knowledge into focused documents.
+              We introduced <strong>skills</strong>: reusable knowledge modules that agents load on demand. Instead of repeating instructions in every prompt, we extracted shared knowledge into focused documents.
             </p>
           </div>
 
@@ -156,7 +156,7 @@ export default function Evo5SkillsSlide() {
 
           <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl">
             <p className="text-amber-800 font-semibold text-base">
-              Key insight: Skills let us scale without redundancy. One skill, many agents&mdash;consistent patterns everywhere.
+              Key insight: Skills let us scale without redundancy. One skill, many agents: consistent patterns everywhere.
             </p>
           </div>
         </div>

@@ -8,21 +8,21 @@ const sections = [
     title: 'Rules',
     org: 'The Axiom Foundation',
     detail:
-      'How AI encodes law — six stages of evolution — and the Axiom rules engine: statute, rules, and computation graph published together, validated against EUROMOD.',
+      'How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute, rules, and computation graph published together, validated against EUROMOD.',
   },
   {
     number: '2',
     title: 'Data',
     org: 'Microcosm',
     detail:
-      'The microdata underneath the models — calibrated to what the statistical agencies publish, every target and its error in the open.',
+      'The microdata underneath the models, calibrated to what the statistical agencies publish, every target and its error in the open.',
   },
   {
     number: '3',
     title: 'Microsimulation',
     org: 'PolicyEngine',
     detail:
-      'Rules plus data at population scale — and the scorecard that grades the model against external scorekeepers.',
+      'Rules plus data at population scale, and the scorecard that grades the model against external scorekeepers.',
   },
 ];
 

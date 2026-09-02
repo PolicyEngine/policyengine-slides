@@ -8,7 +8,7 @@ const layers = [
     harness: 'The validation scoreboard',
     url: 'axiom.org/validation',
     detail:
-      'Cross-engine conformance published per program — provisions indexed, citations extracted, RuleSpec rules linked back to their source — with conformance and certification computed from the harness, never set by hand.',
+      'Cross-engine conformance published per program (provisions indexed, citations extracted, RuleSpec rules linked back to their source), with conformance and certification computed from the harness, never set by hand.',
   },
   {
     layer: 'The data',
@@ -27,7 +27,7 @@ export default function HarnessLayersSlide() {
       </SlideHeader>
 
       <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
-        AI writes the rules and builds the data &mdash; so each layer ships
+        AI writes the rules and builds the data, so each layer ships
         with a public harness that grades it, live.
       </p>
 
@@ -48,7 +48,7 @@ export default function HarnessLayersSlide() {
 
       <div className="accent-block mt-6 max-w-5xl">
         <p className="text-lg text-gray-800 leading-relaxed">
-          Trust is a URL you can open and re-run &mdash; and the
+          Trust is a URL you can open and re-run, and the
           microsimulation built on these layers is graded the same way.
         </p>
       </div>

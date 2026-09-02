@@ -87,7 +87,7 @@ export default function CountryScopeSlide() {
           <div className="accent-block">
             <p className="text-base text-gray-700 leading-relaxed">
               The encoder evolution changes this arithmetic: the Belgian
-              provisions arrived in weeks, verified against EUROMOD &mdash;
+              provisions arrived in weeks, verified against EUROMOD:
               the recipe every next country inherits.
             </p>
           </div>

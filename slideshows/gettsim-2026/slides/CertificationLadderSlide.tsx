@@ -33,7 +33,7 @@ export default function CertificationLadderSlide() {
       </SlideHeader>
 
       <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
-        Agreement with the reference engine is necessary &mdash; and nowhere
+        Agreement with the reference engine is necessary, and nowhere
         near sufficient.
       </p>
 
@@ -94,13 +94,13 @@ export default function CertificationLadderSlide() {
             <p className="text-lg text-gray-700 leading-relaxed">
               Denmark&apos;s child and youth benefit matches EUROMOD on every
               case across three reference legs, and its blocker list is empty.
-              Certified still reads no &mdash; dependency closure fails, with
+              Certified still reads no: dependency closure fails, with
               81 law-derived dependencies open, among them the income basis in
               personskatteloven &sect;7.
             </p>
           </div>
           <p className="text-lg text-gray-600 leading-snug">
-            The US tariff schedule tells the same story &mdash; 216 million
+            The US tariff schedule tells the same story: 216 million
             row-level comparisons against the Yale Budget Lab statutory panel,
             zero unexplained mismatches, and conformant still reads no with
             1.59M units open.
@@ -117,8 +117,8 @@ export default function CertificationLadderSlide() {
       <div className="accent-block mt-8 max-w-5xl">
         <p className="text-xl text-gray-800 leading-relaxed">
           Certified is computed, never set by hand, and the registry publishes
-          whatever the computation says. The scoreboard grades itself honestly
-          &mdash; that is the point.
+          whatever the computation says. The scoreboard grades itself honestly.
+          That is the point.
         </p>
       </div>
     </Slide>

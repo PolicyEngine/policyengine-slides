@@ -36,7 +36,7 @@ export const RulesDividerSlide = () => (
   <SectionDivider
     number="1"
     title="Rules"
-    subtitle="How AI encodes law — six stages of evolution — and the Axiom rules engine: statute text, machine-readable rules, and the computation graph, published together."
+    subtitle="How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute text, machine-readable rules, and the computation graph, published together."
   />
 );
 
@@ -44,7 +44,7 @@ export const DataDividerSlide = () => (
   <SectionDivider
     number="2"
     title="Data"
-    subtitle="Microcosm — the microdata underneath the models, calibrated to what the statistical agencies publish, with every target and its error in the open."
+    subtitle="Microcosm: the microdata underneath the models, calibrated to what the statistical agencies publish, with every target and its error in the open."
   />
 );
 
@@ -52,6 +52,6 @@ export const MicrosimDividerSlide = () => (
   <SectionDivider
     number="3"
     title="Microsimulation"
-    subtitle="PolicyEngine — rules plus data at population scale, graded against external scorekeepers."
+    subtitle="PolicyEngine: rules plus data at population scale, graded against external scorekeepers."
   />
 );

@@ -47,7 +47,7 @@ export default function Evo2PipelineSlide() {
         <div className="w-[45%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              We introduced <strong>agents</strong>&mdash;specialized AI workers that each focus on a single concern. A document-collector gathers sources. A parameter-architect structures data. A rules-engineer implements logic. A test-creator writes validations.
+              We introduced <strong>agents</strong>: specialized AI workers that each focus on a single concern. A document-collector gathers sources. A parameter-architect structures data. A rules-engineer implements logic. A test-creator writes validations.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export default function Evo2PipelineSlide() {
 
           <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl">
             <p className="text-amber-800 font-semibold text-base">
-              Key insight: Sequential execution means tests validate existing code patterns&mdash;not actual program document requirements.
+              Key insight: Sequential execution means tests validate existing code patterns, not actual program document requirements.
             </p>
           </div>
         </div>

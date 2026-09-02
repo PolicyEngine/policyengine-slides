@@ -10,7 +10,7 @@ import {
   DataDividerSlide,
   MicrosimDividerSlide,
 } from './slides/SectionDivider';
-// 1 — Rules: AI-assisted encoding and the Axiom rules engine
+// 1. Rules: AI-assisted encoding and the Axiom rules engine
 import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
 import Evo1SinglePromptSlide from './slides/Evo1SinglePromptSlide';
 import Evo2PipelineSlide from './slides/Evo2PipelineSlide';
@@ -30,11 +30,11 @@ import {
 } from './slides/DemoLiveSlides';
 import BelgiumParitySlide from './slides/BelgiumParitySlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
-// 2 — Data: how Microcosm builds the microdata, and the harness under it
+// 2. Data: how Microcosm builds the microdata, and the harness under it
 import MicrodataPipelineSlide from './slides/MicrodataPipelineSlide';
 import MicrocosmBESlide from './slides/MicrocosmBESlide';
 import HarnessLayersSlide from './slides/HarnessLayersSlide';
-// 3 — Microsimulation: PolicyEngine, graded
+// 3. Microsimulation: PolicyEngine, graded
 import PEOverviewSlide from './slides/PEOverviewSlide';
 import CountryScopeSlide from './slides/CountryScopeSlide';
 import WhoUsesItSlide from './slides/WhoUsesItSlide';
@@ -46,7 +46,7 @@ export const gettsim2026Config: SlideshowConfig = {
   id: 'gettsim-2026',
   title: 'AI-driven rules engine development',
   description:
-    'Rules, data, microsimulation — AI-assisted encoding and the Axiom rules engine, the calibrated microdata underneath, and PolicyEngine graded against external scorekeepers',
+    'Rules, data, microsimulation: AI-assisted encoding and the Axiom rules engine, the calibrated microdata underneath, and PolicyEngine graded against external scorekeepers',
   date: '2026-09-03',
   location: 'GETTSIM workshop, Digital Hub Bonn',
   footerText: 'PolicyEngine · GETTSIM workshop · September 2026',
@@ -63,7 +63,7 @@ export const gettsim2026Config: SlideshowConfig = {
     AgendaSlide,
     CraftScaledSlide,
 
-    // 1 — Rules
+    // 1. Rules
     RulesDividerSlide,
     BridgeToEvolutionSlide,
     Evo1SinglePromptSlide,
@@ -78,14 +78,14 @@ export const gettsim2026Config: SlideshowConfig = {
     BelgiumParitySlide,
     CertificationLadderSlide,
 
-    // 2 — Data
+    // 2. Data
     DataDividerSlide,
     MicrodataPipelineSlide,
     MicrocosmBESlide,
     CalibrationLiveSlide,
     HarnessLayersSlide,
 
-    // 3 — Microsimulation
+    // 3. Microsimulation
     MicrosimDividerSlide,
     PEOverviewSlide,
     CountryScopeSlide,

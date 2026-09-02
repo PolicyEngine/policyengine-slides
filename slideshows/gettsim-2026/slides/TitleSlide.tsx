@@ -10,7 +10,7 @@ const speaker = {
 };
 
 /**
- * Hybrid cover: two parallel halves — PolicyEngine teal, Axiom paper —
+ * Hybrid cover: two parallel halves, PolicyEngine teal and Axiom paper,
  * mirrored layout, wordmarks at identical height, and the title reading
  * across the seam: "Encoding statutes" → "into executable rules".
  */
@@ -78,7 +78,7 @@ export default function TitleSlide() {
 
           <div className="h-[88px] flex flex-col justify-center">
             <p className="text-lg text-gray-700">
-              AI-driven rules engine development &mdash; executable,
+              AI-driven rules engine development: executable,
               verifiable rules
             </p>
             <p className="text-sm text-gray-500 mt-1">

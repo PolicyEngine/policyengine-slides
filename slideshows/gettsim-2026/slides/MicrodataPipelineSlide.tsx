@@ -9,7 +9,7 @@ const stages = [
     step: '1',
     title: 'Targets from administrative truth',
     detail:
-      'Every calibration target is a sum of Chronicle facts — administrative and national-accounts figures the agencies print, each with its source and date. Surveys never set a target.',
+      'Every calibration target is a sum of Chronicle facts: administrative and national-accounts figures the agencies print, each with its source and date. Surveys never set a target.',
   },
   {
     step: '2',
@@ -21,7 +21,7 @@ const stages = [
     step: '3',
     title: 'Calibrate the weights',
     detail:
-      'Reweight the support records so the population reproduces every target at once — programs, incomes, demographics, geography — and publish each target with its residual error.',
+      'Reweight the support records so the population reproduces every target at once (programs, incomes, demographics, geography) and publish each target with its residual error.',
   },
   {
     step: '4',
@@ -40,7 +40,7 @@ export default function MicrodataPipelineSlide() {
 
       <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
         The rules need a population to run on. Microcosm builds one from
-        administrative totals down &mdash; not from a survey up.
+        administrative totals down, not from a survey up.
       </p>
 
       <div className="mt-6 flex items-stretch gap-2">
@@ -66,8 +66,8 @@ export default function MicrodataPipelineSlide() {
 
       <div className="accent-block mt-6 max-w-5xl">
         <p className="text-lg text-gray-800 leading-relaxed">
-          AI agents do the assembly &mdash; matching facts to targets, running
-          the calibration, filing the residuals &mdash; and the dashboard on
+          AI agents do the assembly (matching facts to targets, running
+          the calibration, filing the residuals) and the dashboard on
           the next slides is where the result is graded in public.
         </p>
       </div>

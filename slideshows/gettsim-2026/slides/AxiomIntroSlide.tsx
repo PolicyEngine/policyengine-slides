@@ -6,17 +6,17 @@ const requirements = [
   {
     title: 'Accuracy at every step',
     detail:
-      'Every parameter, formula, citation, and test produced along the way — not only the final answer.',
+      'Every parameter, formula, citation, and test produced along the way, not only the final answer.',
   },
   {
     title: 'Cross-validation against other sources',
     detail:
-      'TAXSIM, agency tables, peer modelers — multiple ground truths beyond our own.',
+      'TAXSIM, agency tables, peer modelers: multiple ground truths beyond our own.',
   },
   {
     title: 'Deterministic quality gates',
     detail:
-      'Tests, lint, type checks, structural rules that the agents must pass — not opinions about quality.',
+      'Tests, lint, type checks, structural rules that the agents must pass, not opinions about quality.',
   },
   {
     title: 'Human review at the right boundary',
@@ -39,7 +39,7 @@ const verbs = [
   {
     verb: 'Verify',
     detail:
-      'A deterministic gauntlet, then oracles that cross-check against external engines and datasets — PolicyEngine, TAXSIM, EUROMOD, SNAP quality-control data — so the model that wrote the rules never grades its own work.',
+      'A deterministic gauntlet, then oracles that cross-check against external engines and datasets (PolicyEngine, TAXSIM, EUROMOD, SNAP quality-control data), so the model that wrote the rules never grades its own work.',
   },
   {
     verb: 'Publish',

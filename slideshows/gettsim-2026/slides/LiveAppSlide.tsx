@@ -12,7 +12,7 @@ interface LiveAppSlideProps {
   displayUrl?: string;
   /**
    * Captured screenshot the presenter can switch to with one click when
-   * the live embed misbehaves — the embedded apps can paint a blank
+   * the live embed misbehaves: the embedded apps can paint a blank
    * document when framed (storage-partitioned third-party context).
    */
   fallbackSrc?: string;
@@ -23,7 +23,7 @@ interface LiveAppSlideProps {
 }
 
 /**
- * Live embedded app with an Expand button — the cbo-2026 AxiomDemoSlide
+ * Live embedded app with an Expand button, the cbo-2026 AxiomDemoSlide
  * pattern, plus a capture-first mode when fallbackSrc is set. The static
  * screenshot slides that follow in the deck remain the deep-dive fallback.
  */

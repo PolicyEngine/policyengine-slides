@@ -16,7 +16,7 @@ export default function ClosingSlide() {
         </p>
 
         <p className="text-3xl text-gray-900 leading-relaxed font-light">
-          AI lets this community encode more law, faster &mdash; and the
+          AI lets this community encode more law, faster, and the
           harness is what keeps the speed honest.
         </p>
 
@@ -28,7 +28,7 @@ export default function ClosingSlide() {
         </div>
 
         <p className="text-2xl text-pe-teal leading-relaxed font-medium">
-          GETTSIM, EUROMOD, statistical offices, open models &mdash; each
+          GETTSIM, EUROMOD, statistical offices, open models: each
           piece, doing what it does best, cross-checking the others.
         </p>
 

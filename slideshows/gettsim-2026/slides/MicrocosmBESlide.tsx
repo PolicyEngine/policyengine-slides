@@ -28,7 +28,7 @@ export default function MicrocosmBESlide() {
       </div>
 
       <p className="mt-4 text-sm text-gray-500 text-center">
-        v0.5 release. Targets are sums of Chronicle facts &mdash; Belgian
+        v0.5 release. Targets are sums of Chronicle facts: Belgian
         administrative and national-accounts data. Surveys enter as validation
         only.
       </p>

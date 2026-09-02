@@ -69,7 +69,7 @@ export default function Evo4ValidationSlide() {
         <div className="w-[35%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              We added <strong>edge-case-generator</strong>, <strong>reference-validator</strong>, and <strong>ci-fixer</strong>{' '}to automatically iterate on failures. The workflow now loops&mdash;when tests fail, ci-fixer analyzes the error and retries.
+              We added <strong>edge-case-generator</strong>, <strong>reference-validator</strong>, and <strong>ci-fixer</strong>{' '}to automatically iterate on failures. The workflow now loops: when tests fail, ci-fixer analyzes the error and retries.
             </p>
           </div>
 

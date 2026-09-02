@@ -34,7 +34,7 @@ export default function Evo1SinglePromptSlide() {
         <div className="w-[45%] flex flex-col">
           <div className="accent-block mb-5">
             <p className="text-gray-700 text-base">
-              We started with the simplest approach: a single prompt asking Claude to implement one benefit program end-to-end. <strong>One command, one output</strong>&mdash;parameters, variables, tests, everything in one shot.
+              We started with the simplest approach: a single prompt asking Claude to implement one benefit program end-to-end. <strong>One command, one output</strong>: parameters, variables, tests, everything in one shot.
             </p>
           </div>
 
