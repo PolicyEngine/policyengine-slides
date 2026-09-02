@@ -47,13 +47,6 @@ export default function IntroSlide() {
         ))}
       </div>
 
-      <div className="accent-block mt-8 max-w-5xl">
-        <p className="text-xl text-gray-800 leading-relaxed">
-          A tax-benefit model is rules applied to data. This talk walks that
-          stack layer by layer &mdash; and shows how AI now helps build every
-          layer of it.
-        </p>
-      </div>
     </Slide>
   );
 }
