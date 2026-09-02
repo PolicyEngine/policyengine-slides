@@ -46,7 +46,6 @@ export default function IntroSlide() {
           </div>
         ))}
       </div>
-
     </Slide>
   );
 }

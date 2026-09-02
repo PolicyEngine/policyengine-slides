@@ -47,13 +47,6 @@ export default function AgendaSlide() {
           </div>
         ))}
       </div>
-
-      <div className="accent-block mt-8 max-w-5xl">
-        <p className="text-xl text-gray-800 leading-relaxed">
-          AI builds at every layer &mdash; and every layer ships with a public
-          harness that grades it.
-        </p>
-      </div>
     </Slide>
   );
 }
