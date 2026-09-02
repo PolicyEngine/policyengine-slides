@@ -20,7 +20,6 @@ import Evo5SkillsSlide from './slides/Evo5SkillsSlide';
 import Evo6FullWorkflowSlide from './slides/Evo6FullWorkflowSlide';
 import AxiomIntroSlide from './slides/AxiomIntroSlide';
 import {
-  DemoAxiomProvisionSlide,
   DemoAxiomGraphSlide,
   DemoAxiomValidationSlide,
 } from './slides/DemoSlides';
@@ -75,7 +74,6 @@ export const gettsim2026Config: SlideshowConfig = {
     Evo6FullWorkflowSlide,
     AxiomIntroSlide,
     DemoAxiomLiveSlide,
-    DemoAxiomProvisionSlide,
     DemoAxiomGraphSlide,
     DemoAxiomValidationSlide,
     BelgiumParitySlide,

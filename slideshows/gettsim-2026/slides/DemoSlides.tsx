@@ -6,16 +6,6 @@ import ScreenshotSlide from './ScreenshotSlide';
  * (shared with the iariw-2026 deck).
  */
 
-export const DemoAxiomProvisionSlide = () => (
-  <ScreenshotSlide
-    title="The law at the node"
-    url="axiom.org"
-    src="/screenshots/iariw-2026/axiom-provision.png"
-    alt="Statute text beside the RuleSpec rule in the Axiom App"
-    caption="CIR 92, art. 36 §2 — the statute text beside the RuleSpec rule that computes it, with entity, unit, and effective dates."
-  />
-);
-
 export const DemoAxiomGraphSlide = () => (
   <ScreenshotSlide
     title="The computation graph"
