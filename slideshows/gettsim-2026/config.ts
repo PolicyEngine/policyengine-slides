@@ -23,6 +23,7 @@ import {
   DemoAxiomLiveSlide,
   ValidationLiveSlide,
   PEAppLiveSlide,
+  UKChatLiveSlide,
   StateTrackerLiveSlide,
   ScorecardLiveSlide,
   CalibrationLiveSlide,
@@ -90,6 +91,7 @@ export const gettsim2026Config: SlideshowConfig = {
     CountryScopeSlide,
     WhoUsesItSlide,
     PEAppLiveSlide,
+    UKChatLiveSlide,
     StateTrackerLiveSlide,
     ScorecardLiveSlide,
 

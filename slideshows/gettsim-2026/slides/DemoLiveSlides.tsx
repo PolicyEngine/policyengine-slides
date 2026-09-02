@@ -109,6 +109,40 @@ export const PEAppLiveSlide = () => (
   </LiveAppSlide>
 );
 
+export const UKChatLiveSlide = () => (
+  <LiveAppSlide
+    title="PolicyEngine UK chat, live"
+    url="https://policyengine-uk-chat.vercel.app/uk/chat"
+    displayUrl="policyengine-uk-chat.vercel.app"
+    fallbackSrc="/screenshots/gettsim-2026/uk-chat.png"
+  >
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">What you are seeing</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        A UK tax and benefit assistant: ask in plain English about a
+        household or a reform, and it runs the PolicyEngine UK model to
+        answer &mdash; with the calculation, not a guess.
+      </p>
+    </div>
+
+    <div className="content-card p-5">
+      <div className="slide-tag mb-3">Why it matters</div>
+      <p className="text-base text-gray-700 leading-relaxed">
+        The language model never computes policy itself. It calls the same
+        encoded rules and calibrated data, so every figure is reproducible
+        outside the chat.
+      </p>
+    </div>
+
+    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
+      <p className="text-sm text-gray-600 leading-relaxed italic">
+        Live walkthrough &mdash; the capture is one click away if the
+        network does not cooperate.
+      </p>
+    </div>
+  </LiveAppSlide>
+);
+
 export const StateTrackerLiveSlide = () => (
   <LiveAppSlide
     title="The state legislative tracker, live"
