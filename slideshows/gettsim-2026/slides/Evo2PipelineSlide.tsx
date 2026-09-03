@@ -39,7 +39,7 @@ export default function Evo2PipelineSlide() {
             <circle className="network-node" cx="680" cy="110" r="50" />
             <g transform="translate(680,110) scale(1.4)" className="svg-icon"><use href="#icon-document" /></g>
             <text className="network-label" x="680" y="180">output</text>
-            <text x="400" y="30" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="13" fill="var(--warning)" fontStyle="italic">tests created after seeing rules-engineer&apos;s work</text>
+            <text x="400" y="30" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="13" fill="#b45309" fontStyle="italic">tests created after seeing rules-engineer&apos;s work</text>
           </svg>
         </div>
 
