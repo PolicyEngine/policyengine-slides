@@ -83,8 +83,8 @@ export const gettsim2026Config: SlideshowConfig = {
     // 2. Data
     DataDividerSlide,
     MicrodataPipelineSlide,
-    MicrocosmBESlide,
     CalibrationLiveSlide,
+    MicrocosmBESlide,
     HarnessLayersSlide,
 
     // 3. Microsimulation
