@@ -52,7 +52,7 @@ export default function LiveAppSlide({
       </SlideHeader>
 
       <div
-        className="grid gap-7 mt-4 h-[calc(100vh-300px)]"
+        className="grid gap-7 mt-4 h-[calc(100vh-340px)]"
         style={{
           gridTemplateColumns: children ? `${sideWidth} 1.38fr` : '1fr',
         }}

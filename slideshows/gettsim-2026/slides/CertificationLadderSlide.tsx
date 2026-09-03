@@ -32,12 +32,12 @@ export default function CertificationLadderSlide() {
         <SlideTitle>Complete is not certified</SlideTitle>
       </SlideHeader>
 
-      <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
+      <p className="text-xl text-gray-800 leading-relaxed max-w-5xl">
         Agreement with the reference engine is necessary, and nowhere
         near sufficient.
       </p>
 
-      <div className="mt-6 flex items-stretch gap-2">
+      <div className="mt-4 flex items-stretch gap-2">
         {rungs.map((rung, i) => (
           <Fragment key={rung.label}>
             {i > 0 && (
@@ -46,7 +46,7 @@ export default function CertificationLadderSlide() {
               </div>
             )}
             {rung.unreached ? (
-              <div className="flex-1 rounded-2xl border-2 border-dashed border-gray-300 bg-white p-5">
+              <div className="flex-1 rounded-2xl border-2 border-dashed border-gray-300 bg-white p-4">
                 <h3 className="text-xl font-bold text-gray-500 mb-1">
                   {rung.label}
                 </h3>
@@ -56,7 +56,7 @@ export default function CertificationLadderSlide() {
               </div>
             ) : (
               <div
-                className="flex-1 content-card p-5"
+                className="flex-1 content-card p-4"
                 style={
                   rung.amber
                     ? { borderLeftColor: 'var(--pe-amber)' }
@@ -75,7 +75,7 @@ export default function CertificationLadderSlide() {
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-[2.2fr_1fr] gap-8 items-stretch">
+      <div className="mt-5 grid grid-cols-[2.2fr_1fr] gap-8 items-stretch">
         <div className="space-y-4">
           <div
             className="content-card p-6"
@@ -114,8 +114,8 @@ export default function CertificationLadderSlide() {
         </div>
       </div>
 
-      <div className="accent-block mt-8 max-w-5xl">
-        <p className="text-xl text-gray-800 leading-relaxed">
+      <div className="accent-block mt-5 max-w-5xl">
+        <p className="text-lg text-gray-800 leading-relaxed">
           Certified is computed, never set by hand, and the registry publishes
           whatever the computation says. The scoreboard grades itself honestly.
           That is the point.

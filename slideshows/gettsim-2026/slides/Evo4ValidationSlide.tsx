@@ -11,7 +11,7 @@ export default function Evo4ValidationSlide() {
         <SlideTitle>Evolution step 4: validation loop</SlideTitle>
       </SlideHeader>
 
-      <div className="flex gap-8 h-[calc(100vh-280px)]">
+      <div className="flex gap-8 h-[calc(100vh-340px)]">
         {/* Left: diagram */}
         <div className="w-[65%] bg-[#f9f8f6] rounded-xl border border-gray-100 flex items-center justify-center p-3">
           <svg className="full-width-flow-svg" viewBox="0 0 1100 680">

@@ -9,13 +9,13 @@ export default function ClosingSlide() {
         <SlideTitle>It takes all of us</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-12 max-w-5xl space-y-10">
-        <p className="text-3xl text-gray-900 leading-relaxed font-light">
+      <div className="mt-8 max-w-5xl space-y-6">
+        <p className="text-2xl text-gray-900 leading-relaxed font-light">
           Model-building has always been about making the consequences of
           policy visible before the choice is made.
         </p>
 
-        <p className="text-3xl text-gray-900 leading-relaxed font-light">
+        <p className="text-2xl text-gray-900 leading-relaxed font-light">
           AI lets this community encode more law, faster, and the
           harness is what keeps the speed honest.
         </p>

@@ -11,7 +11,7 @@ export default function Evo3ParallelSlide() {
         <SlideTitle>Evolution step 3: parallel execution</SlideTitle>
       </SlideHeader>
 
-      <div className="flex gap-8 h-[calc(100vh-280px)]">
+      <div className="flex gap-8 h-[calc(100vh-340px)]">
         {/* Left: diagram */}
         <div className="w-[60%] bg-[#f9f8f6] rounded-xl border border-gray-100 flex items-center justify-center p-4">
           <svg className="full-width-flow-svg" viewBox="0 0 750 420">

@@ -89,7 +89,7 @@ export default function RuleSpecSlide() {
         </div>
 
         <CodeBlock title="yaml · EStG § 66 Kindergeld">
-          <pre className="text-[10px] leading-[12.5px] whitespace-pre overflow-hidden">
+          <pre className="text-[9.5px] leading-[11.5px] whitespace-pre overflow-hidden">
             {code}
           </pre>
         </CodeBlock>

@@ -16,7 +16,7 @@ export default function PolicyBenchSlide() {
         <SlideTitle>AI cannot calculate taxes and benefits accurately today</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-3 h-[calc(100vh-300px)]">
+      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-3 h-[calc(100vh-340px)]">
         <div className="flex flex-col gap-3 min-h-0">
           <div className="content-card p-4">
             <div className="slide-tag mb-2">PolicyBench.org &middot; v1.1 &middot; 2026-08-22</div>
@@ -28,7 +28,7 @@ export default function PolicyBenchSlide() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="content-card p-4 text-center">
+            <div className="content-card p-3 text-center">
               <div className="stat-number text-4xl text-pe-teal">1 in 9</div>
               <p className="text-sm font-semibold text-gray-800 mt-1">
                 amounts wrong to the dollar
@@ -37,7 +37,7 @@ export default function PolicyBenchSlide() {
                 best model: 88.7% exact (GPT-5.6 Sol)
               </p>
             </div>
-            <div className="content-card p-4 text-center">
+            <div className="content-card p-3 text-center">
               <div className="stat-number text-4xl text-pe-teal">&gt;1 in 3</div>
               <p className="text-sm font-semibold text-gray-800 mt-1">
                 amounts wrong
@@ -62,12 +62,12 @@ export default function PolicyBenchSlide() {
           </div>
 
           <div
-            className="rounded-2xl px-6 py-4 text-white mt-auto"
+            className="rounded-2xl px-5 py-3 text-white mt-auto"
             style={{
               background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)',
             }}
           >
-            <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-pe-teal mb-1">
               The takeaway
             </p>
             <p className="text-base leading-relaxed font-light">

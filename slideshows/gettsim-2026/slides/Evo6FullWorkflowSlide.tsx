@@ -54,7 +54,7 @@ export default function Evo6FullWorkflowSlide() {
         <SlideTitle>Evolution step 6: full workflow</SlideTitle>
       </SlideHeader>
 
-      <div className="flex gap-6 h-[calc(100vh-280px)]">
+      <div className="flex gap-6 h-[calc(100vh-340px)]">
         {/* Left: diagram */}
         <div className="w-[65%] bg-[#f9f8f6] rounded-xl p-2 border border-gray-100 flex items-center justify-center">
           <svg className="full-width-flow-svg" viewBox="0 0 950 550" style={{ maxWidth: 850 }}>

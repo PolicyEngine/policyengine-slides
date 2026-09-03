@@ -11,7 +11,7 @@ export default function Evo2PipelineSlide() {
         <SlideTitle>Evolution step 2: core pipeline</SlideTitle>
       </SlideHeader>
 
-      <div className="flex gap-8 h-[calc(100vh-280px)]">
+      <div className="flex gap-8 h-[calc(100vh-340px)]">
         {/* Left: diagram */}
         <div className="w-[55%] bg-[#f9f8f6] rounded-xl border border-gray-100 flex items-center justify-center p-4">
           <svg className="full-width-flow-svg" viewBox="0 0 800 220">
