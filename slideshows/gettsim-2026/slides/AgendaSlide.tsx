@@ -8,7 +8,7 @@ const sections = [
     title: 'Rules',
     org: 'The Axiom Foundation',
     detail:
-      'How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute, rules, and computation graph published together, validated against EUROMOD.',
+      'The law as code: every threshold, rate, formula, and eligibility condition a tax-benefit program needs, each traced to the statute it comes from.',
   },
   {
     number: '2',
