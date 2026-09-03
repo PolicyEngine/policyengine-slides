@@ -62,8 +62,7 @@ rules:
   source: § 66 Abs. 3 Sätze 1 und 2 EStG
   versions:
   - effective_from: '2026-01-01'
-    formula: floor((kindergeld_before_whole_euro_rounding / whole_euro_rounding_multiple) + 0.5)
-      * whole_euro_rounding_multiple`;
+    formula: floor((kindergeld_before_whole_euro_rounding / whole_euro_rounding_multiple) + 0.5) * whole_euro_rounding_multiple`;
 
 export default function RuleSpecSlide() {
   return (
@@ -77,7 +76,7 @@ export default function RuleSpecSlide() {
         </div>
       </SlideHeader>
 
-      <div className="mt-2 grid grid-cols-[0.8fr_1.2fr] gap-6 items-start">
+      <div className="mt-1 grid grid-cols-[0.8fr_1.2fr] gap-6 items-start">
         <div className="space-y-3">
           {anatomy.map((a) => (
             <div key={a.label} className="content-card p-4">
@@ -90,7 +89,7 @@ export default function RuleSpecSlide() {
         </div>
 
         <CodeBlock title="yaml · EStG § 66 Kindergeld">
-          <pre className="text-[10.5px] leading-[13.5px] whitespace-pre overflow-hidden">
+          <pre className="text-[10px] leading-[12.5px] whitespace-pre overflow-hidden">
             {code}
           </pre>
         </CodeBlock>
