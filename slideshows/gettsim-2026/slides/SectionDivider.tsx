@@ -36,7 +36,7 @@ export const RulesDividerSlide = () => (
   <SectionDivider
     number="1"
     title="Rules"
-    subtitle="How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute text, machine-readable rules, and the computation graph, published together."
+    subtitle="The law as code: every threshold, rate, formula, and eligibility condition a tax-benefit program needs, each traced to the statute it comes from."
   />
 );
 
