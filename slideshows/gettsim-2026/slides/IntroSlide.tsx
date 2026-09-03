@@ -7,14 +7,14 @@ const orgs = [
   {
     logo: '/logos/axiom-foundation.svg',
     logoAlt: 'The Axiom Foundation',
-    logoHeight: '44px',
+    logoHeight: '52px',
     what: 'A nonprofit encoding statutes into executable, verifiable rules: every value citing its authority, every rule traced back to the law.',
     role: 'The rules layer',
   },
   {
     logo: '/logos/teal.svg',
     logoAlt: 'PolicyEngine',
-    logoHeight: '44px',
+    logoHeight: '52px',
     what: 'Free, open source software to compute the impact of public policy: tax-benefit models used by researchers, governments, and benefit-access builders.',
     role: 'The microsimulation layer',
   },
@@ -30,8 +30,8 @@ export default function IntroSlide() {
       <div className="h-[calc(100vh-300px)] flex items-center pb-40">
       <div className="w-full grid grid-cols-2 gap-8 items-stretch">
         {orgs.map((org) => (
-          <div key={org.logoAlt} className="content-card p-8 flex flex-col">
-            <div className="h-[60px] flex items-center">
+          <div key={org.logoAlt} className="content-card px-10 py-9 flex flex-col">
+            <div className="h-[72px] flex items-center">
               <Image
                 src={org.logo}
                 alt={org.logoAlt}
@@ -40,10 +40,10 @@ export default function IntroSlide() {
                 style={{ height: org.logoHeight, width: 'auto' }}
               />
             </div>
-            <p className="text-xl text-gray-700 leading-relaxed mt-5">
+            <p className="text-2xl text-gray-700 leading-relaxed mt-7">
               {org.what}
             </p>
-            <div className="slide-tag mt-auto pt-6">{org.role}</div>
+            <div className="mt-9 self-start slide-tag">{org.role}</div>
           </div>
         ))}
       </div>
