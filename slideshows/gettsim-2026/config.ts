@@ -60,8 +60,8 @@ export const gettsim2026Config: SlideshowConfig = {
     // Opening
     TitleSlide,
     IntroSlide,
-    CraftScaledSlide,
     AgendaSlide,
+    CraftScaledSlide,
 
     // 1. Rules
     RulesDividerSlide,
