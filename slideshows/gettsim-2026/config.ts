@@ -18,6 +18,7 @@ import Evo3ParallelSlide from './slides/Evo3ParallelSlide';
 import Evo4ValidationSlide from './slides/Evo4ValidationSlide';
 import Evo5SkillsSlide from './slides/Evo5SkillsSlide';
 import Evo6FullWorkflowSlide from './slides/Evo6FullWorkflowSlide';
+import PEModelFilesSlide from './slides/PEModelFilesSlide';
 import AxiomIntroSlide from './slides/AxiomIntroSlide';
 import RuleSpecSlide from './slides/RuleSpecSlide';
 import {
@@ -74,6 +75,7 @@ export const gettsim2026Config: SlideshowConfig = {
     Evo4ValidationSlide,
     Evo5SkillsSlide,
     Evo6FullWorkflowSlide,
+    PEModelFilesSlide,
     AxiomIntroSlide,
     RuleSpecSlide,
     DemoAxiomLiveSlide,
