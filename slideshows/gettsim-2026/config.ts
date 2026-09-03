@@ -67,6 +67,8 @@ export const gettsim2026Config: SlideshowConfig = {
 
     // 1. Rules
     RulesDividerSlide,
+    PEModelFilesSlide,
+    RuleSpecSlide,
     PolicyBenchSlide,
     BridgeToEvolutionSlide,
     Evo1SinglePromptSlide,
@@ -75,9 +77,7 @@ export const gettsim2026Config: SlideshowConfig = {
     Evo4ValidationSlide,
     Evo5SkillsSlide,
     Evo6FullWorkflowSlide,
-    PEModelFilesSlide,
     AxiomIntroSlide,
-    RuleSpecSlide,
     DemoAxiomLiveSlide,
     ValidationLiveSlide,
     BelgiumParitySlide,
