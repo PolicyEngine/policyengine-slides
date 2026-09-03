@@ -51,7 +51,7 @@ export default function BelgiumParitySlide() {
             and replacement-income pipelines) is merged on main.
             Dependants and child benefits are encoded, held at the
             signed-corpus release frontier. This is the recipe the German
-            lane inherits, with GETTSIM as a second oracle.
+            lane inherits, checked against two oracles.
           </p>
         </div>
       </div>

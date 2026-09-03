@@ -102,8 +102,8 @@ export default function CountryScopeSlide() {
             <p className="text-base text-gray-700 leading-relaxed">
               The encoder evolution changes this arithmetic: the Belgian
               provisions arrived in weeks, verified against EUROMOD, and
-              Germany is now running the same recipe with GETTSIM as a
-              second oracle.
+              Germany is now running the same recipe against two
+              oracles.
             </p>
           </div>
         </div>

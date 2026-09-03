@@ -8,7 +8,7 @@ const sections = [
     title: 'Rules',
     org: 'The Axiom Foundation',
     detail:
-      'How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute, rules, and computation graph published together, validated against EUROMOD and, for Germany, GETTSIM.',
+      'How AI encodes law, in six stages of evolution, and the Axiom rules engine: statute, rules, and computation graph published together, validated against EUROMOD.',
   },
   {
     number: '2',

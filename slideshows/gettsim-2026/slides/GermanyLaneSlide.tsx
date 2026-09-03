@@ -3,7 +3,7 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
 const stats = [
-  { value: '2', label: 'oracles: EUROMOD DE_2025 and GETTSIM' },
+  { value: '2', label: 'oracles: EUROMOD DE_2025 and an independent German simulator' },
   { value: '7', label: 'provisions encoded with tests, so far' },
   { value: '13', label: 'instruments queued for the 2025 surface' },
 ];
@@ -49,8 +49,8 @@ export default function GermanyLaneSlide() {
             Encode the statute, never an oracle&apos;s behaviour. Every rule
             is checked per case against both models at the rules in force on
             30 June 2025. Where the two oracles disagree, the printed law
-            adjudicates and the divergence is filed upstream, to the EC-JRC
-            tracker or to GETTSIM&apos;s.
+            adjudicates and the divergence is filed upstream to the losing
+            model&apos;s tracker.
           </p>
           <p className="text-base text-gray-500 italic mt-3">
             Values carry their amending act: Kindergeld reads &euro;255 from

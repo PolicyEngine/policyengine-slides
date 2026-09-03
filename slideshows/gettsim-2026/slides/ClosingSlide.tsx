@@ -28,7 +28,7 @@ export default function ClosingSlide() {
         </div>
 
         <p className="text-2xl text-pe-teal leading-relaxed font-medium">
-          GETTSIM, EUROMOD, statistical offices, open models: each
+          EUROMOD, statistical offices, open models: each
           piece, doing what it does best, cross-checking the others.
         </p>
 
