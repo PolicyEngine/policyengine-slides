@@ -4,73 +4,138 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { IconChevronRight } from '@tabler/icons-react';
 
-const stages = [
+// Stages and operators as documented on microcosm.institute ("How a release
+// is built", the operator algebra) and in PolicyEngine/microcosm DESIGN.md.
+const phases = [
   {
-    step: '1',
-    title: 'Targets from administrative truth',
-    detail:
-      'Every calibration target is a sum of Chronicle facts: administrative and national-accounts figures the agencies print, each with its source and date. Surveys never set a target.',
+    phase: 'Observations',
+    ops: ['Harmonize sources', 'Assemble multispine'],
+    detail: 'asec · acs · puf · scf · sipp',
   },
   {
-    step: '2',
-    title: 'Support records from a donor pool',
-    detail:
-      'Survey households supply the joint distribution the aggregates lack. Today a reweighted US survey donor pool; a native donor pool is the planned upgrade for each new country.',
+    phase: 'Enrichment',
+    ops: ['Clone operator', 'Imputation operators'],
+    detail: 'tax-detail twins · wealth · tips · esi',
   },
   {
-    step: '3',
-    title: 'Calibrate the weights',
-    detail:
-      'Reweight the support records so the population reproduces every target at once (programs, incomes, demographics, geography) and publish each target with its residual error.',
+    phase: 'Rules',
+    ops: ['Derivations'],
+    detail: 'statute-defined concepts on the frame',
   },
   {
-    step: '4',
-    title: 'Validate against what was held out',
-    detail:
-      'Surveys enter as validation only. Releases are compared side by side, and the same calibrated population is run through two engines to separate data error from rules error.',
+    phase: 'Seeds',
+    ops: ['Take-up seeds'],
+    detail: 'seeded draws at documented priors',
   },
+  {
+    phase: 'Simulation',
+    ops: ['Materialize once'],
+    detail: 'the rules engine, run once per input state',
+  },
+  {
+    phase: 'Weights',
+    ops: ['Target matrix', 'Calibration', 'Selection / export'],
+    detail: 'matrix descent against administrative totals',
+  },
+];
+
+const strategies = [
+  { name: 'support', what: 'which records exist', status: 'shipped' },
+  { name: 'calibration', what: 'weights hit admin facts', status: 'shipped' },
+  { name: 'sparsity', what: 'fewer records, same totals', status: 'shipped' },
+  { name: 'evaluation', what: 'the referee', status: 'shipped' },
+  { name: 'composition', what: 'the interactions', status: 'in progress' },
+  { name: 'dynamics', what: 'time', status: 'design' },
 ];
 
 export default function MicrodataPipelineSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>How Microcosm builds the microdata</SlideTitle>
+        <div className="flex items-baseline justify-between">
+          <SlideTitle>How Microcosm builds the microdata</SlideTitle>
+          <span className="font-mono text-lg text-pe-teal">
+            github.com/PolicyEngine/microcosm
+          </span>
+        </div>
       </SlideHeader>
 
-      <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
-        The rules need a population to run on. Microcosm builds one from
-        administrative totals down, not from a survey up.
+      <p className="text-lg text-gray-800 leading-relaxed">
+        One weighted sampling frame, made a first-class datatype. Every stage
+        is an operator on that frame, the order is load-bearing, and a gate
+        at each hand-off refuses silently broken inputs.
       </p>
 
-      <div className="mt-6 flex items-stretch gap-2">
-        {stages.map((s, i) => (
-          <Fragment key={s.step}>
+      <div className="mt-4 flex items-stretch gap-1">
+        {phases.map((p, i) => (
+          <Fragment key={p.phase}>
             {i > 0 && (
-              <div className="flex items-center shrink-0">
-                <IconChevronRight size={28} className="text-gray-400" />
+              <div className="flex flex-col items-center justify-center shrink-0 w-6">
+                <IconChevronRight size={22} className="text-pe-teal" />
+                <span className="text-[9px] uppercase tracking-wider text-gray-400 mt-1">
+                  gate
+                </span>
               </div>
             )}
-            <div className="flex-1 content-card p-5 flex flex-col">
-              <div className="font-mono text-4xl font-bold text-pe-teal/30 leading-none">
-                {s.step}
+            <div className="flex-1 content-card p-3 flex flex-col">
+              <div className="slide-tag mb-2" style={{ fontSize: '0.65rem' }}>
+                {p.phase}
               </div>
-              <h3 className="text-lg font-bold text-pe-dark mt-3 mb-2 leading-snug">
-                {s.title}
-              </h3>
-              <p className="text-base text-gray-700 leading-snug">{s.detail}</p>
+              <ul className="space-y-1">
+                {p.ops.map((op) => (
+                  <li
+                    key={op}
+                    className="text-sm font-semibold text-pe-dark leading-snug"
+                  >
+                    {op}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-gray-500 font-mono leading-snug mt-auto pt-2">
+                {p.detail}
+              </p>
             </div>
           </Fragment>
         ))}
       </div>
 
-      <div className="accent-block mt-6 max-w-5xl">
-        <p className="text-lg text-gray-800 leading-relaxed">
-          AI agents do the assembly (matching facts to targets, running
-          the calibration, filing the residuals) and the dashboard on
-          the next slides is where the result is graded in public.
-        </p>
+      <div className="mt-4 grid grid-cols-6 gap-2">
+        {strategies.map((s) => (
+          <div
+            key={s.name}
+            className="rounded-xl border border-gray-200 bg-white px-3 py-2 flex items-baseline justify-between gap-2"
+          >
+            <div>
+              <span className="font-mono text-sm text-pe-dark">{s.name}</span>
+              <span className="block text-[11px] text-gray-500 leading-snug">
+                {s.what}
+              </span>
+            </div>
+            <span
+              className="text-[10px] uppercase tracking-wider shrink-0"
+              style={{
+                color:
+                  s.status === 'shipped'
+                    ? 'var(--pe-teal)'
+                    : s.status === 'in progress'
+                      ? 'var(--pe-amber)'
+                      : '#9ca3af',
+              }}
+            >
+              {s.status}
+            </span>
+          </div>
+        ))}
       </div>
+
+      <p className="mt-3 text-sm text-gray-600 leading-snug">
+        Sources: Chronicle catalogues every survey and administrative input
+        and its mapping to statute concepts
+        (<span className="font-mono">github.com/PolicyEngine/chronicle</span>);
+        releases ship as populace datasets on Hugging Face
+        (<span className="font-mono">huggingface.co/policyengine</span>).
+        Belgium runs the same stack; Germany would too.
+      </p>
     </Slide>
   );
 }
