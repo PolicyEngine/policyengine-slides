@@ -33,7 +33,8 @@ export default function AgendaSlide() {
         <SlideTitle>Today: rules, data, microsimulation</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-8 grid grid-cols-3 gap-7 items-stretch">
+      <div className="h-[calc(100vh-300px)] flex items-center">
+      <div className="w-full grid grid-cols-3 gap-7 items-stretch">
         {sections.map((s) => (
           <div key={s.number} className="content-card p-7 flex flex-col">
             <div className="font-mono text-6xl font-bold text-pe-teal/25 leading-none">
@@ -46,6 +47,7 @@ export default function AgendaSlide() {
             </p>
           </div>
         ))}
+      </div>
       </div>
     </Slide>
   );
