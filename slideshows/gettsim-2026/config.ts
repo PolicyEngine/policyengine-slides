@@ -84,6 +84,7 @@ export const gettsim2026Config: SlideshowConfig = {
     DataDividerSlide,
     MicrodataPipelineSlide,
     CalibrationLiveSlide,
+    ScorecardLiveSlide,
     MicrocosmBESlide,
     HarnessLayersSlide,
 
@@ -95,7 +96,6 @@ export const gettsim2026Config: SlideshowConfig = {
     PEAppLiveSlide,
     UKChatLiveSlide,
     StateTrackerLiveSlide,
-    ScorecardLiveSlide,
 
     // Closing
     ClosingSlide,
