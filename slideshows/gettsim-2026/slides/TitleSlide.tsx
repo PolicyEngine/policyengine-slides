@@ -31,7 +31,7 @@ export default function TitleSlide() {
             />
           </div>
 
-          <div className="flex-1 flex items-center justify-end pr-8 pb-24">
+          <div className="flex-1 flex items-center justify-end pr-8 pb-40">
             <h1 className="font-display text-5xl font-bold text-white whitespace-nowrap">
               Encoding statutes
             </h1>
@@ -70,7 +70,7 @@ export default function TitleSlide() {
             />
           </div>
 
-          <div className="flex-1 flex items-center justify-start pl-8 pb-24">
+          <div className="flex-1 flex items-center justify-start pl-8 pb-40">
             <h1 className="font-display text-5xl font-bold text-[#17343a] whitespace-nowrap">
               into executable rules
             </h1>

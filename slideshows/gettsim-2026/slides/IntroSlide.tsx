@@ -27,7 +27,7 @@ export default function IntroSlide() {
         <SlideTitle>Two organizations, one stack</SlideTitle>
       </SlideHeader>
 
-      <div className="h-[calc(100vh-300px)] flex items-center pb-24">
+      <div className="h-[calc(100vh-300px)] flex items-center pb-40">
       <div className="w-full grid grid-cols-2 gap-8 items-stretch">
         {orgs.map((org) => (
           <div key={org.logoAlt} className="content-card p-8 flex flex-col">

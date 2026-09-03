@@ -33,7 +33,7 @@ export default function AgendaSlide() {
         <SlideTitle>Today: rules, data, microsimulation</SlideTitle>
       </SlideHeader>
 
-      <div className="h-[calc(100vh-300px)] flex items-center pb-24">
+      <div className="h-[calc(100vh-300px)] flex items-center pb-40">
       <div className="w-full grid grid-cols-3 gap-7 items-stretch">
         {sections.map((s) => (
           <div key={s.number} className="content-card p-7 flex flex-col">
