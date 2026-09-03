@@ -6,7 +6,6 @@ const rows = [
   { country: 'United States', params: '5,956', vars: '5,981', note: '' },
   { country: 'United Kingdom', params: '597', vars: '872', note: '' },
   { country: 'Canada', params: '395', vars: '393', note: '' },
-  { country: 'Israel', params: '2', vars: '19', note: 'early' },
   { country: 'Nigeria', params: '6', vars: '17', note: 'early' },
 ];
 
@@ -94,8 +93,8 @@ export default function CountryScopeSlide() {
             <div className="slide-tag mb-3">The shape of the gap</div>
             <p className="text-base text-gray-700 leading-relaxed">
               Depth follows demand: the US and UK models are
-              production-grade; Canada is substantial; Israel and Nigeria are
-              community seeds awaiting the same treatment.
+              production-grade; Canada is substantial; Nigeria is a
+              community seed awaiting the same treatment.
             </p>
           </div>
           <div className="accent-block">
