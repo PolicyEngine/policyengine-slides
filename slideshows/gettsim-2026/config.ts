@@ -3,7 +3,6 @@ import { speakers } from '@/lib/speakers';
 // Opening
 import TitleSlide from './slides/TitleSlide';
 import IntroSlide from './slides/IntroSlide';
-import CraftScaledSlide from './slides/CraftScaledSlide';
 import AgendaSlide from './slides/AgendaSlide';
 import {
   RulesDividerSlide,
@@ -61,7 +60,6 @@ export const gettsim2026Config: SlideshowConfig = {
     TitleSlide,
     IntroSlide,
     AgendaSlide,
-    CraftScaledSlide,
 
     // 1. Rules
     RulesDividerSlide,
