@@ -145,7 +145,7 @@ export default function Evo5SkillsSlide() {
               <div className="text-xs text-gray-500">Step 1 errors</div>
             </div>
             <div className="flex-1 content-card p-2 text-center">
-              <div className="text-xl font-black text-amber-500">40%</div>
+              <div className="text-xl font-black text-amber-700">40%</div>
               <div className="text-xs text-gray-500">Step 3 errors</div>
             </div>
             <div className="flex-1 content-card p-2 text-center">
