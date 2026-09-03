@@ -135,11 +135,10 @@ export default function MicrodataPipelineSlide() {
         <text x={OUT_X + OUT_W / 2} y={STEP_Y + 133} textAnchor="middle" fontSize="12.5" fill="#cfe3e0">calibration dashboard</text>
       </svg>
 
-      <p className="mt-2 text-base text-gray-600 leading-snug">
-        Code at <span className="font-mono">github.com/PolicyEngine/microcosm</span>;
-        the source catalogue at <span className="font-mono">github.com/PolicyEngine/chronicle</span>;
-        releases on <span className="font-mono">huggingface.co/policyengine</span>.
-        Belgium runs this stack today; Germany would run the same one.
+      <p className="mt-1 text-sm text-gray-600 leading-snug">
+        Sources: <span className="font-mono">github.com/PolicyEngine/chronicle</span>
+        {' '}(the catalogue) and <span className="font-mono">huggingface.co/policyengine</span>
+        {' '}(the releases). Belgium runs this stack today; Germany would run the same one.
       </p>
     </Slide>
   );
