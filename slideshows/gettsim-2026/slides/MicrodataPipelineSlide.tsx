@@ -60,13 +60,13 @@ export default function MicrodataPipelineSlide() {
         </div>
       </SlideHeader>
 
-      <p className="text-lg text-gray-800 leading-relaxed">
+      <p className="text-xl text-gray-800 leading-relaxed max-w-6xl">
         One weighted sampling frame, made a first-class datatype. Every stage
         is an operator on that frame, the order is load-bearing, and a gate
         at each hand-off refuses silently broken inputs.
       </p>
 
-      <div className="mt-4 flex items-stretch gap-1">
+      <div className="mt-6 flex items-stretch gap-1">
         {phases.map((p, i) => (
           <Fragment key={p.phase}>
             {i > 0 && (
@@ -77,21 +77,21 @@ export default function MicrodataPipelineSlide() {
                 </span>
               </div>
             )}
-            <div className="flex-1 content-card p-3 flex flex-col">
-              <div className="slide-tag mb-2" style={{ fontSize: '0.65rem' }}>
+            <div className="flex-1 content-card p-4 flex flex-col min-h-[230px]">
+              <div className="slide-tag mb-3" style={{ fontSize: '0.7rem' }}>
                 {p.phase}
               </div>
               <ul className="space-y-1">
                 {p.ops.map((op) => (
                   <li
                     key={op}
-                    className="text-sm font-semibold text-pe-dark leading-snug"
+                    className="text-base font-semibold text-pe-dark leading-snug"
                   >
                     {op}
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-gray-500 font-mono leading-snug mt-auto pt-2">
+              <p className="text-sm text-gray-500 font-mono leading-snug mt-auto pt-3">
                 {p.detail}
               </p>
             </div>
@@ -99,15 +99,15 @@ export default function MicrodataPipelineSlide() {
         ))}
       </div>
 
-      <div className="mt-4 grid grid-cols-6 gap-2">
+      <div className="mt-6 grid grid-cols-6 gap-3">
         {strategies.map((s) => (
           <div
             key={s.name}
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 flex items-baseline justify-between gap-2"
+            className="rounded-xl border border-gray-200 bg-white px-4 py-3 flex items-baseline justify-between gap-2"
           >
             <div>
-              <span className="font-mono text-sm text-pe-dark">{s.name}</span>
-              <span className="block text-[11px] text-gray-500 leading-snug">
+              <span className="font-mono text-base text-pe-dark">{s.name}</span>
+              <span className="block text-xs text-gray-500 leading-snug">
                 {s.what}
               </span>
             </div>
@@ -128,7 +128,7 @@ export default function MicrodataPipelineSlide() {
         ))}
       </div>
 
-      <p className="mt-3 text-sm text-gray-600 leading-snug">
+      <p className="mt-5 text-base text-gray-600 leading-snug">
         Sources: Chronicle catalogues every survey and administrative input
         and its mapping to statute concepts
         (<span className="font-mono">github.com/PolicyEngine/chronicle</span>);
