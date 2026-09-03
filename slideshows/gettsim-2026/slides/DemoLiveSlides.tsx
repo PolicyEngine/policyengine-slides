@@ -187,11 +187,5 @@ export const CalibrationLiveSlide = () => (
       </p>
     </div>
 
-    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-      <p className="text-sm text-gray-600 leading-relaxed italic">
-        You do not have to take my word for any of this. It is a
-        website.
-      </p>
-    </div>
   </LiveAppSlide>
 );
