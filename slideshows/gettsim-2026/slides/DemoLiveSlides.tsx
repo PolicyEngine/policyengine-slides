@@ -3,8 +3,7 @@
 import LiveAppSlide from './LiveAppSlide';
 
 /**
- * Live demo slides: the actual apps, embedded with Expand. Each carries a
- * captured screenshot behind the Show capture toggle for the no-network case.
+ * Live demo slides: the actual apps, embedded with Expand.
  */
 
 export const DemoAxiomLiveSlide = () => (
@@ -12,7 +11,6 @@ export const DemoAxiomLiveSlide = () => (
     title="The Axiom App"
     url="https://app.axiom-foundation.org/"
     displayUrl="axiom.org"
-    fallbackSrc="/screenshots/gettsim-2026/axiom-app.png"
   >
   </LiveAppSlide>
 );
@@ -22,7 +20,6 @@ export const ValidationLiveSlide = () => (
     title="Validation, in the open"
     url="https://axiom.org/oracles/"
     displayUrl="axiom.org/oracles"
-    fallbackSrc="/screenshots/gettsim-2026/axiom-oracles.png"
   >
   </LiveAppSlide>
 );
@@ -32,7 +29,6 @@ export const PEAppLiveSlide = () => (
     title="The PolicyEngine app"
     url="https://www.policyengine.org/us"
     displayUrl="policyengine.org"
-    fallbackSrc="/screenshots/gettsim-2026/pe-app-us.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
@@ -66,7 +62,6 @@ export const UKChatLiveSlide = () => (
     title="PolicyEngine UK chat"
     url="https://policyengine-uk-chat.vercel.app/uk/chat"
     displayUrl="policyengine-uk-chat.vercel.app"
-    fallbackSrc="/screenshots/gettsim-2026/uk-chat.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
@@ -100,7 +95,6 @@ export const StateTrackerLiveSlide = () => (
     title="The state legislative tracker"
     url="https://www.policyengine.org/us/bill-tracker"
     displayUrl="policyengine.org/us/bill-tracker"
-    fallbackSrc="/screenshots/gettsim-2026/state-tracker.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
@@ -133,7 +127,6 @@ export const ScorecardLiveSlide = () => (
     title="The scorecard: the model, graded"
     url="https://www.policyengine.org/scorecard"
     displayUrl="policyengine.org/scorecard"
-    fallbackSrc="/screenshots/gettsim-2026/scorecard-sotsn.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
@@ -167,7 +160,6 @@ export const CalibrationLiveSlide = () => (
     title="The calibration dashboard"
     url="https://microcosm.institute/calibration/dashboard/microcosm?country=be"
     displayUrl="microcosm.institute"
-    fallbackSrc="/screenshots/iariw-2026/calibration-dashboard-be.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
