@@ -53,9 +53,11 @@ export default function LiveAppSlide({
 
       <div
         className="grid gap-7 mt-4 h-[calc(100vh-300px)]"
-        style={{ gridTemplateColumns: `${sideWidth} 1.38fr` }}
+        style={{
+          gridTemplateColumns: children ? `${sideWidth} 1.38fr` : '1fr',
+        }}
       >
-        <div className="flex flex-col gap-4">{children}</div>
+        {children && <div className="flex flex-col gap-4">{children}</div>}
 
         <div
           className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto"

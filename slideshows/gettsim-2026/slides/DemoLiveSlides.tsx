@@ -14,31 +14,6 @@ export const DemoAxiomLiveSlide = () => (
     displayUrl="axiom.org"
     fallbackSrc="/screenshots/gettsim-2026/axiom-app.png"
   >
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">What you are seeing</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        The US corpus: 3,309 provisions across federal and all 50
-        states, clustered by jurisdiction. Each node is a rule encoded from
-        the statute; the country picker switches corpora. Germany is encoding
-        now and stays hidden until it passes both of its oracles.
-      </p>
-    </div>
-
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">The walkthrough</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        Open a provision &rarr; read the law beside the RuleSpec rule that
-        computes it &rarr; trace the computation graph from result back to
-        parameters.
-      </p>
-    </div>
-
-    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-      <p className="text-sm text-gray-600 leading-relaxed italic">
-        Live walkthrough. Screenshots follow if the network does not
-        cooperate.
-      </p>
-    </div>
   </LiveAppSlide>
 );
 
@@ -49,32 +24,6 @@ export const ValidationLiveSlide = () => (
     displayUrl="axiom.org/oracles"
     fallbackSrc="/screenshots/gettsim-2026/axiom-oracles.png"
   >
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">What you are seeing</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        902,239 households checked against four independent engines:
-        PolicyEngine, Statistics Canada&apos;s SPSD/M, USDA SNAP
-        quality-control records, and EUROMOD. Every program lists its
-        households and its agreement rate.
-      </p>
-    </div>
-
-    <div className="content-card p-5">
-      <div className="slide-tag mb-3">Why it matters</div>
-      <p className="text-base text-gray-700 leading-relaxed">
-        The model that wrote the rules never grades its own work. One of
-        the four is not a model at all: SNAP QC is administrative records
-        of benefits actually paid. Disagreements are dispositioned, and
-        findings flow both directions.
-      </p>
-    </div>
-
-    <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-      <p className="text-sm text-gray-600 leading-relaxed italic">
-        Live walkthrough. The capture is one click away if the
-        network does not cooperate.
-      </p>
-    </div>
   </LiveAppSlide>
 );
 
