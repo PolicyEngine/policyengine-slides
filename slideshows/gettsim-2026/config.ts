@@ -35,6 +35,7 @@ import GermanyLaneSlide from './slides/GermanyLaneSlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
 // 2. Data: how Microcosm builds the microdata, and the harness under it
 import MicrodataPipelineSlide from './slides/MicrodataPipelineSlide';
+import MicrodataPipelineDetailSlide from './slides/MicrodataPipelineDetailSlide';
 import MicrocosmBESlide from './slides/MicrocosmBESlide';
 import HarnessLayersSlide from './slides/HarnessLayersSlide';
 // 3. Microsimulation: PolicyEngine, graded
@@ -87,6 +88,7 @@ export const gettsim2026Config: SlideshowConfig = {
     // 2. Data
     DataDividerSlide,
     MicrodataPipelineSlide,
+    MicrodataPipelineDetailSlide,
     CalibrationLiveSlide,
     ScorecardLiveSlide,
     MicrocosmBESlide,
