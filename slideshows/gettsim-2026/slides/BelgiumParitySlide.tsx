@@ -12,7 +12,7 @@ export default function BelgiumParitySlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>Belgian income tax, validated against EUROMOD</SlideTitle>
+        <SlideTitle>What parity looks like: Belgian income tax vs EUROMOD</SlideTitle>
       </SlideHeader>
 
       <div className="mt-4 grid grid-cols-3 gap-8">
@@ -50,7 +50,8 @@ export default function BelgiumParitySlide() {
             The Belgian PIT arc (couples, pensions, self-employment,
             and replacement-income pipelines) is merged on main.
             Dependants and child benefits are encoded, held at the
-            signed-corpus release frontier.
+            signed-corpus release frontier. This is the recipe the German
+            lane inherits, with GETTSIM as a second oracle.
           </p>
         </div>
       </div>

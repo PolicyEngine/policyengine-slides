@@ -10,6 +10,7 @@ import {
   MicrosimDividerSlide,
 } from './slides/SectionDivider';
 // 1. Rules: AI-assisted encoding and the Axiom rules engine
+import PolicyBenchSlide from './slides/PolicyBenchSlide';
 import BridgeToEvolutionSlide from './slides/BridgeToEvolutionSlide';
 import Evo1SinglePromptSlide from './slides/Evo1SinglePromptSlide';
 import Evo2PipelineSlide from './slides/Evo2PipelineSlide';
@@ -28,6 +29,7 @@ import {
   CalibrationLiveSlide,
 } from './slides/DemoLiveSlides';
 import BelgiumParitySlide from './slides/BelgiumParitySlide';
+import GermanyLaneSlide from './slides/GermanyLaneSlide';
 import CertificationLadderSlide from './slides/CertificationLadderSlide';
 // 2. Data: how Microcosm builds the microdata, and the harness under it
 import MicrodataPipelineSlide from './slides/MicrodataPipelineSlide';
@@ -63,6 +65,7 @@ export const gettsim2026Config: SlideshowConfig = {
 
     // 1. Rules
     RulesDividerSlide,
+    PolicyBenchSlide,
     BridgeToEvolutionSlide,
     Evo1SinglePromptSlide,
     Evo2PipelineSlide,
@@ -74,6 +77,7 @@ export const gettsim2026Config: SlideshowConfig = {
     DemoAxiomLiveSlide,
     ValidationLiveSlide,
     BelgiumParitySlide,
+    GermanyLaneSlide,
     CertificationLadderSlide,
 
     // 2. Data

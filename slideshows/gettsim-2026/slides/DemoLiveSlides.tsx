@@ -19,7 +19,8 @@ export const DemoAxiomLiveSlide = () => (
       <p className="text-base text-gray-700 leading-relaxed">
         The US corpus: 3,309 provisions across federal and all 50
         states, clustered by jurisdiction. Each node is a rule encoded from
-        the statute; the country picker switches corpora, Belgium included.
+        the statute; the country picker switches corpora. Germany is encoding
+        now and stays hidden until it passes both of its oracles.
       </p>
     </div>
 
@@ -230,7 +231,8 @@ export const CalibrationLiveSlide = () => (
       <div className="slide-tag mb-3">Why it matters</div>
       <p className="text-base text-gray-700 leading-relaxed">
         The same harness discipline as the rules layer, applied to the
-        microdata underneath the model.
+        microdata underneath the model. Belgium is the nearest lane to
+        Germany today; a German build would follow the same recipe.
       </p>
     </div>
 

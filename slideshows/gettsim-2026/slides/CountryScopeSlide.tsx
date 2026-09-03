@@ -66,6 +66,20 @@ export default function CountryScopeSlide() {
                   107 encoded provisions
                 </td>
               </tr>
+              <tr>
+                <td className="py-3 text-xl text-gray-800">
+                  Germany{' '}
+                  <span className="ml-3 text-xs uppercase tracking-wide text-gray-400 align-middle">
+                    via Axiom · experimental
+                  </span>
+                </td>
+                <td
+                  className="py-3 text-xl font-mono text-right text-pe-teal"
+                  colSpan={2}
+                >
+                  7 encoded provisions
+                </td>
+              </tr>
             </tbody>
           </table>
           <p className="mt-4 text-sm text-gray-500 leading-snug">
@@ -87,8 +101,9 @@ export default function CountryScopeSlide() {
           <div className="accent-block">
             <p className="text-base text-gray-700 leading-relaxed">
               The encoder evolution changes this arithmetic: the Belgian
-              provisions arrived in weeks, verified against EUROMOD:
-              the recipe every next country inherits.
+              provisions arrived in weeks, verified against EUROMOD, and
+              Germany is now running the same recipe with GETTSIM as a
+              second oracle.
             </p>
           </div>
         </div>
