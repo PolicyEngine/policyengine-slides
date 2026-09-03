@@ -10,15 +10,15 @@ const amber = 'var(--pe-amber)';
 // is built", intended pipeline) for PolicyEngine/microcosm.
 const ops = [
   { name: 'Harmonize sources', l1: 'asec · acs · puf · scf · sipp', l2: 'shared columns · universes' },
-  { name: 'Assemble multispine', l1: 'acs main spine · asec_puf', l2: 'mass allocation across spines' },
+  { name: 'Assemble multispine', l1: 'acs main spine · asec_puf', l2: 'mass allocated across spines' },
   { name: 'Clone operator', l1: 'puf tax-detail twins', l2: 'on the assembled frame' },
   { name: 'Imputation operators', l1: 'scf wealth · sipp tips · esi', l2: 'mass conservation' },
   { name: 'Derivations', l1: 'statute-defined concepts', l2: 'rules on the frame' },
-  { name: 'Take-up seeds', l1: 'all programs', l2: 'seeded draws at documented priors' },
-  { name: 'Materialize once', l1: 'rules engine, once per input state', l2: 'telemetry-asserted' },
-  { name: 'Target matrix', l1: 'sums of Chronicle facts', l2: 'static columns · district surface' },
-  { name: 'Calibration', l1: 'matrix descent', l2: 'weights only · capped relative error' },
-  { name: 'Selection / export', l1: 'sparse + dense arm', l2: 'h5 + manifests · hardened gates' },
+  { name: 'Take-up seeds', l1: 'all programs', l2: 'draws at documented priors' },
+  { name: 'Materialize once', l1: 'engine run once per input state', l2: 'telemetry-asserted' },
+  { name: 'Target matrix', l1: 'sums of Chronicle facts', l2: 'static columns · districts' },
+  { name: 'Calibration', l1: 'matrix descent', l2: 'weights only · capped rel. error' },
+  { name: 'Selection / export', l1: 'sparse + dense arm', l2: 'h5 + manifests · hard gates' },
 ];
 
 // phase bands: [label, first op index, last op index]
@@ -101,8 +101,8 @@ export default function MicrodataPipelineDetailSlide() {
               <circle cx={x + 28} cy={y + 26} r="12" fill={i >= 7 ? amber : teal} />
               <text x={x + 28} y={y + 30} textAnchor="middle" fontSize="12" fontWeight="700" fill="#ffffff">{i + 1}</text>
               <text x={x + 48} y={y + 31} fontSize="15" fontWeight="700" fill={dark}>{o.name}</text>
-              <text x={x + 16} y={y + 62} fontSize="12.5" fill="#374151" style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{o.l1}</text>
-              <text x={x + 16} y={y + 84} fontSize="12.5" fill="#6b7280" style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{o.l2}</text>
+              <text x={x + 16} y={y + 62} fontSize="12" fill="#374151" style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{o.l1}</text>
+              <text x={x + 16} y={y + 84} fontSize="12" fill="#6b7280" style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{o.l2}</text>
               {!last && !isRowEnd && (
                 <g>
                   <path d={`M ${x + BOX_W} ${y + BOX_H / 2} L ${x + BOX_W + GAP} ${y + BOX_H / 2}`} fill="none" stroke={teal} strokeWidth="2.5" markerEnd="url(#arrow2)" />
