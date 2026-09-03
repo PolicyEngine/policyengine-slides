@@ -45,25 +45,27 @@ export const DemoAxiomLiveSlide = () => (
 export const ValidationLiveSlide = () => (
   <LiveAppSlide
     title="Validation, in the open"
-    url="https://axiom.org/validation"
-    displayUrl="axiom.org/validation"
-    fallbackSrc="/screenshots/gettsim-2026/axiom-validation.png"
+    url="https://axiom.org/oracles/"
+    displayUrl="axiom.org/oracles"
+    fallbackSrc="/screenshots/gettsim-2026/axiom-oracles.png"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>
       <p className="text-base text-gray-700 leading-relaxed">
-        902,239 households checked against four independent engines
-        (PolicyEngine, Statistics Canada&apos;s SPSD/M, USDA SNAP
-        quality-control records among them), published for anyone to
-        re-run.
+        902,239 households checked against four independent engines:
+        PolicyEngine, Statistics Canada&apos;s SPSD/M, USDA SNAP
+        quality-control records, and EUROMOD. Every program lists its
+        households and its agreement rate.
       </p>
     </div>
 
     <div className="content-card p-5">
       <div className="slide-tag mb-3">Why it matters</div>
       <p className="text-base text-gray-700 leading-relaxed">
-        The model that wrote the rules never grades its own work. Every
-        disagreement is dispositioned, and findings flow both directions.
+        The model that wrote the rules never grades its own work. One of
+        the four is not a model at all: SNAP QC is administrative records
+        of benefits actually paid. Disagreements are dispositioned, and
+        findings flow both directions.
       </p>
     </div>
 
