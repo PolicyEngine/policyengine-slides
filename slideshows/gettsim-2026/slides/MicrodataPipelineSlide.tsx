@@ -1,52 +1,38 @@
-import { Fragment } from 'react';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
-import { IconChevronRight } from '@tabler/icons-react';
 
-// Stages and operators as documented on microcosm.institute ("How a release
-// is built", the operator algebra) and in PolicyEngine/microcosm DESIGN.md.
-const phases = [
+const teal = 'var(--pe-teal)';
+const dark = 'var(--pe-dark, #17343a)';
+const amber = 'var(--pe-amber)';
+
+const steps = [
   {
-    phase: 'Observations',
-    ops: ['Harmonize sources', 'Assemble multispine'],
-    detail: 'asec · acs · puf · scf · sipp',
+    n: '1',
+    title: 'Combine the surveys',
+    lines: ['One household file with one', 'set of weights, every source', 'mapped to the same concepts.'],
   },
   {
-    phase: 'Enrichment',
-    ops: ['Clone operator', 'Imputation operators'],
-    detail: 'tax-detail twins · wealth · tips · esi',
+    n: '2',
+    title: 'Fill in what surveys miss',
+    lines: ['Wealth, tax detail, tips and', 'employer insurance imputed', 'from the surveys that have them.'],
   },
   {
-    phase: 'Rules',
-    ops: ['Derivations'],
-    detail: 'statute-defined concepts on the frame',
+    n: '3',
+    title: 'Run the rules engine',
+    lines: ['Taxes and benefits computed', 'for every household; take-up', 'seeded at documented rates.'],
   },
   {
-    phase: 'Seeds',
-    ops: ['Take-up seeds'],
-    detail: 'seeded draws at documented priors',
-  },
-  {
-    phase: 'Simulation',
-    ops: ['Materialize once'],
-    detail: 'the rules engine, run once per input state',
-  },
-  {
-    phase: 'Weights',
-    ops: ['Target matrix', 'Calibration', 'Selection / export'],
-    detail: 'matrix descent against administrative totals',
+    n: '4',
+    title: 'Reweight to match the facts',
+    lines: ['Weights adjusted until the', 'totals hit the official statistics,', 'each target published with its error.'],
   },
 ];
 
-const strategies = [
-  { name: 'support', what: 'which records exist', status: 'shipped' },
-  { name: 'calibration', what: 'weights hit admin facts', status: 'shipped' },
-  { name: 'sparsity', what: 'fewer records, same totals', status: 'shipped' },
-  { name: 'evaluation', what: 'the referee', status: 'shipped' },
-  { name: 'composition', what: 'the interactions', status: 'in progress' },
-  { name: 'dynamics', what: 'time', status: 'design' },
-];
+const STEP_W = 236;
+const STEP_H = 168;
+const STEP_Y = 120;
+const stepX = (i: number) => 300 + i * (STEP_W + 34);
 
 export default function MicrodataPipelineSlide() {
   return (
@@ -61,80 +47,96 @@ export default function MicrodataPipelineSlide() {
       </SlideHeader>
 
       <p className="text-xl text-gray-800 leading-relaxed max-w-6xl">
-        One weighted sampling frame, made a first-class datatype. Every stage
-        is an operator on that frame, the order is load-bearing, and a gate
-        at each hand-off refuses silently broken inputs.
+        Public surveys go in, official statistics set the targets, and a
+        synthetic population comes out whose totals match what the agencies
+        publish. A check between every step refuses broken inputs.
       </p>
 
-      <div className="mt-6 flex items-stretch gap-1">
-        {phases.map((p, i) => (
-          <Fragment key={p.phase}>
-            {i > 0 && (
-              <div className="flex flex-col items-center justify-center shrink-0 w-6">
-                <IconChevronRight size={22} className="text-pe-teal" />
-                <span className="text-[9px] uppercase tracking-wider text-gray-400 mt-1">
-                  gate
-                </span>
-              </div>
+      <svg
+        viewBox="0 0 1440 440"
+        className="mt-4 w-full"
+        style={{ fontFamily: 'inherit' }}
+        role="img"
+        aria-label="Microcosm pipeline: surveys and official statistics in, four steps, calibrated synthetic population out"
+      >
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill={teal} />
+          </marker>
+          <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill={amber} />
+          </marker>
+        </defs>
+
+        {/* Inputs */}
+        <g>
+          <rect x="20" y="70" width="230" height="110" rx="14" fill="#f0f7f7" stroke={teal} strokeWidth="2" />
+          <text x="135" y="104" textAnchor="middle" fontSize="19" fontWeight="700" fill={dark}>Public surveys</text>
+          <text x="135" y="132" textAnchor="middle" fontSize="14" fill="#4b5563">CPS ASEC · ACS · SCF</text>
+          <text x="135" y="154" textAnchor="middle" fontSize="14" fill="#4b5563">SIPP · IRS public-use file</text>
+
+          <rect x="20" y="230" width="230" height="110" rx="14" fill="#fff7ec" stroke={amber} strokeWidth="2" />
+          <text x="135" y="264" textAnchor="middle" fontSize="19" fontWeight="700" fill={dark}>Official statistics</text>
+          <text x="135" y="292" textAnchor="middle" fontSize="14" fill="#4b5563">agency tables and national</text>
+          <text x="135" y="314" textAnchor="middle" fontSize="14" fill="#4b5563">accounts, catalogued in Chronicle</text>
+        </g>
+
+        {/* Inputs → step 1 */}
+        <path d="M 250 125 C 275 125, 275 175, 300 175" fill="none" stroke={teal} strokeWidth="2.5" markerEnd="url(#arrow)" />
+        <path d="M 250 285 C 275 285, 275 225, 300 225" fill="none" stroke={amber} strokeWidth="2.5" markerEnd="url(#arrow-amber)" />
+
+        {/* Official statistics → step 4 as targets */}
+        <path
+          d={`M 135 340 L 135 405 L ${stepX(3) + STEP_W / 2} 405 L ${stepX(3) + STEP_W / 2} ${STEP_Y + STEP_H}`}
+          fill="none"
+          stroke={amber}
+          strokeWidth="2.5"
+          strokeDasharray="7 6"
+          markerEnd="url(#arrow-amber)"
+        />
+        <text x={(135 + stepX(3) + STEP_W / 2) / 2} y="396" textAnchor="middle" fontSize="14" fontWeight="600" fill="#b45309">
+          the same statistics become the calibration targets
+        </text>
+
+        {/* Steps */}
+        {steps.map((s, i) => (
+          <g key={s.n}>
+            <rect x={stepX(i)} y={STEP_Y} width={STEP_W} height={STEP_H} rx="14" fill="#ffffff" stroke="#d1d5db" strokeWidth="1.5" />
+            <rect x={stepX(i)} y={STEP_Y} width="5" height={STEP_H} rx="2" fill={teal} />
+            <circle cx={stepX(i) + 30} cy={STEP_Y + 30} r="15" fill={teal} />
+            <text x={stepX(i) + 30} y={STEP_Y + 35} textAnchor="middle" fontSize="15" fontWeight="700" fill="#ffffff">{s.n}</text>
+            <text x={stepX(i) + 54} y={STEP_Y + 35} fontSize="18" fontWeight="700" fill={dark}>{s.title}</text>
+            {s.lines.map((l, j) => (
+              <text key={l} x={stepX(i) + 18} y={STEP_Y + 72 + j * 24} fontSize="14.5" fill="#374151">{l}</text>
+            ))}
+            {i < steps.length - 1 && (
+              <path
+                d={`M ${stepX(i) + STEP_W} ${STEP_Y + STEP_H / 2} L ${stepX(i + 1)} ${STEP_Y + STEP_H / 2}`}
+                fill="none"
+                stroke={teal}
+                strokeWidth="2.5"
+                markerEnd="url(#arrow)"
+              />
             )}
-            <div className="flex-1 content-card p-4 flex flex-col min-h-[230px]">
-              <div className="slide-tag mb-3" style={{ fontSize: '0.7rem' }}>
-                {p.phase}
-              </div>
-              <ul className="space-y-1">
-                {p.ops.map((op) => (
-                  <li
-                    key={op}
-                    className="text-base font-semibold text-pe-dark leading-snug"
-                  >
-                    {op}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm text-gray-500 font-mono leading-snug mt-auto pt-3">
-                {p.detail}
-              </p>
-            </div>
-          </Fragment>
+          </g>
         ))}
-      </div>
 
-      <div className="mt-6 grid grid-cols-6 gap-3">
-        {strategies.map((s) => (
-          <div
-            key={s.name}
-            className="rounded-xl border border-gray-200 bg-white px-4 py-3 flex items-baseline justify-between gap-2"
-          >
-            <div>
-              <span className="font-mono text-base text-pe-dark">{s.name}</span>
-              <span className="block text-xs text-gray-500 leading-snug">
-                {s.what}
-              </span>
-            </div>
-            <span
-              className="text-[10px] uppercase tracking-wider shrink-0"
-              style={{
-                color:
-                  s.status === 'shipped'
-                    ? 'var(--pe-teal)'
-                    : s.status === 'in progress'
-                      ? 'var(--pe-amber)'
-                      : '#9ca3af',
-              }}
-            >
-              {s.status}
-            </span>
-          </div>
-        ))}
-      </div>
+        {/* Output */}
+        <path d={`M ${stepX(3) + STEP_W} ${STEP_Y + STEP_H / 2} L ${stepX(3) + STEP_W + 34} ${STEP_Y + STEP_H / 2}`} fill="none" stroke={teal} strokeWidth="2.5" markerEnd="url(#arrow)" />
+        <g transform={`translate(${stepX(3) + STEP_W + 34}, 0)`}>
+          <rect x="0" y={STEP_Y} width={1440 - (stepX(3) + STEP_W + 34) - 4} height={STEP_H} rx="14" fill={dark} />
+          <text x={(1440 - (stepX(3) + STEP_W + 34) - 4) / 2} y={STEP_Y + 62} textAnchor="middle" fontSize="18" fontWeight="700" fill="#ffffff">A calibrated</text>
+          <text x={(1440 - (stepX(3) + STEP_W + 34) - 4) / 2} y={STEP_Y + 86} textAnchor="middle" fontSize="18" fontWeight="700" fill="#ffffff">synthetic population</text>
+          <text x={(1440 - (stepX(3) + STEP_W + 34) - 4) / 2} y={STEP_Y + 122} textAnchor="middle" fontSize="13.5" fill="#cfe3e0">graded in public on the</text>
+          <text x={(1440 - (stepX(3) + STEP_W + 34) - 4) / 2} y={STEP_Y + 142} textAnchor="middle" fontSize="13.5" fill="#cfe3e0">calibration dashboard</text>
+        </g>
+      </svg>
 
-      <p className="mt-5 text-base text-gray-600 leading-snug">
-        Sources: Chronicle catalogues every survey and administrative input
-        and its mapping to statute concepts
-        (<span className="font-mono">github.com/PolicyEngine/chronicle</span>);
-        releases ship as populace datasets on Hugging Face
-        (<span className="font-mono">huggingface.co/policyengine</span>).
-        Belgium runs the same stack; Germany would too.
+      <p className="mt-2 text-base text-gray-600 leading-snug">
+        Code at <span className="font-mono">github.com/PolicyEngine/microcosm</span>;
+        the source catalogue at <span className="font-mono">github.com/PolicyEngine/chronicle</span>;
+        releases on <span className="font-mono">huggingface.co/policyengine</span>.
+        Belgium runs this stack today; Germany would run the same one.
       </p>
     </Slide>
   );
