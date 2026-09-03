@@ -10,9 +10,9 @@ const amber = 'var(--pe-amber)';
 // is built", intended pipeline) for PolicyEngine/microcosm.
 const ops = [
   { name: 'Harmonize sources', l1: 'asec · acs · puf · scf · sipp', l2: 'shared columns · universes' },
-  { name: 'Assemble multispine', l1: 'acs main spine · asec_puf', l2: 'mass allocated across spines' },
+  { name: 'Assemble multispine', l1: 'acs main spine · asec_puf', l2: 'qrf transfer · mass conserved' },
   { name: 'Clone operator', l1: 'puf tax-detail twins', l2: 'on the assembled frame' },
-  { name: 'Imputation operators', l1: 'scf wealth · sipp tips · esi', l2: 'mass conservation' },
+  { name: 'Imputation operators', l1: 'scf wealth · sipp tips · esi', l2: 'quantile regression forests' },
   { name: 'Derivations', l1: 'statute-defined concepts', l2: 'rules on the frame' },
   { name: 'Take-up seeds', l1: 'all programs', l2: 'draws at documented priors' },
   { name: 'Materialize once', l1: 'engine run once per input state', l2: 'telemetry-asserted' },
@@ -128,10 +128,10 @@ export default function MicrodataPipelineDetailSlide() {
 
       <p className="mt-1 text-sm text-gray-600 leading-snug">
         Teal operators build and enrich the population; amber operators set
-        the weights. The order is load-bearing: observations, then
-        enrichment, then rules, then seeds, then one simulation run, then
-        weights. Every output is scored by the evaluation harness before a
-        release ships.
+        the weights. Imputations are sequential, zero-inflated quantile
+        regression forest draws from the population&apos;s conditional
+        distribution, so every imputed value is a draw, not a mean. Every
+        output is scored by the evaluation harness before a release ships.
       </p>
     </Slide>
   );
