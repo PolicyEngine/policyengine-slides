@@ -20,9 +20,11 @@ import { policybenchWebinarConfig } from "@/slideshows/policybench-webinar/confi
 import { aspenBenefits2026Config } from "@/slideshows/aspen-benefits-2026/config";
 import { l0Ima2026Config } from "@/slideshows/l0-ima-2026/config";
 import { iariw2026Config } from "@/slideshows/iariw-2026/config";
+import { gettsim2026Config } from "@/slideshows/gettsim-2026/config";
 import { arnold2026Config } from "@/slideshows/arnold-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  gettsim2026Config,
   arnold2026Config,
   iariw2026Config,
   l0Ima2026Config,

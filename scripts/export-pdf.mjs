@@ -148,13 +148,16 @@ async function main() {
     // 3. Open slideshow
     const url = `http://localhost:${port}/slides/${id}`;
     console.log(`Opening ${url}`);
+    // Classic ("shell") headless: the new headless mode has been seen to
+    // hang on navigation entirely on macOS, while shell mode captures
+    // slides reliably.
     browser = await puppeteer.launch({
-      headless: true,
+      headless: "shell",
       protocolTimeout: 60_000,
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080 });
-    await page.goto(url, { waitUntil: "networkidle0", timeout: 30_000 });
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 60_000 });
     await new Promise((r) => setTimeout(r, 3000));
 
     // Private decks render a client-side password gate. Unlock it with
