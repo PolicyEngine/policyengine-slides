@@ -16,44 +16,61 @@ export default function PolicyBenchSlide() {
         <SlideTitle>AI cannot calculate taxes and benefits accurately today</SlideTitle>
       </SlideHeader>
 
-      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-4 h-[calc(100vh-300px)]">
-        <div className="flex flex-col gap-4">
-          <div className="content-card p-5">
-            <div className="slide-tag mb-3">PolicyBench.org &middot; v1.1 &middot; 2026-08-22</div>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              32 frontier models are scored on 100 real households:
-              basic tax-and-transfer calculations, the building blocks of any
+      <div className="grid grid-cols-[0.8fr_1.2fr] gap-7 mt-3 h-[calc(100vh-300px)]">
+        <div className="flex flex-col gap-3 min-h-0">
+          <div className="content-card p-4">
+            <div className="slide-tag mb-2">PolicyBench.org &middot; v1.1 &middot; 2026-08-22</div>
+            <p className="text-base text-gray-800 leading-relaxed">
+              32 frontier models are scored on 100 real households: basic
+              tax-and-transfer calculations, the building blocks of any
               microsimulation model.
             </p>
           </div>
 
-          <div className="content-card p-5">
-            <div className="flex items-start justify-center gap-12 text-center">
-              <div>
-                <div className="stat-number text-6xl text-pe-teal">1 in 9</div>
-                <p className="text-sm text-gray-700 leading-snug mt-2">
-                  amounts wrong to the dollar
-                  <br />
-                  best model: 88.7% exact (GPT-5.6 Sol)
-                </p>
-              </div>
-              <div>
-                <div className="stat-number text-6xl text-pe-teal">&gt;1 in 3</div>
-                <p className="text-sm text-gray-700 leading-snug mt-2">
-                  wrong
-                  <br />
-                  weakest model: 62.3% exact
-                </p>
-              </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="content-card p-4 text-center">
+              <div className="stat-number text-5xl text-pe-teal">1 in 9</div>
+              <p className="text-sm font-semibold text-gray-800 mt-1">
+                amounts wrong to the dollar
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                best model: 88.7% exact (GPT-5.6 Sol)
+              </p>
             </div>
-            <p className="text-sm text-gray-600 leading-snug mt-4 text-center">
-              On SNAP cases where the family is owed benefits, models mostly
-              answer $0. None gets more than 1 in 20 right.
+            <div className="content-card p-4 text-center">
+              <div className="stat-number text-5xl text-pe-teal">&gt;1 in 3</div>
+              <p className="text-sm font-semibold text-gray-800 mt-1">
+                amounts wrong
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                weakest model: 62.3% exact
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="content-card p-4"
+            style={{ borderLeftColor: 'var(--pe-amber)' }}
+          >
+            <div className="slide-tag mb-2" style={{ color: 'var(--pe-amber)' }}>
+              SNAP
+            </div>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Where the family is owed benefits, models mostly answer $0. None
+              gets more than 1 in 20 right.
             </p>
           </div>
 
-          <div className="pl-5 border-l-4 border-pe-teal mt-auto">
-            <p className="text-base text-gray-700 leading-relaxed">
+          <div
+            className="rounded-2xl px-6 py-5 text-white mt-auto"
+            style={{
+              background: 'linear-gradient(180deg, #1d4044 0%, #17343a 100%)',
+            }}
+          >
+            <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-2">
+              The takeaway
+            </p>
+            <p className="text-lg leading-relaxed font-light">
               AI is impressive at code, search, and summarization. It is not a
               substitute for analyst judgment, institutional knowledge, or
               quality-control processes.

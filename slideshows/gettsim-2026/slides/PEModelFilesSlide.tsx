@@ -122,12 +122,6 @@ export default function PEModelFilesSlide() {
           </CodeBlock>
         ))}
       </div>
-
-      <p className="mt-3 text-sm text-gray-600 leading-snug">
-        Dated values with statutory references, a vectorised formula over
-        them, and YAML cases that pin the numbers: 95,000+ parameter values,
-        5,500+ variables, 4,693 test files in the US model.
-      </p>
     </Slide>
   );
 }
