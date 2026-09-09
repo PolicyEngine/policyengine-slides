@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
-import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
-import { buildSlideUrl } from '@/lib/slide-url';
+import { useState, useEffect, useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { SlideshowProvider, SlideshowContextValue } from "./SlideshowContext";
+import { SlideshowConfig, flattenSlides, getSlideComponent } from "@/lib/types";
+import { buildSlideUrl } from "@/lib/slide-url";
 
 interface SlideshowViewerProps {
   config: SlideshowConfig;
@@ -21,7 +21,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   useEffect(() => {
     setMounted(true);
-    const initialSlide = parseInt(searchParams.get('slide') || '0', 10);
+    const initialSlide = parseInt(searchParams.get("slide") || "0", 10);
     setCurrentStep(Math.max(0, Math.min(initialSlide, totalSteps - 1)));
     setIsFullscreen(!!document.fullscreenElement);
 
@@ -29,30 +29,31 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
       setIsFullscreen(!!document.fullscreenElement);
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, [searchParams, totalSteps]);
 
   useEffect(() => {
     const url = buildSlideUrl(window.location.href, currentStep);
-    window.history.replaceState(null, '', url);
+    window.history.replaceState(null, "", url);
   }, [currentStep, config.id]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
+      if (e.key === "ArrowRight" || e.key === " ") {
         e.preventDefault();
         setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         setCurrentStep((prev) => Math.max(prev - 1, 0));
-      } else if (e.key === 'Home') {
+      } else if (e.key === "Home") {
         e.preventDefault();
         setCurrentStep(0);
-      } else if (e.key === 'End') {
+      } else if (e.key === "End") {
         e.preventDefault();
         setCurrentStep(totalSteps - 1);
-      } else if (e.key === 'f' || e.key === 'F11') {
+      } else if (e.key === "f" || e.key === "F11") {
         e.preventDefault();
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen();
@@ -62,18 +63,19 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [totalSteps]);
 
   const handleMainClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (target.closest('.pointer-events-auto')) return;
+    if (target.closest(".pointer-events-auto")) return;
     setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
   };
 
   const currentStepData = steps[currentStep];
-  const footerText = config.footerText ?? `${config.id.replace(/-/g, ' ')} · ${config.date}`;
+  const footerText =
+    config.footerText ?? `${config.id.replace(/-/g, " ")} · ${config.date}`;
 
   const contextValue: SlideshowContextValue = {
     id: config.id,
@@ -90,28 +92,32 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   return (
     <SlideshowProvider value={contextValue}>
       <main className="relative cursor-pointer" onClick={handleMainClick}>
-        {mounted && config.slides.map((slide, slideIndex) => {
-          const SlideComponent = getSlideComponent(slide);
-          const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= 1;
-          const isCurrent = slideIndex === currentStepData?.slideIndex;
+        {mounted &&
+          config.slides.map((slide, slideIndex) => {
+            const SlideComponent = getSlideComponent(slide);
+            const isNeighbor =
+              Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= 1;
+            const isCurrent = slideIndex === currentStepData?.slideIndex;
 
-          if (!isNeighbor) {
-            return <div key={slideIndex} />;
-          }
+            if (!isNeighbor) {
+              return <div key={slideIndex} />;
+            }
 
-          return (
-            <div
-              key={slideIndex}
-              className={isCurrent ? 'slide-active' : 'slide-exit'}
-              style={{ display: isCurrent ? 'block' : 'none' }}
-            >
-              <SlideComponent buildStep={isCurrent ? currentStepData?.buildStep : undefined} />
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={slideIndex}
+                className={isCurrent ? "slide-active" : "slide-exit"}
+                style={{ display: isCurrent ? "block" : "none" }}
+              >
+                <SlideComponent
+                  buildStep={isCurrent ? currentStepData?.buildStep : undefined}
+                />
+              </div>
+            );
+          })}
 
         {!isFullscreen && (
-          <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-between px-8 pointer-events-none">
+          <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-center gap-6 pointer-events-none">
             <div className="flex items-center gap-3 pointer-events-auto">
               <span className="text-white/60 text-xs">
                 Click or arrow keys &middot; F for fullscreen
@@ -132,7 +138,9 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
               </span>
 
               <button
-                onClick={() => setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1))}
+                onClick={() =>
+                  setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1))
+                }
                 className="text-white hover:text-white/80 transition-colors text-2xl w-10 h-10 flex items-center justify-center"
                 aria-label="Next slide"
               >

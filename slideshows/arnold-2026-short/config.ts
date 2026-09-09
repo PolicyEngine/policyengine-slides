@@ -1,15 +1,15 @@
 import { SlideshowConfig } from "@/lib/types";
 import { speakers } from "@/lib/speakers";
 
-import TitleSlide from "./slides/TitleSlide";
+import TitleSlide from "../arnold-2026/slides/TitleSlide";
 import {
   PartnershipSlide,
   WhoUsesSlide,
   FundingSlide,
   PipelineSlide,
-} from "./slides/ContextSlides";
-import AgendaSlide from "./slides/AgendaSlide";
-import ScaleSlide from "./slides/ScaleSlide";
+} from "../arnold-2026/slides/ContextSlides";
+import AgendaSlide from "../arnold-2026/slides/AgendaSlide";
+import ScaleSlide from "../arnold-2026/slides/ScaleSlide";
 import {
   StackIntroSlide,
   StackPeSlide,
@@ -18,22 +18,22 @@ import {
   StackMicrocosmSlide,
   StackThesisSlide,
   StackCorollarySlide,
-} from "./slides/StackWalkSlides";
+} from "../arnold-2026/slides/StackWalkSlides";
 import {
   ScorecardLiveSlide,
   GraphRandSlide,
   ChronicleLiveSlide,
   CalibrationLiveSlide,
   ThesisLiveSlide,
-} from "./slides/LayerSlides";
+} from "../arnold-2026/slides/LayerSlides";
 import {
   DistrictSlide,
   TariffSlide,
   SocialSecuritySlide,
   SnapQcSlide,
   AiIncomeShiftSlide,
-} from "./slides/ProgressSlides";
-import { NextSlide, QuestionsSlide } from "./slides/ClosingSlides";
+} from "../arnold-2026/slides/ProgressSlides";
+import { NextSlide, QuestionsSlide } from "../arnold-2026/slides/ClosingSlides";
 import {
   AppendixDividerSlide,
   GraphStaticSlide,
@@ -46,13 +46,18 @@ import {
   TariffStaticSlide,
   ChronicleStaticSlide,
   ValidationStaticSlide,
-} from "./slides/AppendixSlides";
+} from "../arnold-2026/slides/AppendixSlides";
 
-export const arnold2026Config: SlideshowConfig = {
-  id: "arnold-2026",
+/**
+ * The conversation cut: their threads first, the stack on one slide plus one
+ * recap, one ask — ten slides. Everything else sits in the appendix to pull
+ * on demand (layer walk with live embeds, scene-setting, static fallbacks).
+ */
+export const arnold2026ShortConfig: SlideshowConfig = {
+  id: "arnold-2026-short",
   title: "Five projects, one chain of checks",
   description:
-    "Private funder check-in — the stack, its feedback loops, and current progress",
+    "Private funder check-in — the conversation cut: their threads, the stack, one ask",
   date: "2026-09-01",
   footerText: "Arnold Ventures check-in · September 2026",
   partnerLogo: {
@@ -62,43 +67,38 @@ export const arnold2026Config: SlideshowConfig = {
   speakers: [speakers["max-ghenis"]],
   private: true,
   slides: [
-    // Scene-setting
+    // Their threads first
     TitleSlide,
     AgendaSlide,
-    PartnershipSlide,
-    WhoUsesSlide,
-    FundingSlide,
-    PipelineSlide,
+    DistrictSlide,
+    AiIncomeShiftSlide,
+    SocialSecuritySlide,
+    SnapQcSlide,
+    TariffSlide,
 
-    // The problem, then the stack walk: each layer lit in turn,
-    // with its live surface right after
+    // Why the stack, the stack, its checks, the ask
     ScaleSlide,
     { component: StackIntroSlide, builds: 6 },
-    StackPeSlide,
-    ScorecardLiveSlide,
-    StackAxiomSlide,
     GraphRandSlide,
+    ScorecardLiveSlide,
+    ThesisLiveSlide,
+    NextSlide,
+    QuestionsSlide,
+
+    // Appendix — pull on demand
+    AppendixDividerSlide,
+    StackPeSlide,
+    StackAxiomSlide,
     StackChronicleSlide,
     ChronicleLiveSlide,
     StackMicrocosmSlide,
     CalibrationLiveSlide,
     StackThesisSlide,
-    ThesisLiveSlide,
     StackCorollarySlide,
-
-    // Progress since we last talked
-    DistrictSlide,
-    TariffSlide,
-    SocialSecuritySlide,
-    SnapQcSlide,
-
-    // Close
-    AiIncomeShiftSlide,
-    NextSlide,
-    QuestionsSlide,
-
-    // Appendix — static fallbacks for the embeds
-    AppendixDividerSlide,
+    PartnershipSlide,
+    WhoUsesSlide,
+    FundingSlide,
+    PipelineSlide,
     GraphStaticSlide,
     CalibrationStaticSlide,
     ScorecardStaticSlide,
