@@ -3,6 +3,8 @@ import Image from '@/components/core/BasePathImage';
 import { useSlideshowContextSafe } from './SlideshowContext';
 
 export interface SlideProps {
+  /** Vertically center the content column (opt-in per deck). */
+  center?: boolean;
   children: ReactNode;
   className?: string;
   showFooter?: boolean;
@@ -15,6 +17,7 @@ export interface SlideProps {
 export default function Slide({
   children,
   className = '',
+  center = false,
   showFooter = true,
   isCover = false,
   isEnd = false,
@@ -53,7 +56,7 @@ export default function Slide({
         `}>
           <div className={`
             w-full h-full
-            ${isCover || isEnd ? 'max-w-6xl px-20 flex flex-col justify-center' : 'px-16 flex flex-col justify-center'}
+            ${isCover || isEnd ? 'max-w-6xl px-20 flex flex-col justify-center' : center ? 'px-16 flex flex-col justify-center' : 'px-16'}
           `}>
             {children}
           </div>

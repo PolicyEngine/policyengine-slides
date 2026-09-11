@@ -38,7 +38,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
 
 export default function DashboardWhatSlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
         <SlideTitle>What the dashboard does</SlideTitle>
       </SlideHeader>

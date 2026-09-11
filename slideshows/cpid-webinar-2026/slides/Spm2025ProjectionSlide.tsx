@@ -10,7 +10,7 @@ import StatNumber from '@/components/content/StatNumber';
  */
 export default function Spm2025ProjectionSlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
         <SlideTitle>Before today, the model projected 2025. Here is how it did.</SlideTitle>
       </SlideHeader>
