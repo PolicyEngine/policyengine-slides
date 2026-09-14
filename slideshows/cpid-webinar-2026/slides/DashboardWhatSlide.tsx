@@ -9,7 +9,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
     icon: IconAdjustments,
     title: 'Pick a reform',
     items: [
-      'Restore the 2021 expanded Child Tax Credit',
+      'Implement a federal proposal like the American Family Act or the Tax Cuts for Workers Act',
       'A child allowance, with age tiers and an optional income phase-out',
       'Create or modify a state CTC or EITC, across all states',
     ],
