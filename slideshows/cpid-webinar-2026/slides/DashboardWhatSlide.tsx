@@ -11,8 +11,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
     items: [
       'Restore the 2021 expanded Child Tax Credit',
       'A child allowance, with age tiers and an optional income phase-out',
-      'A state EITC match, in 40 states and DC',
-      'Modify an existing state CTC, in 14 states',
+      'Create or modify a state CTC or EITC, across all states',
     ],
   },
   {
