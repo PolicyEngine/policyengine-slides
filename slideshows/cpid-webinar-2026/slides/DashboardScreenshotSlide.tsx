@@ -27,7 +27,7 @@ export default function DashboardScreenshotSlide() {
         <div className="relative rounded-xl overflow-hidden border border-gray-200 shadow-lg">
           <Image
             src="/screenshots/cpid-webinar-2026/dashboard-results.png"
-            alt="Statewide results: New York, combined federal-state package - child poverty down 44.0%, 344,288 children lifted, \$11.30B annual cost"
+            alt="Statewide results: New York, combined federal-state package - child poverty down 44.0%, 344,288 children lifted, $11.30B annual cost"
             width={1600}
             height={970}
             className="w-auto max-h-[460px]"
@@ -35,7 +35,7 @@ export default function DashboardScreenshotSlide() {
         </div>
         <p className="mt-3 text-base text-gray-600 text-center max-w-5xl">
           New York, 2026, a combined federal-state package: child poverty
-          falls 44%, lifting 344,288 children, at \$11.3B a year across both
+          falls 44%, lifting 344,288 children, at $11.3B a year across both
           levels of government.
         </p>
       </div>
