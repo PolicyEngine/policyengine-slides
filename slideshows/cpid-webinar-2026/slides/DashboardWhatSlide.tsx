@@ -22,6 +22,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
       'Child poverty, overall and ages 0 to 3',
       'Cost to the state and federal budgets',
       'Who gains, by income decile',
+      'Impacts by congressional district',
     ],
   },
   {
