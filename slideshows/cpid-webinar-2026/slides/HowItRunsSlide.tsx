@@ -24,7 +24,7 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
     heading: 'What to expect live',
     items: [
       { text: 'Household impacts in about a minute' },
-      { text: 'Statewide impacts in a few minutes', subtext: 'Two to six for most states; the demo starts a run early' },
+      { text: 'Statewide impacts in a few minutes', subtext: 'Two to six for most states' },
       { text: 'Short shareable links for every result', subtext: 'Results cache durably, so shared links open instantly' },
       { text: 'Provision cards show only what actually changes' },
     ],
