@@ -15,13 +15,13 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
           'Child Tax Credit to $2,200, larger standard deduction, new tips and overtime deductions — largely non-refundable, so limited reach below the poverty line',
       },
       {
-        text: 'ARPA child care stabilization funding ended (late 2024)',
+        text: 'The last ARPA child care funds expired (September 2024)',
         subtext:
-          'Higher child care costs subtract from SPM resources for working families',
+          'Stabilization grants ended in 2023; the supplemental CCDF money ran out September 2024 — and child care costs subtract from SPM resources',
       },
       {
         text: 'Summer EBT ran its second summer',
-        subtext: 'More states participating in 2025 than at its 2024 launch',
+        subtext: 'Alabama and Utah joined the 37 states from the 2024 launch',
       },
     ],
   },
