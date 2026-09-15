@@ -17,9 +17,6 @@ function RemarksSlide({ speaker, prompt }: { speaker: SpeakerInfo; prompt: strin
         </div>
         <div className="content-card px-8 py-6">
           <p className="text-2xl text-gray-700 leading-relaxed">{prompt}</p>
-          <p className="mt-4 text-base text-gray-400">
-            Placeholder. Guests speak without slides unless they send some; swap this card for theirs if they do.
-          </p>
         </div>
       </div>
     </Slide>

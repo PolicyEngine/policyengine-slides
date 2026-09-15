@@ -69,10 +69,6 @@ export default function PolicyShifts2025Slide() {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-base text-gray-500">
-        Candidate drivers, not attribution: the measured change reflects all
-        of these plus the labor market.
-      </p>
     </Slide>
   );
 }
