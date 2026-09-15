@@ -41,4 +41,14 @@ export const speakers: Record<string, SpeakerInfo> = {
     title: 'PolicyEngine',
     photo: '/headshots/maria-juaristi.png',
   },
+  'cynthia-osborne': {
+    name: 'Cynthia Osborne',
+    title: 'Executive Director, Prenatal-to-3 Policy Impact Center;\nProfessor, Vanderbilt University',
+    photo: '/headshots/cynthia-osborne.jpg',
+  },
+  'joshua-mccabe': {
+    name: 'Joshua McCabe',
+    title: 'Director of Social Policy, Niskanen Center',
+    photo: '/headshots/joshua-mccabe.jpg',
+  },
 };

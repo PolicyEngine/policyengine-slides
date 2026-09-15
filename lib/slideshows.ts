@@ -22,8 +22,10 @@ import { l0Ima2026Config } from "@/slideshows/l0-ima-2026/config";
 import { iariw2026Config } from "@/slideshows/iariw-2026/config";
 import { gettsim2026Config } from "@/slideshows/gettsim-2026/config";
 import { arnold2026Config } from "@/slideshows/arnold-2026/config";
+import { cpidWebinar2026Config } from "@/slideshows/cpid-webinar-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  cpidWebinar2026Config,
   gettsim2026Config,
   arnold2026Config,
   iariw2026Config,
