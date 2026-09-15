@@ -14,7 +14,7 @@ export default function Spm2025ProjectionSlide() {
       </SlideHeader>
       <div className="mt-10 grid grid-cols-3 gap-6 items-stretch">
         <StatNumber value="14.4%" label="PolicyEngine projection, SPM child poverty 2025" sublabel="A projected 0.9-point rise from 2024's 13.5%" />
-        <StatNumber value="13.4%" label="Census, SPM child poverty 2025" sublabel="Published this morning — statistically unchanged from 2024" />
+        <StatNumber value="13.4%" label="Census, SPM child poverty 2025" sublabel="Published this morning — down 0.1 points from 2024" />
         <StatNumber value="+1.0 pp" label="Difference" sublabel="Projection minus actual" />
       </div>
       <div className="mt-8 content-card px-8 py-5">
