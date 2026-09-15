@@ -7,10 +7,13 @@ import SlideTitle from '@/components/layout/SlideTitle';
  * 1:50 pm). Census: P60-290 (13.1% all people, 13.4% under 18). PolicyEngine:
  * policyengine-us 2.2.1 on the certified Microcosm 2024 population projected to 2025,
  * receipt rollout/fable-continuation-20260911/out/spm-change-2024-2025-pe-us-2.2.1.json
- * (13.235% all people, 16.567% under 18). The differences listed are the ones the model's
- * construction implies (rules-computed benefits, recalibrated weights, a 2024 population
- * aged to 2025) plus the CPS under-reporting literature (Meyer, Mok and Sullivan 2015 on
- * transfers; Bee and Mitchell 2017 on retirement income). No decomposition is claimed.
+ * (13.235% all people, 16.567% under 18). Under-reporting figures, all read today: Rothbaum,
+ * SEHSD-WP2015-01, CPS ASEC / NIPA ratios 2007-2012, unemployment compensation 67.8, 77.2,
+ * 76.4, 70.6, 65.4, 66.0 percent and pensions 69.9, 73.8, 69.7, 71.4, 73.7, 68.3 percent;
+ * Meyer and Mittag (NBER w21676 abstract): CPS misses 40 percent of food stamp recipients,
+ * over one-third of housing assistance recipients, 60 percent of TANF/GA recipients; Bee and
+ * Mitchell (SEHSD-WP2017-39 abstract): 65+ median income $44,400 in administrative records vs
+ * $33,800 in the CPS ASEC, 65+ poverty 6.9 vs 9.1 percent. No decomposition is claimed.
  */
 const rows: { group: string; census: string; pe: string }[] = [
   { group: 'All people', census: '13.1%', pe: '13.2%' },
@@ -20,7 +23,8 @@ const rows: { group: string; census: string; pe: string }[] = [
 const reasons: string[] = [
   'Benefits are computed from program rules for eligible units (SNAP, SSI, WIC, school meals, housing assistance) rather than taken from what respondents report',
   'Weights are recalibrated to administrative totals from the IRS, SSA, SNAP and Medicaid; poverty rates are never a target',
-  'The CPS under-reports transfer and retirement income, with SNAP, unemployment insurance and pension income the most cited gaps',
+  'The CPS under-reports transfer and retirement income: against national accounts it captured 65 to 77 percent of unemployment insurance dollars and 68 to 74 percent of pension income over 2007 to 2012 (Rothbaum, Census 2015)',
+  'Linked to administrative records, the CPS misses 40 percent of SNAP recipients (Meyer and Mittag), and median income of people 65 and over is 30 percent higher in tax records than in the survey, mostly under-reported pensions and retirement withdrawals (Bee and Mitchell, Census 2017)',
   'The 2025 baseline is the 2024 population aged forward, not a 2025 survey',
 ];
 
