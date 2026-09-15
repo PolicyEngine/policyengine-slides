@@ -14,8 +14,8 @@ import StatNumber from '@/components/content/StatNumber';
  * (pe-us 1.764.6, CPI-aged thresholds) would have said 12.5 / 13.2 / 13.9; BLS's 2025
  * thresholds rose 4.4-6.3% against 2.6% CPI-U, and that gap is most of the difference.
  *
- * [fill] at 10am: the Census 2025 SPM child rate and the difference (prediction minus
- * published), from "Poverty in the United States: 2025".
+ * Filled 10:15 am: Census 2025 SPM child 13.4%, change -0.1 pp on the report's re-based 2024 (13.5%,
+ * Vintage 2025 population controls; the registration used the corrected-series 13.4%). Gap = +1.0 pp.
  */
 export default function Spm2025ProjectionSlide() {
   return (
@@ -32,7 +32,7 @@ export default function Spm2025ProjectionSlide() {
         <StatNumber
           value="−0.1 pp"
           label="Census change in SPM child poverty, 2024 to 2025"
-          sublabel="13.4% to 13.4%, published at 10 am"
+          sublabel="13.5% to 13.4% on the report's re-based 2024, published at 10 am"
         />
         <StatNumber
           value="+1.0 pp"
