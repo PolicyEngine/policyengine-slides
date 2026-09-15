@@ -17,6 +17,11 @@ const organizations: { name: string; logo: string; smaller?: boolean }[] = [
   { name: 'Amplifi', logo: '/logos/organizations/amplifi.png' },
   { name: 'Mirza', logo: '/logos/organizations/mirza.png' },
   { name: 'Starlight', logo: '/logos/organizations/starlight.png' },
+  { name: 'Niskanen Center', logo: '/logos/organizations/niskanen-center.png' },
+  { name: 'Prenatal-to-3 Policy Impact Center', logo: '/logos/organizations/pn3policy.png' },
+  { name: 'Brookings', logo: '/logos/organizations/brookings.svg' },
+  { name: 'AEI', logo: '/logos/organizations/aei.png' },
+  { name: 'Committee for a Responsible Federal Budget', logo: '/logos/organizations/crfb.png' },
 ];
 
 export default function WhoUsesItSlide() {
@@ -26,7 +31,7 @@ export default function WhoUsesItSlide() {
         <SlideTitle>Researchers and developers build with these rules</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-5 gap-x-10 gap-y-14 w-full px-10">
+      <div className="mt-8 grid grid-cols-5 gap-x-10 gap-y-10 w-full px-10">
         {organizations.map((org) => (
           <div
             key={org.name}
