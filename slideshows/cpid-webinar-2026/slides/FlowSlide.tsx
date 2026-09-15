@@ -3,7 +3,7 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
 const flow: { minutes: string; what: string; who: string }[] = [
-  { minutes: '10 min', what: 'Welcome, the new Census numbers, and the SPM calculator', who: 'Max Ghenis' },
+  { minutes: '10 min', what: 'Welcome, the new Census numbers, and the SPM threshold calculator', who: 'Max Ghenis' },
   { minutes: '10 min', what: 'Remarks from guest speakers', who: 'Cynthia Osborne and Joshua McCabe' },
   { minutes: '5 min', what: 'PolicyEngine and microsimulation', who: 'Max Ghenis' },
   { minutes: '20 min', what: 'Child Poverty Impact Dashboard: live demo', who: 'David Trimmer' },
