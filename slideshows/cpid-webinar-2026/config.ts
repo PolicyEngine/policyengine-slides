@@ -7,6 +7,7 @@ import FlowSlide from './slides/FlowSlide';
 import WhyTodaySlide from './slides/WhyTodaySlide';
 import PolicyShifts2025Slide from './slides/PolicyShifts2025Slide';
 import BaselineVsCensusSlide from './slides/BaselineVsCensusSlide';
+import StateChildPovertyMapSlide from './slides/StateChildPovertyMapSlide';
 import { CynthiaRemarksSlide, JoshRemarksSlide } from './slides/GuestRemarksSlides';
 import { MicrosimulationDividerSlide, DashboardDividerSlide, LookingAheadDividerSlide } from './slides/SectionDividers';
 import OpmVsSpmSlide from './slides/OpmVsSpmSlide';
@@ -58,6 +59,7 @@ export const cpidWebinar2026Config: SlideshowConfig = {
     WhatIsPESlide,
     WhoUsesItSlide,
     BaselineVsCensusSlide,
+    StateChildPovertyMapSlide,
     DashboardDividerSlide,
     DashboardWhatSlide,
     DashboardLiveSlide,
