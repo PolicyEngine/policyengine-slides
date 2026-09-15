@@ -16,6 +16,7 @@ import SlideTitle from '@/components/layout/SlideTitle';
 const rows: { group: string; r2024: string; r2025: string; change: string; anchored: string; anchoredChange: string; effect: string }[] = [
   { group: 'All people', r2024: '13.0', r2025: '13.1', change: '+0.1', anchored: '12.3', anchoredChange: '−0.7', effect: '+0.8' },
   { group: 'Under 18', r2024: '13.5', r2025: '13.4', change: '−0.1', anchored: '12.3', anchoredChange: '−1.2', effect: '+1.1' },
+  { group: '18 to 64', r2024: '12.2', r2025: '12.3', change: '0.0', anchored: '11.5', anchoredChange: '−0.7', effect: '+0.7' },
   { group: '65 and over', r2024: '15.1', r2025: '15.4', change: '+0.2', anchored: '14.7', anchoredChange: '−0.4', effect: '+0.7' },
 ];
 
