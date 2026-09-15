@@ -28,7 +28,7 @@ export default function SpmComponentsSlide() {
   return (
     <Slide center>
       <SlideHeader>
-        <SlideTitle>What goes into SPM resources</SlideTitle>
+        <SlideTitle>SPM resources: what counts</SlideTitle>
       </SlideHeader>
       <div className="mt-4 content-card overflow-hidden">
         <table className="w-full text-left">
