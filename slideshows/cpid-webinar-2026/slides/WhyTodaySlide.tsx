@@ -21,14 +21,14 @@ export default function WhyTodaySlide() {
         <SlideTitle>This morning at 10 am, the Census Bureau published the 2025 numbers</SlideTitle>
       </SlideHeader>
       <div className="mt-8 grid grid-cols-3 gap-6">
-        <StatNumber value="[fill]%" label="Official child poverty rate, 2025" sublabel="2024: 14.3%" />
-        <StatNumber value="[fill]%" label="SPM child poverty rate, 2025" sublabel="2024: 13.4%" />
+        <StatNumber value="13.4%" label="Official child poverty rate, 2025" sublabel="2024: 14.3%, down 1.0 pp" />
+        <StatNumber value="13.4%" label="SPM child poverty rate, 2025" sublabel="2024: 13.4%, down 0.1 pp" />
         <StatNumber value="[fill]M" label="Children below the SPM threshold, 2025" sublabel="2024: 9.8M" />
       </div>
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
-          Source: U.S. Census Bureau, <em>Poverty in the United States: 2025</em>, released September 15, 2026.
-          One line on what moved goes here after the release.
+          Source: U.S. Census Bureau, <em>Poverty in the United States: 2025</em> (P60-290), released September 15, 2026.
+          Official child poverty fell 1.0 point to 13.4%. SPM child poverty was 13.4%, down 0.1. The SPM rate for all people rose 0.1 to 13.1%, and for people 65 and over rose 0.2 to 15.4%.
         </p>
       </div>
     </Slide>

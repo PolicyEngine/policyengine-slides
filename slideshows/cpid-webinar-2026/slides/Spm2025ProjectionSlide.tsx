@@ -30,21 +30,22 @@ export default function Spm2025ProjectionSlide() {
           sublabel="Registered September 11: 13.4% to 14.3%"
         />
         <StatNumber
-          value="[fill] pp"
+          value="−0.1 pp"
           label="Census change in SPM child poverty, 2024 to 2025"
-          sublabel="13.4% to [fill]%, published at 10 am"
+          sublabel="13.4% to 13.4%, published at 10 am"
         />
         <StatNumber
-          value="[fill] pp"
+          value="+1.0 pp"
           label="Registered minus published"
-          sublabel="Also on record: all people +0.2 pp, age 65 and over −0.5 pp; the prior model had children at −0.2 pp"
+          sublabel="All people: registered +0.2, Census +0.1. Age 65 and over: registered −0.5, Census +0.2. The prior model had children at −0.2."
         />
       </div>
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
           The model&apos;s own poverty level is held out from calibration and sits above the Census level, so the
-          registered prediction is the modeled 2024 to 2025 change, added to the published 2024 rate. The prediction file, its
-          hash and an OpenTimestamps proof are public. If it misses, it stays there.
+          registered prediction is the modeled 2024 to 2025 change, added to the published 2024 rate. The child change missed by a point; the prior model, still on
+          policyengine.org, was within 0.1. On all people and on seniors the registered changes were closer. The prediction file,
+          its hash and an OpenTimestamps proof are public, and the miss stays there.
         </p>
       </div>
     </Slide>
