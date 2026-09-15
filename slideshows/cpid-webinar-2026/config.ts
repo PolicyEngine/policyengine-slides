@@ -5,6 +5,7 @@ import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import CoverSlide from './slides/CoverSlide';
 import FlowSlide from './slides/FlowSlide';
 import WhyTodaySlide from './slides/WhyTodaySlide';
+import PolicyShifts2025Slide from './slides/PolicyShifts2025Slide';
 import { CynthiaRemarksSlide, JoshRemarksSlide } from './slides/GuestRemarksSlides';
 import { MicrosimulationDividerSlide, DashboardDividerSlide, LookingAheadDividerSlide } from './slides/SectionDividers';
 import OpmVsSpmSlide from './slides/OpmVsSpmSlide';
@@ -42,6 +43,7 @@ export const cpidWebinar2026Config: SlideshowConfig = {
     CoverSlide,
     FlowSlide,
     WhyTodaySlide,
+    PolicyShifts2025Slide,
     Spm2025ProjectionSlide,
     CynthiaRemarksSlide,
     JoshRemarksSlide,
