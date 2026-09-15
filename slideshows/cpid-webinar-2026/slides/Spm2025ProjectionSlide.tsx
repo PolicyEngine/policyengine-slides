@@ -4,47 +4,47 @@ import SlideTitle from '@/components/layout/SlideTitle';
 import StatNumber from '@/components/content/StatNumber';
 
 /**
- * PolicyEngine's projection was recorded before the release from the production API,
- * https://api.policyengine.org/us/economy/2/over/2?region=us&time_period=2025 (and 2024),
- * pulled September 15, 2026 at 01:48 ET: model_version 1.764.6, data_version
- * populace-us-2024-buildp-sparse-rmloss100-cae8640-20260728T011454Z.
- * SPM child poverty: 2024 16.97%, 2025 16.73%, change -0.24 pp.
+ * The prediction on this slide is the one PolicyEngine registered on September 11, 2026:
+ * spm-threshold-paper repo, data/predictions/2025-spm-poverty-rates-2026-09-11.json
+ * (+ .ots OpenTimestamps proof + SHA256SUMS). Method per that file: Census 2024 SPM rate
+ * (corrected series, SEHSD-WP2026-17) plus the canonical model's 2024-to-2025 change.
+ *   all 13.0 + 0.22 = 13.2 | under 18 13.4 + 0.86 = 14.3 | 65+ 15.1 - 0.52 = 14.6
+ * Model levels are held out from calibration, so only the change is used.
+ * For the talk track (in the file, not on the slide): the legacy production model
+ * (pe-us 1.764.6, CPI-aged thresholds) would have said 12.5 / 13.2 / 13.9; BLS's 2025
+ * thresholds rose 4.4-6.3% against 2.6% CPI-U, and that gap is most of the difference.
  *
- * The comparison is the year-over-year change, not the level. The model's level sits
- * above the Census level in 2024 as well (16.97% against 13.4%), and official rates are
- * comparators, never targets.
- *
- * [fill] at 10am: the Census 2025 SPM child rate, its change from the corrected 2024 base
- * (13.4%, SEHSD-WP2026-17 Table 3), and the gap between the two changes.
+ * [fill] at 10am: the Census 2025 SPM child rate and the difference (prediction minus
+ * published), from "Poverty in the United States: 2025".
  */
 export default function Spm2025ProjectionSlide() {
   return (
     <Slide center>
       <SlideHeader>
-        <SlideTitle>Before today, the model projected 2025. Here is how it compares.</SlideTitle>
+        <SlideTitle>Before today, PolicyEngine registered a 2025 prediction. Here is how it compares.</SlideTitle>
       </SlideHeader>
       <div className="mt-10 grid grid-cols-3 gap-6 items-stretch">
         <StatNumber
-          value="−0.2 pp"
-          label="PolicyEngine projected change in SPM child poverty, 2024 to 2025"
-          sublabel="16.97% to 16.73%, production API, pulled this morning at 1:48 am ET"
+          value="14.3%"
+          label="PolicyEngine prediction, SPM child poverty 2025"
+          sublabel="Registered September 11: the Census 2024 rate of 13.4% plus the model's projected change of +0.9 pp"
+        />
+        <StatNumber
+          value="[fill]%"
+          label="Census, SPM child poverty 2025"
+          sublabel="Published at 10 am; 2024: 13.4%"
         />
         <StatNumber
           value="[fill] pp"
-          label="Census change in SPM child poverty, 2024 to 2025"
-          sublabel="13.4% to [fill]%, published at 10 am"
-        />
-        <StatNumber
-          value="[fill] pp"
-          label="Gap between the two changes"
-          sublabel="Projected change minus published change"
+          label="Prediction minus published"
+          sublabel="Also on record: 13.2% for all people, 14.6% for people 65 and over"
         />
       </div>
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
-          The comparison is the change, not the level: the model&apos;s 2024 rate was 17.0% against the Census
-          13.4%. Official numbers are the comparator, not the target, and the projection is checked against them
-          the day they come out.
+          The model&apos;s own poverty level is held out from calibration and sits above the Census level, so the
+          prediction adds the modeled 2024 to 2025 change to the published 2024 rate. The prediction file, its
+          hash and an OpenTimestamps proof are public. If it misses, it stays there.
         </p>
       </div>
     </Slide>
