@@ -25,12 +25,13 @@ export default function BaselineVsCensusSlide() {
         />
         <StatNumber
           value="+2.4%"
-          label="Median state EITC cost vs. IRS totals"
-          sublabel="Federal credits calibrated to administrative data by state"
+          label="Median state EITC cost vs. official state figures"
+          sublabel="23 of 29 states within ±25%"
         />
       </div>
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
+          Federal credits are calibrated to administrative data by state.
           The model&apos;s poverty level is held out from calibration, so the
           dashboard reports each reform as a change against its own
           baseline, and the baseline is compared with the official numbers

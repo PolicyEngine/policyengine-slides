@@ -19,10 +19,6 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
         subtext:
           'Stabilization grants ended in 2023; the supplemental CCDF money ran out September 2024, and child care costs subtract from SPM resources',
       },
-      {
-        text: 'Summer EBT ran its second summer',
-        subtext: 'Alabama and Utah joined the 37 states from the 2024 launch',
-      },
     ],
   },
   {
@@ -38,7 +34,7 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
       },
       {
         text: "Colorado's Family Affordability Credit ramped up",
-        subtext: 'First claimed on 2024 returns, paid out during 2025',
+        subtext: 'In its second year for tax year 2025',
       },
       {
         text: 'Minimum wage increases in over 20 states in January 2025',
