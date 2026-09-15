@@ -11,6 +11,7 @@ import { CynthiaRemarksSlide, JoshRemarksSlide } from './slides/GuestRemarksSlid
 import { MicrosimulationDividerSlide, DashboardDividerSlide, LookingAheadDividerSlide } from './slides/SectionDividers';
 import OpmVsSpmSlide from './slides/OpmVsSpmSlide';
 import SpmComponentsSlide from './slides/SpmComponentsSlide';
+import AnchoredThresholdsSlide from './slides/AnchoredThresholdsSlide';
 import DashboardWhatSlide from './slides/DashboardWhatSlide';
 import DashboardLiveSlide from './slides/DashboardLiveSlide';
 import DashboardScreenshotSlide from './slides/DashboardScreenshotSlide';
@@ -45,6 +46,7 @@ export const cpidWebinar2026Config: SlideshowConfig = {
     WhyTodaySlide,
     OpmVsSpmSlide,
     SpmComponentsSlide,
+    AnchoredThresholdsSlide,
     PolicyShifts2025Slide,
     CynthiaRemarksSlide,
     JoshRemarksSlide,
