@@ -26,8 +26,8 @@ const pillars: { icon: Icon; color: string; title: string; items: string[] }[] =
       color: "var(--pe-teal-dark)",
       title: "Households",
       items: [
-        "Census survey foundation",
-        "Enhanced with IRS, ACS, SCF data",
+        "CPS and ACS survey foundation",
+        "Enhanced with IRS and SCF data",
         "Calibrated to official totals",
         "Or enter any household yourself",
       ],
