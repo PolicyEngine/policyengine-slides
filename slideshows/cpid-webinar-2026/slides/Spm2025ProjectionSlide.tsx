@@ -12,7 +12,7 @@ import StatNumber from '@/components/content/StatNumber';
  * Model levels are held out from calibration, so only the change is used.
  * For the talk track (in the file, not on the slide): the legacy production model
  * (pe-us 1.764.6, CPI-aged thresholds) would have said 12.5 / 13.2 / 13.9; BLS's 2025
- * thresholds rose 4.4-6.3% against 2.6% CPI-U, and that gap is most of the difference.
+ * thresholds rose 4.4-6.3% against 2.6% CPI-U, the largest single change between the two runs.
  *
  * Filled 10:15 am: Census 2025 SPM child 13.4%, change -0.1 pp on the report's re-based 2024 (13.5%,
  * Vintage 2025 population controls; the registration used the corrected-series 13.4%). Gap = +1.0 pp.
