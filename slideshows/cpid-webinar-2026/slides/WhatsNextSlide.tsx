@@ -15,7 +15,7 @@ const items: { icon: Icon; title: string; text: string }[] = [
 
 export default function WhatsNextSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Where this goes next</SlideTitle>
       </SlideHeader>

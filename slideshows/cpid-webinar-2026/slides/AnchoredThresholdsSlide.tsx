@@ -22,7 +22,7 @@ const rows: { group: string; r2024: string; r2025: string; change: string; ancho
 
 export default function AnchoredThresholdsSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Hold the thresholds at 2024, and SPM poverty fell</SlideTitle>
       </SlideHeader>

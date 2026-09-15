@@ -33,7 +33,7 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
 
 export default function HowItRunsSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>How an estimate gets made</SlideTitle>
       </SlideHeader>

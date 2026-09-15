@@ -22,7 +22,7 @@ const steps: { step: string; detail: string }[] = [
 
 export default function SpmThresholdsSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>SPM thresholds: how they are defined</SlideTitle>
       </SlideHeader>

@@ -29,7 +29,7 @@ const columns: { title: string; tone: string; rows: string[] }[] = [
 
 export default function OpmVsSpmSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Two poverty measures</SlideTitle>
       </SlideHeader>

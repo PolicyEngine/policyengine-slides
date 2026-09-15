@@ -26,7 +26,7 @@ const rows: { component: string; items: string }[] = [
 
 export default function SpmComponentsSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>SPM resources: what counts</SlideTitle>
       </SlideHeader>

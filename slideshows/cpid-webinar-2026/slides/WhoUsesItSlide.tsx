@@ -21,7 +21,7 @@ const organizations: { name: string; logo: string; smaller?: boolean }[] = [
 
 export default function WhoUsesItSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Researchers and developers build with these rules</SlideTitle>
       </SlideHeader>

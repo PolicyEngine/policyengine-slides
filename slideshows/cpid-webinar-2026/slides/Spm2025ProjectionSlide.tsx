@@ -19,7 +19,7 @@ import StatNumber from '@/components/content/StatNumber';
  */
 export default function Spm2025ProjectionSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Before today, PolicyEngine registered a 2025 prediction. Here is how it compares.</SlideTitle>
       </SlideHeader>

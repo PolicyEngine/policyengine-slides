@@ -47,7 +47,7 @@ const pillars: { icon: Icon; color: string; title: string; items: string[] }[] =
 
 export default function WhatIsPESlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>PolicyEngine: free, open-source microsimulation</SlideTitle>
       </SlideHeader>

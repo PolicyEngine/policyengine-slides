@@ -14,7 +14,7 @@ import { DASHBOARD_DISPLAY_URL } from '../dashboardUrl';
  * centering to fit 720p without spilling past the footer. */
 export default function DashboardScreenshotSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <div className="flex items-baseline justify-between">
           <SlideTitle>A finished statewide run</SlideTitle>

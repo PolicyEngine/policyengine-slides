@@ -26,7 +26,7 @@ const reasons: string[] = [
 
 export default function BaselineVsCensusSlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>PolicyEngine&apos;s 2025 baseline against the raw CPS</SlideTitle>
       </SlideHeader>

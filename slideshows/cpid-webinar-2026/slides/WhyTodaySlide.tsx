@@ -13,7 +13,7 @@ import StatNumber from '@/components/content/StatNumber';
  */
 export default function WhyTodaySlide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>This morning at 10 am, the Census Bureau published the 2025 numbers</SlideTitle>
       </SlideHeader>

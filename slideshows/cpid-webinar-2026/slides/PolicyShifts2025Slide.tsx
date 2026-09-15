@@ -45,7 +45,7 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
 
 export default function PolicyShifts2025Slide() {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>What changed between 2024 and 2025</SlideTitle>
       </SlideHeader>

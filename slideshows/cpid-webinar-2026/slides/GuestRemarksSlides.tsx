@@ -7,7 +7,7 @@ import { SpeakerInfo } from '@/lib/types';
 
 function RemarksSlide({ speaker, prompt }: { speaker: SpeakerInfo; prompt: string }) {
   return (
-    <Slide center>
+    <Slide>
       <SlideHeader>
         <SlideTitle>Remarks: {speaker.name}</SlideTitle>
       </SlideHeader>
