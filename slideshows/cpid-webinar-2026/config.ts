@@ -23,7 +23,7 @@ import EndSlide from './slides/EndSlide';
  * Skeleton for the September 15, 2026 launch webinar. Flow agreed at the
  * September 11 stand-up: Max welcome → Cynthia and Josh remarks →
  * PolicyEngine and microsimulation overview → David's dashboard demo.
- * Bracketed [fill] text marks numbers that land the morning of the webinar.
+ * Census 2025 numbers were filled the morning of the webinar from P60-290.
  */
 export const cpidWebinar2026Config: SlideshowConfig = {
   id: 'cpid-webinar-2026',
@@ -45,13 +45,14 @@ export const cpidWebinar2026Config: SlideshowConfig = {
     OpmVsSpmSlide,
     SpmComponentsSlide,
     WhyTodaySlide,
-    PolicyShifts2025Slide,
+    Spm2025ProjectionSlide,
     CynthiaRemarksSlide,
     JoshRemarksSlide,
     MicrosimulationDividerSlide,
     WhatIsPESlide,
     WhoUsesItSlide,
-    Spm2025ProjectionSlide,
+    OpmVsSpmSlide,
+    SpmComponentsSlide,
     DashboardDividerSlide,
     DashboardWhatSlide,
     DashboardLiveSlide,

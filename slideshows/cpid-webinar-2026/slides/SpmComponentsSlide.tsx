@@ -51,7 +51,8 @@ export default function SpmComponentsSlide() {
         </table>
       </div>
       <p className="mt-3 text-sm text-gray-500">
-        Resources minus the SPM threshold decides whether a household counts as poor. The threshold varies with housing tenure and local costs.
+        Resources minus the SPM threshold decides whether a household counts as poor. The threshold varies with housing tenure and local costs;
+        PolicyEngine computes it with spm-calculator, open source at policyengine.org/us/spm-calculator.
       </p>
     </Slide>
   );
