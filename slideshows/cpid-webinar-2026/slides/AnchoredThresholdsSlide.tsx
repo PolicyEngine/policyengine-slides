@@ -26,8 +26,8 @@ export default function AnchoredThresholdsSlide() {
         <SlideTitle>Hold the thresholds at 2024, and SPM poverty fell</SlideTitle>
       </SlideHeader>
       <p className="mt-2 text-lg text-gray-700">
-        BLS&apos;s 2025 thresholds rose 6.3% for renters, 5.3% for owners with a mortgage, and 4.4% for owners without, against 2.6% CPI-U.
-        The same households, measured against 2024 thresholds plus inflation:
+        BLS&apos;s 2025 thresholds rose 6.3% for renters, 5.3% for owners with a mortgage, and 4.4% for owners without. Prices rose 2.63%
+        on CPI-U and 2.48% on chained CPI (2024 to 2025 annual averages). The same households, measured against 2024 thresholds plus CPI-U:
       </p>
       <div className="mt-4 content-card overflow-hidden">
         <table className="w-full text-left">
@@ -59,8 +59,9 @@ export default function AnchoredThresholdsSlide() {
       </div>
       <p className="mt-3 text-sm text-gray-500">
         Recomputed from the public 2026 CPS ASEC file with national thresholds held at their 2024 values plus CPI-U; equivalence
-        scale and geographic adjustment as published. Renters: 24.0% published, 22.1% at 2024 thresholds. Columns may not add
-        due to rounding. The official measure, whose thresholds move with CPI-U, fell 1.0 point for children.
+        scale and geographic adjustment as published. Anchoring with chained CPI instead gives 12.3, 12.3 and 14.6. Renters: 24.0%
+        published, 22.1% at 2024 thresholds. Columns may not add due to rounding. The official measure, whose thresholds move with
+        CPI-U, fell 1.0 point for children.
       </p>
     </Slide>
   );
