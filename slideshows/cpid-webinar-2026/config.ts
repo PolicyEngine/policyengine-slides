@@ -6,11 +6,11 @@ import CoverSlide from './slides/CoverSlide';
 import FlowSlide from './slides/FlowSlide';
 import WhyTodaySlide from './slides/WhyTodaySlide';
 import PolicyShifts2025Slide from './slides/PolicyShifts2025Slide';
+import BaselineVsCensusSlide from './slides/BaselineVsCensusSlide';
 import { CynthiaRemarksSlide, JoshRemarksSlide } from './slides/GuestRemarksSlides';
 import { MicrosimulationDividerSlide, DashboardDividerSlide, LookingAheadDividerSlide } from './slides/SectionDividers';
 import OpmVsSpmSlide from './slides/OpmVsSpmSlide';
 import SpmComponentsSlide from './slides/SpmComponentsSlide';
-import Spm2025ProjectionSlide from './slides/Spm2025ProjectionSlide';
 import DashboardWhatSlide from './slides/DashboardWhatSlide';
 import DashboardLiveSlide from './slides/DashboardLiveSlide';
 import DashboardScreenshotSlide from './slides/DashboardScreenshotSlide';
@@ -43,15 +43,15 @@ export const cpidWebinar2026Config: SlideshowConfig = {
     CoverSlide,
     FlowSlide,
     WhyTodaySlide,
+    OpmVsSpmSlide,
+    SpmComponentsSlide,
     PolicyShifts2025Slide,
-    Spm2025ProjectionSlide,
     CynthiaRemarksSlide,
     JoshRemarksSlide,
     MicrosimulationDividerSlide,
     WhatIsPESlide,
     WhoUsesItSlide,
-    OpmVsSpmSlide,
-    SpmComponentsSlide,
+    BaselineVsCensusSlide,
     DashboardDividerSlide,
     DashboardWhatSlide,
     DashboardLiveSlide,
