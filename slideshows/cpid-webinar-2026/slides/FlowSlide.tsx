@@ -26,7 +26,8 @@ export default function FlowSlide() {
         ))}
       </div>
       <p className="mt-6 text-base text-gray-500">
-        Recording and slides go to everyone who registered.
+        The Child Poverty Impact Dashboard was commissioned by the
+        Pritzker Children&apos;s Initiative.
       </p>
     </Slide>
   );
