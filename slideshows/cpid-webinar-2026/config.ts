@@ -1,7 +1,7 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
-import WhatIsPESlide from '@/slideshows/civic-builders-2026/slides/WhatIsPESlide';
-import WhoUsesItSlide from '@/slideshows/cbo-2026/slides/WhoUsesItSlide';
+import WhatIsPESlide from './slides/WhatIsPESlide';
+import WhoUsesItSlide from './slides/WhoUsesItSlide';
 import CoverSlide from './slides/CoverSlide';
 import FlowSlide from './slides/FlowSlide';
 import WhyTodaySlide from './slides/WhyTodaySlide';

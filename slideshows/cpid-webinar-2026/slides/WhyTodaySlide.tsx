@@ -10,9 +10,9 @@ import StatNumber from '@/components/content/StatNumber';
  */
 export default function WhyTodaySlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
-        <SlideTitle>This morning at 10, the Census Bureau published the 2025 numbers</SlideTitle>
+        <SlideTitle>This morning at 10 am, the Census Bureau published the 2025 numbers</SlideTitle>
       </SlideHeader>
       <div className="mt-8 grid grid-cols-3 gap-6">
         <StatNumber value="[fill]%" label="Official child poverty rate, 2025" sublabel="2024: [fill]%" />

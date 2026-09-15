@@ -9,10 +9,9 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
     icon: IconAdjustments,
     title: 'Pick a reform',
     items: [
-      'Restore the 2021 expanded Child Tax Credit',
+      'Implement a federal proposal like the American Family Act or the Tax Cuts for Workers Act',
       'A child allowance, with age tiers and an optional income phase-out',
-      'A state EITC match, in 40 states and DC',
-      'Modify an existing state CTC, in 14 states',
+      'Create or modify a state CTC or EITC, across all states',
     ],
   },
   {
@@ -22,7 +21,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
       'Child poverty, overall and ages 0 to 3',
       'Cost to the state and federal budgets',
       'Who gains, by income decile',
-      'Any state, or all states side by side',
+      'Impacts by congressional district',
     ],
   },
   {
@@ -38,7 +37,7 @@ const cards: { icon: Icon; title: string; items: string[] }[] = [
 
 export default function DashboardWhatSlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
         <SlideTitle>What the dashboard does</SlideTitle>
       </SlideHeader>

@@ -12,7 +12,7 @@ const flow: { minutes: string; what: string; who: string }[] = [
 
 export default function FlowSlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
         <SlideTitle>The next hour</SlideTitle>
       </SlideHeader>

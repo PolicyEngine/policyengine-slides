@@ -3,17 +3,19 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { IconMap2, IconStack2, IconGavel, IconCalendarTime, type Icon } from '@tabler/icons-react';
 
-/** Directions raised at the September 11 stand-up. Trim to what the team is willing to say out loud. */
+/** Trimmed 9/11 (David): SNAP dropped (already a dashboard option) and the
+ * years card refocused (2026-2028 already selectable); each card is
+ * something we are actively willing to commit to out loud. */
 const items: { icon: Icon; title: string; text: string }[] = [
-  { icon: IconMap2, title: 'More levels of government', text: 'Federal proposals alongside state ones; city and county reforms where the data supports it' },
-  { icon: IconStack2, title: 'More programs', text: 'TANF, CCDF child care subsidies, SNAP, Medicaid and CHIP, LIHEAP' },
+  { icon: IconMap2, title: 'More levels of government', text: 'City and county reforms where the data supports it' },
+  { icon: IconStack2, title: 'More programs', text: 'TANF, CCDF child care subsidies, and LIHEAP as adjustable reform levers' },
   { icon: IconGavel, title: 'Bills, not just parameters', text: 'Score reforms as they appear in state legislative bill trackers' },
-  { icon: IconCalendarTime, title: 'More years', text: 'Project 2026, 2027, and 2028 as the baseline moves' },
+  { icon: IconCalendarTime, title: 'Baselines that keep up', text: 'Refresh as new Census data lands and state sessions change the law' },
 ];
 
 export default function WhatsNextSlide() {
   return (
-    <Slide>
+    <Slide center>
       <SlideHeader>
         <SlideTitle>Where this goes next</SlideTitle>
       </SlideHeader>

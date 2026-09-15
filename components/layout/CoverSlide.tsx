@@ -11,6 +11,8 @@ interface CoverSlideProps {
   speakers?: SpeakerInfo[];
   event?: string;
   date?: string;
+  /** Extra classes on the content column (e.g. pt-* to clear the logo). */
+  contentClassName?: string;
 }
 
 export default function CoverSlide({
@@ -19,6 +21,7 @@ export default function CoverSlide({
   speakers,
   event,
   date,
+  contentClassName = '',
 }: CoverSlideProps) {
   const ctx = useSlideshowContextSafe();
   const resolvedTitle = title ?? ctx?.title ?? '';
@@ -27,7 +30,7 @@ export default function CoverSlide({
 
   return (
     <Slide isCover>
-      <div className="flex flex-col items-center justify-center space-y-10 relative z-10">
+      <div className={`flex flex-col items-center justify-center space-y-10 relative z-10 ${contentClassName}`}>
         <div className="w-20 h-1 bg-white/30 rounded-full" />
 
         <h1 className="font-display text-5xl font-bold text-center text-white">
@@ -41,9 +44,9 @@ export default function CoverSlide({
         )}
 
         {speakers && speakers.length > 0 && (
-          <div className="flex items-center justify-center gap-16 mt-4">
+          <div className="flex items-start justify-center gap-16 mt-4">
             {speakers.map((speaker, i) => (
-              <div key={i} className="flex flex-col items-center text-center">
+              <div key={i} className="flex flex-col items-center text-center w-52 shrink-0">
                 <div className="w-28 h-28 relative overflow-hidden rounded-full border-2 border-white/40 mb-3">
                   <Image
                     src={speaker.photo}
