@@ -19,7 +19,7 @@ export default function Spm2025ProjectionSlide() {
       </div>
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
-          The model projected a rise that did not materialize — and the miss
+          The model projected a rise that did not materialize. The miss
           is the point of showing this. Every dashboard estimate starts from
           the same baseline, so the baseline gets checked against the
           official number the day it comes out.

@@ -22,7 +22,7 @@ export default function WhyTodaySlide() {
       <div className="mt-8 content-card px-8 py-5">
         <p className="text-xl text-gray-700">
           The official child rate fell a full point to a record low while the
-          SPM child rate edged down 0.1 points — the two measures converged
+          SPM child rate edged down 0.1 points. The two measures converged
           at 13.4 percent. Source: U.S. Census Bureau,{' '}
           <em>Poverty in the United States: 2025</em> (P60-290), released
           September 15, 2026.

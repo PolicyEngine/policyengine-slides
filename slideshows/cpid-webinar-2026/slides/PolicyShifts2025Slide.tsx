@@ -12,12 +12,12 @@ const columns: { heading: string; items: { text: string; subtext?: string }[] }[
       {
         text: 'OBBBA tax provisions took effect for 2025',
         subtext:
-          'Child Tax Credit to $2,200, larger standard deduction, new tips and overtime deductions — largely non-refundable, so limited reach below the poverty line',
+          'Child Tax Credit to $2,200, larger standard deduction, new tips and overtime deductions. Largely non-refundable, so limited reach below the poverty line',
       },
       {
         text: 'The last ARPA child care funds expired (September 2024)',
         subtext:
-          'Stabilization grants ended in 2023; the supplemental CCDF money ran out September 2024 — and child care costs subtract from SPM resources',
+          'Stabilization grants ended in 2023; the supplemental CCDF money ran out September 2024, and child care costs subtract from SPM resources',
       },
       {
         text: 'Summer EBT ran its second summer',
@@ -74,7 +74,7 @@ export default function PolicyShifts2025Slide() {
         ))}
       </div>
       <p className="mt-4 text-base text-gray-500">
-        Candidate drivers, not attribution — the measured change reflects all
+        Candidate drivers, not attribution: the measured change reflects all
         of these plus the labor market.
       </p>
     </Slide>
