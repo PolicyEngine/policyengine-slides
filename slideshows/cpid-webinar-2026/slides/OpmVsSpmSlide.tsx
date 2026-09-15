@@ -31,7 +31,7 @@ export default function OpmVsSpmSlide() {
   return (
     <Slide center>
       <SlideHeader>
-        <SlideTitle>Two poverty measures, one morning</SlideTitle>
+        <SlideTitle>Two poverty measures</SlideTitle>
       </SlideHeader>
       <div className="mt-6 grid grid-cols-2 gap-8">
         {columns.map((col) => (

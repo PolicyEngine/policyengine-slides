@@ -13,4 +13,4 @@ export const DASHBOARD_DISPLAY_URL =
  * so the slide never shows a 404 if dashboard #116 / app-v2 #1205 slip. The
  * displayed URL stays the public one. */
 export const DASHBOARD_IFRAME_URL =
-  'https://child-poverty-impact-dashboard-sigma.vercel.app/report/results?r=19';
+  'https://child-poverty-impact-dashboard-sigma.vercel.app/us/child-poverty-impact-dashboard';
