@@ -26,7 +26,7 @@ export default function WhoUsesItSlide() {
         <SlideTitle>Researchers and developers build with these rules</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-5 gap-x-10 gap-y-14 w-full px-10">
+      <div className="mt-10 grid grid-cols-5 gap-x-10 gap-y-24 w-full px-10">
         {organizations.map((org) => (
           <div
             key={org.name}
@@ -37,7 +37,7 @@ export default function WhoUsesItSlide() {
               alt={org.name}
               width={org.smaller ? 110 : 150}
               height={85}
-              className="object-contain"
+              className="object-contain max-h-[85px] w-auto"
             />
           </div>
         ))}
