@@ -1,30 +1,78 @@
-import LiveAppSlide from '@/slideshows/iariw-2026/slides/LiveAppSlide';
+'use client';
 
-/** Max's live walk-through of the SPM threshold calculator. Demo values are from the
- * published package (spm-calculator 1.0.0, forecast 3d86d5c4), the artifact the app serves. */
+import React, { useState } from 'react';
+import Slide from '@/components/core/Slide';
+import SlideHeader from '@/components/layout/SlideHeader';
+import SlideTitle from '@/components/layout/SlideTitle';
+
+/** Max's live walk-through of the SPM threshold calculator: full-width iframe, no side column. */
+const CALC_IFRAME_URL = 'https://spm-calculator.vercel.app/us/spm-calculator';
+const CALC_DISPLAY_URL = 'policyengine.org/us/spm-calculator';
+
 export default function CalculatorLiveSlide() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <LiveAppSlide
-      title="SPM threshold calculator"
-      url="https://spm-calculator.vercel.app/us/spm-calculator"
-      displayUrl="policyengine.org/us/spm-calculator"
-      sideWidth="0.5fr"
-    >
-      <div className="content-card px-5 py-4">
-        <p className="text-base font-semibold text-gray-800 mb-2">Walk-through</p>
-        <ol className="list-decimal pl-5 space-y-1.5 text-base text-gray-700">
-          <li>Los Angeles, two adults and two children, renting, 2025: $51,944 against the national $41,701</li>
-          <li>Same family in nonmetro Mississippi: $33,914</li>
-          <li>Los Angeles in 2030, a conditional forecast: $61,057</li>
-          <li>Every result shows its pieces and a Python snippet with the data hash</li>
-        </ol>
+    <Slide>
+      <SlideHeader>
+        <div className="flex items-baseline justify-between">
+          <SlideTitle>SPM threshold calculator</SlideTitle>
+          <span className="font-mono text-lg text-pe-teal">{CALC_DISPLAY_URL}</span>
+        </div>
+      </SlideHeader>
+
+      <div
+        className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto mt-4 h-[calc(100vh-300px)]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <iframe
+          src={CALC_IFRAME_URL}
+          title="SPM threshold calculator"
+          className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(true);
+          }}
+          className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition-colors"
+        >
+          Expand
+        </button>
       </div>
-      <div className="content-card px-5 py-4">
-        <p className="text-base text-gray-500">
-          2022 to 2025 use BLS-published thresholds; 2026 to 2035 are forecasts from rolling Consumer Expenditure and American Community
-          Survey windows. Open source, with a methods paper at /paper.
-        </p>
-      </div>
-    </LiveAppSlide>
+
+      {expanded && (
+        <div
+          className="fixed inset-0 z-[200] bg-black/60 flex items-center justify-center p-8"
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(false);
+          }}
+        >
+          <div
+            className="relative w-full h-full max-w-[95vw] max-h-[90vh] rounded-2xl overflow-hidden bg-white shadow-2xl pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              src={CALC_IFRAME_URL}
+              title="SPM threshold calculator (expanded)"
+              className="w-full h-full border-0"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(false);
+              }}
+              className="absolute top-4 right-4 z-10 bg-white hover:bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 shadow-md transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </Slide>
   );
 }
