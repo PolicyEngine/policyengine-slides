@@ -15,9 +15,11 @@ export const overhang2026Config: SlideshowConfig = {
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
-    TitleSlide, BaselineSlide, GrowthSlide, BacktestSlide, AlignmentSlide,
-    DraftingSlide, WhatIfEveryBillSlide, WhatIfEverySeriesSlide, CrossScaleSlide,
-    HowWeGetThereSlide, PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide,
+    // 30-minute cut (Sat 5:45-6:15 PM): 15 slides, about 16 minutes of talk
+    TitleSlide, BaselineSlide, GrowthSlide, AlignmentSlide, DraftingSlide,
+    WhatIfEveryBillSlide, PolicyBenchSlide, PrimitivesSlide, RulesSlide,
     ModelSlide, AudienceSlide, AgentSlide, ClosingLoopSlide, DiscussionSlide, EndSlide,
+    // Backups for questions, after the end slide
+    BacktestSlide, WhatIfEverySeriesSlide, CrossScaleSlide, HowWeGetThereSlide, BillSlide,
   ],
 };

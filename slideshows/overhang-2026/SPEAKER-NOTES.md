@@ -1,24 +1,30 @@
 # Speaker notes — Law is an alignment problem
 
 The Overhang 2026 · American Geophysical Union, Washington DC
-Saturday September 19, 2026 · Max Ghenis · approximately 5:30 PM ET
-Deck: `/slides/overhang-2026` · 20 slides · 22-minute talk, followed by 20 minutes of discussion.
+Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
+Deck: `/slides/overhang-2026` · 15 slides plus 5 backups · 16-minute talk, 12 minutes of objections, stop at 6:15 for dinner.
 
 The arc: changing baselines → laws as an alignment mechanism → forecasts for bills and outcomes → tools with feedback loops → one bill from statute to forecast → the audience's forecast → a public score and questions about legitimacy.
 
-## Timing map
+## Timing map (30-minute cut)
+
+Slide numbers below are positions in the 30-minute order. The slide-by-slide notes further down keep the original 20-slide numbering; the five slides cut from the talk now sit after the end slide as backups (16 How well did they do? · 17 What if every outcome had an estimate? · 18 What if you cross them? · 19 How do we get there? · 20 One bill through the stack).
 
 | Elapsed | Slides | Section | Minutes |
 |---|---|---|---|
-| 0:00–4:00 | 1–4 | Growth expectations and changing conditions | 4 |
-| 4:00–8:00 | 5–10 | Law, AI drafting, and the question sequence | 4 |
-| 8:00–11:30 | 11–12 | PolicyBench and the five needs | 3.5 |
-| 11:30–14:45 | 13–15 | One bill, its rules, and the model | 3.25 |
-| 14:45–17:15 | 16 | Audience forecast, including two quiet minutes | 2.5 |
-| 17:15–20:00 | 17–18 | Agent forecast and calibration | 2.75 |
-| 20:00–22:00 | 19–20 | Questions and handoff to discussion | 2 |
+| 0:00–2:00 | 1–3 | Title, stated uncertainty, growth and the upper tail | 2 |
+| 2:00–4:00 | 4–5 | Law is an alignment problem; AI already drafts bills | 2 |
+| 4:00–5:00 | 6 | What if every bill had a score? | 1 |
+| 5:00–6:00 | 7 | AI alone can't do it (models answer without tools) | 1 |
+| 6:00–8:00 | 8 | What do we arm the AI with? | 2 |
+| 8:00–11:00 | 9–10 | S. 3596: the rules, then the model | 3 |
+| 11:00–13:00 | 11 | Your number first: 90 seconds of quiet writing | 2 |
+| 13:00–14:30 | 12 | The agent's forecast and its reasoning | 1.5 |
+| 14:30–16:00 | 13 | The loop that matters most; the scoreboard today | 1.5 |
+| 16:00–28:00 | 14 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12 |
+| 28:00–30:00 | 15 | Which bill next? Stop at 6:15; continue over dinner | 2 |
 
-Keep both live demos within their allotted time. Preserve the two quiet minutes on slide 16; the exercise works only if participants write their estimates before seeing the agent's forecast. If time runs short, compress the question sequence and roadmap.
+Start at about 5:48 so people can walk over from the main stage. Page through the whole deck once before presenting so the two chart images and the live pages are cached. If the network fails, describe slides 9 and 12 from the numbers on slides 10, 11 and 13.
 
 ## Slide-by-slide track
 
