@@ -44,11 +44,11 @@ Words: 91 · Clock: 4:55 to 5:45
 
 [click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it. [optional: Show the rule graph, then Expand] The same section as a graph: each box is a rule, each wire an input, and the refundable credit sits at the end of 128 of them. The banner says this subtree can't execute yet. Prototype.
 
-## 8 · PolicyEngine computes what the change does to each household (1:05)
+## 8 · PolicyEngine computes what the change does to each household (1:00)
 
-Words: 141 · Clock: 5:45 to 6:50
+Words: 128 · Clock: 5:45 to 6:50
 
-[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. This is the kind of number I built PolicyEngine to produce, and the kind CBO and the rest of the scoring world run on: one outcome per run, behavior fixed, no interval attached. The simulation computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
+[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. [optional: Show the PolicyEngine app] This is the kind of number I built PolicyEngine to produce, and the kind CBO and the rest of the scoring world run on: one outcome per run, behavior fixed, no interval attached. The simulation computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
 ## 9 · The deficit will never score this bill. Which statistic would? (1:05)
 

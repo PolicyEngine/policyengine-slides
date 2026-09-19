@@ -29,7 +29,7 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 
 | 14:50–27:00 | 16 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12.25 |
 | 27:00–27:30 | 17 | Which bill next? Stop at 6:55 for the lightning talks | 0.5 |
 
-Start at about 6:20 so people can get food first; the listing runs to 7:00 and the lightning talks need the room at 7:00. Page through the whole deck once before presenting so the live pages are cached, and click each live toggle once (slides 4, 7, 13). If the network fails, the numbers on slides 8, 9 and 11 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 7 and 11.
+Start at about 6:20 so people can get food first; the listing runs to 7:00 and the lightning talks need the room at 7:00. Page through the whole deck once before presenting so the live pages are cached, and click each live toggle once (slides 4, 7, 8, 13). If the network fails, the numbers on slides 8, 9 and 11 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 7 and 11.
 
 ## Slide-by-slide track
 
@@ -77,7 +77,7 @@ Optional: "Show the rule graph", then Expand. The refundable credit sits at the 
 
 ### 8 · PolicyEngine computes what the change does to each household (1m)
 
-PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026, SPM child poverty 17.0% → 16.8%. Read the label: certification pending.
+PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026, SPM child poverty 17.0% → 16.8%. Optional toggle: the PolicyEngine app view of the reform.
 Behavior held fixed; the model does not say who files and claims. "The model hands the forecast a mechanism, and the forecast stays a separate question."
 
 ### 9 · The deficit will never score this bill. Which statistic would? (1m 05s)

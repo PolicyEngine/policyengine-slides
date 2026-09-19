@@ -143,13 +143,26 @@ export function RulesSlide() {
   );
 }
 
+const appUrl = 'https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2';
+
 export function ModelSlide() {
+  const [live, setLive] = useState(false);
   return (
-    <BillFrame title="PolicyEngine computes what the change does to each household" source="Source: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026: policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl="https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2">
+    <BillFrame title="PolicyEngine computes what the change does to each household" source="Source: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026: policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl={appUrl}>
+      <div className="relative h-full">
+        <button
+          type="button"
+          onClick={(event) => { event.stopPropagation(); setLive(!live); }}
+          className="absolute right-0 -top-16 z-20 rounded-lg border border-pe-200 bg-white px-4 py-2 text-sm font-semibold text-pe-dark shadow-sm pointer-events-auto"
+        >
+          {live ? 'Show the numbers' : 'Show the PolicyEngine app'}
+        </button>
+        {live ? (
+          <LivePanel url={appUrl} title="PolicyEngine app: S. 3596 reform against current law, live" />
+        ) : (
       <div className="flex h-full flex-col justify-center gap-8">
         <div className="flex items-center justify-between gap-6">
           <p className="text-2xl text-gray-700">PolicyEngine estimates the impact of lowering the threshold.</p>
-          <span className="shrink-0 rounded-full border border-pe-amber px-4 py-2 text-sm text-gray-700">Certification pending</span>
         </div>
         <div className="grid grid-cols-2 gap-6">
           {[
@@ -167,6 +180,8 @@ export function ModelSlide() {
           <p className="text-xl leading-relaxed text-gray-700">The model hands the forecast its mechanism. Who files and claims stays a separate question.</p>
           <p className="mt-2 text-sm text-gray-500">The model holds behavior fixed. The IRS prints the count of who files and claims.</p>
         </div>
+      </div>
+        )}
       </div>
     </BillFrame>
   );
