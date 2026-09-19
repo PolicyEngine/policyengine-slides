@@ -44,11 +44,11 @@ Words: 91 · Clock: 4:55 to 5:45
 
 [click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it. [optional: Show the rule graph, then Expand] The same section as a graph: each box is a rule, each wire an input, and the refundable credit sits at the end of 128 of them. The banner says this subtree can't execute yet. Prototype.
 
-## 8 · The model (1:00)
+## 8 · The model (0:55)
 
-Words: 127 · Clock: 5:45 to 6:45
+Words: 118 · Clock: 5:45 to 6:45
 
-[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. Federal cost, 1.83 billion dollars in 2026, and 17.1 billion over 2026 to 2035. 6.5 percent of people gain. Read the label: certification pending. We have not finished the cross-checks on this pairing. I reran it this afternoon on PolicyEngine's own API with the bill's one-dollar threshold and got the same 1.83 billion, to the dollar. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
+[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. 6.5 percent of people gain. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
 ## 9 · Your indicator first (1:05)
 
@@ -173,3 +173,8 @@ Max: "isn't the bigger vision like, we have forecasts for all official statistic
 # SPF slides cut, 5:45 PM
 
 Max: "let's drop the SPF part of the main talk; it was an awkward fit anyway and now duplicative." Slides 3 and 4 (If the baseline moves; Forecasters marked growth down) are out of the session deck; they carry the lightning talk instead. Slide 2 now ends "It moves faster now, and the mechanism is changing hands," which carries straight into "AI already drafts bills." Sixteen slides; every slide reference renumbered; the talk ends near 14:45, so objections get about 12 minutes.
+
+
+# Model slide, 6:00 PM
+
+Max: "Thesis shouldn't be on the model slide." The Thesis prototype badge and the Thesis bill-page citation are gone from slide 8; it now cites the PolicyEngine API run directly (policy 98503 against current law, 2026). The ten-year card, which came from the Thesis page's display, is replaced by the API run's child-poverty result (17.0% to 16.8%, SPM, 2026). Script line updated to match.
