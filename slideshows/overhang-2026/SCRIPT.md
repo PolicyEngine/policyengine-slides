@@ -20,7 +20,7 @@ Words: 100 · Clock: 1:25 to 2:15
 
 [click] Effort published this on Wednesday. They ran Pangram's AI-text detector over 2,994 bills in the 119th Congress, and it flagged 117 of them, 3.9 percent. Split the text and the pattern sharpens. In the second quarter of this year the detector flagged 6.4 percent of findings-and-preamble text and 0.6 percent of statutory text. A detector flag is evidence of AI use, and it does not establish who wrote what. Max Spero from Pangram is here this weekend if you want the method. So AI already writes some of the words that become law. What evidence should travel with them?
 
-## 4 · AI alone can't do it (0:55)
+## 4 · Without tools, the best model gets 89% of household answers right (0:55)
 
 Words: 116 · Clock: 2:15 to 3:10
 
@@ -32,31 +32,31 @@ Words: 145 · Clock: 3:10 to 4:20
 
 [click] So what does a forecasting agent need? Five things, and each one needs its own feedback loop. One, the rules of the policy, encoded so a program can run them, with tests and independent calculators to check the encoding. Two, official statistics, with a receipt for what each agency printed and when. Three, a population at the household level, calibrated to those statistics, with the calibration error published. Four, a model that computes a reform on that population, with its differences from other models explained. Five, judgment: the piece that combines them into a forecast, with a date on which it resolves and a score when it does. That fifth loop ranks the other four. Every one of those checks works the same for an AI agent and for a human analyst. Now one bill, three of those layers, and one number the IRS prints.
 
-## 6 · One bill through the stack (0:35)
+## 6 · S. 3596 moves one threshold from $2,500 to $1 (0:35)
 
 Words: 82 · Clock: 4:20 to 4:55
 
 [click] The bill is S. 3596, the Stronger Start for Working Families Act, from Senators Hassan and Young. It has sat in Senate Finance since January 8. It lowers the earnings threshold for the refundable child tax credit from 2,500 dollars to one dollar. The 15 percent phase-in rate stays and the refundable cap stays, so a family gains at most about 375 dollars. I picked it because it moves one threshold in the statute and one number in an IRS table. Layer one, the rules.
 
-## 7 · The rules (0:50)
+## 7 · The Axiom Foundation encodes the section the bill amends (0:50)
 
 Words: 91 · Clock: 4:55 to 5:45
 
 [click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it. [optional: Show the rule graph, then Expand] The same section as a graph: each box is a rule, each wire an input, and the refundable credit sits at the end of 128 of them. The banner says this subtree can't execute yet. Prototype.
 
-## 8 · The model (0:55)
+## 8 · PolicyEngine computes what the change does to each household (0:55)
 
 Words: 113 · Clock: 5:45 to 6:45
 
 [click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
-## 9 · Your indicator first (1:05)
+## 9 · The deficit will never score this bill. Which statistic would? (1:05)
 
 Words: 133 · Clock: 6:45 to 7:50
 
 [click] Before the number, the indicator. Which official statistic would tell you whether this bill did its job? The usual answer is cost, and the model gives it: 1.83 billion dollars in 2026. Now look at the deficit that cost lands in. Our agent's forecast for one month's federal deficit, May, carried an 80 percent interval from 240 to 380 billion dollars. The print came in at 293. With or without this bill, those two distributions overlap almost entirely. The deficit will never score this bill. So shout out statistics it would move by more than their own forecast interval. Sixty seconds. [pause for shout-outs; repeat each one back] Returns claiming the credit. Child poverty. Filing among the lowest earners. The bill page lists its candidates and admits where no series exists. Now your number.
 
-## 10 · Your number first (2:05, of which 90 seconds silent)
+## 10 · Write your forecast before you see the agent's (2:05, of which 90 seconds silent)
 
 Words: 77 · Clock: 7:50 to 9:55 · "Go" lands at about 0:31 after the click
 
@@ -66,25 +66,25 @@ Words: 77 · Clock: 7:50 to 9:55 · "Go" lands at about 0:31 after the click
 
 Ten seconds. Keep that number in front of you.
 
-## 11 · The agent's forecast (1:45)
+## 11 · The agent forecast 27.2M returns if the bill passes (1:45)
 
 Words: 214 · Clock: 9:55 to 11:40
 
 [click] Our agent registered this on August 4. We run the agents at Thesis and we score them. Under current law, 17.6 million returns, with an 80 percent interval from 5.1 to 30.1 million. If the bill is enacted, 27.2 million, interval 14.7 to 39.7. A gap of 9.6 million returns. Check yours. Hands up if your median came in above 27 million. [pause] Below the last print, 17.6? [pause] Now read the trace. [live page] The agent took the last print, 17.6, and added half of 2021's excess over its neighbors. It calls that half a judgmental assumption. In 2021 the law removed the earnings test and raised the credit. This bill moves one threshold from 2,500 dollars to one. So you can challenge the analogy, and the page shows you where. The interval half-width is 1.28 sample standard deviations of four prints. One of those four is 2021, and that one print stretches the current-law band from 5 to 30 million. If you wrote a tighter band, the page shows the assumption you'd replace. The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast. The condition gets judged on December 31, 2027, and the first print is due by the end of 2029.
 
-## 12 · Conductors, not oracles (0:40)
+## 12 · Armed with the stack, the model routes the question instead of guessing (0:40)
 
 Words: 104 · Clock: 11:40 to 12:20
 
 [click] Back to slide 4. That board measured an oracle: a model reads the household and answers from memory, and the answer key was PolicyEngine's own output. The best model got 89 percent. What you just watched was a conductor. The page routed one question through the stack. The rules supplied the parameter, the model supplied the mechanism, the IRS prints supplied the base rate, and the agent's judgment sat in named assumptions. The print grades those assumptions. Grades like that tell us which judgments deserve to become mechanism in the next version of the model. The grade is the loop that ranks the other four.
 
-## 13 · The loop that matters most (1:05)
+## 13 · Scoring the forecast is the loop that ranks the other four (1:05)
 
 Words: 134 · Clock: 12:20 to 13:25
 
 [click] Publish the reasoning. Wait for the official number. Score the forecast. That loop ranks the other four. Here is the scoreboard as of this morning. 45 scores, each one a forecast that an outside timestamp authority recorded before the print. 35 of the 45 landed inside their 80 percent interval. Against a persistence baseline, the CRPS ratio is 0.98 on nine matched targets. The persistence baseline carries the last print forward. Nine targets, and a rough tie with persistence. The misses stay on the page. Each one goes back into the rules, the data, the model, or the next forecast. I'm still prototyping Thesis. We run the agents and we score them. If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so.
 
-## 14 · Run the loop backwards (0:50)
+## 14 · Cheap conditionals let us run the loop backwards (0:50)
 
 Words: 118 · Clock: 13:25 to 14:15
 

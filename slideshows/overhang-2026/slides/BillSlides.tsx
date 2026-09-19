@@ -27,7 +27,7 @@ function BillFrame({
       <div className="absolute inset-x-16 top-14 bottom-[104px] flex flex-col">
         <div className="mb-6 shrink-0">
           <div className="flex items-center justify-between gap-6">
-            <h1 className="text-[44px] font-bold leading-tight tracking-tight text-pe-dark">{title}</h1>
+            <h1 className="text-[38px] font-bold leading-tight tracking-tight text-pe-dark">{title}</h1>
             {prototype && <span className="rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Thesis · Prototype</span>}
           </div>
           <div className="accent-bar mt-4 w-28" />
@@ -107,7 +107,7 @@ export function LivePanel({ url, title }: { url: string; title: string }) {
 
 export function BillSlide() {
   return (
-    <BillFrame title="One bill through the stack" source="Source: S. 3596, Stronger Start for Working Families Act · Congress.gov" sourceUrl={congressUrl}>
+    <BillFrame title="S. 3596 moves one threshold from $2,500 to $1" source="Source: S. 3596, Stronger Start for Working Families Act · Congress.gov" sourceUrl={congressUrl}>
       <div className="flex h-full flex-col justify-center gap-7">
         <div>
           <p className="text-lg font-medium text-pe-teal">S. 3596 · Hassan and Young</p>
@@ -133,7 +133,7 @@ export function BillSlide() {
 export function RulesSlide() {
   const [graph, setGraph] = useState(false);
   return (
-    <BillFrame title="The rules" source="Source: the Axiom Foundation · axiom.org/us/statute/26/24/d/1 (statute beside its encoded rules) · axiom.org/app (rule graph, prototype); S. 3596" sourceUrl={graph ? graphUrl : statuteUrl}>
+    <BillFrame title="The Axiom Foundation encodes the section the bill amends" source="Source: the Axiom Foundation · axiom.org/us/statute/26/24/d/1 (statute beside its encoded rules) · axiom.org/app (rule graph, prototype); S. 3596" sourceUrl={graph ? graphUrl : statuteUrl}>
       <div className="grid h-full min-h-0 grid-cols-[0.9fr_1.7fr] gap-7">
         <div className="flex flex-col justify-center gap-6">
           <p className="text-2xl leading-snug text-gray-800">Read the statute beside the rules that encode it.</p>
@@ -163,7 +163,7 @@ export function RulesSlide() {
 
 export function ModelSlide() {
   return (
-    <BillFrame title="The model" source="Source: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026: policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl="https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2">
+    <BillFrame title="PolicyEngine computes what the change does to each household" source="Source: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026: policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl="https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2">
       <div className="flex h-full flex-col justify-center gap-8">
         <div className="flex items-center justify-between gap-6">
           <p className="text-2xl text-gray-700">PolicyEngine estimates the impact of lowering the threshold.</p>
@@ -192,7 +192,7 @@ export function ModelSlide() {
 
 export function IndicatorSlide() {
   return (
-    <BillFrame title="Your indicator first" source="Cost: PolicyEngine panel on the Thesis bill page. Deficit interval: Thesis forecast of the May 2026 Monthly Treasury Statement deficit, $305B with 80% interval [$240B, $380B]; the print came in at $292.6B · app.thesisinstitute.org/us-mts-deficit-may-2026" sourceUrl="https://app.thesisinstitute.org/us-mts-deficit-may-2026">
+    <BillFrame title="The deficit will never score this bill. Which statistic would?" source="Cost: PolicyEngine panel on the Thesis bill page. Deficit interval: Thesis forecast of the May 2026 Monthly Treasury Statement deficit, $305B with 80% interval [$240B, $380B]; the print came in at $292.6B · app.thesisinstitute.org/us-mts-deficit-may-2026" sourceUrl="https://app.thesisinstitute.org/us-mts-deficit-may-2026">
       <div className="flex h-full flex-col justify-center gap-6">
         <p className="text-[30px] font-semibold leading-snug text-pe-dark">Which official statistic would tell you whether this bill did its job?</p>
         <div className="grid grid-cols-[1fr_1.15fr] gap-6">
@@ -218,7 +218,7 @@ export function IndicatorSlide() {
 
 export function AudienceSlide() {
   return (
-    <BillFrame title="Your number first" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
+    <BillFrame title="Write your forecast before you see the agent’s" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
       <div className="flex h-full flex-col justify-between gap-3">
         <p className="max-w-5xl text-[28px] font-medium leading-snug text-pe-dark">How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes?</p>
         <div>
@@ -246,7 +246,7 @@ export function AudienceSlide() {
 
 export function AgentSlide() {
   return (
-    <BillFrame title="The agent’s forecast" prototype source="Source: Thesis prototype, S. 3596 forecast and recorded reasoning trace · app.thesisinstitute.org/bills/s3596-119" sourceUrl={billUrl}>
+    <BillFrame title="The agent forecast 27.2M returns if the bill passes" prototype source="Source: Thesis prototype, S. 3596 forecast and recorded reasoning trace · app.thesisinstitute.org/bills/s3596-119" sourceUrl={billUrl}>
       <div className="grid h-full min-h-0 grid-cols-[1.25fr_1fr] gap-6">
         <div className="flex min-h-0 flex-col justify-between gap-2">
           <p className="text-sm text-gray-600">TY2027 returns · Median [80% interval]</p>
@@ -279,7 +279,7 @@ export function ClosingLoopSlide() {
   const [live, setLive] = useState(false);
   const calibrationUrl = 'https://app.thesisinstitute.org/calibration';
   return (
-    <BillFrame title="The loop that matters most" prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl={calibrationUrl}>
+    <BillFrame title="Scoring the forecast is the loop that ranks the other four" prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl={calibrationUrl}>
       <div className="relative h-full">
         <button
           type="button"

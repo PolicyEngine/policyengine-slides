@@ -42,7 +42,7 @@ export function HowWeGetThereSlide() {
 
 export function PolicyBenchSlide() {
   const [live, setLive] = useState(false);
-  return <Slide><SlideHeader><SlideTitle>AI alone can’t do it</SlideTitle></SlideHeader>
+  return <Slide><SlideHeader><SlideTitle>Without tools, the best model gets 89% of household answers right</SlideTitle></SlideHeader>
     <button
       type="button"
       onClick={(event) => { event.stopPropagation(); setLive(!live); }}

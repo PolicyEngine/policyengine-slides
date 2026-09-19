@@ -19,7 +19,7 @@ export default function BackwardsSlide() {
       <div className="absolute inset-0 flex flex-col px-14 pt-10 pb-24">
         <header className="mb-5 shrink-0">
           <div className="flex items-center justify-between gap-6">
-            <h1 className="font-display text-[38px] font-bold leading-tight tracking-tight text-pe-dark">Run the loop backwards</h1>
+            <h1 className="font-display text-[38px] font-bold leading-tight tracking-tight text-pe-dark">Cheap conditionals let us run the loop backwards</h1>
             <span className="rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Where this goes</span>
           </div>
           <div className="accent-bar mt-4 w-32" />

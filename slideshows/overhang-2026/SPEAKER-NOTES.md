@@ -50,7 +50,7 @@ Effort, published Wednesday: Pangram's detector flagged 117 of 2,994 bills in th
 A detector flag is evidence of AI use and does not establish who wrote what. Max Spero from Pangram is here this weekend.
 "What evidence should travel with them?"
 
-### 4 · AI alone can't do it (55s)
+### 4 · Without tools, the best model gets 89% of household answers right (55s)
 
 A score gives a claim people can question; a forecast gives a claim they can grade. Could the same models supply that evidence?
 PolicyBench: 39 models, 100 households, no tools. Best 89.2% (GPT-5.6 Sol), weakest 62.6%. Exact means within a dollar and eligibility matches.
@@ -62,54 +62,54 @@ Five needs, each with its own feedback loop: rules that run, official statistics
 The fifth loop ranks the other four. The checks work the same for an agent and for a human analyst.
 Skip the roadmap toggle. "Now one bill, three of those layers, and one number the IRS prints."
 
-### 6 · One bill through the stack (35s)
+### 6 · S. 3596 moves one threshold from $2,500 to $1 (35s)
 
 S. 3596, the Stronger Start for Working Families Act (Hassan, Young), in Senate Finance since January 8.
 Refundable CTC earnings threshold $2,500 → $1; the 15% phase-in and the cap stay, so a family gains at most about $375.
 One threshold in the statute, one number in an IRS table. "Layer one, the rules."
 
-### 7 · The rules (50s)
+### 7 · The Axiom Foundation encodes the section the bill amends (50s)
 
 Live: section 24(d)(1) at axiom.org, statute on the left, 14 encoded rules on the right; ctc_refundable_phase_in_threshold holds the $2,500.
 Every rule traces to its sentence of statute and its effective date, so a model, an agent, or you can read the change from the page.
 Optional: "Show the rule graph", then Expand. The refundable credit sits at the end of 128 inputs; the banner says the subtree can't execute yet. Prototype.
 
-### 8 · The model (1m)
+### 8 · PolicyEngine computes what the change does to each household (1m)
 
 PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026, SPM child poverty 17.0% → 16.8%. Read the label: certification pending.
 Behavior held fixed; the model does not say who files and claims. "The model hands the forecast a mechanism, and the forecast stays a separate question."
 
-### 9 · Your indicator first (1m 05s)
+### 9 · The deficit will never score this bill. Which statistic would? (1m 05s)
 
 Cost is the usual answer, and the model gives it. The May monthly deficit forecast ran $240B–$380B; the print was $293B. With or without this bill, the distributions overlap almost entirely.
 Sixty seconds: shout out statistics the bill would move by more than their own forecast interval. Repeat each one back.
 Returns claiming the credit, child poverty, filing among the lowest earners. The bill page lists candidates and admits where no series exists.
 
-### 10 · Your number first (2m 05s, 90 seconds silent)
+### 10 · Write your forecast before you see the agent's (2m 05s, 90 seconds silent)
 
 Returns claiming the refundable CTC for TY2027 if the bill passes. First prints: 19.1M (2020), 37.8M (2021, the year the earnings test dropped), 18.1M, 17.6M.
 "Write a median and an 80 percent interval. Ninety seconds, no talking. Go."
 Ten seconds. Keep the number in front of you.
 
-### 11 · The agent's forecast (1m 45s)
+### 11 · The agent forecast 27.2M returns if the bill passes (1m 45s)
 
 Registered August 4; we run the agents at Thesis and we score them. Current law 17.6M [5.1M, 30.1M]; enacted 27.2M [14.7M, 39.7M]; gap 9.6M. Hands up above 27M; below 17.6M.
 The trace: last print plus half of 2021's excess over its neighbors, labeled a judgmental assumption; half-width 1.28 sample standard deviations of four prints, one of them 2021.
 "The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast." Judged December 31, 2027; first print due by end of 2029.
 
-### 12 · Conductors, not oracles (40s)
+### 12 · Armed with the stack, the model routes the question instead of guessing (40s)
 
 Back to slide 4. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
 What they just watched was a conductor: the page routed one question through the rules (parameter), the model (mechanism), and the IRS prints (base rate); the agent's judgment sat in named assumptions, and the print grades them.
 "Grades like that tell us which judgments deserve to become mechanism. The grade is the loop that ranks the other four."
 
-### 13 · The loop that matters most (1m 05s)
+### 13 · Scoring the forecast is the loop that ranks the other four (1m 05s)
 
 Publish the reasoning, wait for the official number, score the forecast. Scoreboard this morning: 45 witness-verified scores, 35 inside their 80% interval, CRPS ratio 0.98 against persistence on nine matched targets.
 The misses stay on the page and feed back into the rules, the data, the model, or the next forecast. Prototype; we run the agents and we score them.
 "If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so." Optional toggle: the live scoreboard.
 
-### 14 · Run the loop backwards (50s)
+### 14 · Cheap conditionals let us run the loop backwards (50s)
 
 If the ratio drops below one, scale it: every official statistic forecast (the May deficit), every bill's statistics derived (the shout-outs), every pair a cheap conditional (S. 3596 and returns claiming the credit).
 Then slide 2's loop runs backwards: pick the value, set the indicator's level, search the bills whose conditional forecasts move it.
