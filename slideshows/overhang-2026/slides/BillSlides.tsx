@@ -163,7 +163,7 @@ export function RulesSlide() {
 
 export function ModelSlide() {
   return (
-    <BillFrame title="The model" prototype source="Source: PolicyEngine impact displayed in the Thesis prototype · app.thesisinstitute.org/bills/s3596-119" sourceUrl={billUrl}>
+    <BillFrame title="The model" prototype source="Source: PolicyEngine impact displayed in the Thesis prototype · app.thesisinstitute.org/bills/s3596-119 · Rerun 19 Sep 2026 on the PolicyEngine API, policy 98503 vs current law, threshold $1: −$1,825,694,255 in 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl="https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2">
       <div className="flex h-full flex-col justify-center gap-8">
         <div className="flex items-center justify-between gap-6">
           <p className="text-2xl text-gray-700">PolicyEngine estimates the impact of lowering the threshold.</p>
@@ -184,7 +184,7 @@ export function ModelSlide() {
         </div>
         <div className="accent-block">
           <p className="text-xl leading-relaxed text-gray-700">A computed policy impact gives the forecast a mechanism to examine.</p>
-          <p className="mt-2 text-sm text-gray-500">Published model uses a $0 threshold; the bill specifies $1.</p>
+          <p className="mt-2 text-sm text-gray-500">Rerun today on the PolicyEngine API with the bill’s $1 threshold: −$1.83B in 2026, the same to the dollar.</p>
         </div>
       </div>
     </BillFrame>

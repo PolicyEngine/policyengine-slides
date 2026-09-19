@@ -60,7 +60,7 @@ Words: 91 · Clock: 7:40 to 8:30
 
 Words: 127 · Clock: 8:25 to 9:25
 
-[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. Federal cost, 1.83 billion dollars in 2026, and 17.1 billion over 2026 to 2035. 6.5 percent of people gain. Read the two labels. One says certification pending: we have not finished the cross-checks on this pairing. The other says the published run uses a zero-dollar threshold where the bill says one dollar. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
+[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. Federal cost, 1.83 billion dollars in 2026, and 17.1 billion over 2026 to 2035. 6.5 percent of people gain. Read the label: certification pending. We have not finished the cross-checks on this pairing. I reran it this afternoon on PolicyEngine's own API with the bill's one-dollar threshold and got the same 1.83 billion, to the dollar. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
 ## 11 · Your indicator first (1:05)
 
