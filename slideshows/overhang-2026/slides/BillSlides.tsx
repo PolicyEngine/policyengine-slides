@@ -2,7 +2,6 @@
 
 import { ReactNode, useState } from 'react';
 import { IconArrowRight, IconArrowsMaximize, IconExternalLink, IconX } from '@tabler/icons-react';
-import Slide from '@/components/core/Slide';
 import DeckFrame from './DeckFrame';
 
 const billUrl = 'https://app.thesisinstitute.org/bills/s3596-119';
