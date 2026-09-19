@@ -200,7 +200,7 @@ export function AudienceSlide() {
           </div>
         </div>
         <p className="text-xl text-gray-700">Current earnings threshold <strong className="text-pe-dark">$2,500 → $1</strong></p>
-        <div className="accent-block text-2xl font-medium text-pe-teal">Two minutes. Write a median and an 80% interval.</div>
+        <div className="accent-block text-2xl font-medium text-pe-teal">Ninety seconds. Write a median and an 80% interval.</div>
       </div>
     </BillFrame>
   );

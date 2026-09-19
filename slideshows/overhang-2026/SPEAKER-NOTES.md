@@ -8,16 +8,15 @@ The arc: changing baselines → laws as an alignment mechanism → forecasts for
 
 ## Timing map (30-minute cut)
 
-Slide numbers below are positions in the 30-minute order. The slide-by-slide notes further down keep the original 20-slide numbering; the five slides cut from the talk now sit after the end slide as backups (16 How well did they do? · 17 What if every outcome had an estimate? · 18 What if you cross them? · 19 How do we get there? · 20 One bill through the stack).
+The spoken script is in SCRIPT.md (slide by slide, with a running clock). Order per its flow review: BillSlide is back in the talk between the five needs and the rules; "What if every bill had a score?" moved to backups because the title slide carries the question. Backups after the end slide: 16 What if every bill had a score? · 17 How well did they do? · 18 What if every outcome had an estimate? · 19 What if you cross them? · 20 How do we get there?
 
 | Elapsed | Slides | Section | Minutes |
 |---|---|---|---|
 | 0:00–2:00 | 1–3 | Title, stated uncertainty, growth and the upper tail | 2 |
 | 2:00–4:00 | 4–5 | Law is an alignment problem; AI already drafts bills | 2 |
-| 4:00–5:00 | 6 | What if every bill had a score? | 1 |
-| 5:00–6:00 | 7 | AI alone can't do it (models answer without tools) | 1 |
-| 6:00–8:00 | 8 | What do we arm the AI with? | 2 |
-| 8:00–11:00 | 9–10 | S. 3596: the rules, then the model | 3 |
+| 4:20–5:55 | 6 | AI alone can't do it (models answer without tools) | 1.5 |
+| 5:55–7:05 | 7 | What do we arm the AI with? (skip the roadmap toggle) | 1 |
+| 7:05–9:25 | 8–10 | S. 3596: the bill, the rules, then the model | 2.5 |
 | 11:00–13:00 | 11 | Your number first: 90 seconds of quiet writing | 2 |
 | 13:00–14:30 | 12 | The agent's forecast and its reasoning | 1.5 |
 | 14:30–16:00 | 13 | The loop that matters most; the scoreboard today | 1.5 |
