@@ -54,7 +54,7 @@ Words: 82 · Clock: 7:05 to 7:40
 
 Words: 91 · Clock: 7:40 to 8:30
 
-[click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it.
+[click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it. [optional: Show the rule graph, then Expand] The same section as a graph: each box is a rule, each wire an input, and the refundable credit sits at the end of 128 of them. The banner says this subtree can't execute yet. Prototype.
 
 ## 10 · The model (1:00)
 
