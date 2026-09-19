@@ -34,7 +34,7 @@ export function TitleSlide() {
         <div className="flex items-end justify-between gap-8">
           <div className="flex items-center gap-4">
             <BasePathImage src={speakers['max-ghenis'].photo} alt="Max Ghenis" width={64} height={64} className="h-16 w-16 rounded-full object-cover border border-white/40" />
-            <div><p className="text-2xl font-semibold">Max Ghenis</p><p className="mt-1 text-base text-white/70">PolicyEngine · the Axiom Foundation</p></div>
+            <div><p className="text-2xl font-semibold">Max Ghenis</p><p className="mt-1 text-base text-white/70">Founder and CEO, PolicyEngine and Axiom Foundation</p></div>
           </div>
           <div className="text-right text-sm leading-relaxed text-white/70">
             <p>The Overhang 2026</p><p>American Geophysical Union, Washington DC</p><p>September 19, 2026</p>
