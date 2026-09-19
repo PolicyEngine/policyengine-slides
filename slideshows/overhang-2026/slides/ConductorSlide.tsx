@@ -7,7 +7,7 @@ export default function ConductorSlide() {
   return (
     <Slide>
       <SlideHeader>
-        <SlideTitle>With the stack, the model routes instead of guessing</SlideTitle>
+        <SlideTitle>With the stack, the model stops guessing</SlideTitle>
       </SlideHeader>
 
       <div className="mt-4 grid grid-cols-2 gap-8">
@@ -30,7 +30,7 @@ export default function ConductorSlide() {
       </div>
 
       <div className="accent-block mx-auto mt-4 max-w-5xl">
-        <p className="text-xl leading-relaxed text-gray-700">
+        <p className="text-lg leading-relaxed text-gray-700">
           Two claims sit on the same page: the model’s mechanism and the agent’s judgment. The grade on the second tells us which assumptions deserve to become mechanism.
         </p>
       </div>

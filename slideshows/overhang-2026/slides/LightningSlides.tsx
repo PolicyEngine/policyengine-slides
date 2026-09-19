@@ -184,7 +184,7 @@ function ChartFrame({ step, title }: { step: number; title: string }) {
 
 /** Two builds: point estimates, then the one-sigma band. */
 export function SpfChartSlide({ buildStep = 2 }: { buildStep?: number }) {
-  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="Forecasters state a mean and a spread for next year" />;
+  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="Forecasters state a mean and a spread" />;
 }
 
 /** The backtest on the same chart: realized outcomes against the band. */

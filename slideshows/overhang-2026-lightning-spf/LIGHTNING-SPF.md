@@ -14,7 +14,7 @@ I'm Max Ghenis. I build PolicyEngine and the Axiom Foundation, and I'm prototypi
 
 [click] So is there a series of forecasts of this quantity that we can score, from before Metaculus existed? There is. Since 1968 the Philadelphia Fed's Survey of Professional Forecasters has asked its panel to spread probability across bins of next-year output growth, and since 1999 the ECB has asked the same of euro-area forecasters. Each histogram records what a point forecast can't: how much confidence the forecaster puts behind the number. I pooled every one they have published, 3,695 round-by-horizon groups, at maxghenis.com/expectations, and scored them against the numbers the agencies now publish.
 
-## 4 · Forecasters state a mean and a spread for next year (0:55, two builds)
+## 4 · Forecasters state a mean and a spread (0:55, two builds)
 
 [click] Start with the point estimates. This is the pooled mean forecast for next year's US growth from each first-quarter round since 1992. Between 2 and 3 percent most years, lower after 2008, and 1.9 percent for 2027.
 
