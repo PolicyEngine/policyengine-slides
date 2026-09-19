@@ -5,9 +5,9 @@ import DeckFrame from './DeckFrame';
  *  and cheap conditionals, the loop on slide 2 runs backwards, from values to policies. */
 export default function BackwardsSlide() {
   const scale = [
-    { what: 'Every official statistic has a forecast', today: 'Today: 45 scored, the May deficit among them' },
-    { what: 'Every bill derives its statistics', today: 'Today: one bill page lists its candidates; you added yours' },
-    { what: 'Every pair gets a conditional, cheaply', today: 'Today: one pair, 17.6M against 27.2M, graded in 2029' },
+    { what: 'Every official statistic has a forecast', today: '45 scored so far, the May deficit among them' },
+    { what: 'Every bill derives its statistics', today: 'One bill page lists its candidates; you added yours' },
+    { what: 'Every pair gets a conditional, cheaply', today: 'One pair so far, 17.6M against 27.2M, graded in 2029' },
   ];
   const loop = [
     { label: 'Values', detail: 'Pick the goal', Icon: IconUsers },
@@ -37,7 +37,7 @@ export default function BackwardsSlide() {
               </div>
             ))}
           </div>
-          <p className="border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Start from the goal and search the bills. That is the alignment problem in the title.</p>
+          <p className="border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Start from the goal and search the bills.</p>
         </div>
     </DeckFrame>
   );

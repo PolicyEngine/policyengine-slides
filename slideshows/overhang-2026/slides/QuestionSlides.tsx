@@ -57,7 +57,7 @@ export function PolicyBenchSlide() {
     <p className="rounded-lg bg-pe-light px-6 py-4 text-2xl font-semibold text-pe-dark">Models answer without tools: no calculator, search, or PolicyEngine.</p>
     <div className="mt-6 grid grid-cols-3 gap-5"><div className="content-card p-6"><p className="text-6xl font-bold text-pe-teal">89.2%</p><p className="mt-3 text-lg text-gray-700">Best exact accuracy<br />GPT-5.6 Sol</p></div><div className="content-card p-6"><p className="text-6xl font-bold text-pe-amber">28.3%</p><p className="mt-3 text-lg text-gray-700">Exact on positive SNAP amounts<br />Models zero them out on asset heuristics</p></div><div className="content-card p-6"><p className="text-6xl font-bold text-pe-dark">39</p><p className="mt-3 text-lg text-gray-700">Models tested on<br />100 households</p></div></div>
     <p className="mt-6 text-xl text-gray-600">The answer key is PolicyEngine’s own output. What changes when a model can call it?</p>
-    <p className="mt-4 text-sm text-gray-500">Exact: amounts within $1; eligibility matches exactly. Weighted across targets. SNAP figure: households with a positive reference benefit, all models.</p>
+    <p className="mt-4 text-sm text-gray-500">Exact means within $1 for amounts and a match for eligibility, weighted across targets. The SNAP figure covers households with a positive reference benefit, all models.</p>
     <p className="mt-3 text-xs text-gray-500"><a href="https://policybench.org" target="_blank" rel="noreferrer">policybench.org · v1.1, 5 September 2026 snapshot</a> · <a href="https://github.com/PolicyEngine/policybench" target="_blank" rel="noreferrer">Methodology: PolicyEngine/policybench</a> · checked 19 September 2026</p>
   
     </>)}

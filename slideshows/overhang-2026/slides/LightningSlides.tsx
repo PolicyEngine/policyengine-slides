@@ -53,7 +53,7 @@ export function AiGrowthStudiesSlide() {
         ))}
       </div>
       <p className="mt-6 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Same question, answers two orders of magnitude apart, and none of them scored yet.</p>
-      <p className="mt-4 text-xs text-gray-500">Horizons and outcomes differ across these sources; each card states its own. Read 19 September 2026.</p>
+      <p className="mt-4 text-xs text-gray-500">Each card states its own horizon and outcome. Read 19 September 2026.</p>
     </DeckFrame>
   );
 }

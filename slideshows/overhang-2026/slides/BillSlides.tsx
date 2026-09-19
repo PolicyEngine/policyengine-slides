@@ -124,7 +124,7 @@ export function RulesSlide() {
             <p className="break-words font-mono text-lg leading-relaxed text-pe-dark">ctc_refundable_<wbr />phase_in_threshold</p>
             <p className="mt-4 text-3xl font-semibold text-pe-teal">$2,500 → $1</p>
           </div>
-          <p className="text-base text-gray-500">The statute and its encoded rules provide a traceable starting point.</p>
+          <p className="text-base text-gray-500">Every rule traces to the sentence of statute that sets it.</p>
           <button
             type="button"
             onClick={(event) => { event.stopPropagation(); setGraph(!graph); }}
@@ -164,8 +164,8 @@ export function ModelSlide() {
           ))}
         </div>
         <div className="accent-block">
-          <p className="text-xl leading-relaxed text-gray-700">A computed policy impact gives the forecast a mechanism to examine.</p>
-          <p className="mt-2 text-sm text-gray-500">Behavior held fixed. The model does not say who files a return and claims the credit; the IRS prints that count.</p>
+          <p className="text-xl leading-relaxed text-gray-700">The model hands the forecast its mechanism. Who files and claims stays a separate question.</p>
+          <p className="mt-2 text-sm text-gray-500">The model holds behavior fixed. The IRS prints the count of who files and claims.</p>
         </div>
       </div>
     </BillFrame>
@@ -179,7 +179,7 @@ export function IndicatorSlide() {
         <p className="text-[30px] font-semibold leading-snug text-pe-dark">Which official statistic would tell you whether this bill did its job?</p>
         <div className="grid grid-cols-[1fr_1.15fr] gap-6">
           <div className="content-card px-6 py-5">
-            <p className="text-sm uppercase tracking-wide text-gray-500">The usual answer: cost</p>
+            <p className="text-sm uppercase tracking-wide text-gray-500">Cost, the usual answer</p>
             <p className="mt-2 text-4xl font-bold text-pe-dark">−$1.83B <span className="text-lg font-medium text-gray-600">in 2026</span></p>
             <p className="mt-3 text-base leading-relaxed text-gray-700">One month of the federal deficit carried an 80% interval of <strong>$240B to $380B</strong>. With or without the bill, those two distributions overlap almost entirely.</p>
           </div>
@@ -190,7 +190,7 @@ export function IndicatorSlide() {
               <li>2. ________________</li>
               <li>3. ________________</li>
             </ol>
-            <p className="mt-3 text-sm text-gray-500">A good one moves by more than its own forecast interval if the bill works.</p>
+            <p className="mt-3 text-sm text-gray-500">A useful statistic moves by more than its own forecast interval if the bill works.</p>
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@ export function AgentSlide() {
             </div>
           </div>
           <p className="text-xl text-gray-700">Forecast gap <strong className="text-pe-teal">9.6M returns</strong></p>
-          <p className="border-l-4 border-pe-teal pl-4 text-[15px] leading-relaxed text-gray-600">Last print + half of TY2021’s excess over its neighbours (a judgmental assumption); interval half-width = 1.28 sample standard deviations of four prints.</p>
+          <p className="border-l-4 border-pe-teal pl-4 text-[15px] leading-relaxed text-gray-600">The agent took the last print and added half of 2021’s excess over its neighbours, an assumption it labels judgmental. Its interval spans 1.28 sample standard deviations of four prints.</p>
           <div className="space-y-1 text-xs leading-normal text-gray-500">
             <p>Forecast recorded 4 Aug 2026 · Condition judged 31 Dec 2027</p>
             <p>First-print resolution due by 31 Dec 2029</p>

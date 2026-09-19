@@ -189,3 +189,8 @@ Max: "Thesis shouldn't be on the model slide." The Thesis prototype badge and th
 # Stack callback, 6:05 PM
 
 Max asked whether to add a history-of-PolicyEngine intro and whether to return to the five-layer slide with the logos. Verdict: no intro slide (the title slide and the first 35 seconds already say what he builds, and his own rule is present tense over evolution); one sentence on slide 8 now says what kind of number the scoring world runs on. Yes to the callback: slide 15 shows the five layers with their wordmarks and one check each, right before the objections. Talk ends near 15:20.
+
+
+# Voice pass, 6:15 PM
+
+Max: drop "The substrate never decides what to value" (defensive) and review both decks. Cut it. Also fixed on the slides: the detector caveat now reads "The detector flags text; it cannot name the author"; the rules slide says "Every rule traces to the sentence of statute that sets it"; the model slide says "The model hands the forecast its mechanism. Who files and claims stays a separate question" and "The IRS prints the count of who files and claims"; the indicator slide loses its labeled opener; the agent slide's trace summary reads as two sentences; the conductor card says "PolicyBench measures this failure mode"; the backwards slide loses its "Today:" labels and its closer about the title; the studies slide loses its hedge. Script unchanged except this note.

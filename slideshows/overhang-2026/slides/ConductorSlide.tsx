@@ -12,7 +12,7 @@ export default function ConductorSlide() {
             A model reads the household and answers from memory. The best scored{' '}
             <span className="font-semibold text-pe-dark">89.2%</span> without tools, against an answer key computed by PolicyEngine.
           </p>
-          <p className="mt-4 text-lg italic text-gray-500">The failure mode PolicyBench measures.</p>
+          <p className="mt-4 text-lg italic text-gray-500">PolicyBench measures this failure mode.</p>
         </div>
 
         <div className="content-card p-6" style={{ borderLeftColor: 'var(--pe-amber)' }}>

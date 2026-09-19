@@ -96,7 +96,7 @@ export function GrowthSlide() {
             <p className="text-base font-medium text-gray-600">2015–19 → 2025–26</p>
             <div><p className="text-sm text-gray-500">Mean next-year growth</p><p className="mt-1 text-3xl font-bold text-pe-dark">2.19% → 1.89%</p></div>
             <div><p className="text-sm text-gray-500">Probability of growth above 4%</p><p className="mt-1 text-3xl font-bold text-pe-teal">5.6% → 4.2%</p></div>
-            <p className="border-l-4 border-pe-amber pl-3 text-sm leading-relaxed text-gray-600">First-quarter rounds. The later window covers only two survey rounds.</p>
+            <p className="border-l-4 border-pe-amber pl-3 text-sm leading-relaxed text-gray-600">First-quarter rounds. The later window covers two survey rounds.</p>
           </div>
         </div>
         <p className="shrink-0 rounded-lg bg-pe-light px-5 py-3 text-[17px] leading-relaxed text-pe-dark">
@@ -142,7 +142,6 @@ export function AlignmentSlide() {
           ].map(({ label, detail, Icon }, i) => <div key={label} className="contents"><div className="rounded-xl border border-pe-100 bg-pe-light p-6"><Icon className="mb-4 text-pe-teal" size={36} stroke={1.5} /><h2 className="text-2xl font-bold text-pe-dark">{label}</h2><p className="mt-2 text-lg text-gray-600">{detail}</p></div>{i < 2 && <IconArrowRight className="text-pe-teal" size={30} />}</div>)}
         </div>
         <p className="max-w-5xl text-2xl leading-relaxed text-gray-700">We write laws in prose, change them slowly, and rarely score them against their goals.</p>
-        <p className="border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">The substrate never decides what to value.</p>
       </div>
     </Frame>
   );
@@ -158,7 +157,7 @@ export function DraftingSlide() {
           <div className="rounded-xl border border-pe-100 bg-pe-light p-6"><p className="text-5xl font-bold text-pe-teal">6.4%</p><p className="mt-3 text-xl text-pe-dark">Findings and preamble text</p></div>
           <div className="rounded-xl border border-gray-200 p-6"><p className="text-5xl font-bold text-pe-dark">0.6%</p><p className="mt-3 text-xl text-gray-600">Statutory text</p></div>
         </div>
-        <p className="text-base text-gray-500">2026 Q2 · Detector classifications provide evidence of AI use; they do not establish authorship.</p>
+        <p className="text-base text-gray-500">2026 Q2 · The detector flags text; it cannot name the author.</p>
       </div>
     </Frame>
   );
