@@ -47,13 +47,13 @@ export function AiGrowthStudiesSlide() {
       <div className="mt-8 grid grid-cols-4 gap-5">
         {studies.map((s) => (
           <a key={s.who} href={s.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="content-card block p-6">
-            <p className="text-5xl font-bold tracking-tight text-pe-teal">{s.figure}</p>
+            <p className="text-4xl font-bold tracking-tight text-pe-teal">{s.figure}</p>
             <p className="mt-3 text-lg leading-snug text-gray-700">{s.unit}</p>
             <p className="mt-4 text-sm text-gray-500">{s.who}</p>
           </a>
         ))}
       </div>
-      <p className="mt-8 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Same question, answers two orders of magnitude apart, and none of them scored yet.</p>
+      <p className="mt-6 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Same question, answers two orders of magnitude apart, and none of them scored yet.</p>
       <p className="mt-4 text-xs text-gray-500">Horizons and outcomes differ across these sources; each card states its own. Read 19 September 2026.</p>
     </Slide>
   );
@@ -69,15 +69,15 @@ export function SeriesQuestionSlide() {
   return (
     <Slide>
       <SlideHeader><SlideTitle>Is there a series of forecasts we can score? Before Metaculus?</SlideTitle></SlideHeader>
-      <div className="mt-8 grid grid-cols-3 gap-6">
+      <div className="mt-6 grid grid-cols-3 gap-6">
         {facts.map((f) => (
-          <div key={f.big} className="content-card p-7">
-            <p className="text-6xl font-bold tracking-tight text-pe-teal">{f.big}</p>
-            <p className="mt-4 text-xl leading-snug text-gray-700">{f.text}</p>
+          <div key={f.big} className="content-card p-6">
+            <p className="text-5xl font-bold tracking-tight text-pe-teal">{f.big}</p>
+            <p className="mt-3 text-lg leading-snug text-gray-700">{f.text}</p>
           </div>
         ))}
       </div>
-      <p className="mt-8 text-2xl leading-relaxed text-gray-700">Each histogram records what a point forecast cannot: how much confidence the forecaster puts behind the number.</p>
+      <p className="mt-6 text-xl leading-relaxed text-gray-700">Each histogram records what a point forecast cannot: how much confidence the forecaster puts behind the number.</p>
       <p className="mt-4 text-xs text-gray-500"><a href="https://maxghenis.com/expectations/" target="_blank" rel="noreferrer">maxghenis.com/expectations</a> · code and data: <a href="https://github.com/MaxGhenis/expectations" target="_blank" rel="noreferrer">github.com/MaxGhenis/expectations</a></p>
     </Slide>
   );
@@ -168,12 +168,12 @@ function ChartFrame({ step, title }: { step: number; title: string }) {
   return (
     <Slide>
       <SlideHeader><SlideTitle>{title}</SlideTitle></SlideHeader>
-      <div className="mt-4 grid h-[560px] grid-cols-[1.55fr_0.75fr] gap-6">
-        <div className="content-card p-4"><SpfChart step={step} /></div>
+      <div className="mt-3 grid h-[430px] grid-cols-[1.55fr_0.75fr] gap-6">
+        <div className="content-card min-h-0 p-3"><SpfChart step={step} /></div>
         <div className="flex flex-col justify-center gap-5">
-          <p className="text-3xl font-bold text-pe-dark">{cap.title}</p>
-          {cap.lines.map((l) => <p key={l} className="text-xl leading-relaxed text-gray-700">{l}</p>)}
-          {step === 3 && <p className="text-6xl font-bold tracking-tight text-pe-teal">22<span className="text-4xl font-light text-gray-400"> / 33</span></p>}
+          <p className="text-2xl font-bold text-pe-dark">{cap.title}</p>
+          {cap.lines.map((l) => <p key={l} className="text-lg leading-relaxed text-gray-700">{l}</p>)}
+          {step === 3 && <p className="text-5xl font-bold tracking-tight text-pe-teal">22<span className="text-3xl font-light text-gray-400"> / 33</span></p>}
         </div>
       </div>
       <p className="mt-3 text-xs text-gray-500">Survey of Professional Forecasters, Philadelphia Fed; pooled by maxghenis.com/expectations; outcomes from BEA annual real GDP growth as now published.</p>
