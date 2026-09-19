@@ -1,6 +1,6 @@
 # Overhang script: "Law is an alignment problem"
 
-Start at about 6:20 in the main room (the listing moved to 6:15–7:00, Volcano/Mountain, during dinner; hard stop 6:55 for the lightning talks). Running clock counts from the first word. Sixteen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 1,870. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 14:45, leaving about 12 minutes for objections before the close at 27:00 and dinner at 6:15.
+Start at about 6:20 in the main room (the listing moved to 6:15–7:00, Volcano/Mountain, during dinner; hard stop 6:55 for the lightning talks). Running clock counts from the first word. Seventeen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 1,870. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 15:20, leaving about 11 minutes for objections before the close at 27:00 and dinner at 6:15.
 
 ## 1 · Law is an alignment problem (0:35)
 
@@ -44,21 +44,21 @@ Words: 91 · Clock: 4:55 to 5:45
 
 [click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it. [optional: Show the rule graph, then Expand] The same section as a graph: each box is a rule, each wire an input, and the refundable credit sits at the end of 128 of them. The banner says this subtree can't execute yet. Prototype.
 
-## 8 · PolicyEngine computes what the change does to each household (0:55)
+## 8 · PolicyEngine computes what the change does to each household (1:05)
 
-Words: 113 · Clock: 5:45 to 6:45
+Words: 141 · Clock: 5:45 to 6:50
 
-[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
+[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. This is the kind of number I built PolicyEngine to produce, and the kind CBO and the rest of the scoring world run on: one outcome per run, behavior fixed, no interval attached. The simulation computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
 ## 9 · The deficit will never score this bill. Which statistic would? (1:05)
 
-Words: 133 · Clock: 6:45 to 7:50
+Words: 133 · Clock: 6:50 to 7:55
 
 [click] Before the number, the indicator. Which official statistic would tell you whether this bill did its job? The usual answer is cost, and the model gives it: 1.83 billion dollars in 2026. Now look at the deficit that cost lands in. Our agent's forecast for one month's federal deficit, May, carried an 80 percent interval from 240 to 380 billion dollars. The print came in at 293. With or without this bill, those two distributions overlap almost entirely. The deficit will never score this bill. So shout out statistics it would move by more than their own forecast interval. Sixty seconds. [pause for shout-outs; repeat each one back] Returns claiming the credit. Child poverty. Filing among the lowest earners. The bill page lists its candidates and admits where no series exists. Now your number.
 
 ## 10 · Write your forecast before you see the agent's (2:05, of which 90 seconds silent)
 
-Words: 77 · Clock: 7:50 to 9:55 · "Go" lands at about 0:31 after the click
+Words: 77 · Clock: 7:55 to 10:00 · "Go" lands at about 0:31 after the click
 
 [click] Your number first. How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes? The IRS first prints: 19.1 million for 2020, 37.8 for 2021, the year the law dropped the earnings test and raised the credit, then 18.1 and 17.6. Threshold, 2,500 dollars to one dollar. Write a median and an 80 percent interval. Ninety seconds, no talking. Go.
 
@@ -68,35 +68,41 @@ Ten seconds. Keep that number in front of you.
 
 ## 11 · The agent forecast 27.2M returns if the bill passes (1:45)
 
-Words: 214 · Clock: 9:55 to 11:40
+Words: 214 · Clock: 10:00 to 11:45
 
 [click] Our agent registered this on August 4. We run the agents at Thesis and we score them. Under current law, 17.6 million returns, with an 80 percent interval from 5.1 to 30.1 million. If the bill is enacted, 27.2 million, interval 14.7 to 39.7. A gap of 9.6 million returns. Check yours. Hands up if your median came in above 27 million. [pause] Below the last print, 17.6? [pause] Now read the trace. [live page] The agent took the last print, 17.6, and added half of 2021's excess over its neighbors. It calls that half a judgmental assumption. In 2021 the law removed the earnings test and raised the credit. This bill moves one threshold from 2,500 dollars to one. So you can challenge the analogy, and the page shows you where. The interval half-width is 1.28 sample standard deviations of four prints. One of those four is 2021, and that one print stretches the current-law band from 5 to 30 million. If you wrote a tighter band, the page shows the assumption you'd replace. The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast. The condition gets judged on December 31, 2027, and the first print is due by the end of 2029.
 
 ## 12 · Armed with the stack, the model routes the question instead of guessing (0:40)
 
-Words: 104 · Clock: 11:40 to 12:20
+Words: 104 · Clock: 11:45 to 12:25
 
 [click] Back to slide 4. That board measured an oracle: a model reads the household and answers from memory, and the answer key was PolicyEngine's own output. The best model got 89 percent. What you just watched was a conductor. The page routed one question through the stack. The rules supplied the parameter, the model supplied the mechanism, the IRS prints supplied the base rate, and the agent's judgment sat in named assumptions. The print grades those assumptions. Grades like that tell us which judgments deserve to become mechanism in the next version of the model. The grade is the loop that ranks the other four.
 
 ## 13 · Scoring the forecast is the loop that ranks the other four (1:05)
 
-Words: 134 · Clock: 12:20 to 13:25
+Words: 134 · Clock: 12:25 to 13:30
 
 [click] Publish the reasoning. Wait for the official number. Score the forecast. That loop ranks the other four. Here is the scoreboard as of this morning. 45 scores, each one a forecast that an outside timestamp authority recorded before the print. 35 of the 45 landed inside their 80 percent interval. Against a persistence baseline, the CRPS ratio is 0.98 on nine matched targets. The persistence baseline carries the last print forward. Nine targets, and a rough tie with persistence. The misses stay on the page. Each one goes back into the rules, the data, the model, or the next forecast. I'm still prototyping Thesis. We run the agents and we score them. If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so.
 
 ## 14 · Cheap conditionals let us run the loop backwards (0:50)
 
-Words: 118 · Clock: 13:25 to 14:15
+Words: 118 · Clock: 13:30 to 14:20
 
-[click] And if the ratio drops below one, scale it. Every official statistic gets a forecast, the way the May deficit did. Every bill gets its statistics derived, the way you shouted them out. Every pair gets a conditional, the way S. 3596 got one for returns claiming the credit. Once those conditionals are cheap, the loop on slide 2 runs backwards. Start from the value. Set the level of the indicator you want, child poverty or filing among the lowest earners. Search the bills for the ones whose conditional forecasts move it. That's the alignment problem in the title, with the arrows reversed. And the moment you search policies against indicators, Goodhart stops being a footnote. So break it.
+[click] And if the ratio drops below one, scale it. Every official statistic gets a forecast, the way the May deficit did. Every bill gets its statistics derived, the way you shouted them out. Every pair gets a conditional, the way S. 3596 got one for returns claiming the credit. Once those conditionals are cheap, the loop on slide 2 runs backwards. Start from the value. Set the level of the indicator you want, child poverty or filing among the lowest earners. Search the bills for the ones whose conditional forecasts move it. That's the alignment problem in the title, with the arrows reversed. And the moment you search policies against indicators, Goodhart stops being a footnote.
 
-## 15 · Where does this break? (0:30, then about 12 minutes of objections)
+## 15 · Every layer of the stack exists today, each with its own check (0:30)
 
-Words: 90 · Clock: 14:15 to 14:45 · Objections 14:45 to 27:00
+Words: 69 · Clock: 14:20 to 14:50
+
+[click] Back to the five things from slide 5, with names on them. The Axiom Foundation encodes the rules and compares their outputs. Chronicle records official statistics with their sources. Microcosm builds the populations and publishes the calibration error. PolicyEngine computes the reforms. Thesis, still a prototype, forecasts the outcomes and scores them as they resolve. The scoreboard on that last layer ranks the other four. Now break it.
+
+## 16 · Where does this break? (0:30, then about 11 minutes of objections)
+
+Words: 90 · Clock: 14:50 to 15:20 · Objections 15:20 to 27:00
 
 [click] Three headings. Goodhart: what happens when the measure becomes the target? Who sets the objectives: an AI read this bill and proposed the goals on its page, and the page has buttons to countersign or strike them. Legitimacy: who gets to contest the model, the forecast, and the use somebody makes of them? We have twelve minutes under Chatham House rules, so nothing you say gets attributed. One request for the end: tell me which bill should get a forecast next. Who's first?
 
-## 16 · What if every bill had a forecast? (0:25)
+## 17 · What if every bill had a forecast? (0:25)
 
 Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 
@@ -178,3 +184,8 @@ Max: "let's drop the SPF part of the main talk; it was an awkward fit anyway and
 # Model slide, 6:00 PM
 
 Max: "Thesis shouldn't be on the model slide." The Thesis prototype badge and the Thesis bill-page citation are gone from slide 8; it now cites the PolicyEngine API run directly (policy 98503 against current law, 2026). The ten-year card, which came from the Thesis page's display, is replaced by the API run's child-poverty result (17.0% to 16.8%, SPM, 2026). Script line updated to match.
+
+
+# Stack callback, 6:05 PM
+
+Max asked whether to add a history-of-PolicyEngine intro and whether to return to the five-layer slide with the logos. Verdict: no intro slide (the title slide and the first 35 seconds already say what he builds, and his own rule is present tense over evolution); one sentence on slide 8 now says what kind of number the scoring world runs on. Yes to the callback: slide 15 shows the five layers with their wordmarks and one check each, right before the objections. Talk ends near 15:20.
