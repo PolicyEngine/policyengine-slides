@@ -1,6 +1,6 @@
 # Overhang script: "Law is an alignment problem"
 
-Start at about 5:48. Running clock counts from the first word. Seventeen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 2,010. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 16:15, leaving about 10 minutes for objections before the close at 27:00 and dinner at 6:15.
+Start at about 5:48. Running clock counts from the first word. Eighteen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 2,130. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 16:50, leaving about 10 minutes for objections before the close at 27:00 and dinner at 6:15.
 
 ## 1 · Law is an alignment problem (0:35)
 
@@ -84,25 +84,31 @@ Words: 214 · Clock: 12:00 to 13:45
 
 [click] Our agent registered this on August 4. We run the agents at Thesis and we score them. Under current law, 17.6 million returns, with an 80 percent interval from 5.1 to 30.1 million. If the bill is enacted, 27.2 million, interval 14.7 to 39.7. A gap of 9.6 million returns. Check yours. Hands up if your median came in above 27 million. [pause] Below the last print, 17.6? [pause] Now read the trace. [live page] The agent took the last print, 17.6, and added half of 2021's excess over its neighbors. It calls that half a judgmental assumption. In 2021 the law removed the earnings test and raised the credit. This bill moves one threshold from 2,500 dollars to one. So you can challenge the analogy, and the page shows you where. The interval half-width is 1.28 sample standard deviations of four prints. One of those four is 2021, and that one print stretches the current-law band from 5 to 30 million. If you wrote a tighter band, the page shows the assumption you'd replace. The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast. The condition gets judged on December 31, 2027, and the first print is due by the end of 2029.
 
-## 14 · Conductors, not oracles (0:45)
+## 14 · Conductors, not oracles (0:40)
 
-Words: 104 · Clock: 13:45 to 14:30
+Words: 104 · Clock: 13:45 to 14:25
 
 [click] Back to slide 6. That board measured an oracle: a model reads the household and answers from memory, and the answer key was PolicyEngine's own output. The best model got 89 percent. What you just watched was a conductor. The page routed one question through the stack. The rules supplied the parameter, the model supplied the mechanism, the IRS prints supplied the base rate, and the agent's judgment sat in named assumptions. The print grades those assumptions. Grades like that tell us which judgments deserve to become mechanism in the next version of the model. The grade is the loop that ranks the other four.
 
 ## 15 · The loop that matters most (1:05)
 
-Words: 134 · Clock: 14:30 to 15:35
+Words: 134 · Clock: 14:25 to 15:30
 
 [click] Publish the reasoning. Wait for the official number. Score the forecast. That loop ranks the other four. Here is the scoreboard as of this morning. 45 scores, each one a forecast that an outside timestamp authority recorded before the print. 35 of the 45 landed inside their 80 percent interval. Against a persistence baseline, the CRPS ratio is 0.98 on nine matched targets. The persistence baseline carries the last print forward. Nine targets, and a rough tie with persistence. The misses stay on the page. Each one goes back into the rules, the data, the model, or the next forecast. I'm still prototyping Thesis. We run the agents and we score them. If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so.
 
-## 16 · Where does this break? (0:40, then about 11 minutes of objections)
+## 16 · Run the loop backwards (0:50)
 
-Words: 90 · Clock: 15:35 to 16:15 · Objections 16:15 to 27:00
+Words: 118 · Clock: 15:30 to 16:20
 
-[click] Now break it. Three headings. Goodhart: what happens when the measure becomes the target? Who sets the objectives: an AI read this bill and proposed the goals on its page, and the page has buttons to countersign or strike them. Legitimacy: who gets to contest the model, the forecast, and the use somebody makes of them? We have twelve minutes under Chatham House rules, so nothing you say gets attributed. One request for the end: tell me which bill should get a forecast next. Who's first?
+[click] And if the ratio drops below one, scale it. Every official statistic gets a forecast, the way the May deficit did. Every bill gets its statistics derived, the way you shouted them out. Every pair gets a conditional, the way S. 3596 got one for returns claiming the credit. Once those conditionals are cheap, the loop on slide 2 runs backwards. Start from the value. Set the level of the indicator you want, child poverty or filing among the lowest earners. Search the bills for the ones whose conditional forecasts move it. That's the alignment problem in the title, with the arrows reversed. And the moment you search policies against indicators, Goodhart stops being a footnote. So break it.
 
-## 17 · What if every bill had a forecast? (0:25)
+## 17 · Where does this break? (0:30, then about 10 minutes of objections)
+
+Words: 90 · Clock: 16:20 to 16:50 · Objections 16:50 to 27:00
+
+[click] Three headings. Goodhart: what happens when the measure becomes the target? Who sets the objectives: an AI read this bill and proposed the goals on its page, and the page has buttons to countersign or strike them. Legitimacy: who gets to contest the model, the forecast, and the use somebody makes of them? We have twelve minutes under Chatham House rules, so nothing you say gets attributed. One request for the end: tell me which bill should get a forecast next. Who's first?
+
+## 18 · What if every bill had a forecast? (0:25)
 
 Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 
@@ -165,3 +171,10 @@ Max: "could the exercise also be to shout out relevant indicators? like overall 
 # Loop closure, 4:25 PM
 
 Max: "I'm not sure we're really closing the loop on slide 6, and what are the slides after the apparent closing slide. Look at how we closed the loop in iariw-2026." The IARIW deck returns to PolicyBench with "Conductors, not oracles" before "The loop that matters most". Added slide 14 with the same beat, tied to S. 3596: slide 6 graded an oracle answering from memory against PolicyEngine's own answer key; slides 8 to 13 showed a conductor routing one question through the rules, the model and the prints, with the agent's judgment in named assumptions that the IRS print grades. Slide 6 now ends by holding that question. The five backups moved to their own deck, overhang-2026-backup, so the talk deck ends on its end slide. Transition sentences for the new pair: agent to conductors, "Both sit on the same page, and the IRS print grades the forecast" into "Back to slide 6"; conductors to the loop, "The grade is the loop that ranks the other four" into "Publish the reasoning." Clocks from slide 14 on run 45 seconds later; objections shrink to about 11 minutes.
+
+
+---
+
+# The bigger vision, 4:35 PM
+
+Max: "isn't the bigger vision like, we have forecasts for all official statistics, we can derive outcomes/statistics for each bill, and we can forecast those conditionals quickly enough at scale that we can work backwards from our goals to the policies that will help us achieve them"; "that's what gets us to the alignment thesis we posit in the talk title." Added slide 16, "Run the loop backwards", between the scoreboard and the objections: three scale rows (every statistic forecast, every bill's statistics derived, every pair a cheap conditional), then slide 2's loop with the arrows reversed (values, indicators, policies) and the line "Start from the goal and search the bills. That is the alignment problem in the title." Transitions: the scoreboard gates the scaling ("if the ratio drops below one, scale it"); searching policies against indicators hands the room Goodhart ("so break it"). Conductor beat trimmed to 0:40 and the break-it intro to 0:30.

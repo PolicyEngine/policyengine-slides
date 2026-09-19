@@ -10,8 +10,8 @@ export default function ConductorSlide() {
         <SlideTitle>Conductors, not oracles</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-8 grid grid-cols-2 gap-8">
-        <div className="content-card p-8">
+      <div className="mt-6 grid grid-cols-2 gap-8">
+        <div className="content-card p-6">
           <div className="slide-tag mb-3">Oracle · slide 6</div>
           <p className="text-xl leading-relaxed text-gray-700">
             A model reads the household and answers from memory. The best scored{' '}
@@ -20,7 +20,7 @@ export default function ConductorSlide() {
           <p className="mt-4 text-lg italic text-gray-500">The failure mode PolicyBench measures.</p>
         </div>
 
-        <div className="content-card p-8" style={{ borderLeftColor: 'var(--pe-amber)' }}>
+        <div className="content-card p-6" style={{ borderLeftColor: 'var(--pe-amber)' }}>
           <div className="slide-tag mb-3" style={{ color: 'var(--pe-amber)' }}>Conductor · slides 8 to 13</div>
           <p className="text-xl leading-relaxed text-gray-700">
             The bill page routes one question through the stack: the rules supply the parameter, the model supplies the mechanism, and the IRS prints supply the base rate.
@@ -29,7 +29,7 @@ export default function ConductorSlide() {
         </div>
       </div>
 
-      <div className="accent-block mx-auto mt-12 max-w-5xl">
+      <div className="accent-block mx-auto mt-6 max-w-5xl">
         <p className="text-xl leading-relaxed text-gray-700">
           Two claims sit on the same page: the model’s mechanism and the agent’s judgment. The grade on the second tells us which assumptions deserve to become mechanism.
         </p>

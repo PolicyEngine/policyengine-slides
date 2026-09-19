@@ -2,13 +2,13 @@
 
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
-Deck: `/slides/overhang-2026` · 17 slides · backups in `/slides/overhang-2026-backup` · 16-minute talk, about 10 minutes of objections, stop at 6:15 for dinner.
+Deck: `/slides/overhang-2026` · 18 slides · backups in `/slides/overhang-2026-backup` · 17-minute talk, about 10 minutes of objections, stop at 6:15 for dinner.
 
-The arc: the claim (law is an alignment loop we rarely close) → why now (forecasters widened their bands; the AI tail; AI drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 6 answered: a conductor, graded → the scoreboard → objections.
+The arc: the claim (law is an alignment loop we rarely close) → why now (forecasters widened their bands; the AI tail; AI drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 6 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → objections.
 
 ## Timing map (30-minute cut)
 
-The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 14 closes the loop that slide 6 opens, after the IARIW "Conductors, not oracles" beat. The five backups (How well did they do?, What if every bill had a score?, What if every outcome had an estimate?, What if you cross them?, How do we get there?) live in the overhang-2026-backup deck, so this deck ends on its end slide.
+The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 14 closes the loop that slide 6 opens, after the IARIW "Conductors, not oracles" beat; slide 16 runs slide 2's loop backwards, which is the title's claim. The five backups (How well did they do?, What if every bill had a score?, What if every outcome had an estimate?, What if you cross them?, How do we get there?) live in the overhang-2026-backup deck, so this deck ends on its end slide.
 
 | Elapsed | Slide | Section | Minutes |
 |---|---|---|---|
@@ -22,10 +22,11 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 
 | 8:50–9:55 | 11 | Your indicator first: 60 seconds of shout-outs | 1 |
 | 9:55–12:00 | 12 | Your number first: 90 seconds of quiet writing | 2 |
 | 12:00–13:45 | 13 | The agent's forecast and its trace | 1.75 |
-| 13:45–14:30 | 14 | Conductors, not oracles: the answer to slide 6 | 0.75 |
-| 14:30–15:35 | 15 | The loop that matters most; the scoreboard today | 1 |
-| 15:35–27:00 | 16 | Where does this break? Goodhart, who sets the objectives, legitimacy | 11.5 |
-| 27:00–27:30 | 17 | Which bill next? Stop at 6:15; continue over dinner | 0.5 |
+| 13:45–14:25 | 14 | Conductors, not oracles: the answer to slide 6 | 0.75 |
+| 14:25–15:30 | 15 | The loop that matters most; the scoreboard today | 1 |
+| 15:30–16:20 | 16 | Run the loop backwards: values, indicators, policies | 0.75 |
+| 16:20–27:00 | 17 | Where does this break? Goodhart, who sets the objectives, legitimacy | 10.5 |
+| 27:00–27:30 | 18 | Which bill next? Stop at 6:15; continue over dinner | 0.5 |
 
 Start at about 5:48 so people can walk over from the main stage. Page through the whole deck once before presenting so the two chart images and the live pages are cached, and click each live toggle once (slides 3, 6, 9, 15). If the network fails, the numbers on slides 10, 11 and 13 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 9 and 13.
 
@@ -109,7 +110,7 @@ Registered August 4; we run the agents at Thesis and we score them. Current law 
 The trace: last print plus half of 2021's excess over its neighbors, labeled a judgmental assumption; half-width 1.28 sample standard deviations of four prints, one of them 2021.
 "The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast." Judged December 31, 2027; first print due by end of 2029.
 
-### 14 · Conductors, not oracles (45s)
+### 14 · Conductors, not oracles (40s)
 
 Back to slide 6. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
 What they just watched was a conductor: the page routed one question through the rules (parameter), the model (mechanism), and the IRS prints (base rate); the agent's judgment sat in named assumptions, and the print grades them.
@@ -121,13 +122,19 @@ Publish the reasoning, wait for the official number, score the forecast. Scorebo
 The misses stay on the page and feed back into the rules, the data, the model, or the next forecast. Prototype; we run the agents and we score them.
 "If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so." Optional toggle: the live scoreboard.
 
-### 16 · Where does this break? (40s, then about 11 minutes)
+### 16 · Run the loop backwards (50s)
+
+If the ratio drops below one, scale it: every official statistic forecast (the May deficit), every bill's statistics derived (the shout-outs), every pair a cheap conditional (S. 3596 and returns claiming the credit).
+Then slide 2's loop runs backwards: pick the value, set the indicator's level, search the bills whose conditional forecasts move it.
+"That's the alignment problem in the title, with the arrows reversed. And the moment you search policies against indicators, Goodhart stops being a footnote. So break it."
+
+### 17 · Where does this break? (30s, then about 10 minutes)
 
 Three headings: Goodhart; who sets the objectives (an AI proposed the goals on the bill page; countersign or strike buttons); legitimacy (who contests the model, the forecast, and the use).
 Chatham House rules: nothing gets attributed. One request for the end: which bill should get a forecast next.
 Answers to the likely objections are in the "If they ask" section of SCRIPT.md.
 
-### 17 · What if every bill had a forecast? (25s)
+### 18 · What if every bill had a forecast? (25s)
 
 Dinner is at 6:15. Four links on the screen. Keep your number; the IRS prints the answer by the end of 2029 and the agent's score will be on the last link.
 Bring the bill you want forecast next to dinner. Thanks.
