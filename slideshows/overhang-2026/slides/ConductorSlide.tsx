@@ -2,7 +2,7 @@ import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 
-/** Closes the loop opened on the PolicyBench slide, after the IARIW "Conductors, not oracles" beat. */
+/** Closes the loop opened on the PolicyBench slide (slide 4), after the IARIW "Conductors, not oracles" beat. */
 export default function ConductorSlide() {
   return (
     <Slide>
@@ -12,7 +12,7 @@ export default function ConductorSlide() {
 
       <div className="mt-6 grid grid-cols-2 gap-8">
         <div className="content-card p-6">
-          <div className="slide-tag mb-3">Oracle · slide 6</div>
+          <div className="slide-tag mb-3">Oracle · slide 4</div>
           <p className="text-xl leading-relaxed text-gray-700">
             A model reads the household and answers from memory. The best scored{' '}
             <span className="font-semibold text-pe-dark">89.2%</span> without tools, against an answer key computed by PolicyEngine.
@@ -21,7 +21,7 @@ export default function ConductorSlide() {
         </div>
 
         <div className="content-card p-6" style={{ borderLeftColor: 'var(--pe-amber)' }}>
-          <div className="slide-tag mb-3" style={{ color: 'var(--pe-amber)' }}>Conductor · slides 8 to 13</div>
+          <div className="slide-tag mb-3" style={{ color: 'var(--pe-amber)' }}>Conductor · slides 6 to 11</div>
           <p className="text-xl leading-relaxed text-gray-700">
             The bill page routes one question through the stack: the rules supply the parameter, the model supplies the mechanism, and the IRS prints supply the base rate.
           </p>

@@ -1,6 +1,6 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
-import { TitleSlide, BaselineSlide, GrowthSlide, AlignmentSlide, DraftingSlide, DiscussionSlide, EndSlide } from './slides/OpeningSlides';
+import { TitleSlide, AlignmentSlide, DraftingSlide, DiscussionSlide, EndSlide } from './slides/OpeningSlides';
 import { PolicyBenchSlide } from './slides/QuestionSlides';
 import ConductorSlide from './slides/ConductorSlide';
 import BackwardsSlide from './slides/BackwardsSlide';
@@ -17,9 +17,9 @@ export const overhang2026Config: SlideshowConfig = {
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
-    // 30-minute cut (Sat 5:45-6:15 PM): claim first, then the two SPF slides as "why now"; order per SCRIPT.md.
-    // Slide 14 closes the loop that slide 6 opens; slide 16 runs slide 2's loop backwards. Backups live in overhang-2026-backup.
-    TitleSlide, AlignmentSlide, BaselineSlide, GrowthSlide, DraftingSlide,
+    // 30-minute cut, order per SCRIPT.md. The SPF slides moved to the lightning deck (overhang-2026-lightning-spf).
+    // Slide 12 closes the loop that slide 4 opens; slide 14 runs slide 2's loop backwards. Backups live in overhang-2026-backup.
+    TitleSlide, AlignmentSlide, DraftingSlide,
     PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide,
     ModelSlide, IndicatorSlide, AudienceSlide, AgentSlide, ConductorSlide, ClosingLoopSlide, BackwardsSlide, DiscussionSlide, EndSlide,
   ],
