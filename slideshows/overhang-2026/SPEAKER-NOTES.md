@@ -1,8 +1,8 @@
 # Speaker notes — Law is an alignment problem
 
 The Overhang 2026 · American Geophysical Union, Washington DC
-Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
-Deck: `/slides/overhang-2026` · 18 slides · backups in `/slides/overhang-2026-backup` · 17-minute talk, about 10 minutes of objections, stop at 6:15 for dinner.
+Saturday September 19, 2026 · Max Ghenis · 6:15–7:00 PM ET, Volcano/Mountain (113BC), during dinner; lightning talks follow at 7:00 in the same room
+Deck: `/slides/overhang-2026` · 18 slides · backups in `/slides/overhang-2026-backup` · 17-minute talk, about 10 minutes of objections; start at 6:20 so people have plates, hard stop at 6:55 for the lightning talks.
 Lightning talk (Sat 7:00–8:00 PM block, Volcano/Mountain): `/slides/overhang-2026-lightning`, 8 reused slides, script in `../overhang-2026-lightning/LIGHTNING.md`.
 
 The arc: the claim (law is an alignment loop we rarely close) → why now (forecasters widened their bands; the AI tail; AI drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 6 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → objections.
@@ -29,7 +29,7 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 
 | 16:20–27:00 | 17 | Where does this break? Goodhart, who sets the objectives, legitimacy | 10.5 |
 | 27:00–27:30 | 18 | Which bill next? Stop at 6:15; continue over dinner | 0.5 |
 
-Start at about 5:48 so people can walk over from the main stage. Page through the whole deck once before presenting so the two chart images and the live pages are cached, and click each live toggle once (slides 3, 6, 9, 15). If the network fails, the numbers on slides 10, 11 and 13 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 9 and 13.
+Start at about 6:20 so people can get food first; the listing runs to 7:00 and the lightning talks need the room at 7:00. Page through the whole deck once before presenting so the two chart images and the live pages are cached, and click each live toggle once (slides 3, 6, 9, 15). If the network fails, the numbers on slides 10, 11 and 13 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 9 and 13.
 
 ## Slide-by-slide track
 

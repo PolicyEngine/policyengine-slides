@@ -1,6 +1,6 @@
 # Overhang script: "Law is an alignment problem"
 
-Start at about 5:48. Running clock counts from the first word. Eighteen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 2,130. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 16:50, leaving about 10 minutes for objections before the close at 27:00 and dinner at 6:15.
+Start at about 6:20 in the main room (the listing moved to 6:15–7:00, Volcano/Mountain, during dinner; hard stop 6:55 for the lightning talks). Running clock counts from the first word. Eighteen slides in config.ts order; the five backups live in the overhang-2026-backup deck. Spoken words: about 2,130. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 16:50, leaving about 10 minutes for objections before the close at 27:00 and dinner at 6:15.
 
 ## 1 · Law is an alignment problem (0:35)
 
@@ -112,7 +112,7 @@ Words: 90 · Clock: 16:20 to 16:50 · Objections 16:50 to 27:00
 
 Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 
-[click] Dinner is at 6:15, and we're there. Four links on the screen. If you wrote a number tonight, keep it. The IRS prints the answer by the end of 2029, and the agent's score will be on that last link. Bring the bill you want forecast next to dinner. Thanks.
+[click] Lightning talks start in here at 7:00, and I'm giving one. Four links on the screen. If you wrote a number tonight, keep it. The IRS prints the answer by the end of 2029, and the agent's score will be on that last link. Bring the bill you want forecast next to dinner. Thanks.
 
 ## If the wifi dies
 
