@@ -3,6 +3,7 @@
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
 Deck: `/slides/overhang-2026` · 18 slides · backups in `/slides/overhang-2026-backup` · 17-minute talk, about 10 minutes of objections, stop at 6:15 for dinner.
+Lightning talk (Sat 7:00–8:00 PM block, Volcano/Mountain): `/slides/overhang-2026-lightning`, 8 reused slides, script in `../overhang-2026-lightning/LIGHTNING.md`.
 
 The arc: the claim (law is an alignment loop we rarely close) → why now (forecasters widened their bands; the AI tail; AI drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 6 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → objections.
 
