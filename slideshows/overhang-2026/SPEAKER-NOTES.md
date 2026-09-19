@@ -12,8 +12,9 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Order 
 
 | Elapsed | Slides | Section | Minutes |
 |---|---|---|---|
-| 0:00–2:00 | 1–3 | Title, stated uncertainty, growth and the upper tail | 2 |
-| 2:00–4:00 | 4–5 | Law is an alignment problem; AI already drafts bills | 2 |
+| 0:00–1:30 | 1–2 | Title; law is an alignment problem | 1.5 |
+| 1:30–3:30 | 3–4 | Why now: stated uncertainty, growth and the upper tail | 2 |
+| 3:30–4:20 | 5 | AI already drafts bills | 1 |
 | 4:20–5:55 | 6 | AI alone can't do it (models answer without tools) | 1.5 |
 | 5:55–7:05 | 7 | What do we arm the AI with? (skip the roadmap toggle) | 1 |
 | 7:05–9:25 | 8–10 | S. 3596: the bill, the rules, then the model | 2.5 |

@@ -1,60 +1,60 @@
 # Overhang script: "Law is an alignment problem"
 
-Start at about 5:48. Running clock counts from the first word. Fifteen slides in config.ts order. Spoken words: 1,766. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 15:30, leaving about 12 minutes for objections before 6:15.
+Start at about 5:48. Running clock counts from the first word. Fifteen slides in config.ts order (alignment claim first, then the two SPF slides). Spoken words: about 1,780. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 15:30, leaving about 12 minutes for objections before 6:15.
 
 ## 1 · Law is an alignment problem (0:35)
 
-Words: 76 · Clock: 0:00 to 0:35
+Words: 74 · Clock: 0:00 to 0:35
 
-Come on in, there are seats up front. I'm Max Ghenis. I build PolicyEngine and the Axiom Foundation, and I'm prototyping a third thing called Thesis. What if every bill in Congress came with a forecast, registered before the vote and scored when the official number prints? Hold that question. I'll talk for about sixteen minutes, you'll write down one forecast of your own, and then you get twelve minutes to tell me where it breaks.
+Come on in, there are seats up front. I'm Max Ghenis. I build PolicyEngine and the Axiom Foundation, and I'm prototyping a third thing called Thesis. What if every bill in Congress came with a forecast, registered before the vote and scored when the official number prints? Hold that question. I'll talk for about sixteen minutes, you'll write down one forecast of your own, and then you get twelve minutes to tell me where it breaks. First, what a law is for.
 
-## 2 · If the baseline moves (0:55)
+## 2 · Law is an alignment problem (0:55)
 
-Words: 116 · Clock: 0:35 to 1:30
+Words: 130 · Clock: 0:35 to 1:30
 
-[click] Let me start with your trade. The Philadelphia Fed and the ECB have asked professional forecasters for probability distributions since 1968. I pooled those distributions and scored them at maxghenis.com/expectations. This chart shows the pooled standard deviation for next-year US real GDP growth, first-quarter rounds, with the euro area series beside it. From 1992 to 2020 the US figure averaged 1.29 points. In 2021 it spiked to 2.18. This year it sits at 1.41. So the people who do this for a living say they're less sure about next year than they were on average from 1992 to 2020. Congress writes laws against a baseline, and the people who forecast that baseline have widened their bands.
+[click] We use laws to align our collective goals with outcomes. People decide what they value. Legislatures choose policies. Statistical agencies measure what happened, and we read those indicators to see whether the policy served the goal. That loop has the same shape as the alignment loop this room argues about for AI: an objective, a mechanism, and a feedback signal. Now look at how we run it. We write laws in prose. We change them slowly. And we rarely score them against the goals their sponsors stated. A feedback signal that arrives years late, and that nobody reads, leaves the loop open. That was tolerable while the world moved slowly. Does it still? Ask the people who are paid to forecast the baseline.
 
-## 3 · Forecasters marked growth down, and the upper tail with it (1:05)
+## 3 · If the baseline moves (0:55)
 
-Words: 136 · Clock: 1:30 to 2:35
+Words: 118 · Clock: 1:30 to 2:25
 
-[click] Same surveys, same first-quarter rounds. Compare 2015 to 2019 with 2025 and 2026. The mean forecast for next-year growth fell from 2.19 percent to 1.89. The probability they put on growth above 4 percent fell from 5.6 percent to 4.2. The later window covers only two survey rounds, so hold it loosely. Now put that beside the Forecasting Research Institute's survey of AI experts. Their fitted distributions put a probability that rounds to zero on US growth averaging above 10 percent a year from 2025 to 2029, and 3.5 percent if AI progress is rapid. The horizons differ and the survey designs differ. Neither group puts much weight on a fast-changing world, and neither puts zero. If conditions do change quickly, the institutions that set policy will have to move faster than they do today.
+[click] Your trade. The Philadelphia Fed and the ECB have asked professional forecasters for probability distributions since 1968. I pooled those distributions and scored them at maxghenis.com/expectations. This chart shows the pooled standard deviation for next-year US real GDP growth, first-quarter rounds, with the euro area series beside it. From 1992 to 2020 the US figure averaged 1.29 points. In 2021 it spiked to 2.18. This year it sits at 1.41. So the people who do this for a living say they're less sure about next year than they were on average from 1992 to 2020. Congress writes laws against that baseline, and the people who forecast it have widened their bands. Less sure, but less sure around what?
 
-## 4 · Law is an alignment problem (0:55)
+## 4 · Forecasters marked growth down, and the upper tail with it (1:05)
 
-Words: 119 · Clock: 2:35 to 3:30
+Words: 141 · Clock: 2:25 to 3:30
 
-[click] We use laws to align our collective goals with outcomes. People decide what they value. Legislatures choose policies. Statistical agencies measure what happened, and we read those indicators to see whether the policy served the goal. That loop has the same shape as the alignment loop this room argues about for AI: an objective, a mechanism, and a feedback signal. Now look at how we run it. We write laws in prose. We change them slowly. And we rarely score them against the goals their sponsors stated. A feedback signal that arrives years late, and that nobody reads, leaves the loop open. The substrate never decides what to value. Rules, models and forecasts compute consequences. People choose the objectives.
+[click] Same surveys, same first-quarter rounds. Compare 2015 to 2019 with 2025 and 2026. The mean forecast for next-year growth fell from 2.19 percent to 1.89. The probability they put on growth above 4 percent fell from 5.6 percent to 4.2. The later window covers only two survey rounds, so hold it loosely. Now put that beside the Forecasting Research Institute's survey of AI experts. Their fitted distributions put a probability that rounds to zero on US growth averaging above 10 percent a year from 2025 to 2029, and 3.5 percent if AI progress is rapid. The horizons differ and the survey designs differ. Neither group puts much weight on a fast-changing world, and neither puts zero. If that tail arrives, a loop that scores nothing and takes years to close breaks first. And the mechanism is changing hands too.
 
 ## 5 · AI already drafts bills (0:50)
 
-Words: 105 · Clock: 3:30 to 4:20
+Words: 100 · Clock: 3:30 to 4:20
 
-[click] And the prose is changing hands. Effort published this on Wednesday. They ran Pangram's AI-text detector over 2,994 bills in the 119th Congress, and it flagged 117 of them, 3.9 percent. Split the text and the pattern sharpens. In the second quarter of this year the detector flagged 6.4 percent of findings-and-preamble text and 0.6 percent of statutory text. A detector flag is evidence of AI use, and it does not establish who wrote what. Max Spero from Pangram is here this weekend if you want the method. So AI already writes some of the words that become law. What evidence should travel with them?
+[click] Effort published this on Wednesday. They ran Pangram's AI-text detector over 2,994 bills in the 119th Congress, and it flagged 117 of them, 3.9 percent. Split the text and the pattern sharpens. In the second quarter of this year the detector flagged 6.4 percent of findings-and-preamble text and 0.6 percent of statutory text. A detector flag is evidence of AI use, and it does not establish who wrote what. Max Spero from Pangram is here this weekend if you want the method. So AI already writes some of the words that become law. What evidence should travel with them?
 
-## 6 · What if every bill had a score? (0:45)
-
-Words: 102 · Clock: 4:20 to 5:05
-
-[click] Before we vote, estimate what the bill would change. Publish the assumptions, the budget effect, and the uncertainty beside the text. Today a formal score covers the budget effect, for the bills that get one, and the people in this room who work on the Hill know the craft behind each of those. I want the same discipline on every bill, for the outcomes the sponsors said they cared about, with a date on which the estimate resolves. A score gives people a claim they can question. A forecast gives them a claim they can grade, and the grade closes the loop.
-
-## 7 · AI alone can't do it (0:50)
+## 6 · AI alone can't do it (0:50)
 
 Words: 106 · Clock: 5:05 to 5:55
 
-[click] Why not ask a frontier model? We test that at policybench.org. The models answer with no tools: no calculator, no search, no PolicyEngine. We asked 39 models basic tax and benefit questions about 100 households and checked each answer against the computed one. We count an answer as exact when amounts land within a dollar and eligibility matches. The best model, GPT-5.6 Sol, scored 89.2 percent. The weakest scored 62.6. The other models land between them. Those numbers say nothing about a model with tools. The benchmark leaves that open. They do say the rules have to live somewhere a model can call them.
+[click] A score gives people a claim they can question. A forecast gives them a claim they can grade. Could the same models supply that evidence? We test that at policybench.org. The models answer with no tools: no calculator, no search, no PolicyEngine. We asked 39 models basic tax and benefit questions about 100 households and checked each answer against the computed one. We count an answer as exact when amounts land within a dollar and eligibility matches. The best model, GPT-5.6 Sol, scored 89.2 percent. The weakest scored 62.6. The other models land between them. Those numbers say nothing about a model with tools. The benchmark leaves that open. They do say the rules have to live somewhere a model can call them.
 
-## 8 · What do we arm the AI with? (1:10)
+## 7 · What do we arm the AI with? (1:10)
 
 Words: 145 · Clock: 5:55 to 7:05
 
 [click] So what does a forecasting agent need? Five things, and each one needs its own feedback loop. One, the rules of the policy, encoded so a program can run them, with tests and independent calculators to check the encoding. Two, official statistics, with a receipt for what each agency printed and when. Three, a population at the household level, calibrated to those statistics, with the calibration error published. Four, a model that computes a reform on that population, with its differences from other models explained. Five, judgment: the piece that combines them into a forecast, with a date on which it resolves and a score when it does. That fifth loop ranks the other four. Every one of those checks works the same for an AI agent and for a human analyst. Now one bill, three of those layers, and one number the IRS prints.
 
-## 9 · The rules (1:20)
+## 8 · One bill through the stack (0:35)
 
-Words: 169 · Clock: 7:05 to 8:25
+Words: 82 · Clock: 7:05 to 7:40
 
-[click] The bill is S. 3596, the Stronger Start for Working Families Act, from Senators Hassan and Young. It has sat in Senate Finance since January 8. It lowers the earnings threshold for the refundable child tax credit from 2,500 dollars to one dollar. The 15 percent phase-in rate stays and the refundable cap stays, so a family gains at most about 375 dollars. I picked it because it moves one threshold in the statute and one number in an IRS table. [live page] Layer one. This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it.
+[click] The bill is S. 3596, the Stronger Start for Working Families Act, from Senators Hassan and Young. It has sat in Senate Finance since January 8. It lowers the earnings threshold for the refundable child tax credit from 2,500 dollars to one dollar. The 15 percent phase-in rate stays and the refundable cap stays, so a family gains at most about 375 dollars. I picked it because it moves one threshold in the statute and one number in an IRS table. Layer one, the rules.
+
+## 9 · The rules (0:50)
+
+Words: 91 · Clock: 7:40 to 8:30
+
+[click] [live page] This is the section it amends, section 24(d)(1) of the tax code, at axiom.org. On the left, the statute text. On the right, the 14 rules the Axiom Foundation has encoded from that text, and this one, ctc_refundable_phase_in_threshold, holds the 2,500. The bill changes that parameter. Every rule on this page traces back to the sentence of statute that sets it and the date it took effect, so a model, an agent, or you can read the change from the page instead of guessing at it.
 
 ## 10 · The model (1:00)
 
@@ -133,3 +133,9 @@ Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 **Recommended order.** TitleSlide, BaselineSlide, GrowthSlide, AlignmentSlide, DraftingSlide, PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide, ModelSlide, AudienceSlide, AgentSlide, ClosingLoopSlide, DiscussionSlide, EndSlide. Backups: WhatIfEveryBillSlide, BacktestSlide, WhatIfEverySeriesSlide, CrossScaleSlide, HowWeGetThereSlide.
 
 **Verification.** I read every talk-order slide component, the shared FivePrimitivesSlide, both memory files, the Axiom guardrails, the outline, the session pack, and the IARIW notes. I ran the voice rules over the whole script twice and fixed 39 violations: labeled and framing openers, argument pointers ("that is why", "that is what"), narrated honesty, an announced neutrality line, an unverified offer to register audience numbers, an unverified "no sponsor has signed" claim, be-verb identities, one intensifier, and five numbers outside the brief (CBO counts, "two pages", "one in nine", "for one year", "2,499"). Every remaining number matches the brief or a slide. I did not edit the repo.
+
+---
+
+# Order change, 3:10 PM
+
+Max: "I don't see how slides 2 and 3 fit into slide 4." Applied his transition test (write the sentence that carries the listener across each pair of slides; a pair with no true, necessary sentence is misordered). The claim now comes first: Title → Law is an alignment problem → If the baseline moves → Forecasters marked growth down → AI already drafts bills → AI alone can't do it, then unchanged. Slides 2 to 4 above are renumbered and rewritten to carry their transitions. "What if every bill had a score?" is a backup slide now, so its section is gone and its grade line moved into the PolicyBench opener; the bill's intro has its own slide (8) before the rules page. Clocks from slide 8 on run about 15 seconds earlier than printed.

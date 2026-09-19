@@ -15,8 +15,8 @@ export const overhang2026Config: SlideshowConfig = {
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
-    // 30-minute cut (Sat 5:45-6:15 PM): 15 slides, about 15.5 minutes of talk; order per the script's flow review
-    TitleSlide, BaselineSlide, GrowthSlide, AlignmentSlide, DraftingSlide,
+    // 30-minute cut (Sat 5:45-6:15 PM): claim first, then the two SPF slides as "why now"; order per SCRIPT.md
+    TitleSlide, AlignmentSlide, BaselineSlide, GrowthSlide, DraftingSlide,
     PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide,
     ModelSlide, AudienceSlide, AgentSlide, ClosingLoopSlide, DiscussionSlide, EndSlide,
     // Backups for questions, after the end slide
