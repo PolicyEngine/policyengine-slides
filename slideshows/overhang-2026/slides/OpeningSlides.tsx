@@ -1,4 +1,7 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useState, type ReactNode } from 'react';
+import { LivePanel } from './BillSlides';
 import { IconArrowRight, IconScale, IconTargetArrow, IconUsers } from '@tabler/icons-react';
 import BasePathImage from '@/components/core/BasePathImage';
 import Slide from '@/components/core/Slide';
@@ -53,9 +56,22 @@ export function TitleSlide() {
 }
 
 export function BaselineSlide() {
+  const [live, setLive] = useState(false);
+  const trackerUrl = 'https://maxghenis.com/expectations/';
   return (
     <Frame title="If the baseline moves" source={expectationsSource}>
-      <div className="flex h-full flex-col">
+      <div className="relative h-full">
+        <button
+          type="button"
+          onClick={(event) => { event.stopPropagation(); setLive(!live); }}
+          className="absolute right-0 -top-16 z-20 rounded-lg border border-pe-200 bg-white px-4 py-2 text-sm font-semibold text-pe-dark shadow-sm pointer-events-auto"
+        >
+          {live ? 'Show the chart' : 'Show the live tracker'}
+        </button>
+        {live ? (
+          <LivePanel url={trackerUrl} title="Expectations tracker, live" />
+        ) : (
+          <div className="flex h-full flex-col">
         <p className="text-xl text-gray-600">Professional forecasters’ stated uncertainty about next-year US real GDP growth</p>
         <div className="mt-4 grid min-h-0 flex-1 grid-cols-[1fr_245px] items-center gap-8">
           <div className="relative h-full min-h-0">
@@ -68,6 +84,9 @@ export function BaselineSlide() {
             <p className="text-sm leading-relaxed text-gray-500">Pooled standard deviation,<br />percentage points.<br />First-quarter survey rounds.</p>
           </div>
         </div>
+      </div>
+    
+        )}
       </div>
     </Frame>
   );

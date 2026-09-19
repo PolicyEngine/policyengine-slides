@@ -47,7 +47,7 @@ function BillFrame({
 }
 
 /** Live-app pattern from IARIW, with its controls kept within the slide. */
-function LivePanel({ url, title }: { url: string; title: string }) {
+export function LivePanel({ url, title }: { url: string; title: string }) {
   const [expanded, setExpanded] = useState(false);
 
   const controls = (
@@ -238,28 +238,43 @@ export function AgentSlide() {
 }
 
 export function ClosingLoopSlide() {
+  const [live, setLive] = useState(false);
+  const calibrationUrl = 'https://app.thesisinstitute.org/calibration';
   return (
-    <BillFrame title="The loop that matters most" prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl="https://app.thesisinstitute.org/calibration">
-      <div className="flex h-full flex-col justify-center gap-7">
-        <p className="text-[28px] leading-snug text-gray-800">Publish the reasoning. Wait for the official number. <span className="font-semibold text-pe-teal">Score the forecast.</span></p>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="content-card px-6 py-6">
-            <p className="text-5xl font-bold tracking-tight text-pe-teal">45</p>
-            <p className="mt-3 text-xl text-pe-dark">Witness-verified scores</p>
+    <BillFrame title="The loop that matters most" prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl={calibrationUrl}>
+      <div className="relative h-full">
+        <button
+          type="button"
+          onClick={(event) => { event.stopPropagation(); setLive(!live); }}
+          className="absolute right-0 -top-16 z-20 rounded-lg border border-pe-200 bg-white px-4 py-2 text-sm font-semibold text-pe-dark shadow-sm pointer-events-auto"
+        >
+          {live ? 'Show the numbers' : 'Show the live scoreboard'}
+        </button>
+        {live ? (
+          <LivePanel url={calibrationUrl} title="Thesis calibration scoreboard, live" />
+        ) : (
+          <div className="flex h-full flex-col justify-center gap-7">
+            <p className="text-[28px] leading-snug text-gray-800">Publish the reasoning. Wait for the official number. <span className="font-semibold text-pe-teal">Score the forecast.</span></p>
+            <div className="grid grid-cols-3 gap-6">
+              <div className="content-card px-6 py-6">
+                <p className="text-5xl font-bold tracking-tight text-pe-teal">45</p>
+                <p className="mt-3 text-xl text-pe-dark">Witness-verified scores</p>
+              </div>
+              <div className="content-card px-6 py-6">
+                <p className="text-5xl font-bold tracking-tight text-pe-teal">35 / 45</p>
+                <p className="mt-3 text-xl text-pe-dark">Inside the stated 80% interval</p>
+              </div>
+              <div className="content-card px-6 py-6">
+                <p className="text-5xl font-bold tracking-tight text-pe-teal">0.98</p>
+                <p className="mt-3 text-xl text-pe-dark">CRPS ratio vs persistence</p>
+                <p className="mt-2 text-sm text-gray-500">9 matched targets · Lower is better</p>
+              </div>
+            </div>
+            <div className="accent-block">
+              <p className="text-xl leading-relaxed text-gray-700">The record stays public. New evidence feeds back into the rules, the data, the model, and the next forecast.</p>
+            </div>
           </div>
-          <div className="content-card px-6 py-6">
-            <p className="text-5xl font-bold tracking-tight text-pe-teal">35 / 45</p>
-            <p className="mt-3 text-xl text-pe-dark">Inside the stated 80% interval</p>
-          </div>
-          <div className="content-card px-6 py-6">
-            <p className="text-5xl font-bold tracking-tight text-pe-teal">0.98</p>
-            <p className="mt-3 text-xl text-pe-dark">CRPS ratio vs persistence</p>
-            <p className="mt-2 text-sm text-gray-500">9 matched targets · Lower is better</p>
-          </div>
-        </div>
-        <div className="accent-block">
-          <p className="text-xl leading-relaxed text-gray-700">The record stays public. New evidence feeds back into the rules, the data, the model, and the next forecast.</p>
-        </div>
+        )}
       </div>
     </BillFrame>
   );
