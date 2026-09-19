@@ -46,9 +46,9 @@ Words: 91 · Clock: 4:55 to 5:45
 
 ## 8 · The model (0:55)
 
-Words: 118 · Clock: 5:45 to 6:45
+Words: 113 · Clock: 5:45 to 6:45
 
-[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. 6.5 percent of people gain. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
+[click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. I ran it this afternoon on PolicyEngine's API with the bill's one-dollar threshold. Federal cost, 1.83 billion dollars in 2026. Child poverty on the supplemental measure moves from 17.0 to 16.8 percent. Read the label: certification pending. We have not finished the cross-checks on this pairing. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
 ## 9 · Your indicator first (1:05)
 

@@ -169,10 +169,9 @@ export function ModelSlide() {
           <p className="text-2xl text-gray-700">PolicyEngine estimates the impact of lowering the threshold.</p>
           <span className="shrink-0 rounded-full border border-pe-amber px-4 py-2 text-sm text-gray-700">Certification pending</span>
         </div>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 gap-6">
           {[
-            ['−$1.83B', 'Federal budget impact', '2026'],
-            ['6.5%', 'People who gain', '2026, static'],
+            ['$1.83B', 'Federal cost', '2026'],
             ['17.0% → 16.8%', 'Child poverty rate', 'Supplemental Poverty Measure, 2026'],
           ].map(([value, label, period]) => (
             <div key={value} className="content-card px-6 py-8">

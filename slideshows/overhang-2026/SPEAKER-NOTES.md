@@ -76,7 +76,7 @@ Optional: "Show the rule graph", then Expand. The refundable credit sits at the 
 
 ### 8 · The model (1m)
 
-PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: −$1.83B federal in 2026, 6.5% of people gain, SPM child poverty 17.0% → 16.8%. Read the label: certification pending.
+PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026, SPM child poverty 17.0% → 16.8%. Read the label: certification pending.
 Behavior held fixed; the model does not say who files and claims. "The model hands the forecast a mechanism, and the forecast stays a separate question."
 
 ### 9 · Your indicator first (1m 05s)
