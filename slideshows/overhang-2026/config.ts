@@ -3,7 +3,7 @@ import { speakers } from '@/lib/speakers';
 import { TitleSlide, BaselineSlide, GrowthSlide, BacktestSlide, AlignmentSlide, DraftingSlide, DiscussionSlide, EndSlide } from './slides/OpeningSlides';
 import { WhatIfEveryBillSlide, WhatIfEverySeriesSlide, CrossScaleSlide, HowWeGetThereSlide, PolicyBenchSlide } from './slides/QuestionSlides';
 import PrimitivesSlide from './slides/PrimitivesSlide';
-import { BillSlide, RulesSlide, ModelSlide, AudienceSlide, AgentSlide, ClosingLoopSlide } from './slides/BillSlides';
+import { BillSlide, RulesSlide, ModelSlide, IndicatorSlide, AudienceSlide, AgentSlide, ClosingLoopSlide } from './slides/BillSlides';
 
 export const overhang2026Config: SlideshowConfig = {
   id: 'overhang-2026',
@@ -18,7 +18,7 @@ export const overhang2026Config: SlideshowConfig = {
     // 30-minute cut (Sat 5:45-6:15 PM): claim first, then the two SPF slides as "why now"; order per SCRIPT.md
     TitleSlide, AlignmentSlide, BaselineSlide, GrowthSlide, DraftingSlide,
     PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide,
-    ModelSlide, AudienceSlide, AgentSlide, ClosingLoopSlide, DiscussionSlide, EndSlide,
+    ModelSlide, IndicatorSlide, AudienceSlide, AgentSlide, ClosingLoopSlide, DiscussionSlide, EndSlide,
     // Backups for questions, after the end slide
     WhatIfEveryBillSlide, BacktestSlide, WhatIfEverySeriesSlide, CrossScaleSlide, HowWeGetThereSlide,
   ],

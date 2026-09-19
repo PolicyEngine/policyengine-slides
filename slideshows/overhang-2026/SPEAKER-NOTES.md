@@ -2,7 +2,7 @@
 
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
-Deck: `/slides/overhang-2026` · 15 slides plus 5 backups · 16-minute talk, 12 minutes of objections, stop at 6:15 for dinner.
+Deck: `/slides/overhang-2026` · 16 slides plus 5 backups · 17-minute talk, 11 minutes of objections, stop at 6:15 for dinner.
 
 The arc: changing baselines → laws as an alignment mechanism → forecasts for bills and outcomes → tools with feedback loops → one bill from statute to forecast → the audience's forecast → a public score and questions about legitimacy.
 
@@ -18,7 +18,8 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Order 
 | 4:20–5:55 | 6 | AI alone can't do it (models answer without tools) | 1.5 |
 | 5:55–7:05 | 7 | What do we arm the AI with? (skip the roadmap toggle) | 1 |
 | 7:05–9:25 | 8–10 | S. 3596: the bill, the rules, then the model | 2.5 |
-| 11:00–13:00 | 11 | Your number first: 90 seconds of quiet writing | 2 |
+| 9:25–10:30 | 11 | Your indicator first: 60 seconds of shout-outs | 1 |
+| 10:30–12:30 | 12 | Your number first: 90 seconds of quiet writing | 2 |
 | 13:00–14:30 | 12 | The agent's forecast and its reasoning | 1.5 |
 | 14:30–16:00 | 13 | The loop that matters most; the scoreboard today | 1.5 |
 | 16:00–28:00 | 14 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12 |

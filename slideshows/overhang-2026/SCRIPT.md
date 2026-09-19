@@ -1,6 +1,6 @@
 # Overhang script: "Law is an alignment problem"
 
-Start at about 5:48. Running clock counts from the first word. Fifteen slides in config.ts order (alignment claim first, then the two SPF slides). Spoken words: about 1,780. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 15:30, leaving about 12 minutes for objections before 6:15.
+Start at about 5:48. Running clock counts from the first word. Sixteen slides in config.ts order. Spoken words: about 1,910; the talk ends near 16:40, leaving about 11 minutes for objections. At 130 words a minute plus 90 seconds of quiet and two show-of-hands pauses, the talk ends near 15:30, leaving about 12 minutes for objections before 6:15.
 
 ## 1 · Law is an alignment problem (0:35)
 
@@ -62,9 +62,15 @@ Words: 127 · Clock: 8:25 to 9:25
 
 [click] Layer four. PolicyEngine runs that parameter change over a calibrated population of US households. Federal cost, 1.83 billion dollars in 2026, and 17.1 billion over 2026 to 2035. 6.5 percent of people gain. Read the two labels. One says certification pending: we have not finished the cross-checks on this pairing. The other says the published run uses a zero-dollar threshold where the bill says one dollar. The simulation holds behavior fixed and computes what the rule change does to each household's credit. It does not model who files a return and claims the credit, and that count depends on take-up. The IRS prints that count. So the model hands the forecast a mechanism, and the forecast stays a separate question.
 
-## 11 · Your number first (2:05, of which 90 seconds silent)
+## 11 · Your indicator first (1:05)
 
-Words: 77 · Clock: 9:25 to 11:30 · "Go" lands at about 0:31 after the click
+Words: 133 · Clock: 9:25 to 10:30
+
+[click] Before the number, the indicator. Which official statistic would tell you whether this bill did its job? The usual answer is cost, and the model gives it: 1.83 billion dollars in 2026. Now look at the deficit that cost lands in. Our agent's forecast for one month's federal deficit, May, carried an 80 percent interval from 240 to 380 billion dollars. The print came in at 293. With or without this bill, those two distributions overlap almost entirely. A cost score is real, and it is unscoreable against the deficit. So shout out statistics this bill would move by more than their own forecast interval. Sixty seconds. [pause for shout-outs; repeat each one back] Returns claiming the credit. Child poverty. Filing among the lowest earners. The bill page lists its candidates and admits where no series exists. Now your number.
+
+## 12 · Your number first (2:05, of which 90 seconds silent)
+
+Words: 77 · Clock: 10:30 to 12:35 · "Go" lands at about 0:31 after the click
 
 [click] Your number first. How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes? The IRS first prints: 19.1 million for 2020, 37.8 for 2021, the year the law dropped the earnings test and raised the credit, then 18.1 and 17.6. Threshold, 2,500 dollars to one dollar. Write a median and an 80 percent interval. Ninety seconds, no talking. Go.
 
@@ -72,25 +78,25 @@ Words: 77 · Clock: 9:25 to 11:30 · "Go" lands at about 0:31 after the click
 
 Ten seconds. Keep that number in front of you.
 
-## 12 · The agent's forecast (1:45)
+## 13 · The agent's forecast (1:45)
 
 Words: 214 · Clock: 11:30 to 13:15
 
 [click] Our agent registered this on August 4. We run the agents at Thesis and we score them. Under current law, 17.6 million returns, with an 80 percent interval from 5.1 to 30.1 million. If the bill is enacted, 27.2 million, interval 14.7 to 39.7. A gap of 9.6 million returns. Check yours. Hands up if your median came in above 27 million. [pause] Below the last print, 17.6? [pause] Now read the trace. [live page] The agent took the last print, 17.6, and added half of 2021's excess over its neighbors. It calls that half a judgmental assumption. In 2021 the law removed the earnings test and raised the credit. This bill moves one threshold from 2,500 dollars to one. So you can challenge the analogy, and the page shows you where. The interval half-width is 1.28 sample standard deviations of four prints. One of those four is 2021, and that one print stretches the current-law band from 5 to 30 million. If you wrote a tighter band, the page shows the assumption you'd replace. The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast. The condition gets judged on December 31, 2027, and the first print is due by the end of 2029.
 
-## 13 · The loop that matters most (1:05)
+## 14 · The loop that matters most (1:05)
 
 Words: 134 · Clock: 13:15 to 14:20
 
 [click] Publish the reasoning. Wait for the official number. Score the forecast. That loop ranks the other four. Here is the scoreboard as of this morning. 45 scores, each one a forecast that an outside timestamp authority recorded before the print. 35 of the 45 landed inside their 80 percent interval. Against a persistence baseline, the CRPS ratio is 0.98 on nine matched targets. The persistence baseline carries the last print forward. Nine targets, and a rough tie with persistence. The misses stay on the page. Each one goes back into the rules, the data, the model, or the next forecast. I'm still prototyping Thesis. We run the agents and we score them. If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so.
 
-## 14 · Where does this break? (0:40, then 12 minutes of objections)
+## 15 · Where does this break? (0:40, then 12 minutes of objections)
 
 Words: 90 · Clock: 14:20 to 15:00 · Objections 15:00 to 27:00
 
 [click] Now break it. Three headings. Goodhart: what happens when the measure becomes the target? Who sets the objectives: an AI read this bill and proposed the goals on its page, and the page has buttons to countersign or strike them. Legitimacy: who gets to contest the model, the forecast, and the use somebody makes of them? We have twelve minutes under Chatham House rules, so nothing you say gets attributed. One request for the end: tell me which bill should get a forecast next. Who's first?
 
-## 15 · What if every bill had a forecast? (0:25)
+## 16 · What if every bill had a forecast? (0:25)
 
 Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 
@@ -139,3 +145,10 @@ Words: 50 · Clock: 27:00 to 27:25 · About 6:15
 # Order change, 3:10 PM
 
 Max: "I don't see how slides 2 and 3 fit into slide 4." Applied his transition test (write the sentence that carries the listener across each pair of slides; a pair with no true, necessary sentence is misordered). The claim now comes first: Title → Law is an alignment problem → If the baseline moves → Forecasters marked growth down → AI already drafts bills → AI alone can't do it, then unchanged. Slides 2 to 4 above are renumbered and rewritten to carry their transitions. "What if every bill had a score?" is a backup slide now, so its section is gone and its grade line moved into the PolicyBench opener; the bill's intro has its own slide (8) before the rules page. Clocks from slide 8 on run about 15 seconds earlier than printed.
+
+
+---
+
+# Indicator beat, 4:05 PM
+
+Max: "could the exercise also be to shout out relevant indicators? like overall 'cost' is really about the total deficit with or without the bill, so might want other metrics that could be more targeted." Added slide 11, "Your indicator first": 60 seconds of shout-outs before the number, with the cost-versus-deficit contrast (PolicyEngine: -$1.83B in 2026; Thesis May 2026 monthly-deficit forecast $305B [80%: $240B-$380B], print $292.6B, app.thesisinstitute.org/us-mts-deficit-may-2026). Clocks from slide 12 on run about a minute later than before; objections shrink to about 11 minutes.

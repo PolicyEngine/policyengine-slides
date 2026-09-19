@@ -178,6 +178,32 @@ export function ModelSlide() {
   );
 }
 
+export function IndicatorSlide() {
+  return (
+    <BillFrame title="Your indicator first" source="Cost: PolicyEngine panel on the Thesis bill page. Deficit interval: Thesis forecast of the May 2026 Monthly Treasury Statement deficit, $305B with 80% interval [$240B, $380B]; the print came in at $292.6B · app.thesisinstitute.org/us-mts-deficit-may-2026" sourceUrl="https://app.thesisinstitute.org/us-mts-deficit-may-2026">
+      <div className="flex h-full flex-col justify-center gap-6">
+        <p className="text-[30px] font-semibold leading-snug text-pe-dark">Which official statistic would tell you whether this bill did its job?</p>
+        <div className="grid grid-cols-[1fr_1.15fr] gap-6">
+          <div className="content-card px-6 py-5">
+            <p className="text-sm uppercase tracking-wide text-gray-500">The usual answer: cost</p>
+            <p className="mt-2 text-4xl font-bold text-pe-dark">−$1.83B <span className="text-lg font-medium text-gray-600">in 2026</span></p>
+            <p className="mt-3 text-base leading-relaxed text-gray-700">One month of the federal deficit carried an 80% interval of <strong>$240B to $380B</strong>. With or without the bill, those two distributions overlap almost entirely.</p>
+          </div>
+          <div className="content-card px-6 py-5">
+            <p className="text-sm uppercase tracking-wide text-gray-500">Shout them out · 60 seconds</p>
+            <ol className="mt-3 space-y-3 text-2xl text-gray-400">
+              <li>1. ________________</li>
+              <li>2. ________________</li>
+              <li>3. ________________</li>
+            </ol>
+            <p className="mt-3 text-sm text-gray-500">A good one moves by more than its own forecast interval if the bill works.</p>
+          </div>
+        </div>
+      </div>
+    </BillFrame>
+  );
+}
+
 export function AudienceSlide() {
   return (
     <BillFrame title="Your number first" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
