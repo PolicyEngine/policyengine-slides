@@ -7,6 +7,7 @@ import Slide from '@/components/core/Slide';
 const billUrl = 'https://app.thesisinstitute.org/bills/s3596-119';
 const statuteUrl = 'https://axiom.org/us/statute/26/24/d/1';
 const congressUrl = 'https://www.congress.gov/bill/119th-congress/senate-bill/3596';
+const graphUrl = 'https://axiom.org/app?compose=us%3Astatutes%2F26%2F24%2Fd&focus=us%3Astatutes%2F26%2F24%2Fd%23refundable_ctc';
 
 function BillFrame({
   title,
@@ -130,8 +131,9 @@ export function BillSlide() {
 }
 
 export function RulesSlide() {
+  const [graph, setGraph] = useState(false);
   return (
-    <BillFrame title="The rules" source="Source: the Axiom Foundation · axiom.org/us/statute/26/24/d/1; S. 3596" sourceUrl={statuteUrl}>
+    <BillFrame title="The rules" source="Source: the Axiom Foundation · axiom.org/us/statute/26/24/d/1 (statute beside its encoded rules) · axiom.org/app (rule graph, prototype); S. 3596" sourceUrl={graph ? graphUrl : statuteUrl}>
       <div className="grid h-full min-h-0 grid-cols-[0.9fr_1.7fr] gap-7">
         <div className="flex flex-col justify-center gap-6">
           <p className="text-2xl leading-snug text-gray-800">Read the statute beside the rules that encode it.</p>
@@ -141,8 +143,19 @@ export function RulesSlide() {
             <p className="mt-4 text-3xl font-semibold text-pe-teal">$2,500 → $1</p>
           </div>
           <p className="text-base text-gray-500">The statute and its encoded rules provide a traceable starting point.</p>
+          <button
+            type="button"
+            onClick={(event) => { event.stopPropagation(); setGraph(!graph); }}
+            className="self-start rounded-lg border border-pe-200 bg-white px-4 py-2 text-sm font-semibold text-pe-dark shadow-sm pointer-events-auto"
+          >
+            {graph ? 'Show the statute page' : 'Show the rule graph'}
+          </button>
         </div>
-        <LivePanel url={statuteUrl} title="The Axiom Foundation: child tax credit statute and encoded rules" />
+        {graph ? (
+          <LivePanel url={graphUrl} title="The Axiom Foundation: refundable child tax credit rule graph" />
+        ) : (
+          <LivePanel url={statuteUrl} title="The Axiom Foundation: child tax credit statute and encoded rules" />
+        )}
       </div>
     </BillFrame>
   );
