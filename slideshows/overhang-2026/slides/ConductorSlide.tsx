@@ -1,16 +1,11 @@
-import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
+import DeckFrame from './DeckFrame';
 
 /** Closes the loop opened on the PolicyBench slide (slide 4), after the IARIW "Conductors, not oracles" beat. */
 export default function ConductorSlide() {
   return (
-    <Slide>
-      <SlideHeader>
-        <SlideTitle>With the stack, the model stops guessing</SlideTitle>
-      </SlideHeader>
+    <DeckFrame title="With the stack, the model stops guessing">
 
-      <div className="mt-4 grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-2 gap-8">
         <div className="content-card p-6">
           <div className="slide-tag mb-3">Slide 4 · answering from memory</div>
           <p className="text-xl leading-relaxed text-gray-700">
@@ -34,6 +29,6 @@ export default function ConductorSlide() {
           Two claims sit on the same page: the model’s mechanism and the agent’s judgment. The grade on the second tells us which assumptions deserve to become mechanism.
         </p>
       </div>
-    </Slide>
+    </DeckFrame>
   );
 }

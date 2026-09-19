@@ -54,7 +54,7 @@ A detector flag is evidence of AI use and does not establish who wrote what. Max
 ### 4 · Without tools, the best model gets 89% of household answers right (55s)
 
 A score gives a claim people can question; a forecast gives a claim they can grade. Could the same models supply that evidence?
-PolicyBench: 39 models, 100 households, no tools. Best 89.2% (GPT-5.6 Sol), weakest 62.6%. Exact means within a dollar and eligibility matches.
+PolicyBench: 39 models, 100 households, no tools. Best 89.2% (GPT-5.6 Sol). On households that actually get SNAP, exact amounts 28.3% of the time; models zero them out on asset heuristics. Exact means within a dollar and eligibility matches.
 Hold the tools question: the answer key on that board is PolicyEngine's own output. Slide 12 comes back to it. Optional toggle: the live board.
 
 ### 5 · What do we arm the AI with? (1m 10s)

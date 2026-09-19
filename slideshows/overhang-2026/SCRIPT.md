@@ -20,11 +20,11 @@ Words: 100 · Clock: 1:25 to 2:15
 
 [click] Effort published this on Wednesday. They ran Pangram's AI-text detector over 2,994 bills in the 119th Congress, and it flagged 117 of them, 3.9 percent. Split the text and the pattern sharpens. In the second quarter of this year the detector flagged 6.4 percent of findings-and-preamble text and 0.6 percent of statutory text. A detector flag is evidence of AI use, and it does not establish who wrote what. Max Spero from Pangram is here this weekend if you want the method. So AI already writes some of the words that become law. What evidence should travel with them?
 
-## 4 · Without tools, the best model gets 89% of household answers right (0:55)
+## 4 · Without tools, the best model gets 89% of household answers right (1:00)
 
-Words: 116 · Clock: 2:15 to 3:10
+Words: 128 · Clock: 2:15 to 3:10
 
-[click] A score gives people a claim they can question. A forecast gives them a claim they can grade. Could the same models supply that evidence? We test that at policybench.org. The models answer with no tools: no calculator, no search, no PolicyEngine. We asked 39 models basic tax and benefit questions about 100 households and checked each answer against the computed one. We count an answer as exact when amounts land within a dollar and eligibility matches. The best model, GPT-5.6 Sol, scored 89.2 percent. The weakest scored 62.6. The other models land between them. Those numbers say nothing about a model with tools, and the answer key on that board is PolicyEngine's own output. Hold that question until the bill has gone through the stack. The numbers do say the rules have to live somewhere a model can call them.
+[click] A score gives people a claim they can question. A forecast gives them a claim they can grade. Could the same models supply that evidence? We test that at policybench.org. The models answer with no tools: no calculator, no search, no PolicyEngine. We asked 39 models basic tax and benefit questions about 100 households and checked each answer against the computed one. We count an answer as exact when amounts land within a dollar and eligibility matches. The best model, GPT-5.6 Sol, scored 89.2 percent. The average hides the hard cases. On households that actually get SNAP, the models get the amount exactly right 28 percent of the time; many of them zero it out on an asset limit the prompt never supports. Those numbers say nothing about a model with tools, and the answer key on that board is PolicyEngine's own output. Hold that question until the bill has gone through the stack. The numbers do say the rules have to live somewhere a model can call them.
 
 ## 5 · What do we arm the AI with? (1:10)
 

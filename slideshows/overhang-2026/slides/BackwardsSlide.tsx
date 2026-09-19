@@ -1,5 +1,5 @@
 import { IconArrowRight, IconScale, IconTargetArrow, IconUsers } from '@tabler/icons-react';
-import Slide from '@/components/core/Slide';
+import DeckFrame from './DeckFrame';
 
 /** The payoff for the title: with forecasts for every statistic, statistics for every bill,
  *  and cheap conditionals, the loop on slide 2 runs backwards, from values to policies. */
@@ -15,16 +15,8 @@ export default function BackwardsSlide() {
     { label: 'Policies', detail: 'Search the bills whose conditionals move it', Icon: IconScale },
   ];
   return (
-    <Slide fullBleed>
-      <div className="absolute inset-0 flex flex-col px-14 pt-10 pb-24">
-        <header className="mb-5 shrink-0">
-          <div className="flex items-center justify-between gap-6">
-            <h1 className="font-display text-[38px] font-bold leading-tight tracking-tight text-pe-dark">Cheap conditionals let us run the loop backwards</h1>
-            <span className="rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Where this goes</span>
-          </div>
-          <div className="accent-bar mt-4 w-32" />
-        </header>
-        <div className="flex min-h-0 flex-1 flex-col justify-center gap-6">
+    <DeckFrame title="Cheap conditionals let us run the loop backwards" badge={<span className="rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Where this goes</span>}>
+        <div className="flex h-full min-h-0 flex-col justify-center gap-6">
           <div className="grid grid-cols-3 gap-5">
             {scale.map((row) => (
               <div key={row.what} className="content-card p-5">
@@ -47,7 +39,6 @@ export default function BackwardsSlide() {
           </div>
           <p className="border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Start from the goal and search the bills. That is the alignment problem in the title.</p>
         </div>
-      </div>
-    </Slide>
+    </DeckFrame>
   );
 }

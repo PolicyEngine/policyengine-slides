@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react';
 import { IconArrowRight, IconArrowsMaximize, IconExternalLink, IconX } from '@tabler/icons-react';
 import Slide from '@/components/core/Slide';
+import DeckFrame from './DeckFrame';
 
 const billUrl = 'https://app.thesisinstitute.org/bills/s3596-119';
 const statuteUrl = 'https://axiom.org/us/statute/26/24/d/1';
@@ -23,27 +24,9 @@ function BillFrame({
   prototype?: boolean;
 }) {
   return (
-    <Slide fullBleed>
-      <div className="absolute inset-x-16 top-14 bottom-[104px] flex flex-col">
-        <div className="mb-6 shrink-0">
-          <div className="flex items-center justify-between gap-6">
-            <h1 className="text-[38px] font-bold leading-tight tracking-tight text-pe-dark">{title}</h1>
-            {prototype && <span className="rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Thesis · Prototype</span>}
-          </div>
-          <div className="accent-bar mt-4 w-28" />
-        </div>
-        <div className="min-h-0 flex-1">{children}</div>
-        <a
-          href={sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          onClick={(event) => event.stopPropagation()}
-          className="mt-4 shrink-0 text-xs leading-snug text-gray-500 hover:text-pe-teal"
-        >
-          {source}
-        </a>
-      </div>
-    </Slide>
+    <DeckFrame title={title} source={source} sourceUrl={sourceUrl} badge={prototype ? <span className="shrink-0 rounded-full bg-pe-light px-4 py-2 text-sm font-semibold text-pe-dark">Thesis · Prototype</span> : undefined}>
+      {children}
+    </DeckFrame>
   );
 }
 

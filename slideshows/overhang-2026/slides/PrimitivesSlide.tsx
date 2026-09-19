@@ -1,9 +1,7 @@
 'use client';
 import { useState } from 'react';
 import FivePrimitivesSlide from '@/slideshows/iariw-2026/slides/FivePrimitivesSlide';
-import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
+import DeckFrame from './DeckFrame';
 import BasePathImage from '@/components/core/BasePathImage';
 
 const layers = [
@@ -14,7 +12,7 @@ const layers = [
   {logo:'/logos/thesis-institute.png', name:'Thesis · prototype', width:532, height:112, detail:'Forecast outcomes and score them as they resolve.'},
 ];
 function RoadmapView({ title, closing }: { title: string; closing?: string }) {
-  return <Slide><SlideHeader><SlideTitle>{title}</SlideTitle></SlideHeader><div className="mt-10 grid grid-cols-5 gap-4">{layers.map(layer=><div key={layer.name} className="content-card p-5"><div className="flex h-20 items-center"><BasePathImage src={layer.logo} alt={layer.name} width={layer.width} height={layer.height} className="h-auto max-h-14 w-full object-contain" /></div><p className="mt-5 text-lg leading-relaxed text-gray-600">{layer.detail}</p>{layer.name.includes('prototype') && <p className="mt-4 text-sm font-semibold text-pe-teal">Prototype</p>}</div>)}</div>{closing && <p className="mt-10 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">{closing}</p>}</Slide>;
+  return <DeckFrame title={title}><div className="grid grid-cols-5 gap-4">{layers.map(layer=><div key={layer.name} className="content-card p-5"><div className="flex h-20 items-center"><BasePathImage src={layer.logo} alt={layer.name} width={layer.width} height={layer.height} className="h-auto max-h-14 w-full object-contain" /></div><p className="mt-5 text-lg leading-relaxed text-gray-600">{layer.detail}</p>{layer.name.includes('prototype') && <p className="mt-4 text-sm font-semibold text-pe-teal">Prototype</p>}</div>)}</div>{closing && <p className="mt-10 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">{closing}</p>}</DeckFrame>;
 }
 
 /** Callback to slide 5 before the objections: the five layers, each named, each with its check. */

@@ -1,7 +1,6 @@
 import BasePathImage from '@/components/core/BasePathImage';
 import Slide from '@/components/core/Slide';
-import SlideHeader from '@/components/layout/SlideHeader';
-import SlideTitle from '@/components/layout/SlideTitle';
+import DeckFrame from './DeckFrame';
 import { speakers } from '@/lib/speakers';
 import { ClosingLoopSlide } from './BillSlides';
 
@@ -43,9 +42,8 @@ const studies = [
 /** Preface: the spread of published answers to "how much will AI add to growth?" */
 export function AiGrowthStudiesSlide() {
   return (
-    <Slide>
-      <SlideHeader><SlideTitle>Estimates of AI’s growth effect span two orders of magnitude</SlideTitle></SlideHeader>
-      <div className="mt-8 grid grid-cols-4 gap-5">
+    <DeckFrame title="Estimates of AI’s growth effect span two orders of magnitude">
+      <div className="grid grid-cols-4 gap-5">
         {studies.map((s) => (
           <a key={s.who} href={s.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="content-card block p-6">
             <p className="text-4xl font-bold tracking-tight text-pe-teal">{s.figure}</p>
@@ -56,7 +54,7 @@ export function AiGrowthStudiesSlide() {
       </div>
       <p className="mt-6 border-l-4 border-pe-teal pl-5 text-2xl font-medium text-pe-dark">Same question, answers two orders of magnitude apart, and none of them scored yet.</p>
       <p className="mt-4 text-xs text-gray-500">Horizons and outcomes differ across these sources; each card states its own. Read 19 September 2026.</p>
-    </Slide>
+    </DeckFrame>
   );
 }
 
@@ -68,9 +66,8 @@ export function SeriesQuestionSlide() {
     { big: '3,695', text: 'Round-by-horizon pooled distributions across nine variables, scored against the numbers the agencies now publish.' },
   ];
   return (
-    <Slide>
-      <SlideHeader><SlideTitle>Forecasters have stated probabilities since 1968</SlideTitle></SlideHeader>
-      <div className="mt-6 grid grid-cols-3 gap-6">
+    <DeckFrame title="Forecasters have stated probabilities since 1968">
+      <div className="grid grid-cols-3 gap-6">
         {facts.map((f) => (
           <div key={f.big} className="content-card p-6">
             <p className="text-5xl font-bold tracking-tight text-pe-teal">{f.big}</p>
@@ -80,7 +77,7 @@ export function SeriesQuestionSlide() {
       </div>
       <p className="mt-6 text-xl leading-relaxed text-gray-700">Each histogram records what a point forecast cannot: how much confidence the forecaster puts behind the number.</p>
       <p className="mt-4 text-xs text-gray-500"><a href="https://maxghenis.com/expectations/" target="_blank" rel="noreferrer">maxghenis.com/expectations</a> · code and data: <a href="https://github.com/MaxGhenis/expectations" target="_blank" rel="noreferrer">github.com/MaxGhenis/expectations</a></p>
-    </Slide>
+    </DeckFrame>
   );
 }
 
@@ -167,9 +164,8 @@ const chartCaptions: Record<number, { title: string; lines: string[] }> = {
 function ChartFrame({ step, title }: { step: number; title: string }) {
   const cap = chartCaptions[step];
   return (
-    <Slide>
-      <SlideHeader><SlideTitle>{title}</SlideTitle></SlideHeader>
-      <div className="mt-3 grid h-[430px] grid-cols-[1.55fr_0.75fr] gap-6">
+    <DeckFrame title={title} source="Survey of Professional Forecasters, Philadelphia Fed; pooled by maxghenis.com/expectations; outcomes from BEA annual real GDP growth as now published.">
+      <div className="grid h-full min-h-0 grid-cols-[1.55fr_0.75fr] gap-6">
         <div className="content-card min-h-0 p-3"><SpfChart step={step} /></div>
         <div className="flex flex-col justify-center gap-5">
           <p className="text-2xl font-bold text-pe-dark">{cap.title}</p>
@@ -177,8 +173,7 @@ function ChartFrame({ step, title }: { step: number; title: string }) {
           {step === 3 && <p className="text-5xl font-bold tracking-tight text-pe-teal">22<span className="text-3xl font-light text-gray-400"> / 33</span></p>}
         </div>
       </div>
-      <p className="mt-3 text-xs text-gray-500">Survey of Professional Forecasters, Philadelphia Fed; pooled by maxghenis.com/expectations; outcomes from BEA annual real GDP growth as now published.</p>
-    </Slide>
+    </DeckFrame>
   );
 }
 

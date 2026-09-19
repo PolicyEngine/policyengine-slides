@@ -5,21 +5,11 @@ import { LivePanel } from './BillSlides';
 import { IconArrowRight, IconScale, IconTargetArrow, IconUsers } from '@tabler/icons-react';
 import BasePathImage from '@/components/core/BasePathImage';
 import Slide from '@/components/core/Slide';
+import DeckFrame from './DeckFrame';
 import { speakers } from '@/lib/speakers';
 
 function Frame({ title, children, source }: { title: string; children: ReactNode; source?: ReactNode }) {
-  return (
-    <Slide fullBleed>
-      <div className="absolute inset-0 flex flex-col px-14 pt-10 pb-24">
-        <header className="shrink-0 mb-5">
-          <h1 className="font-display text-[38px] font-bold leading-tight tracking-tight text-pe-dark">{title}</h1>
-          <div className="accent-bar mt-4 w-32" />
-        </header>
-        <div className="min-h-0 flex-1">{children}</div>
-        {source && <div className="mt-3 shrink-0 text-xs leading-relaxed text-gray-500">{source}</div>}
-      </div>
-    </Slide>
-  );
+  return <DeckFrame title={title} source={source}>{children}</DeckFrame>;
 }
 
 const expectationsSource = (
