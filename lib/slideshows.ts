@@ -24,9 +24,11 @@ import { gettsim2026Config } from "@/slideshows/gettsim-2026/config";
 import { arnold2026Config } from "@/slideshows/arnold-2026/config";
 import { cpidWebinar2026Config } from "@/slideshows/cpid-webinar-2026/config";
 import { overhang2026Config } from "@/slideshows/overhang-2026/config";
+import { overhang2026BackupConfig } from "@/slideshows/overhang-2026-backup/config";
 
 export const slideshows: SlideshowConfig[] = [
   overhang2026Config,
+  overhang2026BackupConfig,
   cpidWebinar2026Config,
   gettsim2026Config,
   arnold2026Config,

@@ -2,152 +2,132 @@
 
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 5:45–6:15 PM ET, Luna (113A)
-Deck: `/slides/overhang-2026` · 16 slides plus 5 backups · 17-minute talk, 11 minutes of objections, stop at 6:15 for dinner.
+Deck: `/slides/overhang-2026` · 17 slides · backups in `/slides/overhang-2026-backup` · 16-minute talk, about 10 minutes of objections, stop at 6:15 for dinner.
 
-The arc: changing baselines → laws as an alignment mechanism → forecasts for bills and outcomes → tools with feedback loops → one bill from statute to forecast → the audience's forecast → a public score and questions about legitimacy.
+The arc: the claim (law is an alignment loop we rarely close) → why now (forecasters widened their bands; the AI tail; AI drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 6 answered: a conductor, graded → the scoreboard → objections.
 
 ## Timing map (30-minute cut)
 
-The spoken script is in SCRIPT.md (slide by slide, with a running clock). Order per its flow review: BillSlide is back in the talk between the five needs and the rules; "What if every bill had a score?" moved to backups because the title slide carries the question. Backups after the end slide: 16 What if every bill had a score? · 17 How well did they do? · 18 What if every outcome had an estimate? · 19 What if you cross them? · 20 How do we get there?
+The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 14 closes the loop that slide 6 opens, after the IARIW "Conductors, not oracles" beat. The five backups (How well did they do?, What if every bill had a score?, What if every outcome had an estimate?, What if you cross them?, How do we get there?) live in the overhang-2026-backup deck, so this deck ends on its end slide.
 
-| Elapsed | Slides | Section | Minutes |
+| Elapsed | Slide | Section | Minutes |
 |---|---|---|---|
-| 0:00–1:30 | 1–2 | Title; law is an alignment problem | 1.5 |
+| 0:00–0:35 | 1 | Title: the question and the plan | 0.5 |
+| 0:35–1:30 | 2 | Law is an alignment problem | 1 |
 | 1:30–3:30 | 3–4 | Why now: stated uncertainty, growth and the upper tail | 2 |
 | 3:30–4:20 | 5 | AI already drafts bills | 1 |
-| 4:20–5:55 | 6 | AI alone can't do it (models answer without tools) | 1.5 |
-| 5:55–7:05 | 7 | What do we arm the AI with? (skip the roadmap toggle) | 1 |
-| 7:05–9:25 | 8–10 | S. 3596: the bill, the rules, then the model | 2.5 |
-| 9:25–10:30 | 11 | Your indicator first: 60 seconds of shout-outs | 1 |
-| 10:30–12:30 | 12 | Your number first: 90 seconds of quiet writing | 2 |
-| 13:00–14:30 | 12 | The agent's forecast and its reasoning | 1.5 |
-| 14:30–16:00 | 13 | The loop that matters most; the scoreboard today | 1.5 |
-| 16:00–28:00 | 14 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12 |
-| 28:00–30:00 | 15 | Which bill next? Stop at 6:15; continue over dinner | 2 |
+| 4:20–5:15 | 6 | AI alone can't do it; hold the tools question | 1 |
+| 5:15–6:25 | 7 | What do we arm the AI with? (skip the roadmap toggle) | 1 |
+| 6:25–8:50 | 8–10 | S. 3596: the bill, the rules, then the model | 2.5 |
+| 8:50–9:55 | 11 | Your indicator first: 60 seconds of shout-outs | 1 |
+| 9:55–12:00 | 12 | Your number first: 90 seconds of quiet writing | 2 |
+| 12:00–13:45 | 13 | The agent's forecast and its trace | 1.75 |
+| 13:45–14:30 | 14 | Conductors, not oracles: the answer to slide 6 | 0.75 |
+| 14:30–15:35 | 15 | The loop that matters most; the scoreboard today | 1 |
+| 15:35–27:00 | 16 | Where does this break? Goodhart, who sets the objectives, legitimacy | 11.5 |
+| 27:00–27:30 | 17 | Which bill next? Stop at 6:15; continue over dinner | 0.5 |
 
-Start at about 5:48 so people can walk over from the main stage. Page through the whole deck once before presenting so the two chart images and the live pages are cached. If the network fails, describe slides 9 and 12 from the numbers on slides 10, 11 and 13.
+Start at about 5:48 so people can walk over from the main stage. Page through the whole deck once before presenting so the two chart images and the live pages are cached, and click each live toggle once (slides 3, 6, 9, 15). If the network fails, the numbers on slides 10, 11 and 13 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 9 and 13.
 
 ## Slide-by-slide track
 
-### 1 · Law is an alignment problem (30s)
+### 1 · Law is an alignment problem (35s)
 
-“What if every bill had a forecast?” Ask the audience to hold that question through the talk.
-I build software that connects policy rules to modeled consequences and forecasts that can be scored.
-Start with the economic baseline those laws operate within.
+Seats up front. PolicyEngine, the Axiom Foundation, and a prototype called Thesis.
+"What if every bill in Congress came with a forecast, registered before the vote and scored when the official number prints?" Hold that question.
+Sixteen minutes of talk, one forecast of their own, twelve minutes to break it.
 
-### 2 · If the baseline moves (1m 15s)
+### 2 · Law is an alignment problem (55s)
 
-These are forecasters' stated distributions for next-year US real GDP growth, using first-quarter survey rounds.
-The pooled standard deviation is 1.41 percentage points in 2026, against 1.29 over 1992–2020; it reached 2.18 in 2021.
-The chart puts today's uncertainty alongside the historical range and the pandemic spike.
+Values → policies → indicators: the same shape as the AI alignment loop (objective, mechanism, feedback signal).
+We write laws in prose, change them slowly, and rarely score them against their stated goals; a signal that arrives years late leaves the loop open.
+"Does it still? Ask the people who are paid to forecast the baseline."
 
-### 3 · Forecasters marked growth down, and the upper tail with it (1m 30s)
+### 3 · If the baseline moves (55s)
 
-Comparing 2015–19 with 2025–26, mean growth falls from 2.19% to 1.89%; the probability above 4% falls from 5.6% to 4.2%. The later window contains only two rounds.
-FRI's pooled fitted distributions for AI experts imply a probability rounding to 0.0% of growth averaging above 10% in 2025–29, rising to 3.5% under rapid AI progress.
-The horizons and survey designs differ. Use them to ask what scenarios our policy infrastructure can handle.
+Philadelphia Fed and ECB probability distributions since 1968, pooled and scored at maxghenis.com/expectations.
+Pooled standard deviation for next-year US growth: 1.29 on average from 1992 to 2020, 2.18 in 2021, 1.41 this year.
+"Less sure, but less sure around what?"
 
-### 4 · How well did they do? (45s)
+### 4 · Forecasters marked growth down, and the upper tail with it (1m 05s)
 
-Realized next-year growth landed inside the pooled one-standard-deviation band in 22 of 33 years.
-The misses cluster: six straight in 1996–2001, then 2008–09, 2011, and 2020–21.
-“If conditions change quickly, policy has to move faster than it does.”
+2015–19 versus 2025–26: mean 2.19% → 1.89%; P(growth above 4%) 5.6% → 4.2%. The later window holds two rounds; hold it loosely.
+FRI's AI experts: a probability rounding to zero on growth above 10% a year for 2025–29, and 3.5% under rapid AI progress. Horizons and designs differ.
+"If that tail arrives, a loop that scores nothing and takes years to close breaks first. And the mechanism is changing hands too."
 
-### 5 · Law is an alignment problem (1m)
+### 5 · AI already drafts bills (50s)
 
-We use laws to align collective goals with outcomes. We write those laws in prose, change them slowly, and rarely score them against their goals.
-Trace values → policies → indicators: people choose goals, institutions choose policy, and measured outcomes let us learn.
-The substrate never decides what to value.
+Effort, published Wednesday: Pangram's detector flagged 117 of 2,994 bills in the 119th Congress (3.9%); Q2 2026, 6.4% of findings-and-preamble text against 0.6% of statutory text.
+A detector flag is evidence of AI use and does not establish who wrote what. Max Spero from Pangram is here this weekend.
+"What evidence should travel with them?"
 
-### 6 · AI already drafts bills (45s)
+### 6 · AI alone can't do it (55s)
 
-Effort's Pangram-based detector flagged 117 of 2,994 bills in the 119th Congress, or 3.9%.
-Its Q2 2026 findings-and-preamble series reads 6.4%, versus 0.6% for statutory text; these are detector findings and carry that method's limits.
-AI has entered the drafting process. Ask what evidence should accompany the prose it helps produce.
+A score gives a claim people can question; a forecast gives a claim they can grade. Could the same models supply that evidence?
+PolicyBench: 39 models, 100 households, no tools. Best 89.2% (GPT-5.6 Sol), weakest 62.6%. Exact means within a dollar and eligibility matches.
+Hold the tools question: the answer key on that board is PolicyEngine's own output. Slide 14 comes back to it. Optional toggle: the live board.
 
-### 7 · What if every bill had a score? (30s)
+### 7 · What do we arm the AI with? (1m 10s)
 
-Move from the proposals that receive formal estimates to a forecast attached to each bill.
-Keep the question practical: which consequences matter, and what would count as an observed outcome?
-Each estimate needs an explicit policy condition, time horizon, and source for resolution.
+Five needs, each with its own feedback loop: rules that run, official statistics with receipts, a calibrated population, a model that computes reforms, and judgment with a resolution date.
+The fifth loop ranks the other four. The checks work the same for an agent and for a human analyst.
+Skip the roadmap toggle. "Now one bill, three of those layers, and one number the IRS prints."
 
-### 8 · What if every outcome had an estimate? (30s)
+### 8 · One bill through the stack (35s)
 
-Budget effects are one part of a bill's consequences. Participation, household resources, and regional outcomes create other forecastable questions.
-Official statistical series give these questions a shared vocabulary and a place to resolve.
-The useful expansion connects legislative choices to outcomes people care about.
+S. 3596, the Stronger Start for Working Families Act (Hassan, Young), in Senate Finance since January 8.
+Refundable CTC earnings threshold $2,500 → $1; the 15% phase-in and the cap stay, so a family gains at most about $375.
+One threshold in the statute, one number in an IRS table. "Layer one, the rules."
 
-### 9 · What if you cross them? (30s)
+### 9 · The rules (50s)
 
-Cross bills with outcomes and forecast horizons, and the space of questions grows.
-We still have to decide which cells deserve estimates, which need wide uncertainty intervals, and where the evidence is insufficient.
-That requires a system that can expose its assumptions and learn from errors.
+Live: section 24(d)(1) at axiom.org, statute on the left, 14 encoded rules on the right; ctc_refundable_phase_in_threshold holds the $2,500.
+Every rule traces to its sentence of statute and its effective date, so a model, an agent, or you can read the change from the page.
+Optional: "Show the rule graph", then Expand. The refundable credit sits at the end of 128 inputs; the banner says the subtree can't execute yet. Prototype.
 
-### 10 · How do we get there? (45s)
+### 10 · The model (1m)
 
-AI can help build the rules, data, and models that support policy analysis.
-It can then use that infrastructure to assemble forecasts and explain their dependencies.
-Each layer needs a feedback loop that tests the claim it makes.
+PolicyEngine over a calibrated population: −$1.83B federal in 2026, −$17.1B over 2026–2035, 6.5% of people gain. Read the label: certification pending.
+Rerun this afternoon on PolicyEngine's API with the bill's $1 threshold: the same $1.83B, to the dollar.
+Behavior held fixed; the model does not say who files and claims. "The model hands the forecast a mechanism, and the forecast stays a separate question."
 
-### 11 · AI alone can't do it (1m 30s)
+### 11 · Your indicator first (1m 05s)
 
-State the condition first: these models answer without external tools—no calculator, search, or PolicyEngine. Function-call output only formats the answer.
-The September 5 PolicyBench snapshot covers 39 models and 100 households: best weighted exact match is 89.2%, weakest is 62.6%; currency answers match within $1 and eligibility flags match exactly.
-The public fixed test set and serving differences limit interpretation; forced answer calls disable extended thinking for some Claude rows, and the site labels sensitivity reruns.
-These results motivate testing what changes when models can use the tools they need.
+Cost is the usual answer, and the model gives it. The May monthly deficit forecast ran $240B–$380B; the print was $293B. With or without this bill, the distributions overlap almost entirely.
+Sixty seconds: shout out statistics the bill would move by more than their own forecast interval. Repeat each one back.
+Returns claiming the credit, child poverty, filing among the lowest earners. The bill page lists candidates and admits where no series exists.
 
-### 12 · What do we arm the AI with? (2m)
+### 12 · Your number first (2m 05s, 90 seconds silent)
 
-Walk the five needs: policy rules, official statistics, a population, a reform model, and judgment that combines them into forecasts.
-Name each feedback loop: rule checks and external comparisons; intact and timely receipts; calibration and record checks; explained model differences; forecasts scored against first prints.
-Toggle to the compact roadmap: Axiom, Chronicle, Microcosm, PolicyEngine, and Thesis. The Axiom Foundation supports the rules layer; Thesis is a prototype.
-Bring the architecture down to one bill and one observable outcome.
+Returns claiming the refundable CTC for TY2027 if the bill passes. First prints: 19.1M (2020), 37.8M (2021, the year the earnings test dropped), 18.1M, 17.6M.
+"Write a median and an 80 percent interval. Ninety seconds, no talking. Go."
+Ten seconds. Keep the number in front of you.
 
-### 13 · One bill through the stack (45s)
+### 13 · The agent's forecast (1m 45s)
 
-S. 3596, the Stronger Start for Working Families Act, would lower the operative earnings threshold for the refundable child tax credit from $2,500 to $1.
-The 15% phase-in rate and refundable cap stay unchanged; the earnings-formula gain reaches about $375 per family.
-Use the bill to examine a forecasting workflow. Evaluating its consequences leaves the policy judgment with the audience.
+Registered August 4; we run the agents at Thesis and we score them. Current law 17.6M [5.1M, 30.1M]; enacted 27.2M [14.7M, 39.7M]; gap 9.6M. Hands up above 27M; below 17.6M.
+The trace: last print plus half of 2021's excess over its neighbors, labeled a judgmental assumption; half-width 1.28 sample standard deviations of four prints, one of them 2021.
+"The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast." Judged December 31, 2027; first print due by end of 2029.
 
-### 14 · The rules (1m 30s)
+### 14 · Conductors, not oracles (45s)
 
-Expand the statute page and show the prose beside the encoded rules, including `ctc_refundable_phase_in_threshold`.
-Section 24(d)(1)(B)(i) contains the underlying $3,000 amount; section 24(h)(6) applies the current $2,500 override. The bill changes the former and removes the latter.
-The trace from statutory text to a dated parameter makes the model's interpretation inspectable.
+Back to slide 6. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
+What they just watched was a conductor: the page routed one question through the rules (parameter), the model (mechanism), and the IRS prints (base rate); the agent's judgment sat in named assumptions, and the print grades them.
+"Grades like that tell us which judgments deserve to become mechanism. The grade is the loop that ranks the other four."
 
-### 15 · The model (1m)
+### 15 · The loop that matters most (1m 05s)
 
-The displayed PolicyEngine calculation is −$1.83B federal in 2026, −$17.1B over 2026–2035, with 6.5% of people gaining; retain “certification pending.”
-This is a static simulation. The stored computation uses a zero-dollar threshold as an approximation to the bill's one-dollar threshold.
-A claim count also depends on filing and take-up. That gives us a forecast question beyond the simulated budget effect.
+Publish the reasoning, wait for the official number, score the forecast. Scoreboard this morning: 45 witness-verified scores, 35 inside their 80% interval, CRPS ratio 0.98 against persistence on nine matched targets.
+The misses stay on the page and feed back into the rules, the data, the model, or the next forecast. Prototype; we run the agents and we score them.
+"If that ratio stays near one as the record grows, the agents add nothing over persistence, and the scoreboard will say so." Optional toggle: the live scoreboard.
 
-### 16 · Your number first (2m 30s)
+### 16 · Where does this break? (40s, then about 11 minutes)
 
-Read the question: how many tax returns will claim the refundable child tax credit for TY2027 if the bill passes?
-Point to the four first prints—19.1M, 37.8M, 18.1M, 17.6M—and the threshold change from $2,500 to $1.
-“Two minutes. Write a median and an 80% interval.” Keep the agent's numbers hidden and give the room the full two minutes.
+Three headings: Goodhart; who sets the objectives (an AI proposed the goals on the bill page; countersign or strike buttons); legitimacy (who contests the model, the forecast, and the use).
+Chatham House rules: nothing gets attributed. One request for the end: which bill should get a forecast next.
+Answers to the likely objections are in the "If they ask" section of SCRIPT.md.
 
-### 17 · The agent's forecast (1m 30s)
+### 17 · What if every bill had a forecast? (25s)
 
-Reveal the prototype's recorded forecasts: current law 17.6M [5.1M, 30.1M], enacted 27.2M [14.7M, 39.7M], a gap of 9.6M; compare these with the audience's estimates.
-The trace adds half of TY2021's excess over its neighbours to the last print. That half is a judgmental assumption; the interval half-width is 1.28 times the sample standard deviation of four prints.
-The forecast runs were recorded August 4, 2026. The condition is judged December 31, 2027; December 31, 2029 is the registered resolution bound for the first print.
-The assumptions are visible, so people can challenge the analogy, propose another method, and later compare scores.
-
-### 18 · The loop that matters most (1m 15s)
-
-The Thesis prototype scoreboard shows 45 witness-verified scores, with 35 inside their stated 80% intervals.
-Against persistence, the CRPS ratio is 0.98 on nine matched targets. That is a small sample and close to the baseline.
-The useful loop is to publish forecasts and reasoning before outcomes, score against official first prints, and improve the next forecast.
-
-### 19 · Where does this break? (1m 30s)
-
-What happens when optimizing an indicator changes its relationship to the goal? That is the Goodhart question.
-Whose outcomes receive a forecast, and whose experience is missing from the available data? Who sets those objectives?
-How do people contest the model, the forecast, and the use made of them? “Which bill should get a forecast next?”
-
-### 20 · Continue the conversation (30s)
-
-Leave the four links up: maxghenis.com/expectations, axiom.org, policyengine.org, and thesisinstitute.org.
-Invite the room to start with a failure mode, an alternative forecast, or a bill they want to examine.
-Hand over to the 20-minute discussion.
+Dinner is at 6:15. Four links on the screen. Keep your number; the IRS prints the answer by the end of 2029 and the agent's score will be on the last link.
+Bring the bill you want forecast next to dinner. Thanks.
