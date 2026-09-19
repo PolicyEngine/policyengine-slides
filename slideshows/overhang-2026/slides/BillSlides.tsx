@@ -146,42 +146,26 @@ export function RulesSlide() {
 const appUrl = 'https://policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2';
 
 export function ModelSlide() {
-  const [live, setLive] = useState(false);
   return (
-    <BillFrame title="PolicyEngine computes what the change does to each household" source="Source: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026: policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503&region=us&timePeriod=2026&baseline=2" sourceUrl={appUrl}>
-      <div className="relative h-full">
-        <button
-          type="button"
-          onClick={(event) => { event.stopPropagation(); setLive(!live); }}
-          className="absolute right-0 -top-16 z-20 rounded-lg border border-pe-200 bg-white px-4 py-2 text-sm font-semibold text-pe-dark shadow-sm pointer-events-auto"
-        >
-          {live ? 'Show the numbers' : 'Show the PolicyEngine app'}
-        </button>
-        {live ? (
-          <LivePanel url={appUrl} title="PolicyEngine app: S. 3596 reform against current law, live" />
-        ) : (
+    <BillFrame title="PolicyEngine computes what the change does to each household" source="Cost: PolicyEngine US 1.764.6 via the PolicyEngine API, run 19 Sep 2026, policy 98503 (refundable CTC phase-in threshold $1 from 2026) against current law, United States, 2026 · policyengine.org/us/policy?reform=98503 · Deficit interval: Thesis forecast of the May 2026 Monthly Treasury Statement deficit, $305B with 80% interval [$240B, $380B]; print $292.6B · app.thesisinstitute.org/us-mts-deficit-may-2026" sourceUrl={appUrl}>
       <div className="flex h-full flex-col justify-center gap-8">
-        <div className="flex items-center justify-between gap-6">
-          <p className="text-2xl text-gray-700">PolicyEngine estimates the impact of lowering the threshold.</p>
-        </div>
+        <p className="text-2xl text-gray-700">PolicyEngine produces the standard outputs, and cost is the usual one.</p>
         <div className="grid grid-cols-2 gap-6">
-          {[
-            ['$1.83B', 'Federal cost', '2026'],
-            ['17.0% → 16.8%', 'Child poverty rate', 'Supplemental Poverty Measure, 2026'],
-          ].map(([value, label, period]) => (
-            <div key={value} className="content-card px-6 py-8">
-              <p className="text-[48px] font-bold tracking-tight text-pe-teal">{value}</p>
-              <p className="mt-4 text-xl font-medium text-pe-dark">{label}</p>
-              <p className="mt-2 text-base text-gray-500">{period}</p>
-            </div>
-          ))}
+          <div className="content-card px-6 py-8">
+            <p className="text-[48px] font-bold tracking-tight text-pe-teal">$1.83B</p>
+            <p className="mt-4 text-xl font-medium text-pe-dark">Federal cost of the bill</p>
+            <p className="mt-2 text-base text-gray-500">2026, behavior held fixed</p>
+          </div>
+          <div className="content-card px-6 py-8">
+            <p className="text-[48px] font-bold tracking-tight text-pe-dark">$240B–$380B</p>
+            <p className="mt-4 text-xl font-medium text-pe-dark">80% interval on one month’s federal deficit</p>
+            <p className="mt-2 text-base text-gray-500">May 2026 forecast; the print came in at $293B</p>
+          </div>
         </div>
         <div className="accent-block">
-          <p className="text-xl leading-relaxed text-gray-700">The model hands the forecast its mechanism. Who files and claims stays a separate question.</p>
-          <p className="mt-2 text-sm text-gray-500">The model holds behavior fixed. The IRS prints the count of who files and claims.</p>
+          <p className="text-xl leading-relaxed text-gray-700">Cost is the gap between two deficit forecasts whose bands overlap almost entirely. The deficit will never score this bill.</p>
+          <p className="mt-2 text-sm text-gray-500">One outcome per run, no interval attached. The statistic that scores the bill stays an open choice.</p>
         </div>
-      </div>
-        )}
       </div>
     </BillFrame>
   );
@@ -189,14 +173,13 @@ export function ModelSlide() {
 
 export function IndicatorSlide() {
   return (
-    <BillFrame title="The deficit will never score this bill. Which statistic would?" source="Cost: PolicyEngine panel on the Thesis bill page. Deficit interval: Thesis forecast of the May 2026 Monthly Treasury Statement deficit, $305B with 80% interval [$240B, $380B]; the print came in at $292.6B · app.thesisinstitute.org/us-mts-deficit-may-2026" sourceUrl="https://app.thesisinstitute.org/us-mts-deficit-may-2026">
+    <BillFrame title="Which statistic would this bill move most?" source="S. 3596, Stronger Start for Working Families Act · Congress.gov" sourceUrl={congressUrl}>
       <div className="flex h-full flex-col justify-center gap-6">
-        <p className="text-[30px] font-semibold leading-snug text-pe-dark">Which official statistic would tell you whether this bill did its job?</p>
+        <p className="text-[30px] font-semibold leading-snug text-pe-dark">How would you measure whether this bill did its job?</p>
         <div className="grid grid-cols-[1fr_1.15fr] gap-6">
           <div className="content-card px-6 py-5">
-            <p className="text-sm uppercase tracking-wide text-gray-500">Cost, the usual answer</p>
-            <p className="mt-2 text-4xl font-bold text-pe-dark">−$1.83B <span className="text-lg font-medium text-gray-600">in 2026</span></p>
-            <p className="mt-3 text-base leading-relaxed text-gray-700">One month of the federal deficit carried an 80% interval of <strong>$240B to $380B</strong>. With or without the bill, those two distributions overlap almost entirely.</p>
+            <p className="text-xl leading-relaxed text-gray-700">Name an official statistic, and say how far the bill would move it in standard deviations of that statistic’s own forecast.</p>
+            <p className="mt-4 text-base leading-relaxed text-gray-600">A useful statistic moves by more than its own forecast interval if the bill works.</p>
           </div>
           <div className="content-card px-6 py-5">
             <p className="text-sm uppercase tracking-wide text-gray-500">Shout them out · 60 seconds</p>
@@ -205,7 +188,6 @@ export function IndicatorSlide() {
               <li>2. ________________</li>
               <li>3. ________________</li>
             </ol>
-            <p className="mt-3 text-sm text-gray-500">A useful statistic moves by more than its own forecast interval if the bill works.</p>
           </div>
         </div>
       </div>
@@ -215,7 +197,7 @@ export function IndicatorSlide() {
 
 export function AudienceSlide() {
   return (
-    <BillFrame title="Write your forecast before you see the agent’s" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
+    <BillFrame title="The agent picked returns claiming the credit" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
       <div className="flex h-full flex-col justify-between gap-3">
         <p className="max-w-5xl text-[28px] font-medium leading-snug text-pe-dark">How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes?</p>
         <div>

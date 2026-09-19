@@ -2,7 +2,7 @@
 
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 6:15–7:00 PM ET, Volcano/Mountain (113BC), during dinner; lightning talks follow at 7:00 in the same room
-Deck: `/slides/overhang-2026` · 17 slides · backups in `/slides/overhang-2026-backup` · 16-minute talk, about 11 minutes of objections; start at 6:20 so people have plates, hard stop at 6:55 for the lightning talks.
+Deck: `/slides/overhang-2026` · 16 slides · backups in `/slides/overhang-2026-backup` · 16-minute talk, about 11 minutes of objections from the five-layer slide; start at 6:20 so people have plates, hard stop at 6:55 for the lightning talks.
 Lightning talk (Sat 7:00–8:00 PM block, Volcano/Mountain): `/slides/overhang-2026-lightning`, 8 reused slides, script in `../overhang-2026-lightning/LIGHTNING.md`.
 
 The arc: the claim (law is an alignment loop we rarely close) → why now (AI already drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 4 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → the five layers with their names → objections.
@@ -16,18 +16,18 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 
 | 0:00–0:35 | 1 | Title: the question and the plan | 0.5 |
 | 0:35–1:25 | 2 | Law is an alignment problem; the mechanism is changing hands | 0.75 |
 | 1:25–2:15 | 3 | AI already drafts bills | 0.75 |
-| 2:15–3:10 | 4 | AI alone can't do it; hold the tools question | 1 |
-| 3:10–4:20 | 5 | What do we arm the AI with? (skip the roadmap toggle) | 1.25 |
-| 4:20–6:45 | 6–8 | S. 3596: the bill, the rules, then the model | 2.5 |
-| 6:45–7:50 | 9 | Your indicator first: 60 seconds of shout-outs | 1 |
-| 7:50–9:55 | 10 | Your number first: 90 seconds of quiet writing | 2 |
-| 9:55–11:40 | 11 | The agent's forecast and its trace | 1.75 |
-| 11:40–12:20 | 12 | Conductors, not oracles: the answer to slide 4 | 0.75 |
-| 12:20–13:25 | 13 | The loop that matters most; the scoreboard today | 1 |
-| 13:30–14:20 | 14 | Run the loop backwards: values, indicators, policies | 0.75 |
-| 14:20–14:50 | 15 | Every layer of the stack exists today: the five wordmarks, one check each | 0.5 |
-| 14:50–27:00 | 16 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12.25 |
-| 27:00–27:30 | 17 | Which bill next? Stop at 6:55 for the lightning talks | 0.5 |
+| 2:15–3:15 | 4 | Without tools, the best model gets 89% right; hold the tools question | 1 |
+| 3:15–4:25 | 5 | What do we arm the AI with? (skip the roadmap toggle) | 1.25 |
+| 4:25–5:50 | 6–7 | S. 3596: the bill, then the rules | 1.5 |
+| 5:50–6:55 | 8 | Which statistic would this bill move most? 60 seconds of shout-outs | 1 |
+| 6:55–8:00 | 9 | PolicyEngine computes the standard outputs; cost against the deficit band | 1 |
+| 8:00–10:05 | 10 | The agent picked returns claiming the credit: 90 seconds of quiet writing | 2 |
+| 10:05–11:50 | 11 | The agent's forecast and its trace | 1.75 |
+| 11:50–12:30 | 12 | With the stack, the model stops guessing | 0.75 |
+| 12:30–13:35 | 13 | Scoring the forecast is the loop that ranks the other four | 1 |
+| 13:35–14:25 | 14 | Cheap conditionals let us run the loop backwards | 0.75 |
+| 14:25–27:00 | 15 | Every layer exists today, then the objections: Goodhart, who sets the objectives, legitimacy | 12.5 |
+| 27:00–27:30 | 16 | Which bill next? Stop at 6:55 for the lightning talks | 0.5 |
 
 Start at about 6:20 so people can get food first; the listing runs to 7:00 and the lightning talks need the room at 7:00. Page through the whole deck once before presenting so the live pages are cached, and click each live toggle once (slides 4, 7, 8, 13). If the network fails, the numbers on slides 8, 9 and 11 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 7 and 11.
 
@@ -75,18 +75,17 @@ Live: section 24(d)(1) at axiom.org, statute on the left, 14 encoded rules on th
 Every rule traces to its sentence of statute and its effective date, so a model, an agent, or you can read the change from the page.
 Optional: "Show the rule graph", then Expand. The refundable credit sits at the end of 128 inputs; the banner says the subtree can't execute yet. Prototype.
 
-### 8 · PolicyEngine computes what the change does to each household (1m)
+### 8 · Which statistic would this bill move most? (1m 05s)
 
-PolicyEngine over a calibrated population, run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026, SPM child poverty 17.0% → 16.8%. Optional toggle: the PolicyEngine app view of the reform.
-Behavior held fixed; the model does not say who files and claims. "The model hands the forecast a mechanism, and the forecast stays a separate question."
+How would you tell whether the bill did its job? Name an official statistic and how far the bill moves it in standard deviations of that statistic's own forecast.
+Sixty seconds of shout-outs; repeat each one back. Returns claiming the credit, child poverty, filing among the lowest earners.
+"Keep your list. Layer four."
+### 9 · PolicyEngine computes what the change does to each household (1m 05s)
 
-### 9 · The deficit will never score this bill. Which statistic would? (1m 05s)
-
-Cost is the usual answer, and the model gives it. The May monthly deficit forecast ran $240B–$380B; the print was $293B. With or without this bill, the distributions overlap almost entirely.
-Sixty seconds: shout out statistics the bill would move by more than their own forecast interval. Repeat each one back.
-Returns claiming the credit, child poverty, filing among the lowest earners. The bill page lists candidates and admits where no series exists.
-
-### 10 · Write your forecast before you see the agent's (2m 05s, 90 seconds silent)
+Run today on the API with the bill's $1 threshold: $1.83B federal cost in 2026. Cost is the gap between two deficit forecasts; the May 2026 monthly deficit forecast ran $240B–$380B (print $293B), so the bill is noise inside that band.
+The kind of number CBO and the scoring world run on: one outcome per run, behavior fixed, no interval attached.
+"The model hands the forecast a mechanism, and the statistic that scores the bill stays an open choice. An agent made that choice."
+### 10 · The agent picked returns claiming the credit (2m 05s, 90 seconds silent)
 
 Returns claiming the refundable CTC for TY2027 if the bill passes. First prints: 19.1M (2020), 37.8M (2021, the year the earnings test dropped), 18.1M, 17.6M.
 "Write a median and an 80 percent interval. Ninety seconds, no talking. Go."
@@ -100,7 +99,7 @@ The trace: last print plus half of 2021's excess over its neighbors, labeled a j
 
 ### 12 · With the stack, the model stops guessing (40s)
 
-Back to slide 4. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
+Back to the benchmark. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
 What they just watched was a conductor: the page routed one question through the rules (parameter), the model (mechanism), and the IRS prints (base rate); the agent's judgment sat in named assumptions, and the print grades them.
 "Grades like that tell us which judgments deserve to become mechanism. The grade is the loop that ranks the other four."
 
@@ -119,15 +118,9 @@ Then slide 2's loop runs backwards: pick the value, set the indicator's level, s
 ### 15 · Every layer of the stack exists today, each with its own check (30s)
 
 Back to slide 5 with names on the five things: the Axiom Foundation (rules), Chronicle (statistics), Microcosm (population), PolicyEngine (model), Thesis (forecasts, prototype).
-"The scoreboard on that last layer ranks the other four. Now break it."
+"The scoreboard on that last layer ranks the other four. Now break it." Then the three headings by voice: Goodhart, who sets the objectives, legitimacy; Chatham House rules; which bill next.
 
-### 16 · Where does this break? (30s, then about 11 minutes)
-
-Three headings: Goodhart; who sets the objectives (an AI proposed the goals on the bill page; countersign or strike buttons); legitimacy (who contests the model, the forecast, and the use).
-Chatham House rules: nothing gets attributed. One request for the end: which bill should get a forecast next.
-Answers to the likely objections are in the "If they ask" section of SCRIPT.md.
-
-### 17 · What if every bill had a forecast? (25s)
+### 16 · What if every bill had a forecast? (25s)
 
 Dinner is at 6:15. Four links on the screen. Keep your number; the IRS prints the answer by the end of 2029 and the agent's score will be on the last link.
 Bring the bill you want forecast next to dinner. Thanks.

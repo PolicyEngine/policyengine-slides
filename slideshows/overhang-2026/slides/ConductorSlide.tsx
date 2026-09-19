@@ -7,7 +7,7 @@ export default function ConductorSlide() {
 
       <div className="grid grid-cols-2 gap-8">
         <div className="content-card p-6">
-          <div className="slide-tag mb-3">Slide 4 · answering from memory</div>
+          <div className="slide-tag mb-3">Answering from memory</div>
           <p className="text-xl leading-relaxed text-gray-700">
             A model reads the household and answers from memory. The best scored{' '}
             <span className="font-semibold text-pe-dark">89.2%</span> without tools, against an answer key computed by PolicyEngine.
@@ -16,7 +16,7 @@ export default function ConductorSlide() {
         </div>
 
         <div className="content-card p-6" style={{ borderLeftColor: 'var(--pe-amber)' }}>
-          <div className="slide-tag mb-3" style={{ color: 'var(--pe-amber)' }}>Slides 6 to 11 · routing through the stack</div>
+          <div className="slide-tag mb-3" style={{ color: 'var(--pe-amber)' }}>Routing through the stack</div>
           <p className="text-xl leading-relaxed text-gray-700">
             The bill page routes one question through the stack: the rules supply the parameter, the model supplies the mechanism, and the IRS prints supply the base rate.
           </p>
