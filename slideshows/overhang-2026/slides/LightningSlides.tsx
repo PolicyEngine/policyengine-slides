@@ -3,6 +3,7 @@ import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { speakers } from '@/lib/speakers';
+import { ClosingLoopSlide } from './BillSlides';
 
 /** Title for the Expectations lightning talk: the same frame as the session title slide, different claim. */
 export function SpfTitleSlide() {
@@ -43,7 +44,7 @@ const studies = [
 export function AiGrowthStudiesSlide() {
   return (
     <Slide>
-      <SlideHeader><SlideTitle>How much will AI add to growth? Pick your study.</SlideTitle></SlideHeader>
+      <SlideHeader><SlideTitle>Published estimates of AI’s growth effect span two orders of magnitude</SlideTitle></SlideHeader>
       <div className="mt-8 grid grid-cols-4 gap-5">
         {studies.map((s) => (
           <a key={s.who} href={s.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="content-card block p-6">
@@ -68,7 +69,7 @@ export function SeriesQuestionSlide() {
   ];
   return (
     <Slide>
-      <SlideHeader><SlideTitle>Is there a series of forecasts we can score? Before Metaculus?</SlideTitle></SlideHeader>
+      <SlideHeader><SlideTitle>Forecasters have put probabilities on next-year growth since 1968</SlideTitle></SlideHeader>
       <div className="mt-6 grid grid-cols-3 gap-6">
         {facts.map((f) => (
           <div key={f.big} className="content-card p-6">
@@ -183,10 +184,15 @@ function ChartFrame({ step, title }: { step: number; title: string }) {
 
 /** Two builds: point estimates, then the one-sigma band. */
 export function SpfChartSlide({ buildStep = 2 }: { buildStep?: number }) {
-  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="What the pros said about next year" />;
+  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="Forecasters state a mean and a spread for next year’s growth" />;
 }
 
 /** The backtest on the same chart: realized outcomes against the band. */
 export function SpfRealizedSlide() {
-  return <ChartFrame step={3} title="How well did they do?" />;
+  return <ChartFrame step={3} title="Outcomes landed inside the band in 22 of 33 years" />;
+}
+
+/** The Thesis scoreboard as the kicker of the Expectations talk, retitled for that deck. */
+export function SpfLoopSlide() {
+  return <ClosingLoopSlide title="We score AI agents by the same rule" />;
 }

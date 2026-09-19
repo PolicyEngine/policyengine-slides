@@ -1,8 +1,7 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
 import { BaselineSlide, GrowthSlide, EndSlide } from '@/slideshows/overhang-2026/slides/OpeningSlides';
-import { ClosingLoopSlide } from '@/slideshows/overhang-2026/slides/BillSlides';
-import { SpfTitleSlide, AiGrowthStudiesSlide, SeriesQuestionSlide, SpfChartSlide, SpfRealizedSlide } from '@/slideshows/overhang-2026/slides/LightningSlides';
+import { SpfTitleSlide, AiGrowthStudiesSlide, SeriesQuestionSlide, SpfChartSlide, SpfRealizedSlide, SpfLoopSlide } from '@/slideshows/overhang-2026/slides/LightningSlides';
 
 // Five-minute lightning talk: AI-growth studies, then a scorable series, then point estimates, bounds, the trend in
 // uncertainty, the tail, the backtest, and the Thesis scoreboard as the kicker. Script in LIGHTNING-SPF.md.
@@ -23,7 +22,7 @@ export const overhang2026LightningSpfConfig: SlideshowConfig = {
     BaselineSlide,
     GrowthSlide,
     SpfRealizedSlide,
-    ClosingLoopSlide,
+    SpfLoopSlide,
     EndSlide,
   ],
 };

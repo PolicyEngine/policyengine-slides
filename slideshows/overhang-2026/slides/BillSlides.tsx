@@ -275,11 +275,11 @@ export function AgentSlide() {
   );
 }
 
-export function ClosingLoopSlide() {
+export function ClosingLoopSlide({ title = 'Scoring the forecast is the loop that ranks the other four' }: { title?: string }) {
   const [live, setLive] = useState(false);
   const calibrationUrl = 'https://app.thesisinstitute.org/calibration';
   return (
-    <BillFrame title="Scoring the forecast is the loop that ranks the other four" prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl={calibrationUrl}>
+    <BillFrame title={title} prototype source="Source: Thesis prototype calibration scoreboard · app.thesisinstitute.org/calibration · Read 19 Sep 2026" sourceUrl={calibrationUrl}>
       <div className="relative h-full">
         <button
           type="button"

@@ -2,10 +2,10 @@
 
 The Overhang 2026 · American Geophysical Union, Washington DC
 Saturday September 19, 2026 · Max Ghenis · 6:15–7:00 PM ET, Volcano/Mountain (113BC), during dinner; lightning talks follow at 7:00 in the same room
-Deck: `/slides/overhang-2026` · 16 slides · backups in `/slides/overhang-2026-backup` · 15-minute talk, about 12 minutes of objections; start at 6:20 so people have plates, hard stop at 6:55 for the lightning talks.
+Deck: `/slides/overhang-2026` · 17 slides · backups in `/slides/overhang-2026-backup` · 16-minute talk, about 11 minutes of objections; start at 6:20 so people have plates, hard stop at 6:55 for the lightning talks.
 Lightning talk (Sat 7:00–8:00 PM block, Volcano/Mountain): `/slides/overhang-2026-lightning`, 8 reused slides, script in `../overhang-2026-lightning/LIGHTNING.md`.
 
-The arc: the claim (law is an alignment loop we rarely close) → why now (AI already drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 4 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → objections.
+The arc: the claim (law is an alignment loop we rarely close) → why now (AI already drafts bills) → AI alone can't compute the answer → five needs, each with a feedback loop → one bill from statute to model → the room's indicator, then its number → the agent's forecast → slide 4 answered: a conductor, graded → the scoreboard → the loop run backwards, from values to policies → the five layers with their names → objections.
 
 ## Timing map (30-minute cut)
 
@@ -24,9 +24,10 @@ The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 
 | 9:55–11:40 | 11 | The agent's forecast and its trace | 1.75 |
 | 11:40–12:20 | 12 | Conductors, not oracles: the answer to slide 4 | 0.75 |
 | 12:20–13:25 | 13 | The loop that matters most; the scoreboard today | 1 |
-| 13:25–14:15 | 14 | Run the loop backwards: values, indicators, policies | 0.75 |
-| 14:15–27:00 | 15 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12.75 |
-| 27:00–27:30 | 16 | Which bill next? Stop at 6:55 for the lightning talks | 0.5 |
+| 13:30–14:20 | 14 | Run the loop backwards: values, indicators, policies | 0.75 |
+| 14:20–14:50 | 15 | Every layer of the stack exists today: the five wordmarks, one check each | 0.5 |
+| 14:50–27:00 | 16 | Where does this break? Goodhart, who sets the objectives, legitimacy | 12.25 |
+| 27:00–27:30 | 17 | Which bill next? Stop at 6:55 for the lightning talks | 0.5 |
 
 Start at about 6:20 so people can get food first; the listing runs to 7:00 and the lightning talks need the room at 7:00. Page through the whole deck once before presenting so the live pages are cached, and click each live toggle once (slides 4, 7, 13). If the network fails, the numbers on slides 8, 9 and 11 stand on their own; the "If the wifi dies" section of SCRIPT.md covers slides 7 and 11.
 
@@ -115,13 +116,18 @@ If the ratio drops below one, scale it: every official statistic forecast (the M
 Then slide 2's loop runs backwards: pick the value, set the indicator's level, search the bills whose conditional forecasts move it.
 "That's the alignment problem in the title, with the arrows reversed. And the moment you search policies against indicators, Goodhart stops being a footnote. So break it."
 
-### 15 · Where does this break? (30s, then about 10 minutes)
+### 15 · Every layer of the stack exists today, each with its own check (30s)
+
+Back to slide 5 with names on the five things: the Axiom Foundation (rules), Chronicle (statistics), Microcosm (population), PolicyEngine (model), Thesis (forecasts, prototype).
+"The scoreboard on that last layer ranks the other four. Now break it."
+
+### 16 · Where does this break? (30s, then about 11 minutes)
 
 Three headings: Goodhart; who sets the objectives (an AI proposed the goals on the bill page; countersign or strike buttons); legitimacy (who contests the model, the forecast, and the use).
 Chatham House rules: nothing gets attributed. One request for the end: which bill should get a forecast next.
 Answers to the likely objections are in the "If they ask" section of SCRIPT.md.
 
-### 16 · What if every bill had a forecast? (25s)
+### 17 · What if every bill had a forecast? (25s)
 
 Dinner is at 6:15. Four links on the screen. Keep your number; the IRS prints the answer by the end of 2029 and the agent's score will be on the last link.
 Bring the bill you want forecast next to dinner. Thanks.
