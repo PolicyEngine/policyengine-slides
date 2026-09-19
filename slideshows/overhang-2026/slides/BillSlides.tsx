@@ -181,8 +181,8 @@ export function ModelSlide() {
 export function AudienceSlide() {
   return (
     <BillFrame title="Your number first" source="Sources: IRS SOI Table 3.3, first prints for TY2020–TY2023; S. 3596 · Congress.gov" sourceUrl="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-returns-complete-report-publication-1304">
-      <div className="flex h-full flex-col justify-between gap-5">
-        <p className="max-w-5xl text-[31px] font-medium leading-snug text-pe-dark">How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes?</p>
+      <div className="flex h-full flex-col justify-between gap-3">
+        <p className="max-w-5xl text-[28px] font-medium leading-snug text-pe-dark">How many tax returns will claim the refundable child tax credit for tax year 2027 if this bill passes?</p>
         <div>
           <p className="mb-3 text-base text-gray-500">IRS first prints · Returns claiming the refundable child tax credit</p>
           <div className="grid grid-cols-4 gap-5">
@@ -192,7 +192,7 @@ export function AudienceSlide() {
               ['TY2022', '18.1M'],
               ['TY2023', '17.6M'],
             ].map(([year, count]) => (
-              <div key={year} className="rounded-2xl bg-pe-light px-6 py-5">
+              <div key={year} className="rounded-2xl bg-pe-light px-6 py-4">
                 <p className="text-base font-medium text-gray-600">{year}</p>
                 <p className="mt-2 text-4xl font-bold tracking-tight text-pe-dark">{count}</p>
               </div>
@@ -210,15 +210,15 @@ export function AgentSlide() {
   return (
     <BillFrame title="The agent’s forecast" prototype source="Source: Thesis prototype, S. 3596 forecast and recorded reasoning trace · app.thesisinstitute.org/bills/s3596-119" sourceUrl={billUrl}>
       <div className="grid h-full min-h-0 grid-cols-[1.25fr_1fr] gap-6">
-        <div className="flex min-h-0 flex-col justify-between gap-3">
-          <p className="text-base text-gray-600">TY2027 returns · Median [80% interval]</p>
+        <div className="flex min-h-0 flex-col justify-between gap-2">
+          <p className="text-sm text-gray-600">TY2027 returns · Median [80% interval]</p>
           <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-xl bg-gray-100 p-5">
+            <div className="rounded-xl bg-gray-100 p-4">
               <p className="text-base font-medium text-gray-600">Current law</p>
               <p className="mt-1 text-4xl font-bold text-pe-dark">17.6M</p>
               <p className="mt-2 text-lg text-gray-700">[5.1M, 30.1M]</p>
             </div>
-            <div className="rounded-xl bg-pe-light p-5">
+            <div className="rounded-xl bg-pe-light p-4">
               <p className="text-base font-medium text-gray-600">If enacted</p>
               <p className="mt-1 text-4xl font-bold text-pe-dark">27.2M</p>
               <p className="mt-2 text-lg text-gray-700">[14.7M, 39.7M]</p>
@@ -226,7 +226,7 @@ export function AgentSlide() {
           </div>
           <p className="text-xl text-gray-700">Forecast gap <strong className="text-pe-teal">9.6M returns</strong></p>
           <p className="border-l-4 border-pe-teal pl-4 text-[15px] leading-relaxed text-gray-600">Last print + half of TY2021’s excess over its neighbours (a judgmental assumption); interval half-width = 1.28 sample standard deviations of four prints.</p>
-          <div className="space-y-1 text-[13px] leading-relaxed text-gray-500">
+          <div className="space-y-1 text-xs leading-normal text-gray-500">
             <p>Forecast recorded 4 Aug 2026 · Condition judged 31 Dec 2027</p>
             <p>First-print resolution due by 31 Dec 2029</p>
           </div>
