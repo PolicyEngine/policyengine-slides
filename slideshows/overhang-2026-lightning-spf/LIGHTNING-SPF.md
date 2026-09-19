@@ -6,21 +6,21 @@ Deck: `/slides/overhang-2026-lightning-spf` · 9 slides, one with two builds · 
 
 I'm Max Ghenis. I build PolicyEngine and the Axiom Foundation, and I'm prototyping a third thing called Thesis. Five minutes on one question: how sure are the people paid to forecast the economy, and how would we know?
 
-## 2 · Published estimates of AI's growth effect span two orders of magnitude (0:45)
+## 2 · Estimates of AI's growth effect span two orders of magnitude (0:45)
 
 [click] Ask how much AI will add to growth and you can pick your study. Acemoglu: no more than 0.66 percent of total factor productivity over ten years, later revised below 0.53. Goldman Sachs: 1.5 points of productivity growth a year for a decade and 7 percent of global GDP. The Forecasting Research Institute asked economists to assume rapid AI progress, and their median for 2025 to 2029 came in at 3.3 percent a year, with AI experts at 3.7. Epoch's review puts the odds of 30 percent growth sometime this century at about even. Same question, answers two orders of magnitude apart, and none of them scored yet.
 
-## 3 · Forecasters have put probabilities on next-year growth since 1968 (0:40)
+## 3 · Forecasters have stated probabilities since 1968 (0:40)
 
 [click] So is there a series of forecasts of this quantity that we can score, from before Metaculus existed? There is. Since 1968 the Philadelphia Fed's Survey of Professional Forecasters has asked its panel to spread probability across bins of next-year output growth, and since 1999 the ECB has asked the same of euro-area forecasters. Each histogram records what a point forecast can't: how much confidence the forecaster puts behind the number. I pooled every one they have published, 3,695 round-by-horizon groups, at maxghenis.com/expectations, and scored them against the numbers the agencies now publish.
 
-## 4 · Forecasters state a mean and a spread for next year's growth (0:55, two builds)
+## 4 · Forecasters state a mean and a spread for next year (0:55, two builds)
 
 [click] Start with the point estimates. This is the pooled mean forecast for next year's US growth from each first-quarter round since 1992. Between 2 and 3 percent most years, lower after 2008, and 1.9 percent for 2027.
 
 [click] Now the part a point forecast can't show. Each histogram carries its own spread, so here is one standard deviation either side of the mean. About 1.3 points on each side from 1992 to 2020. In the 2021 round it opened to 2.2.
 
-## 5 · Forecasters are less sure about next year than they were for three decades (0:40)
+## 5 · Forecasters are less sure about next year than in 1992–2020 (0:40)
 
 [click] Pull that band width out as its own series. From 1992 to 2020 the US figure averaged 1.29 points. In 2021 it spiked to 2.18. This year it sits at 1.41, with the euro area beside it at 0.78. The pros say they're less sure about next year than they were on average for three decades. Less sure around what?
 

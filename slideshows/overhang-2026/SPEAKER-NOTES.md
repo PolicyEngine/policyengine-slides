@@ -98,7 +98,7 @@ Registered August 4; we run the agents at Thesis and we score them. Current law 
 The trace: last print plus half of 2021's excess over its neighbors, labeled a judgmental assumption; half-width 1.28 sample standard deviations of four prints, one of them 2021.
 "The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast." Judged December 31, 2027; first print due by end of 2029.
 
-### 12 · Armed with the stack, the model routes the question instead of guessing (40s)
+### 12 · With the stack, the model routes instead of guessing (40s)
 
 Back to slide 4. That board graded an oracle: a model answering from memory, against PolicyEngine's own answer key. Best 89%.
 What they just watched was a conductor: the page routed one question through the rules (parameter), the model (mechanism), and the IRS prints (base rate); the agent's judgment sat in named assumptions, and the print grades them.

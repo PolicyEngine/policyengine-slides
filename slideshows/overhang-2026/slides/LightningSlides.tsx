@@ -17,7 +17,7 @@ export function SpfTitleSlide() {
         </div>
         <div className="my-auto py-9">
           <h1 className="max-w-5xl font-display text-[68px] font-bold leading-[1.08] tracking-tight">How sure are<br />the pros?</h1>
-          <p className="mt-7 text-3xl text-white/85">Scoring 58 years of probabilistic economic forecasts</p>
+          <p className="mt-7 text-3xl text-white/85">Scoring three decades of probabilistic economic forecasts</p>
         </div>
         <div className="flex items-end justify-between gap-8">
           <div className="flex items-center gap-4">
@@ -44,7 +44,7 @@ const studies = [
 export function AiGrowthStudiesSlide() {
   return (
     <Slide>
-      <SlideHeader><SlideTitle>Published estimates of AI’s growth effect span two orders of magnitude</SlideTitle></SlideHeader>
+      <SlideHeader><SlideTitle>Estimates of AI’s growth effect span two orders of magnitude</SlideTitle></SlideHeader>
       <div className="mt-8 grid grid-cols-4 gap-5">
         {studies.map((s) => (
           <a key={s.who} href={s.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="content-card block p-6">
@@ -69,7 +69,7 @@ export function SeriesQuestionSlide() {
   ];
   return (
     <Slide>
-      <SlideHeader><SlideTitle>Forecasters have put probabilities on next-year growth since 1968</SlideTitle></SlideHeader>
+      <SlideHeader><SlideTitle>Forecasters have stated probabilities since 1968</SlideTitle></SlideHeader>
       <div className="mt-6 grid grid-cols-3 gap-6">
         {facts.map((f) => (
           <div key={f.big} className="content-card p-6">
@@ -184,7 +184,7 @@ function ChartFrame({ step, title }: { step: number; title: string }) {
 
 /** Two builds: point estimates, then the one-sigma band. */
 export function SpfChartSlide({ buildStep = 2 }: { buildStep?: number }) {
-  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="Forecasters state a mean and a spread for next year’s growth" />;
+  return <ChartFrame step={Math.min(Math.max(buildStep, 1), 2)} title="Forecasters state a mean and a spread for next year" />;
 }
 
 /** The backtest on the same chart: realized outcomes against the band. */

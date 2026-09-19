@@ -72,7 +72,7 @@ Words: 214 · Clock: 10:00 to 11:45
 
 [click] Our agent registered this on August 4. We run the agents at Thesis and we score them. Under current law, 17.6 million returns, with an 80 percent interval from 5.1 to 30.1 million. If the bill is enacted, 27.2 million, interval 14.7 to 39.7. A gap of 9.6 million returns. Check yours. Hands up if your median came in above 27 million. [pause] Below the last print, 17.6? [pause] Now read the trace. [live page] The agent took the last print, 17.6, and added half of 2021's excess over its neighbors. It calls that half a judgmental assumption. In 2021 the law removed the earnings test and raised the credit. This bill moves one threshold from 2,500 dollars to one. So you can challenge the analogy, and the page shows you where. The interval half-width is 1.28 sample standard deviations of four prints. One of those four is 2021, and that one print stretches the current-law band from 5 to 30 million. If you wrote a tighter band, the page shows the assumption you'd replace. The model computed its change from the rule. The agent reasoned from a precedent. Both sit on the same page, and the IRS print grades the forecast. The condition gets judged on December 31, 2027, and the first print is due by the end of 2029.
 
-## 12 · Armed with the stack, the model routes the question instead of guessing (0:40)
+## 12 · With the stack, the model routes instead of guessing (0:40)
 
 Words: 104 · Clock: 11:45 to 12:25
 

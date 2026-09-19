@@ -59,7 +59,7 @@ export function BaselineSlide() {
   const [live, setLive] = useState(false);
   const trackerUrl = 'https://maxghenis.com/expectations/';
   return (
-    <Frame title="Forecasters are less sure about next year than they were for three decades" source={expectationsSource}>
+    <Frame title="Forecasters are less sure about next year than in 1992–2020" source={expectationsSource}>
       <div className="relative h-full">
         <button
           type="button"
