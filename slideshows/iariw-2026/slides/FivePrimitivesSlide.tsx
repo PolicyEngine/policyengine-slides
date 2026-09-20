@@ -30,7 +30,13 @@ const primitives = [
   },
 ];
 
-export default function FivePrimitivesSlide() {
+export default function FivePrimitivesSlide({
+  feedbackLoops,
+  closingText,
+}: {
+  feedbackLoops?: readonly string[];
+  closingText?: string;
+} = {}) {
   return (
     <Slide>
       <SlideHeader>
@@ -42,7 +48,7 @@ export default function FivePrimitivesSlide() {
       </SlideHeader>
 
       <div className="mt-6 grid grid-cols-5 gap-4">
-        {primitives.map((p) => (
+        {primitives.map((p, index) => (
           <div key={p.n} className="content-card p-5 flex flex-col">
             <div className="font-mono text-3xl font-bold text-pe-teal leading-none">
               {p.n}
@@ -51,7 +57,7 @@ export default function FivePrimitivesSlide() {
               {p.need}
             </p>
             <p className="text-sm text-gray-500 leading-snug mt-auto pt-4">
-              {p.harness}
+              {feedbackLoops?.[index] ?? p.harness}
             </p>
           </div>
         ))}
@@ -59,9 +65,9 @@ export default function FivePrimitivesSlide() {
 
       <div className="accent-block mt-8 max-w-5xl">
         <p className="text-xl text-gray-800 leading-relaxed">
-          The same primitives norm AI agents and human researchers alike
+          {closingText ?? <>The same primitives norm AI agents and human researchers alike
           &mdash; toward faster, more accurate, more epistemically rigorous
-          estimates of what policy will do.
+          estimates of what policy will do.</>}
         </p>
       </div>
     </Slide>
