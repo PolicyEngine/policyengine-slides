@@ -9,7 +9,7 @@ The arc: the claim (law is an alignment loop we rarely close) → why now (AI al
 
 ## Timing map (30-minute cut)
 
-The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 12 closes the loop that slide 4 opens, after the IARIW "Conductors, not oracles" beat; slide 14 runs slide 2's loop backwards, which is the title's claim. The two SPF slides moved to the lightning deck. The five backups (How well did they do?, What if every bill had a score?, What if every outcome had an estimate?, What if you cross them?, How do we get there?) live in the overhang-2026-backup deck, so this deck ends on its end slide.
+The spoken script is in SCRIPT.md (slide by slide, with a running clock). Slide 12 closes the loop that slide 4 opens, after the IARIW "Conductors, not oracles" beat; slide 14 runs slide 2's loop backwards, which is the title's claim. The two SPF slides moved to Max's Expectations lightning talk, hosted with his personal work. The five backups (How well did they do?, What if every bill had a score?, What if every outcome had an estimate?, What if you cross them?, How do we get there?) live in the overhang-2026-backup deck, so this deck ends on its end slide.
 
 | Elapsed | Slide | Section | Minutes |
 |---|---|---|---|
