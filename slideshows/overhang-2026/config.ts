@@ -17,7 +17,7 @@ export const overhang2026Config: SlideshowConfig = {
   speakers: [speakers['max-ghenis']],
   private: false,
   slides: [
-    // 30-minute cut, order per SCRIPT.md. The SPF slides moved to the lightning deck (overhang-2026-lightning-spf).
+    // 30-minute cut, order per SCRIPT.md. The SPF slides moved to the Expectations lightning talk, hosted with Max’s personal work.
     // The indicator question (8) comes before the model (9); the conductor slide (12) answers the benchmark slide (4); 14 runs slide 2's loop backwards; 15 returns to the five layers. Objections run without a slide. Backups live in overhang-2026-backup.
     TitleSlide, AlignmentSlide, DraftingSlide,
     PolicyBenchSlide, PrimitivesSlide, BillSlide, RulesSlide,
