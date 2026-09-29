@@ -24,7 +24,7 @@ export default function MicrofoundedDemoSlide() {
             </ul>
 
             <p className="text-pe-teal font-semibold pt-2">
-              policyengine.org/us/obbba-household-by-household
+              policyengine.org/us/obbba-households
             </p>
           </div>
         </SlideContent>

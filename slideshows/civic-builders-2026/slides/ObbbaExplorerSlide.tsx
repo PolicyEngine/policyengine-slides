@@ -5,7 +5,7 @@ import Slide from "@/components/core/Slide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 
-const IFRAME_URL = "https://policyengine.org/us/obbba-household-explorer";
+const IFRAME_URL = "https://www.policyengine.org/us/obbba-households";
 
 export default function ObbbaExplorerSlide() {
   const [expanded, setExpanded] = useState(false);

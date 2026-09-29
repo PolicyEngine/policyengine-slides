@@ -244,7 +244,7 @@ rules — a concrete case where the model harness must explain the mechanism, no
 an answer.
 
 ### 51 · DEMO — OBBBA Household Explorer (45s)
-policyengine.org/us/obbba-household-explorer: take one household and decompose the law
+policyengine.org/us/obbba-households: take one household and decompose the law
 provision by provision. The same model and microdata that produce national and district totals
 also produce a legible case-level explanation.
 

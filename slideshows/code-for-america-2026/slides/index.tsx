@@ -942,7 +942,7 @@ export function DemoPathSlide() {
           Demo URL
         </p>
         <p className="mt-2 text-3xl font-black text-pe-dark">
-          policyengine.org/us/obbba-household-by-household
+          policyengine.org/us/obbba-households
         </p>
         <p className="mt-4 text-xl leading-relaxed text-gray-700">
           Same rules engine powers Laura&apos;s screener, Jill&apos;s

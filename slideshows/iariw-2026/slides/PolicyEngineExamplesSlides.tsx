@@ -37,8 +37,8 @@ export const CliffWatchLiveSlide = () => (
 export const ObbbaExplorerLiveSlide = () => (
   <LiveAppSlide
     title="PolicyEngine in action: one law, household by household"
-    url="https://www.policyengine.org/us/obbba-household-explorer"
-    displayUrl="policyengine.org/us/obbba-household-explorer"
+    url="https://www.policyengine.org/us/obbba-households"
+    displayUrl="policyengine.org/us/obbba-households"
   >
     <div className="content-card p-5">
       <div className="slide-tag mb-3">What you are seeing</div>

@@ -27,7 +27,7 @@ export default function OBBBADemoSlide() {
                 <div className="code-block-dot bg-[#28c840]" />
               </div>
               <div className="code-block-content">
-                <p className="text-[#7ee787] text-xl">policyengine.org/us/obbba-household-by-household</p>
+                <p className="text-[#7ee787] text-xl">policyengine.org/us/obbba-households</p>
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ AI" → grounded vs plain on one screen. Never repeat the page's "certified" wor
    - https://axiom.org/axiom/graph?compose=be  (composition graph)
    - https://axiom.org/validation
    - https://www.policyengine.org/us/cliffwatch
-   - https://www.policyengine.org/us/obbba-household-explorer
+   - https://www.policyengine.org/us/obbba-households
    - https://policyengine.org/be
    - https://microcosm.institute/calibration/dashboard/microcosm?country=be
    - https://chronicle.institute
@@ -55,7 +55,7 @@ Fallback slides: "Browse the encoded law" → "The law at the node" → "The com
 | Step | Do | Say |
 |---|---|---|
 | 2.1 | Show policyengine.org/us/cliffwatch; sweep earnings | "The model traces where interacting rules create a cliff — not just the answer, but the mechanism and the marginal rate around it." |
-| 2.2 | Show policyengine.org/us/obbba-household-explorer; pick a household | "The same law that produces a national score decomposes provision by provision for one household. Aggregate and case-level explanations come from the same model." |
+| 2.2 | Show policyengine.org/us/obbba-households; pick a household | "The same law that produces a national score decomposes provision by provision for one household. Aggregate and case-level explanations come from the same model." |
 
 ## Beat 3 — policyengine.org/be (≈3 min)
 
