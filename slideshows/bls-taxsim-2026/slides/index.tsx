@@ -2,8 +2,7 @@ import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
-import ScreenshotContent from './ScreenshotContent';
-import { BenefitChains, CompareFlow, Contrasts, DropIn, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, WorkedExample, YearChart } from './Visuals';
+import { BenefitChains, CompareFlow, DropIn, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, WorkedExample } from './Visuals';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
@@ -69,16 +68,12 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <Partnership partnership={content.partnership} />
       ) : content.worked ? (
         <WorkedExample worked={content.worked} />
-      ) : content.contrasts ? (
-        <Contrasts contrasts={content.contrasts} />
-      ) : content.yearChart ? (
-        <YearChart chart={content.yearChart} />
+
       ) : content.compare ? (
         <CompareFlow compare={content.compare} />
       ) : content.links ? (
         <QuestionsAndLinks questions={content.body} links={content.links} />
-      ) : content.screenshot ? (
-        <ScreenshotContent screenshot={content.screenshot} />
+
       ) : content.detail ? (
         <DetailContent detail={content.detail} />
       ) : (
