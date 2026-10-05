@@ -1,7 +1,6 @@
 export type BlsIcon =
-  | 'adjustments' | 'basket' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text'
-  | 'flask' | 'github' | 'history' | 'play' | 'scale' | 'settings' | 'target' | 'users'
-  | 'versions' | 'world';
+  | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask' | 'github'
+  | 'history' | 'play' | 'scale' | 'settings' | 'users' | 'versions' | 'world';
 
 export interface BlsSlideContent {
   id: string;
@@ -11,6 +10,8 @@ export interface BlsSlideContent {
   minutes: number;
   notes: string;
   cover?: boolean;
+  /** A full-slide component from slides/PEIntroSlides.tsx. */
+  custom?: 'what-is-pe' | 'pe-today' | 'who-uses-pe';
   /** Clickable URL shown at the right of the slide title. */
   headerLink?: { label: string; url: string };
   /** Resource cards beside the bullet list (the Q&A slide). */
@@ -96,7 +97,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Q&A and discussion"
     ],
     "descriptions": [
-      "Why this matters for CE, how PolicyEngine works, and the NBER collaboration.",
+      "What PolicyEngine is, who uses it, and the NBER collaboration.",
       "A drop-in TAXSIM interface, how a record becomes a result, preparing survey inputs, and year coverage.",
       "A TAXSIM-format file run in the browser, from input rows to federal and state tax.",
       "How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.",
@@ -108,22 +109,40 @@ export const blsSlides: BlsSlideContent[] = [
     "notes": "The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
-    "id": "ce-opportunity",
-    "title": "The CE research opportunity",
+    "id": "what-is-pe",
+    "title": "PolicyEngine: free, open-source microsimulation",
     "body": [
-      "Calculate taxes using a familiar input format",
-      "Examine how assumptions affect household resources",
-      "Explore methods for adding in-kind benefits",
-      "Start with a bounded research comparison"
+      "Rules: federal and state taxes and major benefit programs",
+      "Households: survey data enhanced and calibrated, or any household you enter",
+      "Reforms: change any parameter and see the cost, poverty and distributional effects"
     ],
     "minutes": 2,
-    "notes": "Present these as opportunities for discussion, not commitments or claims about CE’s current production system.",
-    "cards": [
-      { "icon": "file-spreadsheet", "title": "A familiar input format", "text": "Calculate federal and state taxes from TAXSIM-format records." },
-      { "icon": "adjustments", "title": "Visible assumptions", "text": "See how tax units, income ownership and missing data change after-tax income." },
-      { "icon": "basket", "title": "In-kind benefits", "text": "Explore methods to add SNAP and Medicaid to household resources." },
-      { "icon": "target", "title": "A bounded first step", "text": "Start with one year, one sample and a reproducible comparison." }
-    ]
+    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "custom": "what-is-pe"
+  },
+  {
+    "id": "pe-today",
+    "title": "PolicyEngine today",
+    "body": [
+      "95,000+ parameters, 5,500+ variables and 4,693 test files in the US model",
+      "Public code since June 2021, with 133 contributors to the US model",
+      "NBER, the Atlanta Fed and No 10 Downing Street work with the models"
+    ],
+    "minutes": 1,
+    "notes": "Use the numbers to show scale and testing, not to sell. The NBER memorandum of understanding is the reason the TAXSIM emulator exists; the next section covers it. Figures from the gettsim-2026 deck (September 3, 2026); check them before the talk if you quote them.",
+    "custom": "pe-today"
+  },
+  {
+    "id": "who-uses-pe",
+    "title": "Researchers and developers build with these rules",
+    "body": [
+      "Federal partners and users: NBER, the Atlanta Fed, BEA and the Joint Economic Committee",
+      "Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown and USC",
+      "Benefit navigators: MyFriendBen, Amplifi, Mirza and Starlight"
+    ],
+    "minutes": 1,
+    "notes": "Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "custom": "who-uses-pe"
   },
   {
     "id": "rules-and-data",
@@ -134,7 +153,7 @@ export const blsSlides: BlsSlideContent[] = [
       "The model returns taxes and benefit estimates",
       "Researchers can inspect the code and assumptions"
     ],
-    "minutes": 3,
+    "minutes": 2,
     "notes": "Explain the four layers using a household with two adults and a child. The household record supplies ages and income. The rules supply the year-specific calculation. Missing data and program participation require additional choices. PolicyEngine’s TAXSIM adapter translates one input schema into the model’s entities; it does not remove these methodological choices. Source: https://github.com/PolicyEngine/policyengine-us and the previous IARIW overview.",
     "detail": {
       "columns": [
@@ -180,8 +199,8 @@ export const blsSlides: BlsSlideContent[] = [
       "Comparisons that help investigate both models",
       "Continuity for researchers using TAXSIM workflows"
     ],
-    "minutes": 3,
-    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. The screenshot shows the partner section of the TAXSIM site, captured October 5, 2026; its Read more links lead to the MOU announcement and the Atlanta Fed comparison. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
+    "minutes": 2,
+    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The screenshot shows the partner section of the TAXSIM site, captured October 5, 2026; its Read more links lead to the MOU announcement and the Atlanta Fed comparison. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
     "screenshot": {
       "src": "/screenshots/bls-taxsim-2026/taxsim-validated-by.png",

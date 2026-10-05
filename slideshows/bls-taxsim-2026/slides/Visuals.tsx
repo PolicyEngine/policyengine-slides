@@ -1,6 +1,4 @@
 import {
-  IconAdjustmentsHorizontal,
-  IconBasket,
   IconBrandGithub,
   IconChartBar,
   IconChartDots,
@@ -12,7 +10,6 @@ import {
   IconPlayerPlay,
   IconScale,
   IconSettings,
-  IconTarget,
   IconUsersGroup,
   IconVersions,
   IconWorld,
@@ -21,8 +18,6 @@ import {
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
-  'adjustments': IconAdjustmentsHorizontal,
-  'basket': IconBasket,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
   'file-spreadsheet': IconFileSpreadsheet,
@@ -33,7 +28,6 @@ const ICONS: Record<BlsIcon, Icon> = {
   'play': IconPlayerPlay,
   'scale': IconScale,
   'settings': IconSettings,
-  'target': IconTarget,
   'users': IconUsersGroup,
   'versions': IconVersions,
   'world': IconWorld,

@@ -1,6 +1,7 @@
 import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
+import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import ScreenshotContent from './ScreenshotContent';
 import { CompareFlow, IconCards, QuestionsAndLinks, YearRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
@@ -8,7 +9,18 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { blsSlides, type BlsSlideContent } from '../content';
 
+const CUSTOM_SLIDES = {
+  'what-is-pe': WhatIsPolicyEngineSlide,
+  'pe-today': PolicyEngineTodaySlide,
+  'who-uses-pe': WhoUsesPolicyEngineSlide,
+} satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
+
 function DeckSlide({ content }: { content: BlsSlideContent }) {
+  if (content.custom) {
+    const Custom = CUSTOM_SLIDES[content.custom];
+    return <Custom />;
+  }
+
   if (content.cover) {
     return (
       <Slide isCover>
