@@ -22,13 +22,13 @@ Introduce the speakers and thank the BLS hosts and the CE team.
 
 ## 2. Today’s discussion (1–2 min)
 
-- Introduction and context   10 min — Why this matters for CE, how PolicyEngine works, and the NBER collaboration.
-- The emulator and its core assumptions   12 min — A drop-in TAXSIM interface, how a record becomes a result, preparing survey inputs, and year coverage.
-- Live demonstration   10 min — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
-- Validation   13 min — How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.
-- Benefit imputation   10 min — Methods for missing survey inputs, SNAP participation, and Medicaid valuation.
-- A possible CE pilot   5 min — A focused comparison, the inputs it needs, and questions for CE staff.
-- Q&A and discussion   30 min — Questions on the methods, implementation, and opportunities for collaboration.
+- Introduction and context — Why this matters for CE, how PolicyEngine works, and the NBER collaboration.
+- The emulator and its core assumptions — A drop-in TAXSIM interface, how a record becomes a result, preparing survey inputs, and year coverage.
+- Live demonstration — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
+- Validation — How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.
+- Benefit imputation — Methods for missing survey inputs, SNAP participation, and Medicaid valuation.
+- A possible CE pilot — A focused comparison, the inputs it needs, and questions for CE staff.
+- Q&A and discussion — Questions on the methods, implementation, and opportunities for collaboration.
 
 The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A.
 

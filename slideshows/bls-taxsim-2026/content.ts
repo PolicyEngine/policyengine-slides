@@ -87,13 +87,13 @@ export const blsSlides: BlsSlideContent[] = [
     "id": "agenda",
     "title": "Today’s discussion",
     "body": [
-      "Introduction and context   10 min",
-      "The emulator and its core assumptions   12 min",
-      "Live demonstration   10 min",
-      "Validation   13 min",
-      "Benefit imputation   10 min",
-      "A possible CE pilot   5 min",
-      "Q&A and discussion   30 min"
+      "Introduction and context",
+      "The emulator and its core assumptions",
+      "Live demonstration",
+      "Validation",
+      "Benefit imputation",
+      "A possible CE pilot",
+      "Q&A and discussion"
     ],
     "descriptions": [
       "Why this matters for CE, how PolicyEngine works, and the NBER collaboration.",
