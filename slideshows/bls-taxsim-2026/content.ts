@@ -85,6 +85,15 @@ export interface BlsSlideContent {
     height: number;
     caption?: string;
   };
+  /** Before-and-after code for each environment, with a site capture beside it. */
+  dropIn?: {
+    installLabel: string;
+    install: string;
+    columns: [string, string, string];
+    rows: { env: string; before: string; after: string }[];
+    takeaway: string;
+    screenshot: { src: string; alt: string; width: number; height: number; caption: string };
+  };
   /** Two partners joined by an agreement in the center. */
   partnership?: {
     left: { title: string; items: { icon: BlsIcon; title: string; detail: string }[] };
@@ -250,14 +259,28 @@ export const blsSlides: BlsSlideContent[] = [
       "Earlier years still route to TAXSIM35"
     ],
     "minutes": 3,
-    "notes": "The site shows the before-and-after swap for six environments; the capture shows the R tab. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs) for comparison runs. Ask CE staff which environment their current tax-imputation code uses. This is a documented workflow, not a completed run on CE data. Source: https://www.policyengine.org/us/taxsim (captured October 5, 2026) and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/r-package/policyenginetaxsim/README.md",
+    "notes": "The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.",
     "headerLink": TAXSIM_SITE,
-    "screenshot": {
-      "src": "/screenshots/bls-taxsim-2026/taxsim-drop-in-r.png",
-      "alt": "TAXSIM site Get started tabs with R selected: library(usincometaxes) and taxsim_calculate_taxes(input) before, library(policyenginetaxsim) and policyengine_calculate_taxes(input) after",
-      "width": 4256,
-      "height": 1032,
-      "caption": "Existing scripts keep their input files. In R, taxsim_calculate_taxes() becomes policyengine_calculate_taxes(). The site shows the same swap for the CLI, Python, Stata, SAS and Julia."
+    "dropIn": {
+      "installLabel": "Install once",
+      "install": "uv tool install policyengine-taxsim",
+      "columns": ["", "TAXSIM35 (before)", "PolicyEngine TAXSIM (after)"],
+      "rows": [
+        { "env": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv" },
+        { "env": "R", "before": "taxsim_calculate_taxes(input)", "after": "[[policyengine_calculate_taxes]](input)" },
+        { "env": "SAS", "before": "system(taxsim35 < input.csv …)", "after": "system([[policyengine-taxsim]] < input.csv …)" },
+        { "env": "Stata", "before": "taxsimlocal35, replace", "after": "! [[policyengine-taxsim]] < txpydata.raw …" },
+        { "env": "Julia", "before": "pipeline(`taxsim35`, …)", "after": "pipeline(`[[policyengine-taxsim]]`, …)" },
+        { "env": "Python", "before": "subprocess.run(\"taxsim35 …\")", "after": "[[PolicyEngineRunner(df)]].run()" }
+      ],
+      "takeaway": "Same input file, same output variables. Existing scripts change one command or one function name.",
+      "screenshot": {
+        "src": "/screenshots/bls-taxsim-2026/taxsim-hero.png",
+        "alt": "TAXSIM site banner: The next chapter of TAXSIM. An open-source, drop-in replacement for TAXSIM35. Same interface, same inputs, same outputs, powered by PolicyEngine's microsimulation engine.",
+        "width": 1920,
+        "height": 1108,
+        "caption": "policyengine.org/us/taxsim has the install guide and the full code for each environment."
+      }
     }
   },
   {
