@@ -1,6 +1,6 @@
 export type BlsIcon =
-  | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask' | 'github'
-  | 'history' | 'play' | 'scale' | 'settings' | 'users' | 'versions' | 'world';
+  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text'
+  | 'flask' | 'github' | 'history' | 'play' | 'scale' | 'settings' | 'users' | 'versions' | 'world';
 
 export interface BlsSlideContent {
   id: string;
@@ -87,9 +87,9 @@ export interface BlsSlideContent {
   };
   /** Two partners joined by an agreement in the center. */
   partnership?: {
-    left: { title: string; items: { value: string; label: string }[] };
+    left: { title: string; items: { icon: BlsIcon; title: string; detail: string }[] };
     center: { title: string; date: string; detail: string };
-    right: { title: string; items: { value: string; label: string }[] };
+    right: { title: string; items: { icon: BlsIcon; title: string; detail: string }[] };
     takeaway: string;
   };
   /** A live iframe with a side column of demo steps. */
@@ -215,10 +215,10 @@ export const blsSlides: BlsSlideContent[] = [
       "left": {
         "title": "TAXSIM at NBER",
         "items": [
-          { "value": "1970s", "label": "Created by Daniel Feenberg, who still maintains it" },
-          { "value": "1,200+", "label": "Papers cite the Feenberg and Coutts (1993) TAXSIM paper" },
-          { "value": "1960, 1977", "label": "First years of federal and state law" },
-          { "value": "BLS, Census", "label": "BLS uses it for the CE; Census evaluated it for the SPM" }
+          { "icon": "history", "title": "Developed since the 1970s", "detail": "Created and maintained by Daniel Feenberg" },
+          { "icon": "book", "title": "1,200+ citing papers", "detail": "Feenberg and Coutts (1993)" },
+          { "icon": "calendar", "title": "Federal law from 1960", "detail": "State law from 1977" },
+          { "icon": "building", "title": "Used by BLS for the CE", "detail": "Census evaluated it for the SPM" }
         ]
       },
       "center": {
@@ -229,10 +229,10 @@ export const blsSlides: BlsSlideContent[] = [
       "right": {
         "title": "PolicyEngine TAXSIM emulator",
         "items": [
-          { "value": "Same format", "label": "TAXSIM35 inputs and outputs, so scripts keep working" },
-          { "value": "2021 onward", "label": "Federal and state tax from PolicyEngine’s models" },
-          { "value": "1960 to now", "label": "Earlier years go to TAXSIM35 behind one interface" },
-          { "value": "Open source", "label": "Code and issue tracker on GitHub" }
+          { "icon": "file-spreadsheet", "title": "Same TAXSIM35 format", "detail": "Existing scripts keep working" },
+          { "icon": "scale", "title": "PolicyEngine models from 2021", "detail": "Federal and state income tax" },
+          { "icon": "history", "title": "1960 to now in one interface", "detail": "Earlier years route to TAXSIM35" },
+          { "icon": "github", "title": "Open source", "detail": "Code and issue tracker on GitHub" }
         ]
       },
       "takeaway": "Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law."

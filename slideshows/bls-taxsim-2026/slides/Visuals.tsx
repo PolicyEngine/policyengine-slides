@@ -1,5 +1,8 @@
 import {
+  IconBook,
   IconBrandGithub,
+  IconBuildingBank,
+  IconCalendar,
   IconChartBar,
   IconChartDots,
   IconChevronRight,
@@ -19,6 +22,9 @@ import {
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
+  'book': IconBook,
+  'building': IconBuildingBank,
+  'calendar': IconCalendar,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
   'file-spreadsheet': IconFileSpreadsheet,
@@ -395,13 +401,18 @@ type PartnershipData = NonNullable<BlsSlideContent['partnership']>;
 
 function PartnerSide({ side }: { side: PartnershipData['left'] }) {
   return (
-    <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-5">
+    <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-4">
       <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{side.title}</p>
-      <div className="mt-3 space-y-3">
+      <div className="mt-2 divide-y divide-gray-200">
         {side.items.map((item) => (
-          <div key={item.value} className="grid grid-cols-[9.5rem_1fr] items-baseline gap-4">
-            <span className="text-2xl font-bold leading-tight text-pe-teal">{item.value}</span>
-            <span className="text-base leading-snug text-pe-dark">{item.label}</span>
+          <div key={item.title} className="flex items-center gap-4 py-2.5">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-pe-teal/10">
+              <DeckIcon name={item.icon} size={22} />
+            </span>
+            <div>
+              <p className="text-lg font-semibold leading-snug text-pe-dark">{item.title}</p>
+              <p className="text-sm leading-snug text-gray-600">{item.detail}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -414,9 +425,9 @@ export function Partnership({ partnership }: { partnership: PartnershipData }) {
   const { center } = partnership;
   return (
     <div className="mt-4 space-y-5">
-      <div className="grid grid-cols-[1fr_13rem_1fr] items-center gap-5">
+      <div className="grid grid-cols-[1fr_13rem_1fr] items-stretch gap-5">
         <PartnerSide side={partnership.left} />
-        <div className="flex flex-col items-center rounded-xl bg-pe-dark px-4 py-6 text-center text-white">
+        <div className="flex flex-col items-center justify-center rounded-xl bg-pe-dark px-4 py-6 text-center text-white">
           <IconHeartHandshake size={40} stroke={1.5} className="text-teal-300" aria-hidden="true" />
           <p className="mt-3 text-lg font-bold leading-snug">{center.title}</p>
           <p className="text-2xl font-extrabold text-teal-300">{center.date}</p>

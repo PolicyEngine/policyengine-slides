@@ -59,17 +59,17 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 ## 6. The NBER collaboration (7–10 min)
 
 TAXSIM at NBER:
-- **1970s:** Created by Daniel Feenberg, who still maintains it
-- **1,200+:** Papers cite the Feenberg and Coutts (1993) TAXSIM paper
-- **1960, 1977:** First years of federal and state law
-- **BLS, Census:** BLS uses it for the CE; Census evaluated it for the SPM
+- **Developed since the 1970s:** Created and maintained by Daniel Feenberg
+- **1,200+ citing papers:** Feenberg and Coutts (1993)
+- **Federal law from 1960:** State law from 1977
+- **Used by BLS for the CE:** Census evaluated it for the SPM
 
 **Memorandum of understanding, September 2025:** NBER (Daniel Feenberg, James Poterba) and PolicyEngine
 
 PolicyEngine TAXSIM emulator:
-- **Same format:** TAXSIM35 inputs and outputs, so scripts keep working
-- **2021 onward:** Federal and state tax from PolicyEngine’s models
-- **1960 to now:** Earlier years go to TAXSIM35 behind one interface
+- **Same TAXSIM35 format:** Existing scripts keep working
+- **PolicyEngine models from 2021:** Federal and state income tax
+- **1960 to now in one interface:** Earlier years route to TAXSIM35
 - **Open source:** Code and issue tracker on GitHub
 
 Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law.
