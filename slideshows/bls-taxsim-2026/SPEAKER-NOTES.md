@@ -79,25 +79,41 @@ The site shows the before-and-after swap for six environments; the capture shows
 
 ## 8. From a TAXSIM record to a result (13–16 min)
 
-- One TAXSIM-format row: a married couple in California, two children, $130,000 in wages
-- The adapter builds two adults and two dependents in one joint tax unit
-- PolicyEngine returns $8,282 federal and $3,214 California income tax for 2024
+TAXSIM input row: year = 2024 (Tax year); state = 5 (California); mstat = 2 (Married, joint); page, sage = 40, 38 (Adult ages); depx = 2 (Dependents); age1, age2 = 8, 12 (Child ages); pwages = 80,000 (Primary wages); swages = 50,000 (Spouse wages).
+
+Household PolicyEngine builds: Tax unit: Married filing jointly, California, 2024; Head, age 40: Employment income $80,000; Spouse, age 38: Employment income $50,000; Dependents, ages 8 and 12: Qualify for the child tax credit.
+
+TAXSIM outputs:
+- fiitax $8,282: Federal income tax
+- siitax $3,214: California income tax
+- v10 $130,000: Federal AGI
+- v22 $4,000: Child tax credit
+- frate 22%: Federal marginal rate
+- fica $19,890: Payroll tax, both halves
+
+Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers.
 
 ## 9. Coding choices change the result (16–19 min)
 
-- State code: a New Jersey household coded with the FIPS code is taxed as North Carolina
-- Dependent ages: children aged 17 and 19 instead of 8 and 12 raise federal tax by $3,000
-- Tax units: the same parents as two returns pay $3,229 less than one joint return
+Same people, same income. One coding choice changes in each panel.
+
+- **State code** (New Jersey household, state income tax, 2024): Coded 31, TAXSIM’s code for NJ $4,131 vs Coded 34, the Census FIPS code $4,658. +$527, and no error message. TAXSIM reads 34 as North Carolina.
+- **Dependent ages** (California household, federal income tax, 2024): Children aged 8 and 12 $8,282 vs Children aged 17 and 19 $11,282. +$3,000. The child tax credit falls from $4,000 to $1,000.
+- **Tax units** (Same two parents, federal plus state income tax, 2024): One joint return $11,496 vs Two returns: head of household and single $8,267. −$3,229. How to form tax units is a research decision.
+
+Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 Each panel changes one coding choice for the same people and income; the numbers are real emulator runs. State code: TAXSIM uses its own state codes, where New Jersey is 31; the Census FIPS code for New Jersey is 34, which TAXSIM reads as North Carolina. The run does not fail, it silently applies the wrong state’s law. Dependent ages: at 17 and 19 the children no longer qualify for the $2,000 child tax credit and get the $500 credit for other dependents instead. Tax units: one joint return versus a head-of-household return (with both children and $80,000) plus a single return ($50,000); this is the question of how to form tax units for unmarried parents. Present these as choices CE would make, not as errors CE has made. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 ## 10. Year coverage and reproducible runs (19–22 min)
 
-- One file across 2018–2025: TAXSIM35 handles years before 2021, PolicyEngine handles 2021 onward
-- Law changes show up year by year, such as the 2020–21 stimulus payments and the 2021 expanded child tax credit
-- Record the input file, versions, options and logs with every run
+Federal income tax for the same household: 2018 $11,199 (TAXSIM35), 2019 $10,949 (TAXSIM35), 2020 $4,924 (TAXSIM35), 2021 $2,975 (PolicyEngine), 2022 $10,136 (PolicyEngine), 2023 $9,121 (PolicyEngine), 2024 $8,282 (PolicyEngine), 2025 $7,098 (PolicyEngine).
+
+Record with every run: Input file, Emulator version, PolicyEngine version, Run options, Output and logs. One command covers every year. The run record shows which engine handled each year.
+
+The household from slide 8. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 This is the slide-8 household (California, two children aged 8 and 12, $130,000 in wages) run for eight tax years in one file. The emulator routed 2018–2020 to the bundled TAXSIM35 binary and 2021–2025 to PolicyEngine. Federal tax nets the credits: 2020 includes both rounds of stimulus payments ($3,400 and $2,400), 2021 includes the third round ($5,600) and the expanded $6,000 child tax credit, and 2025 reflects the $2,200-per-child credit. Do not imply that all historical years run natively in PolicyEngine. The exact years CE needs are a scoping question. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
@@ -135,6 +151,8 @@ Start the live demo here: after the core assumptions and before validation. Clic
 4. **Explain the cause.** Input coding, a PolicyEngine rule, or TAXSIM itself, checked against the law.
 5. **Fix and publish.** Fixes ship with a test, and the dashboard reruns.
 
+**111,347** Enhanced CPS households · **2021–2025** Tax years · **50 + DC** States in the comparison · **2 engines** TAXSIM35 and PolicyEngine
+
 Each PolicyEngine release and each TAXSIM update starts the loop again.
 
 Present validation as a process, not a single benchmark. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard
@@ -154,75 +172,89 @@ Show the dashboard as the output of the process, not as a list of figures. Pick 
 
 ## 15. From a reported difference to a fix (42–45 min)
 
-1. **Report.** 
-2. **Reproduce.** 
-3. **Classify.** 
-4. **Resolve.** 
-5. **Confirm.** 
+1. **Report.**
+2. **Reproduce.**
+3. **Classify.**
+4. **Resolve.**
+5. **Confirm.**
+
+**1,063** Issues on GitHub since July 2024 · **829** Filed by Dan Feenberg at NBER · **984** Closed · **52+** Questions we sent NBER about TAXSIM’s own rules
+
+- **#1241 · Oregon, PolicyEngine fix:** The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field. Fixed in the emulator in 4 days. https://github.com/PolicyEngine/policyengine-taxsim/issues/1241
+- **#1235 · Massachusetts, TAXSIM fix:** TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024. NBER corrected TAXSIM the next day. https://github.com/PolicyEngine/policyengine-taxsim/issues/1235
+- **#1251 · Minnesota, Input difference:** PolicyEngine found more credits: the renter’s credit, which the comparison return left out. Explained, no code change. https://github.com/PolicyEngine/policyengine-taxsim/issues/1251
 
 Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues
 
 # Benefit imputation
 
-## 16. Eligibility, receipt and benefit value (45–48 min)
+## 16. From eligibility to a benefit value (45–48 min)
 
-| Question | Output | Research choice |
-| --- | --- | --- |
-| Does the unit qualify? | Eligibility indicator | Program unit and observed inputs |
-| How much could it receive? | Potential benefit amount | Apply the rules for the relevant period |
-| Does it participate? | Observed or imputed receipt | Participation evidence or assumptions |
-| How does it enter resources? | A defined monetary measure | Program-specific valuation |
+One California household in 2025: a single parent, children aged 4 and 7, $25,000 in wages.
 
-Illustration: $240 potential monthly benefit × 60% assumed participation = $144 expected receipt. These are hypothetical values, not a household entitlement.
+- **SNAP:** Eligibility: Eligible (SNAP unit of three) → Benefit if enrolled: $2,442 (a year, about $200 a month) → Take-up in the microdata: 82% (USDA participation rate) → Average across similar households: $2,002 (expected value)
+- **Medi-Cal:** Eligibility: 3 of 3 (people eligible) → Benefit if enrolled: $27,709 (a year at average cost per enrollee) → Take-up in the microdata: 78% (California rate (KFF, MACPAC)) → Average across similar households: $21,613 (expected value)
 
-The numerical example is invented only to distinguish potential benefits from expected receipt. It is not a SNAP calculation or a measured take-up rate. In a binary participation simulation, the household receives either zero or the modeled amount; the product is an expected value across uncertainty or comparable households. Medicaid requires a separately defined monetary valuation. Do not add a Medicaid eligibility indicator directly to dollar resources. Source: methodological distinctions developed for this seminar.
+A household calculator gives the potential benefit. Receipt and valuation are separate research choices.
+
+PolicyEngine US 2.25.2, run October 5, 2026. Take-up rates from policyengine-us-data.
+
+The numbers are a real PolicyEngine run (PolicyEngine US 2.25.2, October 5, 2026) for a single parent in California with children aged 4 and 7 and $25,000 in wages in 2025. A household calculation assumes take-up. In the microdata, take-up is assigned at published rates (SNAP 82% from USDA; Medicaid by state, 78% in California, from KFF and MACPAC enrollment targets), so the expected value is an average across similar households, not a payment to this one. Medi-Cal is valued at PolicyEngine’s average cost per enrollee: $11,801 for the parent and $7,954 per child. Do not add a Medicaid eligibility indicator directly to dollar resources.
 
 ## 17. Imputing a distribution of missing inputs (48–51 min)
 
-Quantile regression forests estimate conditional distributions of missing variables using characteristics shared across surveys.
+Sources fused into PolicyEngine’s US microdata:
+- **CPS** (Current Population Survey): The spine: demographics, income, labor force.
+- **ACS** (American Community Survey): Geography, housing, sub-state detail.
+- **SCF** (Survey of Consumer Finances): Wealth, capital income, debt.
+- **SIPP** (Survey of Income and Program Participation): Program take-up, dynamics, transitions.
+- **PUF** (IRS Public Use File): Tax-unit income detail, itemized deductions.
 
-| Step | What the researcher does |
-| --- | --- |
-| Harmonize | Align concepts, units and reference periods across surveys. |
-| Learn | Use shared characteristics to estimate the distribution of a missing variable. |
-| Draw | Sample plausible values rather than assigning every household the predicted mean. |
-| Evaluate | Check held-out distributions and sensitivity across repeated imputations. |
+**Technique.** Quantile regression forests learn the full distribution of each missing variable from many predictors, then sample from it.
 
-For CE, donor choice and shared predictors would need an explicit assessment before transferring the method.
+**Why a distribution.** Households with the same observed traits get different draws, which matters near tax and benefit thresholds.
+
+**For the CE.** Donor surveys and shared predictors would need an explicit assessment before we transfer the method.
 
 A donor survey observes the variable of interest and predictors shared with the recipient survey. A conditional distribution permits households with similar observed characteristics to have different imputed values. That can matter around tax-benefit thresholds. Multiple draws can reveal sensitivity, but they do not automatically solve model misspecification or preserve every joint relationship. The prior deck names CPS, ACS, SCF, SIPP and tax microdata. This slide does not claim a CE implementation exists. Source: local IARIW 2026 ImputationSlide.tsx.
 
-## 18. SNAP and Medicaid in a resource measure (51–53 min)
+## 18. What counts as household resources? (51–53 min)
 
-| Choice | SNAP | Medicaid |
-| --- | --- | --- |
-| Modeled result | Eligibility and potential allotment | Eligibility for coverage |
-| Receipt | Reported receipt or modeled participation | Reported enrollment or modeled participation |
-| Monetary measure | Benefit amount over the chosen period | A separately specified value of coverage |
-| Validation | Recipient counts and benefit amounts | Enrollment and the selected valuation benchmark |
+The same household, four resource concepts.
 
-The research question determines the resource concept. Eligibility alone does not identify actual receipt or a monetary value.
+- **Earnings:** $25,000 (Wages before taxes)
+- **After taxes and credits:** $34,461 (+$9,461: EITC, child tax credit and California credits, less payroll tax)
+- **Plus cash and food benefits:** $43,931 (+$9,470: CalWORKs $5,200, SNAP $2,442, school meals $1,116, WIC $712)
+- **Plus Medi-Cal at cost:** $71,640 (+$27,709 for three enrollees)
 
-Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this talk does not select one. No numerical benefit estimates are asserted.
+The resource concept, not the calculator, decides whether $25,000 of earnings becomes $34,000 or $72,000.
+
+PolicyEngine US 2.25.2, run October 5, 2026. Benefits assume take-up; Medi-Cal is valued at average cost per enrollee.
+
+Each bar adds one component for the same household (PolicyEngine US 2.25.2, 2025). Taxes and credits: the federal EITC and refundable child tax credit and California’s CalEITC and Young Child Tax Credit, less the employee payroll tax. CalWORKs is California’s TANF program. The jump from $43,931 to $71,640 shows why Medicaid needs an explicit valuation choice: cost per enrollee, insurance value and household valuation give different answers, and this talk does not pick one. Establish whether CE research wants potential entitlements, actual receipt, or a broader resource measure.
 
 ## 19. Validation of benefit imputations (53–55 min)
+
+**≈40%** of SNAP recipients are missing from CPS reports, measured against linked administrative records. (Meyer and Mittag, NBER Working Paper 21676)
 
 - **External benchmarks.** Compare imputed receipt and amounts with administrative totals.
 - **Errors by group.** Check how errors differ by income, household type and state.
 - **Holdout tests.** Test on data held back from estimation, and try alternative assumptions.
 - **Calibration is not validation.** A target used to fit the weights cannot also validate them.
 
-The prior IARIW deck describes calibration of household weights to administrative totals. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: policyengine-slides/slideshows/iariw-2026/slides/ImputationSlide.tsx and CalibrationSlide.tsx.
+Meyer and Mittag link the CPS to administrative records and find that the survey misses about 40 percent of SNAP recipients (NBER Working Paper 21676). This is why PolicyEngine computes benefits from program rules and calibrates weights to administrative totals instead of relying on reported receipt. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: the cpid-webinar-2026 deck’s baseline slide and policyengine-slides/slideshows/iariw-2026/slides/CalibrationSlide.tsx.
 
 # A possible CE pilot
 
 ## 20. Where this could fit in CE research (55–57 min)
 
-**CE tax-unit records** (An agreed set of inputs for one year.) → **Current CE tax calculation** (The existing method, unchanged.) and **PolicyEngine TAXSIM emulator** (The same records, same input format.) → **Compare** (Household results and weighted summaries.) → **Review** (Explain differences before expanding the scope.)
+**CE tax-unit records** (An agreed set of inputs for one year.) → **CE’s current TAXSIM run** (In production since the 2013 data.) and **PolicyEngine TAXSIM emulator** (The same file, no format changes.) → **Compare** (Household results and weighted summaries.) → **Review** (Explain differences before expanding the scope.)
+
+Outputs to compare first: fiitax (Federal income tax), siitax (State income tax), fica (Payroll tax), v22 (Child tax credit), v25 (Earned income credit), frate (Federal marginal rate).
 
 Keep CE definitions and weights fixed in the first comparison.
 
-This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
+This is a proposed integration path, not a tested CE implementation. CE has used NBER’s TAXSIM to estimate income taxes since the 2013 data (BLS Monthly Labor Review, 2015), so the same input file can go to both engines. Start with the core outputs: fiitax, siitax, fica, v22 (child tax credit), v25 (EITC) and frate. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
 
 ## 21. A manageable CE pilot (57–60 min)
 
@@ -233,7 +265,11 @@ Four steps, each with a clear output.
 3. **Compare.** Run both calculations and log every difference. Output: comparison and discrepancy log.
 4. **Extend.** Choose one benefit extension after the tax results. Output: extension plan.
 
-Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
+**CE would provide:** One year of tax-unit records in the current TAXSIM format; The current TAXSIM outputs and the survey weights; Staff time to review the discrepancy log.
+
+**PolicyEngine would provide:** The open-source emulator, which installs and runs inside BLS; Runs pinned to emulator and model versions; A diagnosis of each difference, then a benefit extension proposal.
+
+Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
 ## 22. Q&A and discussion (60–90 min)
 

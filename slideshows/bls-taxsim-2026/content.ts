@@ -18,6 +18,29 @@ export interface BlsSlideContent {
   links?: { label: string; url: string; description?: string; icon?: BlsIcon }[];
   /** Two-by-two icon cards in place of the bullet list. */
   cards?: { icon: BlsIcon; title: string; text: string }[];
+  /** A headline figure shown beside the cards. */
+  hero?: { value: string; label: string; source: string };
+  /** One row per program, from eligibility to an expected value. */
+  chains?: {
+    intro: string;
+    columns: string[];
+    rows: { program: string; steps: { value: string; label: string }[] }[];
+    takeaway: string;
+    footnote: string;
+  };
+  /** Source surveys beside method notes. */
+  sourcesPanel?: {
+    sourcesTitle: string;
+    sources: { code: string; name: string; role: string }[];
+    blocks: { tag: string; text: string }[];
+  };
+  /** One bar per resource concept for the same household. */
+  resourceBars?: {
+    intro: string;
+    rows: { label: string; detail: string; value: number }[];
+    takeaway: string;
+    footnote: string;
+  };
   /** One real record: input row, household built from it, and TAXSIM outputs. */
   worked?: {
     inputTitle: string;
@@ -50,6 +73,8 @@ export interface BlsSlideContent {
     engines: { title: string; text: string }[];
     output: { title: string; text: string };
     next: { title: string; text: string };
+    outputsTitle?: string;
+    outputs?: { field: string; meaning: string }[];
     takeaway?: string;
   };
   /** A website capture in place of the bullet list. */
@@ -74,6 +99,7 @@ export interface BlsSlideContent {
     stats?: { value: string; label: string }[];
     steps: { title: string; text: string; output?: string }[];
     examples?: { tag: string; title: string; text: string; outcome: string; url: string }[];
+    sides?: { title: string; items: string[] }[];
     takeaway?: string;
     loop?: string;
   };
@@ -464,7 +490,7 @@ export const blsSlides: BlsSlideContent[] = [
   // Benefit imputation: 10 minutes
   {
     "id": "benefit-concepts",
-    "title": "Eligibility, receipt and benefit value",
+    "title": "From eligibility to a benefit value",
     "body": [
       "Eligibility asks whether a unit qualifies",
       "Potential benefits apply the program rules",
@@ -472,36 +498,32 @@ export const blsSlides: BlsSlideContent[] = [
       "Valuation defines how benefits enter a resource measure"
     ],
     "minutes": 3,
-    "notes": "The numerical example is invented only to distinguish potential benefits from expected receipt. It is not a SNAP calculation or a measured take-up rate. In a binary participation simulation, the household receives either zero or the modeled amount; the product is an expected value across uncertainty or comparable households. Medicaid requires a separately defined monetary valuation. Do not add a Medicaid eligibility indicator directly to dollar resources. Source: methodological distinctions developed for this seminar.",
-    "detail": {
-      "columns": [
-        "Question",
-        "Output",
-        "Research choice"
-      ],
+    "notes": "The numbers are a real PolicyEngine run (PolicyEngine US 2.25.2, October 5, 2026) for a single parent in California with children aged 4 and 7 and $25,000 in wages in 2025. A household calculation assumes take-up. In the microdata, take-up is assigned at published rates (SNAP 82% from USDA; Medicaid by state, 78% in California, from KFF and MACPAC enrollment targets), so the expected value is an average across similar households, not a payment to this one. Medi-Cal is valued at PolicyEngine’s average cost per enrollee: $11,801 for the parent and $7,954 per child. Do not add a Medicaid eligibility indicator directly to dollar resources.",
+    "chains": {
+      "intro": "One California household in 2025: a single parent, children aged 4 and 7, $25,000 in wages.",
+      "columns": ["Eligibility", "Benefit if enrolled", "Take-up in the microdata", "Average across similar households"],
       "rows": [
-        [
-          "Does the unit qualify?",
-          "Eligibility indicator",
-          "Program unit and observed inputs"
-        ],
-        [
-          "How much could it receive?",
-          "Potential benefit amount",
-          "Apply the rules for the relevant period"
-        ],
-        [
-          "Does it participate?",
-          "Observed or imputed receipt",
-          "Participation evidence or assumptions"
-        ],
-        [
-          "How does it enter resources?",
-          "A defined monetary measure",
-          "Program-specific valuation"
-        ]
+        {
+          "program": "SNAP",
+          "steps": [
+            { "value": "Eligible", "label": "SNAP unit of three" },
+            { "value": "$2,442", "label": "a year, about $200 a month" },
+            { "value": "82%", "label": "USDA participation rate" },
+            { "value": "$2,002", "label": "expected value" }
+          ]
+        },
+        {
+          "program": "Medi-Cal",
+          "steps": [
+            { "value": "3 of 3", "label": "people eligible" },
+            { "value": "$27,709", "label": "a year at average cost per enrollee" },
+            { "value": "78%", "label": "California rate (KFF, MACPAC)" },
+            { "value": "$21,613", "label": "expected value" }
+          ]
+        }
       ],
-      "takeaway": "Illustration: $240 potential monthly benefit × 60% assumed participation = $144 expected receipt. These are hypothetical values, not a household entitlement."
+      "takeaway": "A household calculator gives the potential benefit. Receipt and valuation are separate research choices.",
+      "footnote": "PolicyEngine US 2.25.2, run October 5, 2026. Take-up rates from policyengine-us-data."
     }
   },
   {
@@ -515,40 +537,25 @@ export const blsSlides: BlsSlideContent[] = [
     ],
     "minutes": 3,
     "notes": "A donor survey observes the variable of interest and predictors shared with the recipient survey. A conditional distribution permits households with similar observed characteristics to have different imputed values. That can matter around tax-benefit thresholds. Multiple draws can reveal sensitivity, but they do not automatically solve model misspecification or preserve every joint relationship. The prior deck names CPS, ACS, SCF, SIPP and tax microdata. This slide does not claim a CE implementation exists. Source: local IARIW 2026 ImputationSlide.tsx.",
-    "detail": {
-      "intro": "Quantile regression forests estimate conditional distributions of missing variables using characteristics shared across surveys.",
-      "columns": [
-        "Step",
-        "What the researcher does"
+    "sourcesPanel": {
+      "sourcesTitle": "Sources fused into PolicyEngine’s US microdata",
+      "sources": [
+        { "code": "CPS", "name": "Current Population Survey", "role": "The spine: demographics, income, labor force." },
+        { "code": "ACS", "name": "American Community Survey", "role": "Geography, housing, sub-state detail." },
+        { "code": "SCF", "name": "Survey of Consumer Finances", "role": "Wealth, capital income, debt." },
+        { "code": "SIPP", "name": "Survey of Income and Program Participation", "role": "Program take-up, dynamics, transitions." },
+        { "code": "PUF", "name": "IRS Public Use File", "role": "Tax-unit income detail, itemized deductions." }
       ],
-      "rows": [
-        [
-          "Harmonize",
-          "Align concepts, units and reference periods across surveys."
-        ],
-        [
-          "Learn",
-          "Use shared characteristics to estimate the distribution of a missing variable."
-        ],
-        [
-          "Draw",
-          "Sample plausible values rather than assigning every household the predicted mean."
-        ],
-        [
-          "Evaluate",
-          "Check held-out distributions and sensitivity across repeated imputations."
-        ]
-      ],
-      "takeaway": "For CE, donor choice and shared predictors would need an explicit assessment before transferring the method.",
-      "source": {
-        "label": "IARIW 2026 imputation slide",
-        "url": "https://github.com/PolicyEngine/policyengine-slides/blob/main/slideshows/iariw-2026/slides/ImputationSlide.tsx"
-      }
+      "blocks": [
+        { "tag": "Technique", "text": "Quantile regression forests learn the full distribution of each missing variable from many predictors, then sample from it." },
+        { "tag": "Why a distribution", "text": "Households with the same observed traits get different draws, which matters near tax and benefit thresholds." },
+        { "tag": "For the CE", "text": "Donor surveys and shared predictors would need an explicit assessment before we transfer the method." }
+      ]
     }
   },
   {
     "id": "snap-medicaid",
-    "title": "SNAP and Medicaid in a resource measure",
+    "title": "What counts as household resources?",
     "body": [
       "SNAP: program units, eligibility and potential allotments",
       "Participation assumptions convert eligibility into receipt estimates",
@@ -556,36 +563,17 @@ export const blsSlides: BlsSlideContent[] = [
       "A monetary Medicaid value requires a defined valuation method"
     ],
     "minutes": 2,
-    "notes": "Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this talk does not select one. No numerical benefit estimates are asserted.",
-    "detail": {
-      "columns": [
-        "Choice",
-        "SNAP",
-        "Medicaid"
-      ],
+    "notes": "Each bar adds one component for the same household (PolicyEngine US 2.25.2, 2025). Taxes and credits: the federal EITC and refundable child tax credit and California’s CalEITC and Young Child Tax Credit, less the employee payroll tax. CalWORKs is California’s TANF program. The jump from $43,931 to $71,640 shows why Medicaid needs an explicit valuation choice: cost per enrollee, insurance value and household valuation give different answers, and this talk does not pick one. Establish whether CE research wants potential entitlements, actual receipt, or a broader resource measure.",
+    "resourceBars": {
+      "intro": "The same household, four resource concepts.",
       "rows": [
-        [
-          "Modeled result",
-          "Eligibility and potential allotment",
-          "Eligibility for coverage"
-        ],
-        [
-          "Receipt",
-          "Reported receipt or modeled participation",
-          "Reported enrollment or modeled participation"
-        ],
-        [
-          "Monetary measure",
-          "Benefit amount over the chosen period",
-          "A separately specified value of coverage"
-        ],
-        [
-          "Validation",
-          "Recipient counts and benefit amounts",
-          "Enrollment and the selected valuation benchmark"
-        ]
+        { "label": "Earnings", "detail": "Wages before taxes", "value": 25000 },
+        { "label": "After taxes and credits", "detail": "+$9,461: EITC, child tax credit and California credits, less payroll tax", "value": 34461 },
+        { "label": "Plus cash and food benefits", "detail": "+$9,470: CalWORKs $5,200, SNAP $2,442, school meals $1,116, WIC $712", "value": 43931 },
+        { "label": "Plus Medi-Cal at cost", "detail": "+$27,709 for three enrollees", "value": 71640 }
       ],
-      "takeaway": "The research question determines the resource concept. Eligibility alone does not identify actual receipt or a monetary value."
+      "takeaway": "The resource concept, not the calculator, decides whether $25,000 of earnings becomes $34,000 or $72,000.",
+      "footnote": "PolicyEngine US 2.25.2, run October 5, 2026. Benefits assume take-up; Medi-Cal is valued at average cost per enrollee."
     }
   },
   {
@@ -598,13 +586,18 @@ export const blsSlides: BlsSlideContent[] = [
       "Treat calibration and independent validation separately"
     ],
     "minutes": 2,
-    "notes": "The prior IARIW deck describes calibration of household weights to administrative totals. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: policyengine-slides/slideshows/iariw-2026/slides/ImputationSlide.tsx and CalibrationSlide.tsx.",
+    "notes": "Meyer and Mittag link the CPS to administrative records and find that the survey misses about 40 percent of SNAP recipients (NBER Working Paper 21676). This is why PolicyEngine computes benefits from program rules and calibrates weights to administrative totals instead of relying on reported receipt. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: the cpid-webinar-2026 deck’s baseline slide and policyengine-slides/slideshows/iariw-2026/slides/CalibrationSlide.tsx.",
     "cards": [
       { "icon": "chart-bar", "title": "External benchmarks", "text": "Compare imputed receipt and amounts with administrative totals." },
       { "icon": "users", "title": "Errors by group", "text": "Check how errors differ by income, household type and state." },
       { "icon": "flask", "title": "Holdout tests", "text": "Test on data held back from estimation, and try alternative assumptions." },
       { "icon": "scale", "title": "Calibration is not validation", "text": "A target used to fit the weights cannot also validate them." }
-    ]
+    ],
+    "hero": {
+      "value": "≈40%",
+      "label": "of SNAP recipients are missing from CPS reports, measured against linked administrative records.",
+      "source": "Meyer and Mittag, NBER Working Paper 21676"
+    }
   },
 
   // A possible CE pilot: 5 minutes
@@ -618,15 +611,24 @@ export const blsSlides: BlsSlideContent[] = [
       "Review differences before expanding the scope"
     ],
     "minutes": 2,
-    "notes": "This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.",
+    "notes": "This is a proposed integration path, not a tested CE implementation. CE has used NBER’s TAXSIM to estimate income taxes since the 2013 data (BLS Monthly Labor Review, 2015), so the same input file can go to both engines. Start with the core outputs: fiitax, siitax, fica, v22 (child tax credit), v25 (EITC) and frate. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.",
     "compare": {
       "input": { "title": "CE tax-unit records", "text": "An agreed set of inputs for one year." },
       "engines": [
-        { "title": "Current CE tax calculation", "text": "The existing method, unchanged." },
-        { "title": "PolicyEngine TAXSIM emulator", "text": "The same records, same input format." }
+        { "title": "CE’s current TAXSIM run", "text": "In production since the 2013 data." },
+        { "title": "PolicyEngine TAXSIM emulator", "text": "The same file, no format changes." }
       ],
       "output": { "title": "Compare", "text": "Household results and weighted summaries." },
       "next": { "title": "Review", "text": "Explain differences before expanding the scope." },
+      "outputsTitle": "Outputs to compare first",
+      "outputs": [
+        { "field": "fiitax", "meaning": "Federal income tax" },
+        { "field": "siitax", "meaning": "State income tax" },
+        { "field": "fica", "meaning": "Payroll tax" },
+        { "field": "v22", "meaning": "Child tax credit" },
+        { "field": "v25", "meaning": "Earned income credit" },
+        { "field": "frate", "meaning": "Federal marginal rate" }
+      ],
       "takeaway": "Keep CE definitions and weights fixed in the first comparison."
     }
   },
@@ -640,7 +642,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Scope one benefit extension after reviewing the tax results"
     ],
     "minutes": 3,
-    "notes": "Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.",
+    "notes": "Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.",
     "process": {
       "intro": "Four steps, each with a clear output.",
       "steps": [
@@ -648,6 +650,24 @@ export const blsSlides: BlsSlideContent[] = [
         { "title": "Map", "text": "Document input mappings and missing-data assumptions.", "output": "Mapping document" },
         { "title": "Compare", "text": "Run both calculations and log every difference.", "output": "Comparison and discrepancy log" },
         { "title": "Extend", "text": "Choose one benefit extension after the tax results.", "output": "Extension plan" }
+      ],
+      "sides": [
+        {
+          "title": "CE would provide",
+          "items": [
+            "One year of tax-unit records in the current TAXSIM format",
+            "The current TAXSIM outputs and the survey weights",
+            "Staff time to review the discrepancy log"
+          ]
+        },
+        {
+          "title": "PolicyEngine would provide",
+          "items": [
+            "The open-source emulator, which installs and runs inside BLS",
+            "Runs pinned to emulator and model versions",
+            "A diagnosis of each difference, then a benefit extension proposal"
+          ]
+        }
       ]
     }
   },

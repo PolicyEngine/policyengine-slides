@@ -83,6 +83,24 @@ export default function ProcessFlow({ process }: { process: Process }) {
         </div>
       )}
 
+      {process.sides && (
+        <div className="grid grid-cols-2 gap-5">
+          {process.sides.map((side) => (
+            <div key={side.title} className="rounded-lg bg-pe-dark px-5 py-4 text-white">
+              <p className="text-sm font-semibold uppercase tracking-wider text-white/70">{side.title}</p>
+              <ul className="mt-2 space-y-1.5">
+                {side.items.map((item) => (
+                  <li key={item} className="relative pl-4 text-base leading-snug">
+                    <span className="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-teal-300" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
       {process.takeaway && <p className="text-xl leading-snug font-medium max-w-6xl">{process.takeaway}</p>}
       {process.loop && (
         <p className="flex items-center gap-3 text-lg leading-snug">

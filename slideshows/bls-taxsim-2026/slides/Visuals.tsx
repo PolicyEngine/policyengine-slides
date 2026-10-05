@@ -39,9 +39,9 @@ function DeckIcon({ name, size = 26 }: { name: BlsIcon; size?: number }) {
 }
 
 /** Two-by-two cards, each with an icon, a title and one line of text. */
-export function IconCards({ cards }: { cards: NonNullable<BlsSlideContent['cards']> }) {
-  return (
-    <div className="mt-6 grid max-w-6xl grid-cols-2 gap-5">
+export function IconCards({ cards, hero }: { cards: NonNullable<BlsSlideContent['cards']>; hero?: BlsSlideContent['hero'] }) {
+  const grid = (
+    <div className={`grid grid-cols-2 gap-5 ${hero ? '' : 'mt-6 max-w-6xl'}`}>
       {cards.map((card) => (
         <div key={card.title} className="flex items-start gap-4 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-5 py-5">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pe-teal/10">
@@ -55,11 +55,22 @@ export function IconCards({ cards }: { cards: NonNullable<BlsSlideContent['cards
       ))}
     </div>
   );
+  if (!hero) return grid;
+  return (
+    <div className="mt-4 grid grid-cols-[0.8fr_1.7fr] items-stretch gap-6">
+      <div className="flex flex-col justify-center rounded-xl bg-pe-dark px-6 py-6 text-white">
+        <p className="text-6xl font-extrabold tracking-tight">{hero.value}</p>
+        <p className="mt-2 text-lg leading-snug">{hero.label}</p>
+        <p className="mt-3 text-sm leading-snug text-white/70">{hero.source}</p>
+      </div>
+      {grid}
+    </div>
+  );
 }
 
 function FlowBox({ title, text, outlined = false }: { title: string; text: string; outlined?: boolean }) {
   return (
-    <div className={`rounded-lg px-4 py-4 ${outlined ? 'border border-gray-200 border-l-4 border-l-pe-teal bg-white' : 'border-l-4 border-pe-teal bg-gray-50'}`}>
+    <div className={`rounded-lg px-4 py-3 ${outlined ? 'border border-gray-200 border-l-4 border-l-pe-teal bg-white' : 'border-l-4 border-pe-teal bg-gray-50'}`}>
       <p className="text-lg font-semibold leading-snug text-pe-dark">{title}</p>
       <p className="mt-1 text-base leading-snug text-gray-600">{text}</p>
     </div>
@@ -73,7 +84,7 @@ function Arrow() {
 /** One input feeding two calculations, then a comparison and a review. */
 export function CompareFlow({ compare }: { compare: NonNullable<BlsSlideContent['compare']> }) {
   return (
-    <div className="mt-6 space-y-6">
+    <div className="mt-4 space-y-4">
       <div className="grid grid-cols-[1fr_auto_1.15fr_auto_1fr_auto_1fr] items-center gap-3">
         <FlowBox {...compare.input} />
         <Arrow />
@@ -87,6 +98,19 @@ export function CompareFlow({ compare }: { compare: NonNullable<BlsSlideContent[
         <Arrow />
         <FlowBox {...compare.next} />
       </div>
+      {compare.outputs && (
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{compare.outputsTitle}</p>
+          <div className="mt-2 grid gap-3" style={{ gridTemplateColumns: `repeat(${compare.outputs.length}, minmax(0, 1fr))` }}>
+            {compare.outputs.map((output) => (
+              <div key={output.field} className="rounded-lg border-l-4 border-pe-teal bg-gray-50 px-3 py-2">
+                <p className="font-mono text-base font-semibold text-pe-teal">{output.field}</p>
+                <p className="text-sm leading-snug text-gray-600">{output.meaning}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {compare.takeaway && <p className="text-xl leading-snug font-medium text-pe-dark">{compare.takeaway}</p>}
     </div>
   );
@@ -269,6 +293,99 @@ export function YearChart({ chart }: { chart: YearChartData }) {
         </div>
         <p className="mt-3 text-base leading-snug text-pe-dark">{chart.caption}</p>
       </div>
+    </div>
+  );
+}
+
+type Chains = NonNullable<BlsSlideContent['chains']>;
+
+/** One row per program: eligibility through to an expected value. */
+export function BenefitChains({ chains }: { chains: Chains }) {
+  return (
+    <div className="mt-2 space-y-4">
+      <p className="text-xl leading-snug text-pe-dark">{chains.intro}</p>
+      <div className="grid grid-cols-[9rem_1fr_auto_1fr_auto_1fr_auto_1fr] items-center gap-x-3 gap-y-4">
+        <span />
+        {chains.columns.map((column, index) => (
+          <div key={column} className={`text-sm font-semibold uppercase tracking-wider text-gray-500 ${index > 0 ? 'col-span-2 pl-8' : ''}`}>
+            {column}
+          </div>
+        ))}
+        {chains.rows.map((row) => (
+          <div key={row.program} className="contents">
+            <p className="text-xl font-bold text-pe-dark">{row.program}</p>
+            {row.steps.map((step, index) => (
+              <div key={step.label} className="contents">
+                {index > 0 && <Arrow />}
+                <div className={`rounded-lg px-4 py-3 ${index === row.steps.length - 1 ? 'bg-pe-dark text-white' : 'border-l-4 border-pe-teal bg-gray-50 text-pe-dark'}`}>
+                  <p className="text-2xl font-bold leading-tight">{step.value}</p>
+                  <p className={`text-sm leading-snug ${index === row.steps.length - 1 ? 'text-white/80' : 'text-gray-600'}`}>{step.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <p className="text-xl leading-snug font-medium text-pe-dark">{chains.takeaway}</p>
+      <p className="text-sm text-gray-500">{chains.footnote}</p>
+    </div>
+  );
+}
+
+type SourcesPanelData = NonNullable<BlsSlideContent['sourcesPanel']>;
+
+/** Source surveys on the left, method notes on the right. */
+export function SourcesPanel({ panel }: { panel: SourcesPanelData }) {
+  return (
+    <div className="mt-2 grid grid-cols-[1fr_0.95fr] items-start gap-8">
+      <div className="space-y-2">
+        <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{panel.sourcesTitle}</p>
+        {panel.sources.map((source) => (
+          <div key={source.code} className="grid grid-cols-[5rem_1fr] items-baseline gap-3 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-4 py-2">
+            <span className="font-mono text-xl font-bold text-pe-teal">{source.code}</span>
+            <span>
+              <span className="block text-base font-semibold text-pe-dark">{source.name}</span>
+              <span className="block text-sm leading-snug text-gray-600">{source.role}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-5">
+        {panel.blocks.map((block, index) => (
+          <div key={block.tag} className={index === panel.blocks.length - 1 ? 'rounded-lg bg-pe-dark px-5 py-4 text-white' : ''}>
+            <span className="slide-tag">{block.tag}</span>
+            <p className={`mt-2 text-lg leading-snug ${index === panel.blocks.length - 1 ? 'text-white' : 'text-pe-dark'}`}>{block.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+type ResourceBarsData = NonNullable<BlsSlideContent['resourceBars']>;
+
+/** One bar per resource concept for the same household. */
+export function ResourceBars({ bars }: { bars: ResourceBarsData }) {
+  const max = Math.max(...bars.rows.map((row) => row.value));
+  return (
+    <div className="mt-2 space-y-4">
+      <p className="text-xl leading-snug text-pe-dark">{bars.intro}</p>
+      <div className="space-y-3">
+        {bars.rows.map((row) => (
+          <div key={row.label} className="grid grid-cols-[17rem_1fr] items-center gap-5" title={`${row.label}: $${row.value.toLocaleString('en-US')}`}>
+            <div>
+              <p className="text-lg font-semibold leading-snug text-pe-dark">{row.label}</p>
+              <p className="text-sm leading-snug text-gray-600">{row.detail}</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-9 rounded-r-md bg-teal-400" style={{ width: `${(row.value / max) * 82}%` }} />
+              <span className="text-xl font-bold text-pe-dark">${row.value.toLocaleString('en-US')}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="text-xl leading-snug font-medium text-pe-dark">{bars.takeaway}</p>
+      <p className="text-sm text-gray-500">{bars.footnote}</p>
     </div>
   );
 }
