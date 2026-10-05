@@ -129,17 +129,15 @@ Start the live demo here: after the core assumptions and before validation. Clic
 
 ## 13. How we validate the emulator (32–36 min)
 
-Validation is a repeating process, not a single benchmark.
-
-1. **Run both engines.** The same Enhanced CPS records go through TAXSIM35 and PolicyEngine.
-2. **Compare outputs.** Federal and state tax are compared within a stated tolerance.
-3. **Flag differences.** Results by year and state show where the engines disagree.
-4. **Explain the cause.** Check the inputs and both engines against the law and tax forms.
-5. **Fix and publish.** Fixes ship with a test, and the dashboard refreshes.
+1. **Run both engines.** Every household goes through TAXSIM35 and PolicyEngine with the same inputs.
+2. **Compare outputs.** Federal and state income tax, within $15 or 1% of income.
+3. **Flag differences.** The dashboard ranks states and flags the ones that diverge.
+4. **Explain the cause.** Input coding, a PolicyEngine rule, or TAXSIM itself, checked against the law.
+5. **Fix and publish.** Fixes ship with a test, and the dashboard reruns.
 
 Each PolicyEngine release and each TAXSIM update starts the loop again.
 
-Present validation as a process, not a single benchmark. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for numbers: for 2023, 89.8% of 111,347 Enhanced CPS households agree on federal tax and 94.9% on state tax within ±1% of gross income (dashboard data of September 23, 2026, PolicyEngine US 2.6.17). The headline depends on the tolerance: the dashboard also offers ±$15 and ±1% net of rebates, and the comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard and policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx.
+Present validation as a process, not a single benchmark. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard
 
 ## 14. The public validation dashboard (36–42 min)
 
@@ -156,15 +154,13 @@ Show the dashboard as the output of the process, not as a list of figures. Pick 
 
 ## 15. From a reported difference to a fix (42–45 min)
 
-Differences reach us from the dashboard and from public GitHub issues, including issues filed by Dan Feenberg at NBER.
+1. **Report.** 
+2. **Reproduce.** 
+3. **Classify.** 
+4. **Resolve.** 
+5. **Confirm.** 
 
-1. **Report.** A difference is logged as a public GitHub issue.
-2. **Reproduce.** Rebuild it with a minimal household in both engines.
-3. **Classify.** An input question, a PolicyEngine fix, or a possible TAXSIM issue.
-4. **Resolve.** Fix the rule or mapping with a test, or document the convention.
-5. **Confirm.** Reply on the issue; the next dashboard run shows the change.
-
-Describe the triage process in general terms. The classification decides the next step: an input question gets an explanation of the convention; a PolicyEngine problem gets a code change with a regression test; a possible TAXSIM issue goes back to NBER for confirmation. We check every claimed PolicyEngine error against the statute or tax form before we reply. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues
+Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues
 
 # Benefit imputation
 

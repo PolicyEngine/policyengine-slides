@@ -71,7 +71,9 @@ export interface BlsSlideContent {
   /** A left-to-right process of step cards. */
   process?: {
     intro?: string;
+    stats?: { value: string; label: string }[];
     steps: { title: string; text: string; output?: string }[];
+    examples?: { tag: string; title: string; text: string; outcome: string; url: string }[];
     takeaway?: string;
     loop?: string;
   };
@@ -377,15 +379,20 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "How we validate the emulator",
     "body": [],
     "minutes": 4,
-    "notes": "Present validation as a process, not a single benchmark. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for numbers: for 2023, 89.8% of 111,347 Enhanced CPS households agree on federal tax and 94.9% on state tax within ±1% of gross income (dashboard data of September 23, 2026, PolicyEngine US 2.6.17). The headline depends on the tolerance: the dashboard also offers ±$15 and ±1% net of rebates, and the comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard and policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx.",
+    "notes": "Present validation as a process, not a single benchmark. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard",
     "process": {
-      "intro": "Validation is a repeating process, not a single benchmark.",
+      "stats": [
+        { "value": "111,347", "label": "Enhanced CPS households" },
+        { "value": "2021–2025", "label": "Tax years" },
+        { "value": "50 + DC", "label": "States in the comparison" },
+        { "value": "2 engines", "label": "TAXSIM35 and PolicyEngine" }
+      ],
       "steps": [
-        { "title": "Run both engines", "text": "The same Enhanced CPS records go through TAXSIM35 and PolicyEngine." },
-        { "title": "Compare outputs", "text": "Federal and state tax are compared within a stated tolerance." },
-        { "title": "Flag differences", "text": "Results by year and state show where the engines disagree." },
-        { "title": "Explain the cause", "text": "Check the inputs and both engines against the law and tax forms." },
-        { "title": "Fix and publish", "text": "Fixes ship with a test, and the dashboard refreshes." }
+        { "title": "Run both engines", "text": "Every household goes through TAXSIM35 and PolicyEngine with the same inputs." },
+        { "title": "Compare outputs", "text": "Federal and state income tax, within $15 or 1% of income." },
+        { "title": "Flag differences", "text": "The dashboard ranks states and flags the ones that diverge." },
+        { "title": "Explain the cause", "text": "Input coding, a PolicyEngine rule, or TAXSIM itself, checked against the law." },
+        { "title": "Fix and publish", "text": "Fixes ship with a test, and the dashboard reruns." }
       ],
       "loop": "Each PolicyEngine release and each TAXSIM update starts the loop again."
     }
@@ -413,15 +420,43 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "From a reported difference to a fix",
     "body": [],
     "minutes": 3,
-    "notes": "Describe the triage process in general terms. The classification decides the next step: an input question gets an explanation of the convention; a PolicyEngine problem gets a code change with a regression test; a possible TAXSIM issue goes back to NBER for confirmation. We check every claimed PolicyEngine error against the statute or tax form before we reply. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues",
+    "notes": "Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues",
     "process": {
-      "intro": "Differences reach us from the dashboard and from public GitHub issues, including issues filed by Dan Feenberg at NBER.",
+      "stats": [
+        { "value": "1,063", "label": "Issues on GitHub since July 2024" },
+        { "value": "829", "label": "Filed by Dan Feenberg at NBER" },
+        { "value": "984", "label": "Closed" },
+        { "value": "52+", "label": "Questions we sent NBER about TAXSIM’s own rules" }
+      ],
       "steps": [
-        { "title": "Report", "text": "A difference is logged as a public GitHub issue." },
-        { "title": "Reproduce", "text": "Rebuild it with a minimal household in both engines." },
-        { "title": "Classify", "text": "An input question, a PolicyEngine fix, or a possible TAXSIM issue." },
-        { "title": "Resolve", "text": "Fix the rule or mapping with a test, or document the convention." },
-        { "title": "Confirm", "text": "Reply on the issue; the next dashboard run shows the change." }
+        { "title": "Report", "text": "" },
+        { "title": "Reproduce", "text": "" },
+        { "title": "Classify", "text": "" },
+        { "title": "Resolve", "text": "" },
+        { "title": "Confirm", "text": "" }
+      ],
+      "examples": [
+        {
+          "tag": "#1241 · Oregon",
+          "title": "PolicyEngine fix",
+          "text": "The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field.",
+          "outcome": "Fixed in the emulator in 4 days",
+          "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1241"
+        },
+        {
+          "tag": "#1235 · Massachusetts",
+          "title": "TAXSIM fix",
+          "text": "TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024.",
+          "outcome": "NBER corrected TAXSIM the next day",
+          "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1235"
+        },
+        {
+          "tag": "#1251 · Minnesota",
+          "title": "Input difference",
+          "text": "PolicyEngine found more credits: the renter’s credit, which the comparison return left out.",
+          "outcome": "Explained, no code change",
+          "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1251"
+        }
       ]
     }
   },
