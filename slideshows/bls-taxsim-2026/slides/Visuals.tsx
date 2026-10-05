@@ -462,14 +462,14 @@ function CodeLine({ code }: { code: string }) {
 /** The before-and-after code swap as the main content, a site capture beside it. */
 export function DropIn({ dropIn }: { dropIn: DropInData }) {
   return (
-    <div className="mt-2 grid grid-cols-[2.4fr_1fr] items-start gap-6">
-      <div className="space-y-3">
-        <div className="flex items-center gap-4 rounded-lg bg-pe-darker px-5 py-3">
-          <span className="text-sm font-semibold uppercase tracking-wider text-white/60">{dropIn.installLabel}</span>
-          <code className="font-mono text-base text-white">
-            <span className="text-white/50">$ </span>{dropIn.install}
-          </code>
-        </div>
+    <div className="mt-2 space-y-3">
+      <div className="flex items-center gap-4 rounded-lg bg-pe-darker px-5 py-3">
+        <span className="text-sm font-semibold uppercase tracking-wider text-white/60">{dropIn.installLabel}</span>
+        <code className="font-mono text-base text-white">
+          <span className="text-white/50">$ </span>{dropIn.install}
+        </code>
+      </div>
+      <div className="grid grid-cols-[1fr_21rem] items-stretch gap-6">
         <div className="overflow-hidden rounded-lg bg-pe-darker">
           <div className="grid grid-cols-[4.5rem_0.42fr_0.58fr] gap-4 border-b border-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white/60">
             {dropIn.columns.map((column) => <span key={column}>{column}</span>)}
@@ -482,20 +482,25 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
             </div>
           ))}
         </div>
-        <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
+        <figure className="flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
+          <div className="flex items-center gap-1.5 border-b border-gray-200 bg-white px-3 py-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
+            <span className="ml-2 truncate rounded bg-gray-100 px-2 py-0.5 font-mono text-xs text-gray-600">{dropIn.screenshot.url}</span>
+          </div>
+          <div className="relative min-h-0 flex-1">
+            <Image
+              src={dropIn.screenshot.src}
+              alt={dropIn.screenshot.alt}
+              width={dropIn.screenshot.width}
+              height={dropIn.screenshot.height}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+        </figure>
       </div>
-      <figure className="space-y-2">
-        <div className="overflow-hidden rounded-xl border border-gray-200 shadow-md">
-          <Image
-            src={dropIn.screenshot.src}
-            alt={dropIn.screenshot.alt}
-            width={dropIn.screenshot.width}
-            height={dropIn.screenshot.height}
-            className="block h-auto w-full"
-          />
-        </div>
-        <figcaption className="text-sm leading-snug text-gray-600">{dropIn.screenshot.caption}</figcaption>
-      </figure>
+      <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
     </div>
   );
 }

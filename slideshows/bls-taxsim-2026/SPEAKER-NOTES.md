@@ -93,7 +93,7 @@ Install once: `uv tool install policyengine-taxsim`
 
 Same input file, same output variables. Existing scripts change one command or one function name.
 
-Secondary capture: `public/screenshots/bls-taxsim-2026/taxsim-hero.png`. policyengine.org/us/taxsim has the install guide and the full code for each environment.
+Secondary capture: `public/screenshots/bls-taxsim-2026/taxsim-hero.png` (policyengine.org/us/taxsim).
 
 The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.
 

@@ -92,7 +92,7 @@ export interface BlsSlideContent {
     columns: [string, string, string];
     rows: { env: string; before: string; after: string }[];
     takeaway: string;
-    screenshot: { src: string; alt: string; width: number; height: number; caption: string };
+    screenshot: { src: string; alt: string; width: number; height: number; url: string };
   };
   /** Two partners joined by an agreement in the center. */
   partnership?: {
@@ -279,7 +279,7 @@ export const blsSlides: BlsSlideContent[] = [
         "alt": "TAXSIM site banner: The next chapter of TAXSIM. An open-source, drop-in replacement for TAXSIM35. Same interface, same inputs, same outputs, powered by PolicyEngine's microsimulation engine.",
         "width": 1920,
         "height": 1108,
-        "caption": "policyengine.org/us/taxsim has the install guide and the full code for each environment."
+        "url": "policyengine.org/us/taxsim"
       }
     }
   },
