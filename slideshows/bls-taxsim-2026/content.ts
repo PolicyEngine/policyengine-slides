@@ -76,7 +76,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "Tax and benefit imputation for the CE",
     "body": [
       "PolicyEngine’s TAXSIM emulator and beyond",
-      "Max Ghenis and Pavel Makarchuk",
+      "Max Ghenis, Pavel Makarchuk and David Trimmer",
       "BLS seminar · October 8, 2026"
     ],
     "minutes": 1,

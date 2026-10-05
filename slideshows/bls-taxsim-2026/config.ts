@@ -9,6 +9,6 @@ export const blsTaxsim2026Config: SlideshowConfig = {
   date: '2026-10-08',
   location: 'Bureau of Labor Statistics, Suitland',
   footerText: 'DRAFT · BLS · October 8, 2026',
-  speakers: [speakers['max-ghenis'], speakers['pavel-makarchuk']],
+  speakers: [speakers['max-ghenis'], speakers['pavel-makarchuk'], speakers['david-trimmer']],
   slides: blsSlideComponents,
 };

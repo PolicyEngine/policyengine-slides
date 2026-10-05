@@ -13,7 +13,6 @@ function DraftSlide({ content }: { content: BlsSlideContent }) {
     return (
       <Slide isCover>
         <div className="text-center space-y-7 pt-20">
-          <p className="text-lg uppercase tracking-widest text-white/70">BLS seminar draft</p>
           <h1 className="font-display text-5xl font-bold text-white leading-tight">{content.title}</h1>
           <p className="text-2xl text-white/90">{content.body[0]}</p>
           <p className="text-xl text-white/80">{content.body[1]}</p>

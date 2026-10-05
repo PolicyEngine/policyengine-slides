@@ -15,7 +15,7 @@ Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, I
 ## 1. Tax and benefit imputation for the CE (0–1 min)
 
 - PolicyEngine’s TAXSIM emulator and beyond
-- Max Ghenis and Pavel Makarchuk
+- Max Ghenis, Pavel Makarchuk and David Trimmer
 - BLS seminar · October 8, 2026
 
 Introduce the speakers and thank the BLS hosts and the CE team.
