@@ -6,9 +6,9 @@ import type { BlsSlideContent } from '../content';
 type Embed = NonNullable<BlsSlideContent['embed']>;
 
 /**
- * Live iframe with a side column of demo steps and optional headline
- * figures, the gettsim-2026 LiveAppSlide pattern. Clicks inside the frame
- * stop propagation so they do not advance the deck.
+ * Live iframe with a side column of demo steps, the gettsim-2026
+ * LiveAppSlide pattern. Clicks inside the frame stop propagation so they
+ * do not advance the deck.
  */
 export default function LiveEmbed({ title, embed }: { title: string; embed: Embed }) {
   const [expanded, setExpanded] = useState(false);
@@ -17,16 +17,6 @@ export default function LiveEmbed({ title, embed }: { title: string; embed: Embe
     <>
       <div className="grid grid-cols-[0.62fr_1.38fr] gap-7 mt-2 h-[calc(100vh-330px)]">
         <div className="flex flex-col gap-3 min-h-0">
-          {embed.stats && (
-            <div className="grid grid-cols-1 gap-2">
-              {embed.stats.map((stat) => (
-                <div key={stat.label} className="rounded-lg border-l-4 border-pe-teal bg-gray-50 px-4 py-1.5">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{stat.label}</p>
-                  <p className="text-xl font-bold text-pe-dark leading-tight">{stat.value}</p>
-                </div>
-              ))}
-            </div>
-          )}
           <ol className="space-y-2">
             {embed.steps.map((step, index) => (
               <li key={step} className="flex items-start gap-3 text-base leading-snug text-pe-dark">

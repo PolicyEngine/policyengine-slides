@@ -1,14 +1,13 @@
 # BLS TAXSIM seminar: draft slide text and speaker notes
 
-23 slides: 60 minutes presenting, followed by a dedicated 30-minute Q&A slide.
+21 slides: 60 minutes presenting, followed by a dedicated 30-minute Q&A slide.
 
 Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, IARIW 2026 imputation/calibration material in this repository, and the PolicyEngine TAXSIM site (policyengine.org/us/taxsim), captured October 5, 2026.
 
 ## Before presenting
 
-- Rehearse the live demo (slide 11) and the live dashboard (slide 13) on the presentation laptop and the BLS network. Confirm that both frames load. If they do not, open the pages in a browser tab; slides 10 and 14 hold captures of the same pages.
-- On the morning of the talk, check the dashboard figures on slide 13 (2023: 111,347 households, 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026). Update the side column if the live page has changed.
-- Confirm the current explanation for the New York state-tax divergence (slide 14) before you show it. The earlier 99.9%+ claim stays omitted because its benchmark definition was incomplete.
+- Rehearse the live demo (slide 11) and the live dashboard (slide 13) on the presentation laptop and the BLS network. Confirm that both frames load. If a frame does not load, open the page in a browser tab; slide 10 holds a capture of the demo file.
+- On the morning of the talk, open the dashboard and check that it loads. Its headline figures are in the notes for slide 12 for questions (2023: 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026).
 - Confirm the CE-specific benefit methodology and pilot scope. These sections describe proposed research choices rather than a completed CE implementation.
 
 # Introduction and context
@@ -25,13 +24,13 @@ Introduce the speakers and thank the BLS hosts and the CE team.
 
 - Introduction and context   10 min — Why this matters for CE, how PolicyEngine works, and the NBER collaboration.
 - The emulator and its core assumptions   12 min — A drop-in TAXSIM interface, field mappings, input conventions and year coverage.
-- Live demonstration   8 min — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
-- Validation   15 min — The public validation dashboard, what a match rate shows, and how we investigate differences.
+- Live demonstration   10 min — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
+- Validation   13 min — How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.
 - Benefit imputation   10 min — Methods for missing survey inputs, SNAP participation, and Medicaid valuation.
 - A possible CE pilot   5 min — A focused comparison, the inputs it needs, and questions for CE staff.
 - Q&A and discussion   30 min — Questions on the methods, implementation, and opportunities for collaboration.
 
-The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then show the validation evidence. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A.
+The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A.
 
 ## 3. The CE research opportunity (2–4 min)
 
@@ -99,7 +98,7 @@ Concrete mappings checked against local commit 29da68f4: core/input_mapper.py ma
 
 In the TAXSIM code system, 34 means North Carolina. A valid numeric code can still identify the wrong state.
 
-Use New Jersey as a concrete example of a schema mismatch. The TAXSIM SOI state code is 31, while the Census FIPS code is 34. In TAXSIM, 34 means North Carolina. These mappings appear in core/utils.py and the YAML generator uses FIPS for PolicyEngine test data. This is a code-system explanation, not a claim that CE has made this error. Then connect income ownership to the later pension-allocation case. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
+Use New Jersey as a concrete example of a schema mismatch. The TAXSIM SOI state code is 31, while the Census FIPS code is 34. In TAXSIM, 34 means North Carolina. These mappings appear in core/utils.py and the YAML generator uses FIPS for PolicyEngine test data. This is a code-system explanation, not a claim that CE has made this error. Income ownership is a second example: some rules depend on which person receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
 
 ## 9. Year coverage and reproducible runs (19–22 min)
 
@@ -120,7 +119,7 @@ The built-in sample uses TAXSIM state codes: 5 is California, 33 is New York and
 
 Bridge into the live demo. Read one row aloud: household 1 is a married couple filing jointly (mstat 2) in California with two dependents and $80,000 and $50,000 in wages. Point to the state codes and connect them to the input-conventions slide. This capture is also the fallback if the live frame does not load. Captured October 5, 2026.
 
-## 11. Live demo: run the sample file (23–30 min)
+## 11. Live demo: run the sample file (23–32 min)
 
 Live page: https://www.policyengine.org/us/taxsim/run
 
@@ -136,72 +135,48 @@ Start the live demo here: after the core assumptions and before validation. Clic
 
 # Validation
 
-## 12. Validation at several levels (30–32 min)
+## 12. How we validate the emulator (32–36 min)
 
-- Tests of individual rules and edge cases
-- Identical inputs run through both calculators
-- Differences examined by year, state and household type
-- Policy-source checks to explain disagreements
+Validation is a repeating process, not a single benchmark.
 
-Adapt the validation structure from PWBM and CRS. Cross-model agreement measures consistency, while source-based checks help assess correctness. A shared error can survive a comparison. Source: policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25.
+1. **Run both engines.** The same Enhanced CPS records go through TAXSIM35 and PolicyEngine.
+2. **Compare outputs.** Federal and state tax are compared within a stated tolerance.
+3. **Flag differences.** Results by year and state show where the engines disagree.
+4. **Explain the cause.** Check the inputs and both engines against the law and tax forms.
+5. **Fix and publish.** Fixes ship with a test, and the dashboard refreshes.
 
-## 13. The public validation dashboard (32–37 min)
+Each PolicyEngine release and each TAXSIM update starts the loop again.
+
+Present validation as a process, not a single benchmark. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for numbers: for 2023, 89.8% of 111,347 Enhanced CPS households agree on federal tax and 94.9% on state tax within ±1% of gross income (dashboard data of September 23, 2026, PolicyEngine US 2.6.17). The headline depends on the tolerance: the dashboard also offers ±$15 and ±1% net of rebates, and the comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard and policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx.
+
+## 13. The public validation dashboard (36–42 min)
 
 Live page: https://www.policyengine.org/us/taxsim/dashboard
 
-- Households, 2023: 111,347
-- Federal agreement: 89.8%
-- State agreement: 94.9%
+1. Pick a tax year, 2021 to 2025
+2. Choose a tolerance
+3. See agreement by state
+4. Inspect a state to list its households
 
-1. Switch tolerance: ±$15, ±1% of income, net of rebates
-2. Change the tax year, 2021 to 2025
-3. Inspect a state to list its households
+Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September 23, 2026.
 
-Within ±1% of gross income. PolicyEngine US 2.6.17, data of September 23, 2026.
+Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.
 
-The dashboard runs 111,347 Enhanced CPS households through both engines. For 2023, under the ±1% of gross income tolerance, 89.8% agree on federal tax and 94.9% on state tax (data update of September 23, 2026, PolicyEngine US 2.6.17). Switch to ±$15 to show how much the headline depends on the tolerance. Then change the year and inspect a state. Check the figures on the morning of the talk, because the live page can update. Click the slide title before you press the arrow keys. If the frame does not load, the next slide has a capture.
+## 14. From a reported difference to a fix (42–45 min)
 
-## 14. Inspecting a state that diverges (37–39 min)
+Differences reach us from the dashboard and from public GitHub issues, including issues filed by Dan Feenberg at NBER.
 
-Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-dashboard-ny.png` (from https://www.policyengine.org/us/taxsim/dashboard)
+1. **Report.** A difference is logged as a public GitHub issue.
+2. **Reproduce.** Rebuild it with a minimal household in both engines.
+3. **Classify.** An input question, a PolicyEngine fix, or a possible TAXSIM issue.
+4. **Resolve.** Fix the rule or mapping with a test, or document the convention.
+5. **Confirm.** Reply on the issue; the next dashboard run shows the change.
 
-New York, 2023: 91.4% federal and 67.4% state agreement within ±1% of gross income. Inspect lists each household’s difference, so we can trace the cause.
-
-The dashboard flags states that diverge so that we can investigate them. Do not speculate about the cause of the New York state-tax gap; confirm the current explanation before the talk. The same view also flags Montana (42.1%) and Arkansas (55.3%) state agreement. Connect this to the next slide: a headline rate needs its tolerance and sample beside it. Captured October 5, 2026, from the September 23, 2026 data update.
-
-## 15. What a match rate does and does not show (39–42 min)
-
-The dashboard offers ±$15, ±1% of gross income and ±1% net of rebates. The comparator’s default is ±$15.
-
-| Measure | What to report |
-| --- | --- |
-| Agreement | Share of valid records within the stated tolerance |
-| Error size | Absolute differences, tails and weighted aggregate differences |
-| Coverage | Tax years, states, outputs and household characteristics |
-| Exceptions | Missing outputs, explained conventions and unresolved cases |
-
-Agreement within a tolerance is not exact equality. Report the tolerance, year, sample and versions beside every headline rate.
-
-The dashboard’s default view uses ±1% of gross income. Checked against local commit 29da68f4: ComparatorConfig defaults federal_tolerance and state_tolerance to 15, relative_tolerance to zero. The matching logic uses np.isclose with rtol=0. Optional settings include income-scaled tolerances and state rebate treatment. The implementation uses equal_nan=True, so any published analysis must audit missing outputs separately rather than interpreting matched missing values as validated calculations. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/comparison/comparator.py
-
-## 16. Case study: assigning pension income (42–45 min)
-
-Issue #669 documented a comparison in which pension allocation between partners differed.
-
-| Comparison choice | Why it changed the interpretation |
-| --- | --- |
-| PolicyEngine behavior reported in the issue | Split the pension income between partners. |
-| Comparison setup | The TaxAct input assigned the pension to the older partner. |
-| TAXSIM convention described by Feenberg | Allocation depended on whether partners were on different sides of age 65. |
-| Lesson for validation | Match person-level assumptions before attributing a difference to policy rules. |
-
-The same household total can produce a different comparison when income belongs to different people.
-
-This is a historical example, not a claim about current behavior. Feenberg’s issue describes pension and Social Security allocation and requests discussion of the convention. The issue is now closed, but the available issue text does not establish a particular implemented resolution. Do not claim a specific fix or performance result. Explain the diagnosis: examine the person-level inputs before the tax formula. For survey applications, observed ownership is preferable where available; otherwise the convention must be documented. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues/669, checked September 22, 2026.
+Describe the triage process in general terms. The classification decides the next step: an input question gets an explanation of the convention; a PolicyEngine problem gets a code change with a regression test; a possible TAXSIM issue goes back to NBER for confirmation. We check every claimed PolicyEngine error against the statute or tax form before we reply. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues
 
 # Benefit imputation
 
-## 17. Eligibility, receipt and benefit value (45–48 min)
+## 15. Eligibility, receipt and benefit value (45–48 min)
 
 | Question | Output | Research choice |
 | --- | --- | --- |
@@ -214,7 +189,7 @@ Illustration: $240 potential monthly benefit × 60% assumed participation = $144
 
 The numerical example is invented only to distinguish potential benefits from expected receipt. It is not a SNAP calculation or a measured take-up rate. In a binary participation simulation, the household receives either zero or the modeled amount; the product is an expected value across uncertainty or comparable households. Medicaid requires a separately defined monetary valuation. Do not add a Medicaid eligibility indicator directly to dollar resources. Source: methodological distinctions developed for this seminar.
 
-## 18. Imputing a distribution of missing inputs (48–51 min)
+## 16. Imputing a distribution of missing inputs (48–51 min)
 
 Quantile regression forests estimate conditional distributions of missing variables using characteristics shared across surveys.
 
@@ -229,7 +204,7 @@ For CE, donor choice and shared predictors would need an explicit assessment bef
 
 A donor survey observes the variable of interest and predictors shared with the recipient survey. A conditional distribution permits households with similar observed characteristics to have different imputed values. That can matter around tax-benefit thresholds. Multiple draws can reveal sensitivity, but they do not automatically solve model misspecification or preserve every joint relationship. The prior deck names CPS, ACS, SCF, SIPP and tax microdata. This slide does not claim a CE implementation exists. Source: local IARIW 2026 ImputationSlide.tsx.
 
-## 19. SNAP and Medicaid in a resource measure (51–53 min)
+## 17. SNAP and Medicaid in a resource measure (51–53 min)
 
 | Choice | SNAP | Medicaid |
 | --- | --- | --- |
@@ -242,7 +217,7 @@ The research question determines the resource concept. Eligibility alone does no
 
 Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this draft does not select one. No numerical benefit estimates are asserted.
 
-## 20. Validation of benefit imputations (53–55 min)
+## 18. Validation of benefit imputations (53–55 min)
 
 - Compare receipt and amounts with suitable external benchmarks
 - Examine errors across household groups
@@ -253,7 +228,7 @@ The prior IARIW deck describes calibration of household weights to administrativ
 
 # A possible CE pilot
 
-## 21. Where this could fit in CE research (55–57 min)
+## 19. Where this could fit in CE research (55–57 min)
 
 - Begin with an agreed set of tax-imputation inputs
 - Run both calculators on the same records
@@ -262,7 +237,7 @@ The prior IARIW deck describes calibration of household weights to administrativ
 
 This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
 
-## 22. A manageable CE pilot (57–60 min)
+## 20. A manageable CE pilot (57–60 min)
 
 - Agree one year, one sample and the key tax outputs
 - Document input mappings and missing-data assumptions
@@ -271,7 +246,7 @@ This is a proposed integration path, not a representation of a tested CE impleme
 
 Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
-## 23. Q&A and discussion (60–90 min)
+## 21. Q&A and discussion (60–90 min)
 
 - Which outcomes and years would be most useful?
 - Which input assumptions create the most uncertainty?

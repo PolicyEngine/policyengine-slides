@@ -22,8 +22,13 @@ export interface BlsSlideContent {
   embed?: {
     url: string;
     steps: string[];
-    stats?: { label: string; value: string }[];
     footnote?: string;
+  };
+  /** A left-to-right process of step cards. */
+  process?: {
+    intro?: string;
+    steps: { title: string; text: string }[];
+    loop?: string;
   };
   detail?: {
     intro?: string;
@@ -61,8 +66,8 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "Introduction and context   10 min",
       "The emulator and its core assumptions   12 min",
-      "Live demonstration   8 min",
-      "Validation   15 min",
+      "Live demonstration   10 min",
+      "Validation   13 min",
       "Benefit imputation   10 min",
       "A possible CE pilot   5 min",
       "Q&A and discussion   30 min"
@@ -71,13 +76,13 @@ export const blsSlides: BlsSlideContent[] = [
       "Why this matters for CE, how PolicyEngine works, and the NBER collaboration.",
       "A drop-in TAXSIM interface, field mappings, input conventions and year coverage.",
       "A TAXSIM-format file run in the browser, from input rows to federal and state tax.",
-      "The public validation dashboard, what a match rate shows, and how we investigate differences.",
+      "How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.",
       "Methods for missing survey inputs, SNAP participation, and Medicaid valuation.",
       "A focused comparison, the inputs it needs, and questions for CE staff.",
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then show the validation evidence. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "ce-opportunity",
@@ -152,8 +157,8 @@ export const blsSlides: BlsSlideContent[] = [
     "screenshot": {
       "src": "/screenshots/bls-taxsim-2026/taxsim-validated-by.png",
       "alt": "TAXSIM site partner cards: NBER partnership under a memorandum of understanding, and three-way validation with the Federal Reserve Bank of Atlanta Policy Rules Database",
-      "width": 2080,
-      "height": 485,
+      "width": 4256,
+      "height": 1072,
       "caption": "Built under a memorandum of understanding with NBER and TAXSIM creator Daniel Feenberg. The Atlanta Fed’s Policy Rules Database adds a third model for cross-checks."
     }
   },
@@ -174,8 +179,8 @@ export const blsSlides: BlsSlideContent[] = [
     "screenshot": {
       "src": "/screenshots/bls-taxsim-2026/taxsim-drop-in-r.png",
       "alt": "TAXSIM site Get started tabs with R selected: library(usincometaxes) and taxsim_calculate_taxes(input) before, library(policyenginetaxsim) and policyengine_calculate_taxes(input) after",
-      "width": 2080,
-      "height": 480,
+      "width": 4256,
+      "height": 1032,
       "caption": "Existing scripts keep their input files. In R, taxsim_calculate_taxes() becomes policyengine_calculate_taxes(). The site shows the same swap for the CLI, Python, Stata, SAS and Julia."
     }
   },
@@ -236,7 +241,7 @@ export const blsSlides: BlsSlideContent[] = [
       "State identifiers and filing-status coverage"
     ],
     "minutes": 3,
-    "notes": "Use New Jersey as a concrete example of a schema mismatch. The TAXSIM SOI state code is 31, while the Census FIPS code is 34. In TAXSIM, 34 means North Carolina. These mappings appear in core/utils.py and the YAML generator uses FIPS for PolicyEngine test data. This is a code-system explanation, not a claim that CE has made this error. Then connect income ownership to the later pension-allocation case. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py",
+    "notes": "Use New Jersey as a concrete example of a schema mismatch. The TAXSIM SOI state code is 31, while the Census FIPS code is 34. In TAXSIM, 34 means North Carolina. These mappings appear in core/utils.py and the YAML generator uses FIPS for PolicyEngine test data. This is a code-system explanation, not a claim that CE has made this error. Income ownership is a second example: some rules depend on which person receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py",
     "detail": {
       "columns": [
         "Input decision",
@@ -285,7 +290,7 @@ export const blsSlides: BlsSlideContent[] = [
     "notes": "Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md"
   },
 
-  // Live demonstration: 8 minutes
+  // Live demonstration: 10 minutes
   {
     "id": "demo-file",
     "title": "The demo file: three households",
@@ -296,8 +301,8 @@ export const blsSlides: BlsSlideContent[] = [
     "screenshot": {
       "src": "/screenshots/bls-taxsim-2026/taxsim-run-sample.png",
       "alt": "TAXSIM web runner with sample.csv loaded: output detail set to Standard, and an input preview listing taxsimid, year, state, mstat, depx, pwages, swages, page and sage for three households",
-      "width": 1820,
-      "height": 685,
+      "width": 3744,
+      "height": 1440,
       "caption": "The built-in sample uses TAXSIM state codes: 5 is California, 33 is New York and 44 is Texas. The same file runs with the policyengine-taxsim command."
     }
   },
@@ -305,7 +310,7 @@ export const blsSlides: BlsSlideContent[] = [
     "id": "demo-live",
     "title": "Live demo: run the sample file",
     "body": [],
-    "minutes": 7,
+    "minutes": 9,
     "notes": "Start the live demo here: after the core assumptions and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab, or go back one slide to the capture.",
     "headerLink": TAXSIM_RUN,
     "embed": {
@@ -321,138 +326,58 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // Validation: 15 minutes
+  // Validation: 13 minutes
   {
-    "id": "validation-levels",
-    "title": "Validation at several levels",
-    "body": [
-      "Tests of individual rules and edge cases",
-      "Identical inputs run through both calculators",
-      "Differences examined by year, state and household type",
-      "Policy-source checks to explain disagreements"
-    ],
-    "minutes": 2,
-    "notes": "Adapt the validation structure from PWBM and CRS. Cross-model agreement measures consistency, while source-based checks help assess correctness. A shared error can survive a comparison. Source: policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25."
+    "id": "validation-process",
+    "title": "How we validate the emulator",
+    "body": [],
+    "minutes": 4,
+    "notes": "Present validation as a process, not a single benchmark. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for numbers: for 2023, 89.8% of 111,347 Enhanced CPS households agree on federal tax and 94.9% on state tax within ±1% of gross income (dashboard data of September 23, 2026, PolicyEngine US 2.6.17). The headline depends on the tolerance: the dashboard also offers ±$15 and ±1% net of rebates, and the comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard and policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx.",
+    "process": {
+      "intro": "Validation is a repeating process, not a single benchmark.",
+      "steps": [
+        { "title": "Run both engines", "text": "The same Enhanced CPS records go through TAXSIM35 and PolicyEngine." },
+        { "title": "Compare outputs", "text": "Federal and state tax are compared within a stated tolerance." },
+        { "title": "Flag differences", "text": "Results by year and state show where the engines disagree." },
+        { "title": "Explain the cause", "text": "Check the inputs and both engines against the law and tax forms." },
+        { "title": "Fix and publish", "text": "Fixes ship with a test, and the dashboard refreshes." }
+      ],
+      "loop": "Each PolicyEngine release and each TAXSIM update starts the loop again."
+    }
   },
   {
     "id": "dashboard-live",
     "title": "The public validation dashboard",
     "body": [],
-    "minutes": 5,
-    "notes": "The dashboard runs 111,347 Enhanced CPS households through both engines. For 2023, under the ±1% of gross income tolerance, 89.8% agree on federal tax and 94.9% on state tax (data update of September 23, 2026, PolicyEngine US 2.6.17). Switch to ±$15 to show how much the headline depends on the tolerance. Then change the year and inspect a state. Check the figures on the morning of the talk, because the live page can update. Click the slide title before you press the arrow keys. If the frame does not load, the next slide has a capture.",
+    "minutes": 6,
+    "notes": "Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/dashboard",
-      "stats": [
-        { "label": "Households, 2023", "value": "111,347" },
-        { "label": "Federal agreement", "value": "89.8%" },
-        { "label": "State agreement", "value": "94.9%" }
-      ],
       "steps": [
-        "Switch tolerance: ±$15, ±1% of income, net of rebates",
-        "Change the tax year, 2021 to 2025",
+        "Pick a tax year, 2021 to 2025",
+        "Choose a tolerance",
+        "See agreement by state",
         "Inspect a state to list its households"
       ],
-      "footnote": "Within ±1% of gross income. PolicyEngine US 2.6.17, data of September 23, 2026."
+      "footnote": "Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September 23, 2026."
     }
   },
   {
-    "id": "dashboard-state",
-    "title": "Inspecting a state that diverges",
+    "id": "issue-process",
+    "title": "From a reported difference to a fix",
     "body": [],
-    "minutes": 2,
-    "notes": "The dashboard flags states that diverge so that we can investigate them. Do not speculate about the cause of the New York state-tax gap; confirm the current explanation before the talk. The same view also flags Montana (42.1%) and Arkansas (55.3%) state agreement. Connect this to the next slide: a headline rate needs its tolerance and sample beside it. Captured October 5, 2026, from the September 23, 2026 data update.",
-    "headerLink": TAXSIM_DASHBOARD,
-    "screenshot": {
-      "src": "/screenshots/bls-taxsim-2026/taxsim-dashboard-ny.png",
-      "alt": "TAXSIM validation dashboard for New York, 2023: 4,160 households, federal agreement 91.4% marked good, state agreement 67.4% marked diverges, within ±1% of gross income",
-      "width": 2520,
-      "height": 820,
-      "caption": "New York, 2023: 91.4% federal and 67.4% state agreement within ±1% of gross income. Inspect lists each household’s difference, so we can trace the cause."
-    }
-  },
-  {
-    "id": "match-rate",
-    "title": "What a match rate does and does not show",
-    "body": [
-      "Dataset, tax year and software versions",
-      "Output variable and dollar tolerance",
-      "Number of records and treatment of survey weights",
-      "Magnitude, concentration and causes of residual differences"
-    ],
     "minutes": 3,
-    "notes": "The dashboard’s default view uses ±1% of gross income. Checked against local commit 29da68f4: ComparatorConfig defaults federal_tolerance and state_tolerance to 15, relative_tolerance to zero. The matching logic uses np.isclose with rtol=0. Optional settings include income-scaled tolerances and state rebate treatment. The implementation uses equal_nan=True, so any published analysis must audit missing outputs separately rather than interpreting matched missing values as validated calculations. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/comparison/comparator.py",
-    "detail": {
-      "intro": "The dashboard offers ±$15, ±1% of gross income and ±1% net of rebates. The comparator’s default is ±$15.",
-      "columns": [
-        "Measure",
-        "What to report"
-      ],
-      "rows": [
-        [
-          "Agreement",
-          "Share of valid records within the stated tolerance"
-        ],
-        [
-          "Error size",
-          "Absolute differences, tails and weighted aggregate differences"
-        ],
-        [
-          "Coverage",
-          "Tax years, states, outputs and household characteristics"
-        ],
-        [
-          "Exceptions",
-          "Missing outputs, explained conventions and unresolved cases"
-        ]
-      ],
-      "takeaway": "Agreement within a tolerance is not exact equality. Report the tolerance, year, sample and versions beside every headline rate.",
-      "source": {
-        "label": "Comparator configuration and matching logic",
-        "url": "https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/comparison/comparator.py"
-      }
-    }
-  },
-  {
-    "id": "pension-case",
-    "title": "Case study: assigning pension income",
-    "body": [
-      "Reproduce the result with a minimal household",
-      "Locate the first intermediate value that differs",
-      "Check input mappings and the applicable policy rule",
-      "Document the explanation and retain a regression case"
-    ],
-    "minutes": 3,
-    "notes": "This is a historical example, not a claim about current behavior. Feenberg’s issue describes pension and Social Security allocation and requests discussion of the convention. The issue is now closed, but the available issue text does not establish a particular implemented resolution. Do not claim a specific fix or performance result. Explain the diagnosis: examine the person-level inputs before the tax formula. For survey applications, observed ownership is preferable where available; otherwise the convention must be documented. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues/669, checked September 22, 2026.",
-    "detail": {
-      "intro": "Issue #669 documented a comparison in which pension allocation between partners differed.",
-      "columns": [
-        "Comparison choice",
-        "Why it changed the interpretation"
-      ],
-      "rows": [
-        [
-          "PolicyEngine behavior reported in the issue",
-          "Split the pension income between partners."
-        ],
-        [
-          "Comparison setup",
-          "The TaxAct input assigned the pension to the older partner."
-        ],
-        [
-          "TAXSIM convention described by Feenberg",
-          "Allocation depended on whether partners were on different sides of age 65."
-        ],
-        [
-          "Lesson for validation",
-          "Match person-level assumptions before attributing a difference to policy rules."
-        ]
-      ],
-      "takeaway": "The same household total can produce a different comparison when income belongs to different people.",
-      "source": {
-        "label": "Historical example: TAXSIM issue #669, December 2025",
-        "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/669"
-      }
+    "notes": "Describe the triage process in general terms. The classification decides the next step: an input question gets an explanation of the convention; a PolicyEngine problem gets a code change with a regression test; a possible TAXSIM issue goes back to NBER for confirmation. We check every claimed PolicyEngine error against the statute or tax form before we reply. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues",
+    "process": {
+      "intro": "Differences reach us from the dashboard and from public GitHub issues, including issues filed by Dan Feenberg at NBER.",
+      "steps": [
+        { "title": "Report", "text": "A difference is logged as a public GitHub issue." },
+        { "title": "Reproduce", "text": "Rebuild it with a minimal household in both engines." },
+        { "title": "Classify", "text": "An input question, a PolicyEngine fix, or a possible TAXSIM issue." },
+        { "title": "Resolve", "text": "Fix the rule or mapping with a test, or document the convention." },
+        { "title": "Confirm", "text": "Reply on the issue; the next dashboard run shows the change." }
+      ]
     }
   },
 

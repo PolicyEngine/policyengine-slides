@@ -1,5 +1,6 @@
 import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
+import ProcessFlow from './ProcessFlow';
 import ScreenshotContent from './ScreenshotContent';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
@@ -40,6 +41,8 @@ function DraftSlide({ content }: { content: BlsSlideContent }) {
       </SlideHeader>
       {content.embed ? (
         <LiveEmbed title={content.title} embed={content.embed} />
+      ) : content.process ? (
+        <ProcessFlow process={content.process} />
       ) : content.screenshot ? (
         <ScreenshotContent screenshot={content.screenshot} />
       ) : content.detail ? (
