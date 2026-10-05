@@ -57,40 +57,6 @@ export function IconCards({ cards }: { cards: NonNullable<BlsSlideContent['cards
   );
 }
 
-/** A two-segment year bar, then a row of items to record with each run. */
-export function YearRouting({ years }: { years: NonNullable<BlsSlideContent['years']> }) {
-  return (
-    <div className="mt-6 max-w-6xl space-y-8 text-pe-dark">
-      <div>
-        <div className="flex overflow-hidden rounded-xl">
-          {years.segments.map((segment) => (
-            <div
-              key={segment.engine}
-              className={`flex flex-1 flex-col justify-center px-6 py-4 ${segment.highlight ? 'bg-pe-teal text-white' : 'bg-gray-100 text-pe-dark'}`}
-            >
-              <p className="text-sm font-semibold uppercase tracking-wider opacity-80">{segment.label}</p>
-              <p className="text-2xl font-bold leading-tight">{segment.engine}</p>
-              <p className="text-base leading-snug opacity-90">{segment.note}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3 text-xl leading-snug">{years.caption}</p>
-      </div>
-      <div>
-        <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{years.recordTitle}</p>
-        <div className="mt-3 grid grid-cols-5 gap-3">
-          {years.record.map((item) => (
-            <div key={item.label} className="flex items-center gap-3 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-4 py-3">
-              <DeckIcon name={item.icon} size={22} />
-              <span className="text-base font-medium leading-snug">{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function FlowBox({ title, text, outlined = false }: { title: string; text: string; outlined?: boolean }) {
   return (
     <div className={`rounded-lg px-4 py-4 ${outlined ? 'border border-gray-200 border-l-4 border-l-pe-teal bg-white' : 'border-l-4 border-pe-teal bg-gray-50'}`}>
@@ -156,6 +122,152 @@ export function QuestionsAndLinks({ questions, links }: { questions: string[]; l
             </span>
           </a>
         ))}
+      </div>
+    </div>
+  );
+}
+
+type Worked = NonNullable<BlsSlideContent['worked']>;
+
+/** One real record: the input row, the household built from it, and the outputs. */
+export function WorkedExample({ worked }: { worked: Worked }) {
+  return (
+    <div className="mt-2 space-y-3">
+      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-4">
+        <div className="rounded-xl bg-pe-darker px-5 py-4 font-mono">
+          <p className="mb-2 font-sans text-sm font-semibold uppercase tracking-wider text-teal-300">{worked.inputTitle}</p>
+          {worked.input.map((row) => (
+            <div key={row.field} className="grid grid-cols-[6.5rem_5.5rem_1fr] items-baseline gap-2 py-1 text-base">
+              <span className="text-teal-300">{row.field}</span>
+              <span className="text-white">{row.value}</span>
+              <span className="font-sans text-sm text-white/60">{row.meaning}</span>
+            </div>
+          ))}
+        </div>
+        <Arrow />
+        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.householdTitle}</p>
+          <div className="space-y-2">
+            {worked.household.map((member) => (
+              <div key={member.role} className="rounded-lg bg-white px-3 py-2 shadow-sm">
+                <p className="text-base font-semibold leading-snug text-pe-dark">{member.role}</p>
+                <p className="text-sm leading-snug text-gray-600">{member.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Arrow />
+        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.outputTitle}</p>
+          {worked.outputs.map((row) => (
+            <div key={row.field} className="grid grid-cols-[4rem_6rem_1fr] items-baseline gap-2 border-b border-gray-200 py-1.5 last:border-0">
+              <span className="font-mono text-sm text-pe-teal">{row.field}</span>
+              <span className="text-lg font-bold text-pe-dark">{row.value}</span>
+              <span className="text-sm leading-snug text-gray-600">{row.meaning}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="text-sm text-gray-500">{worked.footnote}</p>
+    </div>
+  );
+}
+
+type Contrast = NonNullable<BlsSlideContent['contrasts']>['items'][number];
+
+const CHOICE_COLORS = ['bg-teal-400', 'bg-[var(--pe-amber-dark)]'];
+
+function ContrastPanel({ item }: { item: Contrast }) {
+  const max = Math.max(...item.options.map((o) => o.value));
+  return (
+    <div className="flex flex-col rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
+      <p className="text-xl font-semibold text-pe-dark">{item.title}</p>
+      <p className="text-sm text-gray-500">{item.measure}</p>
+      <div className="mt-4 space-y-4">
+        {item.options.map((option, index) => (
+          <div key={option.label} title={`${option.label}: $${option.value.toLocaleString('en-US')}`}>
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="text-base leading-snug text-pe-dark">{option.label}</span>
+              <span className="text-lg font-bold text-pe-dark">${option.value.toLocaleString('en-US')}</span>
+            </div>
+            <div className="mt-1 h-3 rounded-full bg-gray-200">
+              <div className={`h-3 rounded-full ${CHOICE_COLORS[index]}`} style={{ width: `${(option.value / max) * 100}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-auto pt-4 text-base font-semibold leading-snug text-pe-dark">{item.delta}</p>
+      <p className="text-sm leading-snug text-gray-600">{item.note}</p>
+    </div>
+  );
+}
+
+/** Side-by-side comparisons: one coding choice changes in each panel. */
+export function Contrasts({ contrasts }: { contrasts: NonNullable<BlsSlideContent['contrasts']> }) {
+  return (
+    <div className="mt-2 space-y-4">
+      <p className="text-xl leading-snug text-pe-dark">{contrasts.intro}</p>
+      <div className="grid grid-cols-3 items-stretch gap-5">
+        {contrasts.items.map((item) => <ContrastPanel key={item.title} item={item} />)}
+      </div>
+      <p className="text-sm text-gray-500">{contrasts.footnote}</p>
+    </div>
+  );
+}
+
+type YearChartData = NonNullable<BlsSlideContent['yearChart']>;
+
+const ENGINE_STYLE: Record<'taxsim' | 'pe', { bar: string; label: string }> = {
+  taxsim: { bar: 'bg-[var(--pe-amber-dark)]', label: 'TAXSIM35' },
+  pe: { bar: 'bg-teal-400', label: 'PolicyEngine' },
+};
+
+/** Vertical bars by year, colored by the engine that handled the year. */
+export function YearChart({ chart }: { chart: YearChartData }) {
+  const max = Math.max(...chart.bars.map((b) => b.value));
+  return (
+    <div className="mt-2 grid grid-cols-[1.7fr_1fr] gap-8">
+      <div>
+        <div className="flex items-baseline justify-between">
+          <p className="text-lg font-semibold text-pe-dark">{chart.title}</p>
+          <div className="flex gap-4 text-sm text-gray-600">
+            {(['taxsim', 'pe'] as const).map((engine) => (
+              <span key={engine} className="flex items-center gap-2">
+                <span className={`inline-block h-3 w-3 rounded-sm ${ENGINE_STYLE[engine].bar}`} />
+                {chart.legend[engine]}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mt-3 flex h-[clamp(170px,32vh,400px)] items-end gap-[2px] border-b border-gray-300">
+          {chart.bars.map((bar) => (
+            <div key={bar.year} className="flex h-full flex-1 flex-col justify-end px-1" title={`${bar.year}: $${bar.value.toLocaleString('en-US')} (${ENGINE_STYLE[bar.engine].label})`}>
+              <span className="mb-1 text-center text-sm font-semibold text-pe-dark">${bar.value.toLocaleString('en-US')}</span>
+              <div className={`rounded-t ${ENGINE_STYLE[bar.engine].bar}`} style={{ height: `${(bar.value / max) * 82}%` }} />
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-[2px]">
+          {chart.bars.map((bar) => (
+            <div key={bar.year} className="flex-1 px-1 pt-1 text-center">
+              <p className="text-sm font-semibold text-pe-dark">{bar.year}</p>
+              {bar.note && <p className="text-xs leading-tight text-gray-500">{bar.note}</p>}
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-sm text-gray-500">{chart.footnote}</p>
+      </div>
+      <div>
+        <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{chart.recordTitle}</p>
+        <div className="mt-3 space-y-2">
+          {chart.record.map((item) => (
+            <div key={item.label} className="flex items-center gap-3 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-4 py-2.5">
+              <DeckIcon name={item.icon} size={22} />
+              <span className="text-base font-medium leading-snug text-pe-dark">{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-base leading-snug text-pe-dark">{chart.caption}</p>
       </div>
     </div>
   );

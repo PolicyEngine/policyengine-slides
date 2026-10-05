@@ -79,37 +79,27 @@ The site shows the before-and-after swap for six environments; the capture shows
 
 ## 8. From a TAXSIM record to a result (13–16 min)
 
-1. **Read the record.** One TAXSIM-format row per tax unit: year, state, filing status, ages and income.
-2. **Build the household.** The adapter creates the people, tax unit and household that the row describes.
-3. **Apply the rules.** PolicyEngine calculates federal and state tax for that year and state.
-4. **Return TAXSIM outputs.** Results come back under familiar names, such as fiitax and siitax.
+- One TAXSIM-format row: a married couple in California, two children, $130,000 in wages
+- The adapter builds two adults and two dependents in one joint tax unit
+- PolicyEngine returns $8,282 federal and $3,214 California income tax for 2024
 
-The same file format is the starting point. The household that the adapter builds is what the rules see.
+Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers.
 
-Walk through one record. Concrete mappings checked against local commit 29da68f4: core/input_mapper.py maps pwages and swages separately to each person’s employment_income, and page and sage to age. config/variable_mappings.yaml maps fiitax to income_tax and siitax to state_income_tax. A field name is only one part of the contract: which person gets the income, the period and the output definitions also matter. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/input_mapper.py and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/config/variable_mappings.yaml
+## 9. Coding choices change the result (16–19 min)
 
-## 9. Preparing survey inputs (16–19 min)
+- State code: a New Jersey household coded with the FIPS code is taxed as North Carolina
+- Dependent ages: children aged 17 and 19 instead of 8 and 12 raise federal tax by $3,000
+- Tax units: the same parents as two returns pay $3,229 less than one joint return
 
-1. **Define tax units.** Group people into filers, spouses and dependents.
-2. **Assign income.** Give each amount to the person who receives it.
-3. **Code the state.** Use TAXSIM state codes, not FIPS codes.
-4. **Mark missing values.** Keep a missing value separate from a true zero.
-5. **Check a sample.** Inspect a few built households before the full run.
-
-Each choice can change a household’s tax, so we record it with the run.
-
-Present these as the choices a CE team would make before a first run, not as errors CE has made. State codes are the clearest example: the TAXSIM SOI code for New Jersey is 31, while the Census FIPS code is 34, and in TAXSIM 34 means North Carolina. The mappings appear in core/utils.py. Income ownership matters because some rules depend on the age or status of the person who receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
+Each panel changes one coding choice for the same people and income; the numbers are real emulator runs. State code: TAXSIM uses its own state codes, where New Jersey is 31; the Census FIPS code for New Jersey is 34, which TAXSIM reads as North Carolina. The run does not fail, it silently applies the wrong state’s law. Dependent ages: at 17 and 19 the children no longer qualify for the $2,000 child tax credit and get the $500 credit for other dependents instead. Tax units: one joint return versus a head-of-household return (with both children and $80,000) plus a single return ($50,000); this is the question of how to form tax units for unmarried parents. Present these as choices CE would make, not as errors CE has made. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 ## 10. Year coverage and reproducible runs (19–22 min)
 
-- **Before 2021: TAXSIM35.** Historical years, back to the 1960s
-- **2021 onward: PolicyEngine.** Current law and scheduled future law
+- One file across 2018–2025: TAXSIM35 handles years before 2021, PolicyEngine handles 2021 onward
+- Law changes show up year by year, such as the 2020–21 stimulus payments and the 2021 expanded child tax credit
+- Record the input file, versions, options and logs with every run
 
-One command covers every year. The run record shows which engine handled each year.
-
-Record with every run: Input file, Emulator version, PolicyEngine version, Run options, Output and logs.
-
-Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md
+This is the slide-8 household (California, two children aged 8 and 12, $130,000 in wages) run for eight tax years in one file. The emulator routed 2018–2020 to the bundled TAXSIM35 binary and 2021–2025 to PolicyEngine. Federal tax nets the credits: 2020 includes both rounds of stimulus payments ($3,400 and $2,400), 2021 includes the third round ($5,600) and the expanded $6,000 child tax credit, and 2025 reflects the $2,200-per-child credit. Do not imply that all historical years run natively in PolicyEngine. The exact years CE needs are a scoping question. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 # Live demonstration
 

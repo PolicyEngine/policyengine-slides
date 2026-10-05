@@ -18,12 +18,31 @@ export interface BlsSlideContent {
   links?: { label: string; url: string; description?: string; icon?: BlsIcon }[];
   /** Two-by-two icon cards in place of the bullet list. */
   cards?: { icon: BlsIcon; title: string; text: string }[];
-  /** A year-coverage bar and a row of items to record with each run. */
-  years?: {
-    segments: { label: string; engine: string; note: string; highlight?: boolean }[];
-    caption: string;
+  /** One real record: input row, household built from it, and TAXSIM outputs. */
+  worked?: {
+    inputTitle: string;
+    input: { field: string; value: string; meaning: string }[];
+    householdTitle: string;
+    household: { role: string; detail: string }[];
+    outputTitle: string;
+    outputs: { field: string; value: string; meaning: string }[];
+    footnote: string;
+  };
+  /** Side-by-side comparisons where one coding choice changes. */
+  contrasts?: {
+    intro: string;
+    items: { title: string; measure: string; options: { label: string; value: number }[]; delta: string; note: string }[];
+    footnote: string;
+  };
+  /** Bars by tax year, colored by engine, with a run-record list. */
+  yearChart?: {
+    title: string;
+    legend: { taxsim: string; pe: string };
+    bars: { year: number; value: number; engine: 'taxsim' | 'pe'; note?: string }[];
+    footnote: string;
     recordTitle: string;
     record: { icon: BlsIcon; label: string }[];
+    caption: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -195,53 +214,115 @@ export const blsSlides: BlsSlideContent[] = [
   {
     "id": "record-to-result",
     "title": "From a TAXSIM record to a result",
-    "body": [],
+    "body": [
+      "One TAXSIM-format row: a married couple in California, two children, $130,000 in wages",
+      "The adapter builds two adults and two dependents in one joint tax unit",
+      "PolicyEngine returns $8,282 federal and $3,214 California income tax for 2024"
+    ],
     "minutes": 3,
-    "notes": "Walk through one record. Concrete mappings checked against local commit 29da68f4: core/input_mapper.py maps pwages and swages separately to each person’s employment_income, and page and sage to age. config/variable_mappings.yaml maps fiitax to income_tax and siitax to state_income_tax. A field name is only one part of the contract: which person gets the income, the period and the output definitions also matter. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/input_mapper.py and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/config/variable_mappings.yaml",
-    "process": {
-      "steps": [
-        { "title": "Read the record", "text": "One TAXSIM-format row per tax unit: year, state, filing status, ages and income." },
-        { "title": "Build the household", "text": "The adapter creates the people, tax unit and household that the row describes." },
-        { "title": "Apply the rules", "text": "PolicyEngine calculates federal and state tax for that year and state." },
-        { "title": "Return TAXSIM outputs", "text": "Results come back under familiar names, such as fiitax and siitax." }
+    "notes": "Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers.",
+    "worked": {
+      "inputTitle": "TAXSIM input row",
+      "input": [
+        { "field": "year", "value": "2024", "meaning": "Tax year" },
+        { "field": "state", "value": "5", "meaning": "California" },
+        { "field": "mstat", "value": "2", "meaning": "Married, joint" },
+        { "field": "page, sage", "value": "40, 38", "meaning": "Adult ages" },
+        { "field": "depx", "value": "2", "meaning": "Dependents" },
+        { "field": "age1, age2", "value": "8, 12", "meaning": "Child ages" },
+        { "field": "pwages", "value": "80,000", "meaning": "Primary wages" },
+        { "field": "swages", "value": "50,000", "meaning": "Spouse wages" }
       ],
-      "takeaway": "The same file format is the starting point. The household that the adapter builds is what the rules see."
+      "householdTitle": "Household PolicyEngine builds",
+      "household": [
+        { "role": "Tax unit", "detail": "Married filing jointly, California, 2024" },
+        { "role": "Head, age 40", "detail": "Employment income $80,000" },
+        { "role": "Spouse, age 38", "detail": "Employment income $50,000" },
+        { "role": "Dependents, ages 8 and 12", "detail": "Qualify for the child tax credit" }
+      ],
+      "outputTitle": "TAXSIM outputs",
+      "outputs": [
+        { "field": "fiitax", "value": "$8,282", "meaning": "Federal income tax" },
+        { "field": "siitax", "value": "$3,214", "meaning": "California income tax" },
+        { "field": "v10", "value": "$130,000", "meaning": "Federal AGI" },
+        { "field": "v22", "value": "$4,000", "meaning": "Child tax credit" },
+        { "field": "frate", "value": "22%", "meaning": "Federal marginal rate" },
+        { "field": "fica", "value": "$19,890", "meaning": "Payroll tax, both halves" }
+      ],
+      "footnote": "Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2."
     }
   },
   {
     "id": "input-prep",
-    "title": "Preparing survey inputs",
-    "body": [],
+    "title": "Coding choices change the result",
+    "body": [
+      "State code: a New Jersey household coded with the FIPS code is taxed as North Carolina",
+      "Dependent ages: children aged 17 and 19 instead of 8 and 12 raise federal tax by $3,000",
+      "Tax units: the same parents as two returns pay $3,229 less than one joint return"
+    ],
     "minutes": 3,
-    "notes": "Present these as the choices a CE team would make before a first run, not as errors CE has made. State codes are the clearest example: the TAXSIM SOI code for New Jersey is 31, while the Census FIPS code is 34, and in TAXSIM 34 means North Carolina. The mappings appear in core/utils.py. Income ownership matters because some rules depend on the age or status of the person who receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py",
-    "process": {
-      "steps": [
-        { "title": "Define tax units", "text": "Group people into filers, spouses and dependents." },
-        { "title": "Assign income", "text": "Give each amount to the person who receives it." },
-        { "title": "Code the state", "text": "Use TAXSIM state codes, not FIPS codes." },
-        { "title": "Mark missing values", "text": "Keep a missing value separate from a true zero." },
-        { "title": "Check a sample", "text": "Inspect a few built households before the full run." }
+    "notes": "Each panel changes one coding choice for the same people and income; the numbers are real emulator runs. State code: TAXSIM uses its own state codes, where New Jersey is 31; the Census FIPS code for New Jersey is 34, which TAXSIM reads as North Carolina. The run does not fail, it silently applies the wrong state’s law. Dependent ages: at 17 and 19 the children no longer qualify for the $2,000 child tax credit and get the $500 credit for other dependents instead. Tax units: one joint return versus a head-of-household return (with both children and $80,000) plus a single return ($50,000); this is the question of how to form tax units for unmarried parents. Present these as choices CE would make, not as errors CE has made. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.",
+    "contrasts": {
+      "intro": "Same people, same income. One coding choice changes in each panel.",
+      "items": [
+        {
+          "title": "State code",
+          "measure": "New Jersey household, state income tax, 2024",
+          "options": [
+            { "label": "Coded 31, TAXSIM’s code for NJ", "value": 4131 },
+            { "label": "Coded 34, the Census FIPS code", "value": 4658 }
+          ],
+          "delta": "+$527, and no error message",
+          "note": "TAXSIM reads 34 as North Carolina."
+        },
+        {
+          "title": "Dependent ages",
+          "measure": "California household, federal income tax, 2024",
+          "options": [
+            { "label": "Children aged 8 and 12", "value": 8282 },
+            { "label": "Children aged 17 and 19", "value": 11282 }
+          ],
+          "delta": "+$3,000",
+          "note": "The child tax credit falls from $4,000 to $1,000."
+        },
+        {
+          "title": "Tax units",
+          "measure": "Same two parents, federal plus state income tax, 2024",
+          "options": [
+            { "label": "One joint return", "value": 11496 },
+            { "label": "Two returns: head of household and single", "value": 8267 }
+          ],
+          "delta": "−$3,229",
+          "note": "How to form tax units is a research decision."
+        }
       ],
-      "takeaway": "Each choice can change a household’s tax, so we record it with the run."
+      "footnote": "Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2."
     }
   },
   {
     "id": "years-and-runs",
     "title": "Year coverage and reproducible runs",
     "body": [
-      "2021 onward runs in PolicyEngine; earlier years use TAXSIM35",
-      "Record which engine handled each year",
-      "Pin the emulator and model versions for each run",
-      "Keep the input file, options and logs with the output"
+      "One file across 2018–2025: TAXSIM35 handles years before 2021, PolicyEngine handles 2021 onward",
+      "Law changes show up year by year, such as the 2020–21 stimulus payments and the 2021 expanded child tax credit",
+      "Record the input file, versions, options and logs with every run"
     ],
     "minutes": 3,
-    "notes": "Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md",
-    "years": {
-      "segments": [
-        { "label": "Before 2021", "engine": "TAXSIM35", "note": "Historical years, back to the 1960s" },
-        { "label": "2021 onward", "engine": "PolicyEngine", "note": "Current law and scheduled future law", "highlight": true }
+    "notes": "This is the slide-8 household (California, two children aged 8 and 12, $130,000 in wages) run for eight tax years in one file. The emulator routed 2018–2020 to the bundled TAXSIM35 binary and 2021–2025 to PolicyEngine. Federal tax nets the credits: 2020 includes both rounds of stimulus payments ($3,400 and $2,400), 2021 includes the third round ($5,600) and the expanded $6,000 child tax credit, and 2025 reflects the $2,200-per-child credit. Do not imply that all historical years run natively in PolicyEngine. The exact years CE needs are a scoping question. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.",
+    "yearChart": {
+      "title": "Federal income tax for the same household",
+      "legend": { "taxsim": "TAXSIM35", "pe": "PolicyEngine" },
+      "bars": [
+        { "year": 2018, "value": 11199, "engine": "taxsim" },
+        { "year": 2019, "value": 10949, "engine": "taxsim" },
+        { "year": 2020, "value": 4924, "engine": "taxsim", "note": "Stimulus payments" },
+        { "year": 2021, "value": 2975, "engine": "pe", "note": "Stimulus, $6,000 CTC" },
+        { "year": 2022, "value": 10136, "engine": "pe" },
+        { "year": 2023, "value": 9121, "engine": "pe" },
+        { "year": 2024, "value": 8282, "engine": "pe" },
+        { "year": 2025, "value": 7098, "engine": "pe", "note": "$2,200 per child" }
       ],
-      "caption": "One command covers every year. The run record shows which engine handled each year.",
+      "footnote": "The household from slide 8. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.",
       "recordTitle": "Record with every run",
       "record": [
         { "icon": "file-spreadsheet", "label": "Input file" },
@@ -249,7 +330,8 @@ export const blsSlides: BlsSlideContent[] = [
         { "icon": "history", "label": "PolicyEngine version" },
         { "icon": "settings", "label": "Run options" },
         { "icon": "file-text", "label": "Output and logs" }
-      ]
+      ],
+      "caption": "One command covers every year. The run record shows which engine handled each year."
     }
   },
 
