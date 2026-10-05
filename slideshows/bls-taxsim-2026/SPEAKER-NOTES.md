@@ -1,13 +1,13 @@
 # BLS TAXSIM seminar: slide text and speaker notes
 
-23 slides: 60 minutes presenting, followed by a dedicated 30-minute Q&A slide.
+22 slides: 60 minutes presenting, followed by a dedicated 30-minute Q&A slide.
 
 Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, IARIW 2026 imputation/calibration material in this repository, and the PolicyEngine TAXSIM site (policyengine.org/us/taxsim), captured October 5, 2026.
 
 ## Before presenting
 
-- Rehearse the live demo (slide 13) and the live dashboard (slide 15) on the presentation laptop and the BLS network. Confirm that both frames load. If a frame does not load, open the page in a browser tab; slide 12 holds a capture of the demo file.
-- On the morning of the talk, open the dashboard and check that it loads. Its headline figures are in the notes for slide 14 for questions (2023: 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026).
+- Rehearse the live demo (slide 12) and the live dashboard (slide 14) on the presentation laptop and the BLS network. Confirm that both frames load. If a frame does not load, open the page in a browser tab; slide 11 holds a capture of the demo file.
+- On the morning of the talk, open the dashboard and check that it loads. Its headline figures are in the notes for slide 13 for questions (2023: 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026).
 - Confirm the CE-specific benefit methodology and pilot scope. These sections describe proposed research choices rather than a completed CE implementation.
 
 # Introduction and context
@@ -32,15 +32,15 @@ Introduce the speakers and thank the BLS hosts and the CE team.
 
 The first six sections total 60 minutes. Cover the emulator’s core assumptions first, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A.
 
-## 3. PolicyEngine: free, open-source microsimulation (2–4 min)
+## 3. PolicyEngine: free, open-source microsimulation (2–5 min)
 
 - Rules: federal and state taxes and major benefit programs
 - Households: survey data enhanced and calibrated, or any household you enter
 - Reforms: change any parameter and see the cost, poverty and distributional effects
 
-Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. Adapted from the cpid-webinar-2026 deck (September 2026).
+Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the emulator section covers those. Adapted from the cpid-webinar-2026 deck (September 2026).
 
-## 4. PolicyEngine today (4–5 min)
+## 4. PolicyEngine today (5–6 min)
 
 - 95,000+ parameters, 5,500+ variables and 4,693 test files in the US model
 - Public code since June 2021, with 133 contributors to the US model
@@ -48,7 +48,7 @@ Give the one-minute version of PolicyEngine: an open-source rules engine, a hous
 
 Use the numbers to show scale and testing, not to sell. The NBER memorandum of understanding is the reason the TAXSIM emulator exists; the next section covers it. Figures from the gettsim-2026 deck (September 3, 2026); check them before the talk if you quote them.
 
-## 5. Researchers and developers build with these rules (5–6 min)
+## 5. Researchers and developers build with these rules (6–7 min)
 
 - Federal partners and users: NBER, the Atlanta Fed, BEA and the Joint Economic Committee
 - Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown and USC
@@ -56,23 +56,7 @@ Use the numbers to show scale and testing, not to sell. The NBER memorandum of u
 
 Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).
 
-## 6. PolicyEngine separates rules from survey data (6–8 min)
-
-Survey side:
-- **Household data.** People, relationships and financial inputs. (Ages, earnings, dependents)
-- **Research assumptions.** Choices needed when information is missing. (Participation, income allocation)
-
-Center: **Calculation.** Apply the rules to each household. (Tax liability and potential benefits)
-
-Rules side:
-- **Policy rules.** Dated parameters and calculation formulas. (Tax brackets, credit formulas)
-- **Open and tested.** Open-source code with thousands of unit tests. (github.com/PolicyEngine/policyengine-us)
-
-The same rules can serve any dataset. The data mapping and the assumptions need their own validation.
-
-Explain the two sides using a household with two adults and a child. The household record supplies ages and income. The rules supply the year-specific calculation. Missing data and program participation require additional choices. PolicyEngine’s TAXSIM adapter translates one input schema into the model’s entities; it does not remove these methodological choices. Source: https://github.com/PolicyEngine/policyengine-us and the previous IARIW overview.
-
-## 7. The NBER collaboration (8–10 min)
+## 6. The NBER collaboration (7–10 min)
 
 Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-validated-by.png` (from https://www.policyengine.org/us/taxsim)
 
@@ -82,7 +66,7 @@ Adapt the institutional context from the CRS presentation without repeating unda
 
 # The emulator and its core assumptions
 
-## 8. A drop-in replacement for TAXSIM35 (10–13 min)
+## 7. A drop-in replacement for TAXSIM35 (10–13 min)
 
 Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-drop-in-r.png` (from https://www.policyengine.org/us/taxsim)
 
@@ -90,7 +74,7 @@ Existing scripts keep their input files. In R, taxsim_calculate_taxes() becomes 
 
 The site shows the before-and-after swap for six environments; the capture shows the R tab. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs) for comparison runs. Ask CE staff which environment their current tax-imputation code uses. This is a documented workflow, not a completed run on CE data. Source: https://www.policyengine.org/us/taxsim (captured October 5, 2026) and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/r-package/policyenginetaxsim/README.md
 
-## 9. From a TAXSIM record to a result (13–16 min)
+## 8. From a TAXSIM record to a result (13–16 min)
 
 1. **Read the record.** One TAXSIM-format row per tax unit: year, state, filing status, ages and income.
 2. **Build the household.** The adapter creates the people, tax unit and household that the row describes.
@@ -101,7 +85,7 @@ The same file format is the starting point. The household that the adapter build
 
 Walk through one record. Concrete mappings checked against local commit 29da68f4: core/input_mapper.py maps pwages and swages separately to each person’s employment_income, and page and sage to age. config/variable_mappings.yaml maps fiitax to income_tax and siitax to state_income_tax. A field name is only one part of the contract: which person gets the income, the period and the output definitions also matter. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/input_mapper.py and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/config/variable_mappings.yaml
 
-## 10. Preparing survey inputs (16–19 min)
+## 9. Preparing survey inputs (16–19 min)
 
 1. **Define tax units.** Group people into filers, spouses and dependents.
 2. **Assign income.** Give each amount to the person who receives it.
@@ -113,7 +97,7 @@ Each choice can change a household’s tax, so we record it with the run.
 
 Present these as the choices a CE team would make before a first run, not as errors CE has made. State codes are the clearest example: the TAXSIM SOI code for New Jersey is 31, while the Census FIPS code is 34, and in TAXSIM 34 means North Carolina. The mappings appear in core/utils.py. Income ownership matters because some rules depend on the age or status of the person who receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
 
-## 11. Year coverage and reproducible runs (19–22 min)
+## 10. Year coverage and reproducible runs (19–22 min)
 
 - **Before 2021: TAXSIM35.** Historical years, back to the 1960s
 - **2021 onward: PolicyEngine.** Current law and scheduled future law
@@ -126,7 +110,7 @@ Explain year stitching. Do not imply that all historical years run natively in P
 
 # Live demonstration
 
-## 12. The demo file: three households (22–23 min)
+## 11. The demo file: three households (22–23 min)
 
 Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-run-sample.png` (from https://www.policyengine.org/us/taxsim/run)
 
@@ -134,7 +118,7 @@ The built-in sample uses TAXSIM state codes: 5 is California, 33 is New York and
 
 Bridge into the live demo. Read one row aloud: household 1 is a married couple filing jointly (mstat 2) in California with two dependents and $80,000 and $50,000 in wages. Point to the state codes and connect them to the slide on preparing survey inputs. This capture is also the fallback if the live frame does not load. Captured October 5, 2026.
 
-## 13. Live demo: run the sample file (23–32 min)
+## 12. Live demo: run the sample file (23–32 min)
 
 Live page: https://www.policyengine.org/us/taxsim/run
 
@@ -150,7 +134,7 @@ Start the live demo here: after the core assumptions and before validation. Clic
 
 # Validation
 
-## 14. How we validate the emulator (32–36 min)
+## 13. How we validate the emulator (32–36 min)
 
 Validation is a repeating process, not a single benchmark.
 
@@ -164,7 +148,7 @@ Each PolicyEngine release and each TAXSIM update starts the loop again.
 
 Present validation as a process, not a single benchmark. Cross-model agreement measures consistency; checks against the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for numbers: for 2023, 89.8% of 111,347 Enhanced CPS households agree on federal tax and 94.9% on state tax within ±1% of gross income (dashboard data of September 23, 2026, PolicyEngine US 2.6.17). The headline depends on the tolerance: the dashboard also offers ±$15 and ±1% net of rebates, and the comparator default is ±$15. Source: https://www.policyengine.org/us/taxsim/dashboard and policyengine-slides/slideshows/pwbm-2026/slides/ValidationSlide.tsx.
 
-## 15. The public validation dashboard (36–42 min)
+## 14. The public validation dashboard (36–42 min)
 
 Live page: https://www.policyengine.org/us/taxsim/dashboard
 
@@ -177,7 +161,7 @@ Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September
 
 Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.
 
-## 16. From a reported difference to a fix (42–45 min)
+## 15. From a reported difference to a fix (42–45 min)
 
 Differences reach us from the dashboard and from public GitHub issues, including issues filed by Dan Feenberg at NBER.
 
@@ -191,7 +175,7 @@ Describe the triage process in general terms. The classification decides the nex
 
 # Benefit imputation
 
-## 17. Eligibility, receipt and benefit value (45–48 min)
+## 16. Eligibility, receipt and benefit value (45–48 min)
 
 | Question | Output | Research choice |
 | --- | --- | --- |
@@ -204,7 +188,7 @@ Illustration: $240 potential monthly benefit × 60% assumed participation = $144
 
 The numerical example is invented only to distinguish potential benefits from expected receipt. It is not a SNAP calculation or a measured take-up rate. In a binary participation simulation, the household receives either zero or the modeled amount; the product is an expected value across uncertainty or comparable households. Medicaid requires a separately defined monetary valuation. Do not add a Medicaid eligibility indicator directly to dollar resources. Source: methodological distinctions developed for this seminar.
 
-## 18. Imputing a distribution of missing inputs (48–51 min)
+## 17. Imputing a distribution of missing inputs (48–51 min)
 
 Quantile regression forests estimate conditional distributions of missing variables using characteristics shared across surveys.
 
@@ -219,7 +203,7 @@ For CE, donor choice and shared predictors would need an explicit assessment bef
 
 A donor survey observes the variable of interest and predictors shared with the recipient survey. A conditional distribution permits households with similar observed characteristics to have different imputed values. That can matter around tax-benefit thresholds. Multiple draws can reveal sensitivity, but they do not automatically solve model misspecification or preserve every joint relationship. The prior deck names CPS, ACS, SCF, SIPP and tax microdata. This slide does not claim a CE implementation exists. Source: local IARIW 2026 ImputationSlide.tsx.
 
-## 19. SNAP and Medicaid in a resource measure (51–53 min)
+## 18. SNAP and Medicaid in a resource measure (51–53 min)
 
 | Choice | SNAP | Medicaid |
 | --- | --- | --- |
@@ -232,7 +216,7 @@ The research question determines the resource concept. Eligibility alone does no
 
 Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this talk does not select one. No numerical benefit estimates are asserted.
 
-## 20. Validation of benefit imputations (53–55 min)
+## 19. Validation of benefit imputations (53–55 min)
 
 - **External benchmarks.** Compare imputed receipt and amounts with administrative totals.
 - **Errors by group.** Check how errors differ by income, household type and state.
@@ -243,7 +227,7 @@ The prior IARIW deck describes calibration of household weights to administrativ
 
 # A possible CE pilot
 
-## 21. Where this could fit in CE research (55–57 min)
+## 20. Where this could fit in CE research (55–57 min)
 
 **CE tax-unit records** (An agreed set of inputs for one year.) → **Current CE tax calculation** (The existing method, unchanged.) and **PolicyEngine TAXSIM emulator** (The same records, same input format.) → **Compare** (Household results and weighted summaries.) → **Review** (Explain differences before expanding the scope.)
 
@@ -251,7 +235,7 @@ Keep CE definitions and weights fixed in the first comparison.
 
 This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
 
-## 22. A manageable CE pilot (57–60 min)
+## 21. A manageable CE pilot (57–60 min)
 
 Four steps, each with a clear output.
 
@@ -262,7 +246,7 @@ Four steps, each with a clear output.
 
 Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
-## 23. Q&A and discussion (60–90 min)
+## 22. Q&A and discussion (60–90 min)
 
 - Which outcomes and years would be most useful?
 - Which input assumptions create the most uncertainty?

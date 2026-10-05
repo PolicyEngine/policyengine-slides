@@ -3,7 +3,7 @@ import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import ScreenshotContent from './ScreenshotContent';
-import { CompareFlow, IconCards, QuestionsAndLinks, SplitDiagram, YearRouting } from './Visuals';
+import { CompareFlow, IconCards, QuestionsAndLinks, YearRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
@@ -59,8 +59,6 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <IconCards cards={content.cards} />
       ) : content.years ? (
         <YearRouting years={content.years} />
-      ) : content.split ? (
-        <SplitDiagram split={content.split} />
       ) : content.compare ? (
         <CompareFlow compare={content.compare} />
       ) : content.links ? (

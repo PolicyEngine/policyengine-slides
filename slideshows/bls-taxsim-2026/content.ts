@@ -1,7 +1,6 @@
 export type BlsIcon =
-  | 'adjustments' | 'calculator' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text'
-  | 'flask' | 'github' | 'history' | 'play' | 'scale' | 'settings' | 'test' | 'users'
-  | 'versions' | 'world';
+  | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask' | 'github'
+  | 'history' | 'play' | 'scale' | 'settings' | 'users' | 'versions' | 'world';
 
 export interface BlsSlideContent {
   id: string;
@@ -25,13 +24,6 @@ export interface BlsSlideContent {
     caption: string;
     recordTitle: string;
     record: { icon: BlsIcon; label: string }[];
-  };
-  /** Two sides that meet in one central step. */
-  split?: {
-    left: { label: string; cards: { icon: BlsIcon; title: string; text: string; example?: string }[] };
-    center: { icon: BlsIcon; title: string; text: string; example?: string };
-    right: { label: string; cards: { icon: BlsIcon; title: string; text: string; example?: string }[] };
-    takeaway?: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -124,8 +116,8 @@ export const blsSlides: BlsSlideContent[] = [
       "Households: survey data enhanced and calibrated, or any household you enter",
       "Reforms: change any parameter and see the cost, poverty and distributional effects"
     ],
-    "minutes": 2,
-    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "minutes": 3,
+    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the emulator section covers those. Adapted from the cpid-webinar-2026 deck (September 2026).",
     "custom": "what-is-pe"
   },
   {
@@ -153,36 +145,6 @@ export const blsSlides: BlsSlideContent[] = [
     "custom": "who-uses-pe"
   },
   {
-    "id": "rules-and-data",
-    "title": "PolicyEngine separates rules from survey data",
-    "body": [
-      "Policy rules and parameters define the calculations",
-      "Household characteristics supply the inputs",
-      "The model returns taxes and benefit estimates",
-      "Researchers can inspect the code and assumptions"
-    ],
-    "minutes": 2,
-    "notes": "Explain the two sides using a household with two adults and a child. The household record supplies ages and income. The rules supply the year-specific calculation. Missing data and program participation require additional choices. PolicyEngine’s TAXSIM adapter translates one input schema into the model’s entities; it does not remove these methodological choices. Source: https://github.com/PolicyEngine/policyengine-us and the previous IARIW overview.",
-    "split": {
-      "left": {
-        "label": "Survey side",
-        "cards": [
-          { "icon": "users", "title": "Household data", "text": "People, relationships and financial inputs.", "example": "Ages, earnings, dependents" },
-          { "icon": "adjustments", "title": "Research assumptions", "text": "Choices needed when information is missing.", "example": "Participation, income allocation" }
-        ]
-      },
-      "center": { "icon": "calculator", "title": "Calculation", "text": "Apply the rules to each household.", "example": "Tax liability and potential benefits" },
-      "right": {
-        "label": "Rules side",
-        "cards": [
-          { "icon": "scale", "title": "Policy rules", "text": "Dated parameters and calculation formulas.", "example": "Tax brackets, credit formulas" },
-          { "icon": "test", "title": "Open and tested", "text": "Open-source code with thousands of unit tests.", "example": "github.com/PolicyEngine/policyengine-us" }
-        ]
-      },
-      "takeaway": "The same rules can serve any dataset. The data mapping and the assumptions need their own validation."
-    }
-  },
-  {
     "id": "nber",
     "title": "The NBER collaboration",
     "body": [
@@ -191,7 +153,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Comparisons that help investigate both models",
       "Continuity for researchers using TAXSIM workflows"
     ],
-    "minutes": 2,
+    "minutes": 3,
     "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The screenshot shows the partner section of the TAXSIM site, captured October 5, 2026; its Read more links lead to the MOU announcement and the Atlanta Fed comparison. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
     "screenshot": {
