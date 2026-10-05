@@ -152,11 +152,11 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "An open-source emulator built around the TAXSIM interface",
       "Development with guidance from Dan Feenberg",
-      "Comparison work since 2023 on federal and state tax for tax years 2021 onward",
+      "Side-by-side comparisons of federal and state tax for tax years 2021 onward",
       "Continuity for researchers using TAXSIM workflows"
     ],
     "minutes": 3,
-    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We have compared PolicyEngine and TAXSIM since 2023, for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
+    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We compare PolicyEngine and TAXSIM for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
     "screenshot": {
       "src": "/screenshots/bls-taxsim-2026/taxsim-nber-card.png",
@@ -164,8 +164,7 @@ export const blsSlides: BlsSlideContent[] = [
       "width": 2080,
       "height": 990,
       "facts": [
-        { "value": "Since 2023", "label": "PolicyEngine and TAXSIM compared side by side" },
-        { "value": "Tax years 2021 onward", "label": "The years in the comparison" },
+        { "value": "Tax years 2021 onward", "label": "PolicyEngine and TAXSIM compared side by side" },
         { "value": "Federal and state", "label": "Income tax models compared" }
       ],
       "caption": "The comparison work led to a formal partnership with NBER."

@@ -60,13 +60,12 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 
 Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-nber-card.png` (from https://www.policyengine.org/us/taxsim)
 
-- **Since 2023.** PolicyEngine and TAXSIM compared side by side
-- **Tax years 2021 onward.** The years in the comparison
+- **Tax years 2021 onward.** PolicyEngine and TAXSIM compared side by side
 - **Federal and state.** Income tax models compared
 
 The comparison work led to a formal partnership with NBER.
 
-Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We have compared PolicyEngine and TAXSIM since 2023, for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim
+Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We compare PolicyEngine and TAXSIM for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim
 
 # The emulator and its core assumptions
 
