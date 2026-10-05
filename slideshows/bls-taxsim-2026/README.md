@@ -9,7 +9,7 @@ Agenda: introduction (10 min), the emulator and its core assumptions (12 min), l
 - `content.ts`: slide copy, timing, sources, speaker notes, screenshots and live embeds.
 - `slides/index.tsx`: React rendering with the repository’s shared slide components.
 - `slides/LiveEmbed.tsx`: live iframe with a side column of demo steps (slides 11 and 13).
-- `slides/ProcessFlow.tsx`: step-card process diagrams (slides 12 and 14).
+- `slides/ProcessFlow.tsx`: step-card process diagrams (slides 7, 8, 12 and 14).
 - `slides/ScreenshotContent.tsx`: website captures at 4× density (slides 5, 6 and 10).
 - `SPEAKER-NOTES.md`: readable presenter track and preparation checklist, generated from `content.ts`.
 

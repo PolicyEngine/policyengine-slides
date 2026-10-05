@@ -23,7 +23,7 @@ Introduce the speakers and thank the BLS hosts and the CE team.
 ## 2. Today’s discussion (1–2 min)
 
 - Introduction and context   10 min — Why this matters for CE, how PolicyEngine works, and the NBER collaboration.
-- The emulator and its core assumptions   12 min — A drop-in TAXSIM interface, field mappings, input conventions and year coverage.
+- The emulator and its core assumptions   12 min — A drop-in TAXSIM interface, how a record becomes a result, preparing survey inputs, and year coverage.
 - Live demonstration   10 min — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
 - Validation   13 min — How we compare the two engines, the public dashboard, and how a reported difference becomes a fix.
 - Benefit imputation   10 min — Methods for missing survey inputs, SNAP participation, and Medicaid valuation.
@@ -72,33 +72,28 @@ Existing scripts keep their input files. In R, taxsim_calculate_taxes() becomes 
 
 The site shows the before-and-after swap for six environments; the capture shows the R tab. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs) for comparison runs. Ask CE staff which environment their current tax-imputation code uses. This is a documented workflow, not a completed run on CE data. Source: https://www.policyengine.org/us/taxsim (captured October 5, 2026) and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/r-package/policyenginetaxsim/README.md
 
-## 7. How TAXSIM fields map into PolicyEngine (13–16 min)
+## 7. From a TAXSIM record to a result (13–16 min)
 
-The adapter translates person and tax-unit inputs, then returns familiar TAXSIM output names.
+1. **Read the record.** One TAXSIM-format row per tax unit: year, state, filing status, ages and income.
+2. **Build the household.** The adapter creates the people, tax unit and household that the row describes.
+3. **Apply the rules.** PolicyEngine calculates federal and state tax for that year and state.
+4. **Return TAXSIM outputs.** Results come back under familiar names, such as fiitax and siitax.
 
-| TAXSIM field | Meaning | PolicyEngine mapping |
-| --- | --- | --- |
-| pwages / swages | Primary / spouse wages | employment_income for each person |
-| page / sage | Primary / spouse ages | age for each person |
-| fiitax | Federal income tax output | income_tax |
-| siitax | State income tax output | state_income_tax |
+The same file format is the starting point. The household that the adapter builds is what the rules see.
 
-A compatible file format makes integration easier. Correct entity construction and output definitions still matter.
+Walk through one record. Concrete mappings checked against local commit 29da68f4: core/input_mapper.py maps pwages and swages separately to each person’s employment_income, and page and sage to age. config/variable_mappings.yaml maps fiitax to income_tax and siitax to state_income_tax. A field name is only one part of the contract: which person gets the income, the period and the output definitions also matter. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/input_mapper.py and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/config/variable_mappings.yaml
 
-Concrete mappings checked against local commit 29da68f4: core/input_mapper.py maps pwages and swages separately to person employment_income, and page and sage to age. config/variable_mappings.yaml maps fiitax to income_tax and siitax to state_income_tax. Show that a field name is only one part of the contract: person assignment, period and output conventions also matter. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/input_mapper.py and https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/config/variable_mappings.yaml
+## 8. Preparing survey inputs (16–19 min)
 
-## 8. Input conventions can change the result (16–19 min)
+1. **Define tax units.** Group people into filers, spouses and dependents.
+2. **Assign income.** Give each amount to the person who receives it.
+3. **Code the state.** Use TAXSIM state codes, not FIPS codes.
+4. **Mark missing values.** Keep a missing value separate from a true zero.
+5. **Check a sample.** Inspect a few built households before the full run.
 
-| Input decision | Why it matters | Check before comparison |
-| --- | --- | --- |
-| State codes | TAXSIM and FIPS use different code systems | TAXSIM 31 = NJ; FIPS 34 = NJ |
-| Income ownership | Some rules depend on the recipient’s characteristics | Assign income to the relevant person |
-| Dependent details | Ages and relationships affect modeled treatment | Inspect the constructed tax unit |
-| Missing values | Defaults can silently become assumptions | Distinguish missing from a true zero |
+Each choice can change a household’s tax, so we record it with the run.
 
-In the TAXSIM code system, 34 means North Carolina. A valid numeric code can still identify the wrong state.
-
-Use New Jersey as a concrete example of a schema mismatch. The TAXSIM SOI state code is 31, while the Census FIPS code is 34. In TAXSIM, 34 means North Carolina. These mappings appear in core/utils.py and the YAML generator uses FIPS for PolicyEngine test data. This is a code-system explanation, not a claim that CE has made this error. Income ownership is a second example: some rules depend on which person receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
+Present these as the choices a CE team would make before a first run, not as errors CE has made. State codes are the clearest example: the TAXSIM SOI code for New Jersey is 31, while the Census FIPS code is 34, and in TAXSIM 34 means North Carolina. The mappings appear in core/utils.py. Income ownership matters because some rules depend on the age or status of the person who receives the income. Source: https://github.com/PolicyEngine/policyengine-taxsim/blob/29da68f4/policyengine_taxsim/core/utils.py
 
 ## 9. Year coverage and reproducible runs (19–22 min)
 
@@ -117,7 +112,7 @@ Screenshot: `public/screenshots/bls-taxsim-2026/taxsim-run-sample.png` (from htt
 
 The built-in sample uses TAXSIM state codes: 5 is California, 33 is New York and 44 is Texas. The same file runs with the policyengine-taxsim command.
 
-Bridge into the live demo. Read one row aloud: household 1 is a married couple filing jointly (mstat 2) in California with two dependents and $80,000 and $50,000 in wages. Point to the state codes and connect them to the input-conventions slide. This capture is also the fallback if the live frame does not load. Captured October 5, 2026.
+Bridge into the live demo. Read one row aloud: household 1 is a married couple filing jointly (mstat 2) in California with two dependents and $80,000 and $50,000 in wages. Point to the state codes and connect them to the slide on preparing survey inputs. This capture is also the fallback if the live frame does not load. Captured October 5, 2026.
 
 ## 11. Live demo: run the sample file (23–32 min)
 

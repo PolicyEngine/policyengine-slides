@@ -22,6 +22,7 @@ export default function ProcessFlow({ process }: { process: Process }) {
           </div>
         ))}
       </div>
+      {process.takeaway && <p className="text-xl leading-snug font-medium max-w-6xl">{process.takeaway}</p>}
       {process.loop && (
         <p className="flex items-center gap-3 text-lg leading-snug">
           <IconRefresh className="shrink-0 text-pe-teal" size={24} stroke={2} aria-hidden="true" />
