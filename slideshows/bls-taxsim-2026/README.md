@@ -9,8 +9,9 @@ Agenda: introduction (10 min), the emulator and its core assumptions (12 min), l
 - `content.ts`: slide copy, timing, sources, speaker notes, screenshots and live embeds.
 - `slides/index.tsx`: React rendering with the repository’s shared slide components.
 - `slides/LiveEmbed.tsx`: live iframe with a side column of demo steps (slides 11 and 13).
-- `slides/ProcessFlow.tsx`: step-card process diagrams (slides 7, 8, 12 and 14).
+- `slides/ProcessFlow.tsx`: step-card process diagrams (slides 7, 8, 12, 14 and 20).
 - `slides/ScreenshotContent.tsx`: website captures at 4× density (slides 5, 6 and 10).
+- `slides/Visuals.tsx`: icon cards (slides 3 and 18), the year-coverage bar (slide 9), the comparison diagram (slide 19), and questions with resource links (slide 21).
 - `SPEAKER-NOTES.md`: readable presenter track and preparation checklist, generated from `content.ts`.
 
 The live demo runs the 3-household sample in the web runner at policyengine.org/us/taxsim/run, after the core assumptions and before validation. The validation section is a process overview: how the two engines are compared, the live public dashboard at policyengine.org/us/taxsim/dashboard, and how a reported difference becomes a fix. Captures in `public/screenshots/bls-taxsim-2026/` were taken on October 5, 2026. The CE pilot and benefit extension are proposals, not completed implementations.

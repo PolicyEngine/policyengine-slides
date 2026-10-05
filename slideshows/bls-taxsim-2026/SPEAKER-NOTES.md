@@ -34,10 +34,10 @@ The first six sections total 60 minutes. Cover the emulator’s core assumptions
 
 ## 3. The CE research opportunity (2–4 min)
 
-- Calculate taxes using a familiar input format
-- Examine how assumptions affect household resources
-- Explore methods for adding in-kind benefits
-- Start with a bounded research comparison
+- **A familiar input format.** Calculate federal and state taxes from TAXSIM-format records.
+- **Visible assumptions.** See how tax units, income ownership and missing data change after-tax income.
+- **In-kind benefits.** Explore methods to add SNAP and Medicaid to household resources.
+- **A bounded first step.** Start with one year, one sample and a reproducible comparison.
 
 Present these as opportunities for discussion, not commitments or claims about CE’s current production system.
 
@@ -97,10 +97,12 @@ Present these as the choices a CE team would make before a first run, not as err
 
 ## 9. Year coverage and reproducible runs (19–22 min)
 
-- 2021 onward runs in PolicyEngine; earlier years use TAXSIM35
-- Record which engine handled each year
-- Pin the emulator and model versions for each run
-- Keep the input file, options and logs with the output
+- **Before 2021: TAXSIM35.** Historical years, back to the 1960s
+- **2021 onward: PolicyEngine.** Current law and scheduled future law
+
+One command covers every year. The run record shows which engine handled each year.
+
+Record with every run: Input file, Emulator version, PolicyEngine version, Run options, Output and logs.
 
 Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md
 
@@ -214,10 +216,10 @@ Use this comparison to explain why benefit imputation contains more than a call 
 
 ## 18. Validation of benefit imputations (53–55 min)
 
-- Compare receipt and amounts with suitable external benchmarks
-- Examine errors across household groups
-- Use holdout data and alternative assumptions where feasible
-- Treat calibration and independent validation separately
+- **External benchmarks.** Compare imputed receipt and amounts with administrative totals.
+- **Errors by group.** Check how errors differ by income, household type and state.
+- **Holdout tests.** Test on data held back from estimation, and try alternative assumptions.
+- **Calibration is not validation.** A target used to fit the weights cannot also validate them.
 
 The prior IARIW deck describes calibration of household weights to administrative totals. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: policyengine-slides/slideshows/iariw-2026/slides/ImputationSlide.tsx and CalibrationSlide.tsx.
 
@@ -225,19 +227,20 @@ The prior IARIW deck describes calibration of household weights to administrativ
 
 ## 19. Where this could fit in CE research (55–57 min)
 
-- Begin with an agreed set of tax-imputation inputs
-- Run both calculators on the same records
-- Compare household results and weighted summaries
-- Review differences before expanding the scope
+**CE tax-unit records** (An agreed set of inputs for one year.) → **Current CE tax calculation** (The existing method, unchanged.) and **PolicyEngine TAXSIM emulator** (The same records, same input format.) → **Compare** (Household results and weighted summaries.) → **Review** (Explain differences before expanding the scope.)
+
+Keep CE definitions and weights fixed in the first comparison.
 
 This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
 
 ## 20. A manageable CE pilot (57–60 min)
 
-- Agree one year, one sample and the key tax outputs
-- Document input mappings and missing-data assumptions
-- Produce a reproducible comparison and discrepancy log
-- Scope one benefit extension after reviewing the tax results
+Four steps, each with a clear output.
+
+1. **Scope.** Agree one year, one sample and the key tax outputs. Output: scope note.
+2. **Map.** Document input mappings and missing-data assumptions. Output: mapping document.
+3. **Compare.** Run both calculations and log every difference. Output: comparison and discrepancy log.
+4. **Extend.** Choose one benefit extension after the tax results. Output: extension plan.
 
 Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
@@ -248,9 +251,9 @@ Proposed next steps for discussion. Seek clarity on the relevant year, available
 - What evidence would support a broader evaluation?
 - Which benefit extension would answer a concrete research question?
 
-- [policyengine.org/us/taxsim](https://www.policyengine.org/us/taxsim)
-- [policyengine.org/us/taxsim/run](https://www.policyengine.org/us/taxsim/run)
-- [policyengine.org/us/taxsim/dashboard](https://www.policyengine.org/us/taxsim/dashboard)
-- [github.com/PolicyEngine/policyengine-taxsim](https://github.com/PolicyEngine/policyengine-taxsim)
+- [policyengine.org/us/taxsim](https://www.policyengine.org/us/taxsim) — Install, documentation and examples
+- [policyengine.org/us/taxsim/run](https://www.policyengine.org/us/taxsim/run) — Run a TAXSIM-format file in the browser
+- [policyengine.org/us/taxsim/dashboard](https://www.policyengine.org/us/taxsim/dashboard) — Agreement by year and state
+- [github.com/PolicyEngine/policyengine-taxsim](https://github.com/PolicyEngine/policyengine-taxsim) — Source code and issue tracker
 
 Use the separate 30-minute discussion for questions on the methods and potential CE collaboration. The links on the slide open the TAXSIM site, the web runner, the validation dashboard and the source code.

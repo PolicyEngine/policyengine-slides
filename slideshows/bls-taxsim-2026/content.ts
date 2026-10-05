@@ -1,3 +1,8 @@
+export type BlsIcon =
+  | 'adjustments' | 'basket' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text'
+  | 'flask' | 'github' | 'history' | 'play' | 'scale' | 'settings' | 'target' | 'users'
+  | 'versions' | 'world';
+
 export interface BlsSlideContent {
   id: string;
   title: string;
@@ -8,8 +13,25 @@ export interface BlsSlideContent {
   cover?: boolean;
   /** Clickable URL shown at the right of the slide title. */
   headerLink?: { label: string; url: string };
-  /** Clickable resource links shown under the bullet list. */
-  links?: { label: string; url: string }[];
+  /** Resource cards beside the bullet list (the Q&A slide). */
+  links?: { label: string; url: string; description?: string; icon?: BlsIcon }[];
+  /** Two-by-two icon cards in place of the bullet list. */
+  cards?: { icon: BlsIcon; title: string; text: string }[];
+  /** A year-coverage bar and a row of items to record with each run. */
+  years?: {
+    segments: { label: string; engine: string; note: string; highlight?: boolean }[];
+    caption: string;
+    recordTitle: string;
+    record: { icon: BlsIcon; label: string }[];
+  };
+  /** One input feeding two calculations, then a comparison and a next step. */
+  compare?: {
+    input: { title: string; text: string };
+    engines: { title: string; text: string }[];
+    output: { title: string; text: string };
+    next: { title: string; text: string };
+    takeaway?: string;
+  };
   /** A website capture in place of the bullet list. */
   screenshot?: {
     src: string;
@@ -27,7 +49,7 @@ export interface BlsSlideContent {
   /** A left-to-right process of step cards. */
   process?: {
     intro?: string;
-    steps: { title: string; text: string }[];
+    steps: { title: string; text: string; output?: string }[];
     takeaway?: string;
     loop?: string;
   };
@@ -42,7 +64,7 @@ export interface BlsSlideContent {
   };
 }
 
-const TAXSIM_SITE = { label: "policyengine.org/us/taxsim", url: "https://www.policyengine.org/us/taxsim" };
+const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/us/taxsim", url: "https://www.policyengine.org/us/taxsim" };
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
@@ -95,7 +117,13 @@ export const blsSlides: BlsSlideContent[] = [
       "Start with a bounded research comparison"
     ],
     "minutes": 2,
-    "notes": "Present these as opportunities for discussion, not commitments or claims about CE’s current production system."
+    "notes": "Present these as opportunities for discussion, not commitments or claims about CE’s current production system.",
+    "cards": [
+      { "icon": "file-spreadsheet", "title": "A familiar input format", "text": "Calculate federal and state taxes from TAXSIM-format records." },
+      { "icon": "adjustments", "title": "Visible assumptions", "text": "See how tax units, income ownership and missing data change after-tax income." },
+      { "icon": "basket", "title": "In-kind benefits", "text": "Explore methods to add SNAP and Medicaid to household resources." },
+      { "icon": "target", "title": "A bounded first step", "text": "Start with one year, one sample and a reproducible comparison." }
+    ]
   },
   {
     "id": "rules-and-data",
@@ -228,7 +256,22 @@ export const blsSlides: BlsSlideContent[] = [
       "Keep the input file, options and logs with the output"
     ],
     "minutes": 3,
-    "notes": "Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md"
+    "notes": "Explain year stitching. Do not imply that all historical years run natively in PolicyEngine. The exact years required by CE are a scoping question. Distinguish package capabilities from the proposed research protocol, and explain why a pinned environment is useful when policy code changes. Source: https://github.com/PolicyEngine/policyengine-taxsim and https://github.com/PolicyEngine/policyengine-taxsim/blob/main/CHANGELOG.md",
+    "years": {
+      "segments": [
+        { "label": "Before 2021", "engine": "TAXSIM35", "note": "Historical years, back to the 1960s" },
+        { "label": "2021 onward", "engine": "PolicyEngine", "note": "Current law and scheduled future law", "highlight": true }
+      ],
+      "caption": "One command covers every year. The run record shows which engine handled each year.",
+      "recordTitle": "Record with every run",
+      "record": [
+        { "icon": "file-spreadsheet", "label": "Input file" },
+        { "icon": "versions", "label": "Emulator version" },
+        { "icon": "history", "label": "PolicyEngine version" },
+        { "icon": "settings", "label": "Run options" },
+        { "icon": "file-text", "label": "Output and logs" }
+      ]
+    }
   },
 
   // Live demonstration: 10 minutes
@@ -459,7 +502,13 @@ export const blsSlides: BlsSlideContent[] = [
       "Treat calibration and independent validation separately"
     ],
     "minutes": 2,
-    "notes": "The prior IARIW deck describes calibration of household weights to administrative totals. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: policyengine-slides/slideshows/iariw-2026/slides/ImputationSlide.tsx and CalibrationSlide.tsx."
+    "notes": "The prior IARIW deck describes calibration of household weights to administrative totals. Explain that fitting a target is not independent validation against that target. CE weight changes would be a separate methodological decision, not a prerequisite for the initial tax comparison. Source: policyengine-slides/slideshows/iariw-2026/slides/ImputationSlide.tsx and CalibrationSlide.tsx.",
+    "cards": [
+      { "icon": "chart-bar", "title": "External benchmarks", "text": "Compare imputed receipt and amounts with administrative totals." },
+      { "icon": "users", "title": "Errors by group", "text": "Check how errors differ by income, household type and state." },
+      { "icon": "flask", "title": "Holdout tests", "text": "Test on data held back from estimation, and try alternative assumptions." },
+      { "icon": "scale", "title": "Calibration is not validation", "text": "A target used to fit the weights cannot also validate them." }
+    ]
   },
 
   // A possible CE pilot: 5 minutes
@@ -473,7 +522,17 @@ export const blsSlides: BlsSlideContent[] = [
       "Review differences before expanding the scope"
     ],
     "minutes": 2,
-    "notes": "This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison."
+    "notes": "This is a proposed integration path, not a representation of a tested CE implementation. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.",
+    "compare": {
+      "input": { "title": "CE tax-unit records", "text": "An agreed set of inputs for one year." },
+      "engines": [
+        { "title": "Current CE tax calculation", "text": "The existing method, unchanged." },
+        { "title": "PolicyEngine TAXSIM emulator", "text": "The same records, same input format." }
+      ],
+      "output": { "title": "Compare", "text": "Household results and weighted summaries." },
+      "next": { "title": "Review", "text": "Explain differences before expanding the scope." },
+      "takeaway": "Keep CE definitions and weights fixed in the first comparison."
+    }
   },
   {
     "id": "ce-pilot",
@@ -485,7 +544,16 @@ export const blsSlides: BlsSlideContent[] = [
       "Scope one benefit extension after reviewing the tax results"
     ],
     "minutes": 3,
-    "notes": "Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known."
+    "notes": "Proposed next steps for discussion. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.",
+    "process": {
+      "intro": "Four steps, each with a clear output.",
+      "steps": [
+        { "title": "Scope", "text": "Agree one year, one sample and the key tax outputs.", "output": "Scope note" },
+        { "title": "Map", "text": "Document input mappings and missing-data assumptions.", "output": "Mapping document" },
+        { "title": "Compare", "text": "Run both calculations and log every difference.", "output": "Comparison and discrepancy log" },
+        { "title": "Extend", "text": "Choose one benefit extension after the tax results.", "output": "Extension plan" }
+      ]
+    }
   },
   {
     "id": "qa",
@@ -499,10 +567,10 @@ export const blsSlides: BlsSlideContent[] = [
     "minutes": 30,
     "notes": "Use the separate 30-minute discussion for questions on the methods and potential CE collaboration. The links on the slide open the TAXSIM site, the web runner, the validation dashboard and the source code.",
     "links": [
-      TAXSIM_SITE,
-      TAXSIM_RUN,
-      TAXSIM_DASHBOARD,
-      { "label": "github.com/PolicyEngine/policyengine-taxsim", "url": "https://github.com/PolicyEngine/policyengine-taxsim" }
+      { ...TAXSIM_SITE, "icon": "world", "description": "Install, documentation and examples" },
+      { ...TAXSIM_RUN, "icon": "play", "description": "Run a TAXSIM-format file in the browser" },
+      { ...TAXSIM_DASHBOARD, "icon": "chart-dots", "description": "Agreement by year and state" },
+      { "label": "github.com/PolicyEngine/policyengine-taxsim", "url": "https://github.com/PolicyEngine/policyengine-taxsim", "icon": "github", "description": "Source code and issue tracker" }
     ]
   }
 ];

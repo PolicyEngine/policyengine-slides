@@ -2,6 +2,7 @@ import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import ScreenshotContent from './ScreenshotContent';
+import { CompareFlow, IconCards, QuestionsAndLinks, YearRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
@@ -43,43 +44,34 @@ function DraftSlide({ content }: { content: BlsSlideContent }) {
         <LiveEmbed title={content.title} embed={content.embed} />
       ) : content.process ? (
         <ProcessFlow process={content.process} />
+      ) : content.cards ? (
+        <IconCards cards={content.cards} />
+      ) : content.years ? (
+        <YearRouting years={content.years} />
+      ) : content.compare ? (
+        <CompareFlow compare={content.compare} />
+      ) : content.links ? (
+        <QuestionsAndLinks questions={content.body} links={content.links} />
       ) : content.screenshot ? (
         <ScreenshotContent screenshot={content.screenshot} />
       ) : content.detail ? (
         <DetailContent detail={content.detail} />
       ) : (
-        <>
-          <ol className={content.descriptions ? "space-y-2 mt-6 max-w-6xl" : "space-y-6 mt-8 max-w-6xl"}>
-            {content.body.map((item, index) => (
-              <li key={item} className={`flex items-start gap-7 text-pe-dark ${content.descriptions ? 'text-xl leading-snug' : 'text-2xl leading-relaxed'}`}>
-                <span className="font-mono text-pe-teal font-bold shrink-0 w-10" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <p className={content.descriptions ? 'text-lg font-semibold leading-snug' : ''}>{item}</p>
-                  {content.descriptions?.[index] && (
-                    <p className="text-base leading-snug text-gray-600">{content.descriptions[index]}</p>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
-          {content.links && (
-            <div className="mt-10 flex flex-wrap gap-3">
-              {content.links.map((link) => (
-                <a
-                  key={link.url}
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="pointer-events-auto rounded-lg border border-pe-teal/40 bg-pe-teal/5 px-4 py-2 font-mono text-base text-pe-teal hover:bg-pe-teal/10"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          )}
-        </>
+        <ol className={content.descriptions ? "space-y-2 mt-6 max-w-6xl" : "space-y-6 mt-8 max-w-6xl"}>
+          {content.body.map((item, index) => (
+            <li key={item} className={`flex items-start gap-7 text-pe-dark ${content.descriptions ? 'text-xl leading-snug' : 'text-2xl leading-relaxed'}`}>
+              <span className="font-mono text-pe-teal font-bold shrink-0 w-10" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <p className={content.descriptions ? 'text-lg font-semibold leading-snug' : ''}>{item}</p>
+                {content.descriptions?.[index] && (
+                  <p className="text-base leading-snug text-gray-600">{content.descriptions[index]}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
       )}
     </Slide>
   );
