@@ -40,6 +40,8 @@ export interface BlsSlideContent {
     width: number;
     height: number;
     caption?: string;
+    /** Short facts shown in a column beside the image. */
+    facts?: { value: string; label: string }[];
   };
   /** A live iframe with a side column of demo steps. */
   embed?: {
@@ -150,18 +152,23 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "An open-source emulator built around the TAXSIM interface",
       "Development with guidance from Dan Feenberg",
-      "Comparisons that help investigate both models",
+      "Comparison work since 2023 on federal and state tax for tax years 2021 onward",
       "Continuity for researchers using TAXSIM workflows"
     ],
     "minutes": 3,
-    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The screenshot shows the partner section of the TAXSIM site, captured October 5, 2026; its Read more links lead to the MOU announcement and the Atlanta Fed comparison. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
+    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We have compared PolicyEngine and TAXSIM since 2023, for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
     "screenshot": {
-      "src": "/screenshots/bls-taxsim-2026/taxsim-validated-by.png",
-      "alt": "TAXSIM site partner cards: NBER partnership under a memorandum of understanding, and three-way validation with the Federal Reserve Bank of Atlanta Policy Rules Database",
-      "width": 4256,
-      "height": 1072,
-      "caption": "Built under a memorandum of understanding with NBER and TAXSIM creator Daniel Feenberg. The Atlanta Fed’s Policy Rules Database adds a third model for cross-checks."
+      "src": "/screenshots/bls-taxsim-2026/taxsim-nber-card.png",
+      "alt": "TAXSIM site card: NBER partnership, built under a memorandum of understanding with the National Bureau of Economic Research and TAXSIM creator Daniel Feenberg",
+      "width": 2080,
+      "height": 990,
+      "facts": [
+        { "value": "Since 2023", "label": "PolicyEngine and TAXSIM compared side by side" },
+        { "value": "Tax years 2021 onward", "label": "The years in the comparison" },
+        { "value": "Federal and state", "label": "Income tax models compared" }
+      ],
+      "caption": "The comparison work led to a formal partnership with NBER."
     }
   },
 
