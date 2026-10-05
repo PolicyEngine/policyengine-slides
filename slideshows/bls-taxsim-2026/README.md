@@ -1,4 +1,4 @@
-# BLS TAXSIM seminar draft
+# BLS TAXSIM seminar
 
 Local route: `/slides/bls-taxsim-2026`.
 
@@ -15,5 +15,3 @@ Agenda: introduction (10 min), the emulator and its core assumptions (12 min), l
 - `SPEAKER-NOTES.md`: readable presenter track and preparation checklist, generated from `content.ts`.
 
 The live demo runs the 3-household sample in the web runner at policyengine.org/us/taxsim/run, after the core assumptions and before validation. The validation section is a process overview: how the two engines are compared, the live public dashboard at policyengine.org/us/taxsim/dashboard, and how a reported difference becomes a fix. Captures in `public/screenshots/bls-taxsim-2026/` were taken on October 5, 2026. The CE pilot and benefit extension are proposals, not completed implementations.
-
-The draft label is editorial, not access control.

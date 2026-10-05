@@ -8,7 +8,7 @@ import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
 import { blsSlides, type BlsSlideContent } from '../content';
 
-function DraftSlide({ content }: { content: BlsSlideContent }) {
+function DeckSlide({ content }: { content: BlsSlideContent }) {
   if (content.cover) {
     return (
       <Slide isCover>
@@ -78,7 +78,7 @@ function DraftSlide({ content }: { content: BlsSlideContent }) {
 
 export const blsSlideComponents = blsSlides.map((content) => {
   function BlsSlide() {
-    return <DraftSlide content={content} />;
+    return <DeckSlide content={content} />;
   }
   BlsSlide.displayName = `BlsTaxsim_${content.id}`;
   return BlsSlide;

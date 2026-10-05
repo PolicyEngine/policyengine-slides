@@ -1,4 +1,4 @@
-# BLS TAXSIM seminar: draft slide text and speaker notes
+# BLS TAXSIM seminar: slide text and speaker notes
 
 21 slides: 60 minutes presenting, followed by a dedicated 30-minute Q&A slide.
 
@@ -212,7 +212,7 @@ A donor survey observes the variable of interest and predictors shared with the 
 
 The research question determines the resource concept. Eligibility alone does not identify actual receipt or a monetary value.
 
-Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this draft does not select one. No numerical benefit estimates are asserted.
+Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this talk does not select one. No numerical benefit estimates are asserted.
 
 ## 18. Validation of benefit imputations (53–55 min)
 

@@ -68,7 +68,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Draft content. 60 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 60 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 10 minutes
   {
@@ -460,7 +460,7 @@ export const blsSlides: BlsSlideContent[] = [
       "A monetary Medicaid value requires a defined valuation method"
     ],
     "minutes": 2,
-    "notes": "Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this draft does not select one. No numerical benefit estimates are asserted.",
+    "notes": "Use this comparison to explain why benefit imputation contains more than a call to an eligibility calculator. Establish whether CE research seeks potential entitlements, actual receipt, or a broader resource measure. For Medicaid, costs, insurance value and household valuation are different concepts; this talk does not select one. No numerical benefit estimates are asserted.",
     "detail": {
       "columns": [
         "Choice",
