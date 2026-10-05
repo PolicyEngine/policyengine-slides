@@ -85,14 +85,13 @@ export interface BlsSlideContent {
     height: number;
     caption?: string;
   };
-  /** Before-and-after code for each environment, with a site capture beside it. */
+  /** The install command and the before-and-after code for each environment. */
   dropIn?: {
     installLabel: string;
     install: string;
     columns: [string, string, string];
     rows: { env: string; before: string; after: string }[];
     takeaway: string;
-    screenshot: { src: string; alt: string; width: number; height: number; url: string };
   };
   /** Two partners joined by an agreement in the center. */
   partnership?: {
@@ -273,14 +272,7 @@ export const blsSlides: BlsSlideContent[] = [
         { "env": "Julia", "before": "pipeline(`taxsim35`, …)", "after": "pipeline(`[[policyengine-taxsim]]`, …)" },
         { "env": "Python", "before": "subprocess.run(\"taxsim35 …\")", "after": "[[PolicyEngineRunner(df)]].run()" }
       ],
-      "takeaway": "Same input file, same output variables. Existing scripts change one command or one function name.",
-      "screenshot": {
-        "src": "/screenshots/bls-taxsim-2026/taxsim-hero.png",
-        "alt": "TAXSIM site banner: The next chapter of TAXSIM. An open-source, drop-in replacement for TAXSIM35. Same interface, same inputs, same outputs, powered by PolicyEngine's microsimulation engine.",
-        "width": 1920,
-        "height": 1108,
-        "url": "policyengine.org/us/taxsim"
-      }
+      "takeaway": "Same input file, same output variables. Existing scripts change one command or one function name."
     }
   },
   {

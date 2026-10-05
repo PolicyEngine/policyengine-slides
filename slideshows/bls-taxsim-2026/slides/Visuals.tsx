@@ -19,7 +19,6 @@ import {
   IconWorld,
   type Icon,
 } from '@tabler/icons-react';
-import Image from '@/components/core/BasePathImage';
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
@@ -447,7 +446,7 @@ type DropInData = NonNullable<BlsSlideContent['dropIn']>;
 function CodeLine({ code }: { code: string }) {
   const parts = code.split(/(\[\[.*?\]\])/g).filter(Boolean);
   return (
-    <code className="whitespace-nowrap font-mono text-[13px] leading-snug">
+    <code className="whitespace-nowrap font-mono text-[15px] leading-snug">
       {parts.map((part, index) =>
         part.startsWith('[[') ? (
           <span key={index} className="font-bold text-teal-300">{part.slice(2, -2)}</span>
@@ -459,7 +458,7 @@ function CodeLine({ code }: { code: string }) {
   );
 }
 
-/** The before-and-after code swap as the main content, a site capture beside it. */
+/** The install command and the before-and-after code swap for each environment. */
 export function DropIn({ dropIn }: { dropIn: DropInData }) {
   return (
     <div className="mt-2 space-y-3">
@@ -469,36 +468,17 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
           <span className="text-white/50">$ </span>{dropIn.install}
         </code>
       </div>
-      <div className="grid grid-cols-[1fr_21rem] items-stretch gap-6">
-        <div className="overflow-hidden rounded-lg bg-pe-darker">
-          <div className="grid grid-cols-[4.5rem_0.42fr_0.58fr] gap-4 border-b border-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white/60">
-            {dropIn.columns.map((column) => <span key={column}>{column}</span>)}
-          </div>
-          {dropIn.rows.map((row) => (
-            <div key={row.env} className="grid grid-cols-[4.5rem_0.42fr_0.58fr] items-baseline gap-4 border-b border-white/5 px-5 py-1.5 last:border-0">
-              <span className="text-sm font-semibold text-white">{row.env}</span>
-              <span className="text-white/55"><CodeLine code={row.before} /></span>
-              <span className="text-white"><CodeLine code={row.after} /></span>
-            </div>
-          ))}
+      <div className="overflow-hidden rounded-lg bg-pe-darker">
+        <div className="grid grid-cols-[6rem_0.42fr_0.58fr] gap-6 border-b border-white/10 px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/60">
+          {dropIn.columns.map((column) => <span key={column}>{column}</span>)}
         </div>
-        <figure className="flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
-          <div className="flex items-center gap-1.5 border-b border-gray-200 bg-white px-3 py-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-            <span className="ml-2 truncate rounded bg-gray-100 px-2 py-0.5 font-mono text-xs text-gray-600">{dropIn.screenshot.url}</span>
+        {dropIn.rows.map((row) => (
+          <div key={row.env} className="grid grid-cols-[6rem_0.42fr_0.58fr] items-baseline gap-6 border-b border-white/5 px-6 py-1.5 last:border-0">
+            <span className="text-base font-semibold text-white">{row.env}</span>
+            <span className="text-white/55"><CodeLine code={row.before} /></span>
+            <span className="text-white"><CodeLine code={row.after} /></span>
           </div>
-          <div className="relative min-h-0 flex-1">
-            <Image
-              src={dropIn.screenshot.src}
-              alt={dropIn.screenshot.alt}
-              width={dropIn.screenshot.width}
-              height={dropIn.screenshot.height}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        </figure>
+        ))}
       </div>
       <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
     </div>
