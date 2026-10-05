@@ -17,7 +17,7 @@ export default function DetailContent({ detail }: { detail: NonNullable<BlsSlide
             {detail.rows.map((row) => (
               <tr key={row[0]}>
                 {row.map((cell, index) => (
-                  <td key={index} className={`border-b border-gray-200 py-3 pr-6 align-top ${index === 0 ? 'font-semibold w-[23%]' : ''}`}>{cell}</td>
+                  <td key={index} className={`border-b border-gray-200 py-2 pr-6 align-top ${index === 0 ? 'font-semibold w-[23%]' : ''}`}>{cell}</td>
                 ))}
               </tr>
             ))}

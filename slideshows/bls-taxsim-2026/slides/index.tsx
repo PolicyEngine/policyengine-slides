@@ -1,5 +1,6 @@
 import DetailContent from './DetailContent';
-import Image from '@/components/core/BasePathImage';
+import LiveEmbed from './LiveEmbed';
+import ScreenshotContent from './ScreenshotContent';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
@@ -23,44 +24,59 @@ function DraftSlide({ content }: { content: BlsSlideContent }) {
   return (
     <Slide className="[&>div:last-child]:pr-64">
       <SlideHeader>
-        <SlideTitle>{content.title}</SlideTitle>
-      </SlideHeader>
-      {content.detail ? (
-        <DetailContent detail={content.detail} />
-      ) : content.image ? (
-        <div className="flex flex-col items-center gap-3">
-          <Image
-            src={content.image}
-            alt="PolicyEngine TAXSIM website, reused from the PWBM presentation"
-            width={2560}
-            height={1440}
-            className="w-auto max-w-full max-h-[44vh] object-contain"
-          />
-          <a
-            href="https://policyengine.org/us/taxsim"
-            target="_blank"
-            rel="noreferrer"
-            className="pointer-events-auto text-lg text-pe-teal underline underline-offset-4"
-          >
-            Open the TAXSIM emulator
-          </a>
+        <div className="flex items-baseline justify-between gap-8">
+          <SlideTitle>{content.title}</SlideTitle>
+          {content.headerLink && (
+            <a
+              href={content.headerLink.url}
+              target="_blank"
+              rel="noreferrer"
+              className="pointer-events-auto shrink-0 font-mono text-lg text-pe-teal underline-offset-4 hover:underline"
+            >
+              {content.headerLink.label}
+            </a>
+          )}
         </div>
+      </SlideHeader>
+      {content.embed ? (
+        <LiveEmbed title={content.title} embed={content.embed} />
+      ) : content.screenshot ? (
+        <ScreenshotContent screenshot={content.screenshot} />
+      ) : content.detail ? (
+        <DetailContent detail={content.detail} />
       ) : (
-        <ol className={content.descriptions ? "space-y-2 mt-6 max-w-6xl" : "space-y-6 mt-8 max-w-6xl"}>
-          {content.body.map((item, index) => (
-            <li key={item} className="flex items-start gap-7 text-2xl leading-relaxed text-pe-dark">
-              <span className="font-mono text-pe-teal font-bold shrink-0 w-10" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <div>
-                <p className={content.descriptions ? 'text-xl font-semibold' : ''}>{item}</p>
-                {content.descriptions?.[index] && (
-                  <p className="mt-1 text-lg leading-snug text-gray-600">{content.descriptions[index]}</p>
-                )}
-              </div>
-            </li>
-          ))}
-        </ol>
+        <>
+          <ol className={content.descriptions ? "space-y-2 mt-6 max-w-6xl" : "space-y-6 mt-8 max-w-6xl"}>
+            {content.body.map((item, index) => (
+              <li key={item} className={`flex items-start gap-7 text-pe-dark ${content.descriptions ? 'text-xl leading-snug' : 'text-2xl leading-relaxed'}`}>
+                <span className="font-mono text-pe-teal font-bold shrink-0 w-10" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <p className={content.descriptions ? 'text-lg font-semibold leading-snug' : ''}>{item}</p>
+                  {content.descriptions?.[index] && (
+                    <p className="text-base leading-snug text-gray-600">{content.descriptions[index]}</p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+          {content.links && (
+            <div className="mt-10 flex flex-wrap gap-3">
+              {content.links.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pointer-events-auto rounded-lg border border-pe-teal/40 bg-pe-teal/5 px-4 py-2 font-mono text-base text-pe-teal hover:bg-pe-teal/10"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </Slide>
   );
