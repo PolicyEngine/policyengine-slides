@@ -84,8 +84,13 @@ export interface BlsSlideContent {
     width: number;
     height: number;
     caption?: string;
-    /** Short facts shown in a column beside the image. */
-    facts?: { value: string; label: string }[];
+  };
+  /** Two partners joined by an agreement in the center. */
+  partnership?: {
+    left: { title: string; items: { value: string; label: string }[] };
+    center: { title: string; date: string; detail: string };
+    right: { title: string; items: { value: string; label: string }[] };
+    takeaway: string;
   };
   /** A live iframe with a side column of demo steps. */
   embed?: {
@@ -200,21 +205,37 @@ export const blsSlides: BlsSlideContent[] = [
       "An open-source emulator built around the TAXSIM interface",
       "Development with guidance from Dan Feenberg",
       "Side-by-side comparisons of federal and state tax for tax years 2021 onward",
+      "A memorandum of understanding signed in September 2025",
       "Continuity for researchers using TAXSIM workflows"
     ],
     "minutes": 3,
-    "notes": "Adapt the institutional context from the CRS presentation without repeating undated status claims. Discuss the motivation for preserving a familiar research interface. Context for this audience: since the 2013 data, the CE has used NBER’s TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). We compare PolicyEngine and TAXSIM for federal and state income tax in tax years 2021 onward; the TAXSIM site says this work led to the formal partnership. The card is from the TAXSIM site, captured October 5, 2026; its Read more link leads to the MOU announcement. Source: PolicyEngine at the Congressional Research Service, September 10, 2025, slides 23–25. https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
+    "notes": "Introduce TAXSIM first, then the partnership. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. For this audience: since the 2013 data, the CE has used TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. The emulator keeps TAXSIM35’s formats, computes tax years 2021 onward with PolicyEngine’s federal and state models, and routes earlier years to TAXSIM35. The comparison work has found improvements in both models. Source: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
-    "screenshot": {
-      "src": "/screenshots/bls-taxsim-2026/taxsim-nber-card.png",
-      "alt": "TAXSIM site card: NBER partnership, built under a memorandum of understanding with the National Bureau of Economic Research and TAXSIM creator Daniel Feenberg",
-      "width": 2080,
-      "height": 990,
-      "facts": [
-        { "value": "Tax years 2021 onward", "label": "PolicyEngine and TAXSIM compared side by side" },
-        { "value": "Federal and state", "label": "Income tax models compared" }
-      ],
-      "caption": "The comparison work led to a formal partnership with NBER."
+    "partnership": {
+      "left": {
+        "title": "TAXSIM at NBER",
+        "items": [
+          { "value": "1970s", "label": "Created by Daniel Feenberg, who still maintains it" },
+          { "value": "1,200+", "label": "Papers cite the Feenberg and Coutts (1993) TAXSIM paper" },
+          { "value": "1960, 1977", "label": "First years of federal and state law" },
+          { "value": "BLS, Census", "label": "BLS uses it for the CE; Census evaluated it for the SPM" }
+        ]
+      },
+      "center": {
+        "title": "Memorandum of understanding",
+        "date": "September 2025",
+        "detail": "NBER (Daniel Feenberg, James Poterba) and PolicyEngine"
+      },
+      "right": {
+        "title": "PolicyEngine TAXSIM emulator",
+        "items": [
+          { "value": "Same format", "label": "TAXSIM35 inputs and outputs, so scripts keep working" },
+          { "value": "2021 onward", "label": "Federal and state tax from PolicyEngine’s models" },
+          { "value": "1960 to now", "label": "Earlier years go to TAXSIM35 behind one interface" },
+          { "value": "Open source", "label": "Code and issue tracker on GitHub" }
+        ]
+      },
+      "takeaway": "Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law."
     }
   },
 

@@ -6,6 +6,7 @@ import {
   IconFileSpreadsheet,
   IconFileText,
   IconFlask,
+  IconHeartHandshake,
   IconHistory,
   IconPlayerPlay,
   IconScale,
@@ -386,6 +387,44 @@ export function ResourceBars({ bars }: { bars: ResourceBarsData }) {
       </div>
       <p className="text-xl leading-snug font-medium text-pe-dark">{bars.takeaway}</p>
       <p className="text-sm text-gray-500">{bars.footnote}</p>
+    </div>
+  );
+}
+
+type PartnershipData = NonNullable<BlsSlideContent['partnership']>;
+
+function PartnerSide({ side }: { side: PartnershipData['left'] }) {
+  return (
+    <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-5">
+      <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{side.title}</p>
+      <div className="mt-3 space-y-3">
+        {side.items.map((item) => (
+          <div key={item.value} className="grid grid-cols-[9.5rem_1fr] items-baseline gap-4">
+            <span className="text-2xl font-bold leading-tight text-pe-teal">{item.value}</span>
+            <span className="text-base leading-snug text-pe-dark">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Two partners joined by an agreement in the center. */
+export function Partnership({ partnership }: { partnership: PartnershipData }) {
+  const { center } = partnership;
+  return (
+    <div className="mt-4 space-y-5">
+      <div className="grid grid-cols-[1fr_13rem_1fr] items-center gap-5">
+        <PartnerSide side={partnership.left} />
+        <div className="flex flex-col items-center rounded-xl bg-pe-dark px-4 py-6 text-center text-white">
+          <IconHeartHandshake size={40} stroke={1.5} className="text-teal-300" aria-hidden="true" />
+          <p className="mt-3 text-lg font-bold leading-snug">{center.title}</p>
+          <p className="text-2xl font-extrabold text-teal-300">{center.date}</p>
+          <p className="mt-2 text-sm leading-snug text-white/80">{center.detail}</p>
+        </div>
+        <PartnerSide side={partnership.right} />
+      </div>
+      <p className="text-xl leading-snug font-medium text-pe-dark">{partnership.takeaway}</p>
     </div>
   );
 }

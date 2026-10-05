@@ -3,7 +3,7 @@ import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import ScreenshotContent from './ScreenshotContent';
-import { BenefitChains, CompareFlow, Contrasts, IconCards, QuestionsAndLinks, ResourceBars, SourcesPanel, WorkedExample, YearChart } from './Visuals';
+import { BenefitChains, CompareFlow, Contrasts, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, WorkedExample, YearChart } from './Visuals';
 import Slide from '@/components/core/Slide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
@@ -63,6 +63,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <SourcesPanel panel={content.sourcesPanel} />
       ) : content.resourceBars ? (
         <ResourceBars bars={content.resourceBars} />
+      ) : content.partnership ? (
+        <Partnership partnership={content.partnership} />
       ) : content.worked ? (
         <WorkedExample worked={content.worked} />
       ) : content.contrasts ? (
