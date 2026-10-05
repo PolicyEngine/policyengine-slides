@@ -58,14 +58,17 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 
 ## 6. PolicyEngine separates rules from survey data (6–8 min)
 
-| Layer | What it contributes | Example |
-| --- | --- | --- |
-| Household data | People, relationships and financial inputs | Ages, earnings, dependents |
-| Policy rules | Dated parameters and calculation formulas | Tax brackets and credit formulas |
-| Calculation | Apply the rules to a specified household | Tax liability or potential benefits |
-| Research assumptions | Choices needed when information is missing | Participation and income allocation |
+Survey side:
+- **Household data.** People, relationships and financial inputs. (Ages, earnings, dependents)
+- **Research assumptions.** Choices needed when information is missing. (Participation, income allocation)
 
-The same policy model can serve different datasets. The data mapping and assumptions need their own validation.
+Center: **Calculation.** Apply the rules to each household. (Tax liability and potential benefits)
+
+Rules side:
+- **Policy rules.** Dated parameters and calculation formulas. (Tax brackets, credit formulas)
+- **Open and tested.** Open-source code with thousands of unit tests. (github.com/PolicyEngine/policyengine-us)
+
+The same rules can serve any dataset. The data mapping and the assumptions need their own validation.
 
 Explain the four layers using a household with two adults and a child. The household record supplies ages and income. The rules supply the year-specific calculation. Missing data and program participation require additional choices. PolicyEngine’s TAXSIM adapter translates one input schema into the model’s entities; it does not remove these methodological choices. Source: https://github.com/PolicyEngine/policyengine-us and the previous IARIW overview.
 

@@ -1,6 +1,7 @@
 export type BlsIcon =
-  | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask' | 'github'
-  | 'history' | 'play' | 'scale' | 'settings' | 'users' | 'versions' | 'world';
+  | 'adjustments' | 'calculator' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text'
+  | 'flask' | 'github' | 'history' | 'play' | 'scale' | 'settings' | 'test' | 'users'
+  | 'versions' | 'world';
 
 export interface BlsSlideContent {
   id: string;
@@ -24,6 +25,13 @@ export interface BlsSlideContent {
     caption: string;
     recordTitle: string;
     record: { icon: BlsIcon; label: string }[];
+  };
+  /** Two sides that meet in one central step. */
+  split?: {
+    left: { label: string; cards: { icon: BlsIcon; title: string; text: string; example?: string }[] };
+    center: { icon: BlsIcon; title: string; text: string; example?: string };
+    right: { label: string; cards: { icon: BlsIcon; title: string; text: string; example?: string }[] };
+    takeaway?: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -155,39 +163,23 @@ export const blsSlides: BlsSlideContent[] = [
     ],
     "minutes": 2,
     "notes": "Explain the four layers using a household with two adults and a child. The household record supplies ages and income. The rules supply the year-specific calculation. Missing data and program participation require additional choices. PolicyEngine’s TAXSIM adapter translates one input schema into the model’s entities; it does not remove these methodological choices. Source: https://github.com/PolicyEngine/policyengine-us and the previous IARIW overview.",
-    "detail": {
-      "columns": [
-        "Layer",
-        "What it contributes",
-        "Example"
-      ],
-      "rows": [
-        [
-          "Household data",
-          "People, relationships and financial inputs",
-          "Ages, earnings, dependents"
-        ],
-        [
-          "Policy rules",
-          "Dated parameters and calculation formulas",
-          "Tax brackets and credit formulas"
-        ],
-        [
-          "Calculation",
-          "Apply the rules to a specified household",
-          "Tax liability or potential benefits"
-        ],
-        [
-          "Research assumptions",
-          "Choices needed when information is missing",
-          "Participation and income allocation"
+    "split": {
+      "left": {
+        "label": "Survey side",
+        "cards": [
+          { "icon": "users", "title": "Household data", "text": "People, relationships and financial inputs.", "example": "Ages, earnings, dependents" },
+          { "icon": "adjustments", "title": "Research assumptions", "text": "Choices needed when information is missing.", "example": "Participation, income allocation" }
         ]
-      ],
-      "takeaway": "The same policy model can serve different datasets. The data mapping and assumptions need their own validation.",
-      "source": {
-        "label": "PolicyEngine US model",
-        "url": "https://github.com/PolicyEngine/policyengine-us"
-      }
+      },
+      "center": { "icon": "calculator", "title": "Calculation", "text": "Apply the rules to each household.", "example": "Tax liability and potential benefits" },
+      "right": {
+        "label": "Rules side",
+        "cards": [
+          { "icon": "scale", "title": "Policy rules", "text": "Dated parameters and calculation formulas.", "example": "Tax brackets, credit formulas" },
+          { "icon": "test", "title": "Open and tested", "text": "Open-source code with thousands of unit tests.", "example": "github.com/PolicyEngine/policyengine-us" }
+        ]
+      },
+      "takeaway": "The same rules can serve any dataset. The data mapping and the assumptions need their own validation."
     }
   },
   {

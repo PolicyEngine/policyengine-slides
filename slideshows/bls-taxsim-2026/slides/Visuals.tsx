@@ -1,5 +1,9 @@
 import {
+  IconAdjustmentsHorizontal,
+  IconArrowLeft,
+  IconArrowRight,
   IconBrandGithub,
+  IconCalculator,
   IconChartBar,
   IconChartDots,
   IconChevronRight,
@@ -10,6 +14,7 @@ import {
   IconPlayerPlay,
   IconScale,
   IconSettings,
+  IconTestPipe,
   IconUsersGroup,
   IconVersions,
   IconWorld,
@@ -18,6 +23,8 @@ import {
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
+  'adjustments': IconAdjustmentsHorizontal,
+  'calculator': IconCalculator,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
   'file-spreadsheet': IconFileSpreadsheet,
@@ -28,6 +35,7 @@ const ICONS: Record<BlsIcon, Icon> = {
   'play': IconPlayerPlay,
   'scale': IconScale,
   'settings': IconSettings,
+  'test': IconTestPipe,
   'users': IconUsersGroup,
   'versions': IconVersions,
   'world': IconWorld,
@@ -157,6 +165,47 @@ export function QuestionsAndLinks({ questions, links }: { questions: string[]; l
           </a>
         ))}
       </div>
+    </div>
+  );
+}
+
+type SplitCard = NonNullable<BlsSlideContent['split']>['center'];
+
+function SplitBox({ card, dark = false }: { card: SplitCard; dark?: boolean }) {
+  const Component = ICONS[card.icon];
+  return (
+    <div className={`rounded-lg px-5 py-4 ${dark ? 'bg-pe-dark text-white' : 'border-l-4 border-pe-teal bg-gray-50 text-pe-dark'}`}>
+      <div className="flex items-center gap-3">
+        <Component className={`shrink-0 ${dark ? 'text-white' : 'text-pe-teal'}`} size={24} stroke={1.75} aria-hidden="true" />
+        <p className="text-lg font-semibold leading-snug">{card.title}</p>
+      </div>
+      <p className={`mt-2 text-base leading-snug ${dark ? 'text-white/85' : 'text-gray-600'}`}>{card.text}</p>
+      {card.example && (
+        <p className={`mt-2 text-sm leading-snug ${dark ? 'text-white/70' : 'text-pe-teal'}`}>{card.example}</p>
+      )}
+    </div>
+  );
+}
+
+/** Two sides that meet in one central step: data on the left, rules on the right. */
+export function SplitDiagram({ split }: { split: NonNullable<BlsSlideContent['split']> }) {
+  const sides = [split.left, split.right];
+  return (
+    <div className="mt-4 space-y-5">
+      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
+        {sides.map((side, index) => (
+          <div key={side.label} className={`space-y-3 ${index === 1 ? 'col-start-5 row-start-1' : 'col-start-1 row-start-1'}`}>
+            <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{side.label}</p>
+            {side.cards.map((card) => <SplitBox key={card.title} card={card} />)}
+          </div>
+        ))}
+        <IconArrowRight className="col-start-2 row-start-1 text-pe-teal" size={30} stroke={2} aria-hidden="true" />
+        <div className="col-start-3 row-start-1">
+          <SplitBox card={split.center} dark />
+        </div>
+        <IconArrowLeft className="col-start-4 row-start-1 text-pe-teal" size={30} stroke={2} aria-hidden="true" />
+      </div>
+      {split.takeaway && <p className="text-xl leading-snug font-medium text-pe-dark max-w-6xl">{split.takeaway}</p>}
     </div>
   );
 }
