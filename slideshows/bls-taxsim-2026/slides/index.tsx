@@ -2,11 +2,15 @@ import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
-import { BenefitChains, CompareFlow, DropIn, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, WorkedExample } from './Visuals';
+import { BenefitChains, CompareFlow, DropIn, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkedExample } from './Visuals';
 import Slide from '@/components/core/Slide';
+import CoverSlide from '@/components/layout/CoverSlide';
 import SlideHeader from '@/components/layout/SlideHeader';
 import SlideTitle from '@/components/layout/SlideTitle';
+import { speakers } from '@/lib/speakers';
 import { blsSlides, type BlsSlideContent } from '../content';
+
+const COVER_SPEAKERS = [speakers['max-ghenis'], speakers['pavel-makarchuk'], speakers['david-trimmer']];
 
 const CUSTOM_SLIDES = {
   'what-is-pe': WhatIsPolicyEngineSlide,
@@ -22,14 +26,12 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
 
   if (content.cover) {
     return (
-      <Slide isCover>
-        <div className="text-center space-y-7 pt-20">
-          <h1 className="font-display text-5xl font-bold text-white leading-tight">{content.title}</h1>
-          <p className="text-2xl text-white/90">{content.body[0]}</p>
-          <p className="text-xl text-white/80">{content.body[1]}</p>
-          <p className="text-lg text-white/70">{content.body[2]}</p>
-        </div>
-      </Slide>
+      <CoverSlide
+        title={content.title}
+        subtitle={content.body[0]}
+        speakers={COVER_SPEAKERS}
+        event="BLS seminar"
+      />
     );
   }
 
@@ -66,6 +68,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <DropIn dropIn={content.dropIn} />
       ) : content.partnership ? (
         <Partnership partnership={content.partnership} />
+      ) : content.triangle ? (
+        <Triangle triangle={content.triangle} />
       ) : content.worked ? (
         <WorkedExample worked={content.worked} />
 

@@ -18,7 +18,7 @@ export const speakers: Record<string, SpeakerInfo> = {
   },
   'david-trimmer': {
     name: 'David Trimmer',
-    title: 'Lead State Tax Analyst',
+    title: 'Research Analyst',
     photo: '/headshots/david-trimmer.jpg',
   },
   'daphne-hansell': {

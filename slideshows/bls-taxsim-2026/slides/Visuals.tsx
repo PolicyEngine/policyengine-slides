@@ -7,6 +7,7 @@ import {
   IconChartDots,
   IconChevronRight,
   IconFileSpreadsheet,
+  IconFileText,
   IconFlask,
   IconHeartHandshake,
   IconHistory,
@@ -25,6 +26,7 @@ const ICONS: Record<BlsIcon, Icon> = {
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
   'file-spreadsheet': IconFileSpreadsheet,
+  'file-text': IconFileText,
   'flask': IconFlask,
   'github': IconBrandGithub,
   'history': IconHistory,
@@ -330,6 +332,58 @@ export function Partnership({ partnership }: { partnership: PartnershipData }) {
         <PartnerSide side={partnership.right} />
       </div>
       <p className="text-xl leading-snug font-medium text-pe-dark">{partnership.takeaway}</p>
+    </div>
+  );
+}
+
+type TriangleData = NonNullable<BlsSlideContent['triangle']>;
+
+function TriangleCorner({ corner }: { corner: TriangleData['corners']['top'] }) {
+  return (
+    <div className="flex w-72 items-start gap-3 rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4 shadow-sm">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pe-teal/10">
+        <DeckIcon name={corner.icon} size={24} />
+      </span>
+      <div>
+        <p className="text-xl font-semibold leading-snug text-pe-dark">{corner.title}</p>
+        <p className="text-base leading-snug text-gray-600">{corner.text}</p>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Three calculations at the corners of a triangle, with the law at the center.
+ * The 1000 x 560 box puts each corner card's center on a vertex of the SVG
+ * triangle, so the dashed sides run between the cards.
+ */
+export function Triangle({ triangle }: { triangle: TriangleData }) {
+  const { corners, sides, center } = triangle;
+  return (
+    <div className="-mt-4 space-y-4">
+      <div className="relative mx-auto h-[560px] w-[1000px]">
+        <svg className="absolute inset-0 h-full w-full text-pe-teal/50" viewBox="0 0 1000 560" aria-hidden="true">
+          <polygon points="500,50 144,515 856,515" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="10 8" />
+        </svg>
+        <div className="absolute left-1/2 top-0 -translate-x-1/2">
+          <TriangleCorner corner={corners.top} />
+        </div>
+        <div className="absolute bottom-0 left-0">
+          <TriangleCorner corner={corners.left} />
+        </div>
+        <div className="absolute bottom-0 right-0">
+          <TriangleCorner corner={corners.right} />
+        </div>
+        <p className="absolute right-[700px] top-[250px] w-60 text-right text-base leading-snug text-gray-600">{sides.left}</p>
+        <p className="absolute left-[700px] top-[250px] w-60 text-base leading-snug text-gray-600">{sides.right}</p>
+        <p className="absolute left-1/2 top-[527px] w-[22rem] -translate-x-1/2 text-center text-base leading-snug text-gray-600">{sides.bottom}</p>
+        <div className="absolute left-1/2 top-[360px] w-72 -translate-x-1/2 -translate-y-1/2 rounded-xl bg-pe-dark px-5 py-5 text-center text-white">
+          <IconScale size={40} stroke={1.5} className="mx-auto text-teal-300" aria-hidden="true" />
+          <p className="mt-2 text-lg font-bold leading-snug">{center.title}</p>
+          <p className="mt-1 text-sm leading-snug text-white/80">{center.text}</p>
+        </div>
+      </div>
+      <p className="text-xl leading-snug font-medium text-pe-dark">{triangle.takeaway}</p>
     </div>
   );
 }
