@@ -1,0 +1,882 @@
+[
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "21.7",
+  "unweighted_n": "4595",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "24500.0",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "26.98",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "18.74",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_income_set_payment_in_repayment",
+  "estimate": "16.24",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_income_based_not_paying",
+  "estimate": "2.63",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_making_payments_any_loan",
+  "estimate": "37.38",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "all",
+  "group": "All families",
+  "measure": "pct_borrowers_any_loan_forbearance",
+  "estimate": "46.39",
+  "unweighted_n": "812",
+  "borrower_families_n": "812",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "White non-Hispanic",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "19.82",
+  "unweighted_n": "2754",
+  "borrower_families_n": "396",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "White non-Hispanic",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "25000.0",
+  "unweighted_n": "396",
+  "borrower_families_n": "396",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "White non-Hispanic",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "19.88",
+  "unweighted_n": "396",
+  "borrower_families_n": "396",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "White non-Hispanic",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "17.61",
+  "unweighted_n": "396",
+  "borrower_families_n": "396",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Black or African-American non-Hispanic",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "35.9",
+  "unweighted_n": "626",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Black or African-American non-Hispanic",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "26000.0",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Black or African-American non-Hispanic",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "40.87",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Black or African-American non-Hispanic",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "20.43",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Hispanic or Latino",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "15.34",
+  "unweighted_n": "533",
+  "borrower_families_n": "75",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Hispanic or Latino",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "13000.0",
+  "unweighted_n": "75",
+  "borrower_families_n": "75",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Hispanic or Latino",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "36.86",
+  "unweighted_n": "75",
+  "borrower_families_n": "75",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Hispanic or Latino",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "21.1",
+  "unweighted_n": "75",
+  "borrower_families_n": "75",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Other or multiple race",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "23.46",
+  "unweighted_n": "723",
+  "borrower_families_n": "145",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Other or multiple race",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "25000.0",
+  "unweighted_n": "145",
+  "borrower_families_n": "145",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Other or multiple race",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "34.77",
+  "unweighted_n": "145",
+  "borrower_families_n": "145",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "race_ethnicity",
+  "group": "Other or multiple race",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "20.34",
+  "unweighted_n": "145",
+  "borrower_families_n": "145",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "35.55",
+  "unweighted_n": "909",
+  "borrower_families_n": "306",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "30000.0",
+  "unweighted_n": "306",
+  "borrower_families_n": "306",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "57.48",
+  "unweighted_n": "306",
+  "borrower_families_n": "306",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "15.69",
+  "unweighted_n": "306",
+  "borrower_families_n": "306",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q2",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "21.63",
+  "unweighted_n": "807",
+  "borrower_families_n": "175",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q2",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "16000.0",
+  "unweighted_n": "175",
+  "borrower_families_n": "175",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q2",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "23.69",
+  "unweighted_n": "175",
+  "borrower_families_n": "175",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q2",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "12.17",
+  "unweighted_n": "175",
+  "borrower_families_n": "175",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q3",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "24.8",
+  "unweighted_n": "702",
+  "borrower_families_n": "163",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q3",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "23000.0",
+  "unweighted_n": "163",
+  "borrower_families_n": "163",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q3",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "9.46",
+  "unweighted_n": "163",
+  "borrower_families_n": "163",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q3",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "25.91",
+  "unweighted_n": "163",
+  "borrower_families_n": "163",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q4",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "17.66",
+  "unweighted_n": "816",
+  "borrower_families_n": "149",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q4",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "25000.0",
+  "unweighted_n": "149",
+  "borrower_families_n": "149",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q4",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "7.51",
+  "unweighted_n": "149",
+  "borrower_families_n": "149",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q4",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "19.93",
+  "unweighted_n": "149",
+  "borrower_families_n": "149",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "8.88",
+  "unweighted_n": "1773",
+  "borrower_families_n": "116",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q5 (highest)",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "41000.0",
+  "unweighted_n": "116",
+  "borrower_families_n": "116",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "0.56",
+  "unweighted_n": "116",
+  "borrower_families_n": "116",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "net_worth_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "24.44",
+  "unweighted_n": "116",
+  "borrower_families_n": "116",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "Under 35",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "40.09",
+  "unweighted_n": "613",
+  "borrower_families_n": "237",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "Under 35",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "18000.0",
+  "unweighted_n": "237",
+  "borrower_families_n": "237",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "Under 35",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "29.04",
+  "unweighted_n": "237",
+  "borrower_families_n": "237",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "Under 35",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "12.4",
+  "unweighted_n": "237",
+  "borrower_families_n": "237",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "35-44",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "34.11",
+  "unweighted_n": "763",
+  "borrower_families_n": "238",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "35-44",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "25000.0",
+  "unweighted_n": "238",
+  "borrower_families_n": "238",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "35-44",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "27.2",
+  "unweighted_n": "238",
+  "borrower_families_n": "238",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "35-44",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "22.16",
+  "unweighted_n": "238",
+  "borrower_families_n": "238",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "45-54",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "26.42",
+  "unweighted_n": "820",
+  "borrower_families_n": "186",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "45-54",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "30000.0",
+  "unweighted_n": "186",
+  "borrower_families_n": "186",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "45-54",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "27.79",
+  "unweighted_n": "186",
+  "borrower_families_n": "186",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "45-54",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "20.65",
+  "unweighted_n": "186",
+  "borrower_families_n": "186",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "55-64",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "12.95",
+  "unweighted_n": "1026",
+  "borrower_families_n": "105",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "55-64",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "41000.0",
+  "unweighted_n": "105",
+  "borrower_families_n": "105",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "55-64",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "18.7",
+  "unweighted_n": "105",
+  "borrower_families_n": "105",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "55-64",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "28.9",
+  "unweighted_n": "105",
+  "borrower_families_n": "105",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "65-74",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "5.18",
+  "unweighted_n": "866",
+  "borrower_families_n": "37",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "True"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "65-74",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "39000.0",
+  "unweighted_n": "37",
+  "borrower_families_n": "37",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "True"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "65-74",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "21.78",
+  "unweighted_n": "37",
+  "borrower_families_n": "37",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "True"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "65-74",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "14.97",
+  "unweighted_n": "37",
+  "borrower_families_n": "37",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "True"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "75 or older",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "",
+  "unweighted_n": "507",
+  "borrower_families_n": "9",
+  "suppressed": "True",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "75 or older",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "",
+  "unweighted_n": "9",
+  "borrower_families_n": "9",
+  "suppressed": "True",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "75 or older",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "",
+  "unweighted_n": "9",
+  "borrower_families_n": "9",
+  "suppressed": "True",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "age_of_reference_person",
+  "group": "75 or older",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "",
+  "unweighted_n": "9",
+  "borrower_families_n": "9",
+  "suppressed": "True",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "15.13",
+  "unweighted_n": "858",
+  "borrower_families_n": "129",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "15000.0",
+  "unweighted_n": "129",
+  "borrower_families_n": "129",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "69.78",
+  "unweighted_n": "129",
+  "borrower_families_n": "129",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q1 (lowest)",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "10.68",
+  "unweighted_n": "129",
+  "borrower_families_n": "129",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q2",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "18.76",
+  "unweighted_n": "837",
+  "borrower_families_n": "155",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q2",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "20000.0",
+  "unweighted_n": "155",
+  "borrower_families_n": "155",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q2",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "47.37",
+  "unweighted_n": "155",
+  "borrower_families_n": "155",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q2",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "19.32",
+  "unweighted_n": "155",
+  "borrower_families_n": "155",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q3",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "24.74",
+  "unweighted_n": "808",
+  "borrower_families_n": "193",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q3",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "24000.0",
+  "unweighted_n": "193",
+  "borrower_families_n": "193",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q3",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "23.22",
+  "unweighted_n": "193",
+  "borrower_families_n": "193",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q3",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "13.02",
+  "unweighted_n": "193",
+  "borrower_families_n": "193",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q4",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "27.63",
+  "unweighted_n": "800",
+  "borrower_families_n": "198",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q4",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "25000.0",
+  "unweighted_n": "198",
+  "borrower_families_n": "198",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q4",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "12.81",
+  "unweighted_n": "198",
+  "borrower_families_n": "198",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q4",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "22.29",
+  "unweighted_n": "198",
+  "borrower_families_n": "198",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_families_with_education_debt",
+  "estimate": "22.26",
+  "unweighted_n": "1692",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q5 (highest)",
+  "measure": "median_education_debt_among_borrowers",
+  "estimate": "43000.0",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_borrowers_liq_under_2000",
+  "estimate": "2.49",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ },
+ {
+  "breakdown": "income_quintile",
+  "group": "Q5 (highest)",
+  "measure": "pct_borrowers_any_loan_income_driven",
+  "estimate": "25.72",
+  "unweighted_n": "205",
+  "borrower_families_n": "205",
+  "suppressed": "False",
+  "flag_20_to_49_borrower_families": "False"
+ }
+]
