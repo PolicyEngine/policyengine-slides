@@ -43,7 +43,16 @@ const pillars: { icon: Icon; color: string; title: string; items: string[] }[] =
   },
 ];
 
-/** Adapted from the cpid-webinar-2026 WhatIsPESlide. */
+/** Counted on policyengine-us main, October 6, 2026 (sources in the slide notes). */
+const stats = [
+  { value: '100,000+', label: 'parameters in the US model' },
+  { value: '6,000+', label: 'variables' },
+  { value: '4,867', label: 'test files' },
+  { value: '103', label: 'programs in the coverage registry' },
+  { value: '136', label: 'contributors to the US model' },
+];
+
+/** Adapted from the cpid-webinar-2026 WhatIsPESlide, with the gettsim-2026 PEOverviewSlide figures. */
 export function WhatIsPolicyEngineSlide() {
   return (
     <Slide className={FOOTER_CLEARANCE}>
@@ -73,71 +82,20 @@ export function WhatIsPolicyEngineSlide() {
         ))}
       </div>
 
+      <div className="mt-7 grid grid-cols-5 gap-5">
+        {stats.map((s) => (
+          <div key={s.label} className="content-card p-5">
+            <div className="text-4xl font-extrabold tracking-tight text-pe-teal">{s.value}</div>
+            <div className="text-base text-gray-600 leading-snug mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
       <div className="accent-block mt-7">
         <p className="text-lg text-gray-700 leading-relaxed">
-          Five years open source. Used by governments, Congress, researchers and benefit
+          Public code since June 2021. Used by governments, Congress, researchers and benefit
           navigators, from 10 Downing Street to US statehouses.
         </p>
-      </div>
-    </Slide>
-  );
-}
-
-const stats = [
-  { value: '95,000+', label: 'parameters in the US model' },
-  { value: '5,500+', label: 'variables' },
-  { value: '4,693', label: 'test files' },
-  { value: '103', label: 'programs in the coverage registry' },
-];
-
-const institutions = [
-  { org: 'NBER', detail: 'Memorandum of understanding for an open-source TAXSIM emulator.' },
-  {
-    org: 'Federal Reserve Bank of Atlanta',
-    detail: 'Memorandum of understanding that brings the Policy Rules Database into our validation.',
-  },
-  {
-    org: 'No 10 Downing Street',
-    detail: 'The data science team built 10ds-microsim on PolicyEngine.',
-  },
-];
-
-/** Adapted from the gettsim-2026 PEOverviewSlide. */
-export function PolicyEngineTodaySlide() {
-  return (
-    <Slide className={FOOTER_CLEARANCE}>
-      <SlideHeader>
-        <SlideTitle>PolicyEngine today</SlideTitle>
-      </SlideHeader>
-
-      <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
-        Free, open-source software to compute the effect of public policy. US and UK tax-benefit
-        models, with public code since June 2021 and 133 contributors to the US model.
-      </p>
-
-      <div className="mt-8 grid grid-cols-[1fr_1.1fr] gap-10 items-start">
-        <div className="grid grid-cols-2 gap-5">
-          {stats.map((s) => (
-            <div key={s.label} className="content-card p-5">
-              <div className="text-4xl font-extrabold tracking-tight text-pe-teal">{s.value}</div>
-              <div className="text-base text-gray-600 leading-snug mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="rounded-xl bg-pe-dark p-7 text-white">
-          <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-4">
-            In other institutions’ hands
-          </p>
-          <div className="space-y-4">
-            {institutions.map((c) => (
-              <div key={c.org}>
-                <p className="text-lg font-semibold">{c.org}</p>
-                <p className="text-base leading-snug font-light text-white/80">{c.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </Slide>
   );

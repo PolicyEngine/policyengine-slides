@@ -73,9 +73,9 @@ export function IconCards({ cards, hero }: { cards: NonNullable<BlsSlideContent[
 
 function FlowBox({ title, text, outlined = false }: { title: string; text: string; outlined?: boolean }) {
   return (
-    <div className={`rounded-lg px-4 py-3 ${outlined ? 'border border-gray-200 border-l-4 border-l-pe-teal bg-white' : 'border-l-4 border-pe-teal bg-gray-50'}`}>
-      <p className="text-lg font-semibold leading-snug text-pe-dark">{title}</p>
-      <p className="mt-1 text-base leading-snug text-gray-600">{text}</p>
+    <div className={`rounded-lg px-5 py-4 ${outlined ? 'border border-gray-200 border-l-4 border-l-pe-teal bg-white' : 'border-l-4 border-pe-teal bg-gray-50'}`}>
+      <p className="text-xl font-semibold leading-snug text-pe-dark">{title}</p>
+      <p className="mt-1 text-lg leading-snug text-gray-600">{text}</p>
     </div>
   );
 }
@@ -87,7 +87,7 @@ function Arrow() {
 /** One input feeding two calculations, then a comparison and a review. */
 export function CompareFlow({ compare }: { compare: NonNullable<BlsSlideContent['compare']> }) {
   return (
-    <div className="mt-4 space-y-4">
+    <div className="mt-6 space-y-8">
       <div className="grid grid-cols-[1fr_auto_1.15fr_auto_1fr_auto_1fr] items-center gap-3">
         <FlowBox {...compare.input} />
         <Arrow />
@@ -103,12 +103,12 @@ export function CompareFlow({ compare }: { compare: NonNullable<BlsSlideContent[
       </div>
       {compare.outputs && (
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{compare.outputsTitle}</p>
-          <div className="mt-2 grid gap-3" style={{ gridTemplateColumns: `repeat(${compare.outputs.length}, minmax(0, 1fr))` }}>
+          <p className="text-base font-semibold uppercase tracking-wider text-gray-500">{compare.outputsTitle}</p>
+          <div className="mt-3 grid gap-4" style={{ gridTemplateColumns: `repeat(${compare.outputs.length}, minmax(0, 1fr))` }}>
             {compare.outputs.map((output) => (
-              <div key={output.field} className="rounded-lg border-l-4 border-pe-teal bg-gray-50 px-3 py-2">
-                <p className="font-mono text-base font-semibold text-pe-teal">{output.field}</p>
-                <p className="text-sm leading-snug text-gray-600">{output.meaning}</p>
+              <div key={output.field} className="rounded-lg border-l-4 border-pe-teal bg-gray-50 px-4 py-3">
+                <p className="font-mono text-lg font-semibold text-pe-teal">{output.field}</p>
+                <p className="text-base leading-snug text-gray-600">{output.meaning}</p>
               </div>
             ))}
           </div>
@@ -159,43 +159,43 @@ type Worked = NonNullable<BlsSlideContent['worked']>;
 /** One real record: the input row, the household built from it, and the outputs. */
 export function WorkedExample({ worked }: { worked: Worked }) {
   return (
-    <div className="mt-2 space-y-3">
+    <div className="mt-4 space-y-5">
       <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-4">
-        <div className="rounded-xl bg-pe-darker px-5 py-4 font-mono">
-          <p className="mb-2 font-sans text-sm font-semibold uppercase tracking-wider text-teal-300">{worked.inputTitle}</p>
+        <div className="rounded-xl bg-pe-darker px-6 py-6 font-mono">
+          <p className="mb-3 font-sans text-base font-semibold uppercase tracking-wider text-teal-300">{worked.inputTitle}</p>
           {worked.input.map((row) => (
-            <div key={row.field} className="grid grid-cols-[6.5rem_5.5rem_1fr] items-baseline gap-2 py-1 text-base">
+            <div key={row.field} className="grid grid-cols-[8.5rem_6.5rem_1fr] items-baseline gap-2 py-2 text-xl">
               <span className="text-teal-300">{row.field}</span>
               <span className="text-white">{row.value}</span>
-              <span className="font-sans text-sm text-white/60">{row.meaning}</span>
+              <span className="font-sans text-base text-white/60">{row.meaning}</span>
             </div>
           ))}
         </div>
         <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.householdTitle}</p>
-          <div className="space-y-2">
+        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-6">
+          <p className="mb-3 text-base font-semibold uppercase tracking-wider text-gray-500">{worked.householdTitle}</p>
+          <div className="space-y-4">
             {worked.household.map((member) => (
-              <div key={member.role} className="rounded-lg bg-white px-3 py-2 shadow-sm">
-                <p className="text-base font-semibold leading-snug text-pe-dark">{member.role}</p>
-                <p className="text-sm leading-snug text-gray-600">{member.detail}</p>
+              <div key={member.role} className="rounded-lg bg-white px-4 py-4 shadow-sm">
+                <p className="text-xl font-semibold leading-snug text-pe-dark">{member.role}</p>
+                <p className="text-lg leading-snug text-gray-600">{member.detail}</p>
               </div>
             ))}
           </div>
         </div>
         <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.outputTitle}</p>
+        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-6">
+          <p className="mb-3 text-base font-semibold uppercase tracking-wider text-gray-500">{worked.outputTitle}</p>
           {worked.outputs.map((row) => (
-            <div key={row.field} className="grid grid-cols-[4rem_6rem_1fr] items-baseline gap-2 border-b border-gray-200 py-1.5 last:border-0">
-              <span className="font-mono text-sm text-pe-teal">{row.field}</span>
-              <span className="text-lg font-bold text-pe-dark">{row.value}</span>
-              <span className="text-sm leading-snug text-gray-600">{row.meaning}</span>
+            <div key={row.field} className="grid grid-cols-[4.5rem_8.5rem_1fr] items-baseline gap-2 border-b border-gray-200 py-3 last:border-0">
+              <span className="font-mono text-base text-pe-teal">{row.field}</span>
+              <span className="text-2xl font-bold text-pe-dark">{row.value}</span>
+              <span className="text-base leading-snug text-gray-600">{row.meaning}</span>
             </div>
           ))}
         </div>
       </div>
-      <p className="text-sm text-gray-500">{worked.footnote}</p>
+      <p className="text-base text-gray-500">{worked.footnote}</p>
     </div>
   );
 }
@@ -415,6 +415,14 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
         <code className="font-mono text-base text-white">
           <span className="text-white/50">$ </span>{dropIn.install}
         </code>
+        {dropIn.installAlt && (
+          <>
+            <span className="text-sm text-white/60">or</span>
+            <code className="font-mono text-base text-white">
+              <span className="text-white/50">$ </span>{dropIn.installAlt}
+            </code>
+          </>
+        )}
       </div>
       <div className="overflow-hidden rounded-lg bg-pe-darker">
         <div className="grid grid-cols-[6rem_0.42fr_0.58fr] gap-6 border-b border-white/10 px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/60">

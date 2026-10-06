@@ -11,7 +11,7 @@ export interface BlsSlideContent {
   notes: string;
   cover?: boolean;
   /** A full-slide component from slides/PEIntroSlides.tsx. */
-  custom?: 'what-is-pe' | 'pe-today' | 'who-uses-pe';
+  custom?: 'what-is-pe' | 'who-uses-pe';
   /** Clickable URL shown at the right of the slide title. */
   headerLink?: { label: string; url: string };
   /** Resource cards beside the bullet list (the Q&A slide). */
@@ -65,6 +65,8 @@ export interface BlsSlideContent {
   dropIn?: {
     installLabel: string;
     install: string;
+    /** An alternative install command, shown after "or". */
+    installAlt?: string;
     columns: [string, string, string];
     rows: { env: string; before: string; after: string }[];
     takeaway: string;
@@ -167,20 +169,8 @@ export const blsSlides: BlsSlideContent[] = [
       "Reforms: change any parameter and see the cost, poverty and distributional effects"
     ],
     "minutes": 3,
-    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the emulator section covers those. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "notes": "Give the short version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the emulator section covers those. Use the figures to show scale and testing, not to sell. They were counted on policyengine-us main on October 6, 2026: 104,816 leaf parameters in the US parameter tree, 6,290 variables, 4,867 YAML test files, 103 programs in programs.yaml and 136 GitHub contributors; the repository has been public since June 23, 2021. The cards are adapted from the cpid-webinar-2026 deck and the figures replace the gettsim-2026 ones (August 27).",
     "custom": "what-is-pe"
-  },
-  {
-    "id": "pe-today",
-    "title": "PolicyEngine today",
-    "body": [
-      "95,000+ parameters, 5,500+ variables and 4,693 test files in the US model",
-      "Public code since June 2021, with 133 contributors to the US model",
-      "NBER, the Atlanta Fed and No 10 Downing Street work with the models"
-    ],
-    "minutes": 1,
-    "notes": "Use the numbers to show scale and testing, not to sell. The NBER memorandum of understanding is the reason the TAXSIM emulator exists; the next section covers it. Figures from the gettsim-2026 deck (September 3, 2026); check them before the talk if you quote them.",
-    "custom": "pe-today"
   },
   {
     "id": "who-uses-pe",
@@ -191,7 +181,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Benefit navigators: MyFriendBen, Amplifi, Mirza and Starlight"
     ],
     "minutes": 1,
-    "notes": "Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "notes": "Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. If asked for detail: the Federal Reserve Bank of Atlanta has a memorandum of understanding that brings its Policy Rules Database into PolicyEngine’s validation, and the No 10 Downing Street data science team built 10ds-microsim on PolicyEngine’s UK model. The NBER memorandum of understanding is on the next slide. Adapted from the cpid-webinar-2026 deck (September 2026).",
     "custom": "who-uses-pe"
   },
   {
@@ -204,7 +194,7 @@ export const blsSlides: BlsSlideContent[] = [
       "A memorandum of understanding signed in September 2025",
       "Continuity for researchers using TAXSIM workflows"
     ],
-    "minutes": 3,
+    "minutes": 4,
     "notes": "Introduce TAXSIM first, then the partnership. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. For this audience: since the 2013 data, the CE has used TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. The emulator keeps TAXSIM35’s formats, computes tax years 2021 onward with PolicyEngine’s federal and state models, and routes earlier years to TAXSIM35. The comparison work has found improvements in both models. Source: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
     "headerLink": TAXSIM_SITE,
     "partnership": {
@@ -235,7 +225,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // The emulator and its core assumptions: 12 minutes
+  // The TAXSIM emulator: 6 minutes
   {
     "id": "drop-in",
     "title": "A drop-in replacement for TAXSIM35",
@@ -246,11 +236,12 @@ export const blsSlides: BlsSlideContent[] = [
       "Earlier years still route to TAXSIM35"
     ],
     "minutes": 3,
-    "notes": "The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.",
+    "notes": "The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Either install line works: uv installs the command as an isolated tool, and pip installs the same package from PyPI (policyengine-taxsim 3.0.1, Python 3.10 or later), which may suit a managed BLS environment. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026; PyPI checked October 6, 2026.",
     "headerLink": TAXSIM_SITE,
     "dropIn": {
       "installLabel": "Install once",
       "install": "uv tool install policyengine-taxsim",
+      "installAlt": "pip install policyengine-taxsim",
       "columns": ["", "TAXSIM35 (before)", "PolicyEngine TAXSIM (after)"],
       "rows": [
         { "env": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv" },
@@ -305,7 +296,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // Live demonstration: 10 minutes
+  // Live demonstration: 13 minutes
   {
     "id": "demo-live",
     "title": "Live demo: run the sample file",
@@ -376,7 +367,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "The public validation dashboard",
     "body": [],
     "minutes": 5,
-    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.",
+    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. If someone asks why the dashboard says PolicyEngine US 2.6.17 while the worked example and benefit slides say 2.25.2: the dashboard runs on a pinned release so its comparisons are reproducible, and the household examples use the current release. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/dashboard",

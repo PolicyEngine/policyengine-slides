@@ -1,7 +1,7 @@
 import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
-import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
+import { WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, DropIn, IconCards, Partnership, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkedExample } from './Visuals';
 import Slide from '@/components/core/Slide';
 import CoverSlide from '@/components/layout/CoverSlide';
@@ -14,7 +14,6 @@ const COVER_SPEAKERS = [speakers['max-ghenis'], speakers['pavel-makarchuk'], spe
 
 const CUSTOM_SLIDES = {
   'what-is-pe': WhatIsPolicyEngineSlide,
-  'pe-today': PolicyEngineTodaySlide,
   'who-uses-pe': WhoUsesPolicyEngineSlide,
 } satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
 
