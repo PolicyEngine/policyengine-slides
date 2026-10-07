@@ -66,7 +66,7 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 
 ## 7. How the collaboration started (7–9 min)
 
-Before the emulator: record by record (2022–2024 · tax year 2021, federal and every state):
+Before the emulator: record by record:
 1. **Compare one record:** One household runs through both models.
 2. **Trace the difference:** Fill out the tax form to find the error.
 3. **Write a YAML test:** The record becomes an integration test.

@@ -38,7 +38,7 @@ export default function OriginsSlide({ origins }: { origins: Origins }) {
         <div className="flex flex-col">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h3 className="text-xl font-bold lg:text-2xl">{origins.processTitle}</h3>
-            <p className="text-base text-gray-600">{origins.processDetail}</p>
+            {origins.processDetail && <p className="text-base text-gray-600">{origins.processDetail}</p>}
           </div>
           <ol className="mt-3 flex flex-1 flex-col justify-between gap-1.5">
             {origins.steps.map((step, index) => (
