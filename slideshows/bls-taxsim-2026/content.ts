@@ -479,9 +479,9 @@ export const blsSlides: BlsSlideContent[] = [
     "process": {
       "stats": [
         { "value": "1,100+", "label": "Issues on the public tracker since July 2024" },
-        { "value": "1,000+", "label": "Resolved" },
+        { "value": "1,000+", "label": "Issues resolved" },
         { "value": "340+", "label": "Fixes merged in PolicyEngine and the emulator" },
-        { "value": "100+", "label": "TAXSIM corrections confirmed by NBER on the tracker" }
+        { "value": "100+", "label": "TAXSIM corrections confirmed by NBER" }
       ],
       "steps": [
         { "title": "Report", "text": "" },
