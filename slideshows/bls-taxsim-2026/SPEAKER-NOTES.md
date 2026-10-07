@@ -82,9 +82,9 @@ Start on the left with TAXSIM, end on the right with PolicyEngine, and use the m
 
 ## 7. A drop-in replacement for TAXSIM35 (10–13 min)
 
-Installation, with macOS/Linux and Windows tabs: install the uv package manager (if you don't have it), then `uv tool install policyengine-taxsim`.
+Installation (top of the slide), with macOS/Linux and Windows tabs: install the uv package manager (if you don't have it), then `uv tool install policyengine-taxsim`.
 
-Get started (Same input format, same output variables. Just swap the command.), with interactive tabs as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
+Get started (below; Same input format, same output variables. Just swap the command.), with interactive tabs as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
 
 Existing TAXSIM workflows carry over in every supported environment, with no added complexity.
 
