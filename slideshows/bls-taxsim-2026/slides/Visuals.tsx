@@ -396,8 +396,26 @@ const PARTY_STYLE: Record<'nber' | 'pe' | 'joint', string> = {
 /** Milestones on a full-width line, then a to-scale bar of the tax years each engine covers. */
 export function PartnershipHistory({ history }: { history: HistoryData }) {
   const { coverage } = history;
-  const span = coverage.end - coverage.start + 1;
-  const at = (year: number) => ((year - coverage.start) / span) * 100;
+  const segments = [
+    {
+      label: coverage.taxsimLabel,
+      from: coverage.start,
+      years: coverage.split - coverage.start,
+      style: `${PARTY_STYLE.nber} text-white`,
+      minWidth: undefined,
+      first: true,
+      marks: coverage.marks.filter((m) => m.year < coverage.split),
+    },
+    {
+      label: coverage.peLabel,
+      from: coverage.split,
+      years: coverage.end - coverage.split + 1,
+      style: `${PARTY_STYLE.pe} text-pe-dark`,
+      minWidth: '7.5rem',
+      first: false,
+      marks: coverage.marks.filter((m) => m.year >= coverage.split),
+    },
+  ];
   return (
     <div className="mt-2 space-y-5 text-pe-dark">
       <div>
@@ -431,25 +449,27 @@ export function PartnershipHistory({ history }: { history: HistoryData }) {
             ))}
           </div>
         </div>
-        <div className="mt-2 flex h-11 overflow-hidden rounded-lg">
-          <div className={`flex items-center px-4 text-base font-semibold text-white ${PARTY_STYLE.nber}`} style={{ width: `${at(coverage.split)}%` }}>
-            {coverage.taxsimLabel}
-          </div>
-          <div className={`flex items-center justify-center text-sm font-semibold text-pe-dark ${PARTY_STYLE.pe}`} style={{ width: `${100 - at(coverage.split)}%` }}>
-            {coverage.peLabel}
-          </div>
-        </div>
-        <div className="relative mt-1 h-10">
-          {coverage.marks.map((mark) => {
-            const left = mark.year === coverage.end ? 100 : at(mark.year);
-            const align = left >= 99 ? '-translate-x-full text-right' : left <= 1 ? '' : '-translate-x-1/2 text-center';
-            return (
-              <div key={mark.year} className={`absolute top-0 ${align}`} style={{ left: `${left}%` }}>
-                <p className="text-sm font-semibold">{mark.year}</p>
-                {mark.label && <p className="whitespace-nowrap text-xs text-gray-600">{mark.label}</p>}
+        {/* Each segment carries its own year marks, so marks stay on the segment edges even when the PolicyEngine segment hits its minimum width. */}
+        <div className="mt-2 flex">
+          {segments.map((segment) => (
+            <div key={segment.label} className="min-w-0" style={{ flex: `${segment.years} 1 0%`, minWidth: segment.minWidth }}>
+              <div className={`flex h-11 items-center font-semibold ${segment.first ? 'rounded-l-lg px-4 text-base' : 'justify-center rounded-r-lg px-2 text-sm'} ${segment.style}`}>
+                <span className="truncate">{segment.label}</span>
               </div>
-            );
-          })}
+              <div className="relative mt-1 h-10">
+                {segment.marks.map((mark) => {
+                  const left = ((mark.year - segment.from) / segment.years) * 100;
+                  const align = mark.year === coverage.end ? 'right-0 text-right' : left <= 1 ? 'left-0' : '-translate-x-1/2 text-center';
+                  return (
+                    <div key={mark.year} className={`absolute top-0 ${align}`} style={mark.year === coverage.end || left <= 1 ? undefined : { left: `${left}%` }}>
+                      <p className="text-sm font-semibold">{mark.year}</p>
+                      {mark.label && <p className="whitespace-nowrap text-xs text-gray-600">{mark.label}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
