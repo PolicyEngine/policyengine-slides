@@ -75,16 +75,27 @@ function CodeBlock({
   );
 }
 
-/** Install commands: the steps (split on blank lines) sit side by side to save height. */
-function InstallBlock({ code }: { code: string }) {
+/**
+ * Install commands, one step under the other. Every OS variant sits in the same grid cell (inactive ones
+ * invisible), so the box keeps the size of the longest variant and the tabs do not move when clicked.
+ */
+function InstallBlock({ tabs, active }: { tabs: DropInData['installTabs']; active: number }) {
   return (
-    <div className="relative w-fit max-w-full rounded-lg bg-pe-darker py-2.5 pl-4 pr-24 text-white">
-      <div className="grid gap-x-10 gap-y-2 md:grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr]">
-        {code.split('\n\n').map((step) => (
-          <Code key={step} code={step} highlight={false} />
+    <div className="relative min-w-0 rounded-lg bg-pe-darker py-2.5 pl-4 pr-20 text-white">
+      <div className="grid">
+        {tabs.map((tab, index) => (
+          <div
+            key={tab.label}
+            className={`col-start-1 row-start-1 flex flex-col gap-2 ${index === active ? '' : 'invisible'}`}
+            aria-hidden={index !== active}
+          >
+            {tab.code.split('\n\n').map((step) => (
+              <Code key={step} code={step} highlight={false} />
+            ))}
+          </div>
         ))}
       </div>
-      <CopyButton code={code} className="absolute right-3 top-2" />
+      <CopyButton code={tabs[active].code} className="absolute right-3 top-2" />
     </div>
   );
 }
@@ -114,25 +125,25 @@ function Tabs({ labels, active, onSelect, label }: { labels: string[]; active: n
 }
 
 /**
- * The TAXSIM site's Installation section (centered, on top) and its Get started section below, with working tabs.
+ * The TAXSIM site's Installation section (centered, on top: title and OS tabs beside the commands) and its
+ * Get started section below, with working tabs.
  * Code boxes size to their code; the takeaway sits at the bottom so the tabs never move when clicked.
  */
 export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const [os, setOs] = useState(0);
   const [env, setEnv] = useState(0);
-  const install = dropIn.installTabs[os];
   const tab = dropIn.tabs[env];
   return (
     <div
       className="mt-1 flex flex-col gap-3 lg:h-[min(calc(100vh-330px),25rem)] lg:gap-5"
       onClick={(e) => e.stopPropagation()}
     >
-      <section className="flex flex-col items-center gap-2.5">
-        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+      <section className="flex items-center justify-center gap-6 lg:gap-8">
+        <div className="flex shrink-0 flex-col items-start gap-2.5">
           <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.installTitle}</h3>
           <Tabs labels={dropIn.installTabs.map((t) => t.label)} active={os} onSelect={setOs} label="Operating system" />
         </div>
-        <InstallBlock code={install.code} />
+        <InstallBlock tabs={dropIn.installTabs} active={os} />
       </section>
 
       <section className="flex flex-col gap-2">
