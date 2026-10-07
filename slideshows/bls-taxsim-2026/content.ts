@@ -373,8 +373,7 @@ export const blsSlides: BlsSlideContent[] = [
     "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
-      "url": "https://www.policyengine.org/us/taxsim/dashboard",
-      "footnote": "Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September 23, 2026."
+      "url": "https://www.policyengine.org/us/taxsim/dashboard"
     }
   },
   {
