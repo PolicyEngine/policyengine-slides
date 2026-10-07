@@ -291,15 +291,13 @@ function TriangleCorner({ corner }: { corner: TriangleData['corners']['top'] }) 
 }
 
 /**
- * Three calculations at the corners of a triangle, with the law at the center.
- * The 1000 x 560 box puts each corner card's center on a vertex of the SVG
- * triangle, so the dashed sides run between the cards.
+ * The triangle itself. The 1000 x 560 box puts each corner card's center on a
+ * vertex of the SVG triangle, so the dashed sides run between the cards.
  */
-export function Triangle({ triangle }: { triangle: TriangleData }) {
+function TriangleDiagram({ triangle, className = '' }: { triangle: TriangleData; className?: string }) {
   const { corners, sides, center } = triangle;
   return (
-    <div className="-mt-4 space-y-4">
-      <div className="relative mx-auto h-[560px] w-[1000px]">
+      <div className={`relative h-[560px] w-[1000px] ${className}`}>
         <svg className="absolute inset-0 h-full w-full text-pe-teal/50" viewBox="0 0 1000 560" aria-hidden="true">
           <polygon points="500,50 144,515 856,515" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="10 8" />
         </svg>
@@ -321,7 +319,45 @@ export function Triangle({ triangle }: { triangle: TriangleData }) {
           <p className="mt-1 text-sm leading-snug text-white/80">{center.text}</p>
         </div>
       </div>
-      <p className="text-xl leading-snug font-medium text-pe-dark">{triangle.takeaway}</p>
+  );
+}
+
+/**
+ * Three calculations at the corners of a triangle, with the law at the center.
+ * With steps, the steps run down the left and the triangle shrinks to 75% on
+ * the right; the wrapper reserves the scaled 750 x 420 footprint.
+ */
+export function Triangle({ triangle }: { triangle: TriangleData }) {
+  const takeaway = <p className="text-xl leading-snug font-medium text-pe-dark">{triangle.takeaway}</p>;
+  if (!triangle.steps) {
+    return (
+      <div className="-mt-4 space-y-4">
+        <TriangleDiagram triangle={triangle} className="mx-auto" />
+        {takeaway}
+      </div>
+    );
+  }
+  return (
+    <div className="-mt-2 space-y-5">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-10">
+        <ol className="space-y-6">
+          {triangle.steps.map((step, index) => (
+            <li key={step.title} className="flex items-start gap-5">
+              <span className="w-10 shrink-0 font-mono text-2xl font-bold text-pe-teal" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <p className="text-2xl font-semibold leading-snug text-pe-dark">{step.title}</p>
+                <p className="mt-1 text-lg leading-snug text-gray-600">{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="relative h-[420px] w-[750px] shrink-0">
+          <TriangleDiagram triangle={triangle} className="origin-top-left scale-75" />
+        </div>
+      </div>
+      {takeaway}
     </div>
   );
 }
