@@ -73,10 +73,10 @@ export interface BlsSlideContent {
   };
   /** Shown under a card grid as a one-line takeaway. */
   cardsTakeaway?: string;
-  /** Rows by general area: what TAXSIM gives, how the emulator maps it, and what PolicyEngine can model. */
+  /** Rows by general area: the TAXSIM variables, how the emulator maps them, and the limits or conventions that follow. */
   mapping?: {
     columns: [string, string, string];
-    rows: { area: string; taxsim: string; emulator: string; pe: string }[];
+    rows: { area: string; taxsim: string; emulator: string; limit: string }[];
     takeaway?: string;
   };
   /** A section opener: the section number; the title is the section name. */
@@ -145,7 +145,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 57 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 58 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 12 minutes
   {
@@ -180,7 +180,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 57 minutes, leaving about 3 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 58 minutes, leaving about 2 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "section-intro",
@@ -521,17 +521,35 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "How TAXSIM inputs map to PolicyEngine",
     "body": [],
     "minutes": 2,
-    "notes": "Show the abstractions that let PolicyEngine accept a TAXSIM file and return TAXSIM variables. Business income: TAXSIM gives one amount per type. The emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income; it has no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold. The emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (it is available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors TAXSIM does not apply. Property tax maps to real estate taxes. SALT: PolicyEngine computes the state income tax itself and takes the larger of income or sales tax, with the IRS sales tax tables; it also models city and county income taxes (New York City, Philadelphia, Kansas City, St. Louis, Wilmington and Indiana counties). Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status is derived from mstat and the dependents; interest, dividends, capital gains and S-corporation income are split evenly between spouses; missing ages default to 40 for the head and 10 for dependents. Outputs: fiitax maps to income_tax and siitax to state_income_tax; PolicyEngine US has 40 variables built for TAXSIM outputs, including taxsim_fica. A few detail outputs are not implemented. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for.",
+    "notes": "Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status and dependents’ ages are derived from mstat and the dependent counts; interest, dividends, capital gains and S-corporation income are split evenly between spouses. Other income: pensions map to taxable private pensions and gssi to Social Security retirement benefits; TAXSIM has no split between pensions, IRA and 401(k) withdrawals. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for.",
     "mapping": {
-      "columns": ["TAXSIM gives", "The emulator maps it to", "PolicyEngine can model"],
+      "columns": ["TAXSIM input", "How the emulator maps it", "Limits and conventions"],
       "rows": [
-        { "area": "Business income", "taxsim": "pbusinc, pprofinc, scorp", "emulator": "Self-employment, service-business and S corporation income", "pe": "The QBI deduction with W-2 wage and property limits" },
-        { "area": "Itemized deductions", "taxsim": "mortgage, otheritem, proptax", "emulator": "One deduction with no floor or cap, plus property tax", "pe": "Charity, medical and mortgage interest, each with its own rules" },
-        { "area": "State and local taxes", "taxsim": "state", "emulator": "State income tax computed for the SALT deduction", "pe": "Income or sales tax, and city and county income taxes" },
-        { "area": "Household", "taxsim": "mstat, ages, dependents", "emulator": "Derived filing status, income split between spouses", "pe": "Each person’s income, age and relationships" },
-        { "area": "Outputs", "taxsim": "fiitax, siitax, fica, v10–v45", "emulator": "Mapped from PolicyEngine variables, 40 built for TAXSIM", "pe": "Any PolicyEngine variable, up to household net income" }
+        { "area": "Business income", "taxsim": "pbusinc, pprofinc, scorp", "emulator": "Self-employment, specified-service and S corporation income", "limit": "No W-2 wages or property basis for the QBI deduction’s limits" },
+        { "area": "Itemized deductions", "taxsim": "mortgage, otheritem, proptax", "emulator": "Mortgage and other items as one deduction with no floor or cap", "limit": "Charity and medical arrive in one total, so their AGI limits cannot apply" },
+        { "area": "State and local taxes", "taxsim": "state", "emulator": "PolicyEngine computes the state income tax for the SALT deduction", "limit": "No county or city, so local income taxes are left out" },
+        { "area": "Household", "taxsim": "mstat, page, sage, depx", "emulator": "Filing status and dependents’ ages from the codes and counts", "limit": "Most income comes per tax unit, so it is split evenly between spouses" },
+        { "area": "Other income", "taxsim": "pensions, gssi", "emulator": "Taxable private pensions and Social Security retirement benefits", "limit": "No split between pensions, IRA and 401(k) withdrawals" }
       ],
-      "takeaway": "The emulator keeps PolicyEngine at TAXSIM’s level of detail, so the two stay comparable."
+      "takeaway": "TAXSIM’s inputs set the level of detail. PolicyEngine can do more when a data source supplies more."
+    }
+  },
+  {
+    "id": "output-mapping",
+    "title": "How PolicyEngine returns TAXSIM outputs",
+    "body": [],
+    "minutes": 1,
+    "notes": "Each TAXSIM output keeps TAXSIM’s definition. fiitax is PolicyEngine’s income_tax, which includes the net investment income tax; the Additional Medicare Tax is reported with payroll tax, not in fiitax, as TAXSIM does. siitax is state_income_tax, with Maryland county tax left out because TAXSIM input has no county. fica comes from taxsim_fica, one of 40 PolicyEngine US variables built for TAXSIM outputs; it includes the employee and employer shares. frate and srate come from a second run with $100 more wages: TAXSIM uses a 1-cent change, but PolicyEngine computes in 32-bit floats, so a larger change keeps the rate precise; the emulator varies wages only. With idtl=2, the detail variables v10 to v45 are mapped from PolicyEngine variables, with per-state lists for the state detail; ficar, v15, v16, v20, v21, v23, v30, v31, v33 and v41 are not implemented yet. Benefits such as SNAP, SSI, TANF and WIC are set to zero in emulator mode, so state calculations that count cash assistance as income match TAXSIM’s tax-only scope. Sources: policyengine-taxsim 3.0.1 runners/policyengine_runner.py, core/marginal_rates.py and config/variable_mappings.yaml.",
+    "mapping": {
+      "columns": ["TAXSIM output", "How the emulator computes it", "Limits and conventions"],
+      "rows": [
+        { "area": "Income taxes", "taxsim": "fiitax, siitax", "emulator": "PolicyEngine’s federal income tax, with the NIIT, and state income tax", "limit": "Additional Medicare Tax goes with payroll tax, and Maryland county tax is left out, as in TAXSIM" },
+        { "area": "Payroll tax", "taxsim": "fica", "emulator": "One of 40 PolicyEngine variables built for TAXSIM outputs", "limit": "Employee and employer shares together, as in TAXSIM" },
+        { "area": "Marginal rates", "taxsim": "frate, srate", "emulator": "A second run with $100 more wages", "limit": "TAXSIM uses a 1-cent change; the emulator changes wages only" },
+        { "area": "Detail variables", "taxsim": "v10–v45", "emulator": "Mapped from PolicyEngine variables, with lists for each state", "limit": "Not yet implemented: ficar, v15, v16, v20, v21, v23, v30, v31, v33, v41" },
+        { "area": "Benefits", "taxsim": "none", "emulator": "SNAP, SSI, TANF and WIC set to zero", "limit": "Keeps the results tax-only, as in TAXSIM" }
+      ],
+      "takeaway": "Every output keeps TAXSIM’s definition, so existing code reads the results unchanged."
     }
   },
   {
