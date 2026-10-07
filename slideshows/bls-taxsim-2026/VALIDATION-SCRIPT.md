@@ -1,8 +1,8 @@
 # Validation section: speaker script (David)
 
-Slides 10–14, 16 minutes in total. Spoken pace is about 130 words a minute; the rest of the time is for pointing at the slide and the live dashboard. Timings: triangle 2 min, process 2 min, dashboard 5 min, notable cases 4 min, reported difference to fix 3 min.
+Slides 14–18, 23 minutes in total. Spoken pace is about 130 words a minute; the rest of the time is for pointing at the slide and the live dashboard. Timings: triangle 2 min, process 2 min, dashboard 5 min, notable cases 4 min, reported difference to fix 3 min.
 
-## Slide 10. Three calculations, one arbiter (29–31 min)
+## Slide 14. Three calculations, one arbiter (29–31 min)
 
 Validation for us isn't a single benchmark number. It's a loop we run continuously, and it rests on three independent calculations.
 
@@ -12,7 +12,7 @@ Validation for us isn't a single benchmark number. It's a loop we run continuous
 
 *Point to the center.* The three don't vote. The tiebreaker is the statute and the official instructions. Two engines can share the same mistake, and an agreement rate will never catch that. So every difference is traced back to a specific line on a specific form, and every fix carries a test whose expected value comes from the form or the statute, not from our own model.
 
-## Slide 11. How we validate the emulator (31–33 min)
+## Slide 15. How we validate the emulator (31–33 min)
 
 Here's the loop. Every household goes through both engines with exactly the same input row: 111,347 Enhanced CPS households, tax years 2021 to 2025, all 50 states and DC. A household matches when federal and state income tax agree within $15, or within 1% of income on the dashboard.
 
@@ -24,7 +24,7 @@ When they differ, the cause falls into one of four groups:
 
 Fixes ship with a test, the dashboard reruns, and every new PolicyEngine release or TAXSIM update starts the loop again.
 
-## Slide 12. The public validation dashboard (33–38 min, live)
+## Slide 16. The public validation dashboard (33–38 min, live)
 
 This is the output of that loop, and it's public.
 
@@ -36,7 +36,7 @@ This is the output of that loop, and it's public.
 
 One caution: these numbers move when either engine changes. That's the point of running it continuously.
 
-## Slide 13. Two notable cases (38–42 min)
+## Slide 17. Two notable cases (38–42 min)
 
 Two cases show what "explain the cause" looks like in practice.
 
@@ -50,7 +50,7 @@ The emulator now has an explicit switch for S-corporation treatment. Since Septe
 
 *Point to the line under the table.* Both cases end in a convention we've agreed with NBER and written down, and there are others: rent paid includes utilities, and a single pension amount is split between spouses by age. If you're building TAXSIM inputs from the CE, those conventions are the part to check.
 
-## Slide 14. From a reported difference to a fix (42–45 min)
+## Slide 18. From a reported difference to a fix (42–45 min)
 
 Here's the process for a single household.
 

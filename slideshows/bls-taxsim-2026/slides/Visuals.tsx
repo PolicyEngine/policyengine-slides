@@ -1,23 +1,26 @@
 import {
+  type Icon,
   IconArrowLeft,
   IconArrowRight,
   IconArrowsSplit2,
   IconBook,
   IconBrandGithub,
-  IconCalendar,
+  IconBriefcase,
   IconBuildingBank,
+  IconCalendar,
   IconChartBar,
   IconChartDots,
   IconChevronRight,
   IconFileText,
   IconFlask,
+  IconGavel,
   IconHeartHandshake,
   IconHistory,
   IconPlayerPlay,
+  IconReceiptTax,
   IconScale,
   IconUsersGroup,
   IconWorld,
-  type Icon,
 } from '@tabler/icons-react';
 import type { BlsIcon, BlsSlideContent } from '../content';
 
@@ -35,6 +38,10 @@ const ICONS: Record<BlsIcon, Icon> = {
   'scale': IconScale,
   'users': IconUsersGroup,
   'world': IconWorld,
+  'briefcase': IconBriefcase,
+  'receipt': IconReceiptTax,
+  'gavel': IconGavel,
+  'heart-handshake': IconHeartHandshake,
 };
 
 function DeckIcon({ name, size = 26 }: { name: BlsIcon; size?: number }) {
@@ -43,7 +50,15 @@ function DeckIcon({ name, size = 26 }: { name: BlsIcon; size?: number }) {
 }
 
 /** Two-by-two cards, each with an icon, a title and one line of text. */
-export function IconCards({ cards, hero }: { cards: NonNullable<BlsSlideContent['cards']>; hero?: BlsSlideContent['hero'] }) {
+export function IconCards({
+  cards,
+  hero,
+  takeaway,
+}: {
+  cards: NonNullable<BlsSlideContent['cards']>;
+  hero?: BlsSlideContent['hero'];
+  takeaway?: string;
+}) {
   const grid = (
     <div className={`grid grid-cols-2 gap-5 ${hero ? '' : 'mt-6 max-w-6xl'}`}>
       {cards.map((card) => (
@@ -59,6 +74,17 @@ export function IconCards({ cards, hero }: { cards: NonNullable<BlsSlideContent[
       ))}
     </div>
   );
+  if (!hero && takeaway) {
+    return (
+      <div className="flex max-w-6xl flex-col max-lg:[@media(max-height:820px)]:[zoom:0.84] [@media(max-height:740px)]:[zoom:0.94]">
+        {grid}
+        <div className="mt-6 flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
+          <IconArrowRight className="shrink-0 text-pe-teal" size={26} stroke={2} aria-hidden="true" />
+          <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{takeaway}</p>
+        </div>
+      </div>
+    );
+  }
   if (!hero) return grid;
   return (
     <div className="mt-4 grid grid-cols-[0.8fr_1.7fr] items-stretch gap-6">

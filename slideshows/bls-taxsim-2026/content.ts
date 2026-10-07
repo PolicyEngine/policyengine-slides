@@ -1,6 +1,7 @@
 export type BlsIcon =
   | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-text' | 'flask'
-  | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world';
+  | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world'
+  | 'briefcase' | 'receipt' | 'gavel' | 'heart-handshake';
 
 export interface BlsSlideContent {
   id: string;
@@ -69,6 +70,24 @@ export interface BlsSlideContent {
     afterLabel: string;
     tabs: { label: string; lang: string; before: string; after: string }[];
     takeaway: string;
+  };
+  /** Shown under a card grid as a one-line takeaway. */
+  cardsTakeaway?: string;
+  /** Rows by general area: what TAXSIM gives, how the emulator maps it, and what PolicyEngine can model. */
+  mapping?: {
+    columns: [string, string, string];
+    rows: { area: string; taxsim: string; emulator: string; pe: string }[];
+    takeaway?: string;
+  };
+  /** A section opener: the section number; the title is the section name. */
+  divider?: { number: string };
+  /** How the collaboration started: the testing process before the emulator and the milestones after it. */
+  origins?: {
+    processTitle: string;
+    processDetail: string;
+    steps: { title: string; text: string }[];
+    milestonesTitle: string;
+    milestones: { when: string; title: string; text: string }[];
   };
   /** TAXSIM on the left, PolicyEngine on the right, the agreement and year routing in the middle. */
   bridge?: {
@@ -145,23 +164,29 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "Introduction and context",
       "The TAXSIM emulator",
-      "Live demonstration",
       "Validation",
-      "Benefit imputation",
+      "Beyond TAXSIM",
       "A possible CE pilot",
       "Q&A and discussion"
     ],
     "descriptions": [
-      "What PolicyEngine is, who uses it, and the NBER collaboration.",
-      "A drop-in TAXSIM interface, and how one record becomes a tax result.",
-      "A TAXSIM-format file run in the browser, from input rows to federal and state tax.",
+      "What PolicyEngine is, who uses it, and how the NBER collaboration started.",
+      "A drop-in TAXSIM interface, where each calculation happens, and a live demo in the browser.",
       "How TAXSIM, PolicyEngine and TaxAct are checked against the law, the public dashboard, notable cases, and how a reported difference becomes a fix.",
-      "Methods for missing survey inputs, SNAP participation, and Medicaid valuation.",
+      "What PolicyEngine models beyond TAXSIM’s inputs, and methods for missing survey inputs, SNAP participation and Medicaid valuation.",
       "A focused comparison, the inputs it needs, and questions for CE staff.",
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first six sections total 60 minutes. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 66 minutes. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+  },
+  {
+    "id": "section-intro",
+    "title": "Introduction and context",
+    "body": [],
+    "minutes": 0,
+    "notes": "Section opener. Move on after a few seconds.",
+    "divider": { "number": "01" }
   },
   {
     "id": "what-is-pe",
@@ -198,6 +223,30 @@ export const blsSlides: BlsSlideContent[] = [
     "minutes": 1,
     "notes": "Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).",
     "custom": "who-uses-pe"
+  },
+  {
+    "id": "origins",
+    "title": "How the collaboration started",
+    "body": [],
+    "minutes": 2,
+    "notes": "Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team used differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.",
+    "origins": {
+      "processTitle": "Before the emulator: differential testing",
+      "processDetail": "2022–2024 · tax year 2021, federal and every state",
+      "steps": [
+        { "title": "Run both models", "text": "Samples of 100,000 tax units through TAXSIM35 and PolicyEngine." },
+        { "title": "Rank the differences", "text": "The largest tax differences came out one at a time." },
+        { "title": "Trace by hand", "text": "Fill out the tax form to see which model is wrong." },
+        { "title": "Fix either side", "text": "A PolicyEngine fix with a test, or a TAXSIM35 correction." }
+      ],
+      "milestonesTitle": "From testing to partnership",
+      "milestones": [
+        { "when": "2022", "title": "Validation begins", "text": "Daniel Feenberg shares TAXSIM35 code for testing." },
+        { "when": "2024", "title": "The emulator", "text": "TAXSIM inputs and outputs on PolicyEngine rules." },
+        { "when": "2025", "title": "NSF POSE Phase I", "text": "Feenberg is external mentor through I-Corps for POSE." },
+        { "when": "Sep 2025", "title": "Formal agreement", "text": "NBER and PolicyEngine sign a memorandum of understanding." }
+      ]
+    }
   },
   {
     "id": "nber",
@@ -245,6 +294,14 @@ export const blsSlides: BlsSlideContent[] = [
   },
 
   // The emulator and its core assumptions: 12 minutes
+  {
+    "id": "section-emulator",
+    "title": "The TAXSIM emulator",
+    "body": [],
+    "minutes": 0,
+    "notes": "Section opener. Move on after a few seconds.",
+    "divider": { "number": "02" }
+  },
   {
     "id": "drop-in",
     "title": "A drop-in replacement for TAXSIM35",
@@ -334,6 +391,14 @@ export const blsSlides: BlsSlideContent[] = [
   },
 
   // Validation: 16 minutes
+  {
+    "id": "section-validation",
+    "title": "Validation",
+    "body": [],
+    "minutes": 0,
+    "notes": "Section opener. Move on after a few seconds.",
+    "divider": { "number": "03" }
+  },
   {
     "id": "three-checks",
     "title": "Three calculations, one arbiter",
@@ -463,6 +528,14 @@ export const blsSlides: BlsSlideContent[] = [
 
   // Benefit imputation: 10 minutes
   {
+    "id": "section-benefits",
+    "title": "Beyond TAXSIM",
+    "body": [],
+    "minutes": 0,
+    "notes": "Section opener. Move on after a few seconds.",
+    "divider": { "number": "04" }
+  },
+  {
     "id": "benefit-concepts",
     "title": "From eligibility to a benefit value",
     "body": [
@@ -499,6 +572,38 @@ export const blsSlides: BlsSlideContent[] = [
       "takeaway": "A household calculator gives the potential benefit. Receipt and valuation are separate research choices.",
       "footnote": "PolicyEngine US 2.25.2, run October 5, 2026. Take-up rates from policyengine-us-data."
     }
+  },
+  {
+    "id": "input-mapping",
+    "title": "How TAXSIM inputs map to PolicyEngine",
+    "body": [],
+    "minutes": 2,
+    "notes": "Show the abstractions that let PolicyEngine accept a TAXSIM file and return TAXSIM variables. Business income: TAXSIM gives one amount per type. The emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income; it has no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold. The emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (it is available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors TAXSIM does not apply. Property tax maps to real estate taxes. SALT: PolicyEngine computes the state income tax itself and takes the larger of income or sales tax, with the IRS sales tax tables; it also models city and county income taxes (New York City, Philadelphia, Kansas City, St. Louis, Wilmington and Indiana counties). Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status is derived from mstat and the dependents; interest, dividends, capital gains and S-corporation income are split evenly between spouses; missing ages default to 40 for the head and 10 for dependents. Outputs: fiitax maps to income_tax and siitax to state_income_tax; PolicyEngine US has 40 variables built for TAXSIM outputs, including taxsim_fica. A few detail outputs are not implemented. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for.",
+    "mapping": {
+      "columns": ["TAXSIM gives", "The emulator maps it to", "PolicyEngine can model"],
+      "rows": [
+        { "area": "Business income", "taxsim": "pbusinc, pprofinc, scorp", "emulator": "Self-employment, service-business and S corporation income", "pe": "The QBI deduction with W-2 wage and property limits" },
+        { "area": "Itemized deductions", "taxsim": "mortgage, otheritem, proptax", "emulator": "One deduction with no floor or cap, plus property tax", "pe": "Charity, medical and mortgage interest, each with its own rules" },
+        { "area": "State and local taxes", "taxsim": "state", "emulator": "State income tax computed for the SALT deduction", "pe": "Income or sales tax, and city and county income taxes" },
+        { "area": "Household", "taxsim": "mstat, ages, dependents", "emulator": "Derived filing status, income split between spouses", "pe": "Each person’s income, age and relationships" },
+        { "area": "Outputs", "taxsim": "fiitax, siitax, fica, v10–v45", "emulator": "Mapped from PolicyEngine variables, 40 built for TAXSIM", "pe": "Any PolicyEngine variable, up to household net income" }
+      ],
+      "takeaway": "The emulator keeps PolicyEngine at TAXSIM’s level of detail, so the two stay comparable."
+    }
+  },
+  {
+    "id": "beyond-taxsim",
+    "title": "What PolicyEngine adds beyond TAXSIM",
+    "body": [],
+    "minutes": 2,
+    "notes": "This is what PolicyEngine’s own interfaces offer beyond the emulator. Business income: the QBI deduction with W-2 wage and property limits, specified service businesses, and REIT and PTP income. Deductions: SALT from income or sales tax, property tax and city or county income taxes; charity and medical with their own AGI rules, including the 2026 deduction for non-itemizers’ charitable gifts. New provisions: deductions for tips, overtime and car-loan interest from the 2025 tax law need inputs that TAXSIM does not have; the senior deduction is reachable through ages. Benefits: SNAP, SSI, TANF, WIC, Medicaid and ACA premium tax credits combine into household net income, and marginal rates can include benefits. Any parameter can be changed for reform analysis. In TAXSIM mode the emulator sets these benefits to zero and keeps inputs at TAXSIM’s level of detail, so its results stay comparable with TAXSIM. This leads into the next slide: the richer the rules, the more inputs a survey must supply, which is where imputation comes in.",
+    "cards": [
+      { "icon": "briefcase", "title": "Business income in detail", "text": "The QBI deduction with W-2 wage and property limits, service businesses, and REIT and PTP income." },
+      { "icon": "receipt", "title": "Deductions by component", "text": "SALT from income or sales tax, property tax and local income taxes; charity and medical with their own limits." },
+      { "icon": "gavel", "title": "Provisions beyond TAXSIM’s inputs", "text": "Deductions for tips, overtime and car-loan interest under the 2025 tax law." },
+      { "icon": "heart-handshake", "title": "Taxes and benefits together", "text": "SNAP, SSI, Medicaid and ACA premium credits, household net income, and marginal rates that include benefits." }
+    ],
+    "cardsTakeaway": "Every extra rule needs an input, and a survey may not collect it. That is where imputation comes in."
   },
   {
     "id": "imputation",
@@ -575,6 +680,14 @@ export const blsSlides: BlsSlideContent[] = [
   },
 
   // A possible CE pilot: 5 minutes
+  {
+    "id": "section-pilot",
+    "title": "A possible CE pilot",
+    "body": [],
+    "minutes": 0,
+    "notes": "Section opener. Move on after a few seconds.",
+    "divider": { "number": "05" }
+  },
   {
     "id": "ce-fit",
     "title": "Where this could fit in CE research",
