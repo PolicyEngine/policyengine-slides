@@ -65,7 +65,7 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
       ) : content.process ? (
         <ProcessFlow process={content.process} />
       ) : content.cards ? (
-        <IconCards cards={content.cards} hero={content.hero} takeaway={content.cardsTakeaway} />
+        <IconCards cards={content.cards} hero={content.hero} />
       ) : content.chains ? (
         <BenefitChains chains={content.chains} />
       ) : content.sourcesPanel ? (

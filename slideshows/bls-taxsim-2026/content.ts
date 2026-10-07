@@ -2,7 +2,7 @@ export type BlsIcon =
   | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-text' | 'flask'
   | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world'
   | 'briefcase' | 'receipt' | 'gavel' | 'heart-handshake'
-  | 'coin' | 'map-pin' | 'percentage' | 'list';
+  | 'coin' | 'map-pin' | 'percentage' | 'list' | 'health';
 
 export interface BlsSlideContent {
   id: string;
@@ -72,14 +72,13 @@ export interface BlsSlideContent {
     tabs: { label: string; lang: string; before: string; after: string }[];
     takeaway: string;
   };
-  /** Shown under a card grid as a one-line takeaway. */
-  cardsTakeaway?: string;
   /** Cards by general area: TAXSIM variables, PolicyEngine concepts or added variables, a short note, and a closing value card. */
   mapping?: {
     direction: 'input' | 'output';
     /** With `add`, an input card tells the story: TAXSIM variables, the limit, then the PolicyEngine variables that remove it. */
     rows: { area: string; icon: BlsIcon; taxsim: string[]; pe: string[]; note: string; add?: string[] }[];
     addLabel?: string;
+    taxsimLabel?: string;
     value: { title: string; text: string };
   };
   /** A section opener: the section number; the title is the section name. */
@@ -148,7 +147,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 58 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 56 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 12 minutes
   {
@@ -183,7 +182,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 58 minutes, leaving about 2 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 56 minutes, leaving about 4 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "section-intro",
@@ -390,8 +389,7 @@ export const blsSlides: BlsSlideContent[] = [
     "notes": "Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab. Demo steps: (1) Load the 3-household sample; (2) Keep Standard output: federal and state tax, FICA and marginal rates; (3) Run and download in the browser; (4) Read the results for each household; (5) Switch to Full for AGI, credits, deductions and AMT.",
     "headerLink": TAXSIM_RUN,
     "embed": {
-      "url": "https://www.policyengine.org/us/taxsim/run",
-      "footnote": "No installation needed. The same file runs with the policyengine-taxsim command."
+      "url": "https://www.policyengine.org/us/taxsim/run"
     }
   },
 
@@ -526,6 +524,7 @@ export const blsSlides: BlsSlideContent[] = [
     "minutes": 2,
     "notes": "Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: TAXSIM gives the two adults’ ages (page, sage), the number of dependents (depx) and each dependent’s age (age1 to ageN); filing status comes from mstat. Dependents have no disability or student status, which PolicyEngine uses for the EITC (a disabled child of any age, or a full-time student under 24, can qualify) and for the child and dependent care credit; is_permanently_and_totally_disabled (EITC), is_incapable_of_self_care (child and dependent care credit) and is_full_time_college_student supply them. Unearned income: TAXSIM reports interest (intrec), dividends, short-term and long-term capital gains and S-corporation income for the tax unit, and the emulator splits them evenly between spouses for joint filers; pensions and gssi are split evenly too, unless the spouses fall on different sides of a state’s age rule, when the older spouse gets all of it. Wages are already per spouse (pwages, swages). Person-level variables such as taxable_interest_income and qualified_dividend_income remove the split; taxable_ira_distributions and taxable_401k_distributions also separate retirement accounts from pensions, which TAXSIM does not. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for. Each card ends with the PolicyEngine US input variables that remove the limit, which a survey or an imputation can supply: w2_wages_from_qualified_business and unadjusted_basis_qualified_property apply the wage and property limits of the qualified business income deduction; charitable_cash_donations and other_medical_expenses give each deduction its own adjusted gross income limit or floor; county_fips places the household, which turns on city and county income taxes such as New York City’s and the Indiana county taxes; is_permanently_and_totally_disabled and is_full_time_college_student give dependents the status that the EITC uses; person-level income variables such as taxable_interest_income and qualified_dividend_income replace the split between spouses. Related variables not on the slide: business_is_sstb, qualified_reit_and_ptp_income, charitable_non_cash_donations, home_mortgage_interest, is_incapable_of_self_care, taxable_ira_distributions, taxable_401k_distributions, social_security_disability and social_security_survivors. Variable names checked in PolicyEngine US source on October 7, 2026.",
     "mapping": {
+      "taxsimLabel": "TAXSIM",
       "direction": "input",
       "rows": [
         {
@@ -630,89 +629,83 @@ export const blsSlides: BlsSlideContent[] = [
   },
   {
     "id": "output-mapping",
-    "title": "How PolicyEngine returns TAXSIM outputs",
+    "title": "What PolicyEngine calculates beyond TAXSIM",
     "body": [],
     "minutes": 1,
-    "notes": "Each TAXSIM output keeps TAXSIM’s definition. fiitax is PolicyEngine’s income_tax, which includes the net investment income tax; the Additional Medicare Tax is reported with payroll tax, not in fiitax, as TAXSIM does. siitax is state_income_tax, with Maryland county tax left out because TAXSIM input has no county. fica comes from taxsim_fica, one of 40 PolicyEngine US variables built for TAXSIM outputs; it includes the employee and employer shares. frate and srate come from a second run with $100 more wages: TAXSIM uses a 1-cent change, but PolicyEngine computes in 32-bit floats, so a larger change keeps the rate precise; the emulator varies wages only. With idtl=2, the detail variables v10 to v45 are mapped from PolicyEngine variables, with per-state lists for the state detail; ficar, v15, v16, v20, v21, v23, v30, v31, v33 and v41 are not implemented yet. Benefits such as SNAP, SSI, TANF and WIC are set to zero in emulator mode, so state calculations that count cash assistance as income match TAXSIM’s tax-only scope. Sources: policyengine-taxsim 3.0.1 runners/policyengine_runner.py, core/marginal_rates.py and config/variable_mappings.yaml.",
+    "notes": "Show what PolicyEngine calculates that TAXSIM’s output does not carry, and how the emulator handles each item so that its results stay comparable with TAXSIM. Benefit programs: PolicyEngine calculates SNAP, SSI, TANF, WIC and the state SSI supplements; the emulator sets them to zero, because TAXSIM has no inputs for them and some state taxes count cash assistance as income (for example, the base of the Massachusetts senior circuit breaker credit; policyengine-taxsim issue #1031). Health coverage: Medicaid, CHIP and the ACA premium tax credit are separate PolicyEngine variables; the premium tax credit is not part of PolicyEngine’s income tax, and the emulator does not report any of them. 2025 federal deductions: the deductions for tips, overtime and car-loan interest need inputs that TAXSIM does not have, so they are zero in emulator runs; PolicyEngine calculates them when a data source supplies the inputs. Local income taxes: TAXSIM’s siitax is state-only, so the emulator sets Maryland county income tax to zero, and other local taxes such as New York City’s need a county that the emulator does not set; PolicyEngine’s local_income_tax covers New York City, Philadelphia, Kansas City, St. Louis, Wilmington and the Indiana counties. New York payments: the additional Empire State child credit payment, the supplemental earned income credit and the inflation refund are paid outside Form IT-201, so the emulator excludes them from siitax, as TAXSIM does. Conventions kept from TAXSIM, if asked: fiitax includes the net investment income tax but not the Additional Medicare Tax, which is reported with payroll taxes; fica includes both the employee and employer shares; one-time state rebates are in siitax and also reported as srebate; frate and srate come from a second run with $100 more wages. Sources: policyengine-taxsim 3.0.1 runners/policyengine_runner.py and core/state_output_resolver.py; PolicyEngine US source, October 7, 2026.",
     "mapping": {
       "direction": "output",
+      "addLabel": "PolicyEngine calculates",
       "rows": [
         {
-          "area": "Income taxes",
-          "icon": "scale",
-          "taxsim": [
-            "fiitax",
-            "siitax"
-          ],
-          "pe": [
-            "Federal income tax",
-            "State income tax"
-          ],
-          "note": "As in TAXSIM, the Additional Medicare Tax is reported with payroll taxes."
-        },
-        {
-          "area": "Payroll tax",
-          "icon": "file-text",
-          "taxsim": [
-            "fica"
-          ],
-          "pe": [
-            "Employee and employer payroll tax"
-          ],
-          "note": "One of 40 PolicyEngine variables built to follow TAXSIM definitions."
-        },
-        {
-          "area": "Marginal rates",
-          "icon": "percentage",
-          "taxsim": [
-            "frate",
-            "srate"
-          ],
-          "pe": [
-            "Second calculation with $100 more wages"
-          ],
-          "note": "Wages only. TAXSIM uses a one-cent change."
-        },
-        {
-          "area": "Detail variables",
-          "icon": "list",
-          "taxsim": [
-            "v10–v45"
-          ],
-          "pe": [
-            "Intermediate federal and state amounts"
-          ],
-          "note": "Ten detail variables are not yet implemented."
-        },
-        {
-          "area": "Benefits",
+          "area": "Benefit programs",
           "icon": "heart-handshake",
           "taxsim": [],
-          "pe": [
-            "Benefit programs set to zero"
+          "pe": [],
+          "note": "Set to zero in the emulator, because some state taxes count cash assistance as income.",
+          "add": [
+            "snap",
+            "ssi",
+            "tanf",
+            "wic"
+          ]
+        },
+        {
+          "area": "Health coverage",
+          "icon": "health",
+          "taxsim": [],
+          "pe": [],
+          "note": "Separate from income tax, and not reported by the emulator.",
+          "add": [
+            "medicaid",
+            "chip",
+            "aca_ptc"
+          ]
+        },
+        {
+          "area": "Local income taxes",
+          "icon": "map-pin",
+          "taxsim": [
+            "siitax"
           ],
-          "note": "Results cover taxes only, as in TAXSIM."
+          "pe": [],
+          "note": "State tax only. Maryland county tax is set to zero, and other local taxes need a county.",
+          "add": [
+            "local_income_tax"
+          ]
+        },
+        {
+          "area": "2025 federal deductions",
+          "icon": "gavel",
+          "taxsim": [],
+          "pe": [],
+          "note": "Tips, overtime and car-loan interest have no TAXSIM inputs, so these deductions are zero.",
+          "add": [
+            "tip_income_deduction",
+            "overtime_income_deduction",
+            "auto_loan_interest_deduction"
+          ]
+        },
+        {
+          "area": "New York payments",
+          "icon": "receipt",
+          "taxsim": [
+            "siitax"
+          ],
+          "pe": [],
+          "note": "Paid outside the state return, so the emulator excludes them, as TAXSIM does.",
+          "add": [
+            "ny_additional_ctc",
+            "ny_supplemental_eitc",
+            "ny_inflation_refund_credit"
+          ]
         }
       ],
       "value": {
         "title": "Why it matters",
-        "text": "Each output follows TAXSIM’s definition, so existing code reads the results without changes."
+        "text": "The emulator turns these off to match TAXSIM. PolicyEngine’s own tools return them, up to household net income and marginal rates that include benefits."
       }
     }
-  },
-  {
-    "id": "beyond-taxsim",
-    "title": "What PolicyEngine adds beyond TAXSIM",
-    "body": [],
-    "minutes": 2,
-    "notes": "This is what PolicyEngine’s own interfaces offer beyond the emulator. Business income: the QBI deduction with W-2 wage and property limits, specified service businesses, and REIT and PTP income. Deductions: SALT from income or sales tax, property tax and city or county income taxes; charity and medical with their own AGI rules, including the 2026 deduction for non-itemizers’ charitable gifts. New provisions: deductions for tips, overtime and car-loan interest from the 2025 tax law need inputs that TAXSIM does not have; the senior deduction is reachable through ages. Benefits: SNAP, SSI, TANF, WIC, Medicaid and ACA premium tax credits combine into household net income, and marginal rates can include benefits. Any parameter can be changed for reform analysis. In TAXSIM mode the emulator sets these benefits to zero and keeps inputs at TAXSIM’s level of detail, so its results stay comparable with TAXSIM. This leads into the next slide: the richer the rules, the more inputs a survey must supply, which is where imputation comes in.",
-    "cards": [
-      { "icon": "briefcase", "title": "Business income in detail", "text": "The QBI deduction with W-2 wage and property limits, service businesses, and REIT and PTP income." },
-      { "icon": "receipt", "title": "Deductions by component", "text": "SALT from income or sales tax, property tax and local income taxes; charity and medical with their own limits." },
-      { "icon": "gavel", "title": "Provisions beyond TAXSIM’s inputs", "text": "Deductions for tips, overtime and car-loan interest under the 2025 tax law." },
-      { "icon": "heart-handshake", "title": "Taxes and benefits together", "text": "SNAP, SSI, Medicaid and ACA premium credits, household net income, and marginal rates that include benefits." }
-    ],
-    "cardsTakeaway": "Every extra rule needs an input, and a survey may not collect it. That is where imputation comes in."
   },
   {
     "id": "imputation",

@@ -43,15 +43,19 @@ function CardHeader({ row }: { row: Row }) {
   );
 }
 
-/** Input story: TAXSIM variables, the limit of the TAXSIM format, then the PolicyEngine variables that remove it. */
-function StoryCard({ row, addLabel }: { row: Row; addLabel?: string }) {
+/** Story card: TAXSIM variables (or none), the limit or how the emulator handles it, then the PolicyEngine variables. */
+function StoryCard({ row, addLabel, taxsimLabel }: { row: Row; addLabel?: string; taxsimLabel?: string }) {
   return (
-    <div className="row-span-4 grid grid-rows-subgrid gap-y-3 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm [@media(max-height:820px)]:gap-y-2 [@media(max-height:820px)]:py-3">
+    <div
+      className={`grid grid-rows-subgrid ${taxsimLabel ? 'row-span-4' : 'row-span-3'} gap-y-3 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm [@media(max-height:820px)]:gap-y-2 [@media(max-height:820px)]:py-3`}
+    >
       <CardHeader row={row} />
-      <div className="flex items-center gap-2.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">TAXSIM</span>
-        <TaxsimChips names={row.taxsim} />
-      </div>
+      {taxsimLabel && (
+        <div className="flex items-center gap-2.5">
+          <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{taxsimLabel}</span>
+          <TaxsimChips names={row.taxsim} />
+        </div>
+      )}
       <p className="flex items-start gap-2 text-sm leading-snug text-gray-700 lg:text-[15px]">
         <IconAlertCircle className="mt-0.5 shrink-0" size={17} stroke={2} style={{ color: 'var(--pe-amber-dark)' }} aria-hidden="true" />
         {row.note}
@@ -61,7 +65,7 @@ function StoryCard({ row, addLabel }: { row: Row; addLabel?: string }) {
           <IconPlus size={14} stroke={2.5} aria-hidden="true" />
           {addLabel}
         </p>
-        <div className="mt-1.5 flex flex-col items-start gap-1">
+        <div className="mt-1.5 flex flex-wrap items-start gap-1">
           {(row.add ?? []).map((name) => (
             <span key={name} className="rounded-md border border-pe-teal/20 bg-white px-2 py-0.5 font-mono text-[13px] text-pe-dark [@media(max-height:820px)]:py-0">
               {name}
@@ -102,15 +106,15 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
   return (
     <div
       className={`mt-4 grid grid-cols-3 gap-x-4 gap-y-4 text-pe-dark lg:gap-x-5 ${
-        output
-          ? 'max-lg:[@media(max-height:820px)]:[zoom:0.8]'
-          : 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.82]'
+        story
+          ? 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.8]'
+          : 'max-lg:[@media(max-height:820px)]:[zoom:0.8]'
       }`}
     >
       {mapping.rows.map((row) =>
-        story ? <StoryCard key={row.area} row={row} addLabel={mapping.addLabel} /> : <MappingCard key={row.area} row={row} output={output} />,
+        story ? <StoryCard key={row.area} row={row} addLabel={mapping.addLabel} taxsimLabel={mapping.taxsimLabel} /> : <MappingCard key={row.area} row={row} output={output} />,
       )}
-      <div className={`${story ? 'row-span-4' : 'row-span-3'} flex flex-col justify-center rounded-xl bg-pe-dark px-6 py-5 text-white`}>
+      <div className={`${story && mapping.taxsimLabel ? 'row-span-4' : 'row-span-3'} flex flex-col justify-center rounded-xl bg-pe-dark px-6 py-5 text-white`}>
         <p className="text-sm font-semibold uppercase tracking-wider text-teal-300">{mapping.value.title}</p>
         <p className="mt-2 text-lg font-medium leading-snug">{mapping.value.text}</p>
       </div>
