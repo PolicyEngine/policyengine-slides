@@ -95,6 +95,12 @@ export interface BlsSlideContent {
     takeaway: string;
     source: string;
   };
+  /** CE inputs that PolicyEngine can use and TAXSIM cannot: CE variables, PolicyEngine inputs, use, and TAXSIM's limit. */
+  ceInputs?: {
+    columns: [string, string, string, string];
+    rows: { area: string; ce: string[]; pe: string[]; use: string; taxsim: string }[];
+    source?: string;
+  };
   /** A section opener: the section number; the title is the section name. */
   divider?: { number: string };
   /** How the collaboration started: the testing process before the emulator and the milestones after it. */
@@ -163,7 +169,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 58 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 60 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 12 minutes
   {
@@ -198,7 +204,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 58 minutes, leaving about 2 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 60 minutes, leaving no slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "section-intro",
@@ -249,7 +255,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "How the collaboration started",
     "body": [],
     "minutes": 2,
-    "notes": "Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team compared records one at a time and turned each one into a YAML integration test in policyengine-us. The example on the slide is issue #1504 (November 15, 2022), trimmed: a 70-year-old with $36,000 of tax-exempt pension income in 2021, with SSI and WIC set to zero because they are not in TAXSIM35, and the expected values from the online TAXSIM35 (income_tax of −$1,400, the 2021 recovery rebate). The test failed because PolicyEngine counted tax-exempt pension income in AGI; PR #1505 fixed it the same day and the test stayed in the suite. Issues #1031 (Massachusetts senior circuit breaker, July 2022) and #1279 (2021 AMT, August 2022) follow the same pattern. The method then scaled up to differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.",
+    "notes": "Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team compared records one at a time and turned each one into a YAML integration test in policyengine-us. The example on the slide is issue #1504 (November 15, 2022), trimmed: a 70-year-old with $36,000 of tax-exempt pension income in 2021, with SSI and WIC set to zero because they are not in TAXSIM35, and the expected values from the online TAXSIM35 (income_tax of −$1,400, the 2021 recovery rebate). The test failed because PolicyEngine counted tax-exempt pension income in AGI; PR #1505 fixed it the same day and the test stayed in the suite. Issues #1031 (Massachusetts senior circuit breaker, July 2022) and #1279 (2021 AMT, August 2022) follow the same pattern. The method then scaled up to differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. NBER made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and NBER filed its first issue on its public tracker on September 22, 2024, and has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and NBER’s TAXSIM developer served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.",
     "origins": {
       "processTitle": "Before the emulator: record by record",
       "steps": [
@@ -267,9 +273,9 @@ export const blsSlides: BlsSlideContent[] = [
       },
       "milestonesTitle": "From testing to partnership",
       "milestones": [
-        { "when": "2022", "title": "Validation begins", "text": "Daniel Feenberg shares TAXSIM35 code for testing." },
+        { "when": "2022", "title": "Validation begins", "text": "NBER shares TAXSIM35 code for testing." },
         { "when": "2024", "title": "The emulator", "text": "TAXSIM inputs and outputs on PolicyEngine rules." },
-        { "when": "2025", "title": "NSF POSE Phase I", "text": "Feenberg is external mentor through I-Corps for POSE." },
+        { "when": "2025", "title": "NSF POSE Phase I", "text": "NBER’s TAXSIM developer is external mentor through I-Corps." },
         { "when": "Sep 2025", "title": "Formal agreement", "text": "NBER and PolicyEngine sign a memorandum of understanding." }
       ]
     }
@@ -283,15 +289,15 @@ export const blsSlides: BlsSlideContent[] = [
       "PolicyEngine: open source since 2021, 95,000+ federal and state parameters, and benefit programs such as SNAP and Medicaid",
     ],
     "minutes": 3,
-    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
+    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; NBER still maintains it, and more than 1,200 papers cite the 1993 paper that introduced it. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first issue: September 22, 2024). The memorandum of understanding with NBER was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
     "bridge": {
       "left": {
         "title": "TAXSIM at NBER",
         "party": "nber",
         "items": [
-          { "icon": "history", "title": "Developed since the 1970s", "detail": "By Daniel Feenberg, who maintains it" },
-          { "icon": "book", "title": "1,200+ citing papers", "detail": "Feenberg and Coutts (1993)" },
+          { "icon": "history", "title": "Developed since the 1970s", "detail": "At NBER, which still maintains it" },
+          { "icon": "book", "title": "1,200+ citing papers", "detail": "Of the 1993 TAXSIM paper" },
           { "icon": "calendar", "title": "Federal law from 1960", "detail": "State law from 1977" },
           { "icon": "building", "title": "Used in research and policy", "detail": "Think tanks and federal agencies" }
         ]
@@ -299,7 +305,7 @@ export const blsSlides: BlsSlideContent[] = [
       "center": {
         "title": "Memorandum of understanding",
         "date": "September 2025",
-        "detail": "Daniel Feenberg and James Poterba (NBER) with PolicyEngine",
+        "detail": "NBER and PolicyEngine",
         "routingTitle": "One interface, every tax year",
         "routing": [
           { "years": "1960–2020", "engine": "TAXSIM35", "party": "nber" },
@@ -429,7 +435,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "Three calculations, one arbiter",
     "body": [],
     "minutes": 3,
-    "notes": "Walk the four steps on the left, then point to the triangle. (1) A mismatch between PolicyEngine and TAXSIM on a CPS record becomes a GitHub issue; Dan Feenberg at NBER files most of them. (2) An agentic workflow explores the disagreement: it reruns the record in both engines, checks third-party validators such as a completed TaxAct return or Axiom’s encoding of the statute, and reads the statute and the official instructions. (3) The findings become a recommendation to adjust one engine, or to agree a convention with NBER when TAXSIM’s inputs cannot carry what the law needs; a person reviews every recommendation before it is posted or merged. (4) After the fix ships, the record is rerun to confirm the disagreement is gone. The validators do not vote: the statute and the official instructions decide which calculation is right, because two engines can share an error that no agreement rate would reveal. PolicyEngine fixes carry tests whose expected values come from the form or statute.",
+    "notes": "Walk the four steps on the left, then point to the triangle. (1) A mismatch between PolicyEngine and TAXSIM on a CPS record becomes a GitHub issue; NBER files most of them. (2) An agentic workflow explores the disagreement: it reruns the record in both engines, checks third-party validators such as a completed TaxAct return or Axiom’s encoding of the statute, and reads the statute and the official instructions. (3) The findings become a recommendation to adjust one engine, or to agree a convention with NBER when TAXSIM’s inputs cannot carry what the law needs; a person reviews every recommendation before it is posted or merged. (4) After the fix ships, the record is rerun to confirm the disagreement is gone. The validators do not vote: the statute and the official instructions decide which calculation is right, because two engines can share an error that no agreement rate would reveal. PolicyEngine fixes carry tests whose expected values come from the form or statute.",
     "triangle": {
       "corners": {
         "top": { "icon": "building", "title": "TAXSIM35", "text": "NBER’s calculator, the reference engine" },
@@ -647,6 +653,109 @@ export const blsSlides: BlsSlideContent[] = [
         "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or imputation, unlock the full rules."
       },
       "addLabel": "PolicyEngine adds"
+    }
+  },
+  {
+    "id": "ce-inputs",
+    "title": "CE inputs PolicyEngine can use and TAXSIM cannot",
+    "body": [],
+    "minutes": 2,
+    "notes": "Show which CE fields could feed PolicyEngine inputs that TAXSIM’s format cannot carry. All CE variables are in the 2024 Interview PUMD dictionary (FMLI unless noted; IN_COLL and SSIX are on MEMI). Medical: HEALTHCQ is the sum of HLTHINCQ, MEDSRVCQ, PREDRGCQ and MEDSUPCQ; TAXSIM takes only deductible medical expenses, already above the AGI floor, in its mortgage total, so the CE applied the floor itself. PolicyEngine applies the floor and also uses medical costs for the SNAP excess medical deduction for elderly and disabled members. Charity: CASHCOCQ also includes alimony, child support, gifts and political giving, so use the charity codes in the CNT detail file. Tuition: EDUCACQ includes K-12 tuition; college tuition is UCC 670110. College enrollment: IN_COLL is 1 full time, 2 part time, 3 not at all. TAXSIM’s documentation instead asks users to code students aged 20 to 23 as 19. Car loans: VEHFINCQ is vehicle finance charges; the 2025 deduction also requires final assembly in the United States, which the CE does not record. Rent and utilities: TAXSIM uses rentpaid only for state property tax credits and has no utility field. Benefits: JFS_AMT is the annual value of SNAP (with FS_MTHI months), SSIX is SSI per member, and WELFAREX is public assistance; TAXSIM takes one transfers total, used for state rebates. Quarterly spending variables (CQ and PQ) cover a three-month reference period; income variables cover 12 months. Context for this audience: from the second quarter of 2013 through the 2023 data, CE published federal and state tax estimates from TAXSIM; the 2024 data has no tax or after-tax income estimates, because the model was not updated for the 2024 tax year (CE PUMD Getting Started Guide). The emulator covers tax years 2021 onward. Sources: https://www.bls.gov/cex/pumd/ce-pumd-interview-diary-dictionary.xlsx, https://www.bls.gov/cex/pumd-getting-started-guide.htm, https://taxsim.nber.org/taxsim35/ and PolicyEngine US source, October 7, 2026.",
+    "ceInputs": {
+      "columns": [
+        "CE collects",
+        "PolicyEngine input",
+        "What PolicyEngine does with it",
+        "TAXSIM"
+      ],
+      "rows": [
+        {
+          "area": "Medical costs and premiums",
+          "ce": [
+            "HEALTHCQ",
+            "HLTHINCQ"
+          ],
+          "pe": [
+            "other_medical_expenses",
+            "health_insurance_premiums"
+          ],
+          "use": "Applies the medical deduction’s income floor and the SNAP medical deduction",
+          "taxsim": "Only the deductible amount, in one total"
+        },
+        {
+          "area": "Charitable gifts",
+          "ce": [
+            "CASHCOCQ"
+          ],
+          "pe": [
+            "charitable_cash_donations"
+          ],
+          "use": "Charity deduction, including the 2026 deduction for non-itemizers",
+          "taxsim": "In one total with mortgage interest"
+        },
+        {
+          "area": "Tuition",
+          "ce": [
+            "EDUCACQ"
+          ],
+          "pe": [
+            "qualified_tuition_expenses"
+          ],
+          "use": "American Opportunity and Lifetime Learning credits",
+          "taxsim": "No field"
+        },
+        {
+          "area": "College enrollment",
+          "ce": [
+            "IN_COLL"
+          ],
+          "pe": [
+            "is_full_time_college_student"
+          ],
+          "use": "Student rules for EITC and dependent credits, and SNAP",
+          "taxsim": "No field"
+        },
+        {
+          "area": "Car loan interest",
+          "ce": [
+            "VEHFINCQ"
+          ],
+          "pe": [
+            "auto_loan_interest"
+          ],
+          "use": "Car loan interest deduction for 2025 to 2028",
+          "taxsim": "No field"
+        },
+        {
+          "area": "Rent and utilities",
+          "ce": [
+            "RENDWECQ",
+            "UTILCQ"
+          ],
+          "pe": [
+            "rent",
+            "gas_expense",
+            "water_expense"
+          ],
+          "use": "SNAP shelter deduction and state renter credits",
+          "taxsim": "Rent for state credits only; no utilities"
+        },
+        {
+          "area": "Benefits received",
+          "ce": [
+            "JFS_AMT",
+            "SSIX",
+            "WELFAREX"
+          ],
+          "pe": [
+            "ssi_reported",
+            "takes_up_snap_if_eligible"
+          ],
+          "use": "Compares simulated SNAP, SSI and TANF with reported receipt",
+          "taxsim": "One transfers total"
+        }
+      ],
+      "source": "CE variables from the 2024 Interview public-use microdata dictionary; PolicyEngine US variable names."
     }
   },
   {

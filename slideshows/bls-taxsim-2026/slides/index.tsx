@@ -1,6 +1,7 @@
 import DetailContent from './DetailContent';
 import DropInTabs from './DropInTabs';
 import LiveEmbed from './LiveEmbed';
+import CeInputsTable from './CeInputsTable';
 import InputMapping from './InputMapping';
 import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
@@ -77,6 +78,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <ResourceBars bars={content.resourceBars} />
       ) : content.dropIn ? (
         <DropInTabs dropIn={content.dropIn} />
+      ) : content.ceInputs ? (
+        <CeInputsTable table={content.ceInputs} />
       ) : content.mapping ? (
         <InputMapping mapping={content.mapping} />
       ) : content.origins ? (
