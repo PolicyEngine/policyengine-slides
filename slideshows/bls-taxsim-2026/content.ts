@@ -88,6 +88,8 @@ export interface BlsSlideContent {
     processTitle: string;
     processDetail: string;
     steps: { title: string; text: string }[];
+    /** A real test from the tracker, shown as YAML beside the steps. */
+    example?: { title: string; source: string; url: string; code: string };
     milestonesTitle: string;
     milestones: { when: string; title: string; text: string }[];
   };
@@ -233,16 +235,23 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "How the collaboration started",
     "body": [],
     "minutes": 2,
-    "notes": "Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team used differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.",
+    "notes": "Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team compared records one at a time and turned each one into a YAML integration test in policyengine-us. The example on the slide is issue #1504 (November 15, 2022), trimmed: a 70-year-old with $36,000 of tax-exempt pension income in 2021, with SSI and WIC set to zero because they are not in TAXSIM35, and the expected values from the online TAXSIM35 (income_tax of −$1,400, the 2021 recovery rebate). The test failed because PolicyEngine counted tax-exempt pension income in AGI; PR #1505 fixed it the same day and the test stayed in the suite. Issues #1031 (Massachusetts senior circuit breaker, July 2022) and #1279 (2021 AMT, August 2022) follow the same pattern. The method then scaled up to differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.",
     "origins": {
-      "processTitle": "Before the emulator: differential testing",
+      "processTitle": "Before the emulator: record by record",
       "processDetail": "2022–2024 · tax year 2021, federal and every state",
       "steps": [
-        { "title": "Run both models", "text": "Samples of 100,000 tax units through TAXSIM35 and PolicyEngine." },
-        { "title": "Rank the differences", "text": "The largest tax differences came out one at a time." },
-        { "title": "Trace by hand", "text": "Fill out the tax form to see which model is wrong." },
-        { "title": "Fix either side", "text": "A PolicyEngine fix with a test, or a TAXSIM35 correction." }
+        { "title": "Compare one record", "text": "One household runs through both models." },
+        { "title": "Trace the difference", "text": "Fill out the tax form to find the error." },
+        { "title": "Write a YAML test", "text": "The record becomes an integration test." },
+        { "title": "Fix the model at fault", "text": "PolicyEngine keeps the test; NBER corrects TAXSIM35." },
+        { "title": "Scale up", "text": "Samples of 100,000 tax units find the next records." }
       ],
+      "example": {
+        "title": "One record as a YAML test",
+        "source": "policyengine-us #1504 · November 2022",
+        "url": "https://github.com/PolicyEngine/policyengine-us/issues/1504",
+        "code": "- name: Tax unit with tax-exempt pension income as sole income source.\n  period: 2021\n  input:\n    people:\n      person1:\n        age: 70\n        tax_exempt_pension_income: 36000\n        ssi: 0  # not in TAXSIM35\n        wic: 0  # not in TAXSIM35\n  output:  # expected results from online TAXSIM35 10/24/22 version\n    taxsim_tfica: 0.00\n    income_tax: -1400.00"
+      },
       "milestonesTitle": "From testing to partnership",
       "milestones": [
         { "when": "2022", "title": "Validation begins", "text": "Daniel Feenberg shares TAXSIM35 code for testing." },

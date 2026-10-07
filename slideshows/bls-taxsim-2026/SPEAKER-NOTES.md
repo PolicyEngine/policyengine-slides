@@ -66,11 +66,29 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 
 ## 7. How the collaboration started (7–9 min)
 
-Before the emulator: differential testing (2022–2024 · tax year 2021, federal and every state):
-1. **Run both models:** Samples of 100,000 tax units through TAXSIM35 and PolicyEngine.
-2. **Rank the differences:** The largest tax differences came out one at a time.
-3. **Trace by hand:** Fill out the tax form to see which model is wrong.
-4. **Fix either side:** A PolicyEngine fix with a test, or a TAXSIM35 correction.
+Before the emulator: record by record (2022–2024 · tax year 2021, federal and every state):
+1. **Compare one record:** One household runs through both models.
+2. **Trace the difference:** Fill out the tax form to find the error.
+3. **Write a YAML test:** The record becomes an integration test.
+4. **Fix the model at fault:** PolicyEngine keeps the test; NBER corrects TAXSIM35.
+5. **Scale up:** Samples of 100,000 tax units find the next records.
+
+One record as a YAML test (policyengine-us #1504 · November 2022, https://github.com/PolicyEngine/policyengine-us/issues/1504):
+
+```yaml
+- name: Tax unit with tax-exempt pension income as sole income source.
+  period: 2021
+  input:
+    people:
+      person1:
+        age: 70
+        tax_exempt_pension_income: 36000
+        ssi: 0  # not in TAXSIM35
+        wic: 0  # not in TAXSIM35
+  output:  # expected results from online TAXSIM35 10/24/22 version
+    taxsim_tfica: 0.00
+    income_tax: -1400.00
+```
 
 From testing to partnership:
 - **2022 · Validation begins:** Daniel Feenberg shares TAXSIM35 code for testing.
@@ -78,7 +96,7 @@ From testing to partnership:
 - **2025 · NSF POSE Phase I:** Feenberg is external mentor through I-Corps for POSE.
 - **Sep 2025 · Formal agreement:** NBER and PolicyEngine sign a memorandum of understanding.
 
-Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team used differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.
+Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team compared records one at a time and turned each one into a YAML integration test in policyengine-us. The example on the slide is issue #1504 (November 15, 2022), trimmed: a 70-year-old with $36,000 of tax-exempt pension income in 2021, with SSI and WIC set to zero because they are not in TAXSIM35, and the expected values from the online TAXSIM35 (income_tax of −$1,400, the 2021 recovery rebate). The test failed because PolicyEngine counted tax-exempt pension income in AGI; PR #1505 fixed it the same day and the test stayed in the suite. Issues #1031 (Massachusetts senior circuit breaker, July 2022) and #1279 (2021 AMT, August 2022) follow the same pattern. The method then scaled up to differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.
 
 ## 8. The NBER collaboration (9–12 min)
 
