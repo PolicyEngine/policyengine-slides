@@ -1,6 +1,7 @@
 import {
   IconArrowLeft,
   IconArrowRight,
+  IconArrowsSplit2,
   IconBook,
   IconBrandGithub,
   IconCalendar,
@@ -150,52 +151,6 @@ export function QuestionsAndLinks({ questions, links }: { questions: string[]; l
           </a>
         ))}
       </div>
-    </div>
-  );
-}
-
-type Worked = NonNullable<BlsSlideContent['worked']>;
-
-/** One real record: the input row, the household built from it, and the outputs. */
-export function WorkedExample({ worked }: { worked: Worked }) {
-  return (
-    <div className="mt-2 space-y-3">
-      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-4">
-        <div className="rounded-xl bg-pe-darker px-5 py-4 font-mono">
-          <p className="mb-2 font-sans text-sm font-semibold uppercase tracking-wider text-teal-300">{worked.inputTitle}</p>
-          {worked.input.map((row) => (
-            <div key={row.field} className="grid grid-cols-[6.5rem_5.5rem_1fr] items-baseline gap-2 py-1 text-base">
-              <span className="text-teal-300">{row.field}</span>
-              <span className="text-white">{row.value}</span>
-              <span className="font-sans text-sm text-white/60">{row.meaning}</span>
-            </div>
-          ))}
-        </div>
-        <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.householdTitle}</p>
-          <div className="space-y-2">
-            {worked.household.map((member) => (
-              <div key={member.role} className="rounded-lg bg-white px-3 py-2 shadow-sm">
-                <p className="text-base font-semibold leading-snug text-pe-dark">{member.role}</p>
-                <p className="text-sm leading-snug text-gray-600">{member.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.outputTitle}</p>
-          {worked.outputs.map((row) => (
-            <div key={row.field} className="grid grid-cols-[4rem_6rem_1fr] items-baseline gap-2 border-b border-gray-200 py-1.5 last:border-0">
-              <span className="font-mono text-sm text-pe-teal">{row.field}</span>
-              <span className="text-lg font-bold text-pe-dark">{row.value}</span>
-              <span className="text-sm leading-snug text-gray-600">{row.meaning}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      {worked.footnote && <p className="text-sm text-gray-500">{worked.footnote}</p>}
     </div>
   );
 }
@@ -412,6 +367,79 @@ export function PartnershipBridge({ bridge }: { bridge: BridgeData }) {
         <IconArrowLeft className={`self-center ${SIDE_STYLE.pe.icon}`} size={30} stroke={2.5} aria-hidden="true" />
         <BridgeSide side={bridge.right} />
       </div>
+    </div>
+  );
+}
+
+type RoutingData = NonNullable<BlsSlideContent['routing']>;
+
+const ROUTE_STROKE: Record<'nber' | 'pe', string> = {
+  nber: 'var(--pe-amber-dark)',
+  pe: 'var(--pe-teal-light)',
+};
+
+/** Curved connectors between a single box and two stacked boxes; `join` mirrors the fork. */
+function Connector({ join = false }: { join?: boolean }) {
+  const paths = [
+    { party: 'nber' as const, d: join ? 'M0,25 C55,25 45,50 100,50' : 'M0,50 C55,50 45,25 100,25' },
+    { party: 'pe' as const, d: join ? 'M0,75 C55,75 45,50 100,50' : 'M0,50 C55,50 45,75 100,75' },
+  ];
+  return (
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full" aria-hidden="true">
+      {paths.map((p) => (
+        <path key={p.party} d={p.d} fill="none" stroke={ROUTE_STROKE[p.party]} strokeWidth={3.5} vectorEffect="non-scaling-stroke" />
+      ))}
+    </svg>
+  );
+}
+
+function RowList({ rows }: { rows: RoutingData['input']['rows'] }) {
+  return (
+    <div className="mt-3 space-y-2">
+      {rows.map((row) => (
+        <div key={row.text} className="flex items-center gap-2 rounded-md bg-white/10 px-3 py-2">
+          <span className={`h-3 w-3 shrink-0 rounded-full ${SIDE_STYLE[row.party].dot}`} aria-hidden="true" />
+          <code className="whitespace-nowrap font-mono text-xs leading-snug text-white lg:text-sm">{row.text}</code>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FileBox({ file }: { file: RoutingData['input'] }) {
+  return (
+    <div className="flex flex-col justify-center rounded-xl bg-pe-darker px-5 py-4 text-white">
+      <p className="text-base font-bold lg:text-lg">{file.title}</p>
+      <p className="text-sm text-white/70">{file.detail}</p>
+      <RowList rows={file.rows} />
+    </div>
+  );
+}
+
+/** Same input file and output file on each side; rows split by tax year to two engines in between. */
+export function WorkflowRouting({ routing }: { routing: RoutingData }) {
+  return (
+    <div className="mt-2 space-y-5">
+      <div className="grid h-[clamp(14rem,calc(100vh-450px),24rem)] grid-cols-[1.12fr_4rem_0.88fr_4rem_1.12fr] items-stretch">
+        <FileBox file={routing.input} />
+        <Connector />
+        <div className="flex flex-col justify-between gap-4 py-1">
+          {routing.engines.map((engine) => (
+            <div key={engine.name} className={`flex flex-1 flex-col justify-center rounded-xl border-l-4 bg-gray-50 px-5 py-3 ${SIDE_STYLE[engine.party].border}`}>
+              <p className="text-sm font-bold tracking-wide text-gray-500">{engine.years}</p>
+              <p className="text-xl font-bold leading-snug text-pe-dark">{engine.name}</p>
+              <p className="text-sm leading-snug text-gray-600">{engine.detail}</p>
+            </div>
+          ))}
+        </div>
+        <Connector join />
+        <FileBox file={routing.output} />
+      </div>
+      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
+        <IconArrowsSplit2 className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
+        <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{routing.takeaway}</p>
+      </div>
+      <p className="text-sm text-gray-500">{routing.footnote}</p>
     </div>
   );
 }

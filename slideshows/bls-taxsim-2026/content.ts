@@ -41,15 +41,13 @@ export interface BlsSlideContent {
     takeaway: string;
     footnote: string;
   };
-  /** One real record: input row, household built from it, and TAXSIM outputs. */
-  worked?: {
-    inputTitle: string;
-    input: { field: string; value: string; meaning: string }[];
-    householdTitle: string;
-    household: { role: string; detail: string }[];
-    outputTitle: string;
-    outputs: { field: string; value: string; meaning: string }[];
-    footnote?: string;
+  /** Same input and output files on each side; rows split by tax year to two engines. */
+  routing?: {
+    input: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    engines: { party: 'nber' | 'pe'; years: string; name: string; detail: string }[];
+    output: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    takeaway: string;
+    footnote: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -162,7 +160,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first six sections total 60 minutes. Show the drop-in swap and one worked example, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first six sections total 60 minutes. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "what-is-pe",
@@ -276,42 +274,37 @@ export const blsSlides: BlsSlideContent[] = [
   },
   {
     "id": "record-to-result",
-    "title": "From a TAXSIM record to a result",
+    "title": "Where each calculation happens",
     "body": [
-      "One TAXSIM-format row: a married couple in California, two children, $130,000 in wages",
-      "The adapter builds two adults and two dependents in one joint tax unit",
-      "PolicyEngine returns $8,282 federal and $3,214 California income tax for 2024"
+      "The same TAXSIM input file goes in, with any mix of tax years",
+      "Rows for 1960–2020 go to the bundled TAXSIM35; rows for 2021 onward go to PolicyEngine US",
+      "The same TAXSIM output file comes out, with the same variables for every year"
     ],
     "minutes": 3,
-    "notes": "Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers. Two input points for CE staff: state codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. And one file can cover any year: the emulator routes years before 2021 to the bundled TAXSIM35 and 2021 onward to PolicyEngine, so a run record should note the emulator and model versions.",
-    "worked": {
-      "inputTitle": "TAXSIM input row",
-      "input": [
-        { "field": "year", "value": "2024", "meaning": "Tax year" },
-        { "field": "state", "value": "5", "meaning": "California" },
-        { "field": "mstat", "value": "2", "meaning": "Married, joint" },
-        { "field": "page, sage", "value": "40, 38", "meaning": "Adult ages" },
-        { "field": "depx", "value": "2", "meaning": "Dependents" },
-        { "field": "age1, age2", "value": "8, 12", "meaning": "Child ages" },
-        { "field": "pwages", "value": "80,000", "meaning": "Primary wages" },
-        { "field": "swages", "value": "50,000", "meaning": "Spouse wages" }
+    "notes": "Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.",
+    "routing": {
+      "input": {
+        "title": "TAXSIM input file",
+        "detail": "One row per tax unit, any tax year",
+        "rows": [
+          { "party": "nber", "text": "year=2019 state=5 mstat=2 …" },
+          { "party": "pe", "text": "year=2024 state=5 mstat=2 …" }
+        ]
+      },
+      "engines": [
+        { "party": "nber", "years": "Tax years 1960–2020", "name": "TAXSIM35", "detail": "NBER’s model, bundled with the emulator" },
+        { "party": "pe", "years": "Tax years 2021 onward", "name": "PolicyEngine US", "detail": "Federal and state rules" }
       ],
-      "householdTitle": "Household PolicyEngine builds",
-      "household": [
-        { "role": "Tax unit", "detail": "Married filing jointly, California, 2024" },
-        { "role": "Head, age 40", "detail": "Employment income $80,000" },
-        { "role": "Spouse, age 38", "detail": "Employment income $50,000" },
-        { "role": "Dependents, ages 8 and 12", "detail": "Qualify for the child tax credit" }
-      ],
-      "outputTitle": "TAXSIM outputs",
-      "outputs": [
-        { "field": "fiitax", "value": "$8,282", "meaning": "Federal income tax" },
-        { "field": "siitax", "value": "$3,214", "meaning": "California income tax" },
-        { "field": "v10", "value": "$130,000", "meaning": "Federal AGI" },
-        { "field": "v22", "value": "$4,000", "meaning": "Child tax credit" },
-        { "field": "frate", "value": "22%", "meaning": "Federal marginal rate" },
-        { "field": "fica", "value": "$19,890", "meaning": "Payroll tax, both halves" }
-      ]
+      "output": {
+        "title": "TAXSIM output file",
+        "detail": "Same variables for every year",
+        "rows": [
+          { "party": "nber", "text": "2019: fiitax 10,949 siitax 4,583" },
+          { "party": "pe", "text": "2024: fiitax 8,282 siitax 3,214" }
+        ]
+      },
+      "takeaway": "One file in and one file out. The tax year decides which engine calculates each row.",
+      "footnote": "Example: one California household, married, two children, $130,000 in wages, run for 2019 and 2024."
     }
   },
 
@@ -321,7 +314,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "Live demo: run the sample file",
     "body": [],
     "minutes": 13,
-    "notes": "Go straight into the live demo after the worked example and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab.",
+    "notes": "Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab.",
     "headerLink": TAXSIM_RUN,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/run",

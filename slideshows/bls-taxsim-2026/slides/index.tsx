@@ -3,7 +3,7 @@ import DropInTabs from './DropInTabs';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
-import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkedExample } from './Visuals';
+import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
 import CoverSlide from '@/components/layout/CoverSlide';
 import SlideHeader from '@/components/layout/SlideHeader';
@@ -71,8 +71,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <PartnershipBridge bridge={content.bridge} />
       ) : content.triangle ? (
         <Triangle triangle={content.triangle} />
-      ) : content.worked ? (
-        <WorkedExample worked={content.worked} />
+      ) : content.routing ? (
+        <WorkflowRouting routing={content.routing} />
 
       ) : content.compare ? (
         <CompareFlow compare={content.compare} />

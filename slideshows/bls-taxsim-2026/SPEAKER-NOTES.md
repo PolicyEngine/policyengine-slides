@@ -90,22 +90,20 @@ Existing TAXSIM workflows carry over in every supported environment, with no add
 
 The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.
 
-## 8. From a TAXSIM record to a result (13–16 min)
+## 8. Where each calculation happens (13–16 min)
 
-TAXSIM input row: year = 2024 (Tax year); state = 5 (California); mstat = 2 (Married, joint); page, sage = 40, 38 (Adult ages); depx = 2 (Dependents); age1, age2 = 8, 12 (Child ages); pwages = 80,000 (Primary wages); swages = 50,000 (Spouse wages).
+TAXSIM input file (One row per tax unit, any tax year): `year=2019 state=5 mstat=2 …`, `year=2024 state=5 mstat=2 …`.
 
-Household PolicyEngine builds: Tax unit: Married filing jointly, California, 2024; Head, age 40: Employment income $80,000; Spouse, age 38: Employment income $50,000; Dependents, ages 8 and 12: Qualify for the child tax credit.
+- **Tax years 1960–2020: TAXSIM35.** NBER’s model, bundled with the emulator
+- **Tax years 2021 onward: PolicyEngine US.** Federal and state rules
 
-TAXSIM outputs:
-- fiitax $8,282: Federal income tax
-- siitax $3,214: California income tax
-- v10 $130,000: Federal AGI
-- v22 $4,000: Child tax credit
-- frate 22%: Federal marginal rate
-- fica $19,890: Payroll tax, both halves
+TAXSIM output file (Same variables for every year): `2019: fiitax 10,949 siitax 4,583`, `2024: fiitax 8,282 siitax 3,214`.
 
+One file in and one file out. The tax year decides which engine calculates each row.
 
-Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers. Two input points for CE staff: state codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. And one file can cover any year: the emulator routes years before 2021 to the bundled TAXSIM35 and 2021 onward to PolicyEngine, so a run record should note the emulator and model versions.
+Example: one California household, married, two children, $130,000 in wages, run for 2019 and 2024.
+
+Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.
 
 # Live demonstration
 
