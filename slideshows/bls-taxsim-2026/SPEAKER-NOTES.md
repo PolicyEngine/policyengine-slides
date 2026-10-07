@@ -218,13 +218,13 @@ Section divider 04. Move on after a few seconds.
 
 ## 19. How TAXSIM inputs map to PolicyEngine (41–43 min)
 
-| Area | TAXSIM input | How the emulator maps it | Limits and conventions |
-|---|---|---|---|
-| Business income | `pbusinc, pprofinc, scorp` | Self-employment, specified-service and S corporation income | No W-2 wages or property basis for the QBI deduction’s limits |
-| Itemized deductions | `mortgage, otheritem, proptax` | Mortgage and other items as one deduction with no floor or cap | Charity and medical arrive in one total, so their AGI limits cannot apply |
-| State and local taxes | `state` | PolicyEngine computes the state income tax for the SALT deduction | No county or city, so local income taxes are left out |
-| Household | `mstat, page, sage, depx` | Filing status and dependents’ ages from the codes and counts | Most income comes per tax unit, so it is split evenly between spouses |
-| Other income | `pensions, gssi` | Taxable private pensions and Social Security retirement benefits | No split between pensions, IRA and 401(k) withdrawals |
+| Area | TAXSIM variables | How the emulator handles them |
+|---|---|---|
+| Business income | `pbusinc, pprofinc, scorp` | Mapped to self-employment, specified-service and S corporation income. TAXSIM gives no W-2 wages or property basis, so the QBI deduction’s limits cannot apply. |
+| Itemized deductions | `mortgage, otheritem, proptax` | Mortgage and other items become one deduction with no floor or cap, so the AGI limits on charity and medical cannot apply. |
+| State and local taxes | `state` | PolicyEngine computes the state income tax for the SALT deduction. With no county or city, local income taxes are left out. |
+| Household | `mstat, page, sage, depx` | Filing status and dependents’ ages come from the codes and counts. Most income is split evenly between spouses. |
+| Other income | `pensions, gssi` | Taxable private pensions and Social Security retirement benefits, with no split between pensions, IRA and 401(k) withdrawals. |
 
 TAXSIM’s inputs set the level of detail. PolicyEngine can do more when a data source supplies more.
 
@@ -232,13 +232,13 @@ Explain how a TAXSIM input row becomes a PolicyEngine household, and what the fo
 
 ## 20. How PolicyEngine returns TAXSIM outputs (43–44 min)
 
-| Area | TAXSIM output | How the emulator computes it | Limits and conventions |
-|---|---|---|---|
-| Income taxes | `fiitax, siitax` | PolicyEngine’s federal income tax, with the NIIT, and state income tax | Additional Medicare Tax goes with payroll tax, and Maryland county tax is left out, as in TAXSIM |
-| Payroll tax | `fica` | One of 40 PolicyEngine variables built for TAXSIM outputs | Employee and employer shares together, as in TAXSIM |
-| Marginal rates | `frate, srate` | A second run with $100 more wages | TAXSIM uses a 1-cent change; the emulator changes wages only |
-| Detail variables | `v10–v45` | Mapped from PolicyEngine variables, with lists for each state | Not yet implemented: ficar, v15, v16, v20, v21, v23, v30, v31, v33, v41 |
-| Benefits | `none` | SNAP, SSI, TANF and WIC set to zero | Keeps the results tax-only, as in TAXSIM |
+| Area | TAXSIM variables | How the emulator handles them |
+|---|---|---|
+| Income taxes | `fiitax, siitax` | PolicyEngine’s federal income tax, with the NIIT, and state income tax. As in TAXSIM, Additional Medicare Tax goes with payroll tax and Maryland county tax is left out. |
+| Payroll tax | `fica` | One of 40 PolicyEngine variables built for TAXSIM outputs, with the employee and employer shares together, as in TAXSIM. |
+| Marginal rates | `frate, srate` | A second run with $100 more wages. TAXSIM uses a 1-cent change, and the emulator changes wages only. |
+| Detail variables | `v10–v45` | Mapped from PolicyEngine variables, with lists for each state. Not yet implemented: ficar, v15, v16, v20, v21, v23, v30, v31, v33 and v41. |
+| Benefits | `none` | SNAP, SSI, TANF and WIC are set to zero, so the results stay tax-only, as in TAXSIM. |
 
 Every output keeps TAXSIM’s definition, so existing code reads the results unchanged.
 
