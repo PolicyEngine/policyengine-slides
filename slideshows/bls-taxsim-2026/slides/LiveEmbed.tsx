@@ -6,32 +6,18 @@ import type { BlsSlideContent } from '../content';
 type Embed = NonNullable<BlsSlideContent['embed']>;
 
 /**
- * Live iframe with a side column of demo steps, the gettsim-2026
- * LiveAppSlide pattern. Clicks inside the frame stop propagation so they
- * do not advance the deck.
+ * Live iframe at full width with a one-line caption, based on the
+ * gettsim-2026 LiveAppSlide pattern. Clicks inside the frame stop
+ * propagation so they do not advance the deck.
  */
 export default function LiveEmbed({ title, embed }: { title: string; embed: Embed }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <>
-      <div className="grid grid-cols-[0.62fr_1.38fr] gap-7 mt-2 h-[calc(100vh-330px)]">
-        <div className="flex flex-col gap-3 min-h-0">
-          <ol className="space-y-2">
-            {embed.steps.map((step, index) => (
-              <li key={step} className="flex items-start gap-3 text-base leading-snug text-pe-dark">
-                <span className="font-mono text-pe-teal font-bold shrink-0" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span>{step}</span>
-              </li>
-            ))}
-          </ol>
-          {embed.footnote && <p className="mt-auto text-sm leading-snug text-gray-500">{embed.footnote}</p>}
-        </div>
-
+      <div className="mt-2 flex h-[calc(100vh-330px)] flex-col gap-2">
         <div
-          className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto"
+          className="relative min-h-0 flex-1 rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white pointer-events-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <iframe
@@ -51,6 +37,7 @@ export default function LiveEmbed({ title, embed }: { title: string; embed: Embe
             Expand
           </button>
         </div>
+        {embed.footnote && <p className="text-sm leading-snug text-gray-500">{embed.footnote}</p>}
       </div>
 
       {expanded && (

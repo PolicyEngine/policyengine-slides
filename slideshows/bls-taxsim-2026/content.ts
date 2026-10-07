@@ -95,7 +95,6 @@ export interface BlsSlideContent {
   /** A live iframe with a side column of demo steps. */
   embed?: {
     url: string;
-    steps: string[];
     footnote?: string;
   };
   /** A left-to-right process of step cards. */
@@ -313,17 +312,10 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "Live demo: run the sample file",
     "body": [],
     "minutes": 13,
-    "notes": "Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab.",
+    "notes": "Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab. Demo steps: (1) Load the 3-household sample; (2) Keep Standard output: federal and state tax, FICA and marginal rates; (3) Run and download in the browser; (4) Read the results for each household; (5) Switch to Full for AGI, credits, deductions and AMT.",
     "headerLink": TAXSIM_RUN,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/run",
-      "steps": [
-        "Load the 3-household sample",
-        "Keep Standard output: federal and state tax, FICA and marginal rates",
-        "Run and download in the browser",
-        "Read the results for each household",
-        "Switch to Full for AGI, credits, deductions and AMT"
-      ],
       "footnote": "No installation needed. The same file runs with the policyengine-taxsim command."
     }
   },
@@ -378,16 +370,10 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "The public validation dashboard",
     "body": [],
     "minutes": 5,
-    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.",
+    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/dashboard",
-      "steps": [
-        "Pick a tax year, 2021 to 2025",
-        "Choose a tolerance",
-        "See agreement by state",
-        "Inspect a state to list its households"
-      ],
       "footnote": "Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September 23, 2026."
     }
   },
