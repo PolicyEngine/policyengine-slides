@@ -6,6 +6,7 @@ import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
 import { ThankYouSlide } from './ThankYouSlide';
 import SectionDivider from './SectionDivider';
+import UpdateTimelineSlide from './UpdateTimeline';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
@@ -84,6 +85,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <PartnershipBridge bridge={content.bridge} />
       ) : content.triangle ? (
         <Triangle triangle={content.triangle} />
+      ) : content.updateTimeline ? (
+        <UpdateTimelineSlide timeline={content.updateTimeline} />
       ) : content.routing ? (
         <WorkflowRouting routing={content.routing} />
 
