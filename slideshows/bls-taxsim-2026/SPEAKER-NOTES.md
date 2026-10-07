@@ -220,13 +220,13 @@ Section divider 04. Move on after a few seconds.
 
 | Area | TAXSIM variables | How the emulator handles them |
 |---|---|---|
-| Business income | `pbusinc, pprofinc, scorp` | Mapped to self-employment, specified-service and S corporation income. TAXSIM gives no W-2 wages or property basis, so the QBI deduction’s limits cannot apply. |
-| Itemized deductions | `mortgage, otheritem, proptax` | Mortgage and other items become one deduction with no floor or cap, so the AGI limits on charity and medical cannot apply. |
-| State and local taxes | `state` | PolicyEngine computes the state income tax for the SALT deduction. With no county or city, local income taxes are left out. |
-| Household | `mstat, page, sage, depx` | Filing status and dependents’ ages come from the codes and counts. Most income is split evenly between spouses. |
-| Other income | `pensions, gssi` | Taxable private pensions and Social Security retirement benefits, with no split between pensions, IRA and 401(k) withdrawals. |
+| Business income | `pbusinc, pprofinc, scorp` | Mapped to self-employment income, specified service trade or business income, and S corporation income. Without W-2 wages or the basis of business property, the limits on the qualified business income deduction cannot be applied. |
+| Itemized deductions | `mortgage, otheritem, proptax` | Mortgage interest and other itemized deductions are combined into a single deduction without a floor or cap, so the adjusted gross income limits on the charitable and medical expense deductions cannot be applied. |
+| State and local taxes | `state` | PolicyEngine calculates state income tax for the state and local tax deduction. Because TAXSIM does not identify the county or city, local income taxes are excluded. |
+| Household | `mstat, page, sage, depx` | Filing status and dependent ages are derived from the marital status code and the dependent counts. Income reported for the tax unit as a whole is divided equally between spouses. |
+| Other income | `pensions, gssi` | Pensions are treated as taxable private pension income and Social Security as retirement benefits. TAXSIM does not distinguish pensions from individual retirement account or 401(k) distributions. |
 
-TAXSIM’s inputs set the level of detail. PolicyEngine can do more when a data source supplies more.
+TAXSIM’s inputs determine the level of detail. PolicyEngine can model more when a data source provides it.
 
 Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status and dependents’ ages are derived from mstat and the dependent counts; interest, dividends, capital gains and S-corporation income are split evenly between spouses. Other income: pensions map to taxable private pensions and gssi to Social Security retirement benefits; TAXSIM has no split between pensions, IRA and 401(k) withdrawals. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for.
 
@@ -234,13 +234,13 @@ Explain how a TAXSIM input row becomes a PolicyEngine household, and what the fo
 
 | Area | TAXSIM variables | How the emulator handles them |
 |---|---|---|
-| Income taxes | `fiitax, siitax` | PolicyEngine’s federal income tax, with the NIIT, and state income tax. As in TAXSIM, Additional Medicare Tax goes with payroll tax and Maryland county tax is left out. |
-| Payroll tax | `fica` | One of 40 PolicyEngine variables built for TAXSIM outputs, with the employee and employer shares together, as in TAXSIM. |
-| Marginal rates | `frate, srate` | A second run with $100 more wages. TAXSIM uses a 1-cent change, and the emulator changes wages only. |
-| Detail variables | `v10–v45` | Mapped from PolicyEngine variables, with lists for each state. Not yet implemented: ficar, v15, v16, v20, v21, v23, v30, v31, v33 and v41. |
-| Benefits | `none` | SNAP, SSI, TANF and WIC are set to zero, so the results stay tax-only, as in TAXSIM. |
+| Income taxes | `fiitax, siitax` | Federal income tax, including the net investment income tax, and state income tax from PolicyEngine. Consistent with TAXSIM, the Additional Medicare Tax is reported with payroll taxes, and Maryland county income tax is excluded. |
+| Payroll tax | `fica` | Calculated by one of 40 PolicyEngine variables built for TAXSIM outputs, including both the employee and employer shares, consistent with TAXSIM. |
+| Marginal rates | `frate, srate` | Calculated from a second run with $100 of additional wages. TAXSIM uses a one-cent change, and the emulator varies wages only. |
+| Detail variables | `v10–v45` | Mapped from PolicyEngine variables, with a separate variable list for each state. Ten detail variables, including the payroll tax marginal rate, are not yet implemented. |
+| Benefits | `none` | Benefit programs, such as the Supplemental Nutrition Assistance Program and Supplemental Security Income, are set to zero, so the results cover taxes only, consistent with TAXSIM. |
 
-Every output keeps TAXSIM’s definition, so existing code reads the results unchanged.
+Each output follows TAXSIM’s definition, so existing code reads the results without changes.
 
 Each TAXSIM output keeps TAXSIM’s definition. fiitax is PolicyEngine’s income_tax, which includes the net investment income tax; the Additional Medicare Tax is reported with payroll tax, not in fiitax, as TAXSIM does. siitax is state_income_tax, with Maryland county tax left out because TAXSIM input has no county. fica comes from taxsim_fica, one of 40 PolicyEngine US variables built for TAXSIM outputs; it includes the employee and employer shares. frate and srate come from a second run with $100 more wages: TAXSIM uses a 1-cent change, but PolicyEngine computes in 32-bit floats, so a larger change keeps the rate precise; the emulator varies wages only. With idtl=2, the detail variables v10 to v45 are mapped from PolicyEngine variables, with per-state lists for the state detail; ficar, v15, v16, v20, v21, v23, v30, v31, v33 and v41 are not implemented yet. Benefits such as SNAP, SSI, TANF and WIC are set to zero in emulator mode, so state calculations that count cash assistance as income match TAXSIM’s tax-only scope. Sources: policyengine-taxsim 3.0.1 runners/policyengine_runner.py, core/marginal_rates.py and config/variable_mappings.yaml.
 

@@ -2,15 +2,20 @@ import type { BlsSlideContent } from '../content';
 
 type Mapping = NonNullable<BlsSlideContent['mapping']>;
 
-/** Rows by general area: the TAXSIM variables, then one sentence on how the emulator handles them and what follows. */
+/** Rows by general area: the area and its TAXSIM variables on the left, and how the emulator handles them on the right. */
 export default function InputMapping({ mapping }: { mapping: Mapping }) {
   return (
     <div className="mt-4 text-pe-dark max-lg:[@media(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.92]">
-      <div className="grid grid-cols-[9.5rem_minmax(0,14rem)_1fr] gap-x-6 lg:grid-cols-[11rem_minmax(0,17rem)_1fr] lg:gap-x-8">
+      <div className="flex flex-col">
         {mapping.rows.map((row) => (
-          <div key={row.area} className="col-span-3 grid grid-cols-subgrid items-center border-t border-gray-200 py-3 last:border-b lg:py-4 [@media(max-height:820px)]:py-2.5">
-            <p className="text-lg font-bold leading-snug">{row.area}</p>
-            <p className="font-mono text-sm leading-snug lg:text-[15px]" style={{ color: 'var(--pe-amber-dark)' }}>{row.taxsim}</p>
+          <div
+            key={row.area}
+            className="grid grid-cols-[12rem_1fr] items-center gap-x-8 border-t border-gray-200 py-3 last:border-b lg:grid-cols-[15rem_1fr] lg:gap-x-10 lg:py-4 [@media(max-height:820px)]:py-2"
+          >
+            <div>
+              <p className="text-lg font-bold leading-snug">{row.area}</p>
+              <p className="mt-0.5 font-mono text-sm leading-snug" style={{ color: 'var(--pe-amber-dark)' }}>{row.taxsim}</p>
+            </div>
             <p className="text-base leading-snug text-gray-700 lg:text-lg">{row.text}</p>
           </div>
         ))}
