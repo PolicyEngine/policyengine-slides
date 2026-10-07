@@ -1,12 +1,14 @@
 import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowsSplit2,
   IconBook,
   IconBrandGithub,
-  IconBuildingBank,
   IconCalendar,
+  IconBuildingBank,
   IconChartBar,
   IconChartDots,
   IconChevronRight,
-  IconFileSpreadsheet,
   IconFileText,
   IconFlask,
   IconHeartHandshake,
@@ -21,11 +23,10 @@ import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
   'book': IconBook,
-  'building': IconBuildingBank,
   'calendar': IconCalendar,
+  'building': IconBuildingBank,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
-  'file-spreadsheet': IconFileSpreadsheet,
   'file-text': IconFileText,
   'flask': IconFlask,
   'github': IconBrandGithub,
@@ -154,52 +155,6 @@ export function QuestionsAndLinks({ questions, links }: { questions: string[]; l
   );
 }
 
-type Worked = NonNullable<BlsSlideContent['worked']>;
-
-/** One real record: the input row, the household built from it, and the outputs. */
-export function WorkedExample({ worked }: { worked: Worked }) {
-  return (
-    <div className="mt-2 space-y-3">
-      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-4">
-        <div className="rounded-xl bg-pe-darker px-5 py-4 font-mono">
-          <p className="mb-2 font-sans text-sm font-semibold uppercase tracking-wider text-teal-300">{worked.inputTitle}</p>
-          {worked.input.map((row) => (
-            <div key={row.field} className="grid grid-cols-[6.5rem_5.5rem_1fr] items-baseline gap-2 py-1 text-base">
-              <span className="text-teal-300">{row.field}</span>
-              <span className="text-white">{row.value}</span>
-              <span className="font-sans text-sm text-white/60">{row.meaning}</span>
-            </div>
-          ))}
-        </div>
-        <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.householdTitle}</p>
-          <div className="space-y-2">
-            {worked.household.map((member) => (
-              <div key={member.role} className="rounded-lg bg-white px-3 py-2 shadow-sm">
-                <p className="text-base font-semibold leading-snug text-pe-dark">{member.role}</p>
-                <p className="text-sm leading-snug text-gray-600">{member.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <Arrow />
-        <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-5 py-4">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-gray-500">{worked.outputTitle}</p>
-          {worked.outputs.map((row) => (
-            <div key={row.field} className="grid grid-cols-[4rem_6rem_1fr] items-baseline gap-2 border-b border-gray-200 py-1.5 last:border-0">
-              <span className="font-mono text-sm text-pe-teal">{row.field}</span>
-              <span className="text-lg font-bold text-pe-dark">{row.value}</span>
-              <span className="text-sm leading-snug text-gray-600">{row.meaning}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <p className="text-sm text-gray-500">{worked.footnote}</p>
-    </div>
-  );
-}
-
 type Chains = NonNullable<BlsSlideContent['chains']>;
 
 /** One row per program: eligibility through to an expected value. */
@@ -293,49 +248,6 @@ export function ResourceBars({ bars }: { bars: ResourceBarsData }) {
   );
 }
 
-type PartnershipData = NonNullable<BlsSlideContent['partnership']>;
-
-function PartnerSide({ side }: { side: PartnershipData['left'] }) {
-  return (
-    <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-4">
-      <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{side.title}</p>
-      <div className="mt-2 divide-y divide-gray-200">
-        {side.items.map((item) => (
-          <div key={item.title} className="flex items-center gap-4 py-2.5">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-pe-teal/10">
-              <DeckIcon name={item.icon} size={22} />
-            </span>
-            <div>
-              <p className="text-lg font-semibold leading-snug text-pe-dark">{item.title}</p>
-              <p className="text-sm leading-snug text-gray-600">{item.detail}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/** Two partners joined by an agreement in the center. */
-export function Partnership({ partnership }: { partnership: PartnershipData }) {
-  const { center } = partnership;
-  return (
-    <div className="mt-4 space-y-5">
-      <div className="grid grid-cols-[1fr_13rem_1fr] items-stretch gap-5">
-        <PartnerSide side={partnership.left} />
-        <div className="flex flex-col items-center justify-center rounded-xl bg-pe-dark px-4 py-6 text-center text-white">
-          <IconHeartHandshake size={40} stroke={1.5} className="text-teal-300" aria-hidden="true" />
-          <p className="mt-3 text-lg font-bold leading-snug">{center.title}</p>
-          <p className="text-2xl font-extrabold text-teal-300">{center.date}</p>
-          <p className="mt-2 text-sm leading-snug text-white/80">{center.detail}</p>
-        </div>
-        <PartnerSide side={partnership.right} />
-      </div>
-      <p className="text-xl leading-snug font-medium text-pe-dark">{partnership.takeaway}</p>
-    </div>
-  );
-}
-
 type TriangleData = NonNullable<BlsSlideContent['triangle']>;
 
 function TriangleCorner({ corner }: { corner: TriangleData['corners']['top'] }) {
@@ -388,47 +300,146 @@ export function Triangle({ triangle }: { triangle: TriangleData }) {
   );
 }
 
-type DropInData = NonNullable<BlsSlideContent['dropIn']>;
+type BridgeData = NonNullable<BlsSlideContent['bridge']>;
 
-/** Renders `[[text]]` spans as the highlighted, changed part of a code line. */
-function CodeLine({ code }: { code: string }) {
-  const parts = code.split(/(\[\[.*?\]\])/g).filter(Boolean);
+const SIDE_STYLE: Record<'nber' | 'pe', { border: string; icon: string; dot: string }> = {
+  nber: { border: 'border-[var(--pe-amber-dark)]', icon: 'text-[var(--pe-amber-dark)]', dot: 'bg-[var(--pe-amber-dark)]' },
+  pe: { border: 'border-teal-400', icon: 'text-teal-500', dot: 'bg-teal-400' },
+};
+
+function BridgeSide({ side }: { side: BridgeData['left'] }) {
+  const style = SIDE_STYLE[side.party];
   return (
-    <code className="whitespace-nowrap font-mono text-[15px] leading-snug">
-      {parts.map((part, index) =>
-        part.startsWith('[[') ? (
-          <span key={index} className="font-bold text-teal-300">{part.slice(2, -2)}</span>
-        ) : (
-          <span key={index}>{part}</span>
-        ),
-      )}
-    </code>
+    <div className={`flex h-full flex-col rounded-xl border-t-4 bg-gray-50 px-5 py-4 ${style.border}`}>
+      <p className="text-sm font-bold uppercase tracking-wider text-pe-dark lg:text-base">{side.title}</p>
+      <div className="mt-2 flex flex-1 flex-col justify-evenly divide-y divide-gray-200">
+        {side.items.map((item) => {
+          const Component = ICONS[item.icon];
+          return (
+            <div key={item.title} className="flex items-center gap-3 py-2 lg:gap-4">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm lg:h-10 lg:w-10">
+                <Component className={style.icon} size={24} stroke={1.75} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-base font-semibold leading-snug text-pe-dark lg:text-lg">{item.title}</p>
+                <p className="text-xs leading-snug text-gray-600 lg:text-sm">{item.detail}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
-/** The install command and the before-and-after code swap for each environment. */
-export function DropIn({ dropIn }: { dropIn: DropInData }) {
+/** TAXSIM on the left, PolicyEngine on the right, the agreement and the year routing in the middle. */
+export function PartnershipBridge({ bridge }: { bridge: BridgeData }) {
+  const { center } = bridge;
   return (
-    <div className="mt-2 space-y-3">
-      <div className="flex items-center gap-4 rounded-lg bg-pe-darker px-5 py-3">
-        <span className="text-sm font-semibold uppercase tracking-wider text-white/60">{dropIn.installLabel}</span>
-        <code className="font-mono text-base text-white">
-          <span className="text-white/50">$ </span>{dropIn.install}
-        </code>
-      </div>
-      <div className="overflow-hidden rounded-lg bg-pe-darker">
-        <div className="grid grid-cols-[6rem_0.42fr_0.58fr] gap-6 border-b border-white/10 px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/60">
-          {dropIn.columns.map((column) => <span key={column}>{column}</span>)}
-        </div>
-        {dropIn.rows.map((row) => (
-          <div key={row.env} className="grid grid-cols-[6rem_0.42fr_0.58fr] items-baseline gap-6 border-b border-white/5 px-6 py-1.5 last:border-0">
-            <span className="text-base font-semibold text-white">{row.env}</span>
-            <span className="text-white/55"><CodeLine code={row.before} /></span>
-            <span className="text-white"><CodeLine code={row.after} /></span>
+    <div className="mt-2">
+      <div className="grid min-h-[calc(100vh-390px)] grid-cols-[1fr_auto_clamp(14rem,24vw,19rem)_auto_1fr] items-stretch gap-3">
+        <BridgeSide side={bridge.left} />
+        <IconArrowRight className={`self-center ${SIDE_STYLE.nber.icon}`} size={30} stroke={2.5} aria-hidden="true" />
+        <div className="flex flex-col items-center justify-center gap-3 text-center">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-pe-dark">
+            <IconHeartHandshake className="text-teal-300" size={34} stroke={1.5} aria-hidden="true" />
+          </span>
+          <div>
+            <p className="text-base font-bold leading-snug text-pe-dark lg:text-lg">{center.title}</p>
+            <p className="text-xl font-extrabold text-teal-600 lg:text-2xl">{center.date}</p>
+            <p className="mt-1 text-sm leading-snug text-gray-600">{center.detail}</p>
           </div>
-        ))}
+          <div className="w-full rounded-xl bg-pe-dark px-4 py-4 text-white">
+            <p className="text-xs font-semibold uppercase tracking-wider text-white/70 lg:text-sm">{center.routingTitle}</p>
+            <div className="mt-2 space-y-2">
+              {center.routing.map((route) => (
+                <div key={route.years} className="flex items-center justify-between gap-2 whitespace-nowrap rounded-lg bg-white/10 px-3 py-2">
+                  <span className="flex items-center gap-2 text-sm font-semibold">
+                    <span className={`h-3 w-3 rounded-full ${SIDE_STYLE[route.party].dot}`} aria-hidden="true" />
+                    {route.years}
+                  </span>
+                  <span className="text-xs text-white/85">{route.engine}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <IconArrowLeft className={`self-center ${SIDE_STYLE.pe.icon}`} size={30} stroke={2.5} aria-hidden="true" />
+        <BridgeSide side={bridge.right} />
       </div>
-      <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
+    </div>
+  );
+}
+
+type RoutingData = NonNullable<BlsSlideContent['routing']>;
+
+const ROUTE_STROKE: Record<'nber' | 'pe', string> = {
+  nber: 'var(--pe-amber-dark)',
+  pe: 'var(--pe-teal-light)',
+};
+
+/** Curved connectors between a single box and two stacked boxes; `join` mirrors the fork. */
+function Connector({ join = false }: { join?: boolean }) {
+  const paths = [
+    { party: 'nber' as const, d: join ? 'M0,25 C55,25 45,50 100,50' : 'M0,50 C55,50 45,25 100,25' },
+    { party: 'pe' as const, d: join ? 'M0,75 C55,75 45,50 100,50' : 'M0,50 C55,50 45,75 100,75' },
+  ];
+  return (
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full" aria-hidden="true">
+      {paths.map((p) => (
+        <path key={p.party} d={p.d} fill="none" stroke={ROUTE_STROKE[p.party]} strokeWidth={3.5} vectorEffect="non-scaling-stroke" />
+      ))}
+    </svg>
+  );
+}
+
+function RowList({ rows }: { rows: RoutingData['input']['rows'] }) {
+  return (
+    <div className="mt-3 space-y-2">
+      {rows.map((row) => (
+        <div key={row.text} className="flex items-center gap-2 rounded-md bg-white/10 px-3 py-2">
+          <span className={`h-3 w-3 shrink-0 rounded-full ${SIDE_STYLE[row.party].dot}`} aria-hidden="true" />
+          <code className="whitespace-nowrap font-mono text-xs leading-snug text-white lg:text-sm">{row.text}</code>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FileBox({ file }: { file: RoutingData['input'] }) {
+  return (
+    <div className="flex flex-col justify-center rounded-xl bg-pe-darker px-5 py-4 text-white">
+      <p className="text-base font-bold lg:text-lg">{file.title}</p>
+      <p className="text-sm text-white/70">{file.detail}</p>
+      <RowList rows={file.rows} />
+    </div>
+  );
+}
+
+/** Same input file and output file on each side; rows split by tax year to two engines in between. */
+export function WorkflowRouting({ routing }: { routing: RoutingData }) {
+  return (
+    <div className="mt-2 space-y-5">
+      <div className="grid h-[clamp(14rem,calc(100vh-405px),24rem)] grid-cols-[1.12fr_4rem_0.88fr_4rem_1.12fr] items-stretch">
+        <FileBox file={routing.input} />
+        <Connector />
+        <div className="flex flex-col justify-between gap-4 py-1">
+          {routing.engines.map((engine) => (
+            <div key={engine.name} className={`flex flex-1 flex-col justify-center rounded-xl border-l-4 bg-gray-50 px-5 py-3 ${SIDE_STYLE[engine.party].border}`}>
+              <p className="text-sm font-bold tracking-wide text-gray-500">{engine.years}</p>
+              <p className="text-xl font-bold leading-snug text-pe-dark">{engine.name}</p>
+              <p className="text-sm leading-snug text-gray-600">{engine.detail}</p>
+            </div>
+          ))}
+        </div>
+        <Connector join />
+        <FileBox file={routing.output} />
+      </div>
+      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
+        <IconArrowsSplit2 className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
+        <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{routing.takeaway}</p>
+      </div>
+      {routing.footnote && <p className="text-sm text-gray-500">{routing.footnote}</p>}
     </div>
   );
 }

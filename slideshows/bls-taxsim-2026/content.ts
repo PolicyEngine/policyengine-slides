@@ -1,5 +1,5 @@
 export type BlsIcon =
-  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask'
+  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-text' | 'flask'
   | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world';
 
 export interface BlsSlideContent {
@@ -41,15 +41,13 @@ export interface BlsSlideContent {
     takeaway: string;
     footnote: string;
   };
-  /** One real record: input row, household built from it, and TAXSIM outputs. */
-  worked?: {
-    inputTitle: string;
-    input: { field: string; value: string; meaning: string }[];
-    householdTitle: string;
-    household: { role: string; detail: string }[];
-    outputTitle: string;
-    outputs: { field: string; value: string; meaning: string }[];
-    footnote: string;
+  /** Same input and output files on each side; rows split by tax year to two engines. */
+  routing?: {
+    input: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    engines: { party: 'nber' | 'pe'; years: string; name: string; detail: string }[];
+    output: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    takeaway: string;
+    footnote?: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -65,16 +63,22 @@ export interface BlsSlideContent {
   dropIn?: {
     installLabel: string;
     install: string;
-    columns: [string, string, string];
-    rows: { env: string; before: string; after: string }[];
+    beforeLabel: string;
+    afterLabel: string;
+    tabs: { label: string; lang: string; before: string; after: string; note?: string }[];
     takeaway: string;
   };
-  /** Two partners joined by an agreement in the center. */
-  partnership?: {
-    left: { title: string; items: { icon: BlsIcon; title: string; detail: string }[] };
-    center: { title: string; date: string; detail: string };
-    right: { title: string; items: { icon: BlsIcon; title: string; detail: string }[] };
-    takeaway: string;
+  /** TAXSIM on the left, PolicyEngine on the right, the agreement and year routing in the middle. */
+  bridge?: {
+    left: { title: string; party: 'nber' | 'pe'; items: { icon: BlsIcon; title: string; detail: string }[] };
+    center: {
+      title: string;
+      date: string;
+      detail: string;
+      routingTitle: string;
+      routing: { years: string; engine: string; party: 'nber' | 'pe' }[];
+    };
+    right: { title: string; party: 'nber' | 'pe'; items: { icon: BlsIcon; title: string; detail: string }[] };
   };
   /** Three calculations at the corners of a triangle, with the law at the center. */
   triangle?: {
@@ -91,7 +95,6 @@ export interface BlsSlideContent {
   /** A live iframe with a side column of demo steps. */
   embed?: {
     url: string;
-    steps: string[];
     footnote?: string;
   };
   /** A left-to-right process of step cards. */
@@ -156,7 +159,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first six sections total 60 minutes. Show the drop-in swap and one worked example, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first six sections total 60 minutes. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "what-is-pe",
@@ -198,40 +201,44 @@ export const blsSlides: BlsSlideContent[] = [
     "id": "nber",
     "title": "The NBER collaboration",
     "body": [
-      "An open-source emulator built around the TAXSIM interface",
-      "Development with guidance from Dan Feenberg",
-      "Side-by-side comparisons of federal and state tax for tax years 2021 onward",
-      "A memorandum of understanding signed in September 2025",
-      "Continuity for researchers using TAXSIM workflows"
+      "TAXSIM at NBER: since the 1970s, 1,200+ citing papers, federal law from 1960 and state law from 1977",
+      "A memorandum of understanding in September 2025; one interface routes 1960–2020 to TAXSIM35 and 2021 onward to PolicyEngine",
+      "PolicyEngine: open source since 2021, 95,000+ federal and state parameters, and benefit programs such as SNAP and Medicaid",
     ],
     "minutes": 3,
-    "notes": "Introduce TAXSIM first, then the partnership. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. For this audience: since the 2013 data, the CE has used TAXSIM to estimate income taxes for most households (BLS Monthly Labor Review, 2015, https://www.bls.gov/opub/mlr/2015/article/improving-data-quality-in-ce-with-taxsim.htm). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. The emulator keeps TAXSIM35’s formats, computes tax years 2021 onward with PolicyEngine’s federal and state models, and routes earlier years to TAXSIM35. The comparison work has found improvements in both models. Source: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim",
+    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
-    "partnership": {
+    "bridge": {
       "left": {
         "title": "TAXSIM at NBER",
+        "party": "nber",
         "items": [
-          { "icon": "history", "title": "Developed since the 1970s", "detail": "Created and maintained by Daniel Feenberg" },
+          { "icon": "history", "title": "Developed since the 1970s", "detail": "By Daniel Feenberg, who maintains it" },
           { "icon": "book", "title": "1,200+ citing papers", "detail": "Feenberg and Coutts (1993)" },
           { "icon": "calendar", "title": "Federal law from 1960", "detail": "State law from 1977" },
-          { "icon": "building", "title": "Used by BLS for the CE", "detail": "Census evaluated it for the SPM" }
+          { "icon": "building", "title": "Used in research and policy", "detail": "Think tanks and federal agencies" }
         ]
       },
       "center": {
         "title": "Memorandum of understanding",
         "date": "September 2025",
-        "detail": "NBER (Daniel Feenberg, James Poterba) and PolicyEngine"
-      },
-      "right": {
-        "title": "PolicyEngine TAXSIM emulator",
-        "items": [
-          { "icon": "file-spreadsheet", "title": "Same TAXSIM35 format", "detail": "Existing scripts keep working" },
-          { "icon": "scale", "title": "PolicyEngine models from 2021", "detail": "Federal and state income tax" },
-          { "icon": "history", "title": "1960 to now in one interface", "detail": "Earlier years route to TAXSIM35" },
-          { "icon": "github", "title": "Open source", "detail": "Code and issue tracker on GitHub" }
+        "detail": "Daniel Feenberg and James Poterba (NBER) with PolicyEngine",
+        "routingTitle": "One interface, every tax year",
+        "routing": [
+          { "years": "1960–2020", "engine": "TAXSIM35", "party": "nber" },
+          { "years": "2021 onward", "engine": "PolicyEngine", "party": "pe" }
         ]
       },
-      "takeaway": "Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law."
+      "right": {
+        "title": "PolicyEngine",
+        "party": "pe",
+        "items": [
+          { "icon": "github", "title": "Open source since 2021", "detail": "133 contributors to the US model" },
+          { "icon": "scale", "title": "95,000+ parameters", "detail": "Federal, every state and DC" },
+          { "icon": "users", "title": "Tax and benefit programs", "detail": "Income tax, SNAP, Medicaid, CHIP, SSI, TANF, WIC and ACA subsidies" },
+          { "icon": "building", "title": "Used in research and policy", "detail": "Congress, think tanks, benefit tools" }
+        ]
+      }
     }
   },
 
@@ -251,57 +258,51 @@ export const blsSlides: BlsSlideContent[] = [
     "dropIn": {
       "installLabel": "Install once",
       "install": "uv tool install policyengine-taxsim",
-      "columns": ["", "TAXSIM35 (before)", "PolicyEngine TAXSIM (after)"],
-      "rows": [
-        { "env": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv" },
-        { "env": "R", "before": "taxsim_calculate_taxes(input)", "after": "[[policyengine_calculate_taxes]](input)" },
-        { "env": "SAS", "before": "system(taxsim35 < input.csv …)", "after": "system([[policyengine-taxsim]] < input.csv …)" },
-        { "env": "Stata", "before": "taxsimlocal35, replace", "after": "! [[policyengine-taxsim]] < txpydata.raw …" },
-        { "env": "Julia", "before": "pipeline(`taxsim35`, …)", "after": "pipeline(`[[policyengine-taxsim]]`, …)" },
-        { "env": "Python", "before": "subprocess.run(\"taxsim35 …\")", "after": "[[PolicyEngineRunner(df)]].run()" }
+      "beforeLabel": "TAXSIM35 (before)",
+      "afterLabel": "PolicyEngine TAXSIM (after)",
+      "tabs": [
+        {"label": "CLI", "lang": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv"},
+        {"label": "Python", "lang": "Python", "before": "import subprocess\nresult = subprocess.run(\n  \"taxsim35 < input.csv > output.csv\",\n  shell=True\n)", "after": "[[from policyengine_taxsim.runners import PolicyEngineRunner]]\nimport pandas as pd\n\ndf = pd.read_csv(\"input.csv\")\nresult = [[PolicyEngineRunner(df).run()]]"},
+        {"label": "R", "lang": "R", "before": "library(usincometaxes)\nresult <- taxsim_calculate_taxes(input)", "after": "library([[policyenginetaxsim]])\nresult <- [[policyengine_calculate_taxes]](input)"},
+        {"label": "Stata", "lang": "Stata", "before": "taxsimlocal35, replace", "after": "export delimited using \"txpydata.raw\", delimiter(\",\") replace\n! [[policyengine-taxsim]] < txpydata.raw > output.raw\nimport delimited using \"output.raw\", delimiter(\",\") clear", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
+        {"label": "SAS", "lang": "SAS", "before": "%let rc = %sysfunc(system(\n  taxsim35 < input.csv > output.csv\n));", "after": "%let rc = %sysfunc(system(\n  [[policyengine-taxsim]] < input.csv > output.csv\n));", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
+        {"label": "Julia", "lang": "Julia", "before": "run(pipeline(`taxsim35`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "after": "run(pipeline(`[[policyengine-taxsim]]`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."}
       ],
-      "takeaway": "Same input file, same output variables. Existing scripts change one command or one function name."
+      "takeaway": "Existing TAXSIM workflows carry over in every supported environment, with no added complexity."
     }
   },
   {
     "id": "record-to-result",
-    "title": "From a TAXSIM record to a result",
+    "title": "Where each calculation happens",
     "body": [
-      "One TAXSIM-format row: a married couple in California, two children, $130,000 in wages",
-      "The adapter builds two adults and two dependents in one joint tax unit",
-      "PolicyEngine returns $8,282 federal and $3,214 California income tax for 2024"
+      "The same TAXSIM input file goes in, with any mix of tax years",
+      "Rows for 1960–2020 go to the bundled TAXSIM35; rows for 2021 onward go to PolicyEngine US",
+      "The same TAXSIM output file comes out, with the same variables for every year"
     ],
     "minutes": 3,
-    "notes": "Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers. Two input points for CE staff: state codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. And one file can cover any year: the emulator routes years before 2021 to the bundled TAXSIM35 and 2021 onward to PolicyEngine, so a run record should note the emulator and model versions.",
-    "worked": {
-      "inputTitle": "TAXSIM input row",
-      "input": [
-        { "field": "year", "value": "2024", "meaning": "Tax year" },
-        { "field": "state", "value": "5", "meaning": "California" },
-        { "field": "mstat", "value": "2", "meaning": "Married, joint" },
-        { "field": "page, sage", "value": "40, 38", "meaning": "Adult ages" },
-        { "field": "depx", "value": "2", "meaning": "Dependents" },
-        { "field": "age1, age2", "value": "8, 12", "meaning": "Child ages" },
-        { "field": "pwages", "value": "80,000", "meaning": "Primary wages" },
-        { "field": "swages", "value": "50,000", "meaning": "Spouse wages" }
+    "notes": "Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.",
+    "routing": {
+      "input": {
+        "title": "TAXSIM input file",
+        "detail": "One row per tax unit, any tax year",
+        "rows": [
+          { "party": "nber", "text": "year=2019 state=5 mstat=2 …" },
+          { "party": "pe", "text": "year=2024 state=5 mstat=2 …" }
+        ]
+      },
+      "engines": [
+        { "party": "nber", "years": "Tax years 1960–2020", "name": "TAXSIM35", "detail": "NBER’s model, bundled with the emulator" },
+        { "party": "pe", "years": "Tax years 2021 onward", "name": "PolicyEngine US", "detail": "Federal and state rules" }
       ],
-      "householdTitle": "Household PolicyEngine builds",
-      "household": [
-        { "role": "Tax unit", "detail": "Married filing jointly, California, 2024" },
-        { "role": "Head, age 40", "detail": "Employment income $80,000" },
-        { "role": "Spouse, age 38", "detail": "Employment income $50,000" },
-        { "role": "Dependents, ages 8 and 12", "detail": "Qualify for the child tax credit" }
-      ],
-      "outputTitle": "TAXSIM outputs",
-      "outputs": [
-        { "field": "fiitax", "value": "$8,282", "meaning": "Federal income tax" },
-        { "field": "siitax", "value": "$3,214", "meaning": "California income tax" },
-        { "field": "v10", "value": "$130,000", "meaning": "Federal AGI" },
-        { "field": "v22", "value": "$4,000", "meaning": "Child tax credit" },
-        { "field": "frate", "value": "22%", "meaning": "Federal marginal rate" },
-        { "field": "fica", "value": "$19,890", "meaning": "Payroll tax, both halves" }
-      ],
-      "footnote": "Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2."
+      "output": {
+        "title": "TAXSIM output file",
+        "detail": "Same variables for every year",
+        "rows": [
+          { "party": "nber", "text": "2019: fiitax 10,949 siitax 4,583" },
+          { "party": "pe", "text": "2024: fiitax 8,282 siitax 3,214" }
+        ]
+      },
+      "takeaway": "One file in and one file out. The tax year decides which engine calculates each row."
     }
   },
 
@@ -311,17 +312,10 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "Live demo: run the sample file",
     "body": [],
     "minutes": 13,
-    "notes": "Go straight into the live demo after the worked example and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab.",
+    "notes": "Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab. Demo steps: (1) Load the 3-household sample; (2) Keep Standard output: federal and state tax, FICA and marginal rates; (3) Run and download in the browser; (4) Read the results for each household; (5) Switch to Full for AGI, credits, deductions and AMT.",
     "headerLink": TAXSIM_RUN,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/run",
-      "steps": [
-        "Load the 3-household sample",
-        "Keep Standard output: federal and state tax, FICA and marginal rates",
-        "Run and download in the browser",
-        "Read the results for each household",
-        "Switch to Full for AGI, credits, deductions and AMT"
-      ],
       "footnote": "No installation needed. The same file runs with the policyengine-taxsim command."
     }
   },
@@ -376,17 +370,10 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "The public validation dashboard",
     "body": [],
     "minutes": 5,
-    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab.",
+    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
-      "url": "https://www.policyengine.org/us/taxsim/dashboard",
-      "steps": [
-        "Pick a tax year, 2021 to 2025",
-        "Choose a tolerance",
-        "See agreement by state",
-        "Inspect a state to list its households"
-      ],
-      "footnote": "Enhanced CPS households, both engines. PolicyEngine US 2.6.17, data of September 23, 2026."
+      "url": "https://www.policyengine.org/us/taxsim/dashboard"
     }
   },
   {
