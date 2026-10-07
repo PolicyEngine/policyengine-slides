@@ -9,7 +9,7 @@ type DropInData = NonNullable<BlsSlideContent['dropIn']>;
 /** Renders `[[text]]` spans as the highlighted, changed part; `#` lines render as dim comments. */
 function Code({ code, highlight }: { code: string; highlight: boolean }) {
   return (
-    <pre className="whitespace-pre-wrap break-words font-mono text-xs leading-normal lg:text-[13px]">
+    <pre className="whitespace-pre-wrap break-words font-mono text-xs leading-normal lg:text-[13px] lg:[@media(min-height:880px)]:text-sm">
       {code.split('\n').map((line, lineIndex) => (
         <span key={lineIndex} className={line.trimStart().startsWith('#') ? 'text-white/45' : undefined}>
           {line
@@ -81,7 +81,7 @@ function CodeBlock({
  */
 function InstallBlock({ tabs, active }: { tabs: DropInData['installTabs']; active: number }) {
   return (
-    <div className="relative min-w-0 rounded-lg bg-pe-darker py-2.5 pl-4 pr-20 text-white">
+    <div className="relative max-w-full rounded-lg bg-pe-darker py-3 pl-5 pr-20 text-white">
       <div className="grid">
         {tabs.map((tab, index) => (
           <div
@@ -125,9 +125,9 @@ function Tabs({ labels, active, onSelect, label }: { labels: string[]; active: n
 }
 
 /**
- * The TAXSIM site's Installation section (centered, on top: title and OS tabs beside the commands) and its
- * Get started section below, with working tabs.
- * Code boxes size to their code; the takeaway sits at the bottom so the tabs never move when clicked.
+ * The TAXSIM site's Installation section (centered, on top: title and OS tabs above the commands) and its
+ * Get started section below, with working tabs. Code boxes size to their code. On short screens the whole
+ * widget scales down a little instead of squeezing the spacing.
  */
 export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const [os, setOs] = useState(0);
@@ -135,18 +135,18 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const tab = dropIn.tabs[env];
   return (
     <div
-      className="mt-1 flex flex-col gap-3 lg:h-[min(calc(100vh-330px),25rem)] lg:gap-5"
+      className="mt-2 flex flex-col gap-5 lg:gap-8 [@media(max-height:820px)]:gap-5 lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.96] max-lg:[@media(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.88]"
       onClick={(e) => e.stopPropagation()}
     >
-      <section className="flex items-center justify-center gap-6 lg:gap-8">
-        <div className="flex shrink-0 flex-col items-start gap-2.5">
+      <section className="flex flex-col items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.installTitle}</h3>
           <Tabs labels={dropIn.installTabs.map((t) => t.label)} active={os} onSelect={setOs} label="Operating system" />
         </div>
         <InstallBlock tabs={dropIn.installTabs} active={os} />
       </section>
 
-      <section className="flex flex-col gap-2">
+      <section className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <div className="flex flex-wrap items-baseline gap-x-3">
             <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.getStartedTitle}</h3>
@@ -160,7 +160,7 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
         </div>
       </section>
 
-      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3 lg:mt-auto">
+      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
         <IconCircleCheck className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
         <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{dropIn.takeaway}</p>
       </div>
