@@ -52,7 +52,7 @@ One caution: these numbers move whenever either engine changes. That's the point
 
 ## Slide 17. From a reported difference to a fix (37–39 min)
 
-Here's where we are. *Point to the figures.* Since July 2024 there have been 1,063 issues on the emulator's tracker. Dan has filed 829 of them, and 984 are closed. Differences run both ways: we've sent NBER more than 52 questions about TAXSIM's own rules.
+Here's where we are. *Point to the figures.* Since July 2024 there have been more than 1,100 issues on the emulator's public tracker, and more than 1,000 are resolved. Differences run both ways: we've sent NBER more than 150 questions about TAXSIM's own rules, and NBER has confirmed more than 100 TAXSIM corrections on the tracker. That last number is a floor. TAXSIM's working builds aren't public, so we only count the corrections NBER mentions in a comment.
 
 *Point to the examples.* Three recent issues show the three outcomes. In Oregon, the emulator put the kicker refund inside state tax but not in the rebate field, and we fixed it in four days. In Massachusetts, TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024, and NBER corrected it the next day. In Minnesota, PolicyEngine found more credits than the comparison return, because the return left out the renter's credit. That one was explained with no code change.
 

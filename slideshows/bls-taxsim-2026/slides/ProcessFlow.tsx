@@ -6,6 +6,7 @@ type Process = NonNullable<BlsSlideContent['process']>;
 /**
  * A left-to-right sequence of steps, with optional headline figures above
  * and real examples below. With examples, the steps shrink to a one-line strip.
+ * Figures share one row for the numbers and one for the labels (CSS subgrid), so they line up.
  */
 export default function ProcessFlow({ process }: { process: Process }) {
   const compact = Boolean(process.examples);
@@ -14,21 +15,27 @@ export default function ProcessFlow({ process }: { process: Process }) {
       {process.intro && <p className="text-xl leading-snug max-w-6xl">{process.intro}</p>}
 
       {process.stats && (
-        <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${process.stats.length}, minmax(0, 1fr))` }}>
+        <div
+          className="grid grid-rows-[auto_auto] gap-x-4"
+          style={{ gridTemplateColumns: `repeat(${process.stats.length}, minmax(0, 1fr))` }}
+        >
           {process.stats.map((stat) => (
-            <div key={stat.label} className="rounded-lg bg-pe-dark px-5 py-3 text-white">
-              <p className="text-3xl font-extrabold tracking-tight">{stat.value}</p>
-              <p className="text-sm leading-snug text-white/80">{stat.label}</p>
+            <div
+              key={stat.label}
+              className="row-span-2 grid grid-rows-subgrid justify-items-center gap-y-2 rounded-lg bg-pe-dark px-5 pb-4 pt-5 text-center text-white"
+            >
+              <p className="text-3xl font-extrabold leading-none tracking-tight lg:text-4xl">{stat.value}</p>
+              <p className="max-w-[16rem] text-sm leading-snug text-white/80 [text-wrap:balance] lg:text-base">{stat.label}</p>
             </div>
           ))}
         </div>
       )}
 
       {compact ? (
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2">
           {process.steps.map((step, index) => (
-            <div key={step.title} className="flex items-center gap-2">
-              <span className="rounded-full border border-pe-teal/40 bg-pe-teal/10 px-4 py-1.5 text-base font-semibold">
+            <div key={step.title} className="flex flex-1 items-center gap-2">
+              <span className="flex-1 rounded-full border border-pe-teal/40 bg-pe-teal/10 px-4 py-1.5 text-center text-base font-semibold">
                 <span className="mr-2 font-mono text-sm text-pe-teal">{String(index + 1).padStart(2, '0')}</span>
                 {step.title}
               </span>
