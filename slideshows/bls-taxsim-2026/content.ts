@@ -81,6 +81,12 @@ export interface BlsSlideContent {
     taxsimLabel?: string;
     value: { title: string; text: string };
   };
+  /** CE inputs that PolicyEngine can use and TAXSIM cannot: CE variables, PolicyEngine inputs, use, and TAXSIM's limit. */
+  ceInputs?: {
+    columns: [string, string, string, string];
+    rows: { area: string; ce: string[]; pe: string[]; use: string; taxsim: string }[];
+    source?: string;
+  };
   /** A section opener: the section number; the title is the section name. */
   divider?: { number: string };
   /** How the collaboration started: the testing process before the emulator and the milestones after it. */
@@ -149,7 +155,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 56 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 58 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 12 minutes
   {
@@ -184,7 +190,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 56 minutes, leaving about 4 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 58 minutes, leaving about 2 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "section-intro",
@@ -633,6 +639,109 @@ export const blsSlides: BlsSlideContent[] = [
         "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or imputation, unlock the full rules."
       },
       "addLabel": "PolicyEngine adds"
+    }
+  },
+  {
+    "id": "ce-inputs",
+    "title": "CE inputs PolicyEngine can use and TAXSIM cannot",
+    "body": [],
+    "minutes": 2,
+    "notes": "Show which CE fields could feed PolicyEngine inputs that TAXSIM’s format cannot carry. All CE variables are in the 2024 Interview PUMD dictionary (FMLI unless noted; IN_COLL and SSIX are on MEMI). Medical: HEALTHCQ is the sum of HLTHINCQ, MEDSRVCQ, PREDRGCQ and MEDSUPCQ; TAXSIM takes only deductible medical expenses, already above the AGI floor, in its mortgage total, so the CE applied the floor itself. PolicyEngine applies the floor and also uses medical costs for the SNAP excess medical deduction for elderly and disabled members. Charity: CASHCOCQ also includes alimony, child support, gifts and political giving, so use the charity codes in the CNT detail file. Tuition: EDUCACQ includes K-12 tuition; college tuition is UCC 670110. College enrollment: IN_COLL is 1 full time, 2 part time, 3 not at all. TAXSIM’s documentation instead asks users to code students aged 20 to 23 as 19. Car loans: VEHFINCQ is vehicle finance charges; the 2025 deduction also requires final assembly in the United States, which the CE does not record. Rent and utilities: TAXSIM uses rentpaid only for state property tax credits and has no utility field. Benefits: JFS_AMT is the annual value of SNAP (with FS_MTHI months), SSIX is SSI per member, and WELFAREX is public assistance; TAXSIM takes one transfers total, used for state rebates. Quarterly spending variables (CQ and PQ) cover a three-month reference period; income variables cover 12 months. Context for this audience: from the second quarter of 2013 through the 2023 data, CE published federal and state tax estimates from TAXSIM; the 2024 data has no tax or after-tax income estimates, because the model was not updated for the 2024 tax year (CE PUMD Getting Started Guide). The emulator covers tax years 2021 onward. Sources: https://www.bls.gov/cex/pumd/ce-pumd-interview-diary-dictionary.xlsx, https://www.bls.gov/cex/pumd-getting-started-guide.htm, https://taxsim.nber.org/taxsim35/ and PolicyEngine US source, October 7, 2026.",
+    "ceInputs": {
+      "columns": [
+        "CE collects",
+        "PolicyEngine input",
+        "What PolicyEngine does with it",
+        "TAXSIM"
+      ],
+      "rows": [
+        {
+          "area": "Medical costs and premiums",
+          "ce": [
+            "HEALTHCQ",
+            "HLTHINCQ"
+          ],
+          "pe": [
+            "other_medical_expenses",
+            "health_insurance_premiums"
+          ],
+          "use": "Applies the medical deduction’s income floor and the SNAP medical deduction",
+          "taxsim": "Only the deductible amount, in one total"
+        },
+        {
+          "area": "Charitable gifts",
+          "ce": [
+            "CASHCOCQ"
+          ],
+          "pe": [
+            "charitable_cash_donations"
+          ],
+          "use": "Charity deduction, including the 2026 deduction for non-itemizers",
+          "taxsim": "In one total with mortgage interest"
+        },
+        {
+          "area": "Tuition",
+          "ce": [
+            "EDUCACQ"
+          ],
+          "pe": [
+            "qualified_tuition_expenses"
+          ],
+          "use": "American Opportunity and Lifetime Learning credits",
+          "taxsim": "No field"
+        },
+        {
+          "area": "College enrollment",
+          "ce": [
+            "IN_COLL"
+          ],
+          "pe": [
+            "is_full_time_college_student"
+          ],
+          "use": "Student rules for EITC and dependent credits, and SNAP",
+          "taxsim": "No field"
+        },
+        {
+          "area": "Car loan interest",
+          "ce": [
+            "VEHFINCQ"
+          ],
+          "pe": [
+            "auto_loan_interest"
+          ],
+          "use": "Car loan interest deduction for 2025 to 2028",
+          "taxsim": "No field"
+        },
+        {
+          "area": "Rent and utilities",
+          "ce": [
+            "RENDWECQ",
+            "UTILCQ"
+          ],
+          "pe": [
+            "rent",
+            "gas_expense",
+            "water_expense"
+          ],
+          "use": "SNAP shelter deduction and state renter credits",
+          "taxsim": "Rent for state credits only; no utilities"
+        },
+        {
+          "area": "Benefits received",
+          "ce": [
+            "JFS_AMT",
+            "SSIX",
+            "WELFAREX"
+          ],
+          "pe": [
+            "ssi_reported",
+            "takes_up_snap_if_eligible"
+          ],
+          "use": "Compares simulated SNAP, SSI and TANF with reported receipt",
+          "taxsim": "One transfers total"
+        }
+      ],
+      "source": "CE variables from the 2024 Interview public-use microdata dictionary; PolicyEngine US variable names."
     }
   },
   {
