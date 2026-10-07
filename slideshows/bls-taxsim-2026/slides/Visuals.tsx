@@ -401,18 +401,18 @@ function BridgeSide({ side }: { side: BridgeData['left'] }) {
   const style = SIDE_STYLE[side.party];
   return (
     <div className={`flex h-full flex-col rounded-xl border-t-4 bg-gray-50 px-5 py-4 ${style.border}`}>
-      <p className="text-sm font-bold uppercase tracking-wider text-pe-dark xl:text-base">{side.title}</p>
+      <p className="text-sm font-bold uppercase tracking-wider text-pe-dark lg:text-base">{side.title}</p>
       <div className="mt-2 flex flex-1 flex-col justify-evenly divide-y divide-gray-200">
         {side.items.map((item) => {
           const Component = ICONS[item.icon];
           return (
-            <div key={item.title} className="flex items-center gap-3 py-2 xl:gap-4">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm xl:h-10 xl:w-10">
+            <div key={item.title} className="flex items-center gap-3 py-2 lg:gap-4">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm lg:h-10 lg:w-10">
                 <Component className={style.icon} size={24} stroke={1.75} aria-hidden="true" />
               </span>
               <div>
-                <p className="text-base font-semibold leading-snug text-pe-dark xl:text-lg">{item.title}</p>
-                <p className="text-xs leading-snug text-gray-600 xl:text-sm">{item.detail}</p>
+                <p className="text-base font-semibold leading-snug text-pe-dark lg:text-lg">{item.title}</p>
+                <p className="text-xs leading-snug text-gray-600 lg:text-sm">{item.detail}</p>
               </div>
             </div>
           );
@@ -435,12 +435,12 @@ export function PartnershipBridge({ bridge }: { bridge: BridgeData }) {
             <IconHeartHandshake className="text-teal-300" size={34} stroke={1.5} aria-hidden="true" />
           </span>
           <div>
-            <p className="text-base font-bold leading-snug text-pe-dark xl:text-lg">{center.title}</p>
-            <p className="text-xl font-extrabold text-teal-600 xl:text-2xl">{center.date}</p>
+            <p className="text-base font-bold leading-snug text-pe-dark lg:text-lg">{center.title}</p>
+            <p className="text-xl font-extrabold text-teal-600 lg:text-2xl">{center.date}</p>
             <p className="mt-1 text-sm leading-snug text-gray-600">{center.detail}</p>
           </div>
           <div className="w-full rounded-xl bg-pe-dark px-4 py-4 text-white">
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/70 xl:text-sm">{center.routingTitle}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-white/70 lg:text-sm">{center.routingTitle}</p>
             <div className="mt-2 space-y-2">
               {center.routing.map((route) => (
                 <div key={route.years} className="flex items-center justify-between gap-2 whitespace-nowrap rounded-lg bg-white/10 px-3 py-2">

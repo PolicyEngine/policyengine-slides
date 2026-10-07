@@ -237,7 +237,7 @@ export const blsSlides: BlsSlideContent[] = [
         "items": [
           { "icon": "github", "title": "Open source since 2021", "detail": "133 contributors to the US model" },
           { "icon": "scale", "title": "95,000+ parameters", "detail": "Federal, every state and DC" },
-          { "icon": "users", "title": "Benefit programs too", "detail": "SNAP, Medicaid, CHIP, SSI, TANF, WIC and ACA subsidies" },
+          { "icon": "users", "title": "Tax and benefit programs", "detail": "Income tax, SNAP, Medicaid, CHIP, SSI, TANF, WIC and ACA subsidies" },
           { "icon": "building", "title": "Used in research and policy", "detail": "Congress, think tanks, benefit tools" }
         ]
       }
