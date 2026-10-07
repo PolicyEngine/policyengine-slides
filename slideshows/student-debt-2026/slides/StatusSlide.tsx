@@ -18,7 +18,7 @@ const columns = [
   },
   {
     heading: 'Analysis',
-    done: ['Household examples for four of the eleven agreed measures (4, 5, 10 and 13), plus a comparison of all four plans'],
+    done: ['Household examples for five of the eleven agreed measures (4, 5, 7, 10 and 13), plus a comparison of all four plans and marginal tax rates'],
     next: 'Distributional results on all eleven measures by age, income, race and state, with month 2.',
   },
 ];

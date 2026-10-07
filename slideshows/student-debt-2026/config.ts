@@ -8,6 +8,8 @@ import SaveMinusRapSlide from './slides/SaveMinusRapSlide';
 import BracketJumpsSlide from './slides/BracketJumpsSlide';
 import FloorSlide from './slides/FloorSlide';
 import MarriageSlide from './slides/MarriageSlide';
+import NetIncomeSlide from './slides/NetIncomeSlide';
+import EmtrSlide from './slides/EmtrSlide';
 import ScfProfileSlide from './slides/ScfProfileSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
 import NextStepsSlide from './slides/NextStepsSlide';
@@ -39,6 +41,8 @@ export const studentDebt2026Config: SlideshowConfig = {
     BracketJumpsSlide,
     FloorSlide,
     MarriageSlide,
+    NetIncomeSlide,
+    EmtrSlide,
     ScfProfileSlide,
     QuestionsSlide,
     NextStepsSlide,
