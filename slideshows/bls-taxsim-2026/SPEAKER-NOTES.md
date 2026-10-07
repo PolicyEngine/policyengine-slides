@@ -82,27 +82,37 @@ Start on the left with TAXSIM, end on the right with PolicyEngine, and use the m
 
 ## 7. A drop-in replacement for TAXSIM35 (10–13 min)
 
-Install once: `uv tool install policyengine-taxsim`
+Installation, with macOS/Linux and Windows tabs: install the uv package manager (if you don't have it), then `uv tool install policyengine-taxsim`.
 
-Interactive tabs, as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
+Get started (Same input format, same output variables. Just swap the command.), with interactive tabs as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
 
 Existing TAXSIM workflows carry over in every supported environment, with no added complexity.
 
-The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.
+The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026. For Stata, SAS and Julia: if the command is not found, run uv tool dir --bin and use the full path it prints.
 
 ## 8. Where each calculation happens (13–16 min)
 
-TAXSIM input file (One row per tax unit, any tax year): `year=2019 state=5 mstat=2 …`, `year=2024 state=5 mstat=2 …`.
+TAXSIM input file (One row per tax unit, any tax year):
+
+| year | state | mstat | depx | pwages | swages |
+|---|---|---|---|---|---|
+| 2019 | 5 | 2 | 2 | 80000 | 50000 |
+| 2024 | 5 | 2 | 2 | 80000 | 50000 |
 
 - **Tax years 1960–2020: TAXSIM35.** NBER’s model, bundled with the emulator
 - **Tax years 2021 onward: PolicyEngine US.** Federal and state rules
 
-TAXSIM output file (Same variables for every year): `2019: fiitax 10,949 siitax 4,583`, `2024: fiitax 8,282 siitax 3,214`.
+TAXSIM output file (Same variables for every year):
+
+| year | fiitax | siitax | fica |
+|---|---|---|---|
+| 2019 | 10949 | 4583 | 19890 |
+| 2024 | 8282 | 3214 | 19890 |
 
 One file in and one file out. The tax year decides which engine calculates each row.
 
 
-Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.
+Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949, siitax $4,583 and fica $19,890 through TAXSIM35; 2024 gives fiitax $8,282, siitax $3,214 and fica $19,890 through PolicyEngine. The input columns: state 5 is California in TAXSIM’s codes, mstat 2 is married filing jointly, depx is the number of dependents, and pwages and swages are the two spouses’ wages. fica is payroll tax, employee and employer shares together. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.
 
 # Live demonstration
 

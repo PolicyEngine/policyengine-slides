@@ -393,25 +393,39 @@ function Connector({ join = false }: { join?: boolean }) {
   );
 }
 
-function RowList({ rows }: { rows: RoutingData['input']['rows'] }) {
+function ExampleTable({ table }: { table: RoutingData['input']['table'] }) {
   return (
-    <div className="mt-3 space-y-2">
-      {rows.map((row) => (
-        <div key={row.text} className="flex items-center gap-2 rounded-md bg-white/10 px-3 py-2">
-          <span className={`h-3 w-3 shrink-0 rounded-full ${SIDE_STYLE[row.party].dot}`} aria-hidden="true" />
-          <code className="whitespace-nowrap font-mono text-xs leading-snug text-white lg:text-sm">{row.text}</code>
-        </div>
-      ))}
-    </div>
+    <table className="mt-3 w-full border-separate border-spacing-y-1.5 font-mono text-[11px] lg:text-sm">
+      <thead>
+        <tr className="text-left text-white/55">
+          <th className="w-4" aria-label="Row" />
+          {table.columns.map((column) => (
+            <th key={column} className="px-1.5 pb-0.5 font-normal lg:px-2">{column}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {table.rows.map((row) => (
+          <tr key={row.cells.join('|')} className="bg-white/10 text-white">
+            <td className="rounded-l-md pl-2">
+              <span className={`block h-2.5 w-2.5 rounded-full ${SIDE_STYLE[row.party].dot}`} aria-hidden="true" />
+            </td>
+            {row.cells.map((cell, index) => (
+              <td key={index} className={`px-1.5 py-1.5 lg:px-2 ${index === row.cells.length - 1 ? 'rounded-r-md' : ''}`}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
 function FileBox({ file }: { file: RoutingData['input'] }) {
   return (
-    <div className="flex flex-col justify-center rounded-xl bg-pe-darker px-5 py-4 text-white">
+    <div className="flex flex-col justify-center rounded-xl bg-pe-darker px-4 py-4 text-white lg:px-5">
       <p className="text-base font-bold lg:text-lg">{file.title}</p>
       <p className="text-sm text-white/70">{file.detail}</p>
-      <RowList rows={file.rows} />
+      <ExampleTable table={file.table} />
     </div>
   );
 }
@@ -420,7 +434,7 @@ function FileBox({ file }: { file: RoutingData['input'] }) {
 export function WorkflowRouting({ routing }: { routing: RoutingData }) {
   return (
     <div className="mt-2 space-y-5">
-      <div className="grid h-[clamp(14rem,calc(100vh-405px),24rem)] grid-cols-[1.12fr_4rem_0.88fr_4rem_1.12fr] items-stretch">
+      <div className="grid h-[clamp(14rem,calc(100vh-405px),24rem)] grid-cols-[minmax(min-content,1.12fr)_3rem_minmax(0,0.88fr)_3rem_minmax(min-content,1.12fr)] items-stretch">
         <FileBox file={routing.input} />
         <Connector />
         <div className="flex flex-col justify-between gap-4 py-1">

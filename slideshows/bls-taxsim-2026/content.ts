@@ -43,9 +43,9 @@ export interface BlsSlideContent {
   };
   /** Same input and output files on each side; rows split by tax year to two engines. */
   routing?: {
-    input: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    input: { title: string; detail: string; table: { columns: string[]; rows: { party: 'nber' | 'pe'; cells: string[] }[] } };
     engines: { party: 'nber' | 'pe'; years: string; name: string; detail: string }[];
-    output: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
+    output: { title: string; detail: string; table: { columns: string[]; rows: { party: 'nber' | 'pe'; cells: string[] }[] } };
     takeaway: string;
     footnote?: string;
   };
@@ -61,11 +61,13 @@ export interface BlsSlideContent {
   };
   /** The install command and the before-and-after code for each environment. */
   dropIn?: {
-    installLabel: string;
-    install: string;
+    installTitle: string;
+    installTabs: { label: string; lang: string; code: string }[];
+    getStartedTitle: string;
+    getStartedSubtitle: string;
     beforeLabel: string;
     afterLabel: string;
-    tabs: { label: string; lang: string; before: string; after: string; note?: string }[];
+    tabs: { label: string; lang: string; before: string; after: string }[];
     takeaway: string;
   };
   /** TAXSIM on the left, PolicyEngine on the right, the agreement and year routing in the middle. */
@@ -253,20 +255,25 @@ export const blsSlides: BlsSlideContent[] = [
       "Earlier years still route to TAXSIM35"
     ],
     "minutes": 3,
-    "notes": "The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.",
+    "notes": "The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026. For Stata, SAS and Julia: if the command is not found, run uv tool dir --bin and use the full path it prints.",
     "headerLink": TAXSIM_SITE,
     "dropIn": {
-      "installLabel": "Install once",
-      "install": "uv tool install policyengine-taxsim",
+      "installTitle": "Installation",
+      "installTabs": [
+        {"label": "macOS/Linux", "lang": "Terminal", "code": "# Install uv package manager (if you don't have it)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# Install policyengine-taxsim\nuv tool install policyengine-taxsim"},
+        {"label": "Windows", "lang": "Terminal", "code": "# Install uv package manager (if you don't have it)\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n\n# Install policyengine-taxsim\nuv tool install policyengine-taxsim"}
+      ],
+      "getStartedTitle": "Get started",
+      "getStartedSubtitle": "Same input format, same output variables. Just swap the command.",
       "beforeLabel": "TAXSIM35 (before)",
       "afterLabel": "PolicyEngine TAXSIM (after)",
       "tabs": [
         {"label": "CLI", "lang": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv"},
         {"label": "Python", "lang": "Python", "before": "import subprocess\nresult = subprocess.run(\n  \"taxsim35 < input.csv > output.csv\",\n  shell=True\n)", "after": "[[from policyengine_taxsim.runners import PolicyEngineRunner]]\nimport pandas as pd\n\ndf = pd.read_csv(\"input.csv\")\nresult = [[PolicyEngineRunner(df).run()]]"},
         {"label": "R", "lang": "R", "before": "library(usincometaxes)\nresult <- taxsim_calculate_taxes(input)", "after": "library([[policyenginetaxsim]])\nresult <- [[policyengine_calculate_taxes]](input)"},
-        {"label": "Stata", "lang": "Stata", "before": "taxsimlocal35, replace", "after": "export delimited using \"txpydata.raw\", delimiter(\",\") replace\n! [[policyengine-taxsim]] < txpydata.raw > output.raw\nimport delimited using \"output.raw\", delimiter(\",\") clear", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
-        {"label": "SAS", "lang": "SAS", "before": "%let rc = %sysfunc(system(\n  taxsim35 < input.csv > output.csv\n));", "after": "%let rc = %sysfunc(system(\n  [[policyengine-taxsim]] < input.csv > output.csv\n));", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
-        {"label": "Julia", "lang": "Julia", "before": "run(pipeline(`taxsim35`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "after": "run(pipeline(`[[policyengine-taxsim]]`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."}
+        {"label": "Stata", "lang": "Stata", "before": "taxsimlocal35, replace", "after": "export delimited using \"txpydata.raw\", delimiter(\",\") replace\n! [[policyengine-taxsim]] < txpydata.raw > output.raw\nimport delimited using \"output.raw\", delimiter(\",\") clear"},
+        {"label": "SAS", "lang": "SAS", "before": "%let rc = %sysfunc(system(\n  taxsim35 < input.csv > output.csv\n));", "after": "%let rc = %sysfunc(system(\n  [[policyengine-taxsim]] < input.csv > output.csv\n));"},
+        {"label": "Julia", "lang": "Julia", "before": "run(pipeline(`taxsim35`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "after": "run(pipeline(`[[policyengine-taxsim]]`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))"}
       ],
       "takeaway": "Existing TAXSIM workflows carry over in every supported environment, with no added complexity."
     }
@@ -280,15 +287,18 @@ export const blsSlides: BlsSlideContent[] = [
       "The same TAXSIM output file comes out, with the same variables for every year"
     ],
     "minutes": 3,
-    "notes": "Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.",
+    "notes": "Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949, siitax $4,583 and fica $19,890 through TAXSIM35; 2024 gives fiitax $8,282, siitax $3,214 and fica $19,890 through PolicyEngine. The input columns: state 5 is California in TAXSIM’s codes, mstat 2 is married filing jointly, depx is the number of dependents, and pwages and swages are the two spouses’ wages. fica is payroll tax, employee and employer shares together. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.",
     "routing": {
       "input": {
         "title": "TAXSIM input file",
         "detail": "One row per tax unit, any tax year",
-        "rows": [
-          { "party": "nber", "text": "year=2019 state=5 mstat=2 …" },
-          { "party": "pe", "text": "year=2024 state=5 mstat=2 …" }
-        ]
+        "table": {
+          "columns": ["year", "state", "mstat", "depx", "pwages", "swages"],
+          "rows": [
+            { "party": "nber", "cells": ["2019", "5", "2", "2", "80000", "50000"] },
+            { "party": "pe", "cells": ["2024", "5", "2", "2", "80000", "50000"] }
+          ]
+        }
       },
       "engines": [
         { "party": "nber", "years": "Tax years 1960–2020", "name": "TAXSIM35", "detail": "NBER’s model, bundled with the emulator" },
@@ -297,10 +307,13 @@ export const blsSlides: BlsSlideContent[] = [
       "output": {
         "title": "TAXSIM output file",
         "detail": "Same variables for every year",
-        "rows": [
-          { "party": "nber", "text": "2019: fiitax 10,949 siitax 4,583" },
-          { "party": "pe", "text": "2024: fiitax 8,282 siitax 3,214" }
-        ]
+        "table": {
+          "columns": ["year", "fiitax", "siitax", "fica"],
+          "rows": [
+            { "party": "nber", "cells": ["2019", "10949", "4583", "19890"] },
+            { "party": "pe", "cells": ["2024", "8282", "3214", "19890"] }
+          ]
+        }
       },
       "takeaway": "One file in and one file out. The tax year decides which engine calculates each row."
     }

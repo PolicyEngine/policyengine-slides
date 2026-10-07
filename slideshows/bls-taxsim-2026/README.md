@@ -12,7 +12,8 @@ Agenda: introduction (10 min), the emulator (6 min), live demonstration (13 min)
 - `slides/LiveEmbed.tsx`: live iframe with a side column of demo steps (slides 9 and 12).
 - `slides/ProcessFlow.tsx`: step-card processes with optional figures, real examples and who-provides-what columns (slides 11, 14 and 20).
 - `slides/DetailContent.tsx`: the notable-cases table (slide 13).
-- `slides/Visuals.tsx`: the NBER partnership: TAXSIM on the left, the agreement and year routing in the middle, PolicyEngine on the right (slide 6), the drop-in code swap (slide 7), the routing diagram: one input file, two engines by tax year, one output file (slide 8), the three-calculations triangle (slide 10), benefit chains (slide 15), imputation sources (slide 16), resource bars (slide 17), cards with a headline figure (slide 18), the comparison diagram (slide 19), and questions with resource links (slide 21).
+- `slides/DropInTabs.tsx`: the TAXSIM site’s Installation section (macOS/Linux and Windows tabs) and Get started section (CLI, Python, R, Stata, SAS and Julia tabs, with before and after code), as on policyengine.org/us/taxsim (slide 7). Clicks on the tabs and the Copy buttons do not advance the slide.
+- `slides/Visuals.tsx`: the NBER partnership: TAXSIM on the left, the agreement and year routing in the middle, PolicyEngine on the right (slide 6), the routing diagram: an example input file, two engines by tax year, an example output file (slide 8), the three-calculations triangle (slide 10), benefit chains (slide 15), imputation sources (slide 16), resource bars (slide 17), cards with a headline figure (slide 18), the comparison diagram (slide 19), and questions with resource links (slide 21).
 - `SPEAKER-NOTES.md`: readable presenter track and preparation checklist, kept in step with `content.ts`.
 - `VALIDATION-SCRIPT.md`: full speaker script for the validation section (slides 10–14).
 
