@@ -218,7 +218,7 @@ About 3 minutes: a quick overview, then one or two examples. Show the dashboard 
 4. **Resolve.**
 5. **Confirm.**
 
-**1,100+** Issues on the public tracker since July 2024 · **1,000+** Issues resolved · **150+** Questions on TAXSIM’s own rules · **100+** TAXSIM corrections confirmed by NBER
+**1,100+** Issues on the public tracker since July 2024 · **1,000+** Issues resolved · **150+** Questions on TAXSIM’s own rules · **100+** TAXSIM corrections confirmed
 
 - **#1241 · Oregon, PolicyEngine fix:** The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field. Fixed in the emulator in 4 days. https://github.com/PolicyEngine/policyengine-taxsim/issues/1241
 - **#1235 · Massachusetts, TAXSIM fix:** TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024. NBER corrected TAXSIM the next day. https://github.com/PolicyEngine/policyengine-taxsim/issues/1235
