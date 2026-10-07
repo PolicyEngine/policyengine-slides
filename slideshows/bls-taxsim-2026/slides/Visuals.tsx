@@ -11,11 +11,15 @@ import {
   IconChartBar,
   IconChartDots,
   IconChevronRight,
+  IconCoin,
   IconFileText,
   IconFlask,
   IconGavel,
   IconHeartHandshake,
   IconHistory,
+  IconListDetails,
+  IconMapPin,
+  IconPercentage,
   IconPlayerPlay,
   IconReceiptTax,
   IconScale,
@@ -42,9 +46,13 @@ const ICONS: Record<BlsIcon, Icon> = {
   'receipt': IconReceiptTax,
   'gavel': IconGavel,
   'heart-handshake': IconHeartHandshake,
+  'coin': IconCoin,
+  'map-pin': IconMapPin,
+  'percentage': IconPercentage,
+  'list': IconListDetails,
 };
 
-function DeckIcon({ name, size = 26 }: { name: BlsIcon; size?: number }) {
+export function DeckIcon({ name, size = 26 }: { name: BlsIcon; size?: number }) {
   const Component = ICONS[name];
   return <Component className="shrink-0 text-pe-teal" size={size} stroke={1.75} aria-hidden="true" />;
 }

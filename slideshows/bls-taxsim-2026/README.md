@@ -11,7 +11,7 @@ Agenda: introduction (12 min), the emulator (6 min), live demonstration (13 min)
 - `slides/PEIntroSlides.tsx`: PolicyEngine introduction (slides 4–6), adapted from the cpid-webinar-2026 and gettsim-2026 decks.
 - `slides/SectionDivider.tsx`: section openers on the cover gradient, with the section number and title (slides 3, 9, 13, 18 and 25).
 - `slides/Origins.tsx`: how the collaboration started: the differential-testing process before the emulator and the milestones up to the agreement (slide 7).
-- `slides/InputMapping.tsx`: how TAXSIM inputs and outputs map to PolicyEngine, by general area: the TAXSIM variables and one sentence on how the emulator handles them (slides 19 and 20).
+- `slides/InputMapping.tsx`: how TAXSIM inputs and outputs map to PolicyEngine, as cards by general area: TAXSIM variables and PolicyEngine concepts as chips joined by an arrow, a one-line note, and a closing “why it matters” card (slides 19 and 20).
 - `slides/DropInTabs.tsx`: the TAXSIM site’s Installation section, centered on top (the title and macOS/Linux and Windows tabs above the commands, with the two install steps one under the other) and its Get started section below (CLI, Python, R, Stata, SAS and Julia tabs, with before and after code), as on policyengine.org/us/taxsim (slide 10). Clicks on the tabs and the Copy buttons do not advance the slide. On screens 820px tall or less, the widget scales down a little so that it fits.
 - `slides/LiveEmbed.tsx`: live iframe with a side column of demo steps (slides 12 and 16).
 - `slides/ProcessFlow.tsx`: step-card processes with optional figures, real examples and who-provides-what columns (slides 15, 17 and 27).
