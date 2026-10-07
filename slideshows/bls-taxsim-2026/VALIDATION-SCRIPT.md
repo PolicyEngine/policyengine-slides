@@ -6,11 +6,11 @@ Slides 14–17, 10 minutes in total. Spoken pace is about 130 words a minute; th
 
 Validation for us isn't a single benchmark number. It's a process we run on every disagreement, and it has four steps.
 
-*Point to step 1.* It starts with an issue. Every CPS record goes through TAXSIM and PolicyEngine with exactly the same input row. When the two disagree, that record becomes a GitHub issue. Dan Feenberg at NBER files most of them.
+*Point to step 1.* It starts with an issue. Every CPS record goes through TAXSIM and PolicyEngine with exactly the same input row. When the two disagree, that record becomes a GitHub issue. NBER files most of them.
 
 *Point to step 2.* An agentic workflow then explores the disagreement. It reruns the record in both engines, brings in third-party validators, and reads the statute and the official instructions to find the line where the calculations diverge.
 
-*Point to the triangle.* The triangle shows who takes part. At the top is TAXSIM35, NBER's calculator and our reference engine. On the left is PolicyEngine, run through the emulator. Those two are compared on every record. On the right are the third-party validators: TaxAct, where Dan enters the household and posts the completed federal and state returns, and Axiom, which encodes the statute independently. They give us an independent check when the engines disagree.
+*Point to the triangle.* The triangle shows who takes part. At the top is TAXSIM35, NBER's calculator and our reference engine. On the left is PolicyEngine, run through the emulator. Those two are compared on every record. On the right are the third-party validators: TaxAct, where NBER enters the household and posts the completed federal and state returns, and Axiom, which encodes the statute independently. They give us an independent check when the engines disagree.
 
 *Point to the center.* None of the three gets a vote. The tiebreaker is the statute and the official instructions, because two engines can share the same mistake, and no agreement rate would ever catch that.
 
@@ -42,7 +42,7 @@ This is where that comparison lives, and it's public. A quick overview, then one
 
 *Scroll the state table.* Each row is a state, with its federal and state agreement.
 
-*Example 1: inspect a state with open disagreements.* Every row here is a household, with both engines' results side by side. This list is where issues start: Dan or one of us picks a household, and it goes through the four steps from two slides ago.
+*Example 1: inspect a state with open disagreements.* Every row here is a household, with both engines' results side by side. This list is where issues start: NBER or one of us picks a household, and it goes through the four steps from two slides ago.
 
 *Example 2, if time: inspect a state with near-complete agreement.* This is what an area looks like after its cases have been worked through.
 
