@@ -480,7 +480,7 @@ export const blsSlides: BlsSlideContent[] = [
       "stats": [
         { "value": "1,100+", "label": "Issues on the public tracker since July 2024" },
         { "value": "1,000+", "label": "Issues resolved" },
-        { "value": "150+", "label": "Questions to NBER about TAXSIM’s own rules" },
+        { "value": "150+", "label": "Questions on TAXSIM’s own rules" },
         { "value": "100+", "label": "TAXSIM corrections confirmed by NBER" }
       ],
       "steps": [
