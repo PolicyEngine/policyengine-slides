@@ -90,6 +90,8 @@ export interface BlsSlideContent {
     /** Labels for the sides: top–left, top–right, and left–right. */
     sides: { left: string; right: string; bottom: string };
     center: { title: string; text: string };
+    /** Numbered steps shown to the left of a smaller triangle. */
+    steps?: { title: string; text: string }[];
     takeaway: string;
   };
   /** A live iframe with a side column of demo steps. */
@@ -122,7 +124,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 60 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 51 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 10 minutes
   {
@@ -153,13 +155,13 @@ export const blsSlides: BlsSlideContent[] = [
       "What PolicyEngine is, who uses it, and the NBER collaboration.",
       "A drop-in TAXSIM interface, and how one record becomes a tax result.",
       "A TAXSIM-format file run in the browser, from input rows to federal and state tax.",
-      "How TAXSIM, PolicyEngine and TaxAct are checked against the law, the public dashboard, notable cases, and how a reported difference becomes a fix.",
+      "How a disagreement is resolved with the engines, independent validators and the law, how that shapes the emulator, the public dashboard, and our progress.",
       "Methods for missing survey inputs, SNAP participation, and Medicaid valuation.",
       "A focused comparison, the inputs it needs, and questions for CE staff.",
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first six sections total 60 minutes. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first six sections total 51 minutes, leaving about 9 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "what-is-pe",
@@ -242,7 +244,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // The emulator and its core assumptions: 12 minutes
+  // The TAXSIM emulator: 6 minutes
   {
     "id": "drop-in",
     "title": "A drop-in replacement for TAXSIM35",
@@ -306,7 +308,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // Live demonstration: 10 minutes
+  // Live demonstration: 13 minutes
   {
     "id": "demo-live",
     "title": "Live demo: run the sample file",
@@ -320,34 +322,40 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // Validation: 16 minutes
+  // Validation: 10 minutes
   {
     "id": "three-checks",
     "title": "Three calculations, one arbiter",
     "body": [],
-    "minutes": 2,
-    "notes": "Introduce the three calculations before the process. TAXSIM35 and PolicyEngine are compared automatically on every Enhanced CPS household. When they disagree on a household, Dan Feenberg at NBER prepares the same household in TaxAct, commercial tax preparation software, and posts the completed federal and state returns, so each case can be reconciled line by line on the actual form. The three do not vote: the statute and the official instructions decide which calculation is right, because two engines can share an error that no agreement rate would reveal. Fixes therefore carry tests whose expected values come from the form or statute.",
+    "minutes": 3,
+    "notes": "Walk the four steps on the left, then point to the triangle. (1) A mismatch between PolicyEngine and TAXSIM on a CPS record becomes a GitHub issue; Dan Feenberg at NBER files most of them. (2) An agentic workflow explores the disagreement: it reruns the record in both engines, checks third-party validators such as a completed TaxAct return or Axiom’s encoding of the statute, and reads the statute and the official instructions. (3) The findings become a recommendation to adjust one engine, or to agree a convention with NBER when TAXSIM’s inputs cannot carry what the law needs; a person reviews every recommendation before it is posted or merged. (4) After the fix ships, the record is rerun to confirm the disagreement is gone. The validators do not vote: the statute and the official instructions decide which calculation is right, because two engines can share an error that no agreement rate would reveal. PolicyEngine fixes carry tests whose expected values come from the form or statute.",
     "triangle": {
       "corners": {
         "top": { "icon": "building", "title": "TAXSIM35", "text": "NBER’s calculator, the reference engine" },
         "left": { "icon": "github", "title": "PolicyEngine", "text": "Open-source rules, run through the emulator" },
-        "right": { "icon": "file-text", "title": "TaxAct", "text": "Commercial software: completed federal and state returns" }
+        "right": { "icon": "file-text", "title": "Third-party validators", "text": "TaxAct, Axiom and others" }
       },
       "sides": {
-        "left": "Every household, compared automatically",
-        "right": "NBER prepares a return when the engines disagree",
-        "bottom": "Reconciled line by line on the state form"
+        "left": "Compared on every record",
+        "right": "An independent check when they disagree",
+        "bottom": "Reconciled against the forms"
       },
       "center": { "title": "Statutes and official instructions", "text": "The law decides which calculation is right" },
+      "steps": [
+        { "title": "Issue filed", "text": "A mismatch between PolicyEngine and TAXSIM on a CPS record becomes an issue." },
+        { "title": "Agentic review", "text": "An agentic workflow explores the disagreement using both engines, the validators and the statutes." },
+        { "title": "Recommendation", "text": "The findings recommend adjusting one of the engines, or agreeing a convention with NBER." },
+        { "title": "Rerun", "text": "After the fix ships, we rerun the record to confirm the disagreement is resolved." }
+      ],
       "takeaway": "Agreement measures consistency. The law decides correctness, because two engines can share an error."
     }
   },
   {
     "id": "validation-process",
-    "title": "How we validate the emulator",
+    "title": "How this process shapes the emulator",
     "body": [],
     "minutes": 2,
-    "notes": "Present validation as a process, not a single benchmark. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. Cross-model agreement measures consistency; checks against TaxAct returns, the law and tax forms decide which engine is right, because a shared error can survive a comparison. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Check the dashboard the day before: its September 23 data treats S-corporation income as active, and PR #1199 (September 29) made passive the default, so a refresh would change the federal figures. Do not refresh with TAXSIM builds from September 24 onward until NBER confirms them (policyengine-taxsim #1248). Source: https://www.policyengine.org/us/taxsim/dashboard",
+    "notes": "Each resolved case does not end with the fix. It is compiled on the emulator’s GitHub issue tracker with the input row, both engines’ results and the resolution, PolicyEngine fixes ship with a test so the disagreement cannot quietly return, and the dashboard reruns every state and year so we can compare how complete each area’s agreement is. The lowest-agreement areas set what we look at next. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Check the dashboard the day before: its September 23 data treats S-corporation income as active, and PR #1199 (September 29) made passive the default, so a refresh would change the federal figures. Do not refresh with TAXSIM builds from September 24 onward until NBER confirms them (policyengine-taxsim #1248). Source: https://www.policyengine.org/us/taxsim/dashboard",
     "process": {
       "stats": [
         { "value": "111,347", "label": "Enhanced CPS households" },
@@ -356,57 +364,30 @@ export const blsSlides: BlsSlideContent[] = [
         { "value": "2 engines", "label": "TAXSIM35 and PolicyEngine" }
       ],
       "steps": [
-        { "title": "Run both engines", "text": "Every household goes through TAXSIM35 and PolicyEngine with the same inputs." },
-        { "title": "Compare outputs", "text": "Federal and state income tax, within $15 or 1% of income." },
-        { "title": "Flag differences", "text": "The dashboard ranks states and flags the ones that diverge." },
-        { "title": "Explain the cause", "text": "Input coding, a PolicyEngine rule, or TAXSIM itself, checked against a TaxAct return and the law." },
-        { "title": "Fix and publish", "text": "Fixes ship with a test, and the dashboard reruns." }
+        { "title": "Compile", "text": "Every resolved case is stored as an issue on the emulator’s GitHub tracker, with the input row, both results and the resolution." },
+        { "title": "Lock in", "text": "PolicyEngine fixes ship with a test case, so a resolved disagreement cannot quietly return." },
+        { "title": "Compare by area", "text": "The dashboard reruns every state and year, showing how complete each area’s agreement is." },
+        { "title": "Prioritize", "text": "The areas with the lowest agreement set what we look at next." }
       ],
-      "loop": "Each PolicyEngine release and each TAXSIM update starts the loop again."
+      "loop": "Each PolicyEngine release and each TAXSIM update reruns the comparison."
     }
   },
   {
     "id": "dashboard-live",
     "title": "The public validation dashboard",
     "body": [],
-    "minutes": 5,
-    "notes": "Keep this to about 5 minutes so the notable cases fit. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.",
+    "minutes": 3,
+    "notes": "About 3 minutes: a quick overview, then one or two examples. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list; a second state with near-complete agreement shows what a resolved area looks like. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.",
     "headerLink": TAXSIM_DASHBOARD,
     "embed": {
       "url": "https://www.policyengine.org/us/taxsim/dashboard"
     }
   },
   {
-    "id": "notable-cases",
-    "title": "Two notable cases",
-    "body": [],
-    "minutes": 4,
-    "notes": "Two cases where explaining the cause changed the comparison. Rebates (policyengine-taxsim #1068, July 2026): about a fifth of 2022 households disagreed on state tax, in flat clusters, because TAXSIM by default subtracts a one-time rebate in the payout year while PolicyEngine books it to the year whose liability determines it (Virginia’s 2022 rebate was capped at 2021 liability). TAXSIM’s option 27 books rebates in the eligibility year, and option 30 turns that on with related settings. The emulator reports rebates in srebate (PR #1070) and compare can run TAXSIM with option 30 (PR #1074); scoring tax plus rebates raised 2021 state agreement from 75.5% to 87.1% on the 8,000-household test. PE-US #9566 (September 24) moved the Virginia rebate and the Oregon kicker to their eligibility years. S-corporations (#1053): TAXSIM’s documentation describes scorp as passive business income, subject to the 3.8% net investment income tax and the passive-loss limitation; PolicyEngine treated it as active. A single filer with $300,000 of S-corporation income in 2025 owes $3,800 of NIIT in TAXSIM and none in PolicyEngine. PR #1199 (September 29) added an explicit switch, passive by default on policyengine-us 2.10.1 or later; policyengine-us #9572 keeps passive losses out of the EITC investment-income test, and the audit found QBI loss-netting issues on both sides. The conventions line matters for BLS, which builds TAXSIM inputs from the CE.",
-    "detail": {
-      "columns": ["Case", "What differed", "Why", "How we resolved it"],
-      "rows": [
-        [
-          "One-time state rebates",
-          "About a fifth of 2022 households disagreed on state tax, in flat clusters of $250, $500 and $1,000.",
-          "Timing: TAXSIM subtracts a rebate in the year it is paid; PolicyEngine books it to the year whose liability sets it.",
-          "TAXSIM’s eligibility-year option, and the emulator reports rebates separately. 2021 state agreement rose from 75.5% to 87.1% on an 8,000-household test."
-        ],
-        [
-          "S-corporation income",
-          "A single filer with $300,000 in 2025: $3,800 of net investment income tax in TAXSIM, none in PolicyEngine.",
-          "TAXSIM documents scorp as passive income; PolicyEngine treated it as active.",
-          "An explicit switch in the emulator, passive by default since September 2026. The audit also fixed the EITC investment-income test."
-        ]
-      ],
-      "takeaway": "Some answers are conventions we agree with NBER and write down: rebate timing, S-corporation treatment, rent including utilities, and how a pension is split between spouses.",
-      "source": { "label": "policyengine-taxsim issues #1068 and #1053", "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1053" }
-    }
-  },
-  {
     "id": "issue-process",
     "title": "From a reported difference to a fix",
     "body": [],
-    "minutes": 3,
+    "minutes": 2,
     "notes": "Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues",
     "process": {
       "stats": [
@@ -448,45 +429,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // Benefit imputation: 10 minutes
-  {
-    "id": "benefit-concepts",
-    "title": "From eligibility to a benefit value",
-    "body": [
-      "Eligibility asks whether a unit qualifies",
-      "Potential benefits apply the program rules",
-      "Participation asks whether eligible people receive benefits",
-      "Valuation defines how benefits enter a resource measure"
-    ],
-    "minutes": 3,
-    "notes": "The numbers are a real PolicyEngine run (PolicyEngine US 2.25.2, October 5, 2026) for a single parent in California with children aged 4 and 7 and $25,000 in wages in 2025. A household calculation assumes take-up. In the microdata, take-up is assigned at published rates (SNAP 82% from USDA; Medicaid by state, 78% in California, from KFF and MACPAC enrollment targets), so the expected value is an average across similar households, not a payment to this one. Medi-Cal is valued at PolicyEngine’s average cost per enrollee: $11,801 for the parent and $7,954 per child. Do not add a Medicaid eligibility indicator directly to dollar resources.",
-    "chains": {
-      "intro": "One California household in 2025: a single parent, children aged 4 and 7, $25,000 in wages.",
-      "columns": ["Eligibility", "Benefit if enrolled", "Take-up in the microdata", "Average across similar households"],
-      "rows": [
-        {
-          "program": "SNAP",
-          "steps": [
-            { "value": "Eligible", "label": "SNAP unit of three" },
-            { "value": "$2,442", "label": "a year, about $200 a month" },
-            { "value": "82%", "label": "USDA participation rate" },
-            { "value": "$2,002", "label": "expected value" }
-          ]
-        },
-        {
-          "program": "Medi-Cal",
-          "steps": [
-            { "value": "3 of 3", "label": "people eligible" },
-            { "value": "$27,709", "label": "a year at average cost per enrollee" },
-            { "value": "78%", "label": "California rate (KFF, MACPAC)" },
-            { "value": "$21,613", "label": "expected value" }
-          ]
-        }
-      ],
-      "takeaway": "A household calculator gives the potential benefit. Receipt and valuation are separate research choices.",
-      "footnote": "PolicyEngine US 2.25.2, run October 5, 2026. Take-up rates from policyengine-us-data."
-    }
-  },
+  // Benefit imputation: 7 minutes
   {
     "id": "imputation",
     "title": "Imputing a distribution of missing inputs",
@@ -524,9 +467,9 @@ export const blsSlides: BlsSlideContent[] = [
       "A monetary Medicaid value requires a defined valuation method"
     ],
     "minutes": 2,
-    "notes": "Each bar adds one component for the same household (PolicyEngine US 2.25.2, 2025). Taxes and credits: the federal EITC and refundable child tax credit and California’s CalEITC and Young Child Tax Credit, less the employee payroll tax. CalWORKs is California’s TANF program. The jump from $43,931 to $71,640 shows why Medicaid needs an explicit valuation choice: cost per enrollee, insurance value and household valuation give different answers, and this talk does not pick one. Establish whether CE research wants potential entitlements, actual receipt, or a broader resource measure.",
+    "notes": "Each bar adds one component for one California household: a single parent with children aged 4 and 7 and $25,000 in wages (PolicyEngine US 2.25.2, 2025). A household calculation assumes take-up; in the microdata, take-up is assigned at published rates (SNAP 82% from USDA; Medicaid 78% in California, from KFF and MACPAC). Taxes and credits: the federal EITC and refundable child tax credit and California’s CalEITC and Young Child Tax Credit, less the employee payroll tax. CalWORKs is California’s TANF program. The jump from $43,931 to $71,640 shows why Medicaid needs an explicit valuation choice: cost per enrollee, insurance value and household valuation give different answers, and this talk does not pick one. Establish whether CE research wants potential entitlements, actual receipt, or a broader resource measure.",
     "resourceBars": {
-      "intro": "The same household, four resource concepts.",
+      "intro": "One California household in 2025 (a single parent, children aged 4 and 7, $25,000 in wages), four resource concepts.",
       "rows": [
         { "label": "Earnings", "detail": "Wages before taxes", "value": 25000 },
         { "label": "After taxes and credits", "detail": "+$9,461: EITC, child tax credit and California credits, less payroll tax", "value": 34461 },
