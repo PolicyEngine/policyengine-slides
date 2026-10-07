@@ -58,11 +58,11 @@ Use the numbers to show scale and testing, not to sell. The NBER memorandum of u
 
 ## 6. Researchers and developers build with these rules (6–7 min)
 
-- Federal partners and users: NBER, the Atlanta Fed, BEA and the Joint Economic Committee
-- Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown and USC
+- Federal users: BEA and the Joint Economic Committee
+- Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown, USC, the University of Michigan and UHERO
 - Benefit navigators: MyFriendBen, Amplifi, Mirza and Starlight
 
-Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).
+Point out the federal statistical user, BEA, because it is closest to the CE team’s work, and the university research centers, such as the University of Michigan and UHERO (the University of Hawaii Economic Research Organization). Adapted from the cpid-webinar-2026 deck (September 2026).
 
 ## 7. How the collaboration started (7–9 min)
 

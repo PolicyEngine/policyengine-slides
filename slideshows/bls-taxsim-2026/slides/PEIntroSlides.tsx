@@ -145,12 +145,12 @@ export function PolicyEngineTodaySlide() {
 
 /** maxWidth evens out visual weight: wide wordmarks get more room, tall marks less. */
 const organizations: { name: string; logo: string; maxWidth: number; className?: string }[] = [
-  { name: 'NBER (TAXSIM)', logo: '/logos/organizations/nber.png', maxWidth: 200 },
-  { name: 'Atlanta Fed', logo: '/logos/organizations/atlanta-fed.png', maxWidth: 200 },
   { name: 'BEA', logo: '/logos/organizations/bea.png', maxWidth: 150 },
   { name: 'Joint Economic Committee', logo: '/logos/organizations/jec.png', maxWidth: 110 },
+  { name: 'University of Michigan', logo: '/logos/organizations/umich.png', maxWidth: 170 },
   { name: 'USC', logo: '/logos/organizations/usc.png', maxWidth: 70 },
   { name: 'Georgetown (Better Government Lab)', logo: '/logos/organizations/georgetown.png', maxWidth: 140 },
+  { name: 'UHERO', logo: '/logos/organizations/uhero.png', maxWidth: 130, className: '!max-h-[100px]' },
   { name: 'MyFriendBen', logo: '/logos/organizations/myfriendben.png', maxWidth: 160 },
   { name: 'Amplifi', logo: '/logos/organizations/amplifi.png', maxWidth: 110 },
   { name: 'Mirza', logo: '/logos/organizations/mirza.png', maxWidth: 110 },

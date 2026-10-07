@@ -222,12 +222,12 @@ export const blsSlides: BlsSlideContent[] = [
     "id": "who-uses-pe",
     "title": "Researchers and developers build with these rules",
     "body": [
-      "Federal partners and users: NBER, the Atlanta Fed, BEA and the Joint Economic Committee",
-      "Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown and USC",
+      "Federal users: BEA and the Joint Economic Committee",
+      "Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown, USC, the University of Michigan and UHERO",
       "Benefit navigators: MyFriendBen, Amplifi, Mirza and Starlight"
     ],
     "minutes": 1,
-    "notes": "Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "notes": "Point out the federal statistical user, BEA, because it is closest to the CE team’s work, and the university research centers, such as the University of Michigan and UHERO (the University of Hawaii Economic Research Organization). Adapted from the cpid-webinar-2026 deck (September 2026).",
     "custom": "who-uses-pe"
   },
   {
