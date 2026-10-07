@@ -1,15 +1,12 @@
 import {
-  IconBook,
   IconBrandGithub,
   IconBuildingBank,
-  IconCalendar,
   IconChartBar,
   IconChartDots,
   IconChevronRight,
   IconFileSpreadsheet,
   IconFileText,
   IconFlask,
-  IconHeartHandshake,
   IconHistory,
   IconPlayerPlay,
   IconScale,
@@ -20,9 +17,7 @@ import {
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
-  'book': IconBook,
   'building': IconBuildingBank,
-  'calendar': IconCalendar,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
   'file-spreadsheet': IconFileSpreadsheet,
@@ -293,49 +288,6 @@ export function ResourceBars({ bars }: { bars: ResourceBarsData }) {
   );
 }
 
-type PartnershipData = NonNullable<BlsSlideContent['partnership']>;
-
-function PartnerSide({ side }: { side: PartnershipData['left'] }) {
-  return (
-    <div className="rounded-xl border-l-4 border-pe-teal bg-gray-50 px-6 py-4">
-      <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">{side.title}</p>
-      <div className="mt-2 divide-y divide-gray-200">
-        {side.items.map((item) => (
-          <div key={item.title} className="flex items-center gap-4 py-2.5">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-pe-teal/10">
-              <DeckIcon name={item.icon} size={22} />
-            </span>
-            <div>
-              <p className="text-lg font-semibold leading-snug text-pe-dark">{item.title}</p>
-              <p className="text-sm leading-snug text-gray-600">{item.detail}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/** Two partners joined by an agreement in the center. */
-export function Partnership({ partnership }: { partnership: PartnershipData }) {
-  const { center } = partnership;
-  return (
-    <div className="mt-4 space-y-5">
-      <div className="grid grid-cols-[1fr_13rem_1fr] items-stretch gap-5">
-        <PartnerSide side={partnership.left} />
-        <div className="flex flex-col items-center justify-center rounded-xl bg-pe-dark px-4 py-6 text-center text-white">
-          <IconHeartHandshake size={40} stroke={1.5} className="text-teal-300" aria-hidden="true" />
-          <p className="mt-3 text-lg font-bold leading-snug">{center.title}</p>
-          <p className="text-2xl font-extrabold text-teal-300">{center.date}</p>
-          <p className="mt-2 text-sm leading-snug text-white/80">{center.detail}</p>
-        </div>
-        <PartnerSide side={partnership.right} />
-      </div>
-      <p className="text-xl leading-snug font-medium text-pe-dark">{partnership.takeaway}</p>
-    </div>
-  );
-}
-
 type TriangleData = NonNullable<BlsSlideContent['triangle']>;
 
 function TriangleCorner({ corner }: { corner: TriangleData['corners']['top'] }) {
@@ -429,6 +381,79 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
         ))}
       </div>
       <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
+    </div>
+  );
+}
+
+type HistoryData = NonNullable<BlsSlideContent['history']>;
+
+const PARTY_STYLE: Record<'nber' | 'pe' | 'joint', string> = {
+  nber: 'bg-[var(--pe-amber-dark)]',
+  pe: 'bg-teal-400',
+  joint: 'bg-pe-dark',
+};
+
+/** Milestones on a full-width line, then a to-scale bar of the tax years each engine covers. */
+export function PartnershipHistory({ history }: { history: HistoryData }) {
+  const { coverage } = history;
+  const span = coverage.end - coverage.start + 1;
+  const at = (year: number) => ((year - coverage.start) / span) * 100;
+  return (
+    <div className="mt-2 space-y-5 text-pe-dark">
+      <div>
+        <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${history.milestones.length}, minmax(0, 1fr))` }}>
+          {history.milestones.map((m) => (
+            <div key={m.title} className="flex flex-col">
+              <div className="flex-1 rounded-lg bg-gray-50 px-4 py-3">
+                <p className="text-sm font-bold tracking-wide text-gray-500">{m.when}</p>
+                <p className="mt-1 text-lg font-semibold leading-snug">{m.title}</p>
+                <p className="mt-1 text-sm leading-snug text-gray-600">{m.detail}</p>
+              </div>
+              <div className="mx-auto h-4 w-px bg-gray-300" />
+              <div className="relative flex h-5 items-center justify-center">
+                <span className={`relative z-10 h-5 w-5 rounded-full ring-4 ring-white ${PARTY_STYLE[m.party]}`} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="-mt-[11px] h-0.5 bg-gray-300" />
+      </div>
+
+      <div>
+        <div className="flex items-baseline justify-between">
+          <p className="text-lg font-semibold">{coverage.title}</p>
+          <div className="flex gap-5 text-sm text-gray-600">
+            {(['nber', 'joint', 'pe'] as const).map((party) => (
+              <span key={party} className="flex items-center gap-2">
+                <span className={`inline-block h-3 w-3 rounded-full ${PARTY_STYLE[party]}`} />
+                {history.legend[party]}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mt-2 flex h-11 overflow-hidden rounded-lg">
+          <div className={`flex items-center px-4 text-base font-semibold text-white ${PARTY_STYLE.nber}`} style={{ width: `${at(coverage.split)}%` }}>
+            {coverage.taxsimLabel}
+          </div>
+          <div className={`flex items-center justify-center text-sm font-semibold text-pe-dark ${PARTY_STYLE.pe}`} style={{ width: `${100 - at(coverage.split)}%` }}>
+            {coverage.peLabel}
+          </div>
+        </div>
+        <div className="relative mt-1 h-10">
+          {coverage.marks.map((mark) => {
+            const left = mark.year === coverage.end ? 100 : at(mark.year);
+            const align = left >= 99 ? '-translate-x-full text-right' : left <= 1 ? '' : '-translate-x-1/2 text-center';
+            return (
+              <div key={mark.year} className={`absolute top-0 ${align}`} style={{ left: `${left}%` }}>
+                <p className="text-sm font-semibold">{mark.year}</p>
+                {mark.label && <p className="whitespace-nowrap text-xs text-gray-600">{mark.label}</p>}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <p className="text-xl leading-snug font-medium">{history.takeaway}</p>
     </div>
   );
 }
