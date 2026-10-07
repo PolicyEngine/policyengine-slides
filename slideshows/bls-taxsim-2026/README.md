@@ -2,7 +2,7 @@
 
 Local route: `/slides/bls-taxsim-2026`.
 
-27 slides, including 5 section dividers, with 56 minutes of presentation time (about 4 minutes of slack) and a dedicated final slide for 30 minutes of Q&A.
+28 slides, including 5 section dividers and a closing slide, with 56 minutes of presentation time (about 4 minutes of slack) and a dedicated final slide for 30 minutes of Q&A.
 
 Agenda: introduction (12 min), the emulator (6 min), live demonstration (13 min), validation (10 min), beyond TAXSIM (10 min), CE pilot (5 min), Q&A (30 min).
 
@@ -13,6 +13,7 @@ Agenda: introduction (12 min), the emulator (6 min), live demonstration (13 min)
 - `slides/Origins.tsx`: how the collaboration started: the record-by-record testing before the emulator, a real YAML test from policyengine-us issue #1504 beside it, and the milestones up to the agreement (slide 7).
 - `slides/InputMapping.tsx`: story cards by general area, aligned across each row with CSS subgrid. Slide 19: the TAXSIM variables, the limit of the TAXSIM format, and the PolicyEngine variables that remove it. Slide 20: what PolicyEngine calculates beyond TAXSIM (benefit programs, health coverage, additional state tax credits and federal provisions), how the emulator handles each, and the PolicyEngine variables. Each ends with a “why it matters” card.
 - `slides/DropInTabs.tsx`: the TAXSIM site’s Installation section, centered on top (the title and macOS/Linux and Windows tabs above the commands, with the two install steps one under the other) and its Get started section below (CLI, Python, R, Stata, SAS and Julia tabs, with before and after code), as on policyengine.org/us/taxsim (slide 10). Clicks on the tabs and the Copy buttons do not advance the slide. On screens 820px tall or less, the widget scales down a little so that it fits.
+- `slides/ThankYouSlide.tsx`: the closing slide, with each speaker’s photo, name and email (slide 28).
 - `slides/LiveEmbed.tsx`: live iframe with a side column of demo steps (slides 12 and 16).
 - `slides/ProcessFlow.tsx`: step-card processes with optional figures, real examples and who-provides-what columns (slides 15, 17 and 25).
 - `slides/DetailContent.tsx`: a table layout with a footnote; no slide uses it at present.

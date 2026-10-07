@@ -1,6 +1,6 @@
 # BLS TAXSIM seminar: slide text and speaker notes
 
-27 slides, including 5 section dividers: 56 minutes presenting, about 4 minutes of slack, then a dedicated 30-minute Q&A slide.
+28 slides, including 5 section dividers and a closing slide: 56 minutes presenting, about 4 minutes of slack, then a dedicated 30-minute Q&A slide.
 
 Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, IARIW 2026 imputation/calibration material in this repository, and the PolicyEngine TAXSIM site (policyengine.org/us/taxsim), captured October 5, 2026.
 
@@ -346,3 +346,13 @@ Proposed next steps for discussion. The emulator is an open-source package with 
 - [github.com/PolicyEngine/policyengine-taxsim](https://github.com/PolicyEngine/policyengine-taxsim) — Source code and issue tracker
 
 Use the separate 30-minute discussion for questions on the methods and potential CE collaboration. The links on the slide open the TAXSIM site, the web runner, the validation dashboard and the source code.
+
+## 28. Thank you (closing slide)
+
+- Max Ghenis · max@policyengine.org
+- Pavel Makarchuk · pavel@policyengine.org
+- David Trimmer · david@policyengine.org
+
+policyengine.org/us/taxsim
+
+Closing slide. Leave it up at the end so people can note the emails: max@policyengine.org, pavel@policyengine.org and david@policyengine.org.

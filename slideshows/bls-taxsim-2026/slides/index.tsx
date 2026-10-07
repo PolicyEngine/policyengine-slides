@@ -4,6 +4,7 @@ import LiveEmbed from './LiveEmbed';
 import InputMapping from './InputMapping';
 import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
+import { ThankYouSlide } from './ThankYouSlide';
 import SectionDivider from './SectionDivider';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
@@ -20,6 +21,7 @@ const CUSTOM_SLIDES = {
   'what-is-pe': WhatIsPolicyEngineSlide,
   'pe-today': PolicyEngineTodaySlide,
   'who-uses-pe': WhoUsesPolicyEngineSlide,
+  'thank-you': ThankYouSlide,
 } satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
 
 function DeckSlide({ content }: { content: BlsSlideContent }) {

@@ -13,7 +13,7 @@ export interface BlsSlideContent {
   notes: string;
   cover?: boolean;
   /** A full-slide component from slides/PEIntroSlides.tsx. */
-  custom?: 'what-is-pe' | 'pe-today' | 'who-uses-pe';
+  custom?: 'what-is-pe' | 'pe-today' | 'who-uses-pe' | 'thank-you';
   /** Clickable URL shown at the right of the slide title. */
   headerLink?: { label: string; url: string };
   /** Resource cards beside the bullet list (the Q&A slide). */
@@ -869,5 +869,13 @@ export const blsSlides: BlsSlideContent[] = [
       { ...TAXSIM_DASHBOARD, "icon": "chart-dots", "description": "Agreement by year and state" },
       { "label": "github.com/PolicyEngine/policyengine-taxsim", "url": "https://github.com/PolicyEngine/policyengine-taxsim", "icon": "github", "description": "Source code and issue tracker" }
     ]
+  },
+  {
+    "id": "thank-you",
+    "title": "Thank you",
+    "body": [],
+    "minutes": 0,
+    "notes": "Closing slide. Leave it up at the end so people can note the emails: max@policyengine.org, pavel@policyengine.org and david@policyengine.org.",
+    "custom": "thank-you"
   }
 ];
