@@ -5,6 +5,9 @@ import { DeckIcon } from './Visuals';
 type Mapping = NonNullable<BlsSlideContent['mapping']>;
 type Row = Mapping['rows'][number];
 
+/** The closing card fills the rest of the last row of the three-column grid. */
+const VALUE_SPAN = ['col-span-3', 'col-span-2', 'col-span-1'];
+
 const AMBER_CHIP = { color: 'var(--pe-amber-dark)', background: 'color-mix(in srgb, var(--pe-amber-dark) 12%, transparent)' };
 
 function TaxsimChips({ names }: { names: string[] }) {
@@ -114,7 +117,9 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
       {mapping.rows.map((row) =>
         story ? <StoryCard key={row.area} row={row} addLabel={mapping.addLabel} taxsimLabel={mapping.taxsimLabel} /> : <MappingCard key={row.area} row={row} output={output} />,
       )}
-      <div className={`${story && mapping.taxsimLabel ? 'row-span-4' : 'row-span-3'} flex flex-col justify-center rounded-xl bg-pe-dark px-6 py-5 text-white`}>
+      <div
+        className={`${story && mapping.taxsimLabel ? 'row-span-4' : 'row-span-3'} ${VALUE_SPAN[mapping.rows.length % 3]} flex flex-col justify-center rounded-xl bg-pe-dark px-6 py-5 text-white`}
+      >
         <p className="text-sm font-semibold uppercase tracking-wider text-teal-300">{mapping.value.title}</p>
         <p className="mt-2 text-lg font-medium leading-snug">{mapping.value.text}</p>
       </div>
