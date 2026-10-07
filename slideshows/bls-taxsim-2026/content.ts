@@ -74,10 +74,12 @@ export interface BlsSlideContent {
   };
   /** Shown under a card grid as a one-line takeaway. */
   cardsTakeaway?: string;
-  /** Cards by general area: TAXSIM variables and PolicyEngine concepts joined by an arrow, a short note, and a closing value card. */
+  /** Cards by general area: TAXSIM variables, PolicyEngine concepts or added variables, a short note, and a closing value card. */
   mapping?: {
     direction: 'input' | 'output';
-    rows: { area: string; icon: BlsIcon; taxsim: string[]; pe: string[]; note: string }[];
+    /** With `add`, an input card tells the story: TAXSIM variables, the limit, then the PolicyEngine variables that remove it. */
+    rows: { area: string; icon: BlsIcon; taxsim: string[]; pe: string[]; note: string; add?: string[] }[];
+    addLabel?: string;
     value: { title: string; text: string };
   };
   /** A section opener: the section number; the title is the section name. */
@@ -522,7 +524,7 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "How TAXSIM inputs map to PolicyEngine",
     "body": [],
     "minutes": 2,
-    "notes": "Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status and dependents’ ages are derived from mstat and the dependent counts; interest, dividends, capital gains and S-corporation income are split evenly between spouses. Other income: pensions map to taxable private pensions and gssi to Social Security retirement benefits; TAXSIM has no split between pensions, IRA and 401(k) withdrawals. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for.",
+    "notes": "Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: filing status and dependents’ ages are derived from mstat and the dependent counts; interest, dividends, capital gains and S-corporation income are split evenly between spouses. Other income: pensions map to taxable private pensions and gssi to Social Security retirement benefits; TAXSIM has no split between pensions, IRA and 401(k) withdrawals. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for. Each card ends with the PolicyEngine US input variables that remove the limit, which a survey or an imputation can supply: w2_wages_from_qualified_business and unadjusted_basis_qualified_property apply the wage and property limits of the qualified business income deduction; charitable_cash_donations and other_medical_expenses give each deduction its own adjusted gross income limit or floor; county_fips places the household, which turns on city and county income taxes such as New York City’s and the Indiana county taxes; person-level interest and dividend variables replace the equal split between spouses; taxable_ira_distributions and taxable_401k_distributions separate retirement income by source. Related variables not on the slide: business_is_sstb, qualified_reit_and_ptp_income, charitable_non_cash_donations, home_mortgage_interest, non_qualified_dividend_income, social_security_disability and social_security_survivors. Variable names checked in PolicyEngine US source on October 7, 2026.",
     "mapping": {
       "direction": "input",
       "rows": [
@@ -539,7 +541,11 @@ export const blsSlides: BlsSlideContent[] = [
             "Specified service business income",
             "S corporation income"
           ],
-          "note": "The qualified business income deduction limits need W-2 wages and property basis, which TAXSIM does not report."
+          "note": "The qualified business income deduction limits need W-2 wages and property basis.",
+          "add": [
+            "w2_wages_from_qualified_business",
+            "unadjusted_basis_qualified_property"
+          ]
         },
         {
           "area": "Itemized deductions",
@@ -553,7 +559,11 @@ export const blsSlides: BlsSlideContent[] = [
             "Mortgage interest deduction",
             "Real estate taxes"
           ],
-          "note": "Other itemized deductions arrive as one total, without the charitable or medical expense limits."
+          "note": "Other itemized deductions arrive as one total, without the charitable or medical expense limits.",
+          "add": [
+            "charitable_cash_donations",
+            "other_medical_expenses"
+          ]
         },
         {
           "area": "State and local taxes",
@@ -565,7 +575,10 @@ export const blsSlides: BlsSlideContent[] = [
             "State income tax",
             "State and local tax deduction"
           ],
-          "note": "No county or city, so local income taxes are excluded."
+          "note": "Without the household’s location, county and city income taxes are excluded.",
+          "add": [
+            "county_fips"
+          ]
         },
         {
           "area": "Household",
@@ -581,7 +594,11 @@ export const blsSlides: BlsSlideContent[] = [
             "Each person’s age",
             "Dependents"
           ],
-          "note": "Income reported for the whole tax unit is split equally between spouses."
+          "note": "Income reported for the whole tax unit is split equally between spouses.",
+          "add": [
+            "taxable_interest_income",
+            "qualified_dividend_income"
+          ]
         },
         {
           "area": "Other income",
@@ -594,13 +611,18 @@ export const blsSlides: BlsSlideContent[] = [
             "Taxable private pensions",
             "Social Security retirement benefits"
           ],
-          "note": "No distinction between pensions, individual retirement accounts and 401(k) plans."
+          "note": "Pensions, individual retirement accounts and 401(k) plans are not distinguished.",
+          "add": [
+            "taxable_ira_distributions",
+            "taxable_401k_distributions"
+          ]
         }
       ],
       "value": {
         "title": "Why it matters",
-        "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. Richer inputs, where a data source has them, unlock the full rules."
-      }
+        "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or imputation, unlock the full rules."
+      },
+      "addLabel": "PolicyEngine adds"
     }
   },
   {

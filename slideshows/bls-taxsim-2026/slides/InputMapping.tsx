@@ -1,13 +1,13 @@
-import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
+import { IconArrowRight, IconInfoCircle, IconPlus } from '@tabler/icons-react';
 import type { BlsSlideContent } from '../content';
 import { DeckIcon } from './Visuals';
 
 type Mapping = NonNullable<BlsSlideContent['mapping']>;
 
-function TaxsimChips({ names }: { names: string[] }) {
+function TaxsimChips({ names, wrap = true }: { names: string[]; wrap?: boolean }) {
   if (names.length === 0) return <span className="text-sm italic text-gray-500">Not reported</span>;
   return (
-    <div className="flex max-w-[9.5rem] flex-wrap gap-1">
+    <div className={`flex flex-wrap gap-1 ${wrap ? 'max-w-[9.5rem]' : ''}`}>
       {names.map((name) => (
         <span
           key={name}
@@ -34,8 +34,9 @@ function PolicyEngineChips({ names }: { names: string[] }) {
 }
 
 /**
- * One card per general area: TAXSIM variables and PolicyEngine concepts as chips joined by an arrow
- * (TAXSIM to PolicyEngine for inputs, PolicyEngine to TAXSIM for outputs), with a one-line note.
+ * One card per general area. Input cards with `add` tell a story: the TAXSIM variables, the limit of the TAXSIM
+ * format, then the PolicyEngine variables that remove it. Other cards join PolicyEngine concepts and TAXSIM
+ * variables with an arrow (PolicyEngine to TAXSIM for outputs) and end with a one-line note.
  * The last card states why it matters.
  */
 export default function InputMapping({ mapping }: { mapping: Mapping }) {
@@ -45,7 +46,7 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
       className={`mt-4 grid grid-cols-3 gap-4 text-pe-dark lg:gap-5 ${
         output
           ? 'max-lg:[@media(max-height:820px)]:[zoom:0.8]'
-          : 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.92] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.84]'
+          : 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.84]'
       }`}
     >
       {mapping.rows.map((row) => (
@@ -54,15 +55,40 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
             <DeckIcon name={row.icon} size={22} />
             {row.area}
           </p>
-          <div className={`mt-3 grid items-center gap-x-2.5 ${output ? 'grid-cols-[1fr_auto_auto]' : 'grid-cols-[auto_auto_1fr]'}`}>
-            {output ? <PolicyEngineChips names={row.pe} /> : <TaxsimChips names={row.taxsim} />}
-            <IconArrowRight className="shrink-0 text-pe-teal" size={18} stroke={2.25} aria-hidden="true" />
-            {output ? <TaxsimChips names={row.taxsim} /> : <PolicyEngineChips names={row.pe} />}
-          </div>
-          <p className="mt-auto flex items-start gap-2 pt-3 text-sm leading-snug text-gray-600 lg:text-[15px]">
-            <IconInfoCircle className="mt-0.5 shrink-0 text-gray-400" size={16} stroke={2} aria-hidden="true" />
-            {row.note}
-          </p>
+          {row.add ? (
+            <>
+              <div className="mt-3 flex flex-wrap gap-1">
+                <TaxsimChips names={row.taxsim} wrap={false} />
+              </div>
+              <p className="mt-2.5 flex items-start gap-2 text-sm leading-snug text-gray-600 lg:text-[15px]">
+                <IconInfoCircle className="mt-0.5 shrink-0 text-gray-400" size={16} stroke={2} aria-hidden="true" />
+                {row.note}
+              </p>
+              <p className="mt-auto flex items-center gap-1.5 pt-3 text-xs font-semibold uppercase tracking-wider text-teal-700">
+                <IconPlus size={14} stroke={2.5} aria-hidden="true" />
+                {mapping.addLabel}
+              </p>
+              <div className="mt-1.5 flex flex-col items-start gap-1">
+                {row.add.map((name) => (
+                  <span key={name} className="rounded-md bg-pe-teal/10 px-2 py-0.5 font-mono text-[13px] text-pe-dark">
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={`mt-3 grid items-center gap-x-2.5 ${output ? 'grid-cols-[1fr_auto_auto]' : 'grid-cols-[auto_auto_1fr]'}`}>
+                {output ? <PolicyEngineChips names={row.pe} /> : <TaxsimChips names={row.taxsim} />}
+                <IconArrowRight className="shrink-0 text-pe-teal" size={18} stroke={2.25} aria-hidden="true" />
+                {output ? <TaxsimChips names={row.taxsim} /> : <PolicyEngineChips names={row.pe} />}
+              </div>
+              <p className="mt-auto flex items-start gap-2 pt-3 text-sm leading-snug text-gray-600 lg:text-[15px]">
+                <IconInfoCircle className="mt-0.5 shrink-0 text-gray-400" size={16} stroke={2} aria-hidden="true" />
+                {row.note}
+              </p>
+            </>
+          )}
         </div>
       ))}
       <div className="flex flex-col justify-center rounded-lg bg-pe-dark px-5 py-4 text-white">
@@ -72,3 +98,4 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
     </div>
   );
 }
+
