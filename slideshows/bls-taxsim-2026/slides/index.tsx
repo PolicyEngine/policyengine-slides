@@ -2,7 +2,7 @@ import DetailContent from './DetailContent';
 import LiveEmbed from './LiveEmbed';
 import ProcessFlow from './ProcessFlow';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
-import { BenefitChains, CompareFlow, DropIn, IconCards, PartnershipHistory, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkedExample } from './Visuals';
+import { BenefitChains, CompareFlow, DropIn, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkedExample } from './Visuals';
 import Slide from '@/components/core/Slide';
 import CoverSlide from '@/components/layout/CoverSlide';
 import SlideHeader from '@/components/layout/SlideHeader';
@@ -66,8 +66,8 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <ResourceBars bars={content.resourceBars} />
       ) : content.dropIn ? (
         <DropIn dropIn={content.dropIn} />
-      ) : content.history ? (
-        <PartnershipHistory history={content.history} />
+      ) : content.bridge ? (
+        <PartnershipBridge bridge={content.bridge} />
       ) : content.triangle ? (
         <Triangle triangle={content.triangle} />
       ) : content.worked ? (

@@ -1,5 +1,5 @@
 export type BlsIcon =
-  | 'building' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask'
+  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask'
   | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world';
 
 export interface BlsSlideContent {
@@ -49,7 +49,7 @@ export interface BlsSlideContent {
     household: { role: string; detail: string }[];
     outputTitle: string;
     outputs: { field: string; value: string; meaning: string }[];
-    footnote: string;
+    footnote?: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -69,20 +69,17 @@ export interface BlsSlideContent {
     rows: { env: string; before: string; after: string }[];
     takeaway: string;
   };
-  /** Milestones on a full-width line, then a to-scale bar of tax-year coverage. */
-  history?: {
-    legend: { nber: string; pe: string; joint: string };
-    milestones: { when: string; party: 'nber' | 'pe' | 'joint'; title: string; detail: string }[];
-    coverage: {
+  /** TAXSIM on the left, PolicyEngine on the right, the agreement and year routing in the middle. */
+  bridge?: {
+    left: { title: string; party: 'nber' | 'pe'; items: { icon: BlsIcon; title: string; detail: string }[] };
+    center: {
       title: string;
-      start: number;
-      end: number;
-      split: number;
-      taxsimLabel: string;
-      peLabel: string;
-      marks: { year: number; label?: string }[];
+      date: string;
+      detail: string;
+      routingTitle: string;
+      routing: { years: string; engine: string; party: 'nber' | 'pe' }[];
     };
-    takeaway: string;
+    right: { title: string; party: 'nber' | 'pe'; items: { icon: BlsIcon; title: string; detail: string }[] };
   };
   /** Three calculations at the corners of a triangle, with the law at the center. */
   triangle?: {
@@ -206,37 +203,44 @@ export const blsSlides: BlsSlideContent[] = [
     "id": "nber",
     "title": "The NBER collaboration",
     "body": [
-      "TAXSIM: created at NBER in the 1970s; 1,200+ papers cite the reference paper",
-      "A public issue tracker from 2024 and a memorandum of understanding in September 2025",
-      "Emulator 3.0 in September 2026; TAXSIM35 covers 1960–2020 and PolicyEngine 2021 onward",
+      "TAXSIM at NBER: since the 1970s, 1,200+ citing papers, federal law from 1960 and state law from 1977",
+      "A memorandum of understanding in September 2025; one interface routes 1960–2020 to TAXSIM35 and 2021 onward to PolicyEngine",
+      "The emulator: same TAXSIM35 format, open source, validated in the open",
     ],
     "minutes": 3,
-    "notes": "Walk the timeline left to right, then the bar. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. The bar is to scale: TAXSIM35 covers federal law from 1960 and state law from 1977 through 2020, and PolicyEngine covers 2021 onward, behind one interface. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
+    "notes": "Start on the left with TAXSIM, end on the right with the emulator, and use the middle for the agreement and how years are routed. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
-    "history": {
-      "legend": { "nber": "NBER", "joint": "Together", "pe": "PolicyEngine" },
-      "milestones": [
-        { "when": "1970s", "party": "nber", "title": "TAXSIM created at NBER", "detail": "By Daniel Feenberg, who still maintains it" },
-        { "when": "1993", "party": "nber", "title": "The reference paper", "detail": "Feenberg and Coutts. 1,200+ papers cite it; think tanks and federal agencies rely on TAXSIM" },
-        { "when": "2024", "party": "joint", "title": "A public issue tracker", "detail": "NBER starts filing differences on GitHub" },
-        { "when": "September 2025", "party": "joint", "title": "Memorandum of understanding", "detail": "NBER (Daniel Feenberg, James Poterba) and PolicyEngine" },
-        { "when": "September 2026", "party": "pe", "title": "Emulator 3.0", "detail": "Open source, same TAXSIM35 format; 80 releases this year" }
-      ],
-      "coverage": {
-        "title": "One interface for every tax year",
-        "start": 1960,
-        "end": 2026,
-        "split": 2021,
-        "taxsimLabel": "TAXSIM35: federal and state law",
-        "peLabel": "PolicyEngine",
-        "marks": [
-          { "year": 1960, "label": "Federal law" },
-          { "year": 1977, "label": "State law added" },
-          { "year": 2021 },
-          { "year": 2026 }
+    "bridge": {
+      "left": {
+        "title": "TAXSIM at NBER",
+        "party": "nber",
+        "items": [
+          { "icon": "history", "title": "Developed since the 1970s", "detail": "By Daniel Feenberg, who maintains it" },
+          { "icon": "book", "title": "1,200+ citing papers", "detail": "Feenberg and Coutts (1993)" },
+          { "icon": "calendar", "title": "Federal law from 1960", "detail": "State law from 1977" },
+          { "icon": "building", "title": "Used across research and policy", "detail": "Think tanks and federal agencies" }
         ]
       },
-      "takeaway": "Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law."
+      "center": {
+        "title": "Memorandum of understanding",
+        "date": "September 2025",
+        "detail": "Daniel Feenberg and James Poterba (NBER) with PolicyEngine",
+        "routingTitle": "One interface, every tax year",
+        "routing": [
+          { "years": "1960–2020", "engine": "TAXSIM35", "party": "nber" },
+          { "years": "2021 onward", "engine": "PolicyEngine", "party": "pe" }
+        ]
+      },
+      "right": {
+        "title": "PolicyEngine TAXSIM emulator",
+        "party": "pe",
+        "items": [
+          { "icon": "file-spreadsheet", "title": "Same TAXSIM35 format", "detail": "Existing scripts keep working" },
+          { "icon": "scale", "title": "PolicyEngine models from 2021", "detail": "Federal and state income tax" },
+          { "icon": "github", "title": "Open source", "detail": "Code on GitHub; 80 releases in 2026" },
+          { "icon": "chart-dots", "title": "Validated in the open", "detail": "Public dashboard and issue tracker" }
+        ]
+      }
     }
   },
 
@@ -305,8 +309,7 @@ export const blsSlides: BlsSlideContent[] = [
         { "field": "v22", "value": "$4,000", "meaning": "Child tax credit" },
         { "field": "frate", "value": "22%", "meaning": "Federal marginal rate" },
         { "field": "fica", "value": "$19,890", "meaning": "Payroll tax, both halves" }
-      ],
-      "footnote": "Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2."
+      ]
     }
   },
 

@@ -60,18 +60,23 @@ Point out the federal statistical and research users, such as BEA and the Atlant
 
 ## 6. The NBER collaboration (7–10 min)
 
-Milestones (NBER, together, PolicyEngine):
-- **1970s, TAXSIM created at NBER:** By Daniel Feenberg, who still maintains it
-- **1993, The reference paper:** Feenberg and Coutts. 1,200+ papers cite it; think tanks and federal agencies rely on TAXSIM
-- **2024, A public issue tracker:** NBER starts filing differences on GitHub
-- **September 2025, Memorandum of understanding:** NBER (Daniel Feenberg, James Poterba) and PolicyEngine
-- **September 2026, Emulator 3.0:** Open source, same TAXSIM35 format; 80 releases this year
+TAXSIM at NBER:
+- **Developed since the 1970s:** By Daniel Feenberg, who maintains it
+- **1,200+ citing papers:** Feenberg and Coutts (1993)
+- **Federal law from 1960:** State law from 1977
+- **Used across research and policy:** Think tanks and federal agencies
 
-One interface for every tax year: TAXSIM35 covers federal law from 1960 and state law from 1977 through 2020; PolicyEngine covers 2021 onward (bar drawn to scale, 1960–2026).
+**Memorandum of understanding, September 2025:** Daniel Feenberg and James Poterba (NBER) with PolicyEngine
 
-Both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law.
+One interface, every tax year: 1960–2020 → TAXSIM35; 2021 onward → PolicyEngine.
 
-Walk the timeline left to right, then the bar. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. The bar is to scale: TAXSIM35 covers federal law from 1960 and state law from 1977 through 2020, and PolicyEngine covers 2021 onward, behind one interface. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/
+PolicyEngine TAXSIM emulator:
+- **Same TAXSIM35 format:** Existing scripts keep working
+- **PolicyEngine models from 2021:** Federal and state income tax
+- **Open source:** Code on GitHub; 80 releases in 2026
+- **Validated in the open:** Public dashboard and issue tracker
+
+Start on the left with TAXSIM, end on the right with the emulator, and use the middle for the agreement and how years are routed. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/
 
 # The TAXSIM emulator
 
@@ -106,7 +111,6 @@ TAXSIM outputs:
 - frate 22%: Federal marginal rate
 - fica $19,890: Payroll tax, both halves
 
-Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2.
 
 Walk through one real record from left to right. The row is household 1 of the web runner’s sample file, with the children’s ages added. The adapter maps pwages and swages to each person’s employment_income and page and sage to age, then returns fiitax (income_tax) and siitax (state_income_tax) in TAXSIM’s output format. fica is the TAXSIM convention: employee and employer payroll tax together (15.3% of $130,000). Point out that the federal tax already nets the $4,000 child tax credit. Run on October 5, 2026 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2; the older local build gave the same numbers. Two input points for CE staff: state codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. And one file can cover any year: the emulator routes years before 2021 to the bundled TAXSIM35 and 2021 onward to PolicyEngine, so a run record should note the emulator and model versions.
 

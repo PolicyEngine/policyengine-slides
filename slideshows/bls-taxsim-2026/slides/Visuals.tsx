@@ -1,5 +1,9 @@
 import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconBook,
   IconBrandGithub,
+  IconCalendar,
   IconBuildingBank,
   IconChartBar,
   IconChartDots,
@@ -7,6 +11,7 @@ import {
   IconFileSpreadsheet,
   IconFileText,
   IconFlask,
+  IconHeartHandshake,
   IconHistory,
   IconPlayerPlay,
   IconScale,
@@ -17,6 +22,8 @@ import {
 import type { BlsIcon, BlsSlideContent } from '../content';
 
 const ICONS: Record<BlsIcon, Icon> = {
+  'book': IconBook,
+  'calendar': IconCalendar,
   'building': IconBuildingBank,
   'chart-bar': IconChartBar,
   'chart-dots': IconChartDots,
@@ -190,7 +197,7 @@ export function WorkedExample({ worked }: { worked: Worked }) {
           ))}
         </div>
       </div>
-      <p className="text-sm text-gray-500">{worked.footnote}</p>
+      {worked.footnote && <p className="text-sm text-gray-500">{worked.footnote}</p>}
     </div>
   );
 }
@@ -385,95 +392,73 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
   );
 }
 
-type HistoryData = NonNullable<BlsSlideContent['history']>;
+type BridgeData = NonNullable<BlsSlideContent['bridge']>;
 
-const PARTY_STYLE: Record<'nber' | 'pe' | 'joint', string> = {
-  nber: 'bg-[var(--pe-amber-dark)]',
-  pe: 'bg-teal-400',
-  joint: 'bg-pe-dark',
+const SIDE_STYLE: Record<'nber' | 'pe', { border: string; icon: string; dot: string }> = {
+  nber: { border: 'border-[var(--pe-amber-dark)]', icon: 'text-[var(--pe-amber-dark)]', dot: 'bg-[var(--pe-amber-dark)]' },
+  pe: { border: 'border-teal-400', icon: 'text-teal-500', dot: 'bg-teal-400' },
 };
 
-/** Milestones on a full-width line, then a to-scale bar of the tax years each engine covers. */
-export function PartnershipHistory({ history }: { history: HistoryData }) {
-  const { coverage } = history;
-  const segments = [
-    {
-      label: coverage.taxsimLabel,
-      from: coverage.start,
-      years: coverage.split - coverage.start,
-      style: `${PARTY_STYLE.nber} text-white`,
-      minWidth: undefined,
-      first: true,
-      marks: coverage.marks.filter((m) => m.year < coverage.split),
-    },
-    {
-      label: coverage.peLabel,
-      from: coverage.split,
-      years: coverage.end - coverage.split + 1,
-      style: `${PARTY_STYLE.pe} text-pe-dark`,
-      minWidth: '7.5rem',
-      first: false,
-      marks: coverage.marks.filter((m) => m.year >= coverage.split),
-    },
-  ];
+function BridgeSide({ side }: { side: BridgeData['left'] }) {
+  const style = SIDE_STYLE[side.party];
   return (
-    <div className="mt-2 space-y-5 text-pe-dark">
-      <div>
-        <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${history.milestones.length}, minmax(0, 1fr))` }}>
-          {history.milestones.map((m) => (
-            <div key={m.title} className="flex flex-col">
-              <div className="flex-1 rounded-lg bg-gray-50 px-4 py-3">
-                <p className="text-sm font-bold tracking-wide text-gray-500">{m.when}</p>
-                <p className="mt-1 text-lg font-semibold leading-snug">{m.title}</p>
-                <p className="mt-1 text-sm leading-snug text-gray-600">{m.detail}</p>
-              </div>
-              <div className="mx-auto h-4 w-px bg-gray-300" />
-              <div className="relative flex h-5 items-center justify-center">
-                <span className={`relative z-10 h-5 w-5 rounded-full ring-4 ring-white ${PARTY_STYLE[m.party]}`} />
+    <div className={`flex h-full flex-col rounded-xl border-t-4 bg-gray-50 px-5 py-4 ${style.border}`}>
+      <p className="text-base font-bold uppercase tracking-wider text-pe-dark">{side.title}</p>
+      <div className="mt-2 flex flex-1 flex-col justify-evenly divide-y divide-gray-200">
+        {side.items.map((item) => {
+          const Component = ICONS[item.icon];
+          return (
+            <div key={item.title} className="flex items-center gap-4 py-2">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                <Component className={style.icon} size={24} stroke={1.75} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-lg font-semibold leading-snug text-pe-dark">{item.title}</p>
+                <p className="text-sm leading-snug text-gray-600">{item.detail}</p>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="-mt-[11px] h-0.5 bg-gray-300" />
+          );
+        })}
       </div>
+    </div>
+  );
+}
 
-      <div>
-        <div className="flex items-baseline justify-between">
-          <p className="text-lg font-semibold">{coverage.title}</p>
-          <div className="flex gap-5 text-sm text-gray-600">
-            {(['nber', 'joint', 'pe'] as const).map((party) => (
-              <span key={party} className="flex items-center gap-2">
-                <span className={`inline-block h-3 w-3 rounded-full ${PARTY_STYLE[party]}`} />
-                {history.legend[party]}
-              </span>
-            ))}
+/** TAXSIM on the left, PolicyEngine on the right, the agreement and the year routing in the middle. */
+export function PartnershipBridge({ bridge }: { bridge: BridgeData }) {
+  const { center } = bridge;
+  return (
+    <div className="mt-2">
+      <div className="grid min-h-[calc(100vh-390px)] grid-cols-[1fr_auto_clamp(14rem,24vw,19rem)_auto_1fr] items-stretch gap-3">
+        <BridgeSide side={bridge.left} />
+        <IconArrowRight className={`self-center ${SIDE_STYLE.nber.icon}`} size={30} stroke={2.5} aria-hidden="true" />
+        <div className="flex flex-col items-center justify-center gap-3 text-center">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-pe-dark">
+            <IconHeartHandshake className="text-teal-300" size={34} stroke={1.5} aria-hidden="true" />
+          </span>
+          <div>
+            <p className="text-lg font-bold leading-snug text-pe-dark">{center.title}</p>
+            <p className="text-2xl font-extrabold text-teal-600">{center.date}</p>
+            <p className="mt-1 text-sm leading-snug text-gray-600">{center.detail}</p>
+          </div>
+          <div className="w-full rounded-xl bg-pe-dark px-4 py-4 text-white">
+            <p className="text-sm font-semibold uppercase tracking-wider text-white/70">{center.routingTitle}</p>
+            <div className="mt-2 space-y-2">
+              {center.routing.map((route) => (
+                <div key={route.years} className="flex items-center justify-between gap-2 whitespace-nowrap rounded-lg bg-white/10 px-3 py-2">
+                  <span className="flex items-center gap-2 text-sm font-semibold">
+                    <span className={`h-3 w-3 rounded-full ${SIDE_STYLE[route.party].dot}`} aria-hidden="true" />
+                    {route.years}
+                  </span>
+                  <span className="text-xs text-white/85">{route.engine}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        {/* Each segment carries its own year marks, so marks stay on the segment edges even when the PolicyEngine segment hits its minimum width. */}
-        <div className="mt-2 flex">
-          {segments.map((segment) => (
-            <div key={segment.label} className="min-w-0" style={{ flex: `${segment.years} 1 0%`, minWidth: segment.minWidth }}>
-              <div className={`flex h-11 items-center font-semibold ${segment.first ? 'rounded-l-lg px-4 text-base' : 'justify-center rounded-r-lg px-2 text-sm'} ${segment.style}`}>
-                <span className="truncate">{segment.label}</span>
-              </div>
-              <div className="relative mt-1 h-10">
-                {segment.marks.map((mark) => {
-                  const left = ((mark.year - segment.from) / segment.years) * 100;
-                  const align = mark.year === coverage.end ? 'right-0 text-right' : left <= 1 ? 'left-0' : '-translate-x-1/2 text-center';
-                  return (
-                    <div key={mark.year} className={`absolute top-0 ${align}`} style={mark.year === coverage.end || left <= 1 ? undefined : { left: `${left}%` }}>
-                      <p className="text-sm font-semibold">{mark.year}</p>
-                      {mark.label && <p className="whitespace-nowrap text-xs text-gray-600">{mark.label}</p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
+        <IconArrowLeft className={`self-center ${SIDE_STYLE.pe.icon}`} size={30} stroke={2.5} aria-hidden="true" />
+        <BridgeSide side={bridge.right} />
       </div>
-
-      <p className="text-xl leading-snug font-medium">{history.takeaway}</p>
     </div>
   );
 }
