@@ -49,7 +49,7 @@ export default function EmtrSlide() {
         zeroLine={0}
         height={330}
       />
-      <ModelFootnote agiDirect={false} extra="The borrower is the only earner, in Texas, which has no state income tax; rates elsewhere would be higher. Rates are measured on $500 steps of earnings; spikes above 150% are cut off at the top of the chart (hover shows the value). The standard plan's payment does not change with income, so its rate matches the no-payment line. Spikes on the no-payment line are benefit cliffs, such as losing reduced-price school meals at 185% of the poverty guideline." />
+      <ModelFootnote agiDirect={false} extra="The borrower is the only earner, in Texas, which has no state income tax; rates elsewhere would be higher. Rates are measured over the next $1,000 of earnings, every $500; spikes above 150% are cut off at the top of the chart (hover shows the value). The standard plan's payment does not change with income, so its rate matches the no-payment line. Spikes on the no-payment line are benefit cliffs, such as losing reduced-price school meals at 185% of the poverty guideline." />
     </Slide>
   );
 }

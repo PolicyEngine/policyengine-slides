@@ -16,7 +16,7 @@ const assumptions = [
   ['Parent PLUS', 'SCF loans taken for a child’s education count as Parent PLUS, which RAP, IBR and SAVE exclude.'],
   ['Interest rate', 'The preliminary charts use 6.52%, the 2026–27 undergraduate rate. The final analysis uses a portfolio average.'],
   ['IBR new borrower', 'Born in 1996 or later, as a proxy for first borrowing after July 1, 2014.'],
-  ['Federal vs private', 'The SCF does not separate them; treat education debt as federal and let FSA totals set the level.'],
+  ['Federal vs private', 'The SCF asks whether each education loan is federal; we keep federal loans and let FSA totals set the level.'],
 ];
 
 export default function QuestionsSlide() {
