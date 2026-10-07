@@ -1,5 +1,5 @@
 export type BlsIcon =
-  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-spreadsheet' | 'file-text' | 'flask'
+  | 'book' | 'building' | 'calendar' | 'chart-bar' | 'chart-dots' | 'file-text' | 'flask'
   | 'github' | 'history' | 'play' | 'scale' | 'users' | 'world';
 
 export interface BlsSlideContent {
@@ -205,10 +205,10 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "TAXSIM at NBER: since the 1970s, 1,200+ citing papers, federal law from 1960 and state law from 1977",
       "A memorandum of understanding in September 2025; one interface routes 1960–2020 to TAXSIM35 and 2021 onward to PolicyEngine",
-      "The emulator: same TAXSIM35 format, open source, validated in the open",
+      "PolicyEngine: open source since 2021, 95,000+ parameters, federal and all state taxes with benefits in one model",
     ],
     "minutes": 3,
-    "notes": "Start on the left with TAXSIM, end on the right with the emulator, and use the middle for the agreement and how years are routed. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
+    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters, 5,500+ variables and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
     "bridge": {
       "left": {
@@ -232,13 +232,13 @@ export const blsSlides: BlsSlideContent[] = [
         ]
       },
       "right": {
-        "title": "PolicyEngine TAXSIM emulator",
+        "title": "PolicyEngine",
         "party": "pe",
         "items": [
-          { "icon": "file-spreadsheet", "title": "Same TAXSIM35 format", "detail": "Existing scripts keep working" },
-          { "icon": "scale", "title": "PolicyEngine models from 2021", "detail": "Federal and state income tax" },
-          { "icon": "github", "title": "Open source", "detail": "Code on GitHub; 80 releases in 2026" },
-          { "icon": "chart-dots", "title": "Validated in the open", "detail": "Public dashboard and issue tracker" }
+          { "icon": "github", "title": "Open source since 2021", "detail": "133 contributors to the US model" },
+          { "icon": "scale", "title": "95,000+ parameters", "detail": "5,500+ variables and 4,693 test files" },
+          { "icon": "world", "title": "Federal, all 50 states and DC", "detail": "Taxes and benefits in one model" },
+          { "icon": "building", "title": "Used across research and policy", "detail": "Congress, think tanks and benefit navigators" }
         ]
       }
     }

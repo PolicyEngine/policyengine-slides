@@ -70,13 +70,13 @@ TAXSIM at NBER:
 
 One interface, every tax year: 1960–2020 → TAXSIM35; 2021 onward → PolicyEngine.
 
-PolicyEngine TAXSIM emulator:
-- **Same TAXSIM35 format:** Existing scripts keep working
-- **PolicyEngine models from 2021:** Federal and state income tax
-- **Open source:** Code on GitHub; 80 releases in 2026
-- **Validated in the open:** Public dashboard and issue tracker
+PolicyEngine:
+- **Open source since 2021:** 133 contributors to the US model
+- **95,000+ parameters:** 5,500+ variables and 4,693 test files
+- **Federal, all 50 states and DC:** Taxes and benefits in one model
+- **Used across research and policy:** Congress, think tanks and benefit navigators
 
-Start on the left with TAXSIM, end on the right with the emulator, and use the middle for the agreement and how years are routed. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/
+Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters, 5,500+ variables and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/
 
 # The TAXSIM emulator
 
