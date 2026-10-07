@@ -42,7 +42,7 @@ export default function NetIncomeSlide() {
         readoutFormat={usd0}
         height={340}
       />
-      <ModelFootnote extra="The borrower is the only earner. Texas has no state income tax. Net income is PolicyEngine's household net income for 2026 (market income plus benefits and refundable credits, minus taxes; health coverage not valued), minus 12 times the October payment." />
+      <ModelFootnote agiDirect={false} extra="The borrower is the only earner. Texas has no state income tax. Net income is PolicyEngine's household net income for 2026 (market income plus benefits and refundable credits, minus taxes; health coverage not valued), minus 12 times the October payment." />
     </Slide>
   );
 }
