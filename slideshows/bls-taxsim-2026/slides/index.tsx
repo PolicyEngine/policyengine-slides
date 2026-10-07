@@ -1,7 +1,10 @@
 import DetailContent from './DetailContent';
 import DropInTabs from './DropInTabs';
 import LiveEmbed from './LiveEmbed';
+import InputMapping from './InputMapping';
+import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
+import SectionDivider from './SectionDivider';
 import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
@@ -23,6 +26,10 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
   if (content.custom) {
     const Custom = CUSTOM_SLIDES[content.custom];
     return <Custom />;
+  }
+
+  if (content.divider) {
+    return <SectionDivider number={content.divider.number} title={content.title} />;
   }
 
   if (content.cover) {
@@ -67,6 +74,10 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <ResourceBars bars={content.resourceBars} />
       ) : content.dropIn ? (
         <DropInTabs dropIn={content.dropIn} />
+      ) : content.mapping ? (
+        <InputMapping mapping={content.mapping} />
+      ) : content.origins ? (
+        <OriginsSlide origins={content.origins} />
       ) : content.bridge ? (
         <PartnershipBridge bridge={content.bridge} />
       ) : content.triangle ? (

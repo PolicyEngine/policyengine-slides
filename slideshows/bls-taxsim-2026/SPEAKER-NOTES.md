@@ -1,15 +1,15 @@
 # BLS TAXSIM seminar: slide text and speaker notes
 
-19 slides: 51 minutes presenting, about 9 minutes of slack, then a dedicated 30-minute Q&A slide.
+27 slides, including 5 section dividers: 56 minutes presenting, about 4 minutes of slack, then a dedicated 30-minute Q&A slide.
 
 Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, IARIW 2026 imputation/calibration material in this repository, and the PolicyEngine TAXSIM site (policyengine.org/us/taxsim), captured October 5, 2026.
 
 ## Before presenting
 
-- Rehearse the live demo (slide 9) and the live dashboard (slide 12) on the presentation laptop and the BLS network. Confirm that both frames load. If a frame does not load, open the page in a browser tab.
-- On the morning of the talk, open the dashboard and check that it loads. Its headline figures are in the notes for slide 11 for questions (2023: 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026).
-- The dashboard’s September 23 data treats S-corporation income as active. PR #1199 (September 29) made passive the default, so a refresh before the talk would change the federal figures; update the slide 11 notes and the slide 12 footnote if it does. Do not refresh with TAXSIM builds from September 24 onward until NBER confirms them (policyengine-taxsim #1248).
-- The validation section (slides 10–13, 10 minutes) has a full speaker script in `VALIDATION-SCRIPT.md`.
+- Rehearse the live demo (slide 12) and the live dashboard (slide 16) on the presentation laptop and the BLS network. Confirm that both frames load. If a frame does not load, open the page in a browser tab.
+- On the morning of the talk, open the dashboard and check that it loads. Its headline figures are in the notes for slide 15 for questions (2023: 89.8% federal and 94.9% state agreement within ±1% of gross income, data of September 23, 2026).
+- The dashboard’s September 23 data treats S-corporation income as active. PR #1199 (September 29) made passive the default, so a refresh before the talk would change the federal figures; update the slide 15 notes and the slide 16 footnote if it does. Do not refresh with TAXSIM builds from September 24 onward until NBER confirms them (policyengine-taxsim #1248).
+- The validation section (slides 14–17, 10 minutes) has a full speaker script in `VALIDATION-SCRIPT.md`.
 - Confirm the CE-specific benefit methodology and pilot scope. These sections describe proposed research choices rather than a completed CE implementation.
 
 # Introduction and context
@@ -24,17 +24,23 @@ Introduce the speakers and thank the BLS hosts and the CE team.
 
 ## 2. Today’s discussion (1–2 min)
 
-- Introduction and context — What PolicyEngine is, who uses it, and the NBER collaboration.
-- The TAXSIM emulator — A drop-in TAXSIM interface, and how one record becomes a tax result.
-- Live demonstration — A TAXSIM-format file run in the browser, from input rows to federal and state tax.
+- Introduction and context — What PolicyEngine is, who uses it, and how the NBER collaboration started.
+- The TAXSIM emulator — A drop-in TAXSIM interface, where each calculation happens, and a live demo in the browser.
 - Validation — How a disagreement is resolved with the engines, independent validators and the law, how that shapes the emulator, the public dashboard, and our progress.
-- Benefit imputation — Methods for missing survey inputs, SNAP participation, and Medicaid valuation.
+- Beyond TAXSIM — What PolicyEngine models beyond TAXSIM’s inputs, and methods for missing survey inputs, SNAP participation and Medicaid valuation.
 - A possible CE pilot — A focused comparison, the inputs it needs, and questions for CE staff.
 - Q&A and discussion — Questions on the methods, implementation, and opportunities for collaboration.
 
-The first six sections total 51 minutes, leaving about 9 minutes of slack before the 30-minute Q&A. Show the drop-in swap and one worked example, then run the live demo, then give an overview of the validation process. Introduce benefit imputation afterward as an extension requiring additional data and methodological choices. Reserve 30 minutes for Q&A.
+The first five sections total 56 minutes, leaving about 4 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A.
+  },
+  {
+    "id": "section-intro
 
-## 3. PolicyEngine: free, open-source microsimulation (2–5 min)
+## 3. Introduction and context (section divider)
+
+Section divider 01. Move on after a few seconds.
+
+## 4. PolicyEngine: free, open-source microsimulation (2–5 min)
 
 - Rules: federal and state taxes and major benefit programs
 - Households: survey data enhanced and calibrated, or any household you enter
@@ -42,7 +48,7 @@ The first six sections total 51 minutes, leaving about 9 minutes of slack before
 
 Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the emulator section covers those. Adapted from the cpid-webinar-2026 deck (September 2026).
 
-## 4. PolicyEngine today (5–6 min)
+## 5. PolicyEngine today (5–6 min)
 
 - 95,000+ parameters, 5,500+ variables and 4,693 test files in the US model
 - Public code since June 2021, with 133 contributors to the US model
@@ -50,7 +56,7 @@ Give the one-minute version of PolicyEngine: an open-source rules engine, a hous
 
 Use the numbers to show scale and testing, not to sell. The NBER memorandum of understanding is the reason the TAXSIM emulator exists; the next section covers it. Figures from the gettsim-2026 deck (September 3, 2026); check them before the talk if you quote them.
 
-## 5. Researchers and developers build with these rules (6–7 min)
+## 6. Researchers and developers build with these rules (6–7 min)
 
 - Federal partners and users: NBER, the Atlanta Fed, BEA and the Joint Economic Committee
 - Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown and USC
@@ -58,7 +64,41 @@ Use the numbers to show scale and testing, not to sell. The NBER memorandum of u
 
 Point out the federal statistical and research users, such as BEA and the Atlanta Fed, because they are closest to the CE team’s work. Adapted from the cpid-webinar-2026 deck (September 2026).
 
-## 6. The NBER collaboration (7–10 min)
+## 7. How the collaboration started (7–9 min)
+
+Before the emulator: record by record:
+1. **Compare one record:** One household runs through both models.
+2. **Trace the difference:** Fill out the tax form to find the error.
+3. **Write a YAML test:** The record becomes an integration test.
+4. **Fix the model at fault:** PolicyEngine keeps the test; NBER corrects TAXSIM35.
+5. **Scale up:** Samples of 100,000 tax units find the next records.
+
+One record as a YAML test (policyengine-us #1504 · November 2022, https://github.com/PolicyEngine/policyengine-us/issues/1504):
+
+```yaml
+- name: Tax unit with tax-exempt pension income as sole income source.
+  period: 2021
+  input:
+    people:
+      person1:
+        age: 70
+        tax_exempt_pension_income: 36000
+        ssi: 0  # not in TAXSIM35
+        wic: 0  # not in TAXSIM35
+  output:  # expected results from online TAXSIM35 10/24/22 version
+    taxsim_tfica: 0.00
+    income_tax: -1400.00
+```
+
+From testing to partnership:
+- **2022 · Validation begins:** Daniel Feenberg shares TAXSIM35 code for testing.
+- **2024 · The emulator:** TAXSIM inputs and outputs on PolicyEngine rules.
+- **2025 · NSF POSE Phase I:** Feenberg is external mentor through I-Corps for POSE.
+- **Sep 2025 · Formal agreement:** NBER and PolicyEngine sign a memorandum of understanding.
+
+Ease into the partnership before the agreement slide. Validation against TAXSIM35 started in April 2022 (policyengine-us issue #704, “Validate against TAXSIM 35”). Before the emulator existed, the team compared records one at a time and turned each one into a YAML integration test in policyengine-us. The example on the slide is issue #1504 (November 15, 2022), trimmed: a 70-year-old with $36,000 of tax-exempt pension income in 2021, with SSI and WIC set to zero because they are not in TAXSIM35, and the expected values from the online TAXSIM35 (income_tax of −$1,400, the 2021 recovery rebate). The test failed because PolicyEngine counted tax-exempt pension income in AGI; PR #1505 fixed it the same day and the test stayed in the suite. Issues #1031 (Massachusetts senior circuit breaker, July 2022) and #1279 (2021 AMT, August 2022) follow the same pattern. The method then scaled up to differential testing: random samples of 100,000 tax units, about 1.6 million units across two sample sequences, went through TAXSIM35 and PolicyEngine US for tax year 2021, federal and each state. The units with the largest differences came out one at a time, and the team filled out the relevant part of the tax form by hand to decide which model was wrong. If TAXSIM35 was wrong, its code was patched; if PolicyEngine was wrong, an issue with a failing test was filed. Daniel Feenberg made this possible by sharing the TAXSIM35 source code. The method is written up in policyengine-us discussion #2389. The policyengine-taxsim emulator started in May 2024, and Feenberg filed his first issue on its public tracker on September 22, 2024; he has filed about 830 since. In 2025, NSF awarded PolicyEngine a POSE Phase I grant (award 2518372, September 2025 to August 2026), and Feenberg served as the external mentor through the I-Corps for POSE training. The September 2025 memorandum of understanding (next slide) formalized more than three years of this work. Sources: github.com/PolicyEngine/policyengine-us/issues/704, github.com/PolicyEngine/policyengine-us/discussions/2389, nsf.gov/awardsearch/show-award/?AWD_ID=2518372, policyengine.org/us/research/nsf-pose-phase-1-grant.
+
+## 8. The NBER collaboration (9–12 min)
 
 TAXSIM at NBER:
 - **Developed since the 1970s:** By Daniel Feenberg, who maintains it
@@ -80,43 +120,59 @@ Start on the left with TAXSIM, end on the right with PolicyEngine, and use the m
 
 # The TAXSIM emulator
 
-## 7. A drop-in replacement for TAXSIM35 (10–13 min)
+## 9. The TAXSIM emulator (section divider)
 
-Install once: `uv tool install policyengine-taxsim`
+Section divider 02. Move on after a few seconds.
 
-Interactive tabs, as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
+## 10. A drop-in replacement for TAXSIM35 (12–15 min)
+
+Installation (top of the slide), with macOS/Linux and Windows tabs: install the uv package manager (if you don't have it), then `uv tool install policyengine-taxsim`.
+
+Get started (below; Same input format, same output variables. Just swap the command.), with interactive tabs as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
 
 Existing TAXSIM workflows carry over in every supported environment, with no added complexity.
 
-The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026.
+The table shows the swap that the TAXSIM site gives for six environments; the teal part is what changes. Shell, SAS and Julia only swap the command name. R swaps the package and function (library(policyenginetaxsim), then policyengine_calculate_taxes). Stata writes the file, runs the command and reads the result back. Python can call the runner on a data frame. After installation, setup_policyengine() is a one-time environment setup in R, and the R package also provides compare_with_taxsim(inputs). Ask CE staff which environment their current tax-imputation code uses. Source: https://www.policyengine.org/us/taxsim, read October 5, 2026. For Stata, SAS and Julia: if the command is not found, run uv tool dir --bin and use the full path it prints.
 
-## 8. Where each calculation happens (13–16 min)
+## 11. Where each calculation happens (15–18 min)
 
-TAXSIM input file (One row per tax unit, any tax year): `year=2019 state=5 mstat=2 …`, `year=2024 state=5 mstat=2 …`.
+TAXSIM input file (One row per tax unit, any tax year):
+
+| year | state | mstat | depx | pwages | swages |
+|---|---|---|---|---|---|
+| 2019 | 5 | 2 | 2 | 80000 | 50000 |
+| 2024 | 5 | 2 | 2 | 80000 | 50000 |
 
 - **Tax years 1960–2020: TAXSIM35.** NBER’s model, bundled with the emulator
 - **Tax years 2021 onward: PolicyEngine US.** Federal and state rules
 
-TAXSIM output file (Same variables for every year): `2019: fiitax 10,949 siitax 4,583`, `2024: fiitax 8,282 siitax 3,214`.
+TAXSIM output file (Same variables for every year):
+
+| year | fiitax | siitax | fica |
+|---|---|---|---|
+| 2019 | 10949 | 4583 | 19890 |
+| 2024 | 8282 | 3214 | 19890 |
 
 One file in and one file out. The tax year decides which engine calculates each row.
 
 
-Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949 and siitax $4,583 through TAXSIM35; 2024 gives fiitax $8,282 and siitax $3,214 through PolicyEngine. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.
+Show where the calculation happens. The emulator reads each row’s tax year: rows for 1960–2020 run on the TAXSIM35 binary bundled with the package, and rows for 2021 onward run on PolicyEngine US. Both paths write the same TAXSIM output variables, so one file can mix years. The example is one California household (married, two children aged 8 and 12, $80,000 and $50,000 in wages) run for 2019 and 2024 with policyengine-taxsim 3.0.1 and PolicyEngine US 2.25.2 on October 5, 2026: 2019 gives fiitax $10,949, siitax $4,583 and fica $19,890 through TAXSIM35; 2024 gives fiitax $8,282, siitax $3,214 and fica $19,890 through PolicyEngine. The input columns: state 5 is California in TAXSIM’s codes, mstat 2 is married filing jointly, depx is the number of dependents, and pwages and swages are the two spouses’ wages. fica is payroll tax, employee and employer shares together. Mapping details if asked: pwages and swages become each person’s employment_income, page and sage become ages, and fiitax and siitax map to income_tax and state_income_tax. State codes follow TAXSIM’s own numbering, so New Jersey is 31, while 34 (the Census FIPS code for New Jersey) means North Carolina and silently applies the wrong state’s law. A run record should note the emulator and model versions.
 
 # Live demonstration
 
-## 9. Live demo: run the sample file (16–29 min)
+## 12. Live demo: run the sample file (18–31 min)
 
 Live page: https://www.policyengine.org/us/taxsim/run
-
-No installation needed. The same file runs with the policyengine-taxsim command.
 
 Go straight into the live demo after the routing diagram and before validation. Click inside the frame to use the page. The frame keeps keyboard focus, so click the slide title before you press the arrow keys again. Use Expand for a larger view. Do not use the email form. Run and download in browser saves a CSV on the presentation laptop; open it to show the results for each household. Rehearse on the presentation laptop and network: confirm that the frame loads and note how long the run takes. Start by loading the 3-household sample and reading household 1 aloud: a married couple in California (state code 5, mstat 2) with two dependents and $80,000 and $50,000 in wages. If the frame does not load, open policyengine.org/us/taxsim/run in a browser tab. Demo steps: (1) Load the 3-household sample; (2) Keep Standard output: federal and state tax, FICA and marginal rates; (3) Run and download in the browser; (4) Read the results for each household; (5) Switch to Full for AGI, credits, deductions and AMT.
 
 # Validation
 
-## 10. Three calculations, one arbiter (29–32 min)
+## 13. Validation (section divider)
+
+Section divider 03. Move on after a few seconds.
+
+## 14. Three calculations, one arbiter (31–34 min)
 
 1. **Issue filed.** A mismatch between PolicyEngine and TAXSIM on a CPS record becomes an issue.
 2. **Agentic review.** An agentic workflow explores the disagreement using both engines, the validators and the statutes.
@@ -135,7 +191,7 @@ Agreement measures consistency. The law decides correctness, because two engines
 
 Walk the four steps on the left, then point to the triangle. (1) A mismatch between PolicyEngine and TAXSIM on a CPS record becomes a GitHub issue; Dan Feenberg at NBER files most of them. (2) An agentic workflow explores the disagreement: it reruns the record in both engines, checks third-party validators such as a completed TaxAct return or Axiom’s encoding of the statute, and reads the statute and the official instructions. (3) The findings become a recommendation to adjust one engine, or to agree a convention with NBER when TAXSIM’s inputs cannot carry what the law needs; a person reviews every recommendation before it is posted or merged. (4) After the fix ships, the record is rerun to confirm the disagreement is gone. The validators do not vote: the statute and the official instructions decide which calculation is right, because two engines can share an error that no agreement rate would reveal. PolicyEngine fixes carry tests whose expected values come from the form or statute.
 
-## 11. How this process shapes the emulator (32–34 min)
+## 15. How this process shapes the emulator (34–36 min)
 
 1. **Compile.** Every resolved case is stored as an issue on the emulator’s GitHub tracker, with the input row, both results and the resolution.
 2. **Lock in.** PolicyEngine fixes ship with a test case, so a resolved disagreement cannot quietly return.
@@ -148,13 +204,13 @@ Each PolicyEngine release and each TAXSIM update reruns the comparison.
 
 Each resolved case does not end with the fix. It is compiled on the emulator’s GitHub issue tracker with the input row, both engines’ results and the resolution, PolicyEngine fixes ship with a test so the disagreement cannot quietly return, and the dashboard reruns every state and year so we can compare how complete each area’s agreement is. The lowest-agreement areas set what we look at next. The figures describe the comparison on the public dashboard: 111,347 Enhanced CPS households, tax years 2021–2025, all 50 states and DC, run through both engines. If asked for agreement rates: for 2023, 89.8% agree on federal tax and 94.9% on state tax within ±1% of gross income (data update of September 23, 2026). The comparator default is ±$15. Check the dashboard the day before: its September 23 data treats S-corporation income as active, and PR #1199 (September 29) made passive the default, so a refresh would change the federal figures. Do not refresh with TAXSIM builds from September 24 onward until NBER confirms them (policyengine-taxsim #1248). Source: https://www.policyengine.org/us/taxsim/dashboard
 
-## 12. The public validation dashboard (34–37 min)
+## 16. The public validation dashboard (36–39 min)
 
 Live page: https://www.policyengine.org/us/taxsim/dashboard
 
 About 3 minutes: a quick overview, then one or two examples. Show the dashboard as the output of the process, not as a list of figures. Pick a year, change the tolerance, scroll the state table and inspect one state to show the household list; a second state with near-complete agreement shows what a resolved area looks like. The headline figures are in the notes for the previous slide if someone asks. Check the page on the morning of the talk, because it can update. Click the slide title before you press the arrow keys. If the frame does not load, open policyengine.org/us/taxsim/dashboard in a browser tab. Dashboard steps: (1) Pick a tax year, 2021 to 2025; (2) Choose a tolerance; (3) See agreement by state; (4) Inspect a state to list its households.
 
-## 13. From a reported difference to a fix (37–39 min)
+## 17. From a reported difference to a fix (39–41 min)
 
 1. **Report.**
 2. **Reproduce.**
@@ -170,9 +226,40 @@ About 3 minutes: a quick overview, then one or two examples. Show the dashboard 
 
 Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues
 
-# Benefit imputation
+# Beyond TAXSIM
 
-## 14. Imputing a distribution of missing inputs (39–42 min)
+## 18. Beyond TAXSIM (section divider)
+
+Section divider 04. Move on after a few seconds.
+
+## 19. How TAXSIM inputs map to PolicyEngine (41–43 min)
+
+| Area | TAXSIM input | Limit | PolicyEngine adds |
+|---|---|---|---|
+| Business income | `pbusinc`, `pprofinc`, `scorp` | The qualified business income deduction limits need W-2 wages and property basis. | `w2_wages_from_qualified_business`, `unadjusted_basis_qualified_property` |
+| Itemized deductions | `mortgage`, `otheritem`, `proptax` | Other itemized deductions arrive as one total, without the charitable or medical expense limits. | `charitable_cash_donations`, `other_medical_expenses` |
+| State and local taxes | `state` | Without the household’s location, county and city income taxes are excluded. | `county_fips` |
+| Household | `page`, `sage`, `depx`, `ageN` | Dependents carry only an age, with no disability or student status, which several credits use. | `is_permanently_and_totally_disabled`, `is_full_time_college_student` |
+| Unearned income | `intrec`, `dividends`, `pensions`, `gssi` | Reported for the couple, so the emulator divides it between spouses. | `taxable_interest_income`, `qualified_dividend_income` |
+
+**Why it matters:** Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or imputation, unlock the full rules.
+
+Explain how a TAXSIM input row becomes a PolicyEngine household, and what the format cannot carry. Business income: the emulator maps pbusinc and sbusinc (with psemp and ssemp) to self-employment income, pprofinc and sprofinc to income from a specified service trade or business, and scorp to partnership and S-corporation income. TAXSIM’s own QBI deduction is a flat 20% with the service-business phase-in, capped by taxable income, with no W-2 wage or property test. PolicyEngine applies those limits, so without W-2 wages the deduction phases out above the threshold; the emulator’s --assume-w2-wages option reproduces TAXSIM’s simpler rule (available on the policyengine and compare commands, not on the default drop-in command). Itemized deductions: TAXSIM’s mortgage and otheritem are aggregates; the emulator sums them into deductible mortgage interest, which has no floor or cap, to match TAXSIM, because charity and medical would bring AGI caps and floors that TAXSIM does not apply. Property tax maps to real estate taxes. State and local taxes: PolicyEngine computes the state income tax for the SALT deduction; TAXSIM input has no county or city, so Maryland county tax is set to zero and city taxes such as New York City’s do not apply. Do not present the 2025 SALT cap as a difference: TAXSIM also applies it. Household: TAXSIM gives the two adults’ ages (page, sage), the number of dependents (depx) and each dependent’s age (age1 to ageN); filing status comes from mstat. Dependents have no disability or student status, which PolicyEngine uses for the EITC (a disabled child of any age, or a full-time student under 24, can qualify) and for the child and dependent care credit; is_permanently_and_totally_disabled (EITC), is_incapable_of_self_care (child and dependent care credit) and is_full_time_college_student supply them. Unearned income: TAXSIM reports interest (intrec), dividends, short-term and long-term capital gains and S-corporation income for the tax unit, and the emulator splits them evenly between spouses for joint filers; pensions and gssi are split evenly too, unless the spouses fall on different sides of a state’s age rule, when the older spouse gets all of it. Wages are already per spouse (pwages, swages). Person-level variables such as taxable_interest_income and qualified_dividend_income remove the split; taxable_ira_distributions and taxable_401k_distributions also separate retirement accounts from pensions, which TAXSIM does not. Sources: policyengine-taxsim 3.0.1 config/variable_mappings.yaml and runners/policyengine_runner.py; TAXSIM source law87.for. Each card ends with the PolicyEngine US input variables that remove the limit, which a survey or an imputation can supply: w2_wages_from_qualified_business and unadjusted_basis_qualified_property apply the wage and property limits of the qualified business income deduction; charitable_cash_donations and other_medical_expenses give each deduction its own adjusted gross income limit or floor; county_fips places the household, which turns on city and county income taxes such as New York City’s and the Indiana county taxes; is_permanently_and_totally_disabled and is_full_time_college_student give dependents the status that the EITC uses; person-level income variables such as taxable_interest_income and qualified_dividend_income replace the split between spouses. Related variables not on the slide: business_is_sstb, qualified_reit_and_ptp_income, charitable_non_cash_donations, home_mortgage_interest, is_incapable_of_self_care, taxable_ira_distributions, taxable_401k_distributions, social_security_disability and social_security_survivors. Variable names checked in PolicyEngine US source on October 7, 2026.
+
+## 20. What PolicyEngine calculates beyond TAXSIM (43–44 min)
+
+| Area | In the emulator | PolicyEngine calculates |
+|---|---|---|
+| Benefit programs | Set to zero in the emulator, because some state taxes count cash assistance as income. | `snap`, `ssi`, `tanf`, `wic` |
+| Health coverage | Separate from income tax, and not reported by the emulator. | `medicaid`, `chip`, `aca_ptc` |
+| Additional state tax credits | Zero without inputs TAXSIM lacks, such as tuition or care work. Renters’ credits use rentpaid. | `ny_college_tuition_credit`, `co_care_worker_credit` |
+| Federal provisions | Zero without inputs TAXSIM lacks, such as tips, overtime or tuition. | `tip_income_deduction`, `american_opportunity_credit` |
+
+**Why it matters:** The emulator turns these off to match TAXSIM. PolicyEngine’s own tools return them, up to household net income and marginal rates that include benefits.
+
+Show what PolicyEngine calculates that TAXSIM’s output does not carry, and how the emulator handles each item so that its results stay comparable with TAXSIM. Benefit programs: PolicyEngine calculates SNAP, SSI, TANF, WIC and the state SSI supplements; the emulator sets them to zero, because TAXSIM has no inputs for them and some state taxes count cash assistance as income (for example, the base of the Massachusetts senior circuit breaker credit; policyengine-taxsim issue #1031). Health coverage: Medicaid, CHIP and the ACA premium tax credit are separate PolicyEngine variables; the premium tax credit is not part of PolicyEngine’s income tax, and the emulator does not report any of them. Additional state tax credits: credits that need an input TAXSIM does not have are zero in emulator runs, because the input defaults to zero or false. Examples: the New York college tuition credit and the Minnesota K-12 education credit (tuition and fees), the Colorado care worker credit (an eligible care worker), the Connecticut and Nebraska stillborn child credits, and the Louisiana and Nebraska school readiness credits (the quality rating of the child care facility or worker). Renters’ credits, such as Minnesota’s and California’s, are calculated, because the emulator maps TAXSIM’s rentpaid to rent; parts that depend on disability status are not. Federal provisions: the deductions for tips, overtime and car-loan interest, the American Opportunity and Lifetime Learning credits (tuition) and the saver’s credit (retirement contributions) need inputs that TAXSIM does not have, so they are zero in emulator runs; PolicyEngine calculates them when a data source supplies the inputs. Conventions kept from TAXSIM, if asked: fiitax includes the net investment income tax but not the Additional Medicare Tax, which is reported with payroll taxes; fica includes both the employee and employer shares; one-time state rebates are in siitax and also reported as srebate; frate and srate come from a second run with $100 more wages. Sources: policyengine-taxsim 3.0.1 runners/policyengine_runner.py, core/state_output_resolver.py and config/variable_mappings.yaml; PolicyEngine US source, October 7, 2026.
+
+## 21. Imputing a distribution of missing inputs (44–47 min)
 
 Sources fused into PolicyEngine’s US microdata:
 - **CPS** (Current Population Survey): The spine: demographics, income, labor force.
@@ -189,7 +276,7 @@ Sources fused into PolicyEngine’s US microdata:
 
 A donor survey observes the variable of interest and predictors shared with the recipient survey. A conditional distribution permits households with similar observed characteristics to have different imputed values. That can matter around tax-benefit thresholds. Multiple draws can reveal sensitivity, but they do not automatically solve model misspecification or preserve every joint relationship. The prior deck names CPS, ACS, SCF, SIPP and tax microdata. This slide does not claim a CE implementation exists. Source: local IARIW 2026 ImputationSlide.tsx.
 
-## 15. What counts as household resources? (42–44 min)
+## 22. What counts as household resources? (47–49 min)
 
 One California household in 2025 (a single parent, children aged 4 and 7, $25,000 in wages), four resource concepts.
 
@@ -204,7 +291,7 @@ PolicyEngine US 2.25.2, run October 5, 2026. Benefits assume take-up; Medi-Cal i
 
 Each bar adds one component for one California household: a single parent with children aged 4 and 7 and $25,000 in wages (PolicyEngine US 2.25.2, 2025). A household calculation assumes take-up; in the microdata, take-up is assigned at published rates (SNAP 82% from USDA; Medicaid 78% in California, from KFF and MACPAC). Taxes and credits: the federal EITC and refundable child tax credit and California’s CalEITC and Young Child Tax Credit, less the employee payroll tax. CalWORKs is California’s TANF program. The jump from $43,931 to $71,640 shows why Medicaid needs an explicit valuation choice: cost per enrollee, insurance value and household valuation give different answers, and this talk does not pick one. Establish whether CE research wants potential entitlements, actual receipt, or a broader resource measure.
 
-## 16. Validation of benefit imputations (44–46 min)
+## 23. Validation of benefit imputations (49–51 min)
 
 **≈40%** of SNAP recipients are missing from CPS reports, measured against linked administrative records. (Meyer and Mittag, NBER Working Paper 21676)
 
@@ -217,7 +304,11 @@ Meyer and Mittag link the CPS to administrative records and find that the survey
 
 # A possible CE pilot
 
-## 17. Where this could fit in CE research (46–48 min)
+## 24. A possible CE pilot (section divider)
+
+Section divider 05. Move on after a few seconds.
+
+## 25. Where this could fit in CE research (51–53 min)
 
 **CE tax-unit records** (An agreed set of inputs for one year.) → **CE’s current TAXSIM run** (In production since the 2013 data.) and **PolicyEngine TAXSIM emulator** (The same file, no format changes.) → **Compare** (Household results and weighted summaries.) → **Review** (Explain differences before expanding the scope.)
 
@@ -227,7 +318,7 @@ Keep CE definitions and weights fixed in the first comparison.
 
 This is a proposed integration path, not a tested CE implementation. CE has used NBER’s TAXSIM to estimate income taxes since the 2013 data (BLS Monthly Labor Review, 2015), so the same input file can go to both engines. Start with the core outputs: fiitax, siitax, fica, v22 (child tax credit), v25 (EITC) and frate. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.
 
-## 18. A manageable CE pilot (48–51 min)
+## 26. A manageable CE pilot (53–56 min)
 
 Four steps, each with a clear output.
 
@@ -242,7 +333,7 @@ Four steps, each with a clear output.
 
 Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
-## 19. Q&A and discussion (51–81 min)
+## 27. Q&A and discussion (56–86 min)
 
 - Which outcomes and years would be most useful?
 - Which input assumptions create the most uncertainty?
