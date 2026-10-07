@@ -205,10 +205,10 @@ export const blsSlides: BlsSlideContent[] = [
     "body": [
       "TAXSIM at NBER: since the 1970s, 1,200+ citing papers, federal law from 1960 and state law from 1977",
       "A memorandum of understanding in September 2025; one interface routes 1960–2020 to TAXSIM35 and 2021 onward to PolicyEngine",
-      "PolicyEngine: open source since 2021, 95,000+ parameters, federal and all state taxes with benefits in one model",
+      "PolicyEngine: open source since 2021, 95,000+ federal and state parameters, and benefit programs such as SNAP and Medicaid",
     ],
     "minutes": 3,
-    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters, 5,500+ variables and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
+    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; Daniel Feenberg created it and still maintains it, and more than 1,200 papers cite the Feenberg and Coutts (1993) paper. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first Feenberg issue: September 22, 2024). The memorandum of understanding with NBER (Daniel Feenberg and James Poterba) was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
     "bridge": {
       "left": {
@@ -218,7 +218,7 @@ export const blsSlides: BlsSlideContent[] = [
           { "icon": "history", "title": "Developed since the 1970s", "detail": "By Daniel Feenberg, who maintains it" },
           { "icon": "book", "title": "1,200+ citing papers", "detail": "Feenberg and Coutts (1993)" },
           { "icon": "calendar", "title": "Federal law from 1960", "detail": "State law from 1977" },
-          { "icon": "building", "title": "Used across research and policy", "detail": "Think tanks and federal agencies" }
+          { "icon": "building", "title": "Used in research and policy", "detail": "Think tanks and federal agencies" }
         ]
       },
       "center": {
@@ -236,9 +236,9 @@ export const blsSlides: BlsSlideContent[] = [
         "party": "pe",
         "items": [
           { "icon": "github", "title": "Open source since 2021", "detail": "133 contributors to the US model" },
-          { "icon": "scale", "title": "95,000+ parameters", "detail": "5,500+ variables and 4,693 test files" },
-          { "icon": "world", "title": "Federal, all 50 states and DC", "detail": "Taxes and benefits in one model" },
-          { "icon": "building", "title": "Used across research and policy", "detail": "Congress, think tanks and benefit navigators" }
+          { "icon": "scale", "title": "95,000+ parameters", "detail": "Federal, every state and DC" },
+          { "icon": "users", "title": "Benefit programs too", "detail": "SNAP, Medicaid, CHIP, SSI, TANF, WIC and ACA subsidies" },
+          { "icon": "building", "title": "Used in research and policy", "detail": "Congress, think tanks, benefit tools" }
         ]
       }
     }
