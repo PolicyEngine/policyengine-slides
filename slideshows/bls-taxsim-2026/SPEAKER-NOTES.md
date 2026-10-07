@@ -84,14 +84,7 @@ Start on the left with TAXSIM, end on the right with PolicyEngine, and use the m
 
 Install once: `uv tool install policyengine-taxsim`
 
-| | TAXSIM35 (before) | PolicyEngine TAXSIM (after) |
-| --- | --- | --- |
-| Shell | `taxsim35 < input.csv > output.csv` | `policyengine-taxsim < input.csv > output.csv` |
-| R | `taxsim_calculate_taxes(input)` | `policyengine_calculate_taxes(input)` |
-| SAS | `system(taxsim35 < input.csv …)` | `system(policyengine-taxsim < input.csv …)` |
-| Stata | `taxsimlocal35, replace` | `! policyengine-taxsim < txpydata.raw …` |
-| Julia | `pipeline(`taxsim35`, …)` | `pipeline(`policyengine-taxsim`, …)` |
-| Python | `subprocess.run("taxsim35 …")` | `PolicyEngineRunner(df).run()` |
+Interactive tabs, as on policyengine.org/us/taxsim: CLI, Python, R, Stata, SAS and Julia. Each tab shows the TAXSIM35 code (before) beside the PolicyEngine TAXSIM code (after), with the changed parts highlighted. Click a tab during the talk; clicks do not advance the slide.
 
 Existing TAXSIM workflows carry over in every supported environment, with no added complexity.
 

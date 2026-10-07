@@ -65,8 +65,9 @@ export interface BlsSlideContent {
   dropIn?: {
     installLabel: string;
     install: string;
-    columns: [string, string, string];
-    rows: { env: string; before: string; after: string }[];
+    beforeLabel: string;
+    afterLabel: string;
+    tabs: { label: string; lang: string; before: string; after: string; note?: string }[];
     takeaway: string;
   };
   /** TAXSIM on the left, PolicyEngine on the right, the agreement and year routing in the middle. */
@@ -260,14 +261,15 @@ export const blsSlides: BlsSlideContent[] = [
     "dropIn": {
       "installLabel": "Install once",
       "install": "uv tool install policyengine-taxsim",
-      "columns": ["", "TAXSIM35 (before)", "PolicyEngine TAXSIM (after)"],
-      "rows": [
-        { "env": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv" },
-        { "env": "R", "before": "taxsim_calculate_taxes(input)", "after": "[[policyengine_calculate_taxes]](input)" },
-        { "env": "SAS", "before": "system(taxsim35 < input.csv …)", "after": "system([[policyengine-taxsim]] < input.csv …)" },
-        { "env": "Stata", "before": "taxsimlocal35, replace", "after": "! [[policyengine-taxsim]] < txpydata.raw …" },
-        { "env": "Julia", "before": "pipeline(`taxsim35`, …)", "after": "pipeline(`[[policyengine-taxsim]]`, …)" },
-        { "env": "Python", "before": "subprocess.run(\"taxsim35 …\")", "after": "[[PolicyEngineRunner(df)]].run()" }
+      "beforeLabel": "TAXSIM35 (before)",
+      "afterLabel": "PolicyEngine TAXSIM (after)",
+      "tabs": [
+        {"label": "CLI", "lang": "Shell", "before": "taxsim35 < input.csv > output.csv", "after": "[[policyengine-taxsim]] < input.csv > output.csv"},
+        {"label": "Python", "lang": "Python", "before": "import subprocess\nresult = subprocess.run(\n  \"taxsim35 < input.csv > output.csv\",\n  shell=True\n)", "after": "[[from policyengine_taxsim.runners import PolicyEngineRunner]]\nimport pandas as pd\n\ndf = pd.read_csv(\"input.csv\")\nresult = [[PolicyEngineRunner(df).run()]]"},
+        {"label": "R", "lang": "R", "before": "library(usincometaxes)\nresult <- taxsim_calculate_taxes(input)", "after": "library([[policyenginetaxsim]])\nresult <- [[policyengine_calculate_taxes]](input)"},
+        {"label": "Stata", "lang": "Stata", "before": "taxsimlocal35, replace", "after": "export delimited using \"txpydata.raw\", delimiter(\",\") replace\n! [[policyengine-taxsim]] < txpydata.raw > output.raw\nimport delimited using \"output.raw\", delimiter(\",\") clear", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
+        {"label": "SAS", "lang": "SAS", "before": "%let rc = %sysfunc(system(\n  taxsim35 < input.csv > output.csv\n));", "after": "%let rc = %sysfunc(system(\n  [[policyengine-taxsim]] < input.csv > output.csv\n));", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."},
+        {"label": "Julia", "lang": "Julia", "before": "run(pipeline(`taxsim35`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "after": "run(pipeline(`[[policyengine-taxsim]]`,\n  stdin=\"input.csv\",\n  stdout=\"output.csv\"\n))", "note": "If the command is not found, run uv tool dir --bin and use the full path it prints."}
       ],
       "takeaway": "Existing TAXSIM workflows carry over in every supported environment, with no added complexity."
     }
