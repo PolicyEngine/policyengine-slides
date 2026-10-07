@@ -269,7 +269,7 @@ export const blsSlides: BlsSlideContent[] = [
         { "env": "Julia", "before": "pipeline(`taxsim35`, …)", "after": "pipeline(`[[policyengine-taxsim]]`, …)" },
         { "env": "Python", "before": "subprocess.run(\"taxsim35 …\")", "after": "[[PolicyEngineRunner(df)]].run()" }
       ],
-      "takeaway": "The emulator works through the interfaces researchers already use, so adopting it adds no complexity."
+      "takeaway": "Existing TAXSIM workflows carry over in every supported environment, with no added complexity."
     }
   },
   {

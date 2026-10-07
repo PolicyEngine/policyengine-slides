@@ -8,6 +8,7 @@ import {
   IconChartBar,
   IconChartDots,
   IconChevronRight,
+  IconCircleCheck,
   IconFileText,
   IconFlask,
   IconHeartHandshake,
@@ -385,7 +386,10 @@ export function DropIn({ dropIn }: { dropIn: DropInData }) {
           </div>
         ))}
       </div>
-      <p className="text-xl leading-snug font-medium text-pe-dark">{dropIn.takeaway}</p>
+      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
+        <IconCircleCheck className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
+        <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{dropIn.takeaway}</p>
+      </div>
     </div>
   );
 }
