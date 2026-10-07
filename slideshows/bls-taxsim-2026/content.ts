@@ -475,13 +475,13 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "From a reported difference to a fix",
     "body": [],
     "minutes": 2,
-    "notes": "Differences travel both ways. Dan Feenberg files households where the engines disagree; we file questions when TAXSIM appears to differ from the law (at least 52 issues titled Does TAXSIM or Does taxsimtest). Each case is reproduced with a minimal household, classified, and resolved. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; Feenberg replied Agreed, corrected on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Counts from the GitHub issue tracker on October 5, 2026. Source: https://github.com/PolicyEngine/policyengine-taxsim/issues",
+    "notes": "Present the scale of change, in both engines. NBER files most of the difference reports; we file questions when TAXSIM appears to differ from the law. Each case is reproduced with a minimal household, classified, and resolved. Exact counts on October 7, 2026: 1,186 issues on the policyengine-taxsim tracker since July 15, 2024, of which 1,010 are closed. PolicyEngine changes: 343 merged fixes, that is 163 PolicyEngine US pull requests that cite TAXSIM comparisons since July 2024 (mostly state rule corrections, such as this week’s Massachusetts, Minnesota, New York and Hawaii fixes) and 180 merged pull requests in the emulator. TAXSIM changes: about 106 issues have an NBER comment that confirms a TAXSIM correction (for example “Agreed, corrected”, “Fixed in Taxsim” or “I changed taxsim”), and about 60 more have only “Agreed” or “Now matches”, which do not say which engine changed. This is a lower bound: TAXSIM’s working builds are not public, so changes made without a comment are not counted. Since February 2026 we have also filed 159 questions titled Does TAXSIM or Does taxsimtest. The tracker grows by about 40 issues a day this week, so the slide uses rounded figures. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; NBER replied Agreed and corrected TAXSIM on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Sources: https://github.com/PolicyEngine/policyengine-taxsim/issues and https://github.com/PolicyEngine/policyengine-us/pulls",
     "process": {
       "stats": [
-        { "value": "1,063", "label": "Issues on GitHub since July 2024" },
-        { "value": "829", "label": "Filed by Dan Feenberg at NBER" },
-        { "value": "984", "label": "Closed" },
-        { "value": "52+", "label": "Questions we sent NBER about TAXSIM’s own rules" }
+        { "value": "1,100+", "label": "Issues on the public tracker since July 2024" },
+        { "value": "1,000+", "label": "Resolved" },
+        { "value": "340+", "label": "Fixes merged in PolicyEngine and the emulator" },
+        { "value": "100+", "label": "TAXSIM corrections confirmed by NBER on the tracker" }
       ],
       "steps": [
         { "title": "Report", "text": "" },
