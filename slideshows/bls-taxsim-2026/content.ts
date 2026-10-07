@@ -81,6 +81,20 @@ export interface BlsSlideContent {
     taxsimLabel?: string;
     value: { title: string; text: string };
   };
+  /** The annual state tax update: last cycle's figures, last cycle and the next on one half-month axis, major changes, and the commitment. */
+  updateTimeline?: {
+    stats: { value: string; label: string }[];
+    months: string[];
+    lanes: {
+      title: string;
+      detail: string;
+      /** `start` counts half-month slots from the first month: 0 is the first half of the first month. */
+      segments: { start: number; span: number; title: string; text: string; tone: 'done' | 'sprint' | 'muted' | 'plan' | 'commit' }[];
+    }[];
+    changeGroups: { title: string; items: { state: string; text: string }[] }[];
+    takeaway: string;
+    source: string;
+  };
   /** CE inputs that PolicyEngine can use and TAXSIM cannot: CE variables, PolicyEngine inputs, use, and TAXSIM's limit. */
   ceInputs?: {
     columns: [string, string, string, string];
@@ -155,7 +169,7 @@ const TAXSIM_SITE: { label: string; url: string } = { label: "policyengine.org/u
 const TAXSIM_RUN = { label: "policyengine.org/us/taxsim/run", url: "https://www.policyengine.org/us/taxsim/run" };
 const TAXSIM_DASHBOARD = { label: "policyengine.org/us/taxsim/dashboard", url: "https://www.policyengine.org/us/taxsim/dashboard" };
 
-/** Slide content. 58 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
+/** Slide content. 60 minutes of presentation, including the live demo, plus 30 minutes of Q&A. */
 export const blsSlides: BlsSlideContent[] = [
   // Introduction and context: 12 minutes
   {
@@ -186,11 +200,11 @@ export const blsSlides: BlsSlideContent[] = [
       "A drop-in TAXSIM interface, where each calculation happens, and a live demo in the browser.",
       "How a disagreement is resolved with the engines, independent validators and the law, how that shapes the emulator, the public dashboard, and our progress.",
       "What PolicyEngine models beyond TAXSIM’s inputs, and methods for missing survey inputs, SNAP participation and Medicaid valuation.",
-      "A focused comparison, the inputs it needs, and questions for CE staff.",
+      "A focused comparison, the inputs it needs, questions for CE staff, and when the 2026 tax rules will be ready.",
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 58 minutes, leaving about 2 minutes of slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
+    "notes": "The first five sections total 60 minutes, leaving no slack before the 30-minute Q&A. Show the drop-in swap and where each calculation happens, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Reserve 30 minutes for Q&A."
   },
   {
     "id": "section-intro",
@@ -481,13 +495,13 @@ export const blsSlides: BlsSlideContent[] = [
     "title": "From a reported difference to a fix",
     "body": [],
     "minutes": 2,
-    "notes": "Present the change this work has driven. NBER files most of the difference reports; we file questions when TAXSIM appears to differ from the law. Each case is reproduced with a minimal household, classified, and resolved. Exact counts on October 7, 2026: 1,186 issues on the policyengine-taxsim tracker since July 15, 2024, of which 1,010 are closed; 159 questions titled Does TAXSIM or Does taxsimtest since February 2026. TAXSIM corrections: about 106 issues have an NBER comment that confirms a TAXSIM correction (for example “Agreed, corrected”, “Fixed in Taxsim” or “I changed taxsim”), and about 60 more have only “Agreed” or “Now matches”, which do not say which engine changed. This is a lower bound: TAXSIM’s working builds are not public, so changes made without a comment are not counted. PolicyEngine changes, if asked: 163 PolicyEngine US pull requests since July 2024 cite TAXSIM comparisons (mostly state rule corrections), and the emulator has 180 merged pull requests, about a third of them tooling such as CI, versioning and the dashboard. These are not on the slide, because merged pull requests and confirmed corrections are not counted the same way and should not be compared. The tracker grows by about 40 issues a day this week, so the slide uses rounded figures. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; NBER replied Agreed and corrected TAXSIM on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Sources: https://github.com/PolicyEngine/policyengine-taxsim/issues and https://github.com/PolicyEngine/policyengine-us/pulls",
+    "notes": "Present the change this work has driven in both engines. Do not say how quickly NBER corrects TAXSIM: TAXSIM is closed source with no public release cadence, so we cannot track when its corrections ship, only that NBER confirmed them. NBER files most of the difference reports; we file questions when TAXSIM appears to differ from the law. Each case is reproduced with a minimal household, classified, and resolved. Exact counts on October 7, 2026: 1,186 issues on the policyengine-taxsim tracker since July 15, 2024, of which 1,010 are closed; 159 questions titled Does TAXSIM or Does taxsimtest since February 2026. TAXSIM corrections: about 106 issues have an NBER comment that confirms a TAXSIM correction (for example “Agreed, corrected”, “Fixed in Taxsim” or “I changed taxsim”), and about 60 more have only “Agreed” or “Now matches”, which do not say which engine changed. This is a lower bound: TAXSIM’s working builds are not public, so changes made without a comment are not counted. PolicyEngine changes, if asked: 163 PolicyEngine US pull requests since July 2024 cite TAXSIM comparisons (mostly state rule corrections), and the emulator has 180 merged pull requests, about a third of them tooling such as CI, versioning and the dashboard. These are not on the slide, because merged pull requests and confirmed corrections are not counted the same way and should not be compared. The tracker grows by about 40 issues a day this week, so the slide uses rounded figures. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; NBER replied Agreed and corrected TAXSIM), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Sources: https://github.com/PolicyEngine/policyengine-taxsim/issues and https://github.com/PolicyEngine/policyengine-us/pulls",
     "process": {
       "stats": [
         { "value": "1,100+", "label": "Issues on the public tracker since July 2024" },
         { "value": "1,000+", "label": "Issues resolved" },
-        { "value": "150+", "label": "Questions on TAXSIM’s own rules" },
-        { "value": "100+", "label": "TAXSIM corrections confirmed" }
+        { "value": "150+", "label": "Questions we raised on TAXSIM’s own rules" },
+        { "value": "100+", "label": "TAXSIM corrections NBER confirmed on the tracker" }
       ],
       "steps": [
         { "title": "Report", "text": "" },
@@ -501,21 +515,21 @@ export const blsSlides: BlsSlideContent[] = [
           "tag": "#1241 · Oregon",
           "title": "PolicyEngine fix",
           "text": "The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field.",
-          "outcome": "Fixed in the emulator in 4 days",
+          "outcome": "Fixed in the emulator",
           "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1241"
         },
         {
           "tag": "#1235 · Massachusetts",
-          "title": "TAXSIM fix",
+          "title": "TAXSIM correction",
           "text": "TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024.",
-          "outcome": "NBER corrected TAXSIM the next day",
+          "outcome": "Confirmed and corrected by NBER",
           "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1235"
         },
         {
           "tag": "#1251 · Minnesota",
           "title": "Input difference",
-          "text": "PolicyEngine found more credits: the renter’s credit, which the comparison return left out.",
-          "outcome": "Explained, no code change",
+          "text": "The comparison return left out Minnesota’s renter’s credit, which PolicyEngine calculates.",
+          "outcome": "Explained, no change to either engine",
           "url": "https://github.com/PolicyEngine/policyengine-taxsim/issues/1251"
         }
       ]
@@ -882,7 +896,7 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
 
-  // A possible CE pilot: 5 minutes
+  // A possible CE pilot: 7 minutes
   {
     "id": "section-pilot",
     "title": "A possible CE pilot",
@@ -959,6 +973,149 @@ export const blsSlides: BlsSlideContent[] = [
           ]
         }
       ]
+    }
+  },
+  {
+    "id": "state-updates",
+    "title": "When the 2026 tax rules will be ready",
+    "body": [],
+    "minutes": 2,
+    "notes": "BLS will want to know when each year’s rules are ready. Last year, the 2025 state income tax update ran from the first pull request on December 3, 2025 (Missouri, PR #6898) to the last merge on February 18, 2026 (California, PR #7418): 77 days, or 11 weeks. It covered 44 jurisdictions (the 41 states with a wage income tax, DC, New Hampshire’s interest and dividends tax repeal and Washington’s capital gains tax) in 47 pull requests from 5 contributors, about 22,400 added lines across 1,669 files. Pace: 2 states were done by December 31, 7 by January 31 and 14 by February 10, each worked one at a time with a full model review (median 24 days per pull request; Minnesota, New Jersey, Arizona and Michigan each added 1,300 to 3,100 lines, including programs that were missing). From February 11 to 18 the remaining 30 states were done in parallel (median 4 days per pull request), so most of the 11 weeks was the one-at-a-time phase. After release, federal non-conformity fixes followed from March to May (DC PR #7930, Idaho issue #7837, Maine issue #8122, South Carolina PR #7870), because those states did not adopt parts of the 2025 federal tax law (OBBBA), such as its larger standard deduction. The federal 2026 parameters are already in (IRS Rev. Proc. 2025-32, PR #7915). Plan for 2026: in November, set up agents that draft each state’s update from its forms (about a week of setup); from December, run states in parallel as forms are published; in February, finish the late states and rerun the TAXSIM comparison for 2026. We expect the update itself to take 1 to 6 weeks once forms are out. The commitment is that every state is complete by March 31, 2027, which leaves March as a buffer after last year’s February 18 finish. The update ships in PolicyEngine US and the emulator, independent of the Axiom migration. Sources: PolicyEngine US pull requests and issues on GitHub, pulled October 7, 2026.",
+    "updateTimeline": {
+      "stats": [
+        {
+          "value": "44",
+          "label": "Jurisdictions updated for 2025: 41 income-tax states, DC, NH and WA"
+        },
+        {
+          "value": "47",
+          "label": "Pull requests from 5 contributors"
+        },
+        {
+          "value": "11 weeks",
+          "label": "First pull request to last merge, Dec 3 – Feb 18"
+        },
+        {
+          "value": "30",
+          "label": "States finished in the last week, worked in parallel"
+        }
+      ],
+      "months": [
+        "Nov",
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar"
+      ],
+      "lanes": [
+        {
+          "title": "2025 tax year",
+          "detail": "What happened",
+          "segments": [
+            {
+              "start": 2,
+              "span": 5,
+              "title": "Dec 3 – Feb 10: one state at a time",
+              "text": "Full model reviews, adding missing programs and fixing errors: 14 states done",
+              "tone": "done"
+            },
+            {
+              "start": 7,
+              "span": 1,
+              "title": "Feb 11–18",
+              "text": "30 states in parallel: all 44 done",
+              "tone": "sprint"
+            },
+            {
+              "start": 8,
+              "span": 2,
+              "title": "Mar – May: follow-up fixes",
+              "text": "Federal non-conformity in DC, Idaho, Maine and South Carolina",
+              "tone": "muted"
+            }
+          ]
+        },
+        {
+          "title": "2026 tax year",
+          "detail": "Plan",
+          "segments": [
+            {
+              "start": 0,
+              "span": 2,
+              "title": "Prepare",
+              "text": "Set up agents to draft each state’s update from its forms",
+              "tone": "plan"
+            },
+            {
+              "start": 2,
+              "span": 4,
+              "title": "Update as forms are published",
+              "text": "Run states in parallel as each releases its 2026 forms and instructions",
+              "tone": "plan"
+            },
+            {
+              "start": 6,
+              "span": 2,
+              "title": "Finish and check",
+              "text": "Late states, then rerun the TAXSIM comparison for 2026",
+              "tone": "plan"
+            },
+            {
+              "start": 8,
+              "span": 2,
+              "title": "Done by March 31, 2027",
+              "text": "Every state complete, with March as a buffer",
+              "tone": "commit"
+            }
+          ]
+        }
+      ],
+      "changeGroups": [
+        {
+          "title": "Major law changes in 2025",
+          "items": [
+            {
+              "state": "Iowa",
+              "text": "flat 3.8% rate"
+            },
+            {
+              "state": "New Hampshire",
+              "text": "interest and dividends tax repealed"
+            },
+            {
+              "state": "Maryland",
+              "text": "new top brackets, capital gains surtax"
+            },
+            {
+              "state": "Wisconsin",
+              "text": "wider 4.4% bracket, $1,200 exemption"
+            }
+          ]
+        },
+        {
+          "title": "Added or corrected in the model",
+          "items": [
+            {
+              "state": "New Jersey",
+              "text": "ANCHOR and Stay NJ property tax relief"
+            },
+            {
+              "state": "Minnesota",
+              "text": "K-12 education credit and subtraction"
+            },
+            {
+              "state": "Indiana",
+              "text": "county tax rates"
+            },
+            {
+              "state": "California",
+              "text": "alternative minimum tax thresholds"
+            }
+          ]
+        }
+      ],
+      "takeaway": "Commitment: every state’s 2026 income tax rules complete by March 31, 2027.",
+      "source": "Source: PolicyEngine US pull requests #6898 to #7421 on GitHub."
     }
   },
   {

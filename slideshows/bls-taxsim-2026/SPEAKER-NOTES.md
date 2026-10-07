@@ -1,6 +1,6 @@
 # BLS TAXSIM seminar: slide text and speaker notes
 
-29 slides, including 5 section dividers and a closing slide: 58 minutes presenting, about 2 minutes of slack, then a dedicated 30-minute Q&A slide.
+30 slides, including 5 section dividers and a closing slide: 60 minutes presenting, no slack, then a dedicated 30-minute Q&A slide.
 
 Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, IARIW 2026 imputation/calibration material in this repository, and the PolicyEngine TAXSIM site (policyengine.org/us/taxsim), captured October 5, 2026.
 
@@ -218,13 +218,13 @@ About 3 minutes: a quick overview, then one or two examples. Show the dashboard 
 4. **Resolve.**
 5. **Confirm.**
 
-**1,100+** Issues on the public tracker since July 2024 · **1,000+** Issues resolved · **150+** Questions on TAXSIM’s own rules · **100+** TAXSIM corrections confirmed
+**1,100+** Issues on the public tracker since July 2024 · **1,000+** Issues resolved · **150+** Questions we raised on TAXSIM’s own rules · **100+** TAXSIM corrections NBER confirmed on the tracker
 
-- **#1241 · Oregon, PolicyEngine fix:** The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field. Fixed in the emulator in 4 days. https://github.com/PolicyEngine/policyengine-taxsim/issues/1241
-- **#1235 · Massachusetts, TAXSIM fix:** TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024. NBER corrected TAXSIM the next day. https://github.com/PolicyEngine/policyengine-taxsim/issues/1235
-- **#1251 · Minnesota, Input difference:** PolicyEngine found more credits: the renter’s credit, which the comparison return left out. Explained, no code change. https://github.com/PolicyEngine/policyengine-taxsim/issues/1251
+- **#1241 · Oregon, PolicyEngine fix:** The emulator put Oregon’s kicker refund inside state tax, but not in the rebate field. Fixed in the emulator. https://github.com/PolicyEngine/policyengine-taxsim/issues/1241
+- **#1235 · Massachusetts, TAXSIM correction:** TAXSIM still applied a bank-interest deduction that Massachusetts repealed in 2024. Confirmed and corrected by NBER. https://github.com/PolicyEngine/policyengine-taxsim/issues/1235
+- **#1251 · Minnesota, Input difference:** The comparison return left out Minnesota’s renter’s credit, which PolicyEngine calculates. Explained, no change to either engine. https://github.com/PolicyEngine/policyengine-taxsim/issues/1251
 
-Present the change this work has driven. NBER files most of the difference reports; we file questions when TAXSIM appears to differ from the law. Each case is reproduced with a minimal household, classified, and resolved. Exact counts on October 7, 2026: 1,186 issues on the policyengine-taxsim tracker since July 15, 2024, of which 1,010 are closed; 159 questions titled Does TAXSIM or Does taxsimtest since February 2026. TAXSIM corrections: about 106 issues have an NBER comment that confirms a TAXSIM correction (for example “Agreed, corrected”, “Fixed in Taxsim” or “I changed taxsim”), and about 60 more have only “Agreed” or “Now matches”, which do not say which engine changed. This is a lower bound: TAXSIM’s working builds are not public, so changes made without a comment are not counted. PolicyEngine changes, if asked: 163 PolicyEngine US pull requests since July 2024 cite TAXSIM comparisons (mostly state rule corrections), and the emulator has 180 merged pull requests, about a third of them tooling such as CI, versioning and the dashboard. These are not on the slide, because merged pull requests and confirmed corrections are not counted the same way and should not be compared. The tracker grows by about 40 issues a day this week, so the slide uses rounded figures. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; NBER replied Agreed and corrected TAXSIM on September 25), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Sources: https://github.com/PolicyEngine/policyengine-taxsim/issues and https://github.com/PolicyEngine/policyengine-us/pulls
+Present the change this work has driven in both engines. Do not say how quickly NBER corrects TAXSIM: TAXSIM is closed source with no public release cadence, so we cannot track when its corrections ship, only that NBER confirmed them. NBER files most of the difference reports; we file questions when TAXSIM appears to differ from the law. Each case is reproduced with a minimal household, classified, and resolved. Exact counts on October 7, 2026: 1,186 issues on the policyengine-taxsim tracker since July 15, 2024, of which 1,010 are closed; 159 questions titled Does TAXSIM or Does taxsimtest since February 2026. TAXSIM corrections: about 106 issues have an NBER comment that confirms a TAXSIM correction (for example “Agreed, corrected”, “Fixed in Taxsim” or “I changed taxsim”), and about 60 more have only “Agreed” or “Now matches”, which do not say which engine changed. This is a lower bound: TAXSIM’s working builds are not public, so changes made without a comment are not counted. PolicyEngine changes, if asked: 163 PolicyEngine US pull requests since July 2024 cite TAXSIM comparisons (mostly state rule corrections), and the emulator has 180 merged pull requests, about a third of them tooling such as CI, versioning and the dashboard. These are not on the slide, because merged pull requests and confirmed corrections are not counted the same way and should not be compared. The tracker grows by about 40 issues a day this week, so the slide uses rounded figures. The three examples show the three outcomes: #1241 (opened September 25, fixed by PR #1244 on September 29), #1235 (opened September 24; NBER replied Agreed and corrected TAXSIM), and #1251 (Minnesota renter’s credit: the comparison return had no Schedule M1RENT). Sources: https://github.com/PolicyEngine/policyengine-taxsim/issues and https://github.com/PolicyEngine/policyengine-us/pulls
 
 # Beyond TAXSIM
 
@@ -349,7 +349,23 @@ Four steps, each with a clear output.
 
 Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.
 
-## 28. Q&A and discussion (58–88 min)
+## 28. When the 2026 tax rules will be ready (58–60 min)
+
+**44** Jurisdictions updated for 2025: 41 income-tax states, DC, NH and WA · **47** Pull requests from 5 contributors · **11 weeks** First pull request to last merge, Dec 3 – Feb 18 · **30** States finished in the last week, worked in parallel
+
+**2025 tax year (what happened):** Dec 3 – Feb 10: one state at a time: Full model reviews, adding missing programs and fixing errors: 14 states done; Feb 11–18: 30 states in parallel: all 44 done; Mar – May: follow-up fixes: Federal non-conformity in DC, Idaho, Maine and South Carolina.
+
+**2026 tax year (plan):** Prepare: Set up agents to draft each state’s update from its forms; Update as forms are published: Run states in parallel as each releases its 2026 forms and instructions; Finish and check: Late states, then rerun the TAXSIM comparison for 2026; Done by March 31, 2027: Every state complete, with March as a buffer.
+
+**Major law changes in 2025:** Iowa: flat 3.8% rate; New Hampshire: interest and dividends tax repealed; Maryland: new top brackets, capital gains surtax; Wisconsin: wider 4.4% bracket, $1,200 exemption.
+
+**Added or corrected in the model:** New Jersey: ANCHOR and Stay NJ property tax relief; Minnesota: K-12 education credit and subtraction; Indiana: county tax rates; California: alternative minimum tax thresholds.
+
+Commitment: every state’s 2026 income tax rules complete by March 31, 2027.
+
+BLS will want to know when each year’s rules are ready. Last year, the 2025 state income tax update ran from the first pull request on December 3, 2025 (Missouri, PR #6898) to the last merge on February 18, 2026 (California, PR #7418): 77 days, or 11 weeks. It covered 44 jurisdictions (the 41 states with a wage income tax, DC, New Hampshire’s interest and dividends tax repeal and Washington’s capital gains tax) in 47 pull requests from 5 contributors, about 22,400 added lines across 1,669 files. Pace: 2 states were done by December 31, 7 by January 31 and 14 by February 10, each worked one at a time with a full model review (median 24 days per pull request; Minnesota, New Jersey, Arizona and Michigan each added 1,300 to 3,100 lines, including programs that were missing). From February 11 to 18 the remaining 30 states were done in parallel (median 4 days per pull request), so most of the 11 weeks was the one-at-a-time phase. After release, federal non-conformity fixes followed from March to May (DC PR #7930, Idaho issue #7837, Maine issue #8122, South Carolina PR #7870), because those states did not adopt parts of the 2025 federal tax law (OBBBA), such as its larger standard deduction. The federal 2026 parameters are already in (IRS Rev. Proc. 2025-32, PR #7915). Plan for 2026: in November, set up agents that draft each state’s update from its forms (about a week of setup); from December, run states in parallel as forms are published; in February, finish the late states and rerun the TAXSIM comparison for 2026. We expect the update itself to take 1 to 6 weeks once forms are out. The commitment is that every state is complete by March 31, 2027, which leaves March as a buffer after last year’s February 18 finish. The update ships in PolicyEngine US and the emulator, independent of the Axiom migration. Sources: PolicyEngine US pull requests and issues on GitHub, pulled October 7, 2026.
+
+## 29. Q&A and discussion (60–90 min)
 
 - Which outcomes and years would be most useful?
 - Which input assumptions create the most uncertainty?
@@ -363,7 +379,7 @@ Proposed next steps for discussion. The emulator is an open-source package with 
 
 Use the separate 30-minute discussion for questions on the methods and potential CE collaboration. The links on the slide open the TAXSIM site, the web runner, the validation dashboard and the source code.
 
-## 29. Thank you (closing slide)
+## 30. Thank you (closing slide)
 
 - Max Ghenis · max@policyengine.org
 - Pavel Makarchuk · pavel@policyengine.org
