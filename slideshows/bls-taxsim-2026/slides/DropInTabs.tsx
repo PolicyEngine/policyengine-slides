@@ -78,7 +78,7 @@ function CodeBlock({
 /** Install commands: the steps (split on blank lines) sit side by side to save height. */
 function InstallBlock({ code }: { code: string }) {
   return (
-    <div className="relative rounded-lg bg-pe-darker py-2.5 pl-4 pr-24 text-white">
+    <div className="relative w-fit max-w-full rounded-lg bg-pe-darker py-2.5 pl-4 pr-24 text-white">
       <div className="grid gap-x-10 gap-y-2 md:grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr]">
         {code.split('\n\n').map((step) => (
           <Code key={step} code={step} highlight={false} />
@@ -113,7 +113,10 @@ function Tabs({ labels, active, onSelect, label }: { labels: string[]; active: n
   );
 }
 
-/** The TAXSIM site's Installation section on top and its Get started section below, with working tabs. */
+/**
+ * The TAXSIM site's Installation section (centered, on top) and its Get started section below, with working tabs.
+ * Code boxes size to their code; the takeaway sits at the bottom so the tabs never move when clicked.
+ */
 export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const [os, setOs] = useState(0);
   const [env, setEnv] = useState(0);
@@ -121,18 +124,18 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const tab = dropIn.tabs[env];
   return (
     <div
-      className="mt-1 flex flex-col gap-3 lg:h-[min(calc(100vh-330px),32rem)]"
+      className="mt-1 flex flex-col gap-3 lg:h-[min(calc(100vh-330px),25rem)] lg:gap-5"
       onClick={(e) => e.stopPropagation()}
     >
-      <section className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+      <section className="flex flex-col items-center gap-2.5">
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.installTitle}</h3>
           <Tabs labels={dropIn.installTabs.map((t) => t.label)} active={os} onSelect={setOs} label="Operating system" />
         </div>
         <InstallBlock code={install.code} />
       </section>
 
-      <section className="flex flex-col gap-2 lg:mt-2 lg:min-h-0 lg:flex-1">
+      <section className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <div className="flex flex-wrap items-baseline gap-x-3">
             <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.getStartedTitle}</h3>
@@ -140,13 +143,13 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
           </div>
           <Tabs labels={dropIn.tabs.map((t) => t.label)} active={env} onSelect={setEnv} label="Environment" />
         </div>
-        <div className="grid grid-cols-2 items-stretch gap-4 lg:flex-1" role="tabpanel">
+        <div className="grid grid-cols-2 items-stretch gap-4" role="tabpanel">
           <CodeBlock label={dropIn.beforeLabel} code={tab.before} dim />
           <CodeBlock label={dropIn.afterLabel} code={tab.after} highlight labelClassName="text-teal-300" />
         </div>
       </section>
 
-      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3">
+      <div className="flex items-center gap-4 rounded-lg border-l-4 border-pe-teal bg-pe-teal/10 px-5 py-3 lg:mt-auto">
         <IconCircleCheck className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
         <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{dropIn.takeaway}</p>
       </div>
