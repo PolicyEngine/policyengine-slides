@@ -47,7 +47,7 @@ export interface BlsSlideContent {
     engines: { party: 'nber' | 'pe'; years: string; name: string; detail: string }[];
     output: { title: string; detail: string; rows: { party: 'nber' | 'pe'; text: string }[] };
     takeaway: string;
-    footnote: string;
+    footnote?: string;
   };
   /** One input feeding two calculations, then a comparison and a next step. */
   compare?: {
@@ -303,8 +303,7 @@ export const blsSlides: BlsSlideContent[] = [
           { "party": "pe", "text": "2024: fiitax 8,282 siitax 3,214" }
         ]
       },
-      "takeaway": "One file in and one file out. The tax year decides which engine calculates each row.",
-      "footnote": "Example: one California household, married, two children, $130,000 in wages, run for 2019 and 2024."
+      "takeaway": "One file in and one file out. The tax year decides which engine calculates each row."
     }
   },
 

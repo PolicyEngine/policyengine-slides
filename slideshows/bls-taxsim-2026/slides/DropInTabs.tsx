@@ -63,7 +63,7 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
       className="mt-2 flex flex-col gap-3 lg:h-[min(calc(100vh-330px),32rem)] lg:justify-between"
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="flex items-center gap-4 rounded-lg bg-pe-darker px-5 py-3">
+      <div className="flex items-center gap-4 self-center rounded-lg bg-pe-darker px-6 py-3 shadow-sm">
         <span className="text-sm font-semibold uppercase tracking-wider text-white/60">{dropIn.installLabel}</span>
         <code className="font-mono text-base text-white">
           <span className="text-white/50">$ </span>{dropIn.install}

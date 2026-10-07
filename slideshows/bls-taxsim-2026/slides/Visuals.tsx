@@ -420,7 +420,7 @@ function FileBox({ file }: { file: RoutingData['input'] }) {
 export function WorkflowRouting({ routing }: { routing: RoutingData }) {
   return (
     <div className="mt-2 space-y-5">
-      <div className="grid h-[clamp(14rem,calc(100vh-450px),24rem)] grid-cols-[1.12fr_4rem_0.88fr_4rem_1.12fr] items-stretch">
+      <div className="grid h-[clamp(14rem,calc(100vh-405px),24rem)] grid-cols-[1.12fr_4rem_0.88fr_4rem_1.12fr] items-stretch">
         <FileBox file={routing.input} />
         <Connector />
         <div className="flex flex-col justify-between gap-4 py-1">
@@ -439,7 +439,7 @@ export function WorkflowRouting({ routing }: { routing: RoutingData }) {
         <IconArrowsSplit2 className="shrink-0 text-pe-teal" size={28} stroke={1.75} aria-hidden="true" />
         <p className="text-lg font-semibold leading-snug text-pe-dark lg:text-xl">{routing.takeaway}</p>
       </div>
-      <p className="text-sm text-gray-500">{routing.footnote}</p>
+      {routing.footnote && <p className="text-sm text-gray-500">{routing.footnote}</p>}
     </div>
   );
 }
