@@ -110,7 +110,7 @@ export function PolicyEngineTodaySlide() {
         <SlideTitle>PolicyEngine today</SlideTitle>
       </SlideHeader>
 
-      <div className="[@media(max-height:820px)]:[zoom:0.86] [@media(max-height:740px)]:[zoom:0.76]">
+      <div className="[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.86] [@media(max-height:740px)]:[zoom:0.78]">
       <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
         Free, open-source software to compute the effect of public policy. US and UK tax-benefit
         models, with public code since June 2021 and 133 contributors to the US model.

@@ -10,7 +10,7 @@ type Releases = NonNullable<BlsSlideContent['releases']>;
  */
 export default function ReleasesSlide({ releases }: { releases: Releases }) {
   return (
-    <div className="mt-4 space-y-5 text-pe-dark [@media(max-height:820px)]:space-y-4 [@media(max-height:820px)]:[zoom:0.85] [@media(max-height:740px)]:[zoom:0.74]">
+    <div className="mt-4 space-y-5 text-pe-dark [@media(max-height:820px)]:space-y-4 [@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.85] [@media(max-height:740px)]:[zoom:0.78]">
       <div
         className="grid grid-rows-[auto_auto] gap-x-4"
         style={{ gridTemplateColumns: `repeat(${releases.stats.length}, minmax(0, 1fr))` }}
