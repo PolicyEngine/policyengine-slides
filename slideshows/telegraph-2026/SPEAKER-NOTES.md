@@ -21,9 +21,10 @@ Microcosm UK data: Family Resources Survey, HMRC tax records and other
 surveys, matched to official statistics), and the results. Say it in plain
 words; she doesn't need the pipeline detail.
 
-## 4. Who uses PolicyEngine
+## 4. Our community
 
-Eight organisations as cards, each with a type label.
+Eight organisations that use, cite and support our work, as cards with
+logos and a type label; no description lines on the slide.
 - No 10 data science team (10DS): Nikhil's Innovation Fellowship; the card
   links to our post about it.
 - Parliament: our analysis was cited in a Lords debate on 24 February 2026.
@@ -40,12 +41,14 @@ Eight organisations as cards, each with a type label.
 
 ## 5. In the media and reports
 
-The eight most recent UK citations in our citations list, newest first: City
+Newest first: Tax Policy Associates' X thread on the Universities UK
+employer NI proposal (10 September 2026; the linked article checks its
+costing with PolicyEngine, £6.3bn), then the most recent UK citations in our
+list: City
 AM (junior hiring, July 2026), Social Market Foundation (AI and junior hiring,
 July 2026), Societal Impacts (citizen deliberation, June 2026), ITV Peston
 (fuel duty, May 2026), arXiv (seventh carbon budget, March 2026), ITV Peston
-(student loans, February 2026), Hansard (Lords debate, February 2026) and the
-No 10 Innovation Fellowship article (January 2026). The June 2026 land value
+(student loans, February 2026), Hansard (Lords debate, February 2026). The June 2026 land value
 tax post is also a recent citation; it's on slide 6 instead, so it isn't shown
 twice. The Telegraph's own May 2025 story isn't among the eight newest, but is
 worth mentioning out loud.

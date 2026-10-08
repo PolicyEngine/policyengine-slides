@@ -70,63 +70,66 @@ export const steps = [
 export type User = {
   name: string;
   initials: string;
+  logo?: string;
+  /** Render a light logo dark so it shows on a white slide. */
+  darkenLogo?: boolean;
   kind: "Government" | "Parliament" | "Think tank" | "Funder" | "Consultancy";
-  text: string;
   source?: Source;
 };
 
 export const users: User[] = [
   {
     name: "No 10 data science team",
+    logo: "/logos/orgs/10-downing-street.png",
     initials: "10",
     kind: "Government",
-    text: "Supported policy analysis through an Innovation Fellowship.",
     source: sources.no10Post,
   },
   {
     name: "Parliament",
+    logo: "/logos/orgs/uk-parliament-portcullis.svg",
     initials: "HL",
     kind: "Parliament",
-    text: "Our analysis cited in a Lords debate.",
     source: sources.hansard,
   },
   {
     name: "Tax Policy Associates",
+    logo: "/logos/orgs/tax-policy-associates.jpg",
     initials: "TPA",
     kind: "Think tank",
-    text: "Used our model to analyse a National Insurance proposal.",
     source: sources.tpa,
   },
   {
     name: "Centre for Policy Studies",
+    logo: "/logos/orgs/centre-for-policy-studies.png",
     initials: "CPS",
     kind: "Think tank",
-    text: "Used our model to cost family tax reforms.",
     source: sources.cps,
   },
   {
     name: "New Economics Foundation",
+    logo: "/logos/orgs/new-economics-foundation.png",
     initials: "NEF",
     kind: "Think tank",
-    text: "",
   },
   {
     name: "Good Growth Foundation",
     initials: "GGF",
+    logo: "/logos/orgs/good-growth-foundation.png",
+    darkenLogo: true,
     kind: "Think tank",
-    text: "",
   },
   {
     name: "WPI Economics",
+    logo: "/logos/orgs/wpi-economics.svg",
     initials: "WPI",
     kind: "Consultancy",
-    text: "",
   },
   {
     name: "Nuffield Foundation",
+    logo: "/logos/orgs/nuffield-foundation.svg",
     initials: "NF",
     kind: "Funder",
-    text: "Funds our local-area tax and benefit work.",
     source: sources.nuffield,
   },
 ];
@@ -143,6 +146,14 @@ export type Card = {
 const shot = (file: string) => `/screenshots/telegraph-2026/${file}`;
 
 export const press: Card[] = [
+  {
+    title: "Universities UK wants to scrap employer National Insurance for everyone under 25",
+    date: "Tax Policy Associates (Dan Neidle) · September 2026",
+    text: "",
+    href: "https://x.com/DanNeidle/status/2098054834943295772",
+    image: shot("tpa-universities-uk-ni.png"),
+    alt: "Chart from the Tax Policy Associates analysis of the Universities UK proposal",
+  },
   {
     title: "If Burnham wants firms to hire young people, he needs to get out of their way",
     date: "City AM · July 2026",
@@ -198,14 +209,6 @@ export const press: Card[] = [
     href: "https://hansard.parliament.uk/Lords/2026-02-24/debates/A381F7D6-0A3C-48FD-8D9E-67751E25877A/NationalInsuranceContributions(EmployerPensionsContributions)Bill",
     image: shot("hansard-nic.webp"),
     alt: "Hansard debate page",
-  },
-  {
-    title: "Informing policy using micro-simulations",
-    date: "No 10 Innovation Fellowship · January 2026",
-    text: "",
-    href: "https://fellows.ai.gov.uk/articles/nikhil-woodruff-micro-simulation/",
-    image: shot("no10-fellowship.webp"),
-    alt: "No 10 Innovation Fellowship article",
   },
 ];
 

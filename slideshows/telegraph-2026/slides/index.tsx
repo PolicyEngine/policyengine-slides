@@ -1,8 +1,11 @@
 import type { ReactNode } from "react";
 import {
+  IconAdjustments,
   IconBrandGithub,
   IconBrandLinkedin,
+  IconHome,
   IconMail,
+  IconMap2,
   IconWorld,
 } from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
@@ -135,36 +138,56 @@ export function TitleSlide() {
   );
 }
 
+const whatCards = [
+  {
+    Icon: IconAdjustments,
+    title: "Pick a policy",
+    text: "A tax rate, a benefit amount or a new allowance.",
+  },
+  {
+    Icon: IconHome,
+    title: "One household",
+    text: "How much a family gains or loses.",
+  },
+  {
+    Icon: IconMap2,
+    title: "The whole country",
+    text: "The cost to government, and who gains and loses.",
+  },
+];
+
 export function WhatSlide() {
   return (
     <Frame
       title="What PolicyEngine is"
       subtitle="Free, open-source tax and benefit analysis for the UK and the US"
-      references={[sources.home, sources.model]}
+      references={[sources.home]}
     >
-      <div className="grid grid-cols-2 gap-14 text-2xl leading-relaxed text-gray-700">
-        <div className="space-y-6">
-          <p>
-            A model of the UK tax and benefit system that anyone can use, free,
-            in a web browser.
-          </p>
-          <p>
-            Pick a policy, such as a tax rate, a benefit amount or a new
-            allowance, and see what it does.
-          </p>
-        </div>
-        <div className="space-y-6">
-          <p>
-            <span className="font-semibold text-pe-dark">For one household:</span>{" "}
-            how much a family gains or loses.
-          </p>
-          <p>
-            <span className="font-semibold text-pe-dark">For the country:</span>{" "}
-            the cost to government, and who gains and loses.
-          </p>
-          <p>All the code is public, so every number can be checked.</p>
-        </div>
+      <p className="text-2xl leading-relaxed text-gray-700">
+        A model of the UK tax and benefit system that anyone can use, free, in
+        a web browser.
+      </p>
+      <div className="mt-8 grid grid-cols-3 gap-6">
+        {whatCards.map(({ Icon, title, text }) => (
+          <div
+            key={title}
+            className="border border-gray-200 border-l-4 border-l-pe-teal bg-white p-6"
+          >
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-pe-teal text-white">
+              <Icon size={30} stroke={1.8} aria-hidden="true" />
+            </span>
+            <h2 className="mt-4 text-2xl font-semibold text-pe-dark">{title}</h2>
+            <p className="mt-2 text-lg leading-snug text-gray-600">{text}</p>
+          </div>
+        ))}
       </div>
+      <ExternalLink
+        href={sources.model.href}
+        className="mt-8 flex items-center gap-4 rounded-xl bg-pe-teal/10 px-6 py-4 text-xl text-pe-dark hover:no-underline"
+      >
+        <IconBrandGithub size={28} stroke={1.8} aria-hidden="true" className="text-pe-teal" />
+        All the code is public, so every number can be checked.
+      </ExternalLink>
     </Frame>
   );
 }
@@ -195,27 +218,35 @@ export function HowSlide() {
 export function UsersSlide() {
   return (
     <Frame
-      title="Who uses PolicyEngine"
+      title="Our community"
+      subtitle="Organisations that use, cite and support our work"
       references={[sources.tpa, sources.cps, sources.nuffield]}
     >
       <div className="grid grid-cols-4 gap-4">
         {users.map((user) => {
           const card = (
-            <div className="flex h-full flex-col border border-gray-200 border-l-4 border-l-pe-teal bg-white p-4">
-              <div className="flex items-center justify-between gap-3">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pe-teal/10 text-sm font-bold text-pe-teal">
-                  {user.initials}
-                </span>
+            <div className="flex h-full flex-col p-4">
+              <div className="flex items-start justify-between gap-3">
+                {user.logo ? (
+                  <Image
+                    src={user.logo}
+                    alt={`${user.name} logo`}
+                    width={192}
+                    height={96}
+                    className={`h-12 w-auto max-w-[8rem] object-contain object-left ${user.darkenLogo ? "brightness-0" : ""}`}
+                  />
+                ) : (
+                  <span className="flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-pe-teal/10 text-base font-bold text-pe-teal">
+                    {user.initials}
+                  </span>
+                )}
                 <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
                   {user.kind}
                 </span>
               </div>
-              <h2 className="mt-3 text-lg font-semibold leading-snug text-pe-dark">
+              <h2 className="mt-4 text-xl font-semibold leading-snug text-pe-dark">
                 {user.name}
               </h2>
-              {user.text && (
-                <p className="mt-1 text-sm leading-snug text-gray-600">{user.text}</p>
-              )}
             </div>
           );
           return user.source ? (
