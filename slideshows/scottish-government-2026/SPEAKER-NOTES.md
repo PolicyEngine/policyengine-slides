@@ -10,7 +10,8 @@ on section 3.
 
 ## 1. Title
 
-What has changed since March, in three parts.
+PolicyEngine: data pipeline and planning. Presenters: Vahid Ahmadi, Max Ghenis
+and María Juaristi.
 
 ## 2. Today
 
@@ -96,34 +97,38 @@ government enacted it from 1 October 2026, and it applies in Scotland.
 ## 9. Work, benefits and new shocks
 
 CliffWatch is a tool officials can use directly. The UC rebalancing analysis
-interacts with the Scottish Child Payment. The two employer NICs dashboards are
-shown as one card; the second is linked in the strip below.
-
-The Scotland income tax reform dashboard (1 April) is just outside the
-six-month window but is our most recent Scotland-specific work. Nothing in the
-window is Scotland-only. The bus fare cap and free childcare work is England
-only, so it's left off.
+interacts with the Scottish Child Payment. The Scotland income tax reform
+dashboard (1 April) is just outside the six-month window but is our most recent
+Scotland-specific work, so it has its own card. The two employer NICs
+dashboards and the research library are linked in the line under the cards.
+The bus fare cap and free childcare work is England only, so it's left off.
 
 Source: [UK research library](https://www.policyengine.org/uk/research).
 
-## 10. Autumn Budget 2026: what is new
+## 10. Where we start: the 2025 dashboard
 
-The 2025 dashboard is the starting point; don't re-present it. The new parts
+Show the 2025 dashboard as the base we are building on; click through if there
+is time. Don't re-present its 2025 results.
+
+Source: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025).
+
+## 11. Autumn Budget 2026: what is new
+
+The new parts
 are the data, local results once the local release passes its checks, a short
 method note for the constituency figures, and a Scotland view.
 
-Sources: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025),
-[2026 development repository](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
+Sources: [2026 development repository](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
 [method note draft, Microcosm #1131](https://github.com/PolicyEngine/microcosm/issues/1131).
 
-## 11. How Budget day will run
+## 12. How Budget day will run
 
 The development repository still contains the inherited 2025 measures. This
 is a plan, not completed 2026 analysis.
 
-## 12. Where your input would help
+## 13. Where your input would help
 
 Use this to open the discussion. Note any Scottish benchmarks, breakdowns or
 scenarios they name, and any council-area statistics we could calibrate to.
 
-## 13. Thank you
+## 14. Thank you

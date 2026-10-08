@@ -5,17 +5,17 @@ import CoverSlide from "@/components/layout/CoverSlide";
 import EndSlide from "@/components/layout/EndSlide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
+import { speakers } from "@/lib/speakers";
 import {
   budgetAsks,
   budgetPlan,
   energyPublications,
   pipelineChanges,
   propertyConcepts,
-  recentlyInactive,
+  nicsLinks,
   releaseChecks,
   scotlandLocal,
   scotlandNational,
-  scotlandPublication,
   sources,
   validationStats,
   workPublications,
@@ -127,10 +127,20 @@ function PublicationCard({ item }: { item: Publication }) {
 export function TitleSlide() {
   return (
     <CoverSlide
-      title="PolicyEngine and the Scottish Government"
-      subtitle="What has changed since March: data, research and the Autumn Budget"
-      event="Scottish Government"
+      title="PolicyEngine: data pipeline and planning"
+      subtitle="Presentation for Scottish Government"
+      contentClassName={`pt-28 ${styles.titleCover}`}
+      event=""
       date="9 October 2026"
+      speakers={[
+        { ...speakers["vahid-ahmadi"], title: "Research Associate, PolicyEngine" },
+        { ...speakers["max-ghenis"], title: "CEO, PolicyEngine" },
+        {
+          ...speakers["maria-juaristi"],
+          name: "María Juaristi",
+          title: "Research Associate, PolicyEngine",
+        },
+      ]}
     />
   );
 }
@@ -424,36 +434,55 @@ export function WorkBenefitsSlide() {
           <PublicationCard key={item.href} item={item} />
         ))}
       </div>
-      <div className="mt-6 flex items-center gap-6 border-t border-gray-200 pt-5">
-        <ExternalLink href={scotlandPublication.href} className="shrink-0">
+      <p className="mt-6 text-lg text-gray-600">
+        Also: employer NICs for{" "}
+        <ExternalLink href={nicsLinks[0].href} className="text-pe-teal">
+          {nicsLinks[0].label}
+        </ExternalLink>{" "}
+        and{" "}
+        <ExternalLink href={nicsLinks[1].href} className="text-pe-teal">
+          {nicsLinks[1].label}
+        </ExternalLink>
+        , and the full{" "}
+        <ExternalLink href={sources.research.href} className="text-pe-teal">
+          UK research library
+        </ExternalLink>
+        .
+      </p>
+    </Frame>
+  );
+}
+
+export function Budget2025Slide() {
+  return (
+    <Frame
+      section={sections.budget}
+      title="Where we start: the 2025 dashboard"
+      references={[sources.budget2025]}
+    >
+      <div className="flex items-start gap-12">
+        <ExternalLink href={sources.budget2025.href} className="min-w-0">
           <Image
-            src={scotlandPublication.image}
-            alt={scotlandPublication.alt}
-            width={960}
-            height={640}
-            className={`${styles.thumb} object-cover`}
+            src="/screenshots/scottish-government-2026/autumn-budget-2025.png"
+            alt="Autumn Budget 2025 dashboard showing policy selection and population impact charts"
+            width={1600}
+            height={1000}
+            className={`${styles.shot} w-auto max-w-full border border-gray-200`}
           />
         </ExternalLink>
-        <p className="text-lg text-gray-700">
-          <span className="font-semibold text-pe-dark">
-            Latest Scotland-specific work:{" "}
-          </span>
+        <div className="max-w-xl shrink-0 basis-[32%] space-y-5 text-xl leading-relaxed text-gray-700">
+          <p>
+            Published on Budget day 2025, with fiscal, distributional and
+            household results for each measure, and results by constituency.
+          </p>
+          <p>This year&apos;s dashboard keeps the same structure.</p>
           <ExternalLink
-            href={scotlandPublication.href}
-            className="font-semibold text-pe-teal"
+            href={sources.budget2025.href}
+            className="block font-semibold text-pe-teal"
           >
-            {scotlandPublication.title}
-          </ExternalLink>{" "}
-          ({scotlandPublication.date}). {scotlandPublication.finding}. Also:{" "}
-          <ExternalLink href={recentlyInactive.href} className="text-pe-teal">
-            NICs for {recentlyInactive.label.toLowerCase()}
+            Open the 2025 dashboard
           </ExternalLink>
-          , and the full{" "}
-          <ExternalLink href={sources.research.href} className="text-pe-teal">
-            UK research library
-          </ExternalLink>
-          .
-        </p>
+        </div>
       </div>
     </Frame>
   );
@@ -464,8 +493,7 @@ export function BudgetNewSlide() {
     <Frame
       section={sections.budget}
       title="Autumn Budget 2026: what is new"
-      subtitle="Building on the 2025 dashboard, with the same fiscal, distributional and household views"
-      references={[sources.budget2025, sources.budget2026, sources.methodNote]}
+      references={[sources.budget2026, sources.methodNote]}
     >
       <div className="grid grid-cols-2 gap-14">
         <div>
@@ -553,6 +581,7 @@ export function BudgetAsksSlide() {
 export function ClosingSlide() {
   return (
     <EndSlide
+      subtitle=""
       links={[
         { label: "policyengine.org/uk/research", url: sources.research.href },
         { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org" },

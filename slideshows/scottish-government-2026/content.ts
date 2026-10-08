@@ -230,30 +230,26 @@ export const workPublications: Publication[] = [
     alt: "Cover image for the Universal Credit rebalancing dashboard",
   },
   {
-    title: "Employer NICs exemptions",
-    date: "July 2026",
+    title: "Scotland income tax reform",
+    date: "April 2026",
     finding:
-      "Cost and employment effects for young workers and people moving from inactivity into work",
-    href: "https://www.policyengine.org/uk/young-worker-nics",
-    image: cover("young-worker-nics.jpg"),
-    alt: "Cover image for the young worker NICs dashboard",
+      "Replacing Scotland's six income tax bands with the rest-of-UK structure, then cutting rates",
+    href: "https://www.policyengine.org/uk/scotland-income-tax-reform",
+    image: cover("scotland-income-tax-reform.jpg"),
+    alt: "Cover image for the Scotland income tax reform dashboard",
   },
 ];
 
-export const recentlyInactive = {
-  label: "Recently inactive employees",
-  href: "https://www.policyengine.org/uk/nics-exemption-inactive-employees",
-};
-
-export const scotlandPublication: Publication = {
-  title: "Scotland income tax reform",
-  date: "April 2026",
-  finding:
-    "Replacing Scotland's six bands with the rest-of-UK structure, then cutting rates by 1 or 4 percentage points",
-  href: "https://www.policyengine.org/uk/scotland-income-tax-reform",
-  image: cover("scotland-income-tax-reform.jpg"),
-  alt: "Cover image for the Scotland income tax reform dashboard",
-};
+export const nicsLinks = [
+  {
+    label: "young workers",
+    href: "https://www.policyengine.org/uk/young-worker-nics",
+  },
+  {
+    label: "recently inactive employees",
+    href: "https://www.policyengine.org/uk/nics-exemption-inactive-employees",
+  },
+];
 
 // Section 3: Autumn Budget 2026.
 export const budgetPlan = [

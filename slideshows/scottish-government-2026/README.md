@@ -1,10 +1,10 @@
 # Scottish Government meeting, 9 October 2026
 
-13 slides at `/slides/scottish-government-2026`, in three sections:
+14 slides at `/slides/scottish-government-2026`, in three sections:
 
 1. New data pipeline and property income (slides 3–7)
 2. Published work over the last six months (slides 8–9)
-3. Plan for the Autumn Budget (slides 10–12)
+3. Plan for the Autumn Budget (slides 10–13)
 
 The deck follows two earlier Scottish Government presentations in
 `PolicyEngine/policyengine-demo`:
@@ -26,6 +26,7 @@ February, and section 2 starts in April.
 - `content.ts` holds the pinned sources, tables, publication cards and Budget plan.
 - `slides/index.tsx` contains the slides.
 - `SPEAKER-NOTES.md` gives the presenter track, sources and what not to claim.
+- Presenter headshots come from `lib/speakers` (Vahid's is from the app-v2 team page).
 - Cover images for section 2 are in `public/screenshots/scottish-government-2026/`,
   copied from `policyengine-app-v2` (`app/public/assets/posts/`) and resized.
 

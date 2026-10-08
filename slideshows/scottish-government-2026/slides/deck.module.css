@@ -5,9 +5,33 @@
   max-height: 28vh;
 }
 
-.thumb {
-  width: 9rem;
-  height: 6rem;
+.shot {
+  height: auto;
+  max-height: 52vh;
+}
+
+/* Title slide: keep the logo, speakers and date clear of each other on laptops. */
+@media (max-height: 760px) {
+  .titleCover {
+    padding-top: 6rem !important;
+  }
+
+  .titleCover > :global(*) {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .titleCover > :global(:first-child) {
+    display: none;
+  }
+
+  .titleCover h1 {
+    font-size: 2.25rem;
+  }
+
+  .titleCover :global(.w-28) {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 /* Keep the shared slide template legible on a laptop during the meeting. */
@@ -74,5 +98,74 @@
 
   .cover {
     max-height: 22vh;
+  }
+}
+
+/* Safari on a laptop leaves less than 760px for the slide. */
+@media (max-height: 760px) {
+  .deck > :global(.absolute.inset-0) {
+    padding-top: 2rem;
+  }
+
+  .deck :global(.mb-10) {
+    margin-bottom: 1rem;
+  }
+
+  .deck h1 {
+    font-size: 2.25rem;
+  }
+
+  .deck :global(.text-xl) {
+    font-size: 1.05rem;
+    line-height: 1.45rem;
+  }
+
+  .deck :global(.text-2xl) {
+    font-size: 1.25rem;
+    line-height: 1.7rem;
+  }
+
+  .deck :global(.text-lg) {
+    font-size: 0.95rem;
+    line-height: 1.35rem;
+  }
+
+  .deck :global(.text-base) {
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+  }
+
+  .deck th,
+  .deck td {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .deck :global(.pb-4) {
+    padding-bottom: 0.5rem;
+  }
+
+  .deck :global(.space-y-5) > :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .deck :global(.pt-5) {
+    padding-top: 0.75rem;
+  }
+
+  .deck :global(.mt-6) {
+    margin-top: 0.75rem;
+  }
+
+  .deck :global(.p-4) {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cover {
+    max-height: 17vh;
+  }
+
+  .shot {
+    max-height: 46vh;
   }
 }
