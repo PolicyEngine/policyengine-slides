@@ -6,13 +6,14 @@ on:
   push:
     branches: [main]
 
-# This workflow only builds, tests and lints (nothing deploys from it), so a
-# newer commit on the same pull request or on main makes the older run moot.
-# Cancel it rather than let it wait in the org-wide runner queue. From
+# A newer commit on a pull request makes the run on its previous head moot.
+# Cancel that run rather than let it wait in the org-wide runner queue. From
 # 2026-10-06 to 10-08, 44 of 92 runs were superseded before they finished.
+# Pushes to main get a group of their own per run, so every main commit keeps
+# its own result and none is cancelled.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
