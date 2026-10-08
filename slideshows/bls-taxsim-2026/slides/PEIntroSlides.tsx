@@ -86,7 +86,7 @@ export function WhatIsPolicyEngineSlide() {
 const stats = [
   { value: '95,000+', label: 'parameters in the US model' },
   { value: '5,500+', label: 'variables' },
-  { value: '4,693', label: 'test files' },
+  { value: '4,932', label: 'test files' },
   { value: '103', label: 'programs in the coverage registry' },
 ];
 
@@ -112,7 +112,7 @@ export function PolicyEngineTodaySlide() {
 
       <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
         Free, open-source software to compute the effect of public policy. US and UK tax-benefit
-        models, with public code since June 2021 and 133 contributors to the US model.
+        models, with public code since June 2021 and 136 contributors to the US model.
       </p>
 
       <div className="mt-8 grid grid-cols-[1fr_1.1fr] gap-10 items-start">
@@ -138,6 +138,15 @@ export function PolicyEngineTodaySlide() {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="mt-6 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-5 py-3">
+        <p className="text-base leading-snug text-gray-700">
+          <span className="font-semibold text-pe-dark">Funding: </span>
+          a nonprofit, fiscally sponsored by the PSL Foundation, with grants from Arnold Ventures, the
+          National Science Foundation, the Nuffield Foundation, NEO Philanthropy and the Pritzker
+          Children’s Initiative, and support from organizations that build on the models, such as MyFriendBen.
+        </p>
       </div>
     </Slide>
   );
