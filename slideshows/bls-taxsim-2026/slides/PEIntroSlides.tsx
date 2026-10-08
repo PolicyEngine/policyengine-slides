@@ -143,7 +143,7 @@ export function PolicyEngineTodaySlide() {
 
       <div className="mt-6 rounded-lg border-l-4 border-pe-teal bg-gray-50 px-5 py-3">
         <p className="text-base leading-snug text-gray-700">
-          PolicyEngine is a nonprofit, fiscally sponsored by the PSL Foundation. Grants to date include
+          PolicyEngine is a nonprofit, fiscally sponsored by the PSL Foundation. Funders to date include
           Arnold Ventures, the National Science Foundation (POSE Phase I, 2025–26), the Nuffield Foundation,
           NEO Philanthropy and the Pritzker Children’s Initiative, with support from organizations that
           build on the models, such as MyFriendBen.
