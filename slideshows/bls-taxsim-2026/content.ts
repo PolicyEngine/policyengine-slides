@@ -1158,6 +1158,21 @@ export const blsSlides: BlsSlideContent[] = [
     }
   },
   {
+    "id": "axiom-demo",
+    "title": "Live: the child and dependent care credit in Axiom",
+    "body": [],
+    "minutes": 2,
+    "notes": "A two-minute walk-through of one federal tax provision running in Axiom. The page shows 26 U.S.C. 21 next to its encoded rules; each rule cites its subsection (for example “26 USC § 21(a) · parameter”). Click Skip on the three-step tour if it appears. Steps: (1) point to the statute text and the encodings rail; (2) click “graph ↗” and open the Run tab, ideally in a full browser tab (axiom.org/app?compose=us%3Astatutes%2F26%2F21), because the run form needs width; (3) tax unit: AGI 40000, earned income 40000, expenses paid 3000, tax before the credit 5000, and set Expense Requirements, TIN Included and Service Provider Info to true; (4) add person 2, age 4, child dependent true; (5) Run scenario: the rate is 37% and the credit $1,110; (6) change AGI and earned income to 100000 and rerun: 22% and $660. The arithmetic to say aloud: $40,000 of AGI is 12.5 steps of $2,000 above $15,000, which rounds up to 13, so the rate is 50% − 13 points = 37%, and 37% of $3,000 is $1,110. Above $75,000 a second phase-down applies, to 22% at $100,000. The credit is nonrefundable, so $500 of tax caps it at $500. These are the 2026 parameters as amended in 2025 (50% maximum, 35% then 20% floors); the 2021-only rules sit in the same encoding as separate parameters. The run executes Axiom’s Rust rules engine, compiled to WebAssembly and served by the Axiom API, and the response names the engine release and the compiled artifact’s hash. Say plainly that this is a preview: results are uncertified (the API’s certified set is empty), and the EITC, child tax credit and income tax core do not run live today (they fail to compile against the current engine), which is why production TAXSIM emulation stays on PolicyEngine US. The EITC page (axiom.org/us/statute/26/32) shows its statute and 26 encoded rules, for reading only. Fallbacks: rehearse the run once in a separate tab before the talk and do not reload it (answers are lost on reload); if the engine call stalls (one test call in 18 timed out), stay on the statute page and narrate the $1,110 calculation; the simplest live alternative is self-employment tax (axiom.org/app?compose=us%3Astatutes%2F26%2F1401: $50,000 gives $7,650), kept below the wage base. Use the singular “statute” in URLs: /us/statutes/26/32 renders a not-found page. Checked October 8, 2026 against axiom.org master 3662668e and rulespec-us us/statutes/26/21.yaml.",
+    "headerLink": {
+      "label": "axiom.org/us/statute/26/21",
+      "url": "https://axiom.org/us/statute/26/21"
+    },
+    "embed": {
+      "url": "https://axiom.org/us/statute/26/21",
+      "footnote": "Run tab: AGI $40,000, $3,000 of care for a child aged 4, $5,000 of tax before the credit. The engine returns a 37% rate and a $1,110 credit. Preview results, not yet certified."
+    }
+  },
+  {
     "id": "ce-fit",
     "title": "Where this could fit in CE research",
     "body": [
