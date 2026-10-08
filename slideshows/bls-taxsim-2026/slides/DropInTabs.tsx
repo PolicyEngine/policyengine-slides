@@ -135,23 +135,18 @@ export default function DropInTabs({ dropIn }: { dropIn: DropInData }) {
   const tab = dropIn.tabs[env];
   return (
     <div
-      className="mt-2 flex flex-col gap-5 lg:gap-8 [@media(max-height:820px)]:gap-5 lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.96] max-lg:[@media(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.88]"
+      className="mt-2 flex flex-col gap-5 lg:gap-8 [@media(max-height:820px)]:gap-4 lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.85] max-lg:[@media(max-height:820px)]:[zoom:0.8] [@media(max-height:740px)]:[zoom:0.77]"
       onClick={(e) => e.stopPropagation()}
     >
-      <section className="flex flex-col items-center gap-3">
-        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-          <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.installTitle}</h3>
-          <Tabs labels={dropIn.installTabs.map((t) => t.label)} active={os} onSelect={setOs} label="Operating system" />
-        </div>
+      <section className="flex flex-col items-center gap-2.5">
+        <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.installTitle}</h3>
+        <Tabs labels={dropIn.installTabs.map((t) => t.label)} active={os} onSelect={setOs} label="Operating system" />
         <InstallBlock tabs={dropIn.installTabs} active={os} />
       </section>
 
-      <section className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-          <div className="flex flex-wrap items-baseline gap-x-3">
-            <h3 className="text-lg font-bold text-pe-dark lg:text-xl">{dropIn.getStartedTitle}</h3>
-            <p className="text-sm text-gray-600 lg:text-base">{dropIn.getStartedSubtitle}</p>
-          </div>
+      <section className="flex flex-col gap-2.5">
+        <h3 className="text-center text-lg font-bold text-pe-dark lg:text-xl">{dropIn.getStartedTitle}</h3>
+        <div className="flex justify-center">
           <Tabs labels={dropIn.tabs.map((t) => t.label)} active={env} onSelect={setEnv} label="Environment" />
         </div>
         <div className="grid grid-cols-2 items-stretch gap-4" role="tabpanel">
