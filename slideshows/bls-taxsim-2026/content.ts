@@ -217,7 +217,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The first five sections total 60 minutes, leaving no slack before the 30-minute Q&A. Show the drop-in swap, where each calculation happens and how versions work, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Close with what’s next: the 2026 rules, Axiom and a possible CE pilot. Reserve 30 minutes for Q&A. Thesia Garner’s question list (email of October 7) is answered inside the deck rather than on its own slide: funding and staffing on PolicyEngine today (slide 5); users on slides 6 and 9; versions, release notes, input and output changes and support on Versions and releases (slide 13); testing in the validation section; in-kind benefits on slides 23 and 25; the annual update and the road map in What’s next (slides 28–32). Each of those slides’ notes carries the spoken answer."
+    "notes": "The first five sections total 60 minutes, leaving no slack before the 30-minute Q&A. Show the drop-in swap, where each calculation happens and how versions work, then run the live demo, then give an overview of the validation process. Then show what PolicyEngine models beyond TAXSIM, and introduce benefit imputation as an extension that needs more data and methodological choices. Close with what’s next: the 2026 rules, Axiom and a possible CE pilot. Reserve 30 minutes for Q&A. Thesia Garner’s question list (email of October 7) is answered inside the deck rather than on its own slide: funding and staffing on PolicyEngine today (slide 5); users on slides 6, 7 and 9; versions, release notes, input and output changes and support on Versions and releases (slide 13); testing in the validation section; in-kind benefits on slides 23 and 25; the annual update and the road map in What’s next (slides 28–32). Each of those slides’ notes carries the spoken answer."
   },
   {
     "id": "section-intro",
@@ -1213,7 +1213,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Scope one benefit extension after reviewing the tax results"
     ],
     "minutes": 2,
-    "notes": "Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. The comparison year needs CE TAXSIM estimates, so it must be 2023 or earlier; the 2024 data has none. Avoid proposing a firm timeline before those constraints are known.",
+    "notes": "Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. The comparison year needs CE TAXSIM estimates, so it must be 2023 or earlier; the 2024 data has none. Avoid proposing a firm timeline before those constraints are known. On the AI skills, which speak to the CE program’s limited implementation resources: PolicyEngine’s skills are open source (MIT) in PolicyEngine/policyengine-skills, published for Claude Code as the policyengine-claude plugin (/plugin marketplace add PolicyEngine/policyengine-claude) with a Codex install script and an MCP server; they include household calculations and microsimulation runs on the same rules. There is no TAXSIM-specific skill yet, so do not say it maps CE files out of the box; mapping CE fields to TAXSIM inputs would be pilot work. Confidential CE records stay under BLS’s own rules for AI tools; the skills are useful with public-use microdata and for writing the comparison code.",
     "process": {
       "intro": "Four steps, each with a clear output.",
       "steps": [
@@ -1236,7 +1236,8 @@ export const blsSlides: BlsSlideContent[] = [
           "items": [
             "The open-source emulator, which installs and runs inside BLS",
             "Runs pinned to emulator and model versions",
-            "A diagnosis of each difference, then a benefit extension proposal"
+            "A diagnosis of each difference, then a benefit extension proposal",
+            "Open AI skills that run PolicyEngine from Claude Code or Codex"
           ]
         }
       ]
