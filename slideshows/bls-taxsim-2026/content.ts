@@ -13,7 +13,7 @@ export interface BlsSlideContent {
   notes: string;
   cover?: boolean;
   /** A full-slide component from slides/PEIntroSlides.tsx. */
-  custom?: 'what-is-pe' | 'pe-today' | 'who-uses-pe' | 'thank-you';
+  custom?: 'what-is-pe' | 'who-uses-pe' | 'thank-you';
   /** Clickable URL shown at the right of the slide title. */
   headerLink?: { label: string; url: string };
   /** Resource cards beside the bullet list (the Q&A slide). */
@@ -209,7 +209,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Q&A and discussion"
     ],
     "descriptions": [
-      "What PolicyEngine is, who funds and uses it, why we built an emulator, and how the NBER collaboration started.",
+      "What PolicyEngine is, who uses and funds it, why we built an emulator, and how the NBER collaboration started.",
       "A drop-in TAXSIM interface, where each calculation happens, versions and releases, and a live demo in the browser.",
       "What PolicyEngine models beyond TAXSIM’s inputs and outputs, and the CE fields that could feed it.",
       "How a disagreement is resolved with the engines, independent validators and the law, the public dashboard, and the 2026 tax rules.",
@@ -218,7 +218,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Questions on the methods, implementation, and opportunities for collaboration."
     ],
     "minutes": 1,
-    "notes": "The six sections total 60 minutes, leaving no slack before the 30-minute Q&A. Speakers change only at section dividers, and each divider names its presenter: Max Ghenis (01, introduction, 11 minutes), Pavel Makarchuk (02 and 03, the emulator with the live demo and what goes beyond TAXSIM, 23 minutes), David Trimmer (04, validation and the 2026 tax rules, 12 minutes), then Max Ghenis (05 and 06, benefit imputation and what’s next, 14 minutes). Thesia Garner’s question list (email of October 7) is answered inside the deck rather than on its own slide: transparency of the internal logic on slide 4; funding and staffing on PolicyEngine today (slide 5); users on slides 6, 7 and 9; versions, release notes, input and output changes and support on Versions and releases (slide 13); in-kind benefits on slides 18 and 27; testing in the validation section (slides 20–23); the annual update on slide 24; the road map in What’s next (slides 30–33). Each of those slides’ notes carries the spoken answer."
+    "notes": "The six sections total 60 minutes, leaving no slack before the 30-minute Q&A. Speakers change only at section dividers, and each divider names its presenter: Max Ghenis (01, introduction, slides 1–8, 11 minutes), Pavel Makarchuk (02 and 03, the emulator with the live demo and what goes beyond TAXSIM, slides 9–17, 23 minutes), David Trimmer (04, validation and the 2026 tax rules, slides 18–23, 12 minutes), then Max Ghenis (05 and 06, benefit imputation and what’s next, slides 24–32, 14 minutes). Thesia Garner’s question list (email of October 7) is answered inside the deck rather than on its own slide: transparency of the internal logic, the model’s scale and staffing on slide 4; users and funding on slide 5; why we built the emulator on slide 6; versions, release notes, input and output changes and support on Versions and releases (slide 12); in-kind benefits on slides 17 and 26; testing in the validation section (slides 19–22); the annual update on slide 23; the road map in What’s next (slides 29–32). Each of those slides’ notes carries the spoken answer."
   },
   // Introduction and context (Max Ghenis): 9 minutes, 11 with the cover and agenda
   {
@@ -237,33 +237,20 @@ export const blsSlides: BlsSlideContent[] = [
       "Households: survey data enhanced and calibrated, or any household you enter",
       "Reforms: change any parameter and see the cost, poverty and distributional effects"
     ],
-    "minutes": 2,
-    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the benefit imputation section covers those. Answers Thesia’s question on reviewing the internal logic: all of it is public. PolicyEngine US and policyengine-core are AGPL-3.0 and the emulator is MIT. The US model has 6,266 parameter files, each citing the statute, regulation or agency document that sets it (for example, the child tax credit amount cites 26 U.S.C. 24(h)(2) and IRS Rev. Proc. 2025-32), 6,177 variable formula files and 4,932 YAML test files (policyengine-us main, October 8, 2026). The emulator’s input and output mappings are open too (config/variable_mappings.yaml). Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "minutes": 3,
+    "notes": "Give the one-minute version of PolicyEngine: an open-source rules engine, a household dataset built from public surveys, and a way to score reforms. Keep the focus on the rules and the household data, because the TAXSIM emulator uses the same rules engine. The rules and the survey data are separate, so the same rules can serve any dataset. The TAXSIM adapter maps one input format into the model’s households, but it does not remove the research choices about missing data and participation; the benefit imputation section covers those. Answers Thesia’s question on reviewing the internal logic: all of it is public. PolicyEngine US and policyengine-core are AGPL-3.0 and the emulator is MIT. The US model has 6,266 parameter files, each citing the statute, regulation or agency document that sets it (for example, the child tax credit amount cites 26 U.S.C. 24(h)(2) and IRS Rev. Proc. 2025-32), 6,177 variable formula files and 4,932 YAML test files (policyengine-us main, October 8, 2026). The emulator’s input and output mappings are open too (config/variable_mappings.yaml). Adapted from the cpid-webinar-2026 deck (September 2026). The figures along the bottom: 95,000+ parameters (from the gettsim-2026 deck, September 3, 2026), 6,000+ variables (6,216 variable classes on October 8, 2026), 4,932 YAML test files and 103 programs in the coverage registry (policyengine-us main, October 8, 2026), and 133 contributors to the US model since 2021 (the GitHub list shows 136 accounts, 3 of them bots). Answers Thesia’s staffing question: the emulator is maintained by Pavel Makarchuk, David Trimmer and Max Ghenis; the US model it calls had 20 people committing in the past 12 months, and its code, tests and every issue are public, so the work does not depend on any one person. Do not put headcount or turnover figures on the record beyond what Max chooses to say.",
     "custom": "what-is-pe"
   },
   {
-    "id": "pe-today",
-    "title": "PolicyEngine today",
-    "body": [
-      "95,000+ parameters, 5,500+ variables and 4,932 test files in the US model",
-      "Public code since June 2021, with 133 contributors to the US model",
-      "NBER, the Atlanta Fed and No 10 Downing Street work with the models",
-      "A nonprofit, fiscally sponsored by the PSL Foundation, funded by foundation grants and the organizations that build on the models"
-    ],
-    "minutes": 1,
-    "notes": "Use the numbers to show scale and testing, not to sell. The NBER memorandum of understanding is the reason the TAXSIM emulator exists; the next section covers it. Test files (4,932 YAML files under policyengine_us/tests) and contributors (133 people; the GitHub list shows 136 accounts, 3 of them bots) recounted on October 8, 2026; the other figures are from the gettsim-2026 deck (September 3, 2026). Answers Thesia’s funding question: PolicyEngine is a nonprofit, fiscally sponsored by the PSL Foundation. The funders on the slide are the public supporters page (policyengine.org/us/supporters): Arnold Ventures, the National Science Foundation (a POSE Phase I grant, $299,974, September 2025 to August 2026), the Nuffield Foundation, NEO Philanthropy, the Pritzker Children’s Initiative, and MyFriendBen among the organizations that build on the models. Max speaks to future funding. Answers the staffing question: the emulator is maintained by Pavel Makarchuk, David Trimmer and Max Ghenis; the US model it calls had 20 people committing in the past 12 months. Do not put headcount or turnover figures on the record beyond what Max chooses to say.",
-    "custom": "pe-today"
-  },
-  {
     "id": "who-uses-pe",
-    "title": "Researchers and developers build with these rules",
+    "title": "Who uses and funds PolicyEngine",
     "body": [
       "Federal users: BEA and the Joint Economic Committee",
       "Research institutions: Brookings, AEI, Niskanen, CRFB, Georgetown, USC, the University of Michigan and UHERO",
       "Benefit navigators: MyFriendBen, Amplifi, Mirza and Starlight"
     ],
     "minutes": 1,
-    "notes": "Point out the federal statistical user, BEA, because it is closest to the CE team’s work: BEA’s Distribution of Personal Income technical document (Marina Gindelsky, June 2026) says it runs PolicyEngine for years 2021 forward, and that the emulator “has enabled BEA to continue to produce Disposable Personal Income.” Quote only those fragments: the same footnote and section 7 call TAXSIM-35 discontinued, which we do not say, because NBER maintains TAXSIM and runs an open beta coded through 2024 law (apps.bea.gov/data/special-topics/distribution-of-personal-income/national/technical-document.pdf). Also point out the university research centers, such as the University of Michigan and UHERO (the University of Hawaii Economic Research Organization). Adapted from the cpid-webinar-2026 deck (September 2026).",
+    "notes": "Point out the federal statistical user, BEA, because it is closest to the CE team’s work: BEA’s Distribution of Personal Income technical document (Marina Gindelsky, June 2026) says it runs PolicyEngine for years 2021 forward, and that the emulator “has enabled BEA to continue to produce Disposable Personal Income.” Quote only those fragments: the same footnote and section 7 call TAXSIM-35 discontinued, which we do not say, because NBER maintains TAXSIM and runs an open beta coded through 2024 law (apps.bea.gov/data/special-topics/distribution-of-personal-income/national/technical-document.pdf). Also point out the university research centers, such as the University of Michigan and UHERO (the University of Hawaii Economic Research Organization). Adapted from the cpid-webinar-2026 deck (September 2026). Answers Thesia’s funding question: PolicyEngine is a nonprofit, fiscally sponsored by the PSL Foundation. The funders shown are from the public supporters page (policyengine.org/us/supporters): Arnold Ventures, the National Science Foundation (a POSE Phase I grant, $299,974, September 2025 to August 2026, now ended), the Nuffield Foundation, NEO Philanthropy and the Pritzker Children’s Initiative, with support from organizations that build on the models, such as MyFriendBen. Max speaks to future funding.",
     "custom": "who-uses-pe"
   },
   {

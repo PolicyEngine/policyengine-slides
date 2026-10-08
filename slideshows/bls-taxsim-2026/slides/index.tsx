@@ -10,7 +10,7 @@ import AxiomPlanSlide from './AxiomPlan';
 import { ThankYouSlide } from './ThankYouSlide';
 import SectionDivider from './SectionDivider';
 import UpdateTimelineSlide from './UpdateTimeline';
-import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
+import { WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
 import CoverSlide from '@/components/layout/CoverSlide';
@@ -23,7 +23,6 @@ const COVER_SPEAKERS = [speakers['max-ghenis'], speakers['pavel-makarchuk'], spe
 
 const CUSTOM_SLIDES = {
   'what-is-pe': WhatIsPolicyEngineSlide,
-  'pe-today': PolicyEngineTodaySlide,
   'who-uses-pe': WhoUsesPolicyEngineSlide,
   'thank-you': ThankYouSlide,
 } satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
