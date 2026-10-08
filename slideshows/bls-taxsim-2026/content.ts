@@ -66,7 +66,6 @@ export interface BlsSlideContent {
     installTitle: string;
     installTabs: { label: string; lang: string; code: string }[];
     getStartedTitle: string;
-    getStartedSubtitle: string;
     beforeLabel: string;
     afterLabel: string;
     tabs: { label: string; lang: string; before: string; after: string }[];
@@ -353,7 +352,6 @@ export const blsSlides: BlsSlideContent[] = [
         {"label": "Windows", "lang": "Terminal", "code": "# Install uv package manager (if you don't have it)\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n\n# Install policyengine-taxsim\nuv tool install policyengine-taxsim"}
       ],
       "getStartedTitle": "Get started",
-      "getStartedSubtitle": "Same input format, same output variables. Just swap the command.",
       "beforeLabel": "TAXSIM35 (before)",
       "afterLabel": "PolicyEngine TAXSIM (after)",
       "tabs": [
@@ -650,7 +648,7 @@ export const blsSlides: BlsSlideContent[] = [
       ],
       "value": {
         "title": "Why it matters",
-        "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or imputation, unlock the full rules."
+        "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or an imputation, let PolicyEngine apply rules that need more detail than TAXSIM’s inputs carry."
       },
       "addLabel": "PolicyEngine adds"
     }
@@ -665,7 +663,7 @@ export const blsSlides: BlsSlideContent[] = [
       "columns": [
         "CE collects",
         "PolicyEngine input",
-        "What PolicyEngine does with it",
+        "Calculations it supports",
         "TAXSIM"
       ],
       "rows": [
