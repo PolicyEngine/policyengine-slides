@@ -155,6 +155,14 @@ export const press: Card[] = [
     alt: "Chart from the Tax Policy Associates analysis of the Universities UK proposal",
   },
   {
+    title: "Nationalisation is not a growth strategy",
+    date: "CapX · September 2026",
+    text: "",
+    href: "https://capx.co/nationalisation-is-not-a-growth-strategy",
+    image: shot("capx-nationalisation.webp"),
+    alt: "CapX article header image",
+  },
+  {
     title: "If Burnham wants firms to hire young people, he needs to get out of their way",
     date: "City AM · July 2026",
     text: "",
@@ -201,14 +209,6 @@ export const press: Card[] = [
     href: "https://x.com/itvpeston/status/2027372583616741864",
     image: shot("itvpeston-student-loan.webp"),
     alt: "ITV Peston segment on student loans",
-  },
-  {
-    title: "National Insurance Contributions (Employer Pensions Contributions) Bill",
-    date: "Hansard, House of Lords · February 2026",
-    text: "",
-    href: "https://hansard.parliament.uk/Lords/2026-02-24/debates/A381F7D6-0A3C-48FD-8D9E-67751E25877A/NationalInsuranceContributions(EmployerPensionsContributions)Bill",
-    image: shot("hansard-nic.webp"),
-    alt: "Hansard debate page",
   },
 ];
 
