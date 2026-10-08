@@ -1,0 +1,185 @@
+/* Publication cards: a fixed-ratio cover keeps the grid even. */
+.cover {
+  aspect-ratio: 3 / 2;
+  height: auto;
+  max-height: 28vh;
+}
+
+.shot {
+  height: auto;
+  max-height: 52vh;
+}
+
+/* Side-by-side publication cards: the thumbnail fills the card's height. */
+.thumbWide {
+  width: 13rem;
+  height: auto;
+  min-height: 7rem;
+}
+
+@media (max-height: 760px) {
+  .thumbWide {
+    width: 9rem;
+    min-height: 5rem;
+  }
+}
+
+/* Title slide: keep the logo, speakers and date clear of each other on laptops. */
+@media (max-height: 760px) {
+  .titleCover {
+    padding-top: 6rem !important;
+  }
+
+  .titleCover > :global(*) {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .titleCover > :global(:first-child) {
+    display: none;
+  }
+
+  .titleCover h1 {
+    font-size: 2.25rem;
+  }
+
+  .titleCover :global(.w-28) {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+/* Keep the shared slide template legible on a laptop during the meeting. */
+@media (max-height: 850px) {
+  .deck > :global(.absolute.inset-0) {
+    padding-top: 3rem;
+  }
+
+  .deck :global(.mb-10) {
+    margin-bottom: 1.5rem;
+  }
+
+  .deck h1 {
+    font-size: 2.625rem;
+  }
+
+  .deck :global(.mt-12) {
+    margin-top: 2rem;
+  }
+
+  .deck :global(.mt-10),
+  .deck :global(.mt-9) {
+    margin-top: 1.5rem;
+  }
+
+  .deck :global(.mt-8),
+  .deck :global(.mt-7) {
+    margin-top: 1.25rem;
+  }
+
+  .deck :global(.mt-6) {
+    margin-top: 0.5rem;
+  }
+
+  .deck th,
+  .deck td {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+
+  .deck :global(.space-y-6) > :not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .deck :global(.space-y-4) > :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .deck :global(.pb-5) {
+    padding-bottom: 1rem;
+  }
+
+  .deck :global(.pb-3) {
+    padding-bottom: 0.5rem;
+  }
+
+  .deck :global(.space-y-5) > :not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  .deck :global(.space-y-3) > :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .cover {
+    max-height: 22vh;
+  }
+}
+
+/* Safari on a laptop leaves less than 760px for the slide. */
+@media (max-height: 760px) {
+  .deck > :global(.absolute.inset-0) {
+    padding-top: 2rem;
+  }
+
+  .deck :global(.mb-10) {
+    margin-bottom: 1rem;
+  }
+
+  .deck h1 {
+    font-size: 2.25rem;
+  }
+
+  .deck :global(.text-xl) {
+    font-size: 1.05rem;
+    line-height: 1.45rem;
+  }
+
+  .deck :global(.text-2xl) {
+    font-size: 1.25rem;
+    line-height: 1.7rem;
+  }
+
+  .deck :global(.text-lg) {
+    font-size: 0.95rem;
+    line-height: 1.35rem;
+  }
+
+  .deck :global(.text-base) {
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+  }
+
+  .deck th,
+  .deck td {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .deck :global(.pb-4) {
+    padding-bottom: 0.5rem;
+  }
+
+  .deck :global(.space-y-5) > :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .deck :global(.pt-5) {
+    padding-top: 0.75rem;
+  }
+
+  .deck :global(.mt-6) {
+    margin-top: 0.75rem;
+  }
+
+  .deck :global(.p-4) {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cover {
+    max-height: 17vh;
+  }
+
+  .shot {
+    max-height: 46vh;
+  }
+}
