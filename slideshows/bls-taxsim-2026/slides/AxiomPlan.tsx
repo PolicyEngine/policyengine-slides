@@ -15,7 +15,7 @@ const TONES: Record<AxiomPlan['stages'][number]['tone'], { band: string; label: 
  */
 export default function AxiomPlanSlide({ plan }: { plan: AxiomPlan }) {
   return (
-    <div className="mt-4 space-y-5 text-pe-dark">
+    <div className="mt-4 space-y-5 text-pe-dark [@media(max-height:740px)]:[zoom:0.9]">
       {plan.intro && <p className="max-w-6xl text-xl leading-snug">{plan.intro}</p>}
 
       <div className="flex items-stretch gap-2">

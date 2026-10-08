@@ -70,7 +70,7 @@ export default function UpdateTimelineSlide({ timeline }: { timeline: UpdateTime
         ))}
       </section>
 
-      <section className="grid grid-cols-2 gap-4">
+      <section className="grid grid-cols-2 gap-4 [@media(max-height:960px)]:hidden">
         {timeline.changeGroups.map((group) => (
           <div key={group.title} className="rounded-lg bg-gray-50 px-5 py-4">
             <h3 className="text-lg font-bold">{group.title}</h3>

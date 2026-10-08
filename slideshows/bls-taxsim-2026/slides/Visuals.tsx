@@ -329,7 +329,7 @@ export function Triangle({ triangle }: { triangle: TriangleData }) {
     );
   }
   return (
-    <div className="-mt-2 space-y-5">
+    <div className="-mt-2 space-y-5 [@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.95] [@media(max-height:740px)]:[zoom:0.75]">
       <div className="grid grid-cols-[1fr_auto] items-center gap-10">
         <ol className="space-y-6">
           {triangle.steps.map((step, index) => (

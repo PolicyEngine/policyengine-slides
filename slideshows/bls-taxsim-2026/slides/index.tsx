@@ -35,7 +35,7 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
   }
 
   if (content.divider) {
-    return <SectionDivider number={content.divider.number} title={content.title} />;
+    return <SectionDivider number={content.divider.number} title={content.title} presenter={content.divider.presenter} />;
   }
 
   if (content.cover) {
@@ -45,6 +45,7 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         subtitle={content.body[0]}
         speakers={COVER_SPEAKERS}
         event="BLS seminar"
+        contentClassName="[@media(max-height:760px)]:pt-16"
       />
     );
   }
