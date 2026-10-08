@@ -17,7 +17,7 @@ Based on the September 2025 CRS TAXSIM section, PWBM 2026 validation material, I
 
 # Introduction and context
 
-## 1. Tax and benefit imputation for the CE (0–1 min)
+## 1. Tax and benefit imputation for federal surveys (0–1 min)
 
 - PolicyEngine’s TAXSIM emulator and beyond
 - Max Ghenis, Pavel Makarchuk and David Trimmer
@@ -390,7 +390,7 @@ Axiom today: 1,147 federal and 3,733 state rule modules (rulespec-us, CC BY 4.0)
 
 Answers Thesia’s road-map question. Frame Axiom as our next-generation rules engine. Today: tax years 2021 onward run on PolicyEngine US, and the 2026 update ships there by March 31, 2027, whatever Axiom’s timeline. Axiom encodes rules from the law with companion tests: at rulespec-us a9dc38f (October 6, 2026) there are 1,147 federal rule modules, each paired with a test, and 3,733 state modules across 50 states and DC, with uneven coverage (Colorado has 1,284; 25 jurisdictions have fewer than 10). The engine (axiom-rules-engine) is Rust under MIT; the encodings are CC BY 4.0. Axiom publishes its comparisons with PolicyEngine and TAXSIM as open reports (269 at axiom-oracles.vercel.app). The plan, in Max’s words: we keep powering TAXSIM for as long as it is needed, possibly with Axiom on the backend instead of PolicyEngine US, and PolicyEngine wrappers over Axiom keep existing code working for as long as needed, so the frontier moves forward in a backwards-compatible way. Shipped evidence for the wrapper approach: policyengine.py already runs one country on Axiom, a Belgium pilot for worker social contributions and personal income tax (policyengine.py PR #448, tests/test_be_axiom_pilot.py); a US model on Axiom has no code yet. Axiom’s validation suite already turns its cases into TAXSIM rows and runs both TAXSIM-35 and the emulator on them (axiom-oracles adapters/taxsim). On the emulator, a CI test already pins the command-line entry point (tests/test_cli_entry_point.py). The emulator’s side of that plan is written up in policyengine-taxsim PR #1153 (open, not merged): the command-line tool, the Python import path and TAXSIM-format files stay fixed, with contract tests for those entry points; output values still change when the law or a fix changes them. No migration date is set. If asked about readiness: Axiom does not yet compute a complete federal return (rulespec-us #1318, a cyclic dependency in the composed federal compile, is open; the payroll tax encoding lacks the wage-base cap, axiom-encode #1214), and its API has no certified release, so BLS would run on PolicyEngine US and the emulator. If asked about independence: Max leads both, and the PSL Foundation sponsors both; Axiom is a second reading of the statute, and the statute and official instructions decide disagreements. Do not cite the Axiom-versus-TAXSIM federal run (87,519 tax units): it compares Axiom with a 2026 TAXSIM test build, not with the emulator. Max speaks to funding here.
 
-## 30. Live: the child and dependent care credit in Axiom (54–56 min)
+## 30. The child care credit, live in Axiom (54–56 min)
 
 Live page: https://axiom.org/us/statute/26/21
 
