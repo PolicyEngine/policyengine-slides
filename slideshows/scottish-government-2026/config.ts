@@ -18,7 +18,7 @@ import {
 
 export const scottishGovernment2026Config: SlideshowConfig = {
   id: "scottish-government-2026",
-  title: "PolicyEngine: data pipeline and planning",
+  title: "PolicyEngine: data pipeline, property income and Budget planning",
   description:
     "Follow-up to the February and March meetings: the Microcosm UK data pipeline and property income, UK work published since April, and the Autumn Budget 2026 plan.",
   date: "2026-10-09",

@@ -71,7 +71,7 @@ export const sources = {
 export const pipelineChanges = [
   {
     topic: "Survey year",
-    before: "FRS 2023-24",
+    before: "EFRS 2023-24",
     now: "FRS 2024-25, with SPI 2022-23, WAS round 8, LCFS and the National Travel Survey as donors",
   },
   {

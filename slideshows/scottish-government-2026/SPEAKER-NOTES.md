@@ -10,7 +10,7 @@ on section 3.
 
 ## 1. Title
 
-PolicyEngine: data pipeline and planning. Presenters: Vahid Ahmadi, Max Ghenis
+PolicyEngine: data pipeline, property income and Budget planning. Presenters: Vahid Ahmadi, Max Ghenis, María Juaristi
 and María Juaristi.
 
 ## 2. Today

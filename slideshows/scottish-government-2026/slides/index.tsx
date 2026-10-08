@@ -1,8 +1,13 @@
 import type { ReactNode } from "react";
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconMail,
+  IconWorld,
+} from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
 import Slide from "@/components/core/Slide";
 import CoverSlide from "@/components/layout/CoverSlide";
-import EndSlide from "@/components/layout/EndSlide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
@@ -127,7 +132,7 @@ function PublicationCard({ item }: { item: Publication }) {
 export function TitleSlide() {
   return (
     <CoverSlide
-      title="PolicyEngine: data pipeline and planning"
+      title="PolicyEngine: data pipeline, property income and Budget planning"
       subtitle="Presentation for Scottish Government"
       contentClassName={`pt-28 ${styles.titleCover}`}
       event=""
@@ -578,14 +583,36 @@ export function BudgetAsksSlide() {
   );
 }
 
+const contacts = [
+  { label: "policyengine.org/uk/research", url: sources.research.href, Icon: IconWorld },
+  { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org", Icon: IconMail },
+  { label: "github.com/PolicyEngine", url: "https://github.com/PolicyEngine", Icon: IconBrandGithub },
+  {
+    label: "linkedin.com/company/thepolicyengine",
+    url: "https://www.linkedin.com/company/thepolicyengine",
+    Icon: IconBrandLinkedin,
+  },
+];
+
 export function ClosingSlide() {
   return (
-    <EndSlide
-      subtitle=""
-      links={[
-        { label: "policyengine.org/uk/research", url: sources.research.href },
-        { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org" },
-      ]}
-    />
+    <Slide isEnd>
+      <h1 className="font-display text-5xl font-bold mb-10 text-center">Thank you</h1>
+      <div className="flex flex-col items-start gap-4">
+        {contacts.map(({ label, url, Icon }) => (
+          <a
+            key={url}
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            className="flex items-center gap-4 text-xl opacity-80 hover:opacity-100"
+          >
+            <Icon size={28} stroke={1.6} aria-hidden="true" />
+            {label}
+          </a>
+        ))}
+      </div>
+    </Slide>
   );
 }
