@@ -5,6 +5,8 @@ import CeInputsTable from './CeInputsTable';
 import InputMapping from './InputMapping';
 import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
+import ReleasesSlide from './Releases';
+import AxiomPlanSlide from './AxiomPlan';
 import { ThankYouSlide } from './ThankYouSlide';
 import SectionDivider from './SectionDivider';
 import UpdateTimelineSlide from './UpdateTimeline';
@@ -92,6 +94,10 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <UpdateTimelineSlide timeline={content.updateTimeline} />
       ) : content.routing ? (
         <WorkflowRouting routing={content.routing} />
+      ) : content.releases ? (
+        <ReleasesSlide releases={content.releases} />
+      ) : content.axiomPlan ? (
+        <AxiomPlanSlide plan={content.axiomPlan} />
 
       ) : content.compare ? (
         <CompareFlow compare={content.compare} />

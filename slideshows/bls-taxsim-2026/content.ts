@@ -153,6 +153,20 @@ export interface BlsSlideContent {
     takeaway?: string;
     loop?: string;
   };
+  /** Versions and releases: headline figures, the pin command, and what ships with every release. */
+  releases?: {
+    stats: { value: string; label: string }[];
+    pin: { title: string; code: string; note: string };
+    items: { icon: BlsIcon; title: string; text: string }[];
+    takeaway?: string;
+  };
+  /** The transition to Axiom in stages: today, next, and what stays the same throughout. */
+  axiomPlan?: {
+    intro?: string;
+    stages: { label: string; title: string; items: string[]; tone: 'now' | 'next' | 'always' }[];
+    takeaway?: string;
+    footnote?: string;
+  };
   detail?: {
     intro?: string;
     columns?: string[];
