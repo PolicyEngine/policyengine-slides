@@ -1,8 +1,8 @@
 # Validation section: speaker script (David)
 
-Slides 19–22, 10 minutes in total, then slide 23, When the 2026 tax rules will be ready (44–46 min, 2 minutes; its notes carry the script), before handing back to Max for benefit imputation. Spoken pace is about 130 words a minute; the rest of the time is for pointing at the slide and clicking through the live dashboard. Timings: validation steps and triangle 3 min, shaping the emulator 2 min, dashboard 3 min, progress and recent issues 2 min.
+Slides 21–24, 10 minutes in total, then slide 25, When the 2026 tax rules will be ready (44–46 min, 2 minutes; its notes carry the script), before handing back to Max for benefit imputation. Spoken pace is about 130 words a minute; the rest of the time is for pointing at the slide and clicking through the live dashboard. Timings: validation steps and triangle 3 min, shaping the emulator 2 min, dashboard 3 min, progress and recent issues 2 min.
 
-## Slide 19. Three calculations, one arbiter (34–37 min)
+## Slide 21. Three calculations, one arbiter (34–37 min)
 
 Validation for us isn't a single benchmark number. It's a process we run on every disagreement, and it has four steps.
 
@@ -18,7 +18,7 @@ Validation for us isn't a single benchmark number. It's a process we run on ever
 
 *Point to step 4.* Once the fix ships, we rerun the record to confirm the disagreement is gone.
 
-## Slide 20. How this process shapes the emulator (37–39 min)
+## Slide 22. How this process shapes the emulator (37–39 min)
 
 A resolved case doesn't end with the fix.
 
@@ -32,7 +32,7 @@ A resolved case doesn't end with the fix.
 
 *Point to the line at the bottom.* The loop never closes for good. Every PolicyEngine release and every TAXSIM update reruns the comparison.
 
-## Slide 21. The public validation dashboard (39–42 min, live)
+## Slide 23. The public validation dashboard (39–42 min, live)
 
 This is where that comparison lives, and it's public. A quick overview, then one or two examples.
 
@@ -50,7 +50,7 @@ One caution: these numbers move whenever either engine changes. That's the point
 
 *If asked for headline figures:* for 2023, 89.8% of households agree on federal tax and 94.9% on state tax, within 1% of gross income (data update of September 23, 2026). Choose the two example states on the morning of the talk, after checking that the page loads.
 
-## Slide 22. From a reported difference to a fix (42–44 min)
+## Slide 24. From a reported difference to a fix (42–44 min)
 
 Here's where we are. *Point to the figures.* Since July 2024 there have been more than 1,100 issues on the emulator's public tracker, and more than 1,000 are resolved. Differences run both ways: we've sent NBER more than 150 questions about TAXSIM's own rules, and NBER has confirmed more than 100 TAXSIM corrections on the tracker. That last number is a floor. TAXSIM's working builds aren't public, so we only count the corrections NBER mentions in a comment.
 
