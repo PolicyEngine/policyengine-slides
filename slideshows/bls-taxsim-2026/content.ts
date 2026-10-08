@@ -648,7 +648,7 @@ export const blsSlides: BlsSlideContent[] = [
       ],
       "value": {
         "title": "Why it matters",
-        "text": "Every TAXSIM input has a PolicyEngine equivalent, so existing files run unchanged. The added variables, from a survey or an imputation, let PolicyEngine apply rules that need more detail than TAXSIM’s inputs carry."
+        "text": "Existing TAXSIM files run unchanged. Added variables, from a survey or an imputation, let PolicyEngine apply more detailed rules."
       },
       "addLabel": "PolicyEngine adds"
     }
