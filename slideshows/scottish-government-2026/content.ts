@@ -1,201 +1,299 @@
-const microcosmCommit = "e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e";
+// Microcosm and policyengine-uk links are pinned to the commits checked on
+// 8 October 2026 (microcosm main 75167a68, policyengine-uk main f1a9a3cc).
+const microcosmCommit = "75167a688ea83316654f1d794542124b4277bda9";
 const budgetCommit = "eb77d72b5e353b0cb85fecaf806f3a081753bbfa";
 const microcosm = `https://github.com/PolicyEngine/microcosm/blob/${microcosmCommit}`;
-const ukSpec = `${microcosm}/packages/microcosm-build/src/microcosm/build/uk`;
+const ukBuild = `${microcosm}/packages/microcosm-build/src/microcosm/build/uk`;
+
+export type Source = { label: string; href: string };
 
 export const sources = {
   pipeline: {
     label: "UK build graph",
     href: `${microcosm}/docs/uk-full-build-graph.md`,
   },
-  inputs: { label: "UK source manifest", href: `${ukSpec}/spec/sources.yaml` },
-  frs: { label: "FRS release pin", href: `${ukSpec}/frs_release.json` },
-  architecture: {
-    label: "Microcosm architecture",
-    href: `${microcosm}/DESIGN.md`,
+  geography: {
+    label: "Geography assignment",
+    href: `${microcosm}/docs/geography-assignment.md`,
+  },
+  inputs: { label: "UK source manifest", href: `${ukBuild}/spec/sources.yaml` },
+  nationalTargets: {
+    label: "National targets",
+    href: `${ukBuild}/target_references.json`,
+  },
+  localTargets: {
+    label: "Local targets",
+    href: `${ukBuild}/local_target_references.json`,
   },
   release: {
     label: "Release certification",
     href: `${microcosm}/docs/uk-national-release-assembly-runbook-806.md`,
   },
+  propertyIssue: {
+    label: "Microcosm #1106",
+    href: "https://github.com/PolicyEngine/microcosm/issues/1106",
+  },
+  propertyData: {
+    label: "Microcosm #1145",
+    href: "https://github.com/PolicyEngine/microcosm/pull/1145",
+  },
+  propertyEngine: {
+    label: "policyengine-uk #2172",
+    href: "https://github.com/PolicyEngine/policyengine-uk/pull/2172",
+  },
+  pris: {
+    label: "HMRC property rental income statistics 2026",
+    href: "https://www.gov.uk/government/statistics/property-rental-income-statistics/property-rental-income-statistics-2026",
+  },
+  propertyRates: {
+    label: "GOV.UK property, savings and dividend rates",
+    href: "https://www.gov.uk/government/publications/changes-to-tax-rates-for-property-savings-dividend-income/changes-to-tax-rates-for-property-savings-dividend-income",
+  },
   budget2025: {
-    label: "2025 dashboard",
+    label: "Autumn Budget 2025 dashboard",
     href: "https://www.policyengine.org/uk/autumn-budget-2025",
   },
   budget2026: {
     label: "2026 development repository",
     href: `https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/${budgetCommit}`,
   },
-  scotlandTax: {
-    label: "Scotland income tax analysis",
-    href: "https://www.policyengine.org/uk/scotland-income-tax-reform",
+  methodNote: {
+    label: "Constituency method note (Microcosm #1131)",
+    href: "https://github.com/PolicyEngine/microcosm/issues/1131",
   },
   research: {
     label: "UK research library",
     href: "https://www.policyengine.org/uk/research",
   },
+} satisfies Record<string, Source>;
+
+// Section 1: what changed since the February deck's Enhanced FRS pipeline.
+export const pipelineChanges = [
+  {
+    topic: "Survey year",
+    before: "FRS 2023-24",
+    now: "FRS 2024-25, with SPI 2022-23, WAS round 8, LCFS and the National Travel Survey as donors",
+  },
+  {
+    topic: "High incomes",
+    before: "Two copies of the FRS stacked, one with imputed high incomes",
+    now: "A separate SPI support channel adds tax-record households the FRS lacks",
+  },
+  {
+    topic: "Local geography",
+    before: "650 constituency weight sets",
+    now: "Each household copy is placed in a small census area; constituencies, councils and regions are built up from it",
+  },
+  {
+    topic: "Targets",
+    before: "Administrative totals",
+    now: "Every official statistic comes from Chronicle, a pinned ledger that records its source",
+  },
+  {
+    topic: "Releases",
+    before: "—",
+    now: "Versioned releases that must pass release checks and a signed certification",
+  },
+];
+
+export const scotlandNational = [
+  "Council tax dwellings by band, A–H",
+  "Scottish Child Payment spending",
+  "Income tax: taxpayers and income by band (SPI)",
+  "Population by age, babies and children under 16",
+  "State Pension recipients and UC households with a baby",
+  "Capital gains and bus support",
+];
+
+export const scotlandLocal = [
+  "Households placed in 2022 Scottish Output Areas, with NRS lookups to 2024 constituencies and council areas",
+  "Council tax bands A–H targeted by council area",
+  "Water and sewerage charges netted out of council tax",
+  "Adult and Child Disability Payment mapped onto the benefits they replace",
+];
+
+export const releaseChecks = [
+  "Fit to national targets, checked target by target",
+  "A minimum effective sample in every constituency",
+  "Targets held out of the fit to test it",
+  "A limit on how far any household's weight can move",
+];
+
+export const validationStats = [
+  {
+    value: "1.885m",
+    benchmark: "1.950m",
+    label: "People with income of £100,000 or more, 2025-26",
+    source: "HMRC Survey of Personal Incomes, Table 2.5",
+  },
+  {
+    value: "£0.605bn",
+    benchmark: "£0.600bn",
+    label: "Tax-Free Childcare government top-up, 2025-26",
+    source: "HMRC Tax-Free Childcare statistics",
+  },
+];
+
+export const propertyConcepts = [
+  {
+    source: "HMRC property rental income statistics",
+    measures: "Rent before allowable expenses",
+  },
+  {
+    source: "Survey of Personal Incomes",
+    measures:
+      "Profit after allowable expenses, before residential finance costs",
+  },
+  {
+    source: "Family Resources Survey",
+    measures: "Rent net of mortgage payments, interest and capital",
+  },
+];
+
+// Section 2: published UK work, 8 April – 8 October 2026 (app-v2 c83e129).
+export type Publication = {
+  title: string;
+  date: string;
+  finding: string;
+  href: string;
+  image: string;
+  alt: string;
 };
 
-export const pipelineSteps = [
+const cover = (file: string) => `/screenshots/scottish-government-2026/${file}`;
+
+export const energyPublications: Publication[] = [
   {
-    title: "Assemble",
-    text: "Build linked people, benefit units and households from the FRS.",
+    title: "Middle East war and UK living standards",
+    date: "September 2026",
+    finding:
+      "How energy, fuel and food price rises hit households in 2027-28, with ten policy responses compared",
+    href: "https://www.policyengine.org/uk/middle-east-war-living-standards",
+    image: cover("middle-east-war-living-standards.jpg"),
+    alt: "Cover image for the Middle East war living standards dashboard",
   },
   {
-    title: "Enrich",
-    text: "Add income support and impute variables from donor surveys.",
+    title: "Targeted energy bill discount",
+    date: "October 2026",
+    finding:
+      "Cost, reach and distributional effects of the Resolution Foundation's proposed discount",
+    href: "https://www.policyengine.org/uk/targeted-energy-discount",
+    image: cover("targeted-energy-discount.jpg"),
+    alt: "Cover image for the targeted energy bill discount dashboard",
   },
   {
-    title: "Locate",
-    text: "Assign a geographic area and derive consistent larger areas.",
+    title: "Temporary VAT cut on domestic electricity",
+    date: "July 2026",
+    finding:
+      "Fiscal cost and distributional impact of a six-month cut from 5% to 0% from October 2026",
+    href: "https://www.policyengine.org/uk/electricity-vat-cut",
+    image: cover("electricity-vat-cut.jpg"),
+    alt: "Cover image for the electricity VAT cut dashboard",
   },
   {
-    title: "Calibrate",
-    text: "Adjust household weights against public evidence.",
-  },
-  {
-    title: "Validate",
-    text: "Check the population and package the release evidence.",
+    title: "Energy price shock",
+    date: "April 2026",
+    finding:
+      "Price shock scenarios split by electricity and gas, with five policy responses",
+    href: "https://www.policyengine.org/uk/energy-price-shock",
+    image: cover("energy-price-shock-calculator.jpg"),
+    alt: "Cover image for the energy price shock dashboard",
   },
 ];
 
-export const inputRows = [
-  [
-    "Family Resources Survey 2024–25",
-    "Household structure, earnings and reported benefits",
-  ],
-  [
-    "Survey of Personal Incomes 2022–23 and HMRC",
-    "Income distributions and additional income support",
-  ],
-  ["Wealth and Assets Survey, round 8", "Wealth and asset variables"],
-  [
-    "Living Costs and Food Survey and Effects of Taxes and Benefits",
-    "Consumption, indirect taxes and public services",
-  ],
-  ["National Travel Survey", "Travel patterns and transport spending"],
-  [
-    "Public administrative statistics through Chronicle",
-    "Population, tax and benefit calibration evidence",
-  ],
+export const workPublications: Publication[] = [
+  {
+    title: "UK CliffWatch",
+    date: "June 2026",
+    finding:
+      "Where benefit withdrawal and taxes create cliffs and high marginal rates as earnings rise",
+    href: "https://www.policyengine.org/uk/uk-cliff-watch",
+    image: cover("uk-cliff-watch.jpg"),
+    alt: "Cover image for UK CliffWatch",
+  },
+  {
+    title: "Who bears the AI shock?",
+    date: "August 2026",
+    finding:
+      "AI employment, wage and capital shocks traced through the tax-benefit system",
+    href: "https://www.policyengine.org/uk/research/uk-ai-study",
+    image: cover("uk-ai-study.jpg"),
+    alt: "Cover image for the UK AI study",
+  },
+  {
+    title: "Universal Credit rebalancing",
+    date: "June 2026",
+    finding:
+      "The above-inflation standard allowance uplift and the fixed health element",
+    href: "https://www.policyengine.org/uk/uc-rebalancing",
+    image: cover("uc-rebalancing.jpg"),
+    alt: "Cover image for the Universal Credit rebalancing dashboard",
+  },
+  {
+    title: "Employer NICs exemptions",
+    date: "July 2026",
+    finding:
+      "Cost and employment effects for young workers and people moving from inactivity into work",
+    href: "https://www.policyengine.org/uk/young-worker-nics",
+    image: cover("young-worker-nics.jpg"),
+    alt: "Cover image for the young worker NICs dashboard",
+  },
 ];
 
+export const recentlyInactive = {
+  label: "Recently inactive employees",
+  href: "https://www.policyengine.org/uk/nics-exemption-inactive-employees",
+};
+
+export const scotlandPublication: Publication = {
+  title: "Scotland income tax reform",
+  date: "April 2026",
+  finding:
+    "Replacing Scotland's six bands with the rest-of-UK structure, then cutting rates by 1 or 4 percentage points",
+  href: "https://www.policyengine.org/uk/scotland-income-tax-reform",
+  image: cover("scotland-income-tax-reform.jpg"),
+  alt: "Cover image for the Scotland income tax reform dashboard",
+};
+
+// Section 3: Autumn Budget 2026.
 export const budgetPlan = [
   {
     stage: "Before the Budget",
-    title: "Refresh the baseline",
-    text: "Pin the model and data release. Review current law and prepare scenario definitions.",
+    title: "Pin the model and data",
+    text: "Fix the policyengine-uk version and data release, check current law and prepare likely scenarios.",
   },
   {
     stage: "On Budget day",
-    title: "Encode and check measures",
-    text: "Read the published rules, test implementation and record timing and scope.",
+    title: "Encode and test the measures",
+    text: "Read the published documents, implement each measure and test its timing and scope.",
   },
   {
     stage: "As results clear review",
-    title: "Publish household and population impacts",
-    text: "Show fiscal effects, income distributions and poverty, with a Scotland view.",
+    title: "Publish the dashboard",
+    text: "Fiscal, distributional and household results, with Scotland shown separately.",
   },
   {
     stage: "After publication",
-    title: "Explain differences and revise",
-    text: "Compare like-for-like with official costings and publish assumptions and limitations.",
+    title: "Reconcile with official costings",
+    text: "Explain differences from OBR and Scottish Fiscal Commission figures, and revise.",
   },
 ];
 
-// Dates and descriptions checked against the live posts and apps indexes on
-// 8 October 2026. Policy amounts describe scenarios, not estimated outcomes.
-export const recentResearch = [
+export const budgetAsks = [
   {
-    topic: "Energy and living standards",
-    date: "July–October 2026",
-    summary: "Energy bill support and the distribution of price shocks",
-    links: [
-      {
-        label: "Targeted discount",
-        href: "https://www.policyengine.org/uk/targeted-energy-discount",
-      },
-      {
-        label: "Middle East war",
-        href: "https://www.policyengine.org/uk/middle-east-war-living-standards",
-      },
-      {
-        label: "Electricity VAT",
-        href: "https://www.policyengine.org/uk/electricity-vat-cut",
-      },
-    ],
+    title: "Scotland breakdowns",
+    text: "Which results by household type, council area or income would be most useful",
   },
   {
-    topic: "Childcare",
-    date: "September 2026",
-    summary: "Free hours and a 75% subsidy replacing Tax-Free Childcare",
-    links: [
-      {
-        label: "Childcare analysis",
-        href: "https://www.policyengine.org/uk/free-childcare-reform",
-      },
-    ],
+    title: "Benchmarks",
+    text: "Official Scottish figures we should reconcile against, before and after the Budget",
   },
   {
-    topic: "Work incentives",
-    date: "July 2026",
-    summary: "Employer NICs exemptions for young and recently inactive workers",
-    links: [
-      {
-        label: "Young workers",
-        href: "https://www.policyengine.org/uk/young-worker-nics",
-      },
-      {
-        label: "Recently inactive workers",
-        href: "https://www.policyengine.org/uk/nics-exemption-inactive-employees",
-      },
-    ],
+    title: "Scenarios to prepare",
+    text: "Scottish policy options worth modelling in advance, so they can sit next to the UK measures",
   },
   {
-    topic: "Household interactions",
-    date: "June–September 2026",
-    summary: "Benefit cliffs and the tax-benefit effects of living together",
-    links: [
-      {
-        label: "CliffWatch",
-        href: "https://www.policyengine.org/uk/uk-cliff-watch",
-      },
-      {
-        label: "Marriage calculator",
-        href: "https://www.policyengine.org/uk/marriage",
-      },
-    ],
-  },
-  {
-    topic: "AI and the economy",
-    date: "August 2026",
-    summary:
-      "Fiscal and distributional incidence of employment, wage and capital shocks",
-    links: [
-      {
-        label: "AI study",
-        href: "https://www.policyengine.org/uk/research/uk-ai-study",
-      },
-    ],
-  },
-  {
-    topic: "Benefits and transport",
-    date: "June–July 2026",
-    summary:
-      "Universal Credit rebalancing, fuel duty and the £2 bus fare cap in England",
-    links: [
-      {
-        label: "Universal Credit",
-        href: "https://www.policyengine.org/uk/uc-rebalancing",
-      },
-      {
-        label: "Fuel duty",
-        href: "https://www.policyengine.org/uk/cancelling-fuel-duty-rise",
-      },
-      {
-        label: "Bus fares",
-        href: "https://www.policyengine.org/uk/bus-fare-cap",
-      },
-    ],
+    title: "Local statistics",
+    text: "Council-area statistics we should add as calibration targets",
   },
 ];

@@ -1,172 +1,129 @@
 # Scottish Government presenter notes
 
-Meeting: 9 October 2026. This short deck can support a 15–20 minute presentation
-with additional discussion. Adapt the timing to the meeting agenda.
+Meeting: 9 October 2026. This follows the February deck (methodology, the
+Enhanced FRS pipeline, Scotland calibration targets, the Scottish Budget
+dashboard) and the March update (Spring Statement 2026, research from February
+and March, the Claude plugin). Don't re-explain those; refer back to them.
 
-## 1. PolicyEngine and the Scottish Government
+About 20 minutes plus discussion: roughly 9 on section 1, 5 on section 2 and 6
+on section 3.
 
-Introduce the update around the data behind UK analysis and preparation for
-the next fiscal event. The three requested topics are Microcosm UK, property
-income and Autumn Budget 2026. Finish with recent UK research.
+## 1. Title
 
-## 2. Today's discussion
+What has changed since March, in three parts.
 
-Spend most of the methodology time on the population build and how it supports
-Scotland analysis. The property-income section remains a placeholder until its
-modelling PR supplies the approved explanation and evidence.
+## 2. Today
 
-## 3. The Microcosm UK pipeline
+Section 1 is the new data pipeline and the property income work. Section 2 is
+what we have published since April. Section 3 is the Autumn Budget plan and
+what would help from the Scottish Government.
 
-The Frame carries people, benefit units and households with explicit links and
-weights. Assemble the FRS spine, enrich it from donor sources, assign geography,
-calibrate the representation and evaluate build checks. The stages share a
-reproducible executable graph.
+## 3. From the Enhanced FRS to Microcosm UK
 
-The dense/local and national release roles use the same driver but select
-different documented contracts. Do not describe them as identical target
-surfaces or imply that implementing the graph certifies a new release.
+Set this against the February flowchart. The big changes:
 
-Sources: [UK build graph](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/docs/uk-full-build-graph.md),
-[architecture](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/DESIGN.md).
+- the newer survey year and donors;
+- high incomes now come from a separate SPI support channel, not two stacked
+  copies of the FRS;
+- local geography comes from placing each household copy in a small census
+  area, instead of fitting 650 separate constituency weight sets;
+- every target statistic comes through Chronicle with its source recorded;
+- releases are versioned and certified.
 
-## 4. The UK data sources
+Sources: [UK build graph](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/docs/uk-full-build-graph.md),
+[source manifest](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/packages/microcosm-build/src/microcosm/build/uk/spec/sources.yaml),
+[geography assignment](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/docs/geography-assignment.md).
 
-The current FRS pin is 2024–25. The release pin identifies SPI 2022–23, WAS
-round 8 and LCFS 2023–24 as donor vintages. These differ from the February demo.
-Each source supplies a particular part of the population or its evidence.
-Licensed microdata supplies records and conditional relationships. Public
-administrative statistics supply calibration targets through Chronicle.
+## 4. Scotland in the new build
 
-Sources: [FRS release pin](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/packages/microcosm-build/src/microcosm/build/uk/frs_release.json),
-[UK source manifest](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/packages/microcosm-build/src/microcosm/build/uk/spec/sources.yaml).
+This replaces the February slide with 1,428 targets. The 58 national Scottish
+targets are at geography S92000003 in the national register. Locally, council
+tax bands A–H are targeted by council area. Scottish households are placed in
+2022 Scottish Output Areas (Data Zones are Northern Ireland, not Scotland).
 
-## 5. Enriching the survey population
+If asked for local fit figures: there are none to quote yet. The local release
+has not been certified.
 
-Distinguish support from representation. Adding income support gives the
-calibrator household profiles it can assign weight to. Changing weights alone
-cannot create a missing household profile.
+Sources: [national targets](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/packages/microcosm-build/src/microcosm/build/uk/target_references.json),
+[local targets](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/packages/microcosm-build/src/microcosm/build/uk/local_target_references.json).
 
-Conditional imputation learns distributions using variables shared between
-donor and recipient surveys. Drawing from those distributions retains more
-variation than assigning a conditional mean. Microcosm's fit operators consume
-weights. Not every UK transfer uses the same estimator, so avoid describing
-every stage as a quantile forest.
+## 5. Checked before release
 
-The income support channel also refreshes related household inputs. Keep
-property-income implementation details for the reserved slide.
+The national release (`microcosm_uk_2024_25.h5`) was certified on 4 October
+2026 and is already used in our childcare and energy analyses. The local
+release is still going through the checks; its first full build on 6 October
+was held back by them.
 
-Sources: [UK source manifest](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/packages/microcosm-build/src/microcosm/build/uk/spec/sources.yaml),
-[architecture](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/DESIGN.md).
+The two comparisons come from the certified national release. Don't quote
+VAT or fuel duty totals from it: both are being fixed in open policyengine-uk
+pull requests.
 
-## 6. Scotland in a coherent UK population
+Source: [release certification runbook](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/docs/uk-national-release-assembly-runbook-806.md).
 
-The dense build assigns one atomic area per household within its FRS region.
-For Scotland this is a 2022 Census Output Area. Versioned mappings derive
-larger geographies from that area. This preserves geographic nesting.
+## 6. Property income: three sources, three concepts
 
-The dense build defaults to all applicable geographic targets together.
-Country-only targeting requires an explicit selector. The number of geographic
-copies, output size and target scope are separate settings.
+HMRC's property rental income statistics report rent before expenses. The SPI
+reports profit after expenses but before residential finance costs, which since
+2020-21 get a 20% tax reduction instead of a deduction. The FRS reports rent net
+of mortgage payments. The Enhanced FRS scaled the SPI up to the gross HMRC
+figure, so it modelled a gross concept as if it were taxable profit.
 
-Scotland analysis uses the relevant geographic population with the Scottish
-rules in the tax-benefit model. Explain this as the implemented data design.
-Local results require their own candidate validation and release evidence.
+Sources: [Microcosm #1106](https://github.com/PolicyEngine/microcosm/issues/1106),
+[HMRC property rental income statistics 2026](https://www.gov.uk/government/statistics/property-rental-income-statistics/property-rental-income-statistics-2026).
 
-Source: [UK build graph](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/docs/uk-full-build-graph.md).
+## 7. Property income: what we are changing
 
-## 7. Calibration and release checks
+The model change (policyengine-uk #2172) is merged. The data change (Microcosm
+#1145) is a draft: its numbers are from a test build, not a release, and a few
+decisions are still open, such as whether HMRC's lowest receipts band is used.
 
-Explain how a user can trace an estimate to the data cut and rules version.
-The source pins, linked entities and stage reports give build evidence.
-Per-target diagnostics expose the calibration fit. Candidate comparisons must
-name their scored surface and excluded measures.
+On Scotland: the GOV.UK rate table is marked as not applying to Scotland. In the
+model, Scottish taxpayers' property income is taxed at the ordinary Scottish
+rates, and finance-cost relief uses the single UK property basic rate. Don't say
+anything about Scotland setting its own property rates; we have not checked
+that.
 
-The national release-cut workflow compares a candidate with its pinned
-incumbent, certifies it and verifies the candidate, spine and diagnostic hashes
-before packaging. An inspectable release and promotion to the latest production
-release are separate steps.
+Sources: [policyengine-uk #2172](https://github.com/PolicyEngine/policyengine-uk/pull/2172),
+[Microcosm #1145](https://github.com/PolicyEngine/microcosm/pull/1145),
+[GOV.UK rates paper](https://www.gov.uk/government/publications/changes-to-tax-rates-for-property-savings-dividend-income/changes-to-tax-rates-for-property-savings-dividend-income).
 
-Calibration measures fit to selected evidence. It does not establish all joint
-distributions or every reform's accuracy. Avoid claiming an improvement without
-a measured comparison of the relevant candidate and incumbent.
+## 8. Energy and the cost of living
 
-Sources: [UK build graph](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/docs/uk-full-build-graph.md),
-[release assembly runbook](https://github.com/PolicyEngine/microcosm/blob/e3e3d881f0fdaf8d4796dea25ed4b72deb52cb6e/docs/uk-national-release-assembly-runbook-806.md).
+Each card opens the live dashboard. The energy work builds up from the April
+price-shock analysis. The electricity VAT cut was analysed before the
+government enacted it from 1 October 2026, and it applies in Scotland.
 
-## 8. Property income
+## 9. Work, benefits and new shocks
 
-Reserved for the in-flight modelling PR. Before presenting this section, replace
-the placeholder with the approved source mapping, tax-benefit treatment and
-relevant validation or household example from that PR. Do not infer its design
-or results from the older Budget dashboard.
+CliffWatch is a tool officials can use directly. The UC rebalancing analysis
+interacts with the Scottish Child Payment. The two employer NICs dashboards are
+shown as one card; the second is linked in the strip below.
 
-## 9. The Autumn Budget 2025 foundation
+The Scotland income tax reform dashboard (1 April) is just outside the
+six-month window but is our most recent Scotland-specific work. Nothing in the
+window is Scotland-only. The bus fare cap and free childcare work is England
+only, so it's left off.
 
-The screenshot shows the live dashboard captured on 8 October 2026. Use it to
-explain the connection between selecting measures and viewing population or
-personal impacts. Open the linked dashboard if a live demonstration is useful.
+Source: [UK research library](https://www.policyengine.org/uk/research).
 
-The interface supports fiscal comparisons across years, distributional
-breakdowns and constituency results. Its 2025 package and estimates are
-historical context. They do not describe a newly announced 2026 package.
+## 10. Autumn Budget 2026: what is new
 
-Source: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025).
+The 2025 dashboard is the starting point; don't re-present it. The new parts
+are the data, local results once the local release passes its checks, a short
+method note for the constituency figures, and a Scotland view.
 
-## 10. Autumn Budget 2026 plan
+Sources: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025),
+[2026 development repository](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
+[method note draft, Microcosm #1131](https://github.com/PolicyEngine/microcosm/issues/1131).
 
-The 2026 repository has started work on the successor dashboard and currently
-retains measures and data from 2025. Describe the slide as a proposed delivery
-sequence for discussion, without committing to an unverified timetable.
+## 11. How Budget day will run
 
-Before the Budget, prepare the baseline and model/data pins. On Budget day,
-encode the published rules and check policy timing and scope. Release results
-as they clear review. Compare with official costings on a matching policy,
-period and baseline, and explain material differences.
+The development repository still contains the inherited 2025 measures. This
+is a plan, not completed 2026 analysis.
 
-Sources: [2026 repository at the reviewed commit](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
-[2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025).
+## 12. Where your input would help
 
-## 11. The Scotland view for Budget 2026
+Use this to open the discussion. Note any Scottish benchmarks, breakdowns or
+scenarios they name, and any council-area statistics we could calibrate to.
 
-Discuss priorities for the proposed Scotland view: income deciles, family types,
-child poverty and interactions with devolved rules. Separate household effects
-in Scotland from UK-wide fiscal effects. A microsimulation of household tax
-and benefit changes does not itself provide a Scottish Government funding
-settlement or Barnett consequential estimate.
-
-Use local results only where their data and geographic scope pass validation.
-The existing Scotland income-tax analysis demonstrates a related policy
-question, rather than evidence that these new Budget outputs are delivered.
-Invite the team to identify the most useful breakdowns and official benchmarks.
-
-Sources: [2026 repository](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
-[Scotland income-tax analysis](https://www.policyengine.org/uk/scotland-income-tax-reform).
-
-## 12. Recent UK research
-
-This is intentionally the final slide. The research library combines articles
-with interactive studies. Summarise the questions analysed rather than reading
-every link. Dates below are the publication dates in the website indexes.
-
-- Energy and living standards: [targeted energy discount](https://www.policyengine.org/uk/targeted-energy-discount)
-  (5 October), [Middle East war and UK living standards](https://www.policyengine.org/uk/middle-east-war-living-standards)
-  (25 September) and [temporary electricity VAT cut](https://www.policyengine.org/uk/electricity-vat-cut)
-  (21 July).
-- Childcare: [free hours and a 75% subsidy](https://www.policyengine.org/uk/free-childcare-reform)
-  (3 September). This describes a policy scenario, not an estimated fiscal result.
-- Work incentives: employer NICs exemptions for [young workers](https://www.policyengine.org/uk/young-worker-nics)
-  (9 July) and [recently inactive workers](https://www.policyengine.org/uk/nics-exemption-inactive-employees)
-  (13 July).
-- Household interactions: [CliffWatch](https://www.policyengine.org/uk/uk-cliff-watch)
-  (26 June) and the [marriage calculator](https://www.policyengine.org/uk/marriage)
-  (11 September). The latter compares living together with separate households.
-- AI: [distributional and fiscal incidence of AI shocks](https://www.policyengine.org/uk/research/uk-ai-study)
-  (4 August). Results depend on assumed employment, wage and capital shocks.
-- Benefits and transport: [UC rebalancing](https://www.policyengine.org/uk/uc-rebalancing)
-  and [fuel-duty rise cancellation](https://www.policyengine.org/uk/cancelling-fuel-duty-rise)
-  (both 1 June), plus the [£2 bus fare cap](https://www.policyengine.org/uk/bus-fare-cap)
-  (23 July). The bus policy applies to England outside London. These studies
-  inform the discussion without implying that every policy applies to Scotland.
-
-Metadata sources: [apps index](https://github.com/PolicyEngine/policyengine-app-v2/blob/c83e129de5b14c0972f3070617490e8100e8fcc8/app/src/data/apps/apps.json),
-[posts index](https://github.com/PolicyEngine/policyengine-app-v2/blob/c83e129de5b14c0972f3070617490e8100e8fcc8/app/src/data/posts/posts.json).
+## 13. Thank you

@@ -1,3 +1,15 @@
+/* Publication cards: a fixed-ratio cover keeps the grid even. */
+.cover {
+  aspect-ratio: 3 / 2;
+  height: auto;
+  max-height: 28vh;
+}
+
+.thumb {
+  width: 9rem;
+  height: 6rem;
+}
+
 /* Keep the shared slide template legible on a laptop during the meeting. */
 @media (max-height: 850px) {
   .deck > :global(.absolute.inset-0) {
@@ -50,5 +62,17 @@
 
   .deck :global(.pb-3) {
     padding-bottom: 0.5rem;
+  }
+
+  .deck :global(.space-y-5) > :not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  .deck :global(.space-y-3) > :not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .cover {
+    max-height: 22vh;
   }
 }
