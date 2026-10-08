@@ -44,10 +44,10 @@ logos and a type label; no description lines on the slide.
 Newest first: Tax Policy Associates' X thread on the Universities UK
 employer NI proposal (10 September 2026; the linked article checks its
 costing with PolicyEngine, £6.3bn), CapX (1 September 2026, citing our bus
-fare cap costing), City AM (junior hiring, July 2026), Social Market
+fare cap costing), the New Economics Foundation's report on job quality and
+NEETs (July 2026; its modelling used PolicyEngine UK), City AM (junior hiring, July 2026), Social Market
 Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
-2026), ITV Peston (student loans, February 2026), the Fabian Society's
-"Taxing questions" report (October 2025) and The Telegraph's own story on the
+2026), ITV Peston (student loans, February 2026) and The Telegraph's own story on the
 National Insurance plans (May 2025; paywalled). The June 2026 land value tax
 post is on slide 6 instead, so it isn't shown twice.
 

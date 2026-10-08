@@ -163,6 +163,14 @@ export const press: Card[] = [
     alt: "CapX article header image",
   },
   {
+    title: "Insecure, low-quality work a major driver of UK's NEETs and inactivity crisis",
+    date: "New Economics Foundation · July 2026",
+    text: "",
+    href: "https://neweconomics.org/2026/07/insecure-low-quality-work-a-major-driver-of-uks-neets-and-inactivity-crisis",
+    image: shot("nef-neets-job-quality.jpg"),
+    alt: "New Economics Foundation report on job quality and NEETs",
+  },
+  {
     title: "If Burnham wants firms to hire young people, he needs to get out of their way",
     date: "City AM · July 2026",
     text: "",
@@ -193,14 +201,6 @@ export const press: Card[] = [
     href: "https://x.com/itvpeston/status/2027372583616741864",
     image: shot("itvpeston-student-loan.webp"),
     alt: "ITV Peston segment on student loans",
-  },
-  {
-    title: "Taxing questions: how Labour can raise the revenue we need",
-    date: "Fabian Society · October 2025",
-    text: "",
-    href: "https://fabians.org.uk/publication/taxing-questions/",
-    image: shot("fabians-taxing-questions.webp"),
-    alt: "Fabian Society report cover, Taxing questions",
   },
   {
     title: "Workers face pay hit under Reeves's National Insurance plans",
