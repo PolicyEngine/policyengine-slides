@@ -16,8 +16,8 @@ and María Juaristi.
 ## 2. Today
 
 Section 1 is the new data pipeline and the property income work. Section 2 is
-what we have published since April. Section 3 is the Autumn Budget plan and
-what would help from the Scottish Government.
+what we have published since April. Section 3 is the Autumn Budget plan,
+building on the 2025 dashboard.
 
 ## 3. From the Enhanced FRS to Microcosm UK
 
@@ -112,23 +112,9 @@ is time. Don't re-present its 2025 results.
 
 Source: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025).
 
-## 11. Autumn Budget 2026: what is new
-
-The new parts
-are the data, local results once the local release passes its checks, a short
-method note for the constituency figures, and a Scotland view.
-
-Sources: [2026 development repository](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/eb77d72b5e353b0cb85fecaf806f3a081753bbfa),
-[method note draft, Microcosm #1131](https://github.com/PolicyEngine/microcosm/issues/1131).
-
-## 12. How Budget day will run
+## 11. How Budget day will run
 
 The development repository still contains the inherited 2025 measures. This
 is a plan, not completed 2026 analysis.
 
-## 13. Where your input would help
-
-Use this to open the discussion. Note any Scottish benchmarks, breakdowns or
-scenarios they name, and any council-area statistics we could calibrate to.
-
-## 14. Thank you
+## 12. Thank you

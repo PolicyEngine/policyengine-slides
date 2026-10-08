@@ -275,21 +275,3 @@ export const budgetPlan = [
   },
 ];
 
-export const budgetAsks = [
-  {
-    title: "Scotland breakdowns",
-    text: "Which results by household type, council area or income would be most useful",
-  },
-  {
-    title: "Benchmarks",
-    text: "Official Scottish figures we should reconcile against, before and after the Budget",
-  },
-  {
-    title: "Scenarios to prepare",
-    text: "Scottish policy options worth modelling in advance, so they can sit next to the UK measures",
-  },
-  {
-    title: "Local statistics",
-    text: "Council-area statistics we should add as calibration targets",
-  },
-];

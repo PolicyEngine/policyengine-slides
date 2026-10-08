@@ -2,9 +2,7 @@ import type { SlideshowConfig } from "@/lib/types";
 import {
   AgendaSlide,
   Budget2025Slide,
-  BudgetAsksSlide,
   BudgetDaySlide,
-  BudgetNewSlide,
   ClosingSlide,
   EnergyWorkSlide,
   PipelineChangesSlide,
@@ -35,9 +33,7 @@ export const scottishGovernment2026Config: SlideshowConfig = {
     EnergyWorkSlide,
     WorkBenefitsSlide,
     Budget2025Slide,
-    BudgetNewSlide,
     BudgetDaySlide,
-    BudgetAsksSlide,
     ClosingSlide,
   ],
 };

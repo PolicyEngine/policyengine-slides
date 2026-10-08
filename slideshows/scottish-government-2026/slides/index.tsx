@@ -12,7 +12,6 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
-  budgetAsks,
   budgetPlan,
   energyPublications,
   pipelineChanges,
@@ -165,7 +164,7 @@ export function AgendaSlide() {
     [
       "03",
       "Plan for the Autumn Budget",
-      "What is new this year, and where your input would help",
+      "Building on the 2025 dashboard, and how Budget day will run",
     ],
   ];
   return (
@@ -493,45 +492,6 @@ export function Budget2025Slide() {
   );
 }
 
-export function BudgetNewSlide() {
-  return (
-    <Frame
-      section={sections.budget}
-      title="Autumn Budget 2026: what is new"
-      references={[sources.budget2026, sources.methodNote]}
-    >
-      <div className="grid grid-cols-2 gap-14">
-        <div>
-          <h2 className="text-2xl font-semibold text-pe-dark">
-            Data and local results
-          </h2>
-          <ul className="mt-4 list-disc space-y-3 pl-7 text-xl leading-relaxed text-gray-700">
-            <li>Run on the certified Microcosm UK release</li>
-            <li>
-              Constituency and council results from the local release once it
-              passes its checks
-            </li>
-            <li>
-              A short published note on how the local figures are estimated
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-2xl font-semibold text-pe-dark">
-            A Scotland view
-          </h2>
-          <ul className="mt-4 list-disc space-y-3 pl-7 text-xl leading-relaxed text-gray-700">
-            <li>Effects on Scottish taxpayers under Scottish rates</li>
-            <li>Interactions with the Scottish Child Payment</li>
-            <li>Results for Scottish constituencies and council areas</li>
-            <li>UK-wide fiscal effects kept apart from impacts in Scotland</li>
-          </ul>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
 export function BudgetDaySlide() {
   return (
     <Frame
@@ -562,27 +522,6 @@ export function BudgetDaySlide() {
   );
 }
 
-export function BudgetAsksSlide() {
-  return (
-    <Frame
-      section={sections.budget}
-      title="Where your input would help"
-      subtitle="For discussion today"
-    >
-      <div className="grid grid-cols-2 gap-x-14 gap-y-8">
-        {budgetAsks.map((ask) => (
-          <div key={ask.title} className="border-l-4 border-pe-teal pl-6">
-            <h2 className="text-2xl font-semibold text-pe-dark">{ask.title}</h2>
-            <p className="mt-2 text-xl leading-relaxed text-gray-700">
-              {ask.text}
-            </p>
-          </div>
-        ))}
-      </div>
-    </Frame>
-  );
-}
-
 const contacts = [
   { label: "policyengine.org/uk/research", url: sources.research.href, Icon: IconWorld },
   { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org", Icon: IconMail },
@@ -597,8 +536,8 @@ const contacts = [
 export function ClosingSlide() {
   return (
     <Slide isEnd>
-      <h1 className="font-display text-5xl font-bold mb-10 text-center">Thank you</h1>
-      <div className="flex flex-col items-start gap-4">
+      <h1 className="font-display text-6xl font-bold mb-12 text-center">Thank you</h1>
+      <div className="grid w-full max-w-5xl grid-cols-2 gap-5">
         {contacts.map(({ label, url, Icon }) => (
           <a
             key={url}
@@ -606,10 +545,12 @@ export function ClosingSlide() {
             target="_blank"
             rel="noreferrer"
             onClick={(event) => event.stopPropagation()}
-            className="flex items-center gap-4 text-xl opacity-80 hover:opacity-100"
+            className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 transition-colors hover:bg-white/20"
           >
-            <Icon size={28} stroke={1.6} aria-hidden="true" />
-            {label}
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
+              <Icon size={24} stroke={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-lg font-medium">{label}</span>
           </a>
         ))}
       </div>
