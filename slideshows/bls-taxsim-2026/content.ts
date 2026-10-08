@@ -288,7 +288,7 @@ export const blsSlides: BlsSlideContent[] = [
       "PolicyEngine: open source since 2021, 95,000+ federal and state parameters, and benefit programs such as SNAP and Medicaid",
     ],
     "minutes": 3,
-    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; NBER still maintains it, and more than 1,200 papers cite the 1993 paper that introduced it. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first issue: September 22, 2024). The memorandum of understanding with NBER was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE has used TAXSIM since the 2013 data (BLS Monthly Labor Review, 2015). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
+    "notes": "Start on the left with TAXSIM, end on the right with PolicyEngine, and use the middle for the agreement and how one interface routes tax years. Close with: both teams validate the emulator, and the work has improved how both TAXSIM and PolicyEngine encode tax law. TAXSIM has run at NBER since the 1970s; NBER still maintains it, and more than 1,200 papers cite the 1993 paper that introduced it. Think tanks such as Brookings and federal agencies rely on it. NBER started filing differences on the emulator’s public GitHub tracker in 2024 (first issue: September 22, 2024). The memorandum of understanding with NBER was announced on September 5, 2025. policyengine-taxsim 3.0.0 was released on September 29, 2026, one of 80 PyPI releases since February 2026. One interface covers every tax year: TAXSIM35 handles 1960–2020 (state law from 1977) and PolicyEngine handles 2021 onward. PolicyEngine facts (right): public code since June 2021, 133 contributors to the US model, 95,000+ parameters and 4,693 test files, from the gettsim-2026 deck (September 3, 2026); check them before the talk. The benefit list follows the Benefits and taxes section of policyengine.org/us/taxsim, which also names housing vouchers, the EITC and the CTC. Optional context for this audience, not on the slide: the CE published TAXSIM-based tax estimates from the 2013 data through the 2023 data, and the 2024 data has none (BLS Monthly Labor Review, 2015; CE PUMD Getting Started Guide). Sources: https://www.policyengine.org/us/research/policyengine-nber-mou-taxsim and https://pypi.org/project/policyengine-taxsim/",
     "headerLink": TAXSIM_SITE,
     "bridge": {
       "left": {
@@ -912,11 +912,11 @@ export const blsSlides: BlsSlideContent[] = [
       "Review differences before expanding the scope"
     ],
     "minutes": 2,
-    "notes": "This is a proposed integration path, not a tested CE implementation. CE has used NBER’s TAXSIM to estimate income taxes since the 2013 data (BLS Monthly Labor Review, 2015), so the same input file can go to both engines. Start with the core outputs: fiitax, siitax, fica, v22 (child tax credit), v25 (EITC) and frate. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.",
+    "notes": "This is a proposed integration path, not a tested CE implementation. CE published federal and state income tax estimates from NBER’s TAXSIM from the second quarter of 2013 through the 2023 data (BLS Monthly Labor Review, 2015; CE PUMD Getting Started Guide). The 2024 data has no tax or after-tax income estimates: BLS says the external tax model was not updated for the 2024 tax year, and it keeps a tax unit identifier on the microdata so users can produce their own tax estimates. A comparison therefore needs a year with CE TAXSIM estimates, 2023 or earlier; for the 2024 data onward, the emulator would produce estimates where CE now has none. The same TAXSIM input file can go to both engines. Say this neutrally: the slide states the dates, not the reason. Sources: https://www.bls.gov/cex/pumd-getting-started-guide.htm, https://www.bls.gov/cex/csxfaqs.htm (question 42) and https://www.bls.gov/cex/notices/2025/ce-after-tax.htm. Start with the core outputs: fiitax, siitax, fica, v22 (child tax credit), v25 (EITC) and frate. Ask staff which parts of their current workflow could supply the comparison inputs. Preserve existing CE definitions and weights in the initial comparison.",
     "compare": {
       "input": { "title": "CE tax-unit records", "text": "An agreed set of inputs for one year." },
       "engines": [
-        { "title": "CE’s current TAXSIM run", "text": "In production since the 2013 data." },
+        { "title": "CE’s TAXSIM estimates", "text": "Published for 2013–2023 data; none for 2024." },
         { "title": "PolicyEngine TAXSIM emulator", "text": "The same file, no format changes." }
       ],
       "output": { "title": "Compare", "text": "Household results and weighted summaries." },
@@ -943,7 +943,7 @@ export const blsSlides: BlsSlideContent[] = [
       "Scope one benefit extension after reviewing the tax results"
     ],
     "minutes": 3,
-    "notes": "Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. Avoid proposing a firm timeline before those constraints are known.",
+    "notes": "Proposed next steps for discussion. The emulator is an open-source package with Python, R, Stata and SAS interfaces that installs inside BLS, so confidential records do not need to leave BLS. The who-provides-what split is a proposal, not an agreement. Seek clarity on the relevant year, available inputs, computing environment and who will review discrepancies. The comparison year needs CE TAXSIM estimates, so it must be 2023 or earlier; the 2024 data has none. Avoid proposing a firm timeline before those constraints are known.",
     "process": {
       "intro": "Four steps, each with a clear output.",
       "steps": [
@@ -956,8 +956,8 @@ export const blsSlides: BlsSlideContent[] = [
         {
           "title": "CE would provide",
           "items": [
-            "One year of tax-unit records in the current TAXSIM format",
-            "The current TAXSIM outputs and the survey weights",
+            "One year of tax-unit records in the TAXSIM input format",
+            "Its published TAXSIM estimates and the survey weights",
             "Staff time to review the discrepancy log"
           ]
         },
