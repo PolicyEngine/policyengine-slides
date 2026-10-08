@@ -109,9 +109,11 @@ export default function InputMapping({ mapping }: { mapping: Mapping }) {
   return (
     <div
       className={`mt-4 grid grid-cols-3 gap-x-4 gap-y-4 text-pe-dark lg:gap-x-5 ${
-        story
-          ? 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.8]'
-          : 'max-lg:[@media(max-height:820px)]:[zoom:0.8]'
+        story && output
+          ? 'lg:[@media(min-height:821px)_and_(max-height:920px)]:[zoom:0.93] lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.86] max-lg:[@media(max-height:820px)]:[zoom:0.74] [@media(max-height:740px)]:[zoom:0.8]'
+          : story
+            ? 'lg:[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] max-lg:[@media(max-height:820px)]:[zoom:0.76] [@media(max-height:740px)]:[zoom:0.8]'
+            : 'max-lg:[@media(max-height:820px)]:[zoom:0.8]'
       }`}
     >
       {mapping.rows.map((row) =>
