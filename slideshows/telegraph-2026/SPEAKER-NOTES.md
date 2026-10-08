@@ -26,28 +26,39 @@ words; she doesn't need the pipeline detail.
   blog post are public.
 - Parliament: our analysis was cited in a Lords debate on 24 February 2026
   (National Insurance Contributions (Employer Pensions Contributions) Bill).
+- Tax Policy Associates: checked the Universities UK National Insurance
+  costing with PolicyEngine (10 September 2026). Their land value tax piece
+  (July 2026) also points readers to our model.
+- Nuffield Foundation: funds our local-area work; their project page names us.
 - New Economics Foundation, Good Growth Foundation and WPI Economics: no
-  public write-up in our repos, so the slide only names them. Check with Max
-  what can be said about each before giving detail.
+  public source found, so the slide only names them. Check with Max before
+  giving detail.
+- Don't list HM Treasury: its algorithmic transparency record says "HMT does
+  not currently use PolicyEngine".
 
-## 5. In the media
+## 5. In the media and reports
 
 Lead with The Telegraph's own story (30 May 2025, the National Insurance
-plans). Then ITV Peston (fuel duty, May 2026), City AM (junior hiring and
-employer NICs, July 2026) and The Independent (Reform UK's tax plans, May
-2025). All four are in our citations list. The Telegraph link is paywalled.
+plans). Then, newest first: City AM (junior hiring, July 2026), Social Market
+Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
+2026), Fabian Society (Taxing questions, October 2025), The Independent
+(Reform UK's tax plans, May 2025), Institute of Economic Affairs (cost of tax
+hikes, March 2025) and GB News (National Insurance, October 2024). All eight
+are in our citations list. No NEF report naming PolicyEngine could be found.
 
 ## 6. Recent UK work
 
-Six pieces since April. Each card links to the live tool. Good ones to open
-live if there's time: the Middle East war dashboard and CliffWatch.
+Eight pieces since April, newest first. Each card links to the live tool.
+For this audience: the marriage calculator and the targeted energy discount.
 
 ## 7. Autumn Budget 2025
 
-The dashboard we published on Budget day 2025. Left: the revenue chart for
-the full package. Right: the constituency map (average change in household
-net income, 2029-30, all 650 constituencies). Both screenshots link to the
-live dashboard.
+The dashboard we published on Budget day 2025. Left: the constituency map
+(average change in household net income, 2029-30, all 650 constituencies).
+Right: the household scatter (500 sampled households). The dashboard has no
+constituency scatter. Check the scatter on the live page before showing it:
+it puts nearly every household at about £4,000 a year worse off, which
+doesn't match the map's roughly 1% losses. Both images link to the dashboard.
 
 ## 8. Autumn Budget 2026: our plan
 

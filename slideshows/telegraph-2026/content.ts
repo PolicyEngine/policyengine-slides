@@ -26,6 +26,14 @@ export const sources = {
     label: "Hansard, 24 February 2026",
     href: "https://hansard.parliament.uk/Lords/2026-02-24/debates/A381F7D6-0A3C-48FD-8D9E-67751E25877A/NationalInsuranceContributions(EmployerPensionsContributions)Bill",
   },
+  tpa: {
+    label: "Tax Policy Associates, September 2026",
+    href: "https://taxpolicy.org.uk/2026/09/10/universities-uk-national-insurance-proposal/",
+  },
+  nuffield: {
+    label: "Nuffield Foundation project",
+    href: "https://www.nuffieldfoundation.org/project/enhancing-localising-and-democratising-tax-benefit-policy-analysis",
+  },
   citations: {
     label: "All citations",
     href: "https://www.policyengine.org/uk/citations",
@@ -68,6 +76,16 @@ export const users: User[] = [
     text: "Our analysis has been cited in parliamentary debate.",
     source: sources.hansard,
   },
+  {
+    name: "Tax Policy Associates",
+    text: "Tax policy think tank; checked a costing with PolicyEngine.",
+    source: sources.tpa,
+  },
+  {
+    name: "Nuffield Foundation",
+    text: "Funds our work on local-area tax and benefit analysis.",
+    source: sources.nuffield,
+  },
   { name: "New Economics Foundation", text: "Think tank" },
   { name: "Good Growth Foundation", text: "Think tank" },
   { name: "WPI Economics", text: "Economics consultancy" },
@@ -94,6 +112,22 @@ export const press: Card[] = [
     alt: "The Telegraph logo",
   },
   {
+    title: "If Burnham wants firms to hire young people, he needs to get out of their way",
+    date: "City AM · July 2026",
+    text: "",
+    href: "https://www.cityam.com/if-burnham-wants-firms-to-hire-young-people-he-needs-to-get-out-of-their-way/",
+    image: shot("cityam-burnham-junior-hiring-ni.jpg"),
+    alt: "City AM article on junior hiring",
+  },
+  {
+    title: "AI looks set to squeeze junior hiring. The fix already exists in law",
+    date: "Social Market Foundation · July 2026",
+    text: "",
+    href: "https://www.smf.co.uk/commentary_podcasts/ai-looks-set-to-squeeze-junior-hiring-the-fix-already-exists-in-law/",
+    image: shot("smf-ai-junior-hiring-ni.jpg"),
+    alt: "Social Market Foundation article on junior hiring",
+  },
+  {
     title: "Peston covers our fuel duty analysis",
     date: "ITV Peston · May 2026",
     text: "",
@@ -102,12 +136,12 @@ export const press: Card[] = [
     alt: "ITV Peston showing PolicyEngine's fuel duty analysis",
   },
   {
-    title: "If Burnham wants firms to hire young people, he needs to get out of their way",
-    date: "City AM · July 2026",
+    title: "Taxing questions: how Labour can raise the revenue we need",
+    date: "Fabian Society · October 2025",
     text: "",
-    href: "https://www.cityam.com/if-burnham-wants-firms-to-hire-young-people-he-needs-to-get-out-of-their-way/",
-    image: shot("cityam-burnham-junior-hiring-ni.jpg"),
-    alt: "City AM article on junior hiring",
+    href: "https://fabians.org.uk/publication/taxing-questions/",
+    image: shot("fabians-taxing-questions.webp"),
+    alt: "Fabian Society report cover, Taxing questions",
   },
   {
     title: "How Farage's £80bn tax cuts would benefit the richest most",
@@ -117,9 +151,33 @@ export const press: Card[] = [
     image: shot("independent-farage.webp"),
     alt: "The Independent article on Reform UK tax plans",
   },
+  {
+    title: "New analysis: the cost of tax hikes",
+    date: "Institute of Economic Affairs · March 2025",
+    text: "",
+    href: "https://insider.iea.org.uk/p/new-analysis-the-cost-of-tax-hikes",
+    image: shot("iea-tax-hikes.webp"),
+    alt: "Institute of Economic Affairs article on the cost of tax hikes",
+  },
+  {
+    title: "Labour's National Insurance overhaul could make workers £3,000 worse off",
+    date: "GB News · October 2024",
+    text: "",
+    href: "https://www.gbnews.com/money/budget-workers-national-insurance-tax",
+    image: shot("gbnews-nic.webp"),
+    alt: "GB News article on National Insurance",
+  },
 ];
 
 export const publications: Card[] = [
+  {
+    title: "Targeted energy bill discount",
+    date: "October 2026",
+    text: "Cost, reach and distributional effects of the Resolution Foundation's proposed targeted energy bill discount.",
+    href: "https://www.policyengine.org/uk/targeted-energy-discount",
+    image: shot("targeted-energy-discount.jpg"),
+    alt: "Targeted energy bill discount dashboard cover",
+  },
   {
     title: "The Middle East war and UK living standards",
     date: "September 2026",
@@ -127,6 +185,14 @@ export const publications: Card[] = [
     href: "https://www.policyengine.org/uk/middle-east-war-living-standards",
     image: shot("middle-east-war-living-standards.jpg"),
     alt: "Middle East war and UK living standards dashboard cover",
+  },
+  {
+    title: "Marriage calculator",
+    date: "September 2026",
+    text: "A couple's taxes and benefits living together compared with living separately.",
+    href: "https://www.policyengine.org/uk/marriage",
+    image: shot("marriage-calculator-uk.jpg"),
+    alt: "UK marriage calculator cover",
   },
   {
     title: "Free childcare hours and a 75% subsidy",

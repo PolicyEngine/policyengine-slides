@@ -24,6 +24,46 @@
   }
 }
 
+/* 4×2 card grids on slides 5 and 6. */
+.compactCover {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: 15vh;
+}
+
+/* Slide 7: map and scatter side by side. */
+.chart {
+  height: 58vh;
+  width: auto;
+}
+
+@media (max-height: 850px) {
+  .compactCover {
+    max-height: 12vh;
+  }
+
+  .chart {
+    height: 52vh;
+  }
+}
+
+@media (max-height: 760px) {
+  .compactCover {
+    max-height: 9vh;
+  }
+
+  .compactText {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .chart {
+    height: 48vh;
+  }
+}
+
 /* Title slide: keep the logo, speakers and date clear of each other on laptops. */
 @media (max-height: 760px) {
   .titleCover {

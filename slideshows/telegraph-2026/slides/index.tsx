@@ -87,26 +87,26 @@ function Frame({
   );
 }
 
-function CardTile({ item }: { item: Card }) {
+function CompactTile({ item }: { item: Card }) {
   return (
     <ExternalLink
       href={item.href}
-      className="group block overflow-hidden border border-gray-200 bg-white hover:no-underline"
+      className="group flex flex-col overflow-hidden border border-gray-200 bg-white hover:no-underline"
     >
       <Image
         src={item.image}
         alt={item.alt}
-        width={1200}
-        height={800}
-        className={`${styles.cover} w-full object-cover`}
+        width={800}
+        height={450}
+        className={`${styles.compactCover} w-full object-cover`}
       />
-      <div className="border-l-4 border-pe-teal p-4">
-        <p className="text-sm text-gray-500">{item.date}</p>
-        <h2 className="mt-1 text-xl font-semibold leading-snug text-pe-dark group-hover:underline">
+      <div className="flex-1 border-l-4 border-pe-teal px-3 py-2">
+        <p className="text-xs text-gray-500">{item.date}</p>
+        <h2 className="mt-0.5 text-base font-semibold leading-snug text-pe-dark group-hover:underline">
           {item.title}
         </h2>
         {item.text && (
-          <p className="mt-2 text-base leading-snug text-gray-600">
+          <p className={`${styles.compactText} mt-1 text-sm leading-snug text-gray-600`}>
             {item.text}
           </p>
         )}
@@ -197,9 +197,9 @@ export function UsersSlide() {
   return (
     <Frame
       title="Who uses PolicyEngine"
-      references={[sources.no10Post, sources.hansard]}
+      references={[sources.no10Post, sources.hansard, sources.tpa, sources.nuffield]}
     >
-      <div className="grid grid-cols-2 gap-x-12 gap-y-6">
+      <div className="grid grid-cols-2 gap-x-12 gap-y-5">
         {users.map((user) => (
           <div key={user.name} className="flex items-start gap-4">
             <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pe-teal text-white">
@@ -225,13 +225,13 @@ export function UsersSlide() {
 export function PressSlide() {
   return (
     <Frame
-      title="In the media"
-      subtitle="Recent coverage that drew on PolicyEngine analysis"
+      title="In the media and reports"
+      subtitle="Press coverage and think-tank reports that drew on PolicyEngine analysis"
       references={[sources.citations]}
     >
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-4 gap-4">
         {press.map((item) => (
-          <CardTile key={item.href} item={item} />
+          <CompactTile key={item.href} item={item} />
         ))}
       </div>
     </Frame>
@@ -251,28 +251,9 @@ export function PublicationsSlide() {
         </>
       }
     >
-      <div className="grid grid-cols-2 gap-x-8 gap-y-5">
+      <div className="grid grid-cols-4 gap-4">
         {publications.map((item) => (
-          <ExternalLink
-            key={item.href}
-            href={item.href}
-            className="group flex items-stretch overflow-hidden border border-gray-200 bg-white hover:no-underline"
-          >
-            <Image
-              src={item.image}
-              alt={item.alt}
-              width={600}
-              height={400}
-              className={`${styles.thumbWide} shrink-0 object-cover`}
-            />
-            <div className="min-w-0 border-l-4 border-pe-teal px-4 py-3">
-              <p className="text-sm text-gray-500">{item.date}</p>
-              <h2 className="mt-0.5 text-lg font-semibold leading-snug text-pe-dark group-hover:underline">
-                {item.title}
-              </h2>
-              <p className="mt-1 text-base leading-snug text-gray-600">{item.text}</p>
-            </div>
-          </ExternalLink>
+          <CompactTile key={item.href} item={item} />
         ))}
       </div>
     </Frame>
@@ -286,23 +267,23 @@ export function Budget2025Slide() {
       subtitle="Our dashboard on Budget day: the cost of each measure, who gains and loses, and the effect in every constituency"
       references={[sources.budget2025]}
     >
-      <div className="flex items-start gap-8">
-        <ExternalLink href={sources.budget2025.href} className="min-w-0 basis-[58%]">
-          <Image
-            src="/screenshots/telegraph-2026/autumn-budget-2025.png"
-            alt="Autumn Budget 2025 dashboard showing the policy selector and population impact charts"
-            width={1600}
-            height={1000}
-            className={`${styles.shot} w-auto max-w-full border border-gray-200`}
-          />
-        </ExternalLink>
-        <ExternalLink href={sources.budget2025.href} className="min-w-0 basis-[42%]">
+      <div className="flex items-start justify-center gap-10">
+        <ExternalLink href={sources.budget2025.href} className="min-w-0">
           <Image
             src="/screenshots/telegraph-2026/autumn-budget-2025-constituency-map.png"
             alt="Map of the average change in household net income across all 650 constituencies, 2029-30"
             width={1376}
             height={1398}
-            className={`${styles.shot} w-auto max-w-full`}
+            className={`${styles.chart} w-auto max-w-full`}
+          />
+        </ExternalLink>
+        <ExternalLink href={sources.budget2025.href} className="min-w-0">
+          <Image
+            src="/screenshots/telegraph-2026/autumn-budget-2025-household-scatter.png"
+            alt="Scatter of net income change against household net income for 500 sampled households, 2029-30"
+            width={1376}
+            height={1398}
+            className={`${styles.chart} w-auto max-w-full`}
           />
         </ExternalLink>
       </div>
