@@ -5,7 +5,8 @@ Keep the intro short (slides 2–4) and leave most of the time for slides 7–9.
 
 ## 1. Title
 
-PolicyEngine. Presenters: Vahid Ahmadi, Max Ghenis, María Juaristi.
+PolicyEngine: introduction and Budget planning. Conversation with The
+Telegraph. Presenters: Vahid Ahmadi, Max Ghenis, María Juaristi.
 
 ## 2. What PolicyEngine is
 
@@ -22,16 +23,17 @@ words; she doesn't need the pipeline detail.
 
 ## 4. Who uses PolicyEngine
 
-- 10DS: Nikhil's No 10 Innovation Fellowship. The fellowship article and our
-  blog post are public.
-- Parliament: our analysis was cited in a Lords debate on 24 February 2026
-  (National Insurance Contributions (Employer Pensions Contributions) Bill).
+Eight organisations as cards, each with a type label.
+- No 10 data science team (10DS): Nikhil's Innovation Fellowship; the card
+  links to our post about it.
+- Parliament: our analysis was cited in a Lords debate on 24 February 2026.
 - Tax Policy Associates: checked the Universities UK National Insurance
-  costing with PolicyEngine (10 September 2026). Their land value tax piece
-  (July 2026) also points readers to our model.
-- Nuffield Foundation: funds our local-area work; their project page names us.
+  costing with PolicyEngine (10 September 2026).
+- Centre for Policy Studies: its July 2023 report "Family-Friendly Taxation"
+  used PolicyEngine modelling to cost its personal allowance proposals.
+- Nuffield Foundation: funds our local-area work; its project page names us.
 - New Economics Foundation, Good Growth Foundation and WPI Economics: no
-  public source found, so the slide only names them. Check with Max before
+  public source found, so the cards only name them. Check with Max before
   giving detail.
 - Don't list HM Treasury: its algorithmic transparency record says "HMT does
   not currently use PolicyEngine".

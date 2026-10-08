@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBuildingBank,
   IconMail,
   IconWorld,
 } from "@tabler/icons-react";
@@ -118,7 +117,7 @@ function CompactTile({ item }: { item: Card }) {
 export function TitleSlide() {
   return (
     <CoverSlide
-      title="PolicyEngine"
+      title="PolicyEngine: introduction and Budget planning"
       subtitle="Conversation with The Telegraph"
       contentClassName={`pt-28 ${styles.titleCover}`}
       event=""
@@ -197,26 +196,36 @@ export function UsersSlide() {
   return (
     <Frame
       title="Who uses PolicyEngine"
-      references={[sources.no10Post, sources.hansard, sources.tpa, sources.nuffield]}
+      references={[sources.tpa, sources.cps, sources.nuffield]}
     >
-      <div className="grid grid-cols-2 gap-x-12 gap-y-5">
-        {users.map((user) => (
-          <div key={user.name} className="flex items-start gap-4">
-            <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pe-teal text-white">
-              <IconBuildingBank size={22} stroke={1.8} aria-hidden="true" />
-            </span>
-            <div>
-              <h2 className="text-2xl font-semibold text-pe-dark">
-                {user.source ? (
-                  <ExternalLink href={user.source.href}>{user.name}</ExternalLink>
-                ) : (
-                  user.name
-                )}
+      <div className="grid grid-cols-4 gap-4">
+        {users.map((user) => {
+          const card = (
+            <div className="flex h-full flex-col border border-gray-200 border-l-4 border-l-pe-teal bg-white p-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pe-teal/10 text-sm font-bold text-pe-teal">
+                  {user.initials}
+                </span>
+                <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                  {user.kind}
+                </span>
+              </div>
+              <h2 className="mt-3 text-lg font-semibold leading-snug text-pe-dark">
+                {user.name}
               </h2>
-              <p className="mt-1 text-lg text-gray-600">{user.text}</p>
+              {user.text && (
+                <p className="mt-1 text-sm leading-snug text-gray-600">{user.text}</p>
+              )}
             </div>
-          </div>
-        ))}
+          );
+          return user.source ? (
+            <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
+              {card}
+            </ExternalLink>
+          ) : (
+            <div key={user.name}>{card}</div>
+          );
+        })}
       </div>
     </Frame>
   );

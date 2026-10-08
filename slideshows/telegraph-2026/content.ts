@@ -30,6 +30,10 @@ export const sources = {
     label: "Tax Policy Associates, September 2026",
     href: "https://taxpolicy.org.uk/2026/09/10/universities-uk-national-insurance-proposal/",
   },
+  cps: {
+    label: "Centre for Policy Studies, July 2023",
+    href: "https://cps.org.uk/research/family-friendly-taxation/",
+  },
   nuffield: {
     label: "Nuffield Foundation project",
     href: "https://www.nuffieldfoundation.org/project/enhancing-localising-and-democratising-tax-benefit-policy-analysis",
@@ -63,32 +67,68 @@ export const steps = [
   },
 ];
 
-export type User = { name: string; text: string; source?: Source };
+export type User = {
+  name: string;
+  initials: string;
+  kind: "Government" | "Parliament" | "Think tank" | "Funder" | "Consultancy";
+  text: string;
+  source?: Source;
+};
 
 export const users: User[] = [
   {
-    name: "No 10 data science team (10DS)",
-    text: "Our model has supported policy analysis at No 10 through an Innovation Fellowship.",
-    source: sources.no10,
+    name: "No 10 data science team",
+    initials: "10",
+    kind: "Government",
+    text: "Supported policy analysis through an Innovation Fellowship.",
+    source: sources.no10Post,
   },
   {
     name: "Parliament",
-    text: "Our analysis has been cited in parliamentary debate.",
+    initials: "HL",
+    kind: "Parliament",
+    text: "Our analysis cited in a Lords debate.",
     source: sources.hansard,
   },
   {
     name: "Tax Policy Associates",
-    text: "Tax policy think tank; checked a costing with PolicyEngine.",
+    initials: "TPA",
+    kind: "Think tank",
+    text: "Used our model to analyse a National Insurance proposal.",
     source: sources.tpa,
   },
   {
+    name: "Centre for Policy Studies",
+    initials: "CPS",
+    kind: "Think tank",
+    text: "Used our model to cost family tax reforms.",
+    source: sources.cps,
+  },
+  {
+    name: "New Economics Foundation",
+    initials: "NEF",
+    kind: "Think tank",
+    text: "",
+  },
+  {
+    name: "Good Growth Foundation",
+    initials: "GGF",
+    kind: "Think tank",
+    text: "",
+  },
+  {
+    name: "WPI Economics",
+    initials: "WPI",
+    kind: "Consultancy",
+    text: "",
+  },
+  {
     name: "Nuffield Foundation",
-    text: "Funds our work on local-area tax and benefit analysis.",
+    initials: "NF",
+    kind: "Funder",
+    text: "Funds our local-area tax and benefit work.",
     source: sources.nuffield,
   },
-  { name: "New Economics Foundation", text: "Think tank" },
-  { name: "Good Growth Foundation", text: "Think tank" },
-  { name: "WPI Economics", text: "Economics consultancy" },
 ];
 
 export type Card = {

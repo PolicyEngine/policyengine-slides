@@ -14,7 +14,7 @@ import {
 
 export const telegraph2026Config: SlideshowConfig = {
   id: "telegraph-2026",
-  title: "PolicyEngine: conversation with The Telegraph",
+  title: "PolicyEngine: introduction and Budget planning",
   description:
     "A short introduction to PolicyEngine for The Telegraph: what it is, who uses it, recent UK work, the Autumn Budget plan and ideas for working together.",
   date: "2026-10-09",
