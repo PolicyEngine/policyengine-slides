@@ -1,10 +1,12 @@
 # Scottish Government meeting, 9 October 2026
 
-12 slides at `/slides/scottish-government-2026`, in three sections:
+15 slides at `/slides/scottish-government-2026`, in three sections:
 
-1. New data pipeline and property income (slides 3–7)
-2. Published work over the last six months (slides 8–9)
-3. Plan for the Autumn Budget (slides 10–11)
+1. Scotland's population, imputation and calibration, targets, live diagnostics,
+   and property income (slides 3–9)
+2. Published work over the last six months, with an energy-cap analysis placeholder
+   for the presenter to fill in (slides 10–12)
+3. Plan for the Autumn Budget (slides 13–14)
 
 The deck follows two earlier Scottish Government presentations in
 `PolicyEngine/policyengine-demo`:
@@ -25,6 +27,10 @@ February, and section 2 starts in April.
 - `config.ts` controls the slide order and meeting metadata.
 - `content.ts` holds the pinned sources, tables, publication cards and Budget plan.
 - `slides/index.tsx` contains the slides.
+- `slides/pipeline-diagrams.tsx` contains the Scotland-focused overview,
+  imputation and calibration diagrams. The donor and pipeline layouts draw on
+  [l0-ima-2026](https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/l0-ima-2026).
+  Household symbols and their sizes are illustrative.
 - `SPEAKER-NOTES.md` gives the presenter track, sources and what not to claim.
 - Presenter headshots come from `lib/speakers` (Vahid's is from the app-v2 team page).
 - Cover images for section 2 are in `public/screenshots/scottish-government-2026/`,
@@ -34,6 +40,16 @@ Run `bun install --frozen-lockfile`, then `bun dev`. Open
 `http://localhost:3000/slides/scottish-government-2026`. Arrow keys move between
 slides and `F` enters fullscreen. Links open in a new tab. Export with
 `bun run export scottish-government-2026 /path/to/output.pdf`.
+
+Slide 7 embeds the UK calibration diagnostics site and links to it separately.
+The iframe is interactive and scrolls independently; use the deck's next-slide
+button to leave it. On 8 October the page loaded, but the UK release and summary
+API endpoints returned HTTP 502. The preceding Scottish target inventory remains
+available without the external site. Check the live dashboard before presenting.
+
+Slide 11 is the energy-cap analysis placeholder. Slide 13 links both the 2025
+Budget dashboard and [Autumn Budget 2025 in review](https://github.com/PolicyEngine/autumn-budget-2025-in-review),
+including its public review dashboard.
 
 ## Evidence and status
 
@@ -46,6 +62,11 @@ Checked on 8 October 2026:
   link on the slides returned HTTP 200.
 - Autumn Budget 2026 repository: `eb77d72b5e353b0cb85fecaf806f3a081753bbfa`.
   It still contains the inherited 2025 measures, so section 3 is a plan.
+- Scottish target inventory at the pinned Microcosm commit: 58 national rows for
+  `S92000003`; 831 local-authority rows across 32 Scottish councils; 1,026
+  constituency rows across 57 Scottish Westminster constituencies. Counts refer
+  to target definitions, rather than passed fit checks. Council-tax band H has
+  31 local-authority rows; other council-tax bands have 32.
 
 What the deck deliberately does not claim:
 

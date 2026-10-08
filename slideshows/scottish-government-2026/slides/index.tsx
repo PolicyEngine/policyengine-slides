@@ -14,19 +14,16 @@ import { speakers } from "@/lib/speakers";
 import {
   budgetPlan,
   energyPublications,
-  pipelineChanges,
   propertyConcepts,
   nicsLinks,
-  releaseChecks,
-  scotlandLocal,
-  scotlandNational,
+  scotlandTargetGroups,
   sources,
-  validationStats,
   workPublications,
   type Publication,
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
+import { CalibrationDiagram, ImputationDiagram, OverviewDiagram } from "./pipeline-diagrams";
 
 const sections = {
   data: "1 · Data pipeline and property income",
@@ -193,32 +190,40 @@ export function PipelineChangesSlide() {
   return (
     <Frame
       section={sections.data}
-      title="From the Enhanced FRS to Microcosm UK"
-      subtitle="What has changed since the data pipeline we showed in February"
+      title="Building a population that represents Scotland"
+      subtitle="Microcosm UK combines household surveys with official statistics to support Scottish policy analysis"
       references={[sources.pipeline, sources.inputs, sources.geography]}
     >
-      <table className="w-full text-left text-xl">
-        <thead className="text-pe-dark">
-          <tr className="border-b-2 border-pe-teal">
-            <th className="w-[16%] pb-3 pr-6 font-semibold" />
-            <th className="w-[30%] pb-3 pr-8 font-semibold text-gray-500">
-              February
-            </th>
-            <th className="pb-3 font-semibold">Now</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pipelineChanges.map((row) => (
-            <tr key={row.topic} className="border-b border-gray-200 align-top">
-              <th className="py-3 pr-6 font-semibold text-pe-dark">
-                {row.topic}
-              </th>
-              <td className="py-3 pr-8 text-gray-500">{row.before}</td>
-              <td className="py-3 text-gray-800">{row.now}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <OverviewDiagram />
+      <p className={styles.takeaway}>The aim: estimate how a policy affects different households across Scotland.</p>
+    </Frame>
+  );
+}
+
+export function ImputationSlide() {
+  return (
+    <Frame
+      section={sections.data}
+      title="Filling the gaps for Scottish households"
+      subtitle="No single survey contains everything we need to estimate policy impacts"
+      references={[sources.inputs, sources.pipeline]}
+    >
+      <ImputationDiagram />
+      <p className={styles.takeaway}>Imputation preserves variation between households, rather than giving everyone an average value.</p>
+    </Frame>
+  );
+}
+
+export function CalibrationSlide() {
+  return (
+    <Frame
+      section={sections.data}
+      title="Making the sample represent Scotland"
+      subtitle="Calibration aligns the model with published totals for Scotland and its local areas"
+      references={[sources.nationalTargets, sources.localTargets]}
+    >
+      <CalibrationDiagram />
+      <p className={styles.takeaway}>The household&apos;s circumstances stay the same. Its contribution to population totals changes.</p>
     </Frame>
   );
 }
@@ -227,36 +232,23 @@ export function ScotlandDataSlide() {
   return (
     <Frame
       section={sections.data}
-      title="Scotland in the new build"
-      subtitle="An update to the Scotland calibration targets we showed in February"
+      title="Scottish calibration targets at three levels"
+      subtitle="Examples of the official totals used to represent Scotland"
       references={[
         sources.nationalTargets,
         sources.localTargets,
-        sources.inputs,
       ]}
     >
-      <div className="grid grid-cols-2 gap-14">
-        <div>
-          <h2 className="text-2xl font-semibold text-pe-dark">
-            58 national targets for Scotland
-          </h2>
-          <ul className="mt-4 list-disc space-y-3 pl-7 text-xl leading-relaxed text-gray-700">
-            {scotlandNational.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-2xl font-semibold text-pe-dark">
-            Local detail and Scottish rules
-          </h2>
-          <ul className="mt-4 list-disc space-y-3 pl-7 text-xl leading-relaxed text-gray-700">
-            {scotlandLocal.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
+      <div className={styles.targetGrid}>
+        {scotlandTargetGroups.map((group) => (
+          <div key={group.level} className={styles.targetCard}>
+            <h2>{group.level}</h2>
+            <p className={styles.targetScope}>{group.scope}</p>
+            <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
+          </div>
+        ))}
       </div>
+      <p className={styles.targetStatus}>Counts describe the build&apos;s target definitions. The local-area release is still under validation.</p>
     </Frame>
   );
 }
@@ -265,41 +257,19 @@ export function ReleaseChecksSlide() {
   return (
     <Frame
       section={sections.data}
-      title="Checked before release"
-      subtitle="The national release was certified on 4 October 2026. The local release is still going through the same checks."
-      references={[sources.release, sources.pipeline]}
+      title="Checking the fit to Scottish statistics"
+      subtitle="Compare the model with official targets in the live UK calibration dashboard"
     >
-      <div className="grid grid-cols-[40%_1fr] gap-14">
-        <div>
-          <h2 className="text-2xl font-semibold text-pe-dark">
-            Release checks
-          </h2>
-          <ol className="mt-4 space-y-4 text-xl text-gray-700">
-            {releaseChecks.map((check, i) => (
-              <li key={check} className="flex gap-4">
-                <span className="font-semibold text-pe-teal">{i + 1}</span>
-                <span>{check}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="space-y-6">
-          {validationStats.map((stat) => (
-            <div key={stat.label} className="border-l-4 border-pe-teal pl-6">
-              <p className="text-xl text-gray-700">{stat.label}</p>
-              <p className="mt-2 flex items-baseline gap-4">
-                <span className="text-4xl font-semibold text-pe-dark">
-                  {stat.value}
-                </span>
-                <span className="text-xl text-gray-500">
-                  vs {stat.benchmark} official
-                </span>
-              </p>
-              <p className="mt-1 text-sm text-gray-500">{stat.source}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mb-3 flex items-center justify-between gap-6 text-base text-gray-600">
+        <p>Review Scotland&apos;s population, income and benefit targets.</p>
+        <ExternalLink href={sources.diagnostics.href} className="shrink-0 font-semibold text-pe-teal">Open the live dashboard ↗</ExternalLink>
       </div>
+      <iframe
+        src={sources.diagnostics.href}
+        title="Microcosm UK calibration diagnostics"
+        loading="lazy"
+        className={`${styles.diagnosticsEmbed} pointer-events-auto`}
+      />
     </Frame>
   );
 }
@@ -427,6 +397,17 @@ export function EnergyWorkSlide() {
   );
 }
 
+export function EnergyCapPlaceholderSlide() {
+  return (
+    <Frame title="Energy cap analysis" subtitle="Placeholder · analysis to be added">
+      <div className={styles.placeholder}>
+        <h2>Energy cap analysis</h2>
+        <p>Reserved for the scenario, Scotland results and distributional chart.</p>
+      </div>
+    </Frame>
+  );
+}
+
 export function WorkBenefitsSlide() {
   return (
     <Frame
@@ -461,8 +442,9 @@ export function Budget2025Slide() {
   return (
     <Frame
       section={sections.budget}
-      title="Where we start: the 2025 dashboard"
-      references={[sources.budget2025]}
+      title="Where we are starting"
+      subtitle="The 2025 dashboard and a review of the published analysis"
+      references={[sources.budget2025, sources.budgetReview]}
     >
       <div className="flex items-start gap-12">
         <ExternalLink href={sources.budget2025.href} className="min-w-0">
@@ -474,18 +456,21 @@ export function Budget2025Slide() {
             className={`${styles.shot} w-auto max-w-full border border-gray-200`}
           />
         </ExternalLink>
-        <div className="max-w-xl shrink-0 basis-[32%] space-y-5 text-xl leading-relaxed text-gray-700">
-          <p>
-            Published on Budget day 2025, with fiscal, distributional and
-            household results for each measure, and results by constituency.
-          </p>
-          <p>This year&apos;s dashboard keeps the same structure.</p>
+        <div className="max-w-xl shrink-0 basis-[32%] space-y-5 text-lg leading-relaxed text-gray-700">
+          <h2 className="text-2xl font-semibold text-pe-dark">2025 dashboard</h2>
+          <p>Fiscal, distributional and household results, including results by constituency.</p>
           <ExternalLink
             href={sources.budget2025.href}
             className="block font-semibold text-pe-teal"
           >
             Open the 2025 dashboard
           </ExternalLink>
+          <div className="border-t border-gray-200 pt-5">
+            <h2 className="text-2xl font-semibold text-pe-dark">2025 in review</h2>
+            <p className="mt-2">Published costings, worked household examples and a timeline of when analysis appeared.</p>
+            <ExternalLink href={sources.budgetReviewDashboard.href} className="mt-3 block font-semibold text-pe-teal">Open Budget 2025 in review</ExternalLink>
+            <ExternalLink href={sources.budgetReview.href} className="mt-1 block text-base text-pe-teal">View the review repository</ExternalLink>
+          </div>
         </div>
       </div>
     </Frame>

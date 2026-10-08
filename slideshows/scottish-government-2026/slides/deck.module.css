@@ -10,6 +10,329 @@
   max-height: 52vh;
 }
 
+/* Leave space for the viewer's controls beside the meeting date. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+.overviewDiagram {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+}
+
+.overviewStep {
+  position: relative;
+  min-height: 17rem;
+  border: 1px solid var(--color-gray-200);
+  border-top: 4px solid var(--pe-teal);
+  border-radius: 0.75rem;
+  background: var(--pe-light);
+  padding: 1.75rem;
+}
+
+.stepNumber {
+  position: absolute;
+  top: 1.75rem;
+  right: 1.75rem;
+  color: var(--pe-teal);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.overviewStep h2,
+.householdCard h2,
+.weightCard h2,
+.officialTotals h2 {
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.overviewStep h2 {
+  margin-top: 1.5rem;
+}
+
+.overviewStep p,
+.householdCard p,
+.weightCard p,
+.officialTotals p {
+  margin-top: 0.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.stepArrow {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.6rem);
+  color: var(--pe-teal);
+}
+
+.takeaway {
+  margin-top: 1.75rem;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.25rem;
+  color: var(--pe-dark);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.imputationDiagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1.3fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.diagramLabel {
+  color: var(--pe-teal) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600;
+}
+
+.donorStack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.donorCard {
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+}
+
+.donorCard h2 {
+  color: var(--pe-dark);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.donorCard p {
+  margin-top: 0.25rem;
+  color: var(--color-gray-600);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.householdCard {
+  border: 2px solid var(--pe-teal);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.householdFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.householdFields > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.4rem;
+  padding: 0.85rem 1rem;
+  color: var(--pe-dark);
+}
+
+.householdFields strong {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.householdFields span {
+  color: var(--color-gray-600);
+  font-size: 0.95rem;
+}
+
+.addedField {
+  background: var(--pe-light);
+}
+
+.householdCard .matchingNote {
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+}
+
+.calibrationDiagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1.15fr auto 1fr;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.weightCard,
+.officialTotals {
+  min-height: 17rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.weightCard {
+  text-align: center;
+}
+
+.weightIcons {
+  display: flex;
+  height: 5.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--pe-teal);
+}
+
+.weightIcons svg {
+  flex-shrink: 0;
+}
+
+.officialTotals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--pe-light);
+}
+
+.officialTotals h2 {
+  margin-top: 1rem;
+}
+
+.diagramCaption {
+  margin-top: 0.75rem;
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+}
+
+.targetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.targetCard {
+  border: 1px solid var(--color-gray-200);
+  border-top: 4px solid var(--pe-teal);
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+}
+
+.targetCard h2 {
+  color: var(--pe-dark);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.targetScope {
+  margin-top: 0.5rem;
+  color: var(--pe-teal);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.targetCard ul {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding-left: 1.2rem;
+  color: var(--color-gray-700);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  list-style-type: disc;
+}
+
+.targetStatus {
+  margin-top: 1rem;
+  color: var(--color-gray-600);
+  font-size: 1rem;
+}
+
+.diagnosticsEmbed {
+  width: 100%;
+  height: min(650px, calc(100vh - 390px));
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+}
+
+.placeholder {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--color-gray-300);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.placeholder h2 {
+  color: var(--pe-dark);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.placeholder p {
+  margin-top: 1rem;
+  color: var(--color-gray-600);
+  font-size: 1.25rem;
+}
+
+@media (max-height: 850px) {
+  .overviewStep,
+  .weightCard,
+  .officialTotals {
+    min-height: 14rem;
+    padding: 1.25rem;
+  }
+
+  .overviewStep h2,
+  .householdCard h2,
+  .weightCard h2,
+  .officialTotals h2,
+  .targetCard h2 {
+    font-size: 1.35rem;
+  }
+
+  .overviewStep p,
+  .weightCard p,
+  .officialTotals p {
+    font-size: 1.1rem;
+  }
+
+  .takeaway {
+    margin-top: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .householdCard {
+    padding: 1.25rem;
+  }
+
+  .householdFields {
+    margin-top: 1rem;
+  }
+
+  .targetCard {
+    padding: 1.1rem;
+  }
+
+  .targetCard ul {
+    gap: 0.6rem;
+    font-size: 1.05rem;
+  }
+}
+
 /* Title slide: keep the logo, speakers and date clear of each other on laptops. */
 @media (max-height: 760px) {
   .titleCover {

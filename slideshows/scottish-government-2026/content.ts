@@ -29,6 +29,10 @@ export const sources = {
     label: "Release certification",
     href: `${microcosm}/docs/uk-national-release-assembly-runbook-806.md`,
   },
+  diagnostics: {
+    label: "Live UK calibration diagnostics",
+    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk",
+  },
   propertyIssue: {
     label: "Microcosm #1106",
     href: "https://github.com/PolicyEngine/microcosm/issues/1106",
@@ -53,6 +57,14 @@ export const sources = {
     label: "Autumn Budget 2025 dashboard",
     href: "https://www.policyengine.org/uk/autumn-budget-2025",
   },
+  budgetReview: {
+    label: "Autumn Budget 2025 in review · source",
+    href: "https://github.com/PolicyEngine/autumn-budget-2025-in-review",
+  },
+  budgetReviewDashboard: {
+    label: "Autumn Budget 2025 in review",
+    href: "https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review",
+  },
   budget2026: {
     label: "2026 development repository",
     href: `https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/tree/${budgetCommit}`,
@@ -67,70 +79,39 @@ export const sources = {
   },
 } satisfies Record<string, Source>;
 
-// Section 1: what changed since the February deck's Enhanced FRS pipeline.
-export const pipelineChanges = [
+// Target definitions at the pinned Microcosm commit. Counts are reference rows,
+// not a claim that the local build has passed release checks or fits every row.
+export const scotlandTargetGroups = [
   {
-    topic: "Survey year",
-    before: "EFRS 2023-24",
-    now: "FRS 2024-25, with SPI 2022-23, WAS round 8, LCFS and the National Travel Survey as donors",
+    level: "Scotland",
+    scope: "58 target rows · Scotland-wide",
+    items: [
+      "Population by age, including babies and children",
+      "Taxpayers, income and income tax by income band",
+      "Scottish Child Payment spending and State Pension recipients",
+      "Council tax dwellings by band",
+      "Capital gains, bus support and UC households with a baby",
+    ],
   },
   {
-    topic: "High incomes",
-    before: "Two copies of the FRS stacked, one with imputed high incomes",
-    now: "A separate SPI support channel adds tax-record households the FRS lacks",
+    level: "Council areas",
+    scope: "831 target rows · 32 councils",
+    items: [
+      "Population by age and household counts",
+      "Housing tenure",
+      "Employment and self-employment income",
+      "Universal Credit households",
+      "Council tax dwellings by band A–H",
+    ],
   },
   {
-    topic: "Local geography",
-    before: "650 constituency weight sets",
-    now: "Each household copy is placed in a small census area; constituencies, councils and regions are built up from it",
-  },
-  {
-    topic: "Targets",
-    before: "Administrative totals",
-    now: "Every official statistic comes from Chronicle, a pinned ledger that records its source",
-  },
-  {
-    topic: "Releases",
-    before: "—",
-    now: "Versioned releases that must pass release checks and a signed certification",
-  },
-];
-
-export const scotlandNational = [
-  "Council tax dwellings by band, A–H",
-  "Scottish Child Payment spending",
-  "Income tax: taxpayers and income by band (SPI)",
-  "Population by age, babies and children under 16",
-  "State Pension recipients and UC households with a baby",
-  "Capital gains and bus support",
-];
-
-export const scotlandLocal = [
-  "Households placed in 2022 Scottish Output Areas, with NRS lookups to 2024 constituencies and council areas",
-  "Council tax bands A–H targeted by council area",
-  "Water and sewerage charges netted out of council tax",
-  "Adult and Child Disability Payment mapped onto the benefits they replace",
-];
-
-export const releaseChecks = [
-  "Fit to national targets, checked target by target",
-  "A minimum effective sample in every constituency",
-  "Targets held out of the fit to test it",
-  "A limit on how far any household's weight can move",
-];
-
-export const validationStats = [
-  {
-    value: "1.885m",
-    benchmark: "1.950m",
-    label: "People with income of £100,000 or more, 2025-26",
-    source: "HMRC Survey of Personal Incomes, Table 2.5",
-  },
-  {
-    value: "£0.605bn",
-    benchmark: "£0.600bn",
-    label: "Tax-Free Childcare government top-up, 2025-26",
-    source: "HMRC Tax-Free Childcare statistics",
+    level: "Westminster constituencies",
+    scope: "1,026 target rows · 57 constituencies",
+    items: [
+      "Population by age and household counts",
+      "Employment and self-employment income",
+      "Universal Credit households, including by number of children",
+    ],
   },
 ];
 
@@ -274,4 +255,3 @@ export const budgetPlan = [
     text: "Explain differences from OBR and Scottish Fiscal Commission figures, and revise.",
   },
 ];
-
