@@ -5,11 +5,12 @@ type Releases = NonNullable<BlsSlideContent['releases']>;
 
 /**
  * Versions and releases: headline release figures, the command that pins a run
- * to exact versions, and what ships with every release.
+ * to exact versions, and what ships with every release. On short screens the
+ * block zooms out, as DropInTabs does, so it clears the footer at 1280x720.
  */
 export default function ReleasesSlide({ releases }: { releases: Releases }) {
   return (
-    <div className="mt-4 space-y-5 text-pe-dark">
+    <div className="mt-4 space-y-5 text-pe-dark [@media(max-height:820px)]:space-y-4 [@media(max-height:820px)]:[zoom:0.85] [@media(max-height:740px)]:[zoom:0.74]">
       <div
         className="grid grid-rows-[auto_auto] gap-x-4"
         style={{ gridTemplateColumns: `repeat(${releases.stats.length}, minmax(0, 1fr))` }}
