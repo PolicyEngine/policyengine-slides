@@ -179,14 +179,6 @@ export const press: Card[] = [
     alt: "Social Market Foundation article on junior hiring",
   },
   {
-    title: "Providing a model for citizen deliberation over economic trade-offs",
-    date: "Societal Impacts (Elsevier) · June 2026",
-    text: "",
-    href: "https://doi.org/10.1016/j.socimp.2026.100172",
-    image: shot("societal-impacts-citizen-deliberation.jpg"),
-    alt: "Societal Impacts journal article",
-  },
-  {
     title: "Peston covers our fuel duty analysis",
     date: "ITV Peston · May 2026",
     text: "",
@@ -195,20 +187,28 @@ export const press: Card[] = [
     alt: "ITV Peston showing PolicyEngine's fuel duty analysis",
   },
   {
-    title: "Agent-based macroeconomics for the UK's seventh carbon budget",
-    date: "arXiv · March 2026",
-    text: "",
-    href: "https://arxiv.org/pdf/2602.15607",
-    image: shot("arxiv-carbon-budget.webp"),
-    alt: "arXiv paper on the seventh carbon budget",
-  },
-  {
     title: "Can the government solve the student loan crisis in England and Wales?",
     date: "ITV Peston · February 2026",
     text: "",
     href: "https://x.com/itvpeston/status/2027372583616741864",
     image: shot("itvpeston-student-loan.webp"),
     alt: "ITV Peston segment on student loans",
+  },
+  {
+    title: "Taxing questions: how Labour can raise the revenue we need",
+    date: "Fabian Society · October 2025",
+    text: "",
+    href: "https://fabians.org.uk/publication/taxing-questions/",
+    image: shot("fabians-taxing-questions.webp"),
+    alt: "Fabian Society report cover, Taxing questions",
+  },
+  {
+    title: "Workers face pay hit under Reeves's National Insurance plans",
+    date: "The Telegraph · May 2025",
+    text: "",
+    href: "https://www.telegraph.co.uk/money/tax/workers-face-3000-pay-cut-under-reeves-national-insurance/",
+    image: shot("telegraph-nic.webp"),
+    alt: "The Telegraph logo",
   },
 ];
 

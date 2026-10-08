@@ -215,6 +215,12 @@ export function HowSlide() {
   );
 }
 
+const userGroups: { label: string; kinds: string[] }[] = [
+  { label: "Government and Parliament", kinds: ["Government", "Parliament"] },
+  { label: "Think tanks and consultancies", kinds: ["Think tank", "Consultancy"] },
+  { label: "Funders", kinds: ["Funder"] },
+];
+
 export function UsersSlide() {
   return (
     <Frame
@@ -222,41 +228,49 @@ export function UsersSlide() {
       subtitle="Organisations that use, cite and support our work"
       references={[sources.tpa, sources.cps, sources.nuffield]}
     >
-      <div className="grid grid-cols-4 gap-4">
-        {users.map((user) => {
-          const card = (
-            <div className="flex h-full flex-col p-4">
-              <div className="flex items-start justify-between gap-3">
-                {user.logo ? (
+      <div className="divide-y divide-gray-200">
+        {userGroups.map((group) => (
+          <div
+            key={group.label}
+            className={`${styles.communityRow} grid grid-cols-[14rem_repeat(5,minmax(0,1fr))] items-start gap-x-8`}
+          >
+            <p className="pt-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+              {group.label}
+            </p>
+            {users
+              .filter((user) => group.kinds.includes(user.kind))
+              .map((user) => {
+                const logo = user.logo ? (
                   <Image
                     src={user.logo}
                     alt={`${user.name} logo`}
-                    width={192}
-                    height={96}
-                    className={`h-12 w-auto max-w-[8rem] object-contain object-left ${user.darkenLogo ? "brightness-0" : ""}`}
+                    width={240}
+                    height={104}
+                    className={`${styles.communityLogo} w-auto max-w-full object-contain object-left ${user.darkenLogo ? "brightness-0" : ""}`}
                   />
                 ) : (
-                  <span className="flex h-12 w-16 shrink-0 items-center justify-center rounded-lg bg-pe-teal/10 text-base font-bold text-pe-teal">
+                  <span className={`${styles.communityLogo} flex w-16 items-center justify-center rounded-lg bg-pe-teal/10 text-base font-bold text-pe-teal`}>
                     {user.initials}
                   </span>
-                )}
-                <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
-                  {user.kind}
-                </span>
-              </div>
-              <h2 className="mt-4 text-xl font-semibold leading-snug text-pe-dark">
-                {user.name}
-              </h2>
-            </div>
-          );
-          return user.source ? (
-            <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
-              {card}
-            </ExternalLink>
-          ) : (
-            <div key={user.name}>{card}</div>
-          );
-        })}
+                );
+                const body = (
+                  <>
+                    {logo}
+                    <p className="mt-2 text-sm font-medium leading-snug text-pe-dark">
+                      {user.name}
+                    </p>
+                  </>
+                );
+                return user.source ? (
+                  <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
+                    {body}
+                  </ExternalLink>
+                ) : (
+                  <div key={user.name}>{body}</div>
+                );
+              })}
+          </div>
+        ))}
       </div>
     </Frame>
   );

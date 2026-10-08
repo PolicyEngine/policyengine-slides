@@ -44,15 +44,12 @@ logos and a type label; no description lines on the slide.
 Newest first: Tax Policy Associates' X thread on the Universities UK
 employer NI proposal (10 September 2026; the linked article checks its
 costing with PolicyEngine, £6.3bn), CapX (1 September 2026, citing our bus
-fare cap costing), then the most recent UK citations in our
-list: City
-AM (junior hiring, July 2026), Social Market Foundation (AI and junior hiring,
-July 2026), Societal Impacts (citizen deliberation, June 2026), ITV Peston
-(fuel duty, May 2026), arXiv (seventh carbon budget, March 2026), ITV Peston
-(student loans, February 2026). The June 2026 land value
-tax post is also a recent citation; it's on slide 6 instead, so it isn't shown
-twice. The Telegraph's own May 2025 story isn't among the eight newest, but is
-worth mentioning out loud.
+fare cap costing), City AM (junior hiring, July 2026), Social Market
+Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
+2026), ITV Peston (student loans, February 2026), the Fabian Society's
+"Taxing questions" report (October 2025) and The Telegraph's own story on the
+National Insurance plans (May 2025; paywalled). The June 2026 land value tax
+post is on slide 6 instead, so it isn't shown twice.
 
 ## 6. Recent UK work
 
