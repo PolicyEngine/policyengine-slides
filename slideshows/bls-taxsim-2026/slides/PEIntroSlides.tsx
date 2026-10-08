@@ -114,12 +114,12 @@ const organizations: { name: string; logo: string; maxWidth: number; className?:
   { name: 'Committee for a Responsible Federal Budget', logo: '/logos/organizations/crfb.png', maxWidth: 150, className: 'invert' },
 ];
 
-const funders: { name: string; logo: string; maxWidth: number }[] = [
+const funders: { name: string; logo: string; maxWidth: number; className?: string }[] = [
   { name: 'Arnold Ventures', logo: '/logos/funders/arnold-ventures.svg', maxWidth: 170 },
   { name: 'National Science Foundation', logo: '/logos/funders/nsf.webp', maxWidth: 70 },
-  { name: 'Nuffield Foundation', logo: '/logos/funders/nuffield.webp', maxWidth: 130 },
-  { name: 'NEO Philanthropy', logo: '/logos/funders/neo-philanthropy.png', maxWidth: 90 },
-  { name: 'Pritzker Children’s Initiative', logo: '/logos/funders/pritzker-childrens-initiative.webp', maxWidth: 170 },
+  { name: 'Nuffield Foundation', logo: '/logos/funders/nuffield.webp', maxWidth: 190 },
+  { name: 'NEO Philanthropy', logo: '/logos/funders/neo-philanthropy.png', maxWidth: 140 },
+  { name: 'Pritzker Children’s Initiative', logo: '/logos/funders/pritzker-childrens-initiative.webp', maxWidth: 190, className: '[filter:brightness(0)_saturate(100%)] opacity-80' },
 ];
 
 function LogoCell({ name, logo, maxWidth, className, height }: { name: string; logo: string; maxWidth: number; className?: string; height: number }) {
@@ -156,7 +156,7 @@ export function WhoUsesPolicyEngineSlide() {
         <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-gray-500">Funded by</p>
         <div className="mt-3 grid grid-cols-5 gap-x-12 w-full px-10">
           {funders.map((f) => (
-            <LogoCell key={f.name} {...f} height={60} />
+            <LogoCell key={f.name} {...f} height={72} />
           ))}
         </div>
         <p className="mt-5 text-base text-gray-600">
