@@ -215,12 +215,6 @@ export function HowSlide() {
   );
 }
 
-const userGroups: { label: string; kinds: string[] }[] = [
-  { label: "Government and Parliament", kinds: ["Government", "Parliament"] },
-  { label: "Think tanks and consultancies", kinds: ["Think tank", "Consultancy"] },
-  { label: "Funders", kinds: ["Funder"] },
-];
-
 export function UsersSlide() {
   return (
     <Frame
@@ -228,49 +222,37 @@ export function UsersSlide() {
       subtitle="Organisations that use, cite and support our work"
       references={[sources.tpa, sources.cps, sources.nuffield]}
     >
-      <div className="divide-y divide-gray-200">
-        {userGroups.map((group) => (
-          <div
-            key={group.label}
-            className={`${styles.communityRow} grid grid-cols-[14rem_repeat(5,minmax(0,1fr))] items-start gap-x-8`}
-          >
-            <p className="pt-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-              {group.label}
-            </p>
-            {users
-              .filter((user) => group.kinds.includes(user.kind))
-              .map((user) => {
-                const logo = user.logo ? (
-                  <Image
-                    src={user.logo}
-                    alt={`${user.name} logo`}
-                    width={240}
-                    height={104}
-                    className={`${styles.communityLogo} w-auto max-w-full object-contain object-left ${user.darkenLogo ? "brightness-0" : ""}`}
-                  />
-                ) : (
-                  <span className={`${styles.communityLogo} flex w-16 items-center justify-center rounded-lg bg-pe-teal/10 text-base font-bold text-pe-teal`}>
-                    {user.initials}
-                  </span>
-                );
-                const body = (
-                  <>
-                    {logo}
-                    <p className="mt-2 text-sm font-medium leading-snug text-pe-dark">
-                      {user.name}
-                    </p>
-                  </>
-                );
-                return user.source ? (
-                  <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
-                    {body}
-                  </ExternalLink>
-                ) : (
-                  <div key={user.name}>{body}</div>
-                );
-              })}
-          </div>
-        ))}
+      <div className="grid grid-cols-4 gap-x-10 gap-y-12 pt-4">
+        {users.map((user) => {
+          const logo = user.logo ? (
+            <Image
+              src={user.logo}
+              alt={`${user.name} logo`}
+              width={240}
+              height={104}
+              className={`${styles.communityLogo} w-auto max-w-full object-contain ${user.darkenLogo ? "brightness-0" : ""}`}
+            />
+          ) : (
+            <span className={`${styles.communityLogo} flex w-16 items-center justify-center rounded-lg bg-pe-teal/10 text-base font-bold text-pe-teal`}>
+              {user.initials}
+            </span>
+          );
+          const body = (
+            <div className="flex flex-col items-center text-center">
+              {logo}
+              <p className="mt-3 text-base font-medium leading-snug text-pe-dark">
+                {user.name}
+              </p>
+            </div>
+          );
+          return user.source ? (
+            <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
+              {body}
+            </ExternalLink>
+          ) : (
+            <div key={user.name}>{body}</div>
+          );
+        })}
       </div>
     </Frame>
   );

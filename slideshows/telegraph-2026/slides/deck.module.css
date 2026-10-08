@@ -225,22 +225,12 @@
 }
 
 /* Slide 4: grouped logo rows. */
-.communityRow {
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
-}
-
 .communityLogo {
-  height: 52px;
+  height: 64px;
 }
 
 @media (max-height: 760px) {
-  .communityRow {
-    padding-top: 0.9rem;
-    padding-bottom: 0.9rem;
-  }
-
   .communityLogo {
-    height: 40px;
+    height: 44px;
   }
 }
