@@ -815,7 +815,7 @@ export const blsSlides: BlsSlideContent[] = [
       ],
       "value": {
         "title": "Why it matters",
-        "text": "The emulator turns these off to match TAXSIM. PolicyEngine’s own tools return them, up to household net income and marginal rates that include benefits."
+        "text": "The emulator leaves these out to match TAXSIM. PolicyEngine’s other tools include them, along with household net income and effective marginal rates."
       }
     }
   },
