@@ -6,10 +6,19 @@ on:
   push:
     branches: [main]
 
+# This workflow only builds, tests and lints (nothing deploys from it), so a
+# newer commit on the same pull request or on main makes the older run moot.
+# Cancel it rather than let it wait in the org-wide runner queue. From
+# 2026-10-06 to 10-08, 44 of 92 runs were superseded before they finished.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -19,6 +28,7 @@ jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -28,6 +38,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
