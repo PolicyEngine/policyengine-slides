@@ -815,7 +815,7 @@ export const blsSlides: BlsSlideContent[] = [
       ],
       "value": {
         "title": "Why it matters",
-        "text": "The emulator leaves these out to match TAXSIM. Outside the emulator, PolicyEngine calculates them together with taxes for the same household."
+        "text": "The emulator leaves these out to match TAXSIM. Additional outputs are available in the PolicyEngine web app, Python package and API."
       }
     }
   },
