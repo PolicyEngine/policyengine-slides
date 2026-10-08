@@ -39,6 +39,8 @@ February, and part 4 starts in April.
 - Presenter headshots come from `lib/speakers` (Vahid's is from the app-v2 team page).
 - Cover images for part 4 are in `public/screenshots/scottish-government-2026/`,
   copied from `policyengine-app-v2` (`app/public/assets/posts/`) and resized.
+  `autumn-budget-2025-in-review.jpg` is a 1600×1000 screenshot of the live review
+  dashboard, taken on 8 October 2026.
 
 Run `bun install --frozen-lockfile`, then `bun dev`. Open
 `http://localhost:3000/slides/scottish-government-2026`. Arrow keys move between

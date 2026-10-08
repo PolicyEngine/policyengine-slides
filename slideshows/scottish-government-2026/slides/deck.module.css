@@ -5,11 +5,6 @@
   max-height: 28vh;
 }
 
-.shot {
-  height: auto;
-  max-height: 52vh;
-}
-
 /* Leave space for the viewer's controls beside the meeting date. */
 .deck :global(.gradient-footer) {
   padding-right: 15rem;
@@ -43,9 +38,67 @@
   padding-bottom: 1.5rem;
 }
 
-/* Section dividers. */
-.section {
-  background: var(--pe-light) !important;
+/* Budget starting points: two dashboard previews, each a link. */
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.previewCard {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem;
+  background: white;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  transition: border-color 150ms, box-shadow 150ms;
+}
+
+.previewCard:hover {
+  border-color: var(--pe-teal);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+  text-decoration: none !important;
+}
+
+.previewImage {
+  display: block;
+  width: 100%;
+  height: 38vh;
+  border-bottom: 1px solid var(--color-gray-200);
+  object-fit: cover;
+  object-position: top;
+}
+
+.previewBody {
+  border-left: 4px solid var(--pe-teal);
+  padding: 1.1rem 1.4rem 1.25rem;
+}
+
+.previewBody h2 {
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.previewBody p {
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.previewBody span {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--pe-teal);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.previewCard:hover .previewBody span {
+  text-decoration: underline;
 }
 
 /* Agenda: five rows that fit a laptop screen. */
@@ -626,6 +679,31 @@
 
 /* Compact figures for laptop screens, up to a 1440 x 900 display. */
 @media (max-height: 1000px) {
+  .previewGrid {
+    gap: 2rem;
+  }
+
+  .previewImage {
+    height: 32vh;
+  }
+
+  .previewBody {
+    padding: 0.75rem 1.1rem 0.9rem;
+  }
+
+  .previewBody h2 {
+    font-size: 1.3rem;
+  }
+
+  .previewBody p {
+    font-size: 1rem;
+  }
+
+  .previewBody span {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+
   .agendaRow {
     padding: 0.7rem 0;
   }
@@ -808,6 +886,19 @@
 }
 
 @media (max-height: 760px) {
+  .previewImage {
+    height: 30vh;
+  }
+
+  .previewBody h2 {
+    font-size: 1.1rem;
+  }
+
+  .previewBody p,
+  .previewBody span {
+    font-size: 0.88rem;
+  }
+
   .agendaRow {
     padding: 0.5rem 0;
   }
@@ -1127,9 +1218,5 @@
 
   .cover {
     max-height: 17vh;
-  }
-
-  .shot {
-    max-height: 46vh;
   }
 }

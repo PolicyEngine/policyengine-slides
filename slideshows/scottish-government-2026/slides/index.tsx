@@ -169,7 +169,7 @@ function SectionSlide({
   subtitle: string;
 }) {
   return (
-    <Slide className={`${styles.deck} ${styles.section}`}>
+    <Slide className={styles.deck}>
       <div className="flex h-full flex-col justify-center">
         <p className="mb-3 text-base font-bold uppercase tracking-[0.16em] text-pe-teal">
           Part {part} of {agenda.length}
@@ -429,40 +429,49 @@ export function BudgetSectionSlide() {
   );
 }
 
+const startingPoints = [
+  {
+    title: "Autumn Budget 2025 dashboard",
+    text: "Fiscal, distributional and household results, including results by constituency.",
+    href: sources.budget2025.href,
+    image: "/screenshots/scottish-government-2026/autumn-budget-2025.png",
+    alt: "Autumn Budget 2025 dashboard showing policy selection and population impact charts",
+  },
+  {
+    title: "Autumn Budget 2025 in review",
+    text: "Published costings side by side, worked household examples and a timeline of when analysis appeared.",
+    href: sources.budgetReviewDashboard.href,
+    image: "/screenshots/scottish-government-2026/autumn-budget-2025-in-review.jpg",
+    alt: "Autumn Budget 2025 in review dashboard showing the publication timeline and main publications",
+  },
+];
+
 export function Budget2025Slide() {
   return (
     <Frame
       section={sections.budget}
       title="Where we are starting"
-      subtitle="The 2025 dashboard and a review of the published analysis"
-      references={[sources.budget2025, sources.budgetReview]}
+      subtitle="Two dashboards from last year's Budget; click either to open it"
+      references={[sources.budget2025, sources.budgetReviewDashboard, sources.budgetReview]}
+      center
     >
-      <div className="flex items-start gap-12">
-        <ExternalLink href={sources.budget2025.href} className="min-w-0">
-          <Image
-            src="/screenshots/scottish-government-2026/autumn-budget-2025.png"
-            alt="Autumn Budget 2025 dashboard showing policy selection and population impact charts"
-            width={1600}
-            height={1000}
-            className={`${styles.shot} w-auto max-w-full border border-gray-200`}
-          />
-        </ExternalLink>
-        <div className="max-w-xl shrink-0 basis-[32%] space-y-5 text-lg leading-relaxed text-gray-700">
-          <h2 className="text-2xl font-semibold text-pe-dark">2025 dashboard</h2>
-          <p>Fiscal, distributional and household results, including results by constituency.</p>
-          <ExternalLink
-            href={sources.budget2025.href}
-            className="block font-semibold text-pe-teal"
-          >
-            Open the 2025 dashboard
+      <div className={styles.previewGrid}>
+        {startingPoints.map((item) => (
+          <ExternalLink key={item.href} href={item.href} className={styles.previewCard}>
+            <Image
+              src={item.image}
+              alt={item.alt}
+              width={1600}
+              height={1000}
+              className={styles.previewImage}
+            />
+            <div className={styles.previewBody}>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+              <span>Open the dashboard ↗</span>
+            </div>
           </ExternalLink>
-          <div className="border-t border-gray-200 pt-5">
-            <h2 className="text-2xl font-semibold text-pe-dark">2025 in review</h2>
-            <p className="mt-2">Published costings, worked household examples and a timeline of when analysis appeared.</p>
-            <ExternalLink href={sources.budgetReviewDashboard.href} className="mt-3 block font-semibold text-pe-teal">Open Budget 2025 in review</ExternalLink>
-            <ExternalLink href={sources.budgetReview.href} className="mt-1 block text-base text-pe-teal">View the review repository</ExternalLink>
-          </div>
-        </div>
+        ))}
       </div>
     </Frame>
   );

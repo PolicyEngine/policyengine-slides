@@ -220,9 +220,9 @@ is time. Don't re-present its 2025 results.
 
 The [Autumn Budget 2025 in review project](https://github.com/PolicyEngine/autumn-budget-2025-in-review)
 adds comparisons with other published costings, worked household examples and
-a timeline of when analysis appeared. The slide links both its public dashboard
-and repository. This provides a starting point for checking and improving the
-2026 workflow.
+a timeline of when analysis appeared. The slide previews both dashboards; click
+either card to open it. The review's repository is in the sources line. This
+provides a starting point for checking and improving the 2026 workflow.
 
 Sources: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025),
 [2025 in review dashboard](https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review).
