@@ -38,27 +38,28 @@ words; she doesn't need the pipeline detail.
 
 ## 5. In the media and reports
 
-Lead with The Telegraph's own story (30 May 2025, the National Insurance
-plans). Then, newest first: City AM (junior hiring, July 2026), Social Market
-Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
-2026), Fabian Society (Taxing questions, October 2025), The Independent
-(Reform UK's tax plans, May 2025), Institute of Economic Affairs (cost of tax
-hikes, March 2025) and GB News (National Insurance, October 2024). All eight
-are in our citations list. No NEF report naming PolicyEngine could be found.
+The eight most recent UK citations in our citations list, newest first: City
+AM (junior hiring, July 2026), Social Market Foundation (AI and junior hiring,
+July 2026), Societal Impacts (citizen deliberation, June 2026), ITV Peston
+(fuel duty, May 2026), arXiv (seventh carbon budget, March 2026), ITV Peston
+(student loans, February 2026), Hansard (Lords debate, February 2026) and the
+No 10 Innovation Fellowship article (January 2026). The June 2026 land value
+tax post is also a recent citation; it's on slide 6 instead, so it isn't shown
+twice. The Telegraph's own May 2025 story isn't among the eight newest, but is
+worth mentioning out loud.
 
 ## 6. Recent UK work
 
-Eight pieces since April, newest first. Each card links to the live tool.
-For this audience: the marriage calculator and the targeted energy discount.
+Eight pieces since April, newest first. Each card links to the live page.
+The land value tax post (Progress and Poverty, June 2026) is new PolicyEngine
+modelling of a revenue-neutral swap from council tax to a land value tax.
 
 ## 7. Autumn Budget 2025
 
-The dashboard we published on Budget day 2025. Left: the constituency map
+The dashboard we published on Budget day 2025. Left: the dashboard overview
+(policy selector and revenue impact by year). Right: the constituency map
 (average change in household net income, 2029-30, all 650 constituencies).
-Right: the household scatter (500 sampled households). The dashboard has no
-constituency scatter. Check the scatter on the live page before showing it:
-it puts nearly every household at about £4,000 a year worse off, which
-doesn't match the map's roughly 1% losses. Both images link to the dashboard.
+Both images link to the dashboard.
 
 ## 8. Autumn Budget 2026: our plan
 
