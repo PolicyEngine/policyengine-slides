@@ -232,7 +232,7 @@ Present the change this work has driven in both engines. Do not say how quickly 
 
 Section divider 04. Move on after a few seconds.
 
-## 19. How TAXSIM inputs map to PolicyEngine (41–43 min)
+## 19. Additional inputs beyond TAXSIM (41–43 min)
 
 | Area | TAXSIM input | Limit | PolicyEngine adds |
 |---|---|---|---|
