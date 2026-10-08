@@ -23,7 +23,7 @@ export default function UpdateTimelineSlide({ timeline }: { timeline: UpdateTime
   const slots = timeline.months.length * SLOTS_PER_MONTH;
   const columns = `12rem repeat(${slots}, minmax(0, 1fr))`;
   return (
-    <div className="mt-1 flex flex-col gap-7 text-pe-dark [@media(max-height:820px)]:gap-3 [@media(max-height:820px)]:[zoom:0.88]">
+    <div className="mt-1 flex flex-col gap-7 text-pe-dark [@media(max-height:820px)]:gap-3 [@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.76]">
       <div className="grid gap-x-4" style={{ gridTemplateColumns: `repeat(${timeline.stats.length}, minmax(0, 1fr))` }}>
         {timeline.stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center gap-1.5 rounded-lg bg-pe-dark px-4 pb-3 pt-4 text-center text-white">
