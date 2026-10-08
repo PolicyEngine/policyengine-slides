@@ -15,61 +15,6 @@
   padding-right: 15rem;
 }
 
-.overviewDiagram {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3rem;
-}
-
-.overviewStep {
-  position: relative;
-  min-height: 17rem;
-  border: 1px solid var(--color-gray-200);
-  border-top: 4px solid var(--pe-teal);
-  border-radius: 0.75rem;
-  background: var(--pe-light);
-  padding: 1.75rem;
-}
-
-.stepNumber {
-  position: absolute;
-  top: 1.75rem;
-  right: 1.75rem;
-  color: var(--pe-teal);
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.overviewStep h2,
-.householdCard h2,
-.weightCard h2,
-.officialTotals h2 {
-  color: var(--pe-dark);
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.overviewStep h2 {
-  margin-top: 1.5rem;
-}
-
-.overviewStep p,
-.householdCard p,
-.weightCard p,
-.officialTotals p {
-  margin-top: 0.75rem;
-  color: var(--color-gray-600);
-  font-size: 1.2rem;
-  line-height: 1.45;
-}
-
-.stepArrow {
-  position: absolute;
-  top: 50%;
-  left: calc(100% + 0.6rem);
-  color: var(--pe-teal);
-}
 
 .takeaway {
   margin-top: 1.75rem;
@@ -80,181 +25,6 @@
   line-height: 1.4;
 }
 
-.imputationDiagram {
-  display: grid;
-  grid-template-columns: 1fr auto 1.3fr;
-  align-items: center;
-  gap: 2rem;
-}
-
-.diagramLabel {
-  color: var(--pe-teal) !important;
-  font-size: 0.95rem !important;
-  font-weight: 600;
-}
-
-.donorStack {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.donorCard {
-  border: 1px solid var(--color-gray-200);
-  border-left: 4px solid var(--pe-teal);
-  border-radius: 0.5rem;
-  padding: 1rem 1.25rem;
-  background: var(--bg-secondary);
-}
-
-.donorCard h2 {
-  color: var(--pe-dark);
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.donorCard p {
-  margin-top: 0.25rem;
-  color: var(--color-gray-600);
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-.householdCard {
-  border: 2px solid var(--pe-teal);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-}
-
-.householdFields {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.householdFields > div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 0.4rem;
-  padding: 0.85rem 1rem;
-  color: var(--pe-dark);
-}
-
-.householdFields strong {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.householdFields span {
-  color: var(--color-gray-600);
-  font-size: 0.95rem;
-}
-
-.addedField {
-  background: var(--pe-light);
-}
-
-.householdCard .matchingNote {
-  margin-top: 1.25rem;
-  font-size: 1.05rem;
-}
-
-.calibrationDiagram {
-  display: grid;
-  grid-template-columns: 1fr auto 1.15fr auto 1fr;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.weightCard,
-.officialTotals {
-  min-height: 17rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-}
-
-.weightCard {
-  text-align: center;
-}
-
-.weightIcons {
-  display: flex;
-  height: 5.5rem;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  color: var(--pe-teal);
-}
-
-.weightIcons svg {
-  flex-shrink: 0;
-}
-
-.officialTotals {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--pe-light);
-}
-
-.officialTotals h2 {
-  margin-top: 1rem;
-}
-
-.diagramCaption {
-  margin-top: 0.75rem;
-  color: var(--color-gray-500);
-  font-size: 0.95rem;
-}
-
-.targetGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-.targetCard {
-  border: 1px solid var(--color-gray-200);
-  border-top: 4px solid var(--pe-teal);
-  border-radius: 0.5rem;
-  padding: 1.4rem;
-}
-
-.targetCard h2 {
-  color: var(--pe-dark);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.targetScope {
-  margin-top: 0.5rem;
-  color: var(--pe-teal);
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.targetCard ul {
-  display: grid;
-  gap: 0.8rem;
-  margin-top: 1.25rem;
-  padding-left: 1.2rem;
-  color: var(--color-gray-700);
-  font-size: 1.15rem;
-  line-height: 1.4;
-  list-style-type: disc;
-}
-
-.targetStatus {
-  margin-top: 1rem;
-  color: var(--color-gray-600);
-  font-size: 1rem;
-}
-
 .diagnosticsEmbed {
   width: 100%;
   height: min(650px, calc(100vh - 390px));
@@ -263,73 +33,944 @@
   background: var(--bg-secondary);
 }
 
-.placeholder {
+/* Figure slides: centre the body below the title, clear of the sources line. */
+.centerBody {
   display: flex;
-  min-height: 18rem;
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  border: 2px dashed var(--color-gray-300);
-  border-radius: 0.75rem;
-  padding: 2rem;
-  background: var(--bg-secondary);
-  text-align: center;
+  padding-bottom: 1.5rem;
 }
 
-.placeholder h2 {
-  color: var(--pe-dark);
-  font-size: 2rem;
+/* Section dividers. */
+.section {
+  background: var(--pe-light) !important;
+}
+
+/* Agenda: five rows that fit a laptop screen. */
+.agenda {
+  display: grid;
+  gap: 0;
+}
+
+.agendaRow {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 1.1rem 0;
+}
+
+.agendaRow > span {
+  color: var(--pe-teal);
+  font-size: 2.25rem;
   font-weight: 600;
 }
 
-.placeholder p {
+.agendaRow h2 {
+  color: var(--pe-dark);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.agendaRow p {
+  margin-top: 0.25rem;
+  color: var(--color-gray-600);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* Data pipeline: sources feed each stage from above. */
+.pipeline {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem;
+  background: white;
+  padding: 1.75rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.pipelineHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pipelineGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 1.75rem;
+}
+
+.sourceBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.85rem 1rem;
+  color: var(--color-gray-700);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.feed {
+  position: relative;
+  height: 2.25rem;
+}
+
+.feed::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 7px;
+  left: 50%;
+  width: 2px;
+  background: var(--color-gray-300);
+  transform: translateX(-50%);
+}
+
+.feed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-top: 8px solid var(--color-gray-400);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  transform: translateX(-50%);
+}
+
+.stageBox {
+  position: relative;
+  min-height: 10rem;
+  border: 2px solid var(--pe-teal-dark);
+  border-radius: 0.6rem;
+  background: var(--pe-light);
+  padding: 1.1rem 1rem;
+  text-align: center;
+}
+
+.stageBox:not(.stageBoxLast)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc(1.75rem + 2px);
+  height: 2px;
+  background: var(--color-gray-300);
+}
+
+.stageBoxLast {
+  border-color: var(--pe-amber);
+  background: color-mix(in srgb, var(--pe-amber) 10%, white);
+}
+
+.stageNumber {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal-dark);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.stageBoxLast .stageNumber {
+  background: var(--pe-amber);
+}
+
+.stageBox h2 {
+  margin-top: 0.6rem;
+  color: var(--pe-dark);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stageBox p {
+  margin-top: 0.45rem;
+  color: var(--color-gray-600);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.pipelineFooter {
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.9rem 1.5rem;
+  color: var(--color-gray-500);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.pipelineFooter strong {
+  color: var(--pe-dark);
+}
+
+/* Scottish target table, in the style of l0-ima-2026's target surface. */
+.targetTable {
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+}
+
+.targetRow {
+  display: grid;
+  grid-template-columns: 2.8fr 2fr 0.8fr 0.8fr 1fr 0.6fr;
+  align-items: baseline;
+  gap: 1rem;
+  border-top: 1px solid var(--color-gray-100);
+  padding: 0.55rem 1.5rem;
+  color: var(--color-gray-700);
+  font-size: 1.1rem;
+}
+
+.targetHead {
+  border-top: 0;
+  background: var(--bg-secondary);
+  color: var(--pe-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.targetTotal {
+  border-top: 2px solid var(--color-gray-200);
+  background: var(--pe-light);
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+.tableNote {
   margin-top: 1rem;
+  color: var(--color-gray-500);
+  font-size: 1rem;
+}
+
+/* Property income: one bar of rent received, bracketed by source. */
+.brackets {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 0.9rem;
+}
+
+.bracket {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.75rem;
+  border-bottom: 2px solid var(--pe-teal-dark);
+  padding: 0 0.25rem 0.35rem;
+}
+
+.bracket::before,
+.bracket::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  width: 2px;
+  height: 10px;
+  background: var(--pe-teal-dark);
+}
+
+.bracket::before {
+  left: 0;
+}
+
+.bracket::after {
+  right: 0;
+}
+
+.bracketDashed {
+  border-bottom-style: dashed;
+}
+
+.bracketSource {
+  color: var(--pe-dark);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.bracketMeasure {
   color: var(--color-gray-600);
   font-size: 1.25rem;
 }
 
-@media (max-height: 850px) {
-  .overviewStep,
-  .weightCard,
-  .officialTotals {
-    min-height: 14rem;
-    padding: 1.25rem;
+.ladderBar {
+  display: flex;
+  height: 5.75rem;
+  gap: 2px;
+  margin-top: 1.25rem;
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.segment strong {
+  font-size: 1.5rem;
+}
+
+.segment:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.segment:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.segmentExpenses {
+  background: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+.segmentFinance {
+  background: var(--pe-amber-light);
+  color: var(--pe-darker);
+}
+
+.segmentProfit {
+  background: var(--pe-teal-dark);
+  color: white;
+}
+
+.notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.25rem;
+}
+
+.notes p {
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.25rem;
+  color: var(--color-gray-700);
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+
+.finePrint {
+  margin-top: 1.25rem;
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+}
+
+/* Property income: which source informs each piece, by type of landlord. */
+.matrix {
+  display: grid;
+  grid-template-columns: 15rem 1fr 1fr;
+  gap: 0.6rem 0.75rem;
+}
+
+.matrixRow {
+  display: contents;
+}
+
+.matrixHead {
+  border-bottom: 2px solid var(--pe-teal);
+  padding: 0 0.25rem 0.5rem;
+}
+
+.matrixHead h2,
+.matrixPiece h2 {
+  color: var(--pe-dark);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.matrixHead p,
+.matrixPiece p {
+  margin-top: 0.15rem;
+  color: var(--color-gray-500);
+  font-size: 1rem;
+}
+
+.matrixPiece {
+  align-self: center;
+}
+
+.matrixCell {
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.4rem;
+  background: var(--pe-light);
+  padding: 0.65rem 1rem;
+}
+
+.matrixSpan {
+  grid-column: span 2;
+  background: white;
+}
+
+.matrixCell span {
+  color: var(--pe-teal-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.matrixCell p {
+  margin-top: 0.15rem;
+  color: var(--pe-dark);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.status {
+  margin-top: 1.25rem;
+  color: var(--color-gray-500);
+  font-size: 1rem;
+}
+
+/* Energy discount charts, drawn in HTML. Colours follow the dashboard. */
+.energyStats {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.3rem;
+}
+
+.energyStats strong {
+  color: var(--pe-dark);
+}
+
+.energyGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: start;
+  gap: 3.5rem;
+}
+
+.chart figcaption h2 {
+  color: var(--pe-dark);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 0.95rem;
+}
+
+.legend i {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  vertical-align: -0.05rem;
+}
+
+.swatchPassported,
+.barPassported {
+  background: var(--color-teal-700);
+}
+
+.swatchIncome,
+.barIncome {
+  background: var(--color-teal-400);
+}
+
+.chartNote {
+  margin-top: 0.4rem;
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+}
+
+.regionRows {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 1rem;
+}
+
+.regionRow {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 1.02rem;
+}
+
+.regionLabel {
+  overflow: hidden;
+  color: var(--color-gray-700);
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.regionScotland {
+  background: var(--pe-light);
+}
+
+.regionScotland .regionLabel {
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+.regionTrack {
+  display: flex;
+  height: 1.35rem;
+  align-items: center;
+  gap: 2px;
+}
+
+.regionTrack > span:not(.regionValue) {
+  height: 100%;
+}
+
+.barIncome {
+  border-radius: 0 4px 4px 0;
+}
+
+.regionValue {
+  margin-left: 0.5rem;
+  color: var(--color-gray-700);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.decilePlot {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.6rem;
+  height: 17rem;
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.decileColumn {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.decileValue {
+  margin-bottom: 0.3rem;
+  color: var(--color-gray-700);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.decileBar {
+  width: 72%;
+  border-radius: 4px 4px 0 0;
+  background: var(--pe-teal);
+}
+
+.decileAxis {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+  color: var(--color-gray-600);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.axisCaption {
+  margin-top: 0.3rem;
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Global `a { color: inherit }` outranks Tailwind's layered colour utilities,
+   so the link takes its colour from here. */
+.dashboardLink {
+  flex-shrink: 0;
+  color: var(--pe-teal);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Compact figures for laptop screens, up to a 1440 x 900 display. */
+@media (max-height: 1000px) {
+  .agendaRow {
+    padding: 0.7rem 0;
   }
 
-  .overviewStep h2,
-  .householdCard h2,
-  .weightCard h2,
-  .officialTotals h2,
-  .targetCard h2 {
-    font-size: 1.35rem;
+  .agendaRow > span {
+    font-size: 1.8rem;
   }
 
-  .overviewStep p,
-  .weightCard p,
-  .officialTotals p {
+  .agendaRow h2 {
+    font-size: 1.4rem;
+  }
+
+  .agendaRow p {
     font-size: 1.1rem;
   }
 
-  .takeaway {
-    margin-top: 1.25rem;
+  .pipeline {
+    padding: 1rem 1.25rem;
+  }
+
+  .pipelineHeader {
+    margin-bottom: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .pipelineGrid {
+    column-gap: 1.25rem;
+  }
+
+  .stageBox:not(.stageBoxLast)::after {
+    width: calc(1.25rem + 2px);
+  }
+
+  .sourceBox {
+    gap: 0.2rem;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .feed {
+    height: 1.3rem;
+  }
+
+  .stageBox {
+    min-height: 6.5rem;
+    padding: 0.65rem 0.6rem;
+  }
+
+  .stageNumber {
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 0.8rem;
+  }
+
+  .stageBox h2 {
+    margin-top: 0.4rem;
+    font-size: 1.1rem;
+  }
+
+  .stageBox p {
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .pipelineFooter {
+    margin-top: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .targetRow {
+    padding: 0.25rem 1.25rem;
+    font-size: 0.92rem;
+  }
+
+  .targetHead {
+    font-size: 0.72rem;
+  }
+
+  .tableNote {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .ladderBar {
+    height: 4.5rem;
+  }
+
+  .bracketSource,
+  .bracketMeasure {
+    font-size: 1.1rem;
+  }
+
+  .segment {
+    font-size: 1rem;
+  }
+
+  .segment strong {
+    font-size: 1.25rem;
+  }
+
+  .notes {
+    margin-top: 1.5rem;
+  }
+
+  .notes p,
+  .energyStats {
+    font-size: 1.15rem;
+  }
+
+  .matrix {
+    gap: 0.35rem 0.6rem;
+  }
+
+  .matrixHead h2,
+  .matrixPiece h2 {
+    font-size: 1.1rem;
+  }
+
+  .matrixHead p,
+  .matrixPiece p {
+    font-size: 0.88rem;
+  }
+
+  .matrixCell {
+    padding: 0.35rem 0.85rem;
+  }
+
+  .matrixCell span {
+    font-size: 0.72rem;
+  }
+
+  .matrixCell p {
+    font-size: 1rem;
+  }
+
+  .status {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .energyStats {
+    margin-bottom: 1rem;
+  }
+
+  .chart figcaption h2 {
+    font-size: 1.15rem;
+  }
+
+  .legend,
+  .chartNote,
+  .decileValue,
+  .decileAxis,
+  .axisCaption,
+  .regionValue {
+    font-size: 0.85rem;
+  }
+
+  .regionRows {
+    gap: 0.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .regionRow {
+    font-size: 0.88rem;
+  }
+
+  .regionTrack {
+    height: 1rem;
+  }
+
+  .decilePlot {
+    height: 11rem;
+    margin-top: 0.75rem;
+  }
+
+  .dashboardLink {
+    font-size: 1rem;
+  }
+}
+
+@media (max-height: 760px) {
+  .agendaRow {
+    padding: 0.5rem 0;
+  }
+
+  .agendaRow h2 {
     font-size: 1.2rem;
   }
 
-  .householdCard {
-    padding: 1.25rem;
+  .agendaRow p {
+    font-size: 0.95rem;
   }
 
-  .householdFields {
+  .pipeline {
+    padding: 0.85rem 1rem;
+  }
+
+  .pipelineHeader {
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .sourceBox {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .feed {
+    height: 1.1rem;
+  }
+
+  .stageBox {
+    min-height: 6rem;
+    padding: 0.55rem;
+  }
+
+  .stageBox h2 {
+    margin-top: 0.3rem;
+    font-size: 1rem;
+  }
+
+  .stageBox p {
+    font-size: 0.82rem;
+  }
+
+  .pipelineFooter {
+    margin-top: 0.6rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .targetRow {
+    padding: 0.18rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .targetHead {
+    font-size: 0.68rem;
+  }
+
+  .tableNote,
+  .finePrint,
+  .status {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .brackets {
+    gap: 0.6rem;
+  }
+
+  .bracketSource,
+  .bracketMeasure {
+    font-size: 0.95rem;
+  }
+
+  .ladderBar {
+    height: 3.25rem;
     margin-top: 1rem;
   }
 
-  .targetCard {
-    padding: 1.1rem;
+  .segment {
+    font-size: 0.85rem;
   }
 
-  .targetCard ul {
-    gap: 0.6rem;
+  .segment strong {
     font-size: 1.05rem;
+  }
+
+  .notes {
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .notes p,
+  .energyStats {
+    font-size: 1rem;
+  }
+
+  .matrix {
+    grid-template-columns: 11rem 1fr 1fr;
+    gap: 0.3rem 0.5rem;
+  }
+
+  .matrixHead h2,
+  .matrixPiece h2 {
+    font-size: 1rem;
+  }
+
+  .matrixHead p,
+  .matrixPiece p {
+    font-size: 0.8rem;
+  }
+
+  .matrixCell {
+    padding: 0.3rem 0.7rem;
+  }
+
+  .matrixCell span {
+    font-size: 0.68rem;
+  }
+
+  .matrixCell p {
+    font-size: 0.9rem;
+  }
+
+  .energyStats {
+    margin-bottom: 0.6rem;
+  }
+
+  .chart figcaption h2 {
+    font-size: 1.1rem;
+  }
+
+  .legend,
+  .chartNote,
+  .decileValue,
+  .decileAxis,
+  .axisCaption,
+  .regionValue {
+    font-size: 0.8rem;
+  }
+
+  .regionRows {
+    gap: 0.12rem;
+    margin-top: 0.5rem;
+  }
+
+  .regionRow {
+    grid-template-columns: 11.5rem 1fr;
+    font-size: 0.82rem;
+  }
+
+  .regionTrack {
+    height: 0.95rem;
+  }
+
+  .decilePlot {
+    height: 10.5rem;
+    margin-top: 0.6rem;
+  }
+
+  .dashboardLink {
+    font-size: 0.9rem;
   }
 }
 

@@ -2,6 +2,7 @@
 // 8 October 2026 (microcosm main 75167a68, policyengine-uk main f1a9a3cc).
 const microcosmCommit = "75167a688ea83316654f1d794542124b4277bda9";
 const budgetCommit = "eb77d72b5e353b0cb85fecaf806f3a081753bbfa";
+const energyCommit = "14bf3b0afc121b092bbd7545c9fb4963e8ab5c72";
 const microcosm = `https://github.com/PolicyEngine/microcosm/blob/${microcosmCommit}`;
 const ukBuild = `${microcosm}/packages/microcosm-build/src/microcosm/build/uk`;
 
@@ -77,61 +78,193 @@ export const sources = {
     label: "UK research library",
     href: "https://www.policyengine.org/uk/research",
   },
+  energyDashboard: {
+    label: "Targeted energy bill discount dashboard",
+    href: "https://www.policyengine.org/uk/targeted-energy-discount",
+  },
+  energyAnalysis: {
+    label: "uk-energy-reforms analysis",
+    href: `https://github.com/PolicyEngine/uk-energy-reforms/tree/${energyCommit}/analyses/rf-billing-me-softly`,
+  },
+  energyProposal: {
+    label: "Resolution Foundation, Billing me softly",
+    href: "https://www.resolutionfoundation.org/publications/billing-me-softly/",
+  },
 } satisfies Record<string, Source>;
 
-// Target definitions at the pinned Microcosm commit. Counts are reference rows,
-// not a claim that the local build has passed release checks or fits every row.
-export const scotlandTargetGroups = [
+// The Microcosm UK build, told for Scotland: what each stage adds and which
+// sources feed it (spine stages in sources.yaml at the pinned commit).
+export const pipelineStages = [
   {
-    level: "Scotland",
-    scope: "58 target rows · Scotland-wide",
-    items: [
-      "Population by age, including babies and children",
-      "Taxpayers, income and income tax by income band",
-      "Scottish Child Payment spending and State Pension recipients",
-      "Council tax dwellings by band",
-      "Capital gains, bus support and UC households with a baby",
+    title: "Survey households",
+    adds: "People, families, earnings and benefits",
+    sources: ["Family Resources Survey 2024-25 (DWP)"],
+  },
+  {
+    title: "Add tax records",
+    adds: "High and detailed incomes",
+    sources: ["Survey of Personal Incomes (HMRC)"],
+  },
+  {
+    title: "Fill the gaps",
+    adds: "Wealth, spending, travel and capital gains",
+    sources: [
+      "Wealth and Assets Survey",
+      "Living Costs and Food Survey",
+      "National Travel Survey",
+      "HMRC capital gains statistics",
     ],
   },
   {
-    level: "Council areas",
-    scope: "831 target rows · 32 councils",
-    items: [
-      "Population by age and household counts",
-      "Housing tenure",
-      "Employment and self-employment income",
-      "Universal Credit households",
-      "Council tax dwellings by band A–H",
+    title: "Place in Scotland",
+    adds: "An Output Area, council and constituency for each household",
+    sources: ["NRS 2022 Output Areas and lookups"],
+  },
+  {
+    title: "Match official totals",
+    adds: "Reweight households to Scottish statistics",
+    sources: ["NRS, ONS, HMRC, DWP and Scottish Government statistics"],
+  },
+];
+
+// Scottish target rows at the pinned Microcosm commit, grouped by family.
+// Counts are reference rows (target definitions), not a claim that the local
+// build has passed release checks. Columns: Scotland, 32 council areas,
+// 57 Westminster constituencies.
+export type TargetRow = {
+  family: string;
+  publisher: string;
+  scotland: number;
+  councils: number;
+  constituencies: number;
+};
+
+export const scotlandTargets: TargetRow[] = [
+  { family: "Population by age", publisher: "NRS and ONS mid-year estimates", scotland: 11, councils: 256, constituencies: 456 },
+  { family: "Employment and self-employment income", publisher: "HMRC", scotland: 0, councils: 128, constituencies: 228 },
+  { family: "Universal Credit households", publisher: "DWP", scotland: 1, councils: 32, constituencies: 285 },
+  { family: "Council tax dwellings by band", publisher: "Scottish Government", scotland: 9, councils: 255, constituencies: 0 },
+  { family: "Housing tenure", publisher: "Scotland's Census 2022", scotland: 0, councils: 128, constituencies: 0 },
+  { family: "Households", publisher: "Scotland's Census 2022", scotland: 0, councils: 32, constituencies: 57 },
+  { family: "Taxpayers, income and tax by band", publisher: "HMRC", scotland: 30, councils: 0, constituencies: 0 },
+  { family: "State Pension recipients", publisher: "DWP", scotland: 2, councils: 0, constituencies: 0 },
+  { family: "Capital gains and gains taxpayers", publisher: "HMRC", scotland: 2, councils: 0, constituencies: 0 },
+  { family: "Bus revenue and government support", publisher: "Scottish Transport Statistics", scotland: 2, councils: 0, constituencies: 0 },
+  { family: "Scottish Child Payment spending", publisher: "Scottish Government", scotland: 1, councils: 0, constituencies: 0 },
+];
+
+// HMRC Property Rental Income Statistics 2026, individual landlords, 2024-25.
+// Receipts (Table 2) and total expenses (Table 6) are published for
+// individuals; residential finance costs (Table 8, £12.82bn for all landlords)
+// are pro-rated to individuals by their share of expenses (30.03 / 34.75).
+const prisIndividualExpenses = 30.03;
+const prisFinanceCosts = 12.82 * (prisIndividualExpenses / 34.75);
+
+export const propertyLadder = {
+  receipts: 49.81,
+  otherExpenses: prisIndividualExpenses - prisFinanceCosts,
+  financeCosts: prisFinanceCosts,
+  profitAfterCosts: 49.81 - prisIndividualExpenses,
+};
+
+// Microcosm #1145 (draft): which source informs each piece of landlords'
+// income, for landlords who come from tax records (the SPI) and from the
+// household survey (the FRS). A row with one cell applies to both. Details may
+// change before merge.
+export type PropertyCell = { source: string; text: string };
+
+export const propertyColumns = [
+  { title: "Landlords from tax records", detail: "Survey of Personal Incomes" },
+  { title: "Landlords in the household survey", detail: "Family Resources Survey" },
+];
+
+export const propertyRows: { piece: string; detail: string; cells: PropertyCell[] }[] = [
+  {
+    piece: "Profit",
+    detail: "Taxable property income",
+    cells: [
+      { source: "Tax records", text: "As reported" },
+      { source: "Survey", text: "As reported, with mortgage interest added back" },
     ],
   },
   {
-    level: "Westminster constituencies",
-    scope: "1,026 target rows · 57 constituencies",
-    items: [
-      "Population by age and household counts",
-      "Employment and self-employment income",
-      "Universal Credit households, including by number of children",
+    piece: "Finance costs",
+    detail: "Mortgage interest",
+    cells: [
+      { source: "Tax records", text: "As reported" },
+      { source: "Imputed from tax records", text: "Learned from landlords with similar profit and age" },
+    ],
+  },
+  {
+    piece: "Rent received",
+    detail: "Before expenses",
+    cells: [
+      {
+        source: "HMRC rental income statistics",
+        text: "Ranked by profit into HMRC's bands of rent received; expenses are the difference",
+      },
+    ],
+  },
+  {
+    piece: "Weights",
+    detail: "Calibration",
+    cells: [
+      { source: "HMRC personal income statistics", text: "Matched to landlord numbers and property income, by income band" },
+    ],
+  },
+  {
+    piece: "Tax",
+    detail: "Computed by the model",
+    cells: [
+      {
+        source: "policyengine-uk",
+        text: "Scottish rates on profit · £1,000 allowance or actual expenses · 20% tax reduction on finance costs, 22% from April 2027",
+      },
     ],
   },
 ];
 
-export const propertyConcepts = [
-  {
-    source: "HMRC property rental income statistics",
-    measures: "Rent before allowable expenses",
-  },
-  {
-    source: "Survey of Personal Incomes",
-    measures:
-      "Profit after allowable expenses, before residential finance costs",
-  },
-  {
-    source: "Family Resources Survey",
-    measures: "Rent net of mortgage payments, interest and capital",
-  },
+// Targeted energy bill discount (uk-energy-reforms main 14bf3b0): the
+// Resolution Foundation's flat £175 option, 2026-27, Microcosm UK national
+// release, policyengine-uk 2.102.3. Regions are Great Britain's eleven.
+export const energyRegions = [
+  { region: "North East", passported: 0.391, eligible: 0.547 },
+  { region: "West Midlands", passported: 0.31, eligible: 0.482 },
+  { region: "Wales", passported: 0.294, eligible: 0.467 },
+  { region: "Yorkshire and the Humber", passported: 0.288, eligible: 0.458 },
+  { region: "North West", passported: 0.293, eligible: 0.452 },
+  { region: "Scotland", passported: 0.241, eligible: 0.438 },
+  { region: "East Midlands", passported: 0.249, eligible: 0.435 },
+  { region: "South West", passported: 0.227, eligible: 0.401 },
+  { region: "East of England", passported: 0.211, eligible: 0.364 },
+  { region: "South East", passported: 0.203, eligible: 0.356 },
+  { region: "London", passported: 0.297, eligible: 0.353 },
 ];
 
-// Section 2: published UK work, 8 April – 8 October 2026 (app-v2 c83e129).
+// Scotland only, from the same run: deciles rank Scotland's people by household
+// income after housing costs, adjusted for household size. Average gains
+// include households that receive nothing.
+export const scotlandEnergyDeciles = [
+  { decile: 1, averageGain: 164, shareReceiving: 0.94 },
+  { decile: 2, averageGain: 159, shareReceiving: 0.91 },
+  { decile: 3, averageGain: 141, shareReceiving: 0.81 },
+  { decile: 4, averageGain: 119, shareReceiving: 0.68 },
+  { decile: 5, averageGain: 80, shareReceiving: 0.46 },
+  { decile: 6, averageGain: 30, shareReceiving: 0.17 },
+  { decile: 7, averageGain: 13, shareReceiving: 0.07 },
+  { decile: 8, averageGain: 14, shareReceiving: 0.08 },
+  { decile: 9, averageGain: 13, shareReceiving: 0.07 },
+  { decile: 10, averageGain: 6, shareReceiving: 0.03 },
+];
+
+export const scotlandEnergyHeadline = {
+  households: "2.66m",
+  recipients: "1.16m",
+  cost: "£204m",
+  gbCost: "£2.09bn",
+};
+
+// Section 4: published UK work, 8 April – 8 October 2026 (app-v2 c83e129).
 export type Publication = {
   title: string;
   date: string;
@@ -232,7 +365,7 @@ export const nicsLinks = [
   },
 ];
 
-// Section 3: Autumn Budget 2026.
+// Section 5: Autumn Budget 2026.
 export const budgetPlan = [
   {
     stage: "Before the Budget",

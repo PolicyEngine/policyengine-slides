@@ -14,21 +14,29 @@ import { speakers } from "@/lib/speakers";
 import {
   budgetPlan,
   energyPublications,
-  propertyConcepts,
   nicsLinks,
-  scotlandTargetGroups,
+  scotlandEnergyHeadline,
   sources,
   workPublications,
   type Publication,
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
-import { CalibrationDiagram, ImputationDiagram, OverviewDiagram } from "./pipeline-diagrams";
+import {
+  PipelineGraph,
+  PropertyLadder,
+  PropertyMatrix,
+  RegionEligibilityChart,
+  ScotlandDecileChart,
+  TargetTable,
+} from "./figures";
 
 const sections = {
-  data: "1 · Data pipeline and property income",
-  research: "2 · Published work, April–October 2026",
-  budget: "3 · Plan for the Autumn Budget",
+  data: "1 · Scotland's microdata",
+  property: "2 · Property income",
+  analysis: "3 · Analysis example",
+  research: "4 · Published work, April–October 2026",
+  budget: "5 · Plan for the Autumn Budget",
 };
 
 function ExternalLink({
@@ -71,29 +79,34 @@ function Frame({
   subtitle,
   children,
   references = [],
+  center = false,
 }: {
   section?: string;
   title: string;
   subtitle?: string;
   children: ReactNode;
   references?: Source[];
+  /** Centre the body in the space below the title (for figure slides). */
+  center?: boolean;
 }) {
   return (
     <Slide className={styles.deck}>
-      <SlideHeader>
-        {section && (
-          <p className="mb-2 text-base font-semibold uppercase tracking-wide text-pe-teal">
-            {section}
-          </p>
-        )}
-        <SlideTitle>{title}</SlideTitle>
-        {subtitle && (
-          <p className="mt-3 text-xl leading-relaxed text-gray-600">
-            {subtitle}
-          </p>
-        )}
-      </SlideHeader>
-      {children}
+      <div className="flex h-full flex-col">
+        <SlideHeader>
+          {section && (
+            <p className="mb-2 text-base font-semibold uppercase tracking-wide text-pe-teal">
+              {section}
+            </p>
+          )}
+          <SlideTitle>{title}</SlideTitle>
+          {subtitle && (
+            <p className="mt-3 text-xl leading-relaxed text-gray-600">
+              {subtitle}
+            </p>
+          )}
+        </SlideHeader>
+        {center ? <div className={styles.centerBody}>{children}</div> : children}
+      </div>
       {references.length > 0 && <SourceLine items={references} />}
     </Slide>
   );
@@ -146,38 +159,64 @@ export function TitleSlide() {
   );
 }
 
+function SectionSlide({
+  part,
+  title,
+  subtitle,
+}: {
+  part: number;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <Slide className={`${styles.deck} ${styles.section}`}>
+      <div className="flex h-full flex-col justify-center">
+        <p className="mb-3 text-base font-bold uppercase tracking-[0.16em] text-pe-teal">
+          Part {part} of {agenda.length}
+        </p>
+        <h1 className="font-display text-6xl font-bold leading-tight tracking-tight text-pe-dark">
+          {title}
+        </h1>
+        <div className="accent-bar mt-6 w-32" />
+        <p className="mt-6 max-w-4xl text-2xl leading-snug text-gray-600">{subtitle}</p>
+      </div>
+    </Slide>
+  );
+}
+
+const agenda = [
+  {
+    title: "How we build Scotland's microdata",
+    text: "The sources, the pipeline and the official Scottish totals we match",
+  },
+  {
+    title: "Modelling property income",
+    text: "Which data informs each piece, and how it enters the dataset",
+  },
+  {
+    title: "An analysis example",
+    text: "A targeted energy bill discount, by region and across Scotland",
+  },
+  {
+    title: "Published work since April",
+    text: "UK analysis and tools, with links",
+  },
+  {
+    title: "Plan for the Autumn Budget",
+    text: "Building on the 2025 dashboard, and how Budget day will run",
+  },
+];
+
 export function AgendaSlide() {
-  const items = [
-    [
-      "01",
-      "New data pipeline and property income",
-      "Microcosm UK, what it means for Scotland, and how we are fixing property income",
-    ],
-    [
-      "02",
-      "Published work over the last six months",
-      "UK analysis and tools since April, with links",
-    ],
-    [
-      "03",
-      "Plan for the Autumn Budget",
-      "Building on the 2025 dashboard, and how Budget day will run",
-    ],
-  ];
   return (
     <Frame title="Today">
-      <div className="space-y-8">
-        {items.map(([number, title, text]) => (
-          <div
-            key={number}
-            className="flex items-baseline gap-8 border-b border-gray-200 pb-6"
-          >
-            <span className="text-4xl font-semibold text-pe-teal">
-              {number}
-            </span>
+      <div className={styles.agenda}>
+        {agenda.map((item, index) => (
+          <div key={item.title} className={styles.agendaRow}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
             <div>
-              <h2 className="text-3xl font-semibold text-pe-dark">{title}</h2>
-              <p className="mt-2 text-2xl text-gray-600">{text}</p>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
             </div>
           </div>
         ))}
@@ -186,69 +225,38 @@ export function AgendaSlide() {
   );
 }
 
-export function PipelineChangesSlide() {
+export function DataSectionSlide() {
+  return (
+    <SectionSlide part={1} title={agenda[0].title} subtitle={agenda[0].text} />
+  );
+}
+
+export function PipelineSlide() {
   return (
     <Frame
       section={sections.data}
-      title="Building a population that represents Scotland"
-      subtitle="Microcosm UK combines household surveys with official statistics to support Scottish policy analysis"
+      title="From surveys to a population that represents Scotland"
+      center
       references={[sources.pipeline, sources.inputs, sources.geography]}
     >
-      <OverviewDiagram />
-      <p className={styles.takeaway}>The aim: estimate how a policy affects different households across Scotland.</p>
+      <PipelineGraph />
     </Frame>
   );
 }
 
-export function ImputationSlide() {
+export function TargetsSlide() {
   return (
     <Frame
       section={sections.data}
-      title="Filling the gaps for Scottish households"
-      subtitle="No single survey contains everything we need to estimate policy impacts"
-      references={[sources.inputs, sources.pipeline]}
-    >
-      <ImputationDiagram />
-      <p className={styles.takeaway}>Imputation preserves variation between households, rather than giving everyone an average value.</p>
-    </Frame>
-  );
-}
-
-export function CalibrationSlide() {
-  return (
-    <Frame
-      section={sections.data}
-      title="Making the sample represent Scotland"
-      subtitle="Calibration aligns the model with published totals for Scotland and its local areas"
+      title="The official Scottish totals we match"
+      center
       references={[sources.nationalTargets, sources.localTargets]}
     >
-      <CalibrationDiagram />
-      <p className={styles.takeaway}>The household&apos;s circumstances stay the same. Its contribution to population totals changes.</p>
-    </Frame>
-  );
-}
-
-export function ScotlandDataSlide() {
-  return (
-    <Frame
-      section={sections.data}
-      title="Scottish calibration targets at three levels"
-      subtitle="Examples of the official totals used to represent Scotland"
-      references={[
-        sources.nationalTargets,
-        sources.localTargets,
-      ]}
-    >
-      <div className={styles.targetGrid}>
-        {scotlandTargetGroups.map((group) => (
-          <div key={group.level} className={styles.targetCard}>
-            <h2>{group.level}</h2>
-            <p className={styles.targetScope}>{group.scope}</p>
-            <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </div>
-        ))}
-      </div>
-      <p className={styles.targetStatus}>Counts describe the build&apos;s target definitions. The local-area release is still under validation.</p>
+      <TargetTable />
+      <p className={styles.tableNote}>
+        Target rows defined for Scotland, its 32 council areas and 57 Westminster
+        constituencies. The local-area release is still being validated.
+      </p>
     </Frame>
   );
 }
@@ -274,110 +282,98 @@ export function ReleaseChecksSlide() {
   );
 }
 
+export function PropertySectionSlide() {
+  return (
+    <SectionSlide part={2} title={agenda[1].title} subtitle={agenda[1].text} />
+  );
+}
+
 export function PropertyConceptsSlide() {
   return (
     <Frame
-      section={sections.data}
-      title="Property income: three sources, three concepts"
-      subtitle="Each source measures landlords' income at a different point, so they can't simply be scaled to each other"
-      references={[sources.propertyIssue, sources.pris]}
+      section={sections.property}
+      title="Landlords' income, measured three ways"
+      center
+      references={[sources.pris, sources.propertyIssue]}
     >
-      <table className="w-full text-left text-xl">
-        <thead className="text-pe-dark">
-          <tr className="border-b-2 border-pe-teal">
-            <th className="w-[38%] pb-3 pr-8 font-semibold">Source</th>
-            <th className="pb-3 font-semibold">What it measures</th>
-          </tr>
-        </thead>
-        <tbody>
-          {propertyConcepts.map((row) => (
-            <tr key={row.source} className="border-b border-gray-200">
-              <th className="py-3 pr-8 font-medium text-pe-dark">
-                {row.source}
-              </th>
-              <td className="py-3 text-gray-700">{row.measures}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-8 grid grid-cols-2 gap-10">
-        <div className="border-l-4 border-pe-teal pl-6">
-          <p className="text-xl text-gray-700">
-            The Enhanced FRS scaled SPI property income up to the HMRC gross
-            figure, about <strong>£55bn</strong>, against roughly{" "}
-            <strong>£30bn</strong> of taxable profit in the SPI.
-          </p>
-        </div>
-        <div className="border-l-4 border-pe-teal pl-6">
-          <p className="text-xl text-gray-700">
-            Leaving out the finance-cost tax reduction overstates landlords'
-            income tax by roughly <strong>£1.2–2.6bn</strong> a year.
-          </p>
-        </div>
+      <PropertyLadder />
+      <div className={styles.notes}>
+        <p>
+          Income tax is charged on profit. Finance costs are not deducted; they
+          earn a tax reduction of 20%, rising to 22% from April 2027.
+        </p>
+        <p>
+          Our previous dataset scaled tax-record profit up to rent received:
+          about <strong>£55bn</strong> of taxable property income, against
+          roughly <strong>£31bn</strong>.
+        </p>
+      </div>
+      <p className={styles.finePrint}>
+        Individual landlords, 2024-25. Rent received and total expenses are
+        HMRC&apos;s; finance costs are pro-rated from all landlords&apos;
+        £12.8bn. The survey also nets mortgage capital, so it sits below the
+        last segment.
+      </p>
+    </Frame>
+  );
+}
+
+export function PropertyModelSlide() {
+  return (
+    <Frame
+      section={sections.property}
+      title="Which data informs each piece of landlords' income"
+      center
+      references={[sources.propertyData, sources.propertyEngine, sources.pris]}
+    >
+      <PropertyMatrix />
+      <p className={styles.status}>
+        Model rules are released in policyengine-uk 2.123.0. The data changes
+        are in draft, so details may change.
+      </p>
+    </Frame>
+  );
+}
+
+export function AnalysisSectionSlide() {
+  return (
+    <SectionSlide part={3} title={agenda[2].title} subtitle={agenda[2].text} />
+  );
+}
+
+export function EnergyDiscountSlide() {
+  const h = scotlandEnergyHeadline;
+  return (
+    <Frame
+      section={sections.analysis}
+      title="A targeted energy bill discount"
+      center
+      subtitle="The Resolution Foundation's proposal for 2026-27: £175 a year for households in Great Britain on a means-tested benefit, or where no one has taxable income of £24,000 or more"
+      references={[sources.energyDashboard, sources.energyAnalysis, sources.energyProposal]}
+    >
+      <div className={styles.energyStats}>
+        <p>
+          In Scotland, <strong>{h.recipients}</strong> of {h.households} households
+          receive support, costing <strong>{h.cost}</strong> of the {h.gbCost} GB
+          total.
+        </p>
+        <p className={styles.dashboardLink}>
+          <ExternalLink href={sources.energyDashboard.href}>
+            Explore other designs in the dashboard ↗
+          </ExternalLink>
+        </p>
+      </div>
+      <div className={styles.energyGrid}>
+        <RegionEligibilityChart />
+        <ScotlandDecileChart />
       </div>
     </Frame>
   );
 }
 
-export function PropertyFixSlide() {
+export function ResearchSectionSlide() {
   return (
-    <Frame
-      section={sections.data}
-      title="Property income: what we are changing"
-      references={[
-        sources.propertyEngine,
-        sources.propertyData,
-        sources.propertyRates,
-      ]}
-    >
-      <div className="grid grid-cols-3 gap-10">
-        <div>
-          <p className="text-base font-semibold uppercase tracking-wide text-pe-teal">
-            Model · merged 7 October
-          </p>
-          <ul className="mt-3 list-disc space-y-3 pl-6 text-xl leading-relaxed text-gray-700">
-            <li>
-              Landlords' finance costs relieved as a tax reduction, with carry
-              forward
-            </li>
-            <li>
-              The £1,000 property allowance replaces expenses instead of
-              stacking on top of them
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="text-base font-semibold uppercase tracking-wide text-pe-teal">
-            Data · in progress
-          </p>
-          <ul className="mt-3 list-disc space-y-3 pl-6 text-xl leading-relaxed text-gray-700">
-            <li>SPI taxable profit used as it is, not scaled up</li>
-            <li>Finance costs taken from the SPI tax records</li>
-            <li>Landlords' gross receipts matched to HMRC's bands</li>
-          </ul>
-          <p className="mt-4 text-base text-gray-500">
-            In a test build (not a release), the SPI amounts fit to within 0.1%
-            and finance costs come to £10.15bn against HMRC's £11.08bn.
-          </p>
-        </div>
-        <div>
-          <p className="text-base font-semibold uppercase tracking-wide text-pe-teal">
-            From April 2027
-          </p>
-          <ul className="mt-3 list-disc space-y-3 pl-6 text-xl leading-relaxed text-gray-700">
-            <li>
-              Property income gets its own rates outside Scotland: 22%, 42% and
-              47%
-            </li>
-            <li>Finance-cost relief moves to 22%</li>
-            <li>
-              In the model, Scottish taxpayers' property income is taxed at the
-              Scottish income tax rates
-            </li>
-          </ul>
-        </div>
-      </div>
-    </Frame>
+    <SectionSlide part={4} title={agenda[3].title} subtitle={agenda[3].text} />
   );
 }
 
@@ -392,17 +388,6 @@ export function EnergyWorkSlide() {
         {energyPublications.map((item) => (
           <PublicationCard key={item.href} item={item} />
         ))}
-      </div>
-    </Frame>
-  );
-}
-
-export function EnergyCapPlaceholderSlide() {
-  return (
-    <Frame title="Energy cap analysis" subtitle="Placeholder · analysis to be added">
-      <div className={styles.placeholder}>
-        <h2>Energy cap analysis</h2>
-        <p>Reserved for the scenario, Scotland results and distributional chart.</p>
       </div>
     </Frame>
   );
@@ -435,6 +420,12 @@ export function WorkBenefitsSlide() {
         .
       </p>
     </Frame>
+  );
+}
+
+export function BudgetSectionSlide() {
+  return (
+    <SectionSlide part={5} title={agenda[4].title} subtitle={agenda[4].text} />
   );
 }
 
