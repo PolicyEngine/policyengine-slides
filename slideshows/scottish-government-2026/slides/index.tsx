@@ -25,14 +25,14 @@ import styles from "./deck.module.css";
 import {
   PipelineGraph,
   PropertyLadder,
-  PropertyMatrix,
+  PropertyFlow,
   RegionEligibilityChart,
   ScotlandDecileChart,
   TargetTable,
 } from "./figures";
 
 const sections = {
-  data: "1 · Scotland's microdata",
+  data: "1 · The UK's microdata",
   property: "2 · Property income",
   analysis: "3 · Analysis example",
   research: "4 · Published work, April–October 2026",
@@ -186,7 +186,7 @@ function SectionSlide({
 
 const agenda = [
   {
-    title: "How we build Scotland's microdata",
+    title: "How we build the UK's microdata",
     text: "The sources, the pipeline and the official Scottish totals we match",
   },
   {
@@ -322,14 +322,14 @@ export function PropertyModelSlide() {
   return (
     <Frame
       section={sections.property}
-      title="Which data informs each piece of landlords' income"
+      title="How we build landlords' income, step by step"
       center
       references={[sources.propertyData, sources.propertyEngine, sources.pris]}
     >
-      <PropertyMatrix />
+      <PropertyFlow />
       <p className={styles.status}>
-        Model rules are released in policyengine-uk 2.123.0. The data changes
-        are in draft, so details may change.
+        HMRC&apos;s rental statistics also check the result. The data changes
+        are in draft (Microcosm #1145), so details may change.
       </p>
     </Frame>
   );

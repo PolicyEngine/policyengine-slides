@@ -19,7 +19,7 @@ Five parts: how we build Scotland's microdata, how we model property income, an
 analysis example (a targeted energy bill discount), what we have published since
 April, and the Autumn Budget plan.
 
-## 3. Part 1: How we build Scotland's microdata
+## 3. Part 1: How we build the UK's microdata
 
 ## 4. From surveys to a population that represents Scotland
 
@@ -40,6 +40,8 @@ data that feeds it.
    region, which gives its council area and Westminster constituency.
 5. Match official totals: calibration changes how many real households each
    record represents. It doesn't change a record's income or circumstances.
+   The weights are fitted to UK totals, including Scotland's own (next slide),
+   so Scotland is represented within one UK dataset.
 
 Keep the build machinery out of the explanation. If asked what changed since
 February: the spine is FRS 2024-25, high incomes come from the SPI, and local
@@ -120,31 +122,49 @@ HMRC publishes individuals' rent received (£49.81bn) and total expenses
 Sources: [HMRC property rental income statistics 2026](https://www.gov.uk/government/statistics/property-rental-income-statistics/property-rental-income-statistics-2026),
 [Microcosm #1106](https://github.com/PolicyEngine/microcosm/issues/1106).
 
-## 9. Which data informs each piece of landlords' income
+## 9. How we build landlords' income, step by step
 
-The dataset has two kinds of landlord: those from tax records (the SPI) and
-those in the household survey (the FRS). The grid shows where each piece comes
-from for each.
+Two lanes merge. The top lane is landlords in the household survey; the bottom
+lane is copies of survey households that carry incomes from tax records. Each
+box names the data that informs it.
 
-- Profit: tax records carry it as reported. Survey landlords keep their reported
-  rent, with their imputed mortgage interest added back, so the model relieves
-  the interest once, through the tax reduction.
-- Finance costs: tax records carry the restricted finance costs. Survey
-  landlords get them from tax-record landlords with similar profit and age.
-- Rent received: every landlord is ranked by profit and placed into HMRC's bands
-  of rent received, keeping HMRC's band shares. Expenses are the difference. In
-  the test builds, binding HMRC's counts or totals as targets pulled the SPI
-  amounts out of line, so HMRC's figures are a check rather than a target.
-- Weights: calibrated to the SPI's number of landlords and property income by
-  income band, unscaled.
-- Tax: policyengine-uk applies the rules: Scottish rates for Scottish taxpayers,
-  the £1,000 allowance or actual expenses (not both), and the finance-cost
-  reduction.
+1. FRS households: survey landlords report their rent after mortgage payments
+   (show card K6 nets mortgage interest and capital). A reported loss counts as
+   zero.
+2. Copy households: 10,000 survey households are copied at random to carry
+   tax-record incomes, and they take half the population weight of working-age
+   households (a fifth for pension-age ones). Extra copies hold the incomes over
+   £200,000, sized to HMRC's taxpayer counts for those bands.
+3. Draw tax-record incomes: each adult in a copy gets a full set of incomes,
+   including property profit and finance costs, from SPI taxpayers of a similar
+   age, sex and region (a quantile regression forest). Survey records keep their
+   own reported incomes.
+4. Add back mortgage interest: survey landlords get finance costs from SPI
+   landlords with a similar profit and age: whether they have any follows the
+   SPI's share in their profit band, and the amount comes from a second model.
+   The interest is added back to their profit, so the model relieves it once,
+   as the tax reduction. Mortgage capital stays netted.
+5. Rent received: every landlord with a profit, from either lane, is ranked by
+   profit and placed into HMRC's bands of rent received, keeping HMRC's share of
+   landlords in each band. Expenses are rent received less profit.
+6. Calibrate weights: the national calibration matches the SPI's number of
+   landlords and their property income by total-income band (2023-24 tables,
+   unscaled). HMRC's rental statistics are a check, not a target: binding them
+   pulled the SPI amounts out of line in the test builds.
+7. Compute tax: policyengine-uk applies the rules: Scottish rates for Scottish
+   taxpayers, the £1,000 allowance or actual expenses (not both), and a 20% tax
+   reduction on finance costs (22% from April 2027).
+
+In the test build of the final head (not a release), at calibrated weights:
+rent received is £45.7bn against HMRC's £49.8bn for individuals, finance costs
+£10.6bn against £11.1bn, and 2.77m landlords against 2.85m. The tax reduction
+comes to about £1.9bn for 1.0m landlords in 2025.
 
 The model change (policyengine-uk #2172, released in 2.123.0) is merged. The
 data change (Microcosm #1145) is a draft and details may change: whether the
-survey add-back stays (to confirm with Max), how the open top band of rent
-received is set, and how landlords without profit are treated.
+survey add-back stays and whether it extends to reported losses (both put to
+Max), how the open top band of rent received is set, and how landlords without
+profit are treated.
 
 On Scotland: the GOV.UK rate table is marked as not applying to Scotland. In the
 model, Scottish taxpayers' property income is taxed at the ordinary Scottish

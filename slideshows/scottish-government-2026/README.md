@@ -3,10 +3,10 @@
 18 slides at `/slides/scottish-government-2026`, in five parts, each opened by a
 section slide:
 
-1. How we build Scotland's microdata: the pipeline with the sources that feed
+1. How we build the UK's microdata: the pipeline with the sources that feed
    each stage, the Scottish target table and live diagnostics (slides 3–6)
-2. Modelling property income: what each source measures, and which data informs
-   each piece (slides 7–9)
+2. Modelling property income: what each source measures, and the steps that build
+   landlords' income (slides 7–9)
 3. An analysis example: the targeted energy bill discount, by region and across
    Scotland's income distribution (slides 10–11)
 4. Published work since April (slides 12–14)
@@ -32,7 +32,7 @@ February, and part 4 starts in April.
 - `content.ts` holds the pinned sources, tables, publication cards and Budget plan.
 - `slides/index.tsx` contains the slides.
 - `slides/figures.tsx` draws the pipeline graph, the target table, the property
-  income bar and grid, and the two energy charts (HTML and CSS, no chart
+  income bar and step diagram, and the two energy charts (HTML and CSS, no chart
   library). The pipeline and target table follow
   [l0-ima-2026](https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/l0-ima-2026).
 - `SPEAKER-NOTES.md` gives the presenter track, sources and what not to claim.
@@ -77,7 +77,7 @@ Checked on 8 October 2026:
 
 - Property income: HMRC Property Rental Income Statistics 2026 (individual
   landlords, 2024-25: rent received £49.81bn, expenses £30.03bn; finance costs
-  pro-rated from all landlords' £12.82bn of £34.75bn). The modelling grid
+  pro-rated from all landlords' £12.82bn of £34.75bn). The step diagram
   follows Microcosm #1145 as of 8 October, with HMRC's rental statistics kept as
   a check rather than a calibration target.
 - Energy discount: `uk-energy-reforms` main `14bf3b0afc121b092bbd7545c9fb4963e8ab5c72`,

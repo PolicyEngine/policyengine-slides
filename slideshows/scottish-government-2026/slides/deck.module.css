@@ -432,67 +432,202 @@
   font-size: 0.95rem;
 }
 
-/* Property income: which source informs each piece, by type of landlord. */
-.matrix {
+/* Property income: two lanes of steps that merge into the shared steps. */
+.flow {
   display: grid;
-  grid-template-columns: 15rem 1fr 1fr;
-  gap: 0.6rem 0.75rem;
+  grid-template-columns:
+    minmax(0, 1fr) 2.25rem minmax(0, 1fr) 2.75rem minmax(0, 1fr)
+    2.25rem minmax(0, 1fr) 2.25rem minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) 2.5rem minmax(0, 1fr) auto;
 }
 
-.matrixRow {
-  display: contents;
-}
-
-.matrixHead {
-  border-bottom: 2px solid var(--pe-teal);
-  padding: 0 0.25rem 0.5rem;
-}
-
-.matrixHead h2,
-.matrixPiece h2 {
-  color: var(--pe-dark);
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.matrixHead p,
-.matrixPiece p {
-  margin-top: 0.15rem;
-  color: var(--color-gray-500);
-  font-size: 1rem;
-}
-
-.matrixPiece {
-  align-self: center;
-}
-
-.matrixCell {
-  border: 1px solid var(--color-gray-200);
-  border-left: 4px solid var(--pe-teal);
-  border-radius: 0.4rem;
-  background: var(--pe-light);
-  padding: 0.65rem 1rem;
-}
-
-.matrixSpan {
-  grid-column: span 2;
-  background: white;
-}
-
-.matrixCell span {
+.laneLabel {
+  padding: 0.35rem 0;
   color: var(--pe-teal-dark);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.matrixCell p {
-  margin-top: 0.15rem;
+.flowStep {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border: 2px solid var(--pe-teal-dark);
+  border-radius: 0.6rem;
+  background: white;
+  padding: 0.9rem 1rem;
+}
+
+.flowStepCopy {
+  background: var(--pe-light);
+}
+
+.flowStepModel {
+  border-color: var(--pe-amber);
+  background: color-mix(in srgb, var(--pe-amber) 10%, white);
+}
+
+.flowStepHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.flowNumber {
+  display: inline-flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal-dark);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.flowStepModel .flowNumber {
+  background: var(--pe-amber);
+}
+
+.flowStep h2 {
   color: var(--pe-dark);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.flowStep p {
+  flex: 1;
+  color: var(--color-gray-600);
+  font-size: 1.05rem;
   line-height: 1.35;
+}
+
+.flowSource {
+  align-self: flex-start;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 9999px;
+  background: var(--bg-secondary);
+  padding: 0.15rem 0.65rem;
+  color: var(--color-gray-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Connectors: a line with an arrowhead, across or down. */
+.flowArrow,
+.flowDown,
+.mergeTop,
+.mergeMid,
+.mergeBottom {
+  position: relative;
+}
+
+.flowArrow {
+  align-self: center;
+  height: 1rem;
+}
+
+.flowArrow::before,
+.mergeMid::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  left: 4px;
+  height: 2px;
+  background: var(--color-gray-400);
+  transform: translateY(-50%);
+}
+
+.flowArrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid var(--color-gray-400);
+  transform: translateY(-50%);
+}
+
+.flowDown::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 8px;
+  left: 50%;
+  width: 2px;
+  background: var(--color-gray-400);
+  transform: translateX(-50%);
+}
+
+.flowDown::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-top: 8px solid var(--color-gray-400);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  transform: translateX(-50%);
+}
+
+/* The merge: each lane's line turns towards the middle, which points on. */
+.mergeTop::before,
+.mergeBottom::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: calc(50% - 3px);
+  height: 2px;
+  background: var(--color-gray-400);
+}
+
+.mergeTop::after,
+.mergeBottom::after,
+.mergeMid::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: var(--color-gray-400);
+}
+
+.mergeTop::after {
+  top: 50%;
+  bottom: 0;
+}
+
+.mergeBottom::after {
+  top: 0;
+  height: calc(50% + 2px);
+}
+
+.mergeMid::before {
+  top: 0;
+  bottom: 0;
+}
+
+.mergeMid::after {
+  left: 50%;
+  right: 8px;
+}
+
+.mergeMid i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid var(--color-gray-400);
+  transform: translateY(-50%);
 }
 
 .status {
@@ -814,30 +949,38 @@
     font-size: 1.15rem;
   }
 
-  .matrix {
-    gap: 0.35rem 0.6rem;
+  .flow {
+    grid-template-columns:
+      minmax(0, 1fr) 1.75rem minmax(0, 1fr) 2.25rem minmax(0, 1fr)
+      1.75rem minmax(0, 1fr) 1.75rem minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) 2rem minmax(0, 1fr) auto;
   }
 
-  .matrixHead h2,
-  .matrixPiece h2 {
-    font-size: 1.1rem;
-  }
-
-  .matrixHead p,
-  .matrixPiece p {
-    font-size: 0.88rem;
-  }
-
-  .matrixCell {
-    padding: 0.35rem 0.85rem;
-  }
-
-  .matrixCell span {
+  .laneLabel {
     font-size: 0.72rem;
   }
 
-  .matrixCell p {
+  .flowStep {
+    gap: 0.35rem;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .flowNumber {
+    width: 1.45rem;
+    height: 1.45rem;
+    font-size: 0.75rem;
+  }
+
+  .flowStep h2 {
     font-size: 1rem;
+  }
+
+  .flowStep p {
+    font-size: 0.86rem;
+  }
+
+  .flowSource {
+    font-size: 0.72rem;
   }
 
   .status {
@@ -997,31 +1140,20 @@
     font-size: 1rem;
   }
 
-  .matrix {
-    grid-template-columns: 11rem 1fr 1fr;
-    gap: 0.3rem 0.5rem;
+  .flow {
+    grid-template-rows: auto minmax(0, 1fr) 1.5rem minmax(0, 1fr) auto;
   }
 
-  .matrixHead h2,
-  .matrixPiece h2 {
-    font-size: 1rem;
+  .flowStep {
+    padding: 0.5rem 0.6rem;
   }
 
-  .matrixHead p,
-  .matrixPiece p {
+  .flowStep h2 {
+    font-size: 0.92rem;
+  }
+
+  .flowStep p {
     font-size: 0.8rem;
-  }
-
-  .matrixCell {
-    padding: 0.3rem 0.7rem;
-  }
-
-  .matrixCell span {
-    font-size: 0.68rem;
-  }
-
-  .matrixCell p {
-    font-size: 0.9rem;
   }
 
   .energyStats {

@@ -122,7 +122,7 @@ export const pipelineStages = [
   },
   {
     title: "Match official totals",
-    adds: "Reweight households to Scottish statistics",
+    adds: "Reweight households to UK and Scottish statistics",
     sources: ["NRS, ONS, HMRC, DWP and Scottish Government statistics"],
   },
 ];
@@ -167,60 +167,61 @@ export const propertyLadder = {
   profitAfterCosts: 49.81 - prisIndividualExpenses,
 };
 
-// Microcosm #1145 (draft): which source informs each piece of landlords'
-// income, for landlords who come from tax records (the SPI) and from the
-// household survey (the FRS). A row with one cell applies to both. Details may
-// change before merge.
-export type PropertyCell = { source: string; text: string };
+// Microcosm #1145 (draft): the steps that build landlords' income, from the
+// stage declarations in sources.yaml at the PR head (spi_support_channel,
+// spi_income_band_donors, hmrc_spi_income_spine, property_components). Two
+// lanes, survey landlords and the tax-record copies, merge before rent
+// received. Details may change before merge.
+export type PropertyStep = { title: string; text: string; source: string };
 
-export const propertyColumns = [
-  { title: "Landlords from tax records", detail: "Survey of Personal Incomes" },
-  { title: "Landlords in the household survey", detail: "Family Resources Survey" },
-];
-
-export const propertyRows: { piece: string; detail: string; cells: PropertyCell[] }[] = [
-  {
-    piece: "Profit",
-    detail: "Taxable property income",
-    cells: [
-      { source: "Tax records", text: "As reported" },
-      { source: "Survey", text: "As reported, with mortgage interest added back" },
-    ],
-  },
-  {
-    piece: "Finance costs",
-    detail: "Mortgage interest",
-    cells: [
-      { source: "Tax records", text: "As reported" },
-      { source: "Imputed from tax records", text: "Learned from landlords with similar profit and age" },
-    ],
-  },
-  {
-    piece: "Rent received",
-    detail: "Before expenses",
-    cells: [
+export const propertyLanes = {
+  survey: {
+    label: "Landlords in the household survey",
+    steps: [
       {
-        source: "HMRC rental income statistics",
-        text: "Ranked by profit into HMRC's bands of rent received; expenses are the difference",
+        title: "FRS households",
+        text: "Landlords report rent after mortgage payments",
+        source: "FRS 2024-25",
+      },
+      {
+        title: "Add back mortgage interest",
+        text: "Finance costs drawn from similar tax-record landlords, added to profit",
+        source: "SPI 2022-23",
       },
     ],
   },
-  {
-    piece: "Weights",
-    detail: "Calibration",
-    cells: [
-      { source: "HMRC personal income statistics", text: "Matched to landlord numbers and property income, by income band" },
-    ],
-  },
-  {
-    piece: "Tax",
-    detail: "Computed by the model",
-    cells: [
+  copies: {
+    label: "Copies carrying tax-record incomes",
+    steps: [
       {
-        source: "policyengine-uk",
-        text: "Scottish rates on profit · £1,000 allowance or actual expenses · 20% tax reduction on finance costs, 22% from April 2027",
+        title: "Copy households",
+        text: "10,000 survey households copied, plus copies for incomes over £200,000",
+        source: "FRS · HMRC taxpayer counts",
+      },
+      {
+        title: "Draw tax-record incomes",
+        text: "Each adult gets profit and finance costs from taxpayers like them",
+        source: "SPI 2022-23",
       },
     ],
+  },
+} satisfies Record<string, { label: string; steps: PropertyStep[] }>;
+
+export const propertyMergedSteps: PropertyStep[] = [
+  {
+    title: "Rent received",
+    text: "Landlords ranked by profit into HMRC's bands; expenses are the difference",
+    source: "HMRC rental statistics",
+  },
+  {
+    title: "Calibrate weights",
+    text: "Match landlord numbers and property income by income band",
+    source: "HMRC income tables 2023-24",
+  },
+  {
+    title: "Compute tax",
+    text: "£1,000 allowance or expenses, and a 20% tax reduction on finance costs",
+    source: "policyengine-uk",
   },
 ];
 
