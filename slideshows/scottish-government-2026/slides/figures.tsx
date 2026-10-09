@@ -101,13 +101,13 @@ export function TargetTable() {
 
 // A waterfall from rent received down to what the FRS asks for. Each total is
 // what a source counts; each deduction column says what the next total leaves
-// out. Heights share one £0–50bn axis.
+// out, and a deduction can follow another. Heights share one £0–50bn axis.
 const WATERFALL_MAX = 50;
 
 // Each column's span on the axis, and the level its connector starts from:
 // a deduction hangs from the level the previous column ended at.
 const waterfallColumns = propertyWaterfall.reduce<
-  { step: (typeof propertyWaterfall)[number]; index: number; bottom: number; top: number; connector: number | null }[]
+  { step: (typeof propertyWaterfall)[number]; bottom: number; top: number; connector: number | null }[]
 >((columns, step, index) => {
   const last = columns[index - 1];
   const previous = last ? (last.step.kind === "deduction" ? last.bottom : last.top) : 0;
@@ -116,7 +116,6 @@ const waterfallColumns = propertyWaterfall.reduce<
     ...columns,
     {
       step,
-      index,
       bottom: deduction ? previous - step.value : 0,
       top: deduction ? previous : step.value,
       connector: last ? previous : null,
@@ -135,17 +134,23 @@ export function PropertyWaterfall() {
           </div>
         ))}
         <div className={styles.wfColumns}>
-          {waterfallColumns.map(({ step, index, bottom, top, connector }) => (
+          {waterfallColumns.map(({ step, bottom, top, connector }) => (
             <div key={step.label} className={styles.wfColumn}>
               {connector !== null && (
                 <span className={styles.wfConnector} style={{ bottom: pct(connector) }} aria-hidden="true" />
               )}
               <div
-                className={`${styles.wfBar} ${styles[`wfBar_${step.kind}`]} ${index === 3 ? styles.wfBarInterest : ""}`}
+                className={`${styles.wfBar} ${styles[`wfBar_${step.kind}`]} ${step.label === "Mortgage interest" ? styles.wfBarInterest : ""}`}
                 style={{ bottom: pct(bottom), height: pct(top - bottom) }}
                 title={`${step.label}: ${step.valueLabel}`}
               >
-                {step.kind === "deduction" && <span className={styles.wfInside}>{step.valueLabel}</span>}
+                {step.kind === "deduction" && (
+                  <span
+                    className={`${styles.wfInside} ${step.value / WATERFALL_MAX < 0.15 ? styles.wfBelow : ""}`}
+                  >
+                    {step.valueLabel}
+                  </span>
+                )}
               </div>
               {step.kind !== "deduction" && (
                 <span className={styles.wfValue} style={{ bottom: pct(top) }}>

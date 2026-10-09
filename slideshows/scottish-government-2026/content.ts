@@ -161,17 +161,27 @@ const prisFinanceCosts = 12.82 * (prisIndividualExpenses / 34.75);
 const prisReceipts = 49.81;
 const prisOtherExpenses = prisIndividualExpenses - prisFinanceCosts;
 
-// Waterfall from rent received down to what the FRS asks for. Totals are what a
-// source counts; deductions are what the next total leaves out. The survey's
-// figure has no published total here, so its bar is an upper bound.
+// FRS 2024-25, grossed with GROSS4: ROYYR1 (rent from other property after
+// the show card K6 items, including mortgage payments) x 52 for the 1,022
+// adults reporting a profit, 1.75m landlords. Reported losses (£0.32bn) and
+// sub-letting rent (£0.49bn) are left out.
+const frsRentAfterMortgage = 15.4;
+
+// Waterfall from rent received down to what the FRS asks for. The three totals
+// are what each source counts; the deductions between them are what the next
+// source leaves out. The last deduction is the residual between profit after
+// all costs and the survey's total.
 export type WaterfallStep = {
-  kind: "total" | "deduction" | "bound";
+  kind: "total" | "deduction";
   label: string;
   value: number;
   valueLabel: string;
   note: string;
   source?: string;
 };
+
+const prisProfitAfterCosts = prisReceipts - prisIndividualExpenses;
+const frsResidual = prisProfitAfterCosts - frsRentAfterMortgage;
 
 export const propertyWaterfall: WaterfallStep[] = [
   {
@@ -205,18 +215,18 @@ export const propertyWaterfall: WaterfallStep[] = [
     note: "Not deducted: it earns a 20% tax reduction instead, 22% from April 2027",
   },
   {
-    kind: "total",
-    label: "Profit after all costs",
-    value: prisReceipts - prisIndividualExpenses,
-    valueLabel: `£${(prisReceipts - prisIndividualExpenses).toFixed(1)}bn`,
-    note: "What is left once mortgage interest is paid",
+    kind: "deduction",
+    label: "Capital repaid, and coverage",
+    value: frsResidual,
+    valueLabel: `−£${frsResidual.toFixed(1)}bn`,
+    note: "Mortgage capital, which the survey also takes off, and landlords it misses",
   },
   {
-    kind: "bound",
+    kind: "total",
     label: "Rent after mortgage payments",
-    value: prisReceipts - prisIndividualExpenses,
-    valueLabel: "less than this",
-    note: "Also takes off the mortgage capital repaid",
+    value: frsRentAfterMortgage,
+    valueLabel: `£${frsRentAfterMortgage.toFixed(1)}bn`,
+    note: "What landlords report in the survey",
     source: "Family Resources Survey",
   },
 ];

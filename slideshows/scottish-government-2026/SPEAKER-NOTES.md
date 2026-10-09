@@ -21,7 +21,7 @@ April, and the Autumn Budget plan.
 
 ## 3. Part 1: How we build the UK's microdata
 
-## 4. From surveys to a population that represents Scotland
+## 4. From surveys to a population that represents the UK
 
 Read left to right. Each box below is a stage; the grey box above it names the
 data that feeds it.
@@ -102,8 +102,8 @@ Source: [release certification runbook](https://github.com/PolicyEngine/microcos
 
 Read the waterfall left to right. It starts from HMRC's rent received by
 individual landlords in 2024-25 and takes off one kind of cost at a time. The
-dark bars are totals a source counts; the light bars between them are what the
-next source leaves out.
+three dark bars are the totals each source counts, all for 2024-25; the light
+bars between them are what the next source leaves out.
 
 - Rent received, £49.8bn: HMRC's property rental income statistics, before any
   costs.
@@ -112,11 +112,18 @@ next source leaves out.
 - Taxable profit, about £31bn: what the SPI records and income tax is charged
   on. It still includes mortgage interest.
 - Less mortgage interest, £11.1bn: since 2020-21 it isn't deducted; it earns a
-  20% tax reduction instead, rising to 22% from April 2027.
-- Profit after all costs, £19.8bn: no source publishes this figure directly.
-- Rent after mortgage payments: what the FRS asks for. The survey also takes
-  off the mortgage capital repaid, so its figure is lower still; it has no
-  published total on this basis, so the bar is drawn as an upper bound.
+  20% tax reduction instead, rising to 22% from April 2027. That leaves £19.8bn
+  of profit after all costs, which no source publishes directly.
+- Less capital repaid, and coverage, £4.4bn: the gap between that £19.8bn and
+  the survey's total. Part is the mortgage capital the survey also takes off;
+  part is landlords and rent the survey doesn't capture. The two can't be
+  separated from published figures.
+- Rent after mortgage payments, £15.4bn: what the FRS asks for. Landlords give
+  rent "after paying for" the items on show card K6: mortgage payments,
+  repairs, loan interest, rent, rates and insurance, legal costs and services.
+  This is the FRS 2024-25 grossed up: 1,022 adults reporting a profit, 1.75m
+  landlords. Reported losses (£0.3bn, 67 adults) and sub-letting rent (£0.5bn)
+  are left out; net of losses it is £15.1bn.
 
 The Enhanced FRS scaled SPI profit up to HMRC's rent received, so it modelled
 rent before expenses as taxable profit (about £55bn against roughly £31bn).

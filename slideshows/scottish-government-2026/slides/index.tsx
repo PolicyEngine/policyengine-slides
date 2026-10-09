@@ -235,7 +235,7 @@ export function PipelineSlide() {
   return (
     <Frame
       section={sections.data}
-      title="From surveys to a population that represents Scotland"
+      title="From surveys to a population that represents the UK"
       center
       references={[sources.pipeline, sources.inputs, sources.geography]}
     >
@@ -303,9 +303,9 @@ export function PropertyConceptsSlide() {
         roughly <strong>£31bn</strong>.
       </p>
       <p className={styles.finePrint}>
-        Individual landlords, 2024-25. Rent received and total expenses are
-        HMRC&apos;s; mortgage interest is pro-rated from all landlords&apos;
-        £12.8bn.
+        2024-25, individual landlords. Mortgage interest is pro-rated from
+        HMRC&apos;s all-landlord figure; the FRS total covers landlords
+        reporting a profit.
       </p>
     </Frame>
   );

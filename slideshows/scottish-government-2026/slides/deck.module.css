@@ -319,6 +319,7 @@
 /* Property income: a waterfall from rent received to the survey's measure. */
 .waterfall {
   --wf-gap: 1.25rem;
+  padding-top: 1.5rem;
 }
 
 .wfPlot {
@@ -390,18 +391,17 @@
   background: var(--pe-amber-light);
 }
 
-.wfBar_bound {
-  border: 2px dashed var(--color-teal-700);
-  border-bottom: 0;
-  border-radius: 4px 4px 0 0;
-  background: linear-gradient(to top, var(--pe-light), transparent);
-}
-
 .wfInside {
   color: var(--pe-darker);
   font-size: 1.15rem;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
+}
+
+/* A short deduction bar puts its label underneath. */
+.wfBelow {
+  position: absolute;
+  top: calc(100% + 0.3rem);
 }
 
 .wfValue {
@@ -948,8 +948,12 @@
   }
 
 
+  .waterfall {
+    padding-top: 1.25rem;
+  }
+
   .wfPlot {
-    height: 13rem;
+    height: 12rem;
   }
 
   .wfGrid span {
