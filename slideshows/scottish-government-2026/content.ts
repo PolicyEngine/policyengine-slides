@@ -371,7 +371,7 @@ export const energyPublications: Publication[] = [
       "Fiscal cost and distributional impact of a six-month cut from 5% to 0% from October 2026",
     href: "https://www.policyengine.org/uk/electricity-vat-cut",
     image: cover("electricity-vat-cut.jpg"),
-    alt: "Cover image for the electricity VAT cut dashboard",
+    alt: "VAT on household electricity cut from 5% to 0%",
   },
   {
     title: "Energy price shock",

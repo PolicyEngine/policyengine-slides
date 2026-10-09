@@ -240,8 +240,11 @@ never "£175 a year". 2026-27, on the Microcosm UK national release with policye
   would fall short.
 - Today's Warm Home Discount works differently in Scotland: only Pension Credit
   Guarantee Credit households are data-matched. Officials may raise it.
-- NRS's latest count is 2,570,300 Scottish households in 2025; our 2.66m for
-  2026-27 is about 2% higher. Say so if asked.
+- If asked about the household count: our Scotland total is calibrated to
+  the council tax base, 2.62m chargeable dwellings in September 2025, carried
+  forward to 2026-27. That is a dwelling count, so it sits about 2% above
+  NRS's 2.57m households for 2025. If pressed on why the two differ, offer to
+  follow up rather than guess.
 - Left chart: share of households eligible by region, split by route and sorted
   by the total. The North East is highest (55%); London is lowest (35%), where
   the income test reaches only 6% beyond those on benefits.
@@ -267,8 +270,11 @@ Sources: [dashboard](https://www.policyengine.org/uk/targeted-energy-discount),
 ## 12. Energy and the cost of living
 
 Each card opens the live dashboard. The energy work builds up from the April
-price-shock analysis. The electricity VAT cut was analysed before the
-government enacted it from 1 October 2026, and it applies in Scotland. The
+price-shock analysis. We published the electricity VAT cut costing on
+21 July 2026, the day the Prime Minister announced it; don't say we
+anticipated it. The zero rate has applied across Great Britain, including
+Scotland, since 1 October. The live dashboard's cover is a press photo of the
+Prime Minister, so don't click through to it on the call. The
 targeted discount card is the analysis from part 3.
 
 ## 13. Work, benefits and new shocks
