@@ -226,7 +226,7 @@ export function ScotlandDecileChart() {
           <div
             key={d.decile}
             className={styles.decileColumn}
-            title={`Decile ${d.decile}: £${d.averageGain} on average; ${share(d.shareReceiving)} of households receive support`}
+            title={`Decile ${d.decile}: £${d.averageGain} on average; ${share(d.shareReceiving)} of households are eligible`}
           >
             <span className={styles.decileValue}>£{d.averageGain}</span>
             <span className={styles.decileBar} style={{ height: `${(d.averageGain / max) * 100}%` }} />
