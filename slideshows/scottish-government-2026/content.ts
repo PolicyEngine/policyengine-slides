@@ -204,7 +204,7 @@ export const propertyWaterfall: WaterfallStep[] = [
     label: "Taxable profit",
     value: prisReceipts - prisOtherExpenses,
     valueLabel: "about £31bn",
-    note: "What income tax is charged on",
+    note: "What income tax is charged on; the SPI records £29.4bn for 2023-24",
     source: "Survey of Personal Incomes",
   },
   {

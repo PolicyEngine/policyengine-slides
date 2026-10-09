@@ -298,12 +298,12 @@ export function PropertyConceptsSlide() {
     >
       <PropertyWaterfall />
       <p className={styles.waterfallTakeaway}>
-        Our previous dataset scaled tax-record profit up to rent received, so it
+        The Enhanced FRS scaled tax-record profit up to rent received, so it
         treated about <strong>£55bn</strong> as taxable property income, against
         roughly <strong>£31bn</strong>.
       </p>
       <p className={styles.finePrint}>
-        2024-25, individual landlords. Mortgage interest is pro-rated from
+        UK, 2024-25, individual landlords. Mortgage interest is pro-rated from
         HMRC&apos;s all-landlord figure; the FRS total covers landlords
         reporting a profit.
       </p>

@@ -5,7 +5,7 @@ Enhanced FRS pipeline, Scotland calibration targets, the Scottish Budget
 dashboard) and the March update (Spring Statement 2026, research from February
 and March, the Claude plugin). Don't re-explain those; refer back to them.
 
-About 25 minutes plus discussion: roughly 7 on part 1, 5 on part 2, 5 on part 3,
+About 23 minutes plus discussion: roughly 5 on part 1, 5 on part 2, 5 on part 3,
 3 on part 4 and 5 on part 5.
 
 ## 1. Title
@@ -56,6 +56,10 @@ Layout adapted from the [IMA pipeline diagram](https://github.com/PolicyEngine/p
 
 ## 5. The official Scottish totals we match
 
+The live calibration dashboard slide was taken out on 9 October: its embed
+showed "HF fetch failed 401" and a private dataset name. Don't open the
+dashboard on the call or quote fit percentages.
+
 1,915 target rows: 58 Scotland-wide, 831 across 32 council areas and 1,026
 across 57 Westminster constituencies. These are target definitions, not a count
 of targets that have passed a release check.
@@ -81,24 +85,9 @@ this separately in the national and local files.
 Sources: [national targets](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/packages/microcosm-build/src/microcosm/build/uk/target_references.json),
 [local targets](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/packages/microcosm-build/src/microcosm/build/uk/local_target_references.json).
 
-## 6. Checking the fit to Scottish statistics
+## 6. Part 2: Modelling property income
 
-The embedded [live UK diagnostics dashboard](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk)
-compares model totals with official targets. Open it in a separate tab if a
-larger view helps. Discuss Scotland's population, income and benefit targets,
-rather than a UK-wide headline alone, and keep national and local results
-separate.
-
-On 8 October 2026 the page permitted embedding, but its UK release and summary
-endpoints returned HTTP 502. Check the live data before presenting. If they
-remain unavailable, use the previous slide and avoid quoting fit percentages.
-The deck's next-slide button works when focus is inside the iframe.
-
-Source: [release certification runbook](https://github.com/PolicyEngine/microcosm/blob/75167a688ea83316654f1d794542124b4277bda9/docs/uk-national-release-assembly-runbook-806.md).
-
-## 7. Part 2: Modelling property income
-
-## 8. Landlords' income, measured three ways
+## 7. Landlords' income, measured three ways
 
 Read the waterfall left to right. It starts from HMRC's rent received by
 individual landlords in 2024-25 and takes off one kind of cost at a time. The
@@ -128,9 +117,18 @@ bars between them are what the next source leaves out.
 The Enhanced FRS scaled SPI profit up to HMRC's rent received, so it modelled
 rent before expenses as taxable profit (about £55bn against roughly £31bn).
 
+If asked what today's data hold: Microcosm #1106 (5 October, the day after
+the certified national release) says that release binds no property-income
+target and its property income sits close to the raw FRS, which is likely too
+low for landlords. Microcosm #1145, the next slide, is the fix and is still a
+draft. If asked whether earlier published results were affected: analyses on
+the Enhanced FRS carried the overstatement; check which dataset a given
+dashboard used before answering for it.
+
 The "about £31bn" is HMRC's rent received less the expenses other than mortgage
 interest. The SPI's own published figure is £29.35bn for 2023-24, about £31.8bn
-uprated to 2025, so the two agree. Slide 9 explains how we build each piece.
+uprated to 2025, so the two agree. The bar under the SPI label shows the
+HMRC-derived £31bn, and its note gives the SPI's own £29.4bn. Slide 8 explains how we build each piece.
 
 HMRC publishes individuals' rent received (£49.81bn) and total expenses
 (£30.03bn). Mortgage interest is published for all landlords (£12.82bn of
@@ -140,7 +138,7 @@ expenses.
 Sources: [HMRC property rental income statistics 2026](https://www.gov.uk/government/statistics/property-rental-income-statistics/property-rental-income-statistics-2026),
 [Microcosm #1106](https://github.com/PolicyEngine/microcosm/issues/1106).
 
-## 9. How we build landlords' income, step by step
+## 8. How we build landlords' income, step by step
 
 Two lanes merge. The top lane is landlords in the household survey; the bottom
 lane is copies of survey households that carry incomes from tax records. Each
@@ -194,9 +192,9 @@ Sources: [Microcosm #1145](https://github.com/PolicyEngine/microcosm/pull/1145),
 [policyengine-uk #2172](https://github.com/PolicyEngine/policyengine-uk/pull/2172),
 [GOV.UK rates paper](https://www.gov.uk/government/publications/changes-to-tax-rates-for-property-savings-dividend-income/changes-to-tax-rates-for-property-savings-dividend-income).
 
-## 10. Part 3: An analysis example
+## 9. Part 3: An analysis example
 
-## 11. A targeted energy bill discount
+## 10. A targeted energy bill discount
 
 The Resolution Foundation's flat option from
 [Billing me softly](https://www.resolutionfoundation.org/publications/billing-me-softly/):
@@ -229,16 +227,16 @@ version and a household calculator.
 Sources: [dashboard](https://www.policyengine.org/uk/targeted-energy-discount),
 [analysis at uk-energy-reforms 14bf3b0](https://github.com/PolicyEngine/uk-energy-reforms/tree/14bf3b0afc121b092bbd7545c9fb4963e8ab5c72/analyses/rf-billing-me-softly).
 
-## 12. Part 4: Published work since April
+## 11. Part 4: Published work since April
 
-## 13. Energy and the cost of living
+## 12. Energy and the cost of living
 
 Each card opens the live dashboard. The energy work builds up from the April
 price-shock analysis. The electricity VAT cut was analysed before the
 government enacted it from 1 October 2026, and it applies in Scotland. The
 targeted discount card is the analysis from part 3.
 
-## 14. Work, benefits and new shocks
+## 13. Work, benefits and new shocks
 
 CliffWatch is a tool officials can use directly. The land value tax post
 (Progress and Poverty, 4 June 2026) used PolicyEngine to model replacing council
@@ -251,9 +249,9 @@ The bus fare cap and free childcare work is England only, so it's left off.
 
 Source: [UK research library](https://www.policyengine.org/uk/research).
 
-## 15. Part 5: Plan for the Autumn Budget
+## 14. Part 5: Plan for the Autumn Budget
 
-## 16. Where we are starting
+## 15. Where we are starting
 
 Show the 2025 dashboard as the base we are building on; click through if there
 is time. Don't re-present its 2025 results.
@@ -267,9 +265,9 @@ provides a starting point for checking and improving the 2026 workflow.
 Sources: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025),
 [2025 in review dashboard](https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review).
 
-## 17. How Budget day will run
+## 16. How Budget day will run
 
 The development repository still contains the inherited 2025 measures. This
 is a plan, not completed 2026 analysis.
 
-## 18. Thank you
+## 17. Thank you

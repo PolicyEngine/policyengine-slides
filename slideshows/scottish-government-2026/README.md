@@ -1,16 +1,16 @@
 # Scottish Government meeting, 9 October 2026
 
-18 slides at `/slides/scottish-government-2026`, in five parts, each opened by a
+17 slides at `/slides/scottish-government-2026`, in five parts, each opened by a
 section slide:
 
 1. How we build the UK's microdata: the pipeline with the sources that feed
-   each stage, the Scottish target table and live diagnostics (slides 3–6)
+   each stage and the Scottish target table (slides 3–5)
 2. Modelling property income: a waterfall of what each source measures, and the
-   steps that build landlords' income (slides 7–9)
+   steps that build landlords' income (slides 6–8)
 3. An analysis example: the targeted energy bill discount, by region and across
-   Scotland's income distribution (slides 10–11)
-4. Published work since April (slides 12–14)
-5. Plan for the Autumn Budget (slides 15–17)
+   Scotland's income distribution (slides 9–10)
+4. Published work since April (slides 11–13)
+5. Plan for the Autumn Budget (slides 14–16)
 
 The deck follows two earlier Scottish Government presentations in
 `PolicyEngine/policyengine-demo`:
@@ -47,14 +47,13 @@ Run `bun install --frozen-lockfile`, then `bun dev`. Open
 slides and `F` enters fullscreen. Links open in a new tab. Export with
 `bun run export scottish-government-2026 /path/to/output.pdf`.
 
-Slide 6 embeds the UK calibration diagnostics site and links to it separately.
-The iframe is interactive and scrolls independently; use the deck's next-slide
-button to leave it. On 8 October the page loaded, but the UK release and summary
-API endpoints returned HTTP 502. The preceding Scottish target table remains
-available without the external site. Check the live dashboard before presenting.
+`ReleaseChecksSlide`, which embeds the UK calibration diagnostics site, is out
+of the slide order: on 9 October the embed showed "HF fetch failed 401" with a
+private dataset name. Add it back to `config.ts` once the dashboard loads its
+release.
 
-Slide 11 charts the targeted energy bill discount and links its dashboard. Slide
-16 links both the 2025
+Slide 10 charts the targeted energy bill discount and links its dashboard. Slide
+15 links both the 2025
 Budget dashboard and [Autumn Budget 2025 in review](https://github.com/PolicyEngine/autumn-budget-2025-in-review),
 including its public review dashboard.
 
