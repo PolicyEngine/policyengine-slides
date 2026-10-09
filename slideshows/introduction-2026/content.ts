@@ -38,6 +38,10 @@ export const sources = {
     label: "Nuffield Foundation project",
     href: "https://www.nuffieldfoundation.org/project/enhancing-localising-and-democratising-tax-benefit-policy-analysis",
   },
+  nef: {
+    label: "New Economics Foundation, July 2026",
+    href: "https://neweconomics.org/2026/07/insecure-low-quality-work-a-major-driver-of-uks-neets-and-inactivity-crisis",
+  },
   citations: {
     label: "All citations",
     href: "https://www.policyengine.org/uk/citations",
@@ -86,8 +90,7 @@ export const users: User[] = [
     source: sources.no10Post,
   },
   {
-    name: "Parliament",
-    logo: "/logos/orgs/uk-parliament-portcullis.svg",
+    name: "House of Lords",
     initials: "HL",
     kind: "Parliament",
     source: sources.hansard,
@@ -111,6 +114,7 @@ export const users: User[] = [
     logo: "/logos/orgs/new-economics-foundation.png",
     initials: "NEF",
     kind: "Think tank",
+    source: sources.nef,
   },
   {
     name: "Good Growth Foundation",
@@ -204,7 +208,7 @@ export const press: Card[] = [
   },
   {
     title: "Workers face pay hit under Reeves's National Insurance plans",
-    date: "The Telegraph · May 2025",
+    date: "The Telegraph · October 2024",
     text: "",
     href: "https://www.telegraph.co.uk/money/tax/workers-face-3000-pay-cut-under-reeves-national-insurance/",
     image: shot("telegraph-nic.webp"),
@@ -325,6 +329,6 @@ export const ideas = [
   },
   {
     title: "Checkable numbers",
-    text: "Open code and data, so any figure can be cited and checked.",
+    text: "Open code and a published method, so any figure can be cited and traced.",
   },
 ];

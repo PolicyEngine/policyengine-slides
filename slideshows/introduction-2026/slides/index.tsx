@@ -185,7 +185,7 @@ export function WhatSlide() {
         className="mt-8 flex items-center gap-4 rounded-xl bg-pe-teal/10 px-6 py-4 text-xl text-pe-dark hover:no-underline"
       >
         <IconBrandGithub size={28} stroke={1.8} aria-hidden="true" className="text-pe-teal" />
-        All the code is public, so every number can be checked.
+        All the code is public, so anyone can see how each number is calculated.
       </ExternalLink>
     </Frame>
   );
@@ -219,7 +219,7 @@ export function UsersSlide() {
     <Frame
       title="Our community"
       subtitle="Organisations that use, cite and support our work"
-      references={[sources.tpa, sources.cps, sources.nuffield]}
+      references={[sources.hansard, sources.tpa, sources.cps, sources.nef, sources.nuffield]}
     >
       <div className="grid grid-cols-4 gap-x-10 gap-y-12 pt-4">
         {users.map((user) => {

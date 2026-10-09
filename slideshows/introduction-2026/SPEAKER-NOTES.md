@@ -24,17 +24,23 @@ words; she doesn't need the pipeline detail.
 
 Eight organisations that use, cite and support our work, as cards with
 logos and a type label; no description lines on the slide.
-- No 10 data science team (10DS): Nikhil's Innovation Fellowship; the card
-  links to our post about it.
-- Parliament: our analysis was cited in a Lords debate on 24 February 2026.
+- No 10 data science team (10DS): built its 10ds-microsim package on top of
+  PolicyEngine during Nikhil's Innovation Fellowship; the card links to our
+  20 January 2026 post. That post calls the outputs supplementary,
+  experimental analysis, so don't say No 10 relies on PolicyEngine.
+- House of Lords: our analysis was cited in a Lords debate on 24 February
+  2026. A citation in debate, not Parliament using PolicyEngine. The crowned
+  portcullis is restricted, so the card has no logo.
 - Tax Policy Associates: checked the Universities UK National Insurance
   costing with PolicyEngine (10 September 2026).
 - Centre for Policy Studies: its July 2023 report "Family-Friendly Taxation"
   used PolicyEngine modelling to cost its personal allowance proposals.
 - Nuffield Foundation: funds our local-area work; its project page names us.
-- New Economics Foundation, Good Growth Foundation and WPI Economics: no
-  public source found, so the cards only name them. Check with Max before
-  giving detail.
+- New Economics Foundation: its July 2026 report on job quality and NEETs
+  used PolicyEngine UK (also on slide 5).
+- Good Growth Foundation and WPI Economics: both use PolicyEngine (Max
+  confirmed, 9 October). Neither has a public write-up yet, so the cards name
+  them without a link; leave detail of the work to Max.
 - Don't list HM Treasury: its algorithmic transparency record says "HMT does
   not currently use PolicyEngine".
 
@@ -47,7 +53,7 @@ fare cap costing), the New Economics Foundation's report on job quality and
 NEETs (July 2026; its modelling used PolicyEngine UK), City AM (junior hiring, July 2026), Social Market
 Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
 2026), ITV Peston (student loans, February 2026) and a Telegraph story on the
-National Insurance plans (May 2025; paywalled). The June 2026 land value tax
+National Insurance plans (October 2024, before that month's Budget; paywalled). The June 2026 land value tax
 post is on slide 6 instead, so it isn't shown twice.
 
 ## 6. Recent UK work
@@ -74,6 +80,13 @@ give fit figures for the local data, which is still going through its checks.
 For discussion, not commitments: a Budget calculator for readers, local
 figures, fast costings (for example our costing of removing the £100,000
 childcare limit), chart data, explainers, and checkable numbers.
+
+If asked for the childcare figure: about £0.6bn a year from 2027-28. Corrections
+are still landing (uk-childcare-100k-threshold #6), and the "about 10,000
+families lose" line on the current dashboard was a modelling error that #6
+removes, so don't quote it. "Checkable" means open code and a published
+method: the household data are licensed survey data, so reporters can't
+rerun a figure themselves.
 
 ## 10. Thank you
 
