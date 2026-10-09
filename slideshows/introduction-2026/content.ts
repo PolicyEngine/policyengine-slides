@@ -92,6 +92,7 @@ export const users: User[] = [
   {
     name: "House of Lords",
     initials: "HL",
+    logo: "/logos/orgs/house-of-lords.svg",
     kind: "Parliament",
     source: sources.hansard,
   },
