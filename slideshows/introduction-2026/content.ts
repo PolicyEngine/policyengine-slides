@@ -59,7 +59,7 @@ export const sources = {
 export const steps = [
   {
     title: "The rules",
-    text: "Tax and benefit law written as open code: income tax, National Insurance, Universal Credit, Child Benefit, council tax, VAT and more.",
+    text: "Tax and benefit law written as open code: income tax, National Insurance, Universal Credit, Child Benefit, Council Tax Reduction, VAT and more.",
   },
   {
     title: "The households",
@@ -151,12 +151,12 @@ const shot = (file: string) => `/screenshots/introduction-2026/${file}`;
 
 export const press: Card[] = [
   {
-    title: "Universities UK wants to scrap employer National Insurance for everyone under 25",
+    title: "Universities UK: a £6bn lesson in bad tax policy",
     date: "Tax Policy Associates (Dan Neidle) · September 2026",
     text: "",
-    href: "https://x.com/DanNeidle/status/2098054834943295772",
+    href: "https://taxpolicy.org.uk/2026/09/10/universities-uk-national-insurance-proposal/",
     image: shot("tpa-universities-uk-ni.png"),
-    alt: "Chart from the Tax Policy Associates analysis of the Universities UK proposal",
+    alt: "Cover of the Universities UK Future Jobs Roadmap",
   },
   {
     title: "Nationalisation is not a growth strategy",
@@ -267,11 +267,11 @@ export const publications: Card[] = [
   },
   {
     title: "Replacing council tax with a land value tax",
-    date: "June 2026",
+    date: "June 2026 · guest post",
     text: "A revenue-neutral swap modelled with PolicyEngine: most households gain and poverty edges down.",
     href: "https://progressandpoverty.substack.com/p/how-replacing-council-tax-with-a",
     image: shot("lvt-council-tax.jpg"),
-    alt: "Andy Burnham speaking, cover of the land value tax post",
+    alt: "Chart from the post: average net income change by income decile, 2026-27",
   },
   {
     title: "Energy price shock",
@@ -287,22 +287,22 @@ export const budgetPlan = [
   {
     when: "Before the Budget",
     title: "Fix the model and data",
-    text: "Lock the model version and the certified Microcosm data, and prepare likely measures.",
+    text: "Freeze the model and data versions so every figure can be reproduced, and prepare the measures trailed in advance.",
   },
   {
     when: "On Budget day",
     title: "Model each measure",
-    text: "Read the documents, encode each measure and check its timing and scope.",
+    text: "Read the Budget documents, add each measure to the model, and check when it starts and who it covers.",
   },
   {
-    when: "Within hours",
+    when: "Then",
     title: "Publish the dashboard",
-    text: "Cost, who gains and loses by income, example households and results by constituency.",
+    text: "Cost beside the OBR's, who gains and loses by income, and example households.",
   },
   {
-    when: "Alongside",
-    title: "Explain the method",
-    text: "A short published note on how the constituency figures are estimated.",
+    when: "Once the local data pass their checks",
+    title: "Add constituency results",
+    text: "Results by constituency, with a short published note on how they are estimated.",
   },
 ];
 

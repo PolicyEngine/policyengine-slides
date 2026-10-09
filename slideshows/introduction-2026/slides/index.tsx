@@ -279,7 +279,7 @@ export function PublicationsSlide() {
       title="Recent UK work"
       subtitle={
         <>
-          Interactive analysis published since April.{" "}
+          Analysis published since April.{" "}
           <ExternalLink href={sources.research.href} className="text-pe-teal">
             See all UK research
           </ExternalLink>
@@ -299,7 +299,7 @@ export function Budget2025Slide() {
   return (
     <Frame
       title="Autumn Budget 2025"
-      subtitle="Our dashboard on Budget day: the cost of each measure, who gains and loses, and the effect in every constituency"
+      subtitle="Live on Budget day, 26 November 2025, with three measures costed beside the OBR and a constituency map. Nine measures and a household calculator by 28 November."
       references={[sources.budget2025]}
     >
       <div className="flex items-start justify-center gap-10">
@@ -330,7 +330,7 @@ export function Budget2026Slide() {
   return (
     <Frame
       title="Autumn Budget 2026: our plan"
-      subtitle="The same kind of dashboard, on our new household data"
+      subtitle="Budget day is Wednesday 28 October. The same kind of dashboard as 2025, on our new household data."
     >
       <div className="space-y-0">
         {budgetPlan.map((step) => (
