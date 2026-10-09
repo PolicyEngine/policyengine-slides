@@ -54,9 +54,13 @@ export const sources = {
     label: "Autumn Budget 2025 dashboard",
     href: "https://www.policyengine.org/uk/autumn-budget-2025",
   },
-  budgetReview: {
-    label: "Autumn Budget 2025 in review · source",
-    href: "https://github.com/PolicyEngine/autumn-budget-2025-in-review",
+  scottishBudget: {
+    label: "Scottish Budget 2026-27 dashboard",
+    href: "https://www.policyengine.org/uk/scottish-budget-2026-27",
+  },
+  propertyData: {
+    label: "Microcosm #1145 (draft)",
+    href: "https://github.com/PolicyEngine/microcosm/pull/1145",
   },
   budgetReviewDashboard: {
     label: "Autumn Budget 2025 in review",
@@ -113,7 +117,7 @@ export const pipelineStages = [
   },
   {
     title: "Place in Scotland",
-    adds: "An Output Area, council and constituency for each household",
+    adds: "Local-area build, in validation: an Output Area, council and constituency for each household",
     sources: ["NRS 2022 Output Areas and lookups"],
   },
   {
@@ -406,16 +410,16 @@ export const workPublications: Publication[] = [
       "A revenue-neutral swap modelled with PolicyEngine: most households gain and poverty edges down",
     href: "https://progressandpoverty.substack.com/p/how-replacing-council-tax-with-a",
     image: cover("lvt-council-tax.jpg"),
-    alt: "Cover of the land value tax post",
+    alt: "Chart from the land value tax post: average net income change by income decile, 2026-27",
   },
   {
-    title: "Scotland income tax reform",
+    title: "Reform UK Scotland's income tax proposal",
     date: "April 2026",
     finding:
-      "Replacing Scotland's six income tax bands with the rest-of-UK structure, then cutting rates",
+      "Costing the party's plan to replace Scotland's six bands with the rest-of-UK structure, then cut rates",
     href: "https://www.policyengine.org/uk/scotland-income-tax-reform",
     image: cover("scotland-income-tax-reform.jpg"),
-    alt: "Cover image for the Scotland income tax reform dashboard",
+    alt: "Scotland's six income tax bands beside the rest-of-UK three",
   },
 ];
 
@@ -433,12 +437,12 @@ export const nicsLinks = [
 // Section 5: Autumn Budget 2026.
 export const budgetPlan = [
   {
-    stage: "Before the Budget",
+    stage: "Before 28 October",
     title: "Pin the model and data",
     text: "Fix the policyengine-uk version and data release, check current law and prepare likely scenarios.",
   },
   {
-    stage: "On Budget day",
+    stage: "28 October: UK Budget day",
     title: "Encode and test the measures",
     text: "Read the published documents, implement each measure and test its timing and scope.",
   },
@@ -448,8 +452,8 @@ export const budgetPlan = [
     text: "Fiscal, distributional and household results, with Scotland shown separately.",
   },
   {
-    stage: "After publication",
-    title: "Reconcile with official costings",
-    text: "Explain differences from OBR and Scottish Fiscal Commission figures, and revise.",
+    stage: "After the OBR and SFC publish",
+    title: "Reconcile with official figures",
+    text: "Explain differences from OBR costings and, for Scotland, from the Scottish Fiscal Commission forecasts published with the draft Scottish Budget on 3 December, and revise.",
   },
 ];

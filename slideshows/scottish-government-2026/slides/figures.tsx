@@ -18,7 +18,7 @@ export function PipelineGraph() {
   return (
     <div className={styles.pipeline}>
       <div className={styles.pipelineHeader}>
-        <span className="text-pe-teal">One set of households, built up step by step</span>
+        <span className="text-pe-teal">Microcosm UK: one set of households, built up step by step</span>
         <span className="text-pe-amber">Weighted to UK totals</span>
       </div>
       <div className={styles.pipelineGrid}>
@@ -219,7 +219,7 @@ export function ScotlandDecileChart() {
     <figure className={styles.chart}>
       <figcaption>
         <h2>Scotland: average gain per household</h2>
-        <p className={styles.chartNote}>Includes households that receive nothing</p>
+        <p className={styles.chartNote}>Includes households that get nothing. Each tenth rests on 38 to 102 survey households.</p>
       </figcaption>
       <div className={styles.decilePlot}>
         {scotlandEnergyDeciles.map((d) => (

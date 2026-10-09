@@ -187,7 +187,7 @@ function SectionSlide({
 const agenda = [
   {
     title: "How we build the UK's microdata",
-    text: "The sources, the pipeline and the official Scottish totals we match",
+    text: "The sources, the pipeline and the Scottish targets",
   },
   {
     title: "Modelling property income",
@@ -248,14 +248,15 @@ export function TargetsSlide() {
   return (
     <Frame
       section={sections.data}
-      title="The official Scottish totals we match"
+      title="Scottish targets in the Microcosm UK build"
       center
       references={[sources.nationalTargets, sources.localTargets]}
     >
       <TargetTable />
       <p className={styles.tableNote}>
-        Target rows defined for Scotland, its 32 council areas and 57 Westminster
-        constituencies. The local-area release is still being validated.
+        The national release calibrates to the 58 Scotland-wide rows. The 1,857
+        council and constituency rows are for the local-area build, which is still
+        being validated.
       </p>
     </Frame>
   );
@@ -298,9 +299,10 @@ export function PropertyConceptsSlide() {
     >
       <PropertyWaterfall />
       <p className={styles.waterfallTakeaway}>
-        The Enhanced FRS scaled tax-record profit up to rent received, so it
-        treated about <strong>£55bn</strong> as taxable property income, against
-        roughly <strong>£31bn</strong>.
+        The Enhanced FRS, still the website&apos;s UK default, multiplies
+        tax-record profit by 1.9, so it treats about <strong>£56bn</strong> as
+        taxable property income, more than the rent itself, against roughly{" "}
+        <strong>£31bn</strong>.
       </p>
       <p className={styles.finePrint}>
         UK, 2024-25, individual landlords. Mortgage interest is pro-rated from
@@ -317,11 +319,12 @@ export function PropertyModelSlide() {
       section={sections.property}
       title="How we build landlords' income, step by step"
       center
-      references={[sources.propertyEngine, sources.pris]}
+      references={[sources.propertyData, sources.propertyEngine, sources.pris]}
     >
       <PropertyFlow />
       <p className={styles.status}>
-        This is still work in progress, so details may change.
+        The tax rules in step 7 are released (policyengine-uk 2.123.0). Steps 3 to 6
+        use a draft data update (Microcosm #1145), and step 4 awaits a decision.
       </p>
     </Frame>
   );
@@ -340,14 +343,14 @@ export function EnergyDiscountSlide() {
       section={sections.analysis}
       title="A targeted energy bill discount"
       center
-      subtitle="The Resolution Foundation's proposal for 2026-27: £175 a year for households in Great Britain on a means-tested benefit, or where no one has taxable income of £24,000 or more"
+      subtitle="The Resolution Foundation's £2bn option for early 2027, modelled as £175 per eligible household in Great Britain: those on a means-tested benefit, or where no one has taxable income of £24,000 or more"
       references={[sources.energyDashboard, sources.energyAnalysis, sources.energyProposal]}
     >
       <div className={styles.energyStats}>
         <p>
           In Scotland, <strong>{h.recipients}</strong> of {h.households} households
-          receive support, costing <strong>{h.cost}</strong> of the {h.gbCost} GB
-          total.
+          (44%) would be eligible. If all took it up, it would cost{" "}
+          <strong>{h.cost}</strong> of the {h.gbCost} GB total.
         </p>
         <p className={styles.dashboardLink}>
           <ExternalLink href={sources.energyDashboard.href}>
@@ -430,11 +433,11 @@ const startingPoints = [
     alt: "Autumn Budget 2025 dashboard showing policy selection and population impact charts",
   },
   {
-    title: "Autumn Budget 2025 in review",
-    text: "Published costings side by side, worked household examples and a timeline of when analysis appeared.",
-    href: sources.budgetReviewDashboard.href,
-    image: "/screenshots/scottish-government-2026/autumn-budget-2025-in-review.jpg",
-    alt: "Autumn Budget 2025 in review dashboard showing the publication timeline and main publications",
+    title: "Scottish Budget 2026-27 dashboard",
+    text: "Fiscal and distributional results for the last Scottish Budget's income tax and benefit measures.",
+    href: sources.scottishBudget.href,
+    image: "/screenshots/scottish-government-2026/scottish-budget-2026-27.png",
+    alt: "Scottish Budget 2026-27 dashboard showing the estimated budgetary impact of six measures",
   },
 ];
 
@@ -443,8 +446,8 @@ export function Budget2025Slide() {
     <Frame
       section={sections.budget}
       title="Where we are starting"
-      subtitle="Two dashboards from last year's Budget; click either to open it"
-      references={[sources.budget2025, sources.budgetReviewDashboard, sources.budgetReview]}
+      subtitle="Our dashboards from the last UK and Scottish Budgets; click either to open it"
+      references={[sources.budget2025, sources.scottishBudget]}
       center
     >
       <div className={styles.previewGrid}>
@@ -474,7 +477,7 @@ export function BudgetDaySlide() {
     <Frame
       section={sections.budget}
       title="How Budget day will run"
-      subtitle="The model and data are fixed in advance, so results can follow the publication quickly"
+      subtitle="The Budget is on Wednesday 28 October. We plan to freeze a matched model and data pair the week before, so results can follow the documents quickly"
       references={[sources.budget2026]}
     >
       <div className="space-y-5">

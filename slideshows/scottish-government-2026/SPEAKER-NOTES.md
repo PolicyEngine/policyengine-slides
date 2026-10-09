@@ -36,12 +36,20 @@ data that feeds it.
    households in those sources, which keeps the variation between households
    rather than giving everyone an average. This is statistical matching, not
    linking the same household across surveys.
-4. Place in Scotland: each household is assigned a 2022 Output Area within its
-   region, which gives its council area and Westminster constituency.
+4. Place in Scotland: this runs only in the local-area build, which is still
+   being validated; the national release used in part 3 stops at region. In
+   the local build each household is given a 2022 Output Area drawn at random
+   in proportion to census household counts within its region, which gives its
+   council area and Westminster constituency. Council and constituency fit
+   comes from calibration, not from the survey.
 5. Match official totals: calibration changes how many real households each
    record represents. It doesn't change a record's income or circumstances.
    The weights are fitted to UK totals, including Scotland's own (next slide),
    so Scotland is represented within one UK dataset.
+
+Say which dataset this is: Microcosm UK, our new build. Its first certified
+national release (4 October) is what part 3 uses. The website's UK default
+still runs on the Enhanced FRS from February, now release 1.56.16.
 
 Keep the build machinery out of the explanation. If asked what changed since
 February: the spine is FRS 2024-25, high incomes come from the SPI, and local
@@ -61,8 +69,12 @@ showed "HF fetch failed 401" and a private dataset name. Don't open the
 dashboard on the call or quote fit percentages.
 
 1,915 target rows: 58 Scotland-wide, 831 across 32 council areas and 1,026
-across 57 Westminster constituencies. These are target definitions, not a count
-of targets that have passed a release check.
+across 57 Westminster constituencies. Only the 58 Scotland-wide rows are in a
+released dataset (the national release); the 1,857 council and constituency
+rows are for the local-area build, still being validated. Say plainly that
+council and constituency results aren't released yet. In February we showed
+1,428 targets; the definitions have grown since, but this isn't a production
+upgrade yet.
 
 - Population by age: 9 age bands plus children under 16 and babies under 1
   Scotland-wide; 8 bands in each council and constituency (NRS estimates for
@@ -114,8 +126,22 @@ bars between them are what the next source leaves out.
   landlords. Reported losses (£0.3bn, 67 adults) and sub-letting rent (£0.5bn)
   are left out; net of losses it is £15.1bn.
 
-The Enhanced FRS scaled SPI profit up to HMRC's rent received, so it modelled
-rent before expenses as taxable profit (about £55bn against roughly £31bn).
+Open part 2 by crediting Helen: "Thank you again for passing on HMRC's
+clarification. This chart is that point worked through. The rental statistics
+count rent before allowable expenses. When we wrote in June that the Enhanced
+FRS calibrated to them, that overstated taxable property income." Vahid
+already thanked her in writing on 5 October.
+
+The Enhanced FRS, still the website's UK default (1.56.16), multiplies SPI
+property profit by 1.9, the 2020-21 ratio of rent received to profit
+(policyengine-uk-data hmrc_spi.py), so it treats about £56bn as taxable
+property income: more than the £49.8bn of rent itself, against roughly £31bn.
+
+Every figure on slides 7 and 8 is a UK total, and the property calibration
+targets have no Scotland split. If asked about Scotland: in the FRS, Scotland's
+landlord income rests on 68 adults, grossed up to 97,000 landlords and £0.75bn.
+HMRC has 163,000 landlords with a Scottish address, with £2.82bn of rent and
+£1.53bn of rent less expenses.
 
 If asked what today's data hold: Microcosm #1106 (5 October, the day after
 the certified national release) says that release binds no property-income
@@ -196,17 +222,26 @@ Sources: [Microcosm #1145](https://github.com/PolicyEngine/microcosm/pull/1145),
 
 ## 10. A targeted energy bill discount
 
-The Resolution Foundation's flat option from
+The Resolution Foundation's option from
 [Billing me softly](https://www.resolutionfoundation.org/publications/billing-me-softly/):
-£175 a year for households in Great Britain that receive a means-tested benefit
-(the Warm Home Discount list), or where no member has taxable income of £24,000
-or more. 2026-27, on the Microcosm UK national release with policyengine-uk
+a cut in gas and electricity unit rates, ready to switch on if needed in early
+2027 (January to March), which RF sizes at about £2bn, an average of £175 per
+eligible household. We model it as a flat £175 for households in Great Britain
+that receive a means-tested benefit (the Warm Home Discount list), or where no
+member has taxable income of £24,000 or more. Say "RF's average of £175",
+never "£175 a year". 2026-27, on the Microcosm UK national release with policyengine-uk
 2.102.3, as the dashboard shows by default.
 
 - GB: £2.09bn for 11.95m households (42% of 28.6m).
-- Scotland: 1.16m of 2.66m households (44%) receive support, £204m or about a
-  tenth of the GB cost. 24% qualify through a benefit and 20% through the income
-  test alone.
+- Scotland: 1.16m of 2.66m households (44%) would be eligible, £204m or about
+  a tenth of the GB cost if all took it up. 24% qualify through a benefit and
+  would be enrolled automatically; 20% qualify only through the income test,
+  which RF says would rely on self-declaration this winter, so take-up there
+  would fall short.
+- Today's Warm Home Discount works differently in Scotland: only Pension Credit
+  Guarantee Credit households are data-matched. Officials may raise it.
+- NRS's latest count is 2,570,300 Scottish households in 2025; our 2.66m for
+  2026-27 is about 2% higher. Say so if asked.
 - Left chart: share of households eligible by region, split by route and sorted
   by the total. The North East is highest (55%); London is lowest (35%), where
   the income test reaches only 6% beyond those on benefits.
@@ -241,9 +276,11 @@ targeted discount card is the analysis from part 3.
 CliffWatch is a tool officials can use directly. The land value tax post
 (Progress and Poverty, 4 June 2026) used PolicyEngine to model replacing council
 tax with a flat land value tax, which is relevant to Scotland's council tax
-reform debate. The Scotland income tax reform
-dashboard (1 April) is just outside the six-month window but is our most recent
-Scotland-specific work, so it has its own card. The two employer NICs
+reform debate; its card shows the post's decile chart. The income tax card is
+the dashboard (1 April) costing Reform UK Scotland's pre-election proposal, and
+the card names the party because the dashboard does. We cost proposals from
+any party on request. It ran on the Enhanced FRS, so its figures may move on
+the new data. The two employer NICs
 dashboards and the research library are linked in the line under the cards.
 The bus fare cap and free childcare work is England only, so it's left off.
 
@@ -253,21 +290,39 @@ Source: [UK research library](https://www.policyengine.org/uk/research).
 
 ## 15. Where we are starting
 
-Show the 2025 dashboard as the base we are building on; click through if there
-is time. Don't re-present its 2025 results.
+Show the two dashboards we are building on: the UK Autumn Budget 2025
+dashboard and our Scottish Budget 2026-27 dashboard, which this team told us in
+February they had studied. Don't re-present their results.
 
-The [Autumn Budget 2025 in review project](https://github.com/PolicyEngine/autumn-budget-2025-in-review)
-adds comparisons with other published costings, worked household examples and
-a timeline of when analysis appeared. The slide previews both dashboards; click
-either card to open it. The review's repository is in the sources line. This
-provides a starting point for checking and improving the 2026 workflow.
+Autumn Budget 2025 in review (published costings side by side, worked
+household examples and a timeline) is a preview not yet on policyengine.org,
+and its repository is private; mention it only as work in progress.
 
 Sources: [2025 dashboard](https://www.policyengine.org/uk/autumn-budget-2025),
-[2025 in review dashboard](https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review).
+[Scottish Budget 2026-27 dashboard](https://www.policyengine.org/uk/scottish-budget-2026-27).
 
 ## 16. How Budget day will run
 
+The UK Budget is on Wednesday 28 October; the draft Scottish Budget 2027-28
+and the SFC's forecasts follow on Thursday 3 December. The SFC doesn't cost UK
+Budget measures, so reconciling with it waits for 3 December.
+
 The development repository still contains the inherited 2025 measures. This
-is a plan, not completed 2026 analysis.
+is a plan, not completed 2026 analysis. No Scotland-specific output is built
+yet, and the national release has no constituency geography, so there will be
+no Scottish council or constituency results on 28 October. Whether we repeat
+the Scottish Budget dashboard on 3 December is Max's call; if he hasn't made
+it, ask them what would help rather than promising it.
 
 ## 17. Thank you
+
+## Likely questions
+
+- Data access: the code is open; the built dataset contains UK Data Service
+  licensed microdata and sits in a private repository. Don't offer "the data".
+- Finance-cost relief at 22% from April 2027: the GOV.UK paper says relief is
+  given at the property basic rate (22%) and doesn't address Scottish
+  taxpayers. In the model, Scottish taxpayers' property income is taxed at the
+  ordinary Scottish rates and relief uses the UK property basic rate.
+- Fit to Scottish statistics: the live diagnostics dashboard is down, so don't
+  quote fit percentages; offer to follow up in writing.
