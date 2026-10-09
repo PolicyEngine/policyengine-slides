@@ -51,6 +51,7 @@ export function WhatIsPolicyEngineSlide() {
         <SlideTitle>PolicyEngine: free, open-source microsimulation</SlideTitle>
       </SlideHeader>
 
+      <div className="[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.78]">
       <div className="grid grid-cols-3 gap-6 mt-2">
         {pillars.map((pillar) => (
           <div key={pillar.title} className="content-card overflow-hidden">
@@ -73,11 +74,14 @@ export function WhatIsPolicyEngineSlide() {
         ))}
       </div>
 
-      <div className="accent-block mt-7">
-        <p className="text-lg text-gray-700 leading-relaxed">
-          Five years open source. Used by governments, Congress, researchers and benefit
-          navigators, from 10 Downing Street to US statehouses.
-        </p>
+      <div className="mt-6 grid grid-cols-5 gap-4">
+        {stats.map((s) => (
+          <div key={s.label} className="content-card px-4 py-3">
+            <div className="text-3xl font-extrabold tracking-tight text-pe-teal">{s.value}</div>
+            <div className="text-sm text-gray-600 leading-snug mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
       </div>
     </Slide>
   );
@@ -85,63 +89,11 @@ export function WhatIsPolicyEngineSlide() {
 
 const stats = [
   { value: '95,000+', label: 'parameters in the US model' },
-  { value: '5,500+', label: 'variables' },
-  { value: '4,693', label: 'test files' },
+  { value: '6,000+', label: 'variables' },
+  { value: '4,932', label: 'test files' },
   { value: '103', label: 'programs in the coverage registry' },
+  { value: '133', label: 'contributors to the US model since 2021' },
 ];
-
-const institutions = [
-  { org: 'NBER', detail: 'Memorandum of understanding for an open-source TAXSIM emulator.' },
-  {
-    org: 'Federal Reserve Bank of Atlanta',
-    detail: 'Memorandum of understanding that brings the Policy Rules Database into our validation.',
-  },
-  {
-    org: 'No 10 Downing Street',
-    detail: 'The data science team built 10ds-microsim on PolicyEngine.',
-  },
-];
-
-/** Adapted from the gettsim-2026 PEOverviewSlide. */
-export function PolicyEngineTodaySlide() {
-  return (
-    <Slide className={FOOTER_CLEARANCE}>
-      <SlideHeader>
-        <SlideTitle>PolicyEngine today</SlideTitle>
-      </SlideHeader>
-
-      <p className="text-2xl text-gray-800 leading-relaxed max-w-5xl">
-        Free, open-source software to compute the effect of public policy. US and UK tax-benefit
-        models, with public code since June 2021 and 133 contributors to the US model.
-      </p>
-
-      <div className="mt-8 grid grid-cols-[1fr_1.1fr] gap-10 items-start">
-        <div className="grid grid-cols-2 gap-5">
-          {stats.map((s) => (
-            <div key={s.label} className="content-card p-5">
-              <div className="text-4xl font-extrabold tracking-tight text-pe-teal">{s.value}</div>
-              <div className="text-base text-gray-600 leading-snug mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="rounded-xl bg-pe-dark p-7 text-white">
-          <p className="text-sm font-semibold uppercase tracking-widest text-pe-teal mb-4">
-            In other institutions’ hands
-          </p>
-          <div className="space-y-4">
-            {institutions.map((c) => (
-              <div key={c.org}>
-                <p className="text-lg font-semibold">{c.org}</p>
-                <p className="text-base leading-snug font-light text-white/80">{c.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Slide>
-  );
-}
 
 /** maxWidth evens out visual weight: wide wordmarks get more room, tall marks less. */
 const organizations: { name: string; logo: string; maxWidth: number; className?: string }[] = [
@@ -150,7 +102,7 @@ const organizations: { name: string; logo: string; maxWidth: number; className?:
   { name: 'University of Michigan', logo: '/logos/organizations/umich.png', maxWidth: 170 },
   { name: 'USC', logo: '/logos/organizations/usc.png', maxWidth: 70 },
   { name: 'Georgetown (Better Government Lab)', logo: '/logos/organizations/georgetown.png', maxWidth: 140 },
-  { name: 'UHERO', logo: '/logos/organizations/uhero.png', maxWidth: 130, className: '!max-h-[100px]' },
+  { name: 'UHERO', logo: '/logos/organizations/uhero.png', maxWidth: 130 },
   { name: 'MyFriendBen', logo: '/logos/organizations/myfriendben.png', maxWidth: 160 },
   { name: 'Amplifi', logo: '/logos/organizations/amplifi.png', maxWidth: 110 },
   { name: 'Mirza', logo: '/logos/organizations/mirza.png', maxWidth: 110 },
@@ -162,27 +114,54 @@ const organizations: { name: string; logo: string; maxWidth: number; className?:
   { name: 'Committee for a Responsible Federal Budget', logo: '/logos/organizations/crfb.png', maxWidth: 150, className: 'invert' },
 ];
 
-/** Adapted from the cpid-webinar-2026 WhoUsesItSlide. */
+const funders: { name: string; logo: string; maxWidth: number; className?: string }[] = [
+  { name: 'Arnold Ventures', logo: '/logos/funders/arnold-ventures.svg', maxWidth: 170 },
+  { name: 'National Science Foundation', logo: '/logos/funders/nsf.webp', maxWidth: 70 },
+  { name: 'Nuffield Foundation', logo: '/logos/funders/nuffield.webp', maxWidth: 190 },
+  { name: 'NEO Philanthropy', logo: '/logos/funders/neo-philanthropy.png', maxWidth: 140 },
+  { name: 'Pritzker Children’s Initiative', logo: '/logos/funders/pritzker-childrens-initiative.webp', maxWidth: 190, className: '[filter:brightness(0)_saturate(100%)] opacity-80' },
+];
+
+function LogoCell({ name, logo, maxWidth, className, height }: { name: string; logo: string; maxWidth: number; className?: string; height: number }) {
+  return (
+    <div className="flex items-center justify-center" style={{ height }}>
+      <Image
+        src={logo}
+        alt={name}
+        width={400}
+        height={200}
+        className={`h-auto w-auto object-contain ${className ?? ''}`}
+        style={{ maxWidth, maxHeight: height }}
+      />
+    </div>
+  );
+}
+
+/** Users, adapted from the cpid-webinar-2026 WhoUsesItSlide, and funders from policyengine.org/us/supporters. */
 export function WhoUsesPolicyEngineSlide() {
   return (
     <Slide className={FOOTER_CLEARANCE}>
       <SlideHeader>
-        <SlideTitle>Researchers and developers build with these rules</SlideTitle>
+        <SlideTitle>Who uses and funds PolicyEngine</SlideTitle>
       </SlideHeader>
 
-      <div className="mt-10 grid grid-cols-5 gap-x-12 gap-y-12 w-full px-10">
-        {organizations.map((org) => (
-          <div key={org.name} className="flex items-center justify-center h-[72px]">
-            <Image
-              src={org.logo}
-              alt={org.name}
-              width={400}
-              height={200}
-              className={`h-auto w-auto max-h-[72px] object-contain ${org.className ?? ''}`}
-              style={{ maxWidth: org.maxWidth }}
-            />
-          </div>
-        ))}
+      <div className="[@media(min-height:741px)_and_(max-height:820px)]:[zoom:0.88] [@media(max-height:740px)]:[zoom:0.78]">
+        <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">Used by</p>
+        <div className="mt-3 grid grid-cols-5 gap-x-12 gap-y-6 w-full px-10">
+          {organizations.map((org) => (
+            <LogoCell key={org.name} {...org} height={60} />
+          ))}
+        </div>
+
+        <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-gray-500">Funded by</p>
+        <div className="mt-3 grid grid-cols-5 gap-x-12 w-full px-10">
+          {funders.map((f) => (
+            <LogoCell key={f.name} {...f} height={72} />
+          ))}
+        </div>
+        <p className="mt-5 text-base text-gray-600">
+          A nonprofit, fiscally sponsored by the PSL Foundation, with support from organizations that build on the models, such as MyFriendBen.
+        </p>
       </div>
     </Slide>
   );

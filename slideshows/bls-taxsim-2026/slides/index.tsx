@@ -5,10 +5,12 @@ import CeInputsTable from './CeInputsTable';
 import InputMapping from './InputMapping';
 import OriginsSlide from './Origins';
 import ProcessFlow from './ProcessFlow';
+import ReleasesSlide from './Releases';
+import AxiomPlanSlide from './AxiomPlan';
 import { ThankYouSlide } from './ThankYouSlide';
 import SectionDivider from './SectionDivider';
 import UpdateTimelineSlide from './UpdateTimeline';
-import { PolicyEngineTodaySlide, WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
+import { WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
 import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
 import Slide from '@/components/core/Slide';
 import CoverSlide from '@/components/layout/CoverSlide';
@@ -21,7 +23,6 @@ const COVER_SPEAKERS = [speakers['max-ghenis'], speakers['pavel-makarchuk'], spe
 
 const CUSTOM_SLIDES = {
   'what-is-pe': WhatIsPolicyEngineSlide,
-  'pe-today': PolicyEngineTodaySlide,
   'who-uses-pe': WhoUsesPolicyEngineSlide,
   'thank-you': ThankYouSlide,
 } satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
@@ -33,7 +34,7 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
   }
 
   if (content.divider) {
-    return <SectionDivider number={content.divider.number} title={content.title} />;
+    return <SectionDivider number={content.divider.number} title={content.title} presenter={content.divider.presenter} />;
   }
 
   if (content.cover) {
@@ -43,6 +44,7 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         subtitle={content.body[0]}
         speakers={COVER_SPEAKERS}
         event="BLS seminar"
+        contentClassName="[@media(max-height:760px)]:pt-16"
       />
     );
   }
@@ -92,6 +94,10 @@ function DeckSlide({ content }: { content: BlsSlideContent }) {
         <UpdateTimelineSlide timeline={content.updateTimeline} />
       ) : content.routing ? (
         <WorkflowRouting routing={content.routing} />
+      ) : content.releases ? (
+        <ReleasesSlide releases={content.releases} />
+      ) : content.axiomPlan ? (
+        <AxiomPlanSlide plan={content.axiomPlan} />
 
       ) : content.compare ? (
         <CompareFlow compare={content.compare} />
