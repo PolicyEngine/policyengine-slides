@@ -36,6 +36,11 @@ export const speakers: Record<string, SpeakerInfo> = {
     title: 'Data Scientist',
     photo: '/headshots/ben-ogorek.jpg',
   },
+  'vahid-ahmadi': {
+    name: 'Vahid Ahmadi',
+    title: 'Research Associate',
+    photo: '/headshots/vahid-ahmadi.png',
+  },
   'maria-juaristi': {
     name: 'Maria Juaristi',
     title: 'PolicyEngine',
