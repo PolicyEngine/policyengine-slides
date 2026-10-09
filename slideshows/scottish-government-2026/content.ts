@@ -38,10 +38,6 @@ export const sources = {
     label: "Microcosm #1106",
     href: "https://github.com/PolicyEngine/microcosm/issues/1106",
   },
-  propertyData: {
-    label: "Microcosm #1145",
-    href: "https://github.com/PolicyEngine/microcosm/pull/1145",
-  },
   propertyEngine: {
     label: "policyengine-uk #2172",
     href: "https://github.com/PolicyEngine/policyengine-uk/pull/2172",
@@ -154,18 +150,76 @@ export const scotlandTargets: TargetRow[] = [
 ];
 
 // HMRC Property Rental Income Statistics 2026, individual landlords, 2024-25.
+// Taxable profit here is rent received less the expenses other than finance
+// costs; the SPI's own figure is £29.35bn for 2023-24 (Table 3.7).
 // Receipts (Table 2) and total expenses (Table 6) are published for
 // individuals; residential finance costs (Table 8, £12.82bn for all landlords)
 // are pro-rated to individuals by their share of expenses (30.03 / 34.75).
 const prisIndividualExpenses = 30.03;
 const prisFinanceCosts = 12.82 * (prisIndividualExpenses / 34.75);
 
-export const propertyLadder = {
-  receipts: 49.81,
-  otherExpenses: prisIndividualExpenses - prisFinanceCosts,
-  financeCosts: prisFinanceCosts,
-  profitAfterCosts: 49.81 - prisIndividualExpenses,
+const prisReceipts = 49.81;
+const prisOtherExpenses = prisIndividualExpenses - prisFinanceCosts;
+
+// Waterfall from rent received down to what the FRS asks for. Totals are what a
+// source counts; deductions are what the next total leaves out. The survey's
+// figure has no published total here, so its bar is an upper bound.
+export type WaterfallStep = {
+  kind: "total" | "deduction" | "bound";
+  label: string;
+  value: number;
+  valueLabel: string;
+  note: string;
+  source?: string;
 };
+
+export const propertyWaterfall: WaterfallStep[] = [
+  {
+    kind: "total",
+    label: "Rent received",
+    value: prisReceipts,
+    valueLabel: "£49.8bn",
+    note: "Everything tenants pay, before any costs",
+    source: "HMRC rental income statistics",
+  },
+  {
+    kind: "deduction",
+    label: "Allowable expenses",
+    value: prisOtherExpenses,
+    valueLabel: `−£${prisOtherExpenses.toFixed(1)}bn`,
+    note: "Repairs, letting fees, insurance: deducted before tax",
+  },
+  {
+    kind: "total",
+    label: "Taxable profit",
+    value: prisReceipts - prisOtherExpenses,
+    valueLabel: "about £31bn",
+    note: "What income tax is charged on",
+    source: "Survey of Personal Incomes",
+  },
+  {
+    kind: "deduction",
+    label: "Mortgage interest",
+    value: prisFinanceCosts,
+    valueLabel: `−£${prisFinanceCosts.toFixed(1)}bn`,
+    note: "Not deducted: it earns a 20% tax reduction instead, 22% from April 2027",
+  },
+  {
+    kind: "total",
+    label: "Profit after all costs",
+    value: prisReceipts - prisIndividualExpenses,
+    valueLabel: `£${(prisReceipts - prisIndividualExpenses).toFixed(1)}bn`,
+    note: "What is left once mortgage interest is paid",
+  },
+  {
+    kind: "bound",
+    label: "Rent after mortgage payments",
+    value: prisReceipts - prisIndividualExpenses,
+    valueLabel: "less than this",
+    note: "Also takes off the mortgage capital repaid",
+    source: "Family Resources Survey",
+  },
+];
 
 // Microcosm #1145 (draft): the steps that build landlords' income, from the
 // stage declarations in sources.yaml at the PR head (spi_support_channel,

@@ -24,7 +24,7 @@ import {
 import styles from "./deck.module.css";
 import {
   PipelineGraph,
-  PropertyLadder,
+  PropertyWaterfall,
   PropertyFlow,
   RegionEligibilityChart,
   ScotlandDecileChart,
@@ -296,23 +296,16 @@ export function PropertyConceptsSlide() {
       center
       references={[sources.pris, sources.propertyIssue]}
     >
-      <PropertyLadder />
-      <div className={styles.notes}>
-        <p>
-          Income tax is charged on profit. Finance costs are not deducted; they
-          earn a tax reduction of 20%, rising to 22% from April 2027.
-        </p>
-        <p>
-          Our previous dataset scaled tax-record profit up to rent received:
-          about <strong>£55bn</strong> of taxable property income, against
-          roughly <strong>£31bn</strong>.
-        </p>
-      </div>
+      <PropertyWaterfall />
+      <p className={styles.waterfallTakeaway}>
+        Our previous dataset scaled tax-record profit up to rent received, so it
+        treated about <strong>£55bn</strong> as taxable property income, against
+        roughly <strong>£31bn</strong>.
+      </p>
       <p className={styles.finePrint}>
         Individual landlords, 2024-25. Rent received and total expenses are
-        HMRC&apos;s; finance costs are pro-rated from all landlords&apos;
-        £12.8bn. The survey also nets mortgage capital, so it sits below the
-        last segment.
+        HMRC&apos;s; mortgage interest is pro-rated from all landlords&apos;
+        £12.8bn.
       </p>
     </Frame>
   );
@@ -324,12 +317,11 @@ export function PropertyModelSlide() {
       section={sections.property}
       title="How we build landlords' income, step by step"
       center
-      references={[sources.propertyData, sources.propertyEngine, sources.pris]}
+      references={[sources.propertyEngine, sources.pris]}
     >
       <PropertyFlow />
       <p className={styles.status}>
-        HMRC&apos;s rental statistics also check the result. The data changes
-        are in draft (Microcosm #1145), so details may change.
+        This is still work in progress, so details may change.
       </p>
     </Frame>
   );

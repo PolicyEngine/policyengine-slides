@@ -2,9 +2,9 @@ import { Fragment, type CSSProperties } from "react";
 import {
   energyRegions,
   pipelineStages,
-  propertyLadder,
   propertyLanes,
   propertyMergedSteps,
+  propertyWaterfall,
   type PropertyStep,
   scotlandEnergyDeciles,
   scotlandTargets,
@@ -99,67 +99,72 @@ export function TargetTable() {
   );
 }
 
-const bn = (value: number) => `£${value.toFixed(1)}bn`;
+// A waterfall from rent received down to what the FRS asks for. Each total is
+// what a source counts; each deduction column says what the next total leaves
+// out. Heights share one £0–50bn axis.
+const WATERFALL_MAX = 50;
 
-// One bar of rent received, split into what each source measures. Widths are
-// shares of rent received.
-export function PropertyLadder() {
-  const { receipts, otherExpenses, financeCosts, profitAfterCosts } = propertyLadder;
-  const pct = (value: number) => `${(value / receipts) * 100}%`;
-  const profit = financeCosts + profitAfterCosts;
-  const brackets = [
+// Each column's span on the axis, and the level its connector starts from:
+// a deduction hangs from the level the previous column ended at.
+const waterfallColumns = propertyWaterfall.reduce<
+  { step: (typeof propertyWaterfall)[number]; index: number; bottom: number; top: number; connector: number | null }[]
+>((columns, step, index) => {
+  const last = columns[index - 1];
+  const previous = last ? (last.step.kind === "deduction" ? last.bottom : last.top) : 0;
+  const deduction = step.kind === "deduction";
+  return [
+    ...columns,
     {
-      source: "HMRC rental income statistics",
-      measure: `Rent received · ${bn(receipts)}`,
-      left: "0%",
-      width: "100%",
-      dashed: false,
-    },
-    {
-      source: "Survey of Personal Incomes",
-      measure: `Taxable profit · ${bn(profit)}`,
-      left: pct(otherExpenses),
-      width: pct(profit),
-      dashed: false,
-    },
-    {
-      source: "Family Resources Survey",
-      measure: "Rent after mortgage payments",
-      left: pct(otherExpenses + financeCosts),
-      width: pct(profitAfterCosts),
-      dashed: true,
+      step,
+      index,
+      bottom: deduction ? previous - step.value : 0,
+      top: deduction ? previous : step.value,
+      connector: last ? previous : null,
     },
   ];
-  const segments = [
-    { label: "Allowable expenses", value: otherExpenses, className: styles.segmentExpenses },
-    { label: "Finance costs", value: financeCosts, className: styles.segmentFinance },
-    { label: "Profit after all costs", value: profitAfterCosts, className: styles.segmentProfit },
-  ];
+}, []);
+
+export function PropertyWaterfall() {
+  const pct = (value: number) => `${(value / WATERFALL_MAX) * 100}%`;
   return (
-    <div className={styles.ladder}>
-      <div className={styles.brackets}>
-        {brackets.map((b) => (
-          <div key={b.source} className={styles.bracketRow}>
-            <div
-              className={`${styles.bracket} ${b.dashed ? styles.bracketDashed : ""}`}
-              style={{ marginLeft: b.left, width: b.width }}
-            >
-              <span className={styles.bracketSource}>{b.source}</span>
-              <span className={styles.bracketMeasure}>{b.measure}</span>
-            </div>
+    <div className={styles.waterfall}>
+      <div className={styles.wfPlot}>
+        {[0, 10, 20, 30, 40, 50].map((tick) => (
+          <div key={tick} className={styles.wfGrid} style={{ bottom: pct(tick) }}>
+            <span>£{tick}bn</span>
           </div>
         ))}
+        <div className={styles.wfColumns}>
+          {waterfallColumns.map(({ step, index, bottom, top, connector }) => (
+            <div key={step.label} className={styles.wfColumn}>
+              {connector !== null && (
+                <span className={styles.wfConnector} style={{ bottom: pct(connector) }} aria-hidden="true" />
+              )}
+              <div
+                className={`${styles.wfBar} ${styles[`wfBar_${step.kind}`]} ${index === 3 ? styles.wfBarInterest : ""}`}
+                style={{ bottom: pct(bottom), height: pct(top - bottom) }}
+                title={`${step.label}: ${step.valueLabel}`}
+              >
+                {step.kind === "deduction" && <span className={styles.wfInside}>{step.valueLabel}</span>}
+              </div>
+              {step.kind !== "deduction" && (
+                <span className={styles.wfValue} style={{ bottom: pct(top) }}>
+                  {step.valueLabel}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={styles.ladderBar}>
-        {segments.map((s) => (
-          <div
-            key={s.label}
-            className={`${styles.segment} ${s.className}`}
-            style={{ width: pct(s.value) }}
-            title={`${s.label}: ${bn(s.value)}`}
-          >
-            <span>{s.label}</span>
-            <strong>{bn(s.value)}</strong>
+      <div className={styles.wfCaptions}>
+        {propertyWaterfall.map((step) => (
+          <div key={step.label} className={step.kind === "deduction" ? styles.wfCaptionDeduction : ""}>
+            <h2>
+              {step.kind === "deduction" ? "− " : ""}
+              {step.label}
+            </h2>
+            <p>{step.note}</p>
+            {step.source && <span className={styles.flowSource}>{step.source}</span>}
           </div>
         ))}
       </div>

@@ -100,24 +100,35 @@ Source: [release certification runbook](https://github.com/PolicyEngine/microcos
 
 ## 8. Landlords' income, measured three ways
 
-The bar is HMRC's rent received by individual landlords in 2024-25 (£49.8bn).
-Each source measures a different part of it:
+Read the waterfall left to right. It starts from HMRC's rent received by
+individual landlords in 2024-25 and takes off one kind of cost at a time. The
+dark bars are totals a source counts; the light bars between them are what the
+next source leaves out.
 
-- HMRC's property rental income statistics report rent received, before any
-  expenses.
-- The SPI reports taxable profit: after allowable expenses (repairs, fees,
-  insurance) but before residential finance costs (£30.9bn).
-- The FRS asks for rent after mortgage payments, which nets capital as well as
-  interest, so it sits below the last segment.
+- Rent received, £49.8bn: HMRC's property rental income statistics, before any
+  costs.
+- Less allowable expenses, £19.0bn: repairs, letting fees, insurance and other
+  running costs come off before tax.
+- Taxable profit, about £31bn: what the SPI records and income tax is charged
+  on. It still includes mortgage interest.
+- Less mortgage interest, £11.1bn: since 2020-21 it isn't deducted; it earns a
+  20% tax reduction instead, rising to 22% from April 2027.
+- Profit after all costs, £19.8bn: no source publishes this figure directly.
+- Rent after mortgage payments: what the FRS asks for. The survey also takes
+  off the mortgage capital repaid, so its figure is lower still; it has no
+  published total on this basis, so the bar is drawn as an upper bound.
 
-Since 2020-21, finance costs aren't deducted; they get a 20% tax reduction,
-rising to 22% from April 2027. The Enhanced FRS scaled SPI profit up to HMRC's
-rent received, so it modelled a gross figure as taxable profit (about £55bn
-against roughly £31bn).
+The Enhanced FRS scaled SPI profit up to HMRC's rent received, so it modelled
+rent before expenses as taxable profit (about £55bn against roughly £31bn).
+
+The "about £31bn" is HMRC's rent received less the expenses other than mortgage
+interest. The SPI's own published figure is £29.35bn for 2023-24, about £31.8bn
+uprated to 2025, so the two agree. Slide 9 explains how we build each piece.
 
 HMRC publishes individuals' rent received (£49.81bn) and total expenses
-(£30.03bn). Finance costs are published for all landlords (£12.82bn of
-£34.75bn), so the £11.1bn split is pro-rated by individuals' share of expenses.
+(£30.03bn). Mortgage interest is published for all landlords (£12.82bn of
+£34.75bn of expenses), so the £11.1bn is pro-rated by individuals' share of
+expenses.
 
 Sources: [HMRC property rental income statistics 2026](https://www.gov.uk/government/statistics/property-rental-income-statistics/property-rental-income-statistics-2026),
 [Microcosm #1106](https://github.com/PolicyEngine/microcosm/issues/1106).

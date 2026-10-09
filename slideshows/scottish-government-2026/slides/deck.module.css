@@ -316,113 +316,137 @@
   font-size: 1rem;
 }
 
-/* Property income: one bar of rent received, bracketed by source. */
-.brackets {
-  display: grid;
-  gap: 1.25rem;
-  margin-bottom: 0.9rem;
+/* Property income: a waterfall from rent received to the survey's measure. */
+.waterfall {
+  --wf-gap: 1.25rem;
 }
 
-.bracket {
+.wfPlot {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.2rem 0.75rem;
-  border-bottom: 2px solid var(--pe-teal-dark);
-  padding: 0 0.25rem 0.35rem;
+  height: 20rem;
+  margin-left: 3.75rem;
 }
 
-.bracket::before,
-.bracket::after {
-  content: "";
+.wfGrid {
   position: absolute;
-  bottom: -10px;
-  width: 2px;
-  height: 10px;
-  background: var(--pe-teal-dark);
-}
-
-.bracket::before {
-  left: 0;
-}
-
-.bracket::after {
   right: 0;
+  left: 0;
+  border-top: 1px solid var(--color-gray-200);
 }
 
-.bracketDashed {
-  border-bottom-style: dashed;
-}
-
-.bracketSource {
-  color: var(--pe-dark);
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.bracketMeasure {
-  color: var(--color-gray-600);
-  font-size: 1.25rem;
-}
-
-.ladderBar {
-  display: flex;
-  height: 5.75rem;
-  gap: 2px;
-  margin-top: 1.25rem;
-}
-
-.segment {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  padding: 0 1.1rem;
-  font-size: 1.15rem;
-  line-height: 1.25;
+.wfGrid span {
+  position: absolute;
+  right: calc(100% + 0.6rem);
+  color: var(--color-gray-500);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  transform: translateY(-50%);
   white-space: nowrap;
 }
 
-.segment strong {
-  font-size: 1.5rem;
-}
-
-.segment:first-child {
-  border-radius: 4px 0 0 4px;
-}
-
-.segment:last-child {
-  border-radius: 0 4px 4px 0;
-}
-
-.segmentExpenses {
-  background: var(--color-gray-200);
-  color: var(--color-gray-700);
-}
-
-.segmentFinance {
-  background: var(--pe-amber-light);
-  color: var(--pe-darker);
-}
-
-.segmentProfit {
-  background: var(--pe-teal-dark);
-  color: white;
-}
-
-.notes {
+.wfColumns,
+.wfCaptions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.5rem;
-  margin-top: 2.25rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--wf-gap);
 }
 
-.notes p {
+.wfColumns {
+  position: absolute;
+  inset: 0;
+}
+
+.wfColumn {
+  position: relative;
+}
+
+.wfConnector {
+  position: absolute;
+  left: calc(-18% - var(--wf-gap));
+  width: calc(36% + var(--wf-gap));
+  border-top: 2px dotted var(--color-gray-400);
+}
+
+.wfBar {
+  position: absolute;
+  right: 18%;
+  left: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wfBar_total {
+  border-radius: 4px 4px 0 0;
+  background: var(--color-teal-700);
+}
+
+.wfBar_deduction {
+  border-radius: 4px;
+  background: var(--color-gray-300);
+}
+
+.wfBarInterest {
+  background: var(--pe-amber-light);
+}
+
+.wfBar_bound {
+  border: 2px dashed var(--color-teal-700);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, var(--pe-light), transparent);
+}
+
+.wfInside {
+  color: var(--pe-darker);
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.wfValue {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-bottom: 0.3rem;
+  color: var(--pe-dark);
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: center;
+}
+
+.wfCaptions {
+  margin-top: 0.75rem;
+  margin-left: 3.75rem;
+  border-top: 2px solid var(--color-gray-300);
+  padding-top: 0.75rem;
+}
+
+.wfCaptions h2 {
+  color: var(--pe-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.wfCaptionDeduction h2 {
+  color: var(--color-gray-600);
+}
+
+.wfCaptions p {
+  margin: 0.3rem 0 0.5rem;
+  color: var(--color-gray-600);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.waterfallTakeaway {
+  margin-top: 1.5rem;
   border-left: 4px solid var(--pe-teal);
   padding-left: 1.25rem;
   color: var(--color-gray-700);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   line-height: 1.45;
 }
 
@@ -923,28 +947,38 @@
     font-size: 0.9rem;
   }
 
-  .ladderBar {
-    height: 4.5rem;
+
+  .wfPlot {
+    height: 13rem;
   }
 
-  .bracketSource,
-  .bracketMeasure {
-    font-size: 1.1rem;
+  .wfGrid span {
+    font-size: 0.75rem;
   }
 
-  .segment {
-    font-size: 1rem;
+  .wfCaptions {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
   }
 
-  .segment strong {
-    font-size: 1.25rem;
+  .wfCaptions h2 {
+    font-size: 0.95rem;
   }
 
-  .notes {
-    margin-top: 1.5rem;
+  .wfCaptions p {
+    font-size: 0.82rem;
   }
 
-  .notes p,
+  .wfInside,
+  .wfValue {
+    font-size: 0.95rem;
+  }
+
+  .waterfallTakeaway {
+    margin-top: 0.9rem;
+    font-size: 1.05rem;
+  }
+
   .energyStats {
     font-size: 1.15rem;
   }
@@ -1108,34 +1142,28 @@
     font-size: 0.85rem;
   }
 
-  .brackets {
-    gap: 0.6rem;
+  .wfPlot {
+    height: 10rem;
   }
 
-  .bracketSource,
-  .bracketMeasure {
-    font-size: 0.95rem;
-  }
-
-  .ladderBar {
-    height: 3.25rem;
-    margin-top: 1rem;
-  }
-
-  .segment {
+  .wfCaptions h2 {
     font-size: 0.85rem;
   }
 
-  .segment strong {
-    font-size: 1.05rem;
+  .wfCaptions p {
+    font-size: 0.75rem;
   }
 
-  .notes {
-    gap: 1.5rem;
-    margin-top: 1rem;
+  .wfInside,
+  .wfValue {
+    font-size: 0.85rem;
   }
 
-  .notes p,
+  .waterfallTakeaway {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+
   .energyStats {
     font-size: 1rem;
   }

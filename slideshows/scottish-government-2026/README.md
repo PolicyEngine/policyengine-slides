@@ -5,8 +5,8 @@ section slide:
 
 1. How we build the UK's microdata: the pipeline with the sources that feed
    each stage, the Scottish target table and live diagnostics (slides 3–6)
-2. Modelling property income: what each source measures, and the steps that build
-   landlords' income (slides 7–9)
+2. Modelling property income: a waterfall of what each source measures, and the
+   steps that build landlords' income (slides 7–9)
 3. An analysis example: the targeted energy bill discount, by region and across
    Scotland's income distribution (slides 10–11)
 4. Published work since April (slides 12–14)
@@ -32,7 +32,7 @@ February, and part 4 starts in April.
 - `content.ts` holds the pinned sources, tables, publication cards and Budget plan.
 - `slides/index.tsx` contains the slides.
 - `slides/figures.tsx` draws the pipeline graph, the target table, the property
-  income bar and step diagram, and the two energy charts (HTML and CSS, no chart
+  income waterfall and step diagram, and the two energy charts (HTML and CSS, no chart
   library). The pipeline and target table follow
   [l0-ima-2026](https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/l0-ima-2026).
 - `SPEAKER-NOTES.md` gives the presenter track, sources and what not to claim.
