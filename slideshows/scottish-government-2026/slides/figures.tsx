@@ -304,7 +304,7 @@ export function PropertyFlow() {
           <StepBox
             step={step}
             number={5 + index}
-            className={`self-center ${index === propertyMergedSteps.length - 1 ? styles.flowStepModel : ""}`}
+            className={`self-center ${step.source === "policyengine-uk" ? styles.flowStepModel : ""}`}
             style={merged(5 + index * 2)}
           />
         </Fragment>

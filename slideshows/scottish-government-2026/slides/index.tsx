@@ -323,8 +323,9 @@ export function PropertyModelSlide() {
     >
       <PropertyFlow />
       <p className={styles.status}>
-        The tax rules in step 7 are released (policyengine-uk 2.123.0). Steps 3 to 6
-        use a draft data update (Microcosm #1145), and step 4 awaits a decision.
+        The tax rules in step 6 are released (policyengine-uk 2.123.0). Steps 3 to 5
+        and the property targets in step 7 use a draft data update (Microcosm #1145),
+        and step 4 awaits a decision.
       </p>
     </Frame>
   );

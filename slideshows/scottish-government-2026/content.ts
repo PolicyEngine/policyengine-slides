@@ -282,14 +282,14 @@ export const propertyMergedSteps: PropertyStep[] = [
     source: "HMRC rental statistics",
   },
   {
-    title: "Calibrate weights",
-    text: "Match landlord numbers and property income by income band",
-    source: "HMRC income tables 2023-24",
-  },
-  {
     title: "Compute tax",
     text: "£1,000 allowance or expenses, and a 20% tax reduction on finance costs",
     source: "policyengine-uk",
+  },
+  {
+    title: "Calibrate weights",
+    text: "Match landlord numbers and property income by band, with tax and benefit targets",
+    source: "HMRC income tables 2023-24",
   },
 ];
 

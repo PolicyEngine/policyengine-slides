@@ -189,13 +189,17 @@ box names the data that informs it.
 5. Rent received: every landlord with a profit, from either lane, is ranked by
    profit and placed into HMRC's bands of rent received, keeping HMRC's share of
    landlords in each band. Expenses are rent received less profit.
-6. Calibrate weights: the national calibration matches the SPI's number of
-   landlords and their property income by total-income band (2023-24 tables,
-   unscaled). HMRC's rental statistics are a check, not a target: binding them
-   pulled the SPI amounts out of line in the test builds.
-7. Compute tax: policyengine-uk applies the rules: Scottish rates for Scottish
+6. Compute tax: policyengine-uk applies the rules: Scottish rates for Scottish
    taxpayers, the £1,000 allowance or actual expenses (not both), and a 20% tax
-   reduction on finance costs (22% from April 2027).
+   reduction on finance costs (22% from April 2027). This runs before
+   calibration, because calibration matches tax and benefit targets: the HMRC
+   income targets use PolicyEngine UK's income tax to mark taxpayers
+   (microcosm uk_runtime/hmrc_calibration.py).
+7. Calibrate weights: the national calibration matches the SPI's number of
+   landlords and their property income by total-income band (2023-24 tables,
+   unscaled), alongside the tax, benefit and population targets. HMRC's rental
+   statistics are a check, not a target: binding them pulled the SPI amounts
+   out of line in the test builds.
 
 In the test build of the final head (not a release), at calibrated weights:
 rent received is £45.7bn against HMRC's £49.8bn for individuals, finance costs
