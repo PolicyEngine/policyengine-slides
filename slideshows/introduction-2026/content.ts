@@ -177,7 +177,7 @@ export const press: Card[] = [
   {
     title: "If Burnham wants firms to hire young people, he needs to get out of their way",
     date: "City AM · July 2026",
-    text: "Cites PolicyEngine: £0.77bn to exempt 21 to 24-year-old NEETs from NI.",
+    text: "Cites our £0.77bn cost to exempt NEETs aged 21 to 24 from NI.",
     href: "https://www.cityam.com/if-burnham-wants-firms-to-hire-young-people-he-needs-to-get-out-of-their-way/",
     image: shot("cityam-burnham-junior-hiring-ni.jpg"),
     alt: "City AM article on junior hiring",
@@ -185,7 +185,7 @@ export const press: Card[] = [
   {
     title: "AI looks set to squeeze junior hiring. The fix already exists in law",
     date: "Social Market Foundation · July 2026",
-    text: "Guest post: PolicyEngine UK gives a £4.7bn lower bound for the NI exemption.",
+    text: "Guest post citing PolicyEngine UK's £4.7bn lower bound.",
     href: "https://www.smf.co.uk/commentary_podcasts/ai-looks-set-to-squeeze-junior-hiring-the-fix-already-exists-in-law/",
     image: shot("smf-ai-junior-hiring-ni.jpg"),
     alt: "Social Market Foundation article on junior hiring",
@@ -209,7 +209,7 @@ export const press: Card[] = [
   {
     title: "Workers face pay hit under Reeves's National Insurance plans",
     date: "The Telegraph · October 2024",
-    text: "PolicyEngine modelling: a 1p employer NI rise could cut a £30,000 salary to £29,818.",
+    text: "Our 1p employer NI scenario: a £30,000 salary cut to £29,818.",
     href: "https://www.telegraph.co.uk/money/tax/workers-face-3000-pay-cut-under-reeves-national-insurance/",
     image: shot("telegraph-nic.webp"),
     alt: "The Telegraph logo",
