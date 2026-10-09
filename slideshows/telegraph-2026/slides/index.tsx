@@ -121,7 +121,6 @@ export function TitleSlide() {
   return (
     <CoverSlide
       title="PolicyEngine: introduction and Budget planning"
-      subtitle="Conversation with The Telegraph"
       contentClassName={`pt-28 ${styles.titleCover}`}
       event=""
       date="9 October 2026"
