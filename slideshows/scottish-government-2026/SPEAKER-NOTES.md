@@ -202,8 +202,10 @@ targeted discount card is the analysis from part 3.
 
 ## 14. Work, benefits and new shocks
 
-CliffWatch is a tool officials can use directly. The UC rebalancing analysis
-interacts with the Scottish Child Payment. The Scotland income tax reform
+CliffWatch is a tool officials can use directly. The land value tax post
+(Progress and Poverty, 4 June 2026) used PolicyEngine to model replacing council
+tax with a flat land value tax, which is relevant to Scotland's council tax
+reform debate. The Scotland income tax reform
 dashboard (1 April) is just outside the six-month window but is our most recent
 Scotland-specific work, so it has its own card. The two employer NICs
 dashboards and the research library are linked in the line under the cards.

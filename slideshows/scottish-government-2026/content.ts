@@ -335,13 +335,13 @@ export const workPublications: Publication[] = [
     alt: "Cover image for the UK AI study",
   },
   {
-    title: "Universal Credit rebalancing",
+    title: "Replacing council tax with a land value tax",
     date: "June 2026",
     finding:
-      "The above-inflation standard allowance uplift and the fixed health element",
-    href: "https://www.policyengine.org/uk/uc-rebalancing",
-    image: cover("uc-rebalancing.jpg"),
-    alt: "Cover image for the Universal Credit rebalancing dashboard",
+      "A revenue-neutral swap modelled with PolicyEngine: most households gain and poverty edges down",
+    href: "https://progressandpoverty.substack.com/p/how-replacing-council-tax-with-a",
+    image: cover("lvt-council-tax.jpg"),
+    alt: "Cover of the land value tax post",
   },
   {
     title: "Scotland income tax reform",
