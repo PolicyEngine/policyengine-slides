@@ -27,10 +27,10 @@ import { overhang2026Config } from "@/slideshows/overhang-2026/config";
 import { overhang2026BackupConfig } from "@/slideshows/overhang-2026-backup/config";
 import { overhang2026LightningConfig } from "@/slideshows/overhang-2026-lightning/config";
 import { blsTaxsim2026Config } from "@/slideshows/bls-taxsim-2026/config";
-import { telegraph2026Config } from "@/slideshows/telegraph-2026/config";
+import { introduction2026Config } from "@/slideshows/introduction-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
-  telegraph2026Config,
+  introduction2026Config,
   blsTaxsim2026Config,
   overhang2026Config,
   overhang2026LightningConfig,

@@ -1,12 +1,11 @@
-# Speaker notes: conversation with The Telegraph, 9 October 2026
+# Speaker notes: PolicyEngine introduction and Budget planning, 9 October 2026
 
-A 30-minute chat with a Telegraph journalist who may not know PolicyEngine.
+A 30-minute conversation with a journalist who may not know PolicyEngine.
 Keep the intro short (slides 2–4) and leave most of the time for slides 7–9.
 
 ## 1. Title
 
-PolicyEngine: introduction and Budget planning. Conversation with The
-Telegraph. Presenters: Vahid Ahmadi, Max Ghenis, María Juaristi.
+PolicyEngine: introduction and Budget planning. Presenters: Vahid Ahmadi, Max Ghenis, María Juaristi.
 
 ## 2. What PolicyEngine is
 
@@ -47,7 +46,7 @@ costing with PolicyEngine, £6.3bn), CapX (1 September 2026, citing our bus
 fare cap costing), the New Economics Foundation's report on job quality and
 NEETs (July 2026; its modelling used PolicyEngine UK), City AM (junior hiring, July 2026), Social Market
 Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
-2026), ITV Peston (student loans, February 2026) and The Telegraph's own story on the
+2026), ITV Peston (student loans, February 2026) and a Telegraph story on the
 National Insurance plans (May 2025; paywalled). The June 2026 land value tax
 post is on slide 6 instead, so it isn't shown twice.
 

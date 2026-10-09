@@ -305,7 +305,7 @@ export function Budget2025Slide() {
       <div className="flex items-start justify-center gap-10">
         <ExternalLink href={sources.budget2025.href} className="min-w-0">
           <Image
-            src="/screenshots/telegraph-2026/autumn-budget-2025.png"
+            src="/screenshots/introduction-2026/autumn-budget-2025.png"
             alt="Autumn Budget 2025 dashboard showing the policy selector and revenue impact chart"
             width={1600}
             height={1000}
@@ -314,7 +314,7 @@ export function Budget2025Slide() {
         </ExternalLink>
         <ExternalLink href={sources.budget2025.href} className="min-w-0">
           <Image
-            src="/screenshots/telegraph-2026/autumn-budget-2025-constituency-map.png"
+            src="/screenshots/introduction-2026/autumn-budget-2025-constituency-map.png"
             alt="Map of the average change in household net income across all 650 constituencies, 2029-30"
             width={1376}
             height={1398}

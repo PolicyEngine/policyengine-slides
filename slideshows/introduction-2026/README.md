@@ -1,6 +1,6 @@
-# Conversation with The Telegraph, 9 October 2026
+# PolicyEngine introduction and Budget planning, 9 October 2026
 
-10 slides at `/slides/telegraph-2026`: a short introduction to PolicyEngine
+10 slides at `/slides/introduction-2026`: a short introduction to PolicyEngine
 for a journalist, then recent work, the Autumn Budget and ideas for working
 together.
 
@@ -10,7 +10,7 @@ together.
 - `slides/index.tsx` contains the slides.
 - `SPEAKER-NOTES.md` gives the presenter track and what not to claim.
 
-Images are in `public/screenshots/telegraph-2026/`:
+Images are in `public/screenshots/introduction-2026/`:
 
 - press images and publication covers come from the app-v2 repo
   (`app/public/assets/citations/` and `app/public/assets/posts/`);

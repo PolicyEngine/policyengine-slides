@@ -1,4 +1,4 @@
-// Content for the Telegraph conversation, 9 October 2026.
+// Content for the PolicyEngine introduction deck, 9 October 2026.
 // Every link below returned 200 on 8 October 2026, except the newspaper,
 // ITV, Hansard and No 10 fellowship pages, which block automated checks.
 
@@ -143,7 +143,7 @@ export type Card = {
   alt: string;
 };
 
-const shot = (file: string) => `/screenshots/telegraph-2026/${file}`;
+const shot = (file: string) => `/screenshots/introduction-2026/${file}`;
 
 export const press: Card[] = [
   {
