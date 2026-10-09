@@ -153,7 +153,7 @@ export const press: Card[] = [
   {
     title: "Universities UK: a £6bn lesson in bad tax policy",
     date: "Tax Policy Associates (Dan Neidle) · September 2026",
-    text: "",
+    text: "Cross-checked its £6–7bn costing with PolicyEngine UK.",
     href: "https://taxpolicy.org.uk/2026/09/10/universities-uk-national-insurance-proposal/",
     image: shot("tpa-universities-uk-ni.png"),
     alt: "Cover of the Universities UK Future Jobs Roadmap",
@@ -161,7 +161,7 @@ export const press: Card[] = [
   {
     title: "Nationalisation is not a growth strategy",
     date: "CapX · September 2026",
-    text: "",
+    text: "Cites PolicyEngine's £409m cost for a £2 bus fare cap outside London.",
     href: "https://capx.co/nationalisation-is-not-a-growth-strategy",
     image: shot("capx-nationalisation.webp"),
     alt: "CapX article header image",
@@ -169,7 +169,7 @@ export const press: Card[] = [
   {
     title: "Insecure, low-quality work a major driver of UK's NEETs and inactivity crisis",
     date: "New Economics Foundation · July 2026",
-    text: "",
+    text: "The report's microsimulation modelling ran on PolicyEngine UK.",
     href: "https://neweconomics.org/2026/07/insecure-low-quality-work-a-major-driver-of-uks-neets-and-inactivity-crisis",
     image: shot("nef-neets-job-quality.jpg"),
     alt: "New Economics Foundation report on job quality and NEETs",
@@ -177,7 +177,7 @@ export const press: Card[] = [
   {
     title: "If Burnham wants firms to hire young people, he needs to get out of their way",
     date: "City AM · July 2026",
-    text: "",
+    text: "Cites PolicyEngine: £0.77bn to exempt 21 to 24-year-old NEETs from NI.",
     href: "https://www.cityam.com/if-burnham-wants-firms-to-hire-young-people-he-needs-to-get-out-of-their-way/",
     image: shot("cityam-burnham-junior-hiring-ni.jpg"),
     alt: "City AM article on junior hiring",
@@ -185,7 +185,7 @@ export const press: Card[] = [
   {
     title: "AI looks set to squeeze junior hiring. The fix already exists in law",
     date: "Social Market Foundation · July 2026",
-    text: "",
+    text: "Guest post: PolicyEngine UK gives a £4.7bn lower bound for the NI exemption.",
     href: "https://www.smf.co.uk/commentary_podcasts/ai-looks-set-to-squeeze-junior-hiring-the-fix-already-exists-in-law/",
     image: shot("smf-ai-junior-hiring-ni.jpg"),
     alt: "Social Market Foundation article on junior hiring",
@@ -209,7 +209,7 @@ export const press: Card[] = [
   {
     title: "Workers face pay hit under Reeves's National Insurance plans",
     date: "The Telegraph · October 2024",
-    text: "",
+    text: "PolicyEngine modelling: a 1p employer NI rise could cut a £30,000 salary to £29,818.",
     href: "https://www.telegraph.co.uk/money/tax/workers-face-3000-pay-cut-under-reeves-national-insurance/",
     image: shot("telegraph-nic.webp"),
     alt: "The Telegraph logo",
@@ -255,7 +255,7 @@ export const publications: Card[] = [
     text: "Cost and distributional impact of cutting electricity VAT from 5% to 0% for six months.",
     href: "https://www.policyengine.org/uk/electricity-vat-cut",
     image: shot("electricity-vat-cut.jpg"),
-    alt: "Electricity VAT cut dashboard cover",
+    alt: "VAT on household electricity cut from 5% to 0%",
   },
   {
     title: "UK CliffWatch",

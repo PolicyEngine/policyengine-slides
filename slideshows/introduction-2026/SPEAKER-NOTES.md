@@ -54,7 +54,11 @@ Foundation (AI and junior hiring, July 2026), ITV Peston (fuel duty, May
 2026), ITV Peston (student loans, February 2026) and Fran Ivens's Telegraph
 story of 28 October 2024, two days before that Budget (paywalled): our modelling
 of a 1p employer NI rise, £3,093 more employer NI on a £30,000 salary, or a
-salary cut to £29,818 if passed on. The June 2026 land value tax
+salary cut to £29,818 if passed on. Our figure was the £182 pay cut; £3,093 was
+the employer's NI bill, so don't repeat the "£3,000" in the URL. It was a
+pre-Budget scenario for the IEA (a 1p rate rise), not the package announced,
+and it quoted Nikhil. Each card now carries one line on what we contributed;
+the student loans card has none, so say it if asked. The June 2026 land value tax
 post is on slide 6 instead, so it isn't shown twice.
 
 ## 6. Recent UK work
