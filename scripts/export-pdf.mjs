@@ -4,10 +4,12 @@
  * Usage:
  *   bun run export <slideshow-id> [output.pdf]                 build locally, then capture
  *   bun run export <slideshow-id> [output.pdf] --url <origin>  capture a deployed site
+ *   ... --size 1440x810 --scale 2                              viewport and pixel ratio
  *
  * Examples:
  *   bun run export abundance-dmv ~/Desktop/abundance-dmv.pdf
  *   bun run export bls-taxsim-2026 bls.pdf --url https://www.policyengine.org
+ *   bun run export bls-taxsim-2026 bls.pdf --size 1440x810 --scale 2
  *
  * What it does:
  *   1. Without --url, builds into .next-export with NEXT_PUBLIC_EXPORT_BUILD=1
@@ -15,8 +17,8 @@
  *   2. Reads the step count from the viewer's data-total-steps attribute,
  *      using `chrome --dump-dom`.
  *   3. Screenshots every step at ?slide=N&export=1, which hides the nav bar.
- *   4. Prints a page of the screenshots to a 16:9 PDF with
- *      `chrome --print-to-pdf`.
+ *   4. Prints a page of the screenshots to a PDF with `chrome --print-to-pdf`,
+ *      one page per step at the viewport size.
  *
  * Chrome runs only through its command line. The script never opens a
  * DevTools connection (no puppeteer, no remote debugging), so it also works
@@ -74,7 +76,6 @@ function chrome(binary, args, { timeoutMs = WAIT_MS + 60_000 } = {}) {
     "--hide-scrollbars",
     "--no-first-run",
     "--no-default-browser-check",
-    "--window-size=1920,1080",
   ];
   // Chrome refuses to start its sandbox as root, e.g. in some CI containers.
   if (process.getuid?.() === 0) flags.push("--no-sandbox");
@@ -177,11 +178,23 @@ async function main() {
       origin = server.origin;
     }
 
+    // Chrome's virtual time budget covers only the page's own process. With
+    // site isolation on, a cross-site embed (a live app in an iframe) runs in
+    // another process and is still blank when the budget ends, so keep
+    // embeds in the page's process while capturing.
+    const render = [
+      `--window-size=${args.size.width},${args.size.height}`,
+      `--force-device-scale-factor=${args.scale}`,
+      `--virtual-time-budget=${WAIT_MS}`,
+      "--disable-site-isolation-trials",
+      "--disable-features=IsolateOrigins,site-per-process",
+    ];
+
     // 1. Count the steps.
     const firstUrl = stepUrl(origin, args.id, 0);
     console.log(`Reading ${firstUrl}`);
-    const { total, gated } = parseDeckDom(
-      await chrome(binary, [`--virtual-time-budget=${WAIT_MS}`, "--dump-dom", firstUrl]),
+    const { total, gated, title } = parseDeckDom(
+      await chrome(binary, [...render, "--dump-dom", firstUrl]),
     );
     if (gated) {
       throw new Error(
@@ -203,7 +216,7 @@ async function main() {
       for (let attempt = 1; ; attempt++) {
         try {
           await chrome(binary, [
-            `--virtual-time-budget=${WAIT_MS}`,
+            ...render,
             `--screenshot=${file}`,
             stepUrl(origin, args.id, step),
           ]);
@@ -220,7 +233,7 @@ async function main() {
 
     // 3. Print the screenshots to a PDF.
     const page = path.join(work, "deck.html");
-    writeFileSync(page, deckHtml(names));
+    writeFileSync(page, deckHtml(names, { ...args.size, title }));
     await chrome(binary, [
       "--no-pdf-header-footer",
       `--print-to-pdf=${output}`,

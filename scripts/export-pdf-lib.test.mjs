@@ -9,35 +9,67 @@ import {
 } from "./export-pdf-lib.mjs";
 
 describe("parseArgs", () => {
-  it("defaults the output to <id>.pdf and builds locally", () => {
+  it("defaults to <id>.pdf, a local build and a 1920x1080 page", () => {
     expect(parseArgs(["bls-taxsim-2026"])).toEqual({
       help: false,
       id: "bls-taxsim-2026",
       output: "bls-taxsim-2026.pdf",
       url: null,
+      size: { width: 1920, height: 1080 },
+      scale: 1,
     });
   });
 
-  it("takes an output path and --url in either order", () => {
+  it("takes an output path and options in any order", () => {
     const expected = {
       help: false,
       id: "deck",
       output: "out/deck.pdf",
       url: "https://www.policyengine.org",
+      size: { width: 1440, height: 810 },
+      scale: 2,
     };
     expect(
-      parseArgs(["deck", "out/deck.pdf", "--url", "https://www.policyengine.org/"]),
+      parseArgs([
+        "deck",
+        "out/deck.pdf",
+        "--url",
+        "https://www.policyengine.org/",
+        "--size",
+        "1440x810",
+        "--scale",
+        "2",
+      ]),
     ).toEqual(expected);
     expect(
-      parseArgs(["--url=https://www.policyengine.org", "deck", "out/deck.pdf"]),
+      parseArgs([
+        "--scale=2",
+        "--url=https://www.policyengine.org",
+        "deck",
+        "--size=1440x810",
+        "out/deck.pdf",
+      ]),
     ).toEqual(expected);
   });
 
-  it("rejects a missing id, a bare --url and unknown options", () => {
+  it("rejects a missing id, a bare option and unknown options", () => {
     expect(() => parseArgs([])).toThrow(/Missing slideshow id/);
     expect(() => parseArgs(["deck", "--url"])).toThrow(/--url needs an origin/);
+    expect(() => parseArgs(["deck", "--size", "--scale", "2"])).toThrow(
+      /--size needs a viewport/,
+    );
     expect(() => parseArgs(["deck", "--wait", "5"])).toThrow(/Unknown option/);
     expect(() => parseArgs(["deck", "a.pdf", "b.pdf"])).toThrow(/Unexpected/);
+  });
+
+  it("rejects sizes and scales Chrome cannot render", () => {
+    for (const size of ["1440", "1440x", "0x0", "100x100", "9000x9000", "axb"]) {
+      expect(() => parseArgs(["deck", "--size", size])).toThrow(/--size needs/);
+    }
+    for (const scale of ["0", "0.5", "5", "two"]) {
+      expect(() => parseArgs(["deck", "--scale", scale])).toThrow(/--scale needs/);
+    }
+    expect(parseArgs(["deck", "--scale", "1.5"]).scale).toBe(1.5);
   });
 
   it("returns help for -h", () => {
@@ -57,14 +89,20 @@ describe("stepUrl", () => {
 });
 
 describe("parseDeckDom", () => {
-  it("reads the step count from the viewer", () => {
-    const dom = '<main class="relative cursor-pointer" data-total-steps="36">';
-    expect(parseDeckDom(dom)).toEqual({ total: 36, gated: false });
+  it("reads the step count and title from the viewer", () => {
+    const dom =
+      "<head><title>Taxes &amp; benefits | PolicyEngine</title></head>" +
+      '<main class="relative cursor-pointer" data-total-steps="36">';
+    expect(parseDeckDom(dom)).toEqual({
+      total: 36,
+      gated: false,
+      title: "Taxes & benefits | PolicyEngine",
+    });
   });
 
   it("flags the password gate and a missing count", () => {
     const dom = '<form><input type="password" placeholder="Password"></form>';
-    expect(parseDeckDom(dom)).toEqual({ total: null, gated: true });
+    expect(parseDeckDom(dom)).toEqual({ total: null, gated: true, title: null });
   });
 
   it("treats a zero count as missing", () => {
@@ -83,11 +121,27 @@ describe("shotName", () => {
 });
 
 describe("deckHtml", () => {
-  it("lays out one 16:9 page per screenshot, in order", () => {
-    const html = deckHtml(["step-0.jpg", "step-1.jpg", "step-2.jpg"]);
-    expect(html).toContain("@page { size: 1920px 1080px; margin: 0; }");
+  it("lays out one page per screenshot at the viewport size, in order", () => {
+    const html = deckHtml(["step-0.jpg", "step-1.jpg", "step-2.jpg"], {
+      width: 1440,
+      height: 810,
+    });
+    expect(html).toContain("@page { size: 1440px 810px; margin: 0; }");
+    expect(html).toContain("img { width: 1440px; height: 810px;");
+    expect(html).toContain("<title>Slides</title>");
     const srcs = [...html.matchAll(/<img src="([^"]+)"/g)].map((m) => m[1]);
     expect(srcs).toEqual(["step-0.jpg", "step-1.jpg", "step-2.jpg"]);
+  });
+});
+
+describe("deckHtml title", () => {
+  it("escapes the title that becomes the PDF's document title", () => {
+    const html = deckHtml(["step-0.jpg"], {
+      width: 1920,
+      height: 1080,
+      title: "Taxes & <benefits>",
+    });
+    expect(html).toContain("<title>Taxes &amp; &lt;benefits&gt;</title>");
   });
 });
 
