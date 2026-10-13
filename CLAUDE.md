@@ -43,8 +43,17 @@ lib/
 bun dev                           # Dev server at localhost:3000
 bun run build                     # Production build
 bun run new-slideshow <id> <title> # Scaffold new slideshow
-bun run export <id> [output.pdf]  # Export slideshow to PDF
+bun run export <id> [output.pdf] [--url <origin>]  # Export slideshow to PDF (headless Chrome CLI)
 ```
+
+## Exporting to PDF
+
+`bun run export` drives headless Chrome through its command line only (`--dump-dom`, `--screenshot`, `--print-to-pdf`), never through a DevTools connection, so it works where remote debugging is disabled.
+
+- `?slide=N&export=1` renders step N without the navigation bar; the viewer's `<main>` carries `data-total-steps`.
+- Without `--url`, the script builds into `.next-export` with `NEXT_PUBLIC_EXPORT_BUILD=1`, which skips the password gate so private decks export; deployed builds never set it.
+- With `--url https://www.policyengine.org`, it captures the deployed site (public decks only).
+- `EXPORT_WAIT_MS` (default 10000) sets how much virtual time each slide gets to render; raise it for slides with slow live embeds. `CHROME_PATH` overrides the Chrome binary.
 
 ## Adding a new slideshow
 

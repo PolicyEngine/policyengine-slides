@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildSlideUrl } from "./slide-url";
+import { buildSlideUrl, isExportMode } from "./slide-url";
 
 describe("buildSlideUrl", () => {
   it("preserves basePath when on step 0", () => {
@@ -48,5 +48,27 @@ describe("buildSlideUrl", () => {
       4,
     );
     expect(result).toBe("/slides/abundance-dmv?slide=4");
+  });
+});
+
+describe("isExportMode", () => {
+  it("is on when export=1", () => {
+    expect(isExportMode(new URLSearchParams("slide=4&export=1"))).toBe(true);
+  });
+
+  it("is off without the param or with any other value", () => {
+    expect(isExportMode(new URLSearchParams("slide=4"))).toBe(false);
+    expect(isExportMode(new URLSearchParams("export=0"))).toBe(false);
+    expect(isExportMode(new URLSearchParams("export=true"))).toBe(false);
+  });
+
+  it("survives buildSlideUrl, so the address bar keeps export mode", () => {
+    const url = buildSlideUrl(
+      "http://localhost:3000/slides/abundance-dmv?slide=2&export=1",
+      5,
+    );
+    expect(isExportMode(new URL(url, "http://localhost").searchParams)).toBe(
+      true,
+    );
   });
 });

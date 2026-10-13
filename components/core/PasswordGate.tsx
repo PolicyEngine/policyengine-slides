@@ -13,7 +13,9 @@ export default function PasswordGate({ children }: PasswordGateProps) {
 
   const correctPassword = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD || '';
 
-  if (unlocked) {
+  // `bun run export` builds with NEXT_PUBLIC_EXPORT_BUILD=1 so a headless
+  // browser can capture private decks. Deployed builds never set it.
+  if (unlocked || process.env.NEXT_PUBLIC_EXPORT_BUILD === '1') {
     return <>{children}</>;
   }
 

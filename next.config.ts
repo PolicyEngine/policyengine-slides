@@ -2,6 +2,9 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   basePath: '/slides',
+  // `bun run export` builds into .next-export so its password-free build
+  // never replaces the regular .next one.
+  distDir: process.env.SLIDES_DIST_DIR || '.next',
   images: {
     unoptimized: true,
   },

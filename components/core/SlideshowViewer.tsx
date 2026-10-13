@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
 import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
-import { buildSlideUrl } from '@/lib/slide-url';
+import { buildSlideUrl, isExportMode } from '@/lib/slide-url';
 
 interface SlideshowViewerProps {
   config: SlideshowConfig;
@@ -18,6 +18,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   const steps = useMemo(() => flattenSlides(config.slides), [config.slides]);
   const totalSteps = steps.length;
+  const exportMode = isExportMode(searchParams);
 
   useEffect(() => {
     setMounted(true);
@@ -89,7 +90,11 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   return (
     <SlideshowProvider value={contextValue}>
-      <main className="relative cursor-pointer" onClick={handleMainClick}>
+      <main
+        className="relative cursor-pointer"
+        onClick={handleMainClick}
+        data-total-steps={totalSteps}
+      >
         {mounted && config.slides.map((slide, slideIndex) => {
           const SlideComponent = getSlideComponent(slide);
           const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= 1;
@@ -110,7 +115,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
           );
         })}
 
-        {!isFullscreen && (
+        {!isFullscreen && !exportMode && (
           <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-between px-8 pointer-events-none">
             <div className="flex items-center gap-3 pointer-events-auto">
               <span className="text-white/60 text-xs">

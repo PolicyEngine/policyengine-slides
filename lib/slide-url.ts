@@ -15,3 +15,11 @@ export function buildSlideUrl(
   }
   return url.pathname + url.search;
 }
+
+/**
+ * Export mode (`?export=1`) renders slides without the navigation bar, so a
+ * headless browser can capture each step as it will appear in a PDF.
+ */
+export function isExportMode(params: Pick<URLSearchParams, "get">): boolean {
+  return params.get("export") === "1";
+}
