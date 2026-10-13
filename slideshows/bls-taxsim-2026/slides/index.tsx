@@ -1,0 +1,136 @@
+import DetailContent from './DetailContent';
+import DropInTabs from './DropInTabs';
+import LiveEmbed from './LiveEmbed';
+import CeInputsTable from './CeInputsTable';
+import InputMapping from './InputMapping';
+import OriginsSlide from './Origins';
+import ProcessFlow from './ProcessFlow';
+import ReleasesSlide from './Releases';
+import AxiomPlanSlide from './AxiomPlan';
+import { ThankYouSlide } from './ThankYouSlide';
+import SectionDivider from './SectionDivider';
+import UpdateTimelineSlide from './UpdateTimeline';
+import { WhatIsPolicyEngineSlide, WhoUsesPolicyEngineSlide } from './PEIntroSlides';
+import { BenefitChains, CompareFlow, IconCards, PartnershipBridge, QuestionsAndLinks, ResourceBars, SourcesPanel, Triangle, WorkflowRouting } from './Visuals';
+import Slide from '@/components/core/Slide';
+import CoverSlide from '@/components/layout/CoverSlide';
+import SlideHeader from '@/components/layout/SlideHeader';
+import SlideTitle from '@/components/layout/SlideTitle';
+import { speakers } from '@/lib/speakers';
+import { blsSlides, type BlsSlideContent } from '../content';
+
+const COVER_SPEAKERS = [speakers['max-ghenis'], speakers['pavel-makarchuk'], speakers['david-trimmer']];
+
+const CUSTOM_SLIDES = {
+  'what-is-pe': WhatIsPolicyEngineSlide,
+  'who-uses-pe': WhoUsesPolicyEngineSlide,
+  'thank-you': ThankYouSlide,
+} satisfies Record<NonNullable<BlsSlideContent['custom']>, () => React.JSX.Element>;
+
+function DeckSlide({ content }: { content: BlsSlideContent }) {
+  if (content.custom) {
+    const Custom = CUSTOM_SLIDES[content.custom];
+    return <Custom />;
+  }
+
+  if (content.divider) {
+    return <SectionDivider number={content.divider.number} title={content.title} presenter={content.divider.presenter} />;
+  }
+
+  if (content.cover) {
+    return (
+      <CoverSlide
+        title={content.title}
+        subtitle={content.body[0]}
+        speakers={COVER_SPEAKERS}
+        event="BLS seminar"
+        contentClassName="[@media(max-height:760px)]:pt-16"
+      />
+    );
+  }
+
+  return (
+    <Slide className="[&>div:last-child]:pr-64">
+      <SlideHeader>
+        <div className="flex items-baseline justify-between gap-8">
+          <SlideTitle>{content.title}</SlideTitle>
+          {content.headerLink && (
+            <a
+              href={content.headerLink.url}
+              target="_blank"
+              rel="noreferrer"
+              className="pointer-events-auto shrink-0 font-mono text-lg text-pe-teal underline-offset-4 hover:underline"
+            >
+              {content.headerLink.label}
+            </a>
+          )}
+        </div>
+      </SlideHeader>
+      {content.embed ? (
+        <LiveEmbed title={content.title} embed={content.embed} />
+      ) : content.process ? (
+        <ProcessFlow process={content.process} />
+      ) : content.cards ? (
+        <IconCards cards={content.cards} hero={content.hero} />
+      ) : content.chains ? (
+        <BenefitChains chains={content.chains} />
+      ) : content.sourcesPanel ? (
+        <SourcesPanel panel={content.sourcesPanel} />
+      ) : content.resourceBars ? (
+        <ResourceBars bars={content.resourceBars} />
+      ) : content.dropIn ? (
+        <DropInTabs dropIn={content.dropIn} />
+      ) : content.ceInputs ? (
+        <CeInputsTable table={content.ceInputs} />
+      ) : content.mapping ? (
+        <InputMapping mapping={content.mapping} />
+      ) : content.origins ? (
+        <OriginsSlide origins={content.origins} />
+      ) : content.bridge ? (
+        <PartnershipBridge bridge={content.bridge} />
+      ) : content.triangle ? (
+        <Triangle triangle={content.triangle} />
+      ) : content.updateTimeline ? (
+        <UpdateTimelineSlide timeline={content.updateTimeline} />
+      ) : content.routing ? (
+        <WorkflowRouting routing={content.routing} />
+      ) : content.releases ? (
+        <ReleasesSlide releases={content.releases} />
+      ) : content.axiomPlan ? (
+        <AxiomPlanSlide plan={content.axiomPlan} />
+
+      ) : content.compare ? (
+        <CompareFlow compare={content.compare} />
+      ) : content.links ? (
+        <QuestionsAndLinks questions={content.body} links={content.links} />
+
+      ) : content.detail ? (
+        <DetailContent detail={content.detail} />
+      ) : (
+        <ol className={content.descriptions ? "space-y-2 mt-6 max-w-6xl" : "space-y-6 mt-8 max-w-6xl"}>
+          {content.body.map((item, index) => (
+            <li key={item} className={`flex items-start gap-7 text-pe-dark ${content.descriptions ? 'text-xl leading-snug' : 'text-2xl leading-relaxed'}`}>
+              <span className="font-mono text-pe-teal font-bold shrink-0 w-10" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <p className={content.descriptions ? 'text-lg font-semibold leading-snug' : ''}>{item}</p>
+                {content.descriptions?.[index] && (
+                  <p className="text-base leading-snug text-gray-600">{content.descriptions[index]}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </Slide>
+  );
+}
+
+export const blsSlideComponents = blsSlides.map((content) => {
+  function BlsSlide() {
+    return <DeckSlide content={content} />;
+  }
+  BlsSlide.displayName = `BlsTaxsim_${content.id}`;
+  return BlsSlide;
+});
