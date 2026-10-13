@@ -51,11 +51,13 @@ bun run export <id> [output.pdf] [--url <origin>]  # Export slideshow to PDF (he
 `bun run export` drives headless Chrome through its command line only (`--dump-dom`, `--screenshot`, `--print-to-pdf`), never through a DevTools connection, so it works where remote debugging is disabled.
 
 - `?slide=N&export=1` renders step N without the navigation bar and mounts only that slide (no neighbors); the viewer's `<main>` carries `data-total-steps`.
-- Without `--url`, the script builds into `.next-export` with `NEXT_PUBLIC_EXPORT_BUILD=1`, which skips the password gate so private decks export; deployed builds never set it.
-- With `--url https://www.policyengine.org`, it captures the deployed site (public decks only).
+- Without `--url`, the script runs `next build`, serves the build on a free port and captures it, so unmerged changes export too. With `--url https://www.policyengine.org`, it captures the deployed site.
 - `--size 1440x810 --scale 2` suits decks laid out for a laptop: the content fills the page and text stays sharp. The default is `1920x1080` at scale 1.
-- Cross-site embeds render because the capture runs with site isolation off, which keeps an iframe in the page's process where the render budget applies.
-- `EXPORT_WAIT_MS` (default 10000) sets how much virtual time each slide gets to render; raise it for slides with slow live embeds. `CHROME_PATH` overrides the Chrome binary.
+- Private decks: set `NEXT_PUBLIC_PRIVATE_PASSWORD`. The script passes it in the URL fragment (`#password=...`), which `PasswordGate` accepts and the browser never sends to the server. A local build also needs the variable at build time, as any build of a private deck does.
+- Cross-site embeds render because captures run with Chrome's site isolation off, which keeps an iframe in the page's process where the render budget applies. Pass `--site-isolation` to keep it on when you capture a site you do not control; embeds may then come out blank.
+- `EXPORT_WAIT_MS` (default 10000) sets how much virtual time each slide gets to render after it loads; raise it for slides with slow embeds or long intro animations. `EXPORT_CONCURRENCY` (default 3) sets how many slides are captured at once. `CHROME_PATH` overrides the Chrome binary.
+- A watchdog stops a Chrome that hangs, and each step gets three attempts. A failure or Ctrl-C stops every Chrome the script started, stops the server and removes the screenshots.
+- The script checks that the PDF has one page per step before it reports success.
 
 ## Adding a new slideshow
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { passwordFromHash } from '@/lib/slide-url';
 
 interface PasswordGateProps {
   children: React.ReactNode;
@@ -13,9 +14,16 @@ export default function PasswordGate({ children }: PasswordGateProps) {
 
   const correctPassword = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD || '';
 
-  // `bun run export` builds with NEXT_PUBLIC_EXPORT_BUILD=1 so a headless
-  // browser can capture private decks. Deployed builds never set it.
-  if (unlocked || process.env.NEXT_PUBLIC_EXPORT_BUILD === '1') {
+  // A link can carry the password in its fragment (#password=...), which the
+  // browser never sends to the server. `bun run export` captures private
+  // decks this way. The viewer drops the fragment when it rewrites the URL.
+  useEffect(() => {
+    if (passwordFromHash(window.location.hash) === correctPassword) {
+      setUnlocked(true);
+    }
+  }, [correctPassword]);
+
+  if (unlocked) {
     return <>{children}</>;
   }
 

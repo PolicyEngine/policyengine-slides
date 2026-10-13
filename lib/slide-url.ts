@@ -23,3 +23,12 @@ export function buildSlideUrl(
 export function isExportMode(params: Pick<URLSearchParams, "get">): boolean {
   return params.get("export") === "1";
 }
+
+/**
+ * Read a deck password from a URL fragment such as `#password=abc`. Browsers
+ * never send the fragment to the server. Returns null when the fragment has
+ * no `password` key, and "" for an empty one.
+ */
+export function passwordFromHash(hash: string): string | null {
+  return new URLSearchParams(hash.replace(/^#/, "")).get("password");
+}

@@ -12,94 +12,74 @@
  *   bun run export bls-taxsim-2026 bls.pdf --size 1440x810 --scale 2
  *
  * What it does:
- *   1. Without --url, builds into .next-export with NEXT_PUBLIC_EXPORT_BUILD=1
- *      (private decks skip the password gate) and serves it on a free port.
+ *   1. Without --url, runs `next build` and serves the build on a free port.
  *   2. Reads the step count from the viewer's data-total-steps attribute,
- *      using `chrome --dump-dom`.
- *   3. Screenshots every step at ?slide=N&export=1, which hides the nav bar.
+ *      using `chrome --dump-dom`. A private deck is unlocked with
+ *      NEXT_PUBLIC_PRIVATE_PASSWORD, passed in the URL fragment.
+ *   3. Screenshots every step at ?slide=N&export=1, which hides the nav bar
+ *      and mounts only that slide.
  *   4. Prints a page of the screenshots to a PDF with `chrome --print-to-pdf`,
- *      one page per step at the viewport size.
+ *      one page per step at the viewport size, and checks the page count.
  *
  * Chrome runs only through its command line. The script never opens a
  * DevTools connection (no puppeteer, no remote debugging), so it also works
  * where an administrator has disabled remote debugging.
+ *
+ * Captures run with Chrome's site isolation off, so that live cross-site
+ * embeds render (see `render` below). Pass --site-isolation to keep it on
+ * when you capture a site you do not control.
  */
 
 import { spawn, spawnSync } from "child_process";
-import { existsSync, mkdtempSync, rmSync, statSync, writeFileSync } from "fs";
+import { mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "fs";
 import { createServer } from "net";
 import { tmpdir } from "os";
 import path from "path";
 import { pathToFileURL } from "url";
+import { findChrome, killAllChrome, runChrome } from "./export-pdf-chrome.mjs";
 import {
   USAGE,
+  countPdfPages,
   deckHtml,
   mapLimit,
   parseArgs,
   parseDeckDom,
+  parseIntSetting,
   shotName,
   stepUrl,
 } from "./export-pdf-lib.mjs";
 
-const WAIT_MS = parseInt(process.env.EXPORT_WAIT_MS || "10000", 10);
-const CONCURRENCY = parseInt(process.env.EXPORT_CONCURRENCY || "3", 10);
-const DIST_DIR = ".next-export";
+const ATTEMPTS = 3;
 
-// ── Chrome ───────────────────────────────────────────────────────────
+// ── Cleanup ──────────────────────────────────────────────────────────
+// Everything the script starts or writes is registered here, so a failure
+// or a signal stops Chrome and the server and removes the screenshots
+// (which can show a private deck).
 
-function findChrome() {
-  if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
-  const candidates = [
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    "/Applications/Chromium.app/Contents/MacOS/Chromium",
-  ];
-  for (const candidate of candidates) {
-    if (existsSync(candidate)) return candidate;
+let work = null;
+let server = null;
+let stopping = false;
+
+function cleanup() {
+  stopping = true;
+  killAllChrome();
+  if (server) {
+    server.kill();
+    server = null;
   }
-  for (const name of [
-    "google-chrome",
-    "google-chrome-stable",
-    "chromium",
-    "chromium-browser",
-  ]) {
-    const found = spawnSync("which", [name], { encoding: "utf8" });
-    if (found.status === 0 && found.stdout.trim()) return found.stdout.trim();
+  if (work) {
+    rmSync(work, { recursive: true, force: true });
+    work = null;
   }
-  throw new Error("Chrome not found. Set CHROME_PATH to a Chrome or Chromium binary.");
 }
 
-/** Run headless Chrome with `args`; resolve with stdout. */
-function chrome(binary, args, { timeoutMs = WAIT_MS + 60_000 } = {}) {
-  const flags = [
-    "--headless",
-    "--disable-gpu",
-    "--hide-scrollbars",
-    "--no-first-run",
-    "--no-default-browser-check",
-  ];
-  // Chrome refuses to start its sandbox as root, e.g. in some CI containers.
-  if (process.getuid?.() === 0) flags.push("--no-sandbox");
-  return new Promise((resolve, reject) => {
-    const proc = spawn(binary, [...flags, ...args], {
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-    let stdout = "";
-    let stderr = "";
-    proc.stdout.on("data", (d) => (stdout += d));
-    proc.stderr.on("data", (d) => (stderr += d));
-    const timer = setTimeout(() => {
-      proc.kill("SIGKILL");
-      reject(new Error(`Chrome timed out after ${timeoutMs} ms: ${args.at(-1)}`));
-    }, timeoutMs);
-    proc.on("error", (e) => {
-      clearTimeout(timer);
-      reject(e);
-    });
-    proc.on("close", (code) => {
-      clearTimeout(timer);
-      if (code === 0) resolve(stdout);
-      else reject(new Error(`Chrome exited ${code}: ${stderr.trim().split("\n").at(-1)}`));
-    });
+for (const [signal, code] of [
+  ["SIGINT", 130],
+  ["SIGTERM", 143],
+]) {
+  process.once(signal, () => {
+    cleanup();
+    process.exit(code);
   });
 }
 
@@ -117,36 +97,36 @@ function getFreePort() {
 }
 
 const nextBin = path.join(process.cwd(), "node_modules", ".bin", "next");
-const exportEnv = {
-  ...process.env,
-  SLIDES_DIST_DIR: DIST_DIR,
-  NEXT_PUBLIC_EXPORT_BUILD: "1",
-};
 
 function build() {
-  console.log(`Building into ${DIST_DIR}...`);
-  const result = spawnSync(nextBin, ["build"], { stdio: "inherit", env: exportEnv });
+  console.log("Building...");
+  const result = spawnSync(nextBin, ["build"], { stdio: "inherit" });
+  if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`Build failed (exit ${result.status})`);
 }
 
+/** Start `next start` on `port` and resolve with its origin once it answers. */
 async function startServer(port) {
-  const proc = spawn(nextBin, ["start", "-p", String(port)], {
-    stdio: "ignore",
-    env: exportEnv,
-  });
+  const proc = spawn(nextBin, ["start", "-p", String(port)], { stdio: "ignore" });
+  server = proc;
+  let spawnError = null;
+  proc.on("error", (e) => (spawnError = e));
   const origin = `http://localhost:${port}`;
   const deadline = Date.now() + 60_000;
   while (Date.now() < deadline) {
+    if (spawnError) throw spawnError;
     if (proc.exitCode !== null) throw new Error(`Server exited ${proc.exitCode}`);
     try {
-      const res = await fetch(`${origin}/slides`);
-      if (res.status < 500) return { proc, origin };
+      const remaining = Math.max(1, deadline - Date.now());
+      const res = await fetch(`${origin}/slides`, {
+        signal: AbortSignal.timeout(Math.min(5_000, remaining)),
+      });
+      if (res.status < 500) return origin;
     } catch {
-      // not listening yet
+      // not listening yet, or this request timed out
     }
     await new Promise((r) => setTimeout(r, 500));
   }
-  proc.kill();
   throw new Error("Server did not respond within 60 s");
 }
 
@@ -154,8 +134,20 @@ async function startServer(port) {
 
 async function main() {
   let args;
+  let waitMs;
+  let concurrency;
   try {
     args = parseArgs(process.argv.slice(2));
+    waitMs = parseIntSetting("EXPORT_WAIT_MS", process.env.EXPORT_WAIT_MS, 10_000, {
+      min: 0,
+      max: 600_000,
+    });
+    concurrency = parseIntSetting(
+      "EXPORT_CONCURRENCY",
+      process.env.EXPORT_CONCURRENCY,
+      3,
+      { min: 1, max: 16 },
+    );
   } catch (e) {
     console.error(`${e.message}\n\n${USAGE}`);
     process.exit(1);
@@ -166,90 +158,123 @@ async function main() {
   }
 
   const binary = findChrome();
+  if (!binary) {
+    throw new Error("Chrome not found. Set CHROME_PATH to a Chrome or Chromium binary.");
+  }
   const output = path.resolve(args.output);
-  const work = mkdtempSync(path.join(tmpdir(), `export-${args.id}-`));
-  let server = null;
 
-  try {
-    let origin = args.url;
-    if (!origin) {
-      build();
-      server = await startServer(await getFreePort());
-      origin = server.origin;
-    }
+  let origin = args.url;
+  if (!origin) {
+    build();
+    origin = await startServer(await getFreePort());
+  }
+  work = mkdtempSync(path.join(tmpdir(), `export-${args.id}-`));
 
-    // Chrome's virtual time budget covers only the page's own process. With
-    // site isolation on, a cross-site embed (a live app in an iframe) runs in
-    // another process and is still blank when the budget ends, so keep
-    // embeds in the page's process while capturing.
-    const render = [
+  const render = {
+    // The watchdog covers a whole capture, including a Chrome that hangs.
+    timeoutMs: waitMs + 60_000,
+    extraFlags: [
       `--window-size=${args.size.width},${args.size.height}`,
       `--force-device-scale-factor=${args.scale}`,
-      `--virtual-time-budget=${WAIT_MS}`,
-      // Virtual time stops while a request is pending, so one stalled request
-      // would hold the capture forever. Cap the wait in real time as well.
-      `--timeout=${WAIT_MS + 30_000}`,
-      "--disable-site-isolation-trials",
-      "--disable-features=IsolateOrigins,site-per-process",
-    ];
+      // Time the page gets to render after it loads.
+      `--virtual-time-budget=${waitMs}`,
+      // Cap on the initial page load, so a stalled request cannot hold it.
+      `--timeout=${waitMs + 30_000}`,
+      // The virtual time budget covers only the page's own process. With
+      // site isolation on, a cross-site embed (a live app in an iframe) runs
+      // in another process and is still blank when the budget ends.
+      ...(args.siteIsolation
+        ? []
+        : [
+            "--disable-site-isolation-trials",
+            "--disable-features=IsolateOrigins,site-per-process",
+          ]),
+    ],
+  };
 
-    // 1. Count the steps.
-    const firstUrl = stepUrl(origin, args.id, 0);
-    console.log(`Reading ${firstUrl}`);
-    const { total, gated, title } = parseDeckDom(
-      await chrome(binary, [...render, "--dump-dom", firstUrl]),
+  // 1. Count the steps, unlocking the deck if it is private.
+  console.log(`Reading ${stepUrl(origin, args.id, 0)}`);
+  let password = null;
+  let deck = parseDeckDom(
+    await runChrome(binary, ["--dump-dom", stepUrl(origin, args.id, 0)], render),
+  );
+  if (deck.gated) {
+    password = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD ?? "";
+    deck = parseDeckDom(
+      await runChrome(
+        binary,
+        ["--dump-dom", stepUrl(origin, args.id, 0, password)],
+        render,
+      ),
     );
-    if (gated) {
+    if (deck.gated) {
       throw new Error(
-        "This deck is private. Export it from a local build by leaving out --url.",
+        "This deck is private. Set NEXT_PUBLIC_PRIVATE_PASSWORD to its password.",
       );
     }
-    if (!total) {
-      throw new Error(
-        "No data-total-steps on the page. Is the slideshow id right, and does the site include export mode?",
-      );
-    }
-    console.log(`${total} steps`);
+  }
+  const { total, title } = deck;
+  if (!total) {
+    throw new Error(
+      "No data-total-steps on the page. Is the slideshow id right, and does the site include export mode?",
+    );
+  }
+  console.log(`${total} steps`);
 
-    // 2. Screenshot each step.
-    const names = Array.from({ length: total }, (_, i) => shotName(i, total));
-    let done = 0;
-    await mapLimit(names, CONCURRENCY, async (name, step) => {
+  // 2. Screenshot each step. A failure stops the other captures.
+  const names = Array.from({ length: total }, (_, i) => shotName(i, total));
+  let done = 0;
+  await mapLimit(
+    names,
+    concurrency,
+    async (name, step) => {
       const file = path.join(work, name);
       for (let attempt = 1; ; attempt++) {
         try {
-          await chrome(binary, [
-            ...render,
-            `--screenshot=${file}`,
-            stepUrl(origin, args.id, step),
-          ]);
+          await runChrome(
+            binary,
+            [`--screenshot=${file}`, stepUrl(origin, args.id, step, password)],
+            render,
+          );
           if (statSync(file).size === 0) throw new Error("empty screenshot");
           break;
         } catch (e) {
-          if (attempt === 3) throw new Error(`Step ${step + 1}: ${e.message}`);
+          if (stopping || attempt === ATTEMPTS) {
+            throw new Error(`Step ${step + 1}: ${e.message}`);
+          }
           console.log(`  step ${step + 1} attempt ${attempt} failed (${e.message}); retrying`);
         }
       }
       done++;
       console.log(`Captured ${done}/${total}`);
-    });
+    },
+    {
+      onFailure: () => {
+        stopping = true;
+        killAllChrome();
+      },
+    },
+  );
 
-    // 3. Print the screenshots to a PDF.
-    const page = path.join(work, "deck.html");
-    writeFileSync(page, deckHtml(names, { ...args.size, title }));
-    await chrome(binary, [
-      "--no-pdf-header-footer",
-      `--print-to-pdf=${output}`,
-      pathToFileURL(page).href,
-    ]);
-    console.log(`PDF saved to ${output}`);
-  } finally {
-    if (server) server.proc.kill();
-    rmSync(work, { recursive: true, force: true });
+  // 3. Print the screenshots to a PDF and check that every step has a page.
+  const page = path.join(work, "deck.html");
+  writeFileSync(page, deckHtml(names, { ...args.size, title }));
+  await runChrome(
+    binary,
+    ["--no-pdf-header-footer", `--print-to-pdf=${output}`, pathToFileURL(page).href],
+    { timeoutMs: 120_000 },
+  );
+  const pages = countPdfPages(readFileSync(output));
+  if (pages !== total) {
+    throw new Error(`The PDF has ${pages} pages for ${total} steps: ${output}`);
   }
+  console.log(`PDF saved to ${output} (${pages} pages)`);
 }
 
-main().catch((e) => {
-  console.error(e.message || e);
-  process.exit(1);
-});
+main()
+  .then(() => cleanup())
+  .catch((e) => {
+    cleanup();
+    console.error(e.message || e);
+    process.exit(1);
+  });

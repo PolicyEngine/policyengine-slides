@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildSlideUrl, isExportMode } from "./slide-url";
+import { buildSlideUrl, isExportMode, passwordFromHash } from "./slide-url";
 
 describe("buildSlideUrl", () => {
   it("preserves basePath when on step 0", () => {
@@ -72,3 +72,33 @@ describe("isExportMode", () => {
     );
   });
 });
+
+describe("passwordFromHash", () => {
+  it("reads and decodes the password from the fragment", () => {
+    expect(passwordFromHash("#password=abc")).toBe("abc");
+    expect(passwordFromHash("#password=a%26b%20c%23d")).toBe("a&b c#d");
+    expect(passwordFromHash("password=abc")).toBe("abc");
+  });
+
+  it("round-trips any password that encodeURIComponent wrote", () => {
+    for (const password of ["", "plain", "a&b=c", "sp ace+plus", "ünï/çode#?%"]) {
+      const hash = `#password=${encodeURIComponent(password)}`;
+      expect(passwordFromHash(hash)).toBe(password);
+    }
+  });
+
+  it("returns null without a password key", () => {
+    expect(passwordFromHash("")).toBeNull();
+    expect(passwordFromHash("#")).toBeNull();
+    expect(passwordFromHash("#section-2")).toBeNull();
+  });
+
+  it("drops out of the address bar once the viewer rewrites the URL", () => {
+    const shown = buildSlideUrl(
+      "http://localhost:3000/slides/deck?slide=2&export=1#password=abc",
+      2,
+    );
+    expect(shown).toBe("/slides/deck?slide=2&export=1");
+  });
+});
+

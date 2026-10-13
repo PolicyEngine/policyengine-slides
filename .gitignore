@@ -1,6 +1,5 @@
 node_modules/
 .next/
-.next-export/
 out/
 .DS_Store
 .vercel
