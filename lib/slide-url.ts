@@ -25,6 +25,20 @@ export function isExportMode(params: Pick<URLSearchParams, "get">): boolean {
 }
 
 /**
+ * Milliseconds an export capture asks the page to stay still after the slide
+ * mounts (`settle=<ms>`), as a whole number from 0 to `max`. Anything else
+ * reads as 0.
+ */
+export function exportSettleMs(
+  params: Pick<URLSearchParams, "get">,
+  max: number,
+): number {
+  const raw = params.get("settle") ?? "";
+  if (!/^\d+$/.test(raw)) return 0;
+  return Math.min(parseInt(raw, 10), max);
+}
+
+/**
  * Read a deck password from a URL fragment such as `#password=abc`. Browsers
  * never send the fragment to the server. Returns null when the fragment has
  * no `password` key, and "" for an empty one.

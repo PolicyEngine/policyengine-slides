@@ -5,6 +5,7 @@ import { tmpdir } from "os";
 import path from "path";
 import { pathToFileURL } from "url";
 import { describe, it, expect } from "vitest";
+import { EXPORT_HOLD_SCRIPT } from "../lib/export-hold";
 import { findChrome, runChrome, runningChromeCount } from "./export-pdf-chrome.mjs";
 import {
   countPdfPages,
@@ -26,7 +27,6 @@ describe("parseArgs", () => {
       url: null,
       size: { width: 1920, height: 1080 },
       scale: 1,
-      siteIsolation: false,
     });
   });
 
@@ -38,7 +38,6 @@ describe("parseArgs", () => {
       url: "https://www.policyengine.org",
       size: { width: 1440, height: 810 },
       scale: 2,
-      siteIsolation: true,
     };
     expect(
       parseArgs([
@@ -50,13 +49,11 @@ describe("parseArgs", () => {
         "1440x810",
         "--scale",
         "2",
-        "--site-isolation",
       ]),
     ).toEqual(expected);
     expect(
       parseArgs([
         "--scale=2",
-        "--site-isolation",
         "--url=https://www.policyengine.org",
         "deck",
         "--size=1440x810",
@@ -122,10 +119,21 @@ describe("stepUrl", () => {
     );
   });
 
+  it("adds the settle time only when there is one", () => {
+    expect(stepUrl("http://localhost:4000", "deck", 2, { settle: 8000 })).toBe(
+      "http://localhost:4000/slides/deck?slide=2&export=1&settle=8000",
+    );
+    expect(stepUrl("http://localhost:4000", "deck", 2, { settle: 0 })).toBe(
+      "http://localhost:4000/slides/deck?slide=2&export=1",
+    );
+  });
+
   it("carries a password only in the fragment, and round-trips it", () => {
     for (const password of ["", "plain", "a&b=c", "sp ace+plus", "ünï/çode#?%"]) {
-      const url = new URL(stepUrl("http://localhost:4000", "deck", 3, password));
-      expect(url.search).toBe("?slide=3&export=1");
+      const url = new URL(
+        stepUrl("http://localhost:4000", "deck", 3, { settle: 500, password }),
+      );
+      expect(url.search).toBe("?slide=3&export=1&settle=500");
       expect(new URLSearchParams(url.hash.slice(1)).get("password")).toBe(password);
     }
     expect(new URL(stepUrl("http://localhost:4000", "deck", 3)).hash).toBe("");
@@ -288,6 +296,65 @@ describe.skipIf(!chrome)("printing with Chrome", () => {
       rmSync(dir, { recursive: true, force: true });
     }
   }, 120_000);
+
+  // A page with the export hold in its head. `release` stands in for the
+  // viewer: it marks the page mounted after 300 ms and releases the hold.
+  // The page records when its load event fired, in its own clock.
+  const holdPage = (release) => `<!doctype html><html><head><meta charset="utf-8">
+<script>${EXPORT_HOLD_SCRIPT}</script></head><body><p id="state">parsed</p><script>
+var t0 = performance.now();
+addEventListener("load", function () {
+  document.body.insertAdjacentHTML("beforeend", '<p id="load">' + Math.round(performance.now() - t0) + "</p>");
+});
+${release ? `setTimeout(function () {
+  document.getElementById("state").textContent = "mounted";
+  if (window.__slideshowExportHold) window.__slideshowExportHold.release(${release});
+}, 300);` : ""}
+</script></body></html>`;
+
+  const dump = async (html, query, timeout) => {
+    const dir = mkdtempSync(path.join(tmpdir(), "export-hold-test-"));
+    try {
+      const page = path.join(dir, "page.html");
+      writeFileSync(page, html);
+      return await runChrome(
+        chrome,
+        [`--timeout=${timeout}`, "--dump-dom", `${pathToFileURL(page).href}${query}`],
+        { timeoutMs: 120_000, extraFlags: ciFlags },
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  };
+  const loadedAt = (dom) => {
+    const match = /<p id="load">(\d+)<\/p>/.exec(dom);
+    return match ? Number(match[1]) : null;
+  };
+
+  it("holds load until the settle time after the release has passed", async () => {
+    const dom = await dump(holdPage(1500), "?export=1&settle=1500", 60_000);
+    expect(dom).toContain('<p id="state">mounted</p>');
+    // Released 300 ms in, then 1500 ms of settle.
+    expect(loadedAt(dom)).toBeGreaterThanOrEqual(1800);
+  }, 150_000);
+
+  it("leaves load alone without export=1 or without a settle time", async () => {
+    for (const query of ["", "?settle=1500", "?export=1", "?export=1&settle=0"]) {
+      const dom = await dump(holdPage(1500), query, 60_000);
+      expect(loadedAt(dom)).not.toBeNull();
+      expect(loadedAt(dom)).toBeLessThan(1000);
+    }
+  }, 300_000);
+
+  it("lets Chrome's --timeout end a hold that is never released", async () => {
+    // Nothing releases this hold, so alone it would last MAX_HOLD_MS (two
+    // minutes). When --timeout runs out, Chrome stops the page load, which
+    // ends the hold and fires load.
+    const dom = await dump(holdPage(0), "?export=1&settle=5000", 2_000);
+    expect(dom).toContain('<p id="state">parsed</p>');
+    expect(loadedAt(dom)).toBeGreaterThanOrEqual(1000);
+    expect(loadedAt(dom)).toBeLessThan(60_000);
+  }, 150_000);
 
   it("stops a Chrome that outlives the watchdog and stops tracking it", async () => {
     // A server that accepts the connection and never answers, so the page

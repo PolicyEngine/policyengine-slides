@@ -16,18 +16,16 @@
  *   2. Reads the step count from the viewer's data-total-steps attribute,
  *      using `chrome --dump-dom`. A private deck is unlocked with
  *      NEXT_PUBLIC_PRIVATE_PASSWORD, passed in the URL fragment.
- *   3. Screenshots every step at ?slide=N&export=1, which hides the nav bar
- *      and mounts only that slide.
+ *   3. Screenshots every step at ?slide=N&export=1&settle=<ms>. Export mode
+ *      hides the nav bar, mounts only that slide, and holds the page's load
+ *      event until the slide has been in the DOM for <ms> of real time, so
+ *      live embeds have rendered when Chrome captures at load.
  *   4. Prints a page of the screenshots to a PDF with `chrome --print-to-pdf`,
  *      one page per step at the viewport size, and checks the page count.
  *
  * Chrome runs only through its command line. The script never opens a
  * DevTools connection (no puppeteer, no remote debugging), so it also works
  * where an administrator has disabled remote debugging.
- *
- * Captures run with Chrome's site isolation off, so that live cross-site
- * embeds render (see `render` below). Pass --site-isolation to keep it on
- * when you capture a site you do not control.
  */
 
 import { spawn, spawnSync } from "child_process";
@@ -138,9 +136,9 @@ async function main() {
   let concurrency;
   try {
     args = parseArgs(process.argv.slice(2));
-    waitMs = parseIntSetting("EXPORT_WAIT_MS", process.env.EXPORT_WAIT_MS, 10_000, {
+    waitMs = parseIntSetting("EXPORT_WAIT_MS", process.env.EXPORT_WAIT_MS, 8_000, {
       min: 0,
-      max: 600_000,
+      max: 60_000,
     });
     concurrency = parseIntSetting(
       "EXPORT_CONCURRENCY",
@@ -170,42 +168,29 @@ async function main() {
   }
   work = mkdtempSync(path.join(tmpdir(), `export-${args.id}-`));
 
+  // Chrome captures when the page's load event fires, and export mode holds
+  // that event until the slide has settled. When --timeout runs out, Chrome
+  // stops the page load and captures the page as it stands. The watchdog
+  // covers the whole process, including a Chrome that hangs.
   const render = {
-    // The watchdog covers a whole capture, including a Chrome that hangs.
-    timeoutMs: waitMs + 60_000,
+    timeoutMs: waitMs + 120_000,
     extraFlags: [
       `--window-size=${args.size.width},${args.size.height}`,
       `--force-device-scale-factor=${args.scale}`,
-      // Time the page gets to render after it loads.
-      `--virtual-time-budget=${waitMs}`,
-      // Cap on the initial page load, so a stalled request cannot hold it.
       `--timeout=${waitMs + 30_000}`,
-      // The virtual time budget covers only the page's own process. With
-      // site isolation on, a cross-site embed (a live app in an iframe) runs
-      // in another process and is still blank when the budget ends.
-      ...(args.siteIsolation
-        ? []
-        : [
-            "--disable-site-isolation-trials",
-            "--disable-features=IsolateOrigins,site-per-process",
-          ]),
     ],
   };
+  const at = (step, password = null) =>
+    stepUrl(origin, args.id, step, { settle: waitMs, password });
 
   // 1. Count the steps, unlocking the deck if it is private.
-  console.log(`Reading ${stepUrl(origin, args.id, 0)}`);
+  console.log(`Reading ${at(0)}`);
   let password = null;
-  let deck = parseDeckDom(
-    await runChrome(binary, ["--dump-dom", stepUrl(origin, args.id, 0)], render),
-  );
+  let deck = parseDeckDom(await runChrome(binary, ["--dump-dom", at(0)], render));
   if (deck.gated) {
     password = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD ?? "";
     deck = parseDeckDom(
-      await runChrome(
-        binary,
-        ["--dump-dom", stepUrl(origin, args.id, 0, password)],
-        render,
-      ),
+      await runChrome(binary, ["--dump-dom", at(0, password)], render),
     );
     if (deck.gated) {
       throw new Error(
@@ -222,16 +207,12 @@ async function main() {
   console.log(`${total} steps`);
 
   // 2. Screenshot each step. A step that fails in the parallel pass is
-  // retried afterwards on its own with twice the time: on a busy machine,
-  // several live embeds rendering at once can outrun the watchdog.
+  // retried afterwards on its own with twice the time, since a busy machine
+  // can make several Chromes at once outrun the watchdog.
   const names = Array.from({ length: total }, (_, i) => shotName(i, total));
   const capture = async (step, options) => {
     const file = path.join(work, names[step]);
-    await runChrome(
-      binary,
-      [`--screenshot=${file}`, stepUrl(origin, args.id, step, password)],
-      options,
-    );
+    await runChrome(binary, [`--screenshot=${file}`, at(step, password)], options);
     if (statSync(file).size === 0) throw new Error("empty screenshot");
   };
   let done = 0;

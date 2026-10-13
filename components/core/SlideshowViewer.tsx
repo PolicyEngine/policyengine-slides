@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
 import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
-import { buildSlideUrl, isExportMode } from '@/lib/slide-url';
+import { buildSlideUrl, exportSettleMs, isExportMode } from '@/lib/slide-url';
+import { MAX_SETTLE_MS, releaseExportHold } from '@/lib/export-hold';
 
 interface SlideshowViewerProps {
   config: SlideshowConfig;
@@ -38,6 +39,14 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
     const url = buildSlideUrl(window.location.href, currentStep);
     window.history.replaceState(null, '', url);
   }, [currentStep, config.id]);
+
+  // An export capture holds the page's load event open (lib/export-hold.ts).
+  // Start its settle time once the slide is in the DOM.
+  useEffect(() => {
+    if (mounted && exportMode) {
+      releaseExportHold(exportSettleMs(searchParams, MAX_SETTLE_MS));
+    }
+  }, [mounted, exportMode, searchParams]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

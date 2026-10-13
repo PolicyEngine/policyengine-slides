@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { buildSlideUrl, isExportMode, passwordFromHash } from "./slide-url";
+import {
+  buildSlideUrl,
+  exportSettleMs,
+  isExportMode,
+  passwordFromHash,
+} from "./slide-url";
 
 describe("buildSlideUrl", () => {
   it("preserves basePath when on step 0", () => {
@@ -99,6 +104,23 @@ describe("passwordFromHash", () => {
       2,
     );
     expect(shown).toBe("/slides/deck?slide=2&export=1");
+  });
+});
+
+describe("exportSettleMs", () => {
+  const read = (query: string) => exportSettleMs(new URLSearchParams(query), 60_000);
+
+  it("reads a whole number of milliseconds", () => {
+    expect(read("export=1&settle=8000")).toBe(8000);
+    expect(read("settle=0")).toBe(0);
+  });
+
+  it("stays within 0 and the maximum for any input", () => {
+    expect(read("settle=999999999")).toBe(60_000);
+    for (const value of ["", "-5", "1.5", "abc", "1e9", " 8000", "8000ms", "Infinity"]) {
+      expect(read(`settle=${encodeURIComponent(value)}`)).toBe(0);
+    }
+    expect(read("export=1")).toBe(0);
   });
 });
 

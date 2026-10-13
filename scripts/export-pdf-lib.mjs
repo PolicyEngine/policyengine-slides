@@ -5,21 +5,20 @@
 
 export const USAGE = `Usage: bun run export <slideshow-id> [output.pdf] [options]
 
-  --url <origin>    Capture a deployed site, e.g. https://www.policyengine.org.
-                    Without it, the script builds the site locally and captures
-                    that build, so unmerged changes export too.
-  --size <WxH>      Viewport in CSS pixels, and the PDF page size (default
-                    1920x1080). A deck laid out for a laptop fills the page
-                    better at 1440x810.
-  --scale <n>       Device pixel ratio of the screenshots, 1 to 4 (default 1).
-                    Use 2 with a smaller --size to keep text sharp.
-  --site-isolation  Keep Chrome's site isolation on. Cross-site embeds may then
-                    come out blank. Use it for a site you do not control.
+  --url <origin>  Capture a deployed site, e.g. https://www.policyengine.org.
+                  Without it, the script builds the site locally and captures
+                  that build, so unmerged changes export too.
+  --size <WxH>    Viewport in CSS pixels, and the PDF page size (default
+                  1920x1080). A deck laid out for a laptop fills the page
+                  better at 1440x810.
+  --scale <n>     Device pixel ratio of the screenshots, 1 to 4 (default 1).
+                  Use 2 with a smaller --size to keep text sharp.
 
 Environment:
   CHROME_PATH                   Chrome or Chromium binary (found automatically)
-  EXPORT_WAIT_MS                virtual time each slide gets to render, in
-                                milliseconds (default 10000)
+  EXPORT_WAIT_MS                time each slide stays still after it mounts,
+                                before the capture, in milliseconds (default
+                                8000, at most 60000)
   EXPORT_CONCURRENCY            slides captured at once (default 3)
   NEXT_PUBLIC_PRIVATE_PASSWORD  password for private decks`;
 
@@ -28,8 +27,6 @@ const VALUE_OPTIONS = {
   "--size": "a viewport such as 1440x810",
   "--scale": "a number from 1 to 4",
 };
-
-const FLAG_OPTIONS = ["--site-isolation"];
 
 function parseSize(value) {
   const match = /^(\d+)x(\d+)$/.exec(value);
@@ -53,16 +50,11 @@ function parseScale(value) {
 export function parseArgs(argv) {
   const positional = [];
   const options = {};
-  const flags = new Set();
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "-h" || arg === "--help") return { help: true };
     if (!arg.startsWith("--")) {
       positional.push(arg);
-      continue;
-    }
-    if (FLAG_OPTIONS.includes(arg)) {
-      flags.add(arg);
       continue;
     }
     const eq = arg.indexOf("=");
@@ -86,7 +78,6 @@ export function parseArgs(argv) {
     url: options["--url"] ? options["--url"].replace(/\/+$/, "") : null,
     size: parseSize(options["--size"] || "1920x1080"),
     scale: parseScale(options["--scale"] || "1"),
-    siteIsolation: flags.has("--site-isolation"),
   };
 }
 
@@ -104,14 +95,16 @@ export function parseIntSetting(name, value, fallback, { min, max }) {
 }
 
 /**
- * URL of one step in export mode, which hides the navigation bar. A password
- * (even an empty one) rides in the fragment, which unlocks a private deck and
- * never reaches the server.
+ * URL of one step in export mode, which hides the navigation bar. `settle`
+ * asks the page to stay still that many milliseconds after the slide mounts
+ * before its load event fires. A password (even an empty one) rides in the
+ * fragment, which unlocks a private deck and never reaches the server.
  */
-export function stepUrl(origin, id, step, password = null) {
+export function stepUrl(origin, id, step, { settle = 0, password = null } = {}) {
   const url = new URL(`/slides/${encodeURIComponent(id)}`, origin);
   url.searchParams.set("slide", String(step));
   url.searchParams.set("export", "1");
+  if (settle > 0) url.searchParams.set("settle", String(settle));
   if (password !== null) url.hash = `password=${encodeURIComponent(password)}`;
   return url.toString();
 }
