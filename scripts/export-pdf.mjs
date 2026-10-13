@@ -186,6 +186,9 @@ async function main() {
       `--window-size=${args.size.width},${args.size.height}`,
       `--force-device-scale-factor=${args.scale}`,
       `--virtual-time-budget=${WAIT_MS}`,
+      // Virtual time stops while a request is pending, so one stalled request
+      // would hold the capture forever. Cap the wait in real time as well.
+      `--timeout=${WAIT_MS + 30_000}`,
       "--disable-site-isolation-trials",
       "--disable-features=IsolateOrigins,site-per-process",
     ];

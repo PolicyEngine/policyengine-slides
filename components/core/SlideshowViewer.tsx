@@ -97,7 +97,11 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
       >
         {mounted && config.slides.map((slide, slideIndex) => {
           const SlideComponent = getSlideComponent(slide);
-          const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= 1;
+          // Export mode captures one step per page load, so it mounts only the
+          // current slide: a neighbor's live embed would load in the background
+          // and can keep the capture from settling.
+          const mountRadius = exportMode ? 0 : 1;
+          const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= mountRadius;
           const isCurrent = slideIndex === currentStepData?.slideIndex;
 
           if (!isNeighbor) {
