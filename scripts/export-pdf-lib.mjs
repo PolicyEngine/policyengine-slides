@@ -183,11 +183,10 @@ export function countPdfPages(bytes) {
 
 /**
  * Map `items` through async `fn` with at most `limit` running at once, keeping
- * input order. After the first failure it starts no more items, calls
- * `onFailure` once (so the caller can cancel what is still running), waits for
- * the running items to settle, then rejects with that first error.
+ * input order. After the first failure it starts no more items, waits for the
+ * running items to settle, then rejects with that first error.
  */
-export async function mapLimit(items, limit, fn, { onFailure } = {}) {
+export async function mapLimit(items, limit, fn) {
   if (!Number.isInteger(limit) || limit < 1) {
     throw new Error(`mapLimit needs a whole number limit of at least 1, got ${limit}`);
   }
@@ -204,7 +203,6 @@ export async function mapLimit(items, limit, fn, { onFailure } = {}) {
         if (!failed) {
           failed = true;
           firstError = error;
-          onFailure?.(error);
         }
       }
     }

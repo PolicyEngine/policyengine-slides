@@ -221,40 +221,51 @@ async function main() {
   }
   console.log(`${total} steps`);
 
-  // 2. Screenshot each step. A failure stops the other captures.
+  // 2. Screenshot each step. A step that fails in the parallel pass is
+  // retried afterwards on its own with twice the time: on a busy machine,
+  // several live embeds rendering at once can outrun the watchdog.
   const names = Array.from({ length: total }, (_, i) => shotName(i, total));
+  const capture = async (step, options) => {
+    const file = path.join(work, names[step]);
+    await runChrome(
+      binary,
+      [`--screenshot=${file}`, stepUrl(origin, args.id, step, password)],
+      options,
+    );
+    if (statSync(file).size === 0) throw new Error("empty screenshot");
+  };
   let done = 0;
-  await mapLimit(
-    names,
-    concurrency,
-    async (name, step) => {
-      const file = path.join(work, name);
-      for (let attempt = 1; ; attempt++) {
-        try {
-          await runChrome(
-            binary,
-            [`--screenshot=${file}`, stepUrl(origin, args.id, step, password)],
-            render,
-          );
-          if (statSync(file).size === 0) throw new Error("empty screenshot");
-          break;
-        } catch (e) {
-          if (stopping || attempt === ATTEMPTS) {
-            throw new Error(`Step ${step + 1}: ${e.message}`);
-          }
-          console.log(`  step ${step + 1} attempt ${attempt} failed (${e.message}); retrying`);
+  const retry = [];
+  await mapLimit(names, concurrency, async (_, step) => {
+    try {
+      await capture(step, render);
+      console.log(`Captured ${++done}/${total}`);
+    } catch (e) {
+      if (stopping) throw e;
+      console.log(`  step ${step + 1} failed (${e.message}); will retry alone`);
+      retry.push(step);
+    }
+  });
+  const patient = {
+    timeoutMs: render.timeoutMs * 2,
+    extraFlags: render.extraFlags.map((flag) =>
+      flag.startsWith("--timeout=") ? `--timeout=${(waitMs + 30_000) * 2}` : flag,
+    ),
+  };
+  for (const step of retry.sort((a, b) => a - b)) {
+    for (let attempt = 2; ; attempt++) {
+      try {
+        await capture(step, patient);
+        console.log(`Captured ${++done}/${total} (step ${step + 1}, attempt ${attempt})`);
+        break;
+      } catch (e) {
+        if (stopping || attempt === ATTEMPTS) {
+          throw new Error(`Step ${step + 1}: ${e.message}`);
         }
+        console.log(`  step ${step + 1} attempt ${attempt} failed (${e.message}); retrying`);
       }
-      done++;
-      console.log(`Captured ${done}/${total}`);
-    },
-    {
-      onFailure: () => {
-        stopping = true;
-        killAllChrome();
-      },
-    },
-  );
+    }
+  }
 
   // 3. Print the screenshots to a PDF and check that every step has a page.
   const page = path.join(work, "deck.html");

@@ -234,25 +234,18 @@ describe("mapLimit", () => {
   it("after a failure starts nothing new, waits for running items, and reports the first error", async () => {
     const started = [];
     const finished = [];
-    let failures = 0;
-    const run = mapLimit(
-      [0, 1, 2, 3, 4, 5],
-      2,
-      async (n) => {
-        started.push(n);
-        await new Promise((r) => setTimeout(r, n === 0 ? 5 : 30));
-        if (n === 0) throw new Error("first");
-        finished.push(n);
-        if (n === 1) throw new Error("second");
-      },
-      { onFailure: () => failures++ },
-    );
+    const run = mapLimit([0, 1, 2, 3, 4, 5], 2, async (n) => {
+      started.push(n);
+      await new Promise((r) => setTimeout(r, n === 0 ? 5 : 30));
+      if (n === 0) throw new Error("first");
+      finished.push(n);
+      if (n === 1) throw new Error("second");
+    });
     await expect(run).rejects.toThrow("first");
     // Items 0 and 1 were running when 0 failed. Nothing after them started,
-    // item 1 ran to its end before mapLimit settled, and onFailure ran once.
+    // and item 1 ran to its end before mapLimit settled.
     expect(started).toEqual([0, 1]);
     expect(finished).toEqual([1]);
-    expect(failures).toBe(1);
   });
 });
 

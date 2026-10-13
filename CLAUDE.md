@@ -56,7 +56,7 @@ bun run export <id> [output.pdf] [--url <origin>]  # Export slideshow to PDF (he
 - Private decks: set `NEXT_PUBLIC_PRIVATE_PASSWORD`. The script passes it in the URL fragment (`#password=...`), which `PasswordGate` accepts and the browser never sends to the server. A local build also needs the variable at build time, as any build of a private deck does.
 - Cross-site embeds render because captures run with Chrome's site isolation off, which keeps an iframe in the page's process where the render budget applies. Pass `--site-isolation` to keep it on when you capture a site you do not control; embeds may then come out blank.
 - `EXPORT_WAIT_MS` (default 10000) sets how much virtual time each slide gets to render after it loads; raise it for slides with slow embeds or long intro animations. `EXPORT_CONCURRENCY` (default 3) sets how many slides are captured at once. `CHROME_PATH` overrides the Chrome binary.
-- A watchdog stops a Chrome that hangs, and each step gets three attempts. A failure or Ctrl-C stops every Chrome the script started, stops the server and removes the screenshots.
+- A watchdog stops a Chrome that hangs. A step that fails in the parallel pass is retried afterwards on its own with twice the time, up to three attempts in all. A failure or Ctrl-C stops every Chrome the script started, stops the server and removes the screenshots.
 - The script checks that the PDF has one page per step before it reports success.
 
 ## Adding a new slideshow
