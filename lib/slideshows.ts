@@ -28,8 +28,10 @@ import { overhang2026BackupConfig } from "@/slideshows/overhang-2026-backup/conf
 import { overhang2026LightningConfig } from "@/slideshows/overhang-2026-lightning/config";
 import { blsTaxsim2026Config } from "@/slideshows/bls-taxsim-2026/config";
 import { scottishGovernment2026Config } from "@/slideshows/scottish-government-2026/config";
+import { israelMof2026Config } from "@/slideshows/israel-mof-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  israelMof2026Config,
   scottishGovernment2026Config,
   blsTaxsim2026Config,
   overhang2026Config,
