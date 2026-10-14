@@ -96,15 +96,16 @@ export function parseIntSetting(name, value, fallback, { min, max }) {
 
 /**
  * URL of one step in export mode, which hides the navigation bar. `settle`
- * asks the page to stay still that many milliseconds after the slide mounts
- * before its load event fires. A password (even an empty one) rides in the
- * fragment, which unlocks a private deck and never reaches the server.
+ * (0 included) holds the page's load event until the slide has mounted and
+ * then stayed still that many milliseconds. A password (even an empty one)
+ * rides in the fragment, which unlocks a private deck and never reaches the
+ * server.
  */
-export function stepUrl(origin, id, step, { settle = 0, password = null } = {}) {
+export function stepUrl(origin, id, step, { settle = null, password = null } = {}) {
   const url = new URL(`/slides/${encodeURIComponent(id)}`, origin);
   url.searchParams.set("slide", String(step));
   url.searchParams.set("export", "1");
-  if (settle > 0) url.searchParams.set("settle", String(settle));
+  if (settle !== null) url.searchParams.set("settle", String(settle));
   if (password !== null) url.hash = `password=${encodeURIComponent(password)}`;
   return url.toString();
 }
@@ -120,20 +121,46 @@ function escapeHtml(text) {
 }
 
 /**
- * Read the deck's step count and page title from the DOM that
- * `chrome --dump-dom` prints. `gated` is true when the page still shows the
- * private-deck password form.
+ * Read what a capture needs from the DOM that `chrome --dump-dom` prints at
+ * the moment of capture:
+ * - `total`: the deck's step count, from the viewer's `data-total-steps`;
+ * - `step`: the step the viewer shows, from `data-current-step`;
+ * - `settled`: whether the export hold ended by release, which <html> marks
+ *   with `data-export-settled` (a hold cut off by a timeout leaves no mark);
+ * - `gated`: whether the page shows the private-deck password form;
+ * - `title`: the page title.
  */
 export function parseDeckDom(dom) {
-  const match = dom.match(/data-total-steps="(\d+)"/);
-  const total = match ? parseInt(match[1], 10) : null;
-  const gated = /<input[^>]*type="password"/.test(dom);
+  const number = (name) => {
+    const match = dom.match(new RegExp(`${name}="(\\d+)"`));
+    return match ? parseInt(match[1], 10) : null;
+  };
+  const total = number("data-total-steps");
+  const html = dom.match(/<html\b[^>]*>/);
   const title = dom.match(/<title[^>]*>([^<]*)<\/title>/);
   return {
     total: total && total > 0 ? total : null,
-    gated,
+    step: number("data-current-step"),
+    settled: html ? /\sdata-export-settled(?:=|\s|>|$)/.test(html[0]) : false,
+    gated: /<input[^>]*type="password"/.test(dom),
     title: title ? decodeEntities(title[1]).trim() || null : null,
   };
+}
+
+/**
+ * Throw unless a capture's DOM shows step `step`, settled. A slide that never
+ * mounted, or one that Chrome's --timeout cut off, fails here instead of
+ * becoming a page of the PDF.
+ */
+export function checkCapture(dom, step) {
+  const { step: shown, settled, gated } = parseDeckDom(dom);
+  if (gated) throw new Error("the page showed the password form");
+  if (shown !== step) {
+    throw new Error(
+      shown === null ? "the slide had not mounted" : `the page showed step ${shown + 1}`,
+    );
+  }
+  if (!settled) throw new Error("the slide had not settled when Chrome captured it");
 }
 
 /** Zero-padded file name for a step's screenshot, so names sort in order. */
@@ -165,13 +192,50 @@ ${images}
 }
 
 /**
- * Count the pages of a PDF from its bytes. It counts page objects, which
- * Chrome writes uncompressed (`/Type /Page`, as opposed to the `/Type /Pages`
- * tree nodes).
+ * The parts of a PDF that are not string literals, stream data or comments,
+ * so a search for keywords cannot match text inside them.
+ */
+export function pdfSyntax(bytes) {
+  const text = Buffer.from(bytes).toString("latin1");
+  let out = "";
+  let i = 0;
+  while (i < text.length) {
+    const c = text[i];
+    if (c === "(") {
+      // A literal string: balanced parentheses, with backslash escapes.
+      let depth = 1;
+      i++;
+      while (i < text.length && depth > 0) {
+        if (text[i] === "\\") i += 2;
+        else {
+          if (text[i] === "(") depth++;
+          else if (text[i] === ")") depth--;
+          i++;
+        }
+      }
+      out += "()";
+    } else if (c === "%") {
+      while (i < text.length && text[i] !== "\n" && text[i] !== "\r") i++;
+    } else if (text.startsWith("stream", i) && !/[A-Za-z]/.test(text[i - 1] || "")) {
+      const end = text.indexOf("endstream", i + 6);
+      out += "stream endstream";
+      i = end === -1 ? text.length : end + "endstream".length;
+    } else {
+      out += c;
+      i++;
+    }
+  }
+  return out;
+}
+
+/**
+ * Count the pages of a PDF from its bytes: the `/Type /Page` objects (not the
+ * `/Type /Pages` tree nodes) outside strings, streams and comments. Chrome
+ * writes page objects uncompressed; a PDF that packs them into object streams
+ * counts 0, which the export reports as a mismatch rather than a success.
  */
 export function countPdfPages(bytes) {
-  const text = Buffer.from(bytes).toString("latin1");
-  return (text.match(/\/Type\s*\/Page(?![a-zA-Z])/g) || []).length;
+  return (pdfSyntax(bytes).match(/\/Type\s*\/Page(?![A-Za-z])/g) || []).length;
 }
 
 /**

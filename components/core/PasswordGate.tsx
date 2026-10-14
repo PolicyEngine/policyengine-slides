@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { passwordFromHash } from '@/lib/slide-url';
+import { releaseExportHold } from '@/lib/export-hold';
 
 interface PasswordGateProps {
   children: React.ReactNode;
@@ -17,9 +18,13 @@ export default function PasswordGate({ children }: PasswordGateProps) {
   // A link can carry the password in its fragment (#password=...), which the
   // browser never sends to the server. `bun run export` captures private
   // decks this way. The viewer drops the fragment when it rewrites the URL.
+  // Without the password the form stays, so an export capture (whose hold the
+  // viewer would otherwise release) is let go at once and sees the form.
   useEffect(() => {
     if (passwordFromHash(window.location.hash) === correctPassword) {
       setUnlocked(true);
+    } else {
+      releaseExportHold(0);
     }
   }, [correctPassword]);
 

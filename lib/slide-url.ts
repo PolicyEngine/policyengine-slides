@@ -27,7 +27,7 @@ export function isExportMode(params: Pick<URLSearchParams, "get">): boolean {
 /**
  * Milliseconds an export capture asks the page to stay still after the slide
  * mounts (`settle=<ms>`), as a whole number from 0 to `max`. Anything else
- * reads as 0.
+ * reads as 0; EXPORT_HOLD_SCRIPT opens no hold for those values.
  */
 export function exportSettleMs(
   params: Pick<URLSearchParams, "get">,

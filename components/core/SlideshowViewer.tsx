@@ -103,6 +103,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
         className="relative cursor-pointer"
         onClick={handleMainClick}
         data-total-steps={totalSteps}
+        data-current-step={currentStep}
       >
         {mounted && config.slides.map((slide, slideIndex) => {
           const SlideComponent = getSlideComponent(slide);

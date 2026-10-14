@@ -50,13 +50,14 @@ bun run export <id> [output.pdf] [--url <origin>]  # Export slideshow to PDF (he
 
 `bun run export` drives headless Chrome through its command line only (`--dump-dom`, `--screenshot`, `--print-to-pdf`), never through a DevTools connection, so it works where remote debugging is disabled.
 
-- `?slide=N&export=1` renders step N without the navigation bar and mounts only that slide (no neighbors); the viewer's `<main>` carries `data-total-steps`.
-- Chrome captures a page when its `load` event fires. With `&settle=<ms>`, export mode holds that event until the slide has been in the DOM for that many milliseconds of real time, so live embeds have rendered (`lib/export-hold.ts`: an inline script in `<head>` opens the hold, and the viewer releases it once mounted). Chrome's `--timeout` ends a hold that outlasts it, so a capture cannot wait forever.
+- `?slide=N&export=1` renders step N without the navigation bar and mounts only that slide (no neighbors); the viewer's `<main>` carries `data-total-steps` and `data-current-step`.
+- Chrome captures a page when its `load` event fires. With `&settle=<ms>` (0 included), export mode holds that event until the slide has been in the DOM for that many milliseconds of real time, so live embeds have that long to render (`lib/export-hold.ts`: an inline script in `<head>` opens the hold, and the viewer releases it once mounted). A hold that a release ends marks `<html>` with `data-export-settled`. Chrome's `--timeout` ends a hold that outlasts it, unmarked, so a capture cannot wait forever.
+- Each capture also dumps the DOM, and the script rejects a capture that does not show the requested step with the settled mark (a slide that never mounted, or one the timeout cut off); the step is retried.
 - Without `--url`, the script runs `next build`, serves the build on a free port and captures it, so unmerged changes export too. With `--url https://www.policyengine.org`, it captures the deployed site.
 - `--size 1440x810 --scale 2` suits decks laid out for a laptop: the content fills the page and text stays sharp. The default is `1920x1080` at scale 1.
 - Private decks: set `NEXT_PUBLIC_PRIVATE_PASSWORD`. The script passes it in the URL fragment (`#password=...`), which `PasswordGate` accepts and the browser never sends to the server. A local build also needs the variable at build time, as any build of a private deck does.
-- `EXPORT_WAIT_MS` (default 8000) is the settle time; raise it for slow embeds or long intro animations. `EXPORT_CONCURRENCY` (default 3) sets how many slides are captured at once. `CHROME_PATH` overrides the Chrome binary.
-- A watchdog stops a Chrome that hangs. A step that fails in the parallel pass is retried afterwards on its own with twice the time, up to three attempts in all. A failure or Ctrl-C stops every Chrome the script started, stops the server and removes the screenshots.
+- `EXPORT_WAIT_MS` (default 8000, 0 to 60000) is the settle time; raise it for slow embeds or long intro animations. `EXPORT_CONCURRENCY` (default 3) sets how many slides are captured at once. `CHROME_PATH` overrides the Chrome binary.
+- A watchdog stops a Chrome that hangs. A step that fails in the parallel pass is retried afterwards on its own with twice the time, up to three attempts in all. A failure, Ctrl-C or SIGTERM stops the build, every Chrome the script started and the server, and removes the screenshots. Error messages never include a URL fragment, so a deck password stays out of logs.
 - The script checks that the PDF has one page per step before it reports success.
 
 ## Adding a new slideshow

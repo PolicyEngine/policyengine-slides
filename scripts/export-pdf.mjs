@@ -19,7 +19,9 @@
  *   3. Screenshots every step at ?slide=N&export=1&settle=<ms>. Export mode
  *      hides the nav bar, mounts only that slide, and holds the page's load
  *      event until the slide has been in the DOM for <ms> of real time, so
- *      live embeds have rendered when Chrome captures at load.
+ *      live embeds have that long to render before Chrome captures at load.
+ *      Each capture also dumps the DOM, and a capture that does not show the
+ *      requested step, settled, fails and is retried.
  *   4. Prints a page of the screenshots to a PDF with `chrome --print-to-pdf`,
  *      one page per step at the viewport size, and checks the page count.
  *
@@ -28,7 +30,7 @@
  * where an administrator has disabled remote debugging.
  */
 
-import { spawn, spawnSync } from "child_process";
+import { spawn } from "child_process";
 import { mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "fs";
 import { createServer } from "net";
 import { tmpdir } from "os";
@@ -37,6 +39,7 @@ import { pathToFileURL } from "url";
 import { findChrome, killAllChrome, runChrome } from "./export-pdf-chrome.mjs";
 import {
   USAGE,
+  checkCapture,
   countPdfPages,
   deckHtml,
   mapLimit,
@@ -55,12 +58,17 @@ const ATTEMPTS = 3;
 // (which can show a private deck).
 
 let work = null;
+let builder = null;
 let server = null;
 let stopping = false;
 
 function cleanup() {
   stopping = true;
   killAllChrome();
+  if (builder) {
+    builder.kill();
+    builder = null;
+  }
   if (server) {
     server.kill();
     server = null;
@@ -96,11 +104,22 @@ function getFreePort() {
 
 const nextBin = path.join(process.cwd(), "node_modules", ".bin", "next");
 
+/** Run `next build`, without blocking, so a signal can still stop it. */
 function build() {
   console.log("Building...");
-  const result = spawnSync(nextBin, ["build"], { stdio: "inherit" });
-  if (result.error) throw result.error;
-  if (result.status !== 0) throw new Error(`Build failed (exit ${result.status})`);
+  return new Promise((resolve, reject) => {
+    const proc = spawn(nextBin, ["build"], { stdio: "inherit" });
+    builder = proc;
+    proc.on("error", (e) => {
+      builder = null;
+      reject(e);
+    });
+    proc.on("close", (code, signal) => {
+      builder = null;
+      if (code === 0) resolve();
+      else reject(new Error(`Build failed (${signal ? `stopped by ${signal}` : `exit ${code}`})`));
+    });
+  });
 }
 
 /** Start `next start` on `port` and resolve with its origin once it answers. */
@@ -163,7 +182,7 @@ async function main() {
 
   let origin = args.url;
   if (!origin) {
-    build();
+    await build();
     origin = await startServer(await getFreePort());
   }
   work = mkdtempSync(path.join(tmpdir(), `export-${args.id}-`));
@@ -212,7 +231,14 @@ async function main() {
   const names = Array.from({ length: total }, (_, i) => shotName(i, total));
   const capture = async (step, options) => {
     const file = path.join(work, names[step]);
-    await runChrome(binary, [`--screenshot=${file}`, at(step, password)], options);
+    rmSync(file, { force: true });
+    // One Chrome run writes the screenshot and prints the DOM it captured.
+    const dom = await runChrome(
+      binary,
+      ["--dump-dom", `--screenshot=${file}`, at(step, password)],
+      options,
+    );
+    checkCapture(dom, step);
     if (statSync(file).size === 0) throw new Error("empty screenshot");
   };
   let done = 0;

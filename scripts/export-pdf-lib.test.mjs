@@ -6,8 +6,9 @@ import path from "path";
 import { pathToFileURL } from "url";
 import { describe, it, expect } from "vitest";
 import { EXPORT_HOLD_SCRIPT } from "../lib/export-hold";
-import { findChrome, runChrome, runningChromeCount } from "./export-pdf-chrome.mjs";
+import { findChrome, redact, runChrome, runningChromeCount } from "./export-pdf-chrome.mjs";
 import {
+  checkCapture,
   countPdfPages,
   deckHtml,
   mapLimit,
@@ -119,12 +120,12 @@ describe("stepUrl", () => {
     );
   });
 
-  it("adds the settle time only when there is one", () => {
+  it("adds the settle time when given, 0 included", () => {
     expect(stepUrl("http://localhost:4000", "deck", 2, { settle: 8000 })).toBe(
       "http://localhost:4000/slides/deck?slide=2&export=1&settle=8000",
     );
     expect(stepUrl("http://localhost:4000", "deck", 2, { settle: 0 })).toBe(
-      "http://localhost:4000/slides/deck?slide=2&export=1",
+      "http://localhost:4000/slides/deck?slide=2&export=1&settle=0",
     );
   });
 
@@ -141,24 +142,59 @@ describe("stepUrl", () => {
 });
 
 describe("parseDeckDom", () => {
-  it("reads the step count and title from the viewer", () => {
+  it("reads the step count, shown step and title from the viewer", () => {
     const dom =
-      "<head><title>Taxes &amp; benefits | PolicyEngine</title></head>" +
-      '<main class="relative cursor-pointer" data-total-steps="36">';
+      "<html lang=\"en\" data-export-settled=\"\"><head><title>Taxes &amp; benefits | PolicyEngine</title></head>" +
+      '<main class="relative cursor-pointer" data-total-steps="36" data-current-step="4">';
     expect(parseDeckDom(dom)).toEqual({
       total: 36,
+      step: 4,
+      settled: true,
       gated: false,
       title: "Taxes & benefits | PolicyEngine",
     });
   });
 
-  it("flags the password gate and a missing count", () => {
-    const dom = '<form><input type="password" placeholder="Password"></form>';
-    expect(parseDeckDom(dom)).toEqual({ total: null, gated: true, title: null });
+  it("flags the password gate, a missing count and an unsettled page", () => {
+    const dom =
+      '<html lang="en"><body><form><input type="password" placeholder="Password"></form>';
+    expect(parseDeckDom(dom)).toEqual({
+      total: null,
+      step: null,
+      settled: false,
+      gated: true,
+      title: null,
+    });
   });
 
   it("treats a zero count as missing", () => {
     expect(parseDeckDom('<main data-total-steps="0">').total).toBeNull();
+  });
+
+  it("reads the settled mark only from <html>", () => {
+    const elsewhere = '<html lang="en"><body><p data-export-settled="">text</p>';
+    expect(parseDeckDom(elsewhere).settled).toBe(false);
+    expect(parseDeckDom("<html data-export-settled><body>").settled).toBe(true);
+  });
+});
+
+describe("checkCapture", () => {
+  const page = ({ settled = true, step = 3, gate = false } = {}) =>
+    `<html lang="en"${settled ? ' data-export-settled=""' : ""}><body>` +
+    (gate
+      ? '<input type="password">'
+      : `<main data-total-steps="9"${step === null ? "" : ` data-current-step="${step}"`}>`);
+
+  it("accepts the requested step, settled", () => {
+    expect(() => checkCapture(page(), 3)).not.toThrow();
+  });
+
+  it("rejects a page that is not the requested step, settled", () => {
+    expect(() => checkCapture(page({ step: 2 }), 3)).toThrow(/showed step 3/);
+    expect(() => checkCapture(page({ step: null }), 3)).toThrow(/had not mounted/);
+    expect(() => checkCapture(page({ settled: false }), 3)).toThrow(/had not settled/);
+    expect(() => checkCapture(page({ gate: true }), 3)).toThrow(/password form/);
+    expect(() => checkCapture("", 3)).toThrow(/had not mounted/);
   });
 });
 
@@ -202,13 +238,46 @@ describe("deckHtml", () => {
 });
 
 describe("countPdfPages", () => {
+  const count = (text) => countPdfPages(Buffer.from(text, "latin1"));
+
   it("counts page objects and ignores the page tree", () => {
     const pdf =
       "1 0 obj <</Type /Pages /Kids [2 0 R 3 0 R] /Count 2>> endobj\n" +
       "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n" +
       "3 0 obj <</Type/Page/Parent 1 0 R>> endobj\n";
-    expect(countPdfPages(Buffer.from(pdf, "latin1"))).toBe(2);
-    expect(countPdfPages(Buffer.from("%PDF-1.4\n", "latin1"))).toBe(0);
+    expect(count(pdf)).toBe(2);
+    expect(count("%PDF-1.4\n")).toBe(0);
+  });
+
+  it("ignores the keyword inside strings, streams and comments", () => {
+    const page = "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
+    expect(count(page + "4 0 obj <</Title (/Type /Page)>> endobj\n")).toBe(1);
+    expect(count(page + "4 0 obj <</Title (a (nested /Type /Page) b)>> endobj\n")).toBe(1);
+    expect(count(page + "4 0 obj <</Title (esc\\) /Type /Page \\( still in)>> endobj\n")).toBe(1);
+    expect(
+      count(page + "5 0 obj <</Length 20>>\nstream\n/Type /Page /Type /Page\nendstream\nendobj\n"),
+    ).toBe(1);
+    expect(count(page + "% /Type /Page in a comment\n")).toBe(1);
+  });
+
+  it("counts a page that follows a string or stream", () => {
+    const pdf =
+      "4 0 obj <</Title (x)>> endobj\n" +
+      "5 0 obj <</Length 3>>\nstream\nabc\nendstream\nendobj\n" +
+      "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
+    expect(count(pdf)).toBe(1);
+  });
+});
+
+describe("redact", () => {
+  it("drops URL fragments and password values", () => {
+    const url = "http://localhost:4000/slides/deck?slide=2&export=1#password=s3cr%26t%20pw";
+    expect(redact(url)).toBe("http://localhost:4000/slides/deck?slide=2&export=1");
+    expect(redact(`Chrome timed out: ${url} (retrying)`)).toBe(
+      "Chrome timed out: http://localhost:4000/slides/deck?slide=2&export=1 (retrying)",
+    );
+    expect(redact("bad password=hunter2 here")).toBe("bad password=… here");
+    expect(redact("no secrets here")).toBe("no secrets here");
   });
 });
 
@@ -298,18 +367,21 @@ describe.skipIf(!chrome)("printing with Chrome", () => {
   }, 120_000);
 
   // A page with the export hold in its head. `release` stands in for the
-  // viewer: it marks the page mounted after 300 ms and releases the hold.
-  // The page records when its load event fired, in its own clock.
+  // viewer: 300 ms in, it marks the page mounted and releases the hold with
+  // that settle time (null: never). At load the page records when load fired
+  // in its own clock, and whether a hold was opened.
   const holdPage = (release) => `<!doctype html><html><head><meta charset="utf-8">
 <script>${EXPORT_HOLD_SCRIPT}</script></head><body><p id="state">parsed</p><script>
 var t0 = performance.now();
 addEventListener("load", function () {
-  document.body.insertAdjacentHTML("beforeend", '<p id="load">' + Math.round(performance.now() - t0) + "</p>");
+  document.body.insertAdjacentHTML("beforeend",
+    '<p id="load">' + Math.round(performance.now() - t0) + "</p>" +
+    '<p id="hold">' + (window.__slideshowExportHold ? "opened" : "none") + "</p>");
 });
-${release ? `setTimeout(function () {
+${release === null ? "" : `setTimeout(function () {
   document.getElementById("state").textContent = "mounted";
   if (window.__slideshowExportHold) window.__slideshowExportHold.release(${release});
-}, 300);` : ""}
+}, 300);`}
 </script></body></html>`;
 
   const dump = async (html, query, timeout) => {
@@ -330,33 +402,51 @@ ${release ? `setTimeout(function () {
     const match = /<p id="load">(\d+)<\/p>/.exec(dom);
     return match ? Number(match[1]) : null;
   };
+  const holdState = (dom) => /<p id="hold">(\w+)<\/p>/.exec(dom)?.[1];
 
-  it("holds load until the settle time after the release has passed", async () => {
-    const dom = await dump(holdPage(1500), "?export=1&settle=1500", 60_000);
+  it("holds load until the settle time after the release, and marks the page settled", async () => {
+    // Chrome's own timeout is 20 s, so a release that did nothing would make
+    // load wait until then.
+    const dom = await dump(holdPage(1500), "?export=1&settle=1500", 20_000);
     expect(dom).toContain('<p id="state">mounted</p>');
-    // Released 300 ms in, then 1500 ms of settle.
+    expect(holdState(dom)).toBe("opened");
+    expect(parseDeckDom(dom).settled).toBe(true);
+    expect(dom).not.toContain("<iframe");
+    // Released 300 ms in, then 1500 ms of settle, well before 20 s.
     expect(loadedAt(dom)).toBeGreaterThanOrEqual(1800);
+    expect(loadedAt(dom)).toBeLessThan(10_000);
   }, 150_000);
 
-  it("leaves load alone without export=1 or without a settle time", async () => {
-    for (const query of ["", "?settle=1500", "?export=1", "?export=1&settle=0"]) {
+  it("holds load until the release with settle=0", async () => {
+    const dom = await dump(holdPage(0), "?export=1&settle=0", 20_000);
+    expect(holdState(dom)).toBe("opened");
+    expect(parseDeckDom(dom).settled).toBe(true);
+    expect(loadedAt(dom)).toBeGreaterThanOrEqual(300);
+    expect(loadedAt(dom)).toBeLessThan(10_000);
+  }, 150_000);
+
+  it("opens no hold without export=1 and a whole-number settle", async () => {
+    for (const query of ["", "?settle=1500", "?export=1", "?export=0&settle=1500", "?export=1&settle=abc", "?export=1&settle=-5"]) {
       const dom = await dump(holdPage(1500), query, 60_000);
+      expect(holdState(dom)).toBe("none");
+      expect(parseDeckDom(dom).settled).toBe(false);
       expect(loadedAt(dom)).not.toBeNull();
-      expect(loadedAt(dom)).toBeLessThan(1000);
     }
   }, 300_000);
 
-  it("lets Chrome's --timeout end a hold that is never released", async () => {
+  it("lets Chrome's --timeout end a hold that is never released, unmarked", async () => {
     // Nothing releases this hold, so alone it would last MAX_HOLD_MS (two
     // minutes). When --timeout runs out, Chrome stops the page load, which
-    // ends the hold and fires load.
-    const dom = await dump(holdPage(0), "?export=1&settle=5000", 2_000);
+    // fires load; the page is not marked settled, so a capture rejects it.
+    const dom = await dump(holdPage(null), "?export=1&settle=5000", 2_000);
     expect(dom).toContain('<p id="state">parsed</p>');
+    expect(holdState(dom)).toBe("opened");
+    expect(parseDeckDom(dom).settled).toBe(false);
     expect(loadedAt(dom)).toBeGreaterThanOrEqual(1000);
     expect(loadedAt(dom)).toBeLessThan(60_000);
   }, 150_000);
 
-  it("stops a Chrome that outlives the watchdog and stops tracking it", async () => {
+  it("stops a Chrome that outlives the watchdog, stops tracking it, and keeps the password out of the error", async () => {
     // A server that accepts the connection and never answers, so the page
     // load cannot finish.
     const sockets = new Set();
@@ -366,12 +456,21 @@ ${release ? `setTimeout(function () {
     });
     await new Promise((resolve) => silent.listen(0, "127.0.0.1", resolve));
     try {
-      const url = `http://127.0.0.1:${silent.address().port}/`;
+      const password = "s3cr&t pw";
+      const url = `http://127.0.0.1:${silent.address().port}/#password=${encodeURIComponent(password)}`;
       const hang = runChrome(chrome, ["--dump-dom", url], {
         timeoutMs: 2_000,
         extraFlags: ciFlags,
       });
-      await expect(hang).rejects.toThrow(/Chrome timed out after 2000 ms/);
+      const error = await hang.then(
+        () => null,
+        (e) => e,
+      );
+      expect(error?.message).toMatch(/Chrome timed out after 2000 ms/);
+      // The error names the page but never the password, raw or encoded.
+      expect(error.message).toContain(`127.0.0.1:${silent.address().port}/`);
+      expect(error.message).not.toContain(password);
+      expect(error.message).not.toContain(encodeURIComponent(password));
       expect(runningChromeCount()).toBe(0);
     } finally {
       for (const socket of sockets) socket.destroy();

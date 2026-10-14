@@ -16,6 +16,16 @@ const BASE_FLAGS = [
 
 const running = new Set();
 
+/**
+ * Remove what must not reach a log: URL fragments (where a deck password
+ * rides) and any `password=` value.
+ */
+export function redact(text) {
+  return String(text)
+    .replace(/(\b[a-z][a-z0-9+.-]*:\/\/[^\s#]*)#\S*/gi, "$1")
+    .replace(/(password=)[^\s&]*/gi, "$1…");
+}
+
 /** Path of a Chrome or Chromium binary, or null when none is installed. */
 export function findChrome() {
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
@@ -68,13 +78,15 @@ export function runChrome(binary, args, { timeoutMs, extraFlags = [] }) {
     };
     proc.on("error", (e) => settle(reject, e));
     proc.on("close", (code, signal) => {
+      const target = redact(args.at(-1));
       if (timedOut) {
-        settle(reject, new Error(`Chrome timed out after ${timeoutMs} ms: ${args.at(-1)}`));
+        settle(reject, new Error(`Chrome timed out after ${timeoutMs} ms: ${target}`));
       } else if (code === 0) {
         settle(resolve, stdout);
       } else {
         const reason = signal ? `was stopped by ${signal}` : `exited ${code}`;
-        settle(reject, new Error(`Chrome ${reason}: ${stderr.trim().split("\n").at(-1)}`));
+        const detail = redact(stderr.trim().split("\n").at(-1));
+        settle(reject, new Error(`Chrome ${reason} on ${target}: ${detail}`));
       }
     });
   });
