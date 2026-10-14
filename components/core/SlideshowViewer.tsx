@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
 import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
-import { buildSlideUrl, exportSettleMs, isExportMode } from '@/lib/slide-url';
+import { buildSlideUrl, exportSettleMs, isExportMode, parseSlideParam } from '@/lib/slide-url';
 import { MAX_SETTLE_MS, releaseExportHold } from '@/lib/export-hold';
 
 interface SlideshowViewerProps {
@@ -13,18 +13,21 @@ interface SlideshowViewerProps {
 
 function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   const searchParams = useSearchParams();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
   const steps = useMemo(() => flattenSlides(config.slides), [config.slides]);
   const totalSteps = steps.length;
   const exportMode = isExportMode(searchParams);
 
+  // Read the deep-link step once. After that, currentStep owns the URL: the
+  // effect below writes it with replaceState, and Next mirrors that write back
+  // into useSearchParams, so re-reading the param would undo navigation.
+  const [currentStep, setCurrentStep] = useState(() =>
+    parseSlideParam(searchParams.get('slide'), totalSteps),
+  );
+  const [mounted, setMounted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   useEffect(() => {
     setMounted(true);
-    const initialSlide = parseInt(searchParams.get('slide') || '0', 10);
-    setCurrentStep(Math.max(0, Math.min(initialSlide, totalSteps - 1)));
     setIsFullscreen(!!document.fullscreenElement);
 
     const handleFullscreenChange = () => {
@@ -33,7 +36,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, [searchParams, totalSteps]);
+  }, []);
 
   useEffect(() => {
     const url = buildSlideUrl(window.location.href, currentStep);

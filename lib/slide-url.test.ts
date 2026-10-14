@@ -3,6 +3,7 @@ import {
   buildSlideUrl,
   exportSettleMs,
   isExportMode,
+  parseSlideParam,
   passwordFromHash,
 } from "./slide-url";
 
@@ -124,3 +125,24 @@ describe("exportSettleMs", () => {
   });
 });
 
+describe("parseSlideParam", () => {
+  it("returns the step for a valid param", () => {
+    expect(parseSlideParam("5", 10)).toBe(5);
+  });
+
+  it("returns the first step when the param is missing", () => {
+    expect(parseSlideParam(null, 10)).toBe(0);
+  });
+
+  it("returns the first step for a non-numeric param", () => {
+    expect(parseSlideParam("abc", 10)).toBe(0);
+  });
+
+  it("clamps a negative param to the first step", () => {
+    expect(parseSlideParam("-3", 10)).toBe(0);
+  });
+
+  it("clamps a param past the end to the last step", () => {
+    expect(parseSlideParam("99", 10)).toBe(9);
+  });
+});
