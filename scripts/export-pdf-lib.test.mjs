@@ -238,7 +238,8 @@ describe("deckHtml", () => {
 });
 
 describe("countPdfPages", () => {
-  const count = (text) => countPdfPages(Buffer.from(text, "latin1"));
+  // A complete PDF ends with %%EOF; fragments here get one appended.
+  const count = (text) => countPdfPages(Buffer.from(`${text}\n%%EOF\n`, "latin1"));
 
   it("counts page objects and ignores the page tree", () => {
     const pdf =
@@ -294,7 +295,19 @@ describe("countPdfPages", () => {
 
   it("reads only the stream dictionary's own /Length", () => {
     const data = "endstream /Type /Page\n";
-    const pdf = page + `5 0 obj <</X <</Length 0>> /Length ${data.length}>>\nstream\n${data}\nendstream\nendobj\n`;
+    for (const decoy of ["/X <</Length 0>>", "/Foo [/Length 0]", "/Foo [<</Length 0>>]", "/B <</C [/Length 0]>>"]) {
+      const pdf = page + `5 0 obj <<${decoy} /Length ${data.length}>>\nstream\n${data}\nendstream\nendobj\n`;
+      expect(count(pdf)).toBe(1);
+    }
+  });
+
+  it("takes the last definition of an indirect /Length, as an incremental update does", () => {
+    const data = "x endstream\n/Type /Page\n";
+    const pdf =
+      "16 0 obj 0 endobj\n" +
+      page +
+      `5 0 obj <</Length 16 0 R>>\nstream\n${data}\nendstream\nendobj\n` +
+      `16 0 obj ${data.length} endobj\n`;
     expect(count(pdf)).toBe(1);
   });
 
@@ -325,6 +338,8 @@ describe("countPdfPages", () => {
     expect(() => count(page + "5 0 obj <</Length 300>>\nstream\nabc\nendstream\n")).toThrow(
       /does not end at its \/Length/,
     );
+    expect(() => count(page + "4 0 obj <</Title (no end>> endobj\n")).toThrow(/literal string has no end/);
+    expect(() => count(page + "4 0 obj <</ID <ABCD")).toThrow(/hex string has no end/);
     // A bare `stream` after a token other than `>>` is not a stream.
     expect(count("4 0 obj 1 endobj" + " ".repeat(70) + "stream\n" + page + "endstream\n")).toBe(1);
   });
@@ -335,6 +350,15 @@ describe("countPdfPages", () => {
       "5 0 obj <</Length 3>>\nstream\nabc\nendstream\nendobj\n" +
       "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
     expect(count(pdf)).toBe(1);
+  });
+});
+
+describe("countPdfPages on a truncated file", () => {
+  it("throws unless the file ends with %%EOF", () => {
+    const pdf = "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
+    expect(() => countPdfPages(Buffer.from(pdf, "latin1"))).toThrow(/does not end with %%EOF/);
+    expect(countPdfPages(Buffer.from(`${pdf}%%EOF`, "latin1"))).toBe(1);
+    expect(countPdfPages(Buffer.from(`${pdf}%%EOF\r\n`, "latin1"))).toBe(1);
   });
 });
 

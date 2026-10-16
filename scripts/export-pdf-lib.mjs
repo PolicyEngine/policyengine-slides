@@ -214,12 +214,12 @@ function dictionaryStart(text, close) {
   return -1;
 }
 
-/** A dictionary's text with its nested dictionaries removed. */
+/** A dictionary's text with its nested dictionaries and arrays removed. */
 function topLevel(dict) {
   let flat = dict;
   for (let prev = null; prev !== flat; ) {
     prev = flat;
-    flat = flat.replace(/<<[^<>]*>>/g, " ");
+    flat = flat.replace(/<<[^<>[\]]*>>|\[[^<>[\]]*\]/g, " ");
   }
   return flat;
 }
@@ -232,9 +232,10 @@ function streamLength(dict, text) {
   const match = /\/Length\s+(\d+)(?:\s+(\d+)\s+R)?(?![\d.])/.exec(topLevel(dict));
   if (!match) return null;
   if (match[2] === undefined) return parseInt(match[1], 10);
-  const object = new RegExp(`(?:^|[^0-9])${match[1]}\\s+${match[2]}\\s+obj\\s*(\\d+)\\s*endobj`);
-  const resolved = object.exec(text);
-  return resolved ? parseInt(resolved[1], 10) : null;
+  // The last definition wins, as in a PDF updated incrementally.
+  const object = new RegExp(`(?:^|[^0-9])${match[1]}\\s+${match[2]}\\s+obj\\s*(\\d+)\\s*endobj`, "g");
+  const all = [...text.matchAll(object)];
+  return all.length ? parseInt(all[all.length - 1][1], 10) : null;
 }
 
 /**
@@ -266,11 +267,13 @@ export function pdfSyntax(bytes) {
           i++;
         }
       }
+      if (depth > 0) throw new Error("Malformed PDF: a literal string has no end");
       out += "()";
     } else if (c === "<" && text[i + 1] !== "<") {
       // A hex string, which holds only hex digits and whitespace.
       const close = text.indexOf(">", i + 1);
-      i = close === -1 ? text.length : close + 1;
+      if (close === -1) throw new Error("Malformed PDF: a hex string has no end");
+      i = close + 1;
       out += "()";
     } else if (c === "<") {
       out += "<<";
@@ -319,10 +322,15 @@ export function pdfSyntax(bytes) {
  * Count the pages of a PDF from its bytes: the `/Type /Page` objects (not the
  * `/Type /Pages` tree nodes) outside strings, streams and comments. Chrome
  * writes page objects uncompressed; a PDF that packs them into object streams
- * counts 0, and a malformed stream throws, so either way the export reports a
- * failure rather than a success.
+ * counts 0, and a malformed stream, an unterminated string or a file without
+ * %%EOF throws, so either way the export reports a failure, not a success.
  */
 export function countPdfPages(bytes) {
+  // Chrome writes the page objects near the end of the file, so a file cut
+  // short can still hold every one. A complete PDF ends with %%EOF.
+  if (!/%%EOF\s*$/.test(Buffer.from(bytes).subarray(-1024).toString("latin1"))) {
+    throw new Error("Malformed PDF: the file does not end with %%EOF");
+  }
   return (pdfSyntax(bytes).match(/\/Type\s*\/Page(?![A-Za-z])/g) || []).length;
 }
 
