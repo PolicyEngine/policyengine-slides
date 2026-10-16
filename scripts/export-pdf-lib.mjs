@@ -191,13 +191,17 @@ ${images}
 `;
 }
 
+/** PDF whitespace: NUL, tab, line feed, form feed, carriage return, space. */
+const PDF_SPACE = new Set(["\0", "\t", "\n", "\f", "\r", " "]);
+
 /**
  * Index just past the `<<` that opens the dictionary whose `>>` ends at
- * `close` (exclusive), or -1. Nested dictionaries are skipped.
+ * `close` (exclusive), or -1. `text` holds no strings, so every `<<` and `>>`
+ * in it is a dictionary bracket; nested dictionaries are skipped.
  */
 function dictionaryStart(text, close) {
   let depth = 0;
-  for (let i = close - 2; i >= 1; i--) {
+  for (let i = close - 3; i >= 1; i--) {
     if (text[i] === ">" && text[i - 1] === ">") {
       depth++;
       i--;
@@ -210,12 +214,39 @@ function dictionaryStart(text, close) {
   return -1;
 }
 
+/** A dictionary's text with its nested dictionaries removed. */
+function topLevel(dict) {
+  let flat = dict;
+  for (let prev = null; prev !== flat; ) {
+    prev = flat;
+    flat = flat.replace(/<<[^<>]*>>/g, " ");
+  }
+  return flat;
+}
+
 /**
- * The parts of a PDF that are not string literals, stream data or comments,
- * so a search for keywords cannot match text inside them. A stream is the
- * keyword `stream` right after a dictionary's `>>`; its data is skipped by the
- * dictionary's direct /Length, or up to `endstream` when the length is an
- * indirect reference. A stream that does not end where it should throws.
+ * The stream data length a dictionary declares: a direct integer, or an
+ * indirect reference resolved against `text`. Null when neither works.
+ */
+function streamLength(dict, text) {
+  const match = /\/Length\s+(\d+)(?:\s+(\d+)\s+R)?(?![\d.])/.exec(topLevel(dict));
+  if (!match) return null;
+  if (match[2] === undefined) return parseInt(match[1], 10);
+  const object = new RegExp(`(?:^|[^0-9])${match[1]}\\s+${match[2]}\\s+obj\\s*(\\d+)\\s*endobj`);
+  const resolved = object.exec(text);
+  return resolved ? parseInt(resolved[1], 10) : null;
+}
+
+/**
+ * The parts of a PDF that are not strings (literal or hex), stream data or
+ * comments, so a search for keywords cannot match text inside them.
+ *
+ * A stream is the keyword `stream` right after a dictionary's `>>`, followed
+ * by an end of line. Its data is skipped by the dictionary's top-level
+ * /Length, resolving an indirect reference when the object is in the file.
+ * Data that does not end with `endstream` at that length throws. Only when the
+ * length cannot be read does the scan fall back to the next `endstream`, and
+ * a stream with none throws.
  */
 export function pdfSyntax(bytes) {
   const text = Buffer.from(bytes).toString("latin1");
@@ -236,30 +267,46 @@ export function pdfSyntax(bytes) {
         }
       }
       out += "()";
+    } else if (c === "<" && text[i + 1] !== "<") {
+      // A hex string, which holds only hex digits and whitespace.
+      const close = text.indexOf(">", i + 1);
+      i = close === -1 ? text.length : close + 1;
+      out += "()";
+    } else if (c === "<") {
+      out += "<<";
+      i += 2;
+    } else if (c === ">" && text[i + 1] === ">") {
+      out += ">>";
+      i += 2;
     } else if (c === "%") {
       while (i < text.length && text[i] !== "\n" && text[i] !== "\r") i++;
-    } else if (text.startsWith("stream", i) && /(^|>>)\s*$/.test(out.slice(-64))) {
-      // Data starts after the end-of-line that follows the keyword.
+    } else if (text.startsWith("stream", i) && /[\r\n]/.test(text[i + 6] || "")) {
+      let close = out.length;
+      while (close > 0 && PDF_SPACE.has(out[close - 1])) close--;
+      if (out.slice(close - 2, close) !== ">>") {
+        out += c;
+        i++;
+        continue;
+      }
+      // Data starts after the end of line that follows the keyword.
       let data = i + "stream".length;
       if (text[data] === "\r") data++;
       if (text[data] === "\n") data++;
-      const close = out.trimEnd().length;
       const from = dictionaryStart(out, close);
-      const dict = from === -1 ? "" : out.slice(from, close - 2);
-      const direct = /\/Length\s+(\d+)(?!\s+\d+\s+R)/.exec(dict);
+      const length = from === -1 ? null : streamLength(out.slice(from, close - 2), text);
       let end;
-      if (direct) {
-        end = data + parseInt(direct[1], 10);
-        const tail = /^\s*endstream/.exec(text.slice(end, end + 64));
-        if (!tail) throw new Error(`Malformed PDF: a stream at byte ${i} does not end at its /Length`);
-        end += tail[0].length;
+      if (length !== null) {
+        end = data + length;
+        while (end < text.length && PDF_SPACE.has(text[end])) end++;
+        if (!text.startsWith("endstream", end)) {
+          throw new Error(`Malformed PDF: a stream at byte ${i} does not end at its /Length`);
+        }
       } else {
-        const at = text.indexOf("endstream", data);
-        if (at === -1) throw new Error(`Malformed PDF: a stream at byte ${i} has no endstream`);
-        end = at + "endstream".length;
+        end = text.indexOf("endstream", data);
+        if (end === -1) throw new Error(`Malformed PDF: a stream at byte ${i} has no endstream`);
       }
       out += "stream endstream";
-      i = end;
+      i = end + "endstream".length;
     } else {
       out += c;
       i++;

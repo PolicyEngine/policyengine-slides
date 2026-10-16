@@ -275,9 +275,44 @@ describe("countPdfPages", () => {
     expect(count("4 0 obj [/stream (stream)] endobj\n" + page)).toBe(1);
   });
 
-  it("falls back to endstream when the length is an indirect reference", () => {
-    const pdf = page + "5 0 obj <</Length 6 0 R>>\nstream\nabc /Type /Page\nendstream\nendobj\n";
+  it("resolves an indirect /Length, whatever its object number", () => {
+    for (const ref of ["6 0 R", "16 0 R", "123 0 R"]) {
+      const id = ref.split(" ")[0];
+      const data = "x endstream\n/Type /Page\n";
+      const pdf =
+        page +
+        `5 0 obj <</Length ${ref}>>\nstream\n${data}\nendstream\nendobj\n` +
+        `${id} 0 obj ${data.length} endobj\n`;
+      expect(count(pdf)).toBe(1);
+    }
+  });
+
+  it("falls back to the next endstream when an indirect /Length is not in the file", () => {
+    const pdf = page + "5 0 obj <</Length 16 0 R>>\nstream\nabc /Type /Page\nendstream\nendobj\n";
     expect(count(pdf)).toBe(1);
+  });
+
+  it("reads only the stream dictionary's own /Length", () => {
+    const data = "endstream /Type /Page\n";
+    const pdf = page + `5 0 obj <</X <</Length 0>> /Length ${data.length}>>\nstream\n${data}\nendstream\nendobj\n`;
+    expect(count(pdf)).toBe(1);
+  });
+
+  it("skips hex strings, so their brackets cannot pass for a dictionary's", () => {
+    const data = "endstream /Type /Page";
+    for (const extra of [" /ID <AB>", " /K <>", " /A <</B <CD>>>"]) {
+      const pdf = page + `5 0 obj <</Length ${data.length}${extra}>>\nstream\n${data}\nendstream\nendobj\n`;
+      expect(count(pdf)).toBe(1);
+    }
+    expect(count(page + "4 0 obj <</ID [<2F54797065202F50616765>]>> endobj\n")).toBe(1);
+  });
+
+  it("finds the keyword after any PDF whitespace, NUL included", () => {
+    const data = "/Type /Page /Type /Page";
+    for (const gap of [" ".repeat(63), " ".repeat(200), "\0", "\r\n\t\f"]) {
+      const pdf = page + `5 0 obj <</Length ${data.length}>>${gap}stream\n${data}\nendstream\nendobj\n`;
+      expect(count(pdf)).toBe(1);
+    }
   });
 
   it("throws on a stream that does not end where it should", () => {
@@ -290,6 +325,8 @@ describe("countPdfPages", () => {
     expect(() => count(page + "5 0 obj <</Length 300>>\nstream\nabc\nendstream\n")).toThrow(
       /does not end at its \/Length/,
     );
+    // A bare `stream` after a token other than `>>` is not a stream.
+    expect(count("4 0 obj 1 endobj" + " ".repeat(70) + "stream\n" + page + "endstream\n")).toBe(1);
   });
 
   it("counts a page that follows a string or stream", () => {
@@ -451,6 +488,7 @@ ${release === null ? "" : `setTimeout(function () {
     const dom = await dump(holdPage(0), "?export=1&settle=0", 20_000);
     expect(holdState(dom)).toBe("opened");
     expect(parseDeckDom(dom).settled).toBe(true);
+    expect(dom).not.toContain("<iframe");
     expect(loadedAt(dom)).toBeGreaterThanOrEqual(300);
   }, 150_000);
 
