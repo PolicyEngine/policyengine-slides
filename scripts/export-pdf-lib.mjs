@@ -192,8 +192,30 @@ ${images}
 }
 
 /**
+ * Index just past the `<<` that opens the dictionary whose `>>` ends at
+ * `close` (exclusive), or -1. Nested dictionaries are skipped.
+ */
+function dictionaryStart(text, close) {
+  let depth = 0;
+  for (let i = close - 2; i >= 1; i--) {
+    if (text[i] === ">" && text[i - 1] === ">") {
+      depth++;
+      i--;
+    } else if (text[i] === "<" && text[i - 1] === "<") {
+      if (depth === 0) return i + 1;
+      depth--;
+      i--;
+    }
+  }
+  return -1;
+}
+
+/**
  * The parts of a PDF that are not string literals, stream data or comments,
- * so a search for keywords cannot match text inside them.
+ * so a search for keywords cannot match text inside them. A stream is the
+ * keyword `stream` right after a dictionary's `>>`; its data is skipped by the
+ * dictionary's direct /Length, or up to `endstream` when the length is an
+ * indirect reference. A stream that does not end where it should throws.
  */
 export function pdfSyntax(bytes) {
   const text = Buffer.from(bytes).toString("latin1");
@@ -216,10 +238,28 @@ export function pdfSyntax(bytes) {
       out += "()";
     } else if (c === "%") {
       while (i < text.length && text[i] !== "\n" && text[i] !== "\r") i++;
-    } else if (text.startsWith("stream", i) && !/[A-Za-z]/.test(text[i - 1] || "")) {
-      const end = text.indexOf("endstream", i + 6);
+    } else if (text.startsWith("stream", i) && /(^|>>)\s*$/.test(out.slice(-64))) {
+      // Data starts after the end-of-line that follows the keyword.
+      let data = i + "stream".length;
+      if (text[data] === "\r") data++;
+      if (text[data] === "\n") data++;
+      const close = out.trimEnd().length;
+      const from = dictionaryStart(out, close);
+      const dict = from === -1 ? "" : out.slice(from, close - 2);
+      const direct = /\/Length\s+(\d+)(?!\s+\d+\s+R)/.exec(dict);
+      let end;
+      if (direct) {
+        end = data + parseInt(direct[1], 10);
+        const tail = /^\s*endstream/.exec(text.slice(end, end + 64));
+        if (!tail) throw new Error(`Malformed PDF: a stream at byte ${i} does not end at its /Length`);
+        end += tail[0].length;
+      } else {
+        const at = text.indexOf("endstream", data);
+        if (at === -1) throw new Error(`Malformed PDF: a stream at byte ${i} has no endstream`);
+        end = at + "endstream".length;
+      }
       out += "stream endstream";
-      i = end === -1 ? text.length : end + "endstream".length;
+      i = end;
     } else {
       out += c;
       i++;
@@ -232,7 +272,8 @@ export function pdfSyntax(bytes) {
  * Count the pages of a PDF from its bytes: the `/Type /Page` objects (not the
  * `/Type /Pages` tree nodes) outside strings, streams and comments. Chrome
  * writes page objects uncompressed; a PDF that packs them into object streams
- * counts 0, which the export reports as a mismatch rather than a success.
+ * counts 0, and a malformed stream throws, so either way the export reports a
+ * failure rather than a success.
  */
 export function countPdfPages(bytes) {
   return (pdfSyntax(bytes).match(/\/Type\s*\/Page(?![A-Za-z])/g) || []).length;

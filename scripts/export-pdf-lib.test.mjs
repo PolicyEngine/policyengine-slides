@@ -249,15 +249,47 @@ describe("countPdfPages", () => {
     expect(count("%PDF-1.4\n")).toBe(0);
   });
 
+  // A stream object whose dictionary declares the true length of `data`.
+  const stream = (data, extra = "") =>
+    `5 0 obj <</Length ${Buffer.byteLength(data, "latin1")}${extra}>>\nstream\n${data}\nendstream\nendobj\n`;
+  const page = "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
+
   it("ignores the keyword inside strings, streams and comments", () => {
-    const page = "2 0 obj <</Type /Page /Parent 1 0 R>> endobj\n";
     expect(count(page + "4 0 obj <</Title (/Type /Page)>> endobj\n")).toBe(1);
     expect(count(page + "4 0 obj <</Title (a (nested /Type /Page) b)>> endobj\n")).toBe(1);
     expect(count(page + "4 0 obj <</Title (esc\\) /Type /Page \\( still in)>> endobj\n")).toBe(1);
-    expect(
-      count(page + "5 0 obj <</Length 20>>\nstream\n/Type /Page /Type /Page\nendstream\nendobj\n"),
-    ).toBe(1);
+    expect(count(page + stream("/Type /Page /Type /Page"))).toBe(1);
     expect(count(page + "% /Type /Page in a comment\n")).toBe(1);
+  });
+
+  it("skips stream data by its /Length, even when the data says endstream", () => {
+    expect(count(page + stream("endstream\n/Type /Page\n"))).toBe(1);
+    expect(count(page + stream("x", " /Filter /FlateDecode /DecodeParms <</Columns 4>>"))).toBe(1);
+    expect(
+      count(page + "5 0 obj <</Length 3>>\r\nstream\r\nabc\r\nendstream\r\nendobj\r\n"),
+    ).toBe(1);
+  });
+
+  it("reads `stream` as a keyword only after a dictionary", () => {
+    expect(count("4 0 obj <</Name /stream>> endobj\n" + page)).toBe(1);
+    expect(count("4 0 obj [/stream (stream)] endobj\n" + page)).toBe(1);
+  });
+
+  it("falls back to endstream when the length is an indirect reference", () => {
+    const pdf = page + "5 0 obj <</Length 6 0 R>>\nstream\nabc /Type /Page\nendstream\nendobj\n";
+    expect(count(pdf)).toBe(1);
+  });
+
+  it("throws on a stream that does not end where it should", () => {
+    expect(() => count(page + "5 0 obj <</Length 3>>\nstream\nabcdef\nendstream\n")).toThrow(
+      /does not end at its \/Length/,
+    );
+    expect(() => count(page + "5 0 obj <</Length 6 0 R>>\nstream\nabc /Type /Page\n")).toThrow(
+      /has no endstream/,
+    );
+    expect(() => count(page + "5 0 obj <</Length 300>>\nstream\nabc\nendstream\n")).toThrow(
+      /does not end at its \/Length/,
+    );
   });
 
   it("counts a page that follows a string or stream", () => {
@@ -405,16 +437,14 @@ ${release === null ? "" : `setTimeout(function () {
   const holdState = (dom) => /<p id="hold">(\w+)<\/p>/.exec(dom)?.[1];
 
   it("holds load until the settle time after the release, and marks the page settled", async () => {
-    // Chrome's own timeout is 20 s, so a release that did nothing would make
-    // load wait until then.
     const dom = await dump(holdPage(1500), "?export=1&settle=1500", 20_000);
     expect(dom).toContain('<p id="state">mounted</p>');
     expect(holdState(dom)).toBe("opened");
     expect(parseDeckDom(dom).settled).toBe(true);
     expect(dom).not.toContain("<iframe");
-    // Released 300 ms in, then 1500 ms of settle, well before 20 s.
+    // Released 300 ms in, then 1500 ms of settle. Chrome's timeout does not
+    // set the settled mark, so a release that did nothing fails above.
     expect(loadedAt(dom)).toBeGreaterThanOrEqual(1800);
-    expect(loadedAt(dom)).toBeLessThan(10_000);
   }, 150_000);
 
   it("holds load until the release with settle=0", async () => {
@@ -422,7 +452,6 @@ ${release === null ? "" : `setTimeout(function () {
     expect(holdState(dom)).toBe("opened");
     expect(parseDeckDom(dom).settled).toBe(true);
     expect(loadedAt(dom)).toBeGreaterThanOrEqual(300);
-    expect(loadedAt(dom)).toBeLessThan(10_000);
   }, 150_000);
 
   it("opens no hold without export=1 and a whole-number settle", async () => {
