@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
 import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
-import { buildSlideUrl, parseSlideParam } from '@/lib/slide-url';
+import { buildSlideUrl, exportSettleMs, isExportMode, parseSlideParam } from '@/lib/slide-url';
+import { MAX_SETTLE_MS, releaseExportHold } from '@/lib/export-hold';
 
 interface SlideshowViewerProps {
   config: SlideshowConfig;
@@ -14,6 +15,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   const searchParams = useSearchParams();
   const steps = useMemo(() => flattenSlides(config.slides), [config.slides]);
   const totalSteps = steps.length;
+  const exportMode = isExportMode(searchParams);
 
   // Read the deep-link step once. After that, currentStep owns the URL: the
   // effect below writes it with replaceState, and Next mirrors that write back
@@ -40,6 +42,14 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
     const url = buildSlideUrl(window.location.href, currentStep);
     window.history.replaceState(null, '', url);
   }, [currentStep, config.id]);
+
+  // An export capture holds the page's load event open (lib/export-hold.ts).
+  // Start its settle time once the slide is in the DOM.
+  useEffect(() => {
+    if (mounted && exportMode) {
+      releaseExportHold(exportSettleMs(searchParams, MAX_SETTLE_MS));
+    }
+  }, [mounted, exportMode, searchParams]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -92,10 +102,19 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   return (
     <SlideshowProvider value={contextValue}>
-      <main className="relative cursor-pointer" onClick={handleMainClick}>
+      <main
+        className="relative cursor-pointer"
+        onClick={handleMainClick}
+        data-total-steps={totalSteps}
+        data-current-step={currentStep}
+      >
         {mounted && config.slides.map((slide, slideIndex) => {
           const SlideComponent = getSlideComponent(slide);
-          const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= 1;
+          // Export mode captures one step per page load, so it mounts only the
+          // current slide: a neighbor's live embed would load in the background
+          // and can keep the capture from settling.
+          const mountRadius = exportMode ? 0 : 1;
+          const isNeighbor = Math.abs(slideIndex - (currentStepData?.slideIndex ?? 0)) <= mountRadius;
           const isCurrent = slideIndex === currentStepData?.slideIndex;
 
           if (!isNeighbor) {
@@ -113,7 +132,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
           );
         })}
 
-        {!isFullscreen && (
+        {!isFullscreen && !exportMode && (
           <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-between px-8 pointer-events-none">
             <div className="flex items-center gap-3 pointer-events-auto">
               <span className="text-white/60 text-xs">
