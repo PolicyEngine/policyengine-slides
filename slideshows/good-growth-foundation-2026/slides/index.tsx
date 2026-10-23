@@ -1,0 +1,424 @@
+import type { ReactNode } from "react";
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconChartBar,
+  IconFileCode,
+  IconHome,
+  IconMail,
+  IconWorld,
+} from "@tabler/icons-react";
+import Image from "@/components/core/BasePathImage";
+import Slide from "@/components/core/Slide";
+import CoverSlide from "@/components/layout/CoverSlide";
+import SlideHeader from "@/components/layout/SlideHeader";
+import SlideTitle from "@/components/layout/SlideTitle";
+import { speakers } from "@/lib/speakers";
+import {
+  coverage,
+  energyHeadline,
+  localAreaRows,
+  publications,
+  sources,
+  steps,
+  users,
+  type Card,
+  type Source,
+  webinar,
+} from "../content";
+import styles from "./deck.module.css";
+import { DecileChart, PipelineGraph, RegionEligibilityChart, TargetTable } from "./figures";
+import { MicrosimWalkthrough } from "./microsim";
+
+const sections = {
+  model: "The model",
+  data: "The data",
+  analysis: "An analysis example",
+};
+
+function ExternalLink({
+  children,
+  href,
+  className = "",
+}: {
+  children: ReactNode;
+  href: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(event) => event.stopPropagation()}
+      className={`pointer-events-auto hover:underline ${className}`}
+    >
+      {children}
+    </a>
+  );
+}
+
+function SourceLine({ items }: { items: Source[] }) {
+  return (
+    <div className="absolute bottom-24 left-16 right-16 flex flex-wrap gap-x-5 gap-y-1 text-sm text-gray-500">
+      <span>Sources</span>
+      {items.map((item) => (
+        <ExternalLink key={item.href} href={item.href}>
+          {item.label}
+        </ExternalLink>
+      ))}
+    </div>
+  );
+}
+
+function Frame({
+  section,
+  title,
+  subtitle,
+  children,
+  references = [],
+  center = false,
+}: {
+  section?: string;
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+  references?: Source[];
+  /** Centre the body in the space below the title (for figure slides). */
+  center?: boolean;
+}) {
+  return (
+    <Slide className={styles.deck}>
+      <div className="flex h-full flex-col">
+        <SlideHeader>
+          {section && (
+            <p className="mb-2 text-base font-semibold uppercase tracking-wide text-pe-teal">
+              {section}
+            </p>
+          )}
+          <SlideTitle>{title}</SlideTitle>
+          {subtitle && (
+            <p className="mt-3 text-xl leading-relaxed text-gray-600">
+              {subtitle}
+            </p>
+          )}
+        </SlideHeader>
+        {center ? <div className={styles.centerBody}>{children}</div> : children}
+      </div>
+      {references.length > 0 && <SourceLine items={references} />}
+    </Slide>
+  );
+}
+
+export function TitleSlide() {
+  return (
+    <CoverSlide
+      title="PolicyEngine UK: an introduction"
+      subtitle="Presentation for the Good Growth Foundation"
+      contentClassName={`pt-28 ${styles.titleCover}`}
+      event=""
+      date="23 October 2026"
+      speakers={[
+        { ...speakers["max-ghenis"], title: "CEO, PolicyEngine" },
+        {
+          ...speakers["maria-juaristi"],
+          name: "María Juaristi",
+          title: "Research Associate, PolicyEngine",
+        },
+        { ...speakers["vahid-ahmadi"], title: "Research Associate, PolicyEngine" },
+      ]}
+    />
+  );
+}
+
+const stepIcons = [IconFileCode, IconHome, IconChartBar];
+
+// The 9 October introduction deck's "What PolicyEngine is" and "How it works"
+// slides, merged: the rules, the households and the results, with the open
+// code underneath.
+export function WhatSlide() {
+  return (
+    <Frame
+      title="What PolicyEngine is"
+      subtitle="Free, open-source tax and benefit analysis for the UK and the US"
+      references={[sources.home, sources.model, sources.data]}
+    >
+      <p className="text-2xl leading-relaxed text-gray-700">
+        A model of the UK tax and benefit system that anyone can use, free, in
+        a web browser.
+      </p>
+      <div className="mt-8 grid grid-cols-3 gap-6">
+        {steps.map((step, index) => {
+          const Icon = stepIcons[index];
+          return (
+            <div
+              key={step.title}
+              className="border border-gray-200 border-l-4 border-l-pe-teal bg-white p-6"
+            >
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-pe-teal text-white">
+                  <Icon size={30} stroke={1.8} aria-hidden="true" />
+                </span>
+                <h2 className="text-2xl font-semibold text-pe-dark">
+                  <span className="text-pe-teal">{index + 1}</span> {step.title}
+                </h2>
+              </div>
+              <p className="mt-4 text-lg leading-snug text-gray-600">{step.text}</p>
+            </div>
+          );
+        })}
+      </div>
+      <ExternalLink
+        href={sources.model.href}
+        className={`${styles.codeBanner} mt-8 flex items-center gap-4 rounded-xl bg-pe-teal/10 px-6 py-4 text-xl hover:no-underline`}
+      >
+        <IconBrandGithub size={28} stroke={1.8} aria-hidden="true" className="text-pe-teal" />
+        All the code is public, so anyone can see how each number is calculated.
+      </ExternalLink>
+    </Frame>
+  );
+}
+
+export function MicrosimSlide() {
+  return (
+    <Frame
+      title="How microsimulation works"
+      subtitle="The same rules applied to every household, then weighted up to the whole country"
+    >
+      <MicrosimWalkthrough />
+    </Frame>
+  );
+}
+
+export function CoverageSlide() {
+  return (
+    <Frame
+      section={sections.model}
+      title="What the UK model covers"
+      subtitle="The rules in policyengine-uk, for every nation of the UK"
+      references={[sources.parameters, sources.tests]}
+    >
+      <div className="grid grid-cols-4 gap-6">
+        {coverage.map((group) => (
+          <div key={group.title} className="border-l-4 border-pe-teal bg-gray-50 p-5">
+            <h2 className="text-xl font-semibold text-pe-dark">{group.title}</h2>
+            <ul className={styles.coverageList}>
+              {group.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className={styles.takeaway}>
+        732 of the model&apos;s 795 parameter files cite the law or guidance
+        they come from, and more than 4,000 automated tests check the
+        calculations.
+      </p>
+      <p className={styles.finePrint}>
+        It can also model behavioural responses, such as changes in work and in
+        when capital gains are realised. It does not model inheritance tax.
+      </p>
+    </Frame>
+  );
+}
+
+export function PipelineSlide() {
+  return (
+    <Frame
+      section={sections.data}
+      title="From surveys to a population that represents the UK"
+      center
+      references={[sources.pipeline, sources.inputs, sources.geography, sources.nationalTargets]}
+    >
+      <PipelineGraph />
+    </Frame>
+  );
+}
+
+export function TargetsSlide() {
+  return (
+    <Frame
+      section={sections.data}
+      title="What the weights are calibrated to"
+      subtitle={`The local-area dataset binds every national target plus ${localAreaRows.toLocaleString("en-GB")} for 650 constituencies and 361 local authorities (LAs)`}
+      center
+      references={[sources.nationalTargets, sources.localTargets]}
+    >
+      <TargetTable />
+    </Frame>
+  );
+}
+
+export function EnergyDiscountSlide() {
+  const h = energyHeadline;
+  return (
+    <Frame
+      section={sections.analysis}
+      title="A targeted energy bill discount"
+      center
+      subtitle="The Resolution Foundation's £2bn option for early 2027, modelled as £175 per eligible household in Great Britain: those on a means-tested benefit, or where no one has taxable income of £24,000 or more"
+      references={[sources.energyDashboard, sources.energyAnalysis, sources.energyProposal]}
+    >
+      <div className={styles.energyStats}>
+        <p>
+          <strong>{h.recipients}</strong> of {h.households} households ({h.share})
+          would be eligible. If all took it up, it would cost{" "}
+          <strong>{h.cost}</strong> in 2026-27.
+        </p>
+        <p className={styles.dashboardLink}>
+          <ExternalLink href={sources.energyDashboard.href}>
+            Explore other designs in the dashboard ↗
+          </ExternalLink>
+        </p>
+      </div>
+      <div className={styles.energyGrid}>
+        <RegionEligibilityChart />
+        <DecileChart />
+      </div>
+    </Frame>
+  );
+}
+
+function CompactTile({ item }: { item: Card }) {
+  return (
+    <ExternalLink
+      href={item.href}
+      className="group flex flex-col overflow-hidden border border-gray-200 bg-white hover:no-underline"
+    >
+      <Image
+        src={item.image}
+        alt={item.alt}
+        width={800}
+        height={450}
+        className={`${styles.compactCover} w-full object-cover`}
+      />
+      <div className={`${styles.compactBody} flex-1 border-l-4 border-pe-teal px-3 py-2`}>
+        <p className="text-xs text-gray-500">{item.date}</p>
+        <h2 className="mt-0.5 text-base font-semibold leading-snug text-pe-dark group-hover:underline">
+          {item.title}
+        </h2>
+        <p className={`${styles.compactText} mt-1 text-sm leading-snug text-gray-600`}>
+          {item.text}
+        </p>
+      </div>
+    </ExternalLink>
+  );
+}
+
+export function PublicationsSlide() {
+  return (
+    <Frame
+      title="Recent UK research"
+      subtitle="The newest analysis and tools on policyengine.org/uk/research"
+      references={[sources.research]}
+    >
+      <div className="grid grid-cols-4 gap-4">
+        {publications.map((item) => (
+          <CompactTile key={item.href} item={item} />
+        ))}
+      </div>
+    </Frame>
+  );
+}
+
+export function UsersSlide() {
+  return (
+    <Frame
+      title="Who uses PolicyEngine UK"
+      subtitle="Organisations that use, cite and support our work"
+      references={[sources.hansard, sources.tpa, sources.cps, sources.nef, sources.nuffield]}
+    >
+      <div className="grid grid-cols-4 gap-x-10 gap-y-12 pt-4">
+        {users.map((user) => {
+          const logo = user.logo ? (
+            <Image
+              src={user.logo}
+              alt={`${user.name} logo`}
+              width={240}
+              height={104}
+              className={`${styles.communityLogo} w-auto max-w-full object-contain`}
+            />
+          ) : (
+            <span className={`${styles.communityLogo} ${styles.communityInitials}`}>
+              {user.initials}
+            </span>
+          );
+          const body = (
+            <div className="flex flex-col items-center text-center">
+              {logo}
+              <p className="mt-3 text-base font-medium leading-snug text-pe-dark">
+                {user.name}
+              </p>
+            </div>
+          );
+          return user.source ? (
+            <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
+              {body}
+            </ExternalLink>
+          ) : (
+            <div key={user.name}>{body}</div>
+          );
+        })}
+      </div>
+    </Frame>
+  );
+}
+
+const contacts = [
+  { label: "policyengine.org/uk", url: sources.home.href, Icon: IconWorld },
+  { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org", Icon: IconMail },
+  { label: "github.com/PolicyEngine", url: "https://github.com/PolicyEngine", Icon: IconBrandGithub },
+  {
+    label: "linkedin.com/company/thepolicyengine",
+    url: "https://www.linkedin.com/company/thepolicyengine",
+    Icon: IconBrandLinkedin,
+  },
+];
+
+export function ClosingSlide() {
+  return (
+    <Slide isEnd>
+      <h1 className={`${styles.closingTitle} font-display text-6xl font-bold text-center`}>Thank you</h1>
+      <a
+        href={webinar.href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={(event) => event.stopPropagation()}
+        className={styles.webinarCard}
+      >
+        <Image
+          src={webinar.qr}
+          alt="QR code: register for the Autumn Budget 2026 webinar"
+          width={450}
+          height={450}
+          className={styles.webinarQr}
+        />
+        <div>
+          <p className={styles.webinarEyebrow}>Next week · join our webinar</p>
+          <h2 className={styles.webinarTitle}>{webinar.title}</h2>
+          <p className={styles.webinarWhen}>{webinar.when}</p>
+          <p className={styles.webinarText}>{webinar.text}</p>
+          <p className={styles.webinarCta}>Scan the code to register, free</p>
+        </div>
+      </a>
+      <div className={`${styles.closingContacts} grid w-full max-w-5xl grid-cols-2 gap-4`}>
+        {contacts.map(({ label, url, Icon }) => (
+          <a
+            key={url}
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
+              <Icon size={20} stroke={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-base font-medium">{label}</span>
+          </a>
+        ))}
+      </div>
+    </Slide>
+  );
+}
