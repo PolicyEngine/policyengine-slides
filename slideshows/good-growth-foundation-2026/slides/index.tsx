@@ -17,13 +17,16 @@ import { speakers } from "@/lib/speakers";
 import {
   coverage,
   energyHeadline,
+  publications,
   sources,
   steps,
   users,
+  type Card,
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
-import { DecileChart, PipelineGraph, RegionEligibilityChart } from "./figures";
+import { DecileChart, PipelineGraph, RegionEligibilityChart, TargetTable } from "./figures";
+import { MicrosimWalkthrough } from "./microsim";
 
 const sections = {
   model: "The model",
@@ -203,6 +206,17 @@ export function HowSlide() {
   );
 }
 
+export function MicrosimSlide() {
+  return (
+    <Frame
+      title="How microsimulation works"
+      subtitle="The same rules applied to every household, then weighted up to the whole country"
+    >
+      <MicrosimWalkthrough />
+    </Frame>
+  );
+}
+
 export function CoverageSlide() {
   return (
     <Frame
@@ -249,6 +263,20 @@ export function PipelineSlide() {
   );
 }
 
+export function TargetsSlide() {
+  return (
+    <Frame
+      section={sections.data}
+      title="What the weights are calibrated to"
+      subtitle="Official statistics in the Microcosm UK build, the level at which each binds, and who publishes it"
+      center
+      references={[sources.nationalTargets, sources.localTargets]}
+    >
+      <TargetTable />
+    </Frame>
+  );
+}
+
 export function EnergyDiscountSlide() {
   const h = energyHeadline;
   return (
@@ -274,6 +302,48 @@ export function EnergyDiscountSlide() {
       <div className={styles.energyGrid}>
         <RegionEligibilityChart />
         <DecileChart />
+      </div>
+    </Frame>
+  );
+}
+
+function CompactTile({ item }: { item: Card }) {
+  return (
+    <ExternalLink
+      href={item.href}
+      className="group flex flex-col overflow-hidden border border-gray-200 bg-white hover:no-underline"
+    >
+      <Image
+        src={item.image}
+        alt={item.alt}
+        width={800}
+        height={450}
+        className={`${styles.compactCover} w-full object-cover`}
+      />
+      <div className={`${styles.compactBody} flex-1 border-l-4 border-pe-teal px-3 py-2`}>
+        <p className="text-xs text-gray-500">{item.date}</p>
+        <h2 className="mt-0.5 text-base font-semibold leading-snug text-pe-dark group-hover:underline">
+          {item.title}
+        </h2>
+        <p className={`${styles.compactText} mt-1 text-sm leading-snug text-gray-600`}>
+          {item.text}
+        </p>
+      </div>
+    </ExternalLink>
+  );
+}
+
+export function PublicationsSlide() {
+  return (
+    <Frame
+      title="Recent UK research"
+      subtitle="The newest analysis and tools on policyengine.org/uk/research"
+      references={[sources.research]}
+    >
+      <div className="grid grid-cols-4 gap-4">
+        {publications.map((item) => (
+          <CompactTile key={item.href} item={item} />
+        ))}
       </div>
     </Frame>
   );

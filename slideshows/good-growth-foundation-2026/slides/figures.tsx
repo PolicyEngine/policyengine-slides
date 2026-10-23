@@ -1,4 +1,10 @@
-import { energyDeciles, energyRegions, pipelineStages } from "../content";
+import {
+  energyDeciles,
+  energyRegions,
+  localTargets,
+  nationalTargets,
+  pipelineStages,
+} from "../content";
 import styles from "./deck.module.css";
 
 // The pipeline layout follows the Scottish Government deck's PipelineGraph,
@@ -105,5 +111,49 @@ export function DecileChart() {
         Income decile of people in Great Britain, after housing costs (1 = lowest)
       </p>
     </figure>
+  );
+}
+
+const count = (n: number) => n.toLocaleString("en-GB");
+
+// UK calibration targets: the national release's groups, a total, then the
+// local-area build's rows, which are still being validated.
+export function TargetTable() {
+  const national = nationalTargets.reduce((sum, row) => sum + row.rows, 0);
+  return (
+    <div className={styles.targetTable}>
+      <div className={`${styles.targetRow} ${styles.targetHead}`}>
+        <div>Targets</div>
+        <div>Binds at</div>
+        <div>Source</div>
+        <div className="text-right">Rows</div>
+      </div>
+      {nationalTargets.map((row) => (
+        <div key={row.targets} className={styles.targetRow}>
+          <div className="font-semibold text-pe-dark">{row.targets}</div>
+          <div>{row.level}</div>
+          <div className="text-gray-600">{row.source}</div>
+          <div className="text-right tabular-nums">{count(row.rows)}</div>
+        </div>
+      ))}
+      <div className={`${styles.targetRow} ${styles.targetTotal}`}>
+        <div>National release</div>
+        <div />
+        <div />
+        <div className="text-right tabular-nums">{count(national)}</div>
+      </div>
+      <div className={`${styles.targetRow} ${styles.targetLocal}`}>
+        <div>
+          <span className="font-semibold text-pe-dark">Local-area build: </span>
+          {localTargets.targets}
+        </div>
+        <div>
+          {localTargets.level}
+          <span className={styles.targetBadge}>In validation</span>
+        </div>
+        <div className="text-gray-600">{localTargets.source}</div>
+        <div className="text-right tabular-nums">{count(localTargets.rows)}</div>
+      </div>
+    </div>
   );
 }

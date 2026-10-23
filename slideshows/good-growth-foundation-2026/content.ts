@@ -85,6 +85,14 @@ export const sources = {
     label: "UK research",
     href: "https://www.policyengine.org/uk/research",
   },
+  niesr: {
+    label: "NIESR membership",
+    href: "https://niesr.ac.uk/membership/individual-membership",
+  },
+  localTargets: {
+    label: "Local targets",
+    href: `${ukBuild}/local_target_references.json`,
+  },
 } satisfies Record<string, Source>;
 
 export const steps = [
@@ -182,6 +190,123 @@ export const pipelineStages = [
   },
 ];
 
+// UK calibration targets at the pinned Microcosm commit, grouped from the
+// 31 target families in the national target references (1,231 rows) and the
+// six in the local ones (20,885 rows). "12 regions" means England's nine
+// regions plus Wales, Scotland and Northern Ireland; Universal Credit,
+// State Pension and most DWP rows are for Great Britain, with Northern
+// Ireland's from the Department for Communities.
+export type TargetGroup = {
+  targets: string;
+  level: string;
+  source: string;
+  rows: number;
+};
+
+export const nationalTargets: TargetGroup[] = [
+  { targets: "Population by age", level: "UK and its 12 regions", source: "ONS", rows: 149 },
+  { targets: "Households, by type", level: "UK", source: "ONS", rows: 10 },
+  { targets: "Taxpayers, income and income tax, by income band", level: "UK and its 12 regions", source: "HMRC personal income statistics", rows: 562 },
+  { targets: "Capital gains and gains taxpayers", level: "UK and its 12 regions", source: "HMRC", rows: 105 },
+  { targets: "Salary sacrifice and Tax-Free Childcare", level: "UK", source: "HMRC", rows: 10 },
+  { targets: "Tax receipts and benefit spending", level: "UK", source: "OBR", rows: 23 },
+  { targets: "Universal Credit households, by family and element", level: "Great Britain, Scotland", source: "DWP", rows: 118 },
+  { targets: "State Pension, Pension Credit and workplace pensions", level: "Great Britain and the 12 regions", source: "DWP, Department for Communities (NI)", rows: 74 },
+  { targets: "Other benefits, the benefit cap and two-child limit", level: "Great Britain", source: "DWP", rows: 43 },
+  { targets: "Council tax dwellings, by band", level: "English regions, Wales, Scotland", source: "MHCLG, Welsh and Scottish Governments", rows: 100 },
+  { targets: "Student loans and funded childcare", level: "England", source: "Student Loans Company, DfE", rows: 18 },
+  { targets: "Bus and rail support", level: "Nations and English regions", source: "DfT, ORR and devolved governments", rows: 10 },
+  { targets: "Land values, savings interest, energy spending and other totals", level: "UK, Scotland", source: "ONS, ISC, Scottish Government", rows: 9 },
+];
+
+export const localTargets: TargetGroup = {
+  targets: "Population, households, incomes, Universal Credit, council tax, tenure and rents",
+  level: "650 constituencies and 361 local authorities",
+  source: "ONS, HMRC, DWP, MHCLG and devolved governments",
+  rows: 20885,
+};
+
+export type Card = {
+  title: string;
+  date: string;
+  text: string;
+  href: string;
+  image: string;
+  alt: string;
+};
+
+const shot = (file: string) => `/screenshots/good-growth-foundation-2026/${file}`;
+
+// The eight newest UK items on policyengine.org/uk/research on 23 October
+// 2026, newest first; covers come from policyengine-app-v2's
+// website/public/assets/posts.
+export const publications: Card[] = [
+  {
+    title: "The Burnham plan vs the triple lock",
+    date: "16 October 2026",
+    text: "Budget impact to 2039-40, forecast paths and which households have less income.",
+    href: "https://www.policyengine.org/uk/triple-lock",
+    image: shot("uk-triple-lock.jpg"),
+    alt: "Cover image for the Burnham plan and triple lock analysis",
+  },
+  {
+    title: "Energy bills and the Autumn Budget 2026",
+    date: "14 October 2026",
+    text: "What households will pay for energy, and what support options would cost and reach.",
+    href: "https://www.policyengine.org/uk/energy-autumn-budget",
+    image: shot("energy-autumn-budget.jpg"),
+    alt: "Cover image for the energy bills and Autumn Budget 2026 dashboard",
+  },
+  {
+    title: "Our microsimulation package, published in JOSS",
+    date: "12 October 2026",
+    text: "The peer-reviewed paper on policyengine, the Python package behind PolicyEngine.",
+    href: "https://www.policyengine.org/uk/research/policyengine-joss-paper",
+    image: shot("policyengine-joss-paper-cover.webp"),
+    alt: "Cover image for the Journal of Open Source Software paper post",
+  },
+  {
+    title: "Targeted energy bill discount",
+    date: "5 October 2026",
+    text: "Cost, reach and distributional effects of the Resolution Foundation's proposal.",
+    href: "https://www.policyengine.org/uk/targeted-energy-discount",
+    image: shot("targeted-energy-discount.jpg"),
+    alt: "Cover image for the targeted energy bill discount dashboard",
+  },
+  {
+    title: "The Middle East war and UK living standards",
+    date: "25 September 2026",
+    text: "Energy, fuel and food price rises in 2027-28, with ten policy responses compared.",
+    href: "https://www.policyengine.org/uk/middle-east-war-living-standards",
+    image: shot("middle-east-war-living-standards.jpg"),
+    alt: "Cover image for the Middle East war and living standards dashboard",
+  },
+  {
+    title: "Marriage calculator",
+    date: "11 September 2026",
+    text: "A couple's taxes and benefits living together, against living apart.",
+    href: "https://www.policyengine.org/uk/marriage",
+    image: shot("marriage-calculator-uk.jpg"),
+    alt: "Cover image for the UK marriage calculator",
+  },
+  {
+    title: "Free childcare hours and a 75% subsidy",
+    date: "3 September 2026",
+    text: "15 free hours from nine months, with a subsidy replacing Tax-Free Childcare.",
+    href: "https://www.policyengine.org/uk/free-childcare-reform",
+    image: shot("free-childcare-reform.jpg"),
+    alt: "Cover image for the free childcare reform dashboard",
+  },
+  {
+    title: "Who bears the AI shock?",
+    date: "4 August 2026",
+    text: "AI employment, wage and capital shocks traced through the tax-benefit system.",
+    href: "https://www.policyengine.org/uk/research/uk-ai-study",
+    image: shot("uk-ai-study.jpg"),
+    alt: "Cover image for the UK AI incidence study",
+  },
+];
+
 // Targeted energy bill discount (uk-energy-reforms main 14bf3b0): the RF flat
 // option in 2026-27 on the Microcosm UK 2024-25 national release,
 // policyengine-uk 2.102.3. Figures match the dashboard's data file
@@ -233,8 +358,8 @@ export type User = {
 };
 
 // From the introduction deck's community slide, without the Good Growth
-// Foundation itself. The House of Lords card keeps its initials: the crowned
-// portcullis is a restricted mark.
+// Foundation itself, plus NIESR. Logos come from the introduction deck's
+// branch (House of Lords included) and policyengine-app-v2 (NIESR).
 export const users: User[] = [
   {
     name: "No 10 data science team",
@@ -244,6 +369,7 @@ export const users: User[] = [
   },
   {
     name: "House of Lords",
+    logo: "/logos/orgs/house-of-lords.svg",
     initials: "HL",
     source: sources.hansard,
   },
@@ -275,5 +401,11 @@ export const users: User[] = [
     logo: "/logos/orgs/nuffield-foundation.svg",
     initials: "NF",
     source: sources.nuffield,
+  },
+  {
+    name: "National Institute of Economic and Social Research",
+    logo: "/logos/orgs/niesr.png",
+    initials: "NIESR",
+    source: sources.niesr,
   },
 ];
