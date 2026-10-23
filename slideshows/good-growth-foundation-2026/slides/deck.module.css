@@ -1066,3 +1066,140 @@
     font-size: 0.85rem;
   }
 }
+
+/* Closing slide: the webinar invitation with its registration QR code, above
+   the contact links. The QR sits on white with its own quiet zone. */
+.closingTitle {
+  margin-bottom: 2rem;
+}
+
+.webinarCard {
+  display: flex;
+  width: 100%;
+  max-width: 64rem;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 0.1);
+  padding: 1.25rem 1.75rem;
+  text-align: left;
+  transition: background-color 150ms;
+}
+
+.webinarCard:hover {
+  background: rgb(255 255 255 / 0.18);
+  text-decoration: none !important;
+}
+
+.webinarQr {
+  width: 13rem;
+  height: 13rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  background: white;
+}
+
+.webinarEyebrow {
+  color: rgb(255 255 255 / 0.75);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.webinarTitle {
+  margin-top: 0.4rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.webinarWhen {
+  margin-top: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.webinarText {
+  margin-top: 0.35rem;
+  color: rgb(255 255 255 / 0.85);
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.webinarCta {
+  display: inline-block;
+  margin-top: 0.9rem;
+  border-radius: 9999px;
+  background: white;
+  padding: 0.3rem 0.9rem;
+  color: var(--pe-dark);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.closingContacts {
+  margin-top: 2rem;
+}
+
+@media (max-height: 1000px) {
+  .closingTitle {
+    margin-bottom: 1.25rem;
+    font-size: 3rem;
+  }
+
+  .webinarQr {
+    width: 11rem;
+    height: 11rem;
+  }
+
+  .webinarTitle {
+    font-size: 1.6rem;
+  }
+
+  .webinarWhen {
+    font-size: 1.15rem;
+  }
+
+  .webinarText {
+    font-size: 1rem;
+  }
+
+  .closingContacts {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-height: 760px) {
+  .closingTitle {
+    margin-bottom: 0.6rem;
+    font-size: 2.25rem;
+  }
+
+  .webinarCard {
+    padding: 1rem 1.25rem;
+  }
+
+  .webinarQr {
+    width: 9.5rem;
+    height: 9.5rem;
+  }
+
+  .webinarTitle {
+    font-size: 1.35rem;
+  }
+
+  .webinarText {
+    display: none;
+  }
+
+  .webinarCta {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .closingContacts {
+    margin-top: 0.9rem;
+  }
+}

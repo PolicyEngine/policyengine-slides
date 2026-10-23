@@ -350,6 +350,17 @@ export const energyDeciles = [
   { decile: 10, averageGain: 6, shareReceiving: 0.03 },
 ];
 
+// The Autumn Budget webinar, as announced on the policyengine.org home page
+// banner and in the 21 October UK newsletter. The QR code encodes this exact
+// link; it was generated locally with segno (version 5, error correction M).
+export const webinar = {
+  title: "Autumn Budget 2026: PolicyEngine's same-day first look",
+  when: "Wednesday 28 October, 4:30pm UK time",
+  text: "A free online webinar on the Budget's main tax and benefit measures and what they mean for households.",
+  href: "https://us06web.zoom.us/meeting/register/2DLUeZAbRwKkKEK-2JrFrQ#/registration",
+  qr: "/images/good-growth-foundation-2026/qr-autumn-budget-webinar.svg",
+};
+
 export type User = {
   name: string;
   initials: string;

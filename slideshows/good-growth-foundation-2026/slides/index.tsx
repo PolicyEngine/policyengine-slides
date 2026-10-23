@@ -24,6 +24,7 @@ import {
   users,
   type Card,
   type Source,
+  webinar,
 } from "../content";
 import styles from "./deck.module.css";
 import { DecileChart, PipelineGraph, RegionEligibilityChart, TargetTable } from "./figures";
@@ -378,8 +379,30 @@ const contacts = [
 export function ClosingSlide() {
   return (
     <Slide isEnd>
-      <h1 className="font-display text-6xl font-bold mb-12 text-center">Thank you</h1>
-      <div className="grid w-full max-w-5xl grid-cols-2 gap-5">
+      <h1 className={`${styles.closingTitle} font-display text-6xl font-bold text-center`}>Thank you</h1>
+      <a
+        href={webinar.href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={(event) => event.stopPropagation()}
+        className={styles.webinarCard}
+      >
+        <Image
+          src={webinar.qr}
+          alt="QR code: register for the Autumn Budget 2026 webinar"
+          width={450}
+          height={450}
+          className={styles.webinarQr}
+        />
+        <div>
+          <p className={styles.webinarEyebrow}>Next week · join our webinar</p>
+          <h2 className={styles.webinarTitle}>{webinar.title}</h2>
+          <p className={styles.webinarWhen}>{webinar.when}</p>
+          <p className={styles.webinarText}>{webinar.text}</p>
+          <p className={styles.webinarCta}>Scan the code to register, free</p>
+        </div>
+      </a>
+      <div className={`${styles.closingContacts} grid w-full max-w-5xl grid-cols-2 gap-4`}>
         {contacts.map(({ label, url, Icon }) => (
           <a
             key={url}
@@ -387,12 +410,12 @@ export function ClosingSlide() {
             target="_blank"
             rel="noreferrer"
             onClick={(event) => event.stopPropagation()}
-            className="flex items-center gap-4 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 transition-colors hover:bg-white/20"
+            className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
-              <Icon size={24} stroke={1.8} aria-hidden="true" />
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
+              <Icon size={20} stroke={1.8} aria-hidden="true" />
             </span>
-            <span className="text-lg font-medium">{label}</span>
+            <span className="text-base font-medium">{label}</span>
           </a>
         ))}
       </div>

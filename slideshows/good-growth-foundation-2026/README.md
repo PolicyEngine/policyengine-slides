@@ -12,7 +12,7 @@ PolicyEngine UK for the Good Growth Foundation, for a 20 to 30 minute slot.
 7. A targeted energy bill discount (an analysis example)
 8. Recent UK research
 9. Who uses PolicyEngine UK
-10. Thank you
+10. Thank you, with the Autumn Budget webinar invitation and its registration QR code
 
 Slides 2 and 9 come from the 9 October introduction deck
 (`introduction-2026`, policyengine-slides #77); slide 2 merges its "What
@@ -51,6 +51,12 @@ Figures and sources:
 - Recent research shows the eight newest UK items on
   policyengine.org/uk/research on 23 October 2026, newest first, with covers
   from policyengine-app-v2 (`website/public/assets/posts`).
+
+The closing slide invites the audience to the Autumn Budget 2026 webinar
+(Wednesday 28 October, 4:30pm UK time), as announced on the policyengine.org
+home page. `public/images/good-growth-foundation-2026/qr-autumn-budget-webinar.svg`
+encodes the Zoom registration link; it was generated locally with segno and
+checked by decoding it from slide screenshots at three screen sizes.
 
 Logos in `public/logos/orgs/` come from the introduction deck, except NIESR's,
 which comes from policyengine-app-v2. The community grid leaves out the Good
