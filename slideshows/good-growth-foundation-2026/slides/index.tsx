@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import {
-  IconAdjustments,
   IconBrandGithub,
   IconBrandLinkedin,
+  IconChartBar,
+  IconFileCode,
   IconHome,
   IconMail,
-  IconMap2,
   IconWorld,
 } from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
@@ -130,48 +130,42 @@ export function TitleSlide() {
   );
 }
 
-const whatCards = [
-  {
-    Icon: IconAdjustments,
-    title: "Pick a policy",
-    text: "A tax rate, a benefit amount or a new allowance.",
-  },
-  {
-    Icon: IconHome,
-    title: "One household",
-    text: "How much a family gains or loses.",
-  },
-  {
-    Icon: IconMap2,
-    title: "The whole country",
-    text: "The cost to government, and who gains and loses.",
-  },
-];
+const stepIcons = [IconFileCode, IconHome, IconChartBar];
 
+// The 9 October introduction deck's "What PolicyEngine is" and "How it works"
+// slides, merged: the rules, the households and the results, with the open
+// code underneath.
 export function WhatSlide() {
   return (
     <Frame
       title="What PolicyEngine is"
       subtitle="Free, open-source tax and benefit analysis for the UK and the US"
-      references={[sources.home]}
+      references={[sources.home, sources.model, sources.data]}
     >
       <p className="text-2xl leading-relaxed text-gray-700">
         A model of the UK tax and benefit system that anyone can use, free, in
         a web browser.
       </p>
       <div className="mt-8 grid grid-cols-3 gap-6">
-        {whatCards.map(({ Icon, title, text }) => (
-          <div
-            key={title}
-            className="border border-gray-200 border-l-4 border-l-pe-teal bg-white p-6"
-          >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-pe-teal text-white">
-              <Icon size={30} stroke={1.8} aria-hidden="true" />
-            </span>
-            <h2 className="mt-4 text-2xl font-semibold text-pe-dark">{title}</h2>
-            <p className="mt-2 text-lg leading-snug text-gray-600">{text}</p>
-          </div>
-        ))}
+        {steps.map((step, index) => {
+          const Icon = stepIcons[index];
+          return (
+            <div
+              key={step.title}
+              className="border border-gray-200 border-l-4 border-l-pe-teal bg-white p-6"
+            >
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-pe-teal text-white">
+                  <Icon size={30} stroke={1.8} aria-hidden="true" />
+                </span>
+                <h2 className="text-2xl font-semibold text-pe-dark">
+                  <span className="text-pe-teal">{index + 1}</span> {step.title}
+                </h2>
+              </div>
+              <p className="mt-4 text-lg leading-snug text-gray-600">{step.text}</p>
+            </div>
+          );
+        })}
       </div>
       <ExternalLink
         href={sources.model.href}
@@ -180,29 +174,6 @@ export function WhatSlide() {
         <IconBrandGithub size={28} stroke={1.8} aria-hidden="true" className="text-pe-teal" />
         All the code is public, so anyone can see how each number is calculated.
       </ExternalLink>
-    </Frame>
-  );
-}
-
-export function HowSlide() {
-  return (
-    <Frame
-      title="How it works"
-      references={[sources.model, sources.data]}
-    >
-      <div className="grid grid-cols-3 gap-8">
-        {steps.map((step, index) => (
-          <div key={step.title} className="border-l-4 border-pe-teal bg-gray-50 p-6">
-            <p className="text-5xl font-bold text-pe-teal">{index + 1}</p>
-            <h2 className="mt-4 text-2xl font-semibold text-pe-dark">
-              {step.title}
-            </h2>
-            <p className="mt-3 text-xl leading-relaxed text-gray-700">
-              {step.text}
-            </p>
-          </div>
-        ))}
-      </div>
     </Frame>
   );
 }

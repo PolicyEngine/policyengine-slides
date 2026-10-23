@@ -1,25 +1,25 @@
 # PolicyEngine UK: an introduction, 23 October 2026
 
-11 slides at `/slides/good-growth-foundation-2026`: an introduction to
+10 slides at `/slides/good-growth-foundation-2026`: an introduction to
 PolicyEngine UK for the Good Growth Foundation, for a 20 to 30 minute slot.
 
 1. Title
-2. What PolicyEngine is
-3. How it works
-4. How microsimulation works (six build steps)
-5. What the UK model covers
-6. From surveys to a population that represents the UK (the data)
-7. What the weights are calibrated to (UK calibration targets)
-8. A targeted energy bill discount (an analysis example)
-9. Recent UK research
-10. Who uses PolicyEngine UK
-11. Thank you
+2. What PolicyEngine is (the rules, the households and the results)
+3. How microsimulation works (six build steps)
+4. What the UK model covers
+5. From surveys to a population that represents the UK (the data)
+6. What the weights are calibrated to (UK calibration targets)
+7. A targeted energy bill discount (an analysis example)
+8. Recent UK research
+9. Who uses PolicyEngine UK
+10. Thank you
 
-Slides 2, 3 and 10 come from the 9 October introduction deck
-(`introduction-2026`, policyengine-slides #77). Slides 6 and 8 come from the
+Slides 2 and 9 come from the 9 October introduction deck
+(`introduction-2026`, policyengine-slides #77); slide 2 merges its "What
+PolicyEngine is" and "How it works" slides. Slides 5 and 7 come from the
 Scottish Government deck of the same day (`scottish-government-2026`), told
 for the whole UK: the pipeline drops the Scotland-only stage, and the decile
-chart covers Great Britain. Slide 4 follows the microsimulation walkthrough in
+chart covers Great Britain. Slide 3 follows the microsimulation walkthrough in
 the UK event 2025 deck (`model-scope`, slide 2), with illustrative households
 and figures rather than survey records.
 

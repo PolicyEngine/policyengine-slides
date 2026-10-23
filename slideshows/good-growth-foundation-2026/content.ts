@@ -106,7 +106,7 @@ export const steps = [
   },
   {
     title: "The results",
-    text: "Change a rule and see who gains and loses: for one family, for the whole country, by income group, region and constituency.",
+    text: "Pick a policy and see who gains and loses: how much one family gains or loses, the cost to government, and the effects by income group, region and constituency.",
   },
 ];
 

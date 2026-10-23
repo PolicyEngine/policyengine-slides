@@ -3,7 +3,6 @@ import {
   ClosingSlide,
   CoverageSlide,
   EnergyDiscountSlide,
-  HowSlide,
   MicrosimSlide,
   PipelineSlide,
   PublicationsSlide,
@@ -25,7 +24,6 @@ export const goodGrowthFoundation2026Config: SlideshowConfig = {
   slides: [
     TitleSlide,
     WhatSlide,
-    HowSlide,
     { component: MicrosimSlide, builds: MICROSIM_STEPS },
     CoverageSlide,
     PipelineSlide,
