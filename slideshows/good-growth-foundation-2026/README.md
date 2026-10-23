@@ -38,9 +38,10 @@ Figures and sources:
 - The pipeline and target table cite Microcosm at the commit the Scottish
   Government deck used (main on 8 October 2026). The table groups the 31
   families of the national target references (1,231 rows) and the six of the
-  local ones (20,885 rows, for the local-area build still in validation).
-  The national file has held over 1,000 rows in every build since the
-  4 October release.
+  local ones (20,885 rows), with one row count for each dataset: the
+  local-area dataset binds every national target as well as its own. The
+  national file has held over 1,000 rows in every build since the 4 October
+  release.
 - The energy figures are the Resolution Foundation's flat option in 2026-27
   from uk-energy-reforms 14bf3b0 (Microcosm UK 2024-25 national release,
   policyengine-uk 2.102.3), and match the dashboard's data file. The slide

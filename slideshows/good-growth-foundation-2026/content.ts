@@ -106,7 +106,7 @@ export const steps = [
   },
   {
     title: "The results",
-    text: "Change a rule and see who gains and loses: for one family, for the whole country, by income group and by region.",
+    text: "Change a rule and see who gains and loses: for one family, for the whole country, by income group, region and constituency.",
   },
 ];
 
@@ -180,7 +180,7 @@ export const pipelineStages = [
   },
   {
     title: "Place in local areas",
-    adds: "Local-area build, in validation: a small area, council and constituency for each household",
+    adds: "For the local-area dataset: a small area, council and constituency for each household",
     sources: ["Census small areas (ONS, NRS and NISRA)"],
   },
   {
@@ -195,36 +195,36 @@ export const pipelineStages = [
 // six in the local ones (20,885 rows). "12 regions" means England's nine
 // regions plus Wales, Scotland and Northern Ireland; Universal Credit,
 // State Pension and most DWP rows are for Great Britain, with Northern
-// Ireland's from the Department for Communities.
+// Ireland's from the Department for Communities. The local-area dataset binds
+// every national row as well as its own (microcosm full_targets.py: the local
+// line binds the national register), so its column adds the two.
 export type TargetGroup = {
   targets: string;
   level: string;
   source: string;
-  rows: number;
+  national: number;
+  local: number;
 };
 
-export const nationalTargets: TargetGroup[] = [
-  { targets: "Population by age", level: "UK and its 12 regions", source: "ONS", rows: 149 },
-  { targets: "Households, by type", level: "UK", source: "ONS", rows: 10 },
-  { targets: "Taxpayers, income and income tax, by income band", level: "UK and its 12 regions", source: "HMRC personal income statistics", rows: 562 },
-  { targets: "Capital gains and gains taxpayers", level: "UK and its 12 regions", source: "HMRC", rows: 105 },
-  { targets: "Salary sacrifice and Tax-Free Childcare", level: "UK", source: "HMRC", rows: 10 },
-  { targets: "Tax receipts and benefit spending", level: "UK", source: "OBR", rows: 23 },
-  { targets: "Universal Credit households, by family and element", level: "Great Britain, Scotland", source: "DWP", rows: 118 },
-  { targets: "State Pension, Pension Credit and workplace pensions", level: "Great Britain and the 12 regions", source: "DWP, Department for Communities (NI)", rows: 74 },
-  { targets: "Other benefits, the benefit cap and two-child limit", level: "Great Britain", source: "DWP", rows: 43 },
-  { targets: "Council tax dwellings, by band", level: "English regions, Wales, Scotland", source: "MHCLG, Welsh and Scottish Governments", rows: 100 },
-  { targets: "Student loans and funded childcare", level: "England", source: "Student Loans Company, DfE", rows: 18 },
-  { targets: "Bus and rail support", level: "Nations and English regions", source: "DfT, ORR and devolved governments", rows: 10 },
-  { targets: "Land values, savings interest, energy spending and other totals", level: "UK, Scotland", source: "ONS, ISC, Scottish Government", rows: 9 },
+export const targetGroups: TargetGroup[] = [
+  { targets: "Population by age", level: "UK, 12 regions, constituencies, LAs", source: "ONS", national: 149, local: 149 + 8072 },
+  { targets: "Households, by type and number", level: "UK, constituencies, LAs", source: "ONS, Census", national: 10, local: 10 + 1011 },
+  { targets: "Taxpayers, income and tax, by band", level: "UK, 12 regions, constituencies, LAs", source: "HMRC personal income statistics", national: 562, local: 562 + 4031 },
+  { targets: "Capital gains and gains taxpayers", level: "UK, 12 regions", source: "HMRC", national: 105, local: 105 },
+  { targets: "Salary sacrifice and Tax-Free Childcare", level: "UK", source: "HMRC", national: 10, local: 10 },
+  { targets: "Tax receipts and benefit spending", level: "UK", source: "OBR", national: 23, local: 23 },
+  { targets: "Universal Credit households", level: "Great Britain, Scotland, constituencies, LAs", source: "DWP", national: 118, local: 118 + 3508 },
+  { targets: "Pensions and Pension Credit", level: "Great Britain, 12 regions", source: "DWP, DfC (Northern Ireland)", national: 74, local: 74 },
+  { targets: "Other benefits, benefit cap, two-child limit", level: "Great Britain", source: "DWP", national: 43, local: 43 },
+  { targets: "Council tax dwellings, by band", level: "English regions, Wales, Scotland, LAs", source: "MHCLG and devolved governments", national: 100, local: 100 + 2511 },
+  { targets: "Housing tenure and private rents", level: "LAs", source: "ONS", national: 0, local: 1752 },
+  { targets: "Student loans and funded childcare", level: "England", source: "Student Loans Company, DfE", national: 18, local: 18 },
+  { targets: "Bus and rail support", level: "Nations, English regions", source: "DfT, ORR, devolved governments", national: 10, local: 10 },
+  { targets: "Land values, energy spending, other totals", level: "UK, Scotland", source: "ONS, ISC, Scottish Government", national: 9, local: 9 },
 ];
 
-export const localTargets: TargetGroup = {
-  targets: "Population, households, incomes, Universal Credit, council tax, tenure and rents",
-  level: "650 constituencies and 361 local authorities",
-  source: "ONS, HMRC, DWP, MHCLG and devolved governments",
-  rows: 20885,
-};
+/** Rows the local-area dataset binds for constituencies and local authorities. */
+export const localAreaRows = 20885;
 
 export type Card = {
   title: string;

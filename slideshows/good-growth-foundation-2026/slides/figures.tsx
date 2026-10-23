@@ -1,9 +1,8 @@
 import {
   energyDeciles,
   energyRegions,
-  localTargets,
-  nationalTargets,
   pipelineStages,
+  targetGroups,
 } from "../content";
 import styles from "./deck.module.css";
 
@@ -114,45 +113,39 @@ export function DecileChart() {
   );
 }
 
-const count = (n: number) => n.toLocaleString("en-GB");
+const count = (n: number) => (n === 0 ? "–" : n.toLocaleString("en-GB"));
 
-// UK calibration targets: the national release's groups, a total, then the
-// local-area build's rows, which are still being validated.
+// UK calibration targets: what each group binds at and who publishes it, with
+// the rows bound by the national dataset and by the local-area dataset.
 export function TargetTable() {
-  const national = nationalTargets.reduce((sum, row) => sum + row.rows, 0);
+  const national = targetGroups.reduce((sum, row) => sum + row.national, 0);
+  const local = targetGroups.reduce((sum, row) => sum + row.local, 0);
   return (
     <div className={styles.targetTable}>
       <div className={`${styles.targetRow} ${styles.targetHead}`}>
         <div>Targets</div>
         <div>Binds at</div>
         <div>Source</div>
-        <div className="text-right">Rows</div>
+        <div className="text-right">National dataset</div>
+        <div className="text-right">Local-area dataset</div>
       </div>
-      {nationalTargets.map((row) => (
+      {targetGroups.map((row) => (
         <div key={row.targets} className={styles.targetRow}>
           <div className="font-semibold text-pe-dark">{row.targets}</div>
           <div>{row.level}</div>
           <div className="text-gray-600">{row.source}</div>
-          <div className="text-right tabular-nums">{count(row.rows)}</div>
+          <div className={`text-right tabular-nums ${row.national === 0 ? "text-gray-300" : ""}`}>
+            {count(row.national)}
+          </div>
+          <div className="text-right tabular-nums">{count(row.local)}</div>
         </div>
       ))}
       <div className={`${styles.targetRow} ${styles.targetTotal}`}>
-        <div>National release</div>
+        <div>Total</div>
         <div />
         <div />
         <div className="text-right tabular-nums">{count(national)}</div>
-      </div>
-      <div className={`${styles.targetRow} ${styles.targetLocal}`}>
-        <div>
-          <span className="font-semibold text-pe-dark">Local-area build: </span>
-          {localTargets.targets}
-        </div>
-        <div>
-          {localTargets.level}
-          <span className={styles.targetBadge}>In validation</span>
-        </div>
-        <div className="text-gray-600">{localTargets.source}</div>
-        <div className="text-right tabular-nums">{count(localTargets.rows)}</div>
+        <div className="text-right tabular-nums">{count(local)}</div>
       </div>
     </div>
   );

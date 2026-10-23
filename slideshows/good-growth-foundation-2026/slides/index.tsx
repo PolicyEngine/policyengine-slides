@@ -17,6 +17,7 @@ import { speakers } from "@/lib/speakers";
 import {
   coverage,
   energyHeadline,
+  localAreaRows,
   publications,
   sources,
   steps,
@@ -268,7 +269,7 @@ export function TargetsSlide() {
     <Frame
       section={sections.data}
       title="What the weights are calibrated to"
-      subtitle="Official statistics in the Microcosm UK build, the level at which each binds, and who publishes it"
+      subtitle={`The local-area dataset binds every national target plus ${localAreaRows.toLocaleString("en-GB")} for 650 constituencies and 361 local authorities (LAs)`}
       center
       references={[sources.nationalTargets, sources.localTargets]}
     >
