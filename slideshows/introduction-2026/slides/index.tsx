@@ -10,6 +10,8 @@ import {
   IconHome,
   IconInfoCircle,
   IconMail,
+  IconTrendingUp,
+  IconUsers,
   IconWorld,
 } from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
@@ -18,9 +20,7 @@ import CoverSlide from "@/components/layout/CoverSlide";
 import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
-import { dashboard } from "../dashboardData";
 import {
-  candidateLabel,
   pastEvents,
   preparation,
   sources,
@@ -28,27 +28,12 @@ import {
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
-import {
-  DecileGrowth,
-  HouseholdCurve,
-  MeasureLegend,
-  StackedChart,
-  TimeSeries,
-  bn,
-  fiscalYear,
-  pct,
-  pounds,
-  signed,
-} from "./figures";
 
 const sections = {
   intro: "PolicyEngine",
   budget: "Autumn Budget 2026",
-  analysis: "Candidate measures",
-  living: "Living standards outlook",
+  analysis: "The analysis",
 };
-
-const YEAR = fiscalYear(dashboard.year);
 
 function ExternalLink({
   children,
@@ -262,245 +247,55 @@ export function PastBudgetsSlide() {
   );
 }
 
-export function RevenueSlide() {
-  const columns = dashboard.revenue.map((r) => ({
-    label: fiscalYear(r.year),
-    values: r.values,
-    net: r.net,
-    highlight: r.year === dashboard.year,
-  }));
+const tabs = [
+  { label: "Population impact", tab: "dashboard", Icon: IconUsers },
+  { label: "Household impact", tab: "household", Icon: IconHome },
+  { label: "Living standards", tab: "living", Icon: IconTrendingUp },
+];
+
+// The analysis is presented live: one card opens the dashboard.
+export function DashboardSlide() {
   return (
     <Frame
       section={sections.analysis}
-      title="Revenue impact"
-      subtitle="The nine measures' effect on government revenue, 2026-27 to 2031-32; below zero is a cost to the Treasury"
-      label={candidateLabel}
-      references={[sources.dashboard]}
+      title="The analysis: live dashboard"
+      subtitle="We present the results on the dashboard itself"
     >
-      <div className={styles.chartWithLegend}>
-        <StackedChart
-          columns={columns}
-          axisLabel="Impact (£bn)"
-          tickFormat={(v) => `£${v}bn`}
-          netLabel={(v) => signed(v, bn)}
-        />
-        <MeasureLegend netName="Net impact" />
-      </div>
-    </Frame>
-  );
-}
-
-export function DecilesSlide() {
-  const absolute = dashboard.deciles.map((d) => ({
-    label: String(d.decile),
-    values: d.absolute,
-    net: d.absoluteNet,
-  }));
-  const relative = dashboard.deciles.map((d) => ({
-    label: String(d.decile),
-    // distributional_impact.csv already holds percentages
-    values: d.relative,
-    net: d.relativeNet,
-  }));
-  return (
-    <Frame
-      section={sections.analysis}
-      title={`Impact by income decile, ${YEAR}`}
-      subtitle="Average change in household net income: in pounds a year (left) and as a share of income (right)"
-      label={candidateLabel}
-      references={[sources.dashboard]}
-    >
-      <div className={styles.twoCharts}>
-        <figure>
-          <figcaption>Pounds a year per household</figcaption>
-          <StackedChart
-            columns={absolute}
-            axisLabel="£ a year"
-            xLabel="Income decile (1 = lowest)"
-            tickFormat={(v) => `£${v}`}
-            netLabel={(v) => signed(v, pounds)}
-            height={480}
+      <div className={styles.liveBody}>
+        <ExternalLink
+          href={sources.dashboard.href}
+          className={`${styles.liveCard} gradient-bg hover:no-underline`}
+        >
+          <span className={styles.closingDashboardText}>
+            <span className={styles.closingEyebrow}>Open the dashboard</span>
+            <span className={styles.liveMain}>uk-autumn-budget-2026.vercel.app</span>
+            <span className={styles.closingHint}>
+              Population impact, household impact and the living standards outlook
+            </span>
+          </span>
+          <Image
+            src="/images/introduction-2026/dashboard-qr.svg"
+            alt="QR code for the Autumn Budget 2026 dashboard"
+            width={240}
+            height={240}
+            className={styles.closingQr}
           />
-        </figure>
-        <figure>
-          <figcaption>Share of net income</figcaption>
-          <StackedChart
-            columns={relative}
-            axisLabel="% of net income"
-            xLabel="Income decile (1 = lowest)"
-            tickFormat={(v) => `${v}%`}
-            netLabel={(v) => signed(v, (a) => pct(a, 2))}
-            height={480}
-          />
-        </figure>
-      </div>
-      <MeasureLegend />
-    </Frame>
-  );
-}
-
-const AGE_LABELS: Record<string, string> = {
-  "0-15": "Under 16",
-  "16-24": "16 to 24",
-  "25-34": "25 to 34",
-  "35-49": "35 to 49",
-  "50-64": "50 to 64",
-  "65+": "65 and over",
-};
-
-export function AgeSlide() {
-  const columns = dashboard.ages.map((a) => ({
-    label: AGE_LABELS[a.band],
-    values: a.values,
-    net: a.net,
-    highlight: a.band === "16-24",
-  }));
-  const shown = dashboard.measures
-    .map((m) => m.id)
-    .filter((id) => dashboard.ages.some((a) => (a.values as Record<string, number>)[id]));
-  return (
-    <Frame
-      section={sections.analysis}
-      title={`Average change by age, ${YEAR}`}
-      subtitle="Change in household net income per person, in pounds a year; each person counts their household's change, with young people aged 16 to 24 highlighted"
-      label={candidateLabel}
-      references={[sources.dashboard]}
-    >
-      <div className={styles.chartWithLegend}>
-        <StackedChart
-          columns={columns}
-          axisLabel="£ a year per person"
-          xLabel="Age group"
-          tickFormat={(v) => `£${v}`}
-          netLabel={(v) => signed(v, pounds)}
-        />
-        <MeasureLegend only={shown} />
+        </ExternalLink>
+        <div className={styles.liveTabs}>
+          {tabs.map(({ label, tab, Icon }) => (
+            <ExternalLink
+              key={tab}
+              href={`${sources.dashboard.href}?tab=${tab}`}
+              className={`${styles.liveTab} hover:no-underline`}
+            >
+              <Icon size={22} stroke={1.8} aria-hidden="true" />
+              {label}
+              <IconArrowRight size={18} stroke={1.8} aria-hidden="true" />
+            </ExternalLink>
+          ))}
+        </div>
       </div>
     </Frame>
-  );
-}
-
-export function HouseholdsSlide() {
-  const top = Math.max(...dashboard.households.flatMap((h) => h.points.map(([, v]) => v)));
-  const yMax = Math.ceil(top / 50) * 50;
-  return (
-    <Frame
-      section={sections.analysis}
-      title={`Example households, ${YEAR}`}
-      subtitle="Change in net income from all nine measures as each household's income varies, everything else held fixed"
-      label={candidateLabel}
-      references={[sources.dashboard]}
-    >
-      <div className={styles.householdGrid}>
-        {dashboard.households.map((h) => (
-          <figure key={h.id} className={styles.householdCard} title={h.definition}>
-            <figcaption>
-              <h2>{h.label}</h2>
-              <p>{h.definition}</p>
-            </figcaption>
-            <HouseholdCurve points={h.points} xMax={h.xMax} yMax={yMax} />
-            <p className={styles.householdAxis}>{h.xLabel}</p>
-          </figure>
-        ))}
-      </div>
-    </Frame>
-  );
-}
-
-const ls = dashboard.living;
-
-export function IncomesSlide() {
-  return (
-    <Frame
-      section={sections.living}
-      title="Incomes before the Budget"
-      subtitle="The baseline the measures are scored against: current law and the OBR's March 2026 forecast, with no Budget measures"
-      references={[sources.dashboard, sources.obrMarch2026]}
-    >
-      <div className={styles.twoCharts}>
-        <figure>
-          <figcaption>Median household income (BHC), 2027-28 prices</figcaption>
-          <TimeSeries
-            outturn={ls.medianOutturn}
-            projection={ls.medianProjection}
-            format={(v) => `£${v / 1000}k`}
-            yMin={0}
-            yMax={50000}
-            axisLabel="£ a year"
-          />
-        </figure>
-        <figure>
-          <figcaption>Real change in median income by decile, 2027-28 to 2031-32</figcaption>
-          <DecileGrowth values={ls.decileGrowth} />
-        </figure>
-      </div>
-      <LsLegend />
-    </Frame>
-  );
-}
-
-export function PovertySlide() {
-  return (
-    <Frame
-      section={sections.living}
-      title="Poverty before the Budget"
-      subtitle="The same baseline: current law and the OBR's March 2026 forecast, with no Budget measures"
-      references={[sources.dashboard, sources.obrMarch2026]}
-    >
-      <div className={styles.twoCharts}>
-        <figure>
-          <figcaption>Absolute poverty (BHC), all people</figcaption>
-          <TimeSeries
-            outturn={ls.povertyOutturn}
-            projection={ls.povertyProjection}
-            format={(v) => `${Math.round(v * 100)}%`}
-            yMin={0}
-            yMax={0.2}
-            axisLabel="Poverty rate"
-          />
-        </figure>
-        <figure>
-          <figcaption>Relative poverty (AHC) by family type, 2027-28 and 2031-32</figcaption>
-          <div className={styles.familyRows}>
-            {ls.families.map((f) => (
-              <div key={f.label} className={styles.familyRow}>
-                <span>{f.label}</span>
-                <span className={styles.familyTrack}>
-                  <span className={styles.familyStart} style={{ left: `${f.start * 250}%` }} />
-                  <span className={styles.familyEnd} style={{ left: `${f.end * 250}%` }} />
-                </span>
-                <span className="tabular-nums">
-                  {pct(f.start * 100)} → {pct(f.end * 100)}
-                </span>
-              </div>
-            ))}
-            <div className={styles.familyAxis}>
-              <span />
-              <span className={styles.familyTicks}>
-                {[0, 10, 20, 30, 40].map((t) => (
-                  <span key={t} style={{ left: `${t * 2.5}%` }}>{t}%</span>
-                ))}
-              </span>
-              <span />
-            </div>
-            <p className={styles.familyKey}>
-              <i className={styles.familyStart} /> 2027-28
-              <i className={styles.familyEnd} /> 2031-32
-            </p>
-          </div>
-        </figure>
-      </div>
-      <LsLegend />
-    </Frame>
-  );
-}
-
-function LsLegend() {
-  return (
-    <p className={styles.lsLegend}>
-      <span><i className={styles.outturnKey} />Official: DWP Households Below Average Income</span>
-      <span><i className={styles.projectionKey} />Baseline projection, policyengine {dashboard.source.policyengine}</span>
-    </p>
   );
 }
 

@@ -1,5 +1,5 @@
-/* Analysing the UK Autumn Budget 2026 with PolicyEngine deck. Measure colours come from
-   the dashboard (dashboardData.ts); everything else uses theme variables. */
+/* Analysing the UK Autumn Budget 2026 with PolicyEngine deck. Colours come from
+   theme variables. */
 
 .section {
   margin-bottom: 0.5rem;
@@ -134,388 +134,6 @@
   color: var(--color-gray-700);
 }
 
-/* Charts */
-.chartWithLegend {
-  display: grid;
-  min-height: 0;
-  flex: 1;
-  grid-template-columns: 1fr 19rem;
-  align-items: start;
-  gap: 2rem;
-}
-
-.svgChart {
-  width: 100%;
-  height: auto;
-  max-height: 52vh;
-}
-
-.twoCharts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-}
-
-.twoCharts figcaption {
-  margin-bottom: 0.25rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--pe-dark);
-}
-
-.twoCharts .svgChart {
-  max-height: 40vh;
-}
-
-.highlight {
-  fill: var(--pe-light);
-}
-
-.gridLine {
-  stroke: var(--color-gray-200);
-  stroke-width: 1;
-}
-
-.zeroLine {
-  stroke: var(--color-gray-500);
-  stroke-width: 1.5;
-}
-
-.tickY,
-.tickYSmall {
-  dominant-baseline: middle;
-  text-anchor: end;
-  fill: var(--color-gray-600);
-}
-
-.tickY {
-  font-size: 20px;
-}
-
-.tickYSmall {
-  font-size: 15px;
-}
-
-.tickX,
-.tickXSmall {
-  text-anchor: middle;
-  fill: var(--color-gray-600);
-}
-
-.tickX {
-  font-size: 20px;
-}
-
-.tickXSmall {
-  font-size: 15px;
-}
-
-.tickStrong {
-  font-weight: 700;
-  fill: var(--pe-dark);
-}
-
-.netLine {
-  fill: none;
-  stroke: var(--color-gray-900);
-  stroke-width: 2.5;
-}
-
-.netDot {
-  fill: white;
-  stroke: var(--color-gray-900);
-  stroke-width: 3;
-}
-
-.netValue {
-  text-anchor: middle;
-  font-size: 19px;
-  font-weight: 700;
-  fill: var(--color-gray-900);
-  paint-order: stroke;
-  stroke: white;
-  stroke-width: 5px;
-}
-
-.axisLabel,
-.axisLabelSmall {
-  text-anchor: middle;
-  fill: var(--color-gray-600);
-}
-
-.axisLabel {
-  font-size: 19px;
-}
-
-.axisLabelSmall {
-  font-size: 15px;
-}
-
-.legend {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  font-size: 0.98rem;
-  color: var(--color-gray-700);
-}
-
-.twoCharts + .legend {
-  margin-top: 0.5rem;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-  font-size: 0.88rem;
-}
-
-.twoCharts + .legend .legendGroup:first-child {
-  flex: 0 0 auto;
-}
-
-.twoCharts + .legend ul {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 1.25rem;
-}
-
-.twoCharts + .legend ul li {
-  white-space: nowrap;
-  line-height: 1.5;
-}
-
-.twoCharts + .legend .legendNet {
-  margin-top: 1.3rem;
-  white-space: nowrap;
-}
-
-.legendTitle {
-  margin-bottom: 0.3rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-gray-500);
-}
-
-.legend li,
-.legendNet {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  line-height: 1.6;
-}
-
-.legend li i {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex-shrink: 0;
-}
-
-.legendNetMark {
-  position: relative;
-  width: 1.6rem;
-  height: 2px;
-  background: var(--color-gray-900);
-}
-
-.legendNetMark::after {
-  position: absolute;
-  top: -4px;
-  left: 0.5rem;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--color-gray-900);
-  border-radius: 999px;
-  background: white;
-  content: "";
-}
-
-/* Example households */
-.householdGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.9rem 1.5rem;
-}
-
-.householdCard {
-  border: 1px solid var(--color-gray-200);
-  border-left: 4px solid var(--pe-teal);
-  padding: 0.75rem 1rem 0.5rem;
-}
-
-.householdCard h2 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--pe-dark);
-}
-
-.householdCard figcaption p {
-  margin-top: 0.15rem;
-  font-size: 0.82rem;
-  line-height: 1.35;
-  color: var(--color-gray-600);
-}
-
-.miniChart {
-  width: 100%;
-  height: auto;
-  max-height: 15vh;
-  margin-top: 0.35rem;
-}
-
-.flatNote {
-  text-anchor: middle;
-  font-size: 24px;
-  fill: var(--color-gray-500);
-}
-
-.miniChart .tickYSmall,
-.miniChart .tickXSmall {
-  font-size: 22px;
-}
-
-.householdAxis {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--color-gray-500);
-}
-
-.gainArea {
-  fill: color-mix(in srgb, var(--pe-teal) 35%, white);
-}
-
-.gainLine {
-  fill: none;
-  stroke: var(--pe-teal-dark);
-  stroke-width: 2;
-}
-
-/* Living standards */
-.lsChart {
-  width: 100%;
-  height: auto;
-  max-height: 40vh;
-}
-
-.outturnLine {
-  fill: none;
-  stroke: var(--color-gray-400);
-  stroke-width: 2.5;
-}
-
-.projectionLine {
-  fill: none;
-  stroke: var(--pe-teal);
-  stroke-width: 2.5;
-  stroke-dasharray: 8 6;
-}
-
-.outturnDot {
-  fill: var(--color-gray-400);
-}
-
-.projectionDot {
-  fill: var(--pe-teal);
-}
-
-.riseBar {
-  fill: var(--pe-teal);
-}
-
-.fallBar {
-  fill: var(--pe-amber);
-}
-
-.lsLegend {
-  display: flex;
-  gap: 2.5rem;
-  margin-top: 0.75rem;
-  font-size: 0.98rem;
-  color: var(--color-gray-700);
-}
-
-.lsLegend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.outturnKey,
-.projectionKey {
-  display: inline-block;
-  width: 1.75rem;
-  height: 0;
-  border-top: 3px solid var(--color-gray-400);
-}
-
-.projectionKey {
-  border-top: 3px dashed var(--pe-teal);
-}
-
-.familyRows {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  padding-top: 1rem;
-}
-
-.familyRow,
-.familyAxis {
-  display: grid;
-  grid-template-columns: 13rem 1fr 9rem;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.05rem;
-}
-
-.familyTrack,
-.familyTicks {
-  position: relative;
-  height: 1.25rem;
-}
-
-.familyTrack {
-  border-bottom: 1px solid var(--color-gray-200);
-}
-
-.familyStart,
-.familyEnd {
-  position: absolute;
-  top: 0.15rem;
-  width: 0.9rem;
-  height: 0.9rem;
-  margin-left: -0.45rem;
-  border-radius: 999px;
-}
-
-.familyStart {
-  background: var(--color-gray-400);
-}
-
-.familyEnd {
-  border: 2px solid white;
-  background: var(--pe-teal);
-}
-
-.familyTicks span {
-  position: absolute;
-  transform: translateX(-50%);
-  font-size: 0.85rem;
-  color: var(--color-gray-500);
-}
-
-.familyKey {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: var(--color-gray-700);
-}
-
-.familyKey i {
-  position: relative;
-  top: 0;
-  margin-left: 1rem;
-}
-
-/* Closing */
 /* Closing */
 .closing {
   display: flex;
@@ -688,12 +306,6 @@
   color: var(--pe-teal);
 }
 
-
-
-
-
-
-
 /* Title slide: keep the logo, speakers and date clear of each other on laptops. */
 @media (max-height: 760px) {
   .titleCover {
@@ -779,10 +391,6 @@
   .deck :global(.space-y-3) > :not(:last-child) {
     margin-bottom: 0.5rem;
   }
-
-  .cover {
-    max-height: 22vh;
-  }
 }
 
 /* Safari on a laptop leaves less than 760px for the slide. */
@@ -845,20 +453,8 @@
     padding: 0.6rem 0.75rem;
   }
 
-  .cover {
-    max-height: 17vh;
-  }
-
   .shot {
     max-height: 46vh;
-  }
-}
-
-/* Slide 4: grouped logo rows. */
-
-@media (max-height: 900px) {
-  .householdCard figcaption p {
-    display: none;
   }
 }
 
@@ -881,22 +477,6 @@
     font-size: 1.05rem;
   }
 
-  .svgChart {
-    max-height: 46vh;
-  }
-
-  .twoCharts .svgChart {
-    max-height: 34vh;
-  }
-
-  .lsChart {
-    max-height: 44vh;
-  }
-
-  .miniChart {
-    max-height: 17vh;
-  }
-
   .shot {
     max-height: 32vh;
   }
@@ -905,23 +485,6 @@
 @media (max-height: 760px) {
   .subtitle {
     font-size: 1.1rem;
-  }
-
-  .svgChart {
-    max-height: 40vh;
-  }
-
-  .twoCharts .svgChart,
-  .lsChart {
-    max-height: 30vh;
-  }
-
-  .miniChart {
-    max-height: 15vh;
-  }
-
-  .householdCard figcaption p {
-    display: none;
   }
 }
 
@@ -1000,5 +563,98 @@
   .closingContactIcon {
     height: 2rem;
     width: 2rem;
+  }
+}
+
+/* The analysis: live dashboard */
+.liveBody {
+  display: flex;
+  width: 100%;
+  max-width: 72rem;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 1.5rem auto 0;
+}
+
+.liveCard {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  border-radius: 1.5rem;
+  padding: 2.75rem 2.75rem 2.75rem 3.25rem;
+  color: white;
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.liveCard:hover,
+.liveCard:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 1.75rem 3.5rem -1.5rem rgb(0 0 0 / 0.45);
+}
+
+.liveCard:focus-visible {
+  outline: 3px solid var(--pe-amber);
+  outline-offset: 4px;
+}
+
+.liveMain {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.liveTabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.liveTab {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 1rem;
+  background: var(--pe-light);
+  padding: 1rem 1.25rem;
+  color: var(--pe-dark);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.liveTab svg:first-child {
+  color: var(--pe-teal);
+}
+
+.liveTab svg:last-child {
+  margin-left: auto;
+  color: var(--pe-teal);
+}
+
+.liveTab:hover,
+.liveTab:focus-visible {
+  border-color: var(--pe-teal);
+}
+
+@media (max-height: 850px) {
+  .liveBody {
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .liveCard {
+    padding: 2rem 2rem 2rem 2.5rem;
+  }
+
+  .liveMain {
+    font-size: 2.1rem;
+  }
+
+  .liveCard .closingQr {
+    width: 12rem;
+    height: 12rem;
   }
 }

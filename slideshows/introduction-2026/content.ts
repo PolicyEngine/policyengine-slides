@@ -1,6 +1,4 @@
 // Content for the PolicyEngine and Autumn Budget 2026 deck.
-// The analysis figures are in dashboardData.ts, generated from the
-// dashboard's published files by build_dashboard_data.py.
 
 export type Source = { label: string; href: string };
 
@@ -53,10 +51,6 @@ export const sources = {
   review2025: {
     label: "Autumn Budget 2025 in review",
     href: "https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review",
-  },
-  obrMarch2026: {
-    label: "OBR, March 2026 EFO",
-    href: "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
   },
 };
 
@@ -122,5 +116,3 @@ export const pastEvents = [
   { event: "Spring Budget 2023", measures: 2 },
 ];
 
-export const candidateLabel =
-  "Candidate measures, modelled before the Budget on 28 October; not announced policy";
