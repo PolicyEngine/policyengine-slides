@@ -1,9 +1,9 @@
-# PolicyEngine and the Autumn Budget 2026
+# Analysing the UK Autumn Budget 2026 with PolicyEngine
 
-12 slides at `/slides/introduction-2026`: what PolicyEngine is, how we
-prepared for Budget day (28 October 2026), past Budgets on today's model, and
-the Autumn Budget 2026 dashboard's analysis of nine candidate measures and the
-living standards outlook.
+11 slides at `/slides/introduction-2026`, for the 28 October 2026 webinar:
+what PolicyEngine is and who uses it, how we prepared for Budget day, past
+Budgets on today's model, and the Autumn Budget 2026 dashboard's analysis of
+nine candidate measures and the living standards outlook.
 
 - `config.ts` controls the slide order and metadata.
 - `content.ts` holds the sources, user list, preparation cards and past events.

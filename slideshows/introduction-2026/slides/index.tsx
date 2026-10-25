@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import {
+  IconArrowRight,
   IconBrandGithub,
   IconBrandLinkedin,
   IconChartBar,
@@ -25,7 +26,6 @@ import {
   sources,
   steps,
   users,
-  webinar,
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
@@ -126,11 +126,10 @@ function Frame({
 export function TitleSlide() {
   return (
     <CoverSlide
-      title="PolicyEngine and the Autumn Budget 2026"
-      subtitle="Who we are, how we prepared, and the candidate measures we modelled"
+      title="Analysing the UK Autumn Budget 2026 with PolicyEngine"
       contentClassName={`pt-28 ${styles.titleCover}`}
-      event=""
-      date="October 2026"
+      event="Webinar"
+      date="Wednesday 28 October 2026"
       speakers={[
         { ...speakers["vahid-ahmadi"], title: "Research Associate, PolicyEngine" },
         { ...speakers["max-ghenis"], title: "CEO, PolicyEngine" },
@@ -152,72 +151,62 @@ export function WhatSlide() {
     <Frame
       section={sections.intro}
       title="What PolicyEngine is"
-      subtitle="Free, open-source tax and benefit analysis for the UK and the US"
+      subtitle="A free, open-source model of UK taxes and benefits, in a web browser"
       references={[sources.home, sources.model, sources.data]}
     >
-      <p className="text-2xl leading-relaxed text-gray-700">
-        A model of the UK tax and benefit system that anyone can use, free, in
-        a web browser.
-      </p>
-      <div className="mt-8 grid grid-cols-3 gap-6">
+      <div className={styles.whatFlow}>
         {steps.map((step, index) => {
           const Icon = stepIcons[index];
           return (
-            <div key={step.title} className="border border-gray-200 border-l-4 border-l-pe-teal bg-white p-6">
-              <div className="flex items-center gap-4">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-pe-teal text-white">
-                  <Icon size={30} stroke={1.8} aria-hidden="true" />
+            <div key={step.title} className={styles.whatStepWrap}>
+              <div className={styles.whatStep}>
+                <span className={styles.whatIcon}>
+                  <Icon size={32} stroke={1.8} aria-hidden="true" />
                 </span>
-                <h2 className="text-2xl font-semibold text-pe-dark">
-                  <span className="text-pe-teal">{index + 1}</span> {step.title}
-                </h2>
+                <h2 className={styles.whatStepTitle}>{step.title}</h2>
+                <p className={styles.whatStepText}>{step.text}</p>
               </div>
-              <p className="mt-4 text-lg leading-snug text-gray-600">{step.text}</p>
+              {index < steps.length - 1 && (
+                <IconArrowRight size={36} stroke={1.6} aria-hidden="true" className={styles.whatArrow} />
+              )}
             </div>
           );
         })}
       </div>
       <ExternalLink
         href={sources.model.href}
-        className="mt-8 flex items-center gap-4 rounded-xl bg-pe-teal/10 px-6 py-4 text-xl text-pe-dark hover:no-underline"
+        className={`${styles.whatCode} hover:no-underline`}
       >
-        <IconBrandGithub size={28} stroke={1.8} aria-hidden="true" className="text-pe-teal" />
-        All the code is public, so anyone can see how each number is calculated.
+        <IconBrandGithub size={24} stroke={1.8} aria-hidden="true" />
+        All the code is public, so anyone can check how each number is calculated.
       </ExternalLink>
-    </Frame>
-  );
-}
-
-export function UsersSlide() {
-  return (
-    <Frame
-      section={sections.intro}
-      title="Who uses PolicyEngine UK"
-      subtitle="Organisations that use, cite and support our work"
-      references={[sources.hansard, sources.tpa, sources.cps, sources.nef, sources.nuffield]}
-    >
-      <div className="grid grid-cols-4 gap-x-10 gap-y-12 pt-4">
-        {users.map((user) => {
-          const body = (
-            <div className="flex flex-col items-center text-center">
-              <Image
-                src={user.logo!}
-                alt={`${user.name} logo`}
-                width={240}
-                height={104}
-                className={`${styles.communityLogo} w-auto max-w-full object-contain ${user.darkenLogo ? "brightness-0" : ""}`}
-              />
-              <p className="mt-3 text-base font-medium leading-snug text-pe-dark">{user.name}</p>
-            </div>
-          );
-          return user.source ? (
-            <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
-              {body}
-            </ExternalLink>
-          ) : (
-            <div key={user.name}>{body}</div>
-          );
-        })}
+      <div className={styles.whatUsers}>
+        <p className={styles.whatUsersLabel}>Used, cited and supported by</p>
+        <div className={styles.whatLogos}>
+          {users.map((user) => {
+            const logo = (
+              <span className={styles.whatUser}>
+                <Image
+                  src={user.logo!}
+                  alt=""
+                  width={200}
+                  height={80}
+                  className={`${styles.whatLogo} ${user.darkenLogo ? "brightness-0" : ""}`}
+                />
+                <span className={styles.whatUserName}>{user.name}</span>
+              </span>
+            );
+            return user.source ? (
+              <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
+                {logo}
+              </ExternalLink>
+            ) : (
+              <span key={user.name} className="block">
+                {logo}
+              </span>
+            );
+          })}
+        </div>
       </div>
     </Frame>
   );
@@ -556,33 +545,32 @@ const contacts = [
 export function ClosingSlide() {
   return (
     <Slide isEnd>
-      <h1 className={`${styles.closingTitle} font-display text-6xl font-bold text-center`}>Thank you</h1>
-      <div className={styles.closingLinks}>
-        <a href={sources.dashboard.href} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
-          <span className={styles.closingEyebrow}>The dashboard</span>
-          <span className={styles.closingMain}>uk-autumn-budget-2026.vercel.app</span>
-        </a>
-        <a href={webinar.href} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
-          <span className={styles.closingEyebrow}>Webinar · {webinar.when}</span>
-          <span className={styles.closingMain}>{webinar.title}</span>
-        </a>
-      </div>
-      <div className="grid w-full max-w-5xl grid-cols-2 gap-4">
-        {contacts.map(({ label, url, Icon }) => (
-          <a
-            key={url}
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-            className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
-              <Icon size={20} stroke={1.8} aria-hidden="true" />
-            </span>
-            <span className="text-base font-medium">{label}</span>
-          </a>
-        ))}
+      <div className={styles.closing}>
+        <h1 className={`${styles.closingTitle} font-display font-bold`}>Thank you</h1>
+        <ExternalLink href={sources.dashboard.href} className={`${styles.closingDashboard} hover:no-underline`}>
+          <span className={styles.closingDashboardText}>
+            <span className={styles.closingEyebrow}>Explore the dashboard</span>
+            <span className={styles.closingMain}>uk-autumn-budget-2026.vercel.app</span>
+            <span className={styles.closingHint}>Scan the code to open it on your phone</span>
+          </span>
+          <Image
+            src="/images/introduction-2026/dashboard-qr.svg"
+            alt="QR code for the Autumn Budget 2026 dashboard"
+            width={240}
+            height={240}
+            className={styles.closingQr}
+          />
+        </ExternalLink>
+        <div className={styles.closingContacts}>
+          {contacts.map(({ label, url, Icon }) => (
+            <ExternalLink key={url} href={url} className={`${styles.closingContact} hover:no-underline`}>
+              <span className={styles.closingContactIcon}>
+                <Icon size={20} stroke={1.8} aria-hidden="true" />
+              </span>
+              <span>{label}</span>
+            </ExternalLink>
+          ))}
+        </div>
       </div>
     </Slide>
   );

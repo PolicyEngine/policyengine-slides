@@ -10,13 +10,12 @@ import {
   PreparationSlide,
   RevenueSlide,
   TitleSlide,
-  UsersSlide,
   WhatSlide,
 } from "./slides";
 
 export const introduction2026Config: SlideshowConfig = {
   id: "introduction-2026",
-  title: "PolicyEngine and the Autumn Budget 2026",
+  title: "Analysing the UK Autumn Budget 2026 with PolicyEngine",
   description:
     "What PolicyEngine is, how we prepared for Budget day, past Budgets on today's model, and the dashboard's analysis of nine candidate measures and the living standards outlook.",
   date: "2026-10-28",
@@ -25,7 +24,6 @@ export const introduction2026Config: SlideshowConfig = {
   slides: [
     TitleSlide,
     WhatSlide,
-    UsersSlide,
     PreparationSlide,
     PastBudgetsSlide,
     RevenueSlide,

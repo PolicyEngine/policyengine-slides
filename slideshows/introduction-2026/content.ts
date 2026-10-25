@@ -63,15 +63,15 @@ export const sources = {
 export const steps = [
   {
     title: "The rules",
-    text: "Tax and benefit law written as open code: income tax, National Insurance, Universal Credit, Child Benefit, Council Tax Reduction, VAT and more.",
+    text: "UK tax and benefit law as open code: income tax, National Insurance, Universal Credit, VAT and more.",
   },
   {
     title: "The households",
-    text: "A representative picture of UK households built from the Family Resources Survey, HMRC tax records and other surveys, matched to official statistics.",
+    text: "A representative sample of UK households from the Family Resources Survey, calibrated to official statistics.",
   },
   {
     title: "The results",
-    text: "Pick a policy and see who gains and loses: how much one family gains or loses, the cost to government, and the effects by income group, region and constituency.",
+    text: "Who gains and who loses from a policy, what it costs, and how it lands by income, region and age.",
   },
 ];
 
@@ -144,9 +144,3 @@ export const pastEvents = [
 
 export const candidateLabel =
   "Candidate measures, modelled before the Budget on 28 October; not announced policy";
-
-export const webinar = {
-  title: "Autumn Budget 2026: PolicyEngine's same-day first look",
-  when: "Wednesday 28 October, 4:30pm UK time",
-  href: "https://us06web.zoom.us/meeting/register/2DLUeZAbRwKkKEK-2JrFrQ#/registration",
-};
