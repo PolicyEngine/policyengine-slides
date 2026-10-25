@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { EXPORT_HOLD_SCRIPT } from '@/lib/export-hold';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://policyengine.org'),
@@ -17,6 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Runs before load can fire; it acts only on ?export=1&settle=<ms>. */}
+        <script dangerouslySetInnerHTML={{ __html: EXPORT_HOLD_SCRIPT }} />
+      </head>
       <body>{children}</body>
     </html>
   );

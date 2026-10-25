@@ -1,286 +1,298 @@
 /**
  * Export a slideshow to PDF.
  *
- * Usage:  bun run export <slideshow-id> [output-path]
- * Example: bun run export abundance-dmv ~/Desktop/abundance-dmv.pdf
+ * Usage:
+ *   bun run export <slideshow-id> [output.pdf]                 build locally, then capture
+ *   bun run export <slideshow-id> [output.pdf] --url <origin>  capture a deployed site
+ *   ... --size 1440x810 --scale 2                              viewport and pixel ratio
  *
- * Requires puppeteer:  bun add -d puppeteer
+ * Examples:
+ *   bun run export abundance-dmv ~/Desktop/abundance-dmv.pdf
+ *   bun run export bls-taxsim-2026 bls.pdf --url https://www.policyengine.org
+ *   bun run export bls-taxsim-2026 bls.pdf --size 1440x810 --scale 2
  *
  * What it does:
- *   1. Builds the project (bun run build)
- *   2. Starts a prod server on a free port
- *   3. Opens the slideshow in headless Chrome
- *   4. Reads the "X / Y" counter to detect total steps
- *   5. Arrow-keys through each step, fixing basePath image bug + hiding nav
- *   6. Screenshots each step → combines into a single PDF
- *   7. Tears everything down
+ *   1. Without --url, runs `next build` and serves the build on a free port.
+ *   2. Reads the step count from the viewer's data-total-steps attribute,
+ *      using `chrome --dump-dom`. A private deck is unlocked with
+ *      NEXT_PUBLIC_PRIVATE_PASSWORD, passed in the URL fragment.
+ *   3. Screenshots every step at ?slide=N&export=1&settle=<ms>. Export mode
+ *      hides the nav bar, mounts only that slide, and holds the page's load
+ *      event until the slide has been in the DOM for <ms> of real time, so
+ *      live embeds have that long to render before Chrome captures at load.
+ *      Each capture also dumps the DOM, and a capture that does not show the
+ *      requested step, settled, fails and is retried.
+ *   4. Prints a page of the screenshots to a PDF with `chrome --print-to-pdf`,
+ *      one page per step at the viewport size, and checks the page count.
+ *
+ * Chrome runs only through its command line. The script never opens a
+ * DevTools connection (no puppeteer, no remote debugging), so it also works
+ * where an administrator has disabled remote debugging.
  */
 
-import puppeteer from "puppeteer";
 import { spawn } from "child_process";
+import { mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from "fs";
 import { createServer } from "net";
+import { tmpdir } from "os";
+import path from "path";
+import { pathToFileURL } from "url";
+import { findChrome, killAllChrome, runChrome } from "./export-pdf-chrome.mjs";
+import {
+  USAGE,
+  checkCapture,
+  countPdfPages,
+  deckHtml,
+  mapLimit,
+  parseArgs,
+  parseDeckDom,
+  parseIntSetting,
+  shotName,
+  stepUrl,
+} from "./export-pdf-lib.mjs";
 
-const [id, outputArg] = process.argv.slice(2);
-if (!id) {
-  console.error("Usage: bun run export <slideshow-id> [output-path]");
-  console.error("Example: bun run export abundance-dmv ~/Desktop/slides.pdf");
-  process.exit(1);
+const ATTEMPTS = 3;
+
+// ── Cleanup ──────────────────────────────────────────────────────────
+// Everything the script starts or writes is registered here, so a failure
+// or a signal stops Chrome and the server and removes the screenshots
+// (which can show a private deck).
+
+let work = null;
+let builder = null;
+let server = null;
+let stopping = false;
+
+function cleanup() {
+  stopping = true;
+  killAllChrome();
+  if (builder) {
+    builder.kill();
+    builder = null;
+  }
+  if (server) {
+    server.kill();
+    server = null;
+  }
+  if (work) {
+    rmSync(work, { recursive: true, force: true });
+    work = null;
+  }
 }
-const OUTPUT = outputArg || `${id}.pdf`;
 
-// ── helpers ──────────────────────────────────────────────────────────
+for (const [signal, code] of [
+  ["SIGINT", 130],
+  ["SIGTERM", 143],
+]) {
+  process.once(signal, () => {
+    cleanup();
+    process.exit(code);
+  });
+}
 
-/** Find a free port. */
+// ── Local build and server ───────────────────────────────────────────
+
 function getFreePort() {
   return new Promise((resolve, reject) => {
     const srv = createServer();
     srv.listen(0, () => {
-      const port = srv.address().port;
+      const { port } = srv.address();
       srv.close(() => resolve(port));
     });
     srv.on("error", reject);
   });
 }
 
-/** Start `next start -p <port>` and wait until it responds. */
-async function startServer(port) {
-  const proc = spawn("npx", ["next", "start", "-p", String(port)], {
-    cwd: process.cwd(),
-    stdio: "pipe",
-  });
-  // Wait for server to be ready
-  const ready = new Promise((resolve, reject) => {
-    const timeout = setTimeout(
-      () => reject(new Error("Server failed to start within 30s")),
-      30_000,
-    );
-    proc.stdout.on("data", (d) => {
-      const line = d.toString();
-      if (line.includes("Ready") || line.includes("started")) {
-        clearTimeout(timeout);
-        resolve();
-      }
-    });
-    proc.stderr.on("data", (d) => {
-      const line = d.toString();
-      if (line.includes("Ready") || line.includes("started")) {
-        clearTimeout(timeout);
-        resolve();
-      }
-    });
+const nextBin = path.join(process.cwd(), "node_modules", ".bin", "next");
+
+/** Run `next build`, without blocking, so a signal can still stop it. */
+function build() {
+  console.log("Building...");
+  return new Promise((resolve, reject) => {
+    const proc = spawn(nextBin, ["build"], { stdio: "inherit" });
+    builder = proc;
     proc.on("error", (e) => {
-      clearTimeout(timeout);
+      builder = null;
       reject(e);
     });
-  });
-  await ready;
-  return proc;
-}
-
-/** Fix images whose src is missing the /slides/ basePath prefix. */
-async function fixImages(page) {
-  await page.evaluate(() => {
-    document.querySelectorAll("img").forEach((img) => {
-      const src = img.getAttribute("src") || "";
-      if (src.startsWith("/") && !src.startsWith("/slides/")) {
-        img.src = "/slides" + src;
-      }
+    proc.on("close", (code, signal) => {
+      builder = null;
+      if (code === 0) resolve();
+      else reject(new Error(`Build failed (${signal ? `stopped by ${signal}` : `exit ${code}`})`));
     });
   });
-  // Wait for them to load
-  await page.evaluate(() =>
-    Promise.all(
-      Array.from(document.querySelectorAll("img")).map((img) => {
-        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-        return new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve;
-          setTimeout(resolve, 3000);
-        });
-      }),
-    ),
-  );
-  await new Promise((r) => setTimeout(r, 300));
 }
 
-/** Hide the bottom navigation bar. */
-async function hideNav(page) {
-  await page.evaluate(() => {
-    const nav = document.querySelector(".fixed.bottom-0");
-    if (nav) nav.style.display = "none";
-  });
-}
-
-/** Read total steps from the "X / Y" counter in the nav bar. */
-async function getTotalSteps(page) {
-  return page.evaluate(() => {
-    const spans = Array.from(document.querySelectorAll("span"));
-    for (const span of spans) {
-      const match = span.textContent?.match(/(\d+)\s*\/\s*(\d+)/);
-      if (match) return parseInt(match[2], 10);
+/** Start `next start` on `port` and resolve with its origin once it answers. */
+async function startServer(port) {
+  const proc = spawn(nextBin, ["start", "-p", String(port)], { stdio: "ignore" });
+  server = proc;
+  let spawnError = null;
+  proc.on("error", (e) => (spawnError = e));
+  const origin = `http://localhost:${port}`;
+  const deadline = Date.now() + 60_000;
+  while (Date.now() < deadline) {
+    if (spawnError) throw spawnError;
+    if (proc.exitCode !== null) throw new Error(`Server exited ${proc.exitCode}`);
+    try {
+      const remaining = Math.max(1, deadline - Date.now());
+      const res = await fetch(`${origin}/slides`, {
+        signal: AbortSignal.timeout(Math.min(5_000, remaining)),
+      });
+      if (res.status < 500) return origin;
+    } catch {
+      // not listening yet, or this request timed out
     }
-    return null;
-  });
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  throw new Error("Server did not respond within 60 s");
 }
 
 // ── main ─────────────────────────────────────────────────────────────
 
 async function main() {
-  // 1. Build
-  console.log("Building project...");
-  const build = spawn("npx", ["next", "build"], {
-    cwd: process.cwd(),
-    stdio: "inherit",
-  });
-  await new Promise((resolve, reject) => {
-    build.on("close", (code) =>
-      code === 0 ? resolve() : reject(new Error(`Build failed (exit ${code})`)),
-    );
-  });
-
-  // 2. Start prod server
-  const port = await getFreePort();
-  console.log(`Starting prod server on port ${port}...`);
-  const server = await startServer(port);
-
-  let browser;
+  let args;
+  let waitMs;
+  let concurrency;
   try {
-    // 3. Open slideshow
-    const url = `http://localhost:${port}/slides/${id}`;
-    console.log(`Opening ${url}`);
-    // Classic ("shell") headless: the new headless mode has been seen to
-    // hang on navigation entirely on macOS, while shell mode captures
-    // slides reliably.
-    browser = await puppeteer.launch({
-      headless: "shell",
-      protocolTimeout: 60_000,
+    args = parseArgs(process.argv.slice(2));
+    waitMs = parseIntSetting("EXPORT_WAIT_MS", process.env.EXPORT_WAIT_MS, 8_000, {
+      min: 0,
+      max: 60_000,
     });
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1920, height: 1080 });
-    await page.goto(url, { waitUntil: "networkidle2", timeout: 60_000 });
-    await new Promise((r) => setTimeout(r, 3000));
-
-    // Private decks render a client-side password gate. Unlock it with
-    // NEXT_PUBLIC_PRIVATE_PASSWORD from the environment (empty when unset,
-    // which matches the gate's fallback when the env var isn't defined).
-    const gated = await page.$('input[type="password"]');
-    if (gated) {
-      const pw = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD ?? "";
-      console.log("Password gate detected — submitting configured password");
-      await page.evaluate((value) => {
-        const input = document.querySelector('input[type="password"]');
-        const setter = Object.getOwnPropertyDescriptor(
-          window.HTMLInputElement.prototype,
-          "value",
-        ).set;
-        setter.call(input, value);
-        input.dispatchEvent(new Event("input", { bubbles: true }));
-        input.closest("form").requestSubmit();
-      }, pw);
-      await new Promise((r) => setTimeout(r, 2000));
-    }
-
-    // 4. Detect total steps
-    let totalSteps = await getTotalSteps(page);
-    if (!totalSteps) {
-      console.error(
-        "Could not detect slide count from DOM. Is the slideshow ID correct?",
-      );
-      process.exit(1);
-    }
-    console.log(`Detected ${totalSteps} steps`);
-
-    // 5. Capture each step
-    const screenshots = [];
-    for (let i = 1; i <= totalSteps; i++) {
-      console.log(`Capturing step ${i}/${totalSteps}...`);
-      if (i > 1) {
-        // Dispatch the advance key on `document` rather than page.keyboard so
-        // that an embedded iframe holding keyboard focus (e.g. a scrollytelling
-        // demo) can't swallow it — otherwise the deck never advances and the
-        // same slide is captured repeatedly.
-        await page.evaluate(() => {
-          const el = document.activeElement;
-          if (el && el.tagName === "IFRAME") el.blur();
-          document.dispatchEvent(
-            new KeyboardEvent("keydown", {
-              key: "ArrowRight",
-              code: "ArrowRight",
-              keyCode: 39,
-              which: 39,
-              bubbles: true,
-            }),
-          );
-        });
-        // Give the next slide (including any live embed) time to paint.
-        // Heavier embeds (e.g. the Thesis conditional comparison, which loads
-        // several forecast cells) need a few seconds to finish rendering.
-        await new Promise((r) => setTimeout(r, 5000));
-      }
-      // The fixImages/screenshot CDP calls intermittently throw a transient
-      // "detached Frame" or "captureScreenshot timed out" mid-transition.
-      // Retry the (post-advance) capture so one flake doesn't kill the export.
-      let shot;
-      for (let attempt = 1; attempt <= 3; attempt++) {
-        try {
-          // fixImages only rewrites basePath-less <img> srcs; on slides with
-          // cross-origin iframes its evaluate can hit a permanently detached
-          // child frame, so a failure here must not block the screenshot.
-          try {
-            await fixImages(page);
-          } catch {
-            // ignore — live-iframe slides have no basePath images to fix
-          }
-          try {
-            await hideNav(page);
-          } catch {
-            // same detached-frame class as fixImages; nav is usually already
-            // hidden from the prior step, so never let this kill the capture
-          }
-          await new Promise((r) => setTimeout(r, 200));
-          shot = await page.screenshot({ type: "png", encoding: "base64" });
-          break;
-        } catch (err) {
-          if (attempt === 3) throw err;
-          console.log(
-            `  step ${i} capture attempt ${attempt} failed (${
-              err.message.split("\n")[0]
-            }); retrying...`,
-          );
-          await new Promise((r) => setTimeout(r, 1500));
-        }
-      }
-      screenshots.push(shot);
-    }
-
-    // 6. Combine into PDF
-    console.log("Building PDF...");
-    const html = `<!DOCTYPE html>
-<html><head><style>
-  @page { size: 1920px 1080px; margin: 0; }
-  body { margin: 0; padding: 0; }
-  img { width: 1920px; height: 1080px; display: block; page-break-after: always; }
-  img:last-child { page-break-after: auto; }
-</style></head><body>
-${screenshots.map((s) => `<img src="data:image/png;base64,${s}" />`).join("\n")}
-</body></html>`;
-
-    await page.setContent(html, { waitUntil: "load" });
-    await page.pdf({
-      path: OUTPUT,
-      width: "1920px",
-      height: "1080px",
-      printBackground: true,
-    });
-
-    console.log(`PDF saved to ${OUTPUT}`);
-  } finally {
-    if (browser) await browser.close();
-    server.kill();
+    concurrency = parseIntSetting(
+      "EXPORT_CONCURRENCY",
+      process.env.EXPORT_CONCURRENCY,
+      3,
+      { min: 1, max: 16 },
+    );
+  } catch (e) {
+    console.error(`${e.message}\n\n${USAGE}`);
+    process.exit(1);
   }
+  if (args.help) {
+    console.log(USAGE);
+    return;
+  }
+
+  const binary = findChrome();
+  if (!binary) {
+    throw new Error("Chrome not found. Set CHROME_PATH to a Chrome or Chromium binary.");
+  }
+  const output = path.resolve(args.output);
+
+  let origin = args.url;
+  if (!origin) {
+    await build();
+    origin = await startServer(await getFreePort());
+  }
+  work = mkdtempSync(path.join(tmpdir(), `export-${args.id}-`));
+
+  // Chrome captures when the page's load event fires, and export mode holds
+  // that event until the slide has settled. When --timeout runs out, Chrome
+  // stops the page load and captures the page as it stands. The watchdog
+  // covers the whole process, including a Chrome that hangs.
+  const render = {
+    timeoutMs: waitMs + 120_000,
+    extraFlags: [
+      `--window-size=${args.size.width},${args.size.height}`,
+      `--force-device-scale-factor=${args.scale}`,
+      `--timeout=${waitMs + 30_000}`,
+    ],
+  };
+  const at = (step, password = null) =>
+    stepUrl(origin, args.id, step, { settle: waitMs, password });
+
+  // 1. Count the steps, unlocking the deck if it is private.
+  console.log(`Reading ${at(0)}`);
+  let password = null;
+  let deck = parseDeckDom(await runChrome(binary, ["--dump-dom", at(0)], render));
+  if (deck.gated) {
+    password = process.env.NEXT_PUBLIC_PRIVATE_PASSWORD ?? "";
+    deck = parseDeckDom(
+      await runChrome(binary, ["--dump-dom", at(0, password)], render),
+    );
+    if (deck.gated) {
+      throw new Error(
+        "This deck is private. Set NEXT_PUBLIC_PRIVATE_PASSWORD to its password.",
+      );
+    }
+  }
+  const { total, title } = deck;
+  if (!total) {
+    throw new Error(
+      "No data-total-steps on the page. Is the slideshow id right, and does the site include export mode?",
+    );
+  }
+  console.log(`${total} steps`);
+
+  // 2. Screenshot each step. A step that fails in the parallel pass is
+  // retried afterwards on its own with twice the time, since a busy machine
+  // can make several Chromes at once outrun the watchdog.
+  const names = Array.from({ length: total }, (_, i) => shotName(i, total));
+  const capture = async (step, options) => {
+    const file = path.join(work, names[step]);
+    rmSync(file, { force: true });
+    // One Chrome run writes the screenshot and prints the DOM it captured.
+    const dom = await runChrome(
+      binary,
+      ["--dump-dom", `--screenshot=${file}`, at(step, password)],
+      options,
+    );
+    checkCapture(dom, step);
+    if (statSync(file).size === 0) throw new Error("empty screenshot");
+  };
+  let done = 0;
+  const retry = [];
+  await mapLimit(names, concurrency, async (_, step) => {
+    try {
+      await capture(step, render);
+      console.log(`Captured ${++done}/${total}`);
+    } catch (e) {
+      if (stopping) throw e;
+      console.log(`  step ${step + 1} failed (${e.message}); will retry alone`);
+      retry.push(step);
+    }
+  });
+  const patient = {
+    timeoutMs: render.timeoutMs * 2,
+    extraFlags: render.extraFlags.map((flag) =>
+      flag.startsWith("--timeout=") ? `--timeout=${(waitMs + 30_000) * 2}` : flag,
+    ),
+  };
+  for (const step of retry.sort((a, b) => a - b)) {
+    for (let attempt = 2; ; attempt++) {
+      try {
+        await capture(step, patient);
+        console.log(`Captured ${++done}/${total} (step ${step + 1}, attempt ${attempt})`);
+        break;
+      } catch (e) {
+        if (stopping || attempt === ATTEMPTS) {
+          throw new Error(`Step ${step + 1}: ${e.message}`);
+        }
+        console.log(`  step ${step + 1} attempt ${attempt} failed (${e.message}); retrying`);
+      }
+    }
+  }
+
+  // 3. Print the screenshots to a PDF and check that every step has a page.
+  const page = path.join(work, "deck.html");
+  writeFileSync(page, deckHtml(names, { ...args.size, title }));
+  await runChrome(
+    binary,
+    ["--no-pdf-header-footer", `--print-to-pdf=${output}`, pathToFileURL(page).href],
+    { timeoutMs: 120_000 },
+  );
+  const pages = countPdfPages(readFileSync(output));
+  if (pages !== total) {
+    throw new Error(`The PDF has ${pages} pages for ${total} steps: ${output}`);
+  }
+  console.log(`PDF saved to ${output} (${pages} pages)`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+main()
+  .then(() => cleanup())
+  .catch((e) => {
+    cleanup();
+    console.error(e.message || e);
+    process.exit(1);
+  });

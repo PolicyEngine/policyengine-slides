@@ -27,10 +27,14 @@ import { overhang2026Config } from "@/slideshows/overhang-2026/config";
 import { overhang2026BackupConfig } from "@/slideshows/overhang-2026-backup/config";
 import { overhang2026LightningConfig } from "@/slideshows/overhang-2026-lightning/config";
 import { blsTaxsim2026Config } from "@/slideshows/bls-taxsim-2026/config";
+import { scottishGovernment2026Config } from "@/slideshows/scottish-government-2026/config";
+import { goodGrowthFoundation2026Config } from "@/slideshows/good-growth-foundation-2026/config";
 import { introduction2026Config } from "@/slideshows/introduction-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
   introduction2026Config,
+  goodGrowthFoundation2026Config,
+  scottishGovernment2026Config,
   blsTaxsim2026Config,
   overhang2026Config,
   overhang2026LightningConfig,
