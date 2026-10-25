@@ -20,7 +20,8 @@ export const introduction2026Config: SlideshowConfig = {
     "What PolicyEngine is, how we prepared for Budget day, past Budgets on today's model, and the dashboard's analysis of nine candidate measures and the living standards outlook.",
   date: "2026-10-28",
   location: "PolicyEngine",
-  footerText: "PolicyEngine · Autumn Budget 2026",
+  // No footer text: the shared viewer's slide counter sits where it would go.
+  footerText: "",
   slides: [
     TitleSlide,
     WhatSlide,

@@ -25,7 +25,6 @@ import {
   preparation,
   sources,
   steps,
-  users,
   type Source,
 } from "../content";
 import styles from "./deck.module.css";
@@ -151,9 +150,10 @@ export function WhatSlide() {
     <Frame
       section={sections.intro}
       title="What PolicyEngine is"
-      subtitle="A free, open-source model of UK taxes and benefits, in a web browser"
+      subtitle="A free, open-source model of UK taxes and benefits"
       references={[sources.home, sources.model, sources.data]}
     >
+      <div className={styles.whatBody}>
       <div className={styles.whatFlow}>
         {steps.map((step, index) => {
           const Icon = stepIcons[index];
@@ -161,13 +161,13 @@ export function WhatSlide() {
             <div key={step.title} className={styles.whatStepWrap}>
               <div className={styles.whatStep}>
                 <span className={styles.whatIcon}>
-                  <Icon size={32} stroke={1.8} aria-hidden="true" />
+                  <Icon size={40} stroke={1.8} aria-hidden="true" />
                 </span>
                 <h2 className={styles.whatStepTitle}>{step.title}</h2>
                 <p className={styles.whatStepText}>{step.text}</p>
               </div>
               {index < steps.length - 1 && (
-                <IconArrowRight size={36} stroke={1.6} aria-hidden="true" className={styles.whatArrow} />
+                <IconArrowRight size={44} stroke={1.6} aria-hidden="true" className={styles.whatArrow} />
               )}
             </div>
           );
@@ -180,33 +180,6 @@ export function WhatSlide() {
         <IconBrandGithub size={24} stroke={1.8} aria-hidden="true" />
         All the code is public, so anyone can check how each number is calculated.
       </ExternalLink>
-      <div className={styles.whatUsers}>
-        <p className={styles.whatUsersLabel}>Used, cited and supported by</p>
-        <div className={styles.whatLogos}>
-          {users.map((user) => {
-            const logo = (
-              <span className={styles.whatUser}>
-                <Image
-                  src={user.logo!}
-                  alt=""
-                  width={200}
-                  height={80}
-                  className={`${styles.whatLogo} ${user.darkenLogo ? "brightness-0" : ""}`}
-                />
-                <span className={styles.whatUserName}>{user.name}</span>
-              </span>
-            );
-            return user.source ? (
-              <ExternalLink key={user.name} href={user.source.href} className="block hover:no-underline">
-                {logo}
-              </ExternalLink>
-            ) : (
-              <span key={user.name} className="block">
-                {logo}
-              </span>
-            );
-          })}
-        </div>
       </div>
     </Frame>
   );

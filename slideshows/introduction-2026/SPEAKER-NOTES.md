@@ -10,11 +10,8 @@ Ahmadi, Max Ghenis, María Juaristi.
 
 ## 2. What PolicyEngine is
 
-The Good Growth Foundation deck's intro (23 October), on one slide: the rules,
-the households and the results, then the organisations that use, cite and
-support the model (each logo links to its source).
-Don't say No 10 relies on PolicyEngine: our post calls its outputs
-supplementary, experimental analysis.
+A brief view: the rules, the households and the results, and that all the
+code is public.
 
 ## 3. How we prepared
 

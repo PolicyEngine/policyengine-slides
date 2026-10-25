@@ -63,36 +63,16 @@ export const sources = {
 export const steps = [
   {
     title: "The rules",
-    text: "UK tax and benefit law as open code: income tax, National Insurance, Universal Credit, VAT and more.",
+    text: "UK tax and benefit law, written as open code.",
   },
   {
     title: "The households",
-    text: "A representative sample of UK households from the Family Resources Survey, calibrated to official statistics.",
+    text: "A representative sample of UK households, matched to official statistics.",
   },
   {
     title: "The results",
-    text: "Who gains and who loses from a policy, what it costs, and how it lands by income, region and age.",
+    text: "Who gains, who loses, and what a policy costs.",
   },
-];
-
-export type User = {
-  name: string;
-  initials: string;
-  logo?: string;
-  /** Render a light logo dark so it shows on a white slide. */
-  darkenLogo?: boolean;
-  source?: Source;
-};
-
-export const users: User[] = [
-  { name: "No 10 data science team", logo: "/logos/orgs/10-downing-street.png", initials: "10", source: sources.no10Post },
-  { name: "House of Lords", logo: "/logos/orgs/house-of-lords.svg", initials: "HL", source: sources.hansard },
-  { name: "Tax Policy Associates", logo: "/logos/orgs/tax-policy-associates.jpg", initials: "TPA", source: sources.tpa },
-  { name: "Centre for Policy Studies", logo: "/logos/orgs/centre-for-policy-studies.png", initials: "CPS", source: sources.cps },
-  { name: "New Economics Foundation", logo: "/logos/orgs/new-economics-foundation.png", initials: "NEF", source: sources.nef },
-  { name: "Good Growth Foundation", logo: "/logos/orgs/good-growth-foundation.png", initials: "GGF", darkenLogo: true },
-  { name: "WPI Economics", logo: "/logos/orgs/wpi-economics.svg", initials: "WPI" },
-  { name: "Nuffield Foundation", logo: "/logos/orgs/nuffield-foundation.svg", initials: "NF", source: sources.nuffield },
 ];
 
 export type PrepItem = { title: string; text: string; status: "Done" | "In review" };
