@@ -12,8 +12,12 @@ code is public.
 
 ## 3. How we prepared
 
-- Four mock Budgets (28 September; 5, 12 and 19 October): drill issues #6
-  (with the drill 1 retrospective), #8, #10 and #53 in the dashboard repo.
+- Five mock Budgets (28 September; 5, 12, 19 and 26 October): drill issues
+  #6 (with the drill 1 retrospective), #8, #10, #53 and #144 in the dashboard
+  repo.
+- National results run on Modal, one machine per measure: all ten units (nine
+  measures and the package) took 8.1 minutes on 26 October (dashboard PR
+  #178). The household calculator also runs on Modal and is kept warm.
 - The runbook is `docs/budget-day-runbook.md` (G0 to G5 checkpoints).
 - Mark anything still in review as such on the slide before presenting.
 
@@ -34,14 +38,27 @@ misbehaves.
 
 While you are using the dashboard, the arrow keys, Space and a clicker go to
 it, not to the deck (the arrows switch its tabs). Press **Back to the slide**,
-or click the bar above the dashboard, before moving on. Its tabs:
+or click the bar above the dashboard, before moving on.
 
-- **Population impact**: revenue by year, households by income decile, the
-  map, and young people.
-- **Household impact**: run one household live with Calculate; the result
-  takes about a minute, so start it before talking it through.
-- **Living standards**: the current-law baseline (OBR forecast named on the
-  tab) for incomes and poverty.
+The buttons in the bar (Public finances, Pensioners, Living standards,
+Household impact) load that view into the frame; each click reloads it, so
+measures or a household chosen in the frame are not kept. Its tabs:
+
+- **Population impact**, with six sub-tabs: **Public finances** (the
+  default: revenue by year and the OBR comparison), **All households** (the
+  constituency map and households by income), **Young people**,
+  **Pensioners**, **Living standards** (income by decile and inequality) and
+  **Poverty**.
+- **Household impact**: run one household live with Calculate, or pick an
+  example card.
+- **Pre-measures forecast**: the outlook before the Budget's measures, with
+  the OBR forecast named on the tab.
+- **Policies**: what each measure does.
+- **Methodology**.
+
+These are the tabs in dashboard PR #185. Until it merges, the live site still
+has Living standards as a top-level tab and no Pensioners sub-tab, and the
+Pensioners and Living standards buttons open Population impact's default view.
 
 ## 6. Close
 

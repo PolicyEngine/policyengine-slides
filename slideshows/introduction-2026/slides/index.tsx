@@ -246,6 +246,15 @@ export function PastBudgetsSlide() {
   );
 }
 
+// The dashboard's tabs and Population impact sub-tabs that the bar's buttons
+// open in the frame. Public finances is Population impact's default sub-tab.
+const dashboardViews = [
+  { label: "Public finances", query: "?tab=dashboard" },
+  { label: "Pensioners", query: "?tab=dashboard&sub=pensioners" },
+  { label: "Living standards", query: "?tab=dashboard&sub=living" },
+  { label: "Household impact", query: "?tab=household" },
+];
+
 // The analysis is presented live, on the dashboard embedded in the slide.
 export function DashboardSlide() {
   return (
@@ -254,6 +263,7 @@ export function DashboardSlide() {
         href={sources.dashboard.href}
         address="uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026"
         title={sources.dashboard.label}
+        views={dashboardViews}
       />
     </Frame>
   );

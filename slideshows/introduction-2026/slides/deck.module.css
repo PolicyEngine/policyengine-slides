@@ -629,6 +629,16 @@
   border-color: var(--pe-teal);
 }
 
+.embedView {
+  font-weight: 500;
+}
+
+.embedDivider {
+  align-self: stretch;
+  width: 1px;
+  background: var(--color-gray-200);
+}
+
 .embedFrame {
   min-height: 0;
   width: 100%;

@@ -75,8 +75,8 @@ export type PrepItem = { title: string; text: string; status: "Done" | "In revie
 // (main, and the open PRs named in the README).
 export const preparation: PrepItem[] = [
   {
-    title: "Four mock Budgets",
-    text: "Full Budget-day runs on invented measures on 28 September and 5, 12 and 19 October, to rehearse every step of the day.",
+    title: "Five mock Budgets",
+    text: "Full Budget-day runs on invented measures on 28 September and 5, 12, 19 and 26 October, to rehearse every step of the day.",
     status: "Done",
   },
   {
@@ -91,13 +91,13 @@ export const preparation: PrepItem[] = [
   },
   {
     title: "A household calculator",
-    text: "Any household's change in net income from the selected measures, live on the dashboard.",
+    text: "Any household's change in net income from the selected measures, live on the dashboard. It runs on Modal and is kept warm.",
     status: "Done",
   },
   {
     title: "Every measure in about 8 minutes",
-    text: "All measures and the combined package run in parallel, with results identical to a one-at-a-time run.",
-    status: "In review",
+    text: "All national results run on Modal, one machine per measure, for every measure and the combined package.",
+    status: "Done",
   },
   {
     title: "Each measure published once reviewed",

@@ -11,7 +11,9 @@ embedded in it, where the analysis is presented.
 - `slides/index.tsx` contains the slides. The analysis slide embeds the
   dashboard itself (`slides/DashboardEmbed.tsx`): Expand stretches the same
   frame over the whole screen, so whatever is open in it is kept, and New tab
-  opens it in the browser. The deck draws no charts of its own, so nothing
+  opens it in the browser. Buttons in its bar load the Public finances,
+  Pensioners and Living standards sub-tabs and the Household impact tab into
+  the frame. The deck draws no charts of its own, so nothing
   here goes stale when the dashboard's data change.
 - `SPEAKER-NOTES.md` gives the presenter track.
 
