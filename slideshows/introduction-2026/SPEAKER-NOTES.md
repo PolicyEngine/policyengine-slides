@@ -7,11 +7,15 @@ Ahmadi, Max Ghenis, María Juaristi.
 
 ## 2. What PolicyEngine is
 
-A brief view: the rules, the households and the results, and that all the
-code is public.
+A brief view: PolicyEngine in one line (a nonprofit building free,
+open-source tools, in policyengine.org's own words), then the rules, the
+households and the results, and that all the code is public.
 
 ## 3. How we prepared
 
+- Last year's Budget (26 November 2025): the dashboard went live on Budget
+  day, and the other measures and the household calculator followed by 28
+  November (the 2025 dashboard repo's commit history).
 - Five mock Budgets (28 September; 5, 12, 19 and 26 October): drill issues
   #6 (with the drill 1 retrospective), #8, #10, #53 and #144 in the dashboard
   repo.

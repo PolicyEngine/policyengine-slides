@@ -8,6 +8,7 @@ import {
   IconCircleCheck,
   IconClockHour4,
   IconFlag,
+  IconHistory,
   IconListCheck,
   IconLock,
   IconMail,
@@ -24,6 +25,8 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
+  about,
+  lastBudget,
   mockBudgets,
   pillars,
   preparation,
@@ -134,6 +137,7 @@ export function WhatSlide() {
       title="What PolicyEngine is"
       references={[sources.home, sources.model, sources.data]}
     >
+      <p className={styles.lead}>{about}</p>
       <div className={styles.pillars}>
         {pillars.map((pillar, index) => {
           const { icon: PillarIcon, color } = pillarLooks[index];
@@ -160,8 +164,8 @@ export function WhatSlide() {
         className={`accent-block ${styles.callout} hover:no-underline`}
       >
         <IconBrandGithub size={24} stroke={1.8} aria-hidden="true" />
-        Free and open source: all the code is public, so anyone can check how
-        each number is calculated.
+        All the code is public, so anyone can check how each number is
+        calculated.
       </ExternalLink>
     </Frame>
   );
@@ -172,13 +176,23 @@ const prepIcons: Icon[] = [IconListCheck, IconLock, IconCalculator, IconBolt, Ic
 
 export function PreparationSlide() {
   return (
-    <Frame title="How we prepared for Budget day" references={[sources.dashboardCode]}>
+    <Frame
+      title="How we prepared for Budget day"
+      references={[sources.dashboardCode, sources.dashboard2025Code]}
+    >
       <div className={styles.timeline}>
         <p className={styles.timelineLabel}>
-          <strong>Five mock Budgets</strong>
-          <span>Full Budget-day runs on invented measures, to rehearse every step of the day</span>
+          <strong>Last year&apos;s Budget, then five mock Budgets</strong>
+          <span>Full Budget-day runs on invented measures, to rehearse the day</span>
         </p>
         <ol className={styles.timelineTrack}>
+          <li className={`${styles.timelineStop} ${styles.timelinePast}`}>
+            <span className={styles.timelineDot}>
+              <IconHistory size={18} stroke={2.2} aria-hidden="true" />
+            </span>
+            <span className={styles.timelineDate}>{lastBudget.title}</span>
+            <span className={styles.timelineNote}>{lastBudget.text}</span>
+          </li>
           {mockBudgets.map((date, index) => (
             <li key={date} className={styles.timelineStop}>
               <span className={styles.timelineDot}>{index + 1}</span>

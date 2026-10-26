@@ -50,18 +50,26 @@ export const sources = {
     label: "Dashboard code",
     href: "https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026",
   },
+  dashboard2025Code: {
+    label: "2025 dashboard code",
+    href: "https://github.com/PolicyEngine/uk-autumn-budget-dashboard",
+  },
 };
 
+// How policyengine.org/uk/donate describes PolicyEngine.
+export const about =
+  "PolicyEngine is a nonprofit building free, open-source tools that help people understand tax and benefit policies.";
+
 // What PolicyEngine is: the rules, the households and the results. The rules
-// and households lines follow the Good Growth Foundation deck's checked lists.
+// are the main ones in the Good Growth Foundation deck's checked list.
 export const pillars = [
   {
     title: "Rules",
     items: [
-      "Income tax, with Scotland's own rates",
-      "National Insurance and capital gains tax",
-      "Universal Credit and the State Pension",
-      "VAT, fuel duty, Council Tax Reduction",
+      "Income tax and National Insurance",
+      "Universal Credit and other benefits",
+      "State Pension and Pension Credit",
+      "VAT, fuel duty and capital gains tax",
     ],
   },
   {
@@ -69,7 +77,7 @@ export const pillars = [
     items: [
       "Built from the Family Resources Survey",
       "With HMRC tax records and other surveys",
-      "Calibrated to official statistics",
+      "Weighted to match official statistics",
       "Or enter any household yourself",
     ],
   },
@@ -83,6 +91,14 @@ export const pillars = [
     ],
   },
 ];
+
+// Last year's Budget, from the 2025 dashboard's commit history: the dashboard
+// went live on the day, and the other measures and the household calculator
+// followed by 28 November.
+export const lastBudget = {
+  title: "Autumn Budget 2025",
+  text: "Analysed on the day, 26 Nov",
+};
 
 // The five mock Budgets: full Budget-day runs on invented measures.
 export const mockBudgets = ["28 Sep", "5 Oct", "12 Oct", "19 Oct", "26 Oct"];
