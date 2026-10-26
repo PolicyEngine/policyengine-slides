@@ -14,13 +14,13 @@ export const introduction2026Config: SlideshowConfig = {
     "What PolicyEngine is, how we prepared for Budget day, and the analysis, presented live on the dashboard.",
   date: "2026-10-28",
   location: "PolicyEngine",
-  // No footer text: the shared viewer's slide counter sits where it would go.
-  footerText: "",
+  // The slides keep this clear of the viewer's slide counter (deck.module.css).
+  footerText: "Autumn Budget 2026 webinar · 28 October 2026",
   slides: [
     TitleSlide,
     WhatSlide,
     PreparationSlide,
-      DashboardSlide,
+    DashboardSlide,
     ClosingSlide,
   ],
 };

@@ -52,31 +52,46 @@ export const sources = {
   },
 };
 
-export const steps = [
+// What PolicyEngine is: the rules, the households and the results. The rules
+// and households lines follow the Good Growth Foundation deck's checked lists.
+export const pillars = [
   {
-    title: "The rules",
-    text: "UK tax and benefit law, written as open code.",
+    title: "Rules",
+    items: [
+      "Income tax, with Scotland's own rates",
+      "National Insurance and capital gains tax",
+      "Universal Credit and the State Pension",
+      "VAT, fuel duty, Council Tax Reduction",
+    ],
   },
   {
-    title: "The households",
-    text: "A representative sample of UK households, matched to official statistics.",
+    title: "Households",
+    items: [
+      "Built from the Family Resources Survey",
+      "With HMRC tax records and other surveys",
+      "Calibrated to official statistics",
+      "Or enter any household yourself",
+    ],
   },
   {
-    title: "The results",
-    text: "Who gains, who loses, and what a policy costs.",
+    title: "Results",
+    items: [
+      "Cost or saving to the Treasury",
+      "Who gains and loses, by income decile",
+      "Poverty and inequality",
+      "By region and constituency",
+    ],
   },
 ];
+
+// The five mock Budgets: full Budget-day runs on invented measures.
+export const mockBudgets = ["28 Sep", "5 Oct", "12 Oct", "19 Oct", "26 Oct"];
 
 export type PrepItem = { title: string; text: string; status: "Done" | "In review" };
 
 // Each line is checked against PolicyEngine/uk-autumn-budget-dashboard-2026
 // (main, and the open PRs named in the README).
 export const preparation: PrepItem[] = [
-  {
-    title: "Five mock Budgets",
-    text: "Full Budget-day runs on invented measures on 28 September and 5, 12, 19 and 26 October, to rehearse every step of the day.",
-    status: "Done",
-  },
   {
     title: "A Budget-day runbook",
     text: "Timed checkpoints from the start of the day to the combined run, publication and the overnight briefing, built on the mock Budgets.",

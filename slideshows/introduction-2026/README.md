@@ -9,7 +9,8 @@ where the analysis is presented. The closing slide links
 [the dashboard](https://uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026).
 
 - `config.ts` controls the slide order and metadata.
-- `content.ts` holds the sources and preparation cards.
+- `content.ts` holds the sources, the three pillars of What PolicyEngine is,
+  the mock Budget dates and the preparation items.
 - `slides/index.tsx` contains the slides. The analysis slide embeds the
   dashboard itself (`slides/DashboardEmbed.tsx`): Expand stretches the same
   frame over the whole screen, so whatever is open in it is kept, and New tab

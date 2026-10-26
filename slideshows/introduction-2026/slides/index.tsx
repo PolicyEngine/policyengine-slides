@@ -1,16 +1,21 @@
 import type { ReactNode } from "react";
 import {
-  IconArrowRight,
+  IconBolt,
   IconBrandGithub,
   IconBrandLinkedin,
+  IconCalculator,
   IconChartBar,
   IconCircleCheck,
   IconClockHour4,
-  IconFileCode,
-  IconHome,
-  IconInfoCircle,
+  IconFlag,
+  IconListCheck,
+  IconLock,
   IconMail,
+  IconScale,
+  IconShieldCheck,
+  IconUsers,
   IconWorld,
+  type Icon,
 } from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
 import Slide from "@/components/core/Slide";
@@ -19,19 +24,14 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
+  mockBudgets,
+  pillars,
   preparation,
   sources,
-  steps,
   type Source,
 } from "../content";
 import DashboardEmbed from "./DashboardEmbed";
 import styles from "./deck.module.css";
-
-const sections = {
-  intro: "PolicyEngine",
-  budget: "Autumn Budget 2026",
-  analysis: "The analysis",
-};
 
 function ExternalLink({
   children,
@@ -57,50 +57,45 @@ function ExternalLink({
 
 function SourceLine({ items }: { items: Source[] }) {
   return (
-    <div className="absolute bottom-24 left-16 right-16 flex flex-wrap gap-x-5 gap-y-1 text-sm text-gray-500">
+    <p className={styles.sources}>
       <span>Sources</span>
       {items.map((item) => (
         <ExternalLink key={item.href} href={item.href}>
           {item.label}
         </ExternalLink>
       ))}
-    </div>
+    </p>
   );
 }
 
+// A content slide as in the BLS and CPID decks: the title and accent bar, an
+// optional note at the right of the title, then the body and its sources.
 function Frame({
-  section,
   title,
-  subtitle,
+  aside,
   children,
   references = [],
-  label,
 }: {
-  section?: string;
   title: string;
-  subtitle?: ReactNode;
+  /** Short text on the title's line, at the right, such as an address. */
+  aside?: ReactNode;
   children: ReactNode;
   references?: Source[];
-  /** A one-line status note under the subtitle, such as the candidate label. */
-  label?: string;
 }) {
   return (
     <Slide className={styles.deck}>
       <div className="flex h-full flex-col">
         <SlideHeader>
-          {section && <p className={styles.section}>{section}</p>}
-          <SlideTitle>{title}</SlideTitle>
-          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-          {label && (
-            <p className={styles.candidate}>
-              <IconInfoCircle size={18} stroke={1.8} aria-hidden="true" />
-              {label}
-            </p>
-          )}
+          <div className={styles.titleRow}>
+            <SlideTitle>{title}</SlideTitle>
+            {aside && <span className={styles.titleAside}>{aside}</span>}
+          </div>
         </SlideHeader>
-        <div className={styles.body}>{children}</div>
+        <div className={styles.body}>
+          {children}
+          {references.length > 0 && <SourceLine items={references} />}
+        </div>
       </div>
-      {references.length > 0 && <SourceLine items={references} />}
     </Slide>
   );
 }
@@ -111,83 +106,111 @@ export function TitleSlide() {
       title="Analysing the UK Autumn Budget 2026 with PolicyEngine"
       contentClassName={`pt-28 ${styles.titleCover}`}
       event="Webinar"
-      date="Wednesday 28 October 2026"
+      date="Wednesday 28 October 2026, 4:30pm UK"
       speakers={[
-        { ...speakers["vahid-ahmadi"], title: "Research Associate, PolicyEngine" },
-        { ...speakers["max-ghenis"], title: "CEO, PolicyEngine" },
+        { ...speakers["vahid-ahmadi"], title: "Research Associate" },
+        { ...speakers["max-ghenis"], title: "CEO" },
         {
           ...speakers["maria-juaristi"],
           name: "María Juaristi",
-          title: "Research Associate, PolicyEngine",
+          title: "Research Associate",
         },
       ]}
     />
   );
 }
 
-const stepIcons = [IconFileCode, IconHome, IconChartBar];
+// Each pillar's icon and band colour, in the order of `pillars`.
+const pillarLooks: { icon: Icon; color: string }[] = [
+  { icon: IconScale, color: "var(--pe-teal)" },
+  { icon: IconUsers, color: "var(--pe-teal-dark)" },
+  { icon: IconChartBar, color: "var(--pe-dark)" },
+];
 
-// The Good Growth Foundation deck's merged "What PolicyEngine is" slide.
+// The BLS and CPID decks' three-pillar slide, with the UK model's lists.
 export function WhatSlide() {
   return (
     <Frame
-      section={sections.intro}
       title="What PolicyEngine is"
-      subtitle="A free, open-source model of UK taxes and benefits"
       references={[sources.home, sources.model, sources.data]}
     >
-      <div className={styles.whatBody}>
-      <div className={styles.whatFlow}>
-        {steps.map((step, index) => {
-          const Icon = stepIcons[index];
+      <div className={styles.pillars}>
+        {pillars.map((pillar, index) => {
+          const { icon: PillarIcon, color } = pillarLooks[index];
           return (
-            <div key={step.title} className={styles.whatStepWrap}>
-              <div className={styles.whatStep}>
-                <span className={styles.whatIcon}>
-                  <Icon size={40} stroke={1.8} aria-hidden="true" />
-                </span>
-                <h2 className={styles.whatStepTitle}>{step.title}</h2>
-                <p className={styles.whatStepText}>{step.text}</p>
+            <div key={pillar.title} className={`content-card ${styles.pillar}`}>
+              <div className={styles.pillarHead} style={{ background: color }}>
+                <PillarIcon size={30} stroke={1.6} aria-hidden="true" />
+                <h2>{pillar.title}</h2>
               </div>
-              {index < steps.length - 1 && (
-                <IconArrowRight size={44} stroke={1.6} aria-hidden="true" className={styles.whatArrow} />
-              )}
+              <ul className={styles.pillarList}>
+                {pillar.items.map((item) => (
+                  <li key={item}>
+                    <span className={styles.pillarDot} style={{ background: color }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           );
         })}
       </div>
       <ExternalLink
         href={sources.model.href}
-        className={`${styles.whatCode} hover:no-underline`}
+        className={`accent-block ${styles.callout} hover:no-underline`}
       >
         <IconBrandGithub size={24} stroke={1.8} aria-hidden="true" />
-        All the code is public, so anyone can check how each number is calculated.
+        Free and open source: all the code is public, so anyone can check how
+        each number is calculated.
       </ExternalLink>
-      </div>
     </Frame>
   );
 }
 
+// Each preparation item's icon, in the order of `preparation`.
+const prepIcons: Icon[] = [IconListCheck, IconLock, IconCalculator, IconBolt, IconShieldCheck];
+
 export function PreparationSlide() {
   return (
-    <Frame
-      section={sections.budget}
-      title="How we prepared for Budget day"
-      subtitle="Budget day is Wednesday 28 October"
-      references={[sources.dashboardCode]}
-    >
-      <div className="grid grid-cols-3 gap-5">
-        {preparation.map((item) => {
+    <Frame title="How we prepared for Budget day" references={[sources.dashboardCode]}>
+      <div className={styles.timeline}>
+        <p className={styles.timelineLabel}>
+          <strong>Five mock Budgets</strong>
+          <span>Full Budget-day runs on invented measures, to rehearse every step of the day</span>
+        </p>
+        <ol className={styles.timelineTrack}>
+          {mockBudgets.map((date, index) => (
+            <li key={date} className={styles.timelineStop}>
+              <span className={styles.timelineDot}>{index + 1}</span>
+              <span className={styles.timelineDate}>{date}</span>
+            </li>
+          ))}
+          <li className={`${styles.timelineStop} ${styles.timelineDay}`}>
+            <span className={styles.timelineDot}>
+              <IconFlag size={18} stroke={2.2} aria-hidden="true" />
+            </span>
+            <span className={styles.timelineDate}>Budget day, 28 Oct</span>
+          </li>
+        </ol>
+      </div>
+      <div className={`content-card ${styles.prepList}`}>
+        {preparation.map((item, index) => {
+          const ItemIcon = prepIcons[index];
           const done = item.status === "Done";
-          const Icon = done ? IconCircleCheck : IconClockHour4;
+          const StatusIcon = done ? IconCircleCheck : IconClockHour4;
           return (
-            <div key={item.title} className={styles.prepCard}>
-              <p className={done ? styles.statusDone : styles.statusReview}>
-                <Icon size={18} stroke={2} aria-hidden="true" />
+            <div key={item.title} className={styles.prepRow}>
+              <span className={styles.prepIcon}>
+                <ItemIcon size={22} stroke={1.8} aria-hidden="true" />
+              </span>
+              <div>
+                <h2 className={styles.prepTitle}>{item.title}</h2>
+                <p className={styles.prepText}>{item.text}</p>
+              </div>
+              <span className={done ? styles.statusDone : styles.statusReview}>
+                <StatusIcon size={16} stroke={2} aria-hidden="true" />
                 {item.status}
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold leading-snug text-pe-dark">{item.title}</h2>
-              <p className="mt-2 text-lg leading-snug text-gray-600">{item.text}</p>
+              </span>
             </div>
           );
         })}
@@ -205,13 +228,16 @@ const dashboardViews = [
   { label: "Household impact", query: "?tab=household" },
 ];
 
-// The analysis is presented live, on the dashboard embedded in the slide.
+// The analysis is presented live, on the dashboard embedded in the slide, with
+// its address beside the title as on the CPID deck's live demo.
 export function DashboardSlide() {
   return (
-    <Frame section={sections.analysis} title="The analysis: live dashboard">
+    <Frame
+      title="The analysis: live dashboard"
+      aside={new URL(sources.dashboardDrill.href).host}
+    >
       <DashboardEmbed
         href={sources.dashboardDrill.href}
-        address={sources.dashboardDrill.href.replace("https://", "")}
         title={sources.dashboardDrill.label}
         views={dashboardViews}
       />
@@ -235,12 +261,7 @@ export function ClosingSlide() {
     <Slide isEnd>
       <div className={styles.closing}>
         <h1 className={`${styles.closingTitle} font-display font-bold`}>Thank you</h1>
-        <ExternalLink href={sources.dashboard.href} className={`${styles.closingDashboard} hover:no-underline`}>
-          <span className={styles.closingDashboardText}>
-            <span className={styles.closingEyebrow}>Explore the dashboard</span>
-            <span className={styles.closingMain}>uk-autumn-budget-2026.vercel.app</span>
-            <span className={styles.closingHint}>Scan the code to open it on your phone</span>
-          </span>
+        <ExternalLink href={sources.dashboard.href} className={`${styles.closingCard} hover:no-underline`}>
           <Image
             src="/images/introduction-2026/dashboard-qr.svg"
             alt="QR code for the Autumn Budget 2026 dashboard"
@@ -248,12 +269,20 @@ export function ClosingSlide() {
             height={240}
             className={styles.closingQr}
           />
+          <span className={styles.closingCardText}>
+            <span className={styles.closingEyebrow}>Explore the dashboard</span>
+            {/* The full address: the host alone does not serve the dashboard. */}
+            <span className={styles.closingAddress}>
+              {sources.dashboard.href.replace("https://", "")}
+            </span>
+            <span className={styles.closingHint}>Scan the code to open it on your phone</span>
+          </span>
         </ExternalLink>
         <div className={styles.closingContacts}>
           {contacts.map(({ label, url, Icon }) => (
             <ExternalLink key={url} href={url} className={`${styles.closingContact} hover:no-underline`}>
               <span className={styles.closingContactIcon}>
-                <Icon size={20} stroke={1.8} aria-hidden="true" />
+                <Icon size={18} stroke={1.8} aria-hidden="true" />
               </span>
               <span>{label}</span>
             </ExternalLink>

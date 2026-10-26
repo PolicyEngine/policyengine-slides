@@ -5,7 +5,6 @@ import {
   IconArrowsMaximize,
   IconArrowsMinimize,
   IconExternalLink,
-  IconWorld,
 } from "@tabler/icons-react";
 import styles from "./deck.module.css";
 
@@ -24,13 +23,10 @@ export type DashboardView = {
 
 export default function DashboardEmbed({
   href,
-  address,
   title,
   views = [],
 }: {
   href: string;
-  /** The address as shown in the bar above the frame. */
-  address: string;
   title: string;
   /** Buttons that open a tab or sub-tab in the frame. */
   views?: DashboardView[];
@@ -47,25 +43,26 @@ export default function DashboardEmbed({
       onClick={(event) => event.stopPropagation()}
     >
       <div className={styles.embedBar}>
-        <IconWorld size={18} stroke={1.8} aria-hidden="true" />
-        <span className={styles.embedAddress}>{address}</span>
-        {views.map((view) => (
-          <button
-            key={view.query}
-            type="button"
-            className={`${styles.embedButton} ${styles.embedView}`}
-            onClick={() => {
-              setSrc(`${href}${view.query}`);
-              setLoad(load + 1);
-            }}
-          >
-            {view.label}
-          </button>
-        ))}
-        <span className={styles.embedDivider} aria-hidden="true" />
+        {views.length > 0 && (
+          <div className={styles.embedViews}>
+            {views.map((view) => (
+              <button
+                key={view.query}
+                type="button"
+                className={styles.embedView}
+                onClick={() => {
+                  setSrc(`${href}${view.query}`);
+                  setLoad(load + 1);
+                }}
+              >
+                {view.label}
+              </button>
+            ))}
+          </div>
+        )}
         <button
           type="button"
-          className={styles.embedButton}
+          className={`${styles.embedButton} ${styles.embedPush}`}
           onClick={() => setExpanded(!expanded)}
         >
           <ToggleIcon size={18} stroke={1.8} aria-hidden="true" />

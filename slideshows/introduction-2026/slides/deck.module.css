@@ -1,33 +1,26 @@
-/* Analysing the UK Autumn Budget 2026 with PolicyEngine deck. Colours come from
-   theme variables. */
+/* Analysing the UK Autumn Budget 2026 with PolicyEngine deck, laid out like the
+   BLS and CPID decks. Colours come from theme variables. */
 
-.section {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+/* Keep the footer text clear of the viewer's slide counter. */
+.deck > div:last-child {
+  padding-right: 16rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.titleAside {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 1.125rem;
   color: var(--pe-teal);
-}
-
-.subtitle {
-  margin-top: 0.75rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  color: var(--color-gray-600);
-}
-
-.candidate {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  border: 1px solid var(--color-teal-200);
-  border-radius: 0.5rem;
-  background: var(--pe-light);
-  padding: 0.3rem 0.75rem;
-  font-size: 0.95rem;
-  color: var(--pe-dark);
 }
 
 .body {
@@ -35,15 +28,199 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
-  padding-bottom: 2.5rem;
+  gap: 1.75rem;
+  padding-bottom: 1.5rem;
 }
 
-/* Preparation */
-.prepCard {
-  border: 1px solid var(--color-gray-200);
-  border-left: 4px solid var(--pe-teal);
-  background: white;
-  padding: 1.25rem 1.5rem;
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-top: auto;
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+}
+
+/* What PolicyEngine is */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.pillar {
+  overflow: hidden;
+}
+
+.pillarHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.1rem 1rem 1rem;
+  color: white;
+}
+
+.pillarHead h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.pillarList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+.pillarList li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  color: var(--color-gray-700);
+}
+
+.pillarDot {
+  position: absolute;
+  top: 0.65rem;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+}
+
+.callout {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.85rem;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--color-gray-700);
+}
+
+.callout svg {
+  flex-shrink: 0;
+  color: var(--pe-teal);
+}
+
+/* How we prepared: the mock Budgets on a line to Budget day */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timelineLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  font-size: 1.15rem;
+  color: var(--color-gray-600);
+}
+
+.timelineLabel strong {
+  font-size: 1.35rem;
+  color: var(--pe-dark);
+}
+
+.timelineTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* The line runs from the first stop's centre to the last's. */
+.timelineTrack::before {
+  position: absolute;
+  top: calc(1.25rem - 1.5px);
+  right: calc(100% / 12);
+  left: calc(100% / 12);
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--pe-teal), var(--pe-amber));
+  content: "";
+}
+
+.timelineStop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timelineDot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal);
+  box-shadow: 0 0 0 5px white;
+  color: white;
+  font-weight: 700;
+}
+
+.timelineDate {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--pe-dark);
+}
+
+.timelineDay .timelineDot {
+  background: var(--pe-amber);
+}
+
+.timelineDay .timelineDate {
+  color: var(--pe-amber-dark);
+}
+
+/* How we prepared: the other items, one row each */
+.prepList {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 1.5rem;
+}
+
+.prepRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.55rem 0;
+}
+
+.prepRow + .prepRow {
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.prepIcon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-light);
+  color: var(--pe-teal);
+}
+
+.prepTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--pe-dark);
+}
+
+.prepText {
+  margin-top: 0.1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-gray-600);
 }
 
 .statusDone,
@@ -52,9 +229,10 @@
   align-items: center;
   gap: 0.35rem;
   border-radius: 999px;
-  padding: 0.15rem 0.6rem;
+  padding: 0.2rem 0.7rem;
   font-size: 0.85rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .statusDone {
@@ -65,438 +243,6 @@
 .statusReview {
   background: color-mix(in srgb, var(--pe-amber) 15%, white);
   color: var(--pe-amber-dark);
-}
-
-/* Closing */
-.closing {
-  display: flex;
-  width: 100%;
-  max-width: 64rem;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-}
-
-.closingTitle {
-  font-size: 3.75rem;
-  line-height: 1.1;
-  text-align: center;
-}
-
-.closingDashboard {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2.5rem;
-  border: 1px solid rgb(255 255 255 / 0.3);
-  border-radius: 1.25rem;
-  background: rgb(255 255 255 / 0.12);
-  padding: 2rem 2rem 2rem 2.5rem;
-  color: inherit;
-}
-
-.closingDashboardText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.closingEyebrow {
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.8;
-}
-
-.closingMain {
-  font-size: 2.1rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.closingHint {
-  font-size: 1.05rem;
-  opacity: 0.75;
-}
-
-.closingQr {
-  width: 15rem;
-  height: 15rem;
-  flex-shrink: 0;
-  border-radius: 0.75rem;
-  background: white;
-  padding: 0.5rem;
-}
-
-.closingContacts {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem 1.25rem;
-}
-
-.closingContact {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  border: 1px solid rgb(255 255 255 / 0.15);
-  border-radius: 1rem;
-  background: rgb(255 255 255 / 0.08);
-  padding: 0.7rem 1.1rem;
-  color: inherit;
-  font-size: 1.05rem;
-  font-weight: 500;
-}
-
-.closingContactIcon {
-  display: flex;
-  height: 2.5rem;
-  width: 2.5rem;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: white;
-  color: var(--pe-teal);
-}
-
-/* What PolicyEngine is */
-.whatBody {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3rem;
-  padding-bottom: 2rem;
-}
-
-.whatFlow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-}
-
-.whatStepWrap {
-  display: flex;
-  align-items: stretch;
-}
-
-.whatStep {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  border: 1px solid var(--color-gray-200);
-  border-top: 5px solid var(--pe-teal);
-  border-radius: 1rem;
-  background: white;
-  padding: 2.5rem 2.25rem 2.75rem;
-}
-
-.whatIcon {
-  display: flex;
-  height: 4.5rem;
-  width: 4.5rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: var(--pe-teal);
-  color: white;
-}
-
-.whatStepTitle {
-  margin-top: 1.75rem;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--pe-dark);
-}
-
-.whatStepText {
-  margin-top: 0.9rem;
-  font-size: 1.6rem;
-  line-height: 1.4;
-  color: var(--color-gray-600);
-}
-
-.whatArrow {
-  flex-shrink: 0;
-  align-self: center;
-  margin: 0 1rem;
-  color: var(--pe-teal);
-}
-
-.whatCode {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.9rem;
-  align-self: flex-start;
-  font-size: 1.5rem;
-  color: var(--color-gray-700);
-}
-
-.whatCode svg {
-  color: var(--pe-teal);
-}
-
-/* Title slide: keep the logo, speakers and date clear of each other on laptops. */
-@media (max-height: 760px) {
-  .titleCover {
-    padding-top: 6rem !important;
-  }
-
-  .titleCover > :global(*) {
-    margin-bottom: 1.25rem !important;
-  }
-
-  .titleCover > :global(:first-child) {
-    display: none;
-  }
-
-  .titleCover h1 {
-    font-size: 2.25rem;
-  }
-
-  .titleCover :global(.w-28) {
-    width: 5rem;
-    height: 5rem;
-  }
-}
-
-/* Keep the shared slide template legible on a laptop during the meeting. */
-@media (max-height: 850px) {
-  .deck > :global(.absolute.inset-0) {
-    padding-top: 3rem;
-  }
-
-  .deck :global(.mb-10) {
-    margin-bottom: 1.5rem;
-  }
-
-  .deck h1 {
-    font-size: 2.625rem;
-  }
-
-  .deck :global(.mt-12) {
-    margin-top: 2rem;
-  }
-
-  .deck :global(.mt-10),
-  .deck :global(.mt-9) {
-    margin-top: 1.5rem;
-  }
-
-  .deck :global(.mt-8),
-  .deck :global(.mt-7) {
-    margin-top: 1.25rem;
-  }
-
-  .deck :global(.mt-6) {
-    margin-top: 0.5rem;
-  }
-
-  .deck th,
-  .deck td {
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-  }
-
-  .deck :global(.space-y-6) > :not(:last-child) {
-    margin-bottom: 1rem;
-  }
-
-  .deck :global(.space-y-4) > :not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-
-  .deck :global(.pb-5) {
-    padding-bottom: 1rem;
-  }
-
-  .deck :global(.pb-3) {
-    padding-bottom: 0.5rem;
-  }
-
-  .deck :global(.space-y-5) > :not(:last-child) {
-    margin-bottom: 0.75rem;
-  }
-
-  .deck :global(.space-y-3) > :not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-}
-
-/* Safari on a laptop leaves less than 760px for the slide. */
-@media (max-height: 760px) {
-  .deck > :global(.absolute.inset-0) {
-    padding-top: 2rem;
-  }
-
-  .deck :global(.mb-10) {
-    margin-bottom: 1rem;
-  }
-
-  .deck h1 {
-    font-size: 2.25rem;
-  }
-
-  .deck :global(.text-xl) {
-    font-size: 1.05rem;
-    line-height: 1.45rem;
-  }
-
-  .deck :global(.text-2xl) {
-    font-size: 1.25rem;
-    line-height: 1.7rem;
-  }
-
-  .deck :global(.text-lg) {
-    font-size: 0.95rem;
-    line-height: 1.35rem;
-  }
-
-  .deck :global(.text-base) {
-    font-size: 0.85rem;
-    line-height: 1.2rem;
-  }
-
-  .deck th,
-  .deck td {
-    padding-top: 0.35rem;
-    padding-bottom: 0.35rem;
-  }
-
-  .deck :global(.pb-4) {
-    padding-bottom: 0.5rem;
-  }
-
-  .deck :global(.space-y-5) > :not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-
-  .deck :global(.pt-5) {
-    padding-top: 0.75rem;
-  }
-
-  .deck :global(.mt-6) {
-    margin-top: 0.75rem;
-  }
-
-  .deck :global(.p-4) {
-    padding: 0.6rem 0.75rem;
-  }
-
-  .shot {
-    max-height: 46vh;
-  }
-}
-
-@media (max-height: 850px) {
-  .prepCard {
-    padding: 0.9rem 1.25rem;
-  }
-
-  .prepCard h2 {
-    font-size: 1.35rem;
-  }
-
-  .prepCard p:last-child {
-    font-size: 1rem;
-  }
-
-  .eventHead,
-  .eventRow {
-    padding: 0.4rem 0;
-    font-size: 1.05rem;
-  }
-
-  .shot {
-    max-height: 32vh;
-  }
-}
-
-@media (max-height: 760px) {
-  .subtitle {
-    font-size: 1.1rem;
-  }
-}
-
-/* What PolicyEngine is and the close, on a laptop screen */
-@media (max-height: 850px) {
-  .whatBody {
-    gap: 2rem;
-    padding-bottom: 1rem;
-  }
-
-  .whatStep {
-    padding: 1.6rem 1.5rem 1.8rem;
-  }
-
-  .whatIcon {
-    height: 3.25rem;
-    width: 3.25rem;
-  }
-
-  .whatIcon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .whatStepTitle {
-    margin-top: 1.1rem;
-    font-size: 1.6rem;
-  }
-
-  .whatStepText {
-    margin-top: 0.6rem;
-    font-size: 1.2rem;
-  }
-
-  .whatArrow {
-    width: 32px;
-    height: 32px;
-    margin: 0 0.6rem;
-  }
-
-  .whatCode {
-    font-size: 1.15rem;
-  }
-
-  .closing {
-    padding-top: 5.5rem;
-    gap: 1.25rem;
-  }
-
-  .closingTitle {
-    font-size: 2.5rem;
-  }
-
-  .closingDashboard {
-    padding: 1.1rem 1.1rem 1.1rem 1.75rem;
-  }
-
-  .closingMain {
-    font-size: 1.5rem;
-  }
-
-  .closingHint {
-    font-size: 0.95rem;
-  }
-
-  .closingQr {
-    width: 10rem;
-    height: 10rem;
-  }
-
-  .closingContact {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.95rem;
-  }
-
-  .closingContactIcon {
-    height: 2rem;
-    width: 2rem;
-  }
 }
 
 /* The analysis: the dashboard, live on the slide */
@@ -528,19 +274,31 @@
   gap: 0.75rem;
   border-bottom: 1px solid var(--color-gray-200);
   background: var(--pe-light);
-  padding: 0.5rem 0.75rem 0.5rem 1rem;
-  color: var(--pe-teal);
+  padding: 0.5rem 0.75rem;
   font-size: 0.95rem;
 }
 
-.embedAddress {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.embedViews {
+  display: flex;
+  gap: 0.25rem;
+  border-radius: 0.6rem;
+  background: white;
+  padding: 0.2rem;
+  box-shadow: inset 0 0 0 1px var(--color-gray-200);
+}
+
+.embedView {
+  border-radius: 0.45rem;
+  padding: 0.3rem 0.8rem;
   color: var(--pe-dark);
   font-weight: 500;
+  cursor: pointer;
+}
+
+.embedView:hover,
+.embedView:focus-visible {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
 }
 
 .embedButton {
@@ -562,14 +320,9 @@
   border-color: var(--pe-teal);
 }
 
-.embedView {
-  font-weight: 500;
-}
-
-.embedDivider {
-  align-self: stretch;
-  width: 1px;
-  background: var(--color-gray-200);
+/* Puts Expand and New tab at the bar's right end. */
+.embedPush {
+  margin-left: auto;
 }
 
 .embedFrame {
@@ -578,4 +331,246 @@
   flex: 1;
   border: 0;
   background: white;
+}
+
+/* Closing */
+.closing {
+  display: flex;
+  width: 100%;
+  max-width: 60rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 5rem;
+}
+
+.closingTitle {
+  font-size: 3.75rem;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.closingCard {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 0.12);
+  padding: 1.5rem;
+  color: inherit;
+}
+
+.closingQr {
+  width: 10rem;
+  height: 10rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  background: white;
+  padding: 0.5rem;
+}
+
+.closingCardText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.closingEyebrow {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.closingAddress {
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.closingHint {
+  font-size: 1rem;
+  opacity: 0.75;
+}
+
+.closingContacts {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.closingContact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 0.9rem;
+  background: rgb(255 255 255 / 0.08);
+  padding: 0.55rem 1rem;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.closingContactIcon {
+  display: flex;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: white;
+  color: var(--pe-teal);
+}
+
+/* Title slide: keep the logo, speakers and date clear of each other on laptops. */
+@media (max-height: 760px) {
+  .titleCover {
+    padding-top: 6rem !important;
+  }
+
+  .titleCover > :global(*) {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .titleCover > :global(:first-child) {
+    display: none;
+  }
+
+  .titleCover h1 {
+    font-size: 2.25rem;
+  }
+
+  .titleCover :global(.w-28) {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+/* A laptop screen: the shared template and these slides, tighter. */
+@media (max-height: 850px) {
+  .deck > :global(.absolute.inset-0) {
+    padding-top: 3rem;
+  }
+
+  .deck :global(.mb-10) {
+    margin-bottom: 1.5rem;
+  }
+
+  .deck h1 {
+    font-size: 2.625rem;
+  }
+
+  .body {
+    gap: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .pillarHead {
+    padding: 0.8rem 1rem 0.75rem;
+  }
+
+  .pillarList {
+    gap: 0.5rem;
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+
+  .pillarList li {
+    font-size: 1.05rem;
+  }
+
+  .callout {
+    font-size: 1.1rem;
+  }
+
+  .timeline {
+    gap: 0.75rem;
+  }
+
+  .prepRow {
+    padding: 0.6rem 0;
+  }
+
+  .prepTitle {
+    font-size: 1.05rem;
+  }
+
+  .prepText {
+    font-size: 0.95rem;
+  }
+
+  .closing {
+    padding-top: 4.5rem;
+    gap: 1.25rem;
+  }
+
+  .closingTitle {
+    font-size: 2.75rem;
+  }
+
+  .closingCard {
+    padding: 1rem;
+  }
+
+  .closingQr {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .closingAddress {
+    font-size: 1.1rem;
+  }
+
+  .closingContact {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .closingContactIcon {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+/* Safari on a laptop leaves less than 760px for the slide. */
+@media (max-height: 760px) {
+  .deck > :global(.absolute.inset-0) {
+    padding-top: 2rem;
+  }
+
+  .deck :global(.mb-10) {
+    margin-bottom: 1rem;
+  }
+
+  .deck h1 {
+    font-size: 2.25rem;
+  }
+
+  .pillarList li {
+    font-size: 0.95rem;
+  }
+
+  .timelineDot {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .timelineTrack::before {
+    top: calc(1.05rem - 1.5px);
+  }
+
+  .prepRow {
+    padding: 0.45rem 0;
+  }
+
+  .prepText {
+    font-size: 0.875rem;
+  }
 }
