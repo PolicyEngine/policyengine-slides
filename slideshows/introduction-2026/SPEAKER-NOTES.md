@@ -21,16 +21,9 @@ code is public.
 - The runbook is `docs/budget-day-runbook.md` (G0 to G5 checkpoints).
 - Mark anything still in review as such on the slide before presenting.
 
-## 4. Past Budgets
+## 4. The analysis: live dashboard
 
-- Six events from Spring Budget 2023 to Autumn Budget 2025, rerun on
-  policyengine 6.10.2 and Microcosm UK 2024-25 (dashboard PR #107). These
-  are today's model and data, not what was known at the time.
-- Autumn Budget 2025 in review is a separate dashboard (live).
-
-## 5. The analysis: live dashboard
-
-The dashboard itself is on the slide; it loads while slide 4 is showing.
+The dashboard itself is on the slide; it loads while slide 3 is showing.
 Press **Expand** to fill the screen with it and present from there. **Back to
 the slide** returns to the deck with the same tab, measures and household
 still open. **New tab** opens it in a browser tab, if the embedded copy ever
@@ -60,6 +53,6 @@ These are the tabs in dashboard PR #185. Until it merges, the live site still
 has Living standards as a top-level tab and no Pensioners sub-tab, and the
 Pensioners and Living standards buttons open Population impact's default view.
 
-## 6. Close
+## 5. Close
 
 The dashboard link, with a QR code for phones, and how to reach us.

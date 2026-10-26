@@ -44,14 +44,6 @@ export const sources = {
     label: "Dashboard code",
     href: "https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026",
   },
-  pastEvents: {
-    label: "Past fiscal events (#107)",
-    href: "https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026/pull/107",
-  },
-  review2025: {
-    label: "Autumn Budget 2025 in review",
-    href: "https://autumn-budget-2025-in-review.vercel.app/uk/autumn-budget-2025-in-review",
-  },
 };
 
 export const steps = [
@@ -104,15 +96,5 @@ export const preparation: PrepItem[] = [
     text: "A measure goes live as soon as its figures pass review, and every public file must carry a review entry.",
     status: "In review",
   },
-];
-
-// The six events in #107, with the measures each imports.
-export const pastEvents = [
-  { event: "Autumn Budget 2025", measures: 9 },
-  { event: "Spring Statement 2025", measures: 2 },
-  { event: "Autumn Budget 2024", measures: 5 },
-  { event: "Spring Budget 2024", measures: 3 },
-  { event: "Autumn Statement 2023", measures: 4 },
-  { event: "Spring Budget 2023", measures: 2 },
 ];
 

@@ -19,7 +19,6 @@ import SlideHeader from "@/components/layout/SlideHeader";
 import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
-  pastEvents,
   preparation,
   sources,
   steps,
@@ -192,55 +191,6 @@ export function PreparationSlide() {
             </div>
           );
         })}
-      </div>
-    </Frame>
-  );
-}
-
-export function PastBudgetsSlide() {
-  return (
-    <Frame
-      section={sections.budget}
-      title="Past Budgets, on today's model"
-      subtitle="Earlier fiscal events rerun on the same model and data as 2026, and every published score of last year's Budget set beside ours"
-      references={[sources.pastEvents, sources.review2025]}
-    >
-      <div className={styles.pastGrid}>
-        <div>
-          <h2 className={styles.panelTitle}>Six fiscal events since 2023, each on its own page</h2>
-          <div className={styles.eventTable}>
-            <div className={styles.eventHead}>
-              <span>Event</span>
-              <span className="text-right">Measures modelled</span>
-            </div>
-            {pastEvents.map((row) => (
-              <div key={row.event} className={styles.eventRow}>
-                <span>{row.event}</span>
-                <span className="text-right tabular-nums">{row.measures}</span>
-              </div>
-            ))}
-          </div>
-          <p className={styles.panelNote}>
-            Revenue and income-decile charts and the OBR comparison for each
-            event; every measure not modelled is listed with its reason. In
-            review, to publish after 28 October.
-          </p>
-        </div>
-        <ExternalLink href={sources.review2025.href} className={styles.shotCard}>
-          <Image
-            src="/screenshots/introduction-2026/autumn-budget-2025-in-review.png"
-            alt="Autumn Budget 2025 in review: timeline, scores and household calculator tabs"
-            width={2880}
-            height={1800}
-            className={styles.shot}
-          />
-          <p className={styles.shotCaption}>
-            <strong>Autumn Budget 2025 in review:</strong>{" "}163 publications on
-            one timeline, each score beside the Budget&apos;s and
-            PolicyEngine&apos;s, and the published household examples
-            replicated.
-          </p>
-        </ExternalLink>
       </div>
     </Frame>
   );
