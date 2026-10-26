@@ -26,8 +26,15 @@ code is public.
 
 ## 5. The analysis: live dashboard
 
-Click the card (or focus it and press Enter) to open the dashboard in a new
-tab, then present from there. The three buttons open its tabs directly:
+The dashboard itself is on the slide; it loads while slide 4 is showing.
+Press **Expand** to fill the screen with it and present from there. **Back to
+the slide** returns to the deck with the same tab, measures and household
+still open. **New tab** opens it in a browser tab, if the embedded copy ever
+misbehaves.
+
+While you are using the dashboard, the arrow keys, Space and a clicker go to
+it, not to the deck (the arrows switch its tabs). Press **Back to the slide**,
+or click the bar above the dashboard, before moving on. Its tabs:
 
 - **Population impact**: revenue by year, households by income decile, the
   map, and young people.
@@ -35,8 +42,6 @@ tab, then present from there. The three buttons open its tabs directly:
   takes about a minute, so start it before talking it through.
 - **Living standards**: the current-law baseline (OBR forecast named on the
   tab) for incomes and poverty.
-
-Come back to the deck with the browser tab for the close.
 
 ## 6. Close
 

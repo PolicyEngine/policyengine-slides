@@ -566,95 +566,73 @@
   }
 }
 
-/* The analysis: live dashboard */
-.liveBody {
+/* The analysis: the dashboard, live on the slide */
+.embed {
   display: flex;
-  width: 100%;
-  max-width: 72rem;
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
-  gap: 1.75rem;
-  margin: 1.5rem auto 0;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.3);
+  cursor: auto;
 }
 
-.liveCard {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  border-radius: 1.5rem;
-  padding: 2.75rem 2.75rem 2.75rem 3.25rem;
-  color: white;
-  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+/* Expand: the same frame over the whole screen, above the deck's controls */
+.embedExpanded {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  border: 0;
+  border-radius: 0;
 }
 
-.liveCard:hover,
-.liveCard:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 1.75rem 3.5rem -1.5rem rgb(0 0 0 / 0.45);
-}
-
-.liveCard:focus-visible {
-  outline: 3px solid var(--pe-amber);
-  outline-offset: 4px;
-}
-
-.liveMain {
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.liveTabs {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.liveTab {
+.embedBar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 1rem;
+  border-bottom: 1px solid var(--color-gray-200);
   background: var(--pe-light);
-  padding: 1rem 1.25rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  color: var(--pe-teal);
+  font-size: 0.95rem;
+}
+
+.embedAddress {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--pe-dark);
-  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.embedButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.3rem 0.75rem;
+  color: var(--pe-dark);
   font-weight: 600;
+  cursor: pointer;
 }
 
-.liveTab svg:first-child {
-  color: var(--pe-teal);
-}
-
-.liveTab svg:last-child {
-  margin-left: auto;
-  color: var(--pe-teal);
-}
-
-.liveTab:hover,
-.liveTab:focus-visible {
+.embedButton:hover,
+.embedButton:focus-visible {
   border-color: var(--pe-teal);
 }
 
-@media (max-height: 850px) {
-  .liveBody {
-    gap: 1.25rem;
-    margin-top: 0.75rem;
-  }
-
-  .liveCard {
-    padding: 2rem 2rem 2rem 2.5rem;
-  }
-
-  .liveMain {
-    font-size: 2.1rem;
-  }
-
-  .liveCard .closingQr {
-    width: 12rem;
-    height: 12rem;
-  }
+.embedFrame {
+  min-height: 0;
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: white;
 }

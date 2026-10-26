@@ -10,8 +10,6 @@ import {
   IconHome,
   IconInfoCircle,
   IconMail,
-  IconTrendingUp,
-  IconUsers,
   IconWorld,
 } from "@tabler/icons-react";
 import Image from "@/components/core/BasePathImage";
@@ -27,6 +25,7 @@ import {
   steps,
   type Source,
 } from "../content";
+import DashboardEmbed from "./DashboardEmbed";
 import styles from "./deck.module.css";
 
 const sections = {
@@ -247,54 +246,15 @@ export function PastBudgetsSlide() {
   );
 }
 
-const tabs = [
-  { label: "Population impact", tab: "dashboard", Icon: IconUsers },
-  { label: "Household impact", tab: "household", Icon: IconHome },
-  { label: "Living standards", tab: "living", Icon: IconTrendingUp },
-];
-
-// The analysis is presented live: one card opens the dashboard.
+// The analysis is presented live, on the dashboard embedded in the slide.
 export function DashboardSlide() {
   return (
-    <Frame
-      section={sections.analysis}
-      title="The analysis: live dashboard"
-      subtitle="We present the results on the dashboard itself"
-    >
-      <div className={styles.liveBody}>
-        <ExternalLink
-          href={sources.dashboard.href}
-          className={`${styles.liveCard} gradient-bg hover:no-underline`}
-        >
-          <span className={styles.closingDashboardText}>
-            <span className={styles.closingEyebrow}>Open the dashboard</span>
-            <span className={styles.liveMain}>uk-autumn-budget-2026.vercel.app</span>
-            <span className={styles.closingHint}>
-              Population impact, household impact and the living standards outlook
-            </span>
-          </span>
-          <Image
-            src="/images/introduction-2026/dashboard-qr.svg"
-            alt="QR code for the Autumn Budget 2026 dashboard"
-            width={240}
-            height={240}
-            className={styles.closingQr}
-          />
-        </ExternalLink>
-        <div className={styles.liveTabs}>
-          {tabs.map(({ label, tab, Icon }) => (
-            <ExternalLink
-              key={tab}
-              href={`${sources.dashboard.href}?tab=${tab}`}
-              className={`${styles.liveTab} hover:no-underline`}
-            >
-              <Icon size={22} stroke={1.8} aria-hidden="true" />
-              {label}
-              <IconArrowRight size={18} stroke={1.8} aria-hidden="true" />
-            </ExternalLink>
-          ))}
-        </div>
-      </div>
+    <Frame section={sections.analysis} title="The analysis: live dashboard">
+      <DashboardEmbed
+        href={sources.dashboard.href}
+        address="uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026"
+        title={sources.dashboard.label}
+      />
     </Frame>
   );
 }
