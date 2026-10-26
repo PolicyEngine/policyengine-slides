@@ -56,6 +56,19 @@ export const sources = {
 export const about =
   "PolicyEngine is a nonprofit building free, open-source tools that help people understand tax and benefit policies.";
 
+// The Nuffield Foundation's credit. On 22 October its communications team
+// asked for "funded" rather than "supported", and for its logo, the white
+// version on a dark background. The logo is the white one from
+// nuffieldfoundation.org, kept as downloaded (3,432 bytes, SHA-256
+// b3727385…); its own size is 117.862 by 70.
+export const funder = {
+  label: "Funded by",
+  name: "Nuffield Foundation",
+  logo: "/logos/funders/nuffield-foundation-white.svg",
+  width: 118,
+  height: 70,
+};
+
 // What PolicyEngine is: the rules, the households and the results. The rules
 // are the main ones in the Good Growth Foundation deck's checked list.
 export const pillars = [

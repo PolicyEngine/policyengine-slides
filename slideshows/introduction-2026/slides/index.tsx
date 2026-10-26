@@ -25,6 +25,7 @@ import SlideTitle from "@/components/layout/SlideTitle";
 import { speakers } from "@/lib/speakers";
 import {
   about,
+  funder,
   lastBudget,
   mockBudgets,
   pillars,
@@ -302,6 +303,16 @@ export function ClosingSlide() {
             </ExternalLink>
           ))}
         </div>
+        <ExternalLink href={sources.nuffield.href} className={`${styles.closingFunder} hover:no-underline`}>
+          <span className={styles.closingFunderLabel}>{funder.label}</span>
+          <Image
+            src={funder.logo}
+            alt={funder.name}
+            width={funder.width}
+            height={funder.height}
+            className={styles.closingFunderLogo}
+          />
+        </ExternalLink>
       </div>
     </Slide>
   );
