@@ -49,9 +49,8 @@ measures or a household chosen in the frame are not kept. Its tabs:
 - **Policies**: what each measure does.
 - **Methodology**.
 
-These are the tabs in dashboard PR #185, which the Drill 5 build in the frame
-uses. The closing slide's link is the live site, which until #185 merges
-still has Living standards as a top-level tab and no Pensioners sub-tab.
+These are the tabs from dashboard PR #185 (merged 26 October): the Drill 5
+build in the frame and the live site the closing slide links both have them.
 
 ## 5. Close
 
