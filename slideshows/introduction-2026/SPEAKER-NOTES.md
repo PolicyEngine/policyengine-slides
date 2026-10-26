@@ -49,9 +49,9 @@ measures or a household chosen in the frame are not kept. Its tabs:
 - **Policies**: what each measure does.
 - **Methodology**.
 
-These are the tabs in dashboard PR #185. Until it merges, the live site still
-has Living standards as a top-level tab and no Pensioners sub-tab, and the
-Pensioners and Living standards buttons open Population impact's default view.
+These are the tabs in dashboard PR #185, which the Drill 5 build in the frame
+uses. The closing slide's link is the live site, which until #185 merges
+still has Living standards as a top-level tab and no Pensioners sub-tab.
 
 ## 5. Close
 

@@ -2,8 +2,10 @@
 
 5 slides at `/slides/introduction-2026`, for the 28 October 2026 webinar:
 what PolicyEngine is, how we prepared for Budget day, and a slide with the live
-[Autumn Budget 2026 dashboard](https://uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026)
-embedded in it, where the analysis is presented.
+Autumn Budget 2026 dashboard embedded in it
+([the Drill 5 build](https://uk-autumn-budget-2026-drill-op9iio4el-policy-engine.vercel.app/uk/autumn-budget-2026)),
+where the analysis is presented. The closing slide links
+[the dashboard](https://uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026).
 
 - `config.ts` controls the slide order and metadata.
 - `content.ts` holds the sources and preparation cards.

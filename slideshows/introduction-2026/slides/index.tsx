@@ -210,9 +210,9 @@ export function DashboardSlide() {
   return (
     <Frame section={sections.analysis} title="The analysis: live dashboard">
       <DashboardEmbed
-        href={sources.dashboard.href}
-        address="uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026"
-        title={sources.dashboard.label}
+        href={sources.dashboardDrill.href}
+        address={sources.dashboardDrill.href.replace("https://", "")}
+        title={sources.dashboardDrill.label}
         views={dashboardViews}
       />
     </Frame>

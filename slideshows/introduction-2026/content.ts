@@ -40,6 +40,12 @@ export const sources = {
     label: "Autumn Budget 2026 dashboard",
     href: "https://uk-autumn-budget-2026.vercel.app/uk/autumn-budget-2026",
   },
+  // The build with the results the webinar discusses (Drill 5, deployed 26
+  // October). A deployment address is fixed: a later build gets a new one.
+  dashboardDrill: {
+    label: "Autumn Budget 2026 dashboard, Drill 5 build",
+    href: "https://uk-autumn-budget-2026-drill-op9iio4el-policy-engine.vercel.app/uk/autumn-budget-2026",
+  },
   dashboardCode: {
     label: "Dashboard code",
     href: "https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026",
