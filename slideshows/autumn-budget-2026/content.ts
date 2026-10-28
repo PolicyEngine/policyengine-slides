@@ -52,6 +52,65 @@ export const sources = {
   },
 };
 
+// The Budget measures the dashboard models, condensed from its own descriptions
+// (uk-autumn-budget-dashboard-2026#290, public/data/policy_parameters.json at
+// 7f343f8e), grouped by the Budget's topics across two slides.
+export type MeasureGroup = { topic: string; items: string[] };
+
+export const measureSlides: { title: string; groups: MeasureGroup[] }[] = [
+  {
+    title: "The Budget measures we model",
+    groups: [
+      {
+        topic: "Energy bills",
+        items: [
+          "Zero VAT on domestic electricity: 0% instead of 5% from 1 October 2026 to 30 June 2027, in Great Britain from October and the whole UK from April 2027.",
+          "Household Energy Payment: a one-off £100 from January 2027 to households in council tax bands A to D in England. The devolved governments get a funding share, which isn't modelled.",
+        ],
+      },
+      {
+        topic: "Income from assets",
+        items: [
+          "Property income: rates rise 2 points to 24%, 44% and 49% from April 2027, in England, Wales and Northern Ireland. Landlords' finance cost relief rises to 24% too.",
+          "Savings income: rates rise 2 points to 24%, 44% and 49% from April 2027, UK-wide.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "The Budget measures we model (continued)",
+    groups: [
+      {
+        topic: "Pensions",
+        items: [
+          "The Pension Tax Allowance, from April 2027 to April 2030. It's an income tax reduction of up to £94 in 2027-28 for people over State Pension age with income at or below the full new State Pension (£13,036), less £1 for every £3 above it.",
+        ],
+      },
+      {
+        topic: "Fuel",
+        items: [
+          "The 5p fuel duty cut is kept to 30 June 2027, at 52.95p a litre, then returns to 60.59p from 1 July 2027.",
+        ],
+      },
+      {
+        topic: "Carers",
+        items: [
+          "The Carer's Allowance earnings taper. In England and Wales, from a date in 2030-31, the allowance falls £1 for each £1 of earnings above the limit instead of stopping (£212 a week in 2027-28).",
+        ],
+      },
+      {
+        topic: "Self-employed",
+        items: [
+          "The trading allowance rises from £1,000 to £3,000 from April 2027, for income tax and Class 4.",
+        ],
+      },
+    ],
+  },
+];
+
+export const measuresFooter =
+  "Full descriptions, and the measures we don't model, are on the dashboard's Policies tab.";
+
 // How policyengine.org/uk/donate describes PolicyEngine.
 export const about =
   "PolicyEngine is a nonprofit building free, open-source tools that help people understand tax and benefit policies.";

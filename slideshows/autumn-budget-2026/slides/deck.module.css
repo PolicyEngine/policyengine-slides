@@ -282,6 +282,28 @@
 }
 
 /* The analysis: the dashboard, live on the slide */
+.measures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.measureCard {
+  border-top: 4px solid var(--pe-teal);
+}
+
+.measureTopic {
+  padding: 1.25rem 1.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pe-dark);
+}
+
+.measuresFooter {
+  font-size: 1.1rem;
+  color: var(--color-gray-600);
+}
+
 .embed {
   display: flex;
   min-height: 0;
