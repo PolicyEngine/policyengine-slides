@@ -11,7 +11,21 @@ A brief view: PolicyEngine in one line (a nonprofit building free,
 open-source tools, in policyengine.org's own words), then the rules, the
 households and the results, and that all the code is public.
 
-## 3. How we prepared
+## 3 and 4. The Budget measures we model
+
+Each measure's author introduces it, 30 to 60 seconds each, in slide order,
+while Vahid keeps the screen:
+
+- **Slide 3:** David Trimmer (zero VAT on domestic electricity and the
+  Household Energy Payment), then Ziming Hua (property and savings income, and
+  the trading allowance, which is on slide 4, bottom right).
+- **Slide 4:** Pavel Makarchuk (the Pension Tax Allowance and fuel duty), then
+  Anthony Volk (the Carer's Allowance taper).
+
+The footer points to the dashboard's Policies tab for the full descriptions
+and the measures we don't model.
+
+## 5. How we prepared
 
 The slide is for a general audience: the rehearsals and what they gave us.
 The detail below is background, if asked.
@@ -31,9 +45,9 @@ The detail below is background, if asked.
   #178). The household calculator also runs on Modal and is kept warm.
 - Mark anything still in review as such on the slide before presenting.
 
-## 4. The analysis: live dashboard
+## 6. The analysis: live dashboard
 
-The dashboard itself is on the slide; it loads while slide 3 is showing.
+The dashboard itself is on the slide; it loads while slide 5 is showing.
 Press **Expand** to fill the screen with it and present from there. **Back to
 the slide** returns to the deck with the same tab, measures and household
 still open. **New tab** opens it in a browser tab, if the embedded copy ever
@@ -43,8 +57,8 @@ While you are using the dashboard, the arrow keys, Space and a clicker go to
 it, not to the deck (the arrows switch its tabs). Press **Back to the slide**,
 or click the bar above the dashboard, before moving on.
 
-The buttons in the bar (Public finances, Pensioners, Living standards,
-Household calculator) load that view into the frame; each click reloads it,
+The buttons in the bar (Public finances, Policies, Pensioners, Living
+standards, Household calculator) load that view into the frame; each click reloads it,
 so measures or a household chosen in the frame are not kept. Its tabs:
 
 - **Population impact**, with five sub-tabs: **Public finances** (the
@@ -63,7 +77,7 @@ These are the tabs at ab2026-local-preview.vercel.app/uk/autumn-budget-2026
 on 28 October. The frame and the closing slide's link and QR code all open
 that address.
 
-## 5. Close
+## 7. Close
 
 The dashboard link, with a QR code for phones, and how to reach us. Thank
 the Nuffield Foundation, which funds our UK Budget analysis ("funded by",
