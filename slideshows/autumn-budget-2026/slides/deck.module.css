@@ -466,6 +466,25 @@
   color: var(--pe-teal);
 }
 
+/* The funder's credit: its white logo as downloaded, on the slide's dark background. */
+.closingFunder {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: inherit;
+}
+
+.closingFunderLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.closingFunderLogo {
+  width: auto;
+  height: 4.5rem;
+}
+
 /* Title slide: keep the logo, speakers and date clear of each other on laptops. */
 @media (max-height: 760px) {
   .titleCover {
@@ -592,6 +611,10 @@
     width: 1.9rem;
     height: 1.9rem;
   }
+
+  .closingFunderLogo {
+    height: 4rem;
+  }
 }
 
 /* Safari on a laptop leaves less than 760px for the slide. */
@@ -636,5 +659,41 @@
 
   .prepText {
     font-size: 0.875rem;
+  }
+
+  /* The closing slide makes room for the funder's credit, so "Thank you"
+     stays clear of the PolicyEngine logo above it. */
+  .closing {
+    gap: 1rem;
+  }
+
+  .closingTitle {
+    font-size: 2.4rem;
+  }
+
+  .closingCard {
+    padding: 0.75rem;
+  }
+
+  .closingQr {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .closingContact {
+    padding: 0.35rem 0.9rem;
+  }
+
+  .closingContactIcon {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .closingFunder {
+    gap: 1rem;
+  }
+
+  .closingFunderLogo {
+    height: 3rem;
   }
 }

@@ -65,4 +65,6 @@ that address.
 
 ## 5. Close
 
-The dashboard link, with a QR code for phones, and how to reach us.
+The dashboard link, with a QR code for phones, and how to reach us. Thank
+the Nuffield Foundation, which funds our UK Budget analysis ("funded by",
+not "supported by").

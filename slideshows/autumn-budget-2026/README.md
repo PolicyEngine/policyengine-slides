@@ -1,10 +1,12 @@
-# Analysing the UK Autumn Budget 2026 with PolicyEngine
+# Analysing the Autumn Budget 2026 with PolicyEngine
 
-5 slides at `/slides/introduction-2026`, for the 28 October 2026 webinar:
+5 slides at `/slides/autumn-budget-2026`, for the 28 October 2026 webinar
+(`/slides/introduction-2026` redirects here):
 what PolicyEngine is, how we prepared for Budget day, and a slide with the live
 [Autumn Budget 2026 dashboard](https://ab2026-local-preview.vercel.app/uk/autumn-budget-2026)
 embedded in it, where the analysis is presented. The closing slide links the
-same address, with its QR code.
+same address, with its QR code, and credits the Nuffield Foundation, which
+funds our UK Budget analysis.
 
 - `config.ts` controls the slide order and metadata.
 - `content.ts` holds the sources, the three pillars of What PolicyEngine is,
@@ -19,5 +21,13 @@ same address, with its QR code.
   here goes stale when the dashboard's data change.
 - `SPEAKER-NOTES.md` gives the presenter track.
 
-`public/images/introduction-2026/dashboard-qr.svg` encodes
+`public/images/autumn-budget-2026/dashboard-qr.svg` encodes
 the dashboard's address.
+
+`public/logos/funders/nuffield-foundation-white.svg` is the Nuffield
+Foundation's white logo, downloaded from nuffieldfoundation.org on 22 October
+2026 (3,432 bytes, SHA-256
+`b3727385be9295f8daa3938c745f87b2e00e5675130354f6394ae6b3fec5654c`). That day
+its communications team asked for "funded" rather than "supported", and for
+its logo, the white version on a dark background. Keep the file as
+downloaded; don't recolour or redraw it.
