@@ -96,37 +96,35 @@ export const lastBudget = {
   text: "Analysed on the day, 26 Nov",
 };
 
-// The five mock Budgets: full Budget-day runs on invented measures.
+// The five Budget-day rehearsals (the mock Budgets): full runs of the day on
+// invented measures.
 export const mockBudgets = ["28 Sep", "5 Oct", "12 Oct", "19 Oct", "26 Oct"];
 
 export type PrepItem = { title: string; text: string; status: "Done" | "In review" };
 
-// Each line is checked against PolicyEngine/uk-autumn-budget-dashboard-2026
-// (main, and the open PRs named in the README).
+// Written for a general audience: the technical detail is in the speaker
+// notes. Each line is checked against PolicyEngine/uk-autumn-budget-dashboard-2026;
+// the version is the one in the live dashboard's publication manifest and in
+// main's uv.lock on 28 October.
 export const preparation: PrepItem[] = [
   {
-    title: "A Budget-day runbook",
-    text: "Timed checkpoints from the start of the day to the combined run, publication and the overnight briefing, built on the mock Budgets.",
-    status: "Done",
-  },
-  {
     title: "Fixed model and data",
-    text: "policyengine 6.10.2 with the certified Microcosm UK 2024-25 households, so every figure can be reproduced.",
+    text: "Every figure comes from PolicyEngine 6.11.1 and the same set of households, so anyone can reproduce it.",
     status: "Done",
   },
   {
     title: "A household calculator",
-    text: "Any household's change in net income from the selected measures, live on the dashboard. It runs on Modal and is kept warm.",
+    text: "Enter any household to see how the measures change its income, live on the dashboard.",
     status: "Done",
   },
   {
     title: "Every measure in about 8 minutes",
-    text: "All national results run on Modal, one machine per measure, for every measure and the combined package.",
+    text: "The cost of each measure, and who gains and loses, worked out all at once rather than one by one.",
     status: "Done",
   },
   {
     title: "Each measure published once reviewed",
-    text: "A measure goes live as soon as its figures pass review, and every public file must carry a review entry.",
+    text: "A measure goes on the dashboard as soon as its figures have been checked.",
     status: "In review",
   },
 ];

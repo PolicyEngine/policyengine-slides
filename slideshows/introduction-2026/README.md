@@ -8,7 +8,8 @@ same address, with its QR code.
 
 - `config.ts` controls the slide order and metadata.
 - `content.ts` holds the sources, the three pillars of What PolicyEngine is,
-  the mock Budget dates and the preparation items.
+  the dates of the Budget-day rehearsals (the mock Budgets) and the
+  preparation items, written for a general audience.
 - `slides/index.tsx` contains the slides. The analysis slide embeds the
   dashboard itself (`slides/DashboardEmbed.tsx`): Expand stretches the same
   frame over the whole screen, so whatever is open in it is kept, and New tab

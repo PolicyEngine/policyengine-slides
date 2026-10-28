@@ -13,16 +13,22 @@ households and the results, and that all the code is public.
 
 ## 3. How we prepared
 
+The slide is for a general audience: the rehearsals and what they gave us.
+The detail below is background, if asked.
+
 - Last year's Budget (26 November 2025): the dashboard went live on Budget
   day, and the other measures and the household calculator followed by 28
   November (the 2025 dashboard repo's commit history).
-- Five mock Budgets (28 September; 5, 12, 19 and 26 October): drill issues
-  #6 (with the drill 1 retrospective), #8, #10, #53 and #144 in the dashboard
-  repo.
+- Five Budget-day rehearsals, the mock Budgets (28 September; 5, 12, 19 and
+  26 October): drill issues #6 (with the drill 1 retrospective), #8, #10, #53
+  and #144 in the dashboard repo.
+- The model and data: the policyengine package 6.11.1, with policyengine-uk
+  2.151.0 and the Microcosm UK 2024-25 households. The live dashboard's
+  publication manifest records it for every measure and the package, and
+  main's uv.lock pins it (28 October).
 - National results run on Modal, one machine per measure: all ten units (nine
   measures and the package) took 8.1 minutes on 26 October (dashboard PR
   #178). The household calculator also runs on Modal and is kept warm.
-- The runbook is `docs/budget-day-runbook.md` (G0 to G5 checkpoints).
 - Mark anything still in review as such on the slide before presenting.
 
 ## 4. The analysis: live dashboard

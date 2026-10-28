@@ -9,7 +9,6 @@ import {
   IconClockHour4,
   IconFlag,
   IconHistory,
-  IconListCheck,
   IconLock,
   IconMail,
   IconScale,
@@ -106,10 +105,11 @@ function Frame({
 export function TitleSlide() {
   return (
     <CoverSlide
-      title="Analysing the UK Autumn Budget 2026 with PolicyEngine"
+      title="Analysing the Autumn Budget 2026 with PolicyEngine"
       contentClassName={`pt-28 ${styles.titleCover}`}
       event="Webinar"
-      date="Wednesday 28 October 2026, 4:30pm UK"
+      // GMT: British Summer Time ends on 25 October 2026.
+      date="Wednesday 28 October 2026, 4:30pm GMT"
       speakers={[
         { ...speakers["vahid-ahmadi"], title: "Research Associate" },
         { ...speakers["max-ghenis"], title: "CEO" },
@@ -172,7 +172,7 @@ export function WhatSlide() {
 }
 
 // Each preparation item's icon, in the order of `preparation`.
-const prepIcons: Icon[] = [IconListCheck, IconLock, IconCalculator, IconBolt, IconShieldCheck];
+const prepIcons: Icon[] = [IconLock, IconCalculator, IconBolt, IconShieldCheck];
 
 export function PreparationSlide() {
   return (
@@ -182,8 +182,8 @@ export function PreparationSlide() {
     >
       <div className={styles.timeline}>
         <p className={styles.timelineLabel}>
-          <strong>Last year&apos;s Budget, then five mock Budgets</strong>
-          <span>Full Budget-day runs on invented measures, to rehearse the day</span>
+          <strong>Last year&apos;s Budget, then five Budget-day rehearsals</strong>
+          <span>Each one a full run of the day, on invented measures</span>
         </p>
         <ol className={styles.timelineTrack}>
           <li className={`${styles.timelineStop} ${styles.timelinePast}`}>
