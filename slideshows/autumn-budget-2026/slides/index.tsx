@@ -278,6 +278,7 @@ export function MeasuresSlide2() {
 // open in the frame. Public finances is Population impact's default sub-tab.
 const dashboardViews = [
   { label: "Public finances", query: "?tab=dashboard" },
+  { label: "Policies", query: "?tab=policies" },
   { label: "Pensioners", query: "?tab=dashboard&sub=age&age=pensioners" },
   { label: "Living standards", query: "?tab=dashboard&sub=living" },
   { label: "Household calculator", query: "?tab=household" },
