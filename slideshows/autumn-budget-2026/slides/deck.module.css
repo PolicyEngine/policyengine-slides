@@ -292,15 +292,20 @@
   border-top: 4px solid var(--pe-teal);
 }
 
+/* Larger than the pillars' lists: these slides are read from a shared screen. */
+.measureCard .pillarList li {
+  font-size: 1.4rem;
+}
+
 .measureTopic {
   padding: 1.25rem 1.5rem 0;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--pe-dark);
 }
 
 .measuresFooter {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: var(--color-gray-600);
 }
 
