@@ -4,7 +4,7 @@
 (`/slides/introduction-2026` redirects here):
 what PolicyEngine is, the Budget measures we model (two slides), how we
 prepared for Budget day, and a slide with the live
-[Autumn Budget 2026 dashboard](https://ab2026-local-preview.vercel.app/uk/autumn-budget-2026)
+[Autumn Budget 2026 dashboard](https://policyengine.org/uk/budgets/autumn-2026)
 embedded in it, where the analysis is presented. The closing slide links the
 same address, with its QR code, and credits the Nuffield Foundation, which
 funds our UK Budget analysis.
