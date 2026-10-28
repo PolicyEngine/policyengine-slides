@@ -1,6 +1,7 @@
-# Analysing the UK Autumn Budget 2026 with PolicyEngine
+# Analysing the Autumn Budget 2026 with PolicyEngine
 
-5 slides at `/slides/introduction-2026`, for the 28 October 2026 webinar:
+5 slides at `/slides/autumn-budget-2026`, for the 28 October 2026 webinar
+(`/slides/introduction-2026` redirects here):
 what PolicyEngine is, how we prepared for Budget day, and a slide with the live
 [Autumn Budget 2026 dashboard](https://ab2026-local-preview.vercel.app/uk/autumn-budget-2026)
 embedded in it, where the analysis is presented. The closing slide links the
@@ -20,7 +21,7 @@ funds our UK Budget analysis.
   here goes stale when the dashboard's data change.
 - `SPEAKER-NOTES.md` gives the presenter track.
 
-`public/images/introduction-2026/dashboard-qr.svg` encodes
+`public/images/autumn-budget-2026/dashboard-qr.svg` encodes
 the dashboard's address.
 
 `public/logos/funders/nuffield-foundation-white.svg` is the Nuffield

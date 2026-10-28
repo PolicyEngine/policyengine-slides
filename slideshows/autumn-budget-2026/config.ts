@@ -7,9 +7,9 @@ import {
   WhatSlide,
 } from "./slides";
 
-export const introduction2026Config: SlideshowConfig = {
-  id: "introduction-2026",
-  title: "Analysing the UK Autumn Budget 2026 with PolicyEngine",
+export const autumnBudget2026Config: SlideshowConfig = {
+  id: "autumn-budget-2026",
+  title: "Analysing the Autumn Budget 2026 with PolicyEngine",
   description:
     "What PolicyEngine is, how we prepared for Budget day, and the analysis, presented live on the dashboard.",
   date: "2026-10-28",

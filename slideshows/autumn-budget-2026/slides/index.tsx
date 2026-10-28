@@ -278,7 +278,7 @@ export function ClosingSlide() {
         <h1 className={`${styles.closingTitle} font-display font-bold`}>Thank you</h1>
         <ExternalLink href={sources.dashboard.href} className={`${styles.closingCard} hover:no-underline`}>
           <Image
-            src="/images/introduction-2026/dashboard-qr.svg"
+            src="/images/autumn-budget-2026/dashboard-qr.svg"
             alt="QR code for the Autumn Budget 2026 dashboard"
             width={240}
             height={240}
