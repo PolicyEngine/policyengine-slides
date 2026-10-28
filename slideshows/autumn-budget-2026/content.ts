@@ -37,10 +37,11 @@ export const sources = {
     href: "https://www.policyengine.org/uk/research/policyengine-10-downing-street",
   },
   // The dashboard the webinar presents, on the analysis slide and in the
-  // closing slide's link and QR code. The host alone returns 404.
+  // closing slide's link and QR code: its policyengine.org address
+  // (policyengine-app-v2 #1249).
   dashboard: {
     label: "Autumn Budget 2026 dashboard",
-    href: "https://ab2026-local-preview.vercel.app/uk/autumn-budget-2026",
+    href: "https://policyengine.org/uk/budgets/autumn-2026",
   },
   dashboardCode: {
     label: "Dashboard code",

@@ -73,9 +73,8 @@ so measures or a household chosen in the frame are not kept. Its tabs:
 - **Policies**: what each measure does.
 - **Methodology**.
 
-These are the tabs at ab2026-local-preview.vercel.app/uk/autumn-budget-2026
-on 28 October. The frame and the closing slide's link and QR code all open
-that address.
+These are the dashboard's tabs on 28 October. The frame and the closing
+slide's link and QR code all open policyengine.org/uk/budgets/autumn-2026.
 
 ## 7. Close
 
