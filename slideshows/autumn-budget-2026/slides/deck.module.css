@@ -724,3 +724,23 @@
     height: 3rem;
   }
 }
+
+/* The measures slides on a short window, such as a shared browser window. */
+@media (max-height: 760px) {
+  .measures {
+    gap: 1rem;
+  }
+
+  .measureTopic {
+    padding-top: 0.9rem;
+    font-size: 1.25rem;
+  }
+
+  .measureCard .pillarList li {
+    font-size: 1.05rem;
+  }
+
+  .measuresFooter {
+    font-size: 1rem;
+  }
+}
