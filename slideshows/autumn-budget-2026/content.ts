@@ -197,7 +197,7 @@ export const preparation: PrepItem[] = [
   {
     title: "Each measure published once reviewed",
     text: "A measure goes on the dashboard as soon as its figures have been checked.",
-    status: "In review",
+    status: "Done",
   },
 ];
 
