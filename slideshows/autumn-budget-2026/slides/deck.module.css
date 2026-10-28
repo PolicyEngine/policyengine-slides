@@ -282,6 +282,33 @@
 }
 
 /* The analysis: the dashboard, live on the slide */
+.measures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.measureCard {
+  border-top: 4px solid var(--pe-teal);
+}
+
+/* Larger than the pillars' lists: these slides are read from a shared screen. */
+.measureCard .pillarList li {
+  font-size: 1.4rem;
+}
+
+.measureTopic {
+  padding: 1.25rem 1.5rem 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--pe-dark);
+}
+
+.measuresFooter {
+  font-size: 1.3rem;
+  color: var(--color-gray-600);
+}
+
 .embed {
   display: flex;
   min-height: 0;
@@ -695,5 +722,25 @@
 
   .closingFunderLogo {
     height: 3rem;
+  }
+}
+
+/* The measures slides on a short window, such as a shared browser window. */
+@media (max-height: 760px) {
+  .measures {
+    gap: 1rem;
+  }
+
+  .measureTopic {
+    padding-top: 0.9rem;
+    font-size: 1.25rem;
+  }
+
+  .measureCard .pillarList li {
+    font-size: 1.05rem;
+  }
+
+  .measuresFooter {
+    font-size: 1rem;
   }
 }

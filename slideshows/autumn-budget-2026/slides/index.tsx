@@ -27,6 +27,8 @@ import {
   about,
   funder,
   lastBudget,
+  measureSlides,
+  measuresFooter,
   mockBudgets,
   pillars,
   preparation,
@@ -234,10 +236,49 @@ export function PreparationSlide() {
   );
 }
 
+// The measures modelled, by the Budget's topics, before the live dashboard.
+function MeasuresSlide({ index }: { index: number }) {
+  const { title, groups } = measureSlides[index];
+  return (
+    <Frame title={title}>
+      <div className={styles.measures}>
+        {groups.map((group) => (
+          <div key={group.topic} className={`content-card ${styles.measureCard}`}>
+            <h2 className={styles.measureTopic}>{group.topic}</h2>
+            <ul className={styles.pillarList}>
+              {group.items.map((item) => (
+                <li key={item}>
+                  <span
+                    className={styles.pillarDot}
+                    style={{ background: "var(--pe-teal)" }}
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      {index === measureSlides.length - 1 && (
+        <p className={styles.measuresFooter}>{measuresFooter}</p>
+      )}
+    </Frame>
+  );
+}
+
+export function MeasuresSlide1() {
+  return <MeasuresSlide index={0} />;
+}
+
+export function MeasuresSlide2() {
+  return <MeasuresSlide index={1} />;
+}
+
 // The dashboard's tabs and Population impact sub-tabs that the bar's buttons
 // open in the frame. Public finances is Population impact's default sub-tab.
 const dashboardViews = [
   { label: "Public finances", query: "?tab=dashboard" },
+  { label: "Policies", query: "?tab=policies" },
   { label: "Pensioners", query: "?tab=dashboard&sub=age&age=pensioners" },
   { label: "Living standards", query: "?tab=dashboard&sub=living" },
   { label: "Household calculator", query: "?tab=household" },
