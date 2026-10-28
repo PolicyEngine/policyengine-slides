@@ -15,7 +15,7 @@ PolicyEngine UK for the Good Growth Foundation, for a 20 to 30 minute slot.
 10. Thank you, with the Autumn Budget webinar invitation and its registration QR code
 
 Slides 2 and 9 come from the 9 October introduction deck
-(`introduction-2026`, policyengine-slides #77); slide 2 merges its "What
+(`introduction-2026`, since renamed `autumn-budget-2026`, policyengine-slides #77); slide 2 merges its "What
 PolicyEngine is" and "How it works" slides. Slides 5 and 7 come from the
 Scottish Government deck of the same day (`scottish-government-2026`), told
 for the whole UK: the pipeline drops the Scotland-only stage, and the decile
