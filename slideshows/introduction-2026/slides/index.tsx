@@ -237,9 +237,9 @@ export function PreparationSlide() {
 // open in the frame. Public finances is Population impact's default sub-tab.
 const dashboardViews = [
   { label: "Public finances", query: "?tab=dashboard" },
-  { label: "Pensioners", query: "?tab=dashboard&sub=pensioners" },
+  { label: "Pensioners", query: "?tab=dashboard&sub=age&age=pensioners" },
   { label: "Living standards", query: "?tab=dashboard&sub=living" },
-  { label: "Household impact", query: "?tab=household" },
+  { label: "Household calculator", query: "?tab=household" },
 ];
 
 // The analysis is presented live, on the dashboard embedded in the slide, with
@@ -248,11 +248,11 @@ export function DashboardSlide() {
   return (
     <Frame
       title="The analysis: live dashboard"
-      aside={new URL(sources.dashboardDrill.href).host}
+      aside={new URL(sources.dashboard.href).host}
     >
       <DashboardEmbed
-        href={sources.dashboardDrill.href}
-        title={sources.dashboardDrill.label}
+        href={sources.dashboard.href}
+        title={sources.dashboard.label}
         views={dashboardViews}
       />
     </Frame>

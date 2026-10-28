@@ -38,23 +38,24 @@ it, not to the deck (the arrows switch its tabs). Press **Back to the slide**,
 or click the bar above the dashboard, before moving on.
 
 The buttons in the bar (Public finances, Pensioners, Living standards,
-Household impact) load that view into the frame; each click reloads it, so
-measures or a household chosen in the frame are not kept. Its tabs:
+Household calculator) load that view into the frame; each click reloads it,
+so measures or a household chosen in the frame are not kept. Its tabs:
 
-- **Population impact**, with six sub-tabs: **Public finances** (the
+- **Population impact**, with five sub-tabs: **Public finances** (the
   default: revenue by year and the OBR comparison), **All households** (the
-  constituency map and households by income), **Young people**,
-  **Pensioners**, **Living standards** (income by decile and inequality) and
-  **Poverty**.
-- **Household impact**: run one household live with Calculate, or pick an
-  example card.
+  constituency map and households by income), **By age** (the Pensioners
+  button opens it at pensioners), **Living standards** (income by decile and
+  inequality) and **Poverty**.
+- **Household calculator**: run one household live with Calculate, or pick
+  an example card.
 - **Pre-measures forecast**: the outlook before the Budget's measures, with
   the OBR forecast named on the tab.
 - **Policies**: what each measure does.
 - **Methodology**.
 
-These are the tabs from dashboard PR #185 (merged 26 October): the Drill 5
-build in the frame and the live site the closing slide links both have them.
+These are the tabs at ab2026-local-preview.vercel.app/uk/autumn-budget-2026
+on 28 October. The frame and the closing slide's link and QR code all open
+that address.
 
 ## 5. Close
 
