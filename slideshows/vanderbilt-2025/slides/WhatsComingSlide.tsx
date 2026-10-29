@@ -16,7 +16,7 @@ export default function WhatsComingSlide() {
             <div>
               <p className="font-semibold text-pe-dark mb-3">Congressional district analysis</p>
               <p className="ml-6">Interactive maps showing SNAP participation and other benefits by district</p>
-              <p className="ml-6 text-pe-teal text-2xl">policyengine.github.io/snap-district-map</p>
+              <p className="ml-6 text-pe-teal text-2xl">policyengine.org/us/snap-district-map</p>
             </div>
 
             <div>
