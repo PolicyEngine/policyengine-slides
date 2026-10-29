@@ -56,4 +56,12 @@ export const speakers: Record<string, SpeakerInfo> = {
     title: 'Director of Social Policy, Niskanen Center',
     photo: '/headshots/joshua-mccabe.jpg',
   },
+  // Photo from his own site, fhoces.github.io (files/photo.jpg). His site says
+  // he most recently worked at UC Berkeley as a staff researcher, so no current
+  // affiliation is given here; the title names his Prop 40 work.
+  'fernando-hoces-de-la-guardia': {
+    name: 'Fernando Hoces de la Guardia',
+    title: 'Open Policy Analysis',
+    photo: '/headshots/fernando-hoces-de-la-guardia.jpg',
+  },
 };
