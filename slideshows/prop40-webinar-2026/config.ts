@@ -22,7 +22,7 @@ import EndSlide from './slides/EndSlide';
  * David's order: PolicyEngine, the measure, the two estimates, the calculator
  * demo, then Fernando Hoces de la Guardia's Open Policy Analysis segment, what
  * we are doing next, and Q&A. Calculator figures come from the calculator's
- * own code on the October 29 Forbes data (bridgeNumbers.ts); every other
+ * own code on the October 30 Forbes data (bridgeNumbers.ts); every other
  * figure cites its source on the slide.
  */
 export const prop40Webinar2026Config: SlideshowConfig = {
