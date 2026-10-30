@@ -14,6 +14,7 @@ import CalculatorLiveSlide from './slides/CalculatorLiveSlide';
 import BridgeSlide from './slides/BridgeSlide';
 import OpaHandoffSlide from './slides/OpaHandoffSlide';
 import WhatsNextSlide from './slides/WhatsNextSlide';
+import BallotMeasuresLiveSlide from './slides/BallotMeasuresLiveSlide';
 import QuestionsSlide from './slides/QuestionsSlide';
 import EndSlide from './slides/EndSlide';
 
@@ -21,7 +22,7 @@ import EndSlide from './slides/EndSlide';
  * Webinar of October 30, 2026 (a Friday), noon PT / 3 pm ET. Sections in
  * David's order: PolicyEngine, the measure, the two estimates, the calculator
  * demo, then Fernando Hoces de la Guardia's Open Policy Analysis segment, what
- * we are doing next, and Q&A. Calculator figures come from the calculator's
+ * we are doing next, David's ballot measures dashboard, and Q&A. Calculator figures come from the calculator's
  * own code on the October 30 Forbes data (bridgeNumbers.ts); every other
  * figure cites its source on the slide.
  */
@@ -51,6 +52,7 @@ export const prop40Webinar2026Config: SlideshowConfig = {
     BridgeSlide,
     OpaHandoffSlide,
     WhatsNextSlide,
+    BallotMeasuresLiveSlide,
     QuestionsSlide,
     EndSlide,
   ],
