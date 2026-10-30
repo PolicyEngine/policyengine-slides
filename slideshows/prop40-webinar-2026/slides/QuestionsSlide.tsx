@@ -10,7 +10,7 @@ export default function QuestionsSlide() {
     <Slide isCover>
       <div className="relative z-10 flex flex-col items-center text-center space-y-8 pt-16">
         <h1 className="font-display text-5xl font-bold text-white">Questions</h1>
-        <p className="text-2xl text-white/80">Use the Q&amp;A panel, or raise a hand.</p>
+        <p className="text-2xl text-white/80">Use the chat, or raise a hand.</p>
         <div className="flex gap-14">
           {WEBINAR_SPEAKERS.map((speaker) => (
             <SpeakerHeadshot key={speaker.name} speaker={speaker} size="md" showTitle={false} />
