@@ -11,6 +11,7 @@ import EstimatesTableSlide from './slides/EstimatesTableSlide';
 import WhyTheyDifferSlide from './slides/WhyTheyDifferSlide';
 import HowItWorksSlide from './slides/HowItWorksSlide';
 import CalculatorLiveSlide from './slides/CalculatorLiveSlide';
+import LeversSlide from './slides/LeversSlide';
 import BridgeSlide from './slides/BridgeSlide';
 import OpaHandoffSlide from './slides/OpaHandoffSlide';
 import WhatsNextSlide from './slides/WhatsNextSlide';
@@ -48,6 +49,7 @@ export const prop40Webinar2026Config: SlideshowConfig = {
     WhyTheyDifferSlide,
     DemoDividerSlide,
     HowItWorksSlide,
+    LeversSlide,
     CalculatorLiveSlide,
     BridgeSlide,
     OpaHandoffSlide,
