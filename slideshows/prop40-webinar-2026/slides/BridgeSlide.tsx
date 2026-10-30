@@ -116,7 +116,10 @@ export default function BridgeSlide() {
         Each bar between the two totals is a Shapley value: the assumption&apos;s effect averaged
         over every order of applying them, so those bars sum to the gap (to within rounding). The numbers move with the
         daily Forbes data; on the working paper&apos;s {PAPER_BRIDGE.date} snapshot the ends were{' '}
-        {fmt(PAPER_BRIDGE.startB)} billion and {fmt(PAPER_BRIDGE.endB)} billion.
+        {fmt(PAPER_BRIDGE.startB)} billion and {fmt(PAPER_BRIDGE.endB)} billion.{' '}
+        Both ends differ from the published $104 billion and −$38.9 billion (slide 9) because the
+        calculator runs both sets of assumptions on one roster and current Forbes data, and takes the
+        midpoint of each of Hoover&apos;s ranges instead of averaging 100,000 random draws.
       </p>
     </Slide>
   );
