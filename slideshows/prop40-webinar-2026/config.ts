@@ -8,7 +8,6 @@ import { MeasureDividerSlide, EstimatesDividerSlide, DemoDividerSlide } from './
 import MeasureOverviewSlide from './slides/MeasureOverviewSlide';
 import LaoFiscalSlide from './slides/LaoFiscalSlide';
 import EstimatesTableSlide from './slides/EstimatesTableSlide';
-import WhyTheyDifferSlide from './slides/WhyTheyDifferSlide';
 import HowItWorksSlide from './slides/HowItWorksSlide';
 import CalculatorLiveSlide from './slides/CalculatorLiveSlide';
 import LeversSlide from './slides/LeversSlide';
@@ -20,12 +19,13 @@ import QuestionsSlide from './slides/QuestionsSlide';
 import EndSlide from './slides/EndSlide';
 
 /**
- * Webinar of October 30, 2026 (a Friday), noon PT / 3 pm ET. Sections in
- * David's order: PolicyEngine, the measure, the two estimates, the calculator
- * demo, then Fernando Hoces de la Guardia's Open Policy Analysis segment, what
- * we are doing next, David's ballot measures dashboard, and Q&A. Calculator figures come from the calculator's
- * own code on the October 30 Forbes data (bridgeNumbers.ts); every other
- * figure cites its source on the slide.
+ * Webinar of October 30, 2026 (a Friday), noon PT / 3 pm ET. Sections:
+ * PolicyEngine, the measure, the two estimates, Fernando Hoces de la Guardia's
+ * Open Policy Analysis segment, which introduces the assumption differences,
+ * the calculator demo, what we are doing next, David's ballot measures
+ * dashboard, and Q&A. Calculator figures come from the calculator's own code
+ * on the October 30 Forbes data (bridgeNumbers.ts); every other figure cites
+ * its source on the slide.
  */
 export const prop40Webinar2026Config: SlideshowConfig = {
   id: 'prop40-webinar-2026',
@@ -46,13 +46,12 @@ export const prop40Webinar2026Config: SlideshowConfig = {
     LaoFiscalSlide,
     EstimatesDividerSlide,
     EstimatesTableSlide,
-    WhyTheyDifferSlide,
+    OpaHandoffSlide,
     DemoDividerSlide,
     HowItWorksSlide,
     LeversSlide,
     CalculatorLiveSlide,
     BridgeSlide,
-    OpaHandoffSlide,
     WhatsNextSlide,
     BallotMeasuresLiveSlide,
     QuestionsSlide,
