@@ -9,8 +9,8 @@ import SlideTitle from '@/components/layout/SlideTitle';
  *   updated July 20, 2026, p. 4: 250 billionaires on Forbes's July 1, 2026
  *   list, $2.307 trillion, 5% = $115 billion, a 10% avoidance and evasion
  *   haircut = $104 billion, rounded to $100 billion.
- * - Jaros and Rauh, NBER Working Paper 35899, October 2026: the corrected
- *   Forbes 2025 base (212 people, $1.89 trillion), seven confirmed departures
+ * - Jaros and Rauh, NBER Working Paper 35899, October 2026: their Forbes 2025
+ *   base (212 people by their count, $1.89 trillion), seven confirmed departures
  *   and three pre-filing exits out, international billionaires out, Mark
  *   Zuckerberg out of the recognized base ($59.15 billion), q = 0.50 (about
  *   $30 billion, range $28-36 billion), 7% growth to December 31, 2026, and
@@ -37,7 +37,7 @@ const rows: { label: string; berkeley: string; hoover: string }[] = [
   {
     label: 'Roster',
     berkeley: 'Forbes, July 1, 2026: 250 people, $2,307 billion',
-    hoover: 'Forbes 2025 list, corrected: 212 people; international billionaires out',
+    hoover: 'Forbes 2025 list, 212 people by their count; international billionaires out',
   },
   {
     label: 'Departures',
@@ -102,6 +102,12 @@ export default function EstimatesTableSlide() {
       <p className="mt-2 text-sm text-gray-500">
         f: share of the cohort&apos;s California income tax lost to departures. C: the cohort&apos;s
         income tax a year. r − g: discount rate net of income growth.
+      </p>
+      {/* Why the calculator's totals (slides 13 and 14) differ from these */}
+      <p className="mt-1 text-sm text-gray-500">
+        These are the published figures. The calculator (slides 13 and 14) runs both sets of
+        assumptions on one roster and current Forbes data, and takes the midpoint of each of
+        Hoover&apos;s ranges instead of averaging 100,000 random draws, so its totals differ.
       </p>
     </Slide>
   );
