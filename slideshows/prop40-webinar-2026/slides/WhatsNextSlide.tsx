@@ -32,7 +32,7 @@ const items: { icon: Icon; status: string; title: string; text: string; link?: s
     icon: IconChecklist,
     status: 'Live',
     title: 'More state ballot measures',
-    text: 'Our 2026 ballot measures dashboard covers six measures in five states.',
+    text: 'Our 2026 ballot measures dashboard covers seven measures in five states.',
     link: BALLOT_MEASURES_DISPLAY_URL,
   },
   {
