@@ -12,8 +12,8 @@ const stages: { icon: Icon; color: string; tag: string; title: string; items: st
     tag: 'Stage 1',
     title: 'The one-time wealth tax',
     items: [
-      'Everyone Forbes listed in California on January 1, 2026, at their latest Forbes worth',
-      'Directly held real estate out, then the $1 billion threshold and rate ramp, person by person',
+      'Everyone Forbes listed in California on January 1, 2026, plus newer California entries assumed resident then, at their latest Forbes worth',
+      'Directly held real estate out, then the $1 billion threshold and rate ramp, per person or documented married couple',
       'Then an optional erosion haircut, the legal assumptions and the payment election',
     ],
   },
