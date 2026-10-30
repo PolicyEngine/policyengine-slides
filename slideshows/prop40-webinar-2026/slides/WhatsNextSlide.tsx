@@ -13,8 +13,7 @@ import { BALLOT_MEASURES_DISPLAY_URL, PAPER_DISPLAY_URL } from '../links';
 /** Each card says what exists today and marks what is planned. Sources: the
  * working paper (draft of October 23, 2026, and its "Limitations and
  * extensions"), the daily update workflow in the calculator repo, and the
- * ballot measures dashboard (live on Vercel; policyengine.org listing is
- * app-v2 PR #1415, a draft, on October 29). */
+ * ballot measures dashboard (on policyengine.org since October 30). */
 const items: { icon: Icon; status: string; title: string; text: string; link?: string }[] = [
   {
     icon: IconFileText,
@@ -31,9 +30,9 @@ const items: { icon: Icon; status: string; title: string; text: string; link?: s
   },
   {
     icon: IconChecklist,
-    status: 'Preview live',
+    status: 'Live',
     title: 'More state ballot measures',
-    text: 'Our 2026 ballot measures dashboard covers six measures in five states. A policyengine.org launch is planned.',
+    text: 'Our 2026 ballot measures dashboard covers six measures in five states.',
     link: BALLOT_MEASURES_DISPLAY_URL,
   },
   {

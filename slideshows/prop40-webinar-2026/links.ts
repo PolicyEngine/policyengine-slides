@@ -23,8 +23,7 @@ export const PAPER_DISPLAY_URL = 'policyengine.org/us/california-wealth-tax/pape
 export const OPA_URL = 'https://fhoces.github.io/opa-prop40/';
 export const OPA_DISPLAY_URL = 'fhoces.github.io/opa-prop40';
 
-/** The 2026 ballot measures dashboard. On October 29 it was live on its Vercel
- * host only; the policyengine.org listing is app-v2 PR #1415 (draft). */
-export const BALLOT_MEASURES_URL =
-  'https://ballot-measures-2026.vercel.app/us/ballot-measures-2026';
-export const BALLOT_MEASURES_DISPLAY_URL = 'ballot-measures-2026.vercel.app/us/ballot-measures-2026';
+/** The 2026 ballot measures dashboard, on policyengine.org since October 30,
+ * 2026 (app-v2 PR #1415). */
+export const BALLOT_MEASURES_URL = 'https://www.policyengine.org/us/ballot-measures-2026';
+export const BALLOT_MEASURES_DISPLAY_URL = 'policyengine.org/us/ballot-measures-2026';
