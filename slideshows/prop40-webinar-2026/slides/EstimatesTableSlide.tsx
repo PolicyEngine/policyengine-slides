@@ -103,9 +103,9 @@ export default function EstimatesTableSlide() {
         f: share of the cohort&apos;s California income tax lost to departures. C: the cohort&apos;s
         income tax a year. r − g: discount rate net of income growth.
       </p>
-      {/* Why the calculator's totals (slides 13 and 14) differ from these */}
+      {/* Why the calculator's totals (slides 14 and 15) differ from these */}
       <p className="mt-1 text-sm text-gray-500">
-        These are the published figures. The calculator (slides 13 and 14) runs both sets of
+        These are the published figures. The calculator (slides 14 and 15) runs both sets of
         assumptions on one roster and current Forbes data, and takes the midpoint of each of
         Hoover&apos;s ranges instead of averaging 100,000 random draws, so its totals differ.
       </p>
