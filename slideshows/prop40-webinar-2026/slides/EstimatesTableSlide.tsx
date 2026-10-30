@@ -28,7 +28,7 @@ const camps = [
   {
     name: 'Hoover',
     headline: '−$38.9 billion',
-    detail: 'mean net present value; about $30 billion collected',
+    detail: 'mean net present value; central estimate of about $30 billion collected',
     source: 'Jaros and Rauh, NBER Working Paper 35899, October 2026',
   },
 ];
@@ -76,30 +76,30 @@ export default function EstimatesTableSlide() {
       <div className="-mt-4 grid grid-cols-[200px_1fr_1fr] gap-x-6">
         <div />
         {camps.map((camp) => (
-          <div key={camp.name} className="content-card px-5 py-3 mb-2">
+          <div key={camp.name} className="content-card px-5 py-2 mb-1">
             <p className="slide-tag">{camp.name}</p>
-            <p className="mt-2 text-3xl font-extrabold tracking-tight text-pe-teal">{camp.headline}</p>
-            <p className="text-base text-gray-700">{camp.detail}</p>
-            <p className="mt-1 text-sm text-gray-500">{camp.source}</p>
+            <p className="mt-1 text-2xl font-extrabold tracking-tight text-pe-teal">{camp.headline}</p>
+            <p className="text-sm text-gray-700">{camp.detail}</p>
+            <p className="text-sm text-gray-500">{camp.source}</p>
           </div>
         ))}
 
         {rows.map((row) => (
           <Fragment key={row.label}>
-            <div className="border-t border-gray-200 py-2 text-base font-semibold text-gray-800">
+            <div className="border-t border-gray-200 py-1 text-base font-semibold text-gray-800">
               {row.label}
             </div>
-            <div className="border-t border-gray-200 py-2 text-base text-gray-700 leading-snug">
+            <div className="border-t border-gray-200 py-1 text-base text-gray-700 leading-snug">
               {row.berkeley}
             </div>
-            <div className="border-t border-gray-200 py-2 text-base text-gray-700 leading-snug">
+            <div className="border-t border-gray-200 py-1 text-base text-gray-700 leading-snug">
               {row.hoover}
             </div>
           </Fragment>
         ))}
       </div>
 
-      <p className="mt-3 text-sm text-gray-500">
+      <p className="mt-2 text-sm text-gray-500">
         f: share of the cohort&apos;s California income tax lost to departures. C: the cohort&apos;s
         income tax a year. r − g: discount rate net of income growth.
       </p>

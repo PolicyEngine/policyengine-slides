@@ -113,8 +113,8 @@ export default function BridgeSlide() {
       </div>
 
       <p className="mt-4 text-sm text-gray-500 leading-snug">
-        Each bar is a Shapley value: the assumption&apos;s effect averaged over every order of
-        applying them, so the bars sum to the gap (to within rounding). The numbers move with the
+        Each bar between the two totals is a Shapley value: the assumption&apos;s effect averaged
+        over every order of applying them, so those bars sum to the gap (to within rounding). The numbers move with the
         daily Forbes data; on the working paper&apos;s {PAPER_BRIDGE.date} snapshot the ends were{' '}
         {fmt(PAPER_BRIDGE.startB)} billion and {fmt(PAPER_BRIDGE.endB)} billion.
       </p>
