@@ -7,6 +7,7 @@ Twelve slides in just under 12 minutes. Every figure on a slide traces to `EVIDE
 ## Before presenting
 
 - Open the deck once on the presentation laptop. It needs no live connection after it loads.
+- Press F for fullscreen, and the page control leaves the footer.
 - Keep the PDF backup on the laptop in case the room's network fails.
 - Check the slide order against what Cynthia, Tara and Linda present first, and cut slide 9's table to one sentence if they have already covered it.
 
