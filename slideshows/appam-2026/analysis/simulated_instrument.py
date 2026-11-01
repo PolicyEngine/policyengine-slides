@@ -1,8 +1,7 @@
 """Run one fixed sample of families through every state's rules.
 
-Each run keeps the same people, the same incomes and the same weights, and
-changes only the state and the tax year. The variation in the results therefore
-comes from the rules alone, which is the logic of a simulated instrument.
+Each run keeps the same people and the same incomes and changes only the state,
+so the differences between runs come from each state's rules.
 
 families.pkl stands in for a survey extract: one row per person, with columns
 named variable__year. sample_families.py builds it from Populace US.
@@ -11,18 +10,22 @@ named variable__year. sample_families.py builds it from Populace US.
 import json
 import sys
 from importlib.metadata import version
-from itertools import product
 from multiprocessing import Pool
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from policyengine_core.data import Dataset
 from policyengine_us import Microsimulation
 
 SAMPLE_YEAR = 2024
-YEARS = (2022, 2026)
 WORKERS = 4
+CHILD_AGE_LIMIT = 19
+# A family keeps its state only, so a county from one state never reaches another
+# state's county-level rules.
+FINER_GEOGRAPHY = (
+    "county_fips", "congressional_district_geoid", "block_geoid", "tract_geoid",
+    "cbsa_code", "place_fips",
+)  # fmt: skip
 STATE_FIPS = {
     "AL": 1, "AK": 2, "AZ": 4, "AR": 5, "CA": 6, "CO": 8, "CT": 9, "DE": 10,
     "DC": 11, "FL": 12, "GA": 13, "HI": 15, "ID": 16, "IL": 17, "IN": 18,
@@ -39,51 +42,54 @@ families = None
 
 def load(path):
     global families
-    families = pd.read_pickle(path)
-
-
-def run(state, year):
-    # A worker's exception that fails to unpickle hangs the whole pool, so each
-    # state and year reports its own failure as text.
-    try:
-        return simulate(state, year)
-    except Exception as error:
-        return {"state": state, "year": year, "error": repr(error)}
-
-
-def simulate(state, year):
-    people = families.rename(
-        columns=lambda name: name.replace(f"__{SAMPLE_YEAR}", f"__{year}")
+    families = pd.read_pickle(path).drop(
+        columns=[f"{name}__{SAMPLE_YEAR}" for name in FINER_GEOGRAPHY], errors="ignore"
     )
-    people[f"state_fips__{year}"] = STATE_FIPS[state]
-    sim = Microsimulation(dataset=Dataset.from_dataframe(people, year))
 
-    def mean(name):
-        values = sim.calculate(name, year, map_to="household").values
-        return values.astype(float)
 
-    weights = sim.calculate("household_weight", year).values
-    snap_eligible = sim.calculate("is_snap_eligible", f"{year}-01").values
-    spm_weights = sim.calculate("spm_unit_weight", year).values
+def run(state):
+    # A worker's exception that fails to unpickle hangs the whole pool, so each
+    # state reports its own failure as text.
+    try:
+        return simulate(state)
+    except Exception as error:
+        return {"state": state, "error": repr(error)}
+
+
+def simulate(state):
+    people = families.copy()
+    people[f"state_fips__{SAMPLE_YEAR}"] = STATE_FIPS[state]
+    sim = Microsimulation(dataset=Dataset.from_dataframe(people, SAMPLE_YEAR))
+    month = f"{SAMPLE_YEAR}-01"
+
+    # sample_families.py draws households in proportion to their weights, so each
+    # household in the sample counts once.
+    def household_mean(name):
+        return float(sim.calculate(name, SAMPLE_YEAR, map_to="household").values.mean())
+
+    children = sim.calculate("age", SAMPLE_YEAR).values < CHILD_AGE_LIMIT
+    covered = (
+        sim.calculate("is_medicaid_eligible", SAMPLE_YEAR).values
+        | sim.calculate("is_chip_eligible", SAMPLE_YEAR).values
+    )
     return {
         "state": state,
-        "year": year,
-        "state_income_tax": float(np.average(mean("state_income_tax"), weights=weights)),
-        "state_refundable_credits": float(
-            np.average(mean("state_refundable_credits"), weights=weights)
-        ),
-        "snap_eligible_share": float(np.average(snap_eligible, weights=spm_weights)),
-        "earnings_check": float(np.average(mean("employment_income"), weights=weights)),
+        "snap_eligible_share": float(sim.calculate("is_snap_eligible", month).values.mean()),
+        "child_medicaid_chip_share": float(covered[children].mean()),
+        "state_income_tax": household_mean("state_income_tax"),
+        "state_refundable_credits": household_mean("state_refundable_credits"),
+        "earnings_check": household_mean("employment_income"),
     }
 
 
 def main(path, commit):
     with Pool(WORKERS, initializer=load, initargs=(path,)) as pool:
-        rows = pool.starmap(run, product(STATE_FIPS, YEARS))
+        rows = pool.map(run, STATE_FIPS)
     sample = pd.read_pickle(path)
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": commit,
+        "year": SAMPLE_YEAR,
         "households": int(sample[f"person_household_id__{SAMPLE_YEAR}"].nunique()),
         "people": len(sample),
         "rows": rows,

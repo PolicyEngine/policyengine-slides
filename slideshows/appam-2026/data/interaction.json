@@ -1,0 +1,31 @@
+{
+ "policyengine_us_version": "2.90.2",
+ "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
+ "year": 2026,
+ "earnings": 40000,
+ "state": "TX",
+ "with_subsidy": {
+  "earnings": 40000.0,
+  "snap": 3141.0,
+  "wic": 1447.29,
+  "tanf": 0.0,
+  "child_care_subsidy": 15790.89,
+  "other_benefits": -0.0,
+  "federal_taxes": 4263.23,
+  "state_taxes": -0.0,
+  "child_care_bill": -18000.0,
+  "net_resources": 46642.42
+ },
+ "without_subsidy": {
+  "earnings": 40000.0,
+  "snap": 8739.0,
+  "wic": 1447.29,
+  "tanf": 0.0,
+  "child_care_subsidy": 0.0,
+  "other_benefits": -0.0,
+  "federal_taxes": 4263.23,
+  "state_taxes": -0.0,
+  "child_care_bill": -18000.0,
+  "net_resources": 36449.53
+ }
+}

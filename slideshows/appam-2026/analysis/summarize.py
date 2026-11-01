@@ -101,6 +101,10 @@ def main():
             for j in range(start, stop)
         ]
         drop, before, after = min(drops)
+        changes = {
+            key: rounded(line[at[after]] - line[at[before]])
+            for key, line in states[code].items()
+        }
         cliffs.append(
             {
                 "code": code,
@@ -110,6 +114,7 @@ def main():
                 "drop": rounded(-drop),
                 "net_before": rounded(net[at[before]]),
                 "net_after": rounded(net[at[after]]),
+                "changes": {k: v for k, v in changes.items() if abs(v) >= 100},
             }
         )
 
