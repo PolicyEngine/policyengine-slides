@@ -38,7 +38,9 @@ def results(sim):
         "people": float(weight.sum()),
         "child_poverty": float(np.average(poor[children], weights=weight[children])),
         "poverty": float(np.average(poor, weights=weight)),
-        "poverty_gap": float(np.sum(gap * sim.calculate("spm_unit_weight", YEAR).values)),
+        "poverty_gap": float(
+            np.sum(gap * sim.calculate("spm_unit_weight", YEAR).values)
+        ),
         "poor_records": poor,
         "household_weight": sim.calculate("household_weight", YEAR).values,
         "household_net_income": sim.calculate("household_net_income", YEAR).values,
@@ -70,9 +72,7 @@ def main(commit):
         "current": CURRENT,
         "reformed": REFORMED,
         "cost": float(np.sum(gains * weights)),
-        "households_gaining_share": float(
-            np.sum(weights[gains > 1]) / np.sum(weights)
-        ),
+        "households_gaining_share": float(np.sum(weights[gains > 1]) / np.sum(weights)),
         "any_household_loses": bool((gains < -1).any()),
         "household_records": len(weights),
         # Kish's effective sample size, which falls as weights concentrate.

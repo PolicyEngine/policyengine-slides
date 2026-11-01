@@ -30,9 +30,7 @@ STATES = [
     "WV", "WI", "WY",
 ]  # fmt: skip
 
-COUNTIES = json.loads(
-    Path(__file__).with_name("largest_counties.json").read_text()
-)
+COUNTIES = json.loads(Path(__file__).with_name("largest_counties.json").read_text())
 
 # Colorado, Washington and West Virginia pay subsidies that the model also
 # lists under spm_unit_benefits. Every state's subsidy shows up here through
@@ -71,9 +69,7 @@ def situation(state, earnings, axes=None, year=YEAR):
         marital_units[f"{name}_unit"] = {"members": [name]}
     spm_unit = {
         "members": members,
-        "spm_unit_pre_subsidy_childcare_expenses": {
-            year: CHILD_CARE_PER_MONTH * 12
-        },
+        "spm_unit_pre_subsidy_childcare_expenses": {year: CHILD_CARE_PER_MONTH * 12},
         "has_heating_cooling_expense": {year: True},
         # Both default to a value that misdescribes a parent in a regular job:
         # the activity test defaults to not met, and Wisconsin Works places
@@ -148,9 +144,7 @@ def net_resources_parts(sim, year=YEAR):
             - subsidies_in_benefits
             + sum(get(name) for name in CASH_OUTSIDE_SPM_TOTALS)
         ),
-        "federal_taxes": -(
-            get("spm_unit_federal_tax") + get("spm_unit_payroll_tax")
-        ),
+        "federal_taxes": -(get("spm_unit_federal_tax") + get("spm_unit_payroll_tax")),
         "state_taxes": -(get("spm_unit_state_tax") + get("spm_unit_local_tax")),
         "child_care_bill": -bill,
     }

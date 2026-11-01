@@ -74,7 +74,9 @@ def simulate(state):
     )
     return {
         "state": state,
-        "snap_eligible_share": float(sim.calculate("is_snap_eligible", month).values.mean()),
+        "snap_eligible_share": float(
+            sim.calculate("is_snap_eligible", month).values.mean()
+        ),
         "child_medicaid_chip_share": float(covered[children].mean()),
         "state_income_tax": household_mean("state_income_tax"),
         "state_refundable_credits": household_mean("state_refundable_credits"),

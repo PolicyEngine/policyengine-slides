@@ -23,7 +23,9 @@ def run_state(state):
     axes = hh.earnings_axis(EARNINGS_MIN, EARNINGS_MAX, count)
     sim = hh.simulate(state, axes=axes)
     parts = hh.net_resources_parts(sim)
-    return state, {key: [round(float(x), 2) for x in value] for key, value in parts.items()}
+    return state, {
+        key: [round(float(x), 2) for x in value] for key, value in parts.items()
+    }
 
 
 def main():

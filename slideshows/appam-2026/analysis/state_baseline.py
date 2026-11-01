@@ -37,9 +37,7 @@ def load():
         f"{owner}/{repo}", filename, repo_type="dataset", revision=tag
     )
     with pd.HDFStore(local, "r") as store:
-        tables = {
-            name: store.select(name) for name in ("household", "person", *GROUPS)
-        }
+        tables = {name: store.select(name) for name in ("household", "person", *GROUPS)}
 
 
 def state_file(fips):
