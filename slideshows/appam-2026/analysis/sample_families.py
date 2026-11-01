@@ -27,7 +27,8 @@ def main(path):
     )
     frame = sim.to_input_dataframe()
     sample = frame.loc[frame[f"person_household_id__{YEAR}"].isin(chosen)]
-    columns = [c for c in sample.columns if c.endswith(f"__{YEAR}")]
+    # Household roles such as is_household_head hold for all time, not one year.
+    columns = [c for c in sample.columns if c.endswith((f"__{YEAR}", "__ETERNITY"))]
     sample = sample[columns].reset_index(drop=True)
     sample[f"person_id__{YEAR}"] = sample.index
     sample.to_pickle(path)

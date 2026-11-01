@@ -8,6 +8,7 @@ import {
   crossSection,
   headlineEarnings,
   highest,
+  instrument,
   interaction,
   lowest,
   programLines,
@@ -134,5 +135,31 @@ describe('Axiom run', () => {
   it('refuses a month before the effective date', () => {
     expect(axiomRuns.beforeEffectiveDate.exit_code).not.toBe(0);
     expect(axiomRuns.beforeEffectiveDate.stderr).toContain('2019-11-01');
+  });
+});
+
+describe('fixed-sample microdata run', () => {
+  const STATE_COUNT = 51;
+  const CENT = 0.01;
+
+  it('reports every state, with no failed run', () => {
+    const codes = instrument.rows.map((row) => row.state);
+    expect(new Set(codes).size).toBe(STATE_COUNT);
+    for (const row of instrument.rows) expect(row).not.toHaveProperty('error');
+  });
+
+  it('keeps the same earnings in every state, because only the state changes', () => {
+    const earnings = instrument.rows.map((row) => row.earnings_check);
+    expect(Math.max(...earnings) - Math.min(...earnings)).toBeLessThan(CENT);
+  });
+
+  it('holds each share between zero and one, sorted for the rug plot', () => {
+    for (const line of instrument.lines) {
+      const values = line.values.map((entry) => entry.value);
+      expect(values).toHaveLength(STATE_COUNT);
+      expect(values).toEqual([...values].sort((a, b) => a - b));
+      expect(values[0]).toBeGreaterThanOrEqual(0);
+      expect(values[STATE_COUNT - 1]).toBeLessThanOrEqual(1);
+    }
   });
 });

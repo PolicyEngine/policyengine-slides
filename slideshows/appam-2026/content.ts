@@ -1,5 +1,6 @@
 import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
+import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
 
 export type StateRow = (typeof charts.cross_section)[number];
@@ -43,6 +44,24 @@ export const interaction = {
   subsidy: withSubsidy.child_care_subsidy,
   snapChange: withSubsidy.snap - withoutSubsidy.snap,
   netChange: withSubsidy.net_resources - withoutSubsidy.net_resources,
+};
+
+function instrumentLine(key: 'snap_eligible_share' | 'child_medicaid_chip_share', label: string) {
+  const values = instrumentRun.rows
+    .map((row) => ({ code: row.state, value: row[key] }))
+    .sort((a, b) => a.value - b.value);
+  return { key, label, values };
+}
+
+export const instrument = {
+  year: instrumentRun.year,
+  households: instrumentRun.households,
+  people: instrumentRun.people,
+  rows: instrumentRun.rows,
+  lines: [
+    instrumentLine('snap_eligible_share', 'SNAP eligibility'),
+    instrumentLine('child_medicaid_chip_share', 'Child Medicaid or CHIP eligibility'),
+  ],
 };
 
 export const axiomEngineVersion = axiomRun.engine.engine_version;

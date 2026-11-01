@@ -1,800 +1,417 @@
 {
  "policyengine_us_version": "2.90.2",
  "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
+ "year": 2024,
  "households": 3000,
  "people": 12307,
  "rows": [
   {
    "state": "AL",
-   "year": 2022,
-   "state_income_tax": 4485.809173763909,
+   "snap_eligible_share": 0.24787442773054283,
+   "child_medicaid_chip_share": 0.4631506613983852,
+   "state_income_tax": 4642.204943516523,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.21581993685323644,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "AL",
-   "year": 2026,
-   "state_income_tax": 4588.0528968895105,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.27273015634498454,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "AK",
-   "year": 2022,
+   "snap_eligible_share": 0.23250490516677566,
+   "child_medicaid_chip_share": 0.5119395292904999,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.21139554382680845,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "AK",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.4778980389115625,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "AZ",
-   "year": 2022,
-   "state_income_tax": 2708.1628614486253,
-   "state_refundable_credits": 22.014940747364953,
-   "snap_eligible_share": 0.30940357910552757,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "AZ",
-   "year": 2026,
-   "state_income_tax": 2217.419111177293,
-   "state_refundable_credits": 22.014940747364953,
-   "snap_eligible_share": 0.3621446172062773,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3384565075212557,
+   "child_medicaid_chip_share": 0.3989005325545439,
+   "state_income_tax": 2397.5109981310766,
+   "state_refundable_credits": 22.110333333333333,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "AR",
-   "year": 2022,
-   "state_income_tax": 4620.748735330941,
+   "snap_eligible_share": 0.17593198168737736,
+   "child_medicaid_chip_share": 0.41470537708297545,
+   "state_income_tax": 3993.160017771403,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.15129322245795396,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "AR",
-   "year": 2026,
-   "state_income_tax": 3694.750731688466,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.20043331332552852,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "CA",
-   "year": 2022,
-   "state_income_tax": 5632.303612215754,
-   "state_refundable_credits": 292.8980186497598,
-   "snap_eligible_share": 0.30666169296258833,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "CA",
-   "year": 2026,
-   "state_income_tax": 5117.564771444724,
-   "state_refundable_credits": 386.65159029200817,
-   "snap_eligible_share": 0.3563302663294956,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.34238064094179205,
+   "child_medicaid_chip_share": 0.5627898986428449,
+   "state_income_tax": 5662.352503046731,
+   "state_refundable_credits": 330.14634842966,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "CO",
-   "year": 2022,
-   "state_income_tax": 3523.1796229432753,
-   "state_refundable_credits": 1012.3661921374396,
-   "snap_eligible_share": 0.21812456374664588,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "CO",
-   "year": 2026,
-   "state_income_tax": 3646.888359844286,
-   "state_refundable_credits": 777.4938287318408,
-   "snap_eligible_share": 0.38460441596669925,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.25277959450621323,
+   "child_medicaid_chip_share": 0.4452843154097234,
+   "state_income_tax": 801.2072039235433,
+   "state_refundable_credits": 3671.9969935913086,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "CT",
-   "year": 2022,
-   "state_income_tax": 6191.306203911877,
-   "state_refundable_credits": 380.2945731849094,
-   "snap_eligible_share": 0.3060862058461477,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "CT",
-   "year": 2026,
-   "state_income_tax": 5441.162527788743,
-   "state_refundable_credits": 811.0613478962448,
-   "snap_eligible_share": 0.38568555722417264,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3616742969260955,
+   "child_medicaid_chip_share": 0.5205291187081258,
+   "state_income_tax": 5876.206705067555,
+   "state_refundable_credits": 621.6451496944427,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "DE",
-   "year": 2022,
-   "state_income_tax": 6026.0429877915785,
-   "state_refundable_credits": 26.418675118731436,
-   "snap_eligible_share": 0.33832520536218874,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "DE",
-   "year": 2026,
-   "state_income_tax": 5938.622126399449,
-   "state_refundable_credits": 31.82599280892689,
-   "snap_eligible_share": 0.39273527451488177,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3731196860693264,
+   "child_medicaid_chip_share": 0.4083490809139323,
+   "state_income_tax": 6186.524370158315,
+   "state_refundable_credits": 29.73923017076651,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "DC",
-   "year": 2022,
-   "state_income_tax": 6322.3064479615205,
-   "state_refundable_credits": 1152.2984257337944,
-   "snap_eligible_share": 0.3277394358379021,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "DC",
-   "year": 2026,
-   "state_income_tax": 3890.370956594866,
-   "state_refundable_credits": 3377.910985171372,
-   "snap_eligible_share": 0.38538110921179825,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.36134728580771747,
+   "child_medicaid_chip_share": 0.6227452327778732,
+   "state_income_tax": 6086.459089848438,
+   "state_refundable_credits": 1494.7380930894217,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "FL",
-   "year": 2022,
+   "snap_eligible_share": 0.36134728580771747,
+   "child_medicaid_chip_share": 0.40663116303040714,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3277394358379021,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "FL",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.38538110921179825,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "GA",
-   "year": 2022,
-   "state_income_tax": 5817.729666686229,
+   "snap_eligible_share": 0.2475474166121648,
+   "child_medicaid_chip_share": 0.43325889022504727,
+   "state_income_tax": 5389.918523928755,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.21525523111791572,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "GA",
-   "year": 2026,
-   "state_income_tax": 4383.302028449259,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2729946614125347,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "HI",
-   "year": 2022,
-   "state_income_tax": 7937.1591430233775,
-   "state_refundable_credits": 212.35184029946677,
-   "snap_eligible_share": 0.3675282195403802,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "HI",
-   "year": 2026,
-   "state_income_tax": 5446.559434541953,
-   "state_refundable_credits": 1199.6012586847203,
-   "snap_eligible_share": 0.3230815214457209,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.30085022890778285,
+   "child_medicaid_chip_share": 0.656588215083319,
+   "state_income_tax": 7271.1347313296,
+   "state_refundable_credits": 1110.4359419153234,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "ID",
-   "year": 2022,
-   "state_income_tax": 4956.248243614548,
-   "state_refundable_credits": 331.60630558190655,
-   "snap_eligible_share": 0.24920132379682988,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "ID",
-   "year": 2026,
-   "state_income_tax": 3970.2256692118694,
-   "state_refundable_credits": 493.78658900176634,
-   "snap_eligible_share": 0.22044562897347292,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.2710922171353826,
+   "child_medicaid_chip_share": 0.38790585809998285,
+   "state_income_tax": 4530.093020193735,
+   "state_refundable_credits": 397.755,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "IL",
-   "year": 2022,
-   "state_income_tax": 5447.670297720709,
-   "state_refundable_credits": 224.43614302099368,
-   "snap_eligible_share": 0.28426055480601187,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "IL",
-   "year": 2026,
-   "state_income_tax": 5064.671770119764,
-   "state_refundable_credits": 513.9634955031364,
-   "snap_eligible_share": 0.3397695116001273,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3142576847612819,
+   "child_medicaid_chip_share": 0.61501460230201,
+   "state_income_tax": 5377.259623566016,
+   "state_refundable_credits": 396.0033431086304,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "IN",
-   "year": 2022,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.in.tax.income.county_rates.SOLANO_COUNTY_CA' was not found in the 2022-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "IN",
-   "year": 2026,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.in.tax.income.county_rates.SOLANO_COUNTY_CA' was not found in the 2026-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "IA",
-   "year": 2022,
-   "state_income_tax": 5844.014472115049,
-   "state_refundable_credits": 215.44442471159317,
-   "snap_eligible_share": 0.2761556169298014,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.197187704381949,
+   "child_medicaid_chip_share": 0.45490465555746434,
+   "state_income_tax": 3739.849407449961,
+   "state_refundable_credits": 158.3812874236107,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "IA",
-   "year": 2026,
-   "state_income_tax": 3089.003936341328,
-   "state_refundable_credits": 335.4721415033339,
-   "snap_eligible_share": 0.3264671742172895,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.30379332897318506,
+   "child_medicaid_chip_share": 0.4890912214396152,
+   "state_income_tax": 4952.024769161542,
+   "state_refundable_credits": 270.95906364283957,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "KS",
-   "year": 2022,
-   "state_income_tax": 5281.196782358025,
-   "state_refundable_credits": 138.24644560961346,
-   "snap_eligible_share": 0.15561859950200005,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "KS",
-   "year": 2026,
-   "state_income_tax": 4910.942463663861,
-   "state_refundable_credits": 217.779798577404,
-   "snap_eligible_share": 0.2079070392625797,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.17920209287115763,
+   "child_medicaid_chip_share": 0.43325889022504727,
+   "state_income_tax": 5109.301689960162,
+   "state_refundable_credits": 196.7365119682948,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "KY",
-   "year": 2022,
-   "state_income_tax": 5796.159780818625,
+   "snap_eligible_share": 0.35480706344015694,
+   "child_medicaid_chip_share": 0.4786119223501117,
+   "state_income_tax": 4703.240766317367,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.321680306750959,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "KY",
-   "year": 2026,
-   "state_income_tax": 3974.200512178105,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3799383176802808,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "LA",
-   "year": 2022,
-   "state_income_tax": 4448.268055684163,
-   "state_refundable_credits": 71.43804312983836,
-   "snap_eligible_share": 0.1989171401710658,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "LA",
-   "year": 2026,
-   "state_income_tax": 3074.3212486448824,
-   "state_refundable_credits": 101.39428807519445,
-   "snap_eligible_share": 0.2837271056109273,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.26324395029431,
+   "child_medicaid_chip_share": 0.5031781480845215,
+   "state_income_tax": 4563.110700078388,
+   "state_refundable_credits": 85.3976891459624,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "ME",
-   "year": 2022,
-   "state_income_tax": 5797.531974237218,
-   "state_refundable_credits": 574.3618716903577,
-   "snap_eligible_share": 0.31603446870410645,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "ME",
-   "year": 2026,
-   "state_income_tax": 4903.80782286542,
-   "state_refundable_credits": 1437.8998119553125,
-   "snap_eligible_share": 0.3864177478096877,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3394375408763898,
+   "child_medicaid_chip_share": 0.5986943824085209,
+   "state_income_tax": 5375.652825648625,
+   "state_refundable_credits": 1274.1624221776326,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MD",
-   "year": 2022,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.md.msde.ccs.payment.informal.rates.ST_LOUIS_COUNTY_MO' was not found in the 2022-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "MD",
-   "year": 2026,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.md.msde.ccs.payment.informal.rates.ST_LOUIS_COUNTY_MO' was not found in the 2026-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "MA",
-   "year": 2022,
-   "state_income_tax": 5189.726997804561,
-   "state_refundable_credits": 599.3379576358102,
-   "snap_eligible_share": 0.3223122669193309,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3734466971877044,
+   "child_medicaid_chip_share": 0.6187940216457654,
+   "state_income_tax": 4871.556336189588,
+   "state_refundable_credits": 546.5854472144445,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MA",
-   "year": 2026,
-   "state_income_tax": 4615.002451679726,
-   "state_refundable_credits": 1314.4665576668467,
-   "snap_eligible_share": 0.37970606789911254,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.355134074558535,
+   "child_medicaid_chip_share": 0.47191204260436354,
+   "state_income_tax": 4893.2288542098995,
+   "state_refundable_credits": 1233.917961989085,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MI",
-   "year": 2022,
-   "state_income_tax": 4440.4430257291915,
-   "state_refundable_credits": 395.7114319220921,
-   "snap_eligible_share": 0.300356405410223,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "MI",
-   "year": 2026,
-   "state_income_tax": 3585.0595768598973,
-   "state_refundable_credits": 893.155682864129,
-   "snap_eligible_share": 0.3941442198251261,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3731196860693264,
+   "child_medicaid_chip_share": 0.47878371413846416,
+   "state_income_tax": 4080.4346373734475,
+   "state_refundable_credits": 782.7769156780242,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MN",
-   "year": 2022,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.mn.dcyf.ccap.rates.weekly.CHILD_CARE_CENTER.BERKS_COUNTY_PA' was not found in the 2022-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "MN",
-   "year": 2026,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.mn.dcyf.ccap.rates.weekly.CHILD_CARE_CENTER.BERKS_COUNTY_PA' was not found in the 2026-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "MS",
-   "year": 2022,
-   "state_income_tax": 4547.033721634153,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.15303537384903734,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3727926749509483,
+   "child_medicaid_chip_share": 0.5739563648857584,
+   "state_income_tax": 5493.336677195072,
+   "state_refundable_credits": 1641.2496261903445,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MS",
-   "year": 2026,
-   "state_income_tax": 3400.788965437468,
+   "snap_eligible_share": 0.17691301504251145,
+   "child_medicaid_chip_share": 0.40766191376052224,
+   "state_income_tax": 4141.6180621871945,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.20270119334960368,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MO",
-   "year": 2022,
-   "state_income_tax": 5167.783411945733,
-   "state_refundable_credits": 9.511731010230402,
-   "snap_eligible_share": 0.15496639871600257,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "MO",
-   "year": 2026,
-   "state_income_tax": 4000.429474811451,
-   "state_refundable_credits": 19.069814359615254,
-   "snap_eligible_share": 0.20370121282932616,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.17920209287115763,
+   "child_medicaid_chip_share": 0.4688197904140182,
+   "state_income_tax": 4626.009575565377,
+   "state_refundable_credits": 9.848666666666666,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "MT",
-   "year": 2022,
-   "state_income_tax": 5978.586346155859,
-   "state_refundable_credits": 40.54113188340445,
-   "snap_eligible_share": 0.3277394358379021,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "MT",
-   "year": 2026,
-   "state_income_tax": 4655.006158664032,
-   "state_refundable_credits": 355.6468147571191,
-   "snap_eligible_share": 0.38538110921179825,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.36134728580771747,
+   "child_medicaid_chip_share": 0.44768940044665867,
+   "state_income_tax": 5617.882796454906,
+   "state_refundable_credits": 158.86577366908392,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NE",
-   "year": 2022,
-   "state_income_tax": 5702.222853874711,
-   "state_refundable_credits": 130.3763654393955,
-   "snap_eligible_share": 0.2586944646388724,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NE",
-   "year": 2026,
-   "state_income_tax": 3340.1223417438027,
-   "state_refundable_credits": 628.6020833262926,
-   "snap_eligible_share": 0.29866130454524964,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.2782864617396992,
+   "child_medicaid_chip_share": 0.4789555059268167,
+   "state_income_tax": 4492.997855871195,
+   "state_refundable_credits": 588.7376293460592,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NV",
-   "year": 2022,
+   "snap_eligible_share": 0.36134728580771747,
+   "child_medicaid_chip_share": 0.40267995189829925,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3277394358379021,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NV",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3902546557545319,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NH",
-   "year": 2022,
-   "state_income_tax": 180.62537117705727,
+   "snap_eligible_share": 0.3620013080444735,
+   "child_medicaid_chip_share": 0.6196529805875279,
+   "state_income_tax": 124.109505119284,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3057178161648237,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NH",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.38622784386842024,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NJ",
-   "year": 2022,
-   "state_income_tax": 4972.263441317927,
-   "state_refundable_credits": 672.7782170911818,
-   "snap_eligible_share": 0.30678005308164025,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NJ",
-   "year": 2026,
-   "state_income_tax": 4547.708440571273,
-   "state_refundable_credits": 1096.6803092460125,
-   "snap_eligible_share": 0.359626510852676,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3358404185742315,
+   "child_medicaid_chip_share": 0.4841092595773922,
+   "state_income_tax": 4980.1117833608,
+   "state_refundable_credits": 928.7559224914114,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NM",
-   "year": 2022,
-   "state_income_tax": 4289.448293255258,
-   "state_refundable_credits": 372.3270201357819,
-   "snap_eligible_share": 0.27277216368115365,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NM",
-   "year": 2026,
-   "state_income_tax": 3224.454080817747,
-   "state_refundable_credits": 1161.2030454052388,
-   "snap_eligible_share": 0.38568555722417264,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.302812295618051,
+   "child_medicaid_chip_share": 0.5456107198075932,
+   "state_income_tax": 3624.8189621044694,
+   "state_refundable_credits": 1078.2519249013264,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NY",
-   "year": 2022,
-   "state_income_tax": 6065.088055897256,
-   "state_refundable_credits": 741.8737640342297,
-   "snap_eligible_share": 0.27418202153138954,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NY",
-   "year": 2026,
-   "state_income_tax": 5061.390437856817,
-   "state_refundable_credits": 1493.8123273897324,
-   "snap_eligible_share": 0.3356450571090546,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.31131458469587964,
+   "child_medicaid_chip_share": 0.5054114413331042,
+   "state_income_tax": 5962.339574009895,
+   "state_refundable_credits": 907.7348648373286,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "NC",
-   "year": 2022,
-   "state_income_tax": 5175.689431936495,
+   "snap_eligible_share": 0.35546108567691304,
+   "child_medicaid_chip_share": 0.477065796254939,
+   "state_income_tax": 4802.235627241453,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3222345468653888,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "NC",
-   "year": 2026,
-   "state_income_tax": 4142.077972152309,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.3800681961577649,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "ND",
-   "year": 2022,
-   "state_income_tax": 1337.963316294039,
+   "snap_eligible_share": 0.26324395029431,
+   "child_medicaid_chip_share": 0.4631506613983852,
+   "state_income_tax": 1108.540477870961,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.22874327115648482,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "ND",
-   "year": 2026,
-   "state_income_tax": 992.9676854652907,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2842769191641272,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "OH",
-   "year": 2022,
-   "state_income_tax": 3094.952500215858,
+   "snap_eligible_share": 0.27174623937213865,
+   "child_medicaid_chip_share": 0.471740250816011,
+   "state_income_tax": 2838.545349334717,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.23704117548500492,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "OH",
-   "year": 2026,
-   "state_income_tax": 2426.738831640137,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2934743048199835,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "OK",
-   "year": 2022,
-   "state_income_tax": 4730.512231803788,
-   "state_refundable_credits": 121.29740854024446,
-   "snap_eligible_share": 0.21606547622444,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "OK",
-   "year": 2026,
-   "state_income_tax": 4406.290115354363,
-   "state_refundable_credits": 119.28496479180392,
-   "snap_eligible_share": 0.2737057241360581,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.249836494440811,
+   "child_medicaid_chip_share": 0.47122487545095343,
+   "state_income_tax": 4869.359526581327,
+   "state_refundable_credits": 117.1888083165884,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "OR",
-   "year": 2022,
-   "state_income_tax": 8993.94353225364,
-   "state_refundable_credits": 288.37526274843856,
-   "snap_eligible_share": 0.339426691042413,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "OR",
-   "year": 2026,
-   "state_income_tax": 8504.107829862658,
-   "state_refundable_credits": 503.35995090296785,
-   "snap_eligible_share": 0.39451352567621695,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3737737083060824,
+   "child_medicaid_chip_share": 0.4521559869438241,
+   "state_income_tax": 8990.778425834496,
+   "state_refundable_credits": 372.98409737151115,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "PA",
-   "year": 2022,
-   "state_income_tax": 3898.91368596247,
-   "state_refundable_credits": 39.74424265651905,
-   "snap_eligible_share": 0.27535808408970897,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "PA",
-   "year": 2026,
-   "state_income_tax": 3566.0684599164274,
-   "state_refundable_credits": 371.68801944851504,
-   "snap_eligible_share": 0.38568555722417264,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3616742969260955,
+   "child_medicaid_chip_share": 0.4636660367634427,
+   "state_income_tax": 3921.0559583371482,
+   "state_refundable_credits": 125.49070748287936,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "RI",
-   "year": 2022,
-   "state_income_tax": 4885.042172762693,
-   "state_refundable_credits": 199.0382490936301,
-   "snap_eligible_share": 0.24148167945906787,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "RI",
-   "year": 2026,
-   "state_income_tax": 4384.383618069928,
-   "state_refundable_credits": 296.90106179762347,
-   "snap_eligible_share": 0.2835125732097495,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.2710922171353826,
+   "child_medicaid_chip_share": 0.5557464353203917,
+   "state_income_tax": 4737.612254342874,
+   "state_refundable_credits": 262.03886022925377,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "SC",
-   "year": 2022,
-   "state_income_tax": 5322.846464823121,
+   "snap_eligible_share": 0.2475474166121648,
+   "child_medicaid_chip_share": 0.4746607112180038,
+   "state_income_tax": 5041.379117711544,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.21566004666108401,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "SC",
-   "year": 2026,
-   "state_income_tax": 4417.362349975072,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2729946614125347,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "SD",
-   "year": 2022,
+   "snap_eligible_share": 0.18606932635709614,
+   "child_medicaid_chip_share": 0.4473458168699536,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.16404254921703593,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "SD",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2144472854659317,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "TN",
-   "year": 2022,
+   "snap_eligible_share": 0.17560497056899935,
+   "child_medicaid_chip_share": 0.5021473973544065,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.15162120343507343,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "TN",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.200761294302648,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "TX",
-   "year": 2022,
+   "snap_eligible_share": 0.23610202746893394,
+   "child_medicaid_chip_share": 0.4019927847448892,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2094491696899193,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "TX",
-   "year": 2026,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.25723534351167343,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "UT",
-   "year": 2022,
-   "state_income_tax": 5532.289728994569,
+   "snap_eligible_share": 0.18181818181818182,
+   "child_medicaid_chip_share": 0.39821336540113383,
+   "state_income_tax": 5122.588540344238,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.1588720142004796,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "UT",
-   "year": 2026,
-   "state_income_tax": 4708.6602211037425,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.2098431709896105,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "VT",
-   "year": 2022,
-   "state_income_tax": 5043.193078765479,
-   "state_refundable_credits": 985.822716085479,
-   "snap_eligible_share": 0.3063831940379679,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "VT",
-   "year": 2026,
-   "state_income_tax": 4273.9083079636985,
-   "state_refundable_credits": 1250.5662945717318,
-   "snap_eligible_share": 0.3584635670996409,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3351863963374755,
+   "child_medicaid_chip_share": 0.610719807593197,
+   "state_income_tax": 4839.219672122956,
+   "state_refundable_credits": 1087.1772877934775,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "VA",
-   "year": 2022,
-   "state_income_tax": 5363.322960245165,
-   "state_refundable_credits": 132.9170335416518,
-   "snap_eligible_share": 0.32890257197708067,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "VA",
-   "year": 2026,
-   "state_income_tax": 5458.702028677792,
-   "state_refundable_credits": 280.8603820749461,
-   "snap_eligible_share": 0.3861198837140311,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.36265533028122954,
+   "child_medicaid_chip_share": 0.41058237416251503,
+   "state_income_tax": 5455.676749258995,
+   "state_refundable_credits": 170.28072769069672,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "WA",
-   "year": 2022,
-   "state_income_tax": -249.59040533265065,
-   "state_refundable_credits": 321.54962005780027,
-   "snap_eligible_share": 0.34024389149519463,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "WA",
-   "year": 2026,
-   "state_income_tax": -361.76437979979227,
-   "state_refundable_credits": 424.90865651005464,
-   "snap_eligible_share": 0.39420907766384256,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3734466971877044,
+   "child_medicaid_chip_share": 0.5279161656072839,
+   "state_income_tax": -288.07269490559895,
+   "state_refundable_credits": 382.141,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "WV",
-   "year": 2022,
-   "state_income_tax": 6999.711920840588,
-   "state_refundable_credits": 23.75518500808772,
-   "snap_eligible_share": 0.3277394358379021,
-   "earnings_check": 100949.40977942833
-  },
-  {
-   "state": "WV",
-   "year": 2026,
-   "state_income_tax": 4774.416912946368,
-   "state_refundable_credits": 31.909431978687966,
-   "snap_eligible_share": 0.38568555722417264,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.3616742969260955,
+   "child_medicaid_chip_share": 0.4526713623088816,
+   "state_income_tax": 5585.146787513733,
+   "state_refundable_credits": 31.535528930664064,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "WI",
-   "year": 2022,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.wi.dcf.shares.rates.licensed_group.hourly.SOLANO_COUNTY_CA' was not found in the 2022-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "WI",
-   "year": 2026,
-   "error": "ParameterNotFoundError(\"The parameter 'gov.states.wi.dcf.shares.rates.licensed_group.hourly.SOLANO_COUNTY_CA' was not found in the 2026-01-01 tax and benefit system.\")"
-  },
-  {
-   "state": "WY",
-   "year": 2022,
-   "state_income_tax": 0.0,
-   "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.16087302337648024,
-   "earnings_check": 100949.40977942833
+   "snap_eligible_share": 0.36102027468933945,
+   "child_medicaid_chip_share": 0.4810170073870469,
+   "state_income_tax": 5270.688319202065,
+   "state_refundable_credits": 262.09629645669463,
+   "earnings_check": 100935.56711598643
   },
   {
    "state": "WY",
-   "year": 2026,
+   "snap_eligible_share": 0.18378024852844996,
+   "child_medicaid_chip_share": 0.4631506613983852,
    "state_income_tax": 0.0,
    "state_refundable_credits": 0.0,
-   "snap_eligible_share": 0.21206257040649928,
-   "earnings_check": 100949.40977942833
+   "earnings_check": 100935.56711598643
   }
  ]
 }
