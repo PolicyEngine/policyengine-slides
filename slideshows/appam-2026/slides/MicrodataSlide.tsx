@@ -4,8 +4,9 @@ import Frame from './Frame';
 import InstrumentRugs from './InstrumentRugs';
 
 const PYTHON = `people = pd.read_csv("your_survey.csv")
+# Keep state alone: drop county and finer geography.
 
-for fips in STATE_FIPS.values():
+for fips in STATE_FIPS.values():  # all 51
     people["state_fips__2024"] = fips
     data = Dataset.from_dataframe(people, 2024)
     sim = Microsimulation(dataset=data)
@@ -32,9 +33,9 @@ export default function MicrodataSlide() {
             <InstrumentRugs />
           </div>
           <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
-            Each mark shows one state. The same {instrument.households.toLocaleString('en-US')} households with children
-            from Populace US, our default microdata, under each state’s {instrument.year} rules. SNAP in January, as a
-            share of SPM units. Medicaid or CHIP as a share of children under 19.
+            Each mark shows one state. The same {instrument.households.toLocaleString('en-US')} households with children,
+            drawn by weight from Populace US, our default microdata, under each state’s {instrument.year} rules. SNAP in
+            January, as a share of SPM units with children. Medicaid or CHIP as a share of children under 19.
           </p>
         </div>
       </div>

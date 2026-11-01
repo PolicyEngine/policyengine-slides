@@ -11,7 +11,7 @@ const uses = [
   },
   {
     title: 'Estimate reforms',
-    body: 'How proposed reforms would change poverty and household incomes in each state.',
+    body: 'Who would gain or lose if lawmakers adopted a proposed reform.',
   },
 ];
 

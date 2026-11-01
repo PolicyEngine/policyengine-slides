@@ -1,6 +1,6 @@
 import EarningsChart from './EarningsChart';
 import Frame from './Frame';
-import { cliffs, largestCliff, medianRateAt, percent, usd } from '../content';
+import { cliffs, largestCliff, medianRateAt, percent, subsidyDrivenCliffs, usd } from '../content';
 
 export default function CliffsSlide() {
   return (
@@ -29,6 +29,9 @@ export default function CliffsSlide() {
                 </li>
               ))}
             </ul>
+            <p className="mt-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
+              In {subsidyDrivenCliffs} of 51 states, the family’s largest drop comes from losing the subsidy.
+            </p>
           </div>
           <div>
             <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>

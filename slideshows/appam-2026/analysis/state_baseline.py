@@ -28,6 +28,11 @@ tables = None
 known = None
 
 
+def kish(weights):
+    """Kish's effective sample size, which falls as weights concentrate."""
+    return float(weights.sum() ** 2 / (weights**2).sum())
+
+
 def load():
     global tables, known
     known = set(CountryTaxBenefitSystem().variables)
@@ -40,10 +45,8 @@ def load():
         tables = {name: store.select(name) for name in ("household", "person", *GROUPS)}
 
 
-def state_file(fips):
-    """One state's people as a flat file, with group columns on each member's row."""
-    households = tables["household"]
-    households = households[households["state_fips"] == fips]
+def flat_file(households):
+    """These households' people, with group columns on each member's row."""
     people = tables["person"]
     people = people[
         people["person_household_id"].isin(households["household_id"])
@@ -69,18 +72,24 @@ def state_file(fips):
     return pd.DataFrame({f"{k}__{DATA_YEAR}": v for k, v in columns.items()})
 
 
+def state_file(fips):
+    households = tables["household"]
+    return flat_file(households[households["state_fips"] == fips])
+
+
 def run(fips):
     sim = Microsimulation(dataset=Dataset.from_dataframe(state_file(fips), DATA_YEAR))
     age = sim.calculate("age", YEAR).values
     weight = sim.calculate("person_weight", YEAR).values.astype(float)
     poor = sim.calculate("spm_unit_is_in_spm_poverty", YEAR, map_to="person").values
     households = sim.calculate("household_weight", YEAR).values.astype(float)
+    with_children = sim.calculate("is_child", YEAR, map_to="household").values > 0
     children = age < CHILD_AGE_LIMIT
     return {
         "state": str(sim.calculate("state_code_str", YEAR).values[0]),
         "records": len(households),
-        # Kish's effective sample size, which falls as weights concentrate.
-        "effective_households": float(households.sum() ** 2 / (households**2).sum()),
+        "effective_households": kish(households),
+        "effective_households_with_children": kish(households[with_children]),
         "child_spm_percent": float(
             100 * np.average(poor[children], weights=weight[children])
         ),

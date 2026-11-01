@@ -20,7 +20,7 @@ export default function ParametersSlide() {
   return (
     <Frame title="Parameters record when each value took effect and cite their sources">
       <div className="flex h-full items-center gap-[4vh]">
-        <CodeBlock title="gov/states/ma/tax/income/credits/child_and_family/amount.yaml" className="min-w-0 flex-[3]">
+        <CodeBlock title="gov/states/ma/tax/income/credits/child_and_family/amount.yaml (excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.95vh, 24px)' }}>
             {YAML}
           </pre>
@@ -31,7 +31,7 @@ export default function ParametersSlide() {
             lifted its two-dependent cap.
           </p>
           <p>Ask for any date and the model reads the value in force on that date.</p>
-          <p>Open the file and check each value against the citation beside it.</p>
+          <p>Open the file and check each value against the laws and forms it cites.</p>
         </div>
       </div>
     </Frame>

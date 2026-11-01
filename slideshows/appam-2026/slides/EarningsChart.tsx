@@ -15,7 +15,7 @@ const LAST_LABEL_ON_RIGHT = 90_000;
 
 const SERIES_COLORS: Record<string, string> = {
   IA: 'var(--color-teal-600)',
-  MN: 'var(--pe-amber)',
+  ID: 'var(--pe-amber)',
   MD: 'var(--chart-4)',
 };
 
@@ -38,7 +38,7 @@ export default function EarningsChart() {
     <svg
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       role="img"
-      aria-label="Net resources by earnings for every state, with Iowa, Minnesota and Maryland highlighted"
+      aria-label={`Net resources by earnings for every state, with ${cliffs.map((cliff) => cliff.name).join(", ")} highlighted`}
       className="h-full w-full"
     >
       {Y_TICKS.map((tick) => (

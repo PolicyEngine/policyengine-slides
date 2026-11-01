@@ -51,8 +51,10 @@ export default function ReformSlide() {
         <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
           Populace US, 2026, assuming no behavioral responses. The file holds{' '}
           {massachusetts.records.toLocaleString('en-US')} Massachusetts households, an effective sample of about{' '}
-          {massachusetts.effectiveHouseholds}, and no record crosses the SPM threshold under this reform. The poverty
-          gap moves with each dollar that reaches a family below the threshold.
+          {massachusetts.effectiveHouseholds}, and puts {massachusetts.modelChildRate.toFixed(1)}% of the state’s
+          children below the SPM threshold in 2025, against Census’s {massachusetts.censusChildRate.toFixed(1)}% for
+          2023 to 2025. No record crosses the threshold under this reform, so the rate holds still, while the gap moves
+          with each dollar that reaches a family below it.
         </p>
       </div>
     </Frame>

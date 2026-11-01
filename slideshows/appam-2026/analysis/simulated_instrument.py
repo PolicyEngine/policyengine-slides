@@ -23,8 +23,8 @@ CHILD_AGE_LIMIT = 19
 # A family keeps its state only, so a county from one state never reaches another
 # state's county-level rules.
 FINER_GEOGRAPHY = (
-    "county_fips", "congressional_district_geoid", "block_geoid", "tract_geoid",
-    "cbsa_code", "place_fips",
+    "county", "county_fips", "congressional_district_geoid", "block_geoid",
+    "tract_geoid", "cbsa_code", "place_fips",
 )  # fmt: skip
 STATE_FIPS = {
     "AL": 1, "AK": 2, "AZ": 4, "AR": 5, "CA": 6, "CO": 8, "CT": 9, "DE": 10,
@@ -62,21 +62,24 @@ def simulate(state):
     sim = Microsimulation(dataset=Dataset.from_dataframe(people, SAMPLE_YEAR))
     month = f"{SAMPLE_YEAR}-01"
 
-    # sample_families.py draws households in proportion to their weights, so each
-    # household in the sample counts once.
+    # sample_families.py draws households in proportion to their weights, with
+    # replacement, so each household in the file counts once.
     def household_mean(name):
         return float(sim.calculate(name, SAMPLE_YEAR, map_to="household").values.mean())
 
     children = sim.calculate("age", SAMPLE_YEAR).values < CHILD_AGE_LIMIT
+    units_with_children = (
+        sim.calculate("is_child", SAMPLE_YEAR, map_to="spm_unit").values > 0
+    )
+    snap = sim.calculate("is_snap_eligible", month).values
     covered = (
         sim.calculate("is_medicaid_eligible", SAMPLE_YEAR).values
         | sim.calculate("is_chip_eligible", SAMPLE_YEAR).values
     )
     return {
         "state": state,
-        "snap_eligible_share": float(
-            sim.calculate("is_snap_eligible", month).values.mean()
-        ),
+        "state_check": str(sim.calculate("state_code_str", SAMPLE_YEAR).values[0]),
+        "snap_eligible_share": float(snap[units_with_children].mean()),
         "child_medicaid_chip_share": float(covered[children].mean()),
         "state_income_tax": household_mean("state_income_tax"),
         "state_refundable_credits": household_mean("state_refundable_credits"),

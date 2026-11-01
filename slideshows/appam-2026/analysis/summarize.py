@@ -1,6 +1,6 @@
 """Cut data/family.json down to what the deck's charts draw.
 
-Writes data/charts.json. The earnings, the sweep range and the cliff states
+Writes data/charts.json. The earnings, the sweep range and the cliff count
 sit here so one edit changes every chart and the numbers beside them.
 """
 
@@ -12,7 +12,7 @@ HEADLINE_EARNINGS = 40_000
 SPREAD_EARNINGS = (30_000, 40_000, 50_000, 60_000)
 SWEEP_MIN = 15_000
 SWEEP_MAX = 100_000
-CLIFF_STATES = ("IA", "MN", "MD")
+CLIFF_COUNT = 3
 EMTR_EARNINGS = (30_000, 60_000)
 SPREAD_LINES = ("child_care_subsidy", "snap", "state_taxes", "federal_taxes")
 
@@ -93,8 +93,8 @@ def main():
         for code, lines in states.items()
     }
 
-    cliffs = []
-    for code in CLIFF_STATES:
+    ranking = []
+    for code in states:
         net = states[code]["net_resources"]
         drops = [
             (net[j + 1] - net[j], earnings[j], earnings[j + 1])
@@ -105,7 +105,7 @@ def main():
             key: rounded(line[at[after]] - line[at[before]])
             for key, line in states[code].items()
         }
-        cliffs.append(
+        ranking.append(
             {
                 "code": code,
                 "name": STATE_NAMES[code],
@@ -117,6 +117,7 @@ def main():
                 "changes": {k: v for k, v in changes.items() if abs(v) >= 100},
             }
         )
+    ranking.sort(key=lambda row: row["drop"], reverse=True)
 
     emtr = []
     for value in EMTR_EARNINGS:
@@ -139,7 +140,8 @@ def main():
         "lines_by_program": lines_by_program,
         "sweep_earnings": sweep_earnings,
         "sweep": sweep,
-        "cliffs": cliffs,
+        "cliffs": ranking[:CLIFF_COUNT],
+        "cliff_ranking": ranking,
         "emtr": emtr,
     }
     (root / "charts.json").write_text(json.dumps(payload, separators=(",", ":")) + "\n")

@@ -42,7 +42,7 @@ export default function WhichLinesSlide() {
             ))}
           </dl>
           <p className="mt-[1.5vh]">
-            Texas deducts what the family pays for care when it counts SNAP income, so the subsidy shrinks that deduction.
+            Congress lets SNAP households deduct what they pay for care, so the subsidy shrinks that deduction.
           </p>
         </div>
       </div>

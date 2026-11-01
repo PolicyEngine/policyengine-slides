@@ -25,7 +25,19 @@ export const sweep = charts.sweep;
 export const cliffs = charts.cliffs;
 export const medianRates = charts.emtr;
 
-export const largestCliff = cliffs.reduce((a, b) => (b.drop > a.drop ? b : a));
+export const cliffRanking = charts.cliff_ranking;
+export const largestCliff = cliffRanking[0];
+
+function largestLoss(changes: Record<string, number | undefined>) {
+  const losses = Object.entries(changes).filter(
+    ([key]) => !['earnings', 'net_resources', 'child_care_bill'].includes(key),
+  );
+  return losses.reduce((a, b) => ((b[1] ?? 0) < (a[1] ?? 0) ? b : a))[0];
+}
+
+export const subsidyDrivenCliffs = cliffRanking.filter(
+  (cliff) => largestLoss(cliff.changes) === 'child_care_subsidy',
+).length;
 
 export function spreadAt(earnings: number) {
   const row = spreads.find((spread) => spread.earnings === earnings);
@@ -66,10 +78,14 @@ export const instrument = {
   ],
 };
 
+const massachusettsBaseline = stateBaselineRun.rows.find((row) => row.state === 'MA');
+if (!massachusettsBaseline) throw new Error('No Massachusetts baseline');
+
 export const massachusetts = {
   current: reformRun.current,
   reformed: reformRun.reformed,
-  cost: reformRun.cost,
+  cost: reformRun.state_cost,
+  householdGain: reformRun.household_gain,
   gainingShare: reformRun.households_gaining_share,
   anyHouseholdLoses: reformRun.any_household_loses,
   gapReduction: reformRun.baseline_poverty_gap - reformRun.reformed_poverty_gap,
@@ -77,10 +93,12 @@ export const massachusetts = {
   effectiveHouseholds: Math.round(reformRun.effective_households),
   peopleCrossingThreshold: reformRun.people_crossing_threshold,
   childPoverty: [reformRun.baseline_child_poverty, reformRun.reformed_child_poverty],
+  modelChildRate: massachusettsBaseline.child_spm_percent,
+  censusChildRate: massachusettsBaseline.census_percent,
 };
 
 const effectiveSamples = stateBaselineRun.rows
-  .map((row) => row.effective_households)
+  .map((row) => row.effective_households_with_children)
   .sort((a, b) => a - b);
 const censusGaps = stateBaselineRun.rows.map((row) =>
   Math.abs(row.child_spm_percent - row.census_percent),
@@ -92,6 +110,9 @@ export const stateBaseline = {
   meanCensusGap: censusGaps.reduce((sum, gap) => sum + gap, 0) / censusGaps.length,
   beyondCensusMargin: stateBaselineRun.rows.filter(
     (row, i) => censusGaps[i] > row.census_margin,
+  ).length,
+  modelExceedsCensus: stateBaselineRun.rows.filter(
+    (row) => row.child_spm_percent > row.census_percent,
   ).length,
 };
 
@@ -118,6 +139,10 @@ export const axiomRuns = {
 export function usd(value: number) {
   const sign = value < 0 ? '−' : '';
   return `${sign}$${Math.abs(Math.round(value)).toLocaleString('en-US')}`;
+}
+
+export function usdCents(value: number) {
+  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
 export function millions(value: number) {

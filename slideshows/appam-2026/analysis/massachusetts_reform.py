@@ -6,7 +6,8 @@ Runs current law and the reform on the Massachusetts records in Populace US for
 Populace US carries few well-weighted records for any one state, so a small reform
 can leave a state's poverty rate unchanged because no record crosses the threshold.
 The poverty gap moves with each dollar that reaches a family below the threshold,
-so the slide reports that alongside cost.
+so the slide reports that alongside cost. Cost means the fall in state income tax,
+and household_gain holds the change in household net income beside it.
 """
 
 import json
@@ -18,7 +19,8 @@ import numpy as np
 from policyengine_core.data import Dataset
 from policyengine_core.reforms import Reform
 from policyengine_us import Microsimulation
-from state_baseline import DATA_YEAR, load, state_file
+
+from state_baseline import DATA_YEAR, kish, load, state_file
 
 YEAR = 2026
 MASSACHUSETTS_FIPS = 25
@@ -40,6 +42,12 @@ def results(sim):
         "poverty": float(np.average(poor, weights=weight)),
         "poverty_gap": float(
             np.sum(gap * sim.calculate("spm_unit_weight", YEAR).values)
+        ),
+        "state_income_tax": float(
+            np.sum(
+                sim.calculate("state_income_tax", YEAR).values
+                * sim.calculate("tax_unit_weight", YEAR).values
+            )
         ),
         "poor_records": poor,
         "household_weight": sim.calculate("household_weight", YEAR).values,
@@ -71,12 +79,12 @@ def main(commit):
         "parameter": PARAMETER,
         "current": CURRENT,
         "reformed": REFORMED,
-        "cost": float(np.sum(gains * weights)),
+        "state_cost": baseline["state_income_tax"] - reformed["state_income_tax"],
+        "household_gain": float(np.sum(gains * weights)),
         "households_gaining_share": float(np.sum(weights[gains > 1]) / np.sum(weights)),
         "any_household_loses": bool((gains < -1).any()),
         "household_records": len(weights),
-        # Kish's effective sample size, which falls as weights concentrate.
-        "effective_households": float(weights.sum() ** 2 / (weights**2).sum()),
+        "effective_households": kish(weights),
         "people_crossing_threshold": int(
             np.sum(baseline["poor_records"] != reformed["poor_records"])
         ),

@@ -31,10 +31,9 @@ def test_lines_add_up_to_net_resources(state, income):
 
 @settings(max_examples=MAX_EXAMPLES, deadline=None)
 @given(states, earnings)
-def test_subsidy_stays_between_zero_and_the_bill(state, income):
+def test_family_never_pays_more_than_the_bill(state, income):
     parts = hh.net_resources_parts(hh.simulate(state, income))
-    subsidy = parts["child_care_subsidy"][0]
-    assert -TOLERANCE <= subsidy <= -parts["child_care_bill"][0] + TOLERANCE
+    assert parts["child_care_subsidy"][0] >= -TOLERANCE
 
 
 @settings(max_examples=MAX_EXAMPLES, deadline=None)

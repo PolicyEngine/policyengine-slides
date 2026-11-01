@@ -4,23 +4,40 @@ import { describe, expect, it } from 'vitest';
 import {
   axiomRuns,
   childCareBill,
+  cliffRanking,
   cliffs,
   crossSection,
   headlineEarnings,
   highest,
   instrument,
   interaction,
+  largestCliff,
   lowest,
   massachusetts,
+  medianRateAt,
+  millions,
+  percent,
   programLines,
+  spreadAt,
   spreads,
   stateBaseline,
+  subsidyDrivenCliffs,
   sweep,
   sweepEarnings,
+  usd,
+  usdCents,
 } from './content';
+import nationalCheck from './data/massachusetts_national_check.json';
 import { SERIES } from './slides/FamilyChart';
 
-const family = JSON.parse(readFileSync(join(__dirname, 'data/family.json'), 'utf8'));
+const read = (path: string) => readFileSync(join(__dirname, path), 'utf8');
+const family = JSON.parse(read('data/family.json'));
+const census = JSON.parse(read('data/census_child_spm.json'));
+const notes = read('SPEAKER-NOTES.md');
+const ledger = read('EVIDENCE.md');
+const webinarMap = read('../cpid-webinar-2026/slides/StateChildPovertyMapSlide.tsx');
+
+const NET_OF_THE_LOSS = ['earnings', 'net_resources', 'child_care_bill'];
 
 const lineKeys = [
   'earnings',
@@ -97,13 +114,42 @@ describe('derived chart data', () => {
     }
   });
 
-  it('reports each cliff as the largest fall in that state, one step wide', () => {
-    for (const cliff of cliffs) {
+  it('ranks all 51 states by their largest one-step fall in the sweep', () => {
+    expect(cliffRanking).toHaveLength(51);
+    for (const cliff of cliffRanking) {
       const series = sweep[cliff.code as keyof typeof sweep];
       const falls = series.slice(1).map((value, i) => series[i] - value);
       expect(cliff.after - cliff.before).toBe(500);
       expect(Math.abs(Math.max(...falls) - cliff.drop)).toBeLessThanOrEqual(1);
-      expect(cliff.changes.child_care_subsidy).toBeLessThan(0);
+    }
+    const drops = cliffRanking.map((cliff) => cliff.drop);
+    expect(drops).toEqual([...drops].sort((a, b) => b - a));
+    expect(largestCliff.drop).toBe(drops[0]);
+    expect(cliffs).toEqual(cliffRanking.slice(0, 3));
+  });
+
+  it('counts the states where losing the subsidy costs the family most', () => {
+    const lossAt = (lines: Record<string, number[]>, before: number, after: number) => {
+      const i = family.earnings.indexOf(before);
+      const j = family.earnings.indexOf(after);
+      const entries = Object.entries(lines).filter(([key]) => !NET_OF_THE_LOSS.includes(key));
+      return entries.map(([key, line]) => [key, line[j] - line[i]] as const);
+    };
+    const driven = cliffRanking.filter((cliff) => {
+      const changes = lossAt(family.states[cliff.code], cliff.before, cliff.after);
+      return changes.reduce((a, b) => (b[1] < a[1] ? b : a))[0] === 'child_care_subsidy';
+    });
+    expect(subsidyDrivenCliffs).toBe(driven.length);
+    for (const cliff of cliffs) expect(driven).toContainEqual(cliff);
+  });
+
+  it('recomputes each median marginal rate from the sweep', () => {
+    for (const earnings of [30_000, 60_000]) {
+      const i = family.earnings.indexOf(earnings);
+      const rates = Object.values<{ net_resources: number[] }>(family.states)
+        .map((state) => 1 - (state.net_resources[i + 1] - state.net_resources[i]) / 500)
+        .sort((a, b) => a - b);
+      expect(medianRateAt(earnings)).toBeCloseTo(rates[25], 3);
     }
   });
 
@@ -148,6 +194,18 @@ describe('fixed-sample microdata run', () => {
     const codes = instrument.rows.map((row) => row.state);
     expect(new Set(codes).size).toBe(STATE_COUNT);
     for (const row of instrument.rows) expect(row).not.toHaveProperty('error');
+    expect(instrument.households).toBe(3_000);
+  });
+
+  it('runs each state under that state’s own rules', () => {
+    const tax = (code: string) => {
+      const row = instrument.rows.find((candidate) => candidate.state === code);
+      if (!row) throw new Error(`No run for ${code}`);
+      return row.state_income_tax;
+    };
+    for (const row of instrument.rows) expect(row.state_check).toBe(row.state);
+    for (const code of ['AK', 'FL', 'TX']) expect(tax(code)).toBe(0);
+    for (const code of ['AL', 'CA']) expect(tax(code)).toBeGreaterThan(0);
   });
 
   it('keeps the same earnings in every state, because only the state changes', () => {
@@ -184,8 +242,16 @@ describe('Massachusetts reform', () => {
     expect(massachusetts.childPoverty[0]).toBe(massachusetts.childPoverty[1]);
   });
 
-  it('keeps the effective sample below the record count', () => {
-    expect(massachusetts.effectiveHouseholds).toBeLessThan(massachusetts.records);
+  it('scores the same on the state cut as on a national run', () => {
+    const run = JSON.parse(read('data/massachusetts_reform.json'));
+    expect(run.household_gain).toBe(nationalCheck.household_gain);
+    expect(run.households_gaining_share).toBeCloseTo(nationalCheck.households_gaining_share, 6);
+    expect(run.baseline_child_poverty).toBeCloseTo(nationalCheck.baseline_child_poverty, 6);
+    expect(run.baseline_poverty).toBeCloseTo(nationalCheck.baseline_poverty, 6);
+  });
+
+  it('costs the state what households gain', () => {
+    expect(Math.abs(massachusetts.cost - massachusetts.householdGain)).toBeLessThan(1e-4 * massachusetts.cost);
   });
 });
 
@@ -195,13 +261,83 @@ describe('state baselines', () => {
     for (const row of stateBaseline.rows) {
       expect(row.child_spm_percent).toBeGreaterThanOrEqual(0);
       expect(row.child_spm_percent).toBeLessThanOrEqual(100);
-      expect(row.effective_households).toBeLessThanOrEqual(row.records);
+      expect(row.effective_households_with_children).toBeLessThanOrEqual(row.effective_households);
       expect(row.census_margin).toBeGreaterThan(0);
     }
   });
 
-  it('counts each state beyond Census’s margin at most once', () => {
-    expect(stateBaseline.beyondCensusMargin).toBeLessThanOrEqual(stateBaseline.rows.length);
-    expect(stateBaseline.meanCensusGap).toBeGreaterThan(0);
+  it('copies Census’s rates from the table the webinar deck maps', () => {
+    expect(census.rows).toHaveLength(51);
+    for (const row of census.rows) {
+      expect(webinarMap).toContain(`st: '${row.state}', rate: ${row.rate.toFixed(1)}, moe: ${row.moe.toFixed(1)}`);
+    }
+  });
+
+  it('keeps the direction of the gap with its size', () => {
+    const differences = stateBaseline.rows.map((row) => row.child_spm_percent - row.census_percent);
+    expect(differences.filter((value) => value > 0)).toHaveLength(stateBaseline.modelExceedsCensus);
+    const net = differences.reduce((sum, value) => sum + value, 0) / differences.length;
+    expect(net).toBeGreaterThan(0);
+    expect(net).toBeLessThanOrEqual(stateBaseline.meanCensusGap);
+  });
+});
+
+describe('typed figures', () => {
+  const name = (code: string) => {
+    const row = crossSection.find((candidate) => candidate.code === code);
+    if (!row) throw new Error(`No state ${code}`);
+    return row.name;
+  };
+  const endpoints = instrument.lines.flatMap((line) => {
+    const first = line.values[0];
+    const last = line.values[line.values.length - 1];
+    return [
+      `${percent(first.value)} in ${name(first.code)}`,
+      `${percent(last.value)} in ${name(last.code)}`,
+    ];
+  });
+  const shared = [
+    usd(highest.net_resources),
+    usd(lowest.net_resources),
+    usd(spreadAt(30_000).spread),
+    usd(spreadAt(60_000).spread),
+    usd(interaction.subsidy),
+    usd(-interaction.snapChange),
+    usd(interaction.netChange),
+    usd(largestCliff.drop),
+    `${subsidyDrivenCliffs} of 51 states`,
+    percent(medianRateAt(30_000)),
+    percent(medianRateAt(60_000)),
+    percent(massachusetts.gainingShare),
+    millions(massachusetts.gapReduction),
+    `${massachusetts.modelChildRate.toFixed(1)}%`,
+    `${massachusetts.censusChildRate.toFixed(1)}%`,
+    `${stateBaseline.modelExceedsCensus} of 51 jurisdictions`,
+    ...endpoints,
+  ];
+
+  it('match the data in the speaker notes', () => {
+    for (const figure of [
+      ...shared,
+      usd(cliffs[2].drop),
+      millions(massachusetts.cost),
+      `about ${massachusetts.effectiveHouseholds}`,
+      `about ${stateBaseline.medianEffective} effective households`,
+      usdCents(axiomRuns.onTime),
+      usdCents(axiomRuns.monthlyEarnings),
+    ]) {
+      expect(notes).toContain(figure);
+    }
+  });
+
+  it('match the data in the evidence ledger', () => {
+    for (const figure of [
+      ...shared,
+      `${stateBaseline.beyondCensusMargin} of 51 jurisdictions`,
+      `median of ${stateBaseline.medianEffective}`,
+      `${stateBaseline.meanCensusGap.toFixed(1)} points`,
+    ]) {
+      expect(ledger).toContain(figure);
+    }
   });
 });
