@@ -33,7 +33,7 @@ $40,000 works out to $19.23 an hour, which exceeds every state's minimum wage on
 
 Each mark shows one state on one line of the family's budget. Federal taxes and credits barely move across states, and states drive the rest through child care subsidies, SNAP options and their own taxes.
 
-These lines interact. Run Texas with and without its subsidy: the family gets $15,791 in child care help and loses $5,598 of SNAP, because Congress lets SNAP households deduct what they pay for care and the subsidy shrinks that deduction. Net resources rise by $10,193.
+These lines interact when you run Texas with and without its subsidy: the family gets $15,791 in child care help and loses $5,598 of SNAP. Congress lets SNAP households deduct what they pay for care, so the subsidy shrinks that deduction. Net resources rise by $10,193.
 
 ## 5. This family loses up to $15,343 at a benefit cliff, at earnings that vary by state (3:45, 1 minute)
 
@@ -57,7 +57,7 @@ If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface takes t
 
 Take the parameter from a moment ago and double it, from $440 to $880 per dependent. That costs the state $555 million in 2026. Of Massachusetts households, 29.8% gain and none lose, and the SPM poverty gap shrinks by $167 million.
 
-The poverty rate holds still in this run, because no record crosses the threshold. Populace US holds 1,522 Massachusetts households, an effective sample of about 255, and it puts 20.2% of the state's children below the threshold in 2025, against Census's 12.8% for 2023 to 2025. For a small reform in one state, read the poverty gap: it moves with each dollar that reaches a family below the threshold, and it starts from that higher baseline.
+The poverty rate holds still in this run, because no record crosses the threshold. Populace US holds 1,522 Massachusetts households, an effective sample of about 255. The model puts 20.2% of the state's children below the threshold in 2025, against Census's 12.8% for 2023 to 2025. For a small reform in one state, read the poverty gap: it moves with each dollar that reaches a family below the threshold, and it starts from that higher baseline.
 
 The Child Poverty Impact Dashboard applies the model to child tax credit, EITC, SNAP and state tax credit reforms in every state.
 
@@ -65,17 +65,17 @@ The Child Poverty Impact Dashboard applies the model to child tax credit, EITC, 
 
 The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families, and the Interactive reaches back to 2001. State of the Safety Net shows who qualifies and takes part.
 
-PolicyEngine adds four things: you can change any parameter or write a new rule, run your own microdata, read and edit every line of code, and project current law forward through 2035.
+With PolicyEngine, you can change any parameter or write a new rule, run your own microdata, read and edit every line of code, and project current law forward through 2035.
 
 ## 10. What these results leave out (9:15, 45 seconds)
 
-We model child care subsidies in all 51 jurisdictions from August 2026, and we copy early parameter values back to 2015, so validate any historical run before you use it. Earnings enter as an input, so a change in minimum wage or paid leave law leaves a family's income unchanged. Hours stay fixed unless you set a labor supply response.
+We model child care subsidies in all 51 jurisdictions from August 2026. We copy early parameter values back to 2015, so validate any historical run before you use it. Earnings enter as an input, so a change in minimum wage or paid leave law leaves a family's income unchanged. Hours stay fixed unless you set a labor supply response.
 
-Our default microdata carries thin state samples, about 75 effective households with children in the median state, and its child poverty rates exceed Census's 2023 to 2025 averages in 40 of 51 jurisdictions. For state poverty levels, bring your own microdata.
+Our default microdata carries thin state samples, about 75 effective households with children in the median state. Its child poverty rates exceed Census's 2023 to 2025 averages in 40 of 51 jurisdictions, so for state poverty levels, bring your own microdata.
 
 ## 11. The Axiom Foundation encodes rules with their source text and dates (10:00, 1 minute)
 
-I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Georgia's Division of Family and Children Services applies a 20% earned income deduction in section 3612 of its SNAP manual, and Axiom's file records the manual's words and effective date beside each value.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Georgia's Division of Family and Children Services applies a 20% earned income deduction in section 3612 of its SNAP manual. Axiom's file records the manual's words and effective date beside each value.
 
 We ran this rule through the Axiom engine. A family earning $3,333.33 a month who reports on time gets a $666.67 deduction, and the same family reporting late gets nothing. Ask for November 2019, before the manual section Axiom encoded took effect, and the engine refuses.
 

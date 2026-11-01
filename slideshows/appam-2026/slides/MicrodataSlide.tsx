@@ -33,9 +33,10 @@ export default function MicrodataSlide() {
             <InstrumentRugs />
           </div>
           <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
-            Each mark shows one state. The same {instrument.households.toLocaleString('en-US')} households with children,
-            drawn by weight from Populace US, our default microdata, under each state’s {instrument.year} rules. SNAP in
-            January, as a share of SPM units with children. Medicaid or CHIP as a share of children under 19.
+            Each mark shows one state. We draw {instrument.households.toLocaleString('en-US')} households with children by
+            weight from Populace US, our default microdata, and run the same families under each state’s{' '}
+            {instrument.year} rules. SNAP in January, as a share of SPM units with children. Medicaid or CHIP as a share
+            of children under 19.
           </p>
         </div>
       </div>

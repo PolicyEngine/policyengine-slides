@@ -52,13 +52,13 @@ Slide 7's loop ran from a CSV of the fixed sample, with county and finer geograp
 - `meets_ccdf_activity_test` starts true, because a parent in a regular job meets it and the input defaults to false.
 - `wi_works_placement` starts as `NONE`, because the input defaults to a Community Service Job.
 - $40,000 over 2,080 hours comes to $19.23 an hour. The highest basic state rate on the Department of Labor's table, updated July 1, 2026, belongs to DC at $18.40 (dol.gov/agencies/whd/minimum-wage/state). Local minimums can run higher, and the table leaves them out.
-- The sweeps vary earnings and hold hours at 40 a week. $30,000 over 2,080 hours comes to $14.42 an hour, below DC's basic rate and some other states', so read the $30,000 points as part-time work at those states' wages.
+- The sweeps vary earnings and hold hours at 40 a week, so at $30,000 the family earns $14.42 an hour, less than DC's basic rate.
 
 Net resources add market income, SNAP, WIC, TANF, the child care subsidy and other benefits, then subtract federal and state taxes net of credits and the child care bill.
 
 `analysis/test_invariants.py` reconciles the total with `spm_unit_net_income` and with `household_net_income` over random states and earnings.
 
-Any state comparison built on these totals must account for four differences:
+Any state comparison that uses these totals must account for four differences:
 
 - `spm_unit_market_income` leaves out the Alaska Permanent Fund Dividend, which `household_market_income` includes.
 - `spm_unit_benefits` leaves out New Jersey's ANCHOR payment, which `household_benefits` includes.
