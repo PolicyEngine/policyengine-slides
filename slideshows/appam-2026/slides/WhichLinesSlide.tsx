@@ -14,7 +14,7 @@ function signed(value: number) {
 
 export default function WhichLinesSlide() {
   return (
-    <Frame title="Child care subsidies move net resources most, then SNAP and state taxes">
+    <Frame title="States differ most on child care subsidies, then SNAP and state taxes">
       <div className="flex h-full gap-[4vh]">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
@@ -42,7 +42,7 @@ export default function WhichLinesSlide() {
             ))}
           </dl>
           <p className="mt-[1.5vh]">
-            SNAP deducts what the family pays for care, so the subsidy shrinks that deduction.
+            Texas deducts what the family pays for care when it counts SNAP income, so the subsidy shrinks that deduction.
           </p>
         </div>
       </div>

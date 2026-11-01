@@ -3,6 +3,10 @@ import EndSlideTemplate from '@/components/layout/EndSlide';
 const links = [
   { label: 'policyengine.org', url: 'https://policyengine.org' },
   { label: 'pip install policyengine-us', url: 'https://github.com/PolicyEngine/policyengine-us' },
+  {
+    label: 'github.com/PolicyEngine/policyengine-slides',
+    url: 'https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026',
+  },
   { label: 'max@policyengine.org', url: 'mailto:max@policyengine.org' },
 ];
 

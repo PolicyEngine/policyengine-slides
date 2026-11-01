@@ -83,7 +83,7 @@ Net resources count all four payments in every state.
 | Slide | Claim | Code at `469ad12` |
 | --- | --- | --- |
 | 2 | Program list, every state income tax, TANF and child care rules of all 51 jurisdictions | `STATE_TANF_VARIABLES` holds 51 entries; `child_care_subsidy_programs` holds 51 from 2025 |
-| 4 | SNAP deducts what the family pays for care | `snap_dependent_care_deduction` reads post-subsidy `childcare_expenses` |
+| 4 | Texas deducts what the family pays for care when it counts SNAP income | `snap_dependent_care_deduction` reads post-subsidy `childcare_expenses` |
 | 6 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
 | 10 | 46 jurisdictions through 2023, 48 in 2024, 51 from 2025 | `gov.hhs.ccdf.child_care_subsidy_programs`; missing DC, NC, OR, TN and TX through 2023, and DC, TN and TX in 2024 |
 | 10 | Copy back to 2015 | `backdate_parameters(first_instant="2015-01-01")` in `system.py`, `FIRST_MODELED_YEAR = 2015` in `tools/parameters.py` |

@@ -39,9 +39,9 @@ export default function OneFamilySlide() {
             {modelCommit}).
           </p>
           <p>
-            Net resources add earnings and benefits, then subtract taxes net of credits and the
-            child care the family pays. They leave out health coverage. The gap between the highest
-            and lowest state runs {usd(spreadAt(30_000).spread)} at $30,000 of earnings and{' '}
+            We add earnings and benefits, then subtract taxes net of credits and the child care the
+            family pays, to get net resources. We leave out health coverage. The gap between the
+            highest and lowest state runs {usd(spreadAt(30_000).spread)} at $30,000 of earnings and{' '}
             {usd(spreadAt(60_000).spread)}
             {' at $60,000. South Dakota’s subsidy covers five months.'}
           </p>

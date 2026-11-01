@@ -33,7 +33,7 @@ export default function MicrodataSlide() {
           </div>
           <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
             Each mark shows one state. The same {instrument.households.toLocaleString('en-US')} households with children
-            from Populace US, under each state’s {instrument.year} rules. SNAP in January, as a share of SPM units.
+            from Populace US, our default microdata, under each state’s {instrument.year} rules. SNAP in January, as a share of SPM units.
             Medicaid or CHIP as a share of children under 19.
           </p>
         </div>

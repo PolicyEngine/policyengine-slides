@@ -20,7 +20,7 @@ export default function WhatItDoesSlide() {
     <Frame title="PolicyEngine computes taxes and benefits for a family or a population">
       <div className="flex h-full flex-col justify-center gap-[4.5vh]">
         <p style={{ fontSize: '1.2em' }}>
-          PolicyEngine: a nonprofit that provides free, open source software to compute the impact
+          PolicyEngine is a nonprofit that provides free, open source software to compute the impact
           of public policy.
         </p>
         <div className="grid grid-cols-3 gap-[3vh]">

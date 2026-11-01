@@ -4,7 +4,7 @@ import { cliffs, largestCliff, medianRateAt, percent, usd } from '../content';
 
 export default function CliffsSlide() {
   return (
-    <Frame title={`Cliffs cost this family up to ${usd(largestCliff.drop)}, at earnings that vary by state`}>
+    <Frame title={`This family loses up to ${usd(largestCliff.drop)} at a benefit cliff, at earnings that vary by state`}>
       <div className="flex h-full gap-[4vh]">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>

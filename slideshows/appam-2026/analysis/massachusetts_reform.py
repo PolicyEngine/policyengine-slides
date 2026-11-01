@@ -5,7 +5,8 @@ Runs current law and the reform on the Massachusetts records in Populace US for
 
 Populace US carries few well-weighted records for any one state, so a small reform
 can leave a state's poverty rate unchanged because no record crosses the threshold.
-The poverty gap moves with every dollar, so the slide reports that alongside cost.
+The poverty gap moves with each dollar that reaches a family below the threshold,
+so the slide reports that alongside cost.
 """
 
 import json

@@ -52,7 +52,7 @@ export default function ReformSlide() {
           Populace US, 2026, assuming no behavioral responses. The file holds{' '}
           {massachusetts.records.toLocaleString('en-US')} Massachusetts households, an effective sample of about{' '}
           {massachusetts.effectiveHouseholds}, and no record crosses the SPM threshold under this reform. The poverty
-          gap moves with every dollar, so it suits small reforms.
+          gap moves with each dollar that reaches a family below the threshold.
         </p>
       </div>
     </Frame>

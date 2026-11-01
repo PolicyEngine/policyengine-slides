@@ -2,11 +2,11 @@ import { stateBaseline } from '../content';
 import Frame from './Frame';
 
 const coverage = [
-  'Child care subsidies cover 46 jurisdictions through 2023, 48 in 2024 and all 51 from 2025.',
+  'We model child care subsidies in 46 jurisdictions through 2023, 48 in 2024 and all 51 from 2025.',
   'We copy each parameter’s earliest value back to 2015, so validate historical runs separately.',
   'The model applies Wisconsin’s current child care schedules to earlier years.',
   'South Dakota’s child care program starts in the model in August 2026.',
-  `Populace US holds an effective sample of about ${stateBaseline.medianEffective} households in the median state, and its child poverty rates differ from Census’s by ${stateBaseline.meanCensusGap.toFixed(1)} points on average. Bring your own microdata for state levels.`,
+  `Populace US holds an effective sample of about ${stateBaseline.medianEffective} households in the median state, and its state child poverty rates differ from Census’s by ${stateBaseline.meanCensusGap.toFixed(1)} points on average. Bring your own microdata for state levels.`,
 ];
 
 const mechanisms = [
