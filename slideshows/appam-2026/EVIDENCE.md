@@ -16,7 +16,34 @@ Each claim on a slide traces to a computed result, to code read at a named commi
 | 4 | Texas: $15,791 subsidy, −$5,598 SNAP, +$10,193 net resources | `analysis/interaction.py` → `data/interaction.json` |
 | 5 | Iowa −$14,967 at $44,000, Minnesota −$13,182 at $57,000, Maryland −$15,343 at $97,500 | `data/charts.json`, `cliffs`, which also records each line's change |
 | 5 | Median state's total effective marginal tax rate: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over a $500 raise |
+| 7 | SNAP eligibility 17.6% in Tennessee to 37.4% in Oregon; child Medicaid or CHIP 38.8% in Idaho to 65.7% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
+| 8 | $555 million cost, 29.8% of households gain, none lose, $167 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json` |
+| 8 | 1,522 Massachusetts households, effective sample of about 255, no record crosses the threshold | `data/massachusetts_reform.json`: `household_records`, `effective_households` (Kish), `people_crossing_threshold` |
+| 10 | Effective sample of about 185 households in the median state; child poverty rates differ from Census's by 4.8 points on average | `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
 | 11 | $666.666 deduction on time, $0 late, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`, a real engine run |
+
+Both code blocks ran as printed: slide 7's from a CSV of the fixed sample reproduced Tennessee and Oregon, and slide 8's on the Massachusetts records reproduced the cost. `analysis/massachusetts_reform.py` runs on the Massachusetts records alone, and a national run returned the same cost, gaining share and poverty rates.
+
+## The fixed sample
+
+`analysis/sample_families.py` draws 3,000 households with children from Populace US, with probability in proportion to household weight, so each household then counts once. `analysis/simulated_instrument.py` sets one state on the whole file and reruns it. Mean employment income stays the same in all 51 runs, and `content.test.ts` checks that.
+
+## Massachusetts poverty
+
+The deck leaves out Massachusetts's poverty rates on purpose.
+
+- Under the reform, 492 SPM unit records gain and 102 of them sit below the threshold. The closest of those falls $1,373 short and gains $440, so no record crosses and the rate does not change.
+- 1,279 of the state's 1,684 SPM unit records carry weights below one, which leaves an effective sample of about 255 households.
+- The model's Massachusetts child rate comes to 20.2% for 2025 and 22.3% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`).
+- The national comparison on the webinar deck's `BaselineVsCensusSlide` runs 16.6% in the model against 13.4% from Census, for children in 2025.
+
+## State baselines
+
+`analysis/state_baseline.py` cuts Populace US to one state at a time and runs 2025 child SPM poverty for all 51 jurisdictions.
+
+- The model's rates differ from Census's 2023 to 2025 averages by 4.8 points on average and exceed them by 3.2 points on net. In 38 of 51 jurisdictions the difference exceeds Census's margin of error.
+- Effective samples run from 99 households in Maine to 965 in California, with a median of 185.
+- The deck prints no state poverty rate from Populace US for these reasons.
 
 ## The family
 

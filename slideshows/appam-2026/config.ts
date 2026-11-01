@@ -7,6 +7,7 @@ import EndSlide from './slides/EndSlide';
 import MicrodataSlide from './slides/MicrodataSlide';
 import OneFamilySlide from './slides/OneFamilySlide';
 import ParametersSlide from './slides/ParametersSlide';
+import ReformSlide from './slides/ReformSlide';
 import ScopeSlide from './slides/ScopeSlide';
 import ToolsSlide from './slides/ToolsSlide';
 import WhatItDoesSlide from './slides/WhatItDoesSlide';
@@ -29,6 +30,7 @@ export const appam2026Config: SlideshowConfig = {
     CliffsSlide,
     ParametersSlide,
     MicrodataSlide,
+    ReformSlide,
     ToolsSlide,
     ScopeSlide,
     AxiomSlide,

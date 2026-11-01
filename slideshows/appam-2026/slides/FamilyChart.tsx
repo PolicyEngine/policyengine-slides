@@ -60,15 +60,14 @@ function Column({ row, index }: { row: StateRow; index: number }) {
   const segments = SERIES.map((series) => ({ ...series, amount: series.value(row) })).filter(
     (segment) => segment.amount > 0,
   );
-  let top = baseline;
+  const heights = segments.map((segment) => toHeight(segment.amount));
   return (
     <g>
       <title>{describe(row)}</title>
       <rect x={LEFT + index * band} y={TOP} width={band} height={plotHeight} fill="transparent" />
       {segments.map((segment, i) => {
-        const height = toHeight(segment.amount);
-        top -= height;
-        const drawn = Math.max(height - SURFACE_GAP, 1);
+        const top = baseline - heights.slice(0, i + 1).reduce((sum, height) => sum + height, 0);
+        const drawn = Math.max(heights[i] - SURFACE_GAP, 1);
         const y = top + SURFACE_GAP;
         return i === segments.length - 1 ? (
           <path key={segment.key} d={roundedTop(x, y, BAR_WIDTH, drawn)} fill={segment.color} />

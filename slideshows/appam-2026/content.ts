@@ -2,6 +2,8 @@ import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
+import reformRun from './data/massachusetts_reform.json';
+import stateBaselineRun from './data/state_baseline.json';
 
 export type StateRow = (typeof charts.cross_section)[number];
 
@@ -64,6 +66,35 @@ export const instrument = {
   ],
 };
 
+export const massachusetts = {
+  current: reformRun.current,
+  reformed: reformRun.reformed,
+  cost: reformRun.cost,
+  gainingShare: reformRun.households_gaining_share,
+  anyHouseholdLoses: reformRun.any_household_loses,
+  gapReduction: reformRun.baseline_poverty_gap - reformRun.reformed_poverty_gap,
+  records: reformRun.household_records,
+  effectiveHouseholds: Math.round(reformRun.effective_households),
+  peopleCrossingThreshold: reformRun.people_crossing_threshold,
+  childPoverty: [reformRun.baseline_child_poverty, reformRun.reformed_child_poverty],
+};
+
+const effectiveSamples = stateBaselineRun.rows
+  .map((row) => row.effective_households)
+  .sort((a, b) => a - b);
+const censusGaps = stateBaselineRun.rows.map((row) =>
+  Math.abs(row.child_spm_percent - row.census_percent),
+);
+
+export const stateBaseline = {
+  rows: stateBaselineRun.rows,
+  medianEffective: Math.round(effectiveSamples[Math.floor(effectiveSamples.length / 2)]),
+  meanCensusGap: censusGaps.reduce((sum, gap) => sum + gap, 0) / censusGaps.length,
+  beyondCensusMargin: stateBaselineRun.rows.filter(
+    (row, i) => censusGaps[i] > row.census_margin,
+  ).length,
+};
+
 export const axiomEngineVersion = axiomRun.engine.engine_version;
 
 const DEDUCTION_KEY = 'us-ga:policies/dfcs/snap/3612#earned_income_deduction';
@@ -87,6 +118,10 @@ export const axiomRuns = {
 export function usd(value: number) {
   const sign = value < 0 ? '−' : '';
   return `${sign}$${Math.abs(Math.round(value)).toLocaleString('en-US')}`;
+}
+
+export function millions(value: number) {
+  return `$${Math.round(value / 1_000_000)} million`;
 }
 
 export function percent(share: number) {

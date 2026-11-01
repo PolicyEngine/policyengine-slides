@@ -44,6 +44,22 @@ Away from the cliffs, the median state's total effective marginal tax rate falls
 
 This file holds one real parameter: the Massachusetts child and family credit. The Legislature raised it to $310 for 2023 and $440 for 2024. Each value carries its effective date, and each citation sits next to the values. Ask the model for any date and it reads the value in force on that date.
 
+## 7. Build simulated eligibility measures on your own microdata (5:45, 1 minute 45 seconds)
+
+Many of you build simulated instruments, so here is how that looks. Read in your survey or administrative file, set the state, and run it. Keep the people and their incomes fixed, change only the state, and any difference between runs comes from that state's rules.
+
+We ran 3,000 households with children from Populace US, our default microdata, through each state's 2024 rules. The same families pass SNAP's tests at rates from 17.6% in Tennessee to 37.4% in Oregon. Their children qualify for Medicaid or CHIP at rates from 38.8% in Idaho to 65.7% in Hawaii.
+
+If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface takes the same files. It runs tax years 2021 onward through PolicyEngine and sends earlier years to TAXSIM35.
+
+## 8. Doubling the Massachusetts child and family credit would cost $555 million (7:30, 1 minute 30 seconds)
+
+Take the parameter from a moment ago and double it, from $440 to $880 per dependent. In 2026 that costs $555 million. 29.8% of Massachusetts households gain, none lose, and the SPM poverty gap shrinks by $167 million.
+
+The poverty rate holds still in this run. Populace US holds 1,522 Massachusetts households, an effective sample of about 255, and no record crosses the threshold. For a small reform in one state, read the poverty gap, which moves with every dollar.
+
+The Child Poverty Impact Dashboard applies the model to child tax credit, EITC, SNAP and state tax credit reforms in every state.
+
 ## 9. Research questions and the tools that answer them (9:00, 1 minute)
 
 We all work on the same landscape from different angles. The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families, and the Interactive reaches back to 2001. State of the Safety Net shows who qualifies and takes part.
@@ -54,9 +70,11 @@ PolicyEngine adds four things: you can change any parameter or write a new rule,
 
 Child care subsidies reach all 51 jurisdictions from 2025, and we copy early parameter values back to 2015, so validate any historical run before you use it. Earnings enter as an input, so the model leaves minimum wage and paid leave effects to tools like the Policy Impact Calculator. Hours stay fixed unless you set a labor supply response.
 
+Our default microdata carries thin state samples, about 185 effective households in the median state, and its child poverty rates differ from Census's by 4.8 points on average. For state poverty levels, bring your own microdata.
+
 ## 11. The Axiom Foundation encodes rules with their source text and dates (10:45, 1 minute)
 
-I also lead the Axiom Foundation, which encodes rules as open, machine-readable files. Here is one Georgia SNAP rule. Georgia allows a 20% earned income deduction. Axiom's file records the manual's own words and the effective date beside each value.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Here is one Georgia SNAP rule. Georgia allows a 20% earned income deduction. Axiom's file records the manual's own words and the effective date beside each value.
 
 We ran this rule through the Axiom engine. A family earning $3,333.33 a month who reports on time gets a $666.67 deduction, and the same family reporting late gets nothing. Ask for November 2019, a month before the rule took effect, and the engine refuses.
 

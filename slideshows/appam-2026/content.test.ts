@@ -11,8 +11,10 @@ import {
   instrument,
   interaction,
   lowest,
+  massachusetts,
   programLines,
   spreads,
+  stateBaseline,
   sweep,
   sweepEarnings,
 } from './content';
@@ -161,5 +163,45 @@ describe('fixed-sample microdata run', () => {
       expect(values[0]).toBeGreaterThanOrEqual(0);
       expect(values[STATE_COUNT - 1]).toBeLessThanOrEqual(1);
     }
+  });
+});
+
+describe('Massachusetts reform', () => {
+  it('costs money, helps some households and hurts none', () => {
+    expect(massachusetts.cost).toBeGreaterThan(0);
+    expect(massachusetts.gainingShare).toBeGreaterThan(0);
+    expect(massachusetts.gainingShare).toBeLessThan(1);
+    expect(massachusetts.anyHouseholdLoses).toBe(false);
+  });
+
+  it('closes no more of the poverty gap than it spends', () => {
+    expect(massachusetts.gapReduction).toBeGreaterThan(0);
+    expect(massachusetts.gapReduction).toBeLessThanOrEqual(massachusetts.cost);
+  });
+
+  it('leaves the poverty rate alone only because no record crosses, as the slide says', () => {
+    expect(massachusetts.peopleCrossingThreshold).toBe(0);
+    expect(massachusetts.childPoverty[0]).toBe(massachusetts.childPoverty[1]);
+  });
+
+  it('keeps the effective sample below the record count', () => {
+    expect(massachusetts.effectiveHouseholds).toBeLessThan(massachusetts.records);
+  });
+});
+
+describe('state baselines', () => {
+  it('covers every state, with rates in range and effective samples below records', () => {
+    expect(new Set(stateBaseline.rows.map((row) => row.state)).size).toBe(51);
+    for (const row of stateBaseline.rows) {
+      expect(row.child_spm_percent).toBeGreaterThanOrEqual(0);
+      expect(row.child_spm_percent).toBeLessThanOrEqual(100);
+      expect(row.effective_households).toBeLessThanOrEqual(row.records);
+      expect(row.census_margin).toBeGreaterThan(0);
+    }
+  });
+
+  it('counts each state beyond Census’s margin at most once', () => {
+    expect(stateBaseline.beyondCensusMargin).toBeLessThanOrEqual(stateBaseline.rows.length);
+    expect(stateBaseline.meanCensusGap).toBeGreaterThan(0);
   });
 });
