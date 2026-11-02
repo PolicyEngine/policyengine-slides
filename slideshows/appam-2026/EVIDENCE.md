@@ -35,7 +35,7 @@ Slide 7's loop ran from a CSV of the fixed sample, with county and finer geograp
 - The file's 36,491 Massachusetts household records carry an effective sample of about 395, or 173 among households with children. Its 1,522 records from the Current Population Survey and tax data hold 67% of household weight.
 - The model's Massachusetts child rate comes to 21.4% for 2025 and 23.1% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`). That difference ranks third among the 51 jurisdictions, after Delaware and Louisiana.
 - The same reform on the default file costs $555 million, with 29.8% of households gaining and $167 million off the poverty gap (`data/massachusetts_reform_default.json`).
-- The same reform on the same records at policyengine-us 2.2.1, the version `policyengine.py` 6.11.1 pins, costs $657 million. The credit's formula changed between those versions: 2.2.1 counts a disabled spouse as a qualifying individual, and 2.90.2 counts a spouse incapable of self-care.
+- The same reform on the same records at policyengine-us 2.2.1, the version `policyengine.py` 6.11.1 pins, costs $657 million. The credit's formula changed between those versions. On a joint return, 2.2.1 counts a filer with a disability as a qualifying individual, and 2.90.2 counts a filer incapable of self-care. 2.90.2 also counts a dependent incapable of self-care at any age. This run does not separate how much of the difference those changes explain.
 - The national comparison on the webinar deck's `BaselineVsCensusSlide` runs 16.6% in the model against 13.4% from Census, for children in 2025.
 
 ## State baselines
