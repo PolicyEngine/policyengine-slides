@@ -16,6 +16,7 @@ import {
   massachusetts,
   medianRateAt,
   millions,
+  modelVersion,
   percent,
   programLines,
   spreadAt,
@@ -237,13 +238,22 @@ describe('Massachusetts reform', () => {
     expect(massachusetts.gapReduction).toBeLessThanOrEqual(massachusetts.cost);
   });
 
-  it('leaves the poverty rate alone only because no record crosses, as the slide says', () => {
-    expect(massachusetts.peopleCrossingThreshold).toBe(0);
-    expect(massachusetts.childPoverty[0]).toBe(massachusetts.childPoverty[1]);
+  it('lowers the child rate because records cross the threshold', () => {
+    expect(massachusetts.peopleCrossingThreshold).toBeGreaterThan(0);
+    expect(massachusetts.childRateChange).toBeGreaterThan(0);
   });
 
-  it('scores the same on the state cut as on a national run', () => {
+  it('runs on the file policyengine.py uses for state regions', () => {
+    const baselines = JSON.parse(read('data/state_baseline.json'));
     const run = JSON.parse(read('data/massachusetts_reform.json'));
+    expect(run.dataset).toContain('populace_us_2024_acs_local.h5');
+    expect(baselines.dataset).toBe(run.dataset);
+    expect(run.policyengine_us_version).toBe(modelVersion);
+    expect(baselines.policyengine_us_version).toBe(modelVersion);
+  });
+
+  it('scores the same on a default-file state cut as on a national run', () => {
+    const run = JSON.parse(read('data/massachusetts_reform_default.json'));
     expect(run.household_gain).toBe(nationalCheck.household_gain);
     expect(run.households_gaining_share).toBeCloseTo(nationalCheck.households_gaining_share, 6);
     expect(run.baseline_child_poverty).toBeCloseTo(nationalCheck.baseline_child_poverty, 6);
@@ -312,7 +322,10 @@ describe('typed figures', () => {
     millions(massachusetts.gapReduction),
     `${massachusetts.modelChildRate.toFixed(1)}%`,
     `${massachusetts.censusChildRate.toFixed(1)}%`,
-    `${stateBaseline.modelExceedsCensus} of 51 jurisdictions`,
+    `${stateBaseline.beyondCensusMargin} of 51 jurisdictions`,
+    `${stateBaseline.meanCensusGap.toFixed(1)} points`,
+    `${massachusetts.childRateChange.toFixed(1)} points`,
+    `about ${massachusetts.effectiveHouseholds}`,
     ...endpoints,
   ];
 
@@ -321,7 +334,6 @@ describe('typed figures', () => {
       ...shared,
       usd(cliffs[2].drop),
       millions(massachusetts.cost),
-      `about ${massachusetts.effectiveHouseholds}`,
       `about ${stateBaseline.medianEffective} effective households`,
       usdCents(axiomRuns.onTime),
       usdCents(axiomRuns.monthlyEarnings),
@@ -333,9 +345,8 @@ describe('typed figures', () => {
   it('match the data in the evidence ledger', () => {
     for (const figure of [
       ...shared,
-      `${stateBaseline.beyondCensusMargin} of 51 jurisdictions`,
+      `${stateBaseline.modelExceedsCensus} of 51 jurisdictions`,
       `median of ${stateBaseline.medianEffective}`,
-      `${stateBaseline.meanCensusGap.toFixed(1)} points`,
     ]) {
       expect(ledger).toContain(figure);
     }

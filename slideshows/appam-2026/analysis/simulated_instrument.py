@@ -52,7 +52,7 @@ def run(state):
     # state reports its own failure as text.
     try:
         return simulate(state)
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         return {"state": state, "error": repr(error)}
 
 

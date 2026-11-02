@@ -50,9 +50,8 @@ def inputs_only(frame, inputs):
 
 
 def main(path):
-    from policyengine_us import CountryTaxBenefitSystem
-
     import state_baseline as sb
+    from policyengine_us import CountryTaxBenefitSystem
 
     sb.load()
     people = sb.tables["person"]

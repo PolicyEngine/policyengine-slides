@@ -9,9 +9,8 @@ import sys
 from importlib.metadata import version
 from pathlib import Path
 
-from policyengine_us import Simulation
-
 import household as hh
+from policyengine_us import Simulation
 
 STATE = "TX"
 EARNINGS = 40_000

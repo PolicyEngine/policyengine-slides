@@ -4,11 +4,10 @@ Run from this folder with pytest. The cases come from Hypothesis, so they cover
 states and earnings nobody picked by hand.
 """
 
+import household as hh
 import numpy as np
 from hypothesis import given, settings
 from hypothesis import strategies as st
-
-import household as hh
 
 MAX_EXAMPLES = 40
 # The model stores money as 32-bit floats, so totals drift by fractions of a cent.

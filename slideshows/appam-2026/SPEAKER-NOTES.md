@@ -53,11 +53,11 @@ We drew 3,000 households with children from Populace US, our default microdata, 
 
 If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface takes the same files. It runs tax years 2021 onward through PolicyEngine and sends earlier years to TAXSIM35.
 
-## 8. Doubling the Massachusetts child and family credit would cost $555 million (7:00, 1 minute 30 seconds)
+## 8. Doubling the Massachusetts child and family credit would cost $577 million (7:00, 1 minute 30 seconds)
 
-Take the parameter from a moment ago and double it, from $440 to $880 per dependent. That costs the state $555 million in 2026. Of Massachusetts households, 29.8% gain and none lose, and the SPM poverty gap shrinks by $167 million.
+Take the parameter from a moment ago and double it, from $440 to $880 per dependent. That costs the state $577 million in 2026. Of Massachusetts households, 29.4% gain and none lose, and the SPM poverty gap shrinks by $169 million.
 
-The poverty rate holds still in this run, because no record crosses the threshold. Populace US holds 1,522 Massachusetts households, an effective sample of about 255. The model puts 20.2% of the state's children below the threshold in 2025, against Census's 12.8% for 2023 to 2025. For a small reform in one state, read the poverty gap: it moves with each dollar that reaches a family below the threshold, and it starts from that higher baseline.
+We ran this on our local-area file, the one policyengine.py uses for state regions. It holds 36,491 Massachusetts households, an effective sample of about 395. The model puts 21.4% of the state's children below the threshold in 2025, against Census's 12.8% for 2023 to 2025. The reform lowers the 2026 child rate by 0.2 points, from a baseline that runs high.
 
 The Child Poverty Impact Dashboard applies the model to child tax credit, EITC, SNAP and state tax credit reforms in every state.
 
@@ -71,7 +71,7 @@ With PolicyEngine, you can change any parameter or write a new rule, run your ow
 
 We model child care subsidies in all 51 jurisdictions from August 2026. We copy early parameter values back to 2015, so validate any historical run before you use it. Earnings enter as an input, so a change in minimum wage or paid leave law leaves a family's income unchanged. Hours stay fixed unless you set a labor supply response.
 
-Our default microdata carries thin state samples, about 75 effective households with children in the median state. Its child poverty rates exceed Census's 2023 to 2025 averages in 40 of 51 jurisdictions, so for state poverty levels, bring your own microdata.
+Our local-area file carries thin state samples, about 125 effective households with children in the median state. Its child poverty rates miss Census's 2023 to 2025 averages by 3.2 points on average, and 29 of 51 jurisdictions fall outside Census's margin. For state poverty levels, bring your own microdata.
 
 ## 11. The Axiom Foundation encodes rules with their source text and dates (10:00, 1 minute)
 

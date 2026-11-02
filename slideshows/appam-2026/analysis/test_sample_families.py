@@ -1,10 +1,9 @@
 """The fixed sample must keep each drawn household whole and count each draw once."""
 
 import pandas as pd
+import sample_families as sf
 from hypothesis import given
 from hypothesis import strategies as st
-
-import sample_families as sf
 
 YEAR = sf.YEAR
 HOUSEHOLD = f"person_household_id__{YEAR}"

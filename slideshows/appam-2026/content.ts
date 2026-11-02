@@ -93,6 +93,7 @@ export const massachusetts = {
   effectiveHouseholds: Math.round(reformRun.effective_households),
   peopleCrossingThreshold: reformRun.people_crossing_threshold,
   childPoverty: [reformRun.baseline_child_poverty, reformRun.reformed_child_poverty],
+  childRateChange: 100 * (reformRun.baseline_child_poverty - reformRun.reformed_child_poverty),
   modelChildRate: massachusettsBaseline.child_spm_percent,
   censusChildRate: massachusettsBaseline.census_percent,
 };

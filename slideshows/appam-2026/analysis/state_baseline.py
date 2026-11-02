@@ -1,8 +1,9 @@
 """Compare each state's baseline child poverty with Census and measure its sample.
 
-Cuts the pinned Populace US file to one state at a time, so each run stays small.
-A Massachusetts file cut this way reproduces the national run's reform cost and
-poverty rates. Census publishes a 2023 to 2025 average, and this run reports 2025.
+Runs the local-area Populace US file, which policyengine.py uses for state regions,
+one state at a time so each run stays small. A Massachusetts file cut from the
+default file this way reproduces the national run's reform cost and poverty rates.
+Census publishes a 2023 to 2025 average, and this run reports 2025.
 """
 
 import json
@@ -18,11 +19,16 @@ from policyengine_core.data import Dataset
 from policyengine_us import CountryTaxBenefitSystem, Microsimulation
 from policyengine_us.system import DEFAULT_DATASET
 
+STATE_DATASET = (
+    "hf://datasets/policyengine/populace-us/populace_us_2024_acs_local.h5"
+    "@populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z"
+)
 YEAR = 2025
 DATA_YEAR = 2024
 WORKERS = 3
 CHILD_AGE_LIMIT = 18
 GROUPS = ("tax_unit", "spm_unit", "family", "marital_unit")
+TABLES = ("household", "person", *GROUPS)
 
 tables = None
 known = None
@@ -33,16 +39,59 @@ def kish(weights):
     return float(weights.sum() ** 2 / (weights**2).sum())
 
 
-def load():
-    global tables, known
-    known = set(CountryTaxBenefitSystem().variables)
-    path, tag = DEFAULT_DATASET.removeprefix("hf://datasets/").rsplit("@", 1)
+def download(dataset):
+    path, tag = dataset.removeprefix("hf://datasets/").rsplit("@", 1)
     owner, repo, filename = path.split("/")
-    local = hf_hub_download(
+    return hf_hub_download(
         f"{owner}/{repo}", filename, repo_type="dataset", revision=tag
     )
-    with pd.HDFStore(local, "r") as store:
-        tables = {name: store.select(name) for name in ("household", "person", *GROUPS)}
+
+
+def load():
+    """The default file's tables, for draws that span the country."""
+    global tables, known
+    known = set(CountryTaxBenefitSystem().variables)
+    with pd.HDFStore(download(DEFAULT_DATASET), "r") as store:
+        tables = {name: store.select(name) for name in TABLES}
+
+
+def write_by_state(table, fips, name, folder):
+    for state, rows in table.groupby(fips.values, sort=False):
+        rows.to_pickle(
+            folder / f"{int(state):02d}-{name}.pkl.gz",
+            compression={"method": "gzip", "compresslevel": 1},
+        )
+
+
+def split_by_state(folder):
+    """Split the local-area file by state, holding one table in memory at a time."""
+    folder.mkdir(parents=True, exist_ok=True)
+    with pd.HDFStore(download(STATE_DATASET), "r") as store:
+        households = store.select("household")
+        states = households.set_index("household_id")["state_fips"]
+        write_by_state(households, households["state_fips"], "household", folder)
+        del households
+        people = store.select("person")
+        fips = people["person_household_id"].map(states)
+        write_by_state(people, fips, "person", folder)
+        members = {
+            group: pd.Series(fips.values, index=people[f"person_{group}_id"].values)
+            for group in GROUPS
+        }
+        del people
+        for group in GROUPS:
+            state_of = members.pop(group).groupby(level=0).first()
+            table = store.select(group)
+            write_by_state(table, table[f"{group}_id"].map(state_of), group, folder)
+            del table
+
+
+def load_state(fips, folder):
+    global tables, known
+    known = known or set(CountryTaxBenefitSystem().variables)
+    tables = {
+        name: pd.read_pickle(folder / f"{fips:02d}-{name}.pkl.gz") for name in TABLES
+    }
 
 
 def flat_file(households):
@@ -69,7 +118,12 @@ def flat_file(households):
     add_group(households, "household")
     for group in GROUPS:
         add_group(tables[group], group)
-    return pd.DataFrame({f"{k}__{DATA_YEAR}": v for k, v in columns.items()})
+    frame = pd.DataFrame({f"{k}__{DATA_YEAR}": v for k, v in columns.items()})
+    # The local-area file leaves parent links blank; -1 means no parent.
+    for name in frame.columns[frame.columns.str.startswith("parent_")]:
+        if name.endswith(f"_id__{DATA_YEAR}"):
+            frame[name] = frame[name].fillna(-1).astype(np.int64)
+    return frame
 
 
 def state_file(fips):
@@ -77,7 +131,9 @@ def state_file(fips):
     return flat_file(households[households["state_fips"] == fips])
 
 
-def run(fips):
+def run(job):
+    fips, folder = job
+    load_state(fips, folder)
     sim = Microsimulation(dataset=Dataset.from_dataframe(state_file(fips), DATA_YEAR))
     age = sim.calculate("age", YEAR).values
     weight = sim.calculate("person_weight", YEAR).values.astype(float)
@@ -96,21 +152,25 @@ def run(fips):
     }
 
 
-def main(commit):
+def main(commit, folder):
     data = Path(__file__).parent.parent / "data"
     census = json.loads((data / "census_child_spm.json").read_text())
     published = {row["state"]: row for row in census["rows"]}
-    load()
-    fips = sorted(int(value) for value in tables["household"]["state_fips"].unique())
-    with Pool(WORKERS, initializer=load) as pool:
-        rows = pool.map(run, fips)
+    folder = Path(folder)
+    if not any(folder.glob("*-household.pkl.gz")):
+        split_by_state(folder)
+    fips = sorted(int(path.name[:2]) for path in folder.glob("*-household.pkl.gz"))
+    # Smallest first, and a fresh worker every few states, so memory stays flat.
+    fips.sort(key=lambda state: (folder / f"{state:02d}-person.pkl.gz").stat().st_size)
+    with Pool(WORKERS, maxtasksperchild=4) as pool:
+        rows = pool.map(run, [(state, folder) for state in fips], chunksize=1)
     for row in rows:
         row["census_percent"] = published[row["state"]]["rate"]
         row["census_margin"] = published[row["state"]]["moe"]
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": commit,
-        "dataset": "Populace US",
+        "dataset": STATE_DATASET,
         "year": YEAR,
         "census_source": census["source"],
         "rows": rows,
@@ -119,4 +179,4 @@ def main(commit):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

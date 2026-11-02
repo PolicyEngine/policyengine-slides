@@ -1,12 +1,8 @@
 """Double the Massachusetts child and family tax credit and score it.
 
-Runs current law and the reform on the Massachusetts records in Populace US for
-2026. The reform assumes no behavioral responses.
-
-Populace US carries few well-weighted records for any one state, so a small reform
-can leave a state's poverty rate unchanged because no record crosses the threshold.
-The poverty gap moves with each dollar that reaches a family below the threshold,
-so the slide reports that alongside cost. Cost means the fall in state income tax,
+Runs current law and the reform on the Massachusetts records in the local-area
+Populace US file, which policyengine.py uses for state regions, for 2026. The
+reform assumes no behavioral responses. Cost means the fall in state income tax,
 and household_gain holds the change in household net income beside it.
 """
 
@@ -19,8 +15,7 @@ import numpy as np
 from policyengine_core.data import Dataset
 from policyengine_core.reforms import Reform
 from policyengine_us import Microsimulation
-
-from state_baseline import DATA_YEAR, kish, load, state_file
+from state_baseline import DATA_YEAR, STATE_DATASET, kish, load_state, state_file
 
 YEAR = 2026
 MASSACHUSETTS_FIPS = 25
@@ -50,13 +45,16 @@ def results(sim):
             )
         ),
         "poor_records": poor,
+        "household_children": sim.calculate(
+            "is_child", YEAR, map_to="household"
+        ).values,
         "household_weight": sim.calculate("household_weight", YEAR).values,
         "household_net_income": sim.calculate("household_net_income", YEAR).values,
     }
 
 
-def main(commit):
-    load()
+def main(commit, folder):
+    load_state(MASSACHUSETTS_FIPS, Path(folder))
     people = state_file(MASSACHUSETTS_FIPS)
     baseline = results(
         Microsimulation(dataset=Dataset.from_dataframe(people, DATA_YEAR))
@@ -74,7 +72,7 @@ def main(commit):
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": commit,
-        "dataset": "Populace US",
+        "dataset": STATE_DATASET,
         "year": YEAR,
         "parameter": PARAMETER,
         "current": CURRENT,
@@ -85,6 +83,9 @@ def main(commit):
         "any_household_loses": bool((gains < -1).any()),
         "household_records": len(weights),
         "effective_households": kish(weights),
+        "effective_households_with_children": kish(
+            weights[baseline["household_children"] > 0]
+        ),
         "people_crossing_threshold": int(
             np.sum(baseline["poor_records"] != reformed["poor_records"])
         ),
@@ -97,4 +98,4 @@ def main(commit):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

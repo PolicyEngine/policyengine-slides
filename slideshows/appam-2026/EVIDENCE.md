@@ -18,12 +18,12 @@ Each claim on a slide traces to a computed result, to code read at a named commi
 | 5 | In 46 of 51 states, the largest drop comes from losing the subsidy | `cliff_ranking`: TANF drives Massachusetts and New Hampshire, and WIC drives Maine, New Mexico and Vermont |
 | 5 | Median state's total effective marginal tax rate: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over a $500 raise |
 | 7 | SNAP eligibility 17.5% in Arkansas and Tennessee to 38.3% in Maryland, among SPM units with children; child Medicaid or CHIP 39.8% in Idaho to 66.1% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
-| 8 | State cost, 29.8% of households gain, none lose, $167 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
-| 8 | 1,522 Massachusetts households, effective sample of about 255, no record crosses the threshold | `data/massachusetts_reform.json`: `household_records`, `effective_households` (Kish), `people_crossing_threshold` |
-| 10 | Effective sample in the median state; child poverty rates exceed Census's in 40 of 51 jurisdictions and differ by 4.8 points on average | `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
+| 8 | State cost, 29.4% of households gain, none lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
+| 8 | 36,491 Massachusetts households, effective sample of about 395, 2026 child rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` (Kish), `baseline_child_poverty`, `reformed_child_poverty` |
+| 10 | Effective sample in the median state; child poverty rates miss Census's by 3.2 points on average, and 29 of 51 jurisdictions fall outside Census's margin | `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
 | 11 | $666.666 deduction on time, $0 late, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`, a real engine run |
 
-Slide 7's loop ran from a CSV of the fixed sample, with county and finer geography dropped and a `STATE_FIPS` dictionary defined above it, and reproduced Arkansas and Maryland to every digit. Slide 8's reform dictionary ran on the Massachusetts records, and `analysis/massachusetts_reform.py` runs on those records alone. A national run of the same reform returned the same household gain, gaining share and poverty rates (`data/massachusetts_national_check.json`).
+Slide 7's loop ran from a CSV of the fixed sample, with county and finer geography dropped and a `STATE_FIPS` dictionary defined above it, and reproduced Arkansas and Maryland to every digit. Slide 8's reform dictionary ran on the Massachusetts records of the local-area file, and `analysis/massachusetts_reform.py` runs on those records alone. On the default file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
 
 ## The fixed sample
 
@@ -31,17 +31,22 @@ Slide 7's loop ran from a CSV of the fixed sample, with county and finer geograp
 
 ## Massachusetts poverty
 
-- No record crosses the threshold under the reform, so the rate does not change.
-- The file's 1,522 Massachusetts household records carry an effective sample of about 255.
-- The model's Massachusetts child rate comes to 20.2% for 2025 and 22.3% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`).
+- 101 person records cross the threshold under the reform, and the 2026 child rate falls 0.2 points, from 23.1% to 22.9%.
+- The file's 36,491 Massachusetts household records carry an effective sample of about 395, or 173 among households with children. Its 1,522 records from the Current Population Survey and tax data hold 67% of household weight.
+- The model's Massachusetts child rate comes to 21.4% for 2025 and 23.1% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`). That difference ranks third among the 51 jurisdictions, after Delaware and Louisiana.
+- The same reform on the default file costs $555 million, with 29.8% of households gaining and $167 million off the poverty gap (`data/massachusetts_reform_default.json`).
+- The same reform on the same records at policyengine-us 2.2.1, the version `policyengine.py` 6.11.1 pins, costs $657 million. The credit's formula changed between those versions: 2.2.1 counts a disabled spouse as a qualifying individual, and 2.90.2 counts a spouse incapable of self-care.
 - The national comparison on the webinar deck's `BaselineVsCensusSlide` runs 16.6% in the model against 13.4% from Census, for children in 2025.
 
 ## State baselines
 
-`analysis/state_baseline.py` cuts Populace US to one state at a time and runs 2025 child SPM poverty for all 51 jurisdictions.
+`analysis/state_baseline.py` runs 2025 child SPM poverty for all 51 jurisdictions, one state at a time, on the local-area Populace US file at revision `populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`. `policyengine.py` 6.11.1 selects that file for state regions (`region_datasets` in `src/policyengine/data/bundle/manifest.json`, and `docs/regions.md`), and the file here matches the manifest's SHA-256.
 
-- The model's rates exceed Census's 2023 to 2025 averages in 40 of 51 jurisdictions. They differ by 4.8 points on average and exceed Census's by 3.2 points on net. In 38 of 51 jurisdictions the difference exceeds Census's margin of error.
-- Effective samples of households with children run from 33 in Maine to 390 in California, with a median of 75. Across all households they run from 99 in Maine to 965 in California, with a median of 185.
+- The model's rates differ from Census's 2023 to 2025 averages by 3.2 points on average and exceed Census's by 0.9 points on net. They exceed Census's in 30 of 51 jurisdictions. In 29 of 51 jurisdictions the difference exceeds Census's margin of error.
+- Effective samples of households with children run from 58 in Maine to 499 in California, with a median of 125. Across all households they run from 193 in Maryland to 1,146 in California, with a median of 280.
+- `policyengine.py` leaves ACS group quarters out of SPM measures, and these runs keep them. Leaving them out moves no state's rate by more than 0.02 points and moves Massachusetts's by 0.01.
+- PolicyEngine/microcosm#1445 ran the same file at the same model version, and its 51 state rates match these to six decimal places.
+- The default file reads higher and thinner: a 4.8-point average difference, 40 of 51 above Census, 38 of 51 beyond Census's margin, and a median of 75 effective households with children (`data/state_baseline_default.json`).
 
 ## The family
 
@@ -102,4 +107,3 @@ Slide 9 uses each tool's description from the session abstract, which covers the
 - The rule file sits at `us-ga/policies/dfcs/snap/3612.yaml` in `TheAxiomFoundation/rulespec-us`, published under CC BY 4.0.
 - `axiom-rules-engine` carries an MIT license.
 - Georgia's public manual at pamms.dhs.ga.gov/dfcs/snap/3612 confirms the rule text and the December 2019 effective date.
-- The deck makes no claim about how much of any program Axiom covers.

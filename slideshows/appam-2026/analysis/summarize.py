@@ -34,7 +34,7 @@ STATE_NAMES = {
 
 
 def rounded(value):
-    return int(round(value))
+    return round(value)
 
 
 def main():

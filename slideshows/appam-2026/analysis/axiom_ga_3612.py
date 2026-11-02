@@ -33,7 +33,7 @@ CASES = (
 
 
 def month_bounds(month):
-    year, number = map(int, month.split("-"))
+    number = int(month.split("-")[1])
     end = 30 if number in (4, 6, 9, 11) else 31
     return f"{month}-01", f"{month}-{end:02d}"
 
@@ -83,6 +83,7 @@ def main(engine, artifact):
             input=json.dumps(request(month, late)),
             capture_output=True,
             text=True,
+            check=False,
         )
         results.append(
             {
