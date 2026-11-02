@@ -57,9 +57,9 @@ If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface takes t
 
 Take the parameter from a moment ago and double it, from $440 to $880 per dependent. We estimate Massachusetts would forgo $577 million in 2026. Of Massachusetts households, 29.4% would gain and none would lose, and under the Supplemental Poverty Measure, or SPM, the poverty gap would shrink by $169 million.
 
-We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts households, an effective sample of about 395. We estimate 21.4% of the state's children below the threshold in 2025, and Census reports 12.8% for 2023 to 2025. We estimate that the 2026 child poverty rate would fall by 0.2 points under the doubled credit, from that high baseline.
+We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts households, an effective sample of about 395. We estimate 21.4% of the state's children below the threshold in 2025, and Census reports 12.8% for 2023 to 2025. We estimate that the 2026 child poverty rate would fall by about 0.2 points under the doubled credit, from that high baseline.
 
-On our Child Poverty Impact Dashboard, you can run child tax credit, EITC and SNAP reforms in any state, and state tax credit reforms wherever a state taxes income.
+On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
 
 ## 9. Research questions and the tools that answer them (8:30, 45 seconds)
 

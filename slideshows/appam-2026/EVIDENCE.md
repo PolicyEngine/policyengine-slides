@@ -38,6 +38,7 @@ The script keeps input variables and IDs. It renames the four stored Social Secu
 ## Massachusetts poverty
 
 - We estimate that 101 person records cross the threshold under the doubled credit and that the 2026 child poverty rate falls 0.2 points, from 23.1% to 22.9%.
+- That fall rests on 55 child records in 24 households. Holding weights fixed, we estimate household-clustered standard errors of 0.05 points on the fall, 3.8 points on the 2026 rate, $34 million on the fall in the poverty gap and $54 million on the state cost (`analysis/massachusetts_precision.py` → `data/massachusetts_precision.json`). They leave out what calibration adds.
 - The file's 36,491 Massachusetts household records hold an effective sample of about 395, or 173 among households with children. Its 1,522 records from the Current Population Survey and tax data hold 67% of household weight.
 - We estimate a Massachusetts child poverty rate of 21.4% for 2025 and 23.1% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`). That difference ranks third among the 51 jurisdictions, after Delaware and Louisiana.
 - On the default file, we estimate that Massachusetts would forgo $555 million, 29.8% of households would gain and the poverty gap would shrink by $167 million (`data/massachusetts_reform_default.json`).
@@ -95,7 +96,7 @@ We count all four payments in net resources in every state.
 | 4 | Congress lets SNAP households deduct their care costs | `snap_dependent_care_deduction`, citing 7 U.S.C. 2014(e)(3), reads post-subsidy `childcare_expenses` |
 | 6 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
 | 7 | Our TAXSIM-compatible interface runs 2021 onward through PolicyEngine and earlier years through TAXSIM35 | `StitchedRunner.PE_MIN_YEAR = 2021` in `policyengine_taxsim/runners/stitched_runner.py` at the policyengine-taxsim commit above |
-| 8 | Child tax credit, EITC and SNAP reforms in any state, and state tax credit reforms wherever a state taxes income | `getReformOptionsForState` in `frontend/lib/state-programs.ts` at the dashboard commit above returns federal child tax credit and EITC options and SNAP options in all 51 jurisdictions, and state EITC options in 43: the 42 with an income tax, and Washington |
+| 8 | Child tax credit, EITC, SNAP and state tax credit reforms, state by state | `getReformOptionsForState` in `frontend/lib/state-programs.ts` at the dashboard commit above returns federal child tax credit and EITC options and SNAP options in all 51 jurisdictions, and state EITC options in 43: the 42 with an income tax, and Washington |
 | 9 | Project through 2035 | The PolicyEngine API's US metadata lists years 2022 to 2035 |
 | 10 | 46 jurisdictions through 2023, 48 in 2024, 50 in 2025, 51 from August 2026 | `gov.hhs.ccdf.child_care_subsidy_programs` lists 51 from 2025, missing DC, NC, OR, TN and TX through 2023, and DC, TN and TX in 2024. `sd_cca` returns zero until `uses_weekly_rates` turns on in August 2026 |
 | 10 | Copy back to 2015 | `backdate_parameters(first_instant="2015-01-01")` in `system.py`, `FIRST_MODELED_YEAR = 2015` in `tools/parameters.py` |

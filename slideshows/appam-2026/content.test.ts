@@ -37,6 +37,7 @@ const census = JSON.parse(read('data/census_child_spm.json'));
 const reformRun = JSON.parse(read('data/massachusetts_reform.json'));
 const defaultReform = JSON.parse(read('data/massachusetts_reform_default.json'));
 const pinnedReform = JSON.parse(read('data/massachusetts_reform_221.json'));
+const precision = JSON.parse(read('data/massachusetts_precision.json'));
 const defaultBaseline = JSON.parse(read('data/state_baseline_default.json'));
 const sampleColumns = JSON.parse(read('data/sample_columns.json'));
 const slideCode = JSON.parse(read('data/slide_code_check.json'));
@@ -342,6 +343,17 @@ describe('Massachusetts reform', () => {
     expect(pinnedReform.household_records).toBe(reformRun.household_records);
     expect(pinnedReform.effective_households).toBe(reformRun.effective_households);
   });
+
+  it('takes its standard errors from the same run as the slide', () => {
+    expect(precision.dataset).toBe(reformRun.dataset);
+    expect(precision.policyengine_us_version).toBe(modelVersion);
+    expect(precision.child_rate_percent).toBeCloseTo(100 * reformRun.baseline_child_poverty, 4);
+    expect(precision.child_rate_fall_points).toBeCloseTo(massachusetts.childRateChange, 4);
+    expect(Math.abs(precision.poverty_gap_fall - massachusetts.gapReduction)).toBeLessThan(1e-4 * massachusetts.gapReduction);
+    expect(Math.abs(precision.state_cost - massachusetts.cost)).toBeLessThan(1e-4 * massachusetts.cost);
+    expect(precision.child_records_crossing).toBeLessThanOrEqual(massachusetts.peopleCrossingThreshold);
+    expect(precision.households_with_a_child_crossing).toBeLessThanOrEqual(precision.child_records_crossing);
+  });
 });
 
 describe('state baselines', () => {
@@ -466,6 +478,11 @@ describe('typed figures', () => {
       `from ${percent(massachusetts.childPoverty[0])} to ${percent(massachusetts.childPoverty[1])}`,
       `or ${Math.round(reformRun.effective_households_with_children)} among households with children`,
       `${massachusetts.peopleCrossingThreshold} person records`,
+      `${precision.child_records_crossing} child records in ${precision.households_with_a_child_crossing} households`,
+      `${precision.child_rate_fall_se_points.toFixed(2)} points on the fall`,
+      `${precision.child_rate_se_points.toFixed(1)} points on the 2026 rate`,
+      `${millions(precision.poverty_gap_fall_se)} on the fall in the poverty gap`,
+      `${millions(precision.state_cost_se)} on the state cost`,
       millions(defaultReform.state_cost),
       percent(defaultReform.households_gaining_share),
       millions(defaultReform.baseline_poverty_gap - defaultReform.reformed_poverty_gap),
