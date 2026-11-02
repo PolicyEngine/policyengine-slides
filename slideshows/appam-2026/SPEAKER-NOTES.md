@@ -65,7 +65,7 @@ On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP 
 
 The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families, and the Interactive reaches back to 2001. State of the Safety Net shows who qualifies and takes part.
 
-With PolicyEngine, you can change any parameter, write new rules and run your own microdata. You can read and edit every line of code, and project current law through 2035.
+With PolicyEngine, you can change any parameter, write new rules, run your own microdata, read and edit every line of code, and project current law through 2035.
 
 ## 10. What these results leave out (9:15, 45 seconds)
 

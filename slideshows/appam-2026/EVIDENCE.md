@@ -1,6 +1,6 @@
 # Evidence ledger for the APPAM 2026 deck
 
-Each claim on a slide traces to a computed result, to code read at a named commit, or to a public source.
+Each claim on a slide traces to a computed result, to code at a named commit, or to a public source.
 
 - **PolicyEngine US:** version 2.90.2, commit `469ad12cb957a1b3eaedf9e6dd3e4c69194bba26` (main, November 1, 2026).
 - **policyengine-taxsim:** commit `9c987d8f23955dd1564af43dee3fac4054c0dbf2`.
