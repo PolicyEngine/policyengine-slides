@@ -34,10 +34,10 @@ export default function WhatItDoesSlide() {
           ))}
         </div>
         <p>
-          The US model covers federal and state income taxes and credits, SNAP, SSI, TANF, WIC,
-          school meals, child care subsidies, Medicaid and CHIP eligibility, and ACA premium tax
-          credits. It includes every state income tax and the TANF and child care subsidy rules of
-          all 50 states and DC.
+          We model federal and state income taxes and credits, SNAP, SSI, TANF, WIC, school meals,
+          child care subsidies, Medicaid and CHIP eligibility, and ACA premium tax credits. We
+          include every state income tax and the TANF and child care subsidy rules of all 50 states
+          and DC.
         </p>
       </div>
     </Frame>

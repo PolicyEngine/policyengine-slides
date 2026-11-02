@@ -34,6 +34,13 @@ import { SERIES } from './slides/FamilyChart';
 const read = (path: string) => readFileSync(join(__dirname, path), 'utf8');
 const family = JSON.parse(read('data/family.json'));
 const census = JSON.parse(read('data/census_child_spm.json'));
+const reformRun = JSON.parse(read('data/massachusetts_reform.json'));
+const defaultReform = JSON.parse(read('data/massachusetts_reform_default.json'));
+const pinnedReform = JSON.parse(read('data/massachusetts_reform_221.json'));
+const defaultBaseline = JSON.parse(read('data/state_baseline_default.json'));
+const sampleColumns = JSON.parse(read('data/sample_columns.json'));
+const slideCode = JSON.parse(read('data/slide_code_check.json'));
+const wisconsin = JSON.parse(read('data/wisconsin_schedules.json'));
 const notes = read('SPEAKER-NOTES.md');
 const ledger = read('EVIDENCE.md');
 const webinarMap = read('../cpid-webinar-2026/slides/StateChildPovertyMapSlide.tsx');
@@ -54,6 +61,37 @@ const lineKeys = [
 
 // Each of the nine rounded lines can sit up to 50 cents from its true value.
 const ROUNDING = 5;
+
+type BaselineRow = (typeof stateBaseline.rows)[number];
+
+const medianOf = (values: number[]) =>
+  [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
+
+function baselineSummary(rows: BaselineRow[]) {
+  const gaps = rows.map((row) => row.child_spm_percent - row.census_percent);
+  return {
+    meanGap: gaps.reduce((sum, gap) => sum + Math.abs(gap), 0) / rows.length,
+    exceedsCensus: gaps.filter((gap) => gap > 0).length,
+    beyondMargin: rows.filter((row, i) => Math.abs(gaps[i]) > row.census_margin).length,
+    medianWithChildren: medianOf(rows.map((row) => row.effective_households_with_children)),
+    medianAll: medianOf(rows.map((row) => row.effective_households)),
+  };
+}
+
+function extreme(rows: BaselineRow[], key: 'effective_households' | 'effective_households_with_children') {
+  const sorted = [...rows].sort((a, b) => a[key] - b[key]);
+  return [sorted[0], sorted[sorted.length - 1]].map((row) => ({
+    state: row.state,
+    value: Math.round(row[key]).toLocaleString('en-US'),
+  }));
+}
+
+const groupQuartersMoves = stateBaseline.rows
+  .map((row) => ({
+    state: row.state,
+    move: Math.abs(row.child_spm_percent - row.child_spm_percent_without_group_quarters),
+  }))
+  .sort((a, b) => b.move - a.move);
 
 describe('family cross section', () => {
   it('covers every state once, sorted by net resources', () => {
@@ -185,6 +223,11 @@ describe('Axiom run', () => {
     expect(axiomRuns.beforeEffectiveDate.exit_code).not.toBe(0);
     expect(axiomRuns.beforeEffectiveDate.stderr).toContain('2019-11-01');
   });
+
+  it('runs on monthly pay that the notes round to the family’s $40,000', () => {
+    expect(Math.round(axiomRuns.monthlyEarnings * 12)).toBe(headlineEarnings);
+    expect(notes).toContain(`about ${usd(headlineEarnings)} a year`);
+  });
 });
 
 describe('fixed-sample microdata run', () => {
@@ -221,6 +264,31 @@ describe('fixed-sample microdata run', () => {
       expect(values).toEqual([...values].sort((a, b) => a - b));
       expect(values[0]).toBeGreaterThanOrEqual(0);
       expect(values[STATE_COUNT - 1]).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it('runs under the model version the slide prints', () => {
+    const run = JSON.parse(read('data/simulated_instrument.json'));
+    expect(run.policyengine_us_version).toBe(modelVersion);
+  });
+
+  it('matches what slide 7’s loop returns when run as printed', () => {
+    expect(slideCode.policyengine_us_version).toBe(modelVersion);
+    const states = Object.entries<number>(slideCode.slide_7_snap_eligible_share);
+    expect(states.length).toBeGreaterThan(0);
+    for (const [code, share] of states) {
+      const row = instrument.rows.find((candidate) => candidate.state === code);
+      expect(share).toBe(row?.snap_eligible_share);
+    }
+  });
+
+  it('returns the same shares with the stored values it leaves out', () => {
+    expect(sampleColumns.with_stored_values).toEqual(sampleColumns.inputs_only);
+    expect(sampleColumns.draws).toBe(instrument.households);
+    for (const [code, shares] of Object.entries<Record<string, number>>(sampleColumns.inputs_only)) {
+      const row = instrument.rows.find((candidate) => candidate.state === code);
+      expect(shares.snap_eligible_share).toBe(row?.snap_eligible_share);
+      expect(shares.child_medicaid_chip_share).toBe(row?.child_medicaid_chip_share);
     }
   });
 });
@@ -263,6 +331,17 @@ describe('Massachusetts reform', () => {
   it('costs the state what households gain', () => {
     expect(Math.abs(massachusetts.cost - massachusetts.householdGain)).toBeLessThan(1e-4 * massachusetts.cost);
   });
+
+  it('matches what slide 8’s dictionary returns when run as printed', () => {
+    expect(slideCode.slide_8_state_cost).toBe(massachusetts.cost);
+  });
+
+  it('compares the same records at the version policyengine.py pins', () => {
+    expect(pinnedReform.policyengine_us_version).toBe('2.2.1');
+    expect(pinnedReform.dataset).toBe(reformRun.dataset);
+    expect(pinnedReform.household_records).toBe(reformRun.household_records);
+    expect(pinnedReform.effective_households).toBe(reformRun.effective_households);
+  });
 });
 
 describe('state baselines', () => {
@@ -271,9 +350,37 @@ describe('state baselines', () => {
     for (const row of stateBaseline.rows) {
       expect(row.child_spm_percent).toBeGreaterThanOrEqual(0);
       expect(row.child_spm_percent).toBeLessThanOrEqual(100);
-      expect(row.effective_households_with_children).toBeLessThanOrEqual(row.effective_households);
+      expect(row.effective_households).toBeLessThanOrEqual(row.records);
+      expect(row.effective_households_with_children).toBeLessThanOrEqual(row.records);
       expect(row.census_margin).toBeGreaterThan(0);
     }
+  });
+
+  it('matches microcosm#1445 outside the states its parent-link fill moves', () => {
+    const rates = read('data/microcosm_1445_rates.csv')
+      .trim()
+      .split('\n')
+      .slice(1)
+      .map((line) => line.split(','));
+    expect(rates).toHaveLength(51);
+    const moves = new Map<string, number>();
+    for (const [state, rate] of rates) {
+      const row = stateBaseline.rows.find((candidate) => candidate.state === state);
+      if (!row) throw new Error(`No baseline for ${state}`);
+      const move = Math.abs(row.child_spm_percent - Number(rate));
+      if (move >= 1e-6) moves.set(state, move);
+    }
+    expect([...moves.keys()].sort()).toEqual(['CA', 'DE', 'MO']);
+    expect(ledger).toContain(`to within 0.000001 points in ${51 - moves.size} of 51 jurisdictions`);
+    expect(ledger).toContain(`California moves by ${moves.get('CA')?.toFixed(2)} points`);
+    expect(ledger).toContain(`Delaware by ${moves.get('DE')?.toFixed(3)}`);
+    expect(ledger).toContain(`Missouri by ${moves.get('MO')?.toFixed(5)}`);
+  });
+
+  it('moves every rate by little when it leaves out group quarters', () => {
+    expect(groupQuartersMoves).toHaveLength(51);
+    expect(groupQuartersMoves[0].move).toBeLessThan(0.05);
+    expect(groupQuartersMoves[0].move).toBeGreaterThan(0);
   });
 
   it('copies Census’s rates from the table the webinar deck maps', () => {
@@ -315,7 +422,7 @@ describe('typed figures', () => {
     usd(-interaction.snapChange),
     usd(interaction.netChange),
     usd(largestCliff.drop),
-    `${subsidyDrivenCliffs} of 51 states`,
+    `${subsidyDrivenCliffs} of 51 jurisdictions`,
     percent(medianRateAt(30_000)),
     percent(medianRateAt(60_000)),
     percent(massachusetts.gainingShare),
@@ -336,19 +443,60 @@ describe('typed figures', () => {
       millions(massachusetts.cost),
       `about ${stateBaseline.medianEffective} effective households`,
       usdCents(axiomRuns.onTime),
-      usdCents(axiomRuns.monthlyEarnings),
     ]) {
       expect(notes).toContain(figure);
     }
   });
 
   it('match the data in the evidence ledger', () => {
+    const local = baselineSummary(stateBaseline.rows);
+    const onDefault = baselineSummary(defaultBaseline.rows);
+    const [fewestWithChildren, mostWithChildren] = extreme(
+      stateBaseline.rows,
+      'effective_households_with_children',
+    );
+    const [fewestAll, mostAll] = extreme(stateBaseline.rows, 'effective_households');
+    const pinnedChildRates = [pinnedReform.baseline_child_poverty, pinnedReform.reformed_child_poverty];
+    const massachusettsMove = groupQuartersMoves.find((row) => row.state === 'MA');
     for (const figure of [
       ...shared,
       `${stateBaseline.modelExceedsCensus} of 51 jurisdictions`,
       `median of ${stateBaseline.medianEffective}`,
+      massachusetts.records.toLocaleString('en-US'),
+      `from ${percent(massachusetts.childPoverty[0])} to ${percent(massachusetts.childPoverty[1])}`,
+      `or ${Math.round(reformRun.effective_households_with_children)} among households with children`,
+      `${massachusetts.peopleCrossingThreshold} person records`,
+      millions(defaultReform.state_cost),
+      percent(defaultReform.households_gaining_share),
+      millions(defaultReform.baseline_poverty_gap - defaultReform.reformed_poverty_gap),
+      sampleColumns.distinct_households.toLocaleString('en-US'),
+      ...sampleColumns.computed_by_the_model,
+      `${sampleColumns.undefined_in_this_version.length} names`,
+      `from ${fewestWithChildren.value} in ${name(fewestWithChildren.state)} to ${mostWithChildren.value} in ${name(mostWithChildren.state)}`,
+      `from ${fewestAll.value} in ${name(fewestAll.state)} to ${mostAll.value} in ${name(mostAll.state)}`,
+      `median of ${Math.round(local.medianAll)}`,
+      `${onDefault.meanGap.toFixed(1)} points`,
+      `${onDefault.exceedsCensus} of 51 jurisdictions`,
+      `its margin in ${onDefault.beyondMargin}`,
+      `includes ${Math.round(onDefault.medianWithChildren)} households`,
+      millions(pinnedReform.state_cost),
+      percent(pinnedReform.households_gaining_share),
+      `${(100 * (pinnedChildRates[0] - pinnedChildRates[1])).toFixed(1)} points`,
+      `from ${percent(pinnedChildRates[0])} to ${percent(pinnedChildRates[1])}`,
+      usd(wisconsin.child_care_subsidy['2021']),
+      usd(wisconsin.child_care_subsidy['2023']),
+      `${groupQuartersMoves[0].move.toFixed(3)} points (${name(groupQuartersMoves[0].state)})`,
+      `Massachusetts's by ${massachusettsMove?.move.toFixed(2)}`,
     ]) {
       expect(ledger).toContain(figure);
     }
+  });
+
+  it('take Wisconsin’s current subsidy from the family run', () => {
+    const index = family.earnings.indexOf(wisconsin.earnings);
+    expect(wisconsin.child_care_subsidy[String(reformRun.year)]).toBeCloseTo(
+      family.states.WI.child_care_subsidy[index],
+      2,
+    );
   });
 });

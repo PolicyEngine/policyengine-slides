@@ -30,7 +30,7 @@ export default function ParametersSlide() {
             The Massachusetts Legislature raised this credit to $310 for 2023 and $440 for 2024, and
             lifted its two-dependent cap.
           </p>
-          <p>Ask for any date and the model reads the value in force on that date.</p>
+          <p>Ask for any date and you get the value in force on that date.</p>
           <p>Open the file and check each value against the laws and forms it cites.</p>
         </div>
       </div>

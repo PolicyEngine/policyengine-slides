@@ -17,7 +17,7 @@ export default function CliffsSlide() {
         <div className="flex w-[32%] flex-col justify-center gap-[2.5vh]">
           <div>
             <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
-              A $500 raise crosses the subsidy limit
+              The family crosses the subsidy limit after a $500 raise
             </h2>
             <ul className="space-y-[0.7vh]">
               {cliffs.map((cliff) => (
@@ -30,7 +30,7 @@ export default function CliffsSlide() {
               ))}
             </ul>
             <p className="mt-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-              In {subsidyDrivenCliffs} of 51 states, the family’s largest drop comes from losing the subsidy.
+              In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from losing the subsidy.
             </p>
           </div>
           <div>

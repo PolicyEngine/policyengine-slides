@@ -42,7 +42,7 @@ export default function WhichLinesSlide() {
             ))}
           </dl>
           <p className="mt-[1.5vh]">
-            Congress lets SNAP households deduct what they pay for care, so the subsidy shrinks that deduction.
+            Congress lets SNAP households deduct their care costs, so this family deducts less when Texas pays for care.
           </p>
         </div>
       </div>

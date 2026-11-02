@@ -2,7 +2,7 @@
 
 Runs the local-area Populace US file, which policyengine.py uses for state regions,
 one state at a time so each run stays small. A Massachusetts file cut from the
-default file this way reproduces the national run's reform cost and poverty rates.
+default file this way reproduces the national run's household gain and poverty rates.
 Census publishes a 2023 to 2025 average, and this run reports 2025.
 """
 
@@ -119,16 +119,27 @@ def flat_file(households):
     for group in GROUPS:
         add_group(tables[group], group)
     frame = pd.DataFrame({f"{k}__{DATA_YEAR}": v for k, v in columns.items()})
-    # The local-area file leaves parent links blank; -1 means no parent.
+    # The local-area file leaves some parent links blank; the model reads 0 as unknown.
     for name in frame.columns[frame.columns.str.startswith("parent_")]:
         if name.endswith(f"_id__{DATA_YEAR}"):
-            frame[name] = frame[name].fillna(-1).astype(np.int64)
+            frame[name] = frame[name].fillna(0).astype(np.int64)
     return frame
 
 
 def state_file(fips):
     households = tables["household"]
     return flat_file(households[households["state_fips"] == fips])
+
+
+def in_group_quarters(people, households):
+    """ACS group-quarters residents, whom policyengine.py leaves out of SPM measures."""
+    record_type = people["person_household_id"].map(
+        households.set_index("household_id")["TYPEHUGQ"]
+    )
+    relationship = people["RELSHIPP"]
+    return (record_type.eq(2) & relationship.eq(37)) | (
+        record_type.eq(3) & relationship.eq(38)
+    )
 
 
 def run(job):
@@ -141,6 +152,13 @@ def run(job):
     households = sim.calculate("household_weight", YEAR).values.astype(float)
     with_children = sim.calculate("is_child", YEAR, map_to="household").values > 0
     children = age < CHILD_AGE_LIMIT
+    people = tables["person"]
+    if not np.array_equal(
+        sim.calculate("household_id", YEAR, map_to="person").values,
+        people["person_household_id"].values,
+    ):
+        raise ValueError("The simulation reordered this state's people")
+    housed = children & ~in_group_quarters(people, tables["household"]).values
     return {
         "state": str(sim.calculate("state_code_str", YEAR).values[0]),
         "records": len(households),
@@ -148,6 +166,9 @@ def run(job):
         "effective_households_with_children": kish(households[with_children]),
         "child_spm_percent": float(
             100 * np.average(poor[children], weights=weight[children])
+        ),
+        "child_spm_percent_without_group_quarters": float(
+            100 * np.average(poor[housed], weights=weight[housed])
         ),
     }
 

@@ -49,11 +49,12 @@ def inputs_only(frame, inputs):
     return frame[columns].copy()
 
 
-def main(path):
+def build(keep):
+    """Draw the households with children, keeping these columns of their people."""
     import state_baseline as sb
-    from policyengine_us import CountryTaxBenefitSystem
 
-    sb.load()
+    if sb.tables is None:
+        sb.load()
     people = sb.tables["person"]
     households = sb.tables["household"]
     has_child = people.loc[people["age"] < CHILD_AGE_LIMIT, "person_household_id"]
@@ -66,6 +67,12 @@ def main(path):
         replace=True,
         p=weights / weights.sum(),
     )
+    return expand(inputs_only(sb.flat_file(households), keep), draws), draws
+
+
+def main(path):
+    from policyengine_us import CountryTaxBenefitSystem
+
     # A researcher's file holds inputs, so the model recomputes everything else
     # under each state's rules.
     variables = CountryTaxBenefitSystem().variables
@@ -74,7 +81,7 @@ def main(path):
         for name, variable in variables.items()
         if variable.is_input_variable()
     }
-    sample = expand(inputs_only(sb.flat_file(households), inputs), draws)
+    sample, draws = build(inputs)
     sample.to_pickle(path)
     print(sample.shape, len(set(draws)))
 

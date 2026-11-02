@@ -128,6 +128,8 @@ def net_resources_parts(sim, year=YEAR):
     paid = get("childcare_expenses")
     snap, wic, tanf = get("snap"), get("wic"), get("tanf")
     subsidies_in_benefits = sum(get(name) for name in SUBSIDIES_IN_SPM_BENEFITS)
+    # spm_unit_payroll_tax includes state payroll taxes and paid leave contributions.
+    state_payroll_tax = get("employee_state_payroll_tax")
     parts = {
         "earnings": get("spm_unit_market_income"),
         "snap": snap,
@@ -144,8 +146,14 @@ def net_resources_parts(sim, year=YEAR):
             - subsidies_in_benefits
             + sum(get(name) for name in CASH_OUTSIDE_SPM_TOTALS)
         ),
-        "federal_taxes": -(get("spm_unit_federal_tax") + get("spm_unit_payroll_tax")),
-        "state_taxes": -(get("spm_unit_state_tax") + get("spm_unit_local_tax")),
+        "federal_taxes": -(
+            get("spm_unit_federal_tax")
+            + get("spm_unit_payroll_tax")
+            - state_payroll_tax
+        ),
+        "state_taxes": -(
+            get("spm_unit_state_tax") + get("spm_unit_local_tax") + state_payroll_tax
+        ),
         "child_care_bill": -bill,
     }
     parts["net_resources"] = sum(parts.values())

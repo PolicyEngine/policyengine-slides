@@ -9,18 +9,18 @@ const PYTHON = `reform = Reform.from_dict({
     }
 }, country_id="us")
 
-# massachusetts: the state's rows in our local-area file
+# Use Massachusetts rows from the local-area file
 baseline = Microsimulation(dataset=massachusetts)
 reformed = Microsimulation(dataset=massachusetts, reform=reform)`;
 
 const results = [
-  { value: percent(massachusetts.gainingShare), label: 'of households gain, and none lose' },
+  { value: percent(massachusetts.gainingShare), label: 'of households would gain, and none would lose' },
   { value: millions(massachusetts.gapReduction), label: 'off the SPM poverty gap' },
 ];
 
 export default function ReformSlide() {
   return (
-    <Frame title={`Doubling the Massachusetts child and family credit would cost ${millions(massachusetts.cost)}`}>
+    <Frame title={`We estimate Massachusetts would forgo ${millions(massachusetts.cost)} if lawmakers doubled its child and family credit`}>
       <div className="flex h-full flex-col justify-center gap-[2.6vh]">
         <div className="flex items-stretch gap-[4vh]">
           <div className="min-w-0 flex-[5]">
@@ -43,19 +43,20 @@ export default function ReformSlide() {
           </div>
         </div>
         <p>
-          The{' '}
+          On our{' '}
           <a className="text-pe-teal underline" href="https://www.policyengine.org/us/child-poverty-impact-dashboard">
             Child Poverty Impact Dashboard
-          </a>{' '}
-          applies the model to child tax credit, EITC, SNAP and state tax credit reforms in every state.
+          </a>
+          , you can run child tax credit, EITC and SNAP reforms in any state, and state tax credit reforms wherever a
+          state taxes income.
         </p>
         <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
-          Populace US local-area file and PolicyEngine US {modelVersion}, 2026, assuming no behavioral responses. The
-          file holds{' '}
-          {massachusetts.records.toLocaleString('en-US')} Massachusetts households, an effective sample of about{' '}
-          {massachusetts.effectiveHouseholds}. The model puts {massachusetts.modelChildRate.toFixed(1)}% of the state’s
-          children below the SPM threshold in 2025, against Census’s {massachusetts.censusChildRate.toFixed(1)}% for
-          2023 to 2025. The reform lowers the 2026 child rate by {massachusetts.childRateChange.toFixed(1)} points.
+          We use Populace US’s local-area file with PolicyEngine US {modelVersion} for 2026 state estimates, assuming no
+          behavioral responses. The file holds {massachusetts.records.toLocaleString('en-US')} Massachusetts households,
+          an effective sample of about {massachusetts.effectiveHouseholds}. We estimate{' '}
+          {massachusetts.modelChildRate.toFixed(1)}% of the state’s children below the SPM threshold in 2025, and Census
+          reports {massachusetts.censusChildRate.toFixed(1)}% for 2023 to 2025. We estimate that the 2026 child poverty
+          rate would fall by {massachusetts.childRateChange.toFixed(1)} points under the doubled credit.
         </p>
       </div>
     </Frame>

@@ -80,7 +80,7 @@ export default function EarningsChart() {
               strokeLinejoin="round"
               strokeLinecap="round"
             >
-              <title>{`${cliff.name}: loses ${usd(cliff.drop)} at ${usd(cliff.after)}`}</title>
+              <title>{`Family in ${cliff.name} loses ${usd(cliff.drop)} at ${usd(cliff.after)} of earnings`}</title>
             </path>
             <text
               x={x(cliff.after) + (cliff.after > LAST_LABEL_ON_RIGHT ? -10 : 10)}

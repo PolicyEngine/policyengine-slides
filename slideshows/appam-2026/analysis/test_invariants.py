@@ -37,6 +37,20 @@ def test_family_never_pays_more_than_the_bill(state, income):
 
 @settings(max_examples=MAX_EXAMPLES, deadline=None)
 @given(states, earnings)
+def test_state_payroll_taxes_sit_on_the_state_line(state, income):
+    sim = hh.simulate(state, income)
+    parts = hh.net_resources_parts(sim)
+    state_payroll_tax = line(sim, "employee_state_payroll_tax")
+    federal = line(sim, "spm_unit_federal_tax") + line(sim, "spm_unit_payroll_tax")
+    state_and_local = line(sim, "spm_unit_state_tax") + line(sim, "spm_unit_local_tax")
+    assert abs(parts["federal_taxes"][0] + federal - state_payroll_tax) < TOLERANCE
+    assert (
+        abs(parts["state_taxes"][0] + state_and_local + state_payroll_tax) < TOLERANCE
+    )
+
+
+@settings(max_examples=MAX_EXAMPLES, deadline=None)
+@given(states, earnings)
 def test_reconciles_with_spm_net_income(state, income):
     """Differential test against the model's own SPM total.
 

@@ -1,0 +1,11 @@
+{
+ "policyengine_us_version": "2.90.2",
+ "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
+ "state": "WI",
+ "earnings": 40000,
+ "child_care_subsidy": {
+  "2021": 13257.6,
+  "2023": 14023.68,
+  "2026": 14424.96
+ }
+}

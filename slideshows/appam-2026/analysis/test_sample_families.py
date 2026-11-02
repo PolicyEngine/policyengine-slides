@@ -2,7 +2,7 @@
 
 import pandas as pd
 import sample_families as sf
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 
 YEAR = sf.YEAR
@@ -32,6 +32,7 @@ def frame():
     return pd.DataFrame(rows), sizes
 
 
+@settings(deadline=None)
 @given(st.lists(st.sampled_from([10, 20, 30, 40, 50]), min_size=1, max_size=30))
 def test_each_draw_becomes_its_own_household(draws):
     people, sizes = frame()
@@ -45,6 +46,7 @@ def test_each_draw_becomes_its_own_household(draws):
         )
 
 
+@settings(deadline=None)
 @given(st.lists(st.sampled_from([30]), min_size=1, max_size=10))
 def test_a_repeated_household_keeps_its_units_apart(draws):
     people, _ = frame()

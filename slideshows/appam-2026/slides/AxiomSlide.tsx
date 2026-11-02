@@ -25,14 +25,14 @@ const runs = [
     result: `Deduction of ${usdCents(axiomRuns.onTime)} a month`,
   },
   { family: 'Same family, reports late', result: `Deduction of ${usd(axiomRuns.late)}` },
-  { family: 'Same family, November 2019', result: 'Engine refuses: the encoded section starts December 2019' },
+  { family: 'Ask for November 2019', result: 'Engine refuses: the encoded section starts December 2019' },
 ];
 
 export default function AxiomSlide() {
   return (
     <Frame title="The Axiom Foundation encodes rules with their source text and dates">
       <div className="flex h-full items-center gap-[4vh]">
-        <CodeBlock title="rulespec-us: us-ga/policies/dfcs/snap/3612.yaml (excerpt)" className="min-w-0 flex-[3]">
+        <CodeBlock title="Georgia SNAP manual · section 3612 (encoding excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.8vh, 22px)' }}>
             {RULESPEC}
           </pre>

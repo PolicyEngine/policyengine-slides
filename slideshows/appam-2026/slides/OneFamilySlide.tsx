@@ -43,7 +43,7 @@ export default function OneFamilySlide() {
             family pays, to get net resources. We leave out health coverage. The gap between the
             highest and lowest state runs {usd(spreadAt(30_000).spread)} at $30,000 of earnings and{' '}
             {usd(spreadAt(60_000).spread)}
-            {' at $60,000. The model starts South Dakota’s program in August 2026, so its subsidy covers five months.'}
+            {' at $60,000. We model South Dakota’s program from August 2026, so its subsidy covers five months.'}
           </p>
         </div>
       </div>
