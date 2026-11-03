@@ -38,7 +38,7 @@ LINKS = [
         (864.16, 513.67, 1251.13, 537.17),
         "https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml",
     ),
-    (7, (348.97, 602.91, 558.56, 622.91), "https://www.policyengine.org/us/taxsim"),
+    (7, (348.97, 614.42, 558.56, 634.42), "https://www.policyengine.org/us/taxsim"),
     (
         8,
         (87.32, 601.16, 545.53, 623.16),
