@@ -31,7 +31,7 @@ The gap between the top and bottom state moves with earnings: $16,404 at $30,000
 
 ## 4. States differ most on child care subsidies, then SNAP and state taxes (2:30, 1 minute 15 seconds)
 
-Each mark shows one state on one line of the family's budget. Federal taxes and credits move least across states, and states drive the rest through child care subsidies, SNAP options and their own taxes.
+Each mark shows one state on one line of the family's budget. Federal taxes and credits vary least, and states drive the rest through child care subsidies, SNAP options and their own taxes.
 
 With Texas's subsidy, the family gets $15,791 in child care help and loses $5,598 of SNAP. Congress lets SNAP households deduct their care costs, so this family deducts less when Texas pays for care. The family ends up $10,193 ahead.
 
@@ -55,15 +55,15 @@ If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface at poli
 
 ## 8. We estimate Massachusetts would forgo $577 million if lawmakers doubled its child and family credit (7:00, 1 minute 30 seconds)
 
-Take the parameter from a moment ago and double it, from $440 to $880 per dependent. We estimate Massachusetts would forgo $577 million in 2026. Of Massachusetts households, 29.4% would gain and none would lose. Under the Supplemental Poverty Measure, or SPM, the poverty gap would shrink by $169 million.
+Take the parameter from a moment ago and double it, from $440 to $880 per dependent. We estimate Massachusetts would forgo $577 million in 2026, and that 29.4% of its households would gain and none would lose. Under the Supplemental Poverty Measure, or SPM, the poverty gap would shrink by $169 million.
 
-We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts households, an effective sample of about 395. We estimate that 21.4% of the state's children lived below the SPM threshold in 2025, and Census reports 12.8% for 2023 to 2025. We estimate that the 2026 child poverty rate would fall by about 0.2 points under the doubled credit.
+We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts households, an effective sample of about 395. We estimate a 2025 child poverty rate of 21.4% under the SPM, and Census reports 12.8% for 2023 to 2025. Under the doubled credit, we estimate the 2026 rate would fall by about 0.2 points.
 
 On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
 
 ## 9. Research questions and the tools that answer them (8:30, 45 seconds)
 
-The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families. The Interactive reaches back to 2001. State of the Safety Net shows who qualifies and takes part.
+The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families. State of the Safety Net shows who qualifies and takes part.
 
 With PolicyEngine, you can change any parameter, write new rules and run your own microdata. You can read and edit every line of code and project current law through 2035.
 

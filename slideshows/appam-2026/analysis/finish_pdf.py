@@ -35,14 +35,16 @@ METADATA = {"/Title": "PolicyEngine for state policy research", "/Author": "Max 
 LINKS = [
     (
         6,
-        (864.16, 556.32, 1251.13, 579.82),
+        (864.16, 513.67, 1251.13, 537.17),
         "https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml",
     ),
+    (7, (348.97, 602.91, 558.56, 622.91), "https://www.policyengine.org/us/taxsim"),
     (
         8,
         (87.32, 601.16, 545.53, 623.16),
         "https://www.policyengine.org/us/child-poverty-impact-dashboard",
     ),
+    (11, (1121.77, 604.8, 1207.18, 626.8), "https://axiom.org"),
     (12, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
     (
         12,

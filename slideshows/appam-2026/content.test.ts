@@ -169,6 +169,12 @@ describe('derived chart data', () => {
     expect(cliffs).toEqual(cliffRanking.slice(0, 3));
   });
 
+  it('prints the sweep’s step on slide 5', () => {
+    const slide = read('slides/CliffsSlide.tsx');
+    const step = usd(sweepEarnings[1] - sweepEarnings[0]);
+    for (const phrase of [`after a ${step} raise`, `on a ${step} raise`]) expect(slide).toContain(phrase);
+  });
+
   it('counts the states where losing the subsidy costs the family most', () => {
     const lossAt = (lines: Record<string, number[]>, before: number, after: number) => {
       const i = family.earnings.indexOf(before);
@@ -306,6 +312,44 @@ describe('Axiom run', () => {
     expect(spreads.map((spread) => spread.earnings)).toContain(annual);
     expect(family.states.GA.snap[family.earnings.indexOf(annual)]).toBeGreaterThan(0);
     expect(notes).toContain(`earning ${usd(annual)} a year`);
+  });
+});
+
+describe('code printed on slides', () => {
+  const python = (slide: string) => read(`slides/${slide}.tsx`).match(/const PYTHON = `([\s\S]*?)`;/)![1];
+  // The check reads a copy of the sample saved under the survey's name, and runs two states, not 51.
+  const RUN_DIFFERENTLY = ['people = pd.read_csv("your_survey.csv")', 'for fips in STATE_FIPS.values():  # all 51'];
+
+  it('matches the check script line for line, apart from the sample file and the state loop', () => {
+    const check = read('analysis/check_slide_code.py');
+    for (const slide of ['MicrodataSlide', 'ReformSlide']) {
+      const lines = python(slide)
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line && !line.startsWith('#') && !RUN_DIFFERENTLY.includes(line));
+      expect(lines.length).toBeGreaterThan(3);
+      for (const line of lines) expect(check, `${slide}: ${line}`).toContain(line);
+    }
+  });
+
+  it('ends slide 6’s values at the amount slide 8 doubles', () => {
+    const slide = read('slides/ParametersSlide.tsx');
+    const values = [...slide.matchAll(/^ {2}(\d{4})-01-01: (\d+)$/gm)].map((match) => ({
+      year: Number(match[1]),
+      value: Number(match[2]),
+    }));
+    expect(values[values.length - 1].value).toBe(reformRun.current);
+    expect(reformRun.reformed).toBe(2 * reformRun.current);
+    for (const { year, value } of values.filter((entry) => entry.year >= 2023)) {
+      for (const text of [slide, notes]) expect(text).toContain(`$${value} for ${year}`);
+    }
+  });
+
+  it('shows the rate the Axiom engine applied', () => {
+    const slide = read('slides/AxiomSlide.tsx');
+    const rate = Number(slide.match(/formula: (\d+\.\d+)/)![1]);
+    expect(axiomRuns.deduction).toBeCloseTo(axiomRuns.monthlyEarnings * rate, 6);
+    expect(slide).toContain(`"${Math.round(rate * 100)}% earned income deduction"`);
   });
 });
 
@@ -527,9 +571,13 @@ describe('typed figures', () => {
   ];
 
   it('match the data in the speaker notes', () => {
+    const drops = cliffs.map((cliff) => cliff.drop);
     for (const figure of [
       ...shared,
-      usd(cliffs[2].drop),
+      `In ${cliffs[0].name}, ${cliffs[1].name} and ${cliffs[2].name}`,
+      `after a ${usd(cliffs[0].after - cliffs[0].before)} raise`,
+      `between ${usd(Math.min(...drops))} and ${usd(Math.max(...drops))}`,
+      massachusetts.records.toLocaleString('en-US'),
       millions(massachusetts.cost),
       `about ${stateBaseline.medianEffective} effective households`,
       usd(axiomRuns.deduction),
@@ -550,6 +598,7 @@ describe('typed figures', () => {
     const massachusettsMove = groupQuartersMoves.find((row) => row.state === 'MA');
     for (const figure of [
       ...shared,
+      cliffs.map((cliff) => `${cliff.name} ${usd(-cliff.drop)} at ${usd(cliff.after)}`).join(', '),
       `${stateBaseline.modelExceedsCensus} of 51 jurisdictions`,
       `median of ${stateBaseline.medianEffective}`,
       massachusetts.records.toLocaleString('en-US'),
@@ -584,6 +633,28 @@ describe('typed figures', () => {
       `Massachusetts's by ${massachusettsMove?.move.toFixed(2)}`,
     ]) {
       expect(ledger).toContain(figure);
+    }
+  });
+
+  it('rank the size of Massachusetts’s gap from Census where the ledger says', () => {
+    const gap = (row: BaselineRow) => Math.abs(row.child_spm_percent - row.census_percent);
+    const order = [...stateBaseline.rows].sort((a, b) => gap(b) - gap(a));
+    const rank = order.findIndex((row) => row.state === 'MA');
+    const ahead = order.slice(0, rank).map((row) => name(row.state)).join(' and ');
+    expect(ledger).toContain(`ranks ${['first', 'second', 'third', 'fourth'][rank]} in size among the 51 jurisdictions, after ${ahead}`);
+  });
+
+  it('keep every copy of a repeated figure right', () => {
+    const copies = (text: string, figure: string) => text.split(figure).length - 1;
+    for (const [text, figure, count] of [
+      [notes, usd(largestCliff.drop), 2],
+      [notes, millions(massachusetts.cost), 2],
+      [ledger, massachusetts.records.toLocaleString('en-US'), 2],
+      [ledger, `${stateBaseline.meanCensusGap.toFixed(1)} points`, 2],
+      [ledger, `${massachusetts.childRateChange.toFixed(1)} points`, 2],
+      [ledger, percent(massachusetts.childPoverty[0]), 2],
+    ] as const) {
+      expect(copies(text, figure), figure).toBe(count);
     }
   });
 
