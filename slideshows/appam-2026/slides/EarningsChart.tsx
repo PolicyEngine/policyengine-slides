@@ -12,6 +12,9 @@ const X_TICKS = [20_000, 40_000, 60_000, 80_000, 100_000];
 const Y_TICKS = [20_000, 40_000, 60_000, 80_000];
 // A cliff past this point labels above its peak, away from the chart's edge and the lines below it.
 const LAST_LABEL_BELOW = 90_000;
+const LABEL_SIZE = 23;
+// Inter's semibold glyphs average about 0.6 em, and two labels need room between them.
+const labelWidth = (name: string) => name.length * 0.6 * LABEL_SIZE + 20;
 
 const SERIES_COLORS: Record<string, string> = {
   IA: 'var(--color-teal-600)',
@@ -71,6 +74,11 @@ export default function EarningsChart() {
       {cliffs.map((cliff) => {
         const values = states[cliff.code];
         const below = cliff.after <= LAST_LABEL_BELOW;
+        // Below the lines, a label sits right of its drop unless the next drop leaves no room.
+        const next = Math.min(
+          ...cliffs.map((other) => other.after).filter((after) => after > cliff.after && after <= LAST_LABEL_BELOW),
+        );
+        const crowded = below && x(next) - x(cliff.after) < labelWidth(cliff.name);
         return (
           <g key={cliff.code}>
             <path
@@ -84,10 +92,10 @@ export default function EarningsChart() {
               <title>{`Family in ${cliff.name} loses ${usd(cliff.drop)} at ${usd(cliff.after)} of earnings`}</title>
             </path>
             <text
-              x={below ? x(cliff.after) + 10 : x(cliff.before) - 4}
+              x={!below ? x(cliff.before) - 4 : crowded ? x(cliff.before) - 10 : x(cliff.after) + 10}
               y={below ? y(cliff.net_after) + 30 : y(cliff.net_before) - 14}
-              textAnchor={below ? 'start' : 'end'}
-              fontSize="23"
+              textAnchor={below && !crowded ? 'start' : 'end'}
+              fontSize={LABEL_SIZE}
               fontWeight="600"
               fill="var(--color-gray-800)"
               stroke="white"

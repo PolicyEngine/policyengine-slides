@@ -23,7 +23,7 @@ export default function CliffsSlide() {
               {cliffs.map((cliff) => (
                 <li key={cliff.code} className="flex items-baseline justify-between gap-4">
                   <span>
-                    {cliff.name}, {usd(cliff.after)}
+                    {cliff.name}, {usd(cliff.before)} to {usd(cliff.after)}
                   </span>
                   <span className="font-semibold tabular-nums">{usd(-cliff.drop)}</span>
                 </li>
