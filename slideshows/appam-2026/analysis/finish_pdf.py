@@ -44,7 +44,7 @@ LINKS = [
         (87.32, 601.16, 545.53, 623.16),
         "https://www.policyengine.org/us/child-poverty-impact-dashboard",
     ),
-    (11, (1121.77, 604.8, 1207.18, 626.8), "https://axiom.org"),
+    (11, (1121.77, 618.93, 1207.18, 640.93), "https://axiom.org"),
     (12, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
     (
         12,
