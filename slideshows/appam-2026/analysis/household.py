@@ -43,6 +43,8 @@ SUBSIDIES_IN_SPM_BENEFITS = (
 
 # Alaska's dividend reaches household_market_income and New Jersey's ANCHOR
 # payment reaches household_benefits, but neither reaches the SPM unit totals.
+# policyengine-us#10573 adds both to the SPM unit totals, so empty this tuple
+# when the pin moves past it.
 CASH_OUTSIDE_SPM_TOTALS = ("ak_permanent_fund_dividend", "nj_property_tax_relief")
 
 
