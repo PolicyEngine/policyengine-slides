@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  alaska,
   axiomRuns,
   childCareBill,
   cliffRanking,
@@ -26,7 +27,6 @@ import {
   sweep,
   sweepEarnings,
   usd,
-  usdCents,
 } from './content';
 import nationalCheck from './data/massachusetts_national_check.json';
 import { SERIES } from './slides/FamilyChart';
@@ -210,30 +210,70 @@ describe('derived chart data', () => {
     expect(endLabel(line('federal_taxes'), 4_263)).toBe('27 states $4,263');
     expect(endLabel(line('snap'), 0)).toBe('15 states $0');
   });
+
+  it('names both states that tie at the low end of slide 7’s SNAP strip', () => {
+    const [snap, medicaid] = instrument.lines.map((line) => line.values);
+    const ends = (values: typeof snap) => [values[0].value, values[values.length - 1].value].map((value) => endLabel(values, value, percent));
+    expect(ends(snap)).toEqual(['AR, TN 17.5%', 'MD 38.3%']);
+    expect(ends(medicaid)).toEqual(['ID 39.8%', 'HI 66.1%']);
+  });
+
+  it('pays Alaska’s family the dividend and energy relief for each person', () => {
+    const people = 1 + family.family.child_ages.length;
+    expect(alaska.payments).toBe(people * (alaska.dividend + alaska.energyRelief));
+    for (const text of [notes, ledger]) {
+      for (const amount of [alaska.dividend, alaska.energyRelief, alaska.payments]) expect(text).toContain(usd(amount));
+    }
+  });
 });
 
 describe('links', () => {
   const finishPdf = read('analysis/finish_pdf.py');
+  const HREF = /href[=:]\s*["']([^"']+)["']/g;
+  const order = read('config.ts')
+    .match(/slides:\s*\[([^\]]*)\]/)![1]
+    .split(',')
+    .map((name) => name.trim())
+    .filter(Boolean);
+  const slideSource = (name: string) => read(`slides/${name}.tsx`);
+  const deck = finishPdf.match(/^DECK = "([^"]+)"$/m)![1];
+  const deckAddress = deck.replace(/^https:\/\//, '');
+  const table = finishPdf.match(/^LINKS = \[([\s\S]*?)^\]/m)![1];
+  const entries = [...table.matchAll(/\(\s*(\d+),\s*\([\d.,\s]+\),\s*(?:"([^"]+)"|DECK),?\s*\)/g)].map((match) => ({
+    page: Number(match[1]),
+    target: match[2] ?? deck,
+  }));
 
-  it('sends the PDF where each slide sends the live page', () => {
-    for (const slide of ['ParametersSlide', 'ReformSlide', 'EndSlide']) {
-      const targets = [...read(`slides/${slide}.tsx`).matchAll(/href[=:]\s*["']([^"']+)["']/g)].map((match) => match[1]);
-      expect(targets.length).toBeGreaterThan(0);
-      for (const target of targets) {
-        expect(finishPdf).toContain(target);
-      }
-    }
+  it('reads every entry in the PDF link table', () => {
+    expect(Number(finishPdf.match(/^SLIDES = (\d+)$/m)![1])).toBe(order.length);
+    expect(entries).toHaveLength(table.match(/"(?:https|mailto):|\bDECK\b/g)!.length);
+  });
+
+  it('links each target on the page of the slide that sends the live page there, and nowhere else', () => {
+    const expected = order.flatMap((name, i) => {
+      const source = slideSource(name);
+      const targets = [...source.matchAll(HREF)].map((match) => match[1]);
+      if (source.includes(`'${deckAddress}'`)) targets.push(deck);
+      return targets.map((target) => `${i + 1} ${target}`);
+    });
+    const actual = entries.map(({ page, target }) => `${page} ${target}`);
+    expect(new Set(actual)).toEqual(new Set(expected));
   });
 
   it('prints each address the PDF links to, on the slide that links to it', () => {
     const printed: Record<string, string[]> = {
       ParametersSlide: ['github.com/PolicyEngine/policyengine-us'],
+      MicrodataSlide: ['policyengine.org/us/taxsim'],
       ReformSlide: ['policyengine.org/us/child-poverty-impact-dashboard'],
-      EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', 'policyengine.org/slides/appam-2026'],
+      AxiomSlide: ['axiom.org'],
+      EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', deckAddress],
     };
     for (const [slide, addresses] of Object.entries(printed)) {
+      // Drop each link target, so an address counts only where the slide prints it.
+      const text = slideSource(slide).replace(HREF, '');
       for (const address of addresses) {
-        expect(read(`slides/${slide}.tsx`)).toContain(address);
+        const escaped = address.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        expect(text).toMatch(new RegExp(`(?<![\\w@./:-])${escaped}(?![\\w/-])`));
       }
     }
   });
@@ -252,9 +292,8 @@ describe('Texas interaction', () => {
 });
 
 describe('Axiom run', () => {
-  it('pays 20% of earnings on time and nothing when reported late', () => {
-    expect(axiomRuns.onTime).toBeCloseTo(axiomRuns.monthlyEarnings * 0.2, 6);
-    expect(axiomRuns.late).toBe(0);
+  it('deducts 20% of earnings', () => {
+    expect(axiomRuns.deduction).toBeCloseTo(axiomRuns.monthlyEarnings * 0.2, 6);
   });
 
   it('refuses a month before the effective date', () => {
@@ -262,9 +301,11 @@ describe('Axiom run', () => {
     expect(axiomRuns.beforeEffectiveDate.stderr).toContain('2019-11-01');
   });
 
-  it('runs on monthly pay that the notes round to the family’s $40,000', () => {
-    expect(Math.round(axiomRuns.monthlyEarnings * 12)).toBe(headlineEarnings);
-    expect(notes).toContain(`about ${usd(headlineEarnings)} a year`);
+  it('runs slide 3’s family at earnings where PolicyEngine US gives it Georgia SNAP', () => {
+    const annual = axiomRuns.monthlyEarnings * 12;
+    expect(spreads.map((spread) => spread.earnings)).toContain(annual);
+    expect(family.states.GA.snap[family.earnings.indexOf(annual)]).toBeGreaterThan(0);
+    expect(notes).toContain(`earning ${usd(annual)} a year`);
   });
 });
 
@@ -491,7 +532,7 @@ describe('typed figures', () => {
       usd(cliffs[2].drop),
       millions(massachusetts.cost),
       `about ${stateBaseline.medianEffective} effective households`,
-      usdCents(axiomRuns.onTime),
+      usd(axiomRuns.deduction),
     ]) {
       expect(notes).toContain(figure);
     }

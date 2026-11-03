@@ -72,8 +72,9 @@ def situation(state, earnings, axes=None, year=YEAR):
         "spm_unit_pre_subsidy_childcare_expenses": {year: CHILD_CARE_PER_MONTH * 12},
         "has_heating_cooling_expense": {year: True},
         # Both default to a value that misdescribes a parent in a regular job:
-        # the activity test defaults to not met, and Wisconsin Works places
-        # every family in a Community Service Job.
+        # the activity test defaults to not met, and the Wisconsin Works
+        # placement puts a family with no child under 1 and no third-trimester
+        # pregnancy in a Community Service Job.
         "meets_ccdf_activity_test": {year: True},
     }
     if state == "WI":

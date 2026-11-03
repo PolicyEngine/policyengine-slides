@@ -1,4 +1,5 @@
 import { instrument, percent } from '../content';
+import { endLabel } from './LineRugs';
 
 const WIDTH = 900;
 const HEIGHT = 390;
@@ -60,10 +61,10 @@ export default function InstrumentRugs() {
               </rect>
             ))}
             <text x={x(low.value) - 12} y={top + TICK_HEIGHT / 2 + 7} textAnchor="end" fontSize="20" fill="var(--color-gray-700)">
-              {`${low.code} ${percent(low.value)}`}
+              {endLabel(line.values, low.value, percent)}
             </text>
             <text x={x(high.value) + 12} y={top + TICK_HEIGHT / 2 + 7} textAnchor="start" fontSize="20" fill="var(--color-gray-700)">
-              {`${high.code} ${percent(high.value)}`}
+              {endLabel(line.values, high.value, percent)}
             </text>
           </g>
         );

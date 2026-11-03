@@ -17,15 +17,19 @@ export default function MicrodataSlide() {
     <Frame title="Build simulated eligibility measures on your own microdata">
       <div className="flex h-full items-center gap-[4vh]">
         <div className="min-w-0 flex-[5] space-y-[2.4vh]">
-          <p>Hold your sample fixed and change the state. Differences between runs come from each state’s rules.</p>
+          <p>Hold your sample fixed and change the state. Differences between runs come from the rules in each state.</p>
           <CodeBlock title="One run per state">
             <pre className="overflow-hidden" style={{ fontSize: 'clamp(11px, 1.75vh, 22px)' }}>
               {PYTHON}
             </pre>
           </CodeBlock>
           <p style={{ fontSize: '0.9em' }}>
-            Our TAXSIM-compatible interface runs TAXSIM-format files through PolicyEngine for tax years 2021 onward, and
-            through TAXSIM35 for earlier years.
+            Our TAXSIM-compatible interface at{' '}
+            <a style={{ textDecoration: 'underline' }} href="https://www.policyengine.org/us/taxsim">
+              policyengine.org/us/taxsim
+            </a>{' '}
+            runs TAXSIM-format files through PolicyEngine for tax years 2021 onward, and through TAXSIM35 for earlier
+            years.
           </p>
         </div>
         <div className="flex h-full min-w-0 flex-[6] flex-col">
@@ -35,9 +39,9 @@ export default function MicrodataSlide() {
           <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
             Each mark shows one of 51 jurisdictions. We draw {instrument.households.toLocaleString('en-US')} households with children by
             weight from Populace US, our default microdata, and run the same families under each state’s{' '}
-            {instrument.year} rules, using PolicyEngine US {modelVersion}. January SNAP eligibility, as a share of
-            Supplemental Poverty Measure (SPM) units with children. Medicaid or CHIP eligibility, as a share of children
-            under 19.
+            {instrument.year} rules, using PolicyEngine US {modelVersion}. We measure SNAP eligibility in January as a
+            share of Supplemental Poverty Measure (SPM) units with children, and Medicaid or CHIP eligibility as a share
+            of children under 19.
           </p>
         </div>
       </div>

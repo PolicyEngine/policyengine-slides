@@ -8,7 +8,7 @@ export default function CliffsSlide() {
       <div className="flex h-full gap-[4vh]">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-            Net resources by earnings, one line per state, 2026
+            Net resources by earnings, one line per state and DC, 2026
           </p>
           <div className="min-h-0 flex-1">
             <EarningsChart />
@@ -35,7 +35,7 @@ export default function CliffsSlide() {
           </div>
           <div>
             <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
-              Total effective marginal tax rate, median state
+              Median total effective marginal tax rate on a $500 raise, across 51 jurisdictions
             </h2>
             <ul className="space-y-[0.7vh]">
               {[30_000, 60_000].map((earnings) => (

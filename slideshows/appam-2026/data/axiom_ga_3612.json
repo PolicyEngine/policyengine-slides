@@ -16,10 +16,10 @@
    2
   ]
  },
- "monthly_earnings": "3333.33",
+ "monthly_earnings": "2500.00",
  "results": [
   {
-   "case": "reported on time",
+   "case": "June 2026",
    "month": "2026-06",
    "exit_code": 0,
    "stdout": {
@@ -46,7 +46,7 @@
         "unit": "USD",
         "value": {
          "kind": "decimal",
-         "value": "666.666"
+         "value": "500"
         }
        },
        "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed": {
@@ -78,7 +78,7 @@
         "unit": "USD",
         "value": {
          "kind": "decimal",
-         "value": "666.666"
+         "value": "500"
         },
         "source": "3612 Requirements; Basic Considerations",
         "executed_expression": "(if us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed then (us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate[0] * input(\"total_countable_gross_earned_income\")) else 0)",
@@ -107,97 +107,6 @@
         "entity_id": "family",
         "unit": null,
         "outcome": "holds",
-        "source": "3612 Requirements; Basic Considerations",
-        "executed_expression": "((input(\"total_countable_gross_earned_income\") > 0) and not ((input(\"assistance_unit_failed_to_report_earned_income_timely\") == true)))",
-        "dependencies": []
-       }
-      }
-     }
-    ]
-   },
-   "stderr": ""
-  },
-  {
-   "case": "reported late",
-   "month": "2026-06",
-   "exit_code": 0,
-   "stdout": {
-    "metadata": {
-     "relation_binding": "strict",
-     "requested_mode": "explain",
-     "actual_mode": "explain",
-     "fallback_reason": null
-    },
-    "results": [
-     {
-      "entity_id": "family",
-      "period": {
-       "period_kind": "month",
-       "start": "2026-06-01",
-       "end": "2026-06-30"
-      },
-      "outputs": {
-       "us-ga:policies/dfcs/snap/3612#earned_income_deduction": {
-        "kind": "scalar",
-        "name": "earned_income_deduction",
-        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction",
-        "dtype": "decimal",
-        "unit": "USD",
-        "value": {
-         "kind": "decimal",
-         "value": "0"
-        }
-       },
-       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed": {
-        "kind": "judgment",
-        "name": "earned_income_deduction_allowed",
-        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed",
-        "unit": null,
-        "outcome": "not_holds"
-       },
-       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate": {
-        "kind": "scalar",
-        "name": "earned_income_deduction_rate",
-        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate",
-        "dtype": "decimal",
-        "unit": null,
-        "value": {
-         "kind": "decimal",
-         "value": "0.2"
-        }
-       }
-      },
-      "trace": {
-       "us-ga:policies/dfcs/snap/3612#earned_income_deduction": {
-        "kind": "scalar",
-        "name": "earned_income_deduction",
-        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction",
-        "entity_id": "family",
-        "dtype": "decimal",
-        "unit": "USD",
-        "value": {
-         "kind": "decimal",
-         "value": "0"
-        },
-        "source": "3612 Requirements; Basic Considerations",
-        "executed_expression": "(if us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed then (us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate[0] * input(\"total_countable_gross_earned_income\")) else 0)",
-        "dependencies": [
-         "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed"
-        ],
-        "not_evaluated_dependencies": [
-         {
-          "dependency": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate",
-          "reason": "branch_not_selected"
-         }
-        ]
-       },
-       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed": {
-        "kind": "judgment",
-        "name": "earned_income_deduction_allowed",
-        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed",
-        "entity_id": "family",
-        "unit": null,
-        "outcome": "not_holds",
         "source": "3612 Requirements; Basic Considerations",
         "executed_expression": "((input(\"total_countable_gross_earned_income\") > 0) and not ((input(\"assistance_unit_failed_to_report_earned_income_timely\") == true)))",
         "dependencies": []

@@ -12,6 +12,16 @@ export const lowest = crossSection[0];
 export const median = crossSection[Math.floor(crossSection.length / 2)];
 export const highest = crossSection[crossSection.length - 1];
 
+const alaskaRow = crossSection.find((row) => row.code === 'AK');
+if (!alaskaRow) throw new Error('No Alaska row');
+
+// gov.states.ak.dor.permanent_fund_dividend and energy_relief for 2026, per person.
+export const alaska = {
+  dividend: 1_000,
+  energyRelief: 200,
+  payments: alaskaRow.other_benefits,
+};
+
 export const headlineEarnings = charts.headline_earnings;
 export const family = charts.family;
 export const childCareBill = family.child_care_per_month * 12;
@@ -132,9 +142,8 @@ function axiomDeduction(index: number) {
 
 export const axiomRuns = {
   monthlyEarnings: Number(axiomRun.monthly_earnings),
-  onTime: axiomDeduction(0),
-  late: axiomDeduction(1),
-  beforeEffectiveDate: axiomRun.results[2],
+  deduction: axiomDeduction(0),
+  beforeEffectiveDate: axiomRun.results[1],
 };
 
 export function usd(value: number) {

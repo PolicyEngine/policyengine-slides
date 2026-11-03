@@ -16,20 +16,24 @@ const MAX_NAMED_STATES = 3;
 const LABELS: Record<string, string[]> = {
   child_care_subsidy: ['Child care', 'subsidy'],
   snap: ['SNAP'],
-  state_taxes: ['State credits', 'minus state taxes'],
+  state_taxes: ['State and local', 'credits minus taxes'],
   federal_taxes: ['Federal credits', 'minus federal taxes'],
 };
 
 const x = (value: number) =>
   LEFT + ((value - AXIS_MIN) / (AXIS_MAX - AXIS_MIN)) * (WIDTH - LEFT - RIGHT);
 
-export function endLabel(values: { code: string; value: number }[], value: number) {
+export function endLabel(
+  values: { code: string; value: number }[],
+  value: number,
+  format: (value: number) => string = usd,
+) {
   const tied = values.filter((entry) => entry.value === value);
   if (tied.length <= MAX_NAMED_STATES) {
-    return `${tied.map((entry) => entry.code).join(', ')} ${usd(value)}`;
+    return `${tied.map((entry) => entry.code).join(', ')} ${format(value)}`;
   }
   const states = tied.filter((entry) => entry.code !== 'DC').length;
-  return `${states} states${states < tied.length ? ' and DC' : ''} ${usd(value)}`;
+  return `${states} states${states < tied.length ? ' and DC' : ''} ${format(value)}`;
 }
 
 export default function LineRugs() {

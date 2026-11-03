@@ -1,6 +1,6 @@
 import CodeBlock from '@/components/content/CodeBlock';
 import Frame from './Frame';
-import { axiomEngineVersion, axiomRuns, usd, usdCents } from '../content';
+import { axiomEngineVersion, axiomRuns, usdCents } from '../content';
 
 const RULESPEC = `- name: earned_income_deduction_rate
   kind: parameter
@@ -21,10 +21,9 @@ const RULESPEC = `- name: earned_income_deduction_rate
 
 const runs = [
   {
-    family: `Earns ${usdCents(axiomRuns.monthlyEarnings)} a month and reports on time`,
-    result: `Deduction of ${usdCents(axiomRuns.onTime)} a month`,
+    family: `Earns ${usdCents(axiomRuns.monthlyEarnings)} a month`,
+    result: `Deduction of ${usdCents(axiomRuns.deduction)} a month`,
   },
-  { family: 'Same family, reports late', result: `Deduction of ${usd(axiomRuns.late)}` },
   { family: 'Ask for November 2019', result: 'Engine refuses: the encoded section starts December 2019' },
 ];
 
@@ -56,6 +55,13 @@ export default function AxiomSlide() {
               </div>
             ))}
           </dl>
+          <p className="mt-[2vh]">
+            Explore Axiom&rsquo;s encodings at{' '}
+            <a style={{ textDecoration: 'underline' }} href="https://axiom.org">
+              axiom.org
+            </a>
+            .
+          </p>
         </div>
       </div>
     </Frame>

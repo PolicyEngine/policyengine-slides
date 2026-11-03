@@ -9,16 +9,16 @@ values:
   2024-01-01: 440
 metadata:
   reference:
-    - title: Massachusetts General Laws Part I Title IX
-        Chapter 62 Section 6 (y) (ii) (B)
-      href: https://malegislature.gov/Laws/GeneralLaws/...
+    - title: Form 1 2023 Massachusetts Resident Income
+        Tax (line 46)
+      href: https://www.mass.gov/doc/2023-form-1-instructions/...
     - title: Massachusetts Session Laws Chapter 50 of the
         Acts of 2023 Section 22 & Section 45
       href: https://malegislature.gov/Laws/SessionLaws/...`;
 
 export default function ParametersSlide() {
   return (
-    <Frame title="Parameters record when each value took effect and cite their sources">
+    <Frame title="We record when each value took effect and cite its sources">
       <div className="flex h-full items-center gap-[4vh]">
         <CodeBlock title="gov/states/ma/tax/income/credits/child_and_family/amount.yaml (excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.95vh, 24px)' }}>
@@ -30,7 +30,6 @@ export default function ParametersSlide() {
             The Massachusetts Legislature raised this credit to $310 for 2023 and $440 for 2024, and
             lifted its two-dependent cap.
           </p>
-          <p>Ask for any date and you get the value in force on that date.</p>
           <p>
             Read this file and the rest of our parameters at{' '}
             <a

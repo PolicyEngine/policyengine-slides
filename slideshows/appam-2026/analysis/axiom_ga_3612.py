@@ -8,9 +8,9 @@ Compile first, from a checkout of TheAxiomFoundation/rulespec-us:
       --output ga3612.compiled.json
 
 Then: python axiom_ga_3612.py <engine binary> ga3612.compiled.json
-Writes data/axiom_ga_3612.json. The cases cover the $40,000 family in Georgia,
-the same family when it reports earnings late, and a month before the rule's
-December 2019 effective date.
+Writes data/axiom_ga_3612.json. The cases cover slide 3's family at $30,000 a
+year in Georgia, where PolicyEngine US gives it SNAP, and a month before the
+rule's December 2019 effective date.
 """
 
 import json
@@ -24,11 +24,10 @@ RULES = (
     "earned_income_deduction_allowed",
     "earned_income_deduction",
 )
-MONTHLY_EARNINGS = "3333.33"
+MONTHLY_EARNINGS = "2500.00"
 CASES = (
-    ("reported on time", "2026-06", False),
-    ("reported late", "2026-06", True),
-    ("before the effective date", "2019-11", False),
+    ("June 2026", "2026-06"),
+    ("before the effective date", "2019-11"),
 )
 
 
@@ -38,7 +37,7 @@ def month_bounds(month):
     return f"{month}-01", f"{month}-{end:02d}"
 
 
-def request(month, late):
+def request(month):
     start, end = month_bounds(month)
     interval = {"start": start, "end": end}
     return {
@@ -57,7 +56,7 @@ def request(month, late):
                     "entity": "Household",
                     "entity_id": "family",
                     "interval": interval,
-                    "value": {"kind": "bool", "value": late},
+                    "value": {"kind": "bool", "value": False},
                 },
             ],
             "relations": [],
@@ -77,10 +76,10 @@ def main(engine, artifact):
         [engine, "capabilities"], capture_output=True, text=True, check=True
     ).stdout
     results = []
-    for label, month, late in CASES:
+    for label, month in CASES:
         run = subprocess.run(
             [engine, "run-compiled", "--artifact", artifact],
-            input=json.dumps(request(month, late)),
+            input=json.dumps(request(month)),
             capture_output=True,
             text=True,
             check=False,
