@@ -566,7 +566,7 @@ describe('typed figures', () => {
     `${stateBaseline.beyondCensusMargin} of 51 jurisdictions`,
     `${stateBaseline.meanCensusGap.toFixed(1)} points`,
     `${massachusetts.childRateChange.toFixed(1)} points`,
-    `about ${massachusetts.effectiveHouseholds}`,
+    `about ${massachusetts.effectiveHouseholds}, or ${massachusetts.effectiveHouseholdsWithChildren} among households with children`,
     ...endpoints,
   ];
 

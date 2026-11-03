@@ -101,6 +101,7 @@ export const massachusetts = {
   gapReduction: reformRun.baseline_poverty_gap - reformRun.reformed_poverty_gap,
   records: reformRun.household_records,
   effectiveHouseholds: Math.round(reformRun.effective_households),
+  effectiveHouseholdsWithChildren: Math.round(reformRun.effective_households_with_children),
   peopleCrossingThreshold: reformRun.people_crossing_threshold,
   childPoverty: [reformRun.baseline_child_poverty, reformRun.reformed_child_poverty],
   childRateChange: 100 * (reformRun.baseline_child_poverty - reformRun.reformed_child_poverty),
