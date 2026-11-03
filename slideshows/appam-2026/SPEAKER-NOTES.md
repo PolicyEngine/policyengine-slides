@@ -6,10 +6,10 @@ Twelve slides in about 11 minutes.
 
 ## Before presenting
 
-- Open the deck once on the presentation laptop. It needs no live connection after it loads.
-- Press F for fullscreen, and the page control leaves the footer.
-- Keep the PDF backup on the laptop in case the room's network fails.
-- Check the slide order against what Cynthia, Tara and Linda present first, and cut slide 9's table to one sentence if they have already covered it.
+- Send the PDF to Cynthia's team by Wednesday evening, November 4, for the room's laptop.
+- Keep these notes on your phone.
+- If the room's laptop fails, open policyengine.org/slides/appam-2026 on yours and press F for fullscreen.
+- Check the slide order against what Cynthia, Tara and Linda present first. If they have already covered slide 9's table, give it one sentence.
 
 ## 1. PolicyEngine for state policy research (0:00, 15 seconds)
 

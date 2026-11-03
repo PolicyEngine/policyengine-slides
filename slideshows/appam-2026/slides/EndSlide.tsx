@@ -2,10 +2,13 @@ import BasePathImage from '@/components/core/BasePathImage';
 import Slide from '@/components/core/Slide';
 
 const links = [
-  'policyengine.org',
-  'pip install policyengine-us',
-  'github.com/PolicyEngine/policyengine-slides',
-  'max@policyengine.org',
+  { label: 'policyengine.org', href: 'https://www.policyengine.org' },
+  { label: 'pip install policyengine-us' },
+  {
+    label: 'github.com/PolicyEngine/policyengine-slides',
+    href: 'https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026',
+  },
+  { label: 'max@policyengine.org', href: 'mailto:max@policyengine.org' },
 ];
 
 const DECK_URL = 'policyengine.org/slides/appam-2026';
@@ -17,10 +20,16 @@ export default function EndSlide() {
         <div>
           <h1 className="font-display mb-3 text-5xl font-bold">Thank you</h1>
           <p className="mb-8 text-2xl opacity-80">Questions?</p>
-          <div className="space-y-2 opacity-70">
-            {links.map((link) => (
-              <p key={link} className="text-lg">
-                {link}
+          <div className="space-y-2 opacity-90">
+            {links.map(({ label, href }) => (
+              <p key={label} className="text-lg">
+                {href ? (
+                  <a className="hover:underline" href={href}>
+                    {label}
+                  </a>
+                ) : (
+                  label
+                )}
               </p>
             ))}
           </div>

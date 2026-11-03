@@ -30,6 +30,7 @@ import {
 } from './content';
 import nationalCheck from './data/massachusetts_national_check.json';
 import { SERIES } from './slides/FamilyChart';
+import { endLabel } from './slides/LineRugs';
 
 const read = (path: string) => readFileSync(join(__dirname, path), 'utf8');
 const family = JSON.parse(read('data/family.json'));
@@ -199,6 +200,15 @@ describe('derived chart data', () => {
       expect(values).toHaveLength(51);
       expect(values).toEqual([...values].sort((a, b) => a - b));
     }
+  });
+
+  it('counts DC apart from the states in the rug plot labels', () => {
+    const line = (key: string) => programLines.find((entry) => entry.key === key)!.values;
+    expect(endLabel(line('child_care_subsidy'), 18_000)).toBe('5 states and DC $18,000');
+    expect(endLabel(line('child_care_subsidy'), 0)).toBe('NV, OH $0');
+    expect(endLabel(line('federal_taxes'), 3_678)).toBe('5 states and DC $3,678');
+    expect(endLabel(line('federal_taxes'), 4_263)).toBe('27 states $4,263');
+    expect(endLabel(line('snap'), 0)).toBe('15 states $0');
   });
 });
 

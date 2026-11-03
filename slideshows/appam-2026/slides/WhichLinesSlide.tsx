@@ -18,7 +18,7 @@ export default function WhichLinesSlide() {
       <div className="flex h-full gap-[4vh]">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-            Each mark shows one state, for the family earning {usd(headlineEarnings)}.
+            Each mark shows one of 51 jurisdictions, for the family earning {usd(headlineEarnings)}.
           </p>
           <div className="min-h-0 flex-1">
             <LineRugs />

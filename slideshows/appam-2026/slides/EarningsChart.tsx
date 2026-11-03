@@ -10,8 +10,8 @@ const Y_MIN = 20_000;
 const Y_MAX = 90_000;
 const X_TICKS = [20_000, 40_000, 60_000, 80_000, 100_000];
 const Y_TICKS = [20_000, 40_000, 60_000, 80_000];
-// A cliff past this point labels to its left, away from the chart's edge.
-const LAST_LABEL_ON_RIGHT = 90_000;
+// A cliff past this point labels above its peak, away from the chart's edge and the lines below it.
+const LAST_LABEL_BELOW = 90_000;
 
 const SERIES_COLORS: Record<string, string> = {
   IA: 'var(--color-teal-600)',
@@ -70,6 +70,7 @@ export default function EarningsChart() {
         ))}
       {cliffs.map((cliff) => {
         const values = states[cliff.code];
+        const below = cliff.after <= LAST_LABEL_BELOW;
         return (
           <g key={cliff.code}>
             <path
@@ -83,9 +84,9 @@ export default function EarningsChart() {
               <title>{`Family in ${cliff.name} loses ${usd(cliff.drop)} at ${usd(cliff.after)} of earnings`}</title>
             </path>
             <text
-              x={x(cliff.after) + (cliff.after > LAST_LABEL_ON_RIGHT ? -10 : 10)}
-              y={y(cliff.net_after) + 30}
-              textAnchor={cliff.after > LAST_LABEL_ON_RIGHT ? 'end' : 'start'}
+              x={below ? x(cliff.after) + 10 : x(cliff.before) - 4}
+              y={below ? y(cliff.net_after) + 30 : y(cliff.net_before) - 14}
+              textAnchor={below ? 'start' : 'end'}
               fontSize="23"
               fontWeight="600"
               fill="var(--color-gray-800)"

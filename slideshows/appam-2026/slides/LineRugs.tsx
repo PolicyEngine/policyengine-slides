@@ -3,7 +3,7 @@ import { programLines, usd } from '../content';
 const WIDTH = 1240;
 const HEIGHT = 560;
 const LEFT = 330;
-const RIGHT = 190;
+const RIGHT = 240;
 const AXIS_MIN = -3_000;
 const AXIS_MAX = 19_000;
 const ROW_TOP = 8;
@@ -23,13 +23,13 @@ const LABELS: Record<string, string[]> = {
 const x = (value: number) =>
   LEFT + ((value - AXIS_MIN) / (AXIS_MAX - AXIS_MIN)) * (WIDTH - LEFT - RIGHT);
 
-function endLabel(values: { code: string; value: number }[], value: number) {
+export function endLabel(values: { code: string; value: number }[], value: number) {
   const tied = values.filter((entry) => entry.value === value);
-  const who =
-    tied.length > MAX_NAMED_STATES
-      ? `${tied.length} states`
-      : tied.map((entry) => entry.code).join(', ');
-  return `${who} ${usd(value)}`;
+  if (tied.length <= MAX_NAMED_STATES) {
+    return `${tied.map((entry) => entry.code).join(', ')} ${usd(value)}`;
+  }
+  const states = tied.filter((entry) => entry.code !== 'DC').length;
+  return `${states} states${states < tied.length ? ' and DC' : ''} ${usd(value)}`;
 }
 
 export default function LineRugs() {

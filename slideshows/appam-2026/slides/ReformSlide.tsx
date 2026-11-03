@@ -42,9 +42,9 @@ export default function ReformSlide() {
           </div>
         </div>
         <p>
-          On our{' '}
+          At{' '}
           <a className="text-pe-teal underline" href="https://www.policyengine.org/us/child-poverty-impact-dashboard">
-            Child Poverty Impact Dashboard
+            policyengine.org/us/child-poverty-impact-dashboard
           </a>
           , you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
         </p>

@@ -31,7 +31,16 @@ export default function ParametersSlide() {
             lifted its two-dependent cap.
           </p>
           <p>Ask for any date and you get the value in force on that date.</p>
-          <p>Open the file and check each value against the laws and forms it cites.</p>
+          <p>
+            Read this file and the rest of our parameters at{' '}
+            <a
+              className="text-pe-teal underline"
+              href="https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml"
+            >
+              github.com/PolicyEngine/policyengine-us
+            </a>
+            .
+          </p>
         </div>
       </div>
     </Frame>
