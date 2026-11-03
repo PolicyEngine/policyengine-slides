@@ -34,7 +34,7 @@ export default function ParametersSlide() {
           <p>
             Read this file and the rest of our parameters at{' '}
             <a
-              className="text-pe-teal underline"
+              style={{ textDecoration: 'underline' }}
               href="https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml"
             >
               github.com/PolicyEngine/policyengine-us

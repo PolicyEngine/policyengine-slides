@@ -212,6 +212,33 @@ describe('derived chart data', () => {
   });
 });
 
+describe('links', () => {
+  const finishPdf = read('analysis/finish_pdf.py');
+
+  it('sends the PDF where each slide sends the live page', () => {
+    for (const slide of ['ParametersSlide', 'ReformSlide', 'EndSlide']) {
+      const targets = [...read(`slides/${slide}.tsx`).matchAll(/href[=:]\s*["']([^"']+)["']/g)].map((match) => match[1]);
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(finishPdf).toContain(target);
+      }
+    }
+  });
+
+  it('prints each address the PDF links to, on the slide that links to it', () => {
+    const printed: Record<string, string[]> = {
+      ParametersSlide: ['github.com/PolicyEngine/policyengine-us'],
+      ReformSlide: ['policyengine.org/us/child-poverty-impact-dashboard'],
+      EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', 'policyengine.org/slides/appam-2026'],
+    };
+    for (const [slide, addresses] of Object.entries(printed)) {
+      for (const address of addresses) {
+        expect(read(`slides/${slide}.tsx`)).toContain(address);
+      }
+    }
+  });
+});
+
 describe('Texas interaction', () => {
   it('explains the change in net resources with the subsidy and SNAP', () => {
     const total = interaction.subsidy + interaction.snapChange;

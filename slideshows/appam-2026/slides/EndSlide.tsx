@@ -23,13 +23,7 @@ export default function EndSlide() {
           <div className="space-y-2 opacity-90">
             {links.map(({ label, href }) => (
               <p key={label} className="text-lg">
-                {href ? (
-                  <a className="hover:underline" href={href}>
-                    {label}
-                  </a>
-                ) : (
-                  label
-                )}
+                {href ? <a href={href}>{label}</a> : label}
               </p>
             ))}
           </div>
