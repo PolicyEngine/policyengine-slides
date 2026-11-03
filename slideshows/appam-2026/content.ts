@@ -1,5 +1,6 @@
 import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
+import effectiveRun from './data/effective_samples.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
 import reformRun from './data/massachusetts_reform.json';
@@ -109,7 +110,7 @@ export const massachusetts = {
   censusChildRate: massachusettsBaseline.census_percent,
 };
 
-const effectiveSamples = stateBaselineRun.rows
+const effectiveSamples = effectiveRun.local_area.rows
   .map((row) => row.effective_households_with_children)
   .sort((a, b) => a - b);
 const censusGaps = stateBaselineRun.rows.map((row) =>

@@ -4,7 +4,7 @@ import Frame from './Frame';
 import InstrumentRugs from './InstrumentRugs';
 
 const PYTHON = `people = pd.read_csv("your_survey.csv")
-# Keep state alone: drop county and finer geography.
+# Name columns as PolicyEngine variables; drop county and finer geography.
 
 for fips in STATE_FIPS.values():  # all 51
     people["state_fips__2024"] = fips

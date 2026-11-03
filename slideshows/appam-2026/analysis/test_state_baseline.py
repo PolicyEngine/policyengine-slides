@@ -77,3 +77,84 @@ def test_group_quarters_take_the_record_type_and_the_relationship():
         False,
         True,
     ]
+
+
+@settings(deadline=None)
+@given(
+    st.lists(
+        st.tuples(st.sampled_from(["acs_2024_1yr", "asec_puf"]), st.integers(0, 5)),
+        min_size=1,
+        max_size=20,
+    )
+)
+def test_households_share_a_cluster_only_with_their_source_record(rows):
+    households = pd.DataFrame(
+        {
+            "household_id": range(len(rows)),
+            "household_spine": [spine for spine, _ in rows],
+            "household_source_id": [source for _, source in rows],
+        }
+    )
+    keys = sb.source_households(households)
+    for a, first in enumerate(rows):
+        for b, second in enumerate(rows):
+            assert (keys[a] == keys[b]) == (first == second)
+
+
+@settings(deadline=None)
+@given(st.lists(st.integers(0, 5), min_size=1, max_size=20))
+def test_without_a_spine_households_share_a_cluster_only_with_their_source(sources):
+    households = pd.DataFrame(
+        {"household_id": range(len(sources)), "household_source_id": sources}
+    )
+    keys = sb.source_households(households)
+    for a, first in enumerate(sources):
+        for b, second in enumerate(sources):
+            assert (keys[a] == keys[b]) == (first == second)
+
+
+weighted_sources = st.lists(
+    st.tuples(st.floats(min_value=0.01, max_value=1e5), st.integers(0, 8)),
+    min_size=1,
+    max_size=40,
+)
+
+
+def split(rows):
+    weights = np.array([weight for weight, _ in rows])
+    sources = np.array([str(source) for _, source in rows])
+    return weights, sources
+
+
+@settings(deadline=None)
+@given(weighted_sources)
+def test_counting_each_source_once_never_raises_the_effective_sample(rows):
+    weights, sources = split(rows)
+    merged = sb.source_kish(weights, sources)
+    assert 1 - 1e-9 <= merged <= len(set(sources)) + 1e-9
+    assert merged <= sb.kish(weights) * (1 + 1e-9)
+
+
+@settings(deadline=None)
+@given(st.lists(st.floats(min_value=0.01, max_value=1e5), min_size=1, max_size=40))
+def test_distinct_sources_keep_the_record_sample(weights):
+    weights = np.array(weights)
+    sources = np.array([str(i) for i in range(len(weights))])
+    expected = sb.kish(weights)
+    assert abs(sb.source_kish(weights, sources) - expected) <= 1e-9 * expected
+
+
+@settings(deadline=None)
+@given(
+    weighted_sources,
+    st.randoms(use_true_random=False),
+    st.floats(min_value=0.1, max_value=10),
+)
+def test_the_source_sample_ignores_record_order_and_weight_scale(rows, random, scale):
+    weights, sources = split(rows)
+    order = list(range(len(rows)))
+    random.shuffle(order)
+    expected = sb.source_kish(weights, sources)
+    shuffled = sb.source_kish(weights[order], sources[order])
+    assert abs(shuffled - expected) <= 1e-9 * expected
+    assert abs(sb.source_kish(scale * weights, sources) - expected) <= 1e-9 * expected

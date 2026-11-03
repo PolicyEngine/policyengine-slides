@@ -20,7 +20,7 @@ const rows = [
 ];
 
 const additions = [
-  { title: 'Reforms', body: 'Change any parameter, or write new rules in Python.' },
+  { title: 'Any parameter', body: 'Change any parameter, or write new rules in Python.' },
   { title: 'Microdata', body: 'Run your own survey or administrative file.' },
   { title: 'Open code', body: 'Read and edit every rule.' },
   { title: 'Current law forward', body: 'Project through 2035.' },

@@ -25,6 +25,7 @@ STATE_DATASET = (
 )
 YEAR = 2025
 DATA_YEAR = 2024
+PARENT_LINK_FILL = 0
 WORKERS = 3
 CHILD_AGE_LIMIT = 18
 GROUPS = ("tax_unit", "spm_unit", "family", "marital_unit")
@@ -122,8 +123,27 @@ def flat_file(households):
     # The local-area file leaves some parent links blank; the model reads 0 as unknown.
     for name in frame.columns[frame.columns.str.startswith("parent_")]:
         if name.endswith(f"_id__{DATA_YEAR}"):
-            frame[name] = frame[name].fillna(0).astype(np.int64)
+            frame[name] = frame[name].fillna(PARENT_LINK_FILL).astype(np.int64)
     return frame
+
+
+def source_households(households):
+    """Each household's source record, which a tax-data clone shares with its survey record.
+
+    Matching source ids on the local-area file's two spines belong to different survey
+    records, so we key by spine and id there. The default file has one spine and no
+    spine column.
+    """
+    key = households["household_source_id"].astype(str)
+    if "household_spine" in households:
+        key = households["household_spine"].astype(str) + ":" + key
+    return key.to_numpy()
+
+
+def source_kish(weights, sources):
+    """Kish's effective sample with each source household counted once."""
+    weights = pd.Series(np.asarray(weights, dtype=float))
+    return kish(weights.groupby(np.asarray(sources)).sum())
 
 
 def state_file(fips):
@@ -162,6 +182,8 @@ def run(job):
     return {
         "state": str(sim.calculate("state_code_str", YEAR).values[0]),
         "records": len(households),
+        # We count a survey household and its tax-data clone as two households here;
+        # effective_samples.py counts each source household once.
         "effective_households": kish(households),
         "effective_households_with_children": kish(households[with_children]),
         "child_spm_percent": float(

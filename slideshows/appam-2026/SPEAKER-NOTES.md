@@ -47,7 +47,7 @@ Look at one parameter, the amount per dependent in the Massachusetts child and f
 
 ## 7. Build simulated eligibility measures on your own microdata (5:30, 1 minute 30 seconds)
 
-To build a simulated eligibility measure, read your survey or administrative file, set the state and run it. Keep the people and their incomes fixed and change only the state. Any difference between runs then comes from the rules in that state.
+To build a simulated eligibility measure, map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state. Any difference between runs then comes from the rules in that state.
 
 We drew 3,000 households with children from Populace US, our default microdata, and ran them through each state's 2024 rules. The same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland. Their children qualify for Medicaid or CHIP at rates from 39.8% in Idaho to 66.1% in Hawaii.
 
@@ -57,7 +57,7 @@ If your pipeline already runs on TAXSIM, our TAXSIM-compatible interface at poli
 
 Take the parameter from a moment ago and double it, from $440 to $880 per dependent. We estimate Massachusetts would forgo $577 million in 2026, and that 29.4% of its households would gain and none would lose. Under the Supplemental Poverty Measure, or SPM, the poverty gap would shrink by $169 million.
 
-We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts households, an effective sample of about 395, or 173 among households with children. We estimate that 21.4% of the state's children lived below the SPM threshold in 2025, and Census reports 12.8% for 2023 to 2025. We estimate that the 2026 child poverty rate would fall by about 0.2 points under the doubled credit.
+We ran this on the Populace US local-area file, which we use for state and district results. It holds 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children. We estimate that 21.4% of the state's children lived below the SPM threshold in 2025, and Census reports 12.8% for 2023 to 2025. We estimate that the 2026 child poverty rate would fall by about 0.2 points under the doubled credit.
 
 On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
 
@@ -71,11 +71,11 @@ With PolicyEngine, you can change any parameter, write new rules and run your ow
 
 We model child care subsidies in all 51 jurisdictions from August 2026. We copy each parameter's earliest value back to 2015, so check historical runs against each year's rules. We take earnings and paid leave benefits as inputs and hold them fixed when you change minimum wage or paid leave law. We hold hours fixed unless you set a labor supply response.
 
-Our local-area file holds thin state samples, about 125 effective households with children in the median state. Our child poverty estimates on that file miss Census's 2023 to 2025 averages by 3.2 points on average. In 29 of 51 jurisdictions, they fall outside Census's margin of error. For state child poverty rates, bring your own microdata.
+Our local-area file holds thin state samples, about 108 effective households with children in the median state. Our child poverty estimates on that file miss Census's 2023 to 2025 averages by 3.2 points on average. In 29 of 51 jurisdictions, they fall outside Census's margin of error. For state child poverty rates, bring your own microdata.
 
 ## 11. The Axiom Foundation encodes rules with their source text and dates (10:15, 45 seconds)
 
-I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Georgia's Division of Family and Children Services applies a 20% earned income deduction in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 

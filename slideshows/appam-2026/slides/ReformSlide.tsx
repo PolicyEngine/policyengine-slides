@@ -50,9 +50,9 @@ export default function ReformSlide() {
         </p>
         <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
           We use Populace US’s local-area file with PolicyEngine US {modelVersion} for 2026 state estimates, assuming no
-          behavioral responses. The file holds {massachusetts.records.toLocaleString('en-US')} Massachusetts households,
-          an effective sample of about {massachusetts.effectiveHouseholds}, or{' '}
-          {massachusetts.effectiveHouseholdsWithChildren} among households with children. We estimate that{' '}
+          behavioral responses. The file holds {massachusetts.records.toLocaleString('en-US')} Massachusetts household
+          records, an effective sample of about {massachusetts.effectiveHouseholds} households, or{' '}
+          {massachusetts.effectiveHouseholdsWithChildren} among those with children. We estimate that{' '}
           {massachusetts.modelChildRate.toFixed(1)}% of the state’s children lived below the SPM threshold in 2025, and Census
           reports {massachusetts.censusChildRate.toFixed(1)}% for 2023 to 2025. We estimate that the 2026 child poverty
           rate would fall by about {massachusetts.childRateChange.toFixed(1)} points under the doubled credit.

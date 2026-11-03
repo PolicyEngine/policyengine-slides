@@ -23,7 +23,8 @@ SHARES = ("snap_eligible_share", "child_medicaid_chip_share")
 
 
 def is_id(name):
-    return name == "person_id" or name.startswith("person_") or name.endswith("_id")
+    """sample_families.py keeps every *_id column, so only those count as ids here."""
+    return name.endswith("_id")
 
 
 def rerun(sample):

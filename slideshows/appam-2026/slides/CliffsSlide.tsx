@@ -1,6 +1,6 @@
 import EarningsChart from './EarningsChart';
 import Frame from './Frame';
-import { cliffs, largestCliff, medianRateAt, percent, subsidyDrivenCliffs, usd } from '../content';
+import { cliffs, largestCliff, medianRateAt, percent, subsidyDrivenCliffs, sweepEarnings, usd } from '../content';
 
 export default function CliffsSlide() {
   return (
@@ -8,7 +8,8 @@ export default function CliffsSlide() {
       <div className="flex h-full gap-[4vh]">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-            Net resources by earnings, one line per state and DC, 2026
+            Net resources by earnings from {usd(sweepEarnings[0])} to {usd(sweepEarnings[sweepEarnings.length - 1])},
+            one line per state and DC, 2026
           </p>
           <div className="min-h-0 flex-1">
             <EarningsChart />

@@ -187,6 +187,8 @@
   "marital_unit_support_channel",
   "marital_unit_support_clone_index",
   "medicare_part_b_premiums",
+  "person_support_channel",
+  "person_support_clone_index",
   "second_home_mortgage_interest",
   "source_year",
   "spm_unit_support_channel",

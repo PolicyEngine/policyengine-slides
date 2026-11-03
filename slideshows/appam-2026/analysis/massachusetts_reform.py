@@ -12,10 +12,21 @@ from importlib.metadata import version
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
+import state_baseline
 from policyengine_core.data import Dataset
 from policyengine_core.reforms import Reform
 from policyengine_us import Microsimulation
-from state_baseline import DATA_YEAR, STATE_DATASET, kish, load_state, state_file
+from state_baseline import (
+    DATA_YEAR,
+    PARENT_LINK_FILL,
+    STATE_DATASET,
+    kish,
+    load_state,
+    source_households,
+    source_kish,
+    state_file,
+)
 
 YEAR = 2026
 MASSACHUSETTS_FIPS = 25
@@ -48,6 +59,7 @@ def results(sim):
         "household_children": sim.calculate(
             "is_child", YEAR, map_to="household"
         ).values,
+        "household_id": sim.calculate("household_id", YEAR).values,
         "household_weight": sim.calculate("household_weight", YEAR).values,
         "household_net_income": sim.calculate("household_net_income", YEAR).values,
     }
@@ -69,11 +81,17 @@ def main(commit, folder):
     )
     gains = reformed["household_net_income"] - baseline["household_net_income"]
     weights = baseline["household_weight"]
+    # A survey household and its tax-data clone count once in the effective sample.
+    table = state_baseline.tables["household"]
+    source = pd.Series(source_households(table), index=table["household_id"].to_numpy())
+    sources = source.loc[baseline["household_id"].astype(np.int64)].to_numpy()
+    with_children = baseline["household_children"] > 0
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": commit,
         "dataset": STATE_DATASET,
         "year": YEAR,
+        "parent_link_fill": PARENT_LINK_FILL,
         "parameter": PARAMETER,
         "current": CURRENT,
         "reformed": REFORMED,
@@ -82,9 +100,12 @@ def main(commit, folder):
         "households_gaining_share": float(np.sum(weights[gains > 1]) / np.sum(weights)),
         "any_household_loses": bool((gains < -1).any()),
         "household_records": len(weights),
-        "effective_households": kish(weights),
-        "effective_households_with_children": kish(
-            weights[baseline["household_children"] > 0]
+        "source_households": len(set(sources)),
+        "effective_records": kish(weights),
+        "effective_records_with_children": kish(weights[with_children]),
+        "effective_households": source_kish(weights, sources),
+        "effective_households_with_children": source_kish(
+            weights[with_children], sources[with_children]
         ),
         "people_crossing_threshold": int(
             np.sum(baseline["poor_records"] != reformed["poor_records"])

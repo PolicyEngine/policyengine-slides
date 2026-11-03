@@ -40,6 +40,8 @@ const defaultReform = JSON.parse(read('data/massachusetts_reform_default.json'))
 const pinnedReform = JSON.parse(read('data/massachusetts_reform_221.json'));
 const precision = JSON.parse(read('data/massachusetts_precision.json'));
 const defaultBaseline = JSON.parse(read('data/state_baseline_default.json'));
+const localBaseline = JSON.parse(read('data/state_baseline.json'));
+const samples = JSON.parse(read('data/effective_samples.json'));
 const sampleColumns = JSON.parse(read('data/sample_columns.json'));
 const slideCode = JSON.parse(read('data/slide_code_check.json'));
 const wisconsin = JSON.parse(read('data/wisconsin_schedules.json'));
@@ -65,6 +67,16 @@ const lineKeys = [
 const ROUNDING = 5;
 
 type BaselineRow = (typeof stateBaseline.rows)[number];
+type SampleRow = {
+  state: string;
+  records: number;
+  source_households: number;
+  effective_records: number;
+  effective_records_with_children: number;
+  effective_households: number;
+  effective_households_with_children: number;
+  source_ids_on_both_spines?: number;
+};
 
 const medianOf = (values: number[]) =>
   [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
@@ -75,12 +87,10 @@ function baselineSummary(rows: BaselineRow[]) {
     meanGap: gaps.reduce((sum, gap) => sum + Math.abs(gap), 0) / rows.length,
     exceedsCensus: gaps.filter((gap) => gap > 0).length,
     beyondMargin: rows.filter((row, i) => Math.abs(gaps[i]) > row.census_margin).length,
-    medianWithChildren: medianOf(rows.map((row) => row.effective_households_with_children)),
-    medianAll: medianOf(rows.map((row) => row.effective_households)),
   };
 }
 
-function extreme(rows: BaselineRow[], key: 'effective_households' | 'effective_households_with_children') {
+function extreme(rows: SampleRow[], key: 'effective_households' | 'effective_households_with_children') {
   const sorted = [...rows].sort((a, b) => a[key] - b[key]);
   return [sorted[0], sorted[sorted.length - 1]].map((row) => ({
     state: row.state,
@@ -463,18 +473,79 @@ describe('Massachusetts reform', () => {
     expect(pinnedReform.policyengine_us_version).toBe('2.2.1');
     expect(pinnedReform.dataset).toBe(reformRun.dataset);
     expect(pinnedReform.household_records).toBe(reformRun.household_records);
-    expect(pinnedReform.effective_households).toBe(reformRun.effective_households);
+    // We computed massachusetts_reform_221.json's Kish over records, not source households.
+    expect(pinnedReform.effective_households).toBe(reformRun.effective_records);
   });
 
-  it('takes its standard errors from the same run as the slide', () => {
+  it('computes its standard errors on the slide’s file, model version and parent-link fill', () => {
     expect(precision.dataset).toBe(reformRun.dataset);
     expect(precision.policyengine_us_version).toBe(modelVersion);
+    expect(reformRun.parent_link_fill).toBe(0);
+    expect(precision.parent_link_fill).toBe(reformRun.parent_link_fill);
+    expect(precision.clusters).toBe('source household');
     expect(precision.child_rate_percent).toBeCloseTo(100 * reformRun.baseline_child_poverty, 4);
     expect(precision.child_rate_fall_points).toBeCloseTo(massachusetts.childRateChange, 4);
     expect(Math.abs(precision.poverty_gap_fall - massachusetts.gapReduction)).toBeLessThan(1e-4 * massachusetts.gapReduction);
     expect(Math.abs(precision.state_cost - massachusetts.cost)).toBeLessThan(1e-4 * massachusetts.cost);
     expect(precision.child_records_crossing).toBeLessThanOrEqual(massachusetts.peopleCrossingThreshold);
     expect(precision.households_with_a_child_crossing).toBeLessThanOrEqual(precision.child_records_crossing);
+    expect(precision.source_households_with_a_child_crossing).toBeLessThanOrEqual(precision.households_with_a_child_crossing);
+  });
+});
+
+describe('effective samples', () => {
+  const files = [
+    [samples.local_area, localBaseline],
+    [samples.default, defaultBaseline],
+  ];
+
+  it('count each source household once, below the record-level samples', () => {
+    for (const [file] of files) {
+      expect(file.rows).toHaveLength(51);
+      for (const row of file.rows as SampleRow[]) {
+        expect(row.source_households).toBeLessThanOrEqual(row.records);
+        expect(row.effective_households).toBeGreaterThanOrEqual(1);
+        expect(row.effective_households).toBeLessThanOrEqual(row.source_households);
+        expect(row.effective_households).toBeLessThanOrEqual(row.effective_records * (1 + 1e-9));
+        expect(row.effective_households_with_children).toBeLessThanOrEqual(
+          row.effective_records_with_children * (1 + 1e-9),
+        );
+      }
+    }
+  });
+
+  it('reproduce the record-level samples of the simulation runs', () => {
+    for (const [file, baseline] of files) {
+      const runs = new Map<string, BaselineRow>(baseline.rows.map((row: BaselineRow) => [row.state, row]));
+      for (const row of file.rows as SampleRow[]) {
+        const run = runs.get(row.state);
+        if (!run) throw new Error(`No simulation run for ${row.state}`);
+        expect(row.records).toBe(run.records);
+        expect(Math.abs(row.effective_records - run.effective_households)).toBeLessThan(
+          1e-6 * run.effective_households,
+        );
+        expect(Math.abs(row.effective_records_with_children - run.effective_households_with_children)).toBeLessThan(
+          1e-6 * run.effective_households_with_children,
+        );
+      }
+    }
+  });
+
+  it('give slide 8 the Massachusetts figures of its own run', () => {
+    const row = (samples.local_area.rows as SampleRow[]).find((sample) => sample.state === 'MA');
+    if (!row) throw new Error('No Massachusetts sample');
+    expect(samples.local_area.dataset).toBe(reformRun.dataset);
+    expect(localBaseline.dataset).toBe(reformRun.dataset);
+    expect(row.records).toBe(reformRun.household_records);
+    expect(row.source_households).toBe(reformRun.source_households);
+    for (const key of [
+      'effective_records',
+      'effective_records_with_children',
+      'effective_households',
+      'effective_households_with_children',
+    ] as const) {
+      expect(Math.abs(row[key] - reformRun[key])).toBeLessThan(1e-6 * reformRun[key]);
+    }
   });
 });
 
@@ -566,7 +637,7 @@ describe('typed figures', () => {
     `${stateBaseline.beyondCensusMargin} of 51 jurisdictions`,
     `${stateBaseline.meanCensusGap.toFixed(1)} points`,
     `${massachusetts.childRateChange.toFixed(1)} points`,
-    `about ${massachusetts.effectiveHouseholds}, or ${massachusetts.effectiveHouseholdsWithChildren} among households with children`,
+    `about ${massachusetts.effectiveHouseholds} households, or ${massachusetts.effectiveHouseholdsWithChildren} among those with children`,
     ...endpoints,
   ];
 
@@ -587,13 +658,12 @@ describe('typed figures', () => {
   });
 
   it('match the data in the evidence ledger', () => {
-    const local = baselineSummary(stateBaseline.rows);
     const onDefault = baselineSummary(defaultBaseline.rows);
-    const [fewestWithChildren, mostWithChildren] = extreme(
-      stateBaseline.rows,
-      'effective_households_with_children',
-    );
-    const [fewestAll, mostAll] = extreme(stateBaseline.rows, 'effective_households');
+    const localSamples: SampleRow[] = samples.local_area.rows;
+    const defaultSamples: SampleRow[] = samples.default.rows;
+    const [fewestWithChildren, mostWithChildren] = extreme(localSamples, 'effective_households_with_children');
+    const [fewestAll, mostAll] = extreme(localSamples, 'effective_households');
+    const bothSpines = localSamples.filter((row) => (row.source_ids_on_both_spines ?? 0) > 0).length;
     const pinnedChildRates = [pinnedReform.baseline_child_poverty, pinnedReform.reformed_child_poverty];
     const massachusettsMove = groupQuartersMoves.find((row) => row.state === 'MA');
     for (const figure of [
@@ -603,7 +673,9 @@ describe('typed figures', () => {
       `median of ${stateBaseline.medianEffective}`,
       massachusetts.records.toLocaleString('en-US'),
       `from ${percent(massachusetts.childPoverty[0])} to ${percent(massachusetts.childPoverty[1])}`,
-      `or ${Math.round(reformRun.effective_households_with_children)} among households with children`,
+      `${reformRun.source_households.toLocaleString('en-US')} source households`,
+      `Massachusetts at about ${Math.round(reformRun.effective_records)}, or ${Math.round(reformRun.effective_records_with_children)} among those with children, and the median state at ${Math.round(medianOf(localSamples.map((row) => row.effective_records_with_children)))} households with children`,
+      `spine in ${bothSpines} states`,
       `${massachusetts.peopleCrossingThreshold} person records`,
       `${precision.child_records_crossing} child records in ${precision.households_with_a_child_crossing} households`,
       `${precision.child_rate_fall_se_points.toFixed(2)} points on the fall`,
@@ -618,11 +690,11 @@ describe('typed figures', () => {
       `${sampleColumns.undefined_in_this_version.length} names`,
       `from ${fewestWithChildren.value} in ${name(fewestWithChildren.state)} to ${mostWithChildren.value} in ${name(mostWithChildren.state)}`,
       `from ${fewestAll.value} in ${name(fewestAll.state)} to ${mostAll.value} in ${name(mostAll.state)}`,
-      `median of ${Math.round(local.medianAll)}`,
+      `median of ${Math.round(medianOf(localSamples.map((row) => row.effective_households)))}`,
       `${onDefault.meanGap.toFixed(1)} points`,
       `${onDefault.exceedsCensus} of 51 jurisdictions`,
       `its margin in ${onDefault.beyondMargin}`,
-      `includes ${Math.round(onDefault.medianWithChildren)} households`,
+      `includes ${Math.round(medianOf(defaultSamples.map((row) => row.effective_households_with_children)))} households`,
       millions(pinnedReform.state_cost),
       percent(pinnedReform.households_gaining_share),
       `${(100 * (pinnedChildRates[0] - pinnedChildRates[1])).toFixed(1)} points`,

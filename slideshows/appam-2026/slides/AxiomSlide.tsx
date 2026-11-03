@@ -38,9 +38,9 @@ export default function AxiomSlide() {
         </CodeBlock>
         <div className="flex-[2]">
           <p className="mb-[2vh]">
-            Georgia&rsquo;s Division of Family and Children Services applies a 20% earned income
-            deduction in section 3612 of its SNAP manual. Axiom encodes that rule and records the
-            manual&rsquo;s words and date beside each value.
+            Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division of Family
+            and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that rule
+            and records the manual&rsquo;s words and date beside each value.
           </p>
           <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.05em' }}>
             Axiom Rules Engine {axiomEngineVersion}, running the rule

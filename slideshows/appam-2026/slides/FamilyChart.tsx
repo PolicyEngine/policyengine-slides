@@ -75,7 +75,7 @@ function Column({ row, index }: { row: StateRow; index: number }) {
           <rect key={segment.key} x={x} y={y} width={BAR_WIDTH} height={drawn} fill={segment.color} />
         );
       })}
-      <text x={x + BAR_WIDTH / 2} y={HEIGHT - 8} textAnchor="middle" fontSize="20" fill="var(--color-gray-600)">
+      <text x={x + BAR_WIDTH / 2} y={HEIGHT - 8} textAnchor="middle" fontSize="17" fill="var(--color-gray-600)">
         {row.code}
       </text>
     </g>
