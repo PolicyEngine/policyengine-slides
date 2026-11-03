@@ -37,7 +37,7 @@ export default function MicrodataSlide() {
             <InstrumentRugs />
           </div>
           <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
-            Each mark shows one of 51 jurisdictions. We draw {instrument.households.toLocaleString('en-US')} households with children by
+            Each mark shows one of 51 jurisdictions, and overlapping marks darken. We draw {instrument.households.toLocaleString('en-US')} households with children by
             weight from Populace US, our default microdata, and run the same families under each state’s{' '}
             {instrument.year} rules, using PolicyEngine US {modelVersion}. We measure SNAP eligibility in January as a
             share of Supplemental Poverty Measure (SPM) units with children, and Medicaid or CHIP eligibility as a share

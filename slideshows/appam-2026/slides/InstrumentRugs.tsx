@@ -55,7 +55,7 @@ export default function InstrumentRugs() {
                 width={TICK_WIDTH}
                 height={TICK_HEIGHT}
                 fill="var(--color-teal-600)"
-                opacity="0.4"
+                opacity="0.7"
               >
                 <title>{`${entry.code}: ${percent(entry.value)}`}</title>
               </rect>

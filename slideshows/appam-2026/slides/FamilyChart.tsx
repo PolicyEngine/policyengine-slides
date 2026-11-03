@@ -22,7 +22,7 @@ export const SERIES = [
   {
     key: 'base',
     label: `Earnings after taxes and credits, minus the ${usd(childCareBill)} child care bill`,
-    color: 'var(--color-gray-300)',
+    color: 'var(--color-gray-400)',
     value: (row: StateRow) => row.base,
   },
   {
