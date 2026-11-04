@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
+import { getSlideComponent } from '@/lib/types';
+import { appam2026Config } from './config';
 import {
   alaska,
   axiomRuns,
@@ -265,15 +269,13 @@ describe('links', () => {
     expect(entries).toHaveLength(table.match(/"(?:https|mailto):|\bDECK\b/g)!.length);
   });
 
-  it('links each target on the page of the slide that sends the live page there, and nowhere else', () => {
-    const expected = order.flatMap((name, i) => {
-      const source = slideSource(name);
-      const targets = [...source.matchAll(HREF)].map((match) => match[1]);
-      if (source.includes(`'${deckAddress}'`)) targets.push(deck);
-      return targets.map((target) => `${i + 1} ${target}`);
+  it('links each target on the page of the slide that renders an anchor to it, once for each anchor', () => {
+    const anchors = appam2026Config.slides.flatMap((slide, i) => {
+      const page = new DOMParser().parseFromString(renderToStaticMarkup(createElement(getSlideComponent(slide))), 'text/html');
+      return [...page.querySelectorAll('a[href]')].map((anchor) => `${i + 1} ${anchor.getAttribute('href')}`);
     });
-    const actual = entries.map(({ page, target }) => `${page} ${target}`);
-    expect(new Set(actual)).toEqual(new Set(expected));
+    const links = entries.map(({ page, target }) => `${page} ${target}`);
+    expect(links.sort()).toEqual(anchors.sort());
   });
 
   it('prints each address the PDF links to, on the slide that links to it', () => {

@@ -30,9 +30,13 @@ export default function EndSlide() {
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="rounded-2xl bg-white p-3 shadow-lg">
-            <BasePathImage alt={DECK_URL} src="/images/appam-2026/qr-deck.png" width={172} height={172} loading="eager" />
+            <a href={`https://${DECK_URL}`} className="block">
+              <BasePathImage alt={DECK_URL} src="/images/appam-2026/qr-deck.png" width={172} height={172} loading="eager" />
+            </a>
           </div>
-          <p className="text-lg opacity-80">{DECK_URL}</p>
+          <p className="text-lg opacity-80">
+            <a href={`https://${DECK_URL}`}>{DECK_URL}</a>
+          </p>
         </div>
       </div>
     </Slide>
