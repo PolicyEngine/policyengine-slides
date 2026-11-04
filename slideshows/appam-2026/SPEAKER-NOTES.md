@@ -82,3 +82,7 @@ When we run this rule through the Axiom engine, a family earning $30,000 a year 
 ## 12. Thank you (11:00)
 
 Scan the QR code to open this deck. From its last slide, you can open the code behind each chart.
+
+## Questions
+
+**Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.

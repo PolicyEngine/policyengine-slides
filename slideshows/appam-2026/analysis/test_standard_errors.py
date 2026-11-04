@@ -1,10 +1,12 @@
 """Standard errors must respect the sample's households."""
 
 import numpy as np
+import pandas as pd
 import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
-from standard_errors import ratio_se, total_se
+from policyengine_us import Simulation
+from standard_errors import ratio_se, total_se, unit_clusters
 
 values = st.lists(
     st.floats(min_value=-1e6, max_value=1e6), min_size=2, max_size=40
@@ -72,3 +74,86 @@ def test_a_ratio_keeps_its_value_and_error_when_both_sides_scale(numerator, scal
     assert abs(ratio - numerator.sum() / denominator.sum()) < 1e-9 * max(abs(ratio), 1)
     assert abs(scaled_ratio - ratio) < 1e-6 * max(abs(ratio), 1)
     assert abs(scaled_se - se) < 1e-6 * max(se, 1)
+
+
+def test_units_of_any_size_take_their_households_source():
+    # Household 10 is a survey record and 11 its tax-data clone, so both come from
+    # source "a". Household 10 splits into SPM units of one and two people.
+    person_households = np.array([10, 10, 10, 11, 11, 12])
+    source = pd.Series(["a", "a", "b"], index=[10, 11, 12])
+    spm_units = np.array([0, 1, 1, 2, 2, 3])
+    assert unit_clusters(person_households, spm_units, source).tolist() == [
+        "a",
+        "a",
+        "a",
+        "b",
+    ]
+    people = np.arange(len(person_households))
+    assert unit_clusters(person_households, people, source).tolist() == ["a"] * 5 + [
+        "b"
+    ]
+
+
+def test_a_unit_that_spans_households_stops_the_run():
+    source = pd.Series(["a", "b"], index=[10, 11])
+    with pytest.raises(ValueError, match="spans households"):
+        unit_clusters(np.array([10, 11]), np.array([0, 0]), source)
+
+
+@settings(deadline=None)
+@given(
+    st.lists(st.lists(st.integers(1, 4), min_size=1, max_size=3), min_size=1, max_size=12),
+    st.randoms(use_true_random=False),
+)
+def test_every_unit_takes_its_households_source_in_any_member_order(households, rng):
+    # Each inner list holds one household's unit sizes; households 0 and 1 share a
+    # source, as a survey record and its clone do, and so on in pairs.
+    person_households, unit_of_person, unit_households = [], [], []
+    for household, sizes in enumerate(households):
+        for size in sizes:
+            person_households += [household] * size
+            unit_of_person += [len(unit_households)] * size
+            unit_households.append(household)
+    order = list(range(len(person_households)))
+    rng.shuffle(order)
+    source = pd.Series([f"s{household // 2}" for household in range(len(households))])
+    clusters = unit_clusters(
+        np.array(person_households)[order], np.array(unit_of_person)[order], source
+    )
+    assert clusters.tolist() == source.loc[unit_households].tolist()
+
+
+def test_unit_clusters_agree_with_policyengine_cores_first_member_and_not_map_to():
+    year = 2026
+    adult = {"age": {year: 40}}
+    situation = {
+        "people": {"a": adult, "b": adult, "c": adult, "d": {"age": {year: 6}}},
+        "tax_units": {
+            "ta": {"members": ["a"]},
+            "tb": {"members": ["b"]},
+            "tc": {"members": ["c", "d"]},
+        },
+        "families": {"fa": {"members": ["a"]}, "fb": {"members": ["b", "c", "d"]}},
+        "marital_units": {name: {"members": [name]} for name in "abcd"},
+        "spm_units": {
+            "sa": {"members": ["a"]},
+            "sb": {"members": ["b"]},
+            "sc": {"members": ["c", "d"]},
+        },
+        "households": {
+            "alone": {"members": ["a"], "household_id": {year: 5}},
+            "shared": {"members": ["b", "c", "d"], "household_id": {year: 7}},
+        },
+    }
+    sim = Simulation(situation=situation)
+    person_households = sim.calculate("household_id", year, map_to="person")
+    source = pd.Series(["s5", "s7"], index=[5, 7])
+    for entity in ("spm_unit", "tax_unit"):
+        units = sim.populations[entity]
+        first = units.value_from_first_person(person_households)
+        clusters = unit_clusters(person_households, units.members_entity_id, source)
+        assert clusters.tolist() == source.loc[first].tolist() == ["s5", "s7", "s7"]
+    # map_to between two groups gives each member a share of household 7's id, so
+    # the units that split it get 7/3 and 14/3, which name no household.
+    shares = sim.calculate("household_id", year, map_to="spm_unit")
+    assert shares.tolist() == pytest.approx([5, 7 / 3, 14 / 3])

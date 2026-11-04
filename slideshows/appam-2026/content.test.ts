@@ -610,6 +610,7 @@ describe('typed figures', () => {
     if (!row) throw new Error(`No state ${code}`);
     return row.name;
   };
+  const massachusettsMargin = stateBaseline.rows.find((row) => row.state === 'MA')!.census_margin;
   const endpoints = instrument.lines.flatMap((line) => {
     const first = line.values[0];
     const last = line.values[line.values.length - 1];
@@ -652,9 +653,19 @@ describe('typed figures', () => {
       millions(massachusetts.cost),
       `about ${stateBaseline.medianEffective} effective households`,
       usd(axiomRuns.deduction),
+      `standard error of ${precision.child_rate_se_points.toFixed(1)} points on Massachusetts's 2026 child poverty rate`,
+      `${massachusettsMargin.toFixed(1)}-point margin of error`,
+      `about ${stateBaseline.medianEffective} against Massachusetts's ${massachusetts.effectiveHouseholdsWithChildren}`,
     ]) {
       expect(notes).toContain(figure);
     }
+  });
+
+  it('back the speaker notes’ answer on sampling error', () => {
+    expect(precision.child_rate_se_points).toBeGreaterThan(2 * massachusettsMargin);
+    // A normal error with Massachusetts's standard error misses by this much on average.
+    expect(precision.child_rate_se_points * Math.sqrt(2 / Math.PI)).toBeGreaterThan(stateBaseline.meanCensusGap);
+    expect(stateBaseline.medianEffective).toBeLessThan(massachusetts.effectiveHouseholdsWithChildren);
   });
 
   it('match the data in the evidence ledger', () => {

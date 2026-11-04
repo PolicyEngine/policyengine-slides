@@ -3,7 +3,8 @@
 We linearize each figure over the local-area file's Massachusetts households, with a
 survey household and its tax-data clone in one cluster. We treat the weights as fixed,
 so we leave out what calibration adds. We also leave out errors that every record
-shares, such as a data-wide error in rent.
+shares, such as a data-wide error in rent, and those that every clone shares through
+the model that imputes its tax detail.
 """
 
 import json
@@ -18,7 +19,7 @@ from massachusetts_reform import MASSACHUSETTS_FIPS, PARAMETER, REFORMED, YEAR
 from policyengine_core.data import Dataset
 from policyengine_core.reforms import Reform
 from policyengine_us import Microsimulation
-from standard_errors import ratio_se, total_se
+from standard_errors import ratio_se, total_se, unit_clusters
 from state_baseline import (
     DATA_YEAR,
     PARENT_LINK_FILL,
@@ -59,19 +60,14 @@ def main(commit, folder):
 
     person_households = sim.calculate("household_id", YEAR, map_to="person").values
 
-    def households(entity):
-        # map_to between two groups splits the id across members and sums the
-        # shares, so we read each unit's household from its first member instead.
-        if entity == "person":
-            return person_households
-        units = sim.populations[entity]
-        assert (units.min(person_households) == units.max(person_households)).all(), (
-            f"a {entity} spans households"
-        )
-        return units.value_from_first_person(person_households)
-
     def clusters(entity):
-        return source.loc[households(entity).astype(np.int64)].to_numpy()
+        # map_to between two groups splits the id across members and sums the
+        # shares, so we read each unit's household from its members instead.
+        if entity == "person":
+            members = np.arange(len(person_households))
+        else:
+            members = sim.populations[entity].members_entity_id
+        return unit_clusters(person_households, members, source)
 
     is_child = sim.calculate("age", YEAR).values < CHILD_AGE_LIMIT
     children = sim.calculate("person_weight", YEAR).values * is_child
@@ -103,7 +99,7 @@ def main(commit, folder):
         "child_rate_fall_se_points": 100 * fall_se,
         "child_records_crossing": int(crossing.sum()),
         "households_with_a_child_crossing": len(
-            set(households("person")[crossing].tolist())
+            set(person_households[crossing].tolist())
         ),
         "source_households_with_a_child_crossing": len(
             set(clusters("person")[crossing].tolist())
