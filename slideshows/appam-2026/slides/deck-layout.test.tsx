@@ -252,6 +252,16 @@ describe('deck.module.css', () => {
   });
 });
 
+describe('value columns', () => {
+  // A minus sign lets the browser break a figure in two where a column narrows.
+  it.each(['CliffsSlide.tsx', 'WhichLinesSlide.tsx'])('keep each figure on one line in %s', (file) => {
+    const source = readFileSync(path.join(__dirname, file), 'utf8');
+    const columns = source.match(/className="[^"]*tabular-nums[^"]*"/g) ?? [];
+    expect(columns.length).toBeGreaterThan(0);
+    for (const column of columns) expect(column).toContain('whitespace-nowrap');
+  });
+});
+
 describe('links', () => {
   let container: HTMLDivElement;
   let root: Root;

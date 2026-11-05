@@ -37,7 +37,7 @@ export default function WhichLinesSlide() {
                 className={`flex items-baseline justify-between py-[1vh] ${i === rows.length - 1 ? 'border-t-2 border-gray-300 font-semibold' : ''}`}
               >
                 <dt>{row.label}</dt>
-                <dd className="tabular-nums" style={{ fontSize: '1.2em' }}>
+                <dd className="whitespace-nowrap tabular-nums" style={{ fontSize: '1.2em' }}>
                   {signed(row.value)}
                 </dd>
               </div>
