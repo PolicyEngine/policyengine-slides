@@ -56,7 +56,7 @@ export default function WebAppsSlide() {
                 >
                   {app.address}
                 </a>
-                <p>{app.caption}</p>
+                <p className="text-pretty">{app.caption}</p>
               </figcaption>
             </figure>
           ))}
