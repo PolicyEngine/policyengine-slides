@@ -135,6 +135,10 @@ describe('deck.module.css', () => {
     expect(gap * 16).toBeGreaterThanOrEqual(24);
   });
 
+  it("trims the code blocks' padding in a short window", () => {
+    expect(declared(shortWindows, '.deck :global(.code-block-content)', 'padding')).toBe('1rem');
+  });
+
   it.each([
     [1536, 730, 'a 125% laptop under a toolbar'],
     [1920, 950, 'a 1080p monitor under a toolbar'],

@@ -321,8 +321,8 @@ main:has(button[aria-label='Next slide']) .deck pre {
 
 /* A short window, as on most laptops under a browser's toolbars. Type shrinks with the height while
    the deck's margins hold, so text runs under the footer and the title meets the cover's logo. Scale
-   the top margin, close the gaps under the title and above the footer, and bring the logo in. The
-   PDF's page and any screen 720 px or taller fall outside this block. */
+   the top margin, close the gaps under the title and above the footer, trim the code blocks' padding
+   and bring the logo in. The PDF's page and any screen 720 px or taller fall outside this block. */
 @media (max-height: 719px) and (min-height: 581px) and (min-width: 641px) and (min-aspect-ratio: 1001/1000) {
   .deck > div:first-child {
     padding-top: 11.85vh;
@@ -331,6 +331,10 @@ main:has(button[aria-label='Next slide']) .deck pre {
 
   .frame > div:first-child {
     margin-bottom: 1rem;
+  }
+
+  .deck :global(.code-block-content) {
+    padding: 1rem;
   }
 
   .title > div > div:first-child {
