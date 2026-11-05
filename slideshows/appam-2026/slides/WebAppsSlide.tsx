@@ -18,11 +18,12 @@ const apps = [
   {
     address: 'app.policyengine.org/us/build',
     href: 'https://app.policyengine.org/us/build',
-    src: '/images/appam-2026/build-reform.png',
-    width: 1320,
-    height: 1052,
-    alt: 'Build’s editor with the Massachusetts child and family tax credit amount at $880 from 2026, against $440 under current law, above a chart of its values by year',
-    caption: 'Find a parameter by name, set a new value and run a report.',
+    src: '/images/appam-2026/build-report.png',
+    width: 1820,
+    height: 640,
+    alt: 'Build’s report on doubling the Massachusetts child and family tax credit amount from $440 to $880 from January 1, 2026: $657.4m annual state revenue loss, 45.7% of people gaining income and a 2.3% decrease in child poverty',
+    caption:
+      'Find a parameter by name, set a new value and run a report. For example, we doubled the Massachusetts child and family credit. Build runs PolicyEngine US 2.2.1, and slide 9 runs 2.90.2.',
   },
 ];
 

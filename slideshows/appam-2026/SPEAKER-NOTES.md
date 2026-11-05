@@ -8,7 +8,7 @@ Sixteen slides in about 12 minutes.
 
 - If the room's laptop won't have internet, send Cynthia's team the PDF on Thursday morning.
 - Before the session, scan slide 16's QR code and check that it opens this deck.
-- Before the session, run a report in Build with the credit at $880 and the recording's Nationwide population, and check that it finishes.
+- Before the session, open Build's Massachusetts report at app.policyengine.org/us/report/8adb8bf2-355f-4f00-b7b9-1ef56a1deb77 and check that it loads.
 - About 15 minutes before the session, click the CliffWatch address on slide 11 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 11's recording doesn't depend on it.
 - Then press next on slide 11 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
 - Slide 3 opens on the models' answers. Press next once to show PolicyEngine's answer. The PDF shows that second state.
@@ -36,19 +36,19 @@ We assumed the subsidy for all twelve months to get that $3,663. Massachusetts k
 
 *Massachusetts's early education department schedules new vouchers from October (September 9, 2026 board materials, page 17). The three older versions landed 7 of 15 answers within 10%, a better rate than the newest, so this slide doesn't show models improving. `data/model_answers.json` holds all 50 answers.*
 
-## 4. On PolicyBench, most SNAP and state credit answers land more than 10% from PolicyEngine's (2:15, 45 seconds)
+## 4. On PolicyBench, most SNAP and state credit answers land more than 10% from PolicyEngine's (2:15, 40 seconds)
 
 Now take the family's other lines. Of the 35 answers, 34 landed within 10% on payroll tax, 23 on state credits and 8 on SNAP.
 
 For a broader comparison than one family, PolicyBench asks 51 models about 100 public households, which it samples with household weights from an eligible subset of our data. Among households with a positive amount, 65.1% of SNAP answers and 82.3% of state refundable credit answers land more than 10% from PolicyEngine's, against 11.3% of payroll tax answers. These rates describe that sample, and PolicyBench grades against PolicyEngine.
 
-## 5. This family ends up with $49,127 once we compute every line together (3:00, 1 minute)
+## 5. This family ends up with $49,127 once we compute every line together (2:55, 1 minute)
 
 Here's PolicyEngine's answer, line by line. The family earns $40,000, owes no federal income tax and gets $7,130 in federal refundable credits. It pays $3,244 in payroll tax and $1,260 in Massachusetts income tax and gets $2,449 back in state credits. SNAP adds $3,663, WIC $1,447 and the child care subsidy $16,942, against an $18,000 bill. It ends up with $49,127, and without the subsidy it would end up with $37,455. We didn't ask the models for the WIC amount or the subsidy, because PolicyBench asks for neither.
 
 I expect AI to help a lot with questions like this, but it needs to understand the rules at this computational level. Once we have those rules, we can see what changes as a family's state or earnings change, or across a whole population, and one engine runs all of it.
 
-## 6. One family ends up with $26,562 in Indiana and $54,345 in Alaska (4:00, 1 minute 15 seconds)
+## 6. One family ends up with $26,562 in Indiana and $54,345 in Alaska (3:55, 1 minute 5 seconds)
 
 Now move this family across states, under each state's 2026 rules. We put it in each state's largest county and treat it as a new applicant for every program.
 
@@ -56,23 +56,23 @@ The gray base shows earnings after taxes and credits, minus the full child care 
 
 The gap between the top and bottom state moves with earnings: $16,404 at $30,000 and $21,670 at $60,000.
 
-## 7. This family's net resources fall up to $17,808 at a benefit cliff, at earnings that vary by state (5:15, 1 minute)
+## 7. This family's net resources fall up to $17,808 at a benefit cliff, at earnings that vary by state (5:00, 50 seconds)
 
 Each gray line follows one state as a new applicant's earnings rise. In Idaho, Maryland and Missouri, $500 more in earnings puts a new applicant over the child care income limit, and that applicant ends up between $15,124 and $17,808 behind. In Idaho, the same $500 also takes the family past SNAP's gross income limit. We estimate that a family already in the program qualifies up to about $110,000 in Maryland. Since May 2025, Maryland has put applicants who qualify, like this family, on a waiting list. In 46 of 51 jurisdictions, the family's largest drop comes from the subsidy.
 
 Across states, the median total effective marginal tax rate falls from 63.6% at $30,000 of earnings to 24.6% at $60,000.
 
-## 8. Doubling the Massachusetts child and family credit would give this family $880 more (6:15, 35 seconds)
+## 8. Doubling the Massachusetts child and family credit would give this family $880 more (5:50, 35 seconds)
 
 Take one line of this family's budget, the Massachusetts child and family credit. The Legislature raised the amount per dependent to $310 for 2023 and $440 for 2024, and we record each value's effective date and cite the session law and tax forms behind it. With two children at $440, this family gets $880. Double the amount per dependent, and the family gets another $880 and ends up with $50,007, with every other line unchanged.
 
-## 9. We estimate Massachusetts would forgo $577 million if lawmakers doubled its child and family credit (6:50, 30 seconds)
+## 9. We estimate Massachusetts would forgo $577 million if lawmakers doubled its child and family credit (6:25, 30 seconds)
 
 Now run that change on the whole state. We estimate Massachusetts would forgo $577 million in 2026, and that 29.4% of its households would gain and none would lose.
 
 We ran this on the local-area file of Microcosm, our microdata, which we use for state and district results. It holds 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children.
 
-## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (7:20, 1 minute 15 seconds)
+## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (6:55, 1 minute 15 seconds)
 
 We ran the waterfall, the states, the earnings sweep and the reform on the model behind that SNAP answer, and you can reach it several ways. In Python, you can build a simulated eligibility measure: map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state, and any difference between runs comes from the rules in that state.
 
@@ -80,31 +80,31 @@ For example, we drew 3,000 households with children from Microcosm's national fi
 
 If your pipeline runs on TAXSIM, our TAXSIM-compatible interface at policyengine.org/us/taxsim takes the same files. It runs tax years 2021 onward through PolicyEngine and sends earlier years to TAXSIM35. On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state. Our Claude Code plugin gives Claude Code our agents, commands and skills, and you can read and edit every rule in the open source code.
 
-## 11. You can find a family's cliffs and build a reform without writing code (8:35, 1 minute)
+## 11. You can find a family's cliffs and build a reform without writing code (8:10, 1 minute 15 seconds)
 
 CliffWatch and Build need no code.
 
-*Press next to play the recording, which runs 47 seconds with no sound, and talk over it.*
+*Press next to play the recording, which runs 61 seconds with no sound, and talk over it.*
 
 CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
-In Build, you can open the same Massachusetts credit, set it to $880 and run a report.
+In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. The run takes about three minutes, so the recording cuts to the finished report. Build runs an older release, PolicyEngine US 2.2.1, which puts the state's cost at $657 million. This deck's 2.90.2 gives the $577 million on slide 9.
 
-*The recording stops on the button that runs the report. Press next when you finish.*
+*The recording ends on the report's results. Press next when you finish.*
 
-## 12. We model federal, state and local tax and benefit rules (9:35, 20 seconds)
+## 12. We model federal, state and local tax and benefit rules (9:25, 20 seconds)
 
 We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax.
 
-## 13. We build Microcosm, our microdata, from surveys and official totals (9:55, 50 seconds)
+## 13. We build Microcosm, our microdata, from surveys and official totals (9:45, 50 seconds)
 
 We build Microcosm in two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
 
-## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:45, 30 seconds)
+## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:35, 30 seconds)
 
 On the rules, we're applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled, and adding LIHEAP in eight more states. In Microcosm, we fix CPS errors, so our state child poverty rates differ from Census's by design, and we're tracing how calibration, sampling noise and rent imputation move each state's rate. We're also placing households in local tax jurisdictions from their geography and imputing student loan balances.
 
-## 15. The Axiom Foundation encodes rules with source text and dates (11:15, 40 seconds)
+## 15. The Axiom Foundation encodes rules with source text and dates (11:05, 50 seconds)
 
 I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its gross earned income.
 
@@ -183,6 +183,8 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 **What else does the simulated eligibility measure show?** We estimate that the same 3,000 households' children qualify for Medicaid or CHIP at rates from 39.8% in Idaho to 66.1% in Hawaii.
 
 **Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
+
+**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and slide 9 runs 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents the credit counts, and we haven't separated how much of the difference those changes explain. Build's 45.7% counts people, and slide 9's 29.4% counts households.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 

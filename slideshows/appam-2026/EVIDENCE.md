@@ -195,10 +195,12 @@ We quote these on slide 7 and in the notes' Questions section, and we model none
 
 ## The web apps
 
-We captured slide 11's screenshots and recording from the live sites on November 4, 2026. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
+We captured slide 11's CliffWatch screenshot on November 4, 2026, and Build's report on November 5, 2026, from the live sites. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
 
 - CliffWatch (policyengine.org/us/cliffwatch) ran PolicyEngine US 1.755.5, as its `/api/metadata` reports. We entered a single parent, 33, with children aged 6 and 10 in ZIP code 02139, and left rent and child care at zero. We kept its default programs, which include Medicaid, CHIP and premium tax credits. CliffWatch passes PolicyEngine US the state and no county, so the model computes those credits from Barnstable County's benchmark plan. The notes' TAFDC example rests on the deck's pin: on PolicyEngine US 2.90.2, this family draws $7,912 of TAFDC at $18,000 of earnings and none at $18,100.
-- In Build (app.policyengine.org/us/build), we set the Massachusetts child and family tax credit amount, `gov.states.ma.tax.income.credits.child_and_family.amount`, from $440 to $880 from 2026. For Build, we set the browser's time zone to UTC.
+- In Build (app.policyengine.org/us/build), we set the Massachusetts child and family tax credit amount, `gov.states.ma.tax.income.credits.child_and_family.amount`, from $440 to $880 from 2026, and picked Massachusetts as the population. For Build, we set the browser's time zone to UTC.
+- That click at 15:32:41Z on November 5 ran report 4940 (app.policyengine.org/us/report/8adb8bf2-355f-4f00-b7b9-1ef56a1deb77), which finished at 15:35:22Z. The recording cuts from the click to the finished report. The report shows a $657.4m annual state revenue loss, 45.7% of people gaining income and a 2.3% relative decrease in child poverty, on PolicyEngine US 2.2.1 and `policyengine` 6.12.0.
+- The report's record names the national file, `populace_us_2024.h5@populace-us-2024-spm-20260915`. Its $657.4m matches our 2.2.1 run on the local-area file (`data/massachusetts_reform_221.json`, $657,356,800), and `policyengine.py` 6.12.0 selects that file for state regions. We haven't resolved which file the run read, so the notes compare releases and name no file for Build.
 
 ## Axiom
 
