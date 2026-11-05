@@ -1,6 +1,6 @@
 """Compare each state's baseline child poverty with Census and measure its sample.
 
-Runs the local-area Populace US file, which policyengine.py uses for state regions,
+Runs the local-area Microcosm file, which policyengine.py uses for state regions,
 one state at a time so each run stays small. A Massachusetts file cut from the
 default file this way reproduces the national run's household gain and poverty rates.
 Census publishes a 2023 to 2025 average, and this run reports 2025.

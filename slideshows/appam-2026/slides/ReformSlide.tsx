@@ -43,7 +43,7 @@ export default function ReformSlide() {
           </div>
         </div>
         <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
-          We use Populace US’s local-area file with PolicyEngine US {modelVersion} for 2026 state estimates, assuming no
+          We use Microcosm’s local-area file with PolicyEngine US {modelVersion} for 2026 state estimates, assuming no
           behavioral responses. The file holds {massachusetts.records.toLocaleString('en-US')} Massachusetts household
           records, an effective sample of about {massachusetts.effectiveHouseholds} households, or{' '}
           {massachusetts.effectiveHouseholdsWithChildren} among those with children.

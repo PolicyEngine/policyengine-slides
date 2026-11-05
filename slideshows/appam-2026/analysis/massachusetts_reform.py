@@ -1,7 +1,7 @@
 """Double the Massachusetts child and family tax credit and score it.
 
 Runs current law and the reform on the Massachusetts records in the local-area
-Populace US file, which policyengine.py uses for state regions, for 2026. The
+Microcosm file, which policyengine.py uses for state regions, for 2026. The
 reform assumes no behavioral responses. Cost means the fall in state income tax,
 and household_gain holds the change in household net income beside it.
 """

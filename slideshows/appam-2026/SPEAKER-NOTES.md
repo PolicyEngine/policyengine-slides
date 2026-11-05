@@ -2,12 +2,12 @@
 
 State Policy Impacts on Family Resources: Tools to Improve Policy Analysis. Thursday, November 5, 2026, 10:15 to 11:45am ET, Wellesley room, Boston. Cynthia Osborne moderates. Tara Watson and Linda Giannarelli also present. Each presenter has 10 to 12 minutes.
 
-Fifteen slides in about 12 minutes.
+Sixteen slides in about 12 minutes.
 
 ## Before presenting
 
 - If the room's laptop won't have internet, send Cynthia's team the PDF on Thursday morning.
-- Before the session, scan slide 15's QR code and check that it opens this deck.
+- Before the session, scan slide 16's QR code and check that it opens this deck.
 - Before the session, run a report in Build with the credit at $880 and the recording's Nationwide population, and check that it finishes.
 - About 15 minutes before the session, click the CliffWatch address on slide 11 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 11's recording doesn't depend on it.
 - Then press next on slide 11 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
@@ -70,13 +70,13 @@ Take one line of this family's budget, the Massachusetts child and family credit
 
 Now run that change on the whole state. We estimate Massachusetts would forgo $577 million in 2026, and that 29.4% of its households would gain and none would lose.
 
-We ran this on the local-area file of Populace US, our microdata, which we use for state and district results. It holds 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children.
+We ran this on the local-area file of Microcosm, our microdata, which we use for state and district results. It holds 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children.
 
 ## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (7:20, 1 minute 15 seconds)
 
 We ran the waterfall, the states, the earnings sweep and the reform on the model behind that SNAP answer, and you can reach it several ways. In Python, you can build a simulated eligibility measure: map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state, and any difference between runs comes from the rules in that state.
 
-For example, we drew 3,000 households with children from Populace US's national file and ran them through each state's 2024 rules. We estimate that the same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland.
+For example, we drew 3,000 households with children from Microcosm's national file and ran them through each state's 2024 rules. We estimate that the same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland.
 
 If your pipeline runs on TAXSIM, our TAXSIM-compatible interface at policyengine.org/us/taxsim takes the same files. It runs tax years 2021 onward through PolicyEngine and sends earlier years to TAXSIM35. On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state. Our Claude Code plugin gives Claude Code our agents, commands and skills, and you can read and edit every rule in the open source code.
 
@@ -92,23 +92,25 @@ In Build, you can open the same Massachusetts credit, set it to $880 and run a r
 
 *The recording stops on the button that runs the report. Press next when you finish.*
 
-## 12. We model federal and state taxes and benefits and build microdata from surveys and official totals (9:35, 1 minute 10 seconds)
+## 12. We model federal, state and local tax and benefit rules (9:35, 20 seconds)
 
-On policy, we model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax.
+We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax.
 
-On data, we build two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
+## 13. We build Microcosm, our microdata, from surveys and official totals (9:55, 50 seconds)
 
-## 13. We're working on state poverty accuracy, Medicaid rules, heating assistance and local taxes (10:45, 30 seconds)
+We build Microcosm in two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
 
-We fix CPS errors, so our state child poverty rates differ from Census's by design, and we're tracing how calibration, sampling noise and rent imputation move each state's rate. We're also applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled. And we're adding LIHEAP in eight more states, placing households in local tax jurisdictions from their geography and imputing student loan balances.
+## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:45, 30 seconds)
 
-## 14. The Axiom Foundation encodes rules with source text and dates (11:15, 40 seconds)
+On the rules, we're applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled, and adding LIHEAP in eight more states. In Microcosm, we fix CPS errors, so our state child poverty rates differ from Census's by design, and we're tracing how calibration, sampling noise and rent imputation move each state's rate. We're also placing households in local tax jurisdictions from their geography and imputing student loan balances.
+
+## 15. The Axiom Foundation encodes rules with source text and dates (11:15, 40 seconds)
 
 I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its gross earned income.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
-## 15. Thank you (11:55)
+## 16. Thank you (11:55)
 
 Scan the QR code to open this deck. From its last slide, you can open the code behind each chart.
 
@@ -124,7 +126,7 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 **How do the top models do on SNAP?** On that board, the two highest scorers, GPT-6 Sol and Claude Opus 5.5, miss SNAP by more than 10% in 7 of 13 and 6 of 13 households with a positive reference amount.
 
-**What do PolicyBench's rates count?** PolicyBench pools parsed predictions on positive scored reference amounts, without weights, and leaves out missing or unparseable predictions. Its rates describe 100 public households, which it samples with household weights from an eligible subset of the PolicyEngine populace dataset.
+**What do PolicyBench's rates count?** PolicyBench pools parsed predictions on positive scored reference amounts, without weights, and leaves out missing or unparseable predictions. Its rates describe 100 public households, which it samples with household weights from an eligible subset of Microcosm.
 
 **Does a newer version always score higher?** No. On PolicyBench's October 23 board, GPT-6.1 Sol scores 90.1, against 95.2 for GPT-6 Sol and 94.1 for Claude Opus 5.5, the top current version on a board that leaves out GPT-6.1 Terra.
 

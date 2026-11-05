@@ -4,7 +4,7 @@ Each run keeps the same people and the same incomes and changes only the state,
 so the differences between runs come from each state's rules.
 
 families.pkl stands in for a survey extract: one row per person, with columns
-named variable__year. sample_families.py builds it from Populace US.
+named variable__year. sample_families.py builds it from Microcosm.
 """
 
 import json
