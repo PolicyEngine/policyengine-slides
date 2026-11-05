@@ -4,12 +4,14 @@ import Frame from './Frame';
 const apps = [
   {
     address: 'policyengine.org/us/cliffwatch',
-    href: 'https://www.policyengine.org/us/cliffwatch',
+    // CliffWatch's share link for the household in the screenshot.
+    href: 'https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0',
     src: '/images/appam-2026/cliffwatch-chart.png',
     width: 1689,
     height: 661,
     alt: 'CliffWatch’s chart of a household’s net income as its wages rise, with red markers on three cliffs',
-    caption: 'Enter a household to see where a raise leaves it with less.',
+    caption:
+      'Enter a household to see where a raise leaves it with less. For example, we entered a single parent of two in Massachusetts. CliffWatch counts health coverage in net income.',
   },
   {
     address: 'app.policyengine.org/us/build',
@@ -44,10 +46,17 @@ export default function WebAppsSlide() {
                 />
               </div>
               <figcaption className="mt-[1.4vh]">
-                <a style={{ textDecoration: 'underline' }} href={app.href}>
+                {/* A new tab keeps the deck on this slide; the class stops a click from advancing it. */}
+                <a
+                  className="pointer-events-auto"
+                  style={{ textDecoration: 'underline' }}
+                  href={app.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {app.address}
                 </a>
-                <p>{app.caption}</p>
+                <p className="text-pretty">{app.caption}</p>
               </figcaption>
             </figure>
           ))}
