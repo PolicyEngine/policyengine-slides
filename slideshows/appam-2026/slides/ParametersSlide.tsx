@@ -15,7 +15,7 @@ metadata:
         Tax (line 46)
       href: https://www.mass.gov/doc/2023-form-1-instructions/...
     - title: Massachusetts Session Laws Chapter 50 of the
-        Acts of 2023 Sections 21, 22, 45 and 49
+        Acts of 2023 Section 22 & Section 45
       href: https://malegislature.gov/Laws/SessionLaws/...`;
 
 export default function ParametersSlide() {

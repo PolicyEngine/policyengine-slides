@@ -4,6 +4,8 @@ Run from this folder with pytest. The cases come from Hypothesis, so they cover
 states and earnings nobody picked by hand.
 """
 
+import sys
+
 import family_lines
 import household as hh
 import numpy as np
@@ -202,6 +204,22 @@ def test_a_family_under_the_posted_limit_keeps_its_subsidy(state):
     # $39,500 comes to $3,292 a month, under the $3,331 these states post.
     parts = hh.net_resources_parts(hh.simulate(state, 39_500))
     assert float(parts["child_care_subsidy"][0]) > 0
+
+
+def test_indianas_posted_limit_stops_at_its_april_limit():
+    # $39,500 comes to $3,292 a month: under $3,331 and over the $3,074 limit from April 5.
+    sim = hh.simulate("IN", 39_500)
+    paid = [float(sim.calculate("in_ccdf", f"{hh.YEAR}-{month:02d}")[0]) > 0 for month in range(1, 13)]
+    assert paid == [True] * 4 + [False] * 8
+
+
+def test_a_partial_rerun_refuses_another_model_version(monkeypatch):
+    import compute_family
+
+    monkeypatch.setattr(compute_family, "version", lambda _: "0.0.0")
+    monkeypatch.setattr(sys, "argv", ["compute_family.py", "abc123", "ID"])
+    with pytest.raises(SystemExit, match="partial rerun"):
+        compute_family.main()
 
 
 def test_idaho_limit_matches_the_posted_figure():

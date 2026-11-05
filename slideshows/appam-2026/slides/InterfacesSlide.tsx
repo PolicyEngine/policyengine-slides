@@ -72,7 +72,7 @@ export default function InterfacesSlide() {
           </CodeBlock>
           <p style={{ fontSize: '0.9em' }}>
             For example, we held {instrument.households.toLocaleString('en-US')} households with children fixed and changed only the
-            state, under {instrument.year} rules. They pass SNAP&rsquo;s tests at rates from {percent(low.value)} in{' '}
+            state, under {instrument.year} rules. We estimate that they pass SNAP&rsquo;s tests at rates from {percent(low.value)} in{' '}
             {tied.map((entry) => STATE_NAMES[entry.code]).join(' and ')} to {percent(high.value)} in {STATE_NAMES[high.code]}.
           </p>
         </div>
