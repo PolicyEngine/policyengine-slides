@@ -97,6 +97,8 @@ describe('deck.module.css', () => {
     [1366, 1024, 'a large tablet on its side'],
     [1280, 853, 'a 3:2 laptop'],
     [1500, 1000, 'a 3:2 laptop'],
+    [1024, 640, 'a narrow window'],
+    [1024, 600, 'a narrow window'],
   ])('puts %ix%i, %s, in the width-capped block', (width, height) => {
     expect(matches(widthCaps.params, width, height)).toBe(true);
     expect(matches(smallScreens.params, width, height)).toBe(false);
@@ -137,6 +139,7 @@ describe('deck.module.css', () => {
 
   it("trims the code blocks' padding in a short window", () => {
     expect(declared(shortWindows, '.deck :global(.code-block-content)', 'padding')).toBe('1rem');
+    expect(declared(shortWindows, '.deck :global(.code-block-header)', 'padding-block')).toBe('0.5rem');
   });
 
   it.each([
