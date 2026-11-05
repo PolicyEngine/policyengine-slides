@@ -51,7 +51,7 @@ export const subsidyDrivenCliffs = cliffRanking.filter(
   (cliff) => largestLoss(cliff.changes) === 'child_care_subsidy',
 ).length;
 
-// The last $500 step at which a family already enrolled still draws a subsidy.
+// The last $500 step at which a family already in the program still draws a subsidy.
 export function enrolledExit(code: string) {
   const row = enrolledRun.rows.find((candidate) => candidate.code === code);
   if (!row) throw new Error(`No enrolled run for ${code}`);

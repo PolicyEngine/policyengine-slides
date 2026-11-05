@@ -14,7 +14,7 @@ import styles from './deck.module.css';
 
 export default function CliffsSlide() {
   return (
-    <Frame title={`This family loses up to ${usd(largestCliff.drop)} at a benefit cliff, at earnings that vary by state`}>
+    <Frame title={`This family’s net resources fall up to ${usd(largestCliff.drop)} at a benefit cliff, at earnings that vary by state`}>
       <div className={`flex h-full gap-[4vh] ${styles.flow}`}>
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>
@@ -42,10 +42,10 @@ export default function CliffsSlide() {
             </ul>
             <p className="mt-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
               In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from the subsidy. A family
-              already enrolled keeps the subsidy to about{' '}
+              already in the program keeps the subsidy to about{' '}
               {usd(enrolledExit('MD').before)} in Maryland, {usd(enrolledExit('IA').before)} in Iowa and{' '}
-              {usd(enrolledExit('ID').before)} in Idaho. Since May 2025, Maryland has put approved applicants like this
-              family on a waiting list.
+              {usd(enrolledExit('ID').before)} in Idaho. Since May 2025, Maryland has put applicants who qualify, like
+              this family, on a waiting list.
             </p>
           </div>
           <div>
