@@ -45,7 +45,7 @@ export default function Walkthrough({ play }: { play: boolean }) {
         muted
         playsInline
         preload="auto"
-        aria-label="A screen recording: we enter the Cambridge household in CliffWatch and read its chart, then set the Massachusetts child and family credit to $880 in Build."
+        aria-label="We enter a Massachusetts household in CliffWatch and read its chart, then set the Massachusetts child and family credit to $880 in Build."
         onPlaying={(event) => setShown(!event.currentTarget.paused)}
         onError={() => setShown(false)}
       />

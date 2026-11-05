@@ -41,6 +41,8 @@ export interface SlideshowConfig {
   partnerLogo?: { src: string; alt: string };
   speakers?: SpeakerInfo[];
   private?: boolean;
+  /** Move the deck on PageDown and PageUp, which presentation clickers send. Leave it off for a deck with a region that scrolls. */
+  clickerKeys?: boolean;
   slides: SlideConfig[];
 }
 
