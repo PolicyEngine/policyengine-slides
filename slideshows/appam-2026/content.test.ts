@@ -997,7 +997,7 @@ describe('typed figures', () => {
     const copies = (text: string, figure: string) => text.split(figure).length - 1;
     for (const [text, figure, count] of [
       [notes, usd(largestCliff.drop), 2],
-      [notes, millions(massachusetts.cost), 2],
+      [notes, millions(massachusetts.cost), 4],
       [ledger, massachusetts.records.toLocaleString('en-US'), 2],
       [ledger, `${stateBaseline.meanCensusGap.toFixed(1)} points`, 2],
       [ledger, `${massachusetts.childRateChange.toFixed(1)} points`, 2],
