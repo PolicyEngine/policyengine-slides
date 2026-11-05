@@ -1,0 +1,128 @@
+{
+ "engine": {
+  "artifact_format_version": 3,
+  "capabilities": [
+   "relation_entity_typing",
+   "related_min_max_only",
+   "artifact_interface",
+   "relation_roles"
+  ],
+  "engine_build": {
+   "commit": "e0bda6475f30ac487b7be544f5b9742c716e4bba",
+   "dirty": false
+  },
+  "engine_version": "0.2.2",
+  "legacy_artifact_formats": [
+   2
+  ]
+ },
+ "monthly_earnings": "2500.00",
+ "results": [
+  {
+   "case": "June 2026",
+   "month": "2026-06",
+   "exit_code": 0,
+   "stdout": {
+    "metadata": {
+     "relation_binding": "strict",
+     "requested_mode": "explain",
+     "actual_mode": "explain",
+     "fallback_reason": null
+    },
+    "results": [
+     {
+      "entity_id": "family",
+      "period": {
+       "period_kind": "month",
+       "start": "2026-06-01",
+       "end": "2026-06-30"
+      },
+      "outputs": {
+       "us-ga:policies/dfcs/snap/3612#earned_income_deduction": {
+        "kind": "scalar",
+        "name": "earned_income_deduction",
+        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction",
+        "dtype": "decimal",
+        "unit": "USD",
+        "value": {
+         "kind": "decimal",
+         "value": "500"
+        }
+       },
+       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed": {
+        "kind": "judgment",
+        "name": "earned_income_deduction_allowed",
+        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed",
+        "unit": null,
+        "outcome": "holds"
+       },
+       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate": {
+        "kind": "scalar",
+        "name": "earned_income_deduction_rate",
+        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate",
+        "dtype": "decimal",
+        "unit": null,
+        "value": {
+         "kind": "decimal",
+         "value": "0.2"
+        }
+       }
+      },
+      "trace": {
+       "us-ga:policies/dfcs/snap/3612#earned_income_deduction": {
+        "kind": "scalar",
+        "name": "earned_income_deduction",
+        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction",
+        "entity_id": "family",
+        "dtype": "decimal",
+        "unit": "USD",
+        "value": {
+         "kind": "decimal",
+         "value": "500"
+        },
+        "source": "3612 Requirements; Basic Considerations",
+        "executed_expression": "(if us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed then (us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate[0] * input(\"total_countable_gross_earned_income\")) else 0)",
+        "parameter_reads": [
+         {
+          "parameter": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate",
+          "name": "earned_income_deduction_rate",
+          "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_rate",
+          "index": 0,
+          "value": {
+           "kind": "decimal",
+           "value": "0.2"
+          },
+          "effective_from": "2019-12-01",
+          "source": "3612 Requirements; Basic Considerations"
+         }
+        ],
+        "dependencies": [
+         "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed"
+        ]
+       },
+       "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed": {
+        "kind": "judgment",
+        "name": "earned_income_deduction_allowed",
+        "id": "us-ga:policies/dfcs/snap/3612#earned_income_deduction_allowed",
+        "entity_id": "family",
+        "unit": null,
+        "outcome": "holds",
+        "source": "3612 Requirements; Basic Considerations",
+        "executed_expression": "((input(\"total_countable_gross_earned_income\") > 0) and not ((input(\"assistance_unit_failed_to_report_earned_income_timely\") == true)))",
+        "dependencies": []
+       }
+      }
+     }
+    ]
+   },
+   "stderr": ""
+  },
+  {
+   "case": "before the effective date",
+   "month": "2019-11",
+   "exit_code": 1,
+   "stdout": null,
+   "stderr": "parameter `earned_income_deduction_rate` has no value for key `0` at 2019-11-01"
+  }
+ ]
+}

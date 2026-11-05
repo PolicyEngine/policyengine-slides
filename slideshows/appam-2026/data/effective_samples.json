@@ -1,0 +1,981 @@
+{
+ "local_area": {
+  "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024_acs_local.h5@populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z",
+  "rows": [
+   {
+    "state": "AL",
+    "records": 26511,
+    "source_households": 26331,
+    "effective_records": 301.06996635624733,
+    "effective_records_with_children": 130.98166885193723,
+    "effective_households": 251.09276231084553,
+    "effective_households_with_children": 111.6002593407571,
+    "source_ids_on_both_spines": 13
+   },
+   {
+    "state": "AK",
+    "records": 3899,
+    "source_households": 3760,
+    "effective_records": 279.5035874193542,
+    "effective_records_with_children": 113.1472210476209,
+    "effective_households": 242.2518002284054,
+    "effective_households_with_children": 93.00449301190693,
+    "source_ids_on_both_spines": 0
+   },
+   {
+    "state": "AZ",
+    "records": 35022,
+    "source_households": 34799,
+    "effective_records": 262.9414991236324,
+    "effective_records_with_children": 98.36566156373355,
+    "effective_households": 223.25826991541825,
+    "effective_households_with_children": 77.5066835916482,
+    "source_ids_on_both_spines": 22
+   },
+   {
+    "state": "AR",
+    "records": 15887,
+    "source_households": 15742,
+    "effective_records": 319.0109805555055,
+    "effective_records_with_children": 156.52023302199572,
+    "effective_households": 283.0965963441929,
+    "effective_households_with_children": 135.3445154433101,
+    "source_ids_on_both_spines": 13
+   },
+   {
+    "state": "CA",
+    "records": 162907,
+    "source_households": 162583,
+    "effective_records": 1145.7926586188773,
+    "effective_records_with_children": 498.656425690554,
+    "effective_households": 905.0191867775522,
+    "effective_households_with_children": 406.8412270121457,
+    "source_ids_on_both_spines": 252
+   },
+   {
+    "state": "CO",
+    "records": 30033,
+    "source_households": 29804,
+    "effective_records": 233.46104018948168,
+    "effective_records_with_children": 98.94444750577892,
+    "effective_households": 210.59821142764625,
+    "effective_households_with_children": 89.27041094257615,
+    "source_ids_on_both_spines": 24
+   },
+   {
+    "state": "CT",
+    "records": 18356,
+    "source_households": 18163,
+    "effective_records": 233.62979455461632,
+    "effective_records_with_children": 94.02037856502432,
+    "effective_households": 206.06316722123557,
+    "effective_households_with_children": 84.2633505006458,
+    "source_ids_on_both_spines": 12
+   },
+   {
+    "state": "DE",
+    "records": 5587,
+    "source_households": 5386,
+    "effective_records": 254.3520618921668,
+    "effective_records_with_children": 83.45466256321826,
+    "effective_households": 208.0827192669308,
+    "effective_households_with_children": 65.39513263341146,
+    "source_ids_on_both_spines": 2
+   },
+   {
+    "state": "DC",
+    "records": 4221,
+    "source_households": 4112,
+    "effective_records": 231.75437656035126,
+    "effective_records_with_children": 71.67743092910139,
+    "effective_households": 203.41926190147174,
+    "effective_households_with_children": 55.04823984618137,
+    "source_ids_on_both_spines": 3
+   },
+   {
+    "state": "FL",
+    "records": 99746,
+    "source_households": 99505,
+    "effective_records": 559.4696867556416,
+    "effective_records_with_children": 288.55072363064227,
+    "effective_households": 455.7130452390904,
+    "effective_households_with_children": 216.5963143874981,
+    "source_ids_on_both_spines": 80
+   },
+   {
+    "state": "GA",
+    "records": 50222,
+    "source_households": 49995,
+    "effective_records": 299.3877995597597,
+    "effective_records_with_children": 157.51964219057092,
+    "effective_households": 236.80894385788335,
+    "effective_households_with_children": 124.34742106916082,
+    "source_ids_on_both_spines": 47
+   },
+   {
+    "state": "HI",
+    "records": 6787,
+    "source_households": 6652,
+    "effective_records": 274.3920761613343,
+    "effective_records_with_children": 125.46968680573812,
+    "effective_households": 232.14168797307258,
+    "effective_households_with_children": 116.835751677319,
+    "source_ids_on_both_spines": 2
+   },
+   {
+    "state": "ID",
+    "records": 9670,
+    "source_households": 9563,
+    "effective_records": 287.7337803561012,
+    "effective_records_with_children": 129.29664290392503,
+    "effective_households": 242.0305944640935,
+    "effective_households_with_children": 117.44132990472575,
+    "source_ids_on_both_spines": 4
+   },
+   {
+    "state": "IL",
+    "records": 59543,
+    "source_households": 59289,
+    "effective_records": 370.91268306465514,
+    "effective_records_with_children": 144.07868691278568,
+    "effective_households": 313.7543924130823,
+    "effective_households_with_children": 123.31586898964122,
+    "source_ids_on_both_spines": 53
+   },
+   {
+    "state": "IN",
+    "records": 33205,
+    "source_households": 32985,
+    "effective_records": 289.2074247962948,
+    "effective_records_with_children": 136.70455241043348,
+    "effective_households": 252.3665429104498,
+    "effective_households_with_children": 110.99675125924689,
+    "source_ids_on_both_spines": 24
+   },
+   {
+    "state": "IA",
+    "records": 17103,
+    "source_households": 16899,
+    "effective_records": 202.55437337747287,
+    "effective_records_with_children": 100.2909870228992,
+    "effective_households": 171.68137655782485,
+    "effective_households_with_children": 83.83922987301604,
+    "source_ids_on_both_spines": 8
+   },
+   {
+    "state": "KS",
+    "records": 15107,
+    "source_households": 14939,
+    "effective_records": 245.36572798879612,
+    "effective_records_with_children": 109.5546355329512,
+    "effective_households": 213.98448593622214,
+    "effective_households_with_children": 83.11562680708766,
+    "source_ids_on_both_spines": 9
+   },
+   {
+    "state": "KY",
+    "records": 22675,
+    "source_households": 22528,
+    "effective_records": 199.30270334124828,
+    "effective_records_with_children": 119.74320261004496,
+    "effective_households": 157.20393853360878,
+    "effective_households_with_children": 96.42667757285845,
+    "source_ids_on_both_spines": 8
+   },
+   {
+    "state": "LA",
+    "records": 22440,
+    "source_households": 22295,
+    "effective_records": 322.7560378807623,
+    "effective_records_with_children": 148.31075569615294,
+    "effective_households": 285.2891087862266,
+    "effective_households_with_children": 129.97736322397603,
+    "source_ids_on_both_spines": 17
+   },
+   {
+    "state": "ME",
+    "records": 8205,
+    "source_households": 8026,
+    "effective_records": 197.90404325920017,
+    "effective_records_with_children": 58.44779452892443,
+    "effective_households": 183.8976971532051,
+    "effective_households_with_children": 53.05578029061265,
+    "source_ids_on_both_spines": 2
+   },
+   {
+    "state": "MD",
+    "records": 28394,
+    "source_households": 28171,
+    "effective_records": 193.35489453190198,
+    "effective_records_with_children": 83.22799996119623,
+    "effective_households": 172.06322090113423,
+    "effective_households_with_children": 69.87109469664047,
+    "source_ids_on_both_spines": 17
+   },
+   {
+    "state": "MA",
+    "records": 36491,
+    "source_households": 36197,
+    "effective_records": 395.48166443900243,
+    "effective_records_with_children": 172.8724672815995,
+    "effective_households": 301.28527719490245,
+    "effective_households_with_children": 132.4165654332569,
+    "source_ids_on_both_spines": 37
+   },
+   {
+    "state": "MI",
+    "records": 48666,
+    "source_households": 48399,
+    "effective_records": 349.8376709003794,
+    "effective_records_with_children": 144.12349301810198,
+    "effective_households": 309.02787937721786,
+    "effective_households_with_children": 122.63820435821184,
+    "source_ids_on_both_spines": 31
+   },
+   {
+    "state": "MN",
+    "records": 28293,
+    "source_households": 28066,
+    "effective_records": 259.0326469276491,
+    "effective_records_with_children": 89.18071718834437,
+    "effective_households": 213.0447083209254,
+    "effective_households_with_children": 63.65440626088764,
+    "source_ids_on_both_spines": 14
+   },
+   {
+    "state": "MS",
+    "records": 14888,
+    "source_households": 14748,
+    "effective_records": 308.35744261188654,
+    "effective_records_with_children": 141.83138692001026,
+    "effective_households": 237.7525336385501,
+    "effective_households_with_children": 110.86803368810041,
+    "source_ids_on_both_spines": 9
+   },
+   {
+    "state": "MO",
+    "records": 31207,
+    "source_households": 31012,
+    "effective_records": 263.16306995246504,
+    "effective_records_with_children": 125.86568046195592,
+    "effective_households": 227.1718740867902,
+    "effective_households_with_children": 109.16975437407719,
+    "source_ids_on_both_spines": 10
+   },
+   {
+    "state": "MT",
+    "records": 6039,
+    "source_households": 5941,
+    "effective_records": 315.1155446865849,
+    "effective_records_with_children": 108.12544893349366,
+    "effective_households": 270.959752030303,
+    "effective_households_with_children": 81.16415068850247,
+    "source_ids_on_both_spines": 1
+   },
+   {
+    "state": "NE",
+    "records": 10177,
+    "source_households": 10027,
+    "effective_records": 247.9668808548512,
+    "effective_records_with_children": 103.04276217305852,
+    "effective_households": 216.28530929081882,
+    "effective_households_with_children": 89.31388161107154,
+    "source_ids_on_both_spines": 4
+   },
+   {
+    "state": "NV",
+    "records": 14334,
+    "source_households": 14157,
+    "effective_records": 245.19717556075997,
+    "effective_records_with_children": 104.95003373277798,
+    "effective_households": 200.25251331397794,
+    "effective_households_with_children": 95.76766875136201,
+    "source_ids_on_both_spines": 1
+   },
+   {
+    "state": "NH",
+    "records": 7603,
+    "source_households": 7452,
+    "effective_records": 216.9642801725588,
+    "effective_records_with_children": 89.64596742613368,
+    "effective_households": 184.60181329942924,
+    "effective_households_with_children": 80.0033427057958,
+    "source_ids_on_both_spines": 3
+   },
+   {
+    "state": "NJ",
+    "records": 40989,
+    "source_households": 40650,
+    "effective_records": 278.1681122746534,
+    "effective_records_with_children": 138.65921169835403,
+    "effective_households": 247.76550189661788,
+    "effective_households_with_children": 122.78895336050653,
+    "source_ids_on_both_spines": 23
+   },
+   {
+    "state": "NM",
+    "records": 10436,
+    "source_households": 10310,
+    "effective_records": 302.87445503554255,
+    "effective_records_with_children": 115.72319302135757,
+    "effective_households": 255.26085859159568,
+    "effective_households_with_children": 96.55449699256641,
+    "source_ids_on_both_spines": 3
+   },
+   {
+    "state": "NY",
+    "records": 98348,
+    "source_households": 97978,
+    "effective_records": 508.07641103378586,
+    "effective_records_with_children": 218.0358892424371,
+    "effective_households": 398.94212149671455,
+    "effective_households_with_children": 184.8910120959846,
+    "source_ids_on_both_spines": 165
+   },
+   {
+    "state": "NC",
+    "records": 55284,
+    "source_households": 55062,
+    "effective_records": 386.33715495342597,
+    "effective_records_with_children": 154.75329061127871,
+    "effective_households": 326.4142907287785,
+    "effective_households_with_children": 134.30345798109386,
+    "source_ids_on_both_spines": 46
+   },
+   {
+    "state": "ND",
+    "records": 4718,
+    "source_households": 4629,
+    "effective_records": 243.2073822736143,
+    "effective_records_with_children": 92.35480573654962,
+    "effective_households": 193.2787534764217,
+    "effective_households_with_children": 83.38216261449529,
+    "source_ids_on_both_spines": 0
+   },
+   {
+    "state": "OH",
+    "records": 57871,
+    "source_households": 57588,
+    "effective_records": 387.1320643973209,
+    "effective_records_with_children": 173.9685533897314,
+    "effective_households": 340.5445497661616,
+    "effective_households_with_children": 150.34526253614584,
+    "source_ids_on_both_spines": 34
+   },
+   {
+    "state": "OK",
+    "records": 18618,
+    "source_households": 18457,
+    "effective_records": 237.2825851033332,
+    "effective_records_with_children": 113.45987721817741,
+    "effective_households": 212.460974663393,
+    "effective_households_with_children": 94.47218625731786,
+    "source_ids_on_both_spines": 12
+   },
+   {
+    "state": "OR",
+    "records": 21722,
+    "source_households": 21508,
+    "effective_records": 289.25758939461156,
+    "effective_records_with_children": 117.20929101410496,
+    "effective_households": 253.2266465538262,
+    "effective_households_with_children": 108.12071373122879,
+    "source_ids_on_both_spines": 13
+   },
+   {
+    "state": "PA",
+    "records": 64981,
+    "source_households": 64625,
+    "effective_records": 482.74719475491446,
+    "effective_records_with_children": 174.15590592495874,
+    "effective_households": 424.3527628879772,
+    "effective_households_with_children": 149.94362456299706,
+    "source_ids_on_both_spines": 76
+   },
+   {
+    "state": "RI",
+    "records": 5812,
+    "source_households": 5638,
+    "effective_records": 198.95879205404438,
+    "effective_records_with_children": 69.3517228791022,
+    "effective_households": 163.9810273694797,
+    "effective_households_with_children": 58.06206604799248,
+    "source_ids_on_both_spines": 3
+   },
+   {
+    "state": "SC",
+    "records": 27573,
+    "source_households": 27396,
+    "effective_records": 330.35466413241244,
+    "effective_records_with_children": 149.81653460496918,
+    "effective_households": 245.09371705454728,
+    "effective_households_with_children": 127.70042658640726,
+    "source_ids_on_both_spines": 11
+   },
+   {
+    "state": "SD",
+    "records": 5270,
+    "source_households": 5106,
+    "effective_records": 214.4990329885618,
+    "effective_records_with_children": 68.97439880981722,
+    "effective_households": 189.7859285217032,
+    "effective_households_with_children": 64.30544777337914,
+    "source_ids_on_both_spines": 1
+   },
+   {
+    "state": "TN",
+    "records": 34709,
+    "source_households": 34492,
+    "effective_records": 287.922058576603,
+    "effective_records_with_children": 158.62081507156623,
+    "effective_households": 209.72131614867536,
+    "effective_households_with_children": 135.2272504364775,
+    "source_ids_on_both_spines": 11
+   },
+   {
+    "state": "TX",
+    "records": 125775,
+    "source_households": 125533,
+    "effective_records": 788.2417523247932,
+    "effective_records_with_children": 439.3619407450952,
+    "effective_households": 592.2622713370831,
+    "effective_households_with_children": 362.3662985770338,
+    "source_ids_on_both_spines": 113
+   },
+   {
+    "state": "UT",
+    "records": 14524,
+    "source_households": 14392,
+    "effective_records": 260.4524421052902,
+    "effective_records_with_children": 131.02563626944823,
+    "effective_households": 212.20844597036935,
+    "effective_households_with_children": 95.09955509076035,
+    "source_ids_on_both_spines": 6
+   },
+   {
+    "state": "VT",
+    "records": 3888,
+    "source_households": 3801,
+    "effective_records": 242.8746991880005,
+    "effective_records_with_children": 78.86132569532394,
+    "effective_households": 228.35821230264384,
+    "effective_households_with_children": 65.98332768928861,
+    "source_ids_on_both_spines": 2
+   },
+   {
+    "state": "VA",
+    "records": 41704,
+    "source_households": 41447,
+    "effective_records": 296.03310969213965,
+    "effective_records_with_children": 170.96395083220602,
+    "effective_households": 243.0792741719814,
+    "effective_households_with_children": 157.09372135930138,
+    "source_ids_on_both_spines": 38
+   },
+   {
+    "state": "WA",
+    "records": 37934,
+    "source_households": 37715,
+    "effective_records": 409.3985022261015,
+    "effective_records_with_children": 148.14817207029682,
+    "effective_households": 335.03143109847053,
+    "effective_households_with_children": 124.368248983701,
+    "source_ids_on_both_spines": 18
+   },
+   {
+    "state": "WV",
+    "records": 9612,
+    "source_households": 9500,
+    "effective_records": 347.1415326399411,
+    "effective_records_with_children": 144.6681680633121,
+    "effective_households": 315.4770109050154,
+    "effective_households_with_children": 125.97629786467947,
+    "source_ids_on_both_spines": 3
+   },
+   {
+    "state": "WI",
+    "records": 30565,
+    "source_households": 30319,
+    "effective_records": 252.84197563837657,
+    "effective_records_with_children": 110.02488762657926,
+    "effective_households": 208.3658859983257,
+    "effective_households_with_children": 100.15109442955563,
+    "source_ids_on_both_spines": 17
+   },
+   {
+    "state": "WY",
+    "records": 3357,
+    "source_households": 3273,
+    "effective_records": 222.66302027756277,
+    "effective_records_with_children": 95.08935362990073,
+    "effective_households": 176.15493411220496,
+    "effective_households_with_children": 76.88260056584991,
+    "source_ids_on_both_spines": 0
+   }
+  ]
+ },
+ "default": {
+  "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260909",
+  "rows": [
+   {
+    "state": "AL",
+    "records": 1061,
+    "source_households": 881,
+    "effective_records": 236.55107319475567,
+    "effective_records_with_children": 93.65080602332375,
+    "effective_households": 198.96065215580583,
+    "effective_households_with_children": 78.31206179792125
+   },
+   {
+    "state": "AK",
+    "records": 826,
+    "source_households": 687,
+    "effective_records": 133.09802879677864,
+    "effective_records_with_children": 63.748837119203266,
+    "effective_households": 109.95420048042735,
+    "effective_households_with_children": 50.65136451893132
+   },
+   {
+    "state": "AZ",
+    "records": 1164,
+    "source_households": 941,
+    "effective_records": 189.9592184041849,
+    "effective_records_with_children": 73.65186969070464,
+    "effective_households": 156.45086943109112,
+    "effective_households_with_children": 57.13972103676324
+   },
+   {
+    "state": "AR",
+    "records": 952,
+    "source_households": 807,
+    "effective_records": 205.8083941145262,
+    "effective_records_with_children": 95.40156579863513,
+    "effective_households": 178.13619043616225,
+    "effective_households_with_children": 78.69333169624741
+   },
+   {
+    "state": "CA",
+    "records": 2659,
+    "source_households": 2335,
+    "effective_records": 964.8602100502725,
+    "effective_records_with_children": 389.73613789462917,
+    "effective_households": 787.4600111021418,
+    "effective_households_with_children": 329.3609981310571
+   },
+   {
+    "state": "CO",
+    "records": 1164,
+    "source_households": 935,
+    "effective_records": 145.44069869412928,
+    "effective_records_with_children": 61.08269892846661,
+    "effective_households": 130.05484376047073,
+    "effective_households_with_children": 54.388550194627605
+   },
+   {
+    "state": "CT",
+    "records": 908,
+    "source_households": 715,
+    "effective_records": 135.72407292141725,
+    "effective_records_with_children": 57.005062496714245,
+    "effective_households": 122.66131139820975,
+    "effective_households_with_children": 52.45523463513592
+   },
+   {
+    "state": "DE",
+    "records": 1068,
+    "source_households": 867,
+    "effective_records": 138.95841520788005,
+    "effective_records_with_children": 49.22053959024031,
+    "effective_households": 112.18447895580306,
+    "effective_households_with_children": 38.02095767673519
+   },
+   {
+    "state": "DC",
+    "records": 551,
+    "source_households": 442,
+    "effective_records": 175.55582471377855,
+    "effective_records_with_children": 48.28469823056736,
+    "effective_households": 142.3158210126793,
+    "effective_households_with_children": 34.77942840176096
+   },
+   {
+    "state": "FL",
+    "records": 1642,
+    "source_households": 1401,
+    "effective_records": 561.2687931315957,
+    "effective_records_with_children": 204.65572110263983,
+    "effective_households": 458.0816563778826,
+    "effective_households_with_children": 159.40520297719428
+   },
+   {
+    "state": "GA",
+    "records": 1215,
+    "source_households": 988,
+    "effective_records": 256.7233154812113,
+    "effective_records_with_children": 107.40193460095661,
+    "effective_households": 193.24608766318406,
+    "effective_households_with_children": 83.12078037586947
+   },
+   {
+    "state": "HI",
+    "records": 838,
+    "source_households": 703,
+    "effective_records": 197.42767354447827,
+    "effective_records_with_children": 73.8681354911207,
+    "effective_households": 171.09819723541787,
+    "effective_households_with_children": 68.63075764918712
+   },
+   {
+    "state": "ID",
+    "records": 746,
+    "source_households": 639,
+    "effective_records": 185.13141307532993,
+    "effective_records_with_children": 92.46790805538677,
+    "effective_households": 164.57840700002072,
+    "effective_households_with_children": 84.08777623616179
+   },
+   {
+    "state": "IL",
+    "records": 1668,
+    "source_households": 1414,
+    "effective_records": 276.79640609431533,
+    "effective_records_with_children": 105.04091701934067,
+    "effective_households": 231.20145489601288,
+    "effective_households_with_children": 89.90076477446645
+   },
+   {
+    "state": "IN",
+    "records": 1141,
+    "source_households": 921,
+    "effective_records": 177.01966696059426,
+    "effective_records_with_children": 85.7977094356774,
+    "effective_households": 153.25367922722793,
+    "effective_households_with_children": 69.06191584381783
+   },
+   {
+    "state": "IA",
+    "records": 973,
+    "source_households": 769,
+    "effective_records": 138.47468958011123,
+    "effective_records_with_children": 55.52320885797061,
+    "effective_households": 117.87579349173748,
+    "effective_households_with_children": 48.43889061281043
+   },
+   {
+    "state": "KS",
+    "records": 921,
+    "source_households": 753,
+    "effective_records": 148.6054105840971,
+    "effective_records_with_children": 60.13082056590417,
+    "effective_households": 131.42311298942207,
+    "effective_households_with_children": 48.10295966067193
+   },
+   {
+    "state": "KY",
+    "records": 776,
+    "source_households": 629,
+    "effective_records": 129.52044465545663,
+    "effective_records_with_children": 55.594811460142296,
+    "effective_households": 100.11757864977956,
+    "effective_households_with_children": 40.91215743046426
+   },
+   {
+    "state": "LA",
+    "records": 1000,
+    "source_households": 855,
+    "effective_records": 260.90086270703296,
+    "effective_records_with_children": 106.16514531553632,
+    "effective_households": 224.27689969641074,
+    "effective_households_with_children": 91.04912575207935
+   },
+   {
+    "state": "ME",
+    "records": 785,
+    "source_households": 606,
+    "effective_records": 98.94461640482403,
+    "effective_records_with_children": 33.1152185167114,
+    "effective_households": 90.49271361532924,
+    "effective_households_with_children": 30.914628804637772
+   },
+   {
+    "state": "MD",
+    "records": 1091,
+    "source_households": 868,
+    "effective_records": 142.9724839367435,
+    "effective_records_with_children": 55.0306328423584,
+    "effective_households": 124.11319701312506,
+    "effective_households_with_children": 47.31057559894804
+   },
+   {
+    "state": "MA",
+    "records": 1522,
+    "source_households": 1228,
+    "effective_records": 254.60923423077767,
+    "effective_records_with_children": 97.95418862733884,
+    "effective_households": 202.376269953236,
+    "effective_households_with_children": 76.98486958165647
+   },
+   {
+    "state": "MI",
+    "records": 1478,
+    "source_households": 1211,
+    "effective_records": 244.58681076309966,
+    "effective_records_with_children": 95.45588834362752,
+    "effective_households": 205.81036633088166,
+    "effective_households_with_children": 79.56850005439496
+   },
+   {
+    "state": "MN",
+    "records": 1166,
+    "source_households": 939,
+    "effective_records": 151.41085939244604,
+    "effective_records_with_children": 57.41306431441452,
+    "effective_households": 132.09964577939715,
+    "effective_households_with_children": 44.291522415548414
+   },
+   {
+    "state": "MS",
+    "records": 882,
+    "source_households": 742,
+    "effective_records": 217.18543432971407,
+    "effective_records_with_children": 94.98469232700307,
+    "effective_households": 177.86331681964063,
+    "effective_households_with_children": 72.91502880108645
+   },
+   {
+    "state": "MO",
+    "records": 1013,
+    "source_households": 818,
+    "effective_records": 158.23194083624088,
+    "effective_records_with_children": 70.00864242116391,
+    "effective_households": 137.899644359662,
+    "effective_households_with_children": 57.935325681083
+   },
+   {
+    "state": "MT",
+    "records": 744,
+    "source_households": 646,
+    "effective_records": 189.76250275414372,
+    "effective_records_with_children": 74.05930053304587,
+    "effective_households": 165.16613237414504,
+    "effective_households_with_children": 55.53001214030853
+   },
+   {
+    "state": "NE",
+    "records": 884,
+    "source_households": 734,
+    "effective_records": 145.9510960348787,
+    "effective_records_with_children": 67.67826119911027,
+    "effective_households": 129.76092364423948,
+    "effective_households_with_children": 59.67857978519742
+   },
+   {
+    "state": "NV",
+    "records": 952,
+    "source_households": 775,
+    "effective_records": 153.2144587425425,
+    "effective_records_with_children": 53.8189719639138,
+    "effective_households": 123.16511424011932,
+    "effective_households_with_children": 47.03756338048108
+   },
+   {
+    "state": "NH",
+    "records": 840,
+    "source_households": 689,
+    "effective_records": 140.868912806551,
+    "effective_records_with_children": 50.91685631437766,
+    "effective_households": 117.47848248583652,
+    "effective_households_with_children": 45.25235517082277
+   },
+   {
+    "state": "NJ",
+    "records": 1651,
+    "source_households": 1312,
+    "effective_records": 214.92794357369306,
+    "effective_records_with_children": 90.63484182608163,
+    "effective_households": 184.46479947161646,
+    "effective_households_with_children": 74.63401855142382
+   },
+   {
+    "state": "NM",
+    "records": 902,
+    "source_households": 776,
+    "effective_records": 197.21158124194926,
+    "effective_records_with_children": 74.88789094961987,
+    "effective_households": 162.12899732659207,
+    "effective_households_with_children": 58.865063520055706
+   },
+   {
+    "state": "NY",
+    "records": 2166,
+    "source_households": 1796,
+    "effective_records": 431.19504540166105,
+    "effective_records_with_children": 161.4744379901859,
+    "effective_households": 348.31647678543794,
+    "effective_households_with_children": 130.9691793430268
+   },
+   {
+    "state": "NC",
+    "records": 1337,
+    "source_households": 1115,
+    "effective_records": 278.9726584586971,
+    "effective_records_with_children": 107.2179877714125,
+    "effective_households": 233.89099133683192,
+    "effective_households_with_children": 86.72529559793367
+   },
+   {
+    "state": "ND",
+    "records": 682,
+    "source_households": 593,
+    "effective_records": 154.69431792442464,
+    "effective_records_with_children": 60.78103291195482,
+    "effective_households": 129.37993689583516,
+    "effective_households_with_children": 50.816906687176996
+   },
+   {
+    "state": "OH",
+    "records": 1531,
+    "source_households": 1248,
+    "effective_records": 259.8938711628161,
+    "effective_records_with_children": 94.18129337404824,
+    "effective_households": 223.10335188302295,
+    "effective_households_with_children": 82.71363144573351
+   },
+   {
+    "state": "OK",
+    "records": 918,
+    "source_households": 757,
+    "effective_records": 184.8895033261389,
+    "effective_records_with_children": 75.74235127122593,
+    "effective_households": 157.70043564766516,
+    "effective_households_with_children": 62.772258929304186
+   },
+   {
+    "state": "OR",
+    "records": 1152,
+    "source_households": 938,
+    "effective_records": 174.20405252731825,
+    "effective_records_with_children": 61.385308231105604,
+    "effective_households": 144.77936250564076,
+    "effective_households_with_children": 54.33137847646917
+   },
+   {
+    "state": "PA",
+    "records": 1999,
+    "source_households": 1643,
+    "effective_records": 313.9407214900252,
+    "effective_records_with_children": 119.95047632036783,
+    "effective_households": 266.7890297570619,
+    "effective_households_with_children": 98.18566758746309
+   },
+   {
+    "state": "RI",
+    "records": 804,
+    "source_households": 630,
+    "effective_records": 115.36121502541874,
+    "effective_records_with_children": 43.968675446995185,
+    "effective_households": 95.55812596102776,
+    "effective_households_with_children": 35.1600052455169
+   },
+   {
+    "state": "SC",
+    "records": 955,
+    "source_households": 778,
+    "effective_records": 198.57355826188999,
+    "effective_records_with_children": 82.27387151348555,
+    "effective_households": 156.75565144941268,
+    "effective_households_with_children": 69.40917658099568
+   },
+   {
+    "state": "SD",
+    "records": 866,
+    "source_households": 702,
+    "effective_records": 140.02483771729896,
+    "effective_records_with_children": 59.908756151183155,
+    "effective_households": 119.70075350971014,
+    "effective_households_with_children": 54.45050836191524
+   },
+   {
+    "state": "TN",
+    "records": 1082,
+    "source_households": 865,
+    "effective_records": 213.4611164306311,
+    "effective_records_with_children": 98.05494750797263,
+    "effective_households": 168.74270892490034,
+    "effective_households_with_children": 84.8445093587961
+   },
+   {
+    "state": "TX",
+    "records": 1875,
+    "source_households": 1633,
+    "effective_records": 671.2372643331317,
+    "effective_records_with_children": 296.2185581814811,
+    "effective_households": 545.1464899390376,
+    "effective_households_with_children": 244.55415462995208
+   },
+   {
+    "state": "UT",
+    "records": 861,
+    "source_households": 729,
+    "effective_records": 182.57153743556984,
+    "effective_records_with_children": 96.2499787464925,
+    "effective_households": 159.06738463969998,
+    "effective_households_with_children": 79.57190416971466
+   },
+   {
+    "state": "VT",
+    "records": 496,
+    "source_households": 409,
+    "effective_records": 155.57089695495154,
+    "effective_records_with_children": 51.407008877146595,
+    "effective_households": 145.2442200326746,
+    "effective_households_with_children": 43.19225346484826
+   },
+   {
+    "state": "VA",
+    "records": 1394,
+    "source_households": 1137,
+    "effective_records": 215.49254181633236,
+    "effective_records_with_children": 92.96168372450565,
+    "effective_households": 183.66669518284903,
+    "effective_households_with_children": 81.52244612199962
+   },
+   {
+    "state": "WA",
+    "records": 1305,
+    "source_households": 1086,
+    "effective_records": 217.79313599494608,
+    "effective_records_with_children": 84.69243213256703,
+    "effective_households": 174.6052676211606,
+    "effective_households_with_children": 71.0417580085056
+   },
+   {
+    "state": "WV",
+    "records": 845,
+    "source_households": 733,
+    "effective_records": 220.39920666393735,
+    "effective_records_with_children": 76.67986452201751,
+    "effective_households": 199.80371310547432,
+    "effective_households_with_children": 66.76482536748088
+   },
+   {
+    "state": "WI",
+    "records": 1232,
+    "source_households": 986,
+    "effective_records": 168.6388492204826,
+    "effective_records_with_children": 63.91123916400042,
+    "effective_households": 142.79738350653832,
+    "effective_households_with_children": 53.71215299142791
+   },
+   {
+    "state": "WY",
+    "records": 557,
+    "source_households": 473,
+    "effective_records": 157.0853280537897,
+    "effective_records_with_children": 68.56604856255444,
+    "effective_households": 126.5094764051677,
+    "effective_households_with_children": 57.316244001742554
+   }
+  ]
+ }
+}

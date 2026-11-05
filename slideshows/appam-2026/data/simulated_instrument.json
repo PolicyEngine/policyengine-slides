@@ -1,0 +1,468 @@
+{
+ "policyengine_us_version": "2.90.2",
+ "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
+ "year": 2024,
+ "households": 3000,
+ "people": 12300,
+ "rows": [
+  {
+   "state": "AL",
+   "state_check": "AL",
+   "snap_eligible_share": 0.2572379367720466,
+   "child_medicaid_chip_share": 0.4734233464365066,
+   "state_income_tax": 4453.937546210726,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "AK",
+   "state_check": "AK",
+   "snap_eligible_share": 0.23194675540765392,
+   "child_medicaid_chip_share": 0.5221329687232952,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "AZ",
+   "state_check": "AZ",
+   "snap_eligible_share": 0.35108153078202997,
+   "child_medicaid_chip_share": 0.4100153819859853,
+   "state_income_tax": 2287.954257995963,
+   "state_refundable_credits": 22.204333333333334,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "AR",
+   "state_check": "AR",
+   "snap_eligible_share": 0.17470881863560733,
+   "child_medicaid_chip_share": 0.42625192274824814,
+   "state_income_tax": 3837.0310174662272,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "CA",
+   "state_check": "CA",
+   "snap_eligible_share": 0.3534109816971714,
+   "child_medicaid_chip_share": 0.5701589471885148,
+   "state_income_tax": 5162.827692028741,
+   "state_refundable_credits": 339.3042564305663,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "CO",
+   "state_check": "CO",
+   "snap_eligible_share": 0.26189683860232943,
+   "child_medicaid_chip_share": 0.45393949752179114,
+   "state_income_tax": 531.4195585606893,
+   "state_refundable_credits": 3741.544224278768,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "CT",
+   "state_check": "CT",
+   "snap_eligible_share": 0.37071547420965056,
+   "child_medicaid_chip_share": 0.5276021192958469,
+   "state_income_tax": 5547.824464547475,
+   "state_refundable_credits": 632.3323687877655,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "DE",
+   "state_check": "DE",
+   "snap_eligible_share": 0.3820299500831947,
+   "child_medicaid_chip_share": 0.42163732695265765,
+   "state_income_tax": 5863.763547504902,
+   "state_refundable_credits": 29.7724730257988,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "DC",
+   "state_check": "DC",
+   "snap_eligible_share": 0.37038269550748754,
+   "child_medicaid_chip_share": 0.6327123568620748,
+   "state_income_tax": 5579.594550904671,
+   "state_refundable_credits": 1548.9411732584636,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "FL",
+   "state_check": "FL",
+   "snap_eligible_share": 0.37038269550748754,
+   "child_medicaid_chip_share": 0.4178772859340284,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "GA",
+   "state_check": "GA",
+   "snap_eligible_share": 0.2569051580698835,
+   "child_medicaid_chip_share": 0.44556486070757134,
+   "state_income_tax": 5132.41960143806,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "HI",
+   "state_check": "HI",
+   "snap_eligible_share": 0.31314475873544095,
+   "child_medicaid_chip_share": 0.6605708425910101,
+   "state_income_tax": 6829.737657646179,
+   "state_refundable_credits": 1142.8092419107456,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "ID",
+   "state_check": "ID",
+   "snap_eligible_share": 0.27587354409317805,
+   "child_medicaid_chip_share": 0.3978807041531362,
+   "state_income_tax": 4278.539208164215,
+   "state_refundable_credits": 391.2866666666667,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "IL",
+   "state_check": "IL",
+   "snap_eligible_share": 0.324459234608985,
+   "child_medicaid_chip_share": 0.6233122543155016,
+   "state_income_tax": 5138.385718994005,
+   "state_refundable_credits": 405.63238576076054,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "IN",
+   "state_check": "IN",
+   "snap_eligible_share": 0.20133111480865223,
+   "child_medicaid_chip_share": 0.4662450863100325,
+   "state_income_tax": 3592.4428936057884,
+   "state_refundable_credits": 161.17642553281783,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "IA",
+   "state_check": "IA",
+   "snap_eligible_share": 0.3181364392678869,
+   "child_medicaid_chip_share": 0.4983763459237737,
+   "state_income_tax": 4684.419925348282,
+   "state_refundable_credits": 282.480416905423,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "KS",
+   "state_check": "KS",
+   "snap_eligible_share": 0.17770382695507486,
+   "child_medicaid_chip_share": 0.4447103059306102,
+   "state_income_tax": 4828.866706664721,
+   "state_refundable_credits": 202.81919067414603,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "KY",
+   "state_check": "KY",
+   "snap_eligible_share": 0.36405990016638934,
+   "child_medicaid_chip_share": 0.4874380447786703,
+   "state_income_tax": 4495.195485162735,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "LA",
+   "state_check": "LA",
+   "snap_eligible_share": 0.27354409317803663,
+   "child_medicaid_chip_share": 0.5099982908904461,
+   "state_income_tax": 4382.877999728441,
+   "state_refundable_credits": 87.89835669843356,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "ME",
+   "state_check": "ME",
+   "snap_eligible_share": 0.3490848585690516,
+   "child_medicaid_chip_share": 0.606562980687062,
+   "state_income_tax": 5047.609044066747,
+   "state_refundable_credits": 1296.9920427805582,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MD",
+   "state_check": "MD",
+   "snap_eligible_share": 0.3826955074875208,
+   "child_medicaid_chip_share": 0.6272432062895231,
+   "state_income_tax": 4583.039383239428,
+   "state_refundable_credits": 559.159965242068,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MA",
+   "state_check": "MA",
+   "snap_eligible_share": 0.36405990016638934,
+   "child_medicaid_chip_share": 0.48231071611690307,
+   "state_income_tax": 4614.9010397637685,
+   "state_refundable_credits": 1253.4550415007272,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MI",
+   "state_check": "MI",
+   "snap_eligible_share": 0.38236272878535776,
+   "child_medicaid_chip_share": 0.4877798666894548,
+   "state_income_tax": 3863.265089117527,
+   "state_refundable_credits": 807.6999071828524,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MN",
+   "state_check": "MN",
+   "snap_eligible_share": 0.3820299500831947,
+   "child_medicaid_chip_share": 0.5793881387796957,
+   "state_income_tax": 5028.5198998653095,
+   "state_refundable_credits": 1675.2427300505638,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MS",
+   "state_check": "MS",
+   "snap_eligible_share": 0.1757071547420965,
+   "child_medicaid_chip_share": 0.4192445735771663,
+   "state_income_tax": 3940.61131412824,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MO",
+   "state_check": "MO",
+   "snap_eligible_share": 0.1767054908485857,
+   "child_medicaid_chip_share": 0.4785506750982738,
+   "state_income_tax": 4391.193961966594,
+   "state_refundable_credits": 8.985666666666667,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "MT",
+   "state_check": "MT",
+   "snap_eligible_share": 0.37038269550748754,
+   "child_medicaid_chip_share": 0.45513587420953683,
+   "state_income_tax": 5352.324368675868,
+   "state_refundable_credits": 161.1410932650566,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NE",
+   "state_check": "NE",
+   "snap_eligible_share": 0.2875207986688852,
+   "child_medicaid_chip_share": 0.487950777644847,
+   "state_income_tax": 4184.96296986119,
+   "state_refundable_credits": 618.1449765950839,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NV",
+   "state_check": "NV",
+   "snap_eligible_share": 0.37038269550748754,
+   "child_medicaid_chip_share": 0.414800888736968,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NH",
+   "state_check": "NH",
+   "snap_eligible_share": 0.37071547420965056,
+   "child_medicaid_chip_share": 0.6286104939326611,
+   "state_income_tax": 114.88015413343906,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NJ",
+   "state_check": "NJ",
+   "snap_eligible_share": 0.3470881863560732,
+   "child_medicaid_chip_share": 0.4920526405742608,
+   "state_income_tax": 4610.427715698878,
+   "state_refundable_credits": 964.8427494438688,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NM",
+   "state_check": "NM",
+   "snap_eligible_share": 0.3161397670549085,
+   "child_medicaid_chip_share": 0.5563151598017433,
+   "state_income_tax": 3366.3056352918943,
+   "state_refundable_credits": 1090.142994214376,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NY",
+   "state_check": "NY",
+   "snap_eligible_share": 0.3247920133111481,
+   "child_medicaid_chip_share": 0.5152965305076055,
+   "state_income_tax": 5574.276643596967,
+   "state_refundable_credits": 937.4188373273214,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "NC",
+   "state_check": "NC",
+   "snap_eligible_share": 0.36405990016638934,
+   "child_medicaid_chip_share": 0.48538711331396345,
+   "state_income_tax": 4577.673244646709,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "ND",
+   "state_check": "ND",
+   "snap_eligible_share": 0.27387687188019966,
+   "child_medicaid_chip_share": 0.46949239446248503,
+   "state_income_tax": 1028.5865984107654,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "OH",
+   "state_check": "OH",
+   "snap_eligible_share": 0.27986688851913477,
+   "child_medicaid_chip_share": 0.4788924970090583,
+   "state_income_tax": 2671.9412227071125,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "OK",
+   "state_check": "OK",
+   "snap_eligible_share": 0.2585690515806988,
+   "child_medicaid_chip_share": 0.47872158605366605,
+   "state_income_tax": 4630.004274261276,
+   "state_refundable_credits": 119.15977373417219,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "OR",
+   "state_check": "OR",
+   "snap_eligible_share": 0.38236272878535776,
+   "child_medicaid_chip_share": 0.46316868911297215,
+   "state_income_tax": 8494.683246345203,
+   "state_refundable_credits": 408.721811491025,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "PA",
+   "state_check": "PA",
+   "snap_eligible_share": 0.37071547420965056,
+   "child_medicaid_chip_share": 0.47376516834729104,
+   "state_income_tax": 3756.8276278915405,
+   "state_refundable_credits": 139.31568911320468,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "RI",
+   "state_check": "RI",
+   "snap_eligible_share": 0.28019966722129785,
+   "child_medicaid_chip_share": 0.5616133994189028,
+   "state_income_tax": 4479.640095519066,
+   "state_refundable_credits": 266.6258203570048,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "SC",
+   "state_check": "SC",
+   "snap_eligible_share": 0.2569051580698835,
+   "child_medicaid_chip_share": 0.48213980516151084,
+   "state_income_tax": 4786.52582743597,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "SD",
+   "state_check": "SD",
+   "snap_eligible_share": 0.18569051580698837,
+   "child_medicaid_chip_share": 0.4563322508972825,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "TN",
+   "state_check": "TN",
+   "snap_eligible_share": 0.17470881863560733,
+   "child_medicaid_chip_share": 0.5088019142027004,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "TX",
+   "state_check": "TX",
+   "snap_eligible_share": 0.24093178036605659,
+   "child_medicaid_chip_share": 0.4124081353614767,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "UT",
+   "state_check": "UT",
+   "snap_eligible_share": 0.1826955074875208,
+   "child_medicaid_chip_share": 0.40898991625363185,
+   "state_income_tax": 4880.802060546875,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "VT",
+   "state_check": "VT",
+   "snap_eligible_share": 0.34675540765391016,
+   "child_medicaid_chip_share": 0.6185267475645189,
+   "state_income_tax": 4442.425965610067,
+   "state_refundable_credits": 1123.2743190848032,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "VA",
+   "state_check": "VA",
+   "snap_eligible_share": 0.37104825291181365,
+   "child_medicaid_chip_share": 0.4195863954879508,
+   "state_income_tax": 5164.7773742733,
+   "state_refundable_credits": 174.17439606730144,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "WA",
+   "state_check": "WA",
+   "snap_eligible_share": 0.3820299500831947,
+   "child_medicaid_chip_share": 0.5339258246453598,
+   "state_income_tax": -347.37823592122396,
+   "state_refundable_credits": 386.53066666666666,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "WV",
+   "state_check": "WV",
+   "snap_eligible_share": 0.37071547420965056,
+   "child_medicaid_chip_share": 0.4621432233806187,
+   "state_income_tax": 5338.422353963216,
+   "state_refundable_credits": 31.95597383626302,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "WI",
+   "state_check": "WI",
+   "snap_eligible_share": 0.37004991680532445,
+   "child_medicaid_chip_share": 0.4917108186634763,
+   "state_income_tax": 4938.312827107112,
+   "state_refundable_credits": 265.2563387184938,
+   "earnings_check": 98673.01644589161
+  },
+  {
+   "state": "WY",
+   "state_check": "WY",
+   "snap_eligible_share": 0.18369384359400998,
+   "child_medicaid_chip_share": 0.46949239446248503,
+   "state_income_tax": 0.0,
+   "state_refundable_credits": 0.0,
+   "earnings_check": 98673.01644589161
+  }
+ ]
+}

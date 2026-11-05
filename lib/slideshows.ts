@@ -31,8 +31,10 @@ import { scottishGovernment2026Config } from "@/slideshows/scottish-government-2
 import { goodGrowthFoundation2026Config } from "@/slideshows/good-growth-foundation-2026/config";
 import { autumnBudget2026Config } from "@/slideshows/autumn-budget-2026/config";
 import { prop40Webinar2026Config } from "@/slideshows/prop40-webinar-2026/config";
+import { appam2026Config } from "@/slideshows/appam-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  appam2026Config,
   prop40Webinar2026Config,
   autumnBudget2026Config,
   goodGrowthFoundation2026Config,

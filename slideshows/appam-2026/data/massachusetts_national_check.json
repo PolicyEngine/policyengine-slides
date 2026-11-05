@@ -1,0 +1,10 @@
+{
+ "policyengine_us_version": "2.90.2",
+ "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
+ "dataset": "Populace US",
+ "year": 2026,
+ "household_gain": 554611328.0,
+ "households_gaining_share": 0.2980068325996399,
+ "baseline_child_poverty": 0.22329546523064753,
+ "baseline_poverty": 0.1962823513703525
+}

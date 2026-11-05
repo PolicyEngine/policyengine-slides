@@ -1,0 +1,257 @@
+{
+ "AK": {
+  "county": "Anchorage Municipality",
+  "enum": "ANCHORAGE_MUNICIPALITY_AK",
+  "population": 292545
+ },
+ "AL": {
+  "county": "Jefferson County",
+  "enum": "JEFFERSON_COUNTY_AL",
+  "population": 672550
+ },
+ "AR": {
+  "county": "Pulaski County",
+  "enum": "PULASKI_COUNTY_AR",
+  "population": 397931
+ },
+ "AZ": {
+  "county": "Maricopa County",
+  "enum": "MARICOPA_COUNTY_AZ",
+  "population": 4367186
+ },
+ "CA": {
+  "county": "Los Angeles County",
+  "enum": "LOS_ANGELES_COUNTY_CA",
+  "population": 10019635
+ },
+ "CO": {
+  "county": "El Paso County",
+  "enum": "EL_PASO_COUNTY_CO",
+  "population": 722736
+ },
+ "CT": {
+  "county": "Fairfield County",
+  "enum": "FAIRFIELD_COUNTY_CT",
+  "population": 956446
+ },
+ "DC": {
+  "county": "District of Columbia",
+  "enum": "DISTRICT_OF_COLUMBIA_DC",
+  "population": 683154
+ },
+ "DE": {
+  "county": "New Castle County",
+  "enum": "NEW_CASTLE_COUNTY_DE",
+  "population": 567769
+ },
+ "FL": {
+  "county": "Miami-Dade County",
+  "enum": "MIAMI_DADE_COUNTY_FL",
+  "population": 2690113
+ },
+ "GA": {
+  "county": "Fulton County",
+  "enum": "FULTON_COUNTY_GA",
+  "population": 1054286
+ },
+ "HI": {
+  "county": "Honolulu County",
+  "enum": "HONOLULU_COUNTY_HI",
+  "population": 1015167
+ },
+ "IA": {
+  "county": "Polk County",
+  "enum": "POLK_COUNTY_IA",
+  "population": 488871
+ },
+ "ID": {
+  "county": "Ada County",
+  "enum": "ADA_COUNTY_ID",
+  "population": 485246
+ },
+ "IL": {
+  "county": "Cook County",
+  "enum": "COOK_COUNTY_IL",
+  "population": 5265398
+ },
+ "IN": {
+  "county": "Marion County",
+  "enum": "MARION_COUNTY_IN",
+  "population": 969542
+ },
+ "KS": {
+  "county": "Johnson County",
+  "enum": "JOHNSON_COUNTY_KS",
+  "population": 605154
+ },
+ "KY": {
+  "county": "Jefferson County",
+  "enum": "JEFFERSON_COUNTY_KY",
+  "population": 780449
+ },
+ "LA": {
+  "county": "East Baton Rouge Parish",
+  "enum": "EAST_BATON_ROUGE_PARISH_LA",
+  "population": 455447
+ },
+ "MA": {
+  "county": "Middlesex County",
+  "enum": "MIDDLESEX_COUNTY_MA",
+  "population": 1623411
+ },
+ "MD": {
+  "county": "Montgomery County",
+  "enum": "MONTGOMERY_COUNTY_MD",
+  "population": 1057201
+ },
+ "ME": {
+  "county": "Cumberland County",
+  "enum": "CUMBERLAND_COUNTY_ME",
+  "population": 300776
+ },
+ "MI": {
+  "county": "Wayne County",
+  "enum": "WAYNE_COUNTY_MI",
+  "population": 1789781
+ },
+ "MN": {
+  "county": "Hennepin County",
+  "enum": "HENNEPIN_COUNTY_MN",
+  "population": 1270283
+ },
+ "MO": {
+  "county": "St. Louis County",
+  "enum": "ST_LOUIS_COUNTY_MO",
+  "population": 1001982
+ },
+ "MS": {
+  "county": "Hinds County",
+  "enum": "HINDS_COUNTY_MS",
+  "population": 230772
+ },
+ "MT": {
+  "county": "Yellowstone County",
+  "enum": "YELLOWSTONE_COUNTY_MT",
+  "population": 163593
+ },
+ "NC": {
+  "county": "Wake County",
+  "enum": "WAKE_COUNTY_NC",
+  "population": 1112883
+ },
+ "ND": {
+  "county": "Cass County",
+  "enum": "CASS_COUNTY_ND",
+  "population": 182992
+ },
+ "NE": {
+  "county": "Douglas County",
+  "enum": "DOUGLAS_COUNTY_NE",
+  "population": 578771
+ },
+ "NH": {
+  "county": "Hillsborough County",
+  "enum": "HILLSBOROUGH_COUNTY_NH",
+  "population": 420504
+ },
+ "NJ": {
+  "county": "Bergen County",
+  "enum": "BERGEN_COUNTY_NJ",
+  "population": 952979
+ },
+ "NM": {
+  "county": "Bernalillo County",
+  "enum": "BERNALILLO_COUNTY_NM",
+  "population": 674919
+ },
+ "NV": {
+  "county": "Clark County",
+  "enum": "CLARK_COUNTY_NV",
+  "population": 2231147
+ },
+ "NY": {
+  "county": "Kings County",
+  "enum": "KINGS_COUNTY_NY",
+  "population": 2712360
+ },
+ "OH": {
+  "county": "Franklin County",
+  "enum": "FRANKLIN_COUNTY_OH",
+  "population": 1313598
+ },
+ "OK": {
+  "county": "Oklahoma County",
+  "enum": "OKLAHOMA_COUNTY_OK",
+  "population": 790938
+ },
+ "OR": {
+  "county": "Multnomah County",
+  "enum": "MULTNOMAH_COUNTY_OR",
+  "population": 810011
+ },
+ "PA": {
+  "county": "Philadelphia County",
+  "enum": "PHILADELPHIA_COUNTY_PA",
+  "population": 1596865
+ },
+ "RI": {
+  "county": "Providence County",
+  "enum": "PROVIDENCE_COUNTY_RI",
+  "population": 656672
+ },
+ "SC": {
+  "county": "Greenville County",
+  "enum": "GREENVILLE_COUNTY_SC",
+  "population": 519178
+ },
+ "SD": {
+  "county": "Minnehaha County",
+  "enum": "MINNEHAHA_COUNTY_SD",
+  "population": 194884
+ },
+ "TN": {
+  "county": "Shelby County",
+  "enum": "SHELBY_COUNTY_TN",
+  "population": 929178
+ },
+ "TX": {
+  "county": "Harris County",
+  "enum": "HARRIS_COUNTY_TX",
+  "population": 4697957
+ },
+ "UT": {
+  "county": "Salt Lake County",
+  "enum": "SALT_LAKE_COUNTY_UT",
+  "population": 1173331
+ },
+ "VA": {
+  "county": "Fairfax County",
+  "enum": "FAIRFAX_COUNTY_VA",
+  "population": 1146825
+ },
+ "VT": {
+  "county": "Chittenden County",
+  "enum": "CHITTENDEN_COUNTY_VT",
+  "population": 167523
+ },
+ "WA": {
+  "county": "King County",
+  "enum": "KING_COUNTY_WA",
+  "population": 2240876
+ },
+ "WI": {
+  "county": "Milwaukee County",
+  "enum": "MILWAUKEE_COUNTY_WI",
+  "population": 939123
+ },
+ "WV": {
+  "county": "Kanawha County",
+  "enum": "KANAWHA_COUNTY_WV",
+  "population": 181953
+ },
+ "WY": {
+  "county": "Laramie County",
+  "enum": "LARAMIE_COUNTY_WY",
+  "population": 99905
+ }
+}
