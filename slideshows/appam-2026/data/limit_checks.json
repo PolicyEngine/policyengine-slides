@@ -1,0 +1,32 @@
+{
+  "earnings": 40000,
+  "georgia_without_caps": {
+    "subsidy": 0.0,
+    "net_resources": 27710.53
+  },
+  "ohio_without_voucher": {
+    "subsidy": 0.0,
+    "net_resources": 27710.53
+  },
+  "missouri_at_model_limit": {
+    "subsidy": 14220.0,
+    "net_resources": 41930.53
+  },
+  "alabama_at_model_limit": {
+    "subsidy": 14568.0,
+    "net_resources": 40721.53
+  },
+  "indiana_at_model_limit": {
+    "subsidy": 4925.33,
+    "net_resources": 31487.49
+  },
+  "idaho_at_model_limit": {
+    "subsidy": 16200.0,
+    "net_resources": 44142.4
+  },
+  "maryland_at_posted": {
+    "before": 94000,
+    "after": 94500,
+    "drop": 15197
+  }
+}

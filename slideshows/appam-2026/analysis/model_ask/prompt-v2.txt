@@ -1,0 +1,63 @@
+Estimate the requested tax and benefit outputs using only the household facts below. All listed people live together and are in one household group for tax and benefit calculations. All listed facts describe the full tax-benefit year. Treat demographic, work, student, disability, housing, health coverage, and household-composition facts as constant throughout the tax-benefit year, with no within-year income volatility or status changes. Gross wage and salary amounts are annual totals, including any overtime pay; hourly wage is a straight-time rate when listed. Treat unlisted income, expenses and assets as zero, and derive eligibility and calculated statuses from the stated facts. Assume tax filing and program take-up when required. Do not infer unlisted income, expenses, assets, benefit receipt, rent, or health coverage.
+
+Household:
+- state: MA
+- tax year: 2026
+- county: Middlesex County
+- Head is unmarried, files as head of household, and claims both children as qualifying dependents
+- all three people are U.S. citizens with valid Social Security numbers
+- both children meet WIC's nutritional-risk requirement
+
+Head:
+- age: 30
+- gross wages and salaries: $40,000
+- works 40 hours a week for all 52 weeks
+- pre-subsidy rent: $14,400
+
+Child 1:
+- age: 1
+
+Child 2:
+- age: 4
+
+Benefit inputs:
+- has heating cooling expense
+- meets ccdf activity test
+- pre-subsidy childcare expenses: $18,000
+
+Child care:
+- both children attend center-based care full time: 5 days a week, 8 hours a day, 21 days a month
+
+Assume the family is approved for Massachusetts child care assistance and receives it throughout all twelve months as a new applicant.
+
+Provide the following policy quantities for this household:
+- federal_income_tax_before_refundable_credits: federal individual income tax after nonrefundable credits and before refundable credits. This subtracts nonrefundable credits actually used, including CDCC and the nonrefundable portion of CTC or other credits when applicable; it does not subtract EITC or refundable portions of credits such as refundable CTC
+- federal_refundable_credits: total refundable federal income tax credits, including EITC and refundable portions of credits such as refundable CTC when applicable; exclude the ACA Premium Tax Credit
+- payroll_tax: annual household employee-side payroll tax: employee Social Security tax, employee Medicare tax, Additional Medicare Tax, and mandatory employee state payroll taxes. Exclude employer payroll taxes, FUTA, employer unemployment-insurance taxes, and self-employment tax
+- self_employment_tax: annual self-employment tax liability, excluding employee payroll taxes and Additional Medicare Tax
+- state_income_tax_before_refundable_credits: state individual income tax after nonrefundable credits and before refundable credits, excluding local income and payroll taxes
+- state_refundable_credits: total refundable state individual income tax credits
+- local_income_tax: annual local income, wage, and earnings tax liability in the separate local-income-tax output: NYC income tax, Philadelphia wage tax, Kansas City earnings tax, and St. Louis earnings tax where applicable
+- snap: annual SNAP (food stamps) benefit amount
+- ssi: annual Supplemental Security Income (SSI) amount
+- tanf: annual Temporary Assistance for Needy Families (TANF) benefit amount
+- head_wic_eligible: whether Head is eligible for WIC (1 if yes, 0 if no)
+- head_medicaid_eligible: whether Head is eligible for Medicaid under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- head_chip_eligible: whether Head is eligible for CHIP under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- head_medicare_eligible: whether Head is eligible for Medicare (1 if yes, 0 if no)
+- child1_wic_eligible: whether Child 1 is eligible for WIC (1 if yes, 0 if no)
+- child1_medicaid_eligible: whether Child 1 is eligible for Medicaid under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- child1_chip_eligible: whether Child 1 is eligible for CHIP under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- child1_medicare_eligible: whether Child 1 is eligible for Medicare (1 if yes, 0 if no)
+- child1_head_start_eligible: whether Child 1 is eligible for Head Start for preschool-age children, not Early Head Start (1 if yes, 0 if no)
+- child1_early_head_start_eligible: whether Child 1 is eligible for Early Head Start as a child under this benchmark output (1 if yes, 0 if no)
+- child2_wic_eligible: whether Child 2 is eligible for WIC (1 if yes, 0 if no)
+- child2_medicaid_eligible: whether Child 2 is eligible for Medicaid under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- child2_chip_eligible: whether Child 2 is eligible for CHIP under PolicyEngine rules, not whether they are currently enrolled (1 if yes, 0 if no)
+- child2_medicare_eligible: whether Child 2 is eligible for Medicare (1 if yes, 0 if no)
+- child2_head_start_eligible: whether Child 2 is eligible for Head Start for preschool-age children, not Early Head Start (1 if yes, 0 if no)
+- child2_early_head_start_eligible: whether Child 2 is eligible for Early Head Start as a child under this benchmark output (1 if yes, 0 if no)
+- free_school_meals_eligible: whether PolicyEngine returns positive annual free school meal support for the household (1 if yes, 0 if no; reduced-price meals do not count as 1)
+- reduced_price_school_meals_eligible: whether PolicyEngine returns positive annual reduced-price school meal support for the household (1 if yes, 0 if no; free meals do not count as 1)
+
+Return a single JSON object with an `outputs` object. Use the exact variable names as keys inside `outputs`, for example {"outputs": {"federal_income_tax_before_refundable_credits": {"value": 1234.5, "explanation": "Reason. value = 1234.5"}}}}. Include every requested key exactly once in `outputs`, even if the value is 0. Each requested key must map to an object with a numeric `value` and a non-empty, specific, concise `explanation`. Each explanation must support the numeric value submitted for the same variable in `outputs`. If an explanation mentions a final amount, that amount must match the corresponding `outputs` value. Do not write that you will use one value while submitting a different value. Do not include scratch work, abandoned calculations, or corrections. End each explanation with `value = X`, where X exactly matches the numeric `value` field. For 1/0 eligibility outputs, submit 1 only when the explanation says eligible or yes, and submit 0 only when it says not eligible or no. Put only numeric values in `value`, with no dollar signs, commas, or explanatory text in the values. Do not rely on plain text outside the JSON object for the final answers. If an answer is a currency amount, give the annual amount. If an answer is a rate, give a decimal (e.g. 0.25 for 25%).

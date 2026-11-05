@@ -134,6 +134,7 @@ def main():
         "policyengine_us_commit": family["policyengine_us_commit"],
         "year": family["year"],
         "family": family["family"],
+        "posted_limits": family["posted_limits"],
         "headline_earnings": HEADLINE_EARNINGS,
         "cross_section": cross_section,
         "spreads": spreads,

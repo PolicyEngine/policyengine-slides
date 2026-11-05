@@ -1,8 +1,13 @@
 import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
+import coverageRun from './data/coverage.json';
 import effectiveRun from './data/effective_samples.json';
+import enrolledRun from './data/enrolled_cliffs.json';
+import familyLinesRun from './data/family_lines.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
+import modelAnswersRun from './data/model_answers.json';
+import policyBenchRun from './data/policybench_board.json';
 import reformRun from './data/massachusetts_reform.json';
 import stateBaselineRun from './data/state_baseline.json';
 
@@ -23,8 +28,96 @@ export const alaska = {
   payments: alaskaRow.other_benefits,
 };
 
+const massachusettsCrossSection = crossSection.find((row) => row.code === 'MA');
+if (!massachusettsCrossSection) throw new Error('No Massachusetts row');
+export const massachusettsRow = massachusettsCrossSection;
+
 export const headlineEarnings = charts.headline_earnings;
 export const family = charts.family;
+
+// This family in Massachusetts, line by line: slides 3, 5 and 8.
+export const familyLines = familyLinesRun;
+
+const WATERFALL_STEPS: { key: keyof typeof familyLinesRun.lines; label: string[] }[] = [
+  { key: 'earnings', label: ['Earnings'] },
+  { key: 'federal_income_tax_before_refundable_credits', label: ['Federal', 'income tax'] },
+  { key: 'federal_refundable_credits', label: ['Federal', 'credits'] },
+  { key: 'payroll_tax', label: ['Payroll', 'tax'] },
+  { key: 'state_income_tax_before_refundable_credits', label: ['State', 'income tax'] },
+  { key: 'state_refundable_credits', label: ['State', 'credits'] },
+  { key: 'snap', label: ['SNAP'] },
+  { key: 'wic', label: ['WIC'] },
+  { key: 'child_care_subsidy', label: ['Child care', 'subsidy'] },
+  { key: 'child_care_bill', label: ['Child care', 'bill'] },
+];
+
+// Each step runs from the total before it to the total after it. Net resources closes the chart from zero.
+export const waterfall = [
+  ...WATERFALL_STEPS.reduce<{ key: string; label: string[]; value: number; from: number; to: number; kind: 'step' | 'total' }[]>(
+    (steps, step, i) => {
+      const value = familyLinesRun.lines[step.key] + 0;
+      const from = i === 0 ? 0 : steps[i - 1].to;
+      steps.push({ ...step, value, from, to: from + value, kind: i === 0 ? 'total' : 'step' });
+      return steps;
+    },
+    [],
+  ),
+  {
+    key: 'net_resources',
+    label: ['Net', 'resources'],
+    value: familyLinesRun.lines.net_resources,
+    from: 0,
+    to: familyLinesRun.lines.net_resources,
+    kind: 'total' as const,
+  },
+];
+
+// One row per model, in order of its middle answer, with every answer it gave.
+const shownRows = modelAnswersRun.rows.filter((row) => row.shown).sort((a, b) => a.median - b.median);
+
+const NUMBER_WORDS = ['None', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+export const countWord = (count: number) => NUMBER_WORDS[count] ?? String(count);
+
+// A year of monthly SNAP as the arithmetic a reader can check: 9 × $297 + 3 × $330 = $3,663.
+export function snapPath(months: number[]) {
+  const counts = new Map<number, number>();
+  for (const month of months) counts.set(month, (counts.get(month) ?? 0) + 1);
+  const terms = [...counts.entries()].map(([amount, count]) => `${count} × ${usd(amount)}`);
+  return `${terms.join(' + ')} = ${usd(months.reduce((sum, month) => sum + month, 0))}`;
+}
+
+export const modelAnswers = {
+  referenceSnap: modelAnswersRun.reference_snap,
+  referenceSnapWithoutSubsidy: modelAnswersRun.reference_snap_without_subsidy,
+  shownRows,
+  snap: modelAnswersRun.snap,
+  table: modelAnswersRun.table,
+  rows: modelAnswersRun.rows,
+};
+
+export const policyBench = {
+  snapshot: policyBenchRun.snapshot,
+  models: policyBenchRun.models,
+  households: policyBenchRun.households,
+  cards: policyBenchRun.cards,
+  topTwoSnap: policyBenchRun.top_two_snap,
+  bestScore: policyBenchRun.best_score,
+  bestScoreByApril: policyBenchRun.best_score_by_april,
+  namedScores: policyBenchRun.named_scores,
+};
+
+const districtPopulation = coverageRun.local_area_file.targets_by_family_and_level.find(
+  (row) => row.family === 'census_population' && row.geography_level === 'congressional_district',
+);
+if (!districtPopulation) throw new Error('No congressional district targets');
+
+export const coverage = {
+  ...coverageRun,
+  districtPopulationTargets: districtPopulation.n_targets,
+};
+
+// What Idaho's department posts for a new applicant in a family of three. analysis/household.py applies it.
+export const idahoPostedLimit = charts.posted_limits.ID.monthly;
 export const childCareBill = family.child_care_per_month * 12;
 export const modelVersion = charts.policyengine_us_version;
 export const modelCommit = charts.policyengine_us_commit.slice(0, 7);
@@ -49,6 +142,13 @@ function largestLoss(changes: Record<string, number | undefined>) {
 export const subsidyDrivenCliffs = cliffRanking.filter(
   (cliff) => largestLoss(cliff.changes) === 'child_care_subsidy',
 ).length;
+
+// The last $500 step at which a family already in the program still draws a subsidy.
+export function enrolledExit(code: string) {
+  const row = enrolledRun.rows.find((candidate) => candidate.code === code);
+  if (!row) throw new Error(`No enrolled run for ${code}`);
+  return row.enrolled.exit;
+}
 
 export function spreadAt(earnings: number) {
   const row = spreads.find((spread) => spread.earnings === earnings);

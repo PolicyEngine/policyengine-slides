@@ -25,7 +25,7 @@ from pypdf.generic import RectangleObject
 
 PAGE_WIDTH = 1080
 IMAGE_HEIGHT = 607.5
-SLIDES = 13
+SLIDES = 15
 POINTS_PER_PIXEL = PAGE_WIDTH / 1440
 
 DECK = "https://policyengine.org/slides/appam-2026"
@@ -33,33 +33,27 @@ METADATA = {"/Title": "PolicyEngine for state policy research", "/Author": "Max 
 
 # Slide number, then left, top, right and bottom in pixels at 1440x810, then the target.
 LINKS = [
-    (
-        6,
-        (864.16, 513.67, 1251.13, 537.17),
-        "https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml",
-    ),
-    (7, (348.97, 614.42, 558.56, 634.42), "https://www.policyengine.org/us/taxsim"),
-    (
-        8,
-        (87.32, 601.16, 545.53, 623.16),
-        "https://www.policyengine.org/us/child-poverty-impact-dashboard",
-    ),
-    (
-        9,
-        (64.0, 491.13, 325.09, 513.13),
-        "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0",
-    ),
-    (9, (814.66, 655.78, 1071.06, 677.78), "https://app.policyengine.org/us/build"),
-    (12, (1121.77, 618.93, 1207.18, 640.93), "https://axiom.org"),
-    (13, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
-    (
-        13,
-        (331.52, 506.0, 714.55, 528.0),
-        "https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026",
-    ),
-    (13, (331.52, 542.0, 525.98, 564.0), "mailto:max@policyengine.org"),
-    (13, (853.52, 319.0, 1049.52, 515.0), DECK),
-    (13, (794.55, 527.0, 1108.48, 555.0), DECK),
+    (4, (1156.28, 641.59, 1259.28, 657.59), "https://policybench.org"),
+    (8, (864.16, 629.36, 1222.16, 651.36), "https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml"),
+    (10, (807.28, 278.25, 1010.28, 297.25), "https://www.policyengine.org/us/taxsim"),
+    (10, (807.28, 383.47, 1032.28, 402.47), "https://app.policyengine.org/us/build"),
+    (10, (1041.28, 383.47, 1268.28, 402.47), "https://www.policyengine.org/us/cliffwatch"),
+    (10, (807.28, 464.41, 1205.28, 483.41), "https://www.policyengine.org/us/child-poverty-impact-dashboard"),
+    (10, (807.28, 569.63, 1150.28, 588.63), "https://github.com/PolicyEngine/policyengine-claude"),
+    (10, (807.28, 650.56, 1117.28, 669.56), "https://github.com/PolicyEngine/policyengine-us"),
+    (11, (64, 491.14, 325, 513.14), "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0"),
+    (11, (814.64, 655.8, 1070.64, 677.8), "https://app.policyengine.org/us/build"),
+    (13, (1167, 343.09, 1321, 365.09), "https://github.com/PolicyEngine/microcosm/pull/1445"),
+    (13, (1167, 417.38, 1376, 439.38), "https://github.com/PolicyEngine/policyengine-us/pull/10640"),
+    (13, (1167, 463.42, 1374, 485.42), "https://github.com/PolicyEngine/policyengine-us/pull/10607"),
+    (13, (1167, 509.47, 1320, 531.47), "https://github.com/PolicyEngine/microcosm/pull/1453"),
+    (13, (1167, 583.75, 1320, 605.75), "https://github.com/PolicyEngine/microcosm/pull/1246"),
+    (14, (1123.16, 618.86, 1208.16, 640.86), "https://axiom.org"),
+    (15, (330.5, 434, 473.5, 455), "https://www.policyengine.org"),
+    (15, (330.5, 506, 715.5, 527), "https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026"),
+    (15, (330.5, 542, 526.5, 563), "mailto:max@policyengine.org"),
+    (15, (866.5, 331, 1038.5, 503), DECK),
+    (15, (795.5, 530, 1109.5, 551), DECK),
 ]
 
 # In pixels at 1440x810: how far inside its rectangle a link's ink may start or end

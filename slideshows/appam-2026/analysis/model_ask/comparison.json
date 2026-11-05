@@ -1,0 +1,572 @@
+{
+ "references": {
+  "with_subsidy": {
+   "federal_income_tax_before_refundable_credits": 0.0,
+   "federal_refundable_credits": 7129.58,
+   "payroll_tax": 3244.0,
+   "self_employment_tax": 0.0,
+   "state_income_tax_before_refundable_credits": 1260.0,
+   "state_refundable_credits": 2449.29,
+   "local_income_tax": 0.0,
+   "snap": 3663.0,
+   "ssi": 0.0,
+   "tanf": 0.0,
+   "head_wic_eligible": 0,
+   "child1_wic_eligible": 1,
+   "child2_wic_eligible": 1,
+   "head_medicaid_eligible": 0,
+   "child1_medicaid_eligible": 1,
+   "child2_medicaid_eligible": 1,
+   "head_chip_eligible": 0,
+   "child1_chip_eligible": 0,
+   "child2_chip_eligible": 0,
+   "head_medicare_eligible": 0,
+   "child1_medicare_eligible": 0,
+   "child2_medicare_eligible": 0,
+   "head_head_start_eligible": 0,
+   "child1_head_start_eligible": 0,
+   "child2_head_start_eligible": 1,
+   "head_early_head_start_eligible": 0,
+   "child1_early_head_start_eligible": 1,
+   "child2_early_head_start_eligible": 0,
+   "free_school_meals_eligible": 0,
+   "reduced_price_school_meals_eligible": 0
+  },
+  "without_subsidy": {
+   "federal_income_tax_before_refundable_credits": 0.0,
+   "federal_refundable_credits": 7323.23,
+   "payroll_tax": 3244.0,
+   "self_employment_tax": 0.0,
+   "state_income_tax_before_refundable_credits": 1260.0,
+   "state_refundable_credits": 2449.29,
+   "local_income_tax": 0.0,
+   "snap": 8739.0,
+   "ssi": 0.0,
+   "tanf": 0.0,
+   "head_wic_eligible": 0,
+   "child1_wic_eligible": 1,
+   "child2_wic_eligible": 1,
+   "head_medicaid_eligible": 0,
+   "child1_medicaid_eligible": 1,
+   "child2_medicaid_eligible": 1,
+   "head_chip_eligible": 0,
+   "child1_chip_eligible": 0,
+   "child2_chip_eligible": 0,
+   "head_medicare_eligible": 0,
+   "child1_medicare_eligible": 0,
+   "child2_medicare_eligible": 0,
+   "head_head_start_eligible": 0,
+   "child1_head_start_eligible": 0,
+   "child2_head_start_eligible": 1,
+   "head_early_head_start_eligible": 0,
+   "child1_early_head_start_eligible": 1,
+   "child2_early_head_start_eligible": 0,
+   "free_school_meals_eligible": 0,
+   "reduced_price_school_meals_eligible": 0
+  }
+ },
+ "rows": [
+  {
+   "model": "gpt-6-sol",
+   "served": "gpt-6-sol",
+   "answered": true,
+   "tools": [],
+   "snap": 4000.0,
+   "snap_explanation": "Estimated annual SNAP after earned-income, child-care, and shelter deductions on $40,000 of wages; value = 4000",
+   "right": 23,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     7100.0,
+     7129.58
+    ],
+    [
+     "payroll_tax",
+     3300.0,
+     3244.0
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1250.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     2520.0,
+     2449.29
+    ],
+    [
+     "snap",
+     4000.0,
+     3663.0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 7100.0,
+    "payroll_tax": 3300.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1250.0,
+    "state_refundable_credits": 2520.0,
+    "local_income_tax": 0.0,
+    "snap": 4000.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "gpt-6.1-sol",
+   "served": "gpt-6.1-sol",
+   "answered": true,
+   "tools": [],
+   "snap": 3240.0,
+   "snap_explanation": "Estimated SNAP is 270 monthly after the earned-income deduction, standard deduction, and capped excess-shelter deduction; subsidized child care has no parent fee. value = 3240",
+   "right": 25,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     6738.23,
+     7129.58
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1380.0,
+     1260.0
+    ],
+    [
+     "snap",
+     3240.0,
+     3663.0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 6738.23,
+    "payroll_tax": 3244.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1380.0,
+    "state_refundable_credits": 2449.29,
+    "local_income_tax": 0.0,
+    "snap": 3240.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "served": "gpt-6.1-terra",
+   "answered": true,
+   "tools": [],
+   "snap": 721.0,
+   "snap_explanation": "The estimated annual SNAP benefit uses the household's earnings, childcare expenses, rent, heating expense, and applicable deductions; the result is sensitive to how subsidized childcare costs are counted. value = 721",
+   "right": 21,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     6394.0,
+     7129.58
+    ],
+    [
+     "payroll_tax",
+     3060.0,
+     3244.0
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1360.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     2312.0,
+     2449.29
+    ],
+    [
+     "snap",
+     721.0,
+     3663.0
+    ],
+    [
+     "child1_early_head_start_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child2_head_start_eligible",
+     0.0,
+     1
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 6394.0,
+    "payroll_tax": 3060.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1360.0,
+    "state_refundable_credits": 2312.0,
+    "local_income_tax": 0.0,
+    "snap": 721.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "gpt-6-astra",
+   "served": "gpt-6-astra",
+   "answered": true,
+   "tools": [],
+   "snap": 3240.0,
+   "snap_explanation": "Estimated SNAP is $270 monthly using the three-person maximum allotment, earned-income and standard deductions, and the capped excess-shelter deduction; childcare is assumed fully subsidized. value = 3240",
+   "right": 26,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     6740.34,
+     7129.58
+    ],
+    [
+     "snap",
+     3240.0,
+     3663.0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 6740.34,
+    "payroll_tax": 3244.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1260.0,
+    "state_refundable_credits": 2450.14,
+    "local_income_tax": 0.0,
+    "snap": 3240.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "gpt-6-luna",
+   "served": "gpt-6-luna",
+   "answered": true,
+   "tools": [],
+   "snap": 9216.0,
+   "snap_explanation": "Estimated annual SNAP at the three-person maximum after the household\u2019s substantial dependent care and shelter deductions. value = 9216",
+   "right": 20,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     7045.0,
+     7129.58
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1340.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     1458.0,
+     2449.29
+    ],
+    [
+     "snap",
+     9216.0,
+     3663.0
+    ],
+    [
+     "child1_medicaid_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child1_chip_eligible",
+     1.0,
+     0
+    ],
+    [
+     "child2_medicaid_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child2_chip_eligible",
+     1.0,
+     0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 7045.0,
+    "payroll_tax": 3244.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1340.0,
+    "state_refundable_credits": 1458.0,
+    "local_income_tax": 0.0,
+    "snap": 9216.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "gpt-5.6-terra",
+   "served": "gpt-5.6-terra",
+   "answered": true,
+   "tools": [],
+   "snap": 3838.2,
+   "snap_explanation": "Massachusetts broad-based categorical eligibility applies; after the earned-income, standard, rent, and heating-and-cooling utility deductions, annual SNAP is $3,838.20. value = 3838.2",
+   "right": 22,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     8837.38,
+     7129.58
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1360.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     3574.95,
+     2449.29
+    ],
+    [
+     "snap",
+     3838.2,
+     3663.0
+    ],
+    [
+     "child1_early_head_start_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child2_head_start_eligible",
+     0.0,
+     1
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 8837.38,
+    "payroll_tax": 3244.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1360.0,
+    "state_refundable_credits": 3574.95,
+    "local_income_tax": 0.0,
+    "snap": 3838.2,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "claude-opus-4-7",
+   "served": "claude-opus-4-7",
+   "answered": true,
+   "tools": [],
+   "snap": 4500.0,
+   "snap_explanation": "HH3 gross $3,333/mo. With childcare subsidy received, dep care deduction only on copay (~$333/mo). After 20% EID, standard deduction ~$210, dep care, and shelter deduction capped ~$745, net income ~$1,378. Benefit = max allotment ~$785 - 30% \u00d7 net = ~$372/mo \u00d7 12. value = 4500",
+   "right": 22,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     7347.0,
+     7129.58
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     900.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     2459.0,
+     2449.29
+    ],
+    [
+     "snap",
+     4500.0,
+     3663.0
+    ],
+    [
+     "child1_early_head_start_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child2_head_start_eligible",
+     0.0,
+     1
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 7347.0,
+    "payroll_tax": 3244.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 900.0,
+    "state_refundable_credits": 2459.0,
+    "local_income_tax": 0.0,
+    "snap": 4500.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "claude-opus-5-5",
+   "served": "claude-opus-5-5",
+   "answered": true,
+   "tools": [],
+   "snap": 2844.0,
+   "snap_explanation": "Household of 3 with gross income of $3,333/month. Subtract the 20% earned income deduction and the $209 standard deduction, giving $2,457.67. No dependent care deduction applies because care is subsidized. Shelter costs are $1,200 rent plus the heating SUA. Excess shelter deduction is about $631, so net income is about $1,826.5. Benefit is $785 - 30% x $1,826.5, about $237/month. value = 2844",
+   "right": 25,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     6738.2,
+     7129.58
+    ],
+    [
+     "payroll_tax",
+     3060.0,
+     3244.0
+    ],
+    [
+     "snap",
+     2844.0,
+     3663.0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 6738.2,
+    "payroll_tax": 3060.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1260.0,
+    "state_refundable_credits": 2449.28,
+    "local_income_tax": 0.0,
+    "snap": 2844.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "served": "claude-sonnet-5-5",
+   "answered": true,
+   "tools": [],
+   "snap": 11100.0,
+   "snap_explanation": "Household of 3 passes the gross income test. Net income after the earned income deduction, standard deduction, dependent care deduction and capped shelter deduction is about 213 per month. The benefit is roughly the max allotment minus 30% of net income, about 925 per month, or about 11,100 per year. value = 11100",
+   "right": 21,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     7320.0,
+     7129.58
+    ],
+    [
+     "payroll_tax",
+     3060.0,
+     3244.0
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     1236.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     2448.0,
+     2449.29
+    ],
+    [
+     "snap",
+     11100.0,
+     3663.0
+    ],
+    [
+     "child1_early_head_start_eligible",
+     0.0,
+     1
+    ],
+    [
+     "child2_head_start_eligible",
+     0.0,
+     1
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 7320.0,
+    "payroll_tax": 3060.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 1236.0,
+    "state_refundable_credits": 2448.0,
+    "local_income_tax": 0.0,
+    "snap": 11100.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "served": "claude-haiku-5-5",
+   "answered": true,
+   "tools": [],
+   "snap": 6812.0,
+   "snap_explanation": "Net income after the 20% earned income deduction, standard deduction, childcare deduction, and capped excess shelter (with heating/cooling standard utility allowance) gives about $568 per month, which is the 3-person maximum allotment less 30% of net income. value = 6812",
+   "right": 23,
+   "of": 28,
+   "wrong": [
+    [
+     "federal_refundable_credits",
+     7046.0,
+     7129.58
+    ],
+    [
+     "payroll_tax",
+     3095.0,
+     3244.0
+    ],
+    [
+     "state_income_tax_before_refundable_credits",
+     912.0,
+     1260.0
+    ],
+    [
+     "state_refundable_credits",
+     1458.0,
+     2449.29
+    ],
+    [
+     "snap",
+     6812.0,
+     3663.0
+    ]
+   ],
+   "amounts": {
+    "federal_income_tax_before_refundable_credits": 0.0,
+    "federal_refundable_credits": 7046.0,
+    "payroll_tax": 3095.0,
+    "self_employment_tax": 0.0,
+    "state_income_tax_before_refundable_credits": 912.0,
+    "state_refundable_credits": 1458.0,
+    "local_income_tax": 0.0,
+    "snap": 6812.0,
+    "ssi": 0.0,
+    "tanf": 0.0
+   }
+  }
+ ],
+ "prompt_sha256_prefix": "d4d40386",
+ "ended": "2026-11-05T12:38:59Z"
+}

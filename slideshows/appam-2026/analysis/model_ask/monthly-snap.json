@@ -1,0 +1,228 @@
+{
+ "with_subsidy": {
+  "months": {
+   "2026-01": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-02": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-03": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-04": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-05": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-06": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-07": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-08": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-09": {
+    "snap": 297.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 1626.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 488.0
+   },
+   "2026-10": {
+    "snap": 330.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 1593.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 478.0
+   },
+   "2026-11": {
+    "snap": 330.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 1593.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 478.0
+   },
+   "2026-12": {
+    "snap": 330.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 1593.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 88.14,
+    "snap_expected_contribution": 478.0
+   }
+  },
+  "annual": 3663.0
+ },
+ "without_subsidy": {
+  "months": {
+   "2026-01": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-02": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-03": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-04": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-05": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-06": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-07": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-08": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-09": {
+    "snap": 720.0,
+    "snap_max_allotment": 785.0,
+    "snap_net_income": 214.0,
+    "snap_standard_deduction": 209.0,
+    "snap_excess_shelter_expense_deduction": 744.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 65.0
+   },
+   "2026-10": {
+    "snap": 753.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 181.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 55.0
+   },
+   "2026-11": {
+    "snap": 753.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 181.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 55.0
+   },
+   "2026-12": {
+    "snap": 753.0,
+    "snap_max_allotment": 808.0,
+    "snap_net_income": 181.0,
+    "snap_standard_deduction": 217.0,
+    "snap_excess_shelter_expense_deduction": 769.0,
+    "snap_dependent_care_deduction": 1500.0,
+    "snap_expected_contribution": 55.0
+   }
+  },
+  "annual": 8739.0
+ }
+}

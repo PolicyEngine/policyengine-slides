@@ -1,6 +1,6 @@
-"""Run the code on slides 7 and 8 as the slides print it.
+"""Run the code on slides 9 and 10 as the slides print it.
 
-Slide 7's loop reads a CSV of the fixed sample. Slide 8's reform dictionary runs on
+Slide 10's loop reads a CSV of the fixed sample. Slide 9's reform dictionary runs on
 the Massachusetts rows of the local-area file. content.test.ts compares the results
 with the deck's own runs.
 """
@@ -23,7 +23,7 @@ STATE_FIPS = {code: ALL_STATES[code] for code in ("AR", "MD")}
 MASSACHUSETTS_FIPS = 25
 
 
-def slide_7(sample_path):
+def run_loop(sample_path):
     survey = pd.read_pickle(sample_path).drop(
         columns=[f"{name}__{SAMPLE_YEAR}" for name in FINER_GEOGRAPHY], errors="ignore"
     )
@@ -51,7 +51,7 @@ def state_income_tax(sim):
     )
 
 
-def slide_8(folder):
+def run_reform(folder):
     load_state(MASSACHUSETTS_FIPS, Path(folder))
     massachusetts = Dataset.from_dataframe(state_file(MASSACHUSETTS_FIPS), DATA_YEAR)
     reform = Reform.from_dict({
@@ -70,8 +70,8 @@ def main(commit, sample_path, folder):
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": commit,
-        "slide_7_snap_eligible_share": slide_7(sample_path),
-        "slide_8_state_cost": slide_8(folder),
+        "loop_snap_eligible_share": run_loop(sample_path),
+        "reform_state_cost": run_reform(folder),
     }
     target = Path(__file__).parent.parent / "data" / "slide_code_check.json"
     target.write_text(json.dumps(payload, indent=1) + "\n")

@@ -1,0 +1,86 @@
+{
+  "source": "https://policybench.org",
+  "snapshot": "2026-10-27",
+  "models": 51,
+  "households": 100,
+  "outputs": 18,
+  "cards": [
+    {
+      "key": "state_refundable_credits",
+      "label": "State refundable credits",
+      "positive_within_10": 17.7,
+      "positive_wrong_by_more_than_10": 82.3
+    },
+    {
+      "key": "snap",
+      "label": "SNAP",
+      "positive_within_10": 34.9,
+      "positive_wrong_by_more_than_10": 65.1
+    },
+    {
+      "key": "federal_income_tax_before_refundable_credits",
+      "label": "Federal tax before refundable credits",
+      "positive_within_10": 46.3,
+      "positive_wrong_by_more_than_10": 53.7
+    },
+    {
+      "key": "state_income_tax_before_refundable_credits",
+      "label": "State tax before refundable credits",
+      "positive_within_10": 48.2,
+      "positive_wrong_by_more_than_10": 51.8
+    },
+    {
+      "key": "federal_refundable_credits",
+      "label": "Federal refundable credits",
+      "positive_within_10": 53.1,
+      "positive_wrong_by_more_than_10": 46.9
+    },
+    {
+      "key": "payroll_tax",
+      "label": "Payroll tax",
+      "positive_within_10": 88.7,
+      "positive_wrong_by_more_than_10": 11.3
+    }
+  ],
+  "scores_source": "PolicyBench dashboard-data.json, October 23, 2026 copy",
+  "scores_models": 50,
+  "best_score": {
+    "model": "gpt-6-sol",
+    "exact": 95.2,
+    "released": "2026-09-22"
+  },
+  "top_two_snap": [
+    {
+      "model": "gpt-6-sol",
+      "wrong": 7,
+      "of": 13
+    },
+    {
+      "model": "claude-opus-5.5",
+      "wrong": 6,
+      "of": 13
+    }
+  ],
+  "best_score_by_april": {
+    "model": "gpt-5.5",
+    "exact": 87.9,
+    "released": "2026-04-23"
+  },
+  "named_scores": {
+    "gpt-6-sol": {
+      "model": "gpt-6-sol",
+      "exact": 95.2,
+      "released": "2026-09-22"
+    },
+    "claude-opus-5.5": {
+      "model": "claude-opus-5.5",
+      "exact": 94.1,
+      "released": "2026-09-21"
+    },
+    "gpt-6.1-sol": {
+      "model": "gpt-6.1-sol",
+      "exact": 90.1,
+      "released": "2026-09-29"
+    }
+  }
+}

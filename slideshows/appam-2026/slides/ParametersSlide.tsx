@@ -1,5 +1,6 @@
 import CodeBlock from '@/components/content/CodeBlock';
 import Frame from './Frame';
+import { familyLines, massachusetts, usd } from '../content';
 import styles from './deck.module.css';
 
 const YAML = `description: Massachusetts provides this amount for each
@@ -18,19 +19,34 @@ metadata:
       href: https://malegislature.gov/Laws/SessionLaws/...`;
 
 export default function ParametersSlide() {
+  const { doubled_credit: doubled, lines } = familyLines;
+  const rows = [
+    { label: `Credit today, two dependents at $${massachusetts.current}`, value: usd(familyLines.detail.ma_child_and_family_credit) },
+    { label: `Credit at $${massachusetts.reformed} per dependent`, value: usd(doubled.ma_child_and_family_credit) },
+    { label: 'Net resources today', value: usd(lines.net_resources) },
+    { label: 'Net resources with the doubled credit', value: usd(doubled.lines.net_resources) },
+  ];
   return (
-    <Frame title="We record when each value took effect and cite its sources">
+    <Frame title={`Doubling the Massachusetts child and family credit would give this family ${usd(doubled.lines.net_resources - lines.net_resources)} more`}>
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <CodeBlock title="gov/states/ma/tax/income/credits/child_and_family/amount.yaml (excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.95vh, 24px)' }}>
             {YAML}
           </pre>
         </CodeBlock>
-        <div className="flex-[2] space-y-[3vh]" style={{ fontSize: '1.08em' }}>
+        <div className="min-w-0 flex-[2] space-y-[2.4vh]">
           <p>
-            The Massachusetts Legislature raised this credit to $310 for 2023 and $440 for 2024, and
-            lifted its two-dependent cap.
+            We record when each value took effect and cite its sources. The Massachusetts Legislature raised this credit
+            to $310 for 2023 and $440 for 2024, and lifted its two-dependent cap.
           </p>
+          <dl>
+            {rows.map((row) => (
+              <div key={row.label} className="flex items-baseline justify-between gap-4 py-[0.6vh]">
+                <dt>{row.label}</dt>
+                <dd className="whitespace-nowrap font-semibold tabular-nums">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
           <p>
             Read this file and the rest of our parameters at{' '}
             <a

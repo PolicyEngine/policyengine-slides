@@ -1,18 +1,20 @@
 import { SlideshowConfig } from '@/lib/types';
 import { speakers } from '@/lib/speakers';
+import AnswersSlide from './slides/AnswersSlide';
 import AxiomSlide from './slides/AxiomSlide';
 import CliffsSlide from './slides/CliffsSlide';
+import CoverageSlide from './slides/CoverageSlide';
 import CoverSlide from './slides/CoverSlide';
 import EndSlide from './slides/EndSlide';
-import MicrodataSlide from './slides/MicrodataSlide';
+import EveryProgramSlide from './slides/EveryProgramSlide';
+import InterfacesSlide from './slides/InterfacesSlide';
 import OneFamilySlide from './slides/OneFamilySlide';
 import ParametersSlide from './slides/ParametersSlide';
+import QuestionSlide from './slides/QuestionSlide';
 import ReformSlide from './slides/ReformSlide';
-import ScopeSlide from './slides/ScopeSlide';
-import ToolsSlide from './slides/ToolsSlide';
+import WaterfallSlide from './slides/WaterfallSlide';
 import WebAppsSlide from './slides/WebAppsSlide';
-import WhatItDoesSlide from './slides/WhatItDoesSlide';
-import WhichLinesSlide from './slides/WhichLinesSlide';
+import WorkingOnSlide from './slides/WorkingOnSlide';
 
 export const appam2026Config: SlideshowConfig = {
   id: 'appam-2026',
@@ -26,16 +28,18 @@ export const appam2026Config: SlideshowConfig = {
   clickerKeys: true,
   slides: [
     CoverSlide,
-    WhatItDoesSlide,
+    QuestionSlide,
+    { component: AnswersSlide, builds: 2, exportBuilds: 1 },
+    EveryProgramSlide,
+    WaterfallSlide,
     OneFamilySlide,
-    WhichLinesSlide,
     CliffsSlide,
     ParametersSlide,
-    MicrodataSlide,
     ReformSlide,
+    InterfacesSlide,
     { component: WebAppsSlide, builds: 2, exportBuilds: 1 },
-    ToolsSlide,
-    ScopeSlide,
+    CoverageSlide,
+    WorkingOnSlide,
     AxiomSlide,
     EndSlide,
   ],

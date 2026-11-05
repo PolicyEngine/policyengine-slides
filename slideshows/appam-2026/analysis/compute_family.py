@@ -29,8 +29,13 @@ def run_state(state):
 
 
 def main():
+    # compute_family.py <commit> [STATE ...] reruns the named states and keeps the rest of the file.
+    only = sys.argv[2:]
+    path = Path(__file__).parent.parent / "data" / "family.json"
     with Pool(WORKERS) as pool:
-        states = dict(pool.map(run_state, hh.STATES))
+        states = dict(pool.map(run_state, only or hh.STATES))
+    if only:
+        states = {**json.loads(path.read_text())["states"], **states}
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": sys.argv[1],
@@ -41,11 +46,11 @@ def main():
             "rent_per_month": hh.RENT_PER_MONTH,
             "child_care_per_month": hh.CHILD_CARE_PER_MONTH,
         },
+        "posted_limits": {"ID": {"monthly": hh.IDAHO_POSTED_MONTHLY_LIMIT}},
         "earnings": list(range(EARNINGS_MIN, EARNINGS_MAX + 1, EARNINGS_STEP)),
         "counties": {state: hh.COUNTIES[state]["county"] for state in hh.STATES},
         "states": states,
     }
-    path = Path(__file__).parent.parent / "data" / "family.json"
     path.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
 
 

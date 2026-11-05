@@ -2,7 +2,7 @@
 
 sample_families.py keeps input variables and ids, so the model computes everything
 else. This script sorts the rest of the default file's columns, rebuilds the sample
-with the computed variables' stored values, and reruns the states it names. Slide 7's
+with the computed variables' stored values, and reruns the states it names. Slide 10's
 two shares must not move.
 """
 
