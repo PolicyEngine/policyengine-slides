@@ -1,6 +1,7 @@
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { getAllSlideshowMetadata } from '@/lib/slideshows';
 import { flattenSlides } from '@/lib/types';
 import { appam2026Config } from '../config';
 import WebAppsSlide from './WebAppsSlide';
@@ -63,6 +64,11 @@ describe('slide 9 steps', () => {
     expect(steps(false).map((step) => step.buildStep)).toEqual([1, 2]);
     expect(flattenSlides(appam2026Config.slides, { exportMode: true })).toHaveLength(appam2026Config.slides.length);
   });
+
+  it('counts 13 slides on the index page', () => {
+    const deck = getAllSlideshowMetadata().find((meta) => meta.id === appam2026Config.id);
+    expect(deck?.slideCount).toBe(13);
+  });
 });
 
 describe('Walkthrough', () => {
@@ -95,6 +101,8 @@ describe('Walkthrough', () => {
   it('holds the last frame when the video ends', async () => {
     await renderStep(2);
     await fire('playing');
+    paused = true;
+    await fire('pause');
     await fire('ended');
     expect(shown()).toBe(true);
   });
@@ -113,8 +121,14 @@ describe('Walkthrough', () => {
   });
 
   it('keeps the screenshots when the browser refuses to play', async () => {
-    play.mockRejectedValueOnce(new Error('NotAllowedError'));
+    let handled: ReturnType<typeof vi.spyOn> | undefined;
+    play.mockImplementationOnce(() => {
+      const refused = Promise.reject(new Error('NotAllowedError'));
+      handled = vi.spyOn(refused, 'catch');
+      return refused;
+    });
     await renderStep(2);
+    expect(handled).toHaveBeenCalledTimes(1);
     expect(shown()).toBe(false);
   });
 

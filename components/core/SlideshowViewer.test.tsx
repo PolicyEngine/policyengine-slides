@@ -127,8 +127,10 @@ describe("SlideshowViewer deep links", () => {
 });
 
 describe("SlideshowViewer clicker keys", () => {
+  const clickerDeck = { ...config, clickerKeys: true };
+
   it("moves forward on PageDown and back on PageUp", async () => {
-    await renderAt("/slides/demo?slide=2");
+    await renderAt("/slides/demo?slide=2", clickerDeck);
     await press("PageDown");
     expect(counterText()).toBe(`4 / ${TOTAL_STEPS}`);
     await press("PageUp");
@@ -137,12 +139,22 @@ describe("SlideshowViewer clicker keys", () => {
   });
 
   it("stops at the ends", async () => {
-    await renderAt("/slides/demo");
+    await renderAt("/slides/demo", clickerDeck);
     await press("PageUp");
     expect(counterText()).toBe(`1 / ${TOTAL_STEPS}`);
     await press("End");
     await press("PageDown");
     expect(counterText()).toBe(`${TOTAL_STEPS} / ${TOTAL_STEPS}`);
+  });
+
+  it.each(["PageDown", "PageUp"])("leaves %s to the browser in a deck without the option", async (key) => {
+    await renderAt("/slides/demo?slide=2");
+    const event = new KeyboardEvent("keydown", { key, cancelable: true });
+    await act(async () => {
+      window.dispatchEvent(event);
+    });
+    expect(event.defaultPrevented).toBe(false);
+    expect(counterText()).toBe(`3 / ${TOTAL_STEPS}`);
   });
 });
 

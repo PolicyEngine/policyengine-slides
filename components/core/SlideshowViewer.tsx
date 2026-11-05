@@ -56,11 +56,10 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Presentation clickers send PageDown and PageUp.
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      if (e.key === 'ArrowRight' || e.key === ' ' || (config.clickerKeys && e.key === 'PageDown')) {
         e.preventDefault();
         setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      } else if (e.key === 'ArrowLeft' || (config.clickerKeys && e.key === 'PageUp')) {
         e.preventDefault();
         setCurrentStep((prev) => Math.max(prev - 1, 0));
       } else if (e.key === 'Home') {
@@ -81,7 +80,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [totalSteps]);
+  }, [totalSteps, config.clickerKeys]);
 
   const handleMainClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;

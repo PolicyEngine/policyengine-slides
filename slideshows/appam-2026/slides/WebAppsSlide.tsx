@@ -12,7 +12,7 @@ const apps = [
     height: 661,
     alt: 'CliffWatch’s chart of a household’s net income as its wages rise, with red markers on three cliffs',
     caption:
-      'Enter a household to see where a raise leaves it with less. For example, we entered a single parent of two in Cambridge. CliffWatch counts health coverage in net income.',
+      'Enter a household to see where a raise leaves it with less. For example, we entered a single parent of two in Massachusetts. CliffWatch counts health coverage in net income.',
   },
   {
     address: 'app.policyengine.org/us/build',

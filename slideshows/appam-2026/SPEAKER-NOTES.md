@@ -6,12 +6,12 @@ Thirteen slides in about 11 and a half minutes.
 
 ## Before presenting
 
-- Send Cynthia's team the link to this deck, policyengine.org/slides/appam-2026, by Wednesday evening, November 4. If the room's laptop won't have internet, send them the PDF on Thursday morning.
-- Before Thursday, scan slide 13's QR code and check that it opens this deck.
-- Before Thursday, run a report in Build with the credit at $880 and check that it finishes.
-- About 15 minutes before the session, click the CliffWatch address on slide 9 to open the Cambridge family's chart, which takes about 20 seconds to appear. If it fails, try again a minute later, and if it still fails, leave the live site out and rely on slide 9's recording.
+- If the room's laptop won't have internet, send Cynthia's team the PDF on Thursday morning.
+- Before the session, scan slide 13's QR code and check that it opens this deck.
+- Before the session, run a report in Build with the credit at $880 and the recording's Nationwide population, and check that it finishes.
+- About 15 minutes before the session, click the CliffWatch address on slide 9 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 9's recording doesn't depend on it.
 - Then press next on slide 9 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
-- Keep these notes on your phone and the PDF on your laptop. Present from the live deck, and if the network fails, present from the PDF.
+- Keep these notes on your phone and the PDF on your laptop. Present from the live deck at policyengine.org/slides/appam-2026, and if the network fails, present from the PDF.
 
 ## 1. PolicyEngine for state policy research (0:00, 15 seconds)
 
@@ -69,7 +69,7 @@ We also built two web tools that need no code.
 
 *Press next to play the recording, which runs 47 seconds with no sound, and talk over it.*
 
-CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Cambridge loses the state's cash assistance, TAFDC, when earnings pass $18,000. We cut about 20 seconds of calculating from the recording.
+CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
 In Build, you can open the same Massachusetts credit, set it to $880 and run a report.
 
@@ -99,4 +99,6 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 **Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
 
-**Why does CliffWatch's net income exceed slide 3's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. The Cambridge family also pays nothing for child care, and slide 3's family pays $1,500 a month before any subsidy.
+**Why does CliffWatch's net income exceed slide 3's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 9's family also pays nothing for child care, and slide 3's family pays $1,500 a month before any subsidy.
+
+**Does CliffWatch use local premiums?** CliffWatch passes PolicyEngine US the state and no county, so in Massachusetts the model computes premium tax credits from Barnstable County's benchmark plan.
