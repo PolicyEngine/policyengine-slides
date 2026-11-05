@@ -1,4 +1,5 @@
 import Frame from './Frame';
+import styles from './deck.module.css';
 
 const rows = [
   {
@@ -29,8 +30,8 @@ const additions = [
 export default function ToolsSlide() {
   return (
     <Frame title="Research questions and the tools that answer them">
-      <div className="flex h-full flex-col justify-between gap-[2vh]">
-        <table className="w-full border-collapse text-left">
+      <div className={`flex h-full flex-col justify-between gap-[2vh] ${styles.flow}`}>
+        <table className={`w-full border-collapse text-left ${styles.questions}`}>
           <thead>
             <tr className="border-b-2 border-gray-300 text-gray-700" style={{ fontSize: '0.85em' }}>
               <th className="w-[38%] py-[0.6vh] pr-[3vh] font-semibold">Question</th>
@@ -48,7 +49,7 @@ export default function ToolsSlide() {
         </table>
         <div>
           <h2 className="mb-[1.2vh] font-semibold text-pe-dark">What PolicyEngine adds</h2>
-          <div className="grid grid-cols-4 gap-[2.5vh]">
+          <div className={`grid grid-cols-4 gap-[2.5vh] ${styles.flow}`}>
             {additions.map((addition) => (
               <div key={addition.title} className="content-card p-[1.8vh]">
                 <h3 className="font-semibold text-pe-dark">{addition.title}</h3>

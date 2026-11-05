@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { resolveImageSrc } from '@/lib/base-path-image';
 import { isExportMode } from '@/lib/slide-url';
+import styles from './deck.module.css';
 
 const SOURCE = resolveImageSrc(
   '/videos/appam-2026/walkthrough.mp4',
@@ -34,7 +35,7 @@ export default function Walkthrough({ play }: { play: boolean }) {
 
   return (
     <div
-      className="absolute inset-x-0 top-0 bottom-20 z-10 bg-white"
+      className={`absolute inset-x-0 top-0 bottom-20 z-10 bg-white ${styles.walkthrough}`}
       style={{ visibility: shown ? 'visible' : 'hidden' }}
     >
       <video
