@@ -9,7 +9,7 @@ function range(low: number, high: number) {
 export default function EveryProgramSlide() {
   const { cards, households, models } = policyBench;
   return (
-    <Frame title="Most SNAP and state credit answers land more than 10% from PolicyEngine’s, and few payroll tax answers do">
+    <Frame title="On PolicyBench, most SNAP and state credit answers land more than 10% from PolicyEngine’s">
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[5]">
           <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the seven newest versions, five calls each</h2>

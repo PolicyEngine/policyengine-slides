@@ -33,14 +33,14 @@ METADATA = {"/Title": "PolicyEngine for state policy research", "/Author": "Max 
 
 # Slide number, then left, top, right and bottom in pixels at 1440x810, then the target.
 LINKS = [
-    (4, (1255.28, 619.31, 1358.28, 635.31), "https://policybench.org"),
+    (4, (1156.28, 641.59, 1259.28, 657.59), "https://policybench.org"),
     (8, (864.16, 629.36, 1222.16, 651.36), "https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml"),
-    (10, (807.28, 257.39, 1021.28, 277.39), "https://www.policyengine.org/us/taxsim"),
-    (10, (807.28, 373.47, 1042.28, 393.47), "https://app.policyengine.org/us/build"),
-    (10, (1052.28, 373.47, 1292.28, 393.47), "https://www.policyengine.org/us/cliffwatch"),
-    (10, (807.28, 463.56, 1226.28, 483.56), "https://www.policyengine.org/us/child-poverty-impact-dashboard"),
-    (10, (807.28, 579.64, 1172.28, 599.64), "https://github.com/PolicyEngine/policyengine-claude"),
-    (10, (807.28, 669.73, 1138.28, 689.73), "https://github.com/PolicyEngine/policyengine-us"),
+    (10, (807.28, 278.25, 1010.28, 297.25), "https://www.policyengine.org/us/taxsim"),
+    (10, (807.28, 383.47, 1032.28, 402.47), "https://app.policyengine.org/us/build"),
+    (10, (1041.28, 383.47, 1268.28, 402.47), "https://www.policyengine.org/us/cliffwatch"),
+    (10, (807.28, 464.41, 1205.28, 483.41), "https://www.policyengine.org/us/child-poverty-impact-dashboard"),
+    (10, (807.28, 569.63, 1150.28, 588.63), "https://github.com/PolicyEngine/policyengine-claude"),
+    (10, (807.28, 650.56, 1117.28, 669.56), "https://github.com/PolicyEngine/policyengine-us"),
     (11, (64, 491.14, 325, 513.14), "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0"),
     (11, (814.64, 655.8, 1070.64, 677.8), "https://app.policyengine.org/us/build"),
     (13, (1167, 343.09, 1321, 365.09), "https://github.com/PolicyEngine/microcosm/pull/1445"),

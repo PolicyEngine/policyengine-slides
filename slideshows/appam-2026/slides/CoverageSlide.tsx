@@ -32,7 +32,7 @@ export default function CoverageSlide() {
   return (
     <Frame title="We model federal and state taxes and benefits and build microdata from surveys and official totals">
       <div className={`flex h-full items-start gap-[5vh] pt-[1vh] ${styles.flow}`}>
-        <div className="min-w-0 flex-[4]">
+        <div className="min-w-0 flex-[3]">
           <h2 className="mb-[1.4vh] font-semibold text-pe-dark">Policies</h2>
           <ul className="space-y-[1.8vh]">
             {policies.map((policy) => (
@@ -42,7 +42,7 @@ export default function CoverageSlide() {
         </div>
         <div className="min-w-0 flex-[5]">
           <h2 className="mb-[1.4vh] font-semibold text-pe-dark">Data</h2>
-          <dl className="space-y-[1.4vh]">
+          <dl className="space-y-[1vh]" style={{ fontSize: '0.94em' }}>
             {data.map((entry) => (
               <div key={entry.lead}>
                 <dt className="font-semibold">{entry.lead}</dt>
