@@ -13,9 +13,12 @@ interface SlideshowViewerProps {
 
 function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   const searchParams = useSearchParams();
-  const steps = useMemo(() => flattenSlides(config.slides), [config.slides]);
-  const totalSteps = steps.length;
   const exportMode = isExportMode(searchParams);
+  const steps = useMemo(
+    () => flattenSlides(config.slides, { exportMode }),
+    [config.slides, exportMode],
+  );
+  const totalSteps = steps.length;
 
   // Read the deep-link step once. After that, currentStep owns the URL: the
   // effect below writes it with replaceState, and Next mirrors that write back
@@ -53,10 +56,10 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
+      if (e.key === 'ArrowRight' || e.key === ' ' || (config.clickerKeys && e.key === 'PageDown')) {
         e.preventDefault();
         setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft' || (config.clickerKeys && e.key === 'PageUp')) {
         e.preventDefault();
         setCurrentStep((prev) => Math.max(prev - 1, 0));
       } else if (e.key === 'Home') {
@@ -77,7 +80,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [totalSteps]);
+  }, [totalSteps, config.clickerKeys]);
 
   const handleMainClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;

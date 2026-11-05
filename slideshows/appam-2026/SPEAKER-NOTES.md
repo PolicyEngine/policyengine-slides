@@ -2,13 +2,15 @@
 
 State Policy Impacts on Family Resources: Tools to Improve Policy Analysis. Thursday, November 5, 2026, 10:15 to 11:45am ET, Wellesley room, Boston. Cynthia Osborne moderates. Tara Watson and Linda Giannarelli also present. Each presenter has 10 to 12 minutes.
 
-Thirteen slides in about 11 minutes.
+Thirteen slides in about 11 and a half minutes.
 
 ## Before presenting
 
 - If the room's laptop won't have internet, send Cynthia's team the PDF on Thursday morning.
-- Before Thursday, scan slide 13's QR code and check that it opens this deck.
-- About 15 minutes before the session, click the CliffWatch address on slide 9 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later, and if it still fails, show slide 9's screenshots instead of the live site.
+- Before the session, scan slide 13's QR code and check that it opens this deck.
+- Before the session, run a report in Build with the credit at $880 and the recording's Nationwide population, and check that it finishes.
+- About 15 minutes before the session, click the CliffWatch address on slide 9 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 9's recording doesn't depend on it.
+- Then press next on slide 9 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
 - Keep these notes on your phone and the PDF on your laptop. Present from the live deck at policyengine.org/slides/appam-2026, and if the network fails, present from the PDF.
 
 ## 1. PolicyEngine for state policy research (0:00, 15 seconds)
@@ -61,29 +63,35 @@ We ran this on the Populace US local-area file, which we use for state and distr
 
 On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
 
-## 9. You can find a family's cliffs and build a reform without writing code (8:30, 45 seconds)
+## 9. You can find a family's cliffs and build a reform without writing code (8:30, 1 minute)
 
-CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000.
+We also built two web tools that need no code.
+
+*Press next to play the recording, which runs 47 seconds with no sound, and talk over it.*
+
+CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
 In Build, you can open the same Massachusetts credit, set it to $880 and run a report.
 
-## 10. Research questions and the tools that answer them (9:15, 15 seconds)
+*The recording stops on the button that runs the report. Press next when you finish.*
+
+## 10. Research questions and the tools that answer them (9:30, 15 seconds)
 
 With PolicyEngine, you can also change any parameter, run your own microdata, read every rule and project current law through 2035.
 
-## 11. What we leave out (9:30, 1 minute)
+## 11. What we leave out (9:45, 1 minute)
 
 We model child care subsidies in all 51 jurisdictions from August 2026. We copy each parameter's earliest value back to 2015, so check historical runs against each year's rules. We take earnings and paid leave benefits as inputs and hold them fixed when you change minimum wage or paid leave law. We hold hours fixed unless you set a labor supply response.
 
 Our local-area file holds thin state samples, about 108 effective households with children in the median state. Our child poverty estimates on that file miss Census's 2023 to 2025 averages by 3.2 points on average. In 29 of 51 jurisdictions, they fall outside Census's margin of error. For state child poverty rates, bring your own microdata.
 
-## 12. The Axiom Foundation encodes rules with their source text and dates (10:30, 45 seconds)
+## 12. The Axiom Foundation encodes rules with their source text and dates (10:45, 45 seconds)
 
 I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
-## 13. Thank you (11:15)
+## 13. Thank you (11:30)
 
 Scan the QR code to open this deck. From its last slide, you can open the code behind each chart.
 

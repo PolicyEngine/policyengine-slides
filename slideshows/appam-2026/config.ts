@@ -23,6 +23,7 @@ export const appam2026Config: SlideshowConfig = {
   location: 'APPAM 2026, Boston',
   footerText: 'PolicyEngine for state policy research · APPAM · November 5, 2026',
   speakers: [speakers['max-ghenis']],
+  clickerKeys: true,
   slides: [
     CoverSlide,
     WhatItDoesSlide,
@@ -32,7 +33,7 @@ export const appam2026Config: SlideshowConfig = {
     ParametersSlide,
     MicrodataSlide,
     ReformSlide,
-    WebAppsSlide,
+    { component: WebAppsSlide, builds: 2, exportBuilds: 1 },
     ToolsSlide,
     ScopeSlide,
     AxiomSlide,

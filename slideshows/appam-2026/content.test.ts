@@ -250,11 +250,6 @@ describe('derived chart data', () => {
 describe('links', () => {
   const finishPdf = read('analysis/finish_pdf.py');
   const HREF = /href[=:]\s*["']([^"']+)["']/g;
-  const order = read('config.ts')
-    .match(/slides:\s*\[([^\]]*)\]/)![1]
-    .split(',')
-    .map((name) => name.trim())
-    .filter(Boolean);
   const slideSource = (name: string) => read(`slides/${name}.tsx`);
   const deck = finishPdf.match(/^DECK = "([^"]+)"$/m)![1];
   const deckAddress = deck.replace(/^https:\/\//, '');
@@ -265,7 +260,7 @@ describe('links', () => {
   }));
 
   it('reads every entry in the PDF link table', () => {
-    expect(Number(finishPdf.match(/^SLIDES = (\d+)$/m)![1])).toBe(order.length);
+    expect(Number(finishPdf.match(/^SLIDES = (\d+)$/m)![1])).toBe(appam2026Config.slides.length);
     expect(entries).toHaveLength(table.match(/"(?:https|mailto):|\bDECK\b/g)!.length);
   });
 
