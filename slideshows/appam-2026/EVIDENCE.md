@@ -204,4 +204,5 @@ We captured slide 11's screenshots and recording from the live sites on November
 
 - Axiom publishes `us-ga/policies/dfcs/snap/3612.yaml` in `TheAxiomFoundation/rulespec-us` under CC BY 4.0.
 - Axiom publishes `axiom-rules-engine` under an MIT license.
+- We captured slide 14's graph from axiom.org/app?compose=us-ga:policies/dfcs/snap/3612 on November 5, 2026, and read the rule behind its caption in `3612.yaml`: `earned_income_deduction_allowed` tests `total_countable_gross_earned_income > 0` and not `assistance_unit_failed_to_report_earned_income_timely`, and `earned_income_deduction` multiplies the rate by that income.
 - Georgia's Division of Family and Children Services publishes the rule text and December 2019 effective date in its public SNAP manual (pamms.dhs.ga.gov/dfcs/snap/3612).

@@ -1,24 +1,7 @@
-import CodeBlock from '@/components/content/CodeBlock';
+import Image from '@/components/core/BasePathImage';
 import Frame from './Frame';
 import { axiomEngineVersion, axiomRuns, usdCents } from '../content';
 import styles from './deck.module.css';
-
-const RULESPEC = `- name: earned_income_deduction_rate
-  kind: parameter
-  metadata:
-    proof:
-      atoms:
-        - kind: amount
-          source:
-            corpus_citation_path:
-              us-ga/manual/dfcs/snap/3612
-            excerpt: "20% earned income deduction"
-        - kind: effective_period
-          source:
-            excerpt: "Effective Date: December 2019"
-  versions:
-    - effective_from: '2019-12-01'
-      formula: 0.20`;
 
 const runs = [
   {
@@ -30,39 +13,60 @@ const runs = [
 
 export default function AxiomSlide() {
   return (
-    <Frame title="The Axiom Foundation encodes rules with their source text and dates">
-      <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
-        <CodeBlock title="Georgia SNAP manual · section 3612 (encoding excerpt)" className="min-w-0 flex-[3]">
-          <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.8vh, 22px)' }}>
-            {RULESPEC}
-          </pre>
-        </CodeBlock>
-        <div className="flex-[2]">
-          <p className="mb-[2vh]">
-            Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division of Family
-            and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that rule
-            and records the manual&rsquo;s words and date beside each value.
-          </p>
-          <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.05em' }}>
-            Axiom Rules Engine {axiomEngineVersion}, running the rule
-          </h2>
-          <dl className="space-y-[1.2vh]">
-            {runs.map((run) => (
-              <div key={run.family}>
-                <dt className="text-gray-700" style={{ fontSize: '0.88em' }}>
-                  {run.family}
-                </dt>
-                <dd className="font-semibold">{run.result}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-[2vh]">
-            Explore Axiom&rsquo;s encodings at{' '}
-            <a className="pointer-events-auto" style={{ textDecoration: 'underline' }} href="https://axiom.org">
-              axiom.org
-            </a>
-            .
-          </p>
+    <Frame title="The Axiom Foundation encodes rules with source text and dates">
+      <div className={`flex h-full flex-col justify-center gap-[2.2vh] ${styles.flow}`}>
+        {/* Leaves room under the graph for the rule and the engine's runs. */}
+        <figure className="m-0" style={{ maxWidth: '130vh' }}>
+          <div className="content-card overflow-hidden border border-gray-200">
+            <Image
+              src="/images/appam-2026/axiom-3612-graph.png"
+              alt="Axiom’s graph of section 3612: Total Countable Gross Earned Income and Assistance Unit Failed To Report Earned Income Timely lead to Earned Income Deduction Allowed, which joins the Earned Income Deduction Rate and Total Countable Gross Earned Income to give Earned Income Deduction"
+              width={2080}
+              height={584}
+              loading="eager"
+              className="block h-auto w-full"
+            />
+          </div>
+          <figcaption className="mt-[1vh] text-gray-700" style={{ fontSize: '0.8em' }}>
+            Axiom&rsquo;s graph of section 3612. Georgia allows the deduction when a household has earned
+            income and reports it on time, and applies the rate to its gross earned income.
+          </figcaption>
+        </figure>
+        <div className={`grid grid-cols-2 gap-[4vh] ${styles.flow}`}>
+          <div>
+            <p className="mb-[1.2vh]">
+              Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division of Family
+              and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that rule
+              and records the manual&rsquo;s words beside each value: &ldquo;20% earned income
+              deduction&rdquo; and &ldquo;Effective Date: December 2019.&rdquo;
+            </p>
+            <p>
+              Explore this graph at{' '}
+              <a
+                className="pointer-events-auto"
+                style={{ textDecoration: 'underline' }}
+                href="https://axiom.org/app?compose=us-ga:policies/dfcs/snap/3612"
+              >
+                axiom.org
+              </a>
+              .
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.05em' }}>
+              Axiom Rules Engine {axiomEngineVersion}, running the rule
+            </h2>
+            <dl className="space-y-[1.2vh]">
+              {runs.map((run) => (
+                <div key={run.family}>
+                  <dt className="text-gray-700" style={{ fontSize: '0.88em' }}>
+                    {run.family}
+                  </dt>
+                  <dd className="font-semibold">{run.result}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </Frame>

@@ -623,9 +623,8 @@ describe('code printed on slides', () => {
 
   it('shows the rate the Axiom engine applied', () => {
     const slide = read('slides/AxiomSlide.tsx');
-    const rate = Number(slide.match(/formula: (\d+\.\d+)/)![1]);
+    const rate = Number(slide.match(/&ldquo;(\d+)% earned income\s+deduction&rdquo;/)![1]) / 100;
     expect(axiomRuns.deduction).toBeCloseTo(axiomRuns.monthlyEarnings * rate, 6);
-    expect(slide).toContain(`"${Math.round(rate * 100)}% earned income deduction"`);
   });
 });
 
