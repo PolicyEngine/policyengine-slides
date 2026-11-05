@@ -74,7 +74,7 @@ We ran this on the local-area file of Populace US, our microdata, which we use f
 
 ## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (7:20, 1 minute 15 seconds)
 
-The model behind that SNAP answer also ran the waterfall, the states, the earnings sweep and the reform, and you can reach it several ways. In Python, you can build a simulated eligibility measure: map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state, and any difference between runs comes from the rules in that state.
+We ran the waterfall, the states, the earnings sweep and the reform on the model behind that SNAP answer, and you can reach it several ways. In Python, you can build a simulated eligibility measure: map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state, and any difference between runs comes from the rules in that state.
 
 For example, we drew 3,000 households with children from Populace US's national file and ran them through each state's 2024 rules. We estimate that the same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland.
 
@@ -102,9 +102,9 @@ On data, we build two files. In the national file, we fit household weights agai
 
 We fix CPS errors, so our state child poverty rates differ from Census's by design, and we're tracing how calibration, sampling noise and rent imputation move each state's rate. We're also applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled. And we're adding LIHEAP in eight more states, placing households in local tax jurisdictions from their geography and imputing student loan balances.
 
-## 14. The Axiom Foundation encodes rules with their source text and dates (11:15, 40 seconds)
+## 14. The Axiom Foundation encodes rules with source text and dates (11:15, 40 seconds)
 
-I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its gross earned income.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
@@ -162,7 +162,7 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Does Pennsylvania's figure count Philadelphia's wage tax?** No. We place this family in Philadelphia County and don't set the model's wage tax inputs, so we leave out the city's wage tax. At the 3.74% resident rate, that tax comes to $1,496 on $40,000, which would take Pennsylvania from $47,244 to $45,748 and move the median from Delaware's $46,920 to Wisconsin's $46,898.
 
-**Why does Indiana turn this family down all year?** Indiana's limit since April 5, 135% of the poverty guideline, comes to $3,074 a month for a family of three, and this family earns $3,333. We found no chart Indiana posted before April. Our model reads 150% of the 2026 guideline through April, or $3,415 a month. But 150% of the 2025 guideline gives $3,331, $2 under this family's income, and PN3 prints 140% of poverty for 2025 and 137% for 2026 in its Roadmap, and reports that a bill to raise the limit to 150% didn't pass. So we hold Indiana to $3,331 before April. Chalkbeat reported in April that Indiana would restart child care help in May after a 15-month freeze. At the model's limit, we estimate four months of subsidy and $31,487.
+**Why does Indiana turn this family down all year?** Indiana's limit since April 5, 135% of the poverty guideline, comes to $3,074 a month for a family of three, and this family earns $3,333. We found no chart Indiana posted before April. Our model reads 150% of the 2026 guideline through April, or $3,415 a month. But 150% of the 2025 guideline gives $3,331, $2 under this family's income. PN3 prints 140% of poverty for 2025 and 137% for 2026 in its Roadmap, and reports that a bill to raise the limit to 150% didn't pass. So we hold Indiana to $3,331 before April. Chalkbeat reported in April that Indiana would restart child care help in May after a 15-month freeze. At the model's limit, we estimate four months of subsidy and $31,487.
 
 **Why does Indiana sit below Idaho when PN3 calls Idaho's limit the lowest?** This family misses the limit in both states, so neither pays any of its child care bill, and taxes set the order. Indiana collects $522 in state income tax after its $392 earned income credit, plus $626 in Marion County income tax. Idaho pays the family a net $455: a $465 grocery credit less a $10 building tax. Those amounts make up the $1,603 gap. Without the county tax, Indiana would still sit lowest, at $27,188.
 
