@@ -2,6 +2,7 @@ import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
 import effectiveRun from './data/effective_samples.json';
 import enrolledRun from './data/enrolled_cliffs.json';
+import familyLinesRun from './data/family_lines.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
 import reformRun from './data/massachusetts_reform.json';
@@ -24,8 +25,49 @@ export const alaska = {
   payments: alaskaRow.other_benefits,
 };
 
+const massachusettsCrossSection = crossSection.find((row) => row.code === 'MA');
+if (!massachusettsCrossSection) throw new Error('No Massachusetts row');
+export const massachusettsRow = massachusettsCrossSection;
+
 export const headlineEarnings = charts.headline_earnings;
 export const family = charts.family;
+
+// This family in Massachusetts, line by line: slides 3, 5 and 8.
+export const familyLines = familyLinesRun;
+
+const WATERFALL_STEPS: { key: keyof typeof familyLinesRun.lines; label: string[] }[] = [
+  { key: 'earnings', label: ['Earnings'] },
+  { key: 'federal_income_tax_before_refundable_credits', label: ['Federal', 'income tax'] },
+  { key: 'federal_refundable_credits', label: ['Federal', 'credits'] },
+  { key: 'payroll_tax', label: ['Payroll', 'tax'] },
+  { key: 'state_income_tax_before_refundable_credits', label: ['State', 'income tax'] },
+  { key: 'state_refundable_credits', label: ['State', 'credits'] },
+  { key: 'snap', label: ['SNAP'] },
+  { key: 'wic', label: ['WIC'] },
+  { key: 'child_care_subsidy', label: ['Child care', 'subsidy'] },
+  { key: 'child_care_bill', label: ['Child care', 'bill'] },
+];
+
+// Each step runs from the total before it to the total after it. Net resources closes the chart from zero.
+export const waterfall = [
+  ...WATERFALL_STEPS.reduce<{ key: string; label: string[]; value: number; from: number; to: number; kind: 'step' | 'total' }[]>(
+    (steps, step, i) => {
+      const value = familyLinesRun.lines[step.key] + 0;
+      const from = i === 0 ? 0 : steps[i - 1].to;
+      steps.push({ ...step, value, from, to: from + value, kind: i === 0 ? 'total' : 'step' });
+      return steps;
+    },
+    [],
+  ),
+  {
+    key: 'net_resources',
+    label: ['Net', 'resources'],
+    value: familyLinesRun.lines.net_resources,
+    from: 0,
+    to: familyLinesRun.lines.net_resources,
+    kind: 'total' as const,
+  },
+];
 // What Idaho's department posts for a new applicant in a family of three. analysis/household.py applies it.
 export const idahoPostedLimit = charts.posted_limits.ID.monthly;
 export const childCareBill = family.child_care_per_month * 12;

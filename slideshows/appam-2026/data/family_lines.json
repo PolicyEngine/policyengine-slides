@@ -1,0 +1,53 @@
+{
+  "policyengine_us_version": "2.90.2",
+  "state": "MA",
+  "earnings": 40000,
+  "year": 2026,
+  "lines": {
+    "earnings": 40000.0,
+    "federal_income_tax_before_refundable_credits": -0.0,
+    "federal_refundable_credits": 7129.58,
+    "payroll_tax": -3244.0,
+    "state_income_tax_before_refundable_credits": -1260.0,
+    "state_refundable_credits": 2449.29,
+    "snap": 3663.0,
+    "wic": 1447.29,
+    "child_care_subsidy": 16942.3,
+    "child_care_bill": -18000.0,
+    "net_resources": 49127.47
+  },
+  "detail": {
+    "eitc": 3923.23,
+    "refundable_ctc": 3206.35,
+    "employee_social_security_tax": 2480.0,
+    "employee_medicare_tax": 580.0,
+    "employee_state_payroll_tax": 184.0,
+    "ma_child_and_family_credit": 880.0,
+    "ma_eitc": 1569.29,
+    "childcare_expenses": 1057.7,
+    "snap_dependent_care_deduction": 1057.7,
+    "tanf": 0.0
+  },
+  "without_subsidy": {
+    "snap": 8739.0,
+    "federal_refundable_credits": 7323.23,
+    "snap_dependent_care_deduction": 18000.0
+  },
+  "doubled_credit": {
+    "per_dependent": 880,
+    "lines": {
+      "earnings": 40000.0,
+      "federal_income_tax_before_refundable_credits": -0.0,
+      "federal_refundable_credits": 7129.58,
+      "payroll_tax": -3244.0,
+      "state_income_tax_before_refundable_credits": -1260.0,
+      "state_refundable_credits": 3329.29,
+      "snap": 3663.0,
+      "wic": 1447.29,
+      "child_care_subsidy": 16942.3,
+      "child_care_bill": -18000.0,
+      "net_resources": 50007.47
+    },
+    "ma_child_and_family_credit": 1760.0
+  }
+}

@@ -14,8 +14,8 @@ baseline = Microsimulation(dataset=massachusetts)
 reformed = Microsimulation(dataset=massachusetts, reform=reform)`;
 
 const results = [
+  { value: millions(massachusetts.cost), label: 'less state revenue in 2026' },
   { value: percent(massachusetts.gainingShare), label: 'of households would gain, and none would lose' },
-  { value: millions(massachusetts.gapReduction), label: 'off the SPM poverty gap' },
 ];
 
 export default function ReformSlide() {
@@ -42,21 +42,11 @@ export default function ReformSlide() {
             ))}
           </div>
         </div>
-        <p>
-          At{' '}
-          <a className="pointer-events-auto" style={{ textDecoration: 'underline' }} href="https://www.policyengine.org/us/child-poverty-impact-dashboard">
-            policyengine.org/us/child-poverty-impact-dashboard
-          </a>
-          , you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
-        </p>
         <p className="text-gray-600" style={{ fontSize: '0.74em' }}>
           We use Populace US’s local-area file with PolicyEngine US {modelVersion} for 2026 state estimates, assuming no
           behavioral responses. The file holds {massachusetts.records.toLocaleString('en-US')} Massachusetts household
           records, an effective sample of about {massachusetts.effectiveHouseholds} households, or{' '}
-          {massachusetts.effectiveHouseholdsWithChildren} among those with children. We estimate that{' '}
-          {massachusetts.modelChildRate.toFixed(1)}% of the state’s children lived below the SPM threshold in 2025, and Census
-          reports {massachusetts.censusChildRate.toFixed(1)}% for 2023 to 2025. We estimate that the 2026 child poverty
-          rate would fall by about {massachusetts.childRateChange.toFixed(1)} points under the doubled credit.
+          {massachusetts.effectiveHouseholdsWithChildren} among those with children.
         </p>
       </div>
     </Frame>
