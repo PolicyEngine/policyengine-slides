@@ -296,7 +296,15 @@ describe('links', () => {
 
 describe('child care by month', () => {
   type MonthRow = { code: string; subsidy: number; net_resources: number; monthly: number[]; months_paid: number };
-  const run: { policyengine_us_version: string; earnings: number; rows: MonthRow[]; indiana: Record<string, any> } = JSON.parse(
+  type IndianaCheck = {
+    rate_january: number;
+    rate_may: number;
+    poverty_guideline: number;
+    monthly_limit_from_april: number;
+    monthly_income: number;
+    april_limit_all_year: { subsidy: number; net_resources: number };
+  };
+  const run: { policyengine_us_version: string; earnings: number; rows: MonthRow[]; indiana: IndianaCheck } = JSON.parse(
     read('data/subsidy_months.json'),
   );
   const at = family.earnings.indexOf(run.earnings);
