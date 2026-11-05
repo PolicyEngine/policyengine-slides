@@ -79,6 +79,7 @@ def main():
         "lines": waterfall(sim),
         "detail": detail(sim),
         "without_subsidy": {
+            "net_resources": round(float(hh.net_resources_parts(without)["net_resources"][0]), 2),
             "snap": total(without, "snap"),
             "federal_refundable_credits": total(without, "income_tax_refundable_credits"),
             "snap_dependent_care_deduction": total(without, "snap_dependent_care_deduction"),

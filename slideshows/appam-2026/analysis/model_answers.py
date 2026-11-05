@@ -1,6 +1,6 @@
 """Copy what the models answered about the family into the deck's data.
 
-Usage: python3 model_answers.py <the ask's comparison.json>
+Usage: python3 model_answers.py model_ask/comparison.json
 
 The ask ran once per model with no tools, in PolicyBench's format, for slide 2's family
 (analysis/model_ask/). Its references come from this deck's household.py at PolicyEngine US

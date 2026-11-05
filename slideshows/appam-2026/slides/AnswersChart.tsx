@@ -8,6 +8,8 @@ const ROW = 50;
 const BOTTOM = 44;
 const STEP = 2_500;
 const RADIUS = 11;
+// Wider than a label, so a mark this close to the reference line takes its label on the far side.
+const LABEL_ROOM = 100;
 
 const answers = modelAnswers.shownSnap;
 const reference = modelAnswers.referenceSnap;
@@ -73,10 +75,18 @@ export default function AnswersChart({ reveal }: { reveal: boolean }) {
       </g>
       {answers.map((row, i) => {
         const y = TOP + i * ROW + ROW / 2;
+        const leftLabel = row.snap < reference && x(reference) - x(row.snap) < LABEL_ROOM;
         return (
           <g key={row.model}>
             <circle cx={x(row.snap)} cy={y} r={RADIUS} fill={fill} stroke="white" strokeWidth="2" />
-            <text x={x(row.snap) + RADIUS + 9} y={y + 8} fontSize="24" fontWeight="600" fill="var(--color-gray-800)">
+            <text
+              x={leftLabel ? x(row.snap) - RADIUS - 9 : x(row.snap) + RADIUS + 9}
+              y={y + 8}
+              textAnchor={leftLabel ? 'end' : 'start'}
+              fontSize="24"
+              fontWeight="600"
+              fill="var(--color-gray-800)"
+            >
               {usd(row.snap)}
             </text>
           </g>

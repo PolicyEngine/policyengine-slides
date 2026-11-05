@@ -158,7 +158,7 @@ describe('deck.module.css', () => {
   });
 
   it('closes the gap under the title in a short window', () => {
-    // The largest overrun left at 1280x600 before this rule: slide 8's caption ran 24 px under the footer.
+    // The largest overrun left at 1280x600 before this rule: the reform slide's caption ran 24 px under the footer.
     const gap = 2.5 - parseFloat(declared(shortWindows, '.frame > div:first-child', 'margin-bottom') ?? '2.5');
     expect(gap * 16).toBeGreaterThanOrEqual(24);
   });
@@ -254,7 +254,7 @@ describe('deck.module.css', () => {
 
 describe('value columns', () => {
   // A minus sign lets the browser break a figure in two where a column narrows.
-  it.each(['CliffsSlide.tsx', 'WhichLinesSlide.tsx'])('keep each figure on one line in %s', (file) => {
+  it.each(['CliffsSlide.tsx', 'EveryProgramSlide.tsx'])('keep each figure on one line in %s', (file) => {
     const source = readFileSync(path.join(__dirname, file), 'utf8');
     const columns = source.match(/className="[^"]*tabular-nums[^"]*"/g) ?? [];
     expect(columns.length).toBeGreaterThan(0);

@@ -38,9 +38,9 @@ export default function WorkingOnSlide() {
   return (
     <Frame title="We’re working on state poverty accuracy, Medicaid rules, heating assistance and local taxes">
       <div className={`flex h-full items-center ${styles.flow}`}>
-        <dl className="w-full space-y-[2.2vh]">
+        <dl className="grid w-full grid-cols-[auto_1fr_auto] items-baseline gap-x-[3vh] gap-y-[2.2vh] max-[640px]:grid-cols-1">
           {work.map((item) => (
-            <div key={item.area} className="grid grid-cols-[1fr_3fr_auto] items-baseline gap-x-[3vh] max-[640px]:grid-cols-1">
+            <div key={item.area} className="contents">
               <dt className="font-semibold text-pe-dark">{item.area}</dt>
               <dd>{item.body}</dd>
               <dd>

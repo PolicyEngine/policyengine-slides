@@ -1,9 +1,9 @@
 {
  "policyengine_us_version": "2.90.2",
  "policyengine_us_commit": "469ad12cb957a1b3eaedf9e6dd3e4c69194bba26",
- "slide_7_snap_eligible_share": {
+ "loop_snap_eligible_share": {
   "AR": 0.17470881863560733,
   "MD": 0.3826955074875208
  },
- "slide_8_state_cost": 576530432.0
+ "reform_state_cost": 576530432.0
 }

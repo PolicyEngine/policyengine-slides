@@ -29,6 +29,7 @@
     "tanf": 0.0
   },
   "without_subsidy": {
+    "net_resources": 37454.82,
     "snap": 8739.0,
     "federal_refundable_credits": 7323.23,
     "snap_dependent_care_deduction": 18000.0

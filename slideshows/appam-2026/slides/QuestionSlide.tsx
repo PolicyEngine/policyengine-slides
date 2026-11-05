@@ -8,6 +8,7 @@ const facts = [
   `${usd(family.rent_per_month)} monthly rent`,
   `${usd(family.child_care_per_month)} a month for child care, before any subsidy`,
   `${massachusettsRow.county}, Massachusetts, in 2026`,
+  'Assume the family gets any child care subsidy it qualifies for',
 ];
 
 export default function QuestionSlide() {

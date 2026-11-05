@@ -55,19 +55,19 @@ afterEach(async () => {
   vi.restoreAllMocks();
 });
 
-describe('slide 9 steps', () => {
+describe('slide 11 steps', () => {
   it('takes one step in a PDF export and two live', () => {
     const steps = (exportMode: boolean) =>
       flattenSlides(appam2026Config.slides, { exportMode }).filter((step) => step.slideIndex === WEB_APPS);
-    expect(WEB_APPS).toBe(8);
+    expect(WEB_APPS).toBe(10);
     expect(steps(true).map((step) => step.buildStep)).toEqual([1]);
     expect(steps(false).map((step) => step.buildStep)).toEqual([1, 2]);
     expect(flattenSlides(appam2026Config.slides, { exportMode: true })).toHaveLength(appam2026Config.slides.length);
   });
 
-  it('counts 13 slides on the index page', () => {
+  it('counts 15 slides on the index page', () => {
     const deck = getAllSlideshowMetadata().find((meta) => meta.id === appam2026Config.id);
-    expect(deck?.slideCount).toBe(13);
+    expect(deck?.slideCount).toBe(15);
   });
 
   it('moves on the keys a clicker sends', () => {
@@ -163,7 +163,7 @@ describe('Walkthrough', () => {
   });
 
   it('never loads in a PDF export', async () => {
-    window.history.replaceState(null, '', '/slides/appam-2026?slide=8&export=1');
+    window.history.replaceState(null, '', '/slides/appam-2026?slide=10&export=1');
     await renderStep(1);
     expect(video()).toBeNull();
     expect(play).not.toHaveBeenCalled();

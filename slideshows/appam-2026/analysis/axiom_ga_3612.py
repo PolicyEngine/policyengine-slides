@@ -8,7 +8,7 @@ Compile first, from a checkout of TheAxiomFoundation/rulespec-us:
       --output ga3612.compiled.json
 
 Then: python axiom_ga_3612.py <engine binary> ga3612.compiled.json
-Writes data/axiom_ga_3612.json. The cases cover slide 3's family at $30,000 a
+Writes data/axiom_ga_3612.json. The cases cover slide 6's family at $30,000 a
 year in Georgia, where PolicyEngine US gives it SNAP, and a month before the
 rule's December 2019 effective date.
 """

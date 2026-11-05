@@ -2,7 +2,7 @@
 
 The deck's family applies for each program as a new applicant. This script runs the same household with only each
 state's "currently enrolled" flag added, on a $500 grid from $0 to $160,000, because Maryland's limit for enrolled
-families runs past the deck's own sweep. It covers slide 5's three states and the other states that
+families runs past the deck's own sweep. It covers slide 7's three states and the other states that
 set a lower limit for new applicants. Its new-applicant runs must reproduce data/family.json on the grid the two share.
 
 Writes data/enrolled_cliffs.json, which the slides read, and data/enrolled_sweep.json, which the tests read.

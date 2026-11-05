@@ -10,7 +10,7 @@ const LEGEND = [
 ];
 
 export default function WaterfallSlide() {
-  const { detail, lines } = familyLines;
+  const { detail, lines, without_subsidy: without } = familyLines;
   return (
     <Frame title={`This family ends up with ${usd(lines.net_resources)} once we compute every line together`}>
       <div className={`flex h-full flex-col ${styles.flow}`}>
@@ -29,8 +29,8 @@ export default function WaterfallSlide() {
           Federal refundable credits: EITC {usd(detail.eitc)}, child tax credit {usd(detail.refundable_ctc)}. Payroll tax:
           Social Security {usd(detail.employee_social_security_tax)}, Medicare {usd(detail.employee_medicare_tax)},
           Massachusetts paid leave {usd(detail.employee_state_payroll_tax)}. State refundable credits: child and family{' '}
-          {usd(detail.ma_child_and_family_credit)}, state EITC {usd(detail.ma_eitc)}. We leave out health coverage.
-          PolicyEngine US {modelVersion}.
+          {usd(detail.ma_child_and_family_credit)}, state EITC {usd(detail.ma_eitc)}. Without the subsidy, the family would
+          end up with {usd(without.net_resources)}. We leave out health coverage. PolicyEngine US {modelVersion}.
         </p>
       </div>
     </Frame>

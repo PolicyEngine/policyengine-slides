@@ -1,4 +1,4 @@
-"""Standard errors for slide 8's Massachusetts figures, clustered by source household.
+"""Standard errors for slide 9's Massachusetts figures, clustered by source household.
 
 We linearize each figure over the local-area file's Massachusetts households, with a
 survey household and its tax-data clone in one cluster. We treat the weights as fixed,

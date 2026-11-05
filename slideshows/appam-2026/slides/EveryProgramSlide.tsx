@@ -9,7 +9,7 @@ function range(low: number, high: number) {
 export default function EveryProgramSlide() {
   const { bestScore, bestScoreByApril, cards, households, models } = policyBench;
   return (
-    <Frame title="Across every program, models miss most SNAP and state credit amounts and few payroll tax amounts">
+    <Frame title="Models miss most SNAP and state credit amounts and few payroll tax amounts">
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[5]">
           <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the same seven models</h2>

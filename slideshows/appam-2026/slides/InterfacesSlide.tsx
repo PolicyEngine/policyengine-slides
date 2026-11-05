@@ -59,7 +59,7 @@ export default function InterfacesSlide() {
   const tied = snap.filter((entry) => entry.value === low.value);
   const high = snap[snap.length - 1];
   return (
-    <Frame title="You can reach one model through Python, TAXSIM, web apps and AI tools">
+    <Frame title="You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools">
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[5] space-y-[2vh]">
           <h2 className="font-semibold text-pe-dark" style={{ fontSize: '1.05em' }}>

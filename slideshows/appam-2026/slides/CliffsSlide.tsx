@@ -3,7 +3,6 @@ import Frame from './Frame';
 import {
   cliffs,
   enrolledExit,
-  idahoPostedLimit,
   largestCliff,
   medianRateAt,
   percent,
@@ -45,8 +44,7 @@ export default function CliffsSlide() {
               In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from the subsidy. We estimate
               that a family already in the program keeps the subsidy to about{' '}
               {usd(enrolledExit('MD').before)} in Maryland and {usd(enrolledExit('IA').before)} in Iowa. Since May 2025,
-              Maryland has put applicants who qualify, like this family, on a waiting list. We set Idaho’s limit to the{' '}
-              {usd(idahoPostedLimit)} a month its department posts.
+              Maryland has put applicants who qualify, like this family, on a waiting list.
             </p>
           </div>
           <div>

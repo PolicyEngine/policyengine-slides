@@ -18,11 +18,11 @@ export default function CoverageSlide() {
     },
     {
       lead: 'Measurement errors',
-      body: 'People underreport SNAP and Medicaid in the CPS, so we keep everyone who reports them and assign take-up among the rest to match USDA and CMS counts.',
+      body: 'People underreport SNAP and Medicaid in the CPS, so we keep everyone who reports them and draw take-up among the rest to match USDA’s participation rate and CMS’s enrollment counts.',
     },
     {
       lead: 'Missing gaps',
-      body: 'We impute what the CPS doesn’t ask, such as tax detail from the IRS Public Use File, wealth from the SCF and tips from the SIPP.',
+      body: 'We impute what the CPS doesn’t ask, such as tax detail from the IRS Public Use File, financial assets from the SCF and tips from the SIPP.',
     },
     {
       lead: 'Geographic fidelity',
@@ -31,7 +31,7 @@ export default function CoverageSlide() {
   ];
   return (
     <Frame title="We model federal and state taxes and benefits and build microdata to match official totals">
-      <div className={`flex h-full items-center gap-[5vh] ${styles.flow}`}>
+      <div className={`flex h-full items-start gap-[5vh] pt-[1vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[4]">
           <h2 className="mb-[1.4vh] font-semibold text-pe-dark">Policies</h2>
           <ul className="space-y-[1.8vh]">

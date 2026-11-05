@@ -1,6 +1,6 @@
 """What each state pays the $40,000 family in each month of 2026.
 
-Writes data/subsidy_months.json. Slide 3 names the states whose subsidy covers part of the year, and this script
+Writes data/subsidy_months.json. Slide 6 names the states whose subsidy covers part of the year, and this script
 finds them: it reads each state's own monthly program variables and counts the months that pay anything. It also
 runs Indiana under the limit it set for new applicants on April 5, 2026 in all twelve months.
 """

@@ -4,12 +4,15 @@ Run from this folder with pytest. The cases come from Hypothesis, so they cover
 states and earnings nobody picked by hand.
 """
 
+import family_lines
 import household as hh
 import numpy as np
 import pytest
 from enrolled_cliffs import FLAGS
 from hypothesis import given, settings
 from hypothesis import strategies as st
+from policyengine_core.reforms import Reform
+from policyengine_us import Simulation
 
 MAX_EXAMPLES = 40
 # The model stores money as 32-bit floats, so totals drift by fractions of a cent.
@@ -227,3 +230,44 @@ def test_family_already_in_ohios_first_program_draws_no_voucher():
     sim = enrolled_run("OH", 40_000, True)
     assert sum(months(sim, "oh_child_care_choice_voucher")) == 0
     assert sum(months(sim, "oh_ccap")) > 0
+
+
+TAX_LINES = (
+    "federal_income_tax_before_refundable_credits",
+    "federal_refundable_credits",
+    "payroll_tax",
+    "state_income_tax_before_refundable_credits",
+    "state_refundable_credits",
+)
+
+
+def test_waterfall_adds_up_for_this_family():
+    lines = family_lines.waterfall(hh.simulate(family_lines.STATE, family_lines.EARNINGS))
+    total = lines.pop("net_resources")
+    assert abs(sum(lines.values()) - total) < TOLERANCE
+
+
+@settings(max_examples=MAX_EXAMPLES, deadline=None)
+@given(earnings)
+def test_waterfall_splits_the_net_tax_lines(income):
+    sim = hh.simulate(family_lines.STATE, income)
+    parts = hh.net_resources_parts(sim)
+    lines = family_lines.waterfall(sim)
+    taxes = sum(lines[name] for name in TAX_LINES)
+    assert abs(taxes - (parts["federal_taxes"][0] + parts["state_taxes"][0])) < 2 * TOLERANCE
+
+
+@settings(max_examples=MAX_EXAMPLES, deadline=None)
+@given(earnings)
+def test_doubling_the_credit_moves_only_the_state_credit_line(income):
+    reform = Reform.from_dict(
+        {family_lines.CREDIT: {f"{hh.YEAR}-01-01.2100-12-31": family_lines.DOUBLED}}, country_id="us"
+    )
+    state = family_lines.STATE
+    base = family_lines.waterfall(hh.simulate(state, income))
+    doubled = family_lines.waterfall(Simulation(situation=hh.situation(state, income), reform=reform))
+    moved = {name for name in base if abs(base[name] - doubled[name]) > TOLERANCE}
+    assert moved <= {"state_refundable_credits", "net_resources"}
+    gain = doubled["net_resources"] - base["net_resources"]
+    assert gain >= -TOLERANCE
+    assert abs(gain - (doubled["state_refundable_credits"] - base["state_refundable_credits"])) < TOLERANCE

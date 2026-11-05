@@ -25,7 +25,7 @@ from pypdf.generic import RectangleObject
 
 PAGE_WIDTH = 1080
 IMAGE_HEIGHT = 607.5
-SLIDES = 13
+SLIDES = 15
 POINTS_PER_PIXEL = PAGE_WIDTH / 1440
 
 DECK = "https://policyengine.org/slides/appam-2026"

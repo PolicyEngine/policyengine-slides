@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createElement } from 'react';
@@ -11,8 +12,10 @@ import {
   childCareBill,
   cliffRanking,
   cliffs,
+  coverage,
   crossSection,
   enrolledExit,
+  familyLines,
   headlineEarnings,
   highest,
   idahoPostedLimit,
@@ -21,10 +24,13 @@ import {
   largestCliff,
   lowest,
   massachusetts,
+  massachusettsRow,
   medianRateAt,
   millions,
+  modelAnswers,
   modelVersion,
   percent,
+  policyBench,
   programLines,
   spreadAt,
   spreads,
@@ -33,10 +39,10 @@ import {
   sweep,
   sweepEarnings,
   usd,
+  waterfall,
 } from './content';
 import nationalCheck from './data/massachusetts_national_check.json';
 import { SERIES } from './slides/FamilyChart';
-import { endLabel } from './slides/LineRugs';
 
 const read = (path: string) => readFileSync(join(__dirname, path), 'utf8');
 const family = JSON.parse(read('data/family.json'));
@@ -185,7 +191,7 @@ describe('derived chart data', () => {
     expect(cliffs).toEqual(cliffRanking.slice(0, 3));
   });
 
-  it('prints the sweep’s step on slide 5', () => {
+  it('prints the sweep’s step on slide 7', () => {
     const slide = read('slides/CliffsSlide.tsx');
     const step = usd(sweepEarnings[1] - sweepEarnings[0]);
     for (const phrase of [`${step} more in earnings puts`, `on ${step} more in earnings`]) expect(slide).toContain(phrase);
@@ -216,7 +222,7 @@ describe('derived chart data', () => {
     }
   });
 
-  it('sorts every line of the rug plot and covers 51 states', () => {
+  it('sorts every program line and covers 51 states', () => {
     for (const line of programLines) {
       const values = line.values.map((entry) => entry.value);
       expect(values).toHaveLength(51);
@@ -224,20 +230,14 @@ describe('derived chart data', () => {
     }
   });
 
-  it('counts DC apart from the states in the rug plot labels', () => {
-    const line = (key: string) => programLines.find((entry) => entry.key === key)!.values;
-    expect(endLabel(line('child_care_subsidy'), 18_000)).toBe('6 states and DC $18,000');
-    expect(endLabel(line('child_care_subsidy'), 0)).toBe('ID, NV $0');
-    expect(endLabel(line('federal_taxes'), 3_678)).toBe('6 states and DC $3,678');
-    expect(endLabel(line('federal_taxes'), 4_263)).toBe('26 states $4,263');
-    expect(endLabel(line('snap'), 0)).toBe('15 states $0');
-  });
-
-  it('names both states that tie at the low end of slide 7’s SNAP strip', () => {
-    const [snap, medicaid] = instrument.lines.map((line) => line.values);
-    const ends = (values: typeof snap) => [values[0].value, values[values.length - 1].value].map((value) => endLabel(values, value, percent));
-    expect(ends(snap)).toEqual(['AR, TN 17.5%', 'MD 38.3%']);
-    expect(ends(medicaid)).toEqual(['ID 39.8%', 'HI 66.1%']);
+  it('names both states that tie at the low end of slide 10’s SNAP range', () => {
+    const page = renderToStaticMarkup(createElement(getSlideComponent(appam2026Config.slides[9])));
+    const [snap] = instrument.lines.map((line) => line.values);
+    expect(snap[0].value).toBe(snap[1].value);
+    expect([snap[0].code, snap[1].code].sort()).toEqual(['AR', 'TN']);
+    expect(percent(snap[0].value)).toBe('17.5%');
+    expect(page).toContain('17.5% in Arkansas and Tennessee');
+    expect(page).toContain('38.3% in Maryland');
   });
 
   it('pays Alaska’s family the dividend and energy relief for each person', () => {
@@ -277,9 +277,16 @@ describe('links', () => {
 
   it('prints each address the PDF links to, on the slide that links to it', () => {
     const printed: Record<string, string[]> = {
+      EveryProgramSlide: ['policybench.org'],
       ParametersSlide: ['github.com/PolicyEngine/policyengine-us'],
-      MicrodataSlide: ['policyengine.org/us/taxsim'],
-      ReformSlide: ['policyengine.org/us/child-poverty-impact-dashboard'],
+      InterfacesSlide: [
+        'policyengine.org/us/taxsim',
+        'app.policyengine.org/us/build',
+        'policyengine.org/us/cliffwatch',
+        'policyengine.org/us/child-poverty-impact-dashboard',
+        'github.com/PolicyEngine/policyengine-claude',
+        'github.com/PolicyEngine/policyengine-us',
+      ],
       WebAppsSlide: ['policyengine.org/us/cliffwatch', 'app.policyengine.org/us/build'],
       AxiomSlide: ['axiom.org'],
       EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', deckAddress],
@@ -327,7 +334,7 @@ describe('child care by month', () => {
     }
   });
 
-  it('pays for part of the year only where slide 3 says so', () => {
+  it('pays for part of the year only where slide 6 says so', () => {
     const partial = run.rows.filter((candidate) => candidate.months_paid > 0 && candidate.months_paid < 12);
     expect(partial.map((candidate) => [candidate.code, candidate.months_paid])).toEqual([
       ['IN', 4],
@@ -373,7 +380,7 @@ describe('a family already enrolled', () => {
   );
   const codes = Object.keys(sweepRun.states);
 
-  it('runs at the deck’s model, for slide 5’s states and the others with a lower limit for new applicants', () => {
+  it('runs at the deck’s model, for slide 7’s states and the others with a lower limit for new applicants', () => {
     expect(summary.policyengine_us_version).toBe(modelVersion);
     expect(codes.sort()).toEqual(['IA', 'ID', 'IN', 'MD', 'NV', 'OH']);
     for (const cliff of cliffs) expect(codes).toContain(cliff.code);
@@ -416,7 +423,7 @@ describe('a family already enrolled', () => {
     }
   });
 
-  it('lets a family keep the subsidy past each of slide 5’s cliffs', () => {
+  it('lets a family keep the subsidy past each of slide 7’s cliffs', () => {
     for (const cliff of cliffs) {
       const row = summary.rows.find((candidate: { code: string }) => candidate.code === cliff.code);
       expect(row.new_applicant.largest_drop).toEqual({ before: cliff.before, after: cliff.after, drop: cliff.drop });
@@ -424,9 +431,9 @@ describe('a family already enrolled', () => {
     }
   });
 
-  it('prints each limit on slide 5, and each limit and cliff in the notes and the ledger', () => {
+  it('prints each limit on slide 7, and each limit and cliff in the notes and the ledger', () => {
     const page = renderToStaticMarkup(
-      createElement(getSlideComponent(appam2026Config.slides[4])),
+      createElement(getSlideComponent(appam2026Config.slides[6])),
     ).replace(/&#x27;/g, "'");
     expect(page).toContain(
       `keeps the subsidy to about ${usd(enrolledExit('MD').before)} in Maryland and ${usd(enrolledExit('IA').before)} in Iowa`,
@@ -459,7 +466,7 @@ describe('limits and programs the model does not carry', () => {
   const checks = JSON.parse(read('data/limit_checks.json'));
   const line = (code: string, key: string) => family.states[code][key] as number[];
   const at = (earnings: number) => family.earnings.indexOf(earnings);
-  const slide = renderToStaticMarkup(createElement(getSlideComponent(appam2026Config.slides[2]))).replace(/&#x27;/g, "'");
+  const slide = renderToStaticMarkup(createElement(getSlideComponent(appam2026Config.slides[5]))).replace(/&#x27;/g, "'");
 
   it('stops Idaho’s subsidy at the posted limit, on the deck’s grid', () => {
     const paying = family.earnings.filter((_: number, i: number) => line('ID', 'child_care_subsidy')[i] > 0);
@@ -532,7 +539,7 @@ describe('Axiom run', () => {
     expect(axiomRuns.beforeEffectiveDate.stderr).toContain('2019-11-01');
   });
 
-  it('runs slide 3’s family at earnings where PolicyEngine US gives it Georgia SNAP', () => {
+  it('runs slide 6’s family at earnings where PolicyEngine US gives it Georgia SNAP', () => {
     const annual = axiomRuns.monthlyEarnings * 12;
     expect(spreads.map((spread) => spread.earnings)).toContain(annual);
     expect(family.states.GA.snap[family.earnings.indexOf(annual)]).toBeGreaterThan(0);
@@ -547,7 +554,7 @@ describe('code printed on slides', () => {
 
   it('matches the check script line for line, apart from the sample file and the state loop', () => {
     const check = read('analysis/check_slide_code.py');
-    for (const slide of ['MicrodataSlide', 'ReformSlide']) {
+    for (const slide of ['InterfacesSlide', 'ReformSlide']) {
       const lines = python(slide)
         .split('\n')
         .map((line) => line.trim())
@@ -557,7 +564,7 @@ describe('code printed on slides', () => {
     }
   });
 
-  it('ends slide 6’s values at the amount slide 8 doubles', () => {
+  it('ends slide 8’s values at the amount slide 9 doubles', () => {
     const slide = read('slides/ParametersSlide.tsx');
     const values = [...slide.matchAll(/^ {2}(\d{4})-01-01: (\d+)$/gm)].map((match) => ({
       year: Number(match[1]),
@@ -620,9 +627,9 @@ describe('fixed-sample microdata run', () => {
     expect(run.policyengine_us_version).toBe(modelVersion);
   });
 
-  it('matches what slide 7’s loop returns when run as printed', () => {
+  it('matches what slide 10’s loop returns when run as printed', () => {
     expect(slideCode.policyengine_us_version).toBe(modelVersion);
-    const states = Object.entries<number>(slideCode.slide_7_snap_eligible_share);
+    const states = Object.entries<number>(slideCode.loop_snap_eligible_share);
     expect(states.length).toBeGreaterThan(0);
     for (const [code, share] of states) {
       const row = instrument.rows.find((candidate) => candidate.state === code);
@@ -680,8 +687,8 @@ describe('Massachusetts reform', () => {
     expect(Math.abs(massachusetts.cost - massachusetts.householdGain)).toBeLessThan(1e-4 * massachusetts.cost);
   });
 
-  it('matches what slide 8’s dictionary returns when run as printed', () => {
-    expect(slideCode.slide_8_state_cost).toBe(massachusetts.cost);
+  it('matches what slide 9’s dictionary returns when run as printed', () => {
+    expect(slideCode.reform_state_cost).toBe(massachusetts.cost);
   });
 
   it('compares the same records at the version policyengine.py pins', () => {
@@ -962,5 +969,198 @@ describe('typed figures', () => {
       family.states.WI.child_care_subsidy[index],
       2,
     );
+  });
+});
+
+const render = (index: number) =>
+  renderToStaticMarkup(createElement(getSlideComponent(appam2026Config.slides[index]))).replace(/&#x27;/g, "'");
+
+describe('the family’s lines', () => {
+  const { lines, detail, without_subsidy: without, doubled_credit: doubled } = familyLines;
+
+  it('chains the waterfall from earnings to net resources, within rounding', () => {
+    const steps = waterfall.slice(0, -1);
+    steps.forEach((step, i) => expect(step.from).toBe(i === 0 ? 0 : steps[i - 1].to));
+    expect(Math.abs(steps[steps.length - 1].to - lines.net_resources)).toBeLessThan(0.02);
+    expect(waterfall[waterfall.length - 1].to).toBe(lines.net_resources);
+  });
+
+  it('matches slide 6’s Massachusetts row, at the deck’s model and earnings', () => {
+    expect(familyLines.policyengine_us_version).toBe(modelVersion);
+    expect(familyLines.earnings).toBe(headlineEarnings);
+    expect(massachusettsRow.net_resources).toBe(Math.round(lines.net_resources));
+  });
+
+  it('splits payroll tax and the credits into the parts slide 5 prints', () => {
+    const payroll = detail.employee_social_security_tax + detail.employee_medicare_tax + detail.employee_state_payroll_tax;
+    expect(payroll).toBeCloseTo(-lines.payroll_tax, 1);
+    expect(detail.eitc + detail.refundable_ctc).toBeCloseTo(lines.federal_refundable_credits, 1);
+    expect(detail.ma_child_and_family_credit + detail.ma_eitc).toBeCloseTo(lines.state_refundable_credits, 1);
+    const page = render(4);
+    for (const amount of [detail.eitc, detail.refundable_ctc, detail.employee_social_security_tax, detail.employee_medicare_tax, detail.employee_state_payroll_tax, detail.ma_eitc]) {
+      expect(page).toContain(usd(amount));
+    }
+  });
+
+  it('lets the subsidy set SNAP’s dependent care deduction', () => {
+    expect(detail.snap_dependent_care_deduction).toBeCloseTo(detail.childcare_expenses, 1);
+    expect(Math.abs(lines.child_care_subsidy + detail.childcare_expenses + lines.child_care_bill)).toBeLessThan(0.02);
+    expect(without.snap_dependent_care_deduction).toBe(childCareBill);
+    expect(without.snap).toBeGreaterThan(lines.snap);
+    for (const text of [render(2), notes]) {
+      for (const amount of [lines.snap, without.snap, detail.childcare_expenses, childCareBill]) expect(text).toContain(usd(amount));
+    }
+  });
+
+  it('states the subsidy assumption wherever a figure rests on it', () => {
+    const assumption = 'any child care subsidy it qualifies for';
+    expect(render(1)).toContain(assumption);
+    expect(render(2)).toContain(assumption);
+    expect(notes.match(new RegExp(assumption, 'g'))!.length).toBeGreaterThanOrEqual(2);
+    expect(without.net_resources).toBeLessThan(lines.net_resources);
+    for (const text of [render(4), notes, ledger]) expect(text).toContain(usd(without.net_resources));
+  });
+
+  it('moves only the state credit line when the credit doubles', () => {
+    for (const [key, value] of Object.entries(lines)) {
+      if (key === 'state_refundable_credits' || key === 'net_resources') continue;
+      expect(doubled.lines[key as keyof typeof lines], key).toBe(value);
+    }
+    const gain = doubled.lines.net_resources - lines.net_resources;
+    expect(gain).toBeCloseTo(doubled.lines.state_refundable_credits - lines.state_refundable_credits, 1);
+    expect(gain).toBeCloseTo(detail.ma_child_and_family_credit, 1);
+    expect(doubled.per_dependent).toBe(reformRun.reformed);
+    expect(doubled.ma_child_and_family_credit).toBeCloseTo(2 * detail.ma_child_and_family_credit, 1);
+    expect(notes).toContain(usd(doubled.lines.net_resources));
+  });
+
+  it('prints every line in the notes', () => {
+    for (const step of waterfall) if (step.value !== 0) expect(notes, step.key).toContain(usd(Math.abs(step.value)));
+  });
+
+  it('keeps federal taxes and credits the narrowest line across states, as slide 6’s notes say', () => {
+    const range = (key: string) => {
+      const values = programLines.find((entry) => entry.key === key)!.values.map((entry) => entry.value);
+      return Math.max(...values) - Math.min(...values);
+    };
+    for (const entry of programLines) {
+      if (entry.key !== 'federal_taxes') expect(range('federal_taxes'), entry.key).toBeLessThan(range(entry.key));
+    }
+  });
+});
+
+describe('the models’ answers', () => {
+  const NEWEST = ['GPT-6.1 Sol', 'GPT-6.1 Terra', 'GPT-6 Astra', 'GPT-6 Luna', 'Claude Opus 5.5', 'Claude Sonnet 5.5', 'Claude Haiku 5.5'];
+  const amounts = (row: (typeof modelAnswers.rows)[number]) => row.amounts as Record<string, number>;
+
+  it('keeps all ten in the data file and shows the newest in each family', () => {
+    expect(modelAnswers.rows).toHaveLength(10);
+    expect(modelAnswers.shownSnap.map((row) => row.name).sort()).toEqual([...NEWEST].sort());
+    const snaps = modelAnswers.shownSnap.map((row) => row.snap);
+    expect(snaps).toEqual([...snaps].sort((a, b) => a - b));
+  });
+
+  it('grades against the deck’s own run', () => {
+    expect(modelAnswers.referenceSnap).toBe(familyLines.lines.snap);
+    expect(modelAnswers.referenceSnapWithoutSubsidy).toBe(familyLines.without_subsidy.snap);
+  });
+
+  it('recounts every row of slide 4’s table from the answers', () => {
+    const shown = modelAnswers.rows.filter((row) => row.shown && row.answered);
+    for (const line of modelAnswers.table) {
+      const values = shown.map((row) => amounts(row)[line.key]);
+      expect(line.answers).toBe(values.length);
+      expect(line.low).toBe(Math.min(...values));
+      expect(line.high).toBe(Math.max(...values));
+      expect(line.within_ten_percent, line.key).toBe(values.filter((value) => Math.abs(value - line.reference) <= 0.1 * Math.abs(line.reference)).length);
+    }
+  });
+
+  it('says none of the seven came within 10%, and prints the range', () => {
+    expect(modelAnswers.shownSnapWithinTenPercent).toBe(0);
+    expect(render(2)).toContain('None of the seven came within 10%');
+    expect(notes).toContain('none of the seven came within 10%');
+    const snaps = modelAnswers.shownSnap.map((row) => row.snap);
+    expect(notes).toContain(`from ${usd(snaps[0])} to ${usd(snaps[snaps.length - 1])}`);
+  });
+
+  it('names the older versions and their answers in the notes and the ledger', () => {
+    const older = modelAnswers.rows.filter((row) => !row.shown);
+    expect(older).toHaveLength(3);
+    for (const row of older) {
+      for (const text of [notes, ledger]) {
+        expect(text, row.name).toContain(row.name);
+        expect(text, row.name).toContain(usd(amounts(row).snap));
+      }
+    }
+    expect(notes).toContain('data/model_answers.json');
+  });
+
+  it('holds the prompt the answers came from', () => {
+    const digest = createHash('sha256').update(read('analysis/model_ask/prompt.txt')).digest('hex');
+    expect(digest.startsWith(JSON.parse(read('data/model_answers.json')).prompt_sha256_prefix)).toBe(true);
+  });
+});
+
+describe('PolicyBench’s figures', () => {
+  it('pairs each right and wrong rate', () => {
+    for (const card of policyBench.cards) {
+      expect(card.positive_within_10 + card.positive_wrong_by_more_than_10).toBeCloseTo(100, 6);
+    }
+  });
+
+  it('prints every bar on slide 4 and the three the notes name', () => {
+    const page = render(3);
+    for (const card of policyBench.cards) expect(page).toContain(`${card.positive_wrong_by_more_than_10.toFixed(1)}%`);
+    const wrong = (key: string) => policyBench.cards.find((card) => card.key === key)!.positive_wrong_by_more_than_10;
+    expect(notes).toContain(`${wrong('snap')}% of their SNAP answers`);
+    expect(notes).toContain(`${wrong('state_refundable_credits')}% of their state refundable credit answers`);
+    expect(notes).toContain(`${wrong('payroll_tax')}% of their payroll tax answers`);
+  });
+
+  it('names the leader and dates the comparison', () => {
+    expect(policyBench.bestScore.model).toBe('gpt-6-sol');
+    expect(policyBench.bestScore.exact).toBeGreaterThanOrEqual(policyBench.namedScores['claude-opus-5.5'].exact);
+    expect(policyBench.bestScoreByApril.released <= '2026-04-30').toBe(true);
+    const line = `from ${policyBench.bestScoreByApril.exact} among models released by April to ${policyBench.bestScore.exact} with GPT-6 Sol in September`;
+    expect(notes).toContain(line);
+    expect(render(3).replace(/\s+/g, ' ')).toContain(line);
+  });
+
+  it('says on slides 3 and 4 that PolicyBench grades against PolicyEngine', () => {
+    for (const index of [2, 3]) expect(render(index)).toContain('PolicyBench grades against PolicyEngine');
+  });
+});
+
+describe('coverage', () => {
+  const { default_file: national, local_area_file: local, policyengine_us: model } = coverage;
+  const page = () => render(11).replace(/&rsquo;/g, '’');
+
+  it('counts all 51 jurisdictions one way or the other', () => {
+    expect(model.jurisdictions_with_income_tax + model.jurisdictions_without_income_tax.length).toBe(51);
+    expect(model.state_tanf_variables).toBe(51);
+    expect(model.child_care_programs_latest).toBe(51);
+  });
+
+  it('adds the local file’s households and targets from their parts', () => {
+    const spines = Object.values(local.households_by_spine);
+    expect(spines.reduce((sum, count) => sum + count, 0)).toBe(local.households);
+    expect(local.targets_by_family_and_level.reduce((sum, row) => sum + row.n_targets, 0)).toBe(local.targets);
+    expect(local.households_by_spine.asec_puf).toBe(national.households);
+  });
+
+  it('leaves child poverty out of the local file’s targets', () => {
+    for (const row of local.targets_by_family_and_level) expect(row.family).not.toMatch(/poverty|child/i);
+  });
+
+  it('prints the same counts on slide 12 and in the notes and the ledger', () => {
+    for (const count of [national.households, national.targets, local.targets]) {
+      for (const text of [page(), notes, ledger]) expect(text).toContain(count.toLocaleString('en-US'));
+    }
+    expect(page()).toContain('1.5 million ACS households');
+    expect(notes).toContain('1.5 million American Community Survey households');
+    for (const share of [national.share_within_10_percent, local.share_within_10_percent]) {
+      for (const text of [notes, ledger]) expect(text).toContain(`${(share * 100).toFixed(2)}%`);
+    }
   });
 });

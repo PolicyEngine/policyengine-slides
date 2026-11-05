@@ -12,26 +12,73 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 
 | Slide | Claim | Source |
 | --- | --- | --- |
-| 3 | $28,166 in Idaho, $54,345 in Alaska, median Delaware $46,920 | `analysis/compute_family.py` → `data/family.json` → `analysis/summarize.py` → `data/charts.json` |
-| 3 | Gap of $16,404 at $30,000 and $21,670 at $60,000 | `data/charts.json`, `spreads` |
-| 3 | At $40,000, 47 jurisdictions pay a subsidy in all twelve months, Nevada and Idaho in none, Indiana in four and South Dakota in five | `analysis/subsidy_months.py` → `data/subsidy_months.json`, which reads each state's monthly program variables |
-| 4 | Each state's value on four lines | `data/charts.json`, `lines_by_program` |
-| 4 | Texas: $15,791 subsidy, −$5,598 SNAP, +$10,193 net resources | `analysis/interaction.py` → `data/interaction.json` |
-| 5 | Idaho −$17,808 at $35,000, Maryland −$15,343 at $97,500, Iowa −$14,967 at $44,000, the three largest drops of the 51 | `data/charts.json`, `cliff_ranking`, which records each line's change in every state |
-| 5 | In 46 of 51 jurisdictions, the largest drop comes from the subsidy | `cliff_ranking`. The family loses TANF at the largest drop in Massachusetts and New Hampshire, and WIC in Maine, New Mexico and Vermont. |
-| 5 | We estimate enrolled limits for this family of about $110,000 in Maryland and $68,000 in Iowa. Its net resources then fall by $15,572 and $6,817, respectively | `analysis/enrolled_cliffs.py` → `data/enrolled_cliffs.json`, which adds only each state's enrolled flag to the same household. Its new-applicant runs reproduce `data/family.json`. The same runs give about $75,000 and $13,874 in Idaho, which we leave off the slide because Idaho's department applies the lower limit when a family recertifies |
-| 5 | Median total effective marginal tax rate on $500 more in earnings, across 51 jurisdictions: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over $500 more in earnings |
-| 7 | SNAP eligibility 17.5% in Arkansas and Tennessee to 38.3% in Maryland, among SPM units with children; child Medicaid or CHIP 39.8% in Idaho to 66.1% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
-| 8 | State cost, 29.4% of households would gain, none would lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
-| 8 | 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children, 2026 child poverty rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` and `effective_households_with_children` (Kish, counting each source household once), `baseline_child_poverty`, `reformed_child_poverty` |
-| 11 | Effective sample in the median state; child poverty estimates miss Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
-| 12 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 3's family (`data/family.json`) |
+| 6 | $28,166 in Idaho, $54,345 in Alaska, median Delaware $46,920 | `analysis/compute_family.py` → `data/family.json` → `analysis/summarize.py` → `data/charts.json` |
+| 6 | Gap of $16,404 at $30,000 and $21,670 at $60,000 | `data/charts.json`, `spreads` |
+| 6 | At $40,000, 47 jurisdictions pay a subsidy in all twelve months, Nevada and Idaho in none, Indiana in four and South Dakota in five | `analysis/subsidy_months.py` → `data/subsidy_months.json`, which reads each state's monthly program variables |
+| 6 | Federal taxes and credits vary least across states | `data/charts.json`, `lines_by_program` |
+| Questions | Texas: $15,791 subsidy, −$5,598 SNAP, +$10,193 net resources | `analysis/interaction.py` → `data/interaction.json` |
+| 7 | Idaho −$17,808 at $35,000, Maryland −$15,343 at $97,500, Iowa −$14,967 at $44,000, the three largest drops of the 51 | `data/charts.json`, `cliff_ranking`, which records each line's change in every state |
+| 7 | In 46 of 51 jurisdictions, the largest drop comes from the subsidy | `cliff_ranking`. The family loses TANF at the largest drop in Massachusetts and New Hampshire, and WIC in Maine, New Mexico and Vermont. |
+| 7 | We estimate enrolled limits for this family of about $110,000 in Maryland and $68,000 in Iowa. Its net resources then fall by $15,572 and $6,817, respectively | `analysis/enrolled_cliffs.py` → `data/enrolled_cliffs.json`, which adds only each state's enrolled flag to the same household. Its new-applicant runs reproduce `data/family.json`. The same runs give about $75,000 and $13,874 in Idaho, which we leave off the slide because Idaho's department applies the lower limit when a family recertifies |
+| 7 | Median total effective marginal tax rate on $500 more in earnings, across 51 jurisdictions: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over $500 more in earnings |
+| 10 | SNAP eligibility 17.5% in Arkansas and Tennessee to 38.3% in Maryland, among SPM units with children; child Medicaid or CHIP 39.8% in Idaho to 66.1% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
+| 9 and Questions | State cost, 29.4% of households would gain, none would lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
+| 9 and Questions | 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children, 2026 child poverty rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` and `effective_households_with_children` (Kish, counting each source household once), `baseline_child_poverty`, `reformed_child_poverty` |
+| Questions | Effective sample in the median state; child poverty estimates miss Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
+| 14 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 6's family (`data/family.json`) |
 
-We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 7's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 8's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's default file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
+We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's default file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
+
+## This family, line by line
+
+`analysis/family_lines.py` → `data/family_lines.json` runs the family from `analysis/household.py` in Massachusetts, in Middlesex County, at $40,000 for 2026. Slide 3 reads SNAP with and without the subsidy, slide 5 reads every line, and slide 8 reads the doubled credit.
+
+- The lines add up to $49,127.46, and `net_resources` reads $49,127.47. Rounding explains the cent.
+- Payroll tax holds $2,480 of Social Security, $580 of Medicare and $184 of `ma_employee_state_payroll_tax`, which the model documents as employee-side Massachusetts paid leave contributions.
+- The $16,942 subsidy leaves the family $1,058 of `childcare_expenses`, and `snap_dependent_care_deduction` reads the same amount. Without the subsidy, that deduction reads $18,000, SNAP $8,739, federal refundable credits $7,323 and net resources $37,455.
+- Doubling the credit raises `ma_child_and_family_credit` from $880 to $1,760 and net resources to $50,007, and moves no other line.
+
+## What the models answered
+
+`analysis/model_ask/` holds the prompt, the method we registered before any answer came back, the runners and `comparison.json`. `analysis/model_answers.py` reads that file and writes `data/model_answers.json`, which holds all ten answers and marks the seven slide 3 shows.
+
+- We asked each model once on November 5, 2026, with no tools, in PolicyBench's no-tools batch format (policybench commit 8180cde1). We added a county line, a child care schedule and one sentence on subsidy take-up. These answers belong to this run, not to PolicyBench's board.
+- We gave a call that failed or returned unparseable JSON one retry, and reran no call because of its value.
+- The GPT models and the three Claude 5.5 models ran at each model's default effort. Those Claude models timed out twice at max effort first. Claude Opus 4.7 ran at max, through a session setting, and stays off the slides.
+- OpenAI doesn't serve GPT-5.5 on ChatGPT accounts. We set aside a first batch because its calls could reach tools, and `PREREGISTERED.md` records why.
+- Slide 3 shows the newest version in each family, whatever it answered. GPT-5.6 Terra ($3,838) and GPT-6 Sol ($4,000) came within 10%, and Claude Opus 4.7 ($4,500) didn't.
+- One call gives one draw from each model, so these answers don't rank the models.
+
+## PolicyBench
+
+`analysis/policybench_board.py` → `data/policybench_board.json` reads the live page at policybench.org (fetched November 5, 2026, board snapshot 2026-10-27), the board's `dashboard-data.json` from October 23, 2026, and `modelMeta.ts` at policybench commit 8180cde1.
+
+- Slide 4's bars come from the page's "Where models still break": 51 models and 100 US households, counting answers off by more than 10% among households with a positive amount.
+- The exact-match score counts an amount right within $1 and an eligibility flag right on a match, and weights each answer by household impact. GPT-5.5 led the models released by April, at 87.9, and GPT-6 Sol leads the board at 95.2. GPT-6.1 Sol scores 90.1 and Claude Opus 5.5 94.1.
+- PolicyBench grades against PolicyEngine, and no administrative record stands behind its references. The [reference audit](https://policybench.org/notes/2026-09-22-reference-audit) gives the counts we quote, and the [tool pilot](https://policybench.org/notes/2026-10-20-given-a-policyengine-tool-three-models-score-above-99) gives the scores with a tool.
+
+## The ways in
+
+We checked each address on slide 10 on November 5, 2026. The deck pins PolicyEngine US 2.90.2. PyPI carried 2.95.0 that morning, CliffWatch reported 1.755.5 on November 4, and Build ran 2.2.1 on November 5. The plugin's repository, PolicyEngine/policyengine-claude, describes its contents as "agents, commands, and skills for tax/benefit microsimulation".
+
+## Coverage
+
+`analysis/coverage_counts.py` → `data/coverage.json` counts the PolicyEngine US package and reads the manifests Populace US publishes on Hugging Face.
+
+- **Model:** income tax parameters for 44 jurisdictions and none for Alaska, Florida, Nevada, South Dakota, Tennessee, Texas and Wyoming, 51 entries in `STATE_TANF_VARIABLES`, and 51 programs in `child_care_subsidy_programs`. `local_income_tax_before_refundable_credits` adds New York City's income tax and Philadelphia's wage tax, among others.
+- **Default file** (`populace-us-2024-spm-20260915`): 57,240 households and 5,659 targets. We fit 95.69% within 10% in sample, with an effective sample of 9,174.
+- **Local-area file** (`populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`): 1,586,908 households, 1,529,668 from the ACS and 57,240 from the ASEC and PUF. It fits 4,765 targets, 4,329 by state and 436 by congressional district, and 96.08% land within 10% in sample, with an effective sample of about 12,124. Those targets leave out state child counts and poverty, so this fit doesn't establish state child poverty accuracy.
+- **Take-up** (microcosm commit 766b7c792): `us_runtime/snap_take_up.py` keeps everyone who reports SNAP and draws the rest to USDA's participation rate. `us_runtime/medicaid_take_up.py` keeps everyone who reports Medicaid and calibrates the rest to CMS state enrollment counts.
+- **Imputation:** the `US_DONORS` table at that commit names the IRS Public Use File, the SCF with the SIPP for financial assets, and the SIPP for tips.
+- **Geography:** `us_runtime/puma_ladder.py` keeps an ACS household's PUMA and draws its county and congressional district within that PUMA, in proportion to population overlap.
+
+## Work in progress
+
+Slide 13 links each open pull request, all open on November 5, 2026: PolicyEngine/microcosm#1445 (state child poverty diagnosis), PolicyEngine/policyengine-us#10640 (Medicaid spouse rule), PolicyEngine/policyengine-us#10607 (LIHEAP in California, with #10612, #10613, #10614 and #10616 for Delaware, Idaho, Hawaii and South Carolina), PolicyEngine/microcosm#1453 (local tax geography) and PolicyEngine/microcosm#1246 (student loans).
 
 ## The fixed sample
 
-`analysis/sample_families.py` makes 3,000 draws from the Populace US households with someone under 18, with replacement and in proportion to household weight. When the script draws a household twice, it writes two copies under fresh IDs, and each copy counts once. The sample includes 2,075 distinct household records. Slide 7's Medicaid or CHIP share covers children under 19, so an 18-year-old counts only when the household also holds someone younger.
+`analysis/sample_families.py` makes 3,000 draws from the Populace US households with someone under 18, with replacement and in proportion to household weight. When the script draws a household twice, it writes two copies under fresh IDs, and each copy counts once. The sample includes 2,075 distinct household records. Slide 10's Medicaid or CHIP share covers children under 19, so an 18-year-old counts only when the household also holds someone younger.
 
 The script keeps input variables and IDs. It renames the stored Social Security amounts, `social_security_retirement`, `social_security_disability`, `social_security_survivors` and `social_security_dependents`, to the `_reported` inputs the model reads. It leaves out `has_marketplace_health_coverage`, `is_spm_independent_minor_role` and 181 names that PolicyEngine US 2.90.2 does not define. When we restored those two variables, the runs for Tennessee, Oregon and Hawaii returned the same SNAP and child Medicaid or CHIP shares to every digit (`analysis/audit_sample_columns.py` → `data/sample_columns.json`).
 
@@ -71,8 +118,8 @@ Counting both copies would put Massachusetts at about 395, or 173 among those wi
 - `analysis/largest_counties.py` picks each state's largest county from the 2017 to 2021 American Community Survey.
 - We set `meets_ccdf_activity_test` to true, because a parent in a regular job meets it and the input defaults to false.
 - We set `wi_works_placement` to `NONE`. Otherwise we place a family with no child under 1 and no third-trimester pregnancy in a Community Service Job.
-- We set `gov.states.id.dhw.iccp.income.fpl_rate.initial_eligibility` so Idaho's limit for this family equals the $2,888 a month the department posts (`state_updates` in `analysis/household.py`). Every run of this family takes that limit, in Idaho only. Slides 7, 8 and 11 run the model's own 175%.
-- We add Ohio's Child Care Choice Voucher to every run of this family in Ohio (`oh_child_care_choice_voucher` in `analysis/household.py`). It pays the smaller of the bill and $1,550 a month, to a family over the first program's limit with income up to 200% of the guideline. Slides 7, 8 and 11 leave it out.
+- We set `gov.states.id.dhw.iccp.income.fpl_rate.initial_eligibility` so Idaho's limit for this family equals the $2,888 a month the department posts (`state_updates` in `analysis/household.py`). Every run of this family takes that limit, in Idaho only. Slides 9 and 10 and our state baselines run the model's own 175%.
+- We add Ohio's Child Care Choice Voucher to every run of this family in Ohio (`oh_child_care_choice_voucher` in `analysis/household.py`). It pays the smaller of the bill and $1,550 a month, to a family over the first program's limit with income up to 200% of the guideline. Slides 9 and 10 and our state baselines leave it out.
 - $40,000 over 2,080 hours comes to $19.23 an hour. On the Department of Labor's table, updated July 1, 2026, DC sets the highest basic rate, at $18.40 (dol.gov/agencies/whd/minimum-wage/state). The Department of Labor excludes local minimums, which can run higher.
 - We vary earnings in the sweeps and hold hours at 40 a week. At $30,000, the family earns $14.42 an hour, less than the basic rate in 17 states and DC on that table.
 
@@ -98,7 +145,7 @@ We count all four payments in net resources in every state.
 - **Alabama and Missouri:** both post $3,331 a month for new applicants in a family of three, $2 below this family's $3,333. We keep both modeled subsidies and report the difference here. Alabama's [June 2026 fact sheet](https://dhr.alabama.gov/wp-content/uploads/2026/06/CHILD-CARE-FACT-SHEET-Jun2026-1.pdf) tops its initial scale at $3,331, and it multiplies weekly pay by 4.333, which gives this family $3,333.08. Holding the family to that limit from June 1 leaves five months of subsidy, $6,070, and net resources of $32,224. Missouri's [chart, updated July 1, 2026](https://dese.mo.gov/sites/g/files/zuston521/files/media/pdf/2026/07/Income%20Elig%20_Updated%206.29.26.pdf), tops its traditional scale at $3,331, 150% of the 2025 guideline, and its [May 2026 manual](https://dese.mo.gov/sites/g/files/zuston521/files/media/pdf/2026/05/Child%20Care%20Subsidy%20Eligibility%20Policy%20Manual_May%202026.pdf) states no factor for wages. The model applies 150% of the 2026 guideline, $3,415. Holding the family to the chart leaves no subsidy and net resources of $27,711.
 - **Maryland:** sources differ on the limit for new applicants. [Maryland Family Network](https://marylandchild.org/child-care-scholarship/) and the [Department of Legislative Services](https://dls.maryland.gov/pubs/prod/ProgEval/EvalofDivisionofEarlyChildhood.pdf#page=38) print $94,026 for three and $106,563 at redetermination, which equal 75% and 85% of the federal fiscal 2025 median income the state's [February 2026 briefing](https://mgaleg.maryland.gov/meeting_material/2026/w&m%20-%20134146885147130127%20-%20Briefing%20materials.pdf#page=20) names. The same briefing also gives $115,587 for four, which matches the model's limit of about $97,000 for three. We keep the model's limit. At $94,026, we estimate the largest drop at $15,197, at the step from $94,000 to $94,500 (`data/limit_checks.json`).
 - **Oklahoma:** at its default one-star center rates, Oklahoma pays $555 a month after the family's copay.
-- **Indiana:** Indiana lowered its limit for new applicants from 150% to 135% of the federal poverty guideline on April 5, 2026 (`get_on_fpg_rate`), and families in the program stay eligible to 85% of state median income (`stay_on_smi_rate`). For a family of three, FSSA sets [$3,074 a month to get on](https://www.in.gov/fssa/carefinder/files/Income-Get-on-CCDF.pdf) and [$6,400 to stay on](https://www.in.gov/fssa/carefinder/files/Income-Stay-on-CCDF.pdf). The $3,333-a-month new applicant falls between them, so we count $1,231 a month from January through April, $4,925 in all. With the April limit in all twelve months, the family ends up with $26,562, below Idaho's $28,166 (`data/subsidy_months.json`).
+- **Indiana:** the model reads 150% of the federal poverty guideline through April 4, 2026, citing [OECOSL's bulletin](https://www.in.gov/fssa/carefinder/system-updates-2023) on the raise from 127% on August 1, 2023, and 135% from April 5, 2026 (`get_on_fpg_rate`). Families in the program stay eligible to 85% of state median income (`stay_on_smi_rate`). For a family of three, FSSA sets [$3,074 a month to get on](https://www.in.gov/fssa/carefinder/files/Income-Get-on-CCDF.pdf) and [$6,400 to stay on](https://www.in.gov/fssa/carefinder/files/Income-Stay-on-CCDF.pdf). The $3,333-a-month new applicant falls between them, so we count $1,231 a month from January through April, $4,925 in all. We found no chart Indiana posted before April. The [PN3 Roadmap](https://pn3policy.org/wp-content/uploads/2026/08/PN3PIC_Subsidies_Narratives_2026.pdf) prints 137% of the guideline for 2026, and its 2025 edition printed 140%. And 150% of the 2025 guideline comes to $3,331 a month, $2 below this family, while the model reaches $3,415 by pairing 150% with the 2026 guideline. With the April limit in all twelve months, the family ends up with $26,562, below Idaho's $28,166 (`data/subsidy_months.json`).
 - **South Dakota:** we model `sd_cca` from August 2026, so $7,500 equals five months at $1,500.
 - **Provider tier:** we leave each state at its default, its base or lowest tier.
 - **Alaska:** Alaska pays each person a $1,000 dividend and $200 of energy relief, $3,600 for this family (`gov.states.ak.dor.permanent_fund_dividend` and `energy_relief`).
@@ -107,45 +154,33 @@ We count all four payments in net resources in every state.
 
 | Slide | Claim | Code at `469ad12` |
 | --- | --- | --- |
-| 2 | Program list, every state income tax, TANF and child care rules of all 51 jurisdictions | `STATE_TANF_VARIABLES` holds 51 entries; `child_care_subsidy_programs` holds 51 from 2025 |
-| 3 | We model each state's income limits, not its priority groups, waiting lists or enrollment freezes | No child care variable or parameter tests a waiting list or an enrollment freeze. A search for "priority" in the state child care code finds comments in Alabama (copays for protective services), Kentucky and New Mexico, whose one rule waives the income test for families leaving TANF. None of them applies to this family. A comment in `ca_capp_eligible` says the model assumes enrollment, New Mexico's parameters name a waiting list only in a citation, and Maryland's `smi_freeze_in_effect` freezes the income base year, not enrollment. None of the 18 `takes_up_*` variables covers a state child care subsidy |
-| 3 | We add Ohio's Child Care Choice Voucher | `oh_child_care_subsidies` adds only `oh_ccap`, and no variable or parameter under `gov/states/oh` names the voucher |
-| 4 | Congress lets SNAP households deduct their care costs | `snap_dependent_care_deduction`, citing 7 U.S.C. 2014(e)(3), reads post-subsidy `childcare_expenses` |
-| 6 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
-| 7 | Our TAXSIM-compatible interface runs 2021 onward through PolicyEngine and earlier years through TAXSIM35 | `StitchedRunner.PE_MIN_YEAR = 2021` in `policyengine_taxsim/runners/stitched_runner.py` at the policyengine-taxsim commit above |
-| 8 | Child tax credit, EITC, SNAP and state tax credit reforms, state by state | `getReformOptionsForState` in `frontend/lib/state-programs.ts` at the dashboard commit above returns federal child tax credit and EITC options and SNAP options in all 51 jurisdictions, state EITC options in 43 (the 42 with an income tax, and Washington) and state child tax credit options in 17 for 2026 |
-| 10 | Project through 2035 | The PolicyEngine API's US metadata lists years 2022 to 2035 |
-| 11 | All 51 jurisdictions from August 2026 | `gov.hhs.ccdf.child_care_subsidy_programs` lists 51 from 2025. We model Illinois's program from July 2025, Florida's from October 2025, and Arkansas's and Ohio's from November 2025 (each program's `in_effect`), and South Dakota's from August 2026, when `uses_weekly_rates` turns on |
-| 11 | Copy back to 2015 | `system.py` calls `backdate_parameters(self.parameters, first_instant=f"{FIRST_MODELED_YEAR}-01-01")`, and `tools/parameters.py` sets `FIRST_MODELED_YEAR = 2015`. Wisconsin Shares' rate parameters start on 2025-10-01, so we compute subsidies of $13,258 in 2021 and $14,024 in 2023 (`analysis/wisconsin_schedules.py` → `data/wisconsin_schedules.json`) |
-| 11 | We take earnings and paid leave benefits as inputs | The minimum wage appears only in eligibility tests. `pfml_benefits` holds benefits received, and the model computes employee contributions through `employee_state_payroll_tax` |
-| 11 | Labor supply | Elasticities default to zero |
-| 11 | Medicaid limits | `is_medically_needy_for_medicaid` documentation |
-| 11 | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
+| 12 | Program list, every state income tax, TANF and child care rules of all 51 jurisdictions | `STATE_TANF_VARIABLES` holds 51 entries; `child_care_subsidy_programs` holds 51 from 2025 |
+| 6 and Questions | We model each state's income limits, not its priority groups, waiting lists or enrollment freezes | No child care variable or parameter tests a waiting list or an enrollment freeze. A search for "priority" in the state child care code finds comments in Alabama (copays for protective services), Kentucky and New Mexico, whose one rule waives the income test for families leaving TANF. None of them applies to this family. A comment in `ca_capp_eligible` says the model assumes enrollment, New Mexico's parameters name a waiting list only in a citation, and Maryland's `smi_freeze_in_effect` freezes the income base year, not enrollment. None of the 18 `takes_up_*` variables covers a state child care subsidy |
+| 6 | We add Ohio's Child Care Choice Voucher | `oh_child_care_subsidies` adds only `oh_ccap`, and no variable or parameter under `gov/states/oh` names the voucher |
+| 3 and Questions | Congress lets SNAP households deduct their care costs | `snap_dependent_care_deduction`, citing 7 U.S.C. 2014(e)(3), reads post-subsidy `childcare_expenses` |
+| 8 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
+| 10 | Our TAXSIM-compatible interface runs 2021 onward through PolicyEngine and earlier years through TAXSIM35 | `StitchedRunner.PE_MIN_YEAR = 2021` in `policyengine_taxsim/runners/stitched_runner.py` at the policyengine-taxsim commit above |
+| 10 | Child tax credit, EITC, SNAP and state tax credit reforms, state by state | `getReformOptionsForState` in `frontend/lib/state-programs.ts` at the dashboard commit above returns federal child tax credit and EITC options and SNAP options in all 51 jurisdictions, state EITC options in 43 (the 42 with an income tax, and Washington) and state child tax credit options in 17 for 2026 |
+| Questions | All 51 jurisdictions from August 2026 | `gov.hhs.ccdf.child_care_subsidy_programs` lists 51 from 2025. We model Illinois's program from July 2025, Florida's from October 2025, and Arkansas's and Ohio's from November 2025 (each program's `in_effect`), and South Dakota's from August 2026, when `uses_weekly_rates` turns on |
+| Questions | Copy back to 2015 | `system.py` calls `backdate_parameters(self.parameters, first_instant=f"{FIRST_MODELED_YEAR}-01-01")`, and `tools/parameters.py` sets `FIRST_MODELED_YEAR = 2015`. Wisconsin Shares' rate parameters start on 2025-10-01, so we compute subsidies of $13,258 in 2021 and $14,024 in 2023 (`analysis/wisconsin_schedules.py` → `data/wisconsin_schedules.json`) |
+| Questions | We take earnings and paid leave benefits as inputs | The minimum wage appears only in eligibility tests. `pfml_benefits` holds benefits received, and the model computes employee contributions through `employee_state_payroll_tax` |
+| Questions | Labor supply | Elasticities default to zero |
+| 6 and Questions | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
 
 ## Waiting lists
 
-We quote these on slide 5 and in the notes' Questions section, and we model none of them:
+We quote these on slide 7 and in the notes' Questions section, and we model none of them:
 
 - **Maryland:** MSDE started a waiting list on May 1, 2025 ([fiscal note on HB 849](https://mgaleg.maryland.gov/2026RS/fnotes/bil_0009/hb0849.pdf)). MSDE puts families it approves on that list, and exempts families experiencing homelessness, families receiving TANF, TCA or SSI, and families adding a sibling to a scholarship ([MSDE's August 2026 notice](https://content.govdelivery.com/attachments/MDMSDE/2026/08/19/file_attachments/3751314/CCS%20Homelessness%20One%20Pager%20-%20August%202026.pdf)).
 - **Indiana:** FSSA puts new applicants on a waiting list and sets its limit at 135% of the poverty level ([FSSA's site](https://www.in.gov/fssa/carefinder/child-care-assistance/index)).
 - **Alabama:** DHR puts new applications it received on or after May 8, 2026 on a wait list ([DHR's notice](https://dhr.alabama.gov/change-to-child-care-subsidy-approval-process/)).
 - **Missouri:** DESE puts newly applying families on a waitlist from March 1, 2026 ([DESE's release](https://dese.mo.gov/missouri-implement-waitlist-child-care-assistance-amid-record-demand)).
+- **Texas:** the [Texas Tribune reported on August 11, 2026](https://www.texastribune.org/2026/08/11/texas-cuts-child-care-subsidies/) that "more than 100,000 children are waiting for scholarships", and that the state's target falls from 146,736 seats in 2026 to 132,689 in 2027.
 - **All states:** the National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025 ([press release](https://nwlc.org/press-release/nwlc-finds-waiting-lists-for-child-care-assistance-nearly-doubled-in-2025/)).
-
-## The other tools
-
-We use the session abstract's descriptions of the following tools:
-
-- Policy Tracking System
-- Policy Impact Calculator
-- State Safety Net Interactive
-- Welfare Rules Database
-- CCDF Policies Database
-- State of the Safety Net with ATTIS
 
 ## The web apps
 
-We captured slide 9's screenshots and recording from the live sites on November 4, 2026. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
+We captured slide 11's screenshots and recording from the live sites on November 4, 2026. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
 
 - CliffWatch (policyengine.org/us/cliffwatch) ran PolicyEngine US 1.755.5, as its `/api/metadata` reports. We entered a single parent, 33, with children aged 6 and 10 in ZIP code 02139, and left rent and child care at zero. We kept its default programs, which include Medicaid, CHIP and premium tax credits. CliffWatch passes PolicyEngine US the state and no county, so the model computes those credits from Barnstable County's benchmark plan.
 - In Build (app.policyengine.org/us/build), we set the Massachusetts child and family tax credit amount, `gov.states.ma.tax.income.credits.child_and_family.amount`, from $440 to $880 from 2026. For Build, we set the browser's time zone to UTC.
