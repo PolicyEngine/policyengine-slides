@@ -37,7 +37,7 @@ export default function CliffsSlide() {
                   <span>
                     {cliff.name}, {usd(cliff.before)} to {usd(cliff.after)}
                   </span>
-                  <span className="font-semibold tabular-nums">{usd(-cliff.drop)}</span>
+                  <span className="whitespace-nowrap font-semibold tabular-nums">{usd(-cliff.drop)}</span>
                 </li>
               ))}
             </ul>
@@ -57,7 +57,7 @@ export default function CliffsSlide() {
               {[30_000, 60_000].map((earnings) => (
                 <li key={earnings} className="flex items-baseline justify-between gap-4">
                   <span>At {usd(earnings)}</span>
-                  <span className="font-semibold tabular-nums">{percent(medianRateAt(earnings))}</span>
+                  <span className="whitespace-nowrap font-semibold tabular-nums">{percent(medianRateAt(earnings))}</span>
                 </li>
               ))}
             </ul>
