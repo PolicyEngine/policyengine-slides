@@ -532,6 +532,17 @@ describe('limits and programs the model does not carry', () => {
     expect(notes).toContain(`Alabama's by ${usd(swing(checks.alabama_at_model_limit, 'AL'))}`);
     expect(notes).toContain(`slide 6's title, by ${usd(swing(checks.indiana_at_model_limit, 'IN'))}`);
     expect(notes).toContain(`We estimate ${usd(checks.alabama_at_model_limit.subsidy)} for a family in the program all year`);
+    // Taxes set the gap between Indiana and Idaho, since neither pays any of the bill.
+    const at = family.earnings.indexOf(headlineEarnings);
+    const stateTaxes = (code: string) => family.states[code].state_taxes[at];
+    expect(family.states.IN.child_care_subsidy[at]).toBe(0);
+    expect(family.states.ID.child_care_subsidy[at]).toBe(0);
+    expect(stateTaxes('IN')).toBeCloseTo(-(522.18 + 626.2), 2);
+    expect(stateTaxes('ID')).toBeCloseTo(455, 2);
+    expect(netAt('ID') - netAt('IN')).toBeCloseTo(stateTaxes('ID') - stateTaxes('IN'), 2);
+    expect(notes).toContain(`Those amounts make up the ${usd(netAt('ID') - netAt('IN'))} gap`);
+    expect(notes).toContain(`Indiana would still sit lowest, at ${usd(netAt('IN') + 626.2)}`);
+    expect(netAt('IN') + 626.2).toBeLessThan(netAt('MO'));
   });
 });
 
