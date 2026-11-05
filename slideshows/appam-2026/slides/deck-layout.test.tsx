@@ -131,6 +131,25 @@ describe('deck.module.css', () => {
     expect(matches(smallScreens.params, width, height)).toBe(false);
   });
 
+  it('stops the width caps at 1100 px outside the 3:2 shapes', () => {
+    expect(matches(widthCaps.params, 1099, 620)).toBe(true);
+    expect(matches(widthCaps.params, 1100, 620)).toBe(false);
+    expect(matches(shortWindows.params, 1100, 620)).toBe(true);
+  });
+
+  it('holds the top margin to a tenth of a short window and keeps the footer clear', () => {
+    expect(declared(shortWindows, '.deck > div:first-child', 'padding-top')).toBe('10vh');
+    // The footer stands 5rem tall, so text stops a full rem above it.
+    expect(declared(shortWindows, '.deck > div:first-child', 'padding-bottom')).toBe('6rem');
+  });
+
+  it("brings the cover's logo and title closer in a short window", () => {
+    expect(declared(shortWindows, '.title > div > div:first-child', 'top')).toBe('1.5rem');
+    expect(declared(shortWindows, '.title > div > div:first-child img', 'width')).toBe('14rem');
+    expect(declared(shortWindows, '.cover', 'padding-top')).toBe('3rem');
+    expect(declared(shortWindows, '.cover > :not(:last-child)', 'margin-block-end')).toBe('1.25rem');
+  });
+
   it('closes the gap under the title in a short window', () => {
     // The largest overrun left at 1280x600 before this rule: slide 8's caption ran 24 px under the footer.
     const gap = 2.5 - parseFloat(declared(shortWindows, '.frame > div:first-child', 'margin-bottom') ?? '2.5');
