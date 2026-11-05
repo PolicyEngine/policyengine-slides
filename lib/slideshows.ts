@@ -82,6 +82,7 @@ export function getAllSlideshowMetadata(): SlideshowMetadata[] {
     location: s.location,
     speakers: s.speakers,
     private: s.private,
-    slideCount: flattenSlides(s.slides).length,
+    // The printed count: a step that only works live adds no page.
+    slideCount: flattenSlides(s.slides, { exportMode: true }).length,
   }));
 }

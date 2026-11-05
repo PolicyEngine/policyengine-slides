@@ -124,7 +124,7 @@ We use the session abstract's descriptions of the following tools:
 
 ## The web apps
 
-We captured slide 9's screenshots from the live sites on November 4, 2026.
+We captured slide 9's screenshots and recording from the live sites on November 4, 2026. We cut the waits from the recording, including about 20 seconds while CliffWatch calculates.
 
 - CliffWatch (policyengine.org/us/cliffwatch) ran PolicyEngine US 1.755.5, as its `/api/metadata` reports. We entered a single parent, 33, with children aged 6 and 10 in ZIP code 02139, left rent and child care at zero, and kept its default programs, which include Medicaid, CHIP and premium tax credits.
 - In Build (app.policyengine.org/us/build), we set the Massachusetts child and family tax credit amount, `gov.states.ma.tax.income.credits.child_and_family.amount`, from $440 to $880 from 2026. We captured Build with the browser's time zone set to UTC.

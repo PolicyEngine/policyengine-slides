@@ -13,9 +13,12 @@ interface SlideshowViewerProps {
 
 function SlideshowViewerClient({ config }: SlideshowViewerProps) {
   const searchParams = useSearchParams();
-  const steps = useMemo(() => flattenSlides(config.slides), [config.slides]);
-  const totalSteps = steps.length;
   const exportMode = isExportMode(searchParams);
+  const steps = useMemo(
+    () => flattenSlides(config.slides, { exportMode }),
+    [config.slides, exportMode],
+  );
+  const totalSteps = steps.length;
 
   // Read the deep-link step once. After that, currentStep owns the URL: the
   // effect below writes it with replaceState, and Next mirrors that write back
@@ -53,10 +56,11 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
+      // Presentation clickers send PageDown and PageUp.
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         setCurrentStep((prev) => Math.min(prev + 1, totalSteps - 1));
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
         e.preventDefault();
         setCurrentStep((prev) => Math.max(prev - 1, 0));
       } else if (e.key === 'Home') {

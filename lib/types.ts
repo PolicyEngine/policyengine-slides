@@ -24,6 +24,8 @@ export function formatDate(iso: string): string {
 export interface SlideEntry {
   component: ComponentType<{ buildStep?: number }>;
   builds?: number;
+  /** Steps in a PDF export, when a later step only works live, such as a video. Defaults to `builds`. */
+  exportBuilds?: number;
 }
 
 export type SlideConfig = ComponentType | SlideEntry;
@@ -62,15 +64,22 @@ export function getSlideComponent(slide: SlideConfig): ComponentType<{ buildStep
   return slide as ComponentType<{ buildStep?: number }>;
 }
 
-export function getSlideBuilds(slide: SlideConfig): number {
-  if (isSlideEntry(slide)) return slide.builds ?? 1;
-  return 1;
+export function getSlideBuilds(
+  slide: SlideConfig,
+  { exportMode = false }: { exportMode?: boolean } = {},
+): number {
+  if (!isSlideEntry(slide)) return 1;
+  const builds = slide.builds ?? 1;
+  return exportMode ? (slide.exportBuilds ?? builds) : builds;
 }
 
-export function flattenSlides(slides: SlideConfig[]): { slideIndex: number; buildStep: number }[] {
+export function flattenSlides(
+  slides: SlideConfig[],
+  options: { exportMode?: boolean } = {},
+): { slideIndex: number; buildStep: number }[] {
   const steps: { slideIndex: number; buildStep: number }[] = [];
   slides.forEach((slide, i) => {
-    const builds = getSlideBuilds(slide);
+    const builds = getSlideBuilds(slide, options);
     for (let b = 1; b <= builds; b++) {
       steps.push({ slideIndex: i, buildStep: b });
     }

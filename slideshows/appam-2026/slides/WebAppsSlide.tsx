@@ -1,5 +1,6 @@
 import Image from '@/components/core/BasePathImage';
 import Frame from './Frame';
+import Walkthrough from './Walkthrough';
 
 const apps = [
   {
@@ -24,7 +25,7 @@ const apps = [
   },
 ];
 
-export default function WebAppsSlide() {
+export default function WebAppsSlide({ buildStep }: { buildStep?: number }) {
   return (
     <Frame title="You can find a family’s cliffs and build a reform without writing code">
       <div className="flex h-full items-center">
@@ -62,6 +63,7 @@ export default function WebAppsSlide() {
           ))}
         </div>
       </div>
+      <Walkthrough play={buildStep === 2} />
     </Frame>
   );
 }

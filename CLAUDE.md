@@ -32,7 +32,7 @@ lib/
 ## Key patterns
 
 - **SlideshowContext** provides `footerText`, `buildStep`, `currentSlide`, etc. to all slides via React context. Slides do not need manual `footerText` props.
-- **Build steps**: Use `{ component: MySlide, builds: N }` in config for progressive reveals. Use `<BuildReveal step={N}>` wrapper in slide content.
+- **Build steps**: Use `{ component: MySlide, builds: N }` in config for progressive reveals. Use `<BuildReveal step={N}>` wrapper in slide content. Add `exportBuilds: M` when a slide's later steps only work live, such as a video: PDF exports and the deck index then count M steps for it.
 - **Lazy mounting**: Only current slide +/- 1 neighbor is mounted.
 - **Slide transitions**: CSS-only 150ms crossfade.
 - Footer reads `footerText` from context; explicit prop wins if passed.

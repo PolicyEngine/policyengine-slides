@@ -55,10 +55,10 @@ function currentUrl() {
   return window.location.pathname + window.location.search;
 }
 
-async function renderAt(url: string) {
+async function renderAt(url: string, deck: SlideshowConfig = config) {
   originalReplaceState.call(window.history, null, "", url);
   await act(async () => {
-    root.render(<SlideshowViewer config={config} />);
+    root.render(<SlideshowViewer config={deck} />);
   });
 }
 
@@ -123,5 +123,66 @@ describe("SlideshowViewer deep links", () => {
     await press("Home");
     expect(counterText()).toBe(`1 / ${TOTAL_STEPS}`);
     expect(currentUrl()).toBe("/slides/demo");
+  });
+});
+
+describe("SlideshowViewer clicker keys", () => {
+  it("moves forward on PageDown and back on PageUp", async () => {
+    await renderAt("/slides/demo?slide=2");
+    await press("PageDown");
+    expect(counterText()).toBe(`4 / ${TOTAL_STEPS}`);
+    await press("PageUp");
+    await press("PageUp");
+    expect(counterText()).toBe(`2 / ${TOTAL_STEPS}`);
+  });
+
+  it("stops at the ends", async () => {
+    await renderAt("/slides/demo");
+    await press("PageUp");
+    expect(counterText()).toBe(`1 / ${TOTAL_STEPS}`);
+    await press("End");
+    await press("PageDown");
+    expect(counterText()).toBe(`${TOTAL_STEPS} / ${TOTAL_STEPS}`);
+  });
+});
+
+describe("SlideshowViewer exportBuilds", () => {
+  const seen: (number | undefined)[] = [];
+  const Probe = ({ buildStep }: { buildStep?: number }) => {
+    seen.push(buildStep);
+    return null;
+  };
+  const deck: SlideshowConfig = {
+    ...config,
+    slides: [Blank, { component: Probe, builds: 2, exportBuilds: 1 }, Blank],
+  };
+  const totalSteps = () => container.querySelector("main")?.getAttribute("data-total-steps");
+  const currentStep = () => container.querySelector("main")?.getAttribute("data-current-step");
+
+  beforeEach(() => {
+    seen.length = 0;
+  });
+
+  it("runs every build live", async () => {
+    await renderAt("/slides/demo?slide=2", deck);
+    expect(totalSteps()).toBe("4");
+    expect(seen.at(-1)).toBe(2);
+    expect(counterText()).toBe("3 / 4");
+    await press("ArrowRight");
+    expect(counterText()).toBe("4 / 4");
+  });
+
+  it("captures one page for the slide in an export", async () => {
+    await renderAt("/slides/demo?slide=1&export=1", deck);
+    expect(totalSteps()).toBe("3");
+    expect(currentStep()).toBe("1");
+    expect(seen.at(-1)).toBe(1);
+  });
+
+  it("moves to the next slide on the next export step", async () => {
+    await renderAt("/slides/demo?slide=2&export=1", deck);
+    expect(totalSteps()).toBe("3");
+    expect(currentStep()).toBe("2");
+    expect(seen).toEqual([]);
   });
 });

@@ -32,7 +32,7 @@ export const appam2026Config: SlideshowConfig = {
     ParametersSlide,
     MicrodataSlide,
     ReformSlide,
-    WebAppsSlide,
+    { component: WebAppsSlide, builds: 2, exportBuilds: 1 },
     ToolsSlide,
     ScopeSlide,
     AxiomSlide,
