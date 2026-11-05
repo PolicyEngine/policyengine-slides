@@ -37,15 +37,15 @@ export default function AxiomSlide() {
               axiom.org
             </a>
             . Georgia allows the deduction when a household has earned income and reports it on time, and
-            applies the rate to its gross earned income.
+            applies the rate to its total countable gross earned income.
           </figcaption>
         </figure>
         <div className={`grid grid-cols-2 gap-[4vh] ${styles.flow}`}>
           <div>
             <p>
-              Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division of Family
-              and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that rule
-              and records the manual&rsquo;s words beside each value: &ldquo;20% earned income
+              For example, Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division
+              of Family and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that
+              rule and records the manual&rsquo;s words beside each value: &ldquo;20% earned income
               deduction&rdquo; and &ldquo;Effective Date: December 2019.&rdquo;
             </p>
           </div>

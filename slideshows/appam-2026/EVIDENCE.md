@@ -195,7 +195,7 @@ We quote these on slide 7 and in the notes' Questions section, and we model none
 
 ## The web apps
 
-We captured slide 12's coverage tracker from www.policyengine.org/us/model/rules/coverage on November 5, 2026. It shows 109 total programs, 87 complete, 18 partial and 4 in progress, and its top line reads "Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). The production API served 2.2.1 when the snapshot was fetched." The deck's own runs use 2.90.2. Slide 12 loads that page in a live frame at the still's crop, and the still shows until the tracker renders and stands in for it in the PDF.
+We captured slide 12's coverage tracker from www.policyengine.org/us/model/rules/coverage on November 5, 2026. It shows 109 total programs, 87 complete, 18 partial and 4 in progress, and its top line reads "Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). The production API served 2.2.1 when the snapshot was fetched." The deck's own runs use 2.90.2. Slide 12 loads that page in a live frame at the still's crop. The still shows until the tracker prints that snapshot, and an export prints the still alone.
 
 We captured slide 11's CliffWatch screenshot on November 4, 2026, and Build's report on November 5, 2026, from the live sites. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
 
@@ -210,3 +210,4 @@ We captured slide 11's CliffWatch screenshot on November 4, 2026, and Build's re
 - Axiom publishes `axiom-rules-engine` under an MIT license.
 - We captured slide 15's graph from axiom.org/app?compose=us-ga:policies/dfcs/snap/3612 on November 5, 2026, and read the rule behind its caption in `3612.yaml`: `earned_income_deduction_allowed` tests `total_countable_gross_earned_income > 0` and not `assistance_unit_failed_to_report_earned_income_timely`, and `earned_income_deduction` multiplies the rate by that income.
 - Georgia's Division of Family and Children Services publishes the rule text and December 2019 effective date in its public SNAP manual (pamms.dhs.ga.gov/dfcs/snap/3612).
+- Section 3612 says a household loses the deduction if it fails to report earned income on time, and `3612.yaml` encodes that sentence as losing all of it. Section 3650 of the manual denies the deduction only for the income reported late, when Georgia computes an overpayment, and 7 CFR 273.18(c)(1)(ii)(B) does the same. We haven't encoded section 3650.

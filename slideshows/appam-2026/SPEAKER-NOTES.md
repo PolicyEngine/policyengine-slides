@@ -6,13 +6,12 @@ Sixteen slides in about 12 minutes.
 
 ## Before presenting
 
-- If the room's laptop won't have internet, send Cynthia's team the PDF on Thursday morning.
 - Before the session, scan slide 16's QR code and check that it opens this deck.
 - Before the session, open Build's Massachusetts report at app.policyengine.org/us/report/8adb8bf2-355f-4f00-b7b9-1ef56a1deb77 and check that it loads.
 - About 15 minutes before the session, click the CliffWatch address on slide 11 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 11's recording doesn't depend on it.
 - Then press next on slide 11 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
-- Slide 3 opens on the models' answers. Press next once to show PolicyEngine's answer. The PDF shows that second state.
-- Keep these notes on your phone and the PDF on your laptop. Present from the live deck at policyengine.org/slides/appam-2026, and if the network fails, present from the PDF.
+- Slide 3 opens on the models' answers. Press next once to show PolicyEngine's answer.
+- Keep these notes on your phone, and present from the live deck at policyengine.org/slides/appam-2026.
 
 ## 1. PolicyEngine for state policy research (0:00, 30 seconds)
 
@@ -88,19 +87,19 @@ CliffWatch and Build need no code.
 
 CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
-In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. The run takes about three minutes, so the recording cuts to the finished report. Build runs an older release, PolicyEngine US 2.2.1, and on it we estimate the state's cost at $657 million. On this deck's 2.90.2, we estimate the $577 million on slide 9.
+In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. A report takes about three minutes to run. Build runs an older release, PolicyEngine US 2.2.1, and reports a $657 million cost. On 2.90.2, we estimate the $577 million on slide 9.
 
 *The recording ends on the report's results. Press next when you finish.*
 
 ## 12. We model federal, state and local tax and benefit rules (9:25, 25 seconds)
 
-We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. Our coverage tracker lists 109 programs and marks 87 complete, 18 partial and 4 in progress.
+We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. We list 109 programs in our coverage tracker and mark 87 complete, 18 partial and 4 in progress.
 
-*The tracker runs live in the frame, so you can click and scroll in it, and the arrows keep moving the deck. If you click its search box, click the slide outside the frame, which also moves to the next step.*
+*The tracker runs live in the frame, so you can click and scroll in it, and the arrows keep moving the deck. If you click its search box, the arrows stay in the box until you click the slide outside the frame, and that click also moves the deck to the next step.*
 
 ## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
-We build Microcosm in two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
+We build two Microcosm files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
 
 ## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:40, 30 seconds)
 
@@ -108,7 +107,7 @@ On the rules, we're applying each state's Medicaid rule for an applicant whose s
 
 ## 15. The Axiom Foundation encodes rules with source text and dates (11:10, 50 seconds)
 
-I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its gross earned income.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. For example, Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its total countable gross earned income.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
@@ -168,7 +167,7 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Why does Indiana turn this family down all year?** Indiana's limit since April 5, 135% of the poverty guideline, comes to $3,074 a month for a family of three, and this family earns $3,333. We found no chart Indiana posted before April. Our model reads 150% of the 2026 guideline through April, or $3,415 a month. But 150% of the 2025 guideline gives $3,331, $2 under this family's income. PN3 prints 140% of poverty for 2025 and 137% for 2026 in its Roadmap, and reports that a bill to raise the limit to 150% didn't pass. So we hold Indiana to $3,331 before April. Chalkbeat reported in April that Indiana would restart child care help in May after a 15-month freeze. At the model's limit, we estimate four months of subsidy and $31,487.
 
-**Why does Indiana sit below Idaho when PN3 calls Idaho's limit the lowest?** This family misses the limit in both states, so neither pays any of its child care bill, and taxes set the order. Indiana collects $522 in state income tax after its $392 earned income credit, plus $626 in Marion County income tax. Idaho pays the family a net $455: a $465 grocery credit less a $10 building tax. Those amounts make up the $1,603 gap. Without the county tax, Indiana would still sit lowest, at $27,188.
+**Why does Indiana sit below Idaho when PN3 calls Idaho's limit the lowest?** This family's income exceeds the limit in both states, so neither pays any of its child care bill, and taxes set the order. Indiana collects $522 in state income tax after its $392 earned income credit, plus $626 in Marion County income tax. Idaho pays the family a net $455: a $465 grocery credit less a $10 building tax. Those amounts make up the $1,603 gap. Without the county tax, Indiana would still sit lowest, at $27,188.
 
 **What about a family already in the program?** It keeps the subsidy to a higher limit, then meets its own cliff. We estimate that cliff at $15,572 past about $110,000 in Maryland and $6,817 past about $68,000 in Iowa. Idaho's department told families in the program that it applies the lower limit when they recertify, and said it was preparing a phase-out. At $40,000, we estimate that a family in the program gets $16,200 in Nevada, $14,776 in Indiana and $14,394 in Ohio, whose first program charges a copay.
 
@@ -176,7 +175,7 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **How accurate are your state poverty rates?** Our local-area file holds thin state samples, about 108 effective households with children in the median state. Our child poverty estimates on that file differ from Census's 2023 to 2025 averages by 3.2 points on average. In 29 of 51 jurisdictions, they fall outside Census's margin of error. For state child poverty rates, bring your own microdata.
 
-**Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
+**Could sampling error explain the differences from Census?** Our own sampling error could produce differences of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
 
 **How well do your weights fit?** We fit 95.69% of the national file's 5,659 targets within 10%, and 96.08% of the local-area file's 4,765. Those shares describe the fit in sample. The two files hold effective samples of 9,174 and about 12,124 households.
 
@@ -184,9 +183,15 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **What else does the simulated eligibility measure show?** We estimate that the same 3,000 households' children qualify for Medicaid or CHIP at rates from 39.8% in Idaho to 66.1% in Hawaii.
 
-**Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
+**Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, our coverage tracker reads 2.72.3, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
 
-**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents the credit counts, and we haven't separated how much of the difference those changes explain. Build's 45.7% counts people, and slide 9's 29.4% counts households.
+**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents qualify for the credit, and we haven't separated how much of the difference those changes explain.
+
+**Why does Build's report show a 2.3% decrease in child poverty?** Build reports a relative change. When we run 2.2.1 on slide 9's local-area file, we estimate a fall from 22.2% to 21.7%, or 0.5 points. On 2.90.2, we estimate a fall from 23.1% to 22.9%, or 0.2 points.
+
+**Why does Build's report show 45.7% gaining and slide 9 show 29.4%?** Build's 45.7% counts people, and slide 9's 29.4% counts households. When we run 2.2.1 on slide 9's local-area file, we estimate that 34.1% of households would gain.
+
+**Does a late report cost a Georgia household the whole deduction?** Section 3612 says a household loses the deduction if it fails to report earned income on time, and we encoded that sentence as losing all of it. Georgia's section 3650 denies the deduction only for the income reported late, when it computes an overpayment, and USDA's claims rule at 7 CFR 273.18 does the same. We haven't encoded section 3650.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 
