@@ -12,6 +12,11 @@ main:has(:global(.slide-active) .deck) > :global(.fixed) > div:first-child {
   visibility: hidden;
 }
 
+/* Code that still outgrows its block in a small window scrolls, so it keeps every character. */
+main:has(button[aria-label='Next slide']) .deck pre {
+  overflow-x: auto;
+}
+
 /* Phones, tablets held upright and short or narrow windows: one column that scrolls. */
 @media (max-width: 640px), (max-aspect-ratio: 1/1), (max-height: 500px) {
   /* The viewer's controls: a shorter bar, centered, with no keyboard hint. */
@@ -278,5 +283,37 @@ main:has(:global(.slide-active) .deck) > :global(.fixed) > div:first-child {
   .walkthrough {
     position: fixed;
     bottom: 3.5rem;
+  }
+}
+
+/* A 4:3 projector, a 3:2 laptop or a tablet on its side. The deck sizes type by the screen's height,
+   which leaves too little width on these shapes: code runs out of its block and text runs under the
+   footer. Cap the type by width. At 3:2 the caps meet the height-based sizes, so nothing jumps at the
+   block's edge. */
+@media (min-aspect-ratio: 1001/1000) and (max-aspect-ratio: 153/100) and (min-width: 641px) and (min-height: 501px) {
+  .deck > div:first-child > div,
+  .deck > div:last-child {
+    padding-inline: 4.44vw;
+  }
+
+  .frame h1 {
+    font-size: min(4.4vh, 2.933vw, 48px) !important;
+  }
+
+  .body {
+    font-size: min(2.25vh, 1.5vw, 28px) !important;
+  }
+
+  .deck pre {
+    font-size: min(1.05vw, 22px) !important;
+  }
+
+  .deck :global(.code-block-content) {
+    padding: 1.667vw;
+  }
+
+  .deck :global(.code-block-header) span {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 }
