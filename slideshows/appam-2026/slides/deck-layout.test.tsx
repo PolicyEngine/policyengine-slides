@@ -80,6 +80,8 @@ describe('deck.module.css', () => {
     [320, 568, 'a small phone'],
     [812, 375, 'a phone on its side'],
     [768, 1024, 'a tablet held upright'],
+    [1024, 576, 'a low-resolution 16:9 projector'],
+    [1000, 520, 'a small window'],
   ])('puts %ix%i, %s, in the small-screen block', (width, height) => {
     expect(matches(smallScreens.params, width, height)).toBe(true);
     expect(matches(widthCaps.params, width, height)).toBe(false);
@@ -121,10 +123,16 @@ describe('deck.module.css', () => {
   it.each([
     [1366, 650, 'a 1366x768 laptop under a toolbar'],
     [1280, 600, 'a 1280x720 laptop under a toolbar'],
-    [1024, 576, 'a low-resolution 16:9 projector'],
+    [1024, 694, 'a 1024x768 screen under a toolbar'],
   ])('puts %ix%i, %s, in the short-window block', (width, height) => {
     expect(matches(shortWindows.params, width, height)).toBe(true);
     expect(matches(smallScreens.params, width, height)).toBe(false);
+  });
+
+  it('closes the gap under the title in a short window', () => {
+    // The largest overrun left at 1280x600 before this rule: slide 8's caption ran 24 px under the footer.
+    const gap = 2.5 - parseFloat(declared(shortWindows, '.frame > div:first-child', 'margin-bottom') ?? '2.5');
+    expect(gap * 16).toBeGreaterThanOrEqual(24);
   });
 
   it.each([

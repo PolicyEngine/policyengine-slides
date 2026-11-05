@@ -18,7 +18,7 @@ main:has(button[aria-label='Next slide']) .deck pre {
 }
 
 /* Phones, tablets held upright and short or narrow windows: one column that scrolls. */
-@media (max-width: 640px), (max-aspect-ratio: 1/1), (max-height: 500px) {
+@media (max-width: 640px), (max-aspect-ratio: 1/1), (max-height: 580px) {
   /* The viewer's controls: a shorter bar, centered, with no keyboard hint. */
   main:has(.deck, .title) > :global(.fixed) {
     height: 3.5rem;
@@ -290,7 +290,7 @@ main:has(button[aria-label='Next slide']) .deck pre {
    which leaves too little width on these shapes: code runs out of its block and text runs under the
    footer. Cap the type by width. At 3:2 the caps meet the height-based sizes, so nothing jumps at the
    block's edge. */
-@media (min-aspect-ratio: 1001/1000) and (max-aspect-ratio: 153/100) and (min-width: 641px) and (min-height: 501px) {
+@media (min-aspect-ratio: 1001/1000) and (max-aspect-ratio: 153/100) and (min-width: 641px) and (min-height: 581px) {
   .deck > div:first-child > div,
   .deck > div:last-child {
     padding-inline: 4.44vw;
@@ -321,12 +321,16 @@ main:has(button[aria-label='Next slide']) .deck pre {
 
 /* A short window, as on most laptops under a browser's toolbars. Type shrinks with the height while
    the deck's margins hold, so text runs under the footer and the title meets the cover's logo. Scale
-   the top margin, close the gap above the footer and bring the logo in. No full-screen laptop or
-   projector runs this short, and the PDF's page doesn't. */
-@media (max-height: 719px) and (min-height: 501px) and (min-width: 641px) and (min-aspect-ratio: 1001/1000) {
+   the top margin, close the gaps under the title and above the footer, and bring the logo in. The
+   PDF's page and any screen 720 px or taller fall outside this block. */
+@media (max-height: 719px) and (min-height: 581px) and (min-width: 641px) and (min-aspect-ratio: 1001/1000) {
   .deck > div:first-child {
     padding-top: 11.85vh;
     padding-bottom: 6rem;
+  }
+
+  .frame > div:first-child {
+    margin-bottom: 1rem;
   }
 
   .title > div > div:first-child {
@@ -348,7 +352,7 @@ main:has(button[aria-label='Next slide']) .deck pre {
 
 /* A window wider than 16:9. Slide 9's screenshots grow with the width and push its captions under
    the footer. Hold them to the width they take on a 16:9 screen. */
-@media (min-aspect-ratio: 9/5) and (min-height: 501px) and (min-width: 641px) {
+@media (min-aspect-ratio: 9/5) and (min-height: 581px) and (min-width: 641px) {
   .shots {
     max-width: 162.5vh;
   }
