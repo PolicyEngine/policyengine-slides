@@ -2,7 +2,8 @@
 
 Writes data/subsidy_months.json. Slide 6 names the states whose subsidy covers part of the year, and this script
 finds them: it reads each state's own monthly program variables and counts the months that pay anything. It also
-runs Indiana under the limit it set for new applicants on April 5, 2026 in all twelve months.
+runs Indiana at the limits our model reads and under the limit Indiana set for new applicants on April 5, 2026
+in all twelve months.
 """
 
 import json
@@ -52,7 +53,7 @@ def run_state(state):
 
 
 def indiana():
-    """Indiana's limit for new applicants, the family's income, and the April limit in all twelve months."""
+    """Indiana's limits for new applicants, the family's income, and the row at the model's and the April limit."""
     reform = Reform.from_dict(
         {INDIANA_LIMIT: {f"{hh.YEAR}-01-01.2100-12-31": 1.35}}, country_id="us"
     )
@@ -65,6 +66,7 @@ def indiana():
 
     poverty_guideline = scalar(current.calculate("spm_unit_fpg", hh.YEAR))
     parts = hh.net_resources_parts(april_rule)
+    at_model = hh.net_resources_parts(current)
     return {
         "rate_january": rate(f"{hh.YEAR}-01-01"),
         "rate_may": rate(f"{hh.YEAR}-05-01"),
@@ -74,6 +76,11 @@ def indiana():
         "april_limit_all_year": {
             "subsidy": round(scalar(parts["child_care_subsidy"]), 2),
             "net_resources": round(scalar(parts["net_resources"]), 2),
+        },
+        "model_limit": {
+            "subsidy": round(scalar(at_model["child_care_subsidy"]), 2),
+            "net_resources": round(scalar(at_model["net_resources"]), 2),
+            "monthly": round(scalar(current.calculate("in_ccdf", f"{hh.YEAR}-01", map_to="spm_unit")), 2),
         },
     }
 

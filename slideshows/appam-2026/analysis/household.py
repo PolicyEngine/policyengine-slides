@@ -58,6 +58,10 @@ CASH_OUTSIDE_SPM_TOTALS = ("ak_permanent_fund_dividend", "nj_property_tax_relief
 # the posted limit for this family of three in 2026.
 IDAHO_LIMIT_PARAMETER = "gov.states.id.dhw.iccp.income.fpl_rate.initial_eligibility"
 IDAHO_POSTED_MONTHLY_LIMIT = 2_888
+INDIANA_LIMIT_PARAMETER = "gov.states.in.fssa.ccdf.income.get_on_fpg_rate"
+MISSOURI_LIMIT_PARAMETER = "gov.states.mo.dese.ccs.income.fpl_rate.initial_eligibility"
+ALABAMA_LIMIT_PARAMETER = "gov.states.al.dhr.ccsp.income.limit.fpl_initial"
+POVERTY_GUIDELINE_2025_FOR_THREE = 26_650
 POVERTY_GUIDELINE_2026_FOR_THREE = 27_320
 
 # The model carries Ohio's Publicly Funded Child Care and not its Child Care Choice
@@ -182,20 +186,35 @@ class OhioVoucher(Reform):
         self.update_variable(oh_child_care_subsidies)
 
 
+def posted_limits():
+    """Limits for new applicants where a state posts less than the model reads, by state.
+
+    Each parameter multiplies a poverty guideline. Missouri's chart, updated July 1, 2026, tops
+    out at $3,331 for three, 150% of the 2025 guideline, and the model multiplies the 2026 one.
+    Alabama's fact sheet of June 1, 2026 tops out at the same $3,331, 150% of last year's
+    guideline, which the model's own formula reads. Indiana's chart starts April 5, 2026; before
+    then, we use the same 150% of the 2025 guideline, since no dated source supports more.
+    """
+    of_2025 = 1.5 * POVERTY_GUIDELINE_2025_FOR_THREE / POVERTY_GUIDELINE_2026_FOR_THREE
+    idaho = IDAHO_POSTED_MONTHLY_LIMIT * 12 / POVERTY_GUIDELINE_2026_FOR_THREE
+    return {
+        "ID": {IDAHO_LIMIT_PARAMETER: {f"{YEAR}-01-01.2100-12-31": idaho}},
+        "IN": {INDIANA_LIMIT_PARAMETER: {f"{YEAR}-01-01.{YEAR}-04-04": of_2025}},
+        "MO": {MISSOURI_LIMIT_PARAMETER: {f"{YEAR}-01-01.2100-12-31": of_2025}},
+        "AL": {ALABAMA_LIMIT_PARAMETER: {f"{YEAR}-06-01.2100-12-31": 1.5}},
+    }
+
+
 def state_updates(state):
-    """The reform a state's runs take: Idaho's posted limit, Ohio's voucher, and none for any other state."""
+    """The reform a state's runs take: a posted limit, Ohio's voucher, or none."""
     if state == "OH":
         return OhioVoucher
-    if state != "ID":
-        return None
-    share = IDAHO_POSTED_MONTHLY_LIMIT * 12 / POVERTY_GUIDELINE_2026_FOR_THREE
-    return Reform.from_dict(
-        {IDAHO_LIMIT_PARAMETER: {f"{YEAR}-01-01.2100-12-31": share}}, country_id="us"
-    )
+    limits = posted_limits().get(state)
+    return Reform.from_dict(limits, country_id="us") if limits else None
 
 
 def run(state, household):
-    """Every run of the family goes through here, so Idaho's limit and Ohio's voucher reach them all."""
+    """Every run of the family goes through here, so posted limits and Ohio's voucher reach them all."""
     return Simulation(situation=household, reform=state_updates(state))
 
 

@@ -313,6 +313,7 @@ describe('child care by month', () => {
     monthly_limit_from_april: number;
     monthly_income: number;
     april_limit_all_year: { subsidy: number; net_resources: number };
+    model_limit: { subsidy: number; net_resources: number; monthly: number };
   };
   const run: { policyengine_us_version: string; earnings: number; rows: MonthRow[]; indiana: IndianaCheck } = JSON.parse(
     read('data/subsidy_months.json'),
@@ -339,16 +340,15 @@ describe('child care by month', () => {
   it('pays for part of the year only where slide 6 says so', () => {
     const partial = run.rows.filter((candidate) => candidate.months_paid > 0 && candidate.months_paid < 12);
     expect(partial.map((candidate) => [candidate.code, candidate.months_paid])).toEqual([
-      ['IN', 4],
+      ['AL', 5],
       ['SD', 5],
     ]);
     const none = run.rows.filter((candidate) => candidate.months_paid === 0).map((candidate) => candidate.code);
-    expect(none.sort()).toEqual(['ID', 'NV']);
+    expect(none.sort()).toEqual(['ID', 'IN', 'MO', 'NV']);
     const slide = read('slides/OneFamilySlide.tsx');
-    expect(slide).toContain('Indiana lowered its limit for new applicants on April 5, so we count four months of its subsidy.');
-    expect(slide).toContain('so we count five.');
-    expect(row('IN').monthly.slice(0, 4).every((amount) => amount > 0)).toBe(true);
-    expect(row('IN').monthly.slice(4).every((amount) => amount === 0)).toBe(true);
+    expect(slide).toContain('We count five months of subsidy in Alabama, whose June 1 limit this family exceeds, and in South Dakota');
+    expect(row('AL').monthly.slice(0, 5).every((amount) => amount > 0)).toBe(true);
+    expect(row('AL').monthly.slice(5).every((amount) => amount === 0)).toBe(true);
   });
 
   it('matches FSSA’s limit for a family of three, and puts the family over it', () => {
@@ -362,15 +362,18 @@ describe('child care by month', () => {
   });
 
   it('backs what the notes and the ledger say about Indiana', () => {
-    const { april_limit_all_year: april, monthly_income: income } = run.indiana;
+    const { april_limit_all_year: april, model_limit: model, monthly_income: income } = run.indiana;
     expect(april.subsidy).toBe(0);
-    expect(april.net_resources).toBeLessThan(lowest.net_resources);
+    // Holding Indiana to 150% of the 2025 guideline before April gives the same row as the April limit all year.
+    expect(row('IN').months_paid).toBe(0);
+    expect(Math.abs(row('IN').net_resources - april.net_resources)).toBeLessThan(0.02);
+    expect(lowest.code).toBe('IN');
+    expect(model.net_resources).toBeGreaterThan(lowest.net_resources);
     for (const text of [notes, ledger]) {
-      expect(text).toContain(`up with ${usd(april.net_resources)}`);
-      expect(text).toContain(`below ${lowest.name}'s ${usd(lowest.net_resources)}`);
+      expect(text).toContain(usd(model.net_resources));
       expect(text).toContain(usd(income));
     }
-    expect(ledger).toContain(`${usd(row('IN').monthly[0])} a month from January through April, ${usd(row('IN').subsidy)} in all`);
+    expect(ledger).toContain(`${usd(model.monthly)} a month from January through April, ${usd(model.subsidy)} in all`);
   });
 });
 
@@ -384,7 +387,7 @@ describe('a family already enrolled', () => {
 
   it('runs at the deck’s model, for slide 7’s states and the others with a lower limit for new applicants', () => {
     expect(summary.policyengine_us_version).toBe(modelVersion);
-    expect(codes.sort()).toEqual(['IA', 'ID', 'IN', 'MD', 'NV', 'OH']);
+    expect(codes.sort()).toEqual(['AL', 'IA', 'ID', 'IN', 'MD', 'MO', 'NV', 'OH']);
     for (const cliff of cliffs) expect(codes).toContain(cliff.code);
   });
 
@@ -394,8 +397,11 @@ describe('a family already enrolled', () => {
       sweepRun.earnings.forEach((earnings, i) => {
         // Ohio's first program charges a copay, and its voucher covers this family's bill, so
         // a new applicant draws more across the voucher's range. That gap is intended.
-        if (code === 'OH' && earnings >= 39_000 && earnings <= 54_500) return;
-        expect(enrolled.subsidy[i], `${code} ${earnings}`).toBeGreaterThanOrEqual(fresh.subsidy[i]);
+        if (code === 'OH' && earnings >= 39_000 && earnings <= 53_000) {
+          expect(enrolled.subsidy[i], `${code} ${earnings}`).toBeLessThan(fresh.subsidy[i]);
+        } else {
+          expect(enrolled.subsidy[i], `${code} ${earnings}`).toBeGreaterThanOrEqual(fresh.subsidy[i]);
+        }
       });
     }
   });
@@ -438,7 +444,7 @@ describe('a family already enrolled', () => {
       createElement(getSlideComponent(appam2026Config.slides[6])),
     ).replace(/&#x27;/g, "'");
     expect(page).toContain(
-      `keeps the subsidy to about ${usd(enrolledExit('MD').before)} in Maryland and ${usd(enrolledExit('IA').before)} in Iowa`,
+      `keeps the subsidy to about ${usd(enrolledExit('MD').before)} in Maryland.`,
     );
     expect(page).not.toContain(usd(enrolledExit('ID').before));
     expect(notes).toContain(`about ${usd(enrolledExit('MD').before)} in Maryland`);
@@ -495,27 +501,37 @@ describe('limits and programs the model does not carry', () => {
     const printed: [string, number, string][] = [
       ['Ohio', checks.ohio_without_voucher.net_resources, notes],
       ['Georgia', checks.georgia_without_caps.net_resources, notes],
-      ['Missouri', checks.missouri_at_posted.net_resources, notes],
-      ['Alabama', checks.alabama_at_posted.net_resources, notes],
+      ['Missouri', checks.missouri_at_model_limit.net_resources, notes],
+      ['Alabama', checks.alabama_at_model_limit.net_resources, notes],
       ['Ohio', checks.ohio_without_voucher.net_resources, ledger],
       ['Georgia', checks.georgia_without_caps.net_resources, ledger],
-      ['Missouri', checks.missouri_at_posted.net_resources, ledger],
-      ['Alabama', checks.alabama_at_posted.net_resources, ledger],
+      ['Missouri', checks.missouri_at_model_limit.net_resources, ledger],
+      ['Alabama', checks.alabama_at_model_limit.net_resources, ledger],
     ];
     for (const [name, net, text] of printed) expect(text, name).toContain(usd(net));
-    expect(checks.alabama_at_posted.subsidy).toBe(6_070);
-    expect(checks.missouri_at_posted.subsidy).toBe(0);
+    expect(family.states.AL.child_care_subsidy[family.earnings.indexOf(headlineEarnings)]).toBe(6_070);
+    expect(family.states.MO.child_care_subsidy[family.earnings.indexOf(headlineEarnings)]).toBe(0);
     expect(checks.georgia_without_caps.subsidy).toBe(0);
     expect(checks.ohio_without_voucher.subsidy).toBe(0);
     for (const text of [notes, ledger]) {
       expect(text).toContain(usd(checks.maryland_at_posted.drop));
       expect(text).toContain(usd(checks.maryland_at_posted.after));
     }
-    // Lowest in the deck only because of what we keep, and the notes say so.
-    for (const net of [checks.ohio_without_voucher, checks.georgia_without_caps, checks.missouri_at_posted]) {
-      expect(net.net_resources).toBeLessThan(lowest.net_resources);
+    // Each posted limit lowers the row, and no row we keep would fall below the lowest state without its subsidy.
+    const netAt = (code: string) => family.states[code].net_resources[family.earnings.indexOf(headlineEarnings)];
+    expect(checks.missouri_at_model_limit.net_resources).toBeGreaterThan(netAt('MO'));
+    expect(checks.alabama_at_model_limit.net_resources).toBeGreaterThan(netAt('AL'));
+    expect(checks.indiana_at_model_limit.net_resources).toBeGreaterThan(netAt('IN'));
+    expect(checks.idaho_at_model_limit.net_resources).toBeGreaterThan(netAt('ID'));
+    for (const net of [checks.ohio_without_voucher, checks.georgia_without_caps]) {
+      expect(net.net_resources).toBeGreaterThan(lowest.net_resources);
     }
-    expect(notes.match(new RegExp(`below ${lowest.name}'s ${usd(lowest.net_resources).replace('$', '\\$')}`, 'g'))!.length).toBe(4);
+    // Questions prints what $2 a month moves in each row, and what a family in Alabama's program gets.
+    const swing = (row: { net_resources: number }, code: string) => row.net_resources - netAt(code);
+    expect(notes).toContain(`Missouri's row by ${usd(swing(checks.missouri_at_model_limit, 'MO'))}`);
+    expect(notes).toContain(`Alabama's by ${usd(swing(checks.alabama_at_model_limit, 'AL'))}`);
+    expect(notes).toContain(`slide 6's title, by ${usd(swing(checks.indiana_at_model_limit, 'IN'))}`);
+    expect(notes).toContain(`We estimate ${usd(checks.alabama_at_model_limit.subsidy)} for a family in the program all year`);
   });
 });
 

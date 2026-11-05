@@ -51,25 +51,6 @@ def largest_drop(state, reform, low, high):
 
 
 def main():
-    # DESE's chart, updated July 1, 2026, tops out at $3,331 for three, 150% of the 2025
-    # guideline of $26,650. The model's parameter multiplies the 2026 guideline.
-    missouri_share = 1.5 * 26_650 / hh.POVERTY_GUIDELINE_2026_FOR_THREE
-    missouri = params(
-        {
-            "gov.states.mo.dese.ccs.income.fpl_rate.initial_eligibility": {
-                f"{hh.YEAR}-01-01.2100-12-31": missouri_share
-            }
-        }
-    )
-    # DHR's fact sheet of June 1, 2026 tops out at $3,331 for three, 150% of last year's
-    # guideline, which the model's own formula reads.
-    alabama = params(
-        {
-            "gov.states.al.dhr.ccsp.income.limit.fpl_initial": {
-                f"{hh.YEAR}-06-01.2100-12-31": 1.5
-            }
-        }
-    )
     # Maryland Family Network's page and the Department of Legislative Services print
     # $94,026 for three, which equals 75% of the median income of October 2024.
     maryland = params(
@@ -88,8 +69,10 @@ def main():
                 "earnings": EARNINGS,
                 "georgia_without_caps": row("GA", WithoutGeorgiaCaps),
                 "ohio_without_voucher": row("OH"),
-                "missouri_at_posted": row("MO", missouri),
-                "alabama_at_posted": row("AL", alabama),
+                "missouri_at_model_limit": row("MO"),
+                "alabama_at_model_limit": row("AL"),
+                "indiana_at_model_limit": row("IN"),
+                "idaho_at_model_limit": row("ID"),
                 "maryland_at_posted": largest_drop("MD", maryland, 90_000, 100_000),
             },
             indent=2,

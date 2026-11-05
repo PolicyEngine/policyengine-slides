@@ -29,6 +29,8 @@ FLAGS = {
     "OH": "oh_ccap_enrolled",
     "NV": "nv_ccdp_enrolled",
     "IN": "is_in_ccdf_enrolled",
+    "MO": "mo_ccs_enrolled",
+    "AL": "al_ccsp_enrolled",
 }
 ROOT = Path(__file__).parent.parent / "data"
 

@@ -144,6 +144,16 @@ def test_enrolling_never_lowers_ohios_first_program(income):
     assert first_program(True) >= first_program(False) - TOLERANCE
 
 
+@pytest.mark.parametrize("income", [20_000, 38_000, 53_500, 60_000, 70_000])
+def test_enrolling_never_lowers_ohios_total_subsidy_outside_the_voucher_band(income):
+    assert subsidy("OH", income, True) >= subsidy("OH", income, False) - TOLERANCE
+
+
+@pytest.mark.parametrize("income", [39_000, 40_000, 53_000])
+def test_ohios_voucher_pays_a_new_applicant_more_inside_its_band(income):
+    assert subsidy("OH", income, True) < subsidy("OH", income, False)
+
+
 @pytest.mark.parametrize(
     "state, income",
     [
@@ -166,8 +176,32 @@ def months(sim, name):
     ]
 
 
-def test_only_idaho_and_ohio_take_an_update():
-    assert {s for s in hh.STATES if hh.state_updates(s) is not None} == {"ID", "OH"}
+def test_only_posted_limits_and_ohio_take_an_update():
+    assert {s for s in hh.STATES if hh.state_updates(s) is not None} == {
+        "AL",
+        "ID",
+        "IN",
+        "MO",
+        "OH",
+    }
+
+
+@pytest.mark.parametrize(
+    "state,subsidy", [("ID", 0), ("IN", 0), ("MO", 0), ("AL", 6_070)]
+)
+def test_each_posted_limit_lowers_this_familys_subsidy_and_net_resources(state, subsidy):
+    posted = hh.net_resources_parts(hh.simulate(state, 40_000))
+    model = hh.net_resources_parts(Simulation(situation=hh.situation(state, 40_000)))
+    assert float(posted["child_care_subsidy"][0]) == pytest.approx(subsidy, abs=TOLERANCE)
+    assert float(posted["child_care_subsidy"][0]) < float(model["child_care_subsidy"][0])
+    assert float(posted["net_resources"][0]) < float(model["net_resources"][0])
+
+
+@pytest.mark.parametrize("state", ["IN", "MO", "AL"])
+def test_a_family_under_the_posted_limit_keeps_its_subsidy(state):
+    # $39,500 comes to $3,292 a month, under the $3,331 these states post.
+    parts = hh.net_resources_parts(hh.simulate(state, 39_500))
+    assert float(parts["child_care_subsidy"][0]) > 0
 
 
 def test_idaho_limit_matches_the_posted_figure():

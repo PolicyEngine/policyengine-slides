@@ -39,16 +39,17 @@ export default function OneFamilySlide() {
             {usd(family.rent_per_month)} monthly rent and a {usd(family.child_care_per_month)}{' '}
             monthly child care bill. They apply for each program as a new applicant, in each
             state&rsquo;s largest county, under 2026 rules. We model each state&rsquo;s income limits,
-            not its priority groups, waiting lists or enrollment freezes. We set Idaho&rsquo;s limit
-            to the {usd(idahoPostedLimit)} a month its department posts and add Ohio&rsquo;s Child
-            Care Choice Voucher. PolicyEngine US {modelVersion}.
+            not its priority groups, waiting lists or enrollment freezes. We apply the limits Idaho
+            ({usd(idahoPostedLimit)} a month), Alabama and Missouri ($3,331) post, hold Indiana to the
+            same $3,331 before its April limit, and add Ohio&rsquo;s Child Care Choice Voucher.
+            PolicyEngine US {modelVersion}.
           </p>
           <p>
             We add earnings and benefits, then subtract taxes net of credits and the{' '}
             {usd(childCareBill)} child care bill, to get net resources. We leave out health coverage. The gap between the
             highest and lowest state runs {usd(spreadAt(30_000).spread)} at $30,000 of earnings and{' '}
             {usd(spreadAt(60_000).spread)}
-            {' at $60,000. Indiana lowered its limit for new applicants on April 5, so we count four months of its subsidy. We model South Dakota’s program from August 2026, so we count five. '}
+            {' at $60,000. We count five months of subsidy in Alabama, whose June 1 limit this family exceeds, and in South Dakota, whose program we model from August 2026. '}
             Alaska pays each person a {usd(alaska.dividend)} dividend and {usd(alaska.energyRelief)} of energy relief,{' '}
             {usd(alaska.payments)} for this family.
           </p>

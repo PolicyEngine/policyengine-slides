@@ -117,7 +117,7 @@
      "after": 37000,
      "drop": 9972
     },
-    "subsidy_at_headline": 4925
+    "subsidy_at_headline": 0
    },
    "enrolled": {
     "exit": {
@@ -127,6 +127,48 @@
      "drop": 2971
     },
     "subsidy_at_headline": 14776
+   }
+  },
+  {
+   "code": "MO",
+   "flag": "mo_ccs_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 39500,
+     "after": 40000,
+     "drop": 15124
+    },
+    "subsidy_at_headline": 0
+   },
+   "enrolled": {
+    "exit": {
+     "before": 66000,
+     "after": 66500,
+     "subsidy_before": 6480,
+     "drop": 6102
+    },
+    "subsidy_at_headline": 14220
+   }
+  },
+  {
+   "code": "AL",
+   "flag": "al_ccsp_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 39500,
+     "after": 40000,
+     "drop": 8477
+    },
+    "subsidy_at_headline": 6070
+   },
+   "enrolled": {
+    "exit": {
+     "before": 53000,
+     "after": 53500,
+     "subsidy_before": 13320,
+     "drop": 12585
+    },
+    "subsidy_at_headline": 14568
    }
   }
  ]
