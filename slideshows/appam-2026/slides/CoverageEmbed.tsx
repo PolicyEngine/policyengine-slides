@@ -14,8 +14,18 @@ const PAGE_WIDTH = 1720;
  * past the site's header and sidebar and stops at the tracker's right edge.
  */
 const CROP = { left: 404.5, top: 105.5, width: STILL.width / 2, height: STILL.height / 2 };
-/** Any text on the rendered tracker, to tell it from a loading or error page. */
-const TRACKER_TEXT = 'Total programs';
+/**
+ * The snapshot line the still shows. The tracker's fallback registry prints
+ * other counts under another line, and a loading or error page prints neither,
+ * so the still stays until the tracker agrees with it.
+ */
+const TRACKER_TEXT = 'Coverage reflects policyengine-us 2.72.3';
+
+/** Whether the page in the frame shows the still's snapshot in its own fonts. */
+export function trackerAgrees(page: Document | null | undefined) {
+  if (!page?.body?.innerText?.includes(TRACKER_TEXT)) return false;
+  return (page.fonts?.status ?? 'loaded') === 'loaded';
+}
 
 const isTyping = (target: EventTarget | null) => {
   const element = target as HTMLElement | null;
@@ -31,7 +41,7 @@ export function forwardKey(event: KeyboardEvent) {
 
 /**
  * The tracker, live on the slide, over a still of the same crop. The still
- * shows until the tracker renders, and stays if it never does. Clicks and
+ * shows until the tracker prints the still's snapshot, and stays if it never does. Clicks and
  * scrolling go to the tracker. Arrow keys drive the deck after a click in the
  * frame too, because the deck and the tracker share an origin in production;
  * on a branch preview they stay with the frame until the slide is clicked.
@@ -51,15 +61,16 @@ export default function CoverageEmbed({ alt }: { alt: string }) {
     return () => observer.disconnect();
   }, [exporting]);
 
+  // A hidden frame starts no font loads, so the check waits for the slide to show.
+  const visible = boxWidth > 0;
   useEffect(() => {
-    if (!loaded || ready) return;
+    if (!loaded || ready || !visible) return;
     const sameOrigin = new URL(TRACKER_URL).origin === window.location.origin;
     const timer = setInterval(() => {
-      const text = frame.current?.contentDocument?.body?.innerText ?? '';
-      if (!sameOrigin || text.includes(TRACKER_TEXT)) setReady(true);
+      if (!sameOrigin || trackerAgrees(frame.current?.contentDocument)) setReady(true);
     }, 400);
     return () => clearInterval(timer);
-  }, [loaded, ready]);
+  }, [loaded, ready, visible]);
 
   const handleLoad = () => {
     setLoaded(true);
@@ -95,7 +106,7 @@ export default function CoverageEmbed({ alt }: { alt: string }) {
             border: 0,
             transformOrigin: '0 0',
             transform: `scale(${boxWidth / CROP.width}) translate(${-CROP.left}px, ${-CROP.top}px)`,
-            opacity: ready && boxWidth > 0 ? 1 : 0,
+            opacity: ready && visible ? 1 : 0,
             pointerEvents: ready ? 'auto' : 'none',
           }}
         />

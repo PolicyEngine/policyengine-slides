@@ -1,7 +1,7 @@
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import CoverageEmbed, { TRACKER_URL, forwardKey } from './CoverageEmbed';
+import CoverageEmbed, { TRACKER_URL, forwardKey, trackerAgrees } from './CoverageEmbed';
 
 let container: HTMLDivElement;
 let root: Root;
@@ -40,6 +40,34 @@ describe('the coverage tracker on the rules slide', () => {
     await renderEmbed();
     expect(container.querySelector('iframe')).toBeNull();
     expect(container.querySelector('img')).not.toBeNull();
+  });
+});
+
+describe('the check that shows the frame over the still', () => {
+  const page = (innerText: string, status = 'loaded') =>
+    ({ body: { innerText }, fonts: { status } }) as unknown as Document;
+  const snapshot = 'Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). 109 Total programs';
+
+  it('keeps the still while the tracker prints its fallback counts', () => {
+    expect(trackerAgrees(page('Coverage reflects the bundled fallback registry. 64 Total programs'))).toBe(false);
+  });
+
+  it('keeps the still when the tracker moves to another snapshot', () => {
+    expect(trackerAgrees(page('Coverage reflects policyengine-us 2.95.0 (main @ abc1234). 120 Total programs'))).toBe(false);
+  });
+
+  it('keeps the still on an empty or unreadable page', () => {
+    expect(trackerAgrees(page(''))).toBe(false);
+    expect(trackerAgrees(null)).toBe(false);
+    expect(trackerAgrees(undefined)).toBe(false);
+  });
+
+  it('keeps the still while the page loads its fonts', () => {
+    expect(trackerAgrees(page(snapshot, 'loading'))).toBe(false);
+  });
+
+  it('shows the frame once the tracker matches the still', () => {
+    expect(trackerAgrees(page(snapshot))).toBe(true);
   });
 });
 
