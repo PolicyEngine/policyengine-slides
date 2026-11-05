@@ -32,10 +32,15 @@ def main():
     # compute_family.py <commit> [STATE ...] reruns the named states and keeps the rest of the file.
     only = sys.argv[2:]
     path = Path(__file__).parent.parent / "data" / "family.json"
-    with Pool(WORKERS) as pool:
-        states = dict(pool.map(run_state, only or hh.STATES))
+    kept = {}
     if only:
-        states = {**json.loads(path.read_text())["states"], **states}
+        existing = json.loads(path.read_text())
+        pin = (existing["policyengine_us_version"], existing["policyengine_us_commit"])
+        if pin != (version("policyengine-us"), sys.argv[1]):
+            raise SystemExit("A partial rerun needs the pin that computed the other states.")
+        kept = existing["states"]
+    with Pool(WORKERS) as pool:
+        states = {**kept, **dict(pool.map(run_state, only or hh.STATES))}
     payload = {
         "policyengine_us_version": version("policyengine-us"),
         "policyengine_us_commit": sys.argv[1],

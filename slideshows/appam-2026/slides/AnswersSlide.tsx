@@ -26,7 +26,7 @@ export default function AnswersSlide({ buildStep }: { buildStep?: number }) {
           {usd(without.snap_dependent_care_deduction)} and SNAP comes to {usd(without.snap)}.
         </p>
         <p className="mt-[0.6vh] text-gray-700" style={{ fontSize: '0.74em' }}>
-          We asked the seven newest versions five times each on November 5, with no tools, in PolicyBench&rsquo;s format, and
+          We asked the newest version of seven models five times each on November 5, with no tools, in PolicyBench&rsquo;s format, and
           told them to assume the subsidy for all twelve months. PolicyBench grades against PolicyEngine.
         </p>
       </div>

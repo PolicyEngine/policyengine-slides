@@ -4,7 +4,7 @@ import styles from './deck.module.css';
 const work = [
   {
     area: 'State poverty',
-    body: 'We’re working on state poverty accuracy, starting with a diagnosis of why our child poverty rates differ from Census’s.',
+    body: 'We fix CPS errors, so our child poverty rates differ from Census’s by design. We’re tracing how calibration, sampling noise and rent imputation move each state’s rate.',
     label: 'microcosm #1445',
     href: 'https://github.com/PolicyEngine/microcosm/pull/1445',
   },

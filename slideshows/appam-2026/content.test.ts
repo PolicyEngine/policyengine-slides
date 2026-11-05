@@ -438,6 +438,7 @@ describe('a family already enrolled', () => {
   });
 
   it('draws each of slide 7’s cliff states in its own color', () => {
+    expect(cliffs.map((cliff) => cliff.code)).toContain('MD');
     const lines = [...render(6).matchAll(/<path[^>]*stroke-width="3"[^>]*>/g)].map((match) => match[0]);
     expect(lines).toHaveLength(cliffs.length);
     const strokes = lines.map((line) => / stroke="([^"]+)"/.exec(line)?.[1]);
@@ -542,9 +543,9 @@ describe('limits and programs the model does not carry', () => {
     }
     // Questions prints what $2 a month moves in each row, and what a family in Alabama's program gets.
     const swing = (row: { net_resources: number }, code: string) => row.net_resources - netAt(code);
-    expect(notes).toContain(`Missouri's row by ${usd(swing(checks.missouri_at_model_limit, 'MO'))}`);
+    expect(notes).toContain(`Missouri's figure by ${usd(swing(checks.missouri_at_model_limit, 'MO'))}`);
     expect(notes).toContain(`Alabama's by ${usd(swing(checks.alabama_at_model_limit, 'AL'))}`);
-    expect(notes).toContain(`slide 6's title, by ${usd(swing(checks.indiana_at_model_limit, 'IN'))}`);
+    expect(notes).toContain(`slide 6's title prints, by ${usd(swing(checks.indiana_at_model_limit, 'IN'))}`);
     expect(notes).toContain(`We estimate ${usd(checks.alabama_at_model_limit.subsidy)} for a family in the program all year`);
     // Taxes set the gap between Indiana and Idaho, since neither pays any of the bill.
     const at = family.earnings.indexOf(headlineEarnings);

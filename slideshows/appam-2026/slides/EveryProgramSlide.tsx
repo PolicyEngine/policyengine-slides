@@ -12,7 +12,7 @@ export default function EveryProgramSlide() {
     <Frame title="On PolicyBench, most SNAP and state credit answers land more than 10% from PolicyEngine’s">
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[5]">
-          <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the seven newest versions, five calls each</h2>
+          <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the newest version of seven models, five calls each</h2>
           <table className="w-full border-collapse" style={{ fontSize: '0.86em' }}>
             <thead>
               <tr className="border-b border-gray-300 text-left align-bottom">
