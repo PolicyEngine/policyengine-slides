@@ -6,10 +6,10 @@ Thirteen slides in about 11 minutes.
 
 ## Before presenting
 
-- Send the PDF to Cynthia's team by Wednesday evening, November 4, for the room's laptop.
+- Send Cynthia's team the link to this deck, policyengine.org/slides/appam-2026, by Wednesday evening, November 4. If the room's laptop won't have internet, send them the PDF on Thursday morning.
 - Before Thursday, scan slide 13's QR code and check that it opens this deck.
-- Before the session starts, open CliffWatch's chart once to check that it loads.
-- Keep these notes on your phone and the PDF on your laptop. If the room's laptop fails, present from yours.
+- About 15 minutes before the session, click the CliffWatch address on slide 9 to open the Cambridge family's chart, which takes about 20 seconds to appear. If it fails, try again a minute later, and if it still fails, show slide 9's screenshots instead of the live site.
+- Keep these notes on your phone and the PDF on your laptop. Present from the live deck, and if the network fails, present from the PDF.
 
 ## 1. PolicyEngine for state policy research (0:00, 15 seconds)
 
@@ -91,4 +91,4 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 **Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
 
-**Why does CliffWatch's net income exceed slide 3's net resources?** CliffWatch counts Medicaid and CHIP in net income, and we leave health coverage out of net resources. The Cambridge family also pays nothing for child care, and slide 3's family pays $1,500 a month.
+**Why does CliffWatch's net income exceed slide 3's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. The Cambridge family also pays nothing for child care, and slide 3's family pays $1,500 a month before any subsidy.

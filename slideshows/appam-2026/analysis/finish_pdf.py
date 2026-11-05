@@ -44,7 +44,11 @@ LINKS = [
         (87.32, 601.16, 545.53, 623.16),
         "https://www.policyengine.org/us/child-poverty-impact-dashboard",
     ),
-    (9, (64.0, 491.13, 325.09, 513.13), "https://www.policyengine.org/us/cliffwatch"),
+    (
+        9,
+        (64.0, 491.13, 325.09, 513.13),
+        "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0",
+    ),
     (9, (814.66, 655.78, 1071.06, 677.78), "https://app.policyengine.org/us/build"),
     (12, (1121.77, 618.93, 1207.18, 640.93), "https://axiom.org"),
     (13, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
