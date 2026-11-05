@@ -99,6 +99,8 @@ describe('deck.module.css', () => {
     [1500, 1000, 'a 3:2 laptop'],
     [1024, 640, 'a narrow window'],
     [1024, 600, 'a narrow window'],
+    [1180, 746, 'a tablet on its side in Safari'],
+    [1194, 760, 'a tablet on its side in Safari'],
   ])('puts %ix%i, %s, in the width-capped block', (width, height) => {
     expect(matches(widthCaps.params, width, height)).toBe(true);
     expect(matches(smallScreens.params, width, height)).toBe(false);
@@ -131,10 +133,15 @@ describe('deck.module.css', () => {
     expect(matches(smallScreens.params, width, height)).toBe(false);
   });
 
-  it('stops the width caps at 1100 px outside the 3:2 shapes', () => {
-    expect(matches(widthCaps.params, 1099, 620)).toBe(true);
-    expect(matches(widthCaps.params, 1100, 620)).toBe(false);
-    expect(matches(shortWindows.params, 1100, 620)).toBe(true);
+  it('stops the width caps at 1200 px outside the 3:2 shapes', () => {
+    expect(matches(widthCaps.params, 1199, 620)).toBe(true);
+    expect(matches(widthCaps.params, 1200, 620)).toBe(false);
+    expect(matches(shortWindows.params, 1200, 620)).toBe(true);
+  });
+
+  it("holds code to the smaller of the width's cap and the height's size", () => {
+    // Inline, the deck's code runs from 1.75vh to 1.95vh with a floor, so the cap never raises it.
+    expect(declared(widthCaps, '.deck pre', 'font-size')).toBe('min(1.05vw, 1.75vh, 22px)');
   });
 
   it('holds the top margin to a tenth of a short window and keeps the footer clear', () => {

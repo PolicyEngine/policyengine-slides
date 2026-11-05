@@ -286,12 +286,12 @@ main:has(button[aria-label='Next slide']) .deck pre {
   }
 }
 
-/* A 4:3 projector, a 3:2 laptop, a tablet on its side or a window under 1100 px wide. The deck sizes
+/* A 4:3 projector, a 3:2 laptop, a tablet on its side or a window under 1200 px wide. The deck sizes
    type by the screen's height, which leaves too little width on these shapes: code runs out of its
    block and text runs under the footer. Cap the type by width. At 3:2 the caps meet the height-based
    sizes, so nothing jumps at that edge of the block. */
 @media (min-aspect-ratio: 1001/1000) and (max-aspect-ratio: 153/100) and (min-width: 641px) and (min-height: 581px),
-  (min-aspect-ratio: 1001/1000) and (max-width: 1099px) and (min-width: 641px) and (min-height: 581px) {
+  (min-aspect-ratio: 1001/1000) and (max-width: 1199px) and (min-width: 641px) and (min-height: 581px) {
   .deck > div:first-child > div,
   .deck > div:last-child {
     padding-inline: 4.44vw;
@@ -306,7 +306,7 @@ main:has(button[aria-label='Next slide']) .deck pre {
   }
 
   .deck pre {
-    font-size: min(1.05vw, 22px) !important;
+    font-size: min(1.05vw, 1.75vh, 22px) !important;
   }
 
   .deck :global(.code-block-content) {
