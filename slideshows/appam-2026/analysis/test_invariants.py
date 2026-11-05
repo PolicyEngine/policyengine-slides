@@ -6,8 +6,10 @@ states and earnings nobody picked by hand.
 
 import household as hh
 import numpy as np
+from enrolled_cliffs import FLAGS
 from hypothesis import given, settings
 from hypothesis import strategies as st
+from policyengine_us import Simulation
 
 MAX_EXAMPLES = 40
 # The model stores money as 32-bit floats, so totals drift by fractions of a cent.
@@ -105,3 +107,19 @@ def test_axis_and_single_runs_agree(state, income):
     a = hh.net_resources_parts(swept)["net_resources"][0]
     b = hh.net_resources_parts(single)["net_resources"][0]
     assert np.isclose(a, b, atol=TOLERANCE)
+
+
+@settings(max_examples=MAX_EXAMPLES, deadline=None)
+@given(st.sampled_from(sorted(FLAGS)), earnings)
+def test_enrolling_never_lowers_the_subsidy(state, income):
+    """A state's enrolled flag only raises its income limit, so it can't cost the family a subsidy."""
+
+    def subsidy(enrolled):
+        situation = hh.situation(state, income)
+        if enrolled:
+            situation["spm_units"]["spm_unit"][FLAGS[state]] = {
+                f"{hh.YEAR}-{month:02d}": True for month in range(1, 13)
+            }
+        return hh.net_resources_parts(Simulation(situation=situation))["child_care_subsidy"][0]
+
+    assert subsidy(True) >= subsidy(False) - TOLERANCE

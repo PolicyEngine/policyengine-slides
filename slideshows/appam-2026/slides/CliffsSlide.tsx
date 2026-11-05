@@ -1,6 +1,15 @@
 import EarningsChart from './EarningsChart';
 import Frame from './Frame';
-import { cliffs, largestCliff, medianRateAt, percent, subsidyDrivenCliffs, sweepEarnings, usd } from '../content';
+import {
+  cliffs,
+  enrolledExit,
+  largestCliff,
+  medianRateAt,
+  percent,
+  subsidyDrivenCliffs,
+  sweepEarnings,
+  usd,
+} from '../content';
 import styles from './deck.module.css';
 
 export default function CliffsSlide() {
@@ -9,8 +18,8 @@ export default function CliffsSlide() {
       <div className={`flex h-full gap-[4vh] ${styles.flow}`}>
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-            Net resources by earnings from {usd(sweepEarnings[0])} to {usd(sweepEarnings[sweepEarnings.length - 1])},
-            one line per state and DC, 2026
+            A new applicant&rsquo;s net resources by earnings from {usd(sweepEarnings[0])} to{' '}
+            {usd(sweepEarnings[sweepEarnings.length - 1])}, one line per state and DC, 2026
           </p>
           <div className={`min-h-0 flex-1 ${styles.chart} ${styles.earningsChart}`}>
             <EarningsChart />
@@ -19,7 +28,7 @@ export default function CliffsSlide() {
         <div className="flex w-[32%] flex-col justify-center gap-[2.5vh]">
           <div>
             <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
-              The family crosses the subsidy limit after a $500 raise
+              $500 more in earnings puts a new applicant over the subsidy limit
             </h2>
             <ul className="space-y-[0.7vh]">
               {cliffs.map((cliff) => (
@@ -32,12 +41,16 @@ export default function CliffsSlide() {
               ))}
             </ul>
             <p className="mt-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
-              In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from losing the subsidy.
+              In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from the subsidy. A family
+              already enrolled keeps the subsidy to about{' '}
+              {usd(enrolledExit('MD').before)} in Maryland, {usd(enrolledExit('IA').before)} in Iowa and{' '}
+              {usd(enrolledExit('ID').before)} in Idaho. Since May 2025, Maryland has put approved applicants like this
+              family on a waiting list.
             </p>
           </div>
           <div>
             <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
-              Median total effective marginal tax rate on a $500 raise, across 51 jurisdictions
+              Median total effective marginal tax rate on $500 more in earnings, across 51 jurisdictions
             </h2>
             <ul className="space-y-[0.7vh]">
               {[30_000, 60_000].map((earnings) => (

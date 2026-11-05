@@ -1,0 +1,133 @@
+{
+ "policyengine_us_version": "2.90.2",
+ "year": 2026,
+ "headline_earnings": 40000,
+ "rows": [
+  {
+   "code": "MD",
+   "flag": "md_ccs_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 97000,
+     "after": 97500,
+     "drop": 15343
+    },
+    "subsidy_at_headline": 17688
+   },
+   "enrolled": {
+    "exit": {
+     "before": 110000,
+     "after": 110500,
+     "subsidy_before": 17688,
+     "drop": 15572
+    },
+    "subsidy_at_headline": 17688
+   }
+  },
+  {
+   "code": "IA",
+   "flag": "ia_cca_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 43500,
+     "after": 44000,
+     "drop": 14967
+    },
+    "subsidy_at_headline": 16011
+   },
+   "enrolled": {
+    "exit": {
+     "before": 68000,
+     "after": 68500,
+     "subsidy_before": 7200,
+     "drop": 6817
+    },
+    "subsidy_at_headline": 16011
+   }
+  },
+  {
+   "code": "ID",
+   "flag": "id_iccp_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 47500,
+     "after": 48000,
+     "drop": 14511
+    },
+    "subsidy_at_headline": 16200
+   },
+   "enrolled": {
+    "exit": {
+     "before": 75000,
+     "after": 75500,
+     "subsidy_before": 16200,
+     "drop": 13874
+    },
+    "subsidy_at_headline": 16200
+   }
+  },
+  {
+   "code": "OH",
+   "flag": "oh_ccap_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 38500,
+     "after": 39000,
+     "drop": 10606
+    },
+    "subsidy_at_headline": 0
+   },
+   "enrolled": {
+    "exit": {
+     "before": 75000,
+     "after": 75500,
+     "subsidy_before": 180,
+     "drop": -148
+    },
+    "subsidy_at_headline": 14394
+   }
+  },
+  {
+   "code": "NV",
+   "flag": "nv_ccdp_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 34500,
+     "after": 35000,
+     "drop": 8269
+    },
+    "subsidy_at_headline": 0
+   },
+   "enrolled": {
+    "exit": {
+     "before": 43000,
+     "after": 43500,
+     "subsidy_before": 4050,
+     "drop": 2602
+    },
+    "subsidy_at_headline": 16200
+   }
+  },
+  {
+   "code": "IN",
+   "flag": "is_in_ccdf_enrolled",
+   "new_applicant": {
+    "largest_drop": {
+     "before": 36500,
+     "after": 37000,
+     "drop": 9972
+    },
+    "subsidy_at_headline": 4925
+   },
+   "enrolled": {
+    "exit": {
+     "before": 76500,
+     "after": 77000,
+     "subsidy_before": 3348,
+     "drop": 2971
+    },
+    "subsidy_at_headline": 14776
+   }
+  }
+ ]
+}

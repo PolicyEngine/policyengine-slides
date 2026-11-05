@@ -14,11 +14,13 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 | --- | --- | --- |
 | 3 | $27,711 in Ohio, $54,345 in Alaska, median Delaware $46,920 | `analysis/compute_family.py` → `data/family.json` → `analysis/summarize.py` → `data/charts.json` |
 | 3 | Gap of $16,404 at $30,000 and $21,670 at $60,000 | `data/charts.json`, `spreads` |
+| 3 | At $40,000, 47 jurisdictions pay a subsidy in all twelve months, Ohio and Nevada in none, Indiana in four and South Dakota in five | `analysis/subsidy_months.py` → `data/subsidy_months.json`, which reads each state's monthly program variables |
 | 4 | Each state's value on four lines | `data/charts.json`, `lines_by_program` |
 | 4 | Texas: $15,791 subsidy, −$5,598 SNAP, +$10,193 net resources | `analysis/interaction.py` → `data/interaction.json` |
 | 5 | Maryland −$15,343 at $97,500, Iowa −$14,967 at $44,000, Idaho −$14,511 at $48,000, the three largest drops of the 51 | `data/charts.json`, `cliff_ranking`, which records each line's change in every state |
-| 5 | In 46 of 51 jurisdictions, the largest drop comes from losing the subsidy | `cliff_ranking`. The family loses TANF at the largest drop in Massachusetts and New Hampshire, and WIC in Maine, New Mexico and Vermont. |
-| 5 | Median total effective marginal tax rate on a $500 raise, across 51 jurisdictions: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over a $500 raise |
+| 5 | In 46 of 51 jurisdictions, the largest drop comes from the subsidy | `cliff_ranking`. The family loses TANF at the largest drop in Massachusetts and New Hampshire, and WIC in Maine, New Mexico and Vermont. |
+| 5 | A family already enrolled draws the subsidy to about $110,000 in Maryland, $68,000 in Iowa and $75,000 in Idaho, then falls $15,572, $6,817 and $13,874 | `analysis/enrolled_cliffs.py` → `data/enrolled_cliffs.json`, the same household with only each state's enrolled flag added. Its new-applicant runs reproduce `data/family.json` |
+| 5 | Median total effective marginal tax rate on $500 more in earnings, across 51 jurisdictions: 63.6% at $30,000, 24.6% at $60,000 | `data/charts.json`, `emtr`: one minus the change in net resources over $500 more in earnings |
 | 7 | SNAP eligibility 17.5% in Arkansas and Tennessee to 38.3% in Maryland, among SPM units with children; child Medicaid or CHIP 39.8% in Idaho to 66.1% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
 | 8 | State cost, 29.4% of households would gain, none would lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
 | 8 | 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children, 2026 child poverty rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` and `effective_households_with_children` (Kish, counting each source household once), `baseline_child_poverty`, `reformed_child_poverty` |
@@ -90,6 +92,7 @@ We count all four payments in net resources in every state.
 - **Ohio:** Ohio sets the initial limit at 145% of the federal poverty guideline (`oh_ccap_fpg`), and enrolled families stay eligible to 300%. The $40,000 new applicant falls between them.
 - **Nevada:** Nevada sets its intake limit at 41% of state median income, about $34,674, and its renewal limit at 49%.
 - **Oklahoma:** at its default one-star center rates, Oklahoma pays $555 a month after the family's copay.
+- **Indiana:** Indiana lowered its limit for new applicants from 150% to 135% of the federal poverty guideline on April 5, 2026 (`get_on_fpg_rate`), and enrolled families stay eligible to 85% of state median income (`stay_on_smi_rate`). For a family of three, FSSA sets [$3,074 a month to get on](https://www.in.gov/fssa/carefinder/files/Income-Get-on-CCDF.pdf) and [$6,400 to stay on](https://www.in.gov/fssa/carefinder/files/Income-Stay-on-CCDF.pdf). The $3,333-a-month new applicant falls between them, so the model pays $1,231 a month from January through April, $4,925 in all. With the April limit in all twelve months, the family ends up with $26,562, below Ohio's $27,711 (`data/subsidy_months.json`).
 - **South Dakota:** we model `sd_cca` from August 2026, so $7,500 equals five months at $1,500.
 - **Provider tier:** we leave each state at its default, its base or lowest tier.
 - **Alaska:** Alaska pays each person a $1,000 dividend and $200 of energy relief, $3,600 for this family (`gov.states.ak.dor.permanent_fund_dividend` and `energy_relief`).
@@ -99,6 +102,7 @@ We count all four payments in net resources in every state.
 | Slide | Claim | Code at `469ad12` |
 | --- | --- | --- |
 | 2 | Program list, every state income tax, TANF and child care rules of all 51 jurisdictions | `STATE_TANF_VARIABLES` holds 51 entries; `child_care_subsidy_programs` holds 51 from 2025 |
+| 3 | We model each state's eligibility rules, not waiting lists or enrollment freezes | No child care variable or parameter tests a waiting list or an enrollment freeze. A comment in `ca_capp_eligible` says the model assumes enrollment, New Mexico's parameters name a waiting list only in a citation, and Maryland's `smi_freeze_in_effect` freezes the income base year, not enrollment. None of the 18 `takes_up_*` variables covers a state child care subsidy |
 | 4 | Congress lets SNAP households deduct their care costs | `snap_dependent_care_deduction`, citing 7 U.S.C. 2014(e)(3), reads post-subsidy `childcare_expenses` |
 | 6 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
 | 7 | Our TAXSIM-compatible interface runs 2021 onward through PolicyEngine and earlier years through TAXSIM35 | `StitchedRunner.PE_MIN_YEAR = 2021` in `policyengine_taxsim/runners/stitched_runner.py` at the policyengine-taxsim commit above |
@@ -110,6 +114,14 @@ We count all four payments in net resources in every state.
 | 11 | Labor supply | Elasticities default to zero |
 | 11 | Medicaid limits | `is_medically_needy_for_medicaid` documentation |
 | 11 | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
+
+## Waiting lists
+
+We quote these on slide 5 and in the notes' Questions section, and we model none of them:
+
+- **Maryland:** MSDE started a waiting list on May 1, 2025 ([fiscal note on HB 849](https://mgaleg.maryland.gov/2026RS/fnotes/bil_0009/hb0849.pdf)). It puts approved families on that list, and exempts families experiencing homelessness, families receiving TANF, TCA or SSI, and families adding a sibling to a scholarship ([MSDE's August 2026 notice](https://content.govdelivery.com/attachments/MDMSDE/2026/08/19/file_attachments/3751314/CCS%20Homelessness%20One%20Pager%20-%20August%202026.pdf)).
+- **Indiana:** FSSA puts new applicants on a waiting list and sets its limit at 135% of the poverty level ([FSSA's site](https://www.in.gov/fssa/carefinder/child-care-assistance/index)).
+- **All states:** the National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025 ([press release](https://nwlc.org/press-release/nwlc-finds-waiting-lists-for-child-care-assistance-nearly-doubled-in-2025/)).
 
 ## The other tools
 

@@ -1,6 +1,7 @@
 import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
 import effectiveRun from './data/effective_samples.json';
+import enrolledRun from './data/enrolled_cliffs.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
 import reformRun from './data/massachusetts_reform.json';
@@ -49,6 +50,13 @@ function largestLoss(changes: Record<string, number | undefined>) {
 export const subsidyDrivenCliffs = cliffRanking.filter(
   (cliff) => largestLoss(cliff.changes) === 'child_care_subsidy',
 ).length;
+
+// The last $500 step at which a family already enrolled still draws a subsidy.
+export function enrolledExit(code: string) {
+  const row = enrolledRun.rows.find((candidate) => candidate.code === code);
+  if (!row) throw new Error(`No enrolled run for ${code}`);
+  return row.enrolled.exit;
+}
 
 export function spreadAt(earnings: number) {
   const row = spreads.find((spread) => spread.earnings === earnings);

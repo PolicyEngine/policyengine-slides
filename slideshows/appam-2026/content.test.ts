@@ -12,6 +12,7 @@ import {
   cliffRanking,
   cliffs,
   crossSection,
+  enrolledExit,
   headlineEarnings,
   highest,
   instrument,
@@ -186,7 +187,7 @@ describe('derived chart data', () => {
   it('prints the sweep’s step on slide 5', () => {
     const slide = read('slides/CliffsSlide.tsx');
     const step = usd(sweepEarnings[1] - sweepEarnings[0]);
-    for (const phrase of [`after a ${step} raise`, `on a ${step} raise`]) expect(slide).toContain(phrase);
+    for (const phrase of [`${step} more in earnings puts`, `on ${step} more in earnings`]) expect(slide).toContain(phrase);
   });
 
   it('counts the states where losing the subsidy costs the family most', () => {
@@ -290,6 +291,153 @@ describe('links', () => {
         expect(text).toMatch(new RegExp(`(?<![\\w@./:-])${escaped}(?![\\w/-])`));
       }
     }
+  });
+});
+
+describe('child care by month', () => {
+  type MonthRow = { code: string; subsidy: number; net_resources: number; monthly: number[]; months_paid: number };
+  const run: { policyengine_us_version: string; earnings: number; rows: MonthRow[]; indiana: Record<string, any> } = JSON.parse(
+    read('data/subsidy_months.json'),
+  );
+  const at = family.earnings.indexOf(run.earnings);
+  const row = (code: string) => run.rows.find((candidate) => candidate.code === code)!;
+
+  it('covers all 51 jurisdictions at the deck’s model and earnings', () => {
+    expect(run.policyengine_us_version).toBe(modelVersion);
+    expect(run.earnings).toBe(headlineEarnings);
+    expect(run.rows.map((candidate) => candidate.code).sort()).toEqual(Object.keys(family.states).sort());
+  });
+
+  it('adds up to the deck’s subsidy line in every jurisdiction', () => {
+    for (const candidate of run.rows) {
+      const total = candidate.monthly.reduce((sum, amount) => sum + amount, 0);
+      expect(Math.abs(Math.min(total, childCareBill) - candidate.subsidy), candidate.code).toBeLessThan(0.1);
+      expect(Math.abs(family.states[candidate.code].child_care_subsidy[at] - candidate.subsidy), candidate.code).toBeLessThan(0.02);
+      expect(Math.abs(family.states[candidate.code].net_resources[at] - candidate.net_resources), candidate.code).toBeLessThan(0.02);
+      expect(candidate.months_paid).toBe(candidate.monthly.filter((amount) => amount > 0).length);
+    }
+  });
+
+  it('pays for part of the year only where slide 3 says so', () => {
+    const partial = run.rows.filter((candidate) => candidate.months_paid > 0 && candidate.months_paid < 12);
+    expect(partial.map((candidate) => [candidate.code, candidate.months_paid])).toEqual([
+      ['IN', 4],
+      ['SD', 5],
+    ]);
+    const none = run.rows.filter((candidate) => candidate.months_paid === 0).map((candidate) => candidate.code);
+    expect(none.sort()).toEqual(['NV', 'OH']);
+    const slide = read('slides/OneFamilySlide.tsx');
+    expect(slide).toContain('Indiana lowered its limit for new applicants on April 5, so its subsidy covers four months.');
+    expect(slide).toContain('so its subsidy covers five months.');
+    expect(row('IN').monthly.slice(0, 4).every((amount) => amount > 0)).toBe(true);
+    expect(row('IN').monthly.slice(4).every((amount) => amount === 0)).toBe(true);
+  });
+
+  it('matches FSSA’s limit for a family of three, and puts the family over it', () => {
+    const { indiana } = run;
+    // Income to Get on CCDF, effective April 5, 2026.
+    expect(Math.round(indiana.monthly_limit_from_april)).toBe(3_074);
+    expect(indiana.rate_january).toBe(1.5);
+    expect(indiana.rate_may).toBe(1.35);
+    expect(indiana.monthly_income).toBeGreaterThan(indiana.monthly_limit_from_april);
+    expect(indiana.monthly_income).toBeLessThan((indiana.poverty_guideline * indiana.rate_january) / 12);
+  });
+
+  it('backs what the notes and the ledger say about Indiana', () => {
+    const { april_limit_all_year: april, monthly_income: income } = run.indiana;
+    expect(april.subsidy).toBe(0);
+    expect(april.net_resources).toBeLessThan(lowest.net_resources);
+    for (const text of [notes, ledger]) {
+      expect(text).toContain(`up with ${usd(april.net_resources)}`);
+      expect(text).toContain(`below Ohio's ${usd(lowest.net_resources)}`);
+      expect(text).toContain(usd(income));
+    }
+    expect(ledger).toContain(`${usd(row('IN').monthly[0])} a month from January through April, ${usd(row('IN').subsidy)} in all`);
+  });
+});
+
+describe('a family already enrolled', () => {
+  type Lines = { subsidy: number[]; net_resources: number[] };
+  const summary = JSON.parse(read('data/enrolled_cliffs.json'));
+  const sweepRun: { earnings: number[]; states: Record<string, { new_applicant: Lines; enrolled: Lines }> } = JSON.parse(
+    read('data/enrolled_sweep.json'),
+  );
+  const codes = Object.keys(sweepRun.states);
+
+  it('runs at the deck’s model, for slide 5’s states and the three that turn the family down', () => {
+    expect(summary.policyengine_us_version).toBe(modelVersion);
+    expect(codes.sort()).toEqual(['IA', 'ID', 'IN', 'MD', 'NV', 'OH']);
+    for (const cliff of cliffs) expect(codes).toContain(cliff.code);
+  });
+
+  it('never draws less than a new applicant, at any earnings on the grid', () => {
+    for (const code of codes) {
+      const { new_applicant: fresh, enrolled } = sweepRun.states[code];
+      sweepRun.earnings.forEach((_, i) => {
+        expect(enrolled.subsidy[i], `${code} ${sweepRun.earnings[i]}`).toBeGreaterThanOrEqual(fresh.subsidy[i]);
+      });
+    }
+  });
+
+  it('reproduces the deck’s own sweep for a new applicant', () => {
+    for (const code of codes) {
+      const lines = family.states[code];
+      family.earnings.forEach((earnings: number, i: number) => {
+        const j = sweepRun.earnings.indexOf(earnings);
+        expect(Math.abs(sweepRun.states[code].new_applicant.subsidy[j] - lines.child_care_subsidy[i])).toBeLessThan(0.02);
+        expect(Math.abs(sweepRun.states[code].new_applicant.net_resources[j] - lines.net_resources[i])).toBeLessThan(0.02);
+      });
+    }
+  });
+
+  it('summarizes each state’s last step with a subsidy', () => {
+    for (const { code, enrolled, new_applicant: fresh } of summary.rows) {
+      const lines = sweepRun.states[code].enrolled;
+      const last = sweepRun.earnings.reduce((found, _, i) => (lines.subsidy[i] > 0 ? i : found), -1);
+      expect(enrolled.exit.before).toBe(sweepRun.earnings[last]);
+      expect(enrolled.exit.after).toBe(sweepRun.earnings[last + 1]);
+      expect(enrolled.exit.subsidy_before).toBe(Math.round(lines.subsidy[last]));
+      expect(enrolled.exit.drop).toBe(Math.round(lines.net_resources[last] - lines.net_resources[last + 1]));
+      const at = sweepRun.earnings.indexOf(summary.headline_earnings);
+      expect(enrolled.subsidy_at_headline).toBe(Math.round(lines.subsidy[at]));
+      expect(fresh.subsidy_at_headline).toBe(Math.round(sweepRun.states[code].new_applicant.subsidy[at]));
+    }
+  });
+
+  it('lets a family keep the subsidy past each of slide 5’s cliffs', () => {
+    for (const cliff of cliffs) {
+      const row = summary.rows.find((candidate: { code: string }) => candidate.code === cliff.code);
+      expect(row.new_applicant.largest_drop).toEqual({ before: cliff.before, after: cliff.after, drop: cliff.drop });
+      expect(enrolledExit(cliff.code).before).toBeGreaterThan(cliff.after);
+    }
+  });
+
+  it('prints each limit on slide 5, and each limit and cliff in the notes and the ledger', () => {
+    const page = renderToStaticMarkup(
+      createElement(getSlideComponent(appam2026Config.slides[4])),
+    ).replace(/&#x27;/g, "'");
+    const limits = cliffs.map((cliff) => `${usd(enrolledExit(cliff.code).before)} in ${cliff.name}`);
+    expect(page).toContain(`keeps the subsidy to about ${limits[0]}, ${limits[1]} and ${limits[2]}`);
+    expect(notes).toContain(`about ${usd(enrolledExit('MD').before)} in Maryland`);
+    for (const cliff of cliffs) {
+      const exit = enrolledExit(cliff.code);
+      expect(notes).toContain(`${usd(exit.drop)} past about ${usd(exit.before)} in ${cliff.name}`);
+      expect(ledger).toContain(usd(exit.drop));
+      expect(ledger).toContain(usd(exit.before));
+    }
+  });
+
+  it('gives the notes’ subsidies at $40,000 for the states that turn a new applicant down', () => {
+    const at = (code: string) => summary.rows.find((row: { code: string }) => row.code === code).enrolled.subsidy_at_headline;
+    expect(summary.headline_earnings).toBe(headlineEarnings);
+    expect(notes).toContain(`${usd(at('OH'))} in Ohio, ${usd(at('NV'))} in Nevada and ${usd(at('IN'))} in Indiana`);
+  });
+
+  it('matches FSSA’s stay-on limit for a family of three', () => {
+    // Income to Stay on CCDF, effective April 5, 2026: $6,400 a month.
+    const exit = enrolledExit('IN');
+    expect(exit.before).toBeLessThanOrEqual(6_400 * 12);
+    expect(exit.after).toBeGreaterThan(6_400 * 12);
   });
 });
 
@@ -645,7 +793,7 @@ describe('typed figures', () => {
     for (const figure of [
       ...shared,
       `In ${cliffs[0].name}, ${cliffs[1].name} and ${cliffs[2].name}`,
-      `after a ${usd(cliffs[0].after - cliffs[0].before)} raise`,
+      `${usd(cliffs[0].after - cliffs[0].before)} more in earnings puts a new applicant over`,
       `between ${usd(Math.min(...drops))} and ${usd(Math.max(...drops))}`,
       massachusetts.records.toLocaleString('en-US'),
       millions(massachusetts.cost),
