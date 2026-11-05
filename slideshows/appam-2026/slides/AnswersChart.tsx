@@ -7,22 +7,27 @@ const TOP = 78;
 const ROW = 50;
 const BOTTOM = 44;
 const STEP = 2_500;
-const RADIUS = 11;
-// Wider than a label, so a mark this close to the reference line takes its label on the far side.
-const LABEL_ROOM = 100;
+const RADIUS = 10;
 
-const answers = modelAnswers.shownSnap;
+const rows = modelAnswers.shownRows;
 const reference = modelAnswers.referenceSnap;
 const without = modelAnswers.referenceSnapWithoutSubsidy;
 
-const axisMax = Math.ceil(Math.max(...answers.map((row) => row.snap), without) / STEP) * STEP;
+const axisMax = Math.ceil(Math.max(...rows.flatMap((row) => row.answers), without) / STEP) * STEP;
 const ticks = Array.from({ length: axisMax / STEP + 1 }, (_, i) => i * STEP);
-const height = TOP + answers.length * ROW + BOTTOM;
+const height = TOP + rows.length * ROW + BOTTOM;
 const x = (value: number) => LEFT + (value / axisMax) * (WIDTH - LEFT - RIGHT);
+
+// A model that gives one answer more than once draws one mark, with the count beside it.
+function distinct(answers: number[]) {
+  const counts = new Map<number, number>();
+  for (const answer of answers) counts.set(answer, (counts.get(answer) ?? 0) + 1);
+  return [...counts.entries()].sort(([a], [b]) => a - b);
+}
 
 export default function AnswersChart({ reveal }: { reveal: boolean }) {
   const hidden = { visibility: reveal ? ('visible' as const) : ('hidden' as const) };
-  const axisBottom = TOP + answers.length * ROW;
+  const axisBottom = TOP + rows.length * ROW;
   const fill = reveal ? 'var(--pe-amber)' : 'var(--color-gray-500)';
   return (
     <svg
@@ -30,8 +35,8 @@ export default function AnswersChart({ reveal }: { reveal: boolean }) {
       role="img"
       aria-label={
         reveal
-          ? `Each model's SNAP answer, with PolicyEngine's ${usd(reference)} and ${usd(without)} without the subsidy`
-          : "Each model's SNAP answer"
+          ? `Each model's SNAP answers, with PolicyEngine's ${usd(reference)} and ${usd(without)} without the subsidy`
+          : "Each model's SNAP answers"
       }
       className="h-full w-full"
     >
@@ -43,11 +48,20 @@ export default function AnswersChart({ reveal }: { reveal: boolean }) {
           </text>
         </g>
       ))}
-      {answers.map((row, i) => {
+      <g style={hidden}>
+        <rect
+          x={x(reference * 0.9)}
+          y={TOP - 8}
+          width={x(reference * 1.1) - x(reference * 0.9)}
+          height={axisBottom - TOP + 8}
+          fill="var(--color-teal-600)"
+          opacity="0.14"
+        />
+      </g>
+      {rows.map((row, i) => {
         const y = TOP + i * ROW + ROW / 2;
         return (
           <g key={row.model}>
-            <title>{`${row.name}: ${usd(row.snap)}`}</title>
             <text x={LEFT - 24} y={y + 8} textAnchor="end" fontSize="25" fill="var(--color-gray-800)">
               {row.name}
             </text>
@@ -58,7 +72,10 @@ export default function AnswersChart({ reveal }: { reveal: boolean }) {
       <g style={hidden}>
         <line x1={x(reference)} x2={x(reference)} y1={TOP - 16} y2={axisBottom} stroke="var(--color-teal-600)" strokeWidth="3" />
         <text x={x(reference) + 8} y={TOP - 24} fontSize="25" fontWeight="600" fill="var(--color-gray-800)">
-          We compute {usd(reference)}
+          PolicyEngine&rsquo;s answer: {usd(reference)}
+        </text>
+        <text x={x(reference) - 8} y={TOP - 24} textAnchor="end" fontSize="21" fill="var(--color-gray-700)">
+          Shaded: within 10%
         </text>
         <line
           x1={x(without)}
@@ -73,22 +90,21 @@ export default function AnswersChart({ reveal }: { reveal: boolean }) {
           {usd(without)} without the subsidy
         </text>
       </g>
-      {answers.map((row, i) => {
+      {rows.map((row, i) => {
         const y = TOP + i * ROW + ROW / 2;
-        const leftLabel = row.snap < reference && x(reference) - x(row.snap) < LABEL_ROOM;
         return (
           <g key={row.model}>
-            <circle cx={x(row.snap)} cy={y} r={RADIUS} fill={fill} stroke="white" strokeWidth="2" />
-            <text
-              x={leftLabel ? x(row.snap) - RADIUS - 9 : x(row.snap) + RADIUS + 9}
-              y={y + 8}
-              textAnchor={leftLabel ? 'end' : 'start'}
-              fontSize="24"
-              fontWeight="600"
-              fill="var(--color-gray-800)"
-            >
-              {usd(row.snap)}
-            </text>
+            {distinct(row.answers).map(([answer, count]) => (
+              <g key={answer}>
+                <title>{`${row.name}: ${usd(answer)}${count > 1 ? `, ${count} times` : ''}`}</title>
+                <circle cx={x(answer)} cy={y} r={RADIUS} fill={fill} stroke="white" strokeWidth="2" />
+                {count > 1 && (
+                  <text x={x(answer)} y={y - RADIUS - 3} textAnchor="middle" fontSize="19" fill="var(--color-gray-800)">
+                    {count}×
+                  </text>
+                )}
+              </g>
+            ))}
           </g>
         );
       })}

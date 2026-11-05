@@ -24,6 +24,18 @@ The first Codex call to finish (GPT-6 Luna) shows shell and web search calls in 
 
 Claude Opus 5.5, Sonnet 5.5 and Haiku 5.5 timed out twice at 15 minutes each with no answer. The session's environment had set effort to max (CLAUDE_EFFORT, CLAUDE_CODE_EFFORT_LEVEL), and the Codex calls ran at each model's default. Opus 4.7 answered in that run. I rerun only those three, with those two variables removed so they use the model's default effort, one call each, one retry on failure. No value came back from any of the timed-out calls.
 
+Correction, 2026-11-05T13:20Z: the last sentence above and the first sentence of this amendment are wrong. The independent review caught it (verify/review-evidence.md, item 2). Opus and Sonnet timed out twice at max effort. Haiku first returned malformed JSON containing SNAP $2,988, then timed out on retry. The attempt sits in answers-claude-maxeffort/claude-haiku-5-5.attempt1.json. The retry followed the stated rule for unparseable answers and didn't depend on the value.
+
 ## Result note, 2026-11-05T12:40:06Z
 
 All ten answers sit in comparison.json. Claude 5.5 models: default effort, answered first try in 35 to 72 seconds. Claude Opus 4.7: max effort, from run 2. GPT models: default effort, run 2. First batch stays in answers-first-batch/ and supports no claim, because my setup left tools on with the working folder beside the reference file.
+
+## Amendment 4, 2026-11-05T13:14:09Z, written before any call below
+
+An independent review (verify/review-evidence.md, GPT-6.1 Sol) requested changes. It found that prompt.txt omitted facts the reference uses and that its "unlisted status is false" rule conflicts with the reference's defaults (citizenship, ID, WIC nutritional risk), and that one call per model can't support a statement about a model. So I run a second round, decided because of those two findings and not because of any answer's value:
+
+- Prompt: prompt-v2.txt (sha256 prefix c9233c5b2a8c3419), which states head-of-household filing, citizenship and SSNs, WIC nutritional risk, 52 weeks of work, center-based care 21 days a month, and approved child care assistance for all twelve months, and replaces the "false" rule with "derive eligibility and calculated statuses from the stated facts".
+- Models: all ten that answered in the first round, five calls each, tools off, default effort.
+- Failure rule: a failed or unparseable call gets one retry. Every attempt stays on disk, including malformed ones, and any value inside a malformed attempt gets reported.
+- Reporting: all fifty answers get reported. Slide 3 uses the seven newest versions (Max's rule). Its headline is the count of those 35 calls within 10% of $3,663 and the count within $1, whatever they turn out to be. No further rounds because of any value.
+- The earlier round's answers stay in comparison.json, and they get reported as the earlier prompt's results.

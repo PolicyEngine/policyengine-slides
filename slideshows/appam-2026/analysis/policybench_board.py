@@ -26,6 +26,7 @@ CARDS = {
 # The months each score line compares: models out by the end of April, and the whole board.
 APRIL_END = "2026-04-30"
 SHOWN_SCORES = ["gpt-6-sol", "claude-opus-5.5", "gpt-6.1-sol"]
+TOP_TWO = ["gpt-6-sol", "claude-opus-5.5"]
 
 
 def page_text(path):
@@ -57,6 +58,21 @@ def cards(text):
     return rows
 
 
+def wrong_by_more_than_10(predictions, model, output):
+    """One model's answers more than 10% from a positive scored reference, and how many it gave."""
+    wrong = of = 0
+    for scenario in predictions.values():
+        record = (scenario.get(output) or {}).get(model)
+        if not record or not record.get("scored", True):
+            continue
+        truth, prediction = record.get("groundTruth"), record.get("prediction")
+        if truth is None or prediction is None or truth == 0:
+            continue
+        of += 1
+        wrong += abs(prediction - truth) > 0.1 * abs(truth)
+    return {"model": model, "wrong": wrong, "of": of}
+
+
 def release_dates(path):
     source = Path(path).read_text()
     # The date table is the one whose values are all ISO dates.
@@ -73,7 +89,8 @@ def main(page, board, meta):
     counts = re.search(r"(\d+) Models / (\d+) Households / (\d+) Outputs Snapshot ([\d-]+)", text)
     if not counts:
         raise ValueError("No counts line on the saved page")
-    stats = json.loads(Path(board).read_text())["countries"]["us"]["modelStats"]
+    us = json.loads(Path(board).read_text())["countries"]["us"]
+    stats = us["modelStats"]
     dates = release_dates(meta)
     scores = [
         {"model": row["model"], "exact": round(row["exact"], 1), "released": dates.get(row["model"])}
@@ -98,6 +115,7 @@ def main(page, board, meta):
         "scores_source": "PolicyBench dashboard-data.json, October 23, 2026 copy",
         "scores_models": len(scores),
         "best_score": best,
+        "top_two_snap": [wrong_by_more_than_10(us["scenarioPredictions"], model, "snap") for model in TOP_TWO],
         "best_score_by_april": by_april,
         "named_scores": {name: by_name[name] for name in SHOWN_SCORES},
     }

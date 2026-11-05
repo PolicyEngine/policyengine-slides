@@ -25,12 +25,12 @@ export default function CliffsSlide() {
             <EarningsChart />
           </div>
         </div>
-        <div className="flex w-[32%] flex-col justify-center gap-[2.5vh]">
+        <div className="flex w-[32%] flex-col justify-center gap-[1.6vh]">
           <div>
-            <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
+            <h2 className="mb-[0.6vh] font-semibold text-pe-dark" style={{ fontSize: '1em' }}>
               $500 more in earnings puts a new applicant over the subsidy limit
             </h2>
-            <ul className="space-y-[0.7vh]">
+            <ul className="space-y-[0.4vh]">
               {cliffs.map((cliff) => (
                 <li key={cliff.code} className="flex items-baseline justify-between gap-4">
                   <span>
@@ -40,7 +40,7 @@ export default function CliffsSlide() {
                 </li>
               ))}
             </ul>
-            <p className="mt-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
+            <p className="mt-[0.6vh] text-gray-700" style={{ fontSize: '0.8em' }}>
               In {subsidyDrivenCliffs} of 51 jurisdictions, the family’s largest drop comes from the subsidy. We estimate
               that a family already in the program keeps the subsidy to about{' '}
               {usd(enrolledExit('MD').before)} in Maryland and {usd(enrolledExit('IA').before)} in Iowa. Since May 2025,
@@ -48,10 +48,10 @@ export default function CliffsSlide() {
             </p>
           </div>
           <div>
-            <h2 className="mb-[1vh] font-semibold text-pe-dark" style={{ fontSize: '1.1em' }}>
+            <h2 className="mb-[0.6vh] font-semibold text-pe-dark" style={{ fontSize: '1em' }}>
               Median total effective marginal tax rate on $500 more in earnings, across 51 jurisdictions
             </h2>
-            <ul className="space-y-[0.7vh]">
+            <ul className="space-y-[0.4vh]">
               {[30_000, 60_000].map((earnings) => (
                 <li key={earnings} className="flex items-baseline justify-between gap-4">
                   <span>At {usd(earnings)}</span>

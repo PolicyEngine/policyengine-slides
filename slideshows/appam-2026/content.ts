@@ -72,18 +72,25 @@ export const waterfall = [
   },
 ];
 
-const shownSnap = modelAnswersRun.rows
-  .filter((row) => row.shown && row.answered)
-  .map((row) => ({ model: row.model, name: row.name, snap: row.amounts!.snap }))
-  .sort((a, b) => a.snap - b.snap);
+// One row per model, in order of its middle answer, with every answer it gave.
+const shownRows = modelAnswersRun.rows.filter((row) => row.shown).sort((a, b) => a.median - b.median);
+
+const NUMBER_WORDS = ['None', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+export const countWord = (count: number) => NUMBER_WORDS[count] ?? String(count);
+
+// A year of monthly SNAP as the arithmetic a reader can check: 9 × $297 + 3 × $330 = $3,663.
+export function snapPath(months: number[]) {
+  const counts = new Map<number, number>();
+  for (const month of months) counts.set(month, (counts.get(month) ?? 0) + 1);
+  const terms = [...counts.entries()].map(([amount, count]) => `${count} × ${usd(amount)}`);
+  return `${terms.join(' + ')} = ${usd(months.reduce((sum, month) => sum + month, 0))}`;
+}
 
 export const modelAnswers = {
   referenceSnap: modelAnswersRun.reference_snap,
   referenceSnapWithoutSubsidy: modelAnswersRun.reference_snap_without_subsidy,
-  shownSnap,
-  shownSnapWithinTenPercent: shownSnap.filter(
-    (row) => Math.abs(row.snap - modelAnswersRun.reference_snap) <= 0.1 * modelAnswersRun.reference_snap,
-  ).length,
+  shownRows,
+  snap: modelAnswersRun.snap,
   table: modelAnswersRun.table,
   rows: modelAnswersRun.rows,
 };
@@ -93,6 +100,7 @@ export const policyBench = {
   models: policyBenchRun.models,
   households: policyBenchRun.households,
   cards: policyBenchRun.cards,
+  topTwoSnap: policyBenchRun.top_two_snap,
   bestScore: policyBenchRun.best_score,
   bestScoreByApril: policyBenchRun.best_score_by_april,
   namedScores: policyBenchRun.named_scores,

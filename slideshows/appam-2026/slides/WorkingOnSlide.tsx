@@ -16,7 +16,7 @@ const work = [
   },
   {
     area: 'Heating assistance',
-    body: 'We’re adding LIHEAP in five more states, including California.',
+    body: 'We’re adding LIHEAP in eight more states, including California.',
     label: 'policyengine-us #10607',
     href: 'https://github.com/PolicyEngine/policyengine-us/pull/10607',
   },

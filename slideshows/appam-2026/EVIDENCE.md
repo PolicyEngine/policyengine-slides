@@ -27,35 +27,49 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 | Questions | Effective sample in the median state; child poverty estimates miss Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
 | 14 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 6's family (`data/family.json`) |
 
-We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's default file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
+We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's national file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
 
 ## This family, line by line
 
-`analysis/family_lines.py` → `data/family_lines.json` runs the family from `analysis/household.py` in Massachusetts, in Middlesex County, at $40,000 for 2026. Slide 3 reads SNAP with and without the subsidy, slide 5 reads every line, and slide 8 reads the doubled credit.
+`analysis/family_lines.py` → `data/family_lines.json` runs the family from `analysis/household.py` in Massachusetts, in Middlesex County, at $40,000 for 2026. Slide 2 tells the room to assume the subsidy for all twelve months. Slide 3 reads SNAP with and without the subsidy, slide 5 reads every line, and slide 8 reads the doubled credit.
 
 - The lines add up to $49,127.46, and `net_resources` reads $49,127.47. Rounding explains the cent.
-- Payroll tax holds $2,480 of Social Security, $580 of Medicare and $184 of `ma_employee_state_payroll_tax`, which the model documents as employee-side Massachusetts paid leave contributions.
+- Payroll tax holds $2,480 of Social Security, $580 of Medicare and $184 of Massachusetts paid leave contributions: $40,000 × (0.0018 + 0.007 × 0.4), in `ma_employee_paid_leave_contribution`, which assumes the maximum permitted employee withholding.
+- SNAP comes to 9 × $297 + 3 × $330 = $3,663 (`monthly_snap`). The table below shows each month's path, with `analysis/model_ask/monthly_snap.py` → `monthly-snap.json` behind it. The engine spreads the annual parent fee evenly, and actual monthly fees give $3,660. With assistance set to zero, the deduction reads $1,500 a month and SNAP $720 then $753, or $8,739.
+
+| Months | Maximum allotment | Standard deduction | Parent fee deducted | Shelter deduction (at the cap) | Net income | SNAP |
+| --- | --- | --- | --- | --- | --- | --- |
+| January to September | $785 | $209 | $88.14 | $744 | $1,626 | $297 |
+| October to December | $808 | $217 | $88.14 | $769 | $1,593 | $330 |
+
 - The $16,942 subsidy leaves the family $1,058 of `childcare_expenses`, and `snap_dependent_care_deduction` reads the same amount. Without the subsidy, that deduction reads $18,000, SNAP $8,739, federal refundable credits $7,323 and net resources $37,455.
 - Doubling the credit raises `ma_child_and_family_credit` from $880 to $1,760 and net resources to $50,007, and moves no other line.
 
 ## What the models answered
 
-`analysis/model_ask/` holds the prompt, the method we registered before any answer came back, the runners and `comparison.json`. `analysis/model_answers.py` reads that file and writes `data/model_answers.json`, which holds all ten answers and marks the seven slide 3 shows.
+`analysis/model_ask/` holds both prompts, the method we registered before any answer came back (`PREREGISTERED.md`), the runners and each round's comparison. `analysis/model_answers.py` reads `comparison-v2.json`, refuses any file whose status isn't final, and writes `data/model_answers.json`, which holds all 50 answers and marks the seven versions slide 3 shows.
 
-- We asked each model once on November 5, 2026, with no tools, in PolicyBench's no-tools batch format (policybench commit 8180cde1). We added a county line, a child care schedule and one sentence on subsidy take-up. These answers belong to this run, not to PolicyBench's board.
-- We gave a call that failed or returned unparseable JSON one retry, and reran no call because of its value.
-- The GPT models and the three Claude 5.5 models ran at each model's default effort. Those Claude models timed out twice at max effort first. Claude Opus 4.7 ran at max, through a session setting, and stays off the slides.
+- **The round the slides use:** `prompt-v2.txt` (sha256 prefix c9233c5b2a8c3419), five calls to each of ten models on November 5, 2026, with tools off, at each model's default effort, in PolicyBench's no-tools batch format (policybench commit 8180cde1). It states head-of-household filing, citizenship and SSNs, WIC nutritional risk, 52 weeks of work, center-based care 21 days a month, and approved child care assistance for all twelve months. These answers belong to this run, not to PolicyBench's board.
+- We registered one retry for a call that failed or returned unparseable JSON, and no rerun because of a value. All 50 calls answered on the first attempt, with no retries, no malformed answers and no tool use (`attempt_audit` in `comparison-v2.json`).
+- **Newest versions:** 8 of 35 answers within 10% of $3,663, none within $1, from $0 to $11,160, median $3,800. Eight GPT-6.1 Sol and GPT-6 Astra answers, at $3,240 and $3,250.80, fall about 11.5% short of it.
+- **Older versions:** GPT-6 Sol 3 of 5, GPT-5.6 Terra 0 of 5 and Claude Opus 4.7 4 of 5, or 7 of 15 within 10%, from $3,108 to $8,868. Slide 3 shows the newest version in each family, whatever it answered, so it doesn't show models improving.
+- **All ten:** 15 of 50 within 10% and none within $1. Against $3,660, the total if the parent fee follows Massachusetts's actual months rather than an even spread, the counts stay at 8 and 0 for the newest versions.
+- The same model gives different answers on the same prompt: Claude Opus 5.5 runs from $3,551 to $8,651 over five calls.
+- **The earlier prompt's results:** `prompt.txt` asked each model once, and `comparison.json` holds those answers. Our review found that prompt left out facts the reference uses, so we wrote the second prompt before any second-round call. Opus and Sonnet timed out twice at max effort. Haiku first returned malformed JSON containing SNAP $2,988, then timed out on retry. We reran these three models at default effort and retained one complete answer per model. No slide uses this round.
 - OpenAI doesn't serve GPT-5.5 on ChatGPT accounts. We set aside a first batch because its calls could reach tools, and `PREREGISTERED.md` records why.
-- Slide 3 shows the newest version in each family, whatever it answered. GPT-5.6 Terra ($3,838) and GPT-6 Sol ($4,000) came within 10%, and Claude Opus 4.7 ($4,500) didn't.
-- One call gives one draw from each model, so these answers don't rank the models.
 
 ## PolicyBench
 
 `analysis/policybench_board.py` → `data/policybench_board.json` reads the live page at policybench.org (fetched November 5, 2026, board snapshot 2026-10-27), the board's `dashboard-data.json` from October 23, 2026, and `modelMeta.ts` at policybench commit 8180cde1.
 
-- Slide 4's bars come from the page's "Where models still break": 51 models and 100 US households, counting answers off by more than 10% among households with a positive amount.
-- The exact-match score counts an amount right within $1 and an eligibility flag right on a match, and weights each answer by household impact. GPT-5.5 led the models released by April, at 87.9, and GPT-6 Sol leads the board at 95.2. GPT-6.1 Sol scores 90.1 and Claude Opus 5.5 94.1.
-- PolicyBench grades against PolicyEngine, and no administrative record stands behind its references. The [reference audit](https://policybench.org/notes/2026-09-22-reference-audit) gives the counts we quote, and the [tool pilot](https://policybench.org/notes/2026-10-20-given-a-policyengine-tool-three-models-score-above-99) gives the scores with a tool.
+- Slide 4's bars come from the page's "Where models still break": 51 models and 100 public households, sampled with household weights from an eligible subset of the PolicyEngine populace dataset. These unweighted rates pool parsed predictions on positive scored reference amounts and leave out missing or unparseable predictions. They describe that sample.
+- The exact-match score counts an amount right within $1 and an eligibility flag right on a match, and weights each answer by household impact. On the October 23 copy, GPT-5.5 scores highest among models released by April 30, at 87.9, and GPT-6 Sol highest overall, at 95.2. That compares release cohorts on one snapshot, and no one measured the board in April at this scoring. GPT-6.1 Sol scores 90.1 and Claude Opus 5.5 94.1. No slide prints these scores, because the bars come from a later snapshot.
+- On that copy, the two highest scorers miss SNAP by more than 10% in 7 of 13 (GPT-6 Sol) and 6 of 13 (Claude Opus 5.5) households with a positive reference amount (`top_two_snap`).
+- PolicyBench grades against PolicyEngine, and no administrative record stands behind its references. The [reference audit](https://policybench.org/notes/2026-09-22-reference-audit) gives the counts we quote, and the [tool pilot](https://policybench.org/notes/2026-10-20-given-a-policyengine-tool-three-models-score-above-99) gives the scores with a tool. That pilot doesn't independently validate policy accuracy or show that models need such a tool.
+
+## Massachusetts waiting list
+
+The model carries no Massachusetts waiting list: a search for "waitlist" under `parameters/gov/states/ma` and `variables/gov/states/ma` in PolicyEngine US 2.90.2 returns nothing. Slide 2 tells the room to assume the subsidy for all twelve months, and slide 3 prints the amount with and without it. The [Department of Early Education and Care's September 9, 2026 board materials](https://www.mass.gov/doc/september-eec-board-meeting-materials/download), pages 14 to 17, give 31,724 children on the income-eligible waiting list in July 2026, 21,004 in July 2023, a caseload of 38,776 through June, $31.2 million of new money reaching about 2,000 children, and new vouchers from October. [GBH News](https://www.wgbh.org/news/local/2026-09-03/mass-expands-child-care-financial-assistance-to-income-eligible-families) dates the closure to April 2024. EEC gives priority to families at or below 50% of state median income, and no source we read says how long this family would wait.
 
 ## The ways in
 
@@ -66,15 +80,15 @@ We checked each address on slide 10 on November 5, 2026. The deck pins PolicyEng
 `analysis/coverage_counts.py` → `data/coverage.json` counts the PolicyEngine US package and reads the manifests Populace US publishes on Hugging Face.
 
 - **Model:** income tax parameters for 44 jurisdictions and none for Alaska, Florida, Nevada, South Dakota, Tennessee, Texas and Wyoming, 51 entries in `STATE_TANF_VARIABLES`, and 51 programs in `child_care_subsidy_programs`. `local_income_tax_before_refundable_credits` adds New York City's income tax and Philadelphia's wage tax, among others.
-- **Default file** (`populace-us-2024-spm-20260915`): 57,240 households and 5,659 targets. We fit 95.69% within 10% in sample, with an effective sample of 9,174.
-- **Local-area file** (`populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`): 1,586,908 households, 1,529,668 from the ACS and 57,240 from the ASEC and PUF. It fits 4,765 targets, 4,329 by state and 436 by congressional district, and 96.08% land within 10% in sample, with an effective sample of about 12,124. Those targets leave out state child counts and poverty, so this fit doesn't establish state child poverty accuracy.
+- **National file** (`populace-us-2024-spm-20260915`): 57,240 households and 5,659 targets, including IRS SOI and Census population totals. We fit 95.69% within 10% in sample, with an effective sample of 9,174. We rescale four Social Security benefit inputs to SSA payment totals, impute 65 tax-detail variables from IRS PUF records into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. These describe how we build the file and don't establish its accuracy.
+- **Local-area file** (`populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`): 1,586,908 households, 1,529,668 from the ACS and 57,240 from the ASEC and PUF. Its donor, `populace-us-2024-spm-receipts-20260923`, differs from the national file. It fits 4,765 targets, 4,329 by state and 436 by congressional district, and 96.08% land within 10% in sample, with an effective sample of about 12,124. Those targets leave out state child counts and poverty, so this fit doesn't establish state child poverty accuracy.
 - **Take-up** (microcosm commit 766b7c792): `us_runtime/snap_take_up.py` keeps everyone who reports SNAP and draws the rest to USDA's participation rate. `us_runtime/medicaid_take_up.py` keeps everyone who reports Medicaid and calibrates the rest to CMS state enrollment counts.
 - **Imputation:** the `US_DONORS` table at that commit names the IRS Public Use File, the SCF with the SIPP for financial assets, and the SIPP for tips.
 - **Geography:** `us_runtime/puma_ladder.py` keeps an ACS household's PUMA and draws its county and congressional district within that PUMA, in proportion to population overlap.
 
 ## Work in progress
 
-Slide 13 links each open pull request, all open on November 5, 2026: PolicyEngine/microcosm#1445 (state child poverty diagnosis), PolicyEngine/policyengine-us#10640 (Medicaid spouse rule), PolicyEngine/policyengine-us#10607 (LIHEAP in California, with #10612, #10613, #10614 and #10616 for Delaware, Idaho, Hawaii and South Carolina), PolicyEngine/microcosm#1453 (local tax geography) and PolicyEngine/microcosm#1246 (student loans).
+Slide 13 links each open pull request, all open on November 5, 2026: PolicyEngine/microcosm#1445 (state child poverty diagnosis), PolicyEngine/policyengine-us#10640 (Medicaid spouse rule), PolicyEngine/policyengine-us#10607 (LIHEAP in California, with #10609, #10611, #10612, #10613, #10614, #10616 and #10618 for Colorado, Connecticut, Delaware, Idaho, Hawaii, South Carolina and West Virginia), PolicyEngine/microcosm#1453 (local tax geography) and PolicyEngine/microcosm#1246 (student loans).
 
 ## The fixed sample
 
@@ -90,7 +104,7 @@ The script keeps input variables and IDs. It renames the stored Social Security 
 - That fall rests on 55 child records in 24 households. Clustering by source household, we estimate standard errors of 0.05 points on the fall and 4.6 points on the 2026 rate. They come to $42 million on the fall in the poverty gap and $64 million on the state cost (`analysis/massachusetts_precision.py` → `data/massachusetts_precision.json`). We treat the calibrated weights as known and don't capture errors that every record shares, such as a data-wide error in rent. We also leave out errors that every clone shares through the model that imputes its tax detail.
 - The file's 36,491 Massachusetts household records come from 36,197 source households. They hold an effective sample of about 301 households, or 132 among those with children.
 - We estimate a Massachusetts child poverty rate of 21.4% for 2025 and 23.1% for 2026. Census reports 12.8%, with a margin of error of 2.0 points, for the 2023 to 2025 average (P60-290 Table 18, as used in `slideshows/cpid-webinar-2026`). That difference ranks third in size among the 51 jurisdictions, after Delaware and Louisiana.
-- On the default file, we estimate that Massachusetts would forgo $555 million and 29.8% of households would gain. The poverty gap would shrink by $167 million (`data/massachusetts_reform_default.json`).
+- On the national file, we estimate that Massachusetts would forgo $555 million and 29.8% of households would gain. The poverty gap would shrink by $167 million (`data/massachusetts_reform_default.json`).
 - On the same records at policyengine-us 2.2.1, the version `policyengine.py` 6.12.0 pins, we estimate that Massachusetts would forgo $657 million and 34.1% of households would gain. The child poverty rate would fall 0.5 points, from 22.2% to 21.7% (`data/massachusetts_reform_221.json`). We changed how the model computes the credit between those versions. On a joint return, 2.2.1 counts a filer with a disability as a qualifying individual, and 2.90.2 counts a filer incapable of self-care. 2.90.2 also counts a dependent incapable of self-care at any age. We did not separate how much of the difference those changes explain.
 - On policyengine-us 2.2.1 and the Microcosm 2024 population, we estimate that 16.6% of children nationally lived below the threshold in 2025, and Census reports 13.4% (`BaselineVsCensusSlide` in `slideshows/cpid-webinar-2026`).
 
@@ -102,7 +116,7 @@ The script keeps input variables and IDs. It renames the stored Social Security 
 - Effective samples of households with children run from 53 in Maine to 407 in California, with a median of 108. Across all households they run from 157 in Kentucky to 905 in California, with a median of 237 (`data/effective_samples.json`).
 - `policyengine.py` leaves ACS group quarters out of SPM measures, and we keep them. Leaving them out moves no state's rate by more than 0.023 points (Connecticut) and moves Massachusetts's by 0.01 (`child_spm_percent_without_group_quarters` in `data/state_baseline.json`).
 - On the same file and model version, our rates match `acs_local` in PolicyEngine/microcosm#1445 at 247f1a88 (`docs/evidence/us-state-child-spm-2026-11/outputs/acs_eval.csv`) to within 0.000001 points in 48 of 51 jurisdictions (`data/microcosm_1445_rates.csv`). That run gives blank parent links the id −1, and ours gives them 0, the model's value for an unknown parent. California moves by 0.56 points, Delaware by 0.006 and Missouri by 0.00001.
-- On the default file, our rates differ from Census's by 4.8 points on average. They exceed Census's in 40 of 51 jurisdictions and fall outside its margin in 38 (`data/state_baseline_default.json`). The median effective sample includes 63 households with children (`data/effective_samples.json`).
+- On the national file, our rates differ from Census's by 4.8 points on average. They exceed Census's in 40 of 51 jurisdictions and fall outside its margin in 38 (`data/state_baseline_default.json`). The median effective sample includes 63 households with children (`data/effective_samples.json`).
 
 ## Effective samples
 

@@ -59,6 +59,10 @@ def detail(sim):
     return {name: total(sim, name) for name in names}
 
 
+def monthly_snap(sim):
+    return [round(float(sim.calculate("snap", f"{hh.YEAR}-{month:02d}")[0]), 2) for month in range(1, 13)]
+
+
 def main():
     situation = hh.situation(STATE, EARNINGS)
     sim = hh.run(STATE, situation)
@@ -78,7 +82,9 @@ def main():
         "year": hh.YEAR,
         "lines": waterfall(sim),
         "detail": detail(sim),
+        "monthly_snap": monthly_snap(sim),
         "without_subsidy": {
+            "monthly_snap": monthly_snap(without),
             "net_resources": round(float(hh.net_resources_parts(without)["net_resources"][0]), 2),
             "snap": total(without, "snap"),
             "federal_refundable_credits": total(without, "income_tax_refundable_credits"),

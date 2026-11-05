@@ -11,7 +11,7 @@ Fifteen slides in about 12 minutes.
 - Before the session, run a report in Build with the credit at $880 and the recording's Nationwide population, and check that it finishes.
 - About 15 minutes before the session, click the CliffWatch address on slide 11 and give CliffWatch up to a minute to finish drawing the chart. If it fails, try again a minute later. Slide 11's recording doesn't depend on it.
 - Then press next on slide 11 to play its recording once, in the browser you'll present from. If it doesn't start, the slide keeps its screenshots, so talk over those and press next again.
-- Slide 3 opens on the models' answers. Press next once to show what we compute. The PDF shows that second state.
+- Slide 3 opens on the models' answers. Press next once to show PolicyEngine's answer. The PDF shows that second state.
 - Keep these notes on your phone and the PDF on your laptop. Present from the live deck at policyengine.org/slides/appam-2026, and if the network fails, present from the PDF.
 
 ## 1. PolicyEngine for state policy research (0:00, 30 seconds)
@@ -20,31 +20,35 @@ Thanks, Cynthia, for putting this session together, and thanks to Tara and Linda
 
 ## 2. How much SNAP does this family get in a year? (0:30, 30 seconds)
 
-Here's a family in Massachusetts. One parent, 30, earns $40,000 working full time and has a 1-year-old and a 4-year-old. The family pays $1,200 a month in rent, and child care costs $1,500 a month before any subsidy. Assume the family gets any child care subsidy it qualifies for.
+Here's a family in Massachusetts. One parent, 30, earns $40,000 working full time and has a 1-year-old and a 4-year-old. The family pays $1,200 a month in rent, and child care costs $1,500 a month before any subsidy. Assume Massachusetts approves a child care subsidy and the family holds it for all twelve months. A new applicant this year couldn't, because Massachusetts keeps a waiting list, and I'll come back to that.
 
 How much SNAP does this family get in a year? Take a guess.
 
-## 3. We didn't survey experts. We surveyed AI models. (1:00, 1 minute)
+## 3. We didn't survey experts. We surveyed AI models. (1:00, 1 minute 15 seconds)
 
-We didn't survey experts, but we did survey AI models. This morning, we gave this family to the newest versions of seven OpenAI and Anthropic models, one call each with no tools, in the format of PolicyBench, our tax and benefit eval. We told them to assume the family gets any child care subsidy it qualifies for. Their answers run from $721 to $11,100. We also asked three older versions, and the deck's data file, `data/model_answers.json`, holds their answers.
+We didn't survey experts, but we did survey AI models. This morning, we gave this family to the newest versions of seven OpenAI and Anthropic models, five calls each with no tools, in the format of PolicyBench, our tax and benefit eval, and told them to assume the subsidy for all twelve months. Their answers run from $0 to $11,160, and the same model gives different answers on the same prompt. Claude Opus 5.5 runs from $3,551 to $8,651.
 
 *Press next.*
 
-We compute $3,663, and none of the seven came within 10%. Massachusetts's subsidy cuts the bill the family pays from $18,000 to $1,058, and SNAP's dependent care deduction falls with it. Without the subsidy, SNAP comes to $8,739. The rules affect each other, so the answer needs them computed together.
+PolicyEngine's answer comes to $3,663: $297 a month through September and $330 from October. Eight of the 35 answers came within 10%, none came within $1, and counting three older versions, 15 of all 50 came within 10%. Massachusetts pays all but $1,058 of the $18,000 bill, so the family deducts $1,058 for SNAP. Without the subsidy, it deducts $18,000 and SNAP comes to $8,739.
 
-## 4. Models miss most SNAP and state credit amounts and few payroll tax amounts (2:00, 45 seconds)
+That $3,663 rests on the assumption I asked you to make. Massachusetts reported 31,724 children on its income-eligible waiting list in July. It estimates its new funding will reach about 2,000 children.
 
-Now take the family's other lines. All seven landed within 10% on payroll tax, five on state credits and none on SNAP.
+*Source: Massachusetts Department of Early Education and Care, September 9, 2026 board materials, pages 15 to 17. The three older versions landed 7 of 15 answers within 10%, a better rate than the newest, so this slide doesn't show models improving. `data/model_answers.json` holds all 50 answers.*
 
-In PolicyBench, we ask 51 models about 100 US households. Among households with a positive amount, 65.1% of their SNAP answers and 82.3% of their state refundable credit answers miss by more than 10%, against 11.3% of their payroll tax answers. We grade those answers against PolicyEngine. The top exact-match score rose from 87.9 among models released by April to 95.2 with GPT-6 Sol in September.
+## 4. Most SNAP and state credit answers land more than 10% from PolicyEngine's, and few payroll tax answers do (2:15, 45 seconds)
 
-## 5. This family ends up with $49,127 once we compute every line together (2:45, 1 minute)
+Now take the family's other lines. Of the 35 answers, 34 landed within 10% on payroll tax, 23 on state credits and 8 on SNAP.
 
-Here's what we compute, line by line. The family earns $40,000, owes no federal income tax and gets $7,130 in federal refundable credits. It pays $3,244 in payroll tax and $1,260 in Massachusetts income tax and gets $2,449 back in state credits. SNAP adds $3,663, WIC $1,447 and the child care subsidy $16,942, against an $18,000 bill. It ends up with $49,127, and without the subsidy it would end up with $37,455. We didn't ask the models for the WIC amount or the subsidy, because PolicyBench asks for neither.
+One family illustrates. For a broader comparison, PolicyBench asks 51 models about 100 public households, which it samples with household weights from an eligible subset of our data. Among households with a positive amount, 65.1% of SNAP answers and 82.3% of state refundable credit answers land more than 10% from PolicyEngine's, against 11.3% of payroll tax answers. These rates describe that sample, and PolicyBench grades against PolicyEngine.
 
-I expect AI to help a lot with questions like this, and it needs the rules computed at this level. With those rules computed, we can see what changes as a family's state or earnings change, or across a whole population, and this engine runs all of it.
+## 5. This family ends up with $49,127 once we compute every line together (3:00, 1 minute)
 
-## 6. One family ends up with $28,166 in Idaho and $54,345 in Alaska (3:45, 1 minute 15 seconds)
+Here's PolicyEngine's answer, line by line. The family earns $40,000, owes no federal income tax and gets $7,130 in federal refundable credits. It pays $3,244 in payroll tax and $1,260 in Massachusetts income tax and gets $2,449 back in state credits. SNAP adds $3,663, WIC $1,447 and the child care subsidy $16,942, against an $18,000 bill. It ends up with $49,127, and without the subsidy it would end up with $37,455. We didn't ask the models for the WIC amount or the subsidy, because PolicyBench asks for neither.
+
+I expect AI to help a lot with questions like this, but it needs to understand the rules at this computational level. Once we have those rules, we can see what changes as a family's state or earnings change, or across a whole population, and one engine runs all of it.
+
+## 6. One family ends up with $28,166 in Idaho and $54,345 in Alaska (4:00, 1 minute 15 seconds)
 
 Now move this family across states, under each state's 2026 rules. We put it in each state's largest county and treat it as a new applicant for every program.
 
@@ -52,27 +56,27 @@ The gray base shows earnings after taxes and credits, minus the full child care 
 
 The gap between the top and bottom state moves with earnings: $16,404 at $30,000 and $21,670 at $60,000.
 
-## 7. This family's net resources fall up to $17,808 at a benefit cliff, at earnings that vary by state (5:00, 1 minute)
+## 7. This family's net resources fall up to $17,808 at a benefit cliff, at earnings that vary by state (5:15, 1 minute)
 
 Each gray line follows one state as a new applicant's earnings rise. In Idaho, Maryland and Iowa, $500 more in earnings puts a new applicant over the child care income limit, and that applicant ends up between $14,967 and $17,808 behind. In Idaho, the same $500 also takes the family past SNAP's gross income limit. For example, we estimate that a family already in the program qualifies up to about $110,000 in Maryland. Since May 2025, Maryland has put applicants who qualify, like this family, on a waiting list. In 46 of 51 jurisdictions, the family's largest drop comes from the subsidy.
 
 Across states, the median total effective marginal tax rate falls from 63.6% at $30,000 of earnings to 24.6% at $60,000.
 
-## 8. Doubling the Massachusetts child and family credit would give this family $880 more (6:00, 45 seconds)
+## 8. Doubling the Massachusetts child and family credit would give this family $880 more (6:15, 45 seconds)
 
-Take one line of that budget, the Massachusetts child and family credit. The Legislature raised the amount per dependent to $310 for 2023 and $440 for 2024, and we record each value's effective date and cite the session law and tax forms behind it. With two children at $440, this family gets $880. Double the amount per dependent, and the family gets another $880 and ends up with $50,007, with every other line unchanged.
+Take one line of this family's budget, the Massachusetts child and family credit. The Legislature raised the amount per dependent to $310 for 2023 and $440 for 2024, and we record each value's effective date and cite the session law and tax forms behind it. With two children at $440, this family gets $880. Double the amount per dependent, and the family gets another $880 and ends up with $50,007, with every other line unchanged.
 
-## 9. We estimate Massachusetts would forgo $577 million if lawmakers doubled its child and family credit (6:45, 45 seconds)
+## 9. We estimate Massachusetts would forgo $577 million if lawmakers doubled its child and family credit (7:00, 45 seconds)
 
 Now run that change on the whole state. We estimate Massachusetts would forgo $577 million in 2026, and that 29.4% of its households would gain and none would lose.
 
 We ran this on the local-area file of Populace US, our microdata, which we use for state and district results. It holds 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children.
 
-## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (7:30, 1 minute 15 seconds)
+## 10. You can reach the same PolicyEngine model through Python, TAXSIM, web apps and AI tools (7:45, 1 minute)
 
 The PolicyEngine model behind that SNAP answer ran every result since, and you can reach it several ways. In Python, you can build a simulated eligibility measure: map your survey or administrative file to our variable names, set the state and run it. Keep the people and their incomes fixed and change only the state, and any difference between runs comes from the rules in that state.
 
-For example, we drew 3,000 households with children from Populace US's default file and ran them through each state's 2024 rules. The same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland. Their children qualify for Medicaid or CHIP at rates from 39.8% in Idaho to 66.1% in Hawaii.
+For example, we drew 3,000 households with children from Populace US's national file and ran them through each state's 2024 rules. The same families pass SNAP's tests at rates from 17.5% in Arkansas and Tennessee to 38.3% in Maryland.
 
 If your pipeline runs on TAXSIM, our TAXSIM-compatible interface at policyengine.org/us/taxsim takes the same files. It runs tax years 2021 onward through PolicyEngine and sends earlier years to TAXSIM35. On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state. Our Claude Code plugin gives Claude Code our agents, commands and skills, and you can read and edit every rule in the open source code.
 
@@ -88,15 +92,15 @@ In Build, you can open the same Massachusetts credit, set it to $880 and run a r
 
 *The recording stops on the button that runs the report. Press next when you finish.*
 
-## 12. We model federal and state taxes and benefits and build microdata to match official totals (9:45, 1 minute)
+## 12. We model federal and state taxes and benefits and build microdata from surveys and official totals (9:45, 1 minute)
 
-On policy, we model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes.
+On policy, we model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax.
 
-On data, we reweight Populace US's 57,240 households to 5,659 targets from the IRS, Census, USDA, CMS, SSA and others. People underreport SNAP and Medicaid in the CPS, so we keep everyone who reports them and draw take-up among the rest to match USDA's participation rate and CMS's enrollment counts. We impute what the CPS doesn't ask, such as tax detail from the IRS Public Use File, financial assets from the SCF and tips from the SIPP. For state results, we add 1.5 million American Community Survey households, draw each one's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
+On data, we build two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file: we transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
 
 ## 13. We're working on state poverty accuracy, Medicaid rules, heating assistance and local taxes (10:45, 30 seconds)
 
-We're working on state poverty accuracy, starting with a diagnosis of why our state child poverty rates differ from Census's. We're also applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled. And we're adding LIHEAP in five more states, placing households in local tax jurisdictions from their geography and imputing student loan balances.
+We're working on state poverty accuracy, starting with a diagnosis of why our state child poverty rates differ from Census's. We're also applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled. And we're adding LIHEAP in eight more states, placing households in local tax jurisdictions from their geography and imputing student loan balances.
 
 ## 14. The Axiom Foundation encodes rules with their source text and dates (11:15, 40 seconds)
 
@@ -110,15 +114,29 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 ## Questions
 
-**Which older versions did you ask?** GPT-5.6 Terra answered $3,838, GPT-6 Sol $4,000 and Claude Opus 4.7 $4,500, so the first two came within 10%. We show the newest version in each family, whatever it answers. One call gives one draw from each model, so these answers don't rank the models.
+**Which older versions did you ask?** GPT-5.6 Terra, GPT-6 Sol and Claude Opus 4.7, five calls each. GPT-6 Sol landed 3 of 5 within 10%, Claude Opus 4.7 landed 4 of 5 and GPT-5.6 Terra landed 0 of 5. Together they landed 7 of 15, against 8 of 35 for the newest versions, so slide 3 doesn't show models improving. The answers cover one family, and they don't rank the models. We show the newest version in each family, whatever it answers.
 
-**Why does GPT-6.1 Sol score below GPT-6 Sol?** On PolicyBench, GPT-6.1 Sol scores 90.1, against 95.2 for GPT-6 Sol and 94.1 for Claude Opus 5.5, the top current version. A newer version can score lower.
+**How do you get $3,663?** From January through September, the family's $3,333 a month falls by the 20% earnings deduction, the $209 standard deduction, $88.14 of parent fee and the $744 shelter cap, to $1,626. SNAP pays the $785 maximum minus 30% of that, or $297. From October, the $808 maximum, the $217 deduction and the $769 cap leave $1,593 and $330. So 9 × $297 + 3 × $330 = $3,663. Without the subsidy, the family deducts $1,500 a month, and SNAP pays $720 and then $753, or $8,739.
+
+**Are the models wrong, or is PolicyEngine?** PolicyBench grades against PolicyEngine, so a miss means a model disagrees with the rules as we compute them. For this family's SNAP, you can check our path by hand.
+
+**Are models getting better?** On the same 100-household October 23 board, the highest score among models released by April 30 came from GPT-5.5, at 87.9, and the highest among all models from GPT-6 Sol, at 95.2. That compares release cohorts on one snapshot, and no one measured the board in April at this scoring.
+
+**How do the top models do on SNAP?** On that board, the two highest scorers, GPT-6 Sol and Claude Opus 5.5, miss SNAP by more than 10% in 7 of 13 and 6 of 13 households with a positive reference amount.
+
+**What do PolicyBench's rates count?** These unweighted rates pool parsed predictions on positive scored reference amounts, and they leave out missing or unparseable predictions. They describe PolicyBench's 100 public households, which it samples with household weights from an eligible subset of the PolicyEngine populace dataset.
+
+**Why does GPT-6.1 Sol score below GPT-6 Sol?** On PolicyBench's October 23 board, GPT-6.1 Sol scores 90.1, against 95.2 for GPT-6 Sol and 94.1 for Claude Opus 5.5, the top current version on a board that leaves out GPT-6.1 Terra. A newer version can score lower.
 
 **Who checks PolicyBench's answers?** PolicyBench grades against PolicyEngine, and no administrative record stands behind its references. In a September audit, Claude Opus 5.5 flagged 39 references. We affirmed 5, regenerated 6, traced 8 to an input the prompt never states and confirmed 20 as defects in PolicyEngine US 1.755.4. The audit sits at policybench.org/notes/2026-09-22-reference-audit.
 
-**What happens when models get a PolicyEngine tool?** In a pilot on October 14 and 15, graded against the same engine, GPT-6 Sol rose from 95.2 to 99.2, Claude Opus 5.5 from 94.1 to 99.8 and Gemini 4 Argon from 88.7 to 99.9.
+**What happens when models get a PolicyEngine tool?** In a 100-household pilot on October 14 and 15, we gave three models the reference engine, and their agreement with that engine rose to between 99.2 and 99.9: GPT-6 Sol from 95.2, Claude Opus 5.5 from 94.1 and Gemini 4 Argon from 88.7. That doesn't independently validate policy accuracy or show that models need such a tool.
 
-**Do you model waiting lists?** No. We model each state's income limits, and none of our take-up flags covers state child care subsidies, so this family gets a subsidy wherever it meets the limit. The National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025. Maryland started its waiting list in May 2025. It now exempts families experiencing homelessness, families on cash assistance or SSI, and siblings of children in the program. Alabama, Indiana and Missouri put new applicants on waiting lists too. The Texas Tribune reported in August that more than 100,000 children wait for Texas's scholarships, and that the state's target falls from 146,736 seats in 2026 to 132,689 in 2027.
+**Do you model waiting lists?** No. We model each state's income limits, and none of our take-up flags covers state child care subsidies, so this family gets a subsidy wherever it meets the limit.
+
+Massachusetts's early education department counted 31,724 children on its income-eligible waiting list in July, up from 21,004 in July 2023, with 38,776 in care. It estimates that $31.2 million in new funding will reach about 2,000 children, with new vouchers starting in October. This family holds a priority status there because its income falls below half the state median, and we don't know how long it would wait. Without the subsidy, its SNAP comes to $8,739 and it ends up with $37,455. (Massachusetts Department of Early Education and Care, September 9, 2026 board materials, pages 14 to 17.)
+
+The National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025. Maryland started its waiting list in May 2025. It now exempts families experiencing homelessness, families on cash assistance or SSI, and siblings of children in the program. Alabama, Indiana and Missouri put new applicants on waiting lists too. The Texas Tribune reported in August that more than 100,000 children wait for Texas's scholarships, and that the state's target falls from 146,736 seats in 2026 to 132,689 in 2027.
 
 **How does a subsidy change SNAP in other states?** With Texas's subsidy, the family gets $15,791 in child care help and loses $5,598 of SNAP. Congress lets SNAP households deduct their care costs, so this family deducts less when Texas pays for care. The family ends up $10,193 ahead.
 
@@ -132,7 +150,7 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 **Does Maryland's limit match what it posts?** Sources differ. Maryland Family Network and the Department of Legislative Services print $94,026 for a family of three, 75% of the median income for federal fiscal 2025. Maryland's February 2026 briefing also gives $115,587 for a family of four, which matches our limit of about $97,000 for three. At $94,026, we estimate the drop at $15,197, at $94,500 of earnings.
 
-**Why do you count four months in Indiana?** Our model reads 150% of the poverty guideline, from Indiana's 2023 bulletin, through April, then Indiana's April 5 limit of 135%, or $3,074 a month for a family of three. This family earns $3,333 a month. We read each month's limit on its first day, so we count the subsidy from January through April. The PN3 Roadmap prints 140% of poverty for 2025, which would turn this family down. With the April limit in all twelve months, the family would end up with $26,562, below Idaho's $28,166.
+**Why do you count four months in Indiana?** Our model reads 150% of the poverty guideline, from Indiana's 2023 bulletin, through April, then Indiana's April 5 limit of 135%, or $3,074 a month for a family of three. This family earns $3,333 a month. We read each month's limit on its first day, so we count the subsidy from January through April. The PN3 Roadmap prints 140% of poverty for 2025, which would turn this family down, and on the 2025 guideline, 150% gives $3,331, $2 under this family's income. Chalkbeat reported in April that Indiana would restart child care help in May after a 15-month freeze, so those four months fall inside the freeze. With the April limit in all twelve months, the family would end up with $26,562, below Idaho's $28,166.
 
 **What about a family already in the program?** It keeps the subsidy to a higher limit, then meets its own cliff. We estimate that cliff at $15,572 past about $110,000 in Maryland and $6,817 past about $68,000 in Iowa. Idaho's department told families in the program that the lower limit reaches them when they recertify, and said it was preparing a phase-out. At $40,000, we estimate that a family in the program gets $16,200 in Nevada, $14,776 in Indiana and $14,394 in Ohio, whose first program charges a copay.
 
@@ -142,9 +160,11 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 **Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
 
-**How well do your weights fit?** We fit 95.69% of the default file's 5,659 targets within 10%, and 96.08% of the local-area file's 4,765. Those shares describe the fit in sample. The two files hold effective samples of 9,174 and about 12,124 households.
+**How well do your weights fit?** We fit 95.69% of the national file's 5,659 targets within 10%, and 96.08% of the local-area file's 4,765. Those shares describe the fit in sample. The two files hold effective samples of 9,174 and about 12,124 households.
 
 **What do you leave out?** We model child care subsidies in all 51 jurisdictions from August 2026. We copy each parameter's earliest value back to 2015, so check historical runs against each year's rules. We take earnings and paid leave benefits as inputs and hold them fixed when you change minimum wage or paid leave law. We hold hours fixed unless you set a labor supply response. We leave health coverage out of net resources.
+
+**What else does the simulated eligibility measure show?** The same 3,000 households' children qualify for Medicaid or CHIP at rates from 39.8% in Idaho to 66.1% in Hawaii.
 
 **Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
 

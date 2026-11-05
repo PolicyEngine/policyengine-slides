@@ -7,17 +7,17 @@ function range(low: number, high: number) {
 }
 
 export default function EveryProgramSlide() {
-  const { bestScore, bestScoreByApril, cards, households, models } = policyBench;
+  const { cards, households, models } = policyBench;
   return (
-    <Frame title="Models miss most SNAP and state credit amounts and few payroll tax amounts">
+    <Frame title="Most SNAP and state credit answers land more than 10% from PolicyEngine’s, and few payroll tax answers do">
       <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <div className="min-w-0 flex-[5]">
-          <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the same seven models</h2>
+          <h2 className="mb-[1vh] font-semibold text-pe-dark">This family, the seven newest versions, five calls each</h2>
           <table className="w-full border-collapse" style={{ fontSize: '0.86em' }}>
             <thead>
               <tr className="border-b border-gray-300 text-left align-bottom">
                 <th className="py-[0.6vh] pr-3 font-semibold">Line</th>
-                <th className="py-[0.6vh] pr-3 text-right font-semibold">We compute</th>
+                <th className="py-[0.6vh] pr-3 text-right font-semibold">PolicyEngine</th>
                 <th className="py-[0.6vh] pr-3 text-right font-semibold">Models, low to high</th>
                 <th className="py-[0.6vh] text-right font-semibold">Within 10%</th>
               </tr>
@@ -41,7 +41,7 @@ export default function EveryProgramSlide() {
             {households} households, all {models} models on PolicyBench
           </h2>
           <p className="mb-[1vh] text-gray-700" style={{ fontSize: '0.86em' }}>
-            Share of answers off by more than 10%, among households with a positive amount
+            Share of answers more than 10% from PolicyEngine&rsquo;s, among households with a positive amount
           </p>
           <ul className="space-y-[0.9vh]" style={{ fontSize: '0.86em' }}>
             {cards.map((card) => (
@@ -62,8 +62,8 @@ export default function EveryProgramSlide() {
             ))}
           </ul>
           <p className="mt-[1.4vh] text-gray-700" style={{ fontSize: '0.74em' }}>
-            PolicyBench grades against PolicyEngine. Its top exact-match score rose from {bestScoreByApril.exact.toFixed(1)}{' '}
-            among models released by April to {bestScore.exact.toFixed(1)} with GPT-6 Sol in September.{' '}
+            PolicyBench grades against PolicyEngine, on public households it samples with household weights from an eligible
+            subset of our data.{' '}
             <a className="pointer-events-auto" style={{ textDecoration: 'underline' }} href="https://policybench.org">
               policybench.org
             </a>

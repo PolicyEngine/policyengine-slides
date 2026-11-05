@@ -76,7 +76,7 @@ export default function InterfacesSlide() {
             {tied.map((entry) => STATE_NAMES[entry.code]).join(' and ')} to {percent(high.value)} in {STATE_NAMES[high.code]}.
           </p>
         </div>
-        <dl className="min-w-0 flex-[4] space-y-[1.5vh]" style={{ fontSize: '0.92em' }}>
+        <dl className="min-w-0 flex-[4] space-y-[1vh]" style={{ fontSize: '0.86em' }}>
           {ways.map((way) => (
             <div key={way.name}>
               <dt className="font-semibold text-pe-dark">{way.name}</dt>

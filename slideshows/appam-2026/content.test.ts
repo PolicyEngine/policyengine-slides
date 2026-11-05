@@ -40,6 +40,8 @@ import {
   sweepEarnings,
   usd,
   waterfall,
+  countWord,
+  snapPath,
 } from './content';
 import nationalCheck from './data/massachusetts_national_check.json';
 import { SERIES } from './slides/FamilyChart';
@@ -1013,12 +1015,23 @@ describe('the family’s lines', () => {
   });
 
   it('states the subsidy assumption wherever a figure rests on it', () => {
-    const assumption = 'any child care subsidy it qualifies for';
-    expect(render(1)).toContain(assumption);
+    const assumption = 'all twelve months';
+    expect(render(1)).toContain(`approves a child care subsidy for ${assumption}`);
     expect(render(2)).toContain(assumption);
     expect(notes.match(new RegExp(assumption, 'g'))!.length).toBeGreaterThanOrEqual(2);
     expect(without.net_resources).toBeLessThan(lines.net_resources);
     for (const text of [render(4), notes, ledger]) expect(text).toContain(usd(without.net_resources));
+  });
+
+  it('adds each month’s SNAP to the year, with and without the subsidy', () => {
+    const total = (months: number[]) => months.reduce((sum, month) => sum + month, 0);
+    expect(familyLines.monthly_snap).toHaveLength(12);
+    expect(total(familyLines.monthly_snap)).toBeCloseTo(lines.snap, 2);
+    expect(total(without.monthly_snap)).toBeCloseTo(without.snap, 2);
+    const path = snapPath(familyLines.monthly_snap);
+    expect(path).toBe('9 × $297 + 3 × $330 = $3,663');
+    for (const text of [render(2), notes, ledger]) expect(text).toContain(path);
+    expect(snapPath(without.monthly_snap)).toBe('9 × $720 + 3 × $753 = $8,739');
   });
 
   it('moves only the state credit line when the credit doubles', () => {
@@ -1051,13 +1064,33 @@ describe('the family’s lines', () => {
 
 describe('the models’ answers', () => {
   const NEWEST = ['GPT-6.1 Sol', 'GPT-6.1 Terra', 'GPT-6 Astra', 'GPT-6 Luna', 'Claude Opus 5.5', 'Claude Sonnet 5.5', 'Claude Haiku 5.5'];
-  const amounts = (row: (typeof modelAnswers.rows)[number]) => row.amounts as Record<string, number>;
+  type Call = { model: string; newest: boolean; snap: number; amounts: Record<string, number> };
+  const run = JSON.parse(read('analysis/model_ask/comparison-v2.json'));
+  const calls: Call[] = run.calls;
+  const newest = calls.filter((call) => call.newest);
+  const older = calls.filter((call) => !call.newest);
+  const withinTen = (value: number, truth: number) => Math.abs(value - truth) <= 0.1 * Math.abs(truth);
+
+  it('takes the final round, with all 50 answers and no tools', () => {
+    expect(run.status).toBe('final');
+    expect(calls).toHaveLength(50);
+    expect(run.attempt_audit.tools_seen).toEqual([]);
+    expect(run.attempt_audit.retried).toEqual([]);
+    expect(run.attempt_audit.malformed).toEqual([]);
+    expect(run.attempt_audit.unanswered).toEqual([]);
+  });
 
   it('keeps all ten in the data file and shows the newest in each family', () => {
     expect(modelAnswers.rows).toHaveLength(10);
-    expect(modelAnswers.shownSnap.map((row) => row.name).sort()).toEqual([...NEWEST].sort());
-    const snaps = modelAnswers.shownSnap.map((row) => row.snap);
-    expect(snaps).toEqual([...snaps].sort((a, b) => a - b));
+    expect(modelAnswers.rows.flatMap((row) => row.answers)).toHaveLength(50);
+    expect(modelAnswers.shownRows.map((row) => row.name).sort()).toEqual([...NEWEST].sort());
+    const medians = modelAnswers.shownRows.map((row) => row.median);
+    expect(medians).toEqual([...medians].sort((a, b) => a - b));
+  });
+
+  it('draws every answer the seven gave', () => {
+    const shown = modelAnswers.shownRows.flatMap((row) => row.answers).sort((a, b) => a - b);
+    expect(shown).toEqual(newest.map((call) => call.snap).sort((a, b) => a - b));
   });
 
   it('grades against the deck’s own run', () => {
@@ -1065,40 +1098,84 @@ describe('the models’ answers', () => {
     expect(modelAnswers.referenceSnapWithoutSubsidy).toBe(familyLines.without_subsidy.snap);
   });
 
-  it('recounts every row of slide 4’s table from the answers', () => {
-    const shown = modelAnswers.rows.filter((row) => row.shown && row.answered);
+  it('recounts the headline from the calls', () => {
+    const truth = modelAnswers.referenceSnap;
+    const count = (group: Call[]) => group.filter((call) => withinTen(call.snap, truth)).length;
+    const dollar = (group: Call[]) => group.filter((call) => Math.abs(call.snap - truth) <= 1).length;
+    expect(modelAnswers.snap.shown.answers).toBe(newest.length);
+    expect(modelAnswers.snap.shown.within_ten_percent).toBe(count(newest));
+    expect(modelAnswers.snap.shown.within_one_dollar).toBe(dollar(newest));
+    expect(modelAnswers.snap.older.within_ten_percent).toBe(count(older));
+    expect(modelAnswers.snap.all.within_ten_percent).toBe(count(calls));
+    expect(modelAnswers.snap.all.within_one_dollar).toBe(dollar(calls));
+  });
+
+  it('recounts every row of slide 4’s table from the calls', () => {
     for (const line of modelAnswers.table) {
-      const values = shown.map((row) => amounts(row)[line.key]);
+      const values = newest.map((call) => call.amounts[line.key]);
       expect(line.answers).toBe(values.length);
       expect(line.low).toBe(Math.min(...values));
       expect(line.high).toBe(Math.max(...values));
-      expect(line.within_ten_percent, line.key).toBe(values.filter((value) => Math.abs(value - line.reference) <= 0.1 * Math.abs(line.reference)).length);
+      expect(line.within_ten_percent, line.key).toBe(values.filter((value) => withinTen(value, line.reference)).length);
     }
   });
 
-  it('says none of the seven came within 10%, and prints the range', () => {
-    expect(modelAnswers.shownSnapWithinTenPercent).toBe(0);
-    expect(render(2)).toContain('None of the seven came within 10%');
-    expect(notes).toContain('none of the seven came within 10%');
-    const snaps = modelAnswers.shownSnap.map((row) => row.snap);
-    expect(notes).toContain(`from ${usd(snaps[0])} to ${usd(snaps[snaps.length - 1])}`);
+  it('prints the count on slide 3 and both ways in the notes', () => {
+    const { shown, all } = modelAnswers.snap;
+    const sentence = `${countWord(shown.within_ten_percent)} of the ${shown.answers} answers came within 10%`;
+    expect(render(2)).toContain(sentence);
+    expect(notes).toContain(sentence);
+    expect(notes).toContain(`${all.within_ten_percent} of all ${all.answers} came within 10%`);
+    expect(notes).toContain(`from ${usd(shown.low)} to ${usd(shown.high)}`);
   });
 
-  it('names the older versions and their answers in the notes and the ledger', () => {
-    const older = modelAnswers.rows.filter((row) => !row.shown);
-    expect(older).toHaveLength(3);
-    for (const row of older) {
-      for (const text of [notes, ledger]) {
-        expect(text, row.name).toContain(row.name);
-        expect(text, row.name).toContain(usd(amounts(row).snap));
-      }
+  it('gives slide 4’s notes the counts from the table', () => {
+    const count = (key: string) => modelAnswers.table.find((line) => line.key === key)!.within_ten_percent;
+    const answers = modelAnswers.table[0].answers;
+    expect(notes).toContain(`Of the ${answers} answers, ${count('payroll_tax')} landed within 10% on payroll tax, ${count('state_refundable_credits')} on state credits and ${count('snap')} on SNAP.`);
+  });
+
+  it('shows the same model giving different answers', () => {
+    const opus = modelAnswers.rows.find((row) => row.name === 'Claude Opus 5.5')!;
+    expect(notes).toContain(`Claude Opus 5.5 runs from ${usd(opus.low)} to ${usd(opus.high)}`);
+    expect(ledger).toContain(`Claude Opus 5.5 runs from ${usd(opus.low)} to ${usd(opus.high)}`);
+  });
+
+  it('names the older versions and their counts in the notes and the ledger', () => {
+    const rows = modelAnswers.rows.filter((row) => !row.shown);
+    expect(rows).toHaveLength(3);
+    for (const row of rows) {
+      for (const text of [notes, ledger]) expect(text, row.name).toContain(row.name);
+      expect(notes, row.name).toContain(`${row.name} landed ${row.within_ten_percent} of ${row.answers.length}`);
+      expect(ledger, row.name).toContain(`${row.name} ${row.within_ten_percent} of ${row.answers.length}`);
     }
+    const { older: group, shown } = modelAnswers.snap;
+    expect(group.within_ten_percent / group.answers).toBeGreaterThan(shown.within_ten_percent / shown.answers);
+    expect(notes).toContain(`${group.within_ten_percent} of ${group.answers}`);
     expect(notes).toContain('data/model_answers.json');
   });
 
+  it('keeps the counts against the $3,660 a monthly fee would give', () => {
+    expect(newest.filter((call) => withinTen(call.snap, 3660)).length).toBe(modelAnswers.snap.shown.within_ten_percent);
+    expect(newest.filter((call) => Math.abs(call.snap - 3660) <= 1).length).toBe(modelAnswers.snap.shown.within_one_dollar);
+  });
+
+  it('counts the eight answers just outside the line', () => {
+    const near = newest.filter((call) => ['gpt-6.1-sol', 'gpt-6-astra'].includes(call.model) && !withinTen(call.snap, modelAnswers.referenceSnap));
+    expect(near).toHaveLength(8);
+    for (const call of near) expect(1 - call.snap / modelAnswers.referenceSnap).toBeCloseTo(0.115, 2);
+  });
+
   it('holds the prompt the answers came from', () => {
-    const digest = createHash('sha256').update(read('analysis/model_ask/prompt.txt')).digest('hex');
+    const digest = createHash('sha256').update(read('analysis/model_ask/prompt-v2.txt')).digest('hex');
     expect(digest.startsWith(JSON.parse(read('data/model_answers.json')).prompt_sha256_prefix)).toBe(true);
+  });
+
+  it('prints nothing from the earlier round in the talk', () => {
+    for (const amount of ['$721', '$11,100', '$3,838', '$4,500']) {
+      expect(notes, amount).not.toContain(amount);
+      expect(render(2), amount).not.toContain(amount);
+    }
   });
 });
 
@@ -1113,18 +1190,24 @@ describe('PolicyBench’s figures', () => {
     const page = render(3);
     for (const card of policyBench.cards) expect(page).toContain(`${card.positive_wrong_by_more_than_10.toFixed(1)}%`);
     const wrong = (key: string) => policyBench.cards.find((card) => card.key === key)!.positive_wrong_by_more_than_10;
-    expect(notes).toContain(`${wrong('snap')}% of their SNAP answers`);
-    expect(notes).toContain(`${wrong('state_refundable_credits')}% of their state refundable credit answers`);
-    expect(notes).toContain(`${wrong('payroll_tax')}% of their payroll tax answers`);
+    expect(notes).toContain(`${wrong('snap')}% of SNAP answers`);
+    expect(notes).toContain(`${wrong('state_refundable_credits')}% of state refundable credit answers`);
+    expect(notes).toContain(`${wrong('payroll_tax')}% of payroll tax answers`);
   });
 
-  it('names the leader and dates the comparison', () => {
+  it('keeps the October 23 scores off slide 4, which reads a later snapshot', () => {
+    expect(render(3)).not.toContain(String(policyBench.bestScore.exact));
     expect(policyBench.bestScore.model).toBe('gpt-6-sol');
     expect(policyBench.bestScore.exact).toBeGreaterThanOrEqual(policyBench.namedScores['claude-opus-5.5'].exact);
     expect(policyBench.bestScoreByApril.released <= '2026-04-30').toBe(true);
-    const line = `from ${policyBench.bestScoreByApril.exact} among models released by April to ${policyBench.bestScore.exact} with GPT-6 Sol in September`;
-    expect(notes).toContain(line);
-    expect(render(3).replace(/\s+/g, ' ')).toContain(line);
+    expect(notes).toContain(`released by April 30 came from GPT-5.5, at ${policyBench.bestScoreByApril.exact}`);
+    expect(notes).toContain(`from GPT-6 Sol, at ${policyBench.bestScore.exact}`);
+  });
+
+  it('counts the top two’s SNAP misses for the notes', () => {
+    const [sol, opus] = policyBench.topTwoSnap;
+    expect(notes).toContain(`${sol.wrong} of ${sol.of} and ${opus.wrong} of ${opus.of} households`);
+    expect(ledger).toContain(`${sol.wrong} of ${sol.of} (GPT-6 Sol) and ${opus.wrong} of ${opus.of} (Claude Opus 5.5)`);
   });
 
   it('says on slides 3 and 4 that PolicyBench grades against PolicyEngine', () => {
@@ -1154,11 +1237,11 @@ describe('coverage', () => {
   });
 
   it('prints the same counts on slide 12 and in the notes and the ledger', () => {
-    for (const count of [national.households, national.targets, local.targets]) {
+    for (const count of [national.targets, local.targets]) {
       for (const text of [page(), notes, ledger]) expect(text).toContain(count.toLocaleString('en-US'));
     }
-    expect(page()).toContain('1.5 million ACS households');
-    expect(notes).toContain('1.5 million American Community Survey households');
+    expect(ledger).toContain(national.households.toLocaleString('en-US'));
+    for (const text of [page(), notes]) expect(text).toContain('1.5 million 2024 ACS records');
     for (const share of [national.share_within_10_percent, local.share_within_10_percent]) {
       for (const text of [notes, ledger]) expect(text).toContain(`${(share * 100).toFixed(2)}%`);
     }
