@@ -40,7 +40,8 @@ export default function OneFamilySlide() {
             monthly child care bill. They apply for each program as a new applicant, in each
             state&rsquo;s largest county, under 2026 rules. We model each state&rsquo;s income limits,
             not its priority groups, waiting lists or enrollment freezes. We apply the limits Idaho
-            ({usd(idahoPostedLimit)} a month), Alabama and Missouri ($3,331) post, hold Indiana to the
+            ({usd(idahoPostedLimit)}{' '}
+            a month), Alabama and Missouri ($3,331) post, hold Indiana to the
             same $3,331 before its April limit, and add Ohio&rsquo;s Child Care Choice Voucher.
             PolicyEngine US {modelVersion}.
           </p>

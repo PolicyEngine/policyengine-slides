@@ -431,6 +431,12 @@ describe('a family already enrolled', () => {
     }
   });
 
+  it('keeps a space between an amount and the next word on every slide', () => {
+    appam2026Config.slides.forEach((_, index) => {
+      expect(render(index)).not.toMatch(/>[^<]*\$\d[\d,.]*[a-jl-zA-JL-Z][^<]*</);
+    });
+  });
+
   it('draws each of slide 7’s cliff states in its own color', () => {
     const lines = [...render(6).matchAll(/<path[^>]*stroke-width="3"[^>]*>/g)].map((match) => match[0]);
     expect(lines).toHaveLength(cliffs.length);
