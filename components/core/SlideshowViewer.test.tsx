@@ -147,6 +147,25 @@ describe("SlideshowViewer clicker keys", () => {
     expect(counterText()).toBe(`${TOTAL_STEPS} / ${TOTAL_STEPS}`);
   });
 
+  it.each(["PageDown", "PageUp"])("keeps %s from scrolling the page in a deck with the option", async (key) => {
+    await renderAt("/slides/demo?slide=2", clickerDeck);
+    const event = new KeyboardEvent("keydown", { key, cancelable: true });
+    await act(async () => {
+      window.dispatchEvent(event);
+    });
+    expect(event.defaultPrevented).toBe(true);
+  });
+
+  it("follows the option when the config changes", async () => {
+    await renderAt("/slides/demo");
+    await renderAt(currentUrl(), clickerDeck);
+    await press("PageDown");
+    expect(counterText()).toBe(`2 / ${TOTAL_STEPS}`);
+    await renderAt(currentUrl());
+    await press("PageDown");
+    expect(counterText()).toBe(`2 / ${TOTAL_STEPS}`);
+  });
+
   it.each(["PageDown", "PageUp"])("leaves %s to the browser in a deck without the option", async (key) => {
     await renderAt("/slides/demo?slide=2");
     const event = new KeyboardEvent("keydown", { key, cancelable: true });

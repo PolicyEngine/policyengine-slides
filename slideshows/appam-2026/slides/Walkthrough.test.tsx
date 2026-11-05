@@ -69,6 +69,10 @@ describe('slide 9 steps', () => {
     const deck = getAllSlideshowMetadata().find((meta) => meta.id === appam2026Config.id);
     expect(deck?.slideCount).toBe(13);
   });
+
+  it('moves on the keys a clicker sends', () => {
+    expect(appam2026Config.clickerKeys).toBe(true);
+  });
 });
 
 describe('Walkthrough', () => {
