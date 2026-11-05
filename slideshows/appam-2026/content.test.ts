@@ -431,6 +431,14 @@ describe('a family already enrolled', () => {
     }
   });
 
+  it('draws each of slide 7’s cliff states in its own color', () => {
+    const lines = [...render(6).matchAll(/<path[^>]*stroke-width="3"[^>]*>/g)].map((match) => match[0]);
+    expect(lines).toHaveLength(cliffs.length);
+    const strokes = lines.map((line) => / stroke="([^"]+)"/.exec(line)?.[1]);
+    for (const stroke of strokes) expect(stroke).toMatch(/^var\(--/);
+    expect(new Set(strokes).size).toBe(cliffs.length);
+  });
+
   it('lets a family keep the subsidy past each of slide 7’s cliffs', () => {
     for (const cliff of cliffs) {
       const row = summary.rows.find((candidate: { code: string }) => candidate.code === cliff.code);

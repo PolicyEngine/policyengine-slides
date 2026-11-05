@@ -17,9 +17,9 @@ const LABEL_SIZE = 23;
 const labelWidth = (name: string) => name.length * 0.6 * LABEL_SIZE + 20;
 
 const SERIES_COLORS: Record<string, string> = {
-  IA: 'var(--color-teal-600)',
   ID: 'var(--pe-amber)',
   MD: 'var(--chart-4)',
+  MO: 'var(--color-teal-600)',
 };
 
 const xMin = sweepEarnings[0];
