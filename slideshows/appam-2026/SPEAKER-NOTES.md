@@ -96,6 +96,8 @@ In Build, you can open the same Massachusetts credit, set it to $880, pick Massa
 
 We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. Our coverage tracker lists 109 programs and marks 87 complete, 18 partial and 4 in progress.
 
+*The tracker runs live in the frame, so you can click and scroll in it, and the arrows keep moving the deck. If you click its search box, click the slide outside the frame, which also moves to the next step.*
+
 ## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
 We build Microcosm in two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.

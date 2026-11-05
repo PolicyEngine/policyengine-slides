@@ -1,4 +1,4 @@
-import Image from '@/components/core/BasePathImage';
+import CoverageEmbed from './CoverageEmbed';
 import Frame from './Frame';
 import { coverage } from '../content';
 import styles from './deck.module.css';
@@ -19,16 +19,7 @@ export default function RulesSlide() {
           ))}
         </ul>
         <figure className="m-0" style={{ maxWidth: '125vh' }}>
-          <div className="content-card overflow-hidden border border-gray-200">
-            <Image
-              src="/images/appam-2026/model-coverage.png"
-              alt="PolicyEngine’s coverage tracker: 109 total programs, 87 complete, 18 partial and 4 in progress, reflecting policyengine-us 2.72.3"
-              width={2343}
-              height={569}
-              loading="eager"
-              className="block h-auto w-full"
-            />
-          </div>
+          <CoverageEmbed alt="PolicyEngine’s coverage tracker: 109 total programs, 87 complete, 18 partial and 4 in progress, reflecting policyengine-us 2.72.3" />
           <figcaption className="mt-[1vh]">
             Explore our coverage tracker at{' '}
             <a

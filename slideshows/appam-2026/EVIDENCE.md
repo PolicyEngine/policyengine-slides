@@ -195,7 +195,7 @@ We quote these on slide 7 and in the notes' Questions section, and we model none
 
 ## The web apps
 
-We captured slide 12's coverage tracker from www.policyengine.org/us/model/rules/coverage on November 5, 2026. It shows 109 total programs, 87 complete, 18 partial and 4 in progress, and its top line reads "Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). The production API served 2.2.1 when the snapshot was fetched." The deck's own runs use 2.90.2.
+We captured slide 12's coverage tracker from www.policyengine.org/us/model/rules/coverage on November 5, 2026. It shows 109 total programs, 87 complete, 18 partial and 4 in progress, and its top line reads "Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). The production API served 2.2.1 when the snapshot was fetched." The deck's own runs use 2.90.2. Slide 12 loads that page in a live frame at the still's crop, and the still shows until the tracker renders and stands in for it in the PDF.
 
 We captured slide 11's CliffWatch screenshot on November 4, 2026, and Build's report on November 5, 2026, from the live sites. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
 
