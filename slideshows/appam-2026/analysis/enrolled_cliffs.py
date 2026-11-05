@@ -2,8 +2,8 @@
 
 The deck's family applies for each program as a new applicant. This script runs the same household with only each
 state's "currently enrolled" flag added, on a $500 grid from $0 to $160,000, because Maryland's limit for enrolled
-families runs past the deck's own sweep. It covers slide 5's three states and the three states that turn the
-family down on slide 3. Its new-applicant runs must reproduce data/family.json on the grid the two share.
+families runs past the deck's own sweep. It covers slide 5's three states and the other states that
+set a lower limit for new applicants. Its new-applicant runs must reproduce data/family.json on the grid the two share.
 
 Writes data/enrolled_cliffs.json, which the slides read, and data/enrolled_sweep.json, which the tests read.
 """
@@ -15,7 +15,6 @@ from pathlib import Path
 
 import household as hh
 import numpy as np
-from policyengine_us import Simulation
 
 EARNINGS_MIN = 0
 EARNINGS_MAX = 160_000
@@ -41,7 +40,7 @@ def run(state, enrolled):
         situation["spm_units"]["spm_unit"][FLAGS[state]] = {
             f"{hh.YEAR}-{month:02d}": True for month in range(1, 13)
         }
-    parts = hh.net_resources_parts(Simulation(situation=situation))
+    parts = hh.net_resources_parts(hh.run(state, situation))
     return {
         "subsidy": [round(float(x), 2) for x in parts["child_care_subsidy"]],
         "net_resources": [round(float(x), 2) for x in parts["net_resources"]],

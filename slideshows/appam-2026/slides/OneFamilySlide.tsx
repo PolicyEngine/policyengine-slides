@@ -7,6 +7,7 @@ import {
   family,
   headlineEarnings,
   highest,
+  idahoPostedLimit,
   lowest,
   modelVersion,
   spreadAt,
@@ -37,15 +38,17 @@ export default function OneFamilySlide() {
             children aged {family.child_ages[0]} and {family.child_ages[1]},{' '}
             {usd(family.rent_per_month)} monthly rent and a {usd(family.child_care_per_month)}{' '}
             monthly child care bill. They apply for each program as a new applicant, in each
-            state&rsquo;s largest county, under 2026 rules. We model each state&rsquo;s eligibility
-            rules, not waiting lists or enrollment freezes. PolicyEngine US {modelVersion}.
+            state&rsquo;s largest county, under 2026 rules. We model each state&rsquo;s income limits,
+            not its priority groups, waiting lists or enrollment freezes. We set Idaho&rsquo;s limit
+            to the {usd(idahoPostedLimit)} a month its department posts and add Ohio&rsquo;s Child
+            Care Choice Voucher. PolicyEngine US {modelVersion}.
           </p>
           <p>
             We add earnings and benefits, then subtract taxes net of credits and the{' '}
             {usd(childCareBill)} child care bill, to get net resources. We leave out health coverage. The gap between the
             highest and lowest state runs {usd(spreadAt(30_000).spread)} at $30,000 of earnings and{' '}
             {usd(spreadAt(60_000).spread)}
-            {' at $60,000. Indiana lowered its limit for new applicants on April 5, so its subsidy covers four months. We model South Dakota’s program from August 2026, so its subsidy covers five months. '}
+            {' at $60,000. Indiana lowered its limit for new applicants on April 5, so we count four months of its subsidy. We model South Dakota’s program from August 2026, so we count five. '}
             Alaska pays each person a {usd(alaska.dividend)} dividend and {usd(alaska.energyRelief)} of energy relief,{' '}
             {usd(alaska.payments)} for this family.
           </p>

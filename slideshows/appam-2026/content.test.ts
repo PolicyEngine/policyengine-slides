@@ -15,6 +15,7 @@ import {
   enrolledExit,
   headlineEarnings,
   highest,
+  idahoPostedLimit,
   instrument,
   interaction,
   largestCliff,
@@ -225,10 +226,10 @@ describe('derived chart data', () => {
 
   it('counts DC apart from the states in the rug plot labels', () => {
     const line = (key: string) => programLines.find((entry) => entry.key === key)!.values;
-    expect(endLabel(line('child_care_subsidy'), 18_000)).toBe('5 states and DC $18,000');
-    expect(endLabel(line('child_care_subsidy'), 0)).toBe('NV, OH $0');
-    expect(endLabel(line('federal_taxes'), 3_678)).toBe('5 states and DC $3,678');
-    expect(endLabel(line('federal_taxes'), 4_263)).toBe('27 states $4,263');
+    expect(endLabel(line('child_care_subsidy'), 18_000)).toBe('6 states and DC $18,000');
+    expect(endLabel(line('child_care_subsidy'), 0)).toBe('ID, NV $0');
+    expect(endLabel(line('federal_taxes'), 3_678)).toBe('6 states and DC $3,678');
+    expect(endLabel(line('federal_taxes'), 4_263)).toBe('26 states $4,263');
     expect(endLabel(line('snap'), 0)).toBe('15 states $0');
   });
 
@@ -333,10 +334,10 @@ describe('child care by month', () => {
       ['SD', 5],
     ]);
     const none = run.rows.filter((candidate) => candidate.months_paid === 0).map((candidate) => candidate.code);
-    expect(none.sort()).toEqual(['NV', 'OH']);
+    expect(none.sort()).toEqual(['ID', 'NV']);
     const slide = read('slides/OneFamilySlide.tsx');
-    expect(slide).toContain('Indiana lowered its limit for new applicants on April 5, so its subsidy covers four months.');
-    expect(slide).toContain('so its subsidy covers five months.');
+    expect(slide).toContain('Indiana lowered its limit for new applicants on April 5, so we count four months of its subsidy.');
+    expect(slide).toContain('so we count five.');
     expect(row('IN').monthly.slice(0, 4).every((amount) => amount > 0)).toBe(true);
     expect(row('IN').monthly.slice(4).every((amount) => amount === 0)).toBe(true);
   });
@@ -357,7 +358,7 @@ describe('child care by month', () => {
     expect(april.net_resources).toBeLessThan(lowest.net_resources);
     for (const text of [notes, ledger]) {
       expect(text).toContain(`up with ${usd(april.net_resources)}`);
-      expect(text).toContain(`below Ohio's ${usd(lowest.net_resources)}`);
+      expect(text).toContain(`below ${lowest.name}'s ${usd(lowest.net_resources)}`);
       expect(text).toContain(usd(income));
     }
     expect(ledger).toContain(`${usd(row('IN').monthly[0])} a month from January through April, ${usd(row('IN').subsidy)} in all`);
@@ -372,7 +373,7 @@ describe('a family already enrolled', () => {
   );
   const codes = Object.keys(sweepRun.states);
 
-  it('runs at the deck’s model, for slide 5’s states and the three that turn the family down', () => {
+  it('runs at the deck’s model, for slide 5’s states and the others with a lower limit for new applicants', () => {
     expect(summary.policyengine_us_version).toBe(modelVersion);
     expect(codes.sort()).toEqual(['IA', 'ID', 'IN', 'MD', 'NV', 'OH']);
     for (const cliff of cliffs) expect(codes).toContain(cliff.code);
@@ -381,8 +382,11 @@ describe('a family already enrolled', () => {
   it('never draws less than a new applicant, at any earnings on the grid', () => {
     for (const code of codes) {
       const { new_applicant: fresh, enrolled } = sweepRun.states[code];
-      sweepRun.earnings.forEach((_, i) => {
-        expect(enrolled.subsidy[i], `${code} ${sweepRun.earnings[i]}`).toBeGreaterThanOrEqual(fresh.subsidy[i]);
+      sweepRun.earnings.forEach((earnings, i) => {
+        // Ohio's first program charges a copay, and its voucher covers this family's bill, so
+        // a new applicant draws more across the voucher's range. That gap is intended.
+        if (code === 'OH' && earnings >= 39_000 && earnings <= 54_500) return;
+        expect(enrolled.subsidy[i], `${code} ${earnings}`).toBeGreaterThanOrEqual(fresh.subsidy[i]);
       });
     }
   });
@@ -424,12 +428,14 @@ describe('a family already enrolled', () => {
     const page = renderToStaticMarkup(
       createElement(getSlideComponent(appam2026Config.slides[4])),
     ).replace(/&#x27;/g, "'");
-    const limits = cliffs.map((cliff) => `${usd(enrolledExit(cliff.code).before)} in ${cliff.name}`);
-    expect(page).toContain(`keeps the subsidy to about ${limits[0]}, ${limits[1]} and ${limits[2]}`);
+    expect(page).toContain(
+      `keeps the subsidy to about ${usd(enrolledExit('MD').before)} in Maryland and ${usd(enrolledExit('IA').before)} in Iowa`,
+    );
+    expect(page).not.toContain(usd(enrolledExit('ID').before));
     expect(notes).toContain(`about ${usd(enrolledExit('MD').before)} in Maryland`);
-    for (const cliff of cliffs) {
-      const exit = enrolledExit(cliff.code);
-      expect(notes).toContain(`${usd(exit.drop)} past about ${usd(exit.before)} in ${cliff.name}`);
+    for (const [code, name] of [['MD', 'Maryland'], ['IA', 'Iowa']]) {
+      const exit = enrolledExit(code);
+      expect(notes).toContain(`${usd(exit.drop)} past about ${usd(exit.before)} in ${name}`);
       expect(ledger).toContain(usd(exit.drop));
       expect(ledger).toContain(usd(exit.before));
     }
@@ -438,7 +444,7 @@ describe('a family already enrolled', () => {
   it('gives the notes’ subsidies at $40,000 for the states that turn a new applicant down', () => {
     const at = (code: string) => summary.rows.find((row: { code: string }) => row.code === code).enrolled.subsidy_at_headline;
     expect(summary.headline_earnings).toBe(headlineEarnings);
-    expect(notes).toContain(`${usd(at('OH'))} in Ohio, ${usd(at('NV'))} in Nevada and ${usd(at('IN'))} in Indiana`);
+    expect(notes).toContain(`${usd(at('NV'))} in Nevada, ${usd(at('IN'))} in Indiana and ${usd(at('OH'))} in Ohio`);
   });
 
   it('matches FSSA’s stay-on limit for a family of three', () => {
@@ -446,6 +452,61 @@ describe('a family already enrolled', () => {
     const exit = enrolledExit('IN');
     expect(exit.before).toBeLessThanOrEqual(6_400 * 12);
     expect(exit.after).toBeGreaterThan(6_400 * 12);
+  });
+});
+
+describe('limits and programs the model does not carry', () => {
+  const checks = JSON.parse(read('data/limit_checks.json'));
+  const line = (code: string, key: string) => family.states[code][key] as number[];
+  const at = (earnings: number) => family.earnings.indexOf(earnings);
+  const slide = renderToStaticMarkup(createElement(getSlideComponent(appam2026Config.slides[2]))).replace(/&#x27;/g, "'");
+
+  it('stops Idaho’s subsidy at the posted limit, on the deck’s grid', () => {
+    const paying = family.earnings.filter((_: number, i: number) => line('ID', 'child_care_subsidy')[i] > 0);
+    const last = Math.max(...paying);
+    expect(last).toBeLessThanOrEqual(idahoPostedLimit * 12);
+    expect(last + 500).toBeGreaterThan(idahoPostedLimit * 12);
+    for (const text of [slide, notes, ledger]) expect(text).toContain(usd(idahoPostedLimit));
+  });
+
+  it('pays Ohio’s bill across the voucher’s range, and stops at its ceiling', () => {
+    for (const earnings of [40_000, 45_000, 50_000, 53_000]) {
+      expect(line('OH', 'child_care_subsidy')[at(earnings)], `${earnings}`).toBe(childCareBill);
+    }
+    // $4,442 a month from January through September, then $4,554.
+    expect(line('OH', 'child_care_subsidy')[at(53_500)]).toBe(childCareBill / 4);
+    expect(line('OH', 'child_care_subsidy')[at(55_000)]).toBe(0);
+    expect(slide).toContain('Child Care Choice Voucher');
+    expect(notes).toContain('**Why does Ohio pay this family?**');
+    expect(ledger).toContain('PL_36.pdf');
+    expect(ledger).toContain('PL_45.pdf');
+  });
+
+  it('prints each state’s row at the figure we do not apply', () => {
+    const printed: [string, number, string][] = [
+      ['Ohio', checks.ohio_without_voucher.net_resources, notes],
+      ['Georgia', checks.georgia_without_caps.net_resources, notes],
+      ['Missouri', checks.missouri_at_posted.net_resources, notes],
+      ['Alabama', checks.alabama_at_posted.net_resources, notes],
+      ['Ohio', checks.ohio_without_voucher.net_resources, ledger],
+      ['Georgia', checks.georgia_without_caps.net_resources, ledger],
+      ['Missouri', checks.missouri_at_posted.net_resources, ledger],
+      ['Alabama', checks.alabama_at_posted.net_resources, ledger],
+    ];
+    for (const [name, net, text] of printed) expect(text, name).toContain(usd(net));
+    expect(checks.alabama_at_posted.subsidy).toBe(6_070);
+    expect(checks.missouri_at_posted.subsidy).toBe(0);
+    expect(checks.georgia_without_caps.subsidy).toBe(0);
+    expect(checks.ohio_without_voucher.subsidy).toBe(0);
+    for (const text of [notes, ledger]) {
+      expect(text).toContain(usd(checks.maryland_at_posted.drop));
+      expect(text).toContain(usd(checks.maryland_at_posted.after));
+    }
+    // Lowest in the deck only because of what we keep, and the notes say so.
+    for (const net of [checks.ohio_without_voucher, checks.georgia_without_caps, checks.missouri_at_posted]) {
+      expect(net.net_resources).toBeLessThan(lowest.net_resources);
+    }
+    expect(notes.match(new RegExp(`below ${lowest.name}'s ${usd(lowest.net_resources).replace('$', '\\$')}`, 'g'))!.length).toBe(4);
   });
 });
 

@@ -34,7 +34,7 @@ def monthly_variables(system, name):
 
 
 def run_state(state):
-    sim = Simulation(situation=hh.situation(state, EARNINGS))
+    sim = hh.simulate(state, EARNINGS)
     parts = hh.net_resources_parts(sim)
     name = f"{state.lower()}_child_care_subsidies"
     monthly = np.zeros(len(MONTHS))

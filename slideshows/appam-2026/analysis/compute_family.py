@@ -41,6 +41,7 @@ def main():
             "rent_per_month": hh.RENT_PER_MONTH,
             "child_care_per_month": hh.CHILD_CARE_PER_MONTH,
         },
+        "posted_limits": {"ID": {"monthly": hh.IDAHO_POSTED_MONTHLY_LIMIT}},
         "earnings": list(range(EARNINGS_MIN, EARNINGS_MAX + 1, EARNINGS_STEP)),
         "counties": {state: hh.COUNTIES[state]["county"] for state in hh.STATES},
         "states": states,

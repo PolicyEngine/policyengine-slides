@@ -23,11 +23,11 @@ PolicyEngine is a nonprofit that provides free, open source software to compute 
 
 With it, researchers can compare families, measure their own samples and estimate reforms.
 
-## 3. One family ends up with $27,711 in Ohio and $54,345 in Alaska (1:15, 1 minute 15 seconds)
+## 3. One family ends up with $28,166 in Idaho and $54,345 in Alaska (1:15, 1 minute 15 seconds)
 
 Take one family under each state's 2026 rules. One parent works full time and earns $40,000, has two young children, and pays $1,500 a month for child care. We put them in each state's largest county and treat them as a new applicant for every program.
 
-The gray base shows earnings after taxes and credits, minus the full child care bill, and benefits sit above it. Ohio and Nevada turn this family down for child care help, and Indiana has since April. All three set a lower income limit for new applicants than for families already in the program. We model each state's eligibility rules, not waiting lists or enrollment freezes. Alaska pays each person a $1,000 dividend and $200 of energy relief, $3,600 for this family.
+The gray base shows earnings after taxes and credits, minus the full child care bill, and benefits sit above it. Nevada and Idaho turn this family down for child care help, and Indiana has since April. Each sets its limit for new applicants below this family's $3,333 a month. We model each state's income limits, not its priority groups, waiting lists or enrollment freezes. We set Idaho's limit to the $2,888 a month its department posts and add Ohio's Child Care Choice Voucher. Alaska pays each person a $1,000 dividend and $200 of energy relief, $3,600 for this family.
 
 The gap between the top and bottom state moves with earnings: $16,404 at $30,000 and $21,670 at $60,000.
 
@@ -37,9 +37,9 @@ Each mark shows one state on one line of the family's budget. Federal taxes and 
 
 With Texas's subsidy, the family gets $15,791 in child care help and loses $5,598 of SNAP. Congress lets SNAP households deduct their care costs, so this family deducts less when Texas pays for care. The family ends up $10,193 ahead.
 
-## 5. This family's net resources fall up to $15,343 at a benefit cliff, at earnings that vary by state (3:45, 1 minute)
+## 5. This family's net resources fall up to $17,808 at a benefit cliff, at earnings that vary by state (3:45, 1 minute)
 
-Each gray line follows one state as a new applicant's earnings rise. In Maryland, Iowa and Idaho, $500 more in earnings puts a new applicant over the child care income limit, and that applicant ends up between $14,511 and $15,343 behind. A family already in the program keeps the subsidy to a higher limit, about $110,000 in Maryland. Since May 2025, Maryland has put applicants who qualify, like this family, on a waiting list. In 46 of 51 jurisdictions, the family's largest drop comes from the subsidy.
+Each gray line follows one state as a new applicant's earnings rise. In Idaho, Maryland and Iowa, $500 more in earnings puts a new applicant over the child care income limit, and that applicant ends up between $14,967 and $17,808 behind. In Idaho, the same $500 also takes the family past SNAP's gross income limit. For example, we estimate that a family already in the program qualifies up to about $110,000 in Maryland. Since May 2025, Maryland has put applicants who qualify, like this family, on a waiting list. In 46 of 51 jurisdictions, the family's largest drop comes from the subsidy.
 
 Across states, the median total effective marginal tax rate falls from 63.6% at $30,000 of earnings to 24.6% at $60,000.
 
@@ -97,11 +97,21 @@ Scan the QR code to open this deck. From its last slide, you can open the code b
 
 ## Questions
 
-**Do you model waiting lists?** No. We model each state's eligibility rules, and none of our take-up flags covers state child care subsidies, so this family gets a subsidy wherever it qualifies. The National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025. Since May 2025, Maryland has put applicants who qualify on a waiting list, apart from families experiencing homelessness, families on cash assistance or SSI, and siblings of children in the program. Indiana puts new applicants on a waiting list too.
+**Do you model waiting lists?** No. We model each state's income limits, and none of our take-up flags covers state child care subsidies, so this family gets a subsidy wherever it meets the limit. The National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025. Maryland started its waiting list in May 2025. It now exempts families experiencing homelessness, families on cash assistance or SSI, and siblings of children in the program. Alabama, Indiana and Missouri put new applicants on waiting lists too.
 
-**Why does Indiana's subsidy cover four months?** Indiana lowered its limit for new applicants on April 5, from 150% to 135% of the poverty guideline, or $3,074 a month for a family of three. This family earns $3,333 a month, so we count the subsidy from January through April. With the April limit in all twelve months, the family would end up with $26,562, below Ohio's $27,711.
+**Why does Idaho use a different limit?** Idaho sets a ceiling of 175% of the poverty guideline in its rule, and our model follows it. The department moved new applicants to 130% when it reopened applications in January 2025, and it posts $2,888 a month for a family of three. So we set that limit for this family. At 175%, we estimate Idaho's largest drop at $14,511, at $48,000 of earnings, and Maryland's $15,343 would lead the list. At $2,888, the family loses $16,200 of subsidy and, from January through September, its SNAP, because it also passes SNAP's gross income limit.
 
-**What about a family already in the program?** It keeps the subsidy to a higher limit, then meets its own cliff. That cliff costs $15,572 past about $110,000 in Maryland, $6,817 past about $68,000 in Iowa and $13,874 past about $75,000 in Idaho. At $40,000, a family in the program gets $14,394 in Ohio, $16,200 in Nevada and $14,776 in Indiana.
+**Why does Ohio pay this family?** Ohio runs two programs. Publicly Funded Child Care stops at 145% of the poverty guideline for new applicants, $3,302 a month for a family of three since October. The Child Care Choice Voucher takes families over that limit up to 200%, or $4,554 a month, and a county that turns a family down for income checks the voucher automatically. Ohio pays a center at least $800 a month for a child of 1 and $750 for a child of 4, which covers this family's $1,500 bill. We add the voucher to the program our model carries. Without it, the family would end up with $27,711, below Idaho's $28,166.
+
+**Does Georgia pay this family?** We count $15,244 in Georgia, and Georgia may turn the family down. Georgia's income limit admits it, at $48,350 for a family of three. But Georgia denies new applicants outside its priority groups, and its very low income group stops at $13,660. This family would need another group, such as a child enrolled in Georgia's Pre-K. We don't model priority groups. Without the subsidy, the family would end up with $27,711, below Idaho's $28,166.
+
+**Does any posted limit sit close to this family's income?** Yes. Alabama, since June 1, and Missouri post $3,331 a month for new applicants, and this family earns $3,333. We keep both subsidies rather than let a $2 gap decide a row. If both states hold this family to those limits, we estimate it ends up with $32,224 in Alabama and $27,711 in Missouri, below Idaho's $28,166.
+
+**Does Maryland's limit match what it posts?** Sources differ. Maryland Family Network and the Department of Legislative Services print $94,026 for a family of three, 75% of the median income for federal fiscal 2025. Maryland's February 2026 briefing also gives $115,587 for a family of four, which matches our limit of about $97,000 for three. At $94,026, we estimate the drop at $15,197, at $94,500 of earnings.
+
+**Why do you count four months in Indiana?** Indiana lowered its limit for new applicants on April 5, from 150% to 135% of the poverty guideline, or $3,074 a month for a family of three. This family earns $3,333 a month. We read each month's limit on its first day, so we count the subsidy from January through April. With the April limit in all twelve months, the family would end up with $26,562, below Idaho's $28,166.
+
+**What about a family already in the program?** It keeps the subsidy to a higher limit, then meets its own cliff. We estimate that cliff at $15,572 past about $110,000 in Maryland and $6,817 past about $68,000 in Iowa. Idaho's department told families in the program that the lower limit reaches them when they recertify, and said it was preparing a phase-out. At $40,000, we estimate that a family in the program gets $16,200 in Nevada, $14,776 in Indiana and $14,394 in Ohio, whose first program charges a copay.
 
 **Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
 

@@ -26,6 +26,8 @@ export const alaska = {
 
 export const headlineEarnings = charts.headline_earnings;
 export const family = charts.family;
+// What Idaho's department posts for a new applicant in a family of three. analysis/household.py applies it.
+export const idahoPostedLimit = charts.posted_limits.ID.monthly;
 export const childCareBill = family.child_care_per_month * 12;
 export const modelVersion = charts.policyengine_us_version;
 export const modelCommit = charts.policyengine_us_commit.slice(0, 7);

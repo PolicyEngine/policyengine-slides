@@ -50,11 +50,11 @@
    "flag": "id_iccp_enrolled",
    "new_applicant": {
     "largest_drop": {
-     "before": 47500,
-     "after": 48000,
-     "drop": 14511
+     "before": 34500,
+     "after": 35000,
+     "drop": 17808
     },
-    "subsidy_at_headline": 16200
+    "subsidy_at_headline": 0
    },
    "enrolled": {
     "exit": {
@@ -71,11 +71,11 @@
    "flag": "oh_ccap_enrolled",
    "new_applicant": {
     "largest_drop": {
-     "before": 38500,
-     "after": 39000,
-     "drop": 10606
+     "before": 53000,
+     "after": 53500,
+     "drop": 11149
     },
-    "subsidy_at_headline": 0
+    "subsidy_at_headline": 18000
    },
    "enrolled": {
     "exit": {

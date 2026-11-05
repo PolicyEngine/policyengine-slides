@@ -89,7 +89,7 @@ export default function EarningsChart() {
               strokeLinejoin="round"
               strokeLinecap="round"
             >
-              <title>{`Family in ${cliff.name} loses ${usd(cliff.drop)} at ${usd(cliff.after)} of earnings`}</title>
+              <title>{`A new applicant in ${cliff.name} has ${usd(cliff.drop)} less in net resources at ${usd(cliff.after)} than at ${usd(cliff.before)} of earnings`}</title>
             </path>
             <text
               x={!below ? x(cliff.before) - 4 : crowded ? x(cliff.before) - 10 : x(cliff.after) + 10}

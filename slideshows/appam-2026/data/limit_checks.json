@@ -1,0 +1,24 @@
+{
+  "earnings": 40000,
+  "georgia_without_caps": {
+    "subsidy": 0.0,
+    "net_resources": 27710.53
+  },
+  "ohio_without_voucher": {
+    "subsidy": 0.0,
+    "net_resources": 27710.53
+  },
+  "missouri_at_posted": {
+    "subsidy": 0.0,
+    "net_resources": 27710.53
+  },
+  "alabama_at_posted": {
+    "subsidy": 6070.0,
+    "net_resources": 32223.53
+  },
+  "maryland_at_posted": {
+    "before": 94000,
+    "after": 94500,
+    "drop": 15197
+  }
+}
