@@ -1,6 +1,7 @@
 import CodeBlock from '@/components/content/CodeBlock';
 import Frame from './Frame';
 import { axiomEngineVersion, axiomRuns, usdCents } from '../content';
+import styles from './deck.module.css';
 
 const RULESPEC = `- name: earned_income_deduction_rate
   kind: parameter
@@ -30,7 +31,7 @@ const runs = [
 export default function AxiomSlide() {
   return (
     <Frame title="The Axiom Foundation encodes rules with their source text and dates">
-      <div className="flex h-full items-center gap-[4vh]">
+      <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <CodeBlock title="Georgia SNAP manual · section 3612 (encoding excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.8vh, 22px)' }}>
             {RULESPEC}
@@ -57,7 +58,7 @@ export default function AxiomSlide() {
           </dl>
           <p className="mt-[2vh]">
             Explore Axiom&rsquo;s encodings at{' '}
-            <a style={{ textDecoration: 'underline' }} href="https://axiom.org">
+            <a className="pointer-events-auto" style={{ textDecoration: 'underline' }} href="https://axiom.org">
               axiom.org
             </a>
             .

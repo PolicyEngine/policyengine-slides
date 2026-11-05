@@ -1,5 +1,6 @@
 import CodeBlock from '@/components/content/CodeBlock';
 import Frame from './Frame';
+import styles from './deck.module.css';
 
 const YAML = `description: Massachusetts provides this amount for each
   dependent in its child and family tax credit.
@@ -19,7 +20,7 @@ metadata:
 export default function ParametersSlide() {
   return (
     <Frame title="We record when each value took effect and cite its sources">
-      <div className="flex h-full items-center gap-[4vh]">
+      <div className={`flex h-full items-center gap-[4vh] ${styles.flow}`}>
         <CodeBlock title="gov/states/ma/tax/income/credits/child_and_family/amount.yaml (excerpt)" className="min-w-0 flex-[3]">
           <pre className="overflow-hidden" style={{ fontSize: 'clamp(12px, 1.95vh, 24px)' }}>
             {YAML}
@@ -33,6 +34,7 @@ export default function ParametersSlide() {
           <p>
             Read this file and the rest of our parameters at{' '}
             <a
+              className="pointer-events-auto"
               style={{ textDecoration: 'underline' }}
               href="https://github.com/PolicyEngine/policyengine-us/blob/main/policyengine_us/parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml"
             >

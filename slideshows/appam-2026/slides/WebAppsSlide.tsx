@@ -1,6 +1,7 @@
 import Image from '@/components/core/BasePathImage';
 import Frame from './Frame';
 import Walkthrough from './Walkthrough';
+import styles from './deck.module.css';
 
 const apps = [
   {
@@ -28,10 +29,10 @@ const apps = [
 export default function WebAppsSlide({ buildStep }: { buildStep?: number }) {
   return (
     <Frame title="You can find a family’s cliffs and build a reform without writing code">
-      <div className="flex h-full items-center">
+      <div className={`flex h-full items-center ${styles.flow}`}>
         {/* Columns in proportion to each screenshot's width, so both print at one scale. */}
         <div
-          className="grid w-full items-start gap-[4vh]"
+          className={`grid w-full items-start gap-[4vh] ${styles.flow}`}
           style={{ gridTemplateColumns: apps.map((app) => `${app.width}fr`).join(' ') }}
         >
           {apps.map((app) => (

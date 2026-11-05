@@ -1,5 +1,6 @@
 import FamilyChart, { SERIES } from './FamilyChart';
 import Frame from './Frame';
+import styles from './deck.module.css';
 import {
   alaska,
   childCareBill,
@@ -15,19 +16,19 @@ import {
 export default function OneFamilySlide() {
   return (
     <Frame title={`One family ends up with ${usd(lowest.net_resources)} in ${lowest.name} and ${usd(highest.net_resources)} in ${highest.name}`}>
-      <div className="flex h-full flex-col">
+      <div className={`flex h-full flex-col ${styles.flow}`}>
         <div className="flex flex-wrap gap-x-[3vh] gap-y-[0.4vh]" style={{ fontSize: '1em' }}>
           {SERIES.map((series) => (
             <span key={series.key} className="inline-flex items-center gap-[0.8vh]">
               <span
-                className="inline-block rounded-sm"
+                className="inline-block shrink-0 rounded-sm"
                 style={{ width: '1em', height: '1em', background: series.color }}
               />
               {series.label}
             </span>
           ))}
         </div>
-        <div className="min-h-0 flex-1 py-[0.6vh]">
+        <div className={`min-h-0 flex-1 py-[0.6vh] ${styles.chart} ${styles.familyChart}`}>
           <FamilyChart />
         </div>
         <div className="space-y-[0.3vh] text-gray-700" style={{ fontSize: '0.74em' }}>

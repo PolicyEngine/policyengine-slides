@@ -1,0 +1,282 @@
+/* Layout outside a landscape laptop. A PDF export and a laptop in full screen match none of
+   these rules, so they render as they would without this file. */
+
+/* The viewer's controls sit over each footer until the presenter goes full screen. Move the
+   footer's text clear of the arrows, and drop the keyboard hint, which runs across the logo.
+   The cover has no footer, so it keeps the hint. */
+main:has(button[aria-label='Next slide']) .deck > div:last-child {
+  padding-right: 16rem;
+}
+
+main:has(:global(.slide-active) .deck) > :global(.fixed) > div:first-child {
+  visibility: hidden;
+}
+
+/* Phones, tablets held upright and short or narrow windows: one column that scrolls. */
+@media (max-width: 640px), (max-aspect-ratio: 1/1), (max-height: 500px) {
+  /* The viewer's controls: a shorter bar, centered, with no keyboard hint. */
+  main:has(.deck, .title) > :global(.fixed) {
+    height: 3.5rem;
+    justify-content: center;
+  }
+
+  main:has(.deck, .title) > :global(.fixed) > div:first-child {
+    display: none;
+  }
+
+  /* The cover and the closing slide have no footer, so the bar brings its own background. */
+  main:has(:global(.slide-active) .title) > :global(.fixed) {
+    background: var(--pe-dark);
+  }
+
+  /* Content slides scroll behind that bar. */
+  .deck {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .deck > div:first-child {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .deck > div:first-child > div {
+    height: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .deck > div:last-child {
+    height: 3.5rem;
+  }
+
+  .deck > div:last-child > * {
+    display: none;
+  }
+
+  .frame {
+    height: auto;
+  }
+
+  .frame h1 {
+    font-size: 1.625rem !important;
+  }
+
+  .frame > div:first-child {
+    margin-bottom: 1.25rem;
+  }
+
+  .body {
+    flex: none;
+    font-size: 1.0625rem !important;
+  }
+
+  /* Any row, grid or full-height column stacks. */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    height: auto;
+  }
+
+  .flow > * {
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+
+  /* A chart keeps a readable size and scrolls sideways, with about 12px axis labels. */
+  .chart {
+    flex: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+
+  .familyChart svg {
+    min-width: 67rem;
+  }
+
+  .earningsChart svg {
+    min-width: 45rem;
+  }
+
+  .lineChart svg {
+    min-width: 46.5rem;
+  }
+
+  .instrumentChart svg {
+    min-width: 34rem;
+  }
+
+  /* Where a chart outgrows the screen, say so. Each limit adds the column's padding, 40px, to
+     the chart's width. */
+  .chart::after {
+    content: 'Swipe to see the whole chart';
+    display: none;
+    position: sticky;
+    left: 0;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+  }
+
+  @media (max-width: 1112px) {
+    .familyChart::after {
+      display: block;
+    }
+  }
+
+  @media (max-width: 784px) {
+    .lineChart::after {
+      display: block;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .earningsChart::after {
+      display: block;
+    }
+  }
+
+  @media (max-width: 584px) {
+    .instrumentChart::after {
+      display: block;
+    }
+  }
+
+  /* Slide 5's rows keep each dollar figure whole. */
+  .body li > span:last-child {
+    flex: none;
+  }
+
+  /* A long address wraps on the narrowest phones. */
+  .body a {
+    overflow-wrap: anywhere;
+  }
+
+  .deck :global(.code-block-header) span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .deck :global(.code-block-content) {
+    padding: 1rem;
+  }
+
+  .deck pre {
+    overflow-x: auto;
+    font-size: 0.75rem !important;
+  }
+
+  /* Slide 10's table reads as question, then tools. */
+  .questions,
+  .questions tbody,
+  .questions tr,
+  .questions td {
+    display: block;
+    width: auto;
+  }
+
+  .questions thead {
+    display: none;
+  }
+
+  .questions tr {
+    padding-block: 0.75rem;
+  }
+
+  .questions td {
+    padding: 0;
+  }
+
+  .questions td:first-child {
+    margin-bottom: 0.25rem;
+  }
+
+  /* The cover and the closing slide: logo, then a column that scrolls if it must. */
+  .title > div {
+    height: 100dvh;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .title > div > div:first-child {
+    position: relative;
+    top: auto;
+    left: auto;
+    translate: none;
+    flex: none;
+    margin-top: 1.25rem;
+  }
+
+  .title > div > div:first-child img {
+    width: 11rem;
+  }
+
+  .title > div > div:last-child {
+    position: relative;
+    inset: auto;
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-items: flex-start;
+    padding-bottom: 3.5rem;
+  }
+
+  .title > div > div:last-child > div {
+    height: auto;
+    min-height: 100%;
+    padding: 1rem 1.25rem;
+  }
+
+  .cover {
+    padding-top: 0;
+  }
+
+  .cover > :not(:last-child) {
+    margin-block-end: 1.25rem;
+  }
+
+  .cover h1 {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  .cover > p {
+    font-size: 1.125rem;
+  }
+
+  .end {
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0;
+    text-align: center;
+  }
+
+  .end h1 {
+    font-size: 2.25rem;
+  }
+
+  .end p {
+    overflow-wrap: anywhere;
+  }
+
+  /* The recording covers the space above the bar wherever the reader has scrolled. */
+  .walkthrough {
+    position: fixed;
+    bottom: 3.5rem;
+  }
+}

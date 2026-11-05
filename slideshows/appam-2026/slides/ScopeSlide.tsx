@@ -1,5 +1,6 @@
 import { stateBaseline } from '../content';
 import Frame from './Frame';
+import styles from './deck.module.css';
 
 const coverage = [
   'We model child care subsidies in all 51 jurisdictions from August 2026.',
@@ -32,7 +33,7 @@ function Column({ title, items }: { title: string; items: string[] }) {
 export default function ScopeSlide() {
   return (
     <Frame title="What we leave out">
-      <div className="grid h-full grid-cols-2 content-center items-start gap-[6vh]">
+      <div className={`grid h-full grid-cols-2 content-center items-start gap-[6vh] ${styles.flow}`}>
         <Column title="Years and states" items={coverage} />
         <Column title="Mechanisms" items={mechanisms} />
       </div>

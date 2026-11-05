@@ -1,17 +1,18 @@
 import EarningsChart from './EarningsChart';
 import Frame from './Frame';
 import { cliffs, largestCliff, medianRateAt, percent, subsidyDrivenCliffs, sweepEarnings, usd } from '../content';
+import styles from './deck.module.css';
 
 export default function CliffsSlide() {
   return (
     <Frame title={`This family loses up to ${usd(largestCliff.drop)} at a benefit cliff, at earnings that vary by state`}>
-      <div className="flex h-full gap-[4vh]">
+      <div className={`flex h-full gap-[4vh] ${styles.flow}`}>
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[0.5vh] text-gray-700" style={{ fontSize: '0.85em' }}>
             Net resources by earnings from {usd(sweepEarnings[0])} to {usd(sweepEarnings[sweepEarnings.length - 1])},
             one line per state and DC, 2026
           </p>
-          <div className="min-h-0 flex-1">
+          <div className={`min-h-0 flex-1 ${styles.chart} ${styles.earningsChart}`}>
             <EarningsChart />
           </div>
         </div>

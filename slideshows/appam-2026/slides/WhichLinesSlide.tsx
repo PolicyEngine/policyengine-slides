@@ -1,6 +1,7 @@
 import Frame from './Frame';
 import LineRugs from './LineRugs';
 import { headlineEarnings, interaction, usd } from '../content';
+import styles from './deck.module.css';
 
 const rows = [
   { label: 'Child care subsidy', value: interaction.subsidy },
@@ -15,13 +16,13 @@ function signed(value: number) {
 export default function WhichLinesSlide() {
   return (
     <Frame title="States differ most on child care subsidies, then SNAP and state taxes">
-      <div className="flex h-full gap-[4vh]">
+      <div className={`flex h-full gap-[4vh] ${styles.flow}`}>
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="mb-[1vh] text-gray-700" style={{ fontSize: '0.85em' }}>
             Each mark shows one of 51 jurisdictions, for the family earning {usd(headlineEarnings)}. Overlapping marks
             darken.
           </p>
-          <div className="min-h-0 flex-1">
+          <div className={`min-h-0 flex-1 ${styles.chart} ${styles.lineChart}`}>
             <LineRugs />
           </div>
         </div>
