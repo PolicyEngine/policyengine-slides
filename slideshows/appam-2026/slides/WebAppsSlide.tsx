@@ -23,7 +23,7 @@ const apps = [
     height: 640,
     alt: 'Build’s report on doubling the Massachusetts child and family tax credit amount from $440 to $880 from January 1, 2026: $657.4m annual state revenue loss, 45.7% of people gaining income and a 2.3% decrease in child poverty',
     caption:
-      'Find a parameter by name, set a new value and run a report. For example, we doubled the Massachusetts child and family credit. Build runs PolicyEngine US 2.2.1, and slide 9 runs 2.90.2.',
+      'Find a parameter by name, set a new value and run a report. For example, we doubled the Massachusetts child and family credit. Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2.',
   },
 ];
 

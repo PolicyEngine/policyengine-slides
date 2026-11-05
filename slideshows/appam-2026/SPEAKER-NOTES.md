@@ -88,7 +88,7 @@ CliffWatch and Build need no code.
 
 CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
-In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. The run takes about three minutes, so the recording cuts to the finished report. Build runs an older release, PolicyEngine US 2.2.1, which puts the state's cost at $657 million. This deck's 2.90.2 gives the $577 million on slide 9.
+In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. The run takes about three minutes, so the recording cuts to the finished report. Build runs an older release, PolicyEngine US 2.2.1, and on it we estimate the state's cost at $657 million. On this deck's 2.90.2, we estimate the $577 million on slide 9.
 
 *The recording ends on the report's results. Press next when you finish.*
 
@@ -186,7 +186,7 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
 
-**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and slide 9 runs 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents the credit counts, and we haven't separated how much of the difference those changes explain. Build's 45.7% counts people, and slide 9's 29.4% counts households.
+**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents the credit counts, and we haven't separated how much of the difference those changes explain. Build's 45.7% counts people, and slide 9's 29.4% counts households.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 
