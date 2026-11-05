@@ -43,6 +43,7 @@ LINKS = [
     (10, (807.28, 650.56, 1117.28, 669.56), "https://github.com/PolicyEngine/policyengine-us"),
     (11, (64, 491.14, 325, 513.14), "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0"),
     (11, (814.64, 655.8, 1070.64, 677.8), "https://app.policyengine.org/us/build"),
+    (12, (64, 640, 500, 662), "https://www.policyengine.org/us/model/rules/coverage"),
     (14, (1167, 343.09, 1321, 365.09), "https://github.com/PolicyEngine/microcosm/pull/1445"),
     (14, (1167, 417.38, 1376, 439.38), "https://github.com/PolicyEngine/policyengine-us/pull/10640"),
     (14, (1167, 463.42, 1374, 485.42), "https://github.com/PolicyEngine/policyengine-us/pull/10607"),

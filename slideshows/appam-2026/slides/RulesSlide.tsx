@@ -1,3 +1,4 @@
+import Image from '@/components/core/BasePathImage';
 import Frame from './Frame';
 import { coverage } from '../content';
 import styles from './deck.module.css';
@@ -11,12 +12,35 @@ export default function RulesSlide() {
   ];
   return (
     <Frame title="We model federal, state and local tax and benefit rules">
-      <div className={`flex h-full items-center ${styles.flow}`}>
-        <ul className="space-y-[2.4vh]" style={{ maxWidth: '130vh' }}>
+      <div className={`flex h-full flex-col justify-center gap-[3vh] ${styles.flow}`}>
+        <ul className="space-y-[1.2vh]">
           {rules.map((rule) => (
             <li key={rule}>{rule}</li>
           ))}
         </ul>
+        <figure className="m-0" style={{ maxWidth: '125vh' }}>
+          <div className="content-card overflow-hidden border border-gray-200">
+            <Image
+              src="/images/appam-2026/model-coverage.png"
+              alt="PolicyEngine’s coverage tracker: 109 total programs, 87 complete, 18 partial and 4 in progress, reflecting policyengine-us 2.72.3"
+              width={2343}
+              height={569}
+              loading="eager"
+              className="block h-auto w-full"
+            />
+          </div>
+          <figcaption className="mt-[1vh]">
+            Explore our coverage tracker at{' '}
+            <a
+              className="pointer-events-auto"
+              style={{ textDecoration: 'underline' }}
+              href="https://www.policyengine.org/us/model/rules/coverage"
+            >
+              policyengine.org/us/model/rules/coverage
+            </a>
+            .
+          </figcaption>
+        </figure>
       </div>
     </Frame>
   );

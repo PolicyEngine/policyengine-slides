@@ -25,7 +25,7 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 | 9 and Questions | State cost, 29.4% of households would gain, none would lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
 | 9 and Questions | 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children, 2026 child poverty rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` and `effective_households_with_children` (Kish, counting each source household once), `baseline_child_poverty`, `reformed_child_poverty` |
 | Questions | Effective sample in the median state; child poverty estimates differ from Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
-| 14 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 6's family (`data/family.json`) |
+| 15 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 6's family (`data/family.json`) |
 
 We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Microcosm's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Microcosm's national file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
 
@@ -194,6 +194,8 @@ We quote these on slide 7 and in the notes' Questions section, and we model none
 - **All states:** the National Women's Law Center counted 17 states with waiting lists or frozen intake in February 2025 ([press release](https://nwlc.org/press-release/nwlc-finds-waiting-lists-for-child-care-assistance-nearly-doubled-in-2025/)).
 
 ## The web apps
+
+We captured slide 12's coverage tracker from www.policyengine.org/us/model/rules/coverage on November 5, 2026. It shows 109 total programs, 87 complete, 18 partial and 4 in progress, and its top line reads "Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-10-27). The production API served 2.2.1 when the snapshot was fetched." The deck's own runs use 2.90.2.
 
 We captured slide 11's CliffWatch screenshot on November 4, 2026, and Build's report on November 5, 2026, from the live sites. We scripted the recording, built it from screenshots and drew its cursor and address bar. CliffWatch drew that run's chart in under a second. Other runs took longer.
 

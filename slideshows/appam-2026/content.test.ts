@@ -290,6 +290,7 @@ describe('links', () => {
         'github.com/PolicyEngine/policyengine-us',
       ],
       WebAppsSlide: ['policyengine.org/us/cliffwatch', 'app.policyengine.org/us/build'],
+      RulesSlide: ['policyengine.org/us/model/rules/coverage'],
       AxiomSlide: ['axiom.org'],
       EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', deckAddress],
     };

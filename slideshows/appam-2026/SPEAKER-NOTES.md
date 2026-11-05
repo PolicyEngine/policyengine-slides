@@ -84,7 +84,7 @@ If your pipeline runs on TAXSIM, our TAXSIM-compatible interface at policyengine
 
 CliffWatch and Build need no code.
 
-*Press next to play the recording, which runs 61 seconds with no sound, and talk over it.*
+*Press next to play the recording, which runs 55 seconds with no sound, and talk over it.*
 
 CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
@@ -92,25 +92,25 @@ In Build, you can open the same Massachusetts credit, set it to $880, pick Massa
 
 *The recording ends on the report's results. Press next when you finish.*
 
-## 12. We model federal, state and local tax and benefit rules (9:25, 20 seconds)
+## 12. We model federal, state and local tax and benefit rules (9:25, 25 seconds)
 
-We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax.
+We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. Our coverage tracker lists 109 programs and marks 87 complete, 18 partial and 4 in progress.
 
-## 13. We build Microcosm, our microdata, from surveys and official totals (9:45, 50 seconds)
+## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
 We build Microcosm in two files. In the national file, we fit household weights against 5,659 targets, including IRS SOI and Census population totals. We use SSA payment totals to rescale four Social Security benefit inputs, and when we draw SNAP and Medicaid take-up, we keep everyone who reports them. We use IRS PUF records to impute 65 tax-detail variables into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. For state results, we build the local-area file. We transfer inputs from a finished ASEC and PUF donor to 1.5 million 2024 ACS records, draw each record's county and district within its PUMA, and fit 4,765 targets by state and congressional district.
 
-## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:35, 30 seconds)
+## 14. We're working on Medicaid rules, heating assistance, state poverty accuracy and local taxes (10:40, 30 seconds)
 
 On the rules, we're applying each state's Medicaid rule for an applicant whose spouse isn't aged, blind or disabled, and adding LIHEAP in eight more states. In Microcosm, we fix CPS errors, so our state child poverty rates differ from Census's by design, and we're tracing how calibration, sampling noise and rent imputation move each state's rate. We're also placing households in local tax jurisdictions from their geography and imputing student loan balances.
 
-## 15. The Axiom Foundation encodes rules with source text and dates (11:05, 50 seconds)
+## 15. The Axiom Foundation encodes rules with source text and dates (11:10, 50 seconds)
 
 I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its gross earned income.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
-## 16. Thank you (11:55)
+## 16. Thank you (12:00)
 
 Scan the QR code to open this deck. From its last slide, you can open the code behind each chart.
 
