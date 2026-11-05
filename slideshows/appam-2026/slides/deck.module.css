@@ -314,6 +314,42 @@ main:has(button[aria-label='Next slide']) .deck pre {
 
   .deck :global(.code-block-header) span {
     min-width: 0;
+    font-size: min(0.97vw, 14px);
     overflow-wrap: anywhere;
+  }
+}
+
+/* A short window, as on most laptops under a browser's toolbars. Type shrinks with the height while
+   the deck's margins hold, so text runs under the footer and the title meets the cover's logo. Scale
+   the top margin, close the gap above the footer and bring the logo in. No full-screen laptop or
+   projector runs this short, and the PDF's page doesn't. */
+@media (max-height: 719px) and (min-height: 501px) and (min-width: 641px) and (min-aspect-ratio: 1001/1000) {
+  .deck > div:first-child {
+    padding-top: 11.85vh;
+    padding-bottom: 6rem;
+  }
+
+  .title > div > div:first-child {
+    top: 1.5rem;
+  }
+
+  .title > div > div:first-child img {
+    width: 14rem;
+  }
+
+  .cover {
+    padding-top: 3rem;
+  }
+
+  .cover > :not(:last-child) {
+    margin-block-end: 1.25rem;
+  }
+}
+
+/* A window wider than 16:9. Slide 9's screenshots grow with the width and push its captions under
+   the footer. Hold them to the width they take on a 16:9 screen. */
+@media (min-aspect-ratio: 9/5) and (min-height: 501px) and (min-width: 641px) {
+  .shots {
+    max-width: 162.5vh;
   }
 }

@@ -22,7 +22,7 @@ const frameSource = readFileSync(path.join(__dirname, 'Frame.tsx'), 'utf8');
 const topLevel = css.nodes.filter((node) => node.type !== 'comment') as ChildNode[];
 const blocks = topLevel.filter((node): node is AtRule => node.type === 'atrule');
 const rules = topLevel.filter((node): node is Rule => node.type === 'rule');
-const [smallScreens, widthCaps] = blocks;
+const [smallScreens, widthCaps, shortWindows, wideWindows] = blocks;
 
 // The value one rule gives one property.
 function declared(container: Container, selector: string, property: string) {
@@ -53,8 +53,8 @@ function matches(query: string, width: number, height: number) {
 }
 
 describe('deck.module.css', () => {
-  it('holds its layout rules in two media blocks', () => {
-    expect(blocks.map((block) => block.name)).toEqual(['media', 'media']);
+  it('holds its layout rules in four media blocks', () => {
+    expect(blocks.map((block) => block.name)).toEqual(['media', 'media', 'media', 'media']);
   });
 
   it.each([
@@ -69,9 +69,10 @@ describe('deck.module.css', () => {
     [1512, 982, 'a 14-inch MacBook Pro'],
     [1728, 1117, 'a 16-inch MacBook Pro'],
     [2560, 1440, 'a large monitor'],
-  ])('leaves %ix%i, %s, out of both blocks', (width, height) => {
-    expect(matches(smallScreens.params, width, height)).toBe(false);
-    expect(matches(widthCaps.params, width, height)).toBe(false);
+    [1470, 919, 'a 13-inch MacBook Air below its notch'],
+    [1512, 945, 'a 14-inch MacBook Pro below its notch'],
+  ])('leaves %ix%i, %s, out of every block', (width, height) => {
+    for (const block of blocks) expect(matches(block.params, width, height), block.params).toBe(false);
   });
 
   it.each([
@@ -99,14 +100,15 @@ describe('deck.module.css', () => {
     expect(matches(smallScreens.params, width, height)).toBe(false);
   });
 
-  it('never applies both blocks, and leaves only wide screens to the deck', () => {
+  it('never mixes the small-screen block with another, and leaves only wide screens uncapped', () => {
     const both: string[] = [];
     const uncovered: string[] = [];
     for (let width = 200; width <= 2800; width += 3) {
       for (let height = 200; height <= 2000; height += 3) {
         const small = matches(smallScreens.params, width, height);
         const capped = matches(widthCaps.params, width, height);
-        if (small && capped) both.push(`${width}x${height}`);
+        const others = [widthCaps, shortWindows, wideWindows].some((block) => matches(block.params, width, height));
+        if (small && others) both.push(`${width}x${height}`);
         // A sliver within 0.1% of square falls between the blocks, so it needs a window over 1000 px on each side.
         const sliver = width > height && width * 1000 < height * 1001;
         if (!small && !capped && width * 100 <= height * 153 && !sliver) uncovered.push(`${width}x${height}`);
@@ -114,6 +116,31 @@ describe('deck.module.css', () => {
     }
     expect(both).toEqual([]);
     expect(uncovered).toEqual([]);
+  });
+
+  it.each([
+    [1366, 650, 'a 1366x768 laptop under a toolbar'],
+    [1280, 600, 'a 1280x720 laptop under a toolbar'],
+    [1024, 576, 'a low-resolution 16:9 projector'],
+  ])('puts %ix%i, %s, in the short-window block', (width, height) => {
+    expect(matches(shortWindows.params, width, height)).toBe(true);
+    expect(matches(smallScreens.params, width, height)).toBe(false);
+  });
+
+  it.each([
+    [1536, 730, 'a 125% laptop under a toolbar'],
+    [1920, 950, 'a 1080p monitor under a toolbar'],
+    [2560, 1080, 'an ultrawide monitor'],
+  ])('puts %ix%i, %s, in the wide-window block', (width, height) => {
+    expect(matches(wideWindows.params, width, height)).toBe(true);
+    expect(matches(smallScreens.params, width, height)).toBe(false);
+  });
+
+  it('holds the screenshots at their 16:9 width, so a 16:9 screen never meets the limit', () => {
+    // Below 16:9 the limit can't bind either: a 1440x810 page holds 1312 px between its margins.
+    const limit = parseFloat(declared(wideWindows, '.shots', 'max-width') ?? '0');
+    expect((limit * 810) / 100).toBeGreaterThan(1312);
+    expect((limit * 810) / 100).toBeLessThan(1320);
   });
 
   it('applies outside those blocks only while the viewer shows its controls', () => {

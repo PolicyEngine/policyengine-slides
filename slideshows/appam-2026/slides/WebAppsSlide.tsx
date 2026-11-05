@@ -32,7 +32,7 @@ export default function WebAppsSlide({ buildStep }: { buildStep?: number }) {
       <div className={`flex h-full items-center ${styles.flow}`}>
         {/* Columns in proportion to each screenshot's width, so both print at one scale. */}
         <div
-          className={`grid w-full items-start gap-[4vh] ${styles.flow}`}
+          className={`grid w-full items-start gap-[4vh] ${styles.flow} ${styles.shots}`}
           style={{ gridTemplateColumns: apps.map((app) => `${app.width}fr`).join(' ') }}
         >
           {apps.map((app) => (
