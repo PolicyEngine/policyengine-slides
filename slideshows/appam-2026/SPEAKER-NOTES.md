@@ -95,7 +95,7 @@ In Build, you can open the same Massachusetts credit, set it to $880, pick Massa
 
 We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. We list 109 programs in our coverage tracker and mark 87 complete, 18 partial and 4 in progress.
 
-*The tracker runs live in the frame, so you can click and scroll in it, and the arrows keep moving the deck. If you click its search box, the arrows stay in the box until you click the slide outside the frame, and that click also moves the deck to the next step.*
+*Once the tracker loads, you can click and scroll in the frame, and the arrows keep moving the deck. A click in its search box stops the arrows until you click elsewhere in the frame. Choosing a year in its menu changes the counts.*
 
 ## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
@@ -107,7 +107,7 @@ On the rules, we're applying each state's Medicaid rule for an applicant whose s
 
 ## 15. The Axiom Foundation encodes rules with source text and dates (11:10, 50 seconds)
 
-I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. For example, Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction when a household has earned income and reports it on time, and applies the rate to its total countable gross earned income.
+I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. For example, Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value, and our site draws the rule as this graph. Georgia allows the deduction for a household with earned income, and applies the rate to its total countable gross earned income.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
@@ -191,7 +191,7 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Why does Build's report show 45.7% gaining and slide 9 show 29.4%?** Build's 45.7% counts people, and slide 9's 29.4% counts households. When we run 2.2.1 on slide 9's local-area file, we estimate that 34.1% of households would gain.
 
-**Does a late report cost a Georgia household the whole deduction?** Section 3612 says a household loses the deduction if it fails to report earned income on time, and we encoded that sentence as losing all of it. Georgia's section 3650 denies the deduction only for the income reported late, when it computes an overpayment, and USDA's claims rule at 7 CFR 273.18 does the same. We haven't encoded section 3650.
+**Does a late report cost a Georgia household the whole deduction?** No. Georgia says in section 3612 that a household loses the deduction if it fails to report earned income on time, and we encoded that sentence as losing all of it. In section 3650, Georgia denies the deduction only for the income reported late, when it computes an overpayment, and USDA does the same in its claims rule at 7 CFR 273.18. We haven't encoded section 3650.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 

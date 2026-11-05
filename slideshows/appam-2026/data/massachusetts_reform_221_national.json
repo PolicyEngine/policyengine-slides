@@ -1,0 +1,15 @@
+{
+ "policyengine_us_version": "2.2.1",
+ "dataset": "hf://datasets/policyengine/populace-us/populace_us_2024.h5@populace-us-2024-spm-20260915",
+ "household_records": 1522,
+ "state_cost": 628748288.0,
+ "household_gain": 628749504.0,
+ "households_gaining_share": 0.3399246037006378,
+ "people_gaining_share_over_1_dollar": 0.4673285902286119,
+ "people_gaining_share_over_0_1_percent": 0.4447628863353932,
+ "baseline_child_poverty": 0.21420167239953303,
+ "reformed_child_poverty": 0.21420166107374483,
+ "child_poverty_relative_change": -5.287441535496692e-08,
+ "baseline_poverty_gap": 10494078976.0,
+ "reformed_poverty_gap": 10309666816.0
+}

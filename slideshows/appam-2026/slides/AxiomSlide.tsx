@@ -36,8 +36,8 @@ export default function AxiomSlide() {
             >
               axiom.org
             </a>
-            . Georgia allows the deduction when a household has earned income and reports it on time, and
-            applies the rate to its total countable gross earned income.
+            . Georgia allows the deduction for a household with earned income, and applies the rate to its
+            total countable gross earned income.
           </figcaption>
         </figure>
         <div className={`grid grid-cols-2 gap-[4vh] ${styles.flow}`}>
