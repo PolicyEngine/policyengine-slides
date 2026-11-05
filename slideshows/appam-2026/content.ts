@@ -1,10 +1,13 @@
 import axiomRun from './data/axiom_ga_3612.json';
 import charts from './data/charts.json';
+import coverageRun from './data/coverage.json';
 import effectiveRun from './data/effective_samples.json';
 import enrolledRun from './data/enrolled_cliffs.json';
 import familyLinesRun from './data/family_lines.json';
 import instrumentRun from './data/simulated_instrument.json';
 import interactionRun from './data/interaction.json';
+import modelAnswersRun from './data/model_answers.json';
+import policyBenchRun from './data/policybench_board.json';
 import reformRun from './data/massachusetts_reform.json';
 import stateBaselineRun from './data/state_baseline.json';
 
@@ -68,6 +71,43 @@ export const waterfall = [
     kind: 'total' as const,
   },
 ];
+
+const shownSnap = modelAnswersRun.rows
+  .filter((row) => row.shown && row.answered)
+  .map((row) => ({ model: row.model, name: row.name, snap: row.amounts!.snap }))
+  .sort((a, b) => a.snap - b.snap);
+
+export const modelAnswers = {
+  referenceSnap: modelAnswersRun.reference_snap,
+  referenceSnapWithoutSubsidy: modelAnswersRun.reference_snap_without_subsidy,
+  shownSnap,
+  shownSnapWithinTenPercent: shownSnap.filter(
+    (row) => Math.abs(row.snap - modelAnswersRun.reference_snap) <= 0.1 * modelAnswersRun.reference_snap,
+  ).length,
+  table: modelAnswersRun.table,
+  rows: modelAnswersRun.rows,
+};
+
+export const policyBench = {
+  snapshot: policyBenchRun.snapshot,
+  models: policyBenchRun.models,
+  households: policyBenchRun.households,
+  cards: policyBenchRun.cards,
+  bestScore: policyBenchRun.best_score,
+  bestScoreByApril: policyBenchRun.best_score_by_april,
+  namedScores: policyBenchRun.named_scores,
+};
+
+const districtPopulation = coverageRun.local_area_file.targets_by_family_and_level.find(
+  (row) => row.family === 'census_population' && row.geography_level === 'congressional_district',
+);
+if (!districtPopulation) throw new Error('No congressional district targets');
+
+export const coverage = {
+  ...coverageRun,
+  districtPopulationTargets: districtPopulation.n_targets,
+};
+
 // What Idaho's department posts for a new applicant in a family of three. analysis/household.py applies it.
 export const idahoPostedLimit = charts.posted_limits.ID.monthly;
 export const childCareBill = family.child_care_per_month * 12;

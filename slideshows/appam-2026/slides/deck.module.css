@@ -116,11 +116,11 @@ main:has(button[aria-label='Next slide']) .deck pre {
     min-width: 45rem;
   }
 
-  .lineChart svg {
-    min-width: 46.5rem;
+  .waterfallChart svg {
+    min-width: 56rem;
   }
 
-  .instrumentChart svg {
+  .answersChart svg {
     min-width: 34rem;
   }
 
@@ -142,8 +142,8 @@ main:has(button[aria-label='Next slide']) .deck pre {
     }
   }
 
-  @media (max-width: 784px) {
-    .lineChart::after {
+  @media (max-width: 936px) {
+    .waterfallChart::after {
       display: block;
     }
   }
@@ -155,12 +155,12 @@ main:has(button[aria-label='Next slide']) .deck pre {
   }
 
   @media (max-width: 584px) {
-    .instrumentChart::after {
+    .answersChart::after {
       display: block;
     }
   }
 
-  /* Slide 5's rows keep each dollar figure whole. */
+  /* Slide 7's rows keep each dollar figure whole. */
   .body li > span:last-child {
     flex: none;
   }
@@ -182,31 +182,6 @@ main:has(button[aria-label='Next slide']) .deck pre {
   .deck pre {
     overflow-x: auto;
     font-size: 0.75rem !important;
-  }
-
-  /* Slide 10's table reads as question, then tools. */
-  .questions,
-  .questions tbody,
-  .questions tr,
-  .questions td {
-    display: block;
-    width: auto;
-  }
-
-  .questions thead {
-    display: none;
-  }
-
-  .questions tr {
-    padding-block: 0.75rem;
-  }
-
-  .questions td {
-    padding: 0;
-  }
-
-  .questions td:first-child {
-    margin-bottom: 0.25rem;
   }
 
   /* The cover and the closing slide: logo, then a column that scrolls if it must. */
@@ -359,7 +334,7 @@ main:has(button[aria-label='Next slide']) .deck pre {
   }
 }
 
-/* A window wider than 16:9. Slide 9's screenshots grow with the width and push its captions under
+/* A window wider than 16:9. Slide 11's screenshots grow with the width and push its captions under
    the footer. Hold them to the width they take on a 16:9 screen. */
 @media (min-aspect-ratio: 9/5) and (min-height: 581px) and (min-width: 641px) {
   .shots {

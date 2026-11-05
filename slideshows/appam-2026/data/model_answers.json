@@ -1,0 +1,251 @@
+{
+  "prompt_sha256_prefix": "d4d40386",
+  "policyengine_us_version": "2.90.2",
+  "reference_snap": 3663.0,
+  "reference_snap_without_subsidy": 8739.0,
+  "not_answered": [],
+  "rows": [
+    {
+      "model": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "shown": false,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-6-sol",
+      "amounts": {
+        "snap": 4000.0,
+        "federal_refundable_credits": 7100.0,
+        "state_refundable_credits": 2520.0,
+        "state_income_tax_before_refundable_credits": 1250.0,
+        "payroll_tax": 3300.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 23,
+      "all_outputs": 28
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-6.1-sol",
+      "amounts": {
+        "snap": 3240.0,
+        "federal_refundable_credits": 6738.23,
+        "state_refundable_credits": 2449.29,
+        "state_income_tax_before_refundable_credits": 1380.0,
+        "payroll_tax": 3244.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 25,
+      "all_outputs": 28
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "name": "GPT-6.1 Terra",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-6.1-terra",
+      "amounts": {
+        "snap": 721.0,
+        "federal_refundable_credits": 6394.0,
+        "state_refundable_credits": 2312.0,
+        "state_income_tax_before_refundable_credits": 1360.0,
+        "payroll_tax": 3060.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 21,
+      "all_outputs": 28
+    },
+    {
+      "model": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-6-astra",
+      "amounts": {
+        "snap": 3240.0,
+        "federal_refundable_credits": 6740.34,
+        "state_refundable_credits": 2450.14,
+        "state_income_tax_before_refundable_credits": 1260.0,
+        "payroll_tax": 3244.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 26,
+      "all_outputs": 28
+    },
+    {
+      "model": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-6-luna",
+      "amounts": {
+        "snap": 9216.0,
+        "federal_refundable_credits": 7045.0,
+        "state_refundable_credits": 1458.0,
+        "state_income_tax_before_refundable_credits": 1340.0,
+        "payroll_tax": 3244.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 20,
+      "all_outputs": 28
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "shown": false,
+      "answered": true,
+      "tools": [],
+      "served": "gpt-5.6-terra",
+      "amounts": {
+        "snap": 3838.2,
+        "federal_refundable_credits": 8837.38,
+        "state_refundable_credits": 3574.95,
+        "state_income_tax_before_refundable_credits": 1360.0,
+        "payroll_tax": 3244.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 22,
+      "all_outputs": 28
+    },
+    {
+      "model": "claude-opus-4-7",
+      "name": "Claude Opus 4.7",
+      "shown": false,
+      "answered": true,
+      "tools": [],
+      "served": "claude-opus-4-7",
+      "amounts": {
+        "snap": 4500.0,
+        "federal_refundable_credits": 7347.0,
+        "state_refundable_credits": 2459.0,
+        "state_income_tax_before_refundable_credits": 900.0,
+        "payroll_tax": 3244.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 22,
+      "all_outputs": 28
+    },
+    {
+      "model": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "claude-opus-5-5",
+      "amounts": {
+        "snap": 2844.0,
+        "federal_refundable_credits": 6738.2,
+        "state_refundable_credits": 2449.28,
+        "state_income_tax_before_refundable_credits": 1260.0,
+        "payroll_tax": 3060.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 25,
+      "all_outputs": 28
+    },
+    {
+      "model": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "claude-sonnet-5-5",
+      "amounts": {
+        "snap": 11100.0,
+        "federal_refundable_credits": 7320.0,
+        "state_refundable_credits": 2448.0,
+        "state_income_tax_before_refundable_credits": 1236.0,
+        "payroll_tax": 3060.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 21,
+      "all_outputs": 28
+    },
+    {
+      "model": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "shown": true,
+      "answered": true,
+      "tools": [],
+      "served": "claude-haiku-5-5",
+      "amounts": {
+        "snap": 6812.0,
+        "federal_refundable_credits": 7046.0,
+        "state_refundable_credits": 1458.0,
+        "state_income_tax_before_refundable_credits": 912.0,
+        "payroll_tax": 3095.0,
+        "federal_income_tax_before_refundable_credits": 0.0
+      },
+      "right_of_all_outputs": 23,
+      "all_outputs": 28
+    }
+  ],
+  "table": [
+    {
+      "key": "snap",
+      "label": "SNAP",
+      "reference": 3663.0,
+      "low": 721.0,
+      "high": 11100.0,
+      "within_one_dollar": 0,
+      "within_ten_percent": 0,
+      "answers": 7
+    },
+    {
+      "key": "federal_refundable_credits",
+      "label": "Federal refundable credits",
+      "reference": 7129.58,
+      "low": 6394.0,
+      "high": 7320.0,
+      "within_one_dollar": 0,
+      "within_ten_percent": 6,
+      "answers": 7
+    },
+    {
+      "key": "state_refundable_credits",
+      "label": "State refundable credits",
+      "reference": 2449.29,
+      "low": 1458.0,
+      "high": 2450.14,
+      "within_one_dollar": 3,
+      "within_ten_percent": 5,
+      "answers": 7
+    },
+    {
+      "key": "state_income_tax_before_refundable_credits",
+      "label": "State income tax before refundable credits",
+      "reference": 1260.0,
+      "low": 912.0,
+      "high": 1380.0,
+      "within_one_dollar": 2,
+      "within_ten_percent": 6,
+      "answers": 7
+    },
+    {
+      "key": "payroll_tax",
+      "label": "Payroll tax",
+      "reference": 3244.0,
+      "low": 3060.0,
+      "high": 3244.0,
+      "within_one_dollar": 3,
+      "within_ten_percent": 7,
+      "answers": 7
+    },
+    {
+      "key": "federal_income_tax_before_refundable_credits",
+      "label": "Federal income tax before refundable credits",
+      "reference": 0.0,
+      "low": 0.0,
+      "high": 0.0,
+      "within_one_dollar": 7,
+      "within_ten_percent": 7,
+      "answers": 7
+    }
+  ]
+}

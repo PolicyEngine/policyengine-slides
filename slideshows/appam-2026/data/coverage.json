@@ -1,0 +1,133 @@
+{
+  "policyengine_us": {
+    "variable_files": 7078,
+    "parameter_files": 7242,
+    "jurisdictions_with_income_tax": 44,
+    "jurisdictions_without_income_tax": [
+      "ak",
+      "fl",
+      "nv",
+      "sd",
+      "tn",
+      "tx",
+      "wy"
+    ],
+    "state_tanf_variables": 51,
+    "child_care_programs_latest": 51
+  },
+  "local_area_file": {
+    "revision": "populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z",
+    "households": 1586908,
+    "households_by_spine": {
+      "acs_2024_1yr": 1529668,
+      "asec_puf": 57240
+    },
+    "targets": 4765,
+    "targets_by_family_and_level": [
+      {
+        "family": "census_population",
+        "geography_level": "congressional_district",
+        "basis": "count",
+        "n_targets": 436
+      },
+      {
+        "family": "census_population",
+        "geography_level": "state",
+        "basis": "count",
+        "n_targets": 51
+      },
+      {
+        "family": "cms_medicaid",
+        "geography_level": "state",
+        "basis": "count",
+        "n_targets": 51
+      },
+      {
+        "family": "irs_soi",
+        "geography_level": "state",
+        "basis": "amount",
+        "n_targets": 2088
+      },
+      {
+        "family": "irs_soi",
+        "geography_level": "state",
+        "basis": "count",
+        "n_targets": 2037
+      },
+      {
+        "family": "usda_snap",
+        "geography_level": "state",
+        "basis": "amount",
+        "n_targets": 51
+      },
+      {
+        "family": "usda_snap",
+        "geography_level": "state",
+        "basis": "count",
+        "n_targets": 51
+      }
+    ],
+    "share_within_10_percent": 0.9608,
+    "effective_sample_over_records": 12123.6
+  },
+  "default_file": {
+    "revision": "populace-us-2024-spm-20260915",
+    "parent_build": "populace-us-2024-buildp-sparse-rmloss100-cae8640-20260728T011454Z",
+    "households": 57240,
+    "targets": 5659,
+    "targets_by_agency": {
+      "irs_soi": 4182,
+      "census_pep": 936,
+      "cms_medicaid": 135,
+      "ssa": 111,
+      "usda_snap": 104,
+      "cms_aca": 102,
+      "census_stc": 44,
+      "hhs_acf_tanf": 23,
+      "jct": 11,
+      "cbo": 5,
+      "bea": 2,
+      "cms_medicare": 1,
+      "federal_reserve": 1,
+      "hhs_acf_liheap": 1,
+      "Locked-source mass measured on the base pool at base weights (PolicyEngine/populace#445; #434 protect-swap)": 1
+    },
+    "share_within_10_percent": 0.9568828414914295,
+    "effective_sample_over_records": 9174.432030037513,
+    "snap_take_up_gate": {
+      "take_up_share": 0.81845299430267,
+      "take_up_share_band": [
+        0.7,
+        0.95
+      ],
+      "unique_count": 2,
+      "reported_share": 0.09658006751385996,
+      "reporters_not_taking_up": 0
+    }
+  },
+  "donors": {
+    "commit": "766b7c792",
+    "imputation_stages": 37,
+    "surveys": [
+      "CPS ASEC (prior year)",
+      "CPS ASEC + CMS Marketplace Open Enrollment PUFs",
+      "CPS ASEC + published unauthorized-population estimates",
+      "CPS ASEC reported SSI + SSA SSI Monthly Statistics December 2024",
+      "CPS ASEC reported coverage + CMS Medicaid monthly enrollment snapshot",
+      "CPS ORG",
+      "Census ACS 2022",
+      "Census CPS ASEC",
+      "Census CPS ASEC + CDC natality-derived national pregnancy rate",
+      "Census CPS ASEC + USDA FNS participation rate estimates",
+      "Census CPS ASEC + published retirement-contribution shares",
+      "Census CPS ASEC + statutory exemption cap (7 U.S.C. 2015(o)(6))",
+      "Census SIPP",
+      "Fed SCF 2022 + Census SIPP 2023",
+      "IRS PUF 2015 (uprated)",
+      "IRS PUF 2015 (uprated) + Census CPS ASEC",
+      "IRS SOI Sales of Capital Assets (TY2015) + Pub 1304 Table 1.4",
+      "MEPS-IC",
+      "USDA FNS WIC Eligibility and Enrollment Estimates + Census CPS ASEC"
+    ]
+  }
+}
