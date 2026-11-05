@@ -1,11 +1,19 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import postcss, { type AtRule, type ChildNode, type Rule } from 'postcss';
-import { act } from 'react';
+import postcss, { type AtRule, type ChildNode, type Container, type Rule } from 'postcss';
+import { act, useMemo } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { getSlideComponent } from '@/lib/types';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import SlideshowViewer from '@/components/core/SlideshowViewer';
+import { flattenSlides, getSlideComponent } from '@/lib/types';
 import { appam2026Config } from '../config';
+
+vi.mock('next/navigation', () => ({
+  useSearchParams() {
+    const search = window.location.search;
+    return useMemo(() => new URLSearchParams(search), [search]);
+  },
+}));
 
 const css = postcss.parse(
   readFileSync(path.join(__dirname, 'deck.module.css'), 'utf8'),
@@ -13,6 +21,18 @@ const css = postcss.parse(
 const topLevel = css.nodes.filter((node) => node.type !== 'comment') as ChildNode[];
 const blocks = topLevel.filter((node): node is AtRule => node.type === 'atrule');
 const rules = topLevel.filter((node): node is Rule => node.type === 'rule');
+
+// The value one rule gives one property.
+function declared(container: Container, selector: string, property: string) {
+  let value: string | undefined;
+  container.walkRules((rule) => {
+    if (rule.selector !== selector) return;
+    rule.walkDecls(property, (decl) => {
+      value = decl.value;
+    });
+  });
+  return value;
+}
 
 // Evaluates the only media conditions this file may use.
 function matches(query: string, width: number, height: number) {
@@ -60,6 +80,28 @@ describe('deck.module.css', () => {
     ]);
   });
 
+  it("moves the footer's text clear of the viewer's arrows and hides the keyboard hint", () => {
+    // In a browser at 1366x768, the arrows start 208px from the right edge.
+    const arrows = 208;
+    const padding = declared(css, rules[0].selector, 'padding-right');
+    expect(parseFloat(padding ?? '0') * 16).toBeGreaterThan(arrows);
+    expect(declared(css, rules[1].selector, 'visibility')).toBe('hidden');
+  });
+
+  it('lets a chart scroll sideways, and pins its hint to the left edge', () => {
+    expect(declared(blocks[0], '.chart', 'overflow-x')).toBe('auto');
+    expect(declared(blocks[0], '.chart::after', 'content')).toMatch(/^'.+'$/);
+    expect(declared(blocks[0], '.chart::after', 'position')).toBe('sticky');
+    expect(declared(blocks[0], '.chart::after', 'left')).toBe('0');
+  });
+
+  it('keeps the phone bar below the padding at the end of each scroller', () => {
+    const bar = parseFloat(declared(blocks[0], "main:has(.deck, .title) > :global(.fixed)", 'height') ?? '0');
+    expect(bar).toBeGreaterThan(0);
+    expect(parseFloat(declared(blocks[0], '.deck > div:first-child', 'padding-bottom') ?? '0')).toBeGreaterThan(bar);
+    expect(parseFloat(declared(blocks[0], '.title > div > div:last-child', 'padding-bottom') ?? '0')).toBeGreaterThanOrEqual(bar);
+  });
+
   it("shows each chart's swipe hint exactly where the chart outgrows the screen", () => {
     const columnPadding = 40;
     const widths = new Map<string, number>();
@@ -98,7 +140,7 @@ describe('links', () => {
     container.remove();
   });
 
-  it('never also move the deck on a click or a tap', async () => {
+  it("carry the mark the viewer's click guard reads", async () => {
     let total = 0;
     for (const slide of appam2026Config.slides) {
       const Component = getSlideComponent(slide);
@@ -112,5 +154,55 @@ describe('links', () => {
       }
     }
     expect(total).toBeGreaterThanOrEqual(10);
+  });
+
+  describe('in the viewer', () => {
+    // jsdom can't follow a link, so stop it here. The click still bubbles to the viewer.
+    const stopNavigation = (event: Event) => event.preventDefault();
+    const click = (element: Element) =>
+      act(async () => {
+        element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+      });
+
+    beforeEach(() => {
+      document.addEventListener('click', stopNavigation, true);
+      vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined);
+      vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => undefined);
+      vi.spyOn(HTMLMediaElement.prototype, 'load').mockImplementation(() => undefined);
+    });
+
+    afterEach(() => {
+      document.removeEventListener('click', stopNavigation, true);
+      vi.restoreAllMocks();
+    });
+
+    it('leave the deck where it stands on a click or a tap', async () => {
+      const steps = flattenSlides(appam2026Config.slides).length;
+      let total = 0;
+      for (let step = 0; step < steps; step += 1) {
+        window.history.replaceState(null, '', `/slides/appam-2026?slide=${step}`);
+        await act(async () => {
+          root.render(<SlideshowViewer key={step} config={appam2026Config} />);
+        });
+        const main = container.querySelector('main')!;
+        expect(main.dataset.currentStep).toBe(String(step));
+        for (const link of main.querySelectorAll('.slide-active a')) {
+          await click(link);
+          expect(main.dataset.currentStep, (link as HTMLAnchorElement).href).toBe(String(step));
+          total += 1;
+        }
+      }
+      expect(total).toBeGreaterThanOrEqual(10);
+    });
+
+    it('still lets a click on the slide itself move the deck', async () => {
+      window.history.replaceState(null, '', '/slides/appam-2026?slide=1');
+      await act(async () => {
+        root.render(<SlideshowViewer config={appam2026Config} />);
+      });
+      const main = container.querySelector('main')!;
+      await click(main.querySelector('.slide-active h1')!);
+      expect(main.dataset.currentStep).toBe('2');
+    });
   });
 });
