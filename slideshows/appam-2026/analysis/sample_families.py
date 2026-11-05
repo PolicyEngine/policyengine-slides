@@ -1,4 +1,4 @@
-"""Draw a fixed sample of families from Populace US.
+"""Draw a fixed sample of families from Microcosm.
 
 Draws households with children in proportion to their weights, with replacement,
 and writes every person in each draw to one flat file. A household drawn twice

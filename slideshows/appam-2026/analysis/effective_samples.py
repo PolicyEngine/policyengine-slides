@@ -1,6 +1,6 @@
 """Kish effective samples by state, with each surveyed household counted once.
 
-Some survey households appear twice in Populace, once as the survey record and once as
+Some survey households appear twice in Microcosm, once as the survey record and once as
 a tax-data clone with the same source id and members of the same ages. We add each
 clone's weight to its source record's before taking Kish's measure. We read the
 local-area file's state cuts one state at a time and only a few columns of the default

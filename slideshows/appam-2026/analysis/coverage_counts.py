@@ -1,9 +1,9 @@
-"""Count what slide 12 says about the model and the data.
+"""Count what slides 12 and 13 say about the model and the data.
 
 Usage: python3 coverage_counts.py <policyengine_us package> <saved manifests> <microcosm clone>
 
 Counts files in the installed PolicyEngine US package, reads the build and calibration
-manifests Populace US publishes on Hugging Face for the deck's two files, and reads the donor
+manifests we publish for Microcosm on Hugging Face for the deck's two files, and reads the donor
 table in the microcosm build code at the local-area file's commit. Writes data/coverage.json.
 """
 

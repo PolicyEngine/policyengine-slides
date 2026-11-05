@@ -27,7 +27,7 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 | Questions | Effective sample in the median state; child poverty estimates differ from Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
 | 14 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 6's family (`data/family.json`) |
 
-We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's national file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
+We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 10's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 9's reform dictionary on the Massachusetts rows of Microcosm's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Microcosm's national file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
 
 ## This family, line by line
 
@@ -62,7 +62,7 @@ We dropped county and finer geography from the fixed-sample CSV and defined the 
 
 `analysis/policybench_board.py` → `data/policybench_board.json` reads the live page at policybench.org (fetched November 5, 2026, board snapshot 2026-10-27), the board's `dashboard-data.json` from October 23, 2026, and `modelMeta.ts` at policybench commit 8180cde1.
 
-- Slide 4's bars come from the page's "Where models still break": 51 models and 100 public households, sampled with household weights from an eligible subset of the PolicyEngine populace dataset. These unweighted rates pool parsed predictions on positive scored reference amounts and leave out missing or unparseable predictions. They describe that sample.
+- Slide 4's bars come from the page's "Where models still break": 51 models and 100 public households, sampled with household weights from an eligible subset of Microcosm, which that page calls the PolicyEngine populace dataset. These unweighted rates pool parsed predictions on positive scored reference amounts and leave out missing or unparseable predictions. They describe that sample.
 - The exact-match score counts an amount right within $1 and an eligibility flag right on a match, and weights each answer by household impact. On the October 23 copy, GPT-5.5 scores highest among models released by April 30, at 87.9, and GPT-6 Sol highest overall, at 95.2. That compares release cohorts on one snapshot, and no one measured the board in April at this scoring. GPT-6.1 Sol scores 90.1 and Claude Opus 5.5 94.1. No slide prints these scores, because the bars come from a later snapshot.
 - On that copy, the two highest scorers miss SNAP by more than 10% in 7 of 13 (GPT-6 Sol) and 6 of 13 (Claude Opus 5.5) households with a positive reference amount (`top_two_snap`).
 - PolicyBench grades against PolicyEngine, and no administrative record stands behind its references. The [reference audit](https://policybench.org/notes/2026-09-22-reference-audit) gives the counts we quote, and the [tool pilot](https://policybench.org/notes/2026-10-20-given-a-policyengine-tool-three-models-score-above-99) gives the scores with a tool. That pilot doesn't independently validate policy accuracy or show that models need such a tool.
@@ -77,7 +77,7 @@ We checked each address on slide 10 on November 5, 2026. The page at policyengin
 
 ## Coverage
 
-`analysis/coverage_counts.py` → `data/coverage.json` counts the PolicyEngine US package and reads the manifests Populace US publishes on Hugging Face.
+`analysis/coverage_counts.py` → `data/coverage.json` counts the PolicyEngine US package and reads the manifests we publish for Microcosm, our microdata, on Hugging Face under `policyengine/populace-us`. Build labels the national file Microcosm in `api.policyengine.org/us/metadata`.
 
 - **Model:** income tax parameters for 44 jurisdictions and none for Alaska, Florida, Nevada, South Dakota, Tennessee, Texas and Wyoming, 51 entries in `STATE_TANF_VARIABLES`, and 51 programs in `child_care_subsidy_programs`. `local_income_tax_before_refundable_credits` adds New York City's income tax and Philadelphia's wage tax, among others.
 - **National file** (`populace-us-2024-spm-20260915`): 57,240 households and 5,659 targets, including IRS SOI and Census population totals. We fit 95.69% within 10% in sample, with an effective sample of 9,174. We rescale four Social Security benefit inputs to SSA payment totals, impute 65 tax-detail variables from IRS PUF records into copies of CPS ASEC households, and add inputs from SCF 2022, SIPP 2023 and CPS ORG 2024. These describe how we build the file and don't establish its accuracy.
@@ -88,11 +88,11 @@ We checked each address on slide 10 on November 5, 2026. The page at policyengin
 
 ## Work in progress
 
-Slide 13 links each open pull request, all open on November 5, 2026: PolicyEngine/microcosm#1445 (what moves state child poverty rates), PolicyEngine/policyengine-us#10640 (Medicaid spouse rule), PolicyEngine/policyengine-us#10607 (LIHEAP in California, with #10609, #10611, #10612, #10613, #10614, #10616 and #10618 for Colorado, Connecticut, Delaware, Idaho, Hawaii, South Carolina and West Virginia), PolicyEngine/microcosm#1453 (local tax geography) and PolicyEngine/microcosm#1246 (student loans).
+Slide 14 links each open pull request, all open on November 5, 2026: PolicyEngine/microcosm#1445 (what moves state child poverty rates), PolicyEngine/policyengine-us#10640 (Medicaid spouse rule), PolicyEngine/policyengine-us#10607 (LIHEAP in California, with #10609, #10611, #10612, #10613, #10614, #10616 and #10618 for Colorado, Connecticut, Delaware, Idaho, Hawaii, South Carolina and West Virginia), PolicyEngine/microcosm#1453 (local tax geography) and PolicyEngine/microcosm#1246 (student loans).
 
 ## The fixed sample
 
-`analysis/sample_families.py` makes 3,000 draws from the Populace US households with someone under 18, with replacement and in proportion to household weight. When the script draws a household twice, it writes two copies under fresh IDs, and each copy counts once. The sample includes 2,075 distinct household records. Slide 10's Medicaid or CHIP share covers children under 19, so an 18-year-old counts only when the household also holds someone younger.
+`analysis/sample_families.py` makes 3,000 draws from the Microcosm households with someone under 18, with replacement and in proportion to household weight. When the script draws a household twice, it writes two copies under fresh IDs, and each copy counts once. The sample includes 2,075 distinct household records. Slide 10's Medicaid or CHIP share covers children under 19, so an 18-year-old counts only when the household also holds someone younger.
 
 The script keeps input variables and IDs. It renames the stored Social Security amounts, `social_security_retirement`, `social_security_disability`, `social_security_survivors` and `social_security_dependents`, to the `_reported` inputs the model reads. It leaves out `has_marketplace_health_coverage`, `is_spm_independent_minor_role` and 181 names that PolicyEngine US 2.90.2 does not define. When we restored those two variables, the runs for Tennessee, Oregon and Hawaii returned the same SNAP and child Medicaid or CHIP shares to every digit (`analysis/audit_sample_columns.py` → `data/sample_columns.json`).
 
@@ -110,7 +110,7 @@ The script keeps input variables and IDs. It renames the stored Social Security 
 
 ## State baselines
 
-`analysis/state_baseline.py` computes 2025 child SPM poverty rates for all 51 jurisdictions, one state at a time, on Populace US's local-area file at revision `populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`. `policyengine.py` 6.12.0 selects that file for state regions (`region_datasets` in `src/policyengine/data/bundle/manifest.json`, and `docs/regions.md`), and the file here matches the manifest's SHA-256.
+`analysis/state_baseline.py` computes 2025 child SPM poverty rates for all 51 jurisdictions, one state at a time, on Microcosm's local-area file at revision `populace-us-2024-buildo-acs-local-766b7c7-20261017T030317Z`. `policyengine.py` 6.12.0 selects that file for state regions (`region_datasets` in `src/policyengine/data/bundle/manifest.json`, and `docs/regions.md`), and the file here matches the manifest's SHA-256.
 
 - Our rates differ from Census's 2023 to 2025 averages by 3.2 points on average and exceed Census's by 0.9 points on net. They exceed Census's in 30 of 51 jurisdictions. In 29 of 51 jurisdictions the difference exceeds Census's margin of error.
 - Effective samples of households with children run from 53 in Maine to 407 in California, with a median of 108. Across all households they run from 157 in Kentucky to 905 in California, with a median of 237 (`data/effective_samples.json`).
@@ -120,7 +120,7 @@ The script keeps input variables and IDs. It renames the stored Social Security 
 
 ## Effective samples
 
-Some CPS ASEC households appear twice in each Populace US file, as the ASEC record (support channel `asec`) and as a clone (`puf_tax_detail`) whose members have the same ages. We count each ASEC household and its clone as one household. We add the clone's weight to its ASEC record's before computing Kish's effective sample size, and cluster standard errors by source household. `analysis/effective_samples.py` checks that every shared source covers one ASEC record and one clone with the same ages, and writes `data/effective_samples.json`. In the local-area file, ids on the `acs_2024_1yr` spine match ids on the `asec_puf` spine in 48 states, so we key each source by spine and id.
+Some CPS ASEC households appear twice in each Microcosm file, as the ASEC record (support channel `asec`) and as a clone (`puf_tax_detail`) whose members have the same ages. We count each ASEC household and its clone as one household. We add the clone's weight to its ASEC record's before computing Kish's effective sample size, and cluster standard errors by source household. `analysis/effective_samples.py` checks that every shared source covers one ASEC record and one clone with the same ages, and writes `data/effective_samples.json`. In the local-area file, ids on the `acs_2024_1yr` spine match ids on the `asec_puf` spine in 48 states, so we key each source by spine and id.
 
 Counting both copies would put Massachusetts at about 395, or 173 among those with children, and the median state at 125 households with children (`effective_records` in `data/effective_samples.json`). In `data/state_baseline.json` and `data/state_baseline_default.json`, `effective_households` counts both copies too.
 
@@ -180,7 +180,7 @@ We count all four payments in net resources in every state.
 | Questions | Copy back to 2015 | `system.py` calls `backdate_parameters(self.parameters, first_instant=f"{FIRST_MODELED_YEAR}-01-01")`, and `tools/parameters.py` sets `FIRST_MODELED_YEAR = 2015`. Wisconsin Shares' rate parameters start on 2025-10-01, so we compute subsidies of $13,258 in 2021 and $14,024 in 2023 (`analysis/wisconsin_schedules.py` → `data/wisconsin_schedules.json`) |
 | Questions | We take earnings and paid leave benefits as inputs | The minimum wage appears only in eligibility tests. `pfml_benefits` holds benefits received, and the model computes employee contributions through `employee_state_payroll_tax` |
 | Questions | Labor supply | Elasticities default to zero |
-| 6 and Questions | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
+| 6 and Questions | Take-up | All 18 `takes_up_*` variables default to true, and Microcosm carries `takes_up_*` flags |
 
 ## Waiting lists
 
@@ -204,5 +204,5 @@ We captured slide 11's screenshots and recording from the live sites on November
 
 - Axiom publishes `us-ga/policies/dfcs/snap/3612.yaml` in `TheAxiomFoundation/rulespec-us` under CC BY 4.0.
 - Axiom publishes `axiom-rules-engine` under an MIT license.
-- We captured slide 14's graph from axiom.org/app?compose=us-ga:policies/dfcs/snap/3612 on November 5, 2026, and read the rule behind its caption in `3612.yaml`: `earned_income_deduction_allowed` tests `total_countable_gross_earned_income > 0` and not `assistance_unit_failed_to_report_earned_income_timely`, and `earned_income_deduction` multiplies the rate by that income.
+- We captured slide 15's graph from axiom.org/app?compose=us-ga:policies/dfcs/snap/3612 on November 5, 2026, and read the rule behind its caption in `3612.yaml`: `earned_income_deduction_allowed` tests `total_countable_gross_earned_income > 0` and not `assistance_unit_failed_to_report_earned_income_timely`, and `earned_income_deduction` multiplies the rate by that income.
 - Georgia's Division of Family and Children Services publishes the rule text and December 2019 effective date in its public SNAP manual (pamms.dhs.ga.gov/dfcs/snap/3612).

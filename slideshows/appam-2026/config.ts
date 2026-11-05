@@ -3,8 +3,8 @@ import { speakers } from '@/lib/speakers';
 import AnswersSlide from './slides/AnswersSlide';
 import AxiomSlide from './slides/AxiomSlide';
 import CliffsSlide from './slides/CliffsSlide';
-import CoverageSlide from './slides/CoverageSlide';
 import CoverSlide from './slides/CoverSlide';
+import DataSlide from './slides/DataSlide';
 import EndSlide from './slides/EndSlide';
 import EveryProgramSlide from './slides/EveryProgramSlide';
 import InterfacesSlide from './slides/InterfacesSlide';
@@ -12,6 +12,7 @@ import OneFamilySlide from './slides/OneFamilySlide';
 import ParametersSlide from './slides/ParametersSlide';
 import QuestionSlide from './slides/QuestionSlide';
 import ReformSlide from './slides/ReformSlide';
+import RulesSlide from './slides/RulesSlide';
 import WaterfallSlide from './slides/WaterfallSlide';
 import WebAppsSlide from './slides/WebAppsSlide';
 import WorkingOnSlide from './slides/WorkingOnSlide';
@@ -38,7 +39,8 @@ export const appam2026Config: SlideshowConfig = {
     ReformSlide,
     InterfacesSlide,
     { component: WebAppsSlide, builds: 2, exportBuilds: 1 },
-    CoverageSlide,
+    RulesSlide,
+    DataSlide,
     WorkingOnSlide,
     AxiomSlide,
     EndSlide,

@@ -1258,7 +1258,7 @@ describe('PolicyBench’s figures', () => {
 
 describe('coverage', () => {
   const { default_file: national, local_area_file: local, policyengine_us: model } = coverage;
-  const page = () => render(11).replace(/&rsquo;/g, '’');
+  const page = () => (render(11) + render(12)).replace(/&rsquo;/g, '’');
 
   it('counts all 51 jurisdictions one way or the other', () => {
     expect(model.jurisdictions_with_income_tax + model.jurisdictions_without_income_tax.length).toBe(51);
@@ -1277,7 +1277,7 @@ describe('coverage', () => {
     for (const row of local.targets_by_family_and_level) expect(row.family).not.toMatch(/poverty|child/i);
   });
 
-  it('prints the same counts on slide 12 and in the notes and the ledger', () => {
+  it('prints the same counts on slides 12 and 13 and in the notes and the ledger', () => {
     for (const count of [national.targets, local.targets]) {
       for (const text of [page(), notes, ledger]) expect(text).toContain(count.toLocaleString('en-US'));
     }

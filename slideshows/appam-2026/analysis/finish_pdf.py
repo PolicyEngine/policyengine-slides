@@ -25,7 +25,7 @@ from pypdf.generic import RectangleObject
 
 PAGE_WIDTH = 1080
 IMAGE_HEIGHT = 607.5
-SLIDES = 15
+SLIDES = 16
 POINTS_PER_PIXEL = PAGE_WIDTH / 1440
 
 DECK = "https://policyengine.org/slides/appam-2026"
@@ -43,17 +43,17 @@ LINKS = [
     (10, (807.28, 650.56, 1117.28, 669.56), "https://github.com/PolicyEngine/policyengine-us"),
     (11, (64, 491.14, 325, 513.14), "https://www.policyengine.org/us/cliffwatch?s=MA&zip=02139&ms=unmarried&p=33:a::0,6:c::0,10:c::0"),
     (11, (814.64, 655.8, 1070.64, 677.8), "https://app.policyengine.org/us/build"),
-    (13, (1167, 343.09, 1321, 365.09), "https://github.com/PolicyEngine/microcosm/pull/1445"),
-    (13, (1167, 417.38, 1376, 439.38), "https://github.com/PolicyEngine/policyengine-us/pull/10640"),
-    (13, (1167, 463.42, 1374, 485.42), "https://github.com/PolicyEngine/policyengine-us/pull/10607"),
-    (13, (1167, 509.47, 1320, 531.47), "https://github.com/PolicyEngine/microcosm/pull/1453"),
-    (13, (1167, 583.75, 1320, 605.75), "https://github.com/PolicyEngine/microcosm/pull/1246"),
-    (14, (1123.16, 618.86, 1208.16, 640.86), "https://axiom.org/app?compose=us-ga:policies/dfcs/snap/3612"),
-    (15, (330.5, 434, 473.5, 455), "https://www.policyengine.org"),
-    (15, (330.5, 506, 715.5, 527), "https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026"),
-    (15, (330.5, 542, 526.5, 563), "mailto:max@policyengine.org"),
-    (15, (866.5, 331, 1038.5, 503), DECK),
-    (15, (795.5, 530, 1109.5, 551), DECK),
+    (14, (1167, 343.09, 1321, 365.09), "https://github.com/PolicyEngine/microcosm/pull/1445"),
+    (14, (1167, 417.38, 1376, 439.38), "https://github.com/PolicyEngine/policyengine-us/pull/10640"),
+    (14, (1167, 463.42, 1374, 485.42), "https://github.com/PolicyEngine/policyengine-us/pull/10607"),
+    (14, (1167, 509.47, 1320, 531.47), "https://github.com/PolicyEngine/microcosm/pull/1453"),
+    (14, (1167, 583.75, 1320, 605.75), "https://github.com/PolicyEngine/microcosm/pull/1246"),
+    (15, (1123.16, 618.86, 1208.16, 640.86), "https://axiom.org/app?compose=us-ga:policies/dfcs/snap/3612"),
+    (16, (330.5, 434, 473.5, 455), "https://www.policyengine.org"),
+    (16, (330.5, 506, 715.5, 527), "https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026"),
+    (16, (330.5, 542, 526.5, 563), "mailto:max@policyengine.org"),
+    (16, (866.5, 331, 1038.5, 503), DECK),
+    (16, (795.5, 530, 1109.5, 551), DECK),
 ]
 
 # In pixels at 1440x810: how far inside its rectangle a link's ink may start or end

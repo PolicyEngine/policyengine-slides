@@ -65,9 +65,9 @@ describe('slide 11 steps', () => {
     expect(flattenSlides(appam2026Config.slides, { exportMode: true })).toHaveLength(appam2026Config.slides.length);
   });
 
-  it('counts 15 slides on the index page', () => {
+  it('counts 16 slides on the index page', () => {
     const deck = getAllSlideshowMetadata().find((meta) => meta.id === appam2026Config.id);
-    expect(deck?.slideCount).toBe(15);
+    expect(deck?.slideCount).toBe(16);
   });
 
   it('moves on the keys a clicker sends', () => {
