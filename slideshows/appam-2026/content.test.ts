@@ -283,6 +283,7 @@ describe('links', () => {
       ParametersSlide: ['github.com/PolicyEngine/policyengine-us'],
       MicrodataSlide: ['policyengine.org/us/taxsim'],
       ReformSlide: ['policyengine.org/us/child-poverty-impact-dashboard'],
+      WebAppsSlide: ['policyengine.org/us/cliffwatch', 'app.policyengine.org/us/build'],
       AxiomSlide: ['axiom.org'],
       EndSlide: ['policyengine.org', 'github.com/PolicyEngine/policyengine-slides', 'max@policyengine.org', deckAddress],
     };

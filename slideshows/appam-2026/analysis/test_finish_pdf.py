@@ -96,8 +96,8 @@ def test_links_use_public_addresses():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"pages": 11},
-        {"pages": 13},
+        {"pages": fp.SLIDES - 1},
+        {"pages": fp.SLIDES + 1},
         {"height": 612.0},
         {"height": 600.0},
         {"width": 1440},

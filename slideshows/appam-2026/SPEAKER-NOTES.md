@@ -2,14 +2,14 @@
 
 State Policy Impacts on Family Resources: Tools to Improve Policy Analysis. Thursday, November 5, 2026, 10:15 to 11:45am ET, Wellesley room, Boston. Cynthia Osborne moderates. Tara Watson and Linda Giannarelli also present. Each presenter has 10 to 12 minutes.
 
-Twelve slides in about 11 minutes.
+Thirteen slides in about 11 minutes.
 
 ## Before presenting
 
 - Send the PDF to Cynthia's team by Wednesday evening, November 4, for the room's laptop.
-- Before Thursday, scan slide 12's QR code and check that it opens this deck.
+- Before Thursday, scan slide 13's QR code and check that it opens this deck.
+- Before the session starts, open CliffWatch's chart once to check that it loads.
 - Keep these notes on your phone and the PDF on your laptop. If the room's laptop fails, present from yours.
-- If Cynthia, Tara or Linda cover slide 9's tools before you speak, give that slide one sentence.
 
 ## 1. PolicyEngine for state policy research (0:00, 15 seconds)
 
@@ -61,28 +61,34 @@ We ran this on the Populace US local-area file, which we use for state and distr
 
 On our Child Poverty Impact Dashboard, you can run child tax credit, EITC, SNAP and state tax credit reforms state by state.
 
-## 9. Research questions and the tools that answer them (8:30, 45 seconds)
+## 9. You can find a family's cliffs and build a reform without writing code (8:30, 45 seconds)
 
-The Welfare Rules Database, the CCDF Policies Database and the Policy Tracking System record what states chose. The State Safety Net Interactive and the Policy Impact Calculator show what those choices mean for families. State of the Safety Net shows who qualifies and takes part.
+CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Cambridge loses the state's cash assistance, TAFDC, when earnings pass $18,000.
 
-With PolicyEngine, you can change any parameter, write new rules and run your own microdata. You can read and edit every line of code and project current law through 2035.
+In Build, you can open the same Massachusetts credit, set it to $880 and run a report.
 
-## 10. What we leave out (9:15, 1 minute)
+## 10. Research questions and the tools that answer them (9:15, 15 seconds)
+
+With PolicyEngine, you can also change any parameter, run your own microdata, read every rule and project current law through 2035.
+
+## 11. What we leave out (9:30, 1 minute)
 
 We model child care subsidies in all 51 jurisdictions from August 2026. We copy each parameter's earliest value back to 2015, so check historical runs against each year's rules. We take earnings and paid leave benefits as inputs and hold them fixed when you change minimum wage or paid leave law. We hold hours fixed unless you set a labor supply response.
 
 Our local-area file holds thin state samples, about 108 effective households with children in the median state. Our child poverty estimates on that file miss Census's 2023 to 2025 averages by 3.2 points on average. In 29 of 51 jurisdictions, they fall outside Census's margin of error. For state child poverty rates, bring your own microdata.
 
-## 11. The Axiom Foundation encodes rules with their source text and dates (10:15, 45 seconds)
+## 12. The Axiom Foundation encodes rules with their source text and dates (10:30, 45 seconds)
 
 I also lead the Axiom Foundation. We publish open, machine-readable encodings of rules, starting with tax and benefit policy. Congress sets SNAP's 20% earned income deduction, and Georgia's Division of Family and Children Services applies it in section 3612 of its SNAP manual. We record the manual's words and effective date beside each value.
 
 When we run this rule through the Axiom engine, a family earning $30,000 a year gets a $500 monthly deduction. Ask for November 2019, before the manual section we encoded took effect, and the engine refuses.
 
-## 12. Thank you (11:00)
+## 13. Thank you (11:15)
 
 Scan the QR code to open this deck. From its last slide, you can open the code behind each chart.
 
 ## Questions
 
 **Could sampling error explain the misses against Census?** Our own sampling error could produce misses of that size. We estimate a standard error of 4.6 points on Massachusetts's 2026 child poverty rate, more than twice the 2.0-point margin of error Census reports for the state. Our file holds fewer effective households with children in the median state, about 108 against Massachusetts's 132.
+
+**Why does CliffWatch's net income exceed slide 3's net resources?** CliffWatch counts Medicaid and CHIP in net income, and we leave health coverage out of net resources. The Cambridge family also pays nothing for child care, and slide 3's family pays $1,500 a month.

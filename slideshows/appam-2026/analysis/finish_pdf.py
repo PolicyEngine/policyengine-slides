@@ -25,7 +25,7 @@ from pypdf.generic import RectangleObject
 
 PAGE_WIDTH = 1080
 IMAGE_HEIGHT = 607.5
-SLIDES = 12
+SLIDES = 13
 POINTS_PER_PIXEL = PAGE_WIDTH / 1440
 
 DECK = "https://policyengine.org/slides/appam-2026"
@@ -44,16 +44,18 @@ LINKS = [
         (87.32, 601.16, 545.53, 623.16),
         "https://www.policyengine.org/us/child-poverty-impact-dashboard",
     ),
-    (11, (1121.77, 618.93, 1207.18, 640.93), "https://axiom.org"),
-    (12, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
+    (9, (64.0, 491.13, 325.09, 513.13), "https://www.policyengine.org/us/cliffwatch"),
+    (9, (814.66, 655.78, 1071.06, 677.78), "https://app.policyengine.org/us/build"),
+    (12, (1121.77, 618.93, 1207.18, 640.93), "https://axiom.org"),
+    (13, (331.52, 434.0, 472.9, 456.0), "https://www.policyengine.org"),
     (
-        12,
+        13,
         (331.52, 506.0, 714.55, 528.0),
         "https://github.com/PolicyEngine/policyengine-slides/tree/main/slideshows/appam-2026",
     ),
-    (12, (331.52, 542.0, 525.98, 564.0), "mailto:max@policyengine.org"),
-    (12, (853.52, 319.0, 1049.52, 515.0), DECK),
-    (12, (794.55, 527.0, 1108.48, 555.0), DECK),
+    (13, (331.52, 542.0, 525.98, 564.0), "mailto:max@policyengine.org"),
+    (13, (853.52, 319.0, 1049.52, 515.0), DECK),
+    (13, (794.55, 527.0, 1108.48, 555.0), DECK),
 ]
 
 # In pixels at 1440x810: how far inside its rectangle a link's ink may start or end

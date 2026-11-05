@@ -22,8 +22,8 @@ Each claim on a slide traces to a computed result, to code at a named commit, or
 | 7 | SNAP eligibility 17.5% in Arkansas and Tennessee to 38.3% in Maryland, among SPM units with children; child Medicaid or CHIP 39.8% in Idaho to 66.1% in Hawaii | `analysis/sample_families.py` → `analysis/simulated_instrument.py` → `data/simulated_instrument.json` |
 | 8 | State cost, 29.4% of households would gain, none would lose, $169 million off the SPM poverty gap | `analysis/massachusetts_reform.py` → `data/massachusetts_reform.json`: `state_cost` holds the fall in `state_income_tax`, and `household_gain` holds the change in `household_net_income` |
 | 8 | 36,491 Massachusetts household records, an effective sample of about 301 households, or 132 among those with children, 2026 child poverty rate falls 0.2 points | `data/massachusetts_reform.json`: `household_records`, `effective_households` and `effective_households_with_children` (Kish, counting each source household once), `baseline_child_poverty`, `reformed_child_poverty` |
-| 10 | Effective sample in the median state; child poverty estimates miss Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
-| 11 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 3's family (`data/family.json`) |
+| 11 | Effective sample in the median state; child poverty estimates miss Census's by 3.2 points on average, and in 29 of 51 jurisdictions they fall outside Census's margin of error | `analysis/effective_samples.py` → `data/effective_samples.json`; `analysis/state_baseline.py` → `data/state_baseline.json`, compared with `data/census_child_spm.json` |
+| 12 | $500.00 deduction on $2,500.00 of monthly earnings, refusal for November 2019 | `analysis/axiom_ga_3612.py` → `data/axiom_ga_3612.json`. At $30,000 a year, we estimate $6,363 of Georgia SNAP for slide 3's family (`data/family.json`) |
 
 We dropped county and finer geography from the fixed-sample CSV and defined the `STATE_FIPS` dictionary before running slide 7's loop. The loop reproduced Arkansas and Maryland to every digit. We then ran slide 8's reform dictionary on the Massachusetts rows of Populace US's local-area file. It returned the state cost in `data/massachusetts_reform.json` (`analysis/check_slide_code.py` → `data/slide_code_check.json`). On Populace US's default file, a Massachusetts cut and a national run returned the same household gain, gaining share and poverty rates (`data/massachusetts_reform_default.json`, `data/massachusetts_national_check.json`).
 
@@ -103,13 +103,13 @@ We count all four payments in net resources in every state.
 | 6 | Massachusetts credit values, dates and citations | `parameters/gov/states/ma/tax/income/credits/child_and_family/amount.yaml` and `dependent_cap.yaml` |
 | 7 | Our TAXSIM-compatible interface runs 2021 onward through PolicyEngine and earlier years through TAXSIM35 | `StitchedRunner.PE_MIN_YEAR = 2021` in `policyengine_taxsim/runners/stitched_runner.py` at the policyengine-taxsim commit above |
 | 8 | Child tax credit, EITC, SNAP and state tax credit reforms, state by state | `getReformOptionsForState` in `frontend/lib/state-programs.ts` at the dashboard commit above returns federal child tax credit and EITC options and SNAP options in all 51 jurisdictions, state EITC options in 43 (the 42 with an income tax, and Washington) and state child tax credit options in 17 for 2026 |
-| 9 | Project through 2035 | The PolicyEngine API's US metadata lists years 2022 to 2035 |
-| 10 | All 51 jurisdictions from August 2026 | `gov.hhs.ccdf.child_care_subsidy_programs` lists 51 from 2025. We model Illinois's program from July 2025, Florida's from October 2025, and Arkansas's and Ohio's from November 2025 (each program's `in_effect`), and South Dakota's from August 2026, when `uses_weekly_rates` turns on |
-| 10 | Copy back to 2015 | `system.py` calls `backdate_parameters(self.parameters, first_instant=f"{FIRST_MODELED_YEAR}-01-01")`, and `tools/parameters.py` sets `FIRST_MODELED_YEAR = 2015`. Wisconsin Shares' rate parameters start on 2025-10-01, so we compute subsidies of $13,258 in 2021 and $14,024 in 2023 (`analysis/wisconsin_schedules.py` → `data/wisconsin_schedules.json`) |
-| 10 | We take earnings and paid leave benefits as inputs | The minimum wage appears only in eligibility tests. `pfml_benefits` holds benefits received, and the model computes employee contributions through `employee_state_payroll_tax` |
-| 10 | Labor supply | Elasticities default to zero |
-| 10 | Medicaid limits | `is_medically_needy_for_medicaid` documentation |
-| 10 | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
+| 10 | Project through 2035 | The PolicyEngine API's US metadata lists years 2022 to 2035 |
+| 11 | All 51 jurisdictions from August 2026 | `gov.hhs.ccdf.child_care_subsidy_programs` lists 51 from 2025. We model Illinois's program from July 2025, Florida's from October 2025, and Arkansas's and Ohio's from November 2025 (each program's `in_effect`), and South Dakota's from August 2026, when `uses_weekly_rates` turns on |
+| 11 | Copy back to 2015 | `system.py` calls `backdate_parameters(self.parameters, first_instant=f"{FIRST_MODELED_YEAR}-01-01")`, and `tools/parameters.py` sets `FIRST_MODELED_YEAR = 2015`. Wisconsin Shares' rate parameters start on 2025-10-01, so we compute subsidies of $13,258 in 2021 and $14,024 in 2023 (`analysis/wisconsin_schedules.py` → `data/wisconsin_schedules.json`) |
+| 11 | We take earnings and paid leave benefits as inputs | The minimum wage appears only in eligibility tests. `pfml_benefits` holds benefits received, and the model computes employee contributions through `employee_state_payroll_tax` |
+| 11 | Labor supply | Elasticities default to zero |
+| 11 | Medicaid limits | `is_medically_needy_for_medicaid` documentation |
+| 11 | Take-up | All 18 `takes_up_*` variables default to true, and Populace US carries `takes_up_*` flags |
 
 ## The other tools
 
@@ -121,6 +121,13 @@ We use the session abstract's descriptions of the following tools:
 - Welfare Rules Database
 - CCDF Policies Database
 - State of the Safety Net with ATTIS
+
+## The web apps
+
+We captured slide 9's screenshots from the live sites on November 4, 2026.
+
+- CliffWatch (policyengine.org/us/cliffwatch) ran PolicyEngine US 1.755.5, as its `/api/metadata` reports. We entered a single parent, 33, with children aged 6 and 10 in ZIP code 02139, and kept its default programs, which include Medicaid and CHIP.
+- In Build (app.policyengine.org/us/build), we set the Massachusetts child and family tax credit amount, `gov.states.ma.tax.income.credits.child_and_family.amount`, from $440 to $880 from 2026. For Build, we set the browser's time zone to UTC: in New York time, Build labels each gridline in its chart of historic values with the year before.
 
 ## Axiom
 

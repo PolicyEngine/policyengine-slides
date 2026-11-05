@@ -10,6 +10,7 @@ import ParametersSlide from './slides/ParametersSlide';
 import ReformSlide from './slides/ReformSlide';
 import ScopeSlide from './slides/ScopeSlide';
 import ToolsSlide from './slides/ToolsSlide';
+import WebAppsSlide from './slides/WebAppsSlide';
 import WhatItDoesSlide from './slides/WhatItDoesSlide';
 import WhichLinesSlide from './slides/WhichLinesSlide';
 
@@ -31,6 +32,7 @@ export const appam2026Config: SlideshowConfig = {
     ParametersSlide,
     MicrodataSlide,
     ReformSlide,
+    WebAppsSlide,
     ToolsSlide,
     ScopeSlide,
     AxiomSlide,
