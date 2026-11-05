@@ -16,7 +16,7 @@ export default function AxiomSlide() {
     <Frame title="The Axiom Foundation encodes rules with source text and dates">
       <div className={`flex h-full flex-col justify-center gap-[2.2vh] ${styles.flow}`}>
         {/* Leaves room under the graph for the rule and the engine's runs. */}
-        <figure className="m-0" style={{ maxWidth: '130vh' }}>
+        <figure className="m-0" style={{ maxWidth: '120vh' }}>
           <div className="content-card overflow-hidden border border-gray-200">
             <Image
               src="/images/appam-2026/axiom-3612-graph.png"
@@ -28,28 +28,25 @@ export default function AxiomSlide() {
             />
           </div>
           <figcaption className="mt-[1vh] text-gray-700" style={{ fontSize: '0.8em' }}>
-            Axiom&rsquo;s graph of section 3612. Georgia allows the deduction when a household has earned
-            income and reports it on time, and applies the rate to its gross earned income.
+            Explore Axiom&rsquo;s graph of section 3612 at{' '}
+            <a
+              className="pointer-events-auto"
+              style={{ textDecoration: 'underline' }}
+              href="https://axiom.org/app?compose=us-ga:policies/dfcs/snap/3612"
+            >
+              axiom.org
+            </a>
+            . Georgia allows the deduction when a household has earned income and reports it on time, and
+            applies the rate to its gross earned income.
           </figcaption>
         </figure>
         <div className={`grid grid-cols-2 gap-[4vh] ${styles.flow}`}>
           <div>
-            <p className="mb-[1.2vh]">
+            <p>
               Congress sets SNAP&rsquo;s 20% earned income deduction, and Georgia&rsquo;s Division of Family
               and Children Services applies it in section 3612 of its SNAP manual. Axiom encodes that rule
               and records the manual&rsquo;s words beside each value: &ldquo;20% earned income
               deduction&rdquo; and &ldquo;Effective Date: December 2019.&rdquo;
-            </p>
-            <p>
-              Explore this graph at{' '}
-              <a
-                className="pointer-events-auto"
-                style={{ textDecoration: 'underline' }}
-                href="https://axiom.org/app?compose=us-ga:policies/dfcs/snap/3612"
-              >
-                axiom.org
-              </a>
-              .
             </p>
           </div>
           <div>
