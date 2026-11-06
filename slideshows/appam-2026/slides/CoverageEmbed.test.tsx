@@ -30,7 +30,7 @@ describe('the coverage tracker on the rules slide', () => {
     expect(container.querySelector('img')?.getAttribute('alt')).toBe('The tracker');
   });
 
-  it('keeps the frame hidden until the tracker renders', async () => {
+  it('keeps the frame hidden on first render', async () => {
     window.history.replaceState(null, '', '/slides/appam-2026?slide=13');
     await renderEmbed();
     expect(container.querySelector('iframe')?.style.opacity).toBe('0');
@@ -49,9 +49,11 @@ const SNAPSHOT = 'Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetc
 const FALLBACK = 'Coverage reflects the bundled fallback registry. 64 Total programs';
 
 const card = (label: string, style = '') => `<div ${style}><p>${label}</p></div>`;
-/** The tracker's four cards, with the given attributes on the last one. */
+/** The legend after the tracker's cards, which repeats three of their labels and never fades. */
+const LEGEND = ['Complete', 'Partial', 'In progress', 'Not started'].map((label) => `<span>${label}</span>`).join('');
+/** The tracker's four cards and its legend, with the given attributes on the last card. */
 const cards = (lastStyle = '') =>
-  [card('Total programs'), card('Complete'), card('Partial'), card('In progress', lastStyle)].join('');
+  [card('Total programs'), card('Complete'), card('Partial'), card('In progress', lastStyle), LEGEND].join('');
 const CARD_STATES = {
   'at rest': { html: cards(), rests: true },
   'at rest under an identity matrix': { html: cards('data-transform="matrix(1, 0, 0, 1, 0, 0)"'), rests: true },
@@ -214,6 +216,41 @@ describe('when the frame shows', () => {
     setPage(frame, stubPage(SNAPSHOT));
     await poll();
     expect(shown(frame)).toBe(true);
+  });
+
+  it('waits for the new page to load before it checks again', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await show(1171.5);
+    await load(frame);
+    await poll();
+    await act(async () => void frame.contentWindow?.dispatchEvent(new Event('pagehide')));
+    await poll();
+    expect(hidden(frame)).toBe(true);
+    await load(frame);
+    await poll();
+    expect(shown(frame)).toBe(true);
+  });
+
+  it('first checks the page 400 ms after the slide shows', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await load(frame);
+    await show(1171.5);
+    await act(async () => void vi.advanceTimersByTime(399));
+    expect(hidden(frame)).toBe(true);
+    await act(async () => void vi.advanceTimersByTime(1));
+    expect(shown(frame)).toBe(true);
+  });
+
+  it('hands a key pressed in the frame to the deck once, however many times the frame loads', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await load(frame);
+    await load(frame);
+    const deck = vi.fn();
+    window.addEventListener('keydown', deck);
+    frame.contentWindow?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', cancelable: true }));
+    window.removeEventListener('keydown', deck);
+    expect(deck).toHaveBeenCalledOnce();
+    expect(deck.mock.calls[0][0].key).toBe('ArrowRight');
   });
 
   it('stays on the still across origins, where the browser denies the frame’s window and document', async () => {

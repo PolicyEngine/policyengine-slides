@@ -52,6 +52,8 @@ const census = JSON.parse(read('data/census_child_spm.json'));
 const reformRun = JSON.parse(read('data/massachusetts_reform.json'));
 const defaultReform = JSON.parse(read('data/massachusetts_reform_default.json'));
 const pinnedReform = JSON.parse(read('data/massachusetts_reform_221.json'));
+const nationalReform = JSON.parse(read('data/massachusetts_reform_221_national.json'));
+const buildReport = JSON.parse(JSON.parse(read('data/build_report_4940.json')).result.output);
 const precision = JSON.parse(read('data/massachusetts_precision.json'));
 const defaultBaseline = JSON.parse(read('data/state_baseline_default.json'));
 const localBaseline = JSON.parse(read('data/state_baseline.json'));
@@ -983,6 +985,54 @@ describe('typed figures', () => {
     ]) {
       expect(ledger).toContain(figure);
     }
+  });
+
+  describe('on Build’s report', () => {
+    const hundredths = (share: number) => `${(share * 100).toFixed(2)}%`;
+    const tenths = (value: number) => `$${(value / 1_000_000).toFixed(1)} million`;
+    const gaining = (row: Record<string, number>) => row['Gain less than 5%'] + row['Gain more than 5%'];
+    const { budget, intra_decile: gains } = buildReport;
+    const buildChild = buildReport.poverty.poverty.child;
+    const buildGaining = gaining(gains.all);
+
+    it('match the record and our two 2.2.1 runs in the evidence ledger', () => {
+      for (const figure of [
+        `${usd(-budget.state_tax_revenue_impact)} state revenue loss`,
+        `falling from ${hundredths(buildChild.baseline)} to ${hundredths(buildChild.reform)}`,
+        `$${(pinnedReform.state_cost / 1_000_000).toFixed(2)} million loss and a fall from ${hundredths(pinnedReform.baseline_child_poverty)} to ${hundredths(pinnedReform.reformed_child_poverty)}`,
+        `household gain, ${usd(pinnedReform.household_gain)}, differs by ${usd(pinnedReform.household_gain + budget.budgetary_impact)} from the record's ${usd(-budget.budgetary_impact)} budgetary impact`,
+        `${tenths(nationalReform.state_cost)} loss, and the child poverty rate stays at ${percent(nationalReform.baseline_child_poverty)}`,
+        `record's ${hundredths(buildGaining)} equals the simple mean`,
+        `${percent(nationalReform.people_gaining_share_over_1_dollar)} of people gain more than $1`,
+        `${percent(nationalReform.people_gaining_share_over_0_1_percent)} gain more than 0.1%`,
+      ]) {
+        expect(ledger).toContain(figure);
+      }
+      expect(percent(nationalReform.reformed_child_poverty)).toBe(percent(nationalReform.baseline_child_poverty));
+    });
+
+    it('find the record’s overall share in the simple mean of its ten decile shares', () => {
+      const deciles = [gains.deciles['Gain less than 5%'], gains.deciles['Gain more than 5%']];
+      expect(deciles.map((shares) => shares.length)).toEqual([10, 10]);
+      const mean = deciles.flat().reduce((total: number, share: number) => total + share, 0) / 10;
+      expect(mean).toBeCloseTo(buildGaining, 12);
+    });
+
+    it('match the record and our runs in the speaker notes', () => {
+      const fall = (run: { baseline_child_poverty: number; reformed_child_poverty: number }) =>
+        `we estimate a fall from ${percent(run.baseline_child_poverty)} to ${percent(run.reformed_child_poverty)}, or ${(100 * (run.baseline_child_poverty - run.reformed_child_poverty)).toFixed(1)} points`;
+      for (const figure of [
+        `Build's report show ${tenths(-budget.state_tax_revenue_impact)} and slide 9 show ${millions(massachusetts.cost)}`,
+        `we also estimate ${tenths(pinnedReform.state_cost)}`,
+        `${(100 * (1 - buildChild.reform / buildChild.baseline)).toFixed(1)}% decrease in child poverty`,
+        fall(pinnedReform),
+        fall(reformRun),
+        `Build's ${percent(buildGaining)} counts people, and slide 9's ${percent(reformRun.households_gaining_share)} counts households`,
+        `we estimate that ${percent(pinnedReform.households_gaining_share)} of households would gain`,
+      ]) {
+        expect(notes).toContain(figure);
+      }
+    });
   });
 
   it('rank the size of Massachusetts’s gap from Census where the ledger says', () => {

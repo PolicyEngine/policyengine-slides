@@ -105,8 +105,11 @@ export default function CoverageEmbed({ alt }: { alt: string }) {
     try {
       const page = frame.current?.contentWindow;
       page?.addEventListener('keydown', forwardKey);
-      // A reload prints the fallback counts first, so the still returns until the check passes again.
-      page?.addEventListener('pagehide', () => setReady(false));
+      // A reload prints the fallback counts first, so the still returns until the new page loads and passes the check.
+      page?.addEventListener('pagehide', () => {
+        setLoaded(false);
+        setReady(false);
+      });
     } catch {
       // A cross-origin frame, on a branch preview.
     }

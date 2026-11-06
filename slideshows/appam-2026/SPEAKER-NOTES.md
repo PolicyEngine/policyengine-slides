@@ -87,7 +87,7 @@ CliffWatch and Build need no code.
 
 CliffWatch charts a household's net income as its earnings rise and marks where a raise leaves it with less. For example, a single parent of two school-age children in Massachusetts loses the state's cash assistance, TAFDC, when earnings pass $18,000. CliffWatch counts health coverage in net income. When you try it, the chart can take up to a minute to finish drawing.
 
-In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. A report takes about three minutes to run. Build runs an older release, PolicyEngine US 2.2.1, and reports a $657 million cost. On 2.90.2, we estimate the $577 million on slide 9.
+In Build, you can open the same Massachusetts credit, set it to $880, pick Massachusetts and run a report. Our report took about three minutes to run. Build runs an older release, PolicyEngine US 2.2.1, and reports a $657 million cost, while on 2.90.2 we estimate the $577 million on slide 9.
 
 *The recording ends on the report's results. Press next when you finish.*
 
@@ -95,7 +95,7 @@ In Build, you can open the same Massachusetts credit, set it to $880, pick Massa
 
 We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. We list 109 programs in our coverage tracker and mark 87 complete, 18 partial and 4 in progress.
 
-*Once the tracker loads, you can click and scroll in the frame, and the arrow keys still move the deck. After you click in its search box, the arrow keys move the box's cursor until you click elsewhere in the frame. If you pick a year in its menu, the tracker counts only the programs we mark verified for that year.*
+*Once the tracker loads, you can click and scroll in the frame, and the left and right arrow keys still move the deck. After you click in its search box, they move the box's cursor until you click elsewhere in the frame. If you pick a year in its menu, the tracker counts only the programs we mark verified for that year.*
 
 ## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
