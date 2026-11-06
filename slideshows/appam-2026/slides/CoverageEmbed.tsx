@@ -106,7 +106,9 @@ export default function CoverageEmbed({ alt }: { alt: string }) {
       const page = frame.current?.contentWindow;
       page?.addEventListener('keydown', forwardKey);
       // A reload prints the fallback counts first, so the still returns until the new page loads and passes the check.
-      page?.addEventListener('pagehide', () => {
+      page?.addEventListener('pagehide', (event) => {
+        // A page the browser keeps for Back returns whole, and its frame fires no new load.
+        if (event.persisted) return;
         setLoaded(false);
         setReady(false);
       });

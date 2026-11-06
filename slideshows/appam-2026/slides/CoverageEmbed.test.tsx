@@ -231,6 +231,17 @@ describe('when the frame shows', () => {
     expect(shown(frame)).toBe(true);
   });
 
+  it('keeps the frame when the browser keeps the page for Back', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await show(1171.5);
+    await load(frame);
+    await poll();
+    const leaving = Object.assign(new Event('pagehide'), { persisted: true });
+    await act(async () => void frame.contentWindow?.dispatchEvent(leaving));
+    await poll();
+    expect(shown(frame)).toBe(true);
+  });
+
   it('first checks the page 400 ms after the slide shows', async () => {
     const frame = await mount(stubPage(SNAPSHOT));
     await load(frame);
