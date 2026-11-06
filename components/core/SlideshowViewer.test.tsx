@@ -189,9 +189,15 @@ describe("SlideshowViewer mounting", () => {
       slide.parentElement?.style.display,
     ]);
 
-  it("keeps each neighbor mounted and hidden, and unmounts a slide two or more away", async () => {
+  it("keeps each neighbor mounted and hidden across moves, and unmounts a slide two or more away", async () => {
     await renderAt("/slides/demo?slide=2", deck);
     expect(mounted()).toEqual([["1", "none"], ["2", "block"], ["3", "none"]]);
+    // The same node means React kept the slide's instance, so its state survives the move.
+    const shown = container.querySelector("[data-slide='2']");
+    await press("ArrowRight");
+    expect(container.querySelector("[data-slide='2']")).toBe(shown);
+    await press("ArrowLeft");
+    expect(container.querySelector("[data-slide='2']")).toBe(shown);
     const neighbor = container.querySelector("[data-slide='3']");
     await press("End");
     expect(mounted()).toEqual([["3", "none"], ["4", "block"]]);
