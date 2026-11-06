@@ -185,13 +185,13 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Do all these interfaces run one version?** They run different releases of the same code. This deck runs PolicyEngine US 2.90.2, our coverage tracker reads 2.72.3, CliffWatch ran 1.755.5 on November 4, Build ran 2.2.1 on November 5, and PyPI carried 2.95.0 on November 5.
 
-**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed which filers and dependents qualify for the credit, and we haven't separated how much of the difference those changes explain.
+**Why does Build's report show $657.4 million and slide 9 show $577 million?** Build runs PolicyEngine US 2.2.1, and we ran slide 9 on 2.90.2. When we run 2.2.1 on slide 9's local-area file, we also estimate $657.4 million. Between those releases, we changed how we model which filers and dependents qualify for the credit, and we haven't separated how much of the difference those changes explain.
 
-**Why does Build's report show a 2.3% decrease in child poverty?** Build reports a relative change. When we run 2.2.1 on slide 9's local-area file, we estimate a fall from 22.2% to 21.7%, or 0.5 points. On 2.90.2, we estimate a fall from 23.1% to 22.9%, or 0.2 points.
+**Why does Build's report show a 2.3% decrease in child poverty?** Build reports the fall as a share of the starting rate. When we run 2.2.1 on slide 9's local-area file, we estimate a fall from 22.2% to 21.7%: 0.5 points, or 2.3% of 22.2%.
 
 **Why does Build's report show 45.7% gaining and slide 9 show 29.4%?** Build's 45.7% counts people, and slide 9's 29.4% counts households. When we run 2.2.1 on slide 9's local-area file, we estimate that 34.1% of households would gain.
 
-**Does a late report cost a Georgia household the whole deduction?** No. Georgia says in section 3612 that a household loses the deduction if it fails to report earned income on time, and we encoded that sentence as losing all of it. In section 3650, Georgia denies the deduction only for the income reported late, when it computes an overpayment, and USDA does the same in its claims rule at 7 CFR 273.18. We haven't encoded section 3650.
+**Does a late report cost a Georgia household the whole deduction?** No. Georgia says in section 3612 that a household loses the deduction if it fails to report earned income on time, and Axiom encoded that sentence as losing all of it. In section 3650, Georgia denies the deduction only for the income the household reported late, when it computes an overpayment. Congress limits the denial to computing an overpayment, in 7 U.S.C. 2014(e)(2)(C), and USDA limits it to the income the household reported late, in 7 CFR 273.18. Axiom hasn't encoded section 3650.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 
