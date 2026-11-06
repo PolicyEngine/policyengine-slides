@@ -203,6 +203,19 @@ describe("SlideshowViewer mounting", () => {
     expect(mounted()).toEqual([["3", "none"], ["4", "block"]]);
     expect(container.querySelector("[data-slide='3']")).toBe(neighbor);
   });
+
+  it("keeps each slide's instance while it or its neighbor steps through builds", async () => {
+    const built = { ...config, slides: [{ component: numbered(0), builds: 2 }, numbered(1)] };
+    await renderAt("/slides/demo", built);
+    expect(mounted()).toEqual([["0", "block"], ["1", "none"]]);
+    const first = container.querySelector("[data-slide='0']");
+    const second = container.querySelector("[data-slide='1']");
+    for (const key of ["ArrowRight", "ArrowRight", "ArrowLeft", "ArrowLeft"]) {
+      await press(key);
+      expect(container.querySelector("[data-slide='0']")).toBe(first);
+      expect(container.querySelector("[data-slide='1']")).toBe(second);
+    }
+  });
 });
 
 describe("SlideshowViewer exportBuilds", () => {

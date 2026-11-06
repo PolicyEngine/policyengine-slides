@@ -343,5 +343,26 @@ describe('links', () => {
       await click(main.querySelector('.slide-active h1')!);
       expect(main.dataset.currentStep).toBe('2');
     });
+
+    it("keeps slide 12's frame through every move that leaves the slide shown or a neighbor, and drops it two slides away", async () => {
+      const press = (key: string) =>
+        act(async () => {
+          window.dispatchEvent(new KeyboardEvent('keydown', { key }));
+        });
+      const frame = () => container.querySelector("iframe[title*='coverage tracker']");
+      window.history.replaceState(null, '', '/slides/appam-2026?slide=13');
+      await act(async () => {
+        root.render(<SlideshowViewer config={appam2026Config} />);
+      });
+      const shown = frame();
+      expect(shown).not.toBeNull();
+      // Back through both of slide 11's builds, then on to slide 13 and back.
+      for (const key of ['ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'ArrowRight', 'ArrowLeft']) {
+        await press(key);
+        expect(frame()).toBe(shown);
+      }
+      for (const key of ['ArrowLeft', 'ArrowLeft', 'ArrowLeft']) await press(key);
+      expect(frame()).toBeNull();
+    });
   });
 });
