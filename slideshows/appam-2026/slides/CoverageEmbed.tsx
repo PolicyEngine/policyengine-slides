@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from '@/components/core/BasePathImage';
 import { isExportMode } from '@/lib/slide-url';
 
-export const TRACKER_URL = 'https://www.policyengine.org/us/model/rules/coverage';
+const TRACKER_URL = 'https://www.policyengine.org/us/model/rules/coverage';
 
 const STILL = { width: 2343, height: 721 };
 /** The frame lays the tracker out at the width of the still's capture. */
@@ -70,10 +70,10 @@ export function forwardKey(event: KeyboardEvent) {
 /**
  * The tracker, live on the slide, over a still of the same crop. The still
  * shows until the tracker prints the still's snapshot and its count cards come
- * to rest, and it stays if they never do. It stays for good on a branch preview,
- * where a cross-origin frame's document reads as null. Clicks and scrolling go
- * to the tracker, and arrow keys still drive the deck after a click in the
- * frame, unless the click lands in a text field.
+ * to rest, and it stays if they never do. On any host but www.policyengine.org,
+ * a cross-origin frame's document reads as null, so the still stays for good.
+ * Clicks and scrolling go to the tracker, and arrow keys still drive the deck
+ * after a click in the frame, unless the click lands in a text field.
  */
 export default function CoverageEmbed({ alt }: { alt: string }) {
   const box = useRef<HTMLDivElement>(null);
@@ -113,7 +113,7 @@ export default function CoverageEmbed({ alt }: { alt: string }) {
         setReady(false);
       });
     } catch {
-      // A cross-origin frame, on a branch preview.
+      // A cross-origin frame, on any host but www.policyengine.org.
     }
   };
 

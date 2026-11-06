@@ -96,7 +96,7 @@ In Build, you can open the same Massachusetts credit, set it to $880, pick Massa
 
 We model federal income and payroll taxes and credits and every state income tax, in 44 jurisdictions. We model TANF and child care subsidies in all 50 states and DC, plus SNAP, WIC, SSI, school meals, ACA premium tax credits, Medicaid and CHIP eligibility and local taxes such as Philadelphia's wage tax. Our coverage tracker lists 109 programs and marks 87 complete, 18 partial and 4 in progress.
 
-*Once the tracker loads, you can click and scroll in the frame, and the left and right arrow keys still move the deck. After you click in its search box, they move the box's cursor until you click elsewhere in the frame. If you pick a year in its menu, the tracker counts only the programs we mark verified for that year.*
+*Once the tracker loads, you can click and scroll in the frame, and the left and right arrow keys still move the deck. After you click in its search box, they move the box's cursor until you click elsewhere in the frame. If you pick a year in its menu, the four counts change, because the tracker counts only the programs we mark verified for that year.*
 
 ## 13. We build Microcosm, our microdata, from surveys and official totals (9:50, 50 seconds)
 
