@@ -192,8 +192,10 @@ describe("SlideshowViewer mounting", () => {
   it("keeps each neighbor mounted and hidden, and unmounts a slide two or more away", async () => {
     await renderAt("/slides/demo?slide=2", deck);
     expect(mounted()).toEqual([["1", "none"], ["2", "block"], ["3", "none"]]);
+    const neighbor = container.querySelector("[data-slide='3']");
     await press("End");
     expect(mounted()).toEqual([["3", "none"], ["4", "block"]]);
+    expect(container.querySelector("[data-slide='3']")).toBe(neighbor);
   });
 });
 
