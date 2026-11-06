@@ -89,6 +89,10 @@ const stubPage = (innerText: string, status = 'loaded', html = cards()) => {
 describe('the check that shows the frame over the still', () => {
   const TEXTS = {
     'the still’s snapshot': { text: SNAPSHOT, matches: true },
+    'the same commit, fetched later': {
+      text: 'Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-11-01). 109 Total programs',
+      matches: true,
+    },
     'the fallback counts': { text: FALLBACK, matches: false },
     'another release': { text: 'Coverage reflects policyengine-us 2.95.0 (main @ abc1234). 120 Total programs', matches: false },
     'another commit of the same release': {

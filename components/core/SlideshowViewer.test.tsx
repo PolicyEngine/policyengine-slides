@@ -177,6 +177,26 @@ describe("SlideshowViewer clicker keys", () => {
   });
 });
 
+describe("SlideshowViewer mounting", () => {
+  const numbered = (n: number) =>
+    function NumberedSlide() {
+      return <p data-slide={n} />;
+    };
+  const deck = { ...config, slides: [0, 1, 2, 3, 4].map(numbered) };
+  const mounted = () =>
+    [...container.querySelectorAll<HTMLElement>("[data-slide]")].map((slide) => [
+      slide.dataset.slide,
+      slide.parentElement?.style.display,
+    ]);
+
+  it("keeps each neighbor mounted and hidden, and unmounts a slide two or more away", async () => {
+    await renderAt("/slides/demo?slide=2", deck);
+    expect(mounted()).toEqual([["1", "none"], ["2", "block"], ["3", "none"]]);
+    await press("End");
+    expect(mounted()).toEqual([["3", "none"], ["4", "block"]]);
+  });
+});
+
 describe("SlideshowViewer exportBuilds", () => {
   const seen: (number | undefined)[] = [];
   const Probe = ({ buildStep }: { buildStep?: number }) => {
