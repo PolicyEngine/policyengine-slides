@@ -177,6 +177,47 @@ describe("SlideshowViewer clicker keys", () => {
   });
 });
 
+describe("SlideshowViewer mounting", () => {
+  const numbered = (n: number) =>
+    function NumberedSlide() {
+      return <p data-slide={n} />;
+    };
+  const deck = { ...config, slides: [0, 1, 2, 3, 4].map(numbered) };
+  const mounted = () =>
+    [...container.querySelectorAll<HTMLElement>("[data-slide]")].map((slide) => [
+      slide.dataset.slide,
+      slide.parentElement?.style.display,
+    ]);
+
+  it("keeps each neighbor mounted and hidden across moves, and unmounts a slide two or more away", async () => {
+    await renderAt("/slides/demo?slide=2", deck);
+    expect(mounted()).toEqual([["1", "none"], ["2", "block"], ["3", "none"]]);
+    // The same node means React kept the slide's instance, so its state survives the move.
+    const shown = container.querySelector("[data-slide='2']");
+    await press("ArrowRight");
+    expect(container.querySelector("[data-slide='2']")).toBe(shown);
+    await press("ArrowLeft");
+    expect(container.querySelector("[data-slide='2']")).toBe(shown);
+    const neighbor = container.querySelector("[data-slide='3']");
+    await press("End");
+    expect(mounted()).toEqual([["3", "none"], ["4", "block"]]);
+    expect(container.querySelector("[data-slide='3']")).toBe(neighbor);
+  });
+
+  it("keeps each slide's instance while it or its neighbor steps through builds", async () => {
+    const built = { ...config, slides: [{ component: numbered(0), builds: 2 }, numbered(1)] };
+    await renderAt("/slides/demo", built);
+    expect(mounted()).toEqual([["0", "block"], ["1", "none"]]);
+    const first = container.querySelector("[data-slide='0']");
+    const second = container.querySelector("[data-slide='1']");
+    for (const key of ["ArrowRight", "ArrowRight", "ArrowLeft", "ArrowLeft"]) {
+      await press(key);
+      expect(container.querySelector("[data-slide='0']")).toBe(first);
+      expect(container.querySelector("[data-slide='1']")).toBe(second);
+    }
+  });
+});
+
 describe("SlideshowViewer exportBuilds", () => {
   const seen: (number | undefined)[] = [];
   const Probe = ({ buildStep }: { buildStep?: number }) => {

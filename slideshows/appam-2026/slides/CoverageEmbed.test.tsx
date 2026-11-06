@@ -1,7 +1,7 @@
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import CoverageEmbed, { TRACKER_URL, forwardKey, trackerAgrees } from './CoverageEmbed';
+import CoverageEmbed, { forwardKey, trackerAgrees } from './CoverageEmbed';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -26,7 +26,9 @@ describe('the coverage tracker on the rules slide', () => {
   it('loads the live tracker over its still', async () => {
     window.history.replaceState(null, '', '/slides/appam-2026?slide=13');
     await renderEmbed();
-    expect(container.querySelector('iframe')?.getAttribute('src')).toBe(TRACKER_URL);
+    expect(container.querySelector('iframe')?.getAttribute('src')).toBe(
+      'https://www.policyengine.org/us/model/rules/coverage',
+    );
     expect(container.querySelector('img')?.getAttribute('alt')).toBe('The tracker');
   });
 
@@ -51,9 +53,12 @@ const FALLBACK = 'Coverage reflects the bundled fallback registry. 64 Total prog
 const card = (label: string, style = '') => `<div ${style}><p>${label}</p></div>`;
 /** The legend after the tracker's cards, which repeats three of their labels and never fades. */
 const LEGEND = ['Complete', 'Partial', 'In progress', 'Not started'].map((label) => `<span>${label}</span>`).join('');
+const COUNT_LABELS = ['Total programs', 'Complete', 'Partial', 'In progress'];
+/** The tracker's four cards and its legend, with the given attributes on one card. */
+const cardsWith = (styled: string, style: string) =>
+  [...COUNT_LABELS.map((label) => card(label, label === styled ? style : '')), LEGEND].join('');
 /** The tracker's four cards and its legend, with the given attributes on the last card. */
-const cards = (lastStyle = '') =>
-  [card('Total programs'), card('Complete'), card('Partial'), card('In progress', lastStyle), LEGEND].join('');
+const cards = (lastStyle = '') => cardsWith('In progress', lastStyle);
 const CARD_STATES = {
   'at rest': { html: cards(), rests: true },
   'at rest under an identity matrix': { html: cards('data-transform="matrix(1, 0, 0, 1, 0, 0)"'), rests: true },
@@ -84,6 +89,10 @@ const stubPage = (innerText: string, status = 'loaded', html = cards()) => {
 describe('the check that shows the frame over the still', () => {
   const TEXTS = {
     'the still’s snapshot': { text: SNAPSHOT, matches: true },
+    'the same commit, fetched later': {
+      text: 'Coverage reflects policyengine-us 2.72.3 (main @ 4c65c82, fetched 2026-11-01). 109 Total programs',
+      matches: true,
+    },
     'the fallback counts': { text: FALLBACK, matches: false },
     'another release': { text: 'Coverage reflects policyengine-us 2.95.0 (main @ abc1234). 120 Total programs', matches: false },
     'another commit of the same release': {
@@ -100,6 +109,14 @@ describe('the check that shows the frame over the still', () => {
           const expected = matches && status === 'loaded' && rests;
           expect(trackerAgrees(stubPage(text, status, html)), `${textName}, ${status}, ${cardName}`).toBe(expected);
         }
+      }
+    }
+  });
+
+  it('holds the still while any one of the four cards fades in or grows', () => {
+    for (const label of COUNT_LABELS) {
+      for (const style of ['data-opacity="0"', 'data-transform="matrix(0.9, 0, 0, 0.9, 0, 0)"']) {
+        expect(trackerAgrees(stubPage(SNAPSHOT, 'loaded', cardsWith(label, style))), `${label}, ${style}`).toBe(false);
       }
     }
   });
@@ -281,7 +298,7 @@ describe('when the frame shows', () => {
     expect(hidden(frame)).toBe(true);
   });
 
-  it('keeps showing the frame when the slide leaves and comes back', async () => {
+  it('keeps showing the frame when the deck moves to a neighboring slide and back', async () => {
     const frame = await mount(stubPage(SNAPSHOT));
     await show(1171.5);
     await load(frame);
@@ -289,6 +306,34 @@ describe('when the frame shows', () => {
     await show(0);
     expect(frame.style.opacity).toBe('0');
     await show(1171.5);
+    expect(shown(frame)).toBe(true);
+  });
+
+  it('starts again from the still when the deck unmounts the slide and returns', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await show(1171.5);
+    await load(frame);
+    await poll();
+    expect(shown(frame)).toBe(true);
+    await act(async () => root.unmount());
+    root = createRoot(container);
+    const returned = await mount(stubPage(SNAPSHOT));
+    await show(1171.5);
+    expect(hidden(returned)).toBe(true);
+    await poll();
+    expect(hidden(returned)).toBe(true);
+  });
+
+  it('stops reading the frame’s page once the frame shows', async () => {
+    const frame = await mount(stubPage(SNAPSHOT));
+    await show(1171.5);
+    await load(frame);
+    await poll();
+    expect(shown(frame)).toBe(true);
+    const read = vi.fn(() => stubPage(FALLBACK));
+    Object.defineProperty(frame, 'contentDocument', { get: read, configurable: true });
+    await poll();
+    expect(read).not.toHaveBeenCalled();
     expect(shown(frame)).toBe(true);
   });
 });
