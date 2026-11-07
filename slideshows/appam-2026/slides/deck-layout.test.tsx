@@ -36,20 +36,29 @@ function declared(container: Container, selector: string, property: string) {
   return value;
 }
 
-// Evaluates the only media conditions this file may use, in whole numbers, as a browser compares ratios.
-function matches(query: string, width: number, height: number) {
-  return query.split(',').some((alternative) =>
-    alternative.split(' and ').every((condition) => {
+// Parses the only media conditions this file may use, once, and returns a check that evaluates them
+// in whole numbers, as a browser compares ratios.
+function compile(query: string) {
+  const alternatives = query.split(',').map((alternative) =>
+    alternative.split(' and ').map((condition) => {
       const parsed = condition.trim().match(/^\((min|max)-(width|height|aspect-ratio): (\d+)(?:px|\/(\d+))\)$/);
       if (!parsed) throw new Error(`Unexpected media condition: ${condition.trim()}`);
       const [, side, feature, first, second] = parsed;
-      const [actual, limit] =
-        feature === 'aspect-ratio'
-          ? [width * Number(second), height * Number(first)]
-          : [feature === 'width' ? width : height, Number(first)];
-      return side === 'min' ? actual >= limit : actual <= limit;
+      return { side, feature, first: Number(first), second: Number(second) };
     }),
   );
+  return (width: number, height: number) =>
+    alternatives.some((conditions) =>
+      conditions.every(({ side, feature, first, second }) => {
+        const [actual, limit] =
+          feature === 'aspect-ratio' ? [width * second, height * first] : [feature === 'width' ? width : height, first];
+        return side === 'min' ? actual >= limit : actual <= limit;
+      }),
+    );
+}
+
+function matches(query: string, width: number, height: number) {
+  return compile(query)(width, height);
 }
 
 describe('deck.module.css', () => {
@@ -107,13 +116,16 @@ describe('deck.module.css', () => {
   });
 
   it('never mixes the small-screen block with another, and leaves only wide screens uncapped', () => {
+    const [inSmall, inCapped, inShort, inWide] = [smallScreens, widthCaps, shortWindows, wideWindows].map((block) =>
+      compile(block.params),
+    );
     const both: string[] = [];
     const uncovered: string[] = [];
     for (let width = 200; width <= 2800; width += 3) {
       for (let height = 200; height <= 2000; height += 3) {
-        const small = matches(smallScreens.params, width, height);
-        const capped = matches(widthCaps.params, width, height);
-        const others = [widthCaps, shortWindows, wideWindows].some((block) => matches(block.params, width, height));
+        const small = inSmall(width, height);
+        const capped = inCapped(width, height);
+        const others = capped || inShort(width, height) || inWide(width, height);
         if (small && others) both.push(`${width}x${height}`);
         // A sliver within 0.1% of square falls between the blocks, so it needs a window over 1000 px on each side.
         const sliver = width > height && width * 1000 < height * 1001;
