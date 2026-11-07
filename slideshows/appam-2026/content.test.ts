@@ -52,6 +52,8 @@ const census = JSON.parse(read('data/census_child_spm.json'));
 const reformRun = JSON.parse(read('data/massachusetts_reform.json'));
 const defaultReform = JSON.parse(read('data/massachusetts_reform_default.json'));
 const pinnedReform = JSON.parse(read('data/massachusetts_reform_221.json'));
+const nationalReform = JSON.parse(read('data/massachusetts_reform_221_national.json'));
+const buildReport = JSON.parse(JSON.parse(read('data/build_report_4940.json')).result.output);
 const precision = JSON.parse(read('data/massachusetts_precision.json'));
 const defaultBaseline = JSON.parse(read('data/state_baseline_default.json'));
 const localBaseline = JSON.parse(read('data/state_baseline.json'));
@@ -983,6 +985,83 @@ describe('typed figures', () => {
     ]) {
       expect(ledger).toContain(figure);
     }
+  });
+
+  describe('on Build’s report', () => {
+    const hundredths = (share: number) => `${(share * 100).toFixed(2)}%`;
+    const tenths = (value: number) => `$${(value / 1_000_000).toFixed(1)} million`;
+    const relativeFall = (before: number, after: number) => `${(100 * (1 - after / before)).toFixed(1)}%`;
+    // A float32 number from 2^n up to 2^(n+1) moves in steps of 2^(n-23).
+    const float32Step = (value: number) => 2 ** (Math.floor(Math.log2(Math.abs(value))) - 23);
+    const gaining = (row: Record<string, number>) => row['Gain less than 5%'] + row['Gain more than 5%'];
+    const record = JSON.parse(read('data/build_report_4940.json')).result;
+    const { budget, intra_decile: gains } = buildReport;
+    const buildChild = buildReport.poverty.poverty.child;
+    const buildGaining = gaining(gains.all);
+
+    it('match the report as the ledger describes it', () => {
+      expect(ledger).toContain(
+        `$${(-budget.state_tax_revenue_impact / 1_000_000).toFixed(1)}m annual state revenue loss, ${percent(buildGaining)} of people gaining income and a ${relativeFall(buildChild.baseline, buildChild.reform)} relative decrease in child poverty, on PolicyEngine US ${buildReport.model_version} and \`policyengine\` ${buildReport.policyengine_version}`,
+      );
+    });
+
+    it('match the record and our two 2.2.1 runs in the evidence ledger', () => {
+      const step = float32Step(pinnedReform.household_gain);
+      for (const figure of [
+        `names the national file, \`${buildReport.dataset.split('/').pop()}\``,
+        `Its report spec reads \`"dataset": "${record.report_spec_json.dataset}"\` and \`"region": "${record.report_spec_json.region}"\`, with the status \`${record.report_spec_status}\``,
+        `${usd(-budget.state_tax_revenue_impact)} state revenue loss`,
+        `falling from ${hundredths(buildChild.baseline)} to ${hundredths(buildChild.reform)}`,
+        `$${(pinnedReform.state_cost / 1_000_000).toFixed(2)} million loss and a fall from ${hundredths(pinnedReform.baseline_child_poverty)} to ${hundredths(pinnedReform.reformed_child_poverty)}`,
+        `We sum that run in float32, which steps by ${usd(step)} at that size, and its household gain, ${usd(pinnedReform.household_gain)}, lands within one step of the record's ${usd(-budget.budgetary_impact)} budgetary impact`,
+        `On the national file at ${nationalReform.policyengine_us_version}, we estimate a ${tenths(nationalReform.state_cost)} loss and a fall of ${(100 * (nationalReform.baseline_child_poverty - nationalReform.reformed_child_poverty)).toFixed(7)} points in the child poverty rate, from ${percent(nationalReform.baseline_child_poverty)}`,
+        `record's ${hundredths(buildGaining)} equals the simple mean`,
+        `${percent(nationalReform.people_gaining_share_over_1_dollar)} of all people gain more than $1`,
+        `${percent(nationalReform.people_gaining_share_over_0_1_percent)} gain more than 0.1%`,
+      ]) {
+        expect(ledger).toContain(figure);
+      }
+      expect(Math.fround(pinnedReform.household_gain)).toBe(pinnedReform.household_gain);
+      expect(Math.abs(pinnedReform.household_gain + budget.budgetary_impact)).toBeLessThan(step);
+      // The national run reads the file the record names, at the record's release.
+      expect(nationalReform.dataset.split('/').pop()).toBe(buildReport.dataset.split('/').pop());
+      expect(nationalReform.policyengine_us_version).toBe(buildReport.model_version);
+      // The ledger quotes the report's share of people gaining in two places.
+      expect(ledger.split(`${percent(buildGaining)} of people gaining`).length - 1).toBe(2);
+    });
+
+    it('state the thresholds the national run applies', () => {
+      const script = read('analysis/massachusetts_reform_national.py');
+      expect(script).toContain('np.sum((weights * heads)[gains > 1])');
+      expect(script).toContain('np.sum((weights * heads)[relative > 0.001])');
+    });
+
+    it('find the record’s overall share in the simple mean of its ten decile shares', () => {
+      const deciles = [gains.deciles['Gain less than 5%'], gains.deciles['Gain more than 5%']];
+      expect(deciles.map((shares) => shares.length)).toEqual([10, 10]);
+      const mean = deciles.flat().reduce((total: number, share: number) => total + share, 0) / 10;
+      expect(mean).toBeCloseTo(buildGaining, 12);
+    });
+
+    it('match the record and our runs in the speaker notes', () => {
+      const before = pinnedReform.baseline_child_poverty;
+      const after = pinnedReform.reformed_child_poverty;
+      const minutes = Math.round((Date.parse(record.finished_at) - Date.parse(record.requested_at)) / 60_000);
+      for (const figure of [
+        `Our report took about ${['one', 'two', 'three', 'four', 'five'][minutes - 1]} minutes to run`,
+        `reports a ${millions(-budget.state_tax_revenue_impact)} cost`,
+        `Build's report show ${tenths(-budget.state_tax_revenue_impact)} and slide 9 show ${millions(massachusetts.cost)}`,
+        `we also estimate ${tenths(pinnedReform.state_cost)}`,
+        `${relativeFall(buildChild.baseline, buildChild.reform)} decrease in child poverty`,
+        `we estimate a fall from ${percent(before)} to ${percent(after)}: ${(100 * (before - after)).toFixed(1)} points, or ${relativeFall(before, after)} of ${percent(before)}`,
+        `Build counts people in its ${percent(buildGaining)}, and we counted households in slide 9's ${percent(reformRun.households_gaining_share)}`,
+        `we estimate that ${percent(pinnedReform.households_gaining_share)} of households would gain`,
+      ]) {
+        expect(notes).toContain(figure);
+      }
+      // The notes answer Build's relative fall with ours, so the two have to agree.
+      expect(relativeFall(before, after)).toBe(relativeFall(buildChild.baseline, buildChild.reform));
+    });
   });
 
   it('rank the size of Massachusetts’s gap from Census where the ledger says', () => {
