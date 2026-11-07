@@ -1014,7 +1014,7 @@ describe('typed figures', () => {
         `falling from ${hundredths(buildChild.baseline)} to ${hundredths(buildChild.reform)}`,
         `$${(pinnedReform.state_cost / 1_000_000).toFixed(2)} million loss and a fall from ${hundredths(pinnedReform.baseline_child_poverty)} to ${hundredths(pinnedReform.reformed_child_poverty)}`,
         `We sum that run in float32, which steps by ${usd(step)} at that size, and its household gain, ${usd(pinnedReform.household_gain)}, lands within one step of the record's ${usd(-budget.budgetary_impact)} budgetary impact`,
-        `On the national file at ${nationalReform.policyengine_us_version}, we estimate a ${tenths(nationalReform.state_cost)} loss and a fall of ${(100 * (nationalReform.baseline_child_poverty - nationalReform.reformed_child_poverty)).toFixed(6)} points in the child poverty rate, from ${percent(nationalReform.baseline_child_poverty)}`,
+        `On the national file at ${nationalReform.policyengine_us_version}, we estimate a ${tenths(nationalReform.state_cost)} loss and a fall of ${(100 * (nationalReform.baseline_child_poverty - nationalReform.reformed_child_poverty)).toFixed(7)} points in the child poverty rate, from ${percent(nationalReform.baseline_child_poverty)}`,
         `record's ${hundredths(buildGaining)} equals the simple mean`,
         `${percent(nationalReform.people_gaining_share_over_1_dollar)} of all people gain more than $1`,
         `${percent(nationalReform.people_gaining_share_over_0_1_percent)} gain more than 0.1%`,
