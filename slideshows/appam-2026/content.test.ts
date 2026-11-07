@@ -1008,12 +1008,13 @@ describe('typed figures', () => {
     it('match the record and our two 2.2.1 runs in the evidence ledger', () => {
       const step = float32Step(pinnedReform.household_gain);
       for (const figure of [
+        `names the national file, \`${buildReport.dataset.split('/').pop()}\``,
         `Its report spec reads \`"dataset": "${record.report_spec_json.dataset}"\` and \`"region": "${record.report_spec_json.region}"\`, with the status \`${record.report_spec_status}\``,
         `${usd(-budget.state_tax_revenue_impact)} state revenue loss`,
         `falling from ${hundredths(buildChild.baseline)} to ${hundredths(buildChild.reform)}`,
         `$${(pinnedReform.state_cost / 1_000_000).toFixed(2)} million loss and a fall from ${hundredths(pinnedReform.baseline_child_poverty)} to ${hundredths(pinnedReform.reformed_child_poverty)}`,
         `We sum that run in float32, which steps by ${usd(step)} at that size, and its household gain, ${usd(pinnedReform.household_gain)}, lands within one step of the record's ${usd(-budget.budgetary_impact)} budgetary impact`,
-        `${tenths(nationalReform.state_cost)} loss and no change in the child poverty rate, at ${percent(nationalReform.baseline_child_poverty)}`,
+        `On the national file at ${nationalReform.policyengine_us_version}, we estimate a ${tenths(nationalReform.state_cost)} loss and a fall of ${(100 * (nationalReform.baseline_child_poverty - nationalReform.reformed_child_poverty)).toFixed(6)} points in the child poverty rate, from ${percent(nationalReform.baseline_child_poverty)}`,
         `record's ${hundredths(buildGaining)} equals the simple mean`,
         `${percent(nationalReform.people_gaining_share_over_1_dollar)} of all people gain more than $1`,
         `${percent(nationalReform.people_gaining_share_over_0_1_percent)} gain more than 0.1%`,
@@ -1022,7 +1023,11 @@ describe('typed figures', () => {
       }
       expect(Math.fround(pinnedReform.household_gain)).toBe(pinnedReform.household_gain);
       expect(Math.abs(pinnedReform.household_gain + budget.budgetary_impact)).toBeLessThan(step);
-      expect(percent(nationalReform.reformed_child_poverty)).toBe(percent(nationalReform.baseline_child_poverty));
+      // The national run reads the file the record names, at the record's release.
+      expect(nationalReform.dataset.split('/').pop()).toBe(buildReport.dataset.split('/').pop());
+      expect(nationalReform.policyengine_us_version).toBe(buildReport.model_version);
+      // The ledger quotes the report's share of people gaining in two places.
+      expect(ledger.split(`${percent(buildGaining)} of people gaining`).length - 1).toBe(2);
     });
 
     it('state the thresholds the national run applies', () => {
@@ -1041,13 +1046,15 @@ describe('typed figures', () => {
     it('match the record and our runs in the speaker notes', () => {
       const before = pinnedReform.baseline_child_poverty;
       const after = pinnedReform.reformed_child_poverty;
+      const minutes = Math.round((Date.parse(record.finished_at) - Date.parse(record.requested_at)) / 60_000);
       for (const figure of [
+        `Our report took about ${['one', 'two', 'three', 'four', 'five'][minutes - 1]} minutes to run`,
         `reports a ${millions(-budget.state_tax_revenue_impact)} cost`,
         `Build's report show ${tenths(-budget.state_tax_revenue_impact)} and slide 9 show ${millions(massachusetts.cost)}`,
         `we also estimate ${tenths(pinnedReform.state_cost)}`,
         `${relativeFall(buildChild.baseline, buildChild.reform)} decrease in child poverty`,
         `we estimate a fall from ${percent(before)} to ${percent(after)}: ${(100 * (before - after)).toFixed(1)} points, or ${relativeFall(before, after)} of ${percent(before)}`,
-        `Build's ${percent(buildGaining)} counts people, and slide 9's ${percent(reformRun.households_gaining_share)} counts households`,
+        `Build counts people in its ${percent(buildGaining)}, and we counted households in slide 9's ${percent(reformRun.households_gaining_share)}`,
         `we estimate that ${percent(pinnedReform.households_gaining_share)} of households would gain`,
       ]) {
         expect(notes).toContain(figure);

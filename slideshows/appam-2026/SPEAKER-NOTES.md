@@ -189,9 +189,9 @@ We test a new applicant in every month, so Alabama's five months don't describe 
 
 **Why does Build's report show a 2.3% decrease in child poverty?** Build reports the fall as a share of the starting rate. When we run 2.2.1 on slide 9's local-area file, we estimate a fall from 22.2% to 21.7%: 0.5 points, or 2.3% of 22.2%.
 
-**Why does Build's report show 45.7% gaining and slide 9 show 29.4%?** Build's 45.7% counts people, and slide 9's 29.4% counts households. When we run 2.2.1 on slide 9's local-area file, we estimate that 34.1% of households would gain.
+**Why does Build's report show 45.7% gaining and slide 9 show 29.4%?** Build counts people in its 45.7%, and we counted households in slide 9's 29.4%. When we run 2.2.1 on slide 9's local-area file, we estimate that 34.1% of households would gain.
 
-**Does a late report cost a Georgia household the whole deduction?** No. Georgia says in section 3612 that a household loses the deduction if it fails to report earned income on time, and Axiom encoded that sentence as losing all of it. In section 3650, Georgia denies the deduction only for the income the household reported late, when it computes an overpayment. Congress limits the denial to computing an overpayment, in 7 U.S.C. 2014(e)(2)(C), and USDA limits it to the income the household reported late, in 7 CFR 273.18. Axiom hasn't encoded section 3650.
+**If a Georgia household doesn't report earned income on time, does it lose the whole deduction?** No. Georgia says in section 3612 that a household loses the deduction if it fails to report earned income on time, and Axiom encoded that sentence as losing all of it. In section 3650, Georgia denies the deduction only for the income the household didn't report on time, when it computes an overpayment. Congress limits the denial to computing an overpayment, in 7 U.S.C. 2014(e)(2)(C), and USDA limits it to the income the household didn't report on time, in 7 CFR 273.18. Axiom hasn't encoded section 3650.
 
 **Why does CliffWatch's net income exceed slide 5's net resources?** CliffWatch counts Medicaid, CHIP and premium tax credits in net income, and we leave health coverage out of net resources. Slide 11's family also pays nothing for child care, and slide 5's family pays $1,500 a month before any subsidy.
 
