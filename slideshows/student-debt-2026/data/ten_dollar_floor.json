@@ -1,0 +1,65 @@
+[
+ {
+  "household": "Single filer, no children",
+  "legacy_plan": "IBR",
+  "agi_from": "0.0",
+  "agi_to": 24300.0,
+  "rap_payment_at_top_of_range": 40.5
+ },
+ {
+  "household": "Single filer, no children",
+  "legacy_plan": "IBR, new borrower",
+  "agi_from": "0.0",
+  "agi_to": 24500.0,
+  "rap_payment_at_top_of_range": 40.83
+ },
+ {
+  "household": "Single filer, no children",
+  "legacy_plan": "SAVE (if available)",
+  "agi_from": "0.0",
+  "agi_to": 37100.0,
+  "rap_payment_at_top_of_range": 92.75
+ },
+ {
+  "household": "Single parent, two children",
+  "legacy_plan": "IBR",
+  "agi_from": "0.0",
+  "agi_to": 41300.0,
+  "rap_payment_at_top_of_range": 37.67
+ },
+ {
+  "household": "Single parent, two children",
+  "legacy_plan": "IBR, new borrower",
+  "agi_from": "0.0",
+  "agi_to": 41500.0,
+  "rap_payment_at_top_of_range": 38.33
+ },
+ {
+  "household": "Single parent, two children",
+  "legacy_plan": "SAVE (if available)",
+  "agi_from": "0.0",
+  "agi_to": 62600.0,
+  "rap_payment_at_top_of_range": 213.0
+ },
+ {
+  "household": "Married couple filing jointly, two children, one borrower",
+  "legacy_plan": "IBR",
+  "agi_from": "0.0",
+  "agi_to": 49900.0,
+  "rap_payment_at_top_of_range": 66.33
+ },
+ {
+  "household": "Married couple filing jointly, two children, one borrower",
+  "legacy_plan": "IBR, new borrower",
+  "agi_from": "0.0",
+  "agi_to": 50000.0,
+  "rap_payment_at_top_of_range": 66.67
+ },
+ {
+  "household": "Married couple filing jointly, two children, one borrower",
+  "legacy_plan": "SAVE (if available)",
+  "agi_from": "0.0",
+  "agi_to": 75400.0,
+  "rap_payment_at_top_of_range": 339.83
+ }
+]

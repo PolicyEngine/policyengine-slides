@@ -1,0 +1,72 @@
+[
+ {
+  "boundary": 10000.0,
+  "monthly_payment_at_boundary": 10.0,
+  "monthly_payment_one_dollar_above": 10.0,
+  "monthly_jump": 0.0,
+  "annual_jump": 0.0
+ },
+ {
+  "boundary": 20000.0,
+  "monthly_payment_at_boundary": 16.67,
+  "monthly_payment_one_dollar_above": 33.33,
+  "monthly_jump": 16.67,
+  "annual_jump": 200.02
+ },
+ {
+  "boundary": 30000.0,
+  "monthly_payment_at_boundary": 50.0,
+  "monthly_payment_one_dollar_above": 75.0,
+  "monthly_jump": 25.0,
+  "annual_jump": 300.03
+ },
+ {
+  "boundary": 40000.0,
+  "monthly_payment_at_boundary": 100.0,
+  "monthly_payment_one_dollar_above": 133.34,
+  "monthly_jump": 33.34,
+  "annual_jump": 400.04
+ },
+ {
+  "boundary": 50000.0,
+  "monthly_payment_at_boundary": 166.67,
+  "monthly_payment_one_dollar_above": 208.34,
+  "monthly_jump": 41.67,
+  "annual_jump": 500.05
+ },
+ {
+  "boundary": 60000.0,
+  "monthly_payment_at_boundary": 250.0,
+  "monthly_payment_one_dollar_above": 300.01,
+  "monthly_jump": 50.01,
+  "annual_jump": 600.06
+ },
+ {
+  "boundary": 70000.0,
+  "monthly_payment_at_boundary": 350.0,
+  "monthly_payment_one_dollar_above": 408.34,
+  "monthly_jump": 58.34,
+  "annual_jump": 700.07
+ },
+ {
+  "boundary": 80000.0,
+  "monthly_payment_at_boundary": 466.67,
+  "monthly_payment_one_dollar_above": 533.34,
+  "monthly_jump": 66.67,
+  "annual_jump": 800.08
+ },
+ {
+  "boundary": 90000.0,
+  "monthly_payment_at_boundary": 600.0,
+  "monthly_payment_one_dollar_above": 675.01,
+  "monthly_jump": 75.01,
+  "annual_jump": 900.09
+ },
+ {
+  "boundary": 100000.0,
+  "monthly_payment_at_boundary": 750.0,
+  "monthly_payment_one_dollar_above": 833.34,
+  "monthly_jump": 83.34,
+  "annual_jump": 1000.1
+ }
+]
