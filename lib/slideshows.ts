@@ -32,6 +32,7 @@ import { goodGrowthFoundation2026Config } from "@/slideshows/good-growth-foundat
 import { autumnBudget2026Config } from "@/slideshows/autumn-budget-2026/config";
 import { prop40Webinar2026Config } from "@/slideshows/prop40-webinar-2026/config";
 import { appam2026Config } from "@/slideshows/appam-2026/config";
+import { studentDebt2026Config } from "@/slideshows/student-debt-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
   appam2026Config,
@@ -67,6 +68,7 @@ export const slideshows: SlideshowConfig[] = [
   riCtcWebinarConfig,
   modelScopeConfig,
   georgetown2026Config,
+  studentDebt2026Config,
 ];
 
 export function getSlideshowById(id: string): SlideshowConfig | undefined {
