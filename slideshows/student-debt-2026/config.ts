@@ -20,6 +20,12 @@ import EndSlide from './slides/EndSlide';
  * chart reads outputs of the pilot's prelim/2026-10-07 scripts (household_charts.py rerun on
  * policyengine-us student-loan-ibr-save @ ec7214d2; scf_borrower_profile.py),
  * exported to ./data. Nothing in the deck computes a payment itself.
+ *
+ * One row differs from the scripts' output. data/ten_dollar_floor.json ends the
+ * married couple's IBR range at $49,800, with RAP $66.00 there (household_payments.csv:
+ * married, 49800.0, RAP, 66.0). Floating-point rounding left the run's IBR payment at
+ * $49,900 just under $5, where 34 CFR 685.209(g)(1)(iii)(B) sets $10, so the run put the
+ * range's end at $49,900. FloorSlide's footnote states the correction.
  */
 export const studentDebt2026Config: SlideshowConfig = {
   id: 'student-debt-2026',
