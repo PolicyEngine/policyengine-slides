@@ -45,8 +45,8 @@
   "household": "Married couple filing jointly, two children, one borrower",
   "legacy_plan": "IBR",
   "agi_from": "0.0",
-  "agi_to": 49900.0,
-  "rap_payment_at_top_of_range": 66.33
+  "agi_to": 49800.0,
+  "rap_payment_at_top_of_range": 66.0
  },
  {
   "household": "Married couple filing jointly, two children, one borrower",
