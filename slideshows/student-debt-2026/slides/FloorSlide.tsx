@@ -47,7 +47,7 @@ export default function FloorSlide() {
         ))}
       </div>
       <p className="mt-3 text-sm text-gray-500">Bars run from $0 to $80,000 of AGI.</p>
-      <ModelFootnote extra="Ranges are on a $100 grid of AGI. November 2 correction: for the married couple, IBR's $0 range ends at $49,800, not the $49,900 the October 7 version showed, because IBR charges $10 at $49,900." />
+      <ModelFootnote extra="We computed each range on a $100 grid of AGI. In our November 2 update, we corrected the end of the married couple's IBR range from $49,900 to $49,800, and their RAP payment there from $66.33 to $66.00. At $49,900 the couple owes $10 under IBR." />
     </Slide>
   );
 }
