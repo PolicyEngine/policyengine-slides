@@ -4,7 +4,7 @@ Local route: `/slides/bls-taxsim-2026`.
 
 36 slides, including 6 section dividers and a closing slide, with 60 minutes of presentation time (no slack) and a dedicated final slide for 30 minutes of Q&A.
 
-Agenda and presenters: introduction (Max Ghenis, 11 min); the TAXSIM emulator with versions and releases and the live demo (Pavel Makarchuk, 18 min); beyond TAXSIM (Pavel Makarchuk, 5 min); validation and the 2026 tax rules (David Trimmer, 12 min); benefit imputation (Max Ghenis, 6 min); what’s next: Axiom with a live walk-through, and a possible CE pilot (Max Ghenis, 8 min); Q&A (30 min). Speakers change only at section dividers. Thesia Garner’s question list (October 7) is answered in the notes of the slides that cover each question; the agenda slide’s notes map them.
+Agenda and presenters: introduction (Max Ghenis, 11 min); the TAXSIM emulator with versions and releases and the live demo (Pavel Makarchuk, 18 min); beyond TAXSIM (Pavel Makarchuk, 5 min); validation and the 2026 tax rules (David Trimmer, 12 min); benefit imputation (Max Ghenis, 6 min); what’s next: Axiom with a live walk-through, and a possible CE pilot (Max Ghenis, 8 min); Q&A (30 min). Speakers change only at section dividers. The notes answer the hosts’ questions on the slides that cover them, and the agenda slide’s notes map each question to its slide.
 
 - `content.ts`: slide copy, timing, sources, speaker notes, screenshots and live embeds.
 - `slides/index.tsx`: React rendering with the repository’s shared slide components. The cover uses the shared `CoverSlide` with speaker headshots.
