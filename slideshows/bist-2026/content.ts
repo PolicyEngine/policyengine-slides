@@ -15,7 +15,8 @@
 // config.ts and the part labels are "parts" below.
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
-// policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc,
+// policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc
+// (its figures are now those of its PR #46, head 778557c, read 16 November),
 // and firm-microsim-paper e6d5dd6. GOV.UK pages and the Microcosm
 // calibration dashboard were read the same day; the AI post on 16 November.
 //
@@ -27,13 +28,11 @@
 //   November), which is eight days newer than that build.
 
 import {
-  IconArrowsDiff,
   IconArrowsExchange,
   IconArrowsSplit,
   IconBasket,
   IconBolt,
   IconBriefcase,
-  IconBuildingBank,
   IconBuildingFactory2,
   IconBulb,
   IconCalendar,
@@ -104,11 +103,11 @@ export const sources = {
     href: "https://doi.org/10.21105/joss.11115",
   },
   trade: {
-    label: "Ahmadi (2026b), trade shocks",
+    label: "Ahmadi (2026b), trade study",
     href: "https://github.com/PolicyEngine/uk-trade-shock-study",
   },
   ai: {
-    label: "Ahmadi (2026a), AI shock",
+    label: "Ahmadi (2026a), AI study",
     href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7174479",
   },
   firm: {
@@ -289,8 +288,8 @@ export const sources = {
     href: "https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/calibration_accuracy.txt",
   },
   tradeFigure: {
-    label: "Working paper figure, commit 06c8bbc",
-    href: "https://github.com/PolicyEngine/uk-trade-shock-study/blob/06c8bbc/paper/figures/fig_incidence_profile.png",
+    label: "Working paper figure, PR #46, 778557c",
+    href: "https://github.com/PolicyEngine/uk-trade-shock-study/blob/778557c/paper/figures/fig_incidence_profile.png",
   },
   // The figure on the firm VAT slide, at the commit the deck reads.
   firmFigure: {
@@ -311,9 +310,19 @@ export const tags = {
   experimental: tag("Experimental", "caution"),
   proposed: tag("Proposal", "caution"),
   workingPaper: tag("Working paper", "caution"),
-  // The trade study's tariff stage uses the survey-weighted FRS 2024-25
-  // (uk-trade-shock-study 06c8bbc, paper/sections/results.tex).
-  frsNotMicrocosm: tag("Survey-weighted FRS 2024–25, not Microcosm UK", "muted"),
+  // The trade study's rerun (uk-trade-shock-study PR #46, 778557c, open, not
+  // merged; README and paper/sections/results.tex): every microsimulation
+  // runs on policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the
+  // certified Microcosm UK 2024-25 build; the tariff stage under 2026-27
+  // rules.
+  microcosm: tag("Microcosm UK", "built"),
+  // Doability markers on the ideas slides (see the verification notes in
+  // NOTES.md): what the existing code takes, what needs a mapping between
+  // another model's sectors and SIC or COICOP, and what needs a small change.
+  canToday: tag("Can take today", "built"),
+  mapping: tag("Needs a sector mapping", "muted"),
+  extension: tag("Small extension", "caution"),
+  toBuild: tag("Not built yet", "muted"),
 };
 
 // The seven parts of the talk: the label above each slide's title, the
@@ -321,39 +330,39 @@ export const tags = {
 // ideas: no link to a trade, macroeconomic or agent-based model is built, and
 // there are no published PolicyEngine results for the Economic Prosperity
 // Deal or BICS (trade study 06c8bbc reports none for the deal schedule;
-// PolicyEngine UK has no firm entity, see firmTools and abmQuestions below).
+// PolicyEngine UK has no firm entity, see coverage and abmQuestions below).
 export const parts = [
   { key: "intro", icon: IconFlag, title: "Introduction", text: "Who we are." },
   {
     key: "what",
     icon: IconScale,
     title: "What PolicyEngine is",
-    text: "Rules, household data and how a run works.",
+    text: "How a run works, the rules, the household data and its calibration.",
   },
   {
     key: "have",
     icon: IconStack2,
     title: "What we have already",
-    text: "The UK model's coverage, and what we hold on firms.",
+    text: "The taxes and benefits the UK model covers, and what is open.",
   },
   {
     key: "projects",
     icon: IconPresentationAnalytics,
     title: "Projects we have done",
-    text: "A Budget dashboard, an AI scenario, firm VAT and trade.",
+    text: "A Budget dashboard, an AI scenario, synthetic firms and trade.",
   },
   {
     key: "explore",
     icon: IconCompass,
     title: "What we could explore further",
-    text: "From a trade or macro model's results to households.",
+    text: "From a trade or macroeconomic model's results to households.",
     tag: tags.notBuilt,
   },
   {
     key: "ideas",
     icon: IconBulb,
     title: "Ideas that fit the unit",
-    text: "Business policy, agent-based models and a table interface.",
+    text: "Business policy, agent-based models and one way to link models.",
     tag: tags.notBuilt,
   },
   {
@@ -522,7 +531,11 @@ export const whoWeAre = {
 // variables/input/consumption/); it sets VAT and duties. Income after taxes
 // and benefits is the result. The "Input" and "Result" labels carry that
 // message, with the slide's subtitle.
-export const components = [
+// One flow for what the model is and how a run works (the former "computes
+// household incomes" and "how a reform or a scenario is run" slides, merged;
+// the run's own sources are in the comment above runStatus below). The step
+// labels keep the message that spending is an input and income the result.
+export const modelFlow = [
   {
     icon: IconScale,
     owner: "Open source",
@@ -533,12 +546,18 @@ export const components = [
     icon: IconUsers,
     owner: "Input",
     title: "The households",
-    text: "Microcosm UK 2024–\u206025: survey incomes and spending by category, with calibrated weights",
+    text: "Microcosm UK 2024–\u206025: incomes and spending by category, grown with OBR indices",
+  },
+  {
+    icon: IconCopy,
+    owner: "Two simulations",
+    title: "Run twice",
+    text: "Baseline and counterfactual: a reform changes parameters, a scenario changes inputs",
   },
   {
     icon: IconChartBar,
     owner: "Result",
-    title: "The results",
+    title: "The difference",
     text: "Income after taxes and benefits; poverty, inequality and Exchequer cost",
   },
 ];
@@ -568,7 +587,7 @@ export const coverage = [
       "Employer NI: changes passed to pay by default",
       "Business rates and corporate stamp duty: published totals, allocated to shareholders",
     ],
-    notModelled: "Corporation tax",
+    notModelled: "Corporation tax; firms as entities",
   },
   {
     icon: IconHeartHandshake,
@@ -604,10 +623,9 @@ export const tradeEvents = [
   { icon: IconShip, title: "The 2025 US tariffs", text: "An earnings change: the next slide" },
 ];
 
-export const tradeEnergy = {
-  offset: "about 60%",
-  range: "49–64% across variants",
-};
+// The earlier "about 60% (49-64%)" energy offset is dropped: it came from
+// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 778557c) reports a
+// different measure (see NOTES.md).
 
 // The Economic Prosperity Deal, end to end: from a trade or macroeconomic
 // model's results for the deal to household and fiscal results. Not built,
@@ -617,7 +635,7 @@ export const tradeEnergy = {
 //   supply-chain conditions). These facts are in NOTES.md, not on the slide;
 // - "Deal schedule in our study": uk-trade-shock-study 06c8bbc has a deal
 //   schedule and reports no results for it (see tariffBridge below);
-// - static, no general equilibrium: see runFlow below;
+// - static, no general equilibrium: see modelFlow and runStatus below;
 // - the feedback arrow is the macro-micro loop on the macro links slide,
 //   which is not built (see macroLinks below).
 // The standard GTAP model has one wage per labour type and its standard
@@ -629,14 +647,14 @@ export const epdTrace = {
       icon: IconWorld,
       owner: "Trade or macro model",
       title: "Results for the deal",
-      text: "Output, jobs, prices by sector; wages by labour type; closure stated",
+      text: "Jobs and prices by sector; wages by labour type; closure stated",
     },
     {
       icon: IconArrowsExchange,
       owner: "Agreed mapping",
       title: "Sector mapping",
       text: "Another model’s sectors or products to SIC and COICOP divisions",
-      tag: tags.notBuilt,
+      tag: tags.toBuild,
       dashed: true,
     },
     {
@@ -678,20 +696,26 @@ export const tariffDisaggregation = {
     {
       icon: IconBriefcase,
       result: "Earnings and jobs by sector",
+      from: "Agent-based model; jobs by sector from a CGE model",
       key: "Two-digit SIC division",
       assigned: "Employees in that sector; job losses drawn at random",
+      tag: tags.canToday,
     },
     {
       icon: IconUser,
       result: "Wages by labour type",
+      from: "CGE trade model",
       key: "Occupation group",
       assigned: "Employees in those occupations",
+      tag: tags.extension,
     },
     {
       icon: IconShoppingCart,
       result: "Prices",
+      from: "Trade and partial-equilibrium models",
       key: "COICOP spending division",
       assigned: "Households, by what they spend",
+      tag: tags.canToday,
     },
   ],
   breakdowns: [
@@ -706,8 +730,11 @@ export const tariffDisaggregation = {
 // The tariff bridge: shock = elasticity × tariff × US export share by SIC
 // division; cushion macros MsUSTariffWageCutCushionPct and
 // MsUSTariffDisplacementCushionPct (results/e3_constants.json:
-// wagecut_cushion_pct 43.7; displacement_cushion_pct 35.4,
-// displacement_cushion_sd_pct 5.1, over 100 assignment draws). Results are
+// gross_shock_gbp_m_per_year 1007.1; n_draws 20; wagecut_cushion_pct 41.8;
+// displacement_cushion_pct 32.1, displacement_cushion_sd_pct 3.3, over 20
+// displacement draws and 3 wage-cut draws), at uk-trade-shock-study PR #46,
+// head 778557c (open, not merged), run on Microcosm UK at 2026. These
+// replace the figures of 06c8bbc (43.7%, 35.4%, SD 5.1 over 100 draws). Results are
 // for the schedule before the Economic Prosperity Deal; the study reports
 // none for the deal schedule.
 export const tariffBridge = {
@@ -719,7 +746,7 @@ export const tariffBridge = {
     { icon: IconUsers, title: "Survey employees", text: "Assigned by sector" },
   ],
   replaceable: [1, 3] as [number, number],
-  cushion: { wageCuts: "43.7%", jobLosses: "35.4%", jobLossesSd: "5.1 points" },
+  cushion: { wageCuts: "41.8%", jobLosses: "32.1%", jobLossesSd: "3.3 points", draws: "20 draws" },
 };
 
 // A non-tax business policy, with BICS as the example. Scheme facts: sources
@@ -748,7 +775,7 @@ export const businessPolicy = {
       icon: IconArrowsSplit,
       owner: "PolicyEngine",
       title: "Allocate to households",
-      text: "Prices by spending; pay and jobs by sector of employment; profits by shareholding",
+      text: "Prices by spending; pay and jobs by sector; total profits by shareholding",
     },
     {
       icon: IconHome,
@@ -798,42 +825,18 @@ export const aiShock = {
 // (microcosm 429d7a0 README). The two
 // published employer NI analyses are sources youngWorkerNics and
 // inactiveNics.
-export const firmTools = [
-  {
-    icon: IconReceiptTax,
-    tags: [tags.workingPaper],
-    title: "Firm-level VAT microsimulation",
-    text: "Costs VAT threshold changes on synthetic firms.",
-    facts: [
-      { value: "about 2.7 million", label: "enterprises (ONS)" },
-      { value: "about 2.2 million", label: "VAT-registered traders (HMRC)" },
-    ],
-  },
-  {
-    icon: IconBriefcase,
-    tags: [{ label: "In the model", tone: "built" } as Tag],
-    title: "Employer costs",
-    text: "Employer NI and total employment costs.",
-    facts: [{ value: "Published", label: "two NI exemption analyses" }],
-  },
-  // In the model today (policyengine-uk d3db7ac): business rates and
-  // corporate stamp duty enter as published totals allocated to shareholders
-  // (see coverage above); parameters/gov/contrib/policyengine/employer_ni/
-  // *_incidence.yaml split an employer NI change between pay, prices and
-  // profits, all to pay by default; budget/consumer_incident_tax_change and
-  // corporate_incident_tax_change allocate an outside business-tax estimate
-  // by spending or by shareholding (see businessPolicy above). The card that
-  // was here, "Linking firms to households" (no firm entity; Microcosm's
-  // experimental firm tables and job links, unused in the UK build), is in
-  // NOTES.md.
-  {
-    icon: IconArrowsSplit,
-    tags: [{ label: "In the model", tone: "built" } as Tag],
-    title: "Business taxes reach households",
-    text: "Business rates and corporate stamp duty are allocated to shareholders.",
-    facts: [{ value: "Employer NI", label: "changes split between pay, prices and profits; all to pay by default" }],
-  },
-];
+// The former "What we have on the business side" slide is merged into the
+// coverage slide: its "Employer costs" and "Business taxes reach households"
+// cards repeated the coverage card "Taxes on business", and its firm VAT card
+// is the "Synthetic firms" item of dataAccess and the firm project slide.
+// The cards' text is in NOTES.md. In the model today (policyengine-uk
+// d3db7ac): business rates and corporate stamp duty enter as published
+// totals allocated to shareholders (see coverage above); parameters/gov/
+// contrib/policyengine/employer_ni/*_incidence.yaml split an employer NI
+// change between pay, prices and profits, all to pay by default; budget/
+// consumer_incident_tax_change and corporate_incident_tax_change allocate an
+// outside business-tax estimate by spending or by shareholding (see
+// businessPolicy above). PolicyEngine UK has no firm entity.
 
 // The loop card's precedent is Mosley and Cornforth (2023); the OG-UK card
 // follows that project's repository. Forecast scenario (policyengine-uk
@@ -846,7 +849,7 @@ export const macroLinks = [
   {
     icon: IconTrendingUp,
     title: "A forecast scenario",
-    tags: [{ label: "Mechanism in the model", tone: "built" } as Tag, { label: "Possible next step", tone: "muted" } as Tag],
+    tags: [{ label: "Mechanism built; not yet run", tone: "muted" } as Tag],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
@@ -885,28 +888,45 @@ export const abmQuestions = [
     icon: IconCpu,
     question: "A semiconductor supply disruption",
     behaviour: "Firms lose inputs, cut output and jobs",
-    passes: "Job and earnings losses by sector and region",
+    passes: "Job and earnings losses by sector",
+    tag: tags.canToday,
   },
   {
     icon: IconBolt,
     question: "Electricity-cost relief (BICS)",
     behaviour: "Firms choose between prices, pay and profit",
-    passes: "Prices, earnings and profits by sector",
+    passes: "Price changes by spending category; pay by sector",
+    tag: tags.mapping,
   },
   {
     icon: IconRobot,
     question: "AI adoption over the cycle",
     behaviour: "Firms adopt, enter and exit; wages adjust",
-    passes: "Paths of jobs, wages and profits by sector",
+    passes: "Jobs and wages by sector, one year at a time",
+    tag: tags.canToday,
   },
 ];
 
+// Doability of each input, checked on 16 November 2026 against
+// uk-trade-shock-study PR #46 (778557c), tariff_pipeline/shocks.py and
+// runner.py: apply_shocks takes persons with employment_income, sic_division,
+// age and weight, and applies wage cuts or job losses by two-digit SIC
+// division; region is reported (runner.py, region_income_change) but is not
+// an input, so losses by sector and region would be a small extension.
+// Prices: policyengine-uk holds spending by category
+// (variables/input/consumption/), and the trade study applies price changes
+// to food and energy spending (uk_trade_shock_study/incidence.py); mapping an
+// agent-based model's sectors to those categories is the work. Profits by
+// sector cannot be taken: the model allocates an economy-wide profit change
+// by shareholding and has no link from a sector's profits to its owners, so
+// profits are off the slide. Paths: each year is a separate run.
+
+// The full list of outputs is on the linking slide (tariffDisaggregation);
+// this is its short form. "Benefit claims" and "all by year" are in NOTES.md.
 export const abmReturns = [
-  "Household incomes by decile and region",
+  "Household incomes, by decile and region",
   "Poverty and inequality",
-  "Benefit claims",
-  "Tax and benefit receipts",
-  "All by year",
+  "Taxes and benefits, by year",
 ];
 
 // Code, data and synthetic data (the row under the coverage cards). Licences: policyengine-uk and policyengine.py
@@ -932,8 +952,8 @@ export const dataAccess = [
   {
     icon: IconBuildingFactory2,
     tag: tags.workingPaper,
-    title: "Synthetic firm data",
-    text: "Drawn from published tables, so it can be shared.",
+    title: "Synthetic firms",
+    text: "For VAT costing; drawn from published tables, so they can be shared.",
   },
 ];
 
@@ -949,7 +969,7 @@ export const pilots = [
       {
         icon: IconWorld,
         label: "A trade model could provide",
-        text: "Sector output, jobs, prices; wages by labour type",
+        text: "Jobs and prices by sector; wages by labour type",
       },
       {
         icon: IconHome,
@@ -987,7 +1007,7 @@ export const pilots = [
 ];
 
 // Six questions. The second and third follow from what different kinds of
-// model report (interfaceSpec below); tariff revenue and returns to capital
+// model report (tariffDisaggregation above); tariff revenue and returns to capital
 // as further channels are in NOTES.md.
 export const questions = [
   { icon: IconTargetArrow, text: "Which pilot first: the Economic Prosperity Deal, or BICS?" },
@@ -1049,13 +1069,6 @@ export const rulesEntities = [
 //   labour_supply_responses/{income,substitution}_elasticity.yaml are 0.
 // - A shock changes inputs, not rules: uk-trade-shock-study 06c8bbc,
 //   uk_trade_shock_study/runner.py (baseline and shocked simulations).
-export const runFlow = [
-  { icon: IconDatabase, title: "Certified dataset", text: "Microcosm UK 2024–\u206025" },
-  { icon: IconTrendingUp, title: "Project to the year", text: "Inputs grow with OBR indices" },
-  { icon: IconCopy, title: "Run twice", text: "A reform changes parameters; a scenario changes inputs" },
-  { icon: IconArrowsDiff, title: "Take the difference", text: "Per household, then weighted" },
-];
-
 // Shown as a status tag beside the subtitle. The reform example
 // (gov.hmrc.income_tax.rates.uk[0].rate: 0.21) and what comes from outside
 // the model (firms' decisions, general equilibrium) are in NOTES.md.
@@ -1188,107 +1201,26 @@ export const calibrationFit = {
     { icon: IconHome, value: "78.2k", label: "household records" },
   ],
   publishers: [
-    { name: "HMRC", count: 776 },
-    { name: "ONS", count: 365 },
-    { name: "DWP", count: 213 },
-    { name: "MHCLG", count: 82 },
-    { name: "Others", count: 78 },
+    { name: "HMRC", count: 776, shade: "var(--pe-teal-dark)" },
+    { name: "ONS", count: 365, shade: "var(--pe-teal)" },
+    { name: "DWP", count: 213, shade: "color-mix(in srgb, var(--pe-teal) 55%, white)" },
+    { name: "MHCLG", count: 82, shade: "var(--pe-amber)" },
+    { name: "Others", count: 78, shade: "var(--color-gray-400)" },
   ],
-  solver: ["38 target families, each 1/38 of the total weight", "Adam on log-weights", "1,500 steps, best kept"],
+  solver: ["38 target families, each 1/38 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
 };
 
-// What the weights are fitted to: the certified build's 1,514 targets by
-// publisher and by statistic. Read on 16 November 2026 from the public
-// calibration dashboard pinned to that build (source "dashboard"; the page's
-// own data route, "family_fit"). The counts add up to the publisher totals
-// on the calibration slide: HMRC 776, ONS 365, DWP 213, MHCLG 82 and 78 from
-// ten other publishers.
-// Three groupings of the same 1,514 targets exist and are not the same
-// thing, so this slide prints no total number of groups:
-// - the dashboard's browsing view shows "44 statistics" (calibration slide);
-// - the solver's loss has 38 target families, each with 1/38 of the weight
-//   (calibration slide, from the build's diagnostics);
-// - this slide's rows are the publisher-and-statistic groups of the
-//   dashboard's fit table (41 of them), with the small ones merged here.
-// Tile labels are plain-English names of those groups, for example
-// "hmrc.survey_of_personal_incomes" and "mhclg.council_tax_stock".
-// "Others" in full: OBR 16 (expenditure 12, receipts 4), Department for
-// Transport 13 (local bus journeys 9, finances 4), Scottish Government 12
-// (council tax stock 9, local bus finances 2, social security 1), Student
-// Loans Company 12 (student support 6, repayments 4, borrowers 2), Welsh
-// Government 11 (council tax stock 10, local bus finances 1), Department for
-// Education 8 (funded childcare), Northern Ireland bodies 5 (Department for
-// Communities 3, Department for Infrastructure 1, NI Transport Holding
-// Company 1) and the Independent Schools Council 1.
-// HMRC's smaller groups: Child Benefit 5, benefits in kind 5, salary
-// sacrifice 7 (3 + 2 + 2) and Tax-Free Childcare 2. ONS's: land 3 and
-// consumer trends 2. DWP's: Attendance Allowance 2 and workplace pensions 1.
-// "shade" is the publisher's colour in the strip and on its bars: design
-// tokens only.
-export type TargetGroup = { label: string; count: number };
-export const calibrationTargets = {
-  hmrc: {
-    name: "HMRC",
-    shade: "var(--pe-teal-dark)",
-    count: 776,
-    icon: IconReceiptTax,
-    groups: [
-      { label: "Survey of Personal Incomes", count: 568 },
-      { label: "Capital gains tax", count: 105 },
-      { label: "Income tax liabilities", count: 84 },
-      { label: "Child Benefit, benefits in kind, salary sacrifice, Tax-Free Childcare", count: 19 },
-    ] as TargetGroup[],
-  },
-  ons: {
-    name: "ONS",
-    shade: "var(--pe-teal)",
-    count: 365,
-    icon: IconUsers,
-    groups: [
-      { label: "Population", count: 179 },
-      { label: "Employment", count: 159 },
-      { label: "Household composition", count: 22 },
-      { label: "Land, consumer trends", count: 5 },
-    ] as TargetGroup[],
-  },
-  dwp: {
-    name: "DWP",
-    shade: "color-mix(in srgb, var(--pe-teal) 55%, white)",
-    count: 213,
-    icon: IconHeartHandshake,
-    groups: [
-      { label: "Universal Credit", count: 103 },
-      { label: "State Pension", count: 57 },
-      { label: "Two-child limit", count: 15 },
-      { label: "Benefit cap", count: 14 },
-      { label: "Pension Credit", count: 13 },
-      { label: "Legacy benefits", count: 8 },
-      { label: "Attendance Allowance, workplace pensions", count: 3 },
-    ] as TargetGroup[],
-  },
-  mhclg: {
-    name: "MHCLG",
-    shade: "var(--pe-amber)",
-    count: 82,
-    icon: IconHome,
-    groups: [{ label: "Council tax dwelling stock", count: 82 }] as TargetGroup[],
-  },
-  others: {
-    name: "Others",
-    shade: "var(--color-gray-400)",
-    count: 78,
-    icon: IconBuildingBank,
-    groups: [
-      { label: "OBR", count: 16 },
-      { label: "DfT", count: 13 },
-      { label: "Scottish Gov.", count: 12 },
-      { label: "Student Loans Co.", count: 12 },
-      { label: "Welsh Gov.", count: 11 },
-      { label: "DfE", count: 8 },
-      { label: "Northern Ireland bodies, ISC", count: 6 },
-    ] as TargetGroup[],
-  },
-};
+// Targets by publisher (calibrationFit.publishers): HMRC 776, ONS 365, DWP
+// 213, MHCLG 82 and 78 from ten other publishers, read on 16 November 2026
+// from the public calibration dashboard pinned to the certified build
+// (source "dashboard"; the page's own data route, "family_fit"). The former
+// slide "What the weights are fitted to" drew these as a map of publishers
+// and statistics; it is cut, because the live dashboard on the next slide
+// shows the same map. Its counts by statistic are in NOTES.md. Three
+// groupings of the same 1,514 targets exist and are not the same thing: the
+// dashboard's browsing view shows "44 statistics"; the solver's loss has 38
+// target families, each with 1/38 of the weight; the dashboard's fit table
+// has 41 publisher-and-statistic groups.
 
 // Projects we have done: three slides with live or published work.
 // - The Autumn Budget 2026 dashboard: what it models is the Autumn Budget
@@ -1303,7 +1235,7 @@ export const calibrationTargets = {
 //   the paper's static threshold sweep ("Static effect of moving the VAT
 //   registration threshold, 2025--26, relative to the £90,000 baseline"),
 //   copied unchanged to public/images/bist-2026/. The two counts are the
-//   firmTools facts below.
+//   "about 2.7 million" and "about 2.2 million" in NOTES.md.
 export const budgetProject = {
   labels: [
     { icon: IconReceiptTax, title: "The Budget measures we model", text: "Energy bills, income from assets, pensions, fuel, carers, the self-employed" },
@@ -1330,20 +1262,11 @@ export const aiProject = {
   ],
 };
 
-export const firmProject = {
-  image: {
-    src: "/images/bist-2026/firm-vat-revenue-impact-2025-26.png",
-    width: 2674,
-    height: 1609,
-    alt: "Line chart from the working paper: revenue in £ million against the VAT registration threshold in £ thousand, from 70 to 120, relative to the current £90,000 threshold.",
-  },
-  caption: "Static revenue effect of moving the VAT registration threshold, 2025–26, relative to £90,000",
-  points: [
-    { icon: IconArrowsDiff, title: "Static costing", text: "The rule is re-applied to a fixed turnover distribution" },
-    { icon: IconTrendingUp, title: "Turnover responses", text: "Sensitivity tests under assumed elasticities" },
-    { icon: IconBuildingFactory2, title: "Reforms costed", text: "Threshold level and shape; a reduced-rate band" },
-  ],
-};
+// The former slide "Firm-level VAT microsimulation: costing threshold
+// changes" (the paper's static threshold sweep, firm-vat-revenue-impact-
+// 2025-26.png, and three labels: static costing, turnover responses, reforms
+// costed) is cut: its figure was a headline result. Its content is in
+// NOTES.md, and the fourth step of firmMethod below names what was costed.
 
 // How the synthetic firms are built (firm-microsim-paper e6d5dd6).
 // - Method: paper/Sections/data.tex. Official statistics publish firm counts
@@ -1393,7 +1316,7 @@ export const firmMethod = {
       icon: IconReceiptTax,
       owner: "Costed",
       title: "Threshold changes",
-      text: "Statically, then with turnover responses as sensitivity tests",
+      text: "Level and shape costed statically; turnover responses as sensitivity tests",
     },
   ],
   accuracy: {
@@ -1422,7 +1345,7 @@ export const firmMethod = {
 
 // The trade study as a project (uk-trade-shock-study 06c8bbc, a working
 // paper). The four episodes and the energy figures are tradeEvents and
-// tradeEnergy above. Figure: paper/figures/fig_incidence_profile.png,
+// tradeEvents above. Figure (the same file at 06c8bbc and at PR #46, 778557c): paper/figures/fig_incidence_profile.png,
 // "Household incidence by equivalised disposable income decile, as a share
 // of each decile's total spending. All series are plotted as magnitudes on a
 // log axis ... Costs are plotted as positive; the India CETA series is a
@@ -1455,39 +1378,14 @@ export const tradeProject = {
 export const interfaceToday =
   "The trade study’s code applies earnings changes by two-digit SIC division to survey employees";
 
-// "models": different kinds of model report different things, so the
-// interface takes whichever a model has. A CGE trade model of the GTAP kind
-// reports output, employment and prices by sector and wages by labour type,
-// under a stated closure (see epdTrace above); a trade model with one
-// economy-wide wage gives that wage and prices; partial-equilibrium models
-// of goods sectors give product prices. Prices carry as much as earnings:
-// mapped to household spending by COICOP division, a price change for the
-// average consumer becomes a distribution by income decile. "keys" are what
-// PolicyEngine UK holds (above).
-export const interfaceSpec = {
-  models: [
-    {
-      icon: IconWorld,
-      field: "A CGE trade model",
-      text: "Output, jobs and prices by sector; wages by labour type; closure stated",
-    },
-    { icon: IconCoins, field: "A one-wage trade model", text: "An economy-wide wage, and prices" },
-    { icon: IconShoppingCart, field: "Partial-equilibrium models", text: "Product prices" },
-  ],
-  keys: [
-    { icon: IconBuildingFactory2, label: "Two-digit SIC division" },
-    { icon: IconBasket, label: "COICOP spending division" },
-    { icon: IconMapPin, label: "ITL1 region, optional" },
-    { icon: IconCalendar, label: "Scenario and year, to 2031" },
-  ],
-  outputs: [
-    { icon: IconChartBar, field: "Income deciles" },
-    { icon: IconChartPie, field: "Poverty and inequality" },
-    { icon: IconReceiptTax, field: "Taxes, benefits, government balance" },
-    { icon: IconMap, field: "Regions" },
-  ],
-  proposedOutputs: [
-    { icon: IconDice, field: "Mean and SD across draws" },
-    { icon: IconTable, field: "CSV tables" },
-  ],
-};
+// Different kinds of model report different things, so the link takes
+// whichever a model has (the "from" lines of tariffDisaggregation above). A
+// CGE trade model of the GTAP kind reports output, employment and prices by
+// sector and wages by labour type, under a stated closure (see epdTrace
+// above); a trade model with one economy-wide wage gives that wage and
+// prices; partial-equilibrium models of goods sectors give product prices.
+// Prices carry as much as earnings: mapped to household spending by COICOP
+// division, a price change for the average consumer becomes a distribution
+// by income decile. The former interface slide's keys (ITL1 region, scenario
+// and year to 2031) and possible additions (mean and SD across draws, CSV
+// tables) are in NOTES.md.

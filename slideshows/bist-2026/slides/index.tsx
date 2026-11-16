@@ -10,7 +10,6 @@ import {
   IconChevronUp,
   IconFileCode,
   IconMail,
-  IconTable,
   IconWorld,
   type Icon,
 } from "@tabler/icons-react";
@@ -25,27 +24,22 @@ import {
   businessPolicy,
   calibrationEquation,
   calibrationFit,
-  calibrationTargets,
-  components,
   coverage,
   dataAccess,
   epdTrace,
   firmMethod,
-  firmProject,
-  firmTools,
-  interfaceSpec,
   interfaceToday,
   macroLinks,
   microcosmFlow,
   microcosmResult,
   microcosmStatus,
+  modelFlow,
   parts,
   pilots,
   questions,
   rulesCode,
   rulesEntities,
   rulesFacts,
-  runFlow,
   runStatus,
   sources,
   tags,
@@ -56,9 +50,7 @@ import {
   whoWeAre,
   type Logo,
   type PartKey,
-  type Source,
   type Tag,
-  type TargetGroup,
 } from "../content";
 import Embed from "./Embed";
 import { CountUp, Reveal } from "./Reveal";
@@ -69,20 +61,6 @@ type Section = PartKey;
 
 /** Staggers an element's entrance when its slide comes on screen. */
 const enter = (index: number) => ({ "--i": index }) as CSSProperties;
-
-function ExternalLink({ children, href }: { children: ReactNode; href: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={(event) => event.stopPropagation()}
-      className="pointer-events-auto hover:underline"
-    >
-      {children}
-    </a>
-  );
-}
 
 /** An icon in the teal ink, with no box behind it: the deck's one icon style. */
 function Badge({ icon: IconComponent, size }: { icon: Icon; size?: "small" | "large" }) {
@@ -129,7 +107,6 @@ function Frame({
   subtitle,
   status = [],
   children,
-  references = [],
   scale = 1.25,
   fill = false,
 }: {
@@ -139,7 +116,6 @@ function Frame({
   /** Status tags shown beside the subtitle. */
   status?: Tag[];
   children: ReactNode;
-  references?: Source[];
   /** Size of the body relative to the deck's base unit. */
   scale?: number;
   /** The body fills the slide from the top, for a live page or a figure. */
@@ -164,16 +140,6 @@ function Frame({
         <div className={`${styles.body} ${fill ? styles.bodyFill : ""}`} style={bodyScale(scale)}>
           {children}
         </div>
-        {references.length > 0 && (
-          <div className={styles.sources}>
-            <span>Sources</span>
-            {references.map((item) => (
-              <ExternalLink key={item.href} href={item.href}>
-                {item.label}
-              </ExternalLink>
-            ))}
-          </div>
-        )}
       </div>
     </Slide>
   );
@@ -465,18 +431,6 @@ export function WhoSlide() {
       title="Who we are"
       scale={0.97}
       subtitle="The organisation, and who uses our UK work"
-      references={[
-        sources.about,
-        sources.joss,
-        sources.nuffield,
-        sources.no10,
-        sources.hmt,
-        sources.obr,
-        sources.hansard,
-        sources.nef,
-        sources.cps,
-        sources.niesr,
-      ]}
     >
       <div className={styles.facts}>
         {facts.map((fact, index) => (
@@ -500,26 +454,11 @@ export function WhatSlide() {
     <Frame
       section="what"
       title="PolicyEngine UK computes household incomes after taxes and benefits"
-      scale={1.5}
-      subtitle="Open-source microsimulation: spending is an input, income is the result"
-      references={[sources.model, sources.data, sources.python, sources.joss]}
-    >
-      <Flow steps={components} builds={[1, 2, 3]} />
-    </Frame>
-  );
-}
-
-export function RunSlide() {
-  return (
-    <Frame
-      section="what"
-      title="How a reform or a scenario is run"
-      scale={1.5}
-      subtitle="Two simulations on the same households: baseline and counterfactual"
+      scale={1.28}
+      subtitle="Open-source microsimulation: the same households, run twice"
       status={[runStatus]}
-      references={[sources.model, sources.growth, sources.labourSupply, sources.impactAnalysis]}
     >
-      <Flow steps={runFlow} builds={[1, 2, 3, 4]} />
+      <Flow steps={modelFlow} builds={[1, 2, 3, 4]} />
     </Frame>
   );
 }
@@ -532,30 +471,28 @@ export function EpdSlide() {
       title="The Economic Prosperity Deal: from macro impacts to households"
       scale={1.25}
       subtitle="How one deal could be traced from a trade or macro model's results to household incomes"
-      status={[tags.notBuilt, tags.noResults]}
-      references={[sources.epd, sources.trade, sources.python]}
+      status={[tags.noResults]}
     >
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
     </Frame>
   );
 }
 
-export function DisaggregationSlide() {
+export function LinkSlide() {
   const { rows, breakdowns } = tariffDisaggregation;
   return (
     <Frame
-      section="explore"
-      title="Disaggregation: how sector results reach people"
-      scale={1.08}
-      subtitle="Inside the PolicyEngine step: which records receive each change"
-      references={[sources.python, sources.trade, sources.gtap]}
+      section="ideas"
+      title="One way to link: tables in, tables out"
+      scale={0.98}
+      subtitle="A starting point for discussion: what a model could pass, and which records receive it"
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>The other model's result</p>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>A model’s result</p>
         <span />
         <Reveal step={2} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
           Mapped by
-          <StatusTag tag={tags.notBuilt} />
+          <StatusTag tag={tags.toBuild} />
         </Reveal>
         <span />
         <Reveal step={3} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
@@ -569,7 +506,10 @@ export function DisaggregationSlide() {
           <Fragment key={row.result}>
             <div className={`${styles.cell} ${styles.cellLead}`}>
               <Badge icon={row.icon} size="small" />
-              {row.result}
+              <div>
+                {row.result}
+                <p className={styles.cellSub}>{row.from}</p>
+              </div>
             </div>
             <Reveal step={2} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
@@ -580,8 +520,9 @@ export function DisaggregationSlide() {
             <Reveal step={3} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
             </Reveal>
-            <Reveal step={3} ghost className={styles.cell}>
+            <Reveal step={3} ghost className={`${styles.cell} ${styles.cellTagged}`}>
               {row.assigned}
+              <StatusTag tag={row.tag} />
             </Reveal>
           </Fragment>
         ))}
@@ -599,6 +540,10 @@ export function DisaggregationSlide() {
           </ul>
         </Reveal>
       </div>
+      <div className={styles.rowsFoot}>
+        <StatusTag tag={{ label: "Runs today", tone: "built" }} />
+        <p>{interfaceToday}</p>
+      </div>
     </Frame>
   );
 }
@@ -611,8 +556,7 @@ export function BridgeSlide() {
       title="The tariff study: from US tariffs to employees’ earnings"
       scale={1.1}
       subtitle="The 2025 US tariffs, traced to employees and through taxes and benefits"
-      status={[tags.frsNotMicrocosm, { label: "Deal not yet modelled", tone: "muted" }]}
-      references={[sources.trade, sources.epd]}
+      status={[tags.microcosm, { label: "Deal not yet modelled", tone: "muted" }]}
     >
       <Flow
         steps={steps}
@@ -644,7 +588,7 @@ export function BridgeSlide() {
             <CountUp value={cushion.jobLosses} step={2} />
           </p>
           <p className={styles.statLabel}>
-            if it comes as job losses (SD {cushion.jobLossesSd} across 100 draws)
+            if it comes as job losses (SD {cushion.jobLossesSd} across {cushion.draws})
           </p>
         </Reveal>
       </div>
@@ -663,7 +607,6 @@ export function RulesSlide() {
       scale={1.2}
       subtitle="Law as dated parameters, formulas and tests"
       status={[{ label: "Counts at version 2.179.0", tone: "muted" }]}
-      references={[sources.parameterExample, sources.variableExample, sources.testExample]}
     >
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
         <div className={styles.code}>
@@ -759,7 +702,6 @@ export function MicrocosmBuildSlide() {
       scale={1.22}
       subtitle="An open-source pipeline of 54 stages, from surveys and statistics to weights"
       status={[microcosmStatus]}
-      references={[sources.sourceStages, sources.imputation, sources.data]}
     >
       <div className={styles.snake}>
         <SnakeStep step={spine} number={1} area="a" />
@@ -779,7 +721,7 @@ export function MicrocosmBuildSlide() {
 }
 
 export function CalibrationSlide() {
-  const { stats, solver } = calibrationFit;
+  const { stats, solver, publishers } = calibrationFit;
   // The first build shows what goes in (targets and records); the second,
   // how the fitted weights do (fit and effective sample size).
   const [targets, fit, sample, records] = stats;
@@ -795,8 +737,10 @@ export function CalibrationSlide() {
       title="Calibration: weights fitted to official statistics"
       scale={1.02}
       subtitle="The certified national build of 7 November 2026"
-      status={[{ label: "In-sample fit", tone: "caution" }]}
-      references={[sources.dashboard, sources.calibration, sources.doctrine]}
+      status={[
+        { label: "In-sample fit", tone: "caution" },
+        { label: "Targets at model year 2025", tone: "muted" },
+      ]}
     >
       <div className="grid grid-cols-[1.1fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
@@ -823,6 +767,22 @@ export function CalibrationSlide() {
               </span>
             ))}
           </div>
+          <div className={styles.divider}>
+            <p className={styles.rowLabel}>The 1,514 targets, by publisher</p>
+            <div className={styles.stack} aria-hidden="true">
+              {publishers.map((publisher) => (
+                <span key={publisher.name} style={{ flexGrow: publisher.count, background: publisher.shade }} />
+              ))}
+            </div>
+            <p className={styles.stackLegend}>
+              {publishers.map((publisher) => (
+                <span key={publisher.name}>
+                  <i style={{ background: publisher.shade }} />
+                  {publisher.name} <strong>{publisher.count}</strong>
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
         <div className={styles.kpis}>
           {tiles.map(({ stat, step }) => (
@@ -840,99 +800,18 @@ export function CalibrationSlide() {
   );
 }
 
-type Publisher = (typeof calibrationTargets)[keyof typeof calibrationTargets];
-
-/**
- * A publisher's block in the target map. Its first "tiles" statistics are
- * tiles sized by their counts; the rest are listed with their counts.
- */
-function TargetBlock({
-  publisher,
-  area,
-  index,
-  tiles,
-  direction = "row",
-  small = false,
-}: {
-  publisher: Publisher;
-  area: string;
-  index: number;
-  tiles: number;
-  direction?: "row" | "column";
-  /** A small block: a tighter head and list. */
-  small?: boolean;
-}) {
-  const sized: TargetGroup[] = publisher.groups.slice(0, tiles);
-  const listed: TargetGroup[] = publisher.groups.slice(tiles);
-  return (
-    <div
-      className={`${styles.targetBlock} ${small ? styles.targetSmall : ""} ${styles.enter}`}
-      style={{ gridArea: area, ...enter(index), "--shade": publisher.shade } as CSSProperties}
-    >
-      <div className={styles.targetHead}>
-        <Badge icon={publisher.icon} size="small" />
-        <h2>{publisher.name}</h2>
-        <strong>{publisher.count.toLocaleString("en-GB")}</strong>
-      </div>
-      {sized.length > 0 && (
-        <div className={styles.targetTiles} style={{ flexDirection: direction }}>
-          {sized.map((group) => (
-            <div key={group.label} className={styles.targetTile} style={{ flexGrow: group.count }}>
-              <span>{group.label}</span>
-              <strong>{group.count}</strong>
-            </div>
-          ))}
-        </div>
-      )}
-      {listed.length > 0 && (
-        <p className={styles.targetList}>
-          {listed.map((group) => (
-            <span key={group.label}>
-              {group.label} <strong>{group.count}</strong>
-            </span>
-          ))}
-        </p>
-      )}
-    </div>
-  );
-}
-
-export function TargetsSlide() {
-  const { hmrc, ons, dwp, mhclg, others } = calibrationTargets;
-  return (
-    <Frame
-      section="what"
-      title="What the weights are fitted to"
-      scale={1.1}
-      fill
-      subtitle="The 1,514 targets of the certified 7 November build, by publisher and statistic"
-      status={[{ label: "All at model year 2025", tone: "muted" }]}
-      references={[sources.dashboard, sources.calibration]}
-    >
-      <div className={styles.targetMap}>
-        <TargetBlock publisher={hmrc} area="hmrc" index={0} tiles={3} direction="column" />
-        <TargetBlock publisher={ons} area="ons" index={1} tiles={2} />
-        <TargetBlock publisher={dwp} area="dwp" index={2} tiles={2} />
-        <TargetBlock publisher={mhclg} area="mhclg" index={3} tiles={0} small />
-        <TargetBlock publisher={others} area="others" index={4} tiles={0} small />
-      </div>
-      <p className={styles.targetFoot}>
-        Each publisher’s block has an area in proportion to its number of targets.
-      </p>
-    </Frame>
-  );
-}
-
 export function CalibrationLiveSlide() {
   return (
     <Frame
       section="what"
-      title="Explore the fit: the live calibration dashboard"
+      title="What the weights are fitted to: the live calibration dashboard"
       scale={1.1}
       fill
-      subtitle="Every target’s official figure beside the fitted value"
-      status={[{ label: "Certified 7 November build", tone: "built" }]}
-      references={[sources.dashboard]}
+      subtitle="Every target by publisher and statistic: the official figure beside the fitted value"
+      status={[
+        { label: "Live", tone: "built" },
+        { label: "Certified 7 November build", tone: "built" },
+      ]}
     >
       <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
     </Frame>
@@ -948,44 +827,8 @@ export function BusinessPolicySlide() {
       scale={1.45}
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
       status={[tags.notBuilt, tags.noResults]}
-      references={[sources.bicsGuidance, sources.bicsIa, sources.model]}
     >
       <Flow steps={flow} titleLines={2} />
-    </Frame>
-  );
-}
-
-export function FirmToolsSlide() {
-  return (
-    <Frame
-      section="have"
-      title="What we have on the business side"
-      scale={1.2}
-      subtitle="Each labelled by how far along it is"
-      references={[sources.firm, sources.vatThresholds, sources.youngWorkerNics, sources.inactiveNics, sources.data]}
-    >
-      <div className={styles.cards} style={columns(3)}>
-        {firmTools.map((tool) => (
-          <Card
-            key={tool.title}
-            icon={tool.icon}
-            title={tool.title}
-            text={tool.text}
-            cardTags={tool.tags}
-            index={firmTools.indexOf(tool)}
-          >
-            {tool.facts.length > 0 && (
-              <div className={styles.cardFacts}>
-                {tool.facts.map((fact) => (
-                  <p key={fact.label}>
-                    <strong>{fact.value}</strong> {fact.label}
-                  </p>
-                ))}
-              </div>
-            )}
-          </Card>
-        ))}
-      </div>
     </Frame>
   );
 }
@@ -995,10 +838,9 @@ export function AbmSlide() {
     <Frame
       section="ideas"
       title="Where an agent-based model could link"
-      scale={1.15}
+      scale={1.04}
       subtitle="Three candidate questions, for discussion"
       status={[tags.notBuilt]}
-      references={[sources.dosi, sources.gtap, sources.aiPost, sources.inet]}
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Policy question</p>
@@ -1023,8 +865,9 @@ export function AbmSlide() {
             <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
             </Reveal>
-            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellTagged}`}>
               {row.passes}
+              <StatusTag tag={row.tag} />
             </Reveal>
           </Fragment>
         ))}
@@ -1046,7 +889,6 @@ export function MacroSlide() {
       title="Links to macroeconomic models"
       scale={1.25}
       subtitle="Three possible routes, at three stages"
-      references={[sources.model, ...macroLinks.map((link) => link.source)]}
     >
       <div className={styles.cards} style={columns(3)}>
         {macroLinks.map((link) => (
@@ -1074,81 +916,6 @@ export function MacroSlide() {
   );
 }
 
-function SpecRows({ rows }: { rows: { icon: Icon; field: string; text?: string }[] }) {
-  return (
-    <dl className={`${styles.pairs} ${styles.pairTight}`}>
-      {rows.map((row) => (
-        <div key={row.field} className={styles.pair}>
-          <Badge icon={row.icon} size="small" />
-          <div>
-            <dt>{row.field}</dt>
-            {row.text && <dd>{row.text}</dd>}
-          </div>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
-export function InterfaceSlide() {
-  return (
-    <Frame
-      section="ideas"
-      title="One way to link: tables in, tables out"
-      scale={0.92}
-      subtitle="A starting point for discussion: earnings, jobs and prices in; household results out"
-      references={[sources.trade, sources.model, sources.python]}
-    >
-      <div className={styles.interface}>
-        <div className={`${styles.card} ${styles.cardCompact}`}>
-          <div className={styles.cardTitleRow}>
-            <h2>What different models could pass</h2>
-            <StatusTag tag={tags.proposed} />
-          </div>
-          <SpecRows rows={interfaceSpec.models} />
-          <div className={styles.divider}>
-            <p className={styles.dividerText}>Keyed by</p>
-            <div className={styles.keys}>
-              {interfaceSpec.keys.map((key) => (
-                <span key={key.label} className={styles.entity}>
-                  <Badge icon={key.icon} size="small" />
-                  {key.label}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className={styles.divider}>
-            <StatusTag tag={{ label: "Runs today", tone: "built" }} />
-            <p className={styles.dividerText}>{interfaceToday}</p>
-          </div>
-        </div>
-        <Reveal step={2} motion="wipe" className={styles.hub}>
-          <div className={styles.hubRow}>
-            <IconArrowRight stroke={2.2} aria-hidden="true" />
-            <Badge icon={IconTable} size="large" />
-            <IconArrowRight stroke={2.2} aria-hidden="true" />
-          </div>
-          <p>PolicyEngine</p>
-        </Reveal>
-        <Reveal step={2} ghost className={`${styles.card} ${styles.cardCompact}`}>
-          <div className={styles.cardTitleRow}>
-            <h2>PolicyEngine can already report</h2>
-            <StatusTag tag={{ label: "Existing outputs", tone: "built" }} />
-          </div>
-          <SpecRows rows={interfaceSpec.outputs} />
-          <div className={styles.divider}>
-            <div className={styles.cardTitleRow}>
-              <p className={styles.dividerText}>Possible additions</p>
-              <StatusTag tag={tags.proposed} />
-            </div>
-            <SpecRows rows={interfaceSpec.proposedOutputs} />
-          </div>
-        </Reveal>
-      </div>
-    </Frame>
-  );
-}
-
 export function PilotsSlide() {
   return (
     <Frame
@@ -1157,7 +924,6 @@ export function PilotsSlide() {
       scale={1.15}
       subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
       status={[tags.notBuilt, tags.noResults]}
-      references={[sources.epd, sources.bicsGuidance, sources.trade, sources.model]}
     >
       <div className={styles.cards} style={columns(2)}>
         {pilots.map((item, index) => (
@@ -1244,7 +1010,6 @@ export function CoverageSlide() {
       title="What the UK model covers, and what is open"
       scale={1.05}
       subtitle="Taxes and benefits on households, with business-tax changes allocated to them"
-      references={[sources.model, sources.python, sources.data, sources.firm]}
     >
       <div className={styles.cards} style={columns(4)}>
         {coverage.map((group, index) => (
@@ -1293,7 +1058,6 @@ export function BudgetSlide() {
       fill
       subtitle={`${measures.title}, and ${calculator.title.toLowerCase()}`}
       status={[{ label: "Live", tone: "built" }]}
-      references={[sources.budgetDashboard, sources.budgetDashboardCode]}
     >
       <Embed
         href={sources.budgetDashboard.href}
@@ -1313,7 +1077,6 @@ export function AiPostSlide() {
       fill
       subtitle="PolicyEngine post, 16 November 2026: distributional and fiscal incidence in the UK"
       status={[{ label: "Illustrative scenario", tone: "caution" }, aiProject.tag]}
-      references={[sources.aiPost, sources.ai]}
     >
       <div className={styles.project}>
         <div className={styles.projectSide}>
@@ -1358,7 +1121,6 @@ export function FirmMethodSlide() {
       scale={0.9}
       subtitle="Firm-level VAT microsimulation: published tables in, calibrated firm records out"
       status={[tags.workingPaper]}
-      references={[sources.firm, sources.firmHmrcFigure]}
     >
       <div className={styles.method}>
         <div>
@@ -1408,35 +1170,6 @@ export function FirmMethodSlide() {
   );
 }
 
-export function FirmVatSlide() {
-  const { image, caption, points } = firmProject;
-  return (
-    <Frame
-      section="projects"
-      title="Firm-level VAT microsimulation: costing threshold changes"
-      scale={1.15}
-      subtitle="What moving the VAT registration threshold could raise or cost, on the synthetic firms"
-      status={[tags.workingPaper]}
-      references={[sources.firm, sources.firmFigure, { ...sources.vatThresholds, label: "Related post: VAT threshold analysis" }]}
-    >
-      <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
-        <Figure image={image} caption={caption} />
-        <div className={styles.vsteps}>
-          {points.map((point) => (
-            <div key={point.title} className={styles.vstep}>
-              <Badge icon={point.icon} size="large" />
-              <div>
-                <h3>{point.title}</h3>
-                <p>{point.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
 export function TradeSlide() {
   const { image, caption } = tradeProject;
   return (
@@ -1445,8 +1178,7 @@ export function TradeSlide() {
       title="Who bears the cost of trade changes? Four UK episodes, 2021–26"
       scale={1.15}
       subtitle="Price and earnings changes from four trade events, traced to households"
-      status={[tags.workingPaper, { label: "Earlier FRS datasets, not Microcosm UK", tone: "muted" }]}
-      references={[sources.trade, sources.tradeFigure]}
+      status={[tags.workingPaper, tags.microcosm]}
     >
       <div className="grid grid-cols-[0.85fr_1.15fr] items-center gap-[calc(var(--u)*2.4)]">
         <div className={styles.episodes} style={columns(1)}>
