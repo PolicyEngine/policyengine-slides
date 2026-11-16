@@ -23,13 +23,58 @@
   flex-direction: column;
 }
 
+/* The part label, with the talk's seven parts as a row of marks. */
+.partRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 2);
+  margin-bottom: calc(var(--u) * 0.6);
+}
+
 .section {
-  margin-bottom: calc(var(--u) * 0.5);
-  color: var(--pe-teal);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  color: var(--pe-teal-dark);
   font-size: calc(var(--u) * 1.05);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+.sectionNumber {
+  display: inline-flex;
+  width: calc(var(--u) * 1.7);
+  height: calc(var(--u) * 1.7);
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--pe-teal);
+  color: white;
+  font-size: calc(var(--u) * 0.95);
+  letter-spacing: 0;
+}
+
+.tracker {
+  display: flex;
+  gap: calc(var(--u) * 0.35);
+}
+
+.tracker span {
+  width: calc(var(--u) * 1.6);
+  height: calc(var(--u) * 0.35);
+  border-radius: 999px;
+  background: var(--color-gray-200);
+}
+
+.tracker .trackerDone {
+  background: var(--tint-strong);
+}
+
+.tracker .trackerCurrent {
+  width: calc(var(--u) * 3);
+  background: var(--pe-teal);
 }
 
 .title {
@@ -69,49 +114,130 @@
   padding: calc(var(--u) * 1.4) 0 calc(var(--u) * 1.2);
 }
 
+/* A live page or a figure: the body runs from under the title to the sources. */
+.bodyFill {
+  justify-content: flex-start;
+  gap: calc(var(--u) * 0.9);
+  padding: calc(var(--u) * 1.1) 0 calc(var(--u) * 0.8);
+}
+
+/* ---------- Build steps and entrances ----------
+   A build step that has not been reached is hidden but keeps its space, so
+   nothing moves when it appears. Everything is visible unless "revealHidden"
+   says otherwise. */
+
+.revealHidden {
+  visibility: hidden;
+}
+
+/* A box that has not been reached: an empty dashed outline in its place. */
+.revealGhost {
+  border-style: dashed !important;
+  border-color: var(--color-gray-300) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: transparent !important;
+}
+
+.revealGhost > * {
+  visibility: hidden;
+}
+
+.revealRise {
+  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.revealFade {
+  animation: fade 320ms ease-out both;
+}
+
+/* Arrows and connectors draw in from the left. */
+.revealWipe {
+  animation: wipe 300ms ease-out both;
+}
+
+/* A row of items entering one after another when the slide comes on. */
+.enter {
+  animation: slide 340ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* An entrance moves and never hides: the content is visible whether or
+   not the animation runs. */
+@keyframes slide {
+  from {
+    transform: translateY(calc(var(--u0) * 0.9));
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--u0) * 0.9));
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes wipe {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealRise,
+  .revealFade,
+  .revealWipe,
+  .enter {
+    animation: none;
+  }
+}
+
 .sources {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.15rem 1.25rem;
+  gap: calc(var(--u0) * 0.15) calc(var(--u0) * 1.25);
   color: var(--color-gray-500);
-  font-size: 0.875rem;
+  font-size: min(0.875rem, calc(var(--u0) * 1.15));
   line-height: 1.3;
 }
 
-/* ---------- Icon badge: a tinted rounded square ---------- */
+/* ---------- Icons: bare, in the teal ink, in three sizes ---------- */
 
 .badge {
   display: inline-flex;
-  width: calc(var(--u) * 3.8);
-  height: calc(var(--u) * 3.8);
+  width: calc(var(--u) * 2.7);
+  height: calc(var(--u) * 2.7);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: calc(var(--u) * 0.9);
-  background: var(--tint);
-  color: var(--pe-teal-dark);
+  color: var(--pe-teal);
 }
 
 .badge svg {
-  width: 58%;
-  height: 58%;
+  width: 100%;
+  height: 100%;
 }
 
 .badgeSmall {
-  width: calc(var(--u) * 2.8);
-  height: calc(var(--u) * 2.8);
-  border-radius: calc(var(--u) * 0.7);
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 2);
 }
 
 .badgeLarge {
-  width: calc(var(--u) * 4.6);
-  height: calc(var(--u) * 4.6);
-  border-radius: calc(var(--u) * 1.1);
-}
-
-.badgeSolid {
-  background: var(--pe-teal);
-  color: white;
+  width: calc(var(--u) * 3.4);
+  height: calc(var(--u) * 3.4);
 }
 
 /* ---------- Status tags ---------- */
@@ -294,15 +420,26 @@
 .step {
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--line);
+  border: 1.5px solid var(--line);
+  box-shadow: 0 calc(var(--u0) * 0.15) calc(var(--u0) * 0.5) color-mix(in srgb, var(--pe-dark) 6%, transparent);
   border-radius: calc(var(--u) * 0.8);
   background: white;
   padding: calc(var(--u) * 1.3) calc(var(--u) * 1.3) calc(var(--u) * 1.4);
 }
 
 .stepDashed {
-  border: 2px dashed var(--pe-teal);
+  border: 1.5px dashed var(--pe-teal);
+  box-shadow: none;
   background: color-mix(in srgb, var(--pe-teal) 5%, white);
+}
+
+/* The step's place in the flow, opposite its icon. */
+.stepIndex {
+  color: var(--color-gray-400);
+  font-size: calc(var(--u) * 1.3);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .stepTop {
@@ -377,9 +514,16 @@
 
 /* A return arrow under a flow, from the last step back to the first: a
    feedback that is not built, so it is grey and dashed. */
+.feedback {
+  display: grid;
+  grid-row: 2;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
 .feedbackLine {
   position: relative;
-  grid-row: 2;
+  grid-row: 1;
   height: calc(var(--u) * 1.7);
   margin-top: calc(var(--u) * 0.7);
   border: 0 dashed var(--color-gray-400);
@@ -417,7 +561,7 @@
 
 .feedbackLabel {
   display: flex;
-  grid-row: 3;
+  grid-row: 2;
   grid-column: 1 / -1;
   align-items: center;
   justify-content: center;
@@ -509,25 +653,31 @@
   font-size: calc(var(--u) * 3.3);
 }
 
+/* Key figures as a two-by-two block of tiles. */
 .kpis {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: calc(var(--u) * 1.4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.3);
 }
 
-.kpis .stat {
+.kpi {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
-  border-radius: calc(var(--u) * 0.8);
-  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.3);
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 1.4) calc(var(--u) * 1.3);
 }
 
-.kpis .statValue {
-  font-size: calc(var(--u) * 3);
+.kpi .statValue {
+  margin-top: calc(var(--u) * 0.8);
+  font-size: calc(var(--u) * 3.4);
+  font-variant-numeric: tabular-nums;
 }
 
-.kpis .statLabel {
-  margin-top: calc(var(--u) * 0.3);
-  font-size: calc(var(--u) * 1.3);
+.kpi .statLabel {
+  font-size: calc(var(--u) * 1.35);
 }
 
 .figureTitle {
@@ -705,26 +855,72 @@
   text-wrap: pretty;
 }
 
-/* Logo rows: marks centred on one line, each at its own height so that
-   square and wide marks look the same size. */
-.logoRow {
+/* ---------- Who we are: facts across the top, then two rows of logos ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.4);
+}
+
+.fact {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: calc(var(--u) * 2.2);
-  min-height: calc(var(--u) * 5.6);
-  margin-top: calc(var(--u) * 1.1);
+  gap: calc(var(--u) * 1.1);
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1) calc(var(--u) * 1.3);
+}
+
+.fact h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.8);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.fact p {
+  margin-top: calc(var(--u) * 0.15);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.logoSection {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1) calc(var(--u) * 1.3) calc(var(--u) * 1.1);
+}
+
+/* Equal cells: every mark is centred in a box of one height, with its
+   caption on one baseline below. */
+.logoGrid {
+  display: grid;
+  gap: calc(var(--u) * 1.2);
+  margin-top: calc(var(--u) * 0.7);
+}
+
+.logoCell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logoMark {
   display: flex;
-  min-width: 0;
+  width: 100%;
+  height: calc(var(--u0) * 4.3);
   align-items: center;
   justify-content: center;
 }
 
 .logoMark img {
-  max-width: 100%;
+  max-width: 82%;
   object-fit: contain;
 }
 
@@ -736,33 +932,17 @@
 
 /* A name set as text, where we hold no logo file. */
 .wordmark {
-  display: inline-flex;
-  align-items: center;
-  border: 2px solid var(--pe-dark);
-  padding: 0 calc(var(--u) * 1);
   color: var(--pe-dark);
-  font-size: calc(var(--u) * 1.7);
+  font-size: calc(var(--u0) * 2.2);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   white-space: nowrap;
 }
 
-/* Two groups of logos side by side, each with one caption below. */
-.logoGroups {
-  display: grid;
-  grid-template-columns: 1fr 2.6fr;
-  gap: calc(var(--u) * 2);
-}
-
-.logoGroup + .logoGroup {
-  border-left: 1px solid var(--line);
-  padding-left: calc(var(--u) * 2);
-}
-
 .logoCaption {
-  margin-top: calc(var(--u) * 0.8);
+  margin-top: calc(var(--u) * 0.5);
   color: var(--color-gray-700);
-  font-size: calc(var(--u) * 1.25);
+  font-size: calc(var(--u) * 1.15);
   font-weight: 500;
   line-height: 1.3;
   text-align: center;
@@ -856,8 +1036,8 @@
 }
 
 .hub .badge svg {
-  width: 58%;
-  height: 58%;
+  width: 100%;
+  height: 100%;
 }
 
 .hub p {
@@ -992,9 +1172,18 @@
   font-weight: 600;
 }
 
-.codeTitle svg {
-  width: calc(var(--u) * 1.5);
-  height: calc(var(--u) * 1.5);
+/* An entity: an icon badge and its name. */
+.entity {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.4);
+  font-weight: 600;
+}
+
+.chips:has(.entity) {
+  gap: calc(var(--u) * 1.6);
 }
 
 .code pre {
@@ -1079,8 +1268,633 @@
   font-size: calc(var(--u0) * 2);
 }
 
+.closingContacts .badge {
+  color: white;
+}
+
 .closingContacts {
   gap: calc(var(--u0) * 1.3);
   margin-top: calc(var(--u0) * 4);
   font-size: calc(var(--u0) * 1.3);
+}
+
+/* ---------- In brief: one numbered card per part ---------- */
+
+.partCard {
+  padding: calc(var(--u) * 1.4) calc(var(--u) * 1.6) calc(var(--u) * 1.5);
+}
+
+.partCard .cardHead {
+  align-items: center;
+  margin-bottom: calc(var(--u) * 1);
+}
+
+.partCardLead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.9);
+}
+
+.partNumber {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 2.6);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.partCard h2 {
+  font-size: calc(var(--u) * 1.95);
+}
+
+.partCard > p {
+  font-size: calc(var(--u) * 1.5);
+}
+
+/* ---------- What is open: a row under the coverage cards ---------- */
+
+.access {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.6);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 1.3);
+}
+
+.accessItem {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.9);
+}
+
+.accessHead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+.accessItem h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.accessItem p {
+  margin-top: calc(var(--u) * 0.2);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.35);
+  line-height: 1.3;
+}
+
+/* ---------- Calibration targets: a map of publishers ----------
+   Columns 776 : 421 : 317 and rows 365 : 191 : 182 give HMRC, ONS, DWP,
+   MHCLG and Others areas in proportion to 776, 365, 213, 82 and 78. */
+
+.targetMap {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template:
+    "hmrc ons ons" 365fr
+    "hmrc dwp mhclg" 191fr
+    "hmrc dwp others" 182fr
+    / 776fr 421fr 317fr;
+  gap: calc(var(--u) * 0.6);
+}
+
+.targetBlock {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.45);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-top: calc(var(--u) * 0.35) solid var(--shade);
+  border-radius: calc(var(--u) * 0.5);
+  background: white;
+  padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8) calc(var(--u) * 0.7);
+}
+
+.targetHead {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+}
+
+.targetHead h2 {
+  flex: 1;
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 700;
+}
+
+.targetHead strong {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 2.3);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.targetTiles {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  gap: calc(var(--u) * 0.4);
+}
+
+.targetTile {
+  display: flex;
+  min-width: 0;
+  min-height: calc(var(--u) * 2.2);
+  flex: 1 1 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.6);
+  border-radius: calc(var(--u) * 0.4);
+  background: color-mix(in srgb, var(--shade) 16%, white);
+  padding: calc(var(--u) * 0.45) calc(var(--u) * 0.7);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.25);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.targetTile strong {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.targetList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.1) calc(var(--u) * 0.9);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.1);
+  line-height: 1.3;
+}
+
+.targetList strong {
+  color: var(--pe-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.targetSmall {
+  gap: calc(var(--u) * 0.25);
+  padding: calc(var(--u) * 0.45) calc(var(--u) * 0.7) calc(var(--u) * 0.5);
+}
+
+.targetSmall .targetHead h2 {
+  font-size: calc(var(--u) * 1.35);
+}
+
+.targetSmall .targetHead strong {
+  font-size: calc(var(--u) * 1.8);
+}
+
+.targetSmall .targetHead .badge {
+  width: calc(var(--u) * 1.6);
+  height: calc(var(--u) * 1.6);
+}
+
+.targetSmall .targetList {
+  gap: 0 calc(var(--u) * 0.7);
+  font-size: calc(var(--u) * 1);
+  line-height: 1.25;
+}
+
+.targetFoot {
+  flex-shrink: 0;
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.1);
+}
+
+/* ---------- Snake flow: three steps across, a turn, then back ---------- */
+
+.snake {
+  display: grid;
+  grid-template:
+    "a ab b bc c" auto
+    ". . . . turn" auto
+    "f ef e de d" auto
+    / minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: calc(var(--u) * 0.5) calc(var(--u) * 0.6);
+}
+
+.snakeStep {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.1);
+  border: 1.5px solid var(--line);
+  border-radius: calc(var(--u) * 0.8);
+  background: white;
+  box-shadow: 0 calc(var(--u0) * 0.15) calc(var(--u0) * 0.5) color-mix(in srgb, var(--pe-dark) 6%, transparent);
+  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.3);
+}
+
+.snakeStep h2 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.7);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.snakeStep p {
+  margin-top: calc(var(--u) * 0.25);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.snakeStep .owner {
+  margin: 0 0 calc(var(--u) * 0.2);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 0.9);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.snakeLead {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+/* The step's number: a plain teal numeral. */
+.snakeNumber {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 1.9);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* The end of the path: the file itself. */
+.snakeResult {
+  border: 2px solid var(--pe-teal);
+  background: var(--tint);
+  box-shadow: none;
+}
+
+.snakeLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pe-teal);
+}
+
+.snakeLink svg {
+  width: calc(var(--u) * 2.2);
+  height: calc(var(--u) * 2.2);
+}
+
+/* ---------- Accuracy: a headline figure and its five parts ---------- */
+
+.method {
+  display: grid;
+  grid-template-columns: 0.95fr 0.95fr 1.25fr;
+  align-items: stretch;
+  gap: calc(var(--u) * 2);
+}
+
+.method > div > .rowLabel {
+  margin-bottom: calc(var(--u) * 0.8);
+}
+
+.method .figure img {
+  max-height: calc(var(--u0) * 22);
+}
+
+.methodSteps {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.8);
+}
+
+.methodSteps li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 0.7) calc(var(--u) * 1);
+}
+
+.methodSteps .snakeLead {
+  flex-direction: row;
+}
+
+.methodSteps h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.methodSteps p {
+  margin-top: calc(var(--u) * 0.15);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.accuracy {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.4) calc(var(--u) * 1.2);
+}
+
+.accuracy .statValue {
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.accuracyPopulation {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 0.9);
+}
+
+.accuracyRows {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  margin: calc(var(--u) * 1) 0;
+}
+
+.accuracyRows li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: calc(var(--u) * 0.3) calc(var(--u) * 0.8);
+  color: var(--color-gray-800);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.2;
+}
+
+.accuracyRows strong {
+  color: var(--pe-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.accuracyRows i {
+  grid-column: 1 / -1;
+  height: calc(var(--u) * 0.5);
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+/* ---------- Episodes: a short list of icon rows, then one figure ---------- */
+
+.episodes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--u) * 1);
+}
+
+.episode {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.9);
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1) calc(var(--u) * 1.1);
+}
+
+.episode h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.episode p {
+  margin-top: calc(var(--u) * 0.25);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.25);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.episodeStat {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: calc(var(--u) * 1.3);
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.episodeStat .statLabel {
+  font-size: calc(var(--u) * 1.3);
+}
+
+/* ---------- Projects: a live page or a figure with a few labels ---------- */
+
+.project {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+  gap: calc(var(--u) * 2.4);
+}
+
+/* The live page takes the row's height, which the slide bounds. */
+.project > .embed {
+  min-height: 0;
+  height: 100%;
+}
+
+/* Beside a live page: two figures, a rule, then what the work covers,
+   spread over the frame's height. */
+.projectSide {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: calc(var(--u) * 0.4) 0;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.figure {
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 1.4);
+}
+
+.figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(var(--u0) * 28);
+  margin: 0 auto;
+}
+
+.figure figcaption {
+  margin-top: calc(var(--u) * 0.8);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+/* ---------- Embed: a live page in a framed window with a small toolbar ---------- */
+
+.embed {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.9);
+  background: white;
+  box-shadow: 0 calc(var(--u0) * 1) calc(var(--u0) * 2.4) calc(var(--u0) * -1.4) color-mix(in srgb, var(--pe-dark) 45%, transparent);
+  cursor: auto;
+}
+
+/* Expand: the same frame over the whole screen, above the deck's controls. */
+.embedExpanded {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  border: 0;
+  border-radius: 0;
+}
+
+.embedBar {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u0) * 0.7);
+  border-bottom: 1px solid var(--line);
+  background: var(--color-gray-50);
+  padding: calc(var(--u0) * 0.45) calc(var(--u0) * 0.7);
+  font-size: calc(var(--u0) * 0.95);
+}
+
+.embedAddress {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u0) * 0.4);
+  border-radius: 999px;
+  background: white;
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.8);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--color-gray-700);
+  font-weight: 500;
+}
+
+.embedAddress svg,
+.embedButton svg {
+  width: calc(var(--u0) * 1.15);
+  height: calc(var(--u0) * 1.15);
+}
+
+.embedViews {
+  display: flex;
+  gap: calc(var(--u0) * 0.2);
+}
+
+.embedView {
+  border-radius: calc(var(--u0) * 0.45);
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.7);
+  color: var(--pe-dark);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.embedView:hover,
+.embedView:focus-visible {
+  background: var(--tint);
+  color: var(--pe-teal-dark);
+}
+
+.embedButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(var(--u0) * 0.4);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.5);
+  background: white;
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.75);
+  color: var(--pe-dark);
+  font-size: calc(var(--u0) * 0.95);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.embedButton:hover,
+.embedButton:focus-visible {
+  border-color: var(--pe-teal);
+  color: var(--pe-teal-dark);
+}
+
+/* Puts Expand and New tab at the bar's right end. */
+.embedPush {
+  margin-left: auto;
+}
+
+/* The page's window; a zoomed frame is drawn larger and scaled down into it. */
+.embedView2 {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.embedFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+  transform-origin: top left;
+}
+
+/* Keys of the table interface: icon badges with a label, two to a row. */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--u) * 0.6) calc(var(--u) * 1);
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.keys .entity {
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 500;
 }

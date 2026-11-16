@@ -1,16 +1,14 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import katex from "katex";
 import {
+  IconArrowDown,
+  IconArrowLeft,
   IconArrowRight,
   IconArrowsLeftRight,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBuildingBank,
-  IconChartBar,
   IconChevronUp,
   IconFileCode,
-  IconFlame,
-  IconHome,
   IconMail,
   IconTable,
   IconWorld,
@@ -18,28 +16,30 @@ import {
 } from "@tabler/icons-react";
 import BasePathImage from "@/components/core/BasePathImage";
 import Slide from "@/components/core/Slide";
-import CoverSlide from "@/components/layout/CoverSlide";
 import { speakers } from "@/lib/speakers";
 import {
   abmQuestions,
   abmReturns,
-  aiShock,
-  appendixContents,
+  aiProject,
+  budgetProject,
   businessPolicy,
   calibrationEquation,
   calibrationFit,
+  calibrationTargets,
   components,
   coverage,
   dataAccess,
   epdTrace,
+  firmMethod,
+  firmProject,
   firmTools,
-  inBrief,
   interfaceSpec,
   interfaceToday,
   macroLinks,
   microcosmFlow,
-  microcosmRelease,
+  microcosmResult,
   microcosmStatus,
+  parts,
   pilots,
   questions,
   rulesCode,
@@ -51,25 +51,24 @@ import {
   tags,
   tariffBridge,
   tariffDisaggregation,
-  tradeEnergy,
   tradeEvents,
-  uncertainty,
-  uses,
+  tradeProject,
   whoWeAre,
   type Logo,
+  type PartKey,
   type Source,
   type Tag,
+  type TargetGroup,
 } from "../content";
+import Embed from "./Embed";
+import { CountUp, Reveal } from "./Reveal";
 import styles from "./deck.module.css";
 
-// The eyebrow above each title. The talk has three parts, then a close.
-const sections = {
-  intro: "PolicyEngine: who and what",
-  macro: "Overlap 1: macro and micro",
-  business: "Overlap 2: business modelling",
-  next: "Working together",
-  appendix: "Appendix",
-};
+/** Which of the talk's seven parts a slide belongs to. */
+type Section = PartKey;
+
+/** Staggers an element's entrance when its slide comes on screen. */
+const enter = (index: number) => ({ "--i": index }) as CSSProperties;
 
 function ExternalLink({ children, href }: { children: ReactNode; href: string }) {
   return (
@@ -85,20 +84,12 @@ function ExternalLink({ children, href }: { children: ReactNode; href: string })
   );
 }
 
-/** An icon in a tinted rounded square: the deck's one icon style. */
-function Badge({
-  icon: IconComponent,
-  size,
-  solid = false,
-}: {
-  icon: Icon;
-  size?: "small" | "large";
-  solid?: boolean;
-}) {
+/** An icon in the teal ink, with no box behind it: the deck's one icon style. */
+function Badge({ icon: IconComponent, size }: { icon: Icon; size?: "small" | "large" }) {
   const sizeClass = size === "small" ? styles.badgeSmall : size === "large" ? styles.badgeLarge : "";
   return (
-    <span className={`${styles.badge} ${sizeClass} ${solid ? styles.badgeSolid : ""}`}>
-      <IconComponent stroke={1.8} aria-hidden="true" />
+    <span className={`${styles.badge} ${sizeClass}`}>
+      <IconComponent stroke={1.75} aria-hidden="true" />
     </span>
   );
 }
@@ -111,6 +102,27 @@ function StatusTag({ tag }: { tag: Tag }) {
 const bodyScale = (scale: number) =>
   ({ "--u": `calc(var(--u0) * ${scale})` }) as CSSProperties;
 
+/** The label above a title, and the talk's seven parts as a row of marks. */
+function PartHeader({ section }: { section: Section }) {
+  const current = parts.findIndex((part) => part.key === section);
+  return (
+    <div className={styles.partRow}>
+      <p className={styles.section}>
+        <span className={styles.sectionNumber}>{current + 1}</span>
+        {parts[current].title}
+      </p>
+      <div className={styles.tracker} aria-hidden="true">
+        {parts.map((part, index) => (
+          <span
+            key={part.key}
+            className={index === current ? styles.trackerCurrent : index < current ? styles.trackerDone : ""}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Frame({
   section,
   title,
@@ -119,8 +131,9 @@ function Frame({
   children,
   references = [],
   scale = 1.25,
+  fill = false,
 }: {
-  section?: string;
+  section?: Section;
   title: string;
   subtitle?: string;
   /** Status tags shown beside the subtitle. */
@@ -129,12 +142,14 @@ function Frame({
   references?: Source[];
   /** Size of the body relative to the deck's base unit. */
   scale?: number;
+  /** The body fills the slide from the top, for a live page or a figure. */
+  fill?: boolean;
 }) {
   return (
     <Slide className={styles.deck}>
       <div className={styles.frame}>
         <header>
-          {section && <p className={styles.section}>{section}</p>}
+          {section && <PartHeader section={section} />}
           <h1 className={styles.title}>{title}</h1>
           {(subtitle || status.length > 0) && (
             <div className={styles.subtitleRow}>
@@ -146,7 +161,7 @@ function Frame({
           )}
           <div className={`accent-bar ${styles.bar}`} />
         </header>
-        <div className={styles.body} style={bodyScale(scale)}>
+        <div className={`${styles.body} ${fill ? styles.bodyFill : ""}`} style={bodyScale(scale)}>
           {children}
         </div>
         {references.length > 0 && (
@@ -173,15 +188,26 @@ function Card({
   text,
   cardTags = [],
   children,
+  step = 1,
+  index,
 }: {
   icon: Icon;
   title: string;
   text?: string;
   cardTags?: Tag[];
   children?: ReactNode;
+  /** The build step at which the card appears. */
+  step?: number;
+  /** Position in a row of cards, for a staggered entrance. */
+  index?: number;
 }) {
   return (
-    <div className={styles.card}>
+    <Reveal
+      step={step}
+      ghost
+      className={`${styles.card} ${index === undefined ? "" : styles.enter}`}
+      style={index === undefined ? undefined : enter(index)}
+    >
       <div className={styles.cardHead}>
         <Badge icon={icon} size="large" />
         <div className={styles.tagRow}>
@@ -193,7 +219,7 @@ function Card({
       <h2>{title}</h2>
       {text && <p>{text}</p>}
       {children}
-    </div>
+    </Reveal>
   );
 }
 
@@ -206,51 +232,67 @@ type Step = {
   dashed?: boolean;
 };
 
-/** Icon steps joined by arrows, with an optional bracket under a run of steps. */
+/**
+ * Icon steps joined by arrows, with an optional bracket under a run of steps.
+ * "builds" gives the build step at which each step appears, with the arrow
+ * that leads to it; without it the steps enter together, one after another.
+ */
 function Flow({
   steps,
   bracket,
   feedback,
   titleLines,
+  builds,
 }: {
   steps: Step[];
   /** A return arrow under the flow, from the last step back to the first. */
-  feedback?: { label: string; tag?: Tag };
+  feedback?: { label: string; tag?: Tag; step?: number };
   /** Reserve this many lines for every step title, so the text below lines up. */
   titleLines?: number;
-  bracket?: { from: number; to: number; label: string };
+  bracket?: { from: number; to: number; label: string; step?: number };
+  builds?: number[];
 }) {
   const template = steps.map(() => "minmax(0, 1fr)").join(" auto ");
   return (
     <div className={styles.flow} style={{ gridTemplateColumns: template }}>
-      {steps.map((step, index) => (
-        <Fragment key={step.title}>
-          {index > 0 && (
-            <span className={styles.arrow} style={{ gridRow: 1 }}>
-              <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </span>
-          )}
-          <div className={`${styles.step} ${step.dashed ? styles.stepDashed : ""}`} style={{ gridRow: 1 }}>
-            <div className={styles.stepTop}>
-              <Badge icon={step.icon} />
-              {step.tag && <StatusTag tag={step.tag} />}
-            </div>
-            {step.owner && <p className={styles.owner}>{step.owner}</p>}
-            <h2 style={titleLines ? { minHeight: `${1.2 * titleLines}em` } : undefined}>{step.title}</h2>
-            <p>{step.text}</p>
-          </div>
-        </Fragment>
-      ))}
+      {steps.map((step, index) => {
+        const at = builds?.[index] ?? 1;
+        return (
+          <Fragment key={step.title}>
+            {index > 0 && (
+              <Reveal step={at} motion="wipe" className={styles.arrow} style={{ gridRow: 1 }}>
+                <IconArrowRight stroke={2.2} aria-hidden="true" />
+              </Reveal>
+            )}
+            <Reveal
+              step={at}
+              ghost
+              className={`${styles.step} ${step.dashed ? styles.stepDashed : ""} ${builds ? "" : styles.enter}`}
+              style={{ gridRow: 1, ...(builds ? {} : enter(index)) }}
+            >
+              <div className={styles.stepTop}>
+                <Badge icon={step.icon} />
+                {step.tag ? <StatusTag tag={step.tag} /> : <span className={styles.stepIndex}>{index + 1}</span>}
+              </div>
+              {step.owner && <p className={styles.owner}>{step.owner}</p>}
+              <h2 style={titleLines ? { minHeight: `${1.2 * titleLines}em` } : undefined}>{step.title}</h2>
+              <p>{step.text}</p>
+            </Reveal>
+          </Fragment>
+        );
+      })}
       {bracket && (
-        <div
+        <Reveal
+          step={bracket.step ?? 1}
+          motion="fade"
           className={styles.bracket}
           style={{ gridColumn: `${2 * bracket.from + 1} / ${2 * bracket.to + 2}` }}
         >
           <p>{bracket.label}</p>
-        </div>
+        </Reveal>
       )}
       {feedback && (
-        <>
+        <Reveal step={feedback.step ?? 1} motion="fade" className={styles.feedback}>
           <span className={`${styles.feedbackLine} ${styles.feedbackStart}`} style={{ gridColumn: 1 }}>
             <IconChevronUp stroke={2.2} aria-hidden="true" />
           </span>
@@ -266,7 +308,7 @@ function Flow({
             <p>{feedback.label}</p>
             {feedback.tag && <StatusTag tag={feedback.tag} />}
           </div>
-        </>
+        </Reveal>
       )}
     </div>
   );
@@ -279,28 +321,6 @@ function Mini({ icon, title, text }: { icon: Icon; title: string; text?: string 
       <div>
         <h3>{title}</h3>
         {text && <p>{text}</p>}
-      </div>
-    </div>
-  );
-}
-
-function Stat({
-  icon,
-  value,
-  label,
-  medium = false,
-}: {
-  icon: Icon;
-  value: string;
-  label: string;
-  medium?: boolean;
-}) {
-  return (
-    <div className={`${styles.stat} ${medium ? styles.statMedium : ""}`}>
-      <Badge icon={icon} size={medium ? undefined : "large"} />
-      <div>
-        <p className={styles.statValue}>{value}</p>
-        <p className={styles.statLabel}>{label}</p>
       </div>
     </div>
   );
@@ -326,42 +346,68 @@ function Tex({ tex, display = false }: { tex: string; display?: boolean }) {
   );
 }
 
+// The cover follows the shared CoverSlide, with the audience's name set as
+// written: that component capitalises every word of its event line.
+const coverSpeakers = [
+  { ...speakers["vahid-ahmadi"], title: "Research Associate" },
+  { ...speakers["max-ghenis"], title: "CEO" },
+];
+
 export function TitleSlide() {
   return (
-    <CoverSlide
-      title="From business shocks to household incomes"
-      subtitle="Tax–benefit microsimulation alongside trade, macroeconomic and agent-based models"
-      event="BIST Modelling Unit"
-      date="19 November 2026"
-      speakers={[
-        { ...speakers["vahid-ahmadi"], title: "Research Associate" },
-        { ...speakers["max-ghenis"], title: "CEO" },
-      ]}
-    />
+    <Slide isCover>
+      <div className="relative z-10 flex flex-col items-center justify-center space-y-10">
+        <div className="h-1 w-20 rounded-full bg-white/30" />
+        <h1 className="font-display text-center text-5xl font-bold text-white">
+          From business shocks to household incomes
+        </h1>
+        <p className="text-center text-2xl text-white opacity-80">
+          Tax–benefit microsimulation alongside trade, macroeconomic and agent-based models
+        </p>
+        <div className="mt-4 flex items-start justify-center gap-16">
+          {coverSpeakers.map((speaker) => (
+            <div key={speaker.name} className="flex w-52 shrink-0 flex-col items-center text-center">
+              <div className="relative mb-3 h-28 w-28 overflow-hidden rounded-full border-2 border-white/40">
+                <BasePathImage src={speaker.photo} alt={speaker.name} fill className="object-cover" />
+              </div>
+              <p className="text-xl font-semibold text-white">{speaker.name}</p>
+              <p className="text-sm font-light text-white/70">{speaker.title}</p>
+            </div>
+          ))}
+        </div>
+        <div className="pt-2 text-center text-white opacity-70">
+          <p>Modelling Unit, Department for Business, Innovation, Science and Trade</p>
+          <p>19 November 2026</p>
+        </div>
+      </div>
+    </Slide>
   );
 }
 
 export function InBriefSlide() {
   return (
-    <Frame title="In brief"
-      scale={1.35} subtitle="Three parts, then two candidate pilots to discuss">
+    <Frame section="intro" title="In brief" scale={1.08} subtitle="The talk in seven parts: this introduction, then six more">
       <div className={styles.cards} style={columns(3)}>
-        {inBrief.map((item) => (
-          <Card
-            key={item.title}
-            icon={item.icon}
-            title={item.title}
-            text={item.text}
-            cardTags={item.tag ? [item.tag] : []}
-          />
+        {parts.slice(1).map((part, index) => (
+          <div key={part.key} className={`${styles.card} ${styles.partCard} ${styles.enter}`} style={enter(index)}>
+            <div className={styles.cardHead}>
+              <div className={styles.partCardLead}>
+                <span className={styles.partNumber}>{index + 2}</span>
+                <Badge icon={part.icon} />
+              </div>
+              {"tag" in part && <StatusTag tag={part.tag} />}
+            </div>
+            <h2>{part.title}</h2>
+            <p>{part.text}</p>
+          </div>
         ))}
       </div>
     </Frame>
   );
 }
 
-/** One organisation's mark, at its own height, linked to its source if it has one. */
-function LogoMark({ org }: { org: Logo }) {
+/** One organisation: its mark in a cell of fixed height, and a caption below. */
+function LogoCell({ org }: { org: Logo }) {
   const mark = org.logo ? (
     <BasePathImage
       src={org.logo}
@@ -369,14 +415,12 @@ function LogoMark({ org }: { org: Logo }) {
       width={org.width ?? 1}
       height={org.pixelHeight ?? 1}
       className={org.darken ? styles.logoDarken : undefined}
-      style={{ height: `calc(var(--u) * ${org.height})`, width: "auto" }}
+      style={{ height: `calc(var(--u0) * ${org.height})`, width: "auto" }}
     />
   ) : (
-    <span className={styles.wordmark} style={{ height: `calc(var(--u) * ${org.height})` }}>
-      {org.name}
-    </span>
+    <span className={styles.wordmark}>{org.name}</span>
   );
-  return org.source ? (
+  const box = org.source ? (
     <a
       href={org.source.href}
       target="_blank"
@@ -392,15 +436,34 @@ function LogoMark({ org }: { org: Logo }) {
       {mark}
     </span>
   );
+  return (
+    <div className={styles.logoCell}>
+      {box}
+      {org.caption && <p className={styles.logoCaption}>{org.caption}</p>}
+    </div>
+  );
+}
+
+function LogoSection({ title, logos }: { title: string; logos: Logo[] }) {
+  return (
+    <section className={styles.logoSection}>
+      <h2 className={styles.rowLabel}>{title}</h2>
+      <div className={styles.logoGrid} style={columns(logos.length)}>
+        {logos.map((org) => (
+          <LogoCell key={org.name} org={org} />
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export function WhoSlide() {
   const { facts, government, thinkTanks } = whoWeAre;
   return (
     <Frame
-      section={sections.intro}
+      section="intro"
       title="Who we are"
-      scale={1.05}
+      scale={0.97}
       subtitle="The organisation, and who uses our UK work"
       references={[
         sources.about,
@@ -415,44 +478,19 @@ export function WhoSlide() {
         sources.niesr,
       ]}
     >
-      <div className="grid grid-cols-[1fr_2fr] items-center gap-[calc(var(--u)*3)]">
-        <div className={styles.vsteps}>
-          {facts.map((fact) => (
-            <div key={fact.title} className={styles.vstep}>
-              <Badge icon={fact.icon} size="large" />
-              <div>
-                <h3>{fact.title}</h3>
-                <p>{fact.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.cards}>
-          <div className={`${styles.card} ${styles.cardCompact}`}>
-            <h2 className={styles.figureTitle}>In government</h2>
-            <div className={styles.logoGroups}>
-              {government.map((group) => (
-                <div key={group.caption} className={styles.logoGroup}>
-                  <div className={styles.logoRow}>
-                    {group.logos.map((org) => (
-                      <LogoMark key={org.name} org={org} />
-                    ))}
-                  </div>
-                  <p className={styles.logoCaption}>{group.caption}</p>
-                </div>
-              ))}
+      <div className={styles.facts}>
+        {facts.map((fact, index) => (
+          <div key={fact.title} className={`${styles.fact} ${styles.enter}`} style={enter(index)}>
+            <Badge icon={fact.icon} />
+            <div>
+              <h3>{fact.title}</h3>
+              <p>{fact.text}</p>
             </div>
           </div>
-          <div className={`${styles.card} ${styles.cardCompact}`}>
-            <h2 className={styles.figureTitle}>Think tanks and researchers using our work</h2>
-            <div className={styles.logoRow}>
-              {thinkTanks.map((org) => (
-                <LogoMark key={org.name} org={org} />
-              ))}
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
+      <LogoSection title="In government" logos={government} />
+      <LogoSection title="Think tanks and researchers using our work" logos={thinkTanks} />
     </Frame>
   );
 }
@@ -460,13 +498,13 @@ export function WhoSlide() {
 export function WhatSlide() {
   return (
     <Frame
-      section={sections.intro}
+      section="what"
       title="PolicyEngine UK computes household incomes after taxes and benefits"
       scale={1.5}
       subtitle="Open-source microsimulation: spending is an input, income is the result"
       references={[sources.model, sources.data, sources.python, sources.joss]}
     >
-      <Flow steps={components} />
+      <Flow steps={components} builds={[1, 2, 3]} />
     </Frame>
   );
 }
@@ -474,14 +512,14 @@ export function WhatSlide() {
 export function RunSlide() {
   return (
     <Frame
-      section={sections.intro}
+      section="what"
       title="How a reform or a scenario is run"
       scale={1.5}
       subtitle="Two simulations on the same households: baseline and counterfactual"
       status={[runStatus]}
       references={[sources.model, sources.growth, sources.labourSupply, sources.impactAnalysis]}
     >
-      <Flow steps={runFlow} />
+      <Flow steps={runFlow} builds={[1, 2, 3, 4]} />
     </Frame>
   );
 }
@@ -490,14 +528,14 @@ export function EpdSlide() {
   const { flow, feedback } = epdTrace;
   return (
     <Frame
-      section={sections.macro}
+      section="explore"
       title="The Economic Prosperity Deal: from macro impacts to households"
       scale={1.25}
       subtitle="How one deal could be traced from a trade or macro model's results to household incomes"
       status={[tags.notBuilt, tags.noResults]}
       references={[sources.epd, sources.trade, sources.python]}
     >
-      <Flow steps={flow} titleLines={2} feedback={feedback} />
+      <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
     </Frame>
   );
 }
@@ -506,7 +544,7 @@ export function DisaggregationSlide() {
   const { rows, breakdowns } = tariffDisaggregation;
   return (
     <Frame
-      section={sections.macro}
+      section="explore"
       title="Disaggregation: how sector results reach people"
       scale={1.08}
       subtitle="Inside the PolicyEngine step: which records receive each change"
@@ -515,34 +553,42 @@ export function DisaggregationSlide() {
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>The other model's result</p>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
+        <Reveal step={2} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
           Mapped by
           <StatusTag tag={tags.notBuilt} />
-        </p>
+        </Reveal>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine can assign it to</p>
+        <Reveal step={3} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
+          PolicyEngine can assign it to
+        </Reveal>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine can already report</p>
+        <Reveal step={4} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
+          PolicyEngine can already report
+        </Reveal>
         {rows.map((row) => (
           <Fragment key={row.result}>
             <div className={`${styles.cell} ${styles.cellLead}`}>
               <Badge icon={row.icon} size="small" />
               {row.result}
             </div>
-            <span className={styles.arrow}>
+            <Reveal step={2} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </span>
-            <div className={`${styles.cell} ${styles.cellDashed}`}>{row.key}</div>
-            <span className={styles.arrow}>
+            </Reveal>
+            <Reveal step={2} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+              {row.key}
+            </Reveal>
+            <Reveal step={3} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </span>
-            <div className={styles.cell}>{row.assigned}</div>
+            </Reveal>
+            <Reveal step={3} ghost className={styles.cell}>
+              {row.assigned}
+            </Reveal>
           </Fragment>
         ))}
-        <span className={`${styles.arrow} ${styles.sharedArrow}`}>
+        <Reveal step={4} motion="wipe" className={`${styles.arrow} ${styles.sharedArrow}`}>
           <IconArrowRight stroke={2.2} aria-hidden="true" />
-        </span>
-        <div className={`${styles.cell} ${styles.sharedCell}`}>
+        </Reveal>
+        <Reveal step={4} ghost className={`${styles.cell} ${styles.sharedCell}`}>
           <ul className={styles.list}>
             {breakdowns.map((item) => (
               <li key={item.title}>
@@ -551,7 +597,7 @@ export function DisaggregationSlide() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </div>
     </Frame>
   );
@@ -561,10 +607,10 @@ export function BridgeSlide() {
   const { steps, replaceable, cushion } = tariffBridge;
   return (
     <Frame
-      section={sections.macro}
-      title="The tariff bridge: steps a trade model could replace"
+      section="projects"
+      title="The tariff study: from US tariffs to employees’ earnings"
       scale={1.1}
-      subtitle="From the 2025 US tariffs to survey employees' earnings"
+      subtitle="The 2025 US tariffs, traced to employees and through taxes and benefits"
       status={[tags.frsNotMicrocosm, { label: "Deal not yet modelled", tone: "muted" }]}
       references={[sources.trade, sources.epd]}
     >
@@ -575,6 +621,7 @@ export function BridgeSlide() {
           from: replaceable[0],
           to: replaceable[1],
           label: "A trade model could replace these",
+          step: 3,
         }}
       />
       <div className={styles.finding}>
@@ -586,51 +633,20 @@ export function BridgeSlide() {
             Through lower taxes and NI, more benefits and lower pension contributions
           </p>
         </div>
-        <div>
-          <p className={styles.statValue}>{cushion.wageCuts}</p>
+        <Reveal step={2}>
+          <p className={styles.statValue}>
+            <CountUp value={cushion.wageCuts} step={2} />
+          </p>
           <p className={styles.statLabel}>if the loss comes as wage cuts across workers</p>
-        </div>
-        <div>
-          <p className={styles.statValue}>{cushion.jobLosses}</p>
+        </Reveal>
+        <Reveal step={2}>
+          <p className={styles.statValue}>
+            <CountUp value={cushion.jobLosses} step={2} />
+          </p>
           <p className={styles.statLabel}>
             if it comes as job losses (SD {cushion.jobLossesSd} across 100 draws)
           </p>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
-export function UncertaintySlide() {
-  return (
-    <Frame
-      section={sections.appendix}
-      title="Assignment variability: repeated random draws"
-      scale={1.05}
-      subtitle="A sector scenario gives totals; random draws choose which employees are affected"
-      status={[tags.illustrative, tags.frsNotMicrocosm]}
-      references={[sources.ai, sources.aiDraws, sources.trade]}
-    >
-      <div className="grid grid-cols-[1fr_1.15fr] items-center gap-[calc(var(--u)*3)]">
-        <div className={styles.vsteps}>
-          {uncertainty.steps.map((step) => (
-            <div key={step.title} className={styles.vstep}>
-              <Badge icon={step.icon} size="large" />
-              <div>
-                <h3>{step.title}</h3>
-                {step.text && <p>{step.text}</p>}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.card}>
-          <h2 className={styles.figureTitle}>Exchequer cost, AI scenario</h2>
-          <div className={styles.pairs}>
-            {uncertainty.stats.map((stat) => (
-              <Stat key={stat.value} icon={stat.icon} value={stat.value} label={stat.label} medium />
-            ))}
-          </div>
-        </div>
+        </Reveal>
       </div>
     </Frame>
   );
@@ -642,7 +658,7 @@ const codeAccent = /(\b(?:class|def|return)\b|"[^"]*")/;
 export function RulesSlide() {
   return (
     <Frame
-      section={sections.intro}
+      section="what"
       title="How the rules are encoded"
       scale={1.2}
       subtitle="Law as dated parameters, formulas and tests"
@@ -652,7 +668,7 @@ export function RulesSlide() {
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
         <div className={styles.code}>
           <p className={styles.codeTitle}>
-            <IconFileCode stroke={1.8} aria-hidden="true" />
+            <Badge icon={IconFileCode} size="small" />
             {rulesCode.title}
           </p>
           <pre>
@@ -678,9 +694,9 @@ export function RulesSlide() {
           <div className={styles.divider}>
             <p className={styles.rowLabel}>Three entities</p>
             <div className={styles.chips}>
-              {rulesEntities.map(({ icon: EntityIcon, label }) => (
-                <span key={label} className={styles.chip}>
-                  <EntityIcon stroke={1.8} aria-hidden="true" />
+              {rulesEntities.map(({ icon, label }) => (
+                <span key={label} className={styles.entity}>
+                  <Badge icon={icon} size="small" />
                   {label}
                 </span>
               ))}
@@ -692,39 +708,97 @@ export function RulesSlide() {
   );
 }
 
+/** One stop on the snake: a numbered step, wide and short. */
+function SnakeStep({
+  step,
+  number,
+  area,
+  result = false,
+}: {
+  step: Step;
+  number?: number;
+  area: string;
+  result?: boolean;
+}) {
+  return (
+    <Reveal
+      step={number ?? 5}
+      ghost
+      className={`${styles.snakeStep} ${result ? styles.snakeResult : ""}`}
+      style={{ gridArea: area }}
+    >
+      <div className={styles.snakeLead}>
+        {number && <span className={styles.snakeNumber}>{number}</span>}
+        <Badge icon={step.icon} size="large" />
+      </div>
+      <div>
+        {step.owner && <p className={styles.owner}>{step.owner}</p>}
+        <h2>{step.title}</h2>
+        <p>{step.text}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+function SnakeLink({ step, area, icon: LinkIcon }: { step: number; area: string; icon: Icon }) {
+  return (
+    <Reveal step={step} motion="fade" className={styles.snakeLink} style={{ gridArea: area }}>
+      <LinkIcon stroke={2.2} aria-hidden="true" />
+    </Reveal>
+  );
+}
+
+// The household file's build as a snake: three steps left to right, a turn
+// down, then two steps right to left, ending at the file itself.
 export function MicrocosmBuildSlide() {
+  const [spine, tax, wealth, takeUp, weights] = microcosmFlow;
   return (
     <Frame
-      section={sections.intro}
+      section="what"
       title="Microcosm UK 2024–25: how the household file is built"
-      scale={1.3}
+      scale={1.22}
       subtitle="An open-source pipeline of 54 stages, from surveys and statistics to weights"
       status={[microcosmStatus]}
       references={[sources.sourceStages, sources.imputation, sources.data]}
     >
-      <Flow steps={microcosmFlow} titleLines={2} />
+      <div className={styles.snake}>
+        <SnakeStep step={spine} number={1} area="a" />
+        <SnakeLink step={2} area="ab" icon={IconArrowRight} />
+        <SnakeStep step={tax} number={2} area="b" />
+        <SnakeLink step={3} area="bc" icon={IconArrowRight} />
+        <SnakeStep step={wealth} number={3} area="c" />
+        <SnakeLink step={4} area="turn" icon={IconArrowDown} />
+        <SnakeStep step={takeUp} number={4} area="d" />
+        <SnakeLink step={5} area="de" icon={IconArrowLeft} />
+        <SnakeStep step={weights} number={5} area="e" />
+        <SnakeLink step={5} area="ef" icon={IconArrowLeft} />
+        <SnakeStep step={microcosmResult} area="f" result />
+      </div>
     </Frame>
   );
 }
 
 export function CalibrationSlide() {
-  const { stats, publishers, solver } = calibrationFit;
-  const largest = Math.max(...publishers.map((row) => row.count));
+  const { stats, solver } = calibrationFit;
+  // The first build shows what goes in (targets and records); the second,
+  // how the fitted weights do (fit and effective sample size).
+  const [targets, fit, sample, records] = stats;
+  const tiles = [
+    { stat: targets, step: 1 },
+    { stat: records, step: 1 },
+    { stat: fit, step: 2 },
+    { stat: sample, step: 2 },
+  ];
   return (
     <Frame
-      section={sections.intro}
+      section="what"
       title="Calibration: weights fitted to official statistics"
-      scale={1.1}
+      scale={1.02}
       subtitle="The certified national build of 7 November 2026"
       status={[{ label: "In-sample fit", tone: "caution" }]}
       references={[sources.dashboard, sources.calibration, sources.doctrine]}
     >
-      <div className={styles.kpis}>
-        {stats.map((stat) => (
-          <Stat key={stat.label} icon={stat.icon} value={stat.value} label={stat.label} medium />
-        ))}
-      </div>
-      <div className="grid grid-cols-[1.15fr_1fr] items-start gap-[calc(var(--u)*3)]">
+      <div className="grid grid-cols-[1.1fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
           <h2 className={styles.figureTitle}>What the solver minimises</h2>
           <Tex tex={calibrationEquation} display />
@@ -750,24 +824,117 @@ export function CalibrationSlide() {
             ))}
           </div>
         </div>
-        <div>
-          <h2 className={styles.figureTitle}>Targets by publisher</h2>
-          <div className={styles.bars}>
-            {publishers.map((row) => (
-              <Fragment key={row.name}>
-                <span className={styles.barName}>{row.name}</span>
-                <span className={styles.barTrack}>
-                  <span
-                    className={styles.barFill}
-                    style={{ width: `${(row.count / largest) * 82}%` }}
-                  />
-                  <span className={styles.barCount}>{row.count}</span>
-                </span>
-              </Fragment>
-            ))}
-          </div>
+        <div className={styles.kpis}>
+          {tiles.map(({ stat, step }) => (
+            <Reveal key={stat.label} step={step} ghost className={styles.kpi}>
+              <Badge icon={stat.icon} />
+              <p className={styles.statValue}>
+                {step > 1 ? <CountUp value={stat.value} step={step} /> : stat.value}
+              </p>
+              <p className={styles.statLabel}>{stat.label}</p>
+            </Reveal>
+          ))}
         </div>
       </div>
+    </Frame>
+  );
+}
+
+type Publisher = (typeof calibrationTargets)[keyof typeof calibrationTargets];
+
+/**
+ * A publisher's block in the target map. Its first "tiles" statistics are
+ * tiles sized by their counts; the rest are listed with their counts.
+ */
+function TargetBlock({
+  publisher,
+  area,
+  index,
+  tiles,
+  direction = "row",
+  small = false,
+}: {
+  publisher: Publisher;
+  area: string;
+  index: number;
+  tiles: number;
+  direction?: "row" | "column";
+  /** A small block: a tighter head and list. */
+  small?: boolean;
+}) {
+  const sized: TargetGroup[] = publisher.groups.slice(0, tiles);
+  const listed: TargetGroup[] = publisher.groups.slice(tiles);
+  return (
+    <div
+      className={`${styles.targetBlock} ${small ? styles.targetSmall : ""} ${styles.enter}`}
+      style={{ gridArea: area, ...enter(index), "--shade": publisher.shade } as CSSProperties}
+    >
+      <div className={styles.targetHead}>
+        <Badge icon={publisher.icon} size="small" />
+        <h2>{publisher.name}</h2>
+        <strong>{publisher.count.toLocaleString("en-GB")}</strong>
+      </div>
+      {sized.length > 0 && (
+        <div className={styles.targetTiles} style={{ flexDirection: direction }}>
+          {sized.map((group) => (
+            <div key={group.label} className={styles.targetTile} style={{ flexGrow: group.count }}>
+              <span>{group.label}</span>
+              <strong>{group.count}</strong>
+            </div>
+          ))}
+        </div>
+      )}
+      {listed.length > 0 && (
+        <p className={styles.targetList}>
+          {listed.map((group) => (
+            <span key={group.label}>
+              {group.label} <strong>{group.count}</strong>
+            </span>
+          ))}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export function TargetsSlide() {
+  const { hmrc, ons, dwp, mhclg, others } = calibrationTargets;
+  return (
+    <Frame
+      section="what"
+      title="What the weights are fitted to"
+      scale={1.1}
+      fill
+      subtitle="The 1,514 targets of the certified 7 November build, by publisher and statistic"
+      status={[{ label: "All at model year 2025", tone: "muted" }]}
+      references={[sources.dashboard, sources.calibration]}
+    >
+      <div className={styles.targetMap}>
+        <TargetBlock publisher={hmrc} area="hmrc" index={0} tiles={3} direction="column" />
+        <TargetBlock publisher={ons} area="ons" index={1} tiles={2} />
+        <TargetBlock publisher={dwp} area="dwp" index={2} tiles={2} />
+        <TargetBlock publisher={mhclg} area="mhclg" index={3} tiles={0} small />
+        <TargetBlock publisher={others} area="others" index={4} tiles={0} small />
+      </div>
+      <p className={styles.targetFoot}>
+        Each publisher’s block has an area in proportion to its number of targets.
+      </p>
+    </Frame>
+  );
+}
+
+export function CalibrationLiveSlide() {
+  return (
+    <Frame
+      section="what"
+      title="Explore the fit: the live calibration dashboard"
+      scale={1.1}
+      fill
+      subtitle="Every target’s official figure beside the fitted value"
+      status={[{ label: "Certified 7 November build", tone: "built" }]}
+      references={[sources.dashboard]}
+    >
+      <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
     </Frame>
   );
 }
@@ -776,7 +943,7 @@ export function BusinessPolicySlide() {
   const { flow } = businessPolicy;
   return (
     <Frame
-      section={sections.business}
+      section="ideas"
       title="Business policy: from firm costs to households"
       scale={1.45}
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
@@ -791,7 +958,7 @@ export function BusinessPolicySlide() {
 export function FirmToolsSlide() {
   return (
     <Frame
-      section={sections.business}
+      section="have"
       title="What we have on the business side"
       scale={1.2}
       subtitle="Each labelled by how far along it is"
@@ -799,7 +966,14 @@ export function FirmToolsSlide() {
     >
       <div className={styles.cards} style={columns(3)}>
         {firmTools.map((tool) => (
-          <Card key={tool.title} icon={tool.icon} title={tool.title} text={tool.text} cardTags={tool.tags}>
+          <Card
+            key={tool.title}
+            icon={tool.icon}
+            title={tool.title}
+            text={tool.text}
+            cardTags={tool.tags}
+            index={firmTools.indexOf(tool)}
+          >
             {tool.facts.length > 0 && (
               <div className={styles.cardFacts}>
                 {tool.facts.map((fact) => (
@@ -816,75 +990,15 @@ export function FirmToolsSlide() {
   );
 }
 
-// Positions on a £0bn to £40bn scale.
-const pct = (bn: number) => `${(bn / 40) * 100}%`;
-
-export function AiSlide() {
-  return (
-    <Frame
-      section={sections.appendix}
-      title="Who bears the cost of the AI scenario?"
-      scale={1.3}
-      subtitle="A 2026 scenario: 7% of employees lose a year's earnings"
-      status={[tags.illustrative, tags.frsNotMicrocosm]}
-      references={[sources.ai]}
-    >
-      <div className="grid grid-cols-[1fr_1.9fr] items-center gap-[calc(var(--u)*3)]">
-        <div className={styles.vsteps} style={{ gap: "calc(var(--u) * 2.4)" }}>
-          <Stat icon={IconBuildingBank} value={aiShock.cost} label="Exchequer cost: mean of 50 draws" />
-          <Stat icon={IconHome} value={aiShock.poverty} label="Absolute poverty before housing costs" />
-        </div>
-        <div className={styles.card}>
-          <h2 className={styles.figureTitle}>Exchequer cost by who loses the jobs</h2>
-          <div>
-            <div className={styles.range}>
-              <span className={styles.rangeBand} style={{ left: pct(13.9), width: `calc(${pct(20.6)} - ${pct(13.9)})` }} />
-              <span className={styles.rangeMark} style={{ left: pct(13.9) }} />
-              <span className={styles.rangeMark} style={{ left: pct(20.6) }} />
-              <span className={`${styles.rangeMark} ${styles.rangeMarkMuted}`} style={{ left: pct(32.8) }} />
-              <span className={styles.rangeLabel} style={{ left: pct(13.9) }}>
-                {aiShock.patternLow}
-                <span>uniform</span>
-              </span>
-              <span className={styles.rangeLabel} style={{ left: pct(20.6) }}>
-                {aiShock.patternHigh}
-                <span>top-third tilt</span>
-              </span>
-              <span className={styles.rangeLabel} style={{ left: pct(32.8) }}>
-                {aiShock.topLoaded}
-                <span>top-loaded stress test</span>
-              </span>
-            </div>
-            <div className={styles.rangeTicks}>
-              {[0, 10, 20, 30, 40].map((bn) => (
-                <span key={bn} style={{ left: pct(bn) }}>
-                  £{bn}bn
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className={styles.divider}>
-            <Mini
-              icon={IconChartBar}
-              title={`Poverty varies less: ${aiShock.povertyRange}`}
-              text="across the four same-size patterns (the teal band)"
-            />
-          </div>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
 export function AbmSlide() {
   return (
     <Frame
-      section={sections.business}
+      section="ideas"
       title="Where an agent-based model could link"
       scale={1.15}
       subtitle="Three candidate questions, for discussion"
       status={[tags.notBuilt]}
-      references={[sources.dosi, sources.gtap, sources.ai, sources.inet]}
+      references={[sources.dosi, sources.gtap, sources.aiPost, sources.inet]}
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Policy question</p>
@@ -894,20 +1008,24 @@ export function AbmSlide() {
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>It could pass in</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine can report</p>
-        {abmQuestions.map((row) => (
+        {abmQuestions.map((row, index) => (
           <Fragment key={row.question}>
-            <div className={`${styles.cell} ${styles.cellLead}`}>
+            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellLead}`}>
               <Badge icon={row.icon} />
               {row.question}
-            </div>
-            <span className={styles.arrow}>
+            </Reveal>
+            <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </span>
-            <div className={`${styles.cell} ${styles.cellDashed}`}>{row.behaviour}</div>
-            <span className={styles.arrow}>
+            </Reveal>
+            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+              {row.behaviour}
+            </Reveal>
+            <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </span>
-            <div className={`${styles.cell} ${styles.cellDashed}`}>{row.passes}</div>
+            </Reveal>
+            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+              {row.passes}
+            </Reveal>
           </Fragment>
         ))}
         <span className={`${styles.arrow} ${styles.sharedArrow}`}>
@@ -924,7 +1042,7 @@ export function AbmSlide() {
 export function MacroSlide() {
   return (
     <Frame
-      section={sections.macro}
+      section="explore"
       title="Links to macroeconomic models"
       scale={1.25}
       subtitle="Three possible routes, at three stages"
@@ -932,7 +1050,14 @@ export function MacroSlide() {
     >
       <div className={styles.cards} style={columns(3)}>
         {macroLinks.map((link) => (
-          <Card key={link.title} icon={link.icon} title={link.title} text={link.text} cardTags={link.tags}>
+          <Card
+            key={link.title}
+            icon={link.icon}
+            title={link.title}
+            text={link.text}
+            cardTags={link.tags}
+            step={macroLinks.indexOf(link) + 1}
+          >
             <div className={styles.link}>
               <span>{link.from}</span>
               {link.twoWay ? (
@@ -968,33 +1093,44 @@ function SpecRows({ rows }: { rows: { icon: Icon; field: string; text?: string }
 export function InterfaceSlide() {
   return (
     <Frame
-      section={sections.macro}
+      section="ideas"
       title="One way to link: tables in, tables out"
-      scale={0.9}
-      subtitle="A starting point for discussion"
+      scale={0.92}
+      subtitle="A starting point for discussion: earnings, jobs and prices in; household results out"
       references={[sources.trade, sources.model, sources.python]}
     >
       <div className={styles.interface}>
         <div className={`${styles.card} ${styles.cardCompact}`}>
           <div className={styles.cardTitleRow}>
-            <h2>What another model could pass</h2>
+            <h2>What different models could pass</h2>
             <StatusTag tag={tags.proposed} />
           </div>
-          <SpecRows rows={interfaceSpec.inputs} />
+          <SpecRows rows={interfaceSpec.models} />
+          <div className={styles.divider}>
+            <p className={styles.dividerText}>Keyed by</p>
+            <div className={styles.keys}>
+              {interfaceSpec.keys.map((key) => (
+                <span key={key.label} className={styles.entity}>
+                  <Badge icon={key.icon} size="small" />
+                  {key.label}
+                </span>
+              ))}
+            </div>
+          </div>
           <div className={styles.divider}>
             <StatusTag tag={{ label: "Runs today", tone: "built" }} />
             <p className={styles.dividerText}>{interfaceToday}</p>
           </div>
         </div>
-        <div className={styles.hub}>
+        <Reveal step={2} motion="wipe" className={styles.hub}>
           <div className={styles.hubRow}>
             <IconArrowRight stroke={2.2} aria-hidden="true" />
-            <Badge icon={IconTable} size="large" solid />
+            <Badge icon={IconTable} size="large" />
             <IconArrowRight stroke={2.2} aria-hidden="true" />
           </div>
           <p>PolicyEngine</p>
-        </div>
-        <div className={`${styles.card} ${styles.cardCompact}`}>
+        </Reveal>
+        <Reveal step={2} ghost className={`${styles.card} ${styles.cardCompact}`}>
           <div className={styles.cardTitleRow}>
             <h2>PolicyEngine can already report</h2>
             <StatusTag tag={{ label: "Existing outputs", tone: "built" }} />
@@ -1007,25 +1143,7 @@ export function InterfaceSlide() {
             </div>
             <SpecRows rows={interfaceSpec.proposedOutputs} />
           </div>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
-export function DataSlide() {
-  return (
-    <Frame
-      section={sections.appendix}
-      title="Open code, restricted microdata, synthetic data"
-      scale={1.4}
-      subtitle="Models can link by exchanging tables of results"
-      references={[sources.model, sources.python, sources.data, sources.firm]}
-    >
-      <div className={styles.cards} style={columns(3)}>
-        {dataAccess.map((item) => (
-          <Card key={item.title} icon={item.icon} title={item.title} text={item.text} cardTags={[item.tag]} />
-        ))}
+        </Reveal>
       </div>
     </Frame>
   );
@@ -1034,7 +1152,7 @@ export function DataSlide() {
 export function PilotsSlide() {
   return (
     <Frame
-      section={sections.next}
+      section="collaborate"
       title="Two candidate pilots"
       scale={1.15}
       subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
@@ -1042,10 +1160,10 @@ export function PilotsSlide() {
       references={[sources.epd, sources.bicsGuidance, sources.trade, sources.model]}
     >
       <div className={styles.cards} style={columns(2)}>
-        {pilots.map((item) => (
-          <div key={item.title} className={styles.card}>
+        {pilots.map((item, index) => (
+          <Reveal key={item.title} step={index + 1} ghost className={styles.card}>
             <div className={`${styles.cardTitleRow} ${styles.titleTwoLines}`}>
-              <Badge icon={item.icon} size="large" solid />
+              <Badge icon={item.icon} size="large" />
               <h2>{item.title}</h2>
             </div>
             <dl className={styles.pairs}>
@@ -1059,7 +1177,7 @@ export function PilotsSlide() {
                 </div>
               ))}
             </dl>
-          </div>
+          </Reveal>
         ))}
       </div>
     </Frame>
@@ -1068,11 +1186,10 @@ export function PilotsSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame section={sections.next} title="Questions for discussion"
-      scale={1.12}>
+    <Frame section="collaborate" title="Questions for discussion" scale={1}>
       <ol className={styles.questions}>
         {questions.map((question, index) => (
-          <li key={question.text} className={styles.question}>
+          <li key={question.text} className={`${styles.question} ${styles.enter}`} style={enter(index)}>
             <Badge icon={question.icon} />
             <span className={styles.questionNumber}>{index + 1}</span>
             {question.text}
@@ -1111,9 +1228,7 @@ export function ClosingSlide() {
             onClick={(event) => event.stopPropagation()}
             className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
           >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-pe-teal">
-              <ContactIcon size={20} stroke={1.8} aria-hidden="true" />
-            </span>
+            <Badge icon={ContactIcon} size="small" />
             <span className="font-medium">{label}</span>
           </a>
         ))}
@@ -1122,52 +1237,22 @@ export function ClosingSlide() {
   );
 }
 
-export function AppendixSlide() {
-  return (
-    <Slide className={styles.deck}>
-      <div className={styles.frame}>
-        <div className={styles.body} style={bodyScale(1.3)}>
-          <div>
-            <p className={styles.section}>After the talk</p>
-            <h1 className={styles.dividerTitle}>Appendix</h1>
-            <div className={`accent-bar ${styles.bar}`} />
-          </div>
-          <div className={styles.minis} style={{ ...columns(4), marginTop: "calc(var(--u) * 1.2)" }}>
-            {appendixContents.map((item) => (
-              <div
-                key={item.title}
-                className={`${styles.card} ${styles.cardCompact}`}
-                style={"wide" in item ? { gridColumn: "span 2" } : undefined}
-              >
-                <div className={styles.cardHead}>
-                  <Badge icon={item.icon} size="large" />
-                </div>
-                <h2>{item.title}</h2>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Slide>
-  );
-}
-
 export function CoverageSlide() {
   return (
     <Frame
-      section={sections.appendix}
-      title="What the UK model covers"
-      scale={1.08}
-      subtitle="Business-tax changes can be allocated by shareholding or spending"
-      references={[sources.model]}
+      section="have"
+      title="What the UK model covers, and what is open"
+      scale={1.05}
+      subtitle="Taxes and benefits on households, with business-tax changes allocated to them"
+      references={[sources.model, sources.python, sources.data, sources.firm]}
     >
       <div className={styles.cards} style={columns(4)}>
-        {coverage.map((group) => (
-          <div key={group.title} className={`${styles.card} ${styles.cardCompact}`}>
-            <div className={styles.cardHead}>
-              <Badge icon={group.icon} size="large" />
+        {coverage.map((group, index) => (
+          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+            <div className={styles.cardTitleRow}>
+              <Badge icon={group.icon} />
+              <h2>{group.title}</h2>
             </div>
-            <h2>{group.title}</h2>
             <Bullets items={group.items} />
             {group.notModelled && (
               <div className={styles.cardNote}>
@@ -1178,103 +1263,204 @@ export function CoverageSlide() {
           </div>
         ))}
       </div>
+      <div className={styles.access}>
+        {dataAccess.map((item) => (
+          <div key={item.title} className={styles.accessItem}>
+            <Badge icon={item.icon} size="small" />
+            <div>
+              <div className={styles.accessHead}>
+                <h3>{item.title}</h3>
+                <StatusTag tag={item.tag} />
+              </div>
+              <p>{item.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </Frame>
   );
 }
 
-export function ReleaseSlide() {
+// ---------- Projects we have done ----------
+
+export function BudgetSlide() {
+  const [measures, calculator] = budgetProject.labels;
   return (
     <Frame
-      section={sections.appendix}
-      title="Microcosm UK data: release gates, certification and firm support"
-      scale={1.15}
-      subtitle="What a release checks, what a bundle fixes, what exists for firms"
-      references={[sources.gates, sources.bundle, sources.certification, sources.microcosmReadme, sources.firmTargets]}
+      section="projects"
+      title="The Autumn Budget 2026 dashboard"
+      scale={1.1}
+      fill
+      subtitle={`${measures.title}, and ${calculator.title.toLowerCase()}`}
+      status={[{ label: "Live", tone: "built" }]}
+      references={[sources.budgetDashboard, sources.budgetDashboardCode]}
     >
-      <div className={styles.cards} style={columns(3)}>
-        {microcosmRelease.map((item) => (
-          <Card
-            key={item.title}
-            icon={item.icon}
-            title={item.title}
-            text={item.value ? undefined : item.text}
-            cardTags={[item.tag]}
-          >
-            {item.value && (
-              <div className={`${styles.stat} ${styles.statMedium}`} style={{ marginTop: "calc(var(--u) * 0.6)" }}>
-                <p className={styles.statValue}>{item.value}</p>
-                <p className={styles.statLabel} style={{ marginTop: 0 }}>
-                  {item.text}
-                </p>
+      <Embed
+        href={sources.budgetDashboard.href}
+        title={sources.budgetDashboard.label}
+        views={budgetProject.views}
+      />
+    </Frame>
+  );
+}
+
+export function AiPostSlide() {
+  return (
+    <Frame
+      section="projects"
+      title="Who bears the cost of an AI scenario?"
+      scale={1.1}
+      fill
+      subtitle="PolicyEngine post, 16 November 2026: distributional and fiscal incidence in the UK"
+      status={[{ label: "Illustrative scenario", tone: "caution" }, aiProject.tag]}
+      references={[sources.aiPost, sources.ai]}
+    >
+      <div className={styles.project}>
+        <div className={styles.projectSide}>
+          {aiProject.labels.map((label) => (
+            <div key={label.title} className={styles.vstep}>
+              <Badge icon={label.icon} size="large" />
+              <div>
+                <h3>{label.title}</h3>
+                <p>{label.text}</p>
               </div>
-            )}
-            <Bullets items={item.points} />
-          </Card>
-        ))}
+            </div>
+          ))}
+        </div>
+        <Embed href={sources.aiPost.href} title={sources.aiPost.label} zoom={0.7} />
+      </div>
+    </Frame>
+  );
+}
+
+/** A figure from a paper, in a frame, with its caption. */
+function Figure({
+  image,
+  caption,
+}: {
+  image: { src: string; width: number; height: number; alt: string };
+  caption: string;
+}) {
+  return (
+    <figure className={styles.figure}>
+      <BasePathImage src={image.src} alt={image.alt} width={image.width} height={image.height} />
+      <figcaption>{caption}</figcaption>
+    </figure>
+  );
+}
+
+export function FirmMethodSlide() {
+  const { flow, accuracy, image, caption } = firmMethod;
+  return (
+    <Frame
+      section="projects"
+      title="How we built synthetic UK firms"
+      scale={0.9}
+      subtitle="Firm-level VAT microsimulation: published tables in, calibrated firm records out"
+      status={[tags.workingPaper]}
+      references={[sources.firm, sources.firmHmrcFigure]}
+    >
+      <div className={styles.method}>
+        <div>
+          <p className={styles.rowLabel}>The method</p>
+          <ol className={styles.methodSteps}>
+            {flow.map((step, index) => (
+              <li key={step.title} className={styles.enter} style={enter(index)}>
+                <div className={styles.snakeLead}>
+                  <span className={styles.snakeNumber}>{index + 1}</span>
+                  <Badge icon={step.icon} size="small" />
+                </div>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <Reveal step={2} ghost className={styles.accuracy}>
+          <p className={styles.rowLabel}>{accuracy.title}</p>
+          <p className={styles.statValue}>
+            <CountUp value={accuracy.overall.value} step={2} />
+          </p>
+          <p className={styles.statLabel}>{accuracy.overall.label}</p>
+          <ul className={styles.accuracyRows}>
+            {accuracy.rows.map((row) => (
+              <li key={row.label}>
+                <span>{row.label}</span>
+                <strong>{row.value}</strong>
+                <i style={{ width: row.value }} />
+              </li>
+            ))}
+          </ul>
+          <div className={styles.accuracyPopulation}>
+            {accuracy.population.map((item) => (
+              <Mini key={item.label} icon={item.icon} title={item.value} text={item.label} />
+            ))}
+          </div>
+        </Reveal>
+        <Reveal step={3}>
+          <p className={styles.rowLabel}>Beside HMRC’s costing</p>
+          <Figure image={image} caption={caption} />
+        </Reveal>
+      </div>
+    </Frame>
+  );
+}
+
+export function FirmVatSlide() {
+  const { image, caption, points } = firmProject;
+  return (
+    <Frame
+      section="projects"
+      title="Firm-level VAT microsimulation: costing threshold changes"
+      scale={1.15}
+      subtitle="What moving the VAT registration threshold could raise or cost, on the synthetic firms"
+      status={[tags.workingPaper]}
+      references={[sources.firm, sources.firmFigure, { ...sources.vatThresholds, label: "Related post: VAT threshold analysis" }]}
+    >
+      <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
+        <Figure image={image} caption={caption} />
+        <div className={styles.vsteps}>
+          {points.map((point) => (
+            <div key={point.title} className={styles.vstep}>
+              <Badge icon={point.icon} size="large" />
+              <div>
+                <h3>{point.title}</h3>
+                <p>{point.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </Frame>
   );
 }
 
 export function TradeSlide() {
+  const { image, caption } = tradeProject;
   return (
     <Frame
-      section={sections.appendix}
-      title="Who bears the cost of trade changes?"
-      scale={1.2}
-      subtitle="Four UK trade events of 2021–26, traced to households"
-      status={[{ label: "Earlier FRS datasets, not Microcosm UK", tone: "muted" }]}
-      references={[sources.trade]}
+      section="projects"
+      title="Who bears the cost of trade changes? Four UK episodes, 2021–26"
+      scale={1.15}
+      subtitle="Price and earnings changes from four trade events, traced to households"
+      status={[tags.workingPaper, { label: "Earlier FRS datasets, not Microcosm UK", tone: "muted" }]}
+      references={[sources.trade, sources.tradeFigure]}
     >
-      <div className="grid grid-cols-[1.5fr_1fr] items-center gap-[calc(var(--u)*3)]">
-        <div className={styles.cards} style={columns(2)}>
-          {tradeEvents.map((event) => (
-            <div key={event.title} className={`${styles.card} ${styles.cardCompact}`}>
-              <div className={styles.cardTitleRow}>
-                <Badge icon={event.icon} />
-                <h2>{event.title}</h2>
+      <div className="grid grid-cols-[0.85fr_1.15fr] items-center gap-[calc(var(--u)*2.4)]">
+        <div className={styles.episodes} style={columns(1)}>
+          {tradeEvents.map((event, index) => (
+            <div key={event.title} className={`${styles.episode} ${styles.enter}`} style={enter(index)}>
+              <Badge icon={event.icon} />
+              <div>
+                <h3>{event.title}</h3>
+                <p>{event.text}</p>
               </div>
-              <p>{event.text}</p>
             </div>
           ))}
         </div>
-        <div>
-          <p className={styles.rowLabel}>The energy surge, 2022–23</p>
-          <div className={styles.stat} style={{ marginTop: "calc(var(--u) * 0.7)" }}>
-            <Badge icon={IconFlame} size="large" />
-            <p className={styles.statValue}>{tradeEnergy.offset}</p>
-          </div>
-          <p className={styles.statLabel}>
-            of the rise in energy costs offset by the Energy Price Guarantee and the Energy Bills
-            Support Scheme
-          </p>
-          <div className={styles.chips}>
-            <span className={styles.chip}>{tradeEnergy.range}</span>
-          </div>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
-export function UsesSlide() {
-  return (
-    <Frame
-      section={sections.appendix}
-      title="Use, evaluation and engagement"
-      scale={1.1}
-      references={[sources.no10, sources.hmt, sources.obr, sources.hansard, sources.nuffield]}
-    >
-      <div className={styles.cards} style={{ gridTemplateColumns: "1.15fr 1.15fr 0.8fr" }}>
-        {uses.map((group) => (
-          <div key={group.title} className={`${styles.card} ${styles.cardCompact}`}>
-            <div className={styles.cardTitleRow}>
-              <Badge icon={group.icon} size="large" />
-              <h2>{group.title}</h2>
-            </div>
-            <Bullets items={group.items} />
-          </div>
-        ))}
+        <Figure image={image} caption={caption} />
       </div>
     </Frame>
   );

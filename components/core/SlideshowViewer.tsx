@@ -153,7 +153,9 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
               </button>
 
               <span className="text-base font-medium text-white min-w-[4rem] text-center">
-                {currentStep + 1} / {totalSteps}
+                {config.countSlides
+                  ? `${(currentStepData?.slideIndex ?? 0) + 1} / ${config.slides.length}`
+                  : `${currentStep + 1} / ${totalSteps}`}
               </span>
 
               <button

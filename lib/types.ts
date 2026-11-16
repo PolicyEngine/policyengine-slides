@@ -43,6 +43,8 @@ export interface SlideshowConfig {
   private?: boolean;
   /** Move the deck on PageDown and PageUp, which presentation clickers send. Leave it off for a deck with a region that scrolls. */
   clickerKeys?: boolean;
+  /** Number the counter by slide, so a slide's build steps share one number. */
+  countSlides?: boolean;
   slides: SlideConfig[];
 }
 

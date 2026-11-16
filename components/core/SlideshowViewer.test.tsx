@@ -251,6 +251,13 @@ describe("SlideshowViewer exportBuilds", () => {
     expect(seen.at(-1)).toBe(1);
   });
 
+  it("numbers by slide when countSlides is set", async () => {
+    await renderAt("/slides/demo?slide=2", { ...deck, countSlides: true });
+    expect(counterText()).toBe("2 / 3");
+    await press("ArrowRight");
+    expect(counterText()).toBe("3 / 3");
+  });
+
   it("moves to the next slide on the next export step", async () => {
     await renderAt("/slides/demo?slide=2&export=1", deck);
     expect(totalSteps()).toBe("3");
