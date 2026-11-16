@@ -1,9 +1,12 @@
 # From business shocks to household incomes, 19 November 2026
 
-25 slides at `/slides/bist-2026`: PolicyEngine's seminar
+27 slides at `/slides/bist-2026`: PolicyEngine's seminar
 for the Modelling Unit of the Department for Business, Innovation, Science
-and Trade (BIST). Slides 1 to 20 are the talk (30 to 35 minutes); 21 to 25
-are an appendix.
+and Trade (BIST). Slides 1 to 19 are the talk; 20 to 27 are an appendix.
+
+The talk follows the meeting's agenda. The Modelling Unit introduces its work
+and models first, without slides of ours; the deck then has three parts, each
+named in the label above its slides' titles, and a short close.
 
 Each slide carries one message, with icons, short labels and status tags.
 What the presenter says, including every caveat and figure that is not on a
@@ -11,29 +14,46 @@ slide, is in [NOTES.md](NOTES.md).
 
 1. Title
 2. In brief
-3. PolicyEngine UK computes incomes, not spending
-4. How a reform or a shock is run
-5. Disaggregating tariff impacts
-6. The tariff bridge: steps a trade model could replace
-7. Assignment variability: repeated random draws
-8. How the rules are encoded
-9. Microcosm UK 2024–25: how the household file is built
-10. Calibration: weights fitted to official statistics
-11. Business policy beyond tax: from firm costs to households
-12. What we have on the business side
-13. Who bears the AI shock?
-14. Where an agent-based model would link
-15. Links to macroeconomic models
-16. A proposed interface: tables in, tables out
-17. Open code, restricted microdata, synthetic data
-18. Two candidate pilots
-19. Questions for discussion
-20. Thank you
-21. Appendix
-22. What the UK model covers, including business taxes
-23. Gates, certification and firm support
-24. Who bears the trade shocks?
-25. Use, evaluation and engagement
+
+PolicyEngine: who and what
+
+3. Who we are
+4. PolicyEngine UK computes incomes, not spending
+5. How a reform or a shock is run
+6. How the rules are encoded
+7. Microcosm UK 2024–25: how the household file is built
+8. Calibration: weights fitted to official statistics
+
+Overlap 1: macro and micro
+
+9. The Economic Prosperity Deal: from macro impacts to households
+10. Disaggregation: how sector results reach people
+11. The tariff bridge: steps a trade model could replace
+12. Links to macroeconomic models
+13. A proposed interface: tables in, tables out
+
+Overlap 2: business modelling
+
+14. Business policy beyond tax: from firm costs to households
+15. What we have on the business side
+16. Where an agent-based model would link
+
+Working together
+
+17. Two candidate pilots
+18. Questions for discussion
+19. Thank you
+
+Appendix
+
+20. Appendix
+21. What the UK model covers, including business taxes
+22. Microcosm UK data: release gates, certification and firm support
+23. Who bears the trade shocks?
+24. Who bears the AI shock?
+25. Assignment variability: repeated random draws
+26. Open code, restricted microdata, synthetic data
+27. Use, evaluation and engagement
 
 - `config.ts` controls the slide order and meeting metadata.
 - `content.ts` holds the figures, short labels, icons, status tags and
@@ -59,19 +79,46 @@ notes for that slide.
   study's price episodes on the enhanced FRS 2023–24 and its tariff stage on
   the survey-weighted FRS 2024–25 (uk-trade-shock-study `06c8bbc`,
   `paper/sections/results.tex`). Neither is Microcosm UK.
-- **Order.** The talk opens with what the model computes (incomes after
-  taxes and benefits; spending is an input) and how a run works, takes
-  tariff disaggregation first, then the rules and the Microcosm data,
-  business policy, AI, model links and data, and ends with two candidate
-  pilots. Model coverage, release gates, the trade study's four events and
+- **Order.** Three parts. The first is PolicyEngine itself: the
+  organisation, what the model computes (incomes after taxes and benefits;
+  spending is an input), how a run works, the rules and the Microcosm data.
+  The second is macro modelling with microsimulation: the Economic Prosperity
+  Deal from macro impacts to household impacts, the disaggregation mechanism,
+  the tariff bridge, links to macroeconomic models and a proposed interface.
+  The third is business modelling: business policy beyond tax, what we hold
+  on firms, and where an agent-based model would link. The talk ends with two
+  candidate pilots and questions. Model coverage, release gates, the trade
+  study's four events, the AI shock, assignment variability, data access and
   use, evaluation and engagement are in the appendix.
 - **Status.** Each piece carries its status as a tag: the firm VAT model is a working
   paper, Microcosm's firm support is experimental, OG-UK is an early
   prototype, and no link to a trade, macroeconomic or agent-based model is
   built.
 - **Sources by slide.**
-  - Output breakdowns (tariff disaggregation): the output classes in
-    policyengine.py `810a59e`, `src/policyengine/outputs/`.
+  - Who we are: "a nonprofit building free, open-source tools" is the
+    wording of [policyengine.org/uk/donate](https://www.policyengine.org/uk/donate),
+    read on 16 November 2026. UK and US models in one package: the
+    policyengine.py paper (Ahmadi et al. 2026, JOSS), which gives the
+    package's country coverage as the US and UK; the slide claims no other
+    country. Licences: the repositories' LICENSE files. The four items of
+    use, evaluation and engagement and the funder are those of the appendix
+    slide, with the same public pages (the No 10 article, HM Treasury's
+    transparency record, the OBR's annual report, Hansard and the supporters
+    page) and the same caveats.
+  - The Economic Prosperity Deal, from macro impacts to households: no new
+    fact. The deal's terms are from the general terms on GOV.UK; the deal
+    schedule without published results is the trade study's
+    (uk-trade-shock-study `06c8bbc`); "static, no general equilibrium" is
+    the model-run slide's; the feedback arrow is the macro–micro loop of the
+    macroeconomic models slide. The path and the feedback are tagged not
+    built, and the slide is tagged "No results yet".
+  - Disaggregation: the mechanism inside the PolicyEngine step. Earnings and
+    jobs by two-digit SIC division and the repeated random draws are the
+    trade study's assignment (`tariff_pipeline/exposure.py`); spending is
+    held by COICOP division (policyengine-uk `d3db7ac`). A map from a trade
+    model's labour types to occupations is part of the proposed interface.
+    The mapping column is tagged not built. Output breakdowns: the output
+    classes in policyengine.py `810a59e`, `src/policyengine/outputs/`.
   - Trade-model outputs: the standard GTAP model has one wage per labour
     type, not per sector, and its standard closure fixes aggregate
     employment, so the deck asks for wages by labour type and, in the
@@ -79,7 +126,7 @@ notes for that slide.
   - Tariff bridge: uk-trade-shock-study `06c8bbc`,
     `results/e3_constants.json` (cushion 43.7% for wage cuts; 35.4% for job
     losses, standard deviation 5.1 points across 100 draws).
-  - Economic Prosperity Deal (tariff bridge and pilots): the general terms
+  - Economic Prosperity Deal (its own slide, tariff bridge and pilots): the general terms
     on GOV.UK (operative 8 May 2025; a 100,000-vehicle quota at a 10% tariff;
     and, subject to supply-chain conditions, a steel and aluminium quota at
     most-favoured-nation rates).
@@ -103,7 +150,7 @@ notes for that slide.
     agent-based model of AI and a GTAP run with technology sectors are
     described, in the notes to the agent-based model slide, as possible inputs
     only.
-  - Data access: licences and READMEs of policyengine-uk, policyengine.py,
+  - Data access (appendix): licences and READMEs of policyengine-uk, policyengine.py,
     microcosm `429d7a0` and firm-microsim-paper `e6d5dd6`.
   - Rules: policyengine-uk `d3db7ac` (version 2.179.0). The snippet is
     abridged from the personal allowance variable (the parameter and the test
@@ -121,27 +168,48 @@ notes for that slide.
     `docs/impact-analysis.md`.
   - Microcosm uses two kinds of number and keeps them apart:
     - *The certified build* (the national build of 7 November 2026 that
-      policyengine.py 6.19.0 pins): 1,514 targets in 44 statistics, 98.7%
-      within 10%, a final loss of 0.51%, 78.2 thousand household records with
-      a non-zero weight, and targets by publisher. All from the public
-      [calibration dashboard](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk),
-      read on 15 November 2026 (its default UK release that day; the page has
-      no address for a single release). They are in-sample fit; the dashboard
-      has no out-of-sample check for the UK, and the calibration slide carries
-      an "In-sample fit" tag.
+      policyengine.py 6.19.0 pins,
+      `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`), from two
+      places:
+      - the public
+        [calibration dashboard](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk),
+        read on 15 November 2026 (its default UK release that day; the page
+        has no address for a single release): 1,514 targets, which the
+        dashboard browses as 44 statistics, 98.7% within 10%, 78.2 thousand
+        household records, and targets by publisher;
+      - the certified build's diagnostics: an effective sample size of about
+        7.2 thousand (9.2% of records); 38 target families in the loss, each
+        1/38 of the total weight; saved weights from step 1,437 of 1,500;
+        targets at model year 2025; 85 checks run, all passed; and the
+        build's commit, `dc00d158f`, which declares 54 source stages. The
+        10,000 copies of survey households that take SPI incomes, their
+        weights before calibration, and the take-up rule (reported claims
+        kept, the others drawn) are from the diagnostics and agree with the
+        code.
+
+      The deck does not quote the solver's final objective, which is not
+      comparable across releases. The fit is in-sample; the dashboard has no
+      out-of-sample check for the UK, and the calibration slide carries an
+      "In-sample fit" tag.
     - *The code* at microcosm `429d7a0` (15 November): 56 source stages
-      (`uk/source_stages.json`; every microdata artifact in it is pinned by
-      SHA-256, the public reference tables are not), the imputation method
+      today, against the certified build's 54 (`uk/source_stages.json`;
+      every survey microdata file in it is pinned by SHA-256 and checked when
+      the build runs, the public reference tables are not), the SPI copies
+      (`uk_runtime/spi_support.py`, `spi_band_donors.py`,
+      `spi_employment_shell.py`), the imputation method
       (`microcosm-fit/README.md`), the loss (`microcosm-calibrate`,
       `relative_error_loss`), the UK national solve settings
-      (`uk_runtime/national_doctrine.py`), 94 release gates (`uk/gates.json`)
+      (`uk_runtime/national_doctrine.py`), 94 declared checks, of which 92
+      can block a release and 2 only report (`uk/gates.json`),
       and the firm support (README, `uk_runtime/firm_generation.py`,
-      `uk/uk_firms_targets.json`, `docs/firm-support-plan.md`). The target
+      `uk/uk_firms_targets.json`, `docs/firm-support-plan.md`; the data frame
+      supports firm tables and job links, and the UK build does not use
+      them). The target
       file at that commit lists 1,710 national rows, more than the certified
       build's 1,514, so the deck quotes the build.
     - "Certified": policyengine.py `810a59e`, `data/bundle/manifest.json`,
       `docs/bundles.md` and `docs/engineering/skills/data-certification.md`.
-  - Assignment variability: uk-ai-study `5d75106`,
+  - Assignment variability (appendix): uk-ai-study `5d75106`,
     `results/robustness/central_monte_carlo.json` (the illustrative central
     scenario, 50 draws: mean £17.69bn,
     SD £1.20bn, 2.5th to 97.5th percentile £15.5bn to £19.8bn; the paper
@@ -175,11 +243,16 @@ record count is taken from the 2023 build.
 ## Review
 
 Earlier versions had four rounds of Fable 5.2 review: facts against the
-pinned code, and usefulness, neutrality, privacy and layout. This version is
-a redesign for legibility: far less text on each slide, an icon on every
-card, step and figure, and status as tags. No figure changed; the text taken
-off the slides is in `NOTES.md`. It has 20 talk slides plus a five-slide
-appendix. Exports at 1920×1080 and 1440×810 were inspected page by page.
+pinned code, and usefulness, neutrality, privacy and layout. The version
+before this one was a redesign for legibility: far less text on each slide,
+an icon on every card, step and figure, and status as tags; the text taken
+off the slides is in `NOTES.md`. This version reorders the talk into three
+parts and adds two slides, "Who we are" and the Economic Prosperity Deal
+from macro impacts to households; the disaggregation slide now shows the
+assignment mechanism. The AI shock, assignment variability and data access
+moved to the appendix. No figure changed. It has 19 talk slides plus an
+eight-slide appendix. Exports at 1920×1080 and 1440×810 were inspected page
+by page.
 
 ## Privacy
 

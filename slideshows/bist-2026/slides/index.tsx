@@ -9,6 +9,7 @@ import {
   IconBriefcaseOff,
   IconBuildingBank,
   IconChartBar,
+  IconChevronUp,
   IconCoins,
   IconFileCode,
   IconFlame,
@@ -23,6 +24,7 @@ import CoverSlide from "@/components/layout/CoverSlide";
 import { speakers } from "@/lib/speakers";
 import {
   abmQuestions,
+  abmReturns,
   aiShock,
   appendixContents,
   businessPolicy,
@@ -31,6 +33,7 @@ import {
   components,
   coverage,
   dataAccess,
+  epdTrace,
   firmTools,
   inBrief,
   inputOutput,
@@ -54,18 +57,17 @@ import {
   tradeEvents,
   uncertainty,
   uses,
+  whoWeAre,
   type Source,
   type Tag,
 } from "../content";
 import styles from "./deck.module.css";
 
+// The eyebrow above each title. The talk has three parts, then a close.
 const sections = {
-  model: "PolicyEngine UK",
-  data: "Microcosm: the household data",
-  tariffs: "Tariff analysis",
-  business: "Business policy",
-  ai: "AI",
-  links: "Linking models",
+  intro: "PolicyEngine: who and what",
+  macro: "Overlap 1: macro and micro",
+  business: "Overlap 2: business modelling",
   next: "Working together",
   appendix: "Appendix",
 };
@@ -209,9 +211,12 @@ type Step = {
 function Flow({
   steps,
   bracket,
+  feedback,
   titleLines,
 }: {
   steps: Step[];
+  /** A return arrow under the flow, from the last step back to the first. */
+  feedback?: { label: string; tag?: Tag };
   /** Reserve this many lines for every step title, so the text below lines up. */
   titleLines?: number;
   bracket?: { from: number; to: number; label: string };
@@ -244,6 +249,25 @@ function Flow({
         >
           <p>{bracket.label}</p>
         </div>
+      )}
+      {feedback && (
+        <>
+          <span className={`${styles.feedbackLine} ${styles.feedbackStart}`} style={{ gridColumn: 1 }}>
+            <IconChevronUp stroke={2.2} aria-hidden="true" />
+          </span>
+          <span
+            className={`${styles.feedbackLine} ${styles.feedbackMiddle}`}
+            style={{ gridColumn: `2 / ${2 * steps.length - 1}` }}
+          />
+          <span
+            className={`${styles.feedbackLine} ${styles.feedbackEnd}`}
+            style={{ gridColumn: 2 * steps.length - 1 }}
+          />
+          <div className={styles.feedbackLabel}>
+            <p>{feedback.label}</p>
+            {feedback.tag && <StatusTag tag={feedback.tag} />}
+          </div>
+        </>
       )}
     </div>
   );
@@ -344,7 +368,7 @@ export function TitleSlide() {
 export function InBriefSlide() {
   return (
     <Frame title="In brief"
-      scale={1.35} subtitle="Three points, and two pilots to discuss">
+      scale={1.35} subtitle="Three parts, then two candidate pilots to discuss">
       <div className={styles.cards} style={columns(3)}>
         {inBrief.map((item) => (
           <Card
@@ -360,11 +384,53 @@ export function InBriefSlide() {
   );
 }
 
+export function WhoSlide() {
+  const { facts, uses: users, funding } = whoWeAre;
+  return (
+    <Frame
+      section={sections.intro}
+      title="Who we are"
+      scale={0.97}
+      subtitle="The organisation, and who has used or assessed the UK model"
+      references={[sources.about, sources.joss, sources.no10, sources.hmt, sources.obr, sources.hansard, sources.nuffield]}
+    >
+      <div className="grid grid-cols-[1fr_1.55fr] items-center gap-[calc(var(--u)*3)]">
+        <div className={styles.vsteps}>
+          {facts.map((fact) => (
+            <div key={fact.title} className={styles.vstep}>
+              <Badge icon={fact.icon} size="large" />
+              <div>
+                <h3>{fact.title}</h3>
+                <p>{fact.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.card}>
+          <h2 className={styles.figureTitle}>Use, evaluation and engagement</h2>
+          <dl className={styles.pairs}>
+            {users.map((row) => (
+              <div key={row.label} className={styles.pair}>
+                <Badge icon={row.icon} size="small" />
+                <div>
+                  <dt>{row.label}</dt>
+                  <dd>{row.text}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+      <Strip icon={funding.icon}>{funding.text}</Strip>
+    </Frame>
+  );
+}
+
 export function WhatSlide() {
   const { input, output } = inputOutput;
   return (
     <Frame
-      section={sections.model}
+      section={sections.intro}
       title="PolicyEngine UK computes incomes, not spending"
       scale={1.4}
       subtitle="Open-source tax–benefit microsimulation"
@@ -391,7 +457,7 @@ export function WhatSlide() {
 export function RunSlide() {
   return (
     <Frame
-      section={sections.model}
+      section={sections.intro}
       title="How a reform or a shock is run"
       scale={1.3}
       subtitle="Two simulations on the same households: baseline and counterfactual"
@@ -409,19 +475,68 @@ export function RunSlide() {
   );
 }
 
-export function DisaggregationSlide() {
-  const { flow, breakdowns } = tariffDisaggregation;
+export function EpdSlide() {
+  const { flow, feedback, deal } = epdTrace;
   return (
     <Frame
-      section={sections.tariffs}
-      title="Disaggregating tariff impacts"
-      scale={1.25}
-      subtitle="How a trade model's sector results could reach households"
+      section={sections.macro}
+      title="The Economic Prosperity Deal: from macro impacts to households"
+      scale={1}
+      subtitle="One deal, traced from a trade or macro model's results to household incomes"
+      status={[tags.notBuilt, tags.noResults]}
+      references={[sources.epd, sources.trade, sources.python]}
+    >
+      <Flow steps={flow} titleLines={2} feedback={feedback} />
+      <div className={styles.panel}>
+        <p className={styles.rowLabel}>The deal</p>
+        <div className={styles.minis} style={columns(deal.length)}>
+          {deal.map((item) => (
+            <Mini key={item.title} icon={item.icon} title={item.title} text={item.text} />
+          ))}
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+export function DisaggregationSlide() {
+  const { rows, breakdowns } = tariffDisaggregation;
+  return (
+    <Frame
+      section={sections.macro}
+      title="Disaggregation: how sector results reach people"
+      scale={1.08}
+      subtitle="Inside the PolicyEngine step: which records receive each change"
       references={[sources.python, sources.trade, sources.gtap]}
     >
-      <Flow steps={flow} />
+      <div className={styles.rows}>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>The other model's result</p>
+        <span />
+        <p className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
+          Mapped by
+          <StatusTag tag={tags.notBuilt} />
+        </p>
+        <span />
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine assigns it to</p>
+        {rows.map((row) => (
+          <Fragment key={row.result}>
+            <div className={`${styles.cell} ${styles.cellLead}`}>
+              <Badge icon={row.icon} size="small" />
+              {row.result}
+            </div>
+            <span className={styles.arrow}>
+              <IconArrowRight stroke={2.2} aria-hidden="true" />
+            </span>
+            <div className={`${styles.cell} ${styles.cellDashed}`}>{row.key}</div>
+            <span className={styles.arrow}>
+              <IconArrowRight stroke={2.2} aria-hidden="true" />
+            </span>
+            <div className={styles.cell}>{row.assigned}</div>
+          </Fragment>
+        ))}
+      </div>
       <div className={styles.panel}>
-        <p className={styles.rowLabel}>PolicyEngine returns</p>
+        <p className={styles.rowLabel}>The rules run; PolicyEngine returns</p>
         <div className={styles.minis} style={columns(breakdowns.length)}>
           {breakdowns.map((item) => (
             <Mini key={item.title} icon={item.icon} title={item.title} tag={item.tag} />
@@ -436,7 +551,7 @@ export function BridgeSlide() {
   const { steps, replaceable, cushion } = tariffBridge;
   return (
     <Frame
-      section={sections.tariffs}
+      section={sections.macro}
       title="The tariff bridge: steps a trade model could replace"
       scale={1.1}
       subtitle="From the 2025 US tariffs to survey employees' earnings"
@@ -474,7 +589,7 @@ export function BridgeSlide() {
 export function UncertaintySlide() {
   return (
     <Frame
-      section={sections.model}
+      section={sections.appendix}
       title="Assignment variability: repeated random draws"
       scale={1.05}
       subtitle="A sector shock does not say which employees are affected"
@@ -510,7 +625,7 @@ export function UncertaintySlide() {
 export function RulesSlide() {
   return (
     <Frame
-      section={sections.model}
+      section={sections.intro}
       title="How the rules are encoded"
       scale={1.2}
       subtitle="Law as dated parameters, formulas and tests"
@@ -559,7 +674,7 @@ export function RulesSlide() {
 export function MicrocosmBuildSlide() {
   return (
     <Frame
-      section={sections.data}
+      section={sections.intro}
       title="Microcosm UK 2024–25: how the household file is built"
       scale={1.22}
       subtitle="An open-source pipeline from surveys and statistics to weights"
@@ -582,7 +697,7 @@ export function CalibrationSlide() {
   const largest = Math.max(...publishers.map((row) => row.count));
   return (
     <Frame
-      section={sections.data}
+      section={sections.intro}
       title="Calibration: weights fitted to official statistics"
       scale={1.1}
       subtitle="The certified national build of 7 November 2026"
@@ -700,7 +815,7 @@ const pct = (bn: number) => `${(bn / 40) * 100}%`;
 export function AiSlide() {
   return (
     <Frame
-      section={sections.ai}
+      section={sections.appendix}
       title="Who bears the AI shock?"
       scale={1.3}
       subtitle="A 2026 scenario: 7% of employees lose a year's earnings"
@@ -757,17 +872,19 @@ export function AiSlide() {
 export function AbmSlide() {
   return (
     <Frame
-      section={sections.links}
+      section={sections.business}
       title="Where an agent-based model would link"
-      scale={1.25}
+      scale={1.15}
       subtitle="Three candidate questions"
       status={[tags.notBuilt]}
       references={[sources.dosi, sources.gtap, sources.ai, sources.inet]}
     >
-      <div className={styles.rows}>
+      <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Policy question</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>The agent-based model simulates</p>
+        <span />
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>It passes in</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine returns</p>
         {abmQuestions.map((row) => (
@@ -783,9 +900,15 @@ export function AbmSlide() {
             <span className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
             </span>
-            <div className={styles.cell}>{row.returns}</div>
+            <div className={`${styles.cell} ${styles.cellDashed}`}>{row.passes}</div>
           </Fragment>
         ))}
+        <span className={`${styles.arrow} ${styles.sharedArrow}`}>
+          <IconArrowRight stroke={2.2} aria-hidden="true" />
+        </span>
+        <div className={`${styles.cell} ${styles.sharedCell}`}>
+          <Bullets items={abmReturns} />
+        </div>
       </div>
     </Frame>
   );
@@ -794,7 +917,7 @@ export function AbmSlide() {
 export function MacroSlide() {
   return (
     <Frame
-      section={sections.links}
+      section={sections.macro}
       title="Links to macroeconomic models"
       scale={1.25}
       subtitle="Three routes, at three stages"
@@ -838,7 +961,7 @@ function SpecRows({ rows }: { rows: { icon: Icon; field: string; text?: string }
 export function InterfaceSlide() {
   return (
     <Frame
-      section={sections.links}
+      section={sections.macro}
       title="A proposed interface: tables in, tables out"
       scale={1.15}
       references={[sources.trade, sources.model, sources.python]}
@@ -878,7 +1001,7 @@ export function InterfaceSlide() {
 export function DataSlide() {
   return (
     <Frame
-      section={sections.links}
+      section={sections.appendix}
       title="Open code, restricted microdata, synthetic data"
       scale={1.3}
       references={[sources.model, sources.python, sources.data, sources.firm]}
@@ -994,9 +1117,13 @@ export function AppendixSlide() {
             <h1 className={styles.dividerTitle}>Appendix</h1>
             <div className={`accent-bar ${styles.bar}`} />
           </div>
-          <div className={styles.minis} style={{ ...columns(4), marginTop: "calc(var(--u) * 1.5)" }}>
+          <div className={styles.minis} style={{ ...columns(4), marginTop: "calc(var(--u) * 1.2)" }}>
             {appendixContents.map((item) => (
-              <div key={item.title} className={`${styles.card} ${styles.cardCompact}`}>
+              <div
+                key={item.title}
+                className={`${styles.card} ${styles.cardCompact}`}
+                style={"wide" in item ? { gridColumn: "span 2" } : undefined}
+              >
                 <div className={styles.cardHead}>
                   <Badge icon={item.icon} size="large" />
                 </div>
@@ -1044,7 +1171,7 @@ export function ReleaseSlide() {
   return (
     <Frame
       section={sections.appendix}
-      title="Gates, certification and firm support"
+      title="Microcosm UK data: release gates, certification and firm support"
       scale={1.15}
       subtitle="What a release checks, what a bundle fixes, what exists for firms"
       references={[sources.gates, sources.bundle, sources.certification, sources.microcosmReadme, sources.firmTargets]}

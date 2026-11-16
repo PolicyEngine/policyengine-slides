@@ -11,7 +11,23 @@ Status tags used on the slides: **Not built**, **No results yet**,
 **Early prototype**, **In-sample fit** and **Survey-weighted FRS 2024–25, not
 Microcosm UK**.
 
-## Talk (slides 1 to 20)
+The talk has three parts, in the order of the meeting's agenda, after the
+Modelling Unit introduces its own work and models:
+
+1. **PolicyEngine: who and what** (slides 3 to 8): the organisation, what
+   the model computes, how a run works, the rules and the data.
+2. **Overlap 1: macro and micro** (slides 9 to 13): the Economic Prosperity
+   Deal from macro impacts to household impacts, the disaggregation
+   mechanism, the tariff bridge, links to macroeconomic models and a proposed
+   interface.
+3. **Overlap 2: business modelling** (slides 14 to 16): business policy
+   beyond tax, what we hold on firms, and where an agent-based model would
+   link.
+
+Slides 17 to 19 close the talk: two candidate pilots, questions and
+contacts. Each slide's part is the label above its title.
+
+## Talk (slides 1 to 19)
 
 ### 1. Title
 
@@ -21,31 +37,65 @@ Microcosm UK**.
 
 ### 2. In brief
 
-- The talk proposes two candidate pilots that would pass another model's
-  sector results to PolicyEngine. Neither is built.
-- **Incomes, not spending.** PolicyEngine UK is open-source tax–benefit
-  microsimulation. It computes household incomes after taxes and benefits,
-  poverty and the public finances. Household spending is an input, not a
-  result.
-- **A household layer for other models.** Trade, macroeconomic and
-  agent-based models give changes in earnings, jobs and prices by sector.
-  PolicyEngine can turn these into household and fiscal effects by income
-  decile and region, and experimentally by local area. No such link is built:
-  our trade and AI studies use published estimates and stated scenarios.
-- **Two candidate pilots.** Tariff changes under the US–UK Economic
-  Prosperity Deal, and the electricity-cost relief of the British Industrial
-  Competitiveness Scheme (BICS). We have no published results for either.
+- The three cards are the three parts of the talk; two candidate pilots
+  follow at the end. No link to another model is built.
+- **PolicyEngine: who and what.** A nonprofit that builds free, open-source
+  tax–benefit microsimulation. PolicyEngine UK computes household incomes
+  after taxes and benefits, poverty and the public finances. Household
+  spending is an input, not a result.
+- **Overlap 1: macro and micro.** Trade, macroeconomic and agent-based models
+  give changes in earnings, jobs and prices by sector. PolicyEngine can turn
+  these into household and fiscal effects by income decile and region, and
+  experimentally by local area. No such link is built: our trade and AI
+  studies use published estimates and stated scenarios. The worked example is
+  the US–UK Economic Prosperity Deal.
+- **Overlap 2: business modelling.** Business policy beyond tax, with the
+  electricity-cost relief of the British Industrial Competitiveness Scheme
+  (BICS) as the example; what we hold on firms; and where an agent-based
+  model would link. PolicyEngine UK has no firm entity.
+- **Two candidate pilots** (slide 17): tariff changes under the Economic
+  Prosperity Deal, and BICS. We have no published results for either.
 
-### 3. PolicyEngine UK computes incomes, not spending
+### 3. Who we are
+
+- **Nonprofit.** PolicyEngine is a nonprofit building free, open-source tools
+  that help people understand tax and benefit policies (the wording of
+  policyengine.org/uk/donate).
+- **Open source.** The rules (PolicyEngine UK), the data pipeline (Microcosm)
+  and the analysis package (policyengine.py) are public. PolicyEngine UK and
+  policyengine.py are licensed AGPL-3.0, Microcosm MIT. The household
+  microdata are licensed survey records and are not public (appendix,
+  slide 26).
+- **UK and US models.** One Python package, policyengine.py, runs both
+  country models with the same reform and output interface (Ahmadi et al.
+  2026, JOSS). This talk is about the UK model.
+- **Use, evaluation and engagement.** The same four items, with the same
+  caveats, as the appendix slide (slide 27):
+  - 10 Downing Street's data science team (10DS) built 10ds-microsim on
+    PolicyEngine; its results are used as supplementary, experimental
+    analysis.
+  - HM Treasury's Personal Tax, Welfare and Pensions team ran a pilot
+    evaluation of PolicyEngine UK in 2024; its transparency record says HMT
+    does not currently use it.
+  - The OBR lists PolicyEngine among the organisations it engaged with in
+    2025–26.
+  - House of Commons Library research using PolicyEngine, cited in a House of
+    Lords debate.
+- **Funding.** The Nuffield Foundation funds PolicyEngine UK through grants
+  made in 2024 and 2026, for local-area data and constituency-level Budget
+  analysis.
+- Research and media use is on the appendix slide.
+
+### 4. PolicyEngine UK computes incomes, not spending
 
 - The model computes household incomes after taxes and benefits, poverty and
   the public finances.
 - **The rules.** PolicyEngine UK codes taxes and benefits from legislation
   and guidance, and uprates them with OBR outturn and forecasts.
-- **The households.** Microcosm UK 2024–25: the Family Resources Survey, with
-  high incomes imputed from HMRC's Survey of Personal Incomes, wealth and
-  spending imputed from other surveys, and weights calibrated to official
-  totals.
+- **The households.** Microcosm UK 2024–25: the Family Resources Survey; copies
+  of survey households whose adults take incomes from HMRC's Survey of
+  Personal Incomes, with extra copies above £200,000; wealth and spending
+  imputed from other surveys; and weights calibrated to official totals.
 - **The results.** policyengine.py reports effects by programme, income
   decile, poverty, inequality and region, and the net cost to the Exchequer.
   Local-area results use a separate, experimental file.
@@ -57,7 +107,7 @@ Microcosm UK**.
 - The shock studies were run on earlier datasets (the survey-weighted or
   enhanced FRS), not Microcosm UK.
 
-### 4. How a reform or a shock is run
+### 5. How a reform or a shock is run
 
 - Two simulations on the same households: a baseline and a counterfactual.
 - **Certified dataset.** Microcosm UK 2024–25: people, benefit units and
@@ -82,19 +132,154 @@ Microcosm UK**.
 - A business shock enters through earnings, prices or business taxes, from
   published estimates, another model or a stated scenario.
 
-### 5. Disaggregating tariff impacts
+### 6. How the rules are encoded
 
-- A trade model gives results by sector. PolicyEngine could carry them to
-  households; the concordance is not built.
-- **Sector results (trade model).** A GTAP-style run: changes in output,
-  employment and prices by sector, and wages by labour type.
+- Law as dated parameters, formulas and tests. The example is the personal
+  allowance, abridged; the counts are at version 2.179.0 (the bundle
+  certifies 2.174.1).
+- **Parameter: dated values, with legal references.** The personal allowance
+  is 12,500 from 6 April 2019 and 12,570 from 6 April 2021, the second with a
+  reference to the Income Tax (Indexation) Order 2021. The parameter file is
+  linked in the sources row.
+- **Variable: a formula over arrays, one value per person.** This is the
+  snippet on the slide. It reduces the allowance by the reduction rate for
+  adjusted net income above the limit, and never below zero.
+- **Test: inputs and the expected output.** The linked test file includes the
+  case "Personal Allowance eliminated": for 2020, an adjusted net income of
+  150,000 gives a personal allowance of 0.
+- **Three entities.** Person, benefit unit and household. Each variable
+  belongs to one.
+- **1,086 parameter files.** Dated rates and thresholds; 998 carry a
+  reference.
+- **1,504 variables, 6,779 tests.** A test gives inputs and the expected
+  output.
+
+### 7. Microcosm UK 2024–25: how the household file is built
+
+- An open-source pipeline from licensed surveys and published statistics to a
+  weighted file.
+- **Survey spine (FRS 2024–25).** Households, benefit units and people, with
+  incomes, housing and each main job's sector.
+- **Tax-record incomes (HMRC SPI 2022–23).** The build adds 10,000 copies of
+  FRS households whose adults take taxpayers' incomes drawn from the SPI
+  public-use file.
+  - Before calibration, the copies carry half the weight of households with
+    nobody of pension age and a fifth of the weight of the others.
+  - The extra records above £200,000 are a separate step: copies placed in
+    four income bands, from £200,000, £500,000, £1 million and £2 million.
+- **Wealth and spending (WAS, LCFS, ETB, NTS).** Wealth, spending by
+  category, VAT, public services and travel, drawn from donor surveys.
+- **Benefit take-up (DWP and HMRC).** People who report a benefit in the FRS
+  always claim it. Only the others the rules find entitled are drawn, so that
+  totals meet the published rates or caseloads.
+- **Calibrated weights (official totals).** Household weights fitted to
+  official totals by the calibration step.
+- **Imputation.** Quantile regression forests, weighted and chained across
+  variables. Draws sample the conditional distribution.
+- **Sector and occupation.** From the survey's job record. For the copies,
+  SIC division and occupation are imputed from their SPI incomes, not
+  observed. No weight target is by industry. This matters here because both
+  pilots assign shocks by sector.
+- **Reproducible.** Every survey microdata file is pinned by SHA-256 and
+  checked when the build runs. Draws are seeded.
+- **Stages.** The certified build ran at commit dc00d158f, which declares 54
+  stages, each naming its survey and source. Today's code (429d7a0, 15
+  November) declares 56; the slide's source link opens that version.
+- Abbreviations. FRS: Family Resources Survey. SPI: Survey of Personal
+  Incomes. WAS: Wealth and Assets Survey, round 8. LCFS: Living Costs and
+  Food Survey 2024–25. ETB: Effects of Taxes and Benefits. NTS: National
+  Travel Survey.
+- The shock studies in this deck were run on earlier datasets, not on
+  Microcosm UK.
+
+### 8. Calibration: weights fitted to official statistics
+
+- The certified national build of 7 November 2026, from its public dashboard
+  and its diagnostics.
+- 1,514 targets. The dashboard browses them as 44 statistics; these are its
+  display groups, not the families the loss uses.
+- 98.7% of targets are within 10% of the official figure.
+- An effective sample size of about 7.2k, 9.2% of the records: the weights
+  are unequal.
+- 78.2k household records. The build prunes nothing, so no record has a
+  weight of zero.
+- Every target is at model year 2025, though the file is called 2024–25.
+- What the solver minimises (the equation on the slide):
+  - *w* are the household weights (*w*⁰ at the start). *a_j* is a
+    household's contribution to target *j*, from data and rules. *t_j* is the
+    official figure.
+  - The target weights *ω_j* sum to one. The loss has 38 target families;
+    each carries 1/38 (about 2.6%) of the total weight, split evenly within
+    it. A family with one target counts as much as the 360 regional SPI
+    targets together.
+  - Gradient descent (Adam) on log-weights: 1,500 steps, learning rate 0.02,
+    seed 0. The saved weights are the best step's, step 1,437.
+  - Each weight is capped at 10 times its start, enforced after every step.
+    Total households are free to move with the targets.
+- The slide does not show the solver's final objective. It depends on the
+  family weights and the target set, so it is not comparable across
+  releases.
+- Targets by publisher:
+  - HMRC, 776: incomes by band and region, capital gains, tax liabilities.
+  - ONS, 365: population by age and region, employment by occupation.
+  - DWP, 213: Universal Credit, State Pension and other benefit caseloads.
+  - MHCLG, 82: council tax dwellings by band.
+  - Others, 78: OBR receipts and spending, bus journeys, student loans.
+- This is in-sample fit; the dashboard has no out-of-sample test for the UK.
+- Effective sample size, the families, the saved step and the model year are
+  from the certified build's diagnostics
+  (`microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`). The solver
+  settings in the code (429d7a0) match them.
+
+### 9. The Economic Prosperity Deal: from macro impacts to households
+
+- One deal has macro impacts and household impacts. This slide is the
+  end-to-end path; the next three slides are its parts. Not built; no
+  results yet.
+- **Results for the deal (a trade or macro model).** Changes in output,
+  employment and prices by sector, and wages by labour type, under the
+  deal's tariff schedule, with the labour-market closure stated. A GTAP-style
+  model has one wage per labour type, not per sector, and its standard
+  closure fixes aggregate employment.
 - **Concordance (agreed mapping, not built).** Model sectors to two-digit SIC
   divisions for earnings and jobs; to COICOP spending divisions for prices.
-- **Assign to people (PolicyEngine).** Earnings and job changes to employees
-  in each sector, over repeated draws; price changes to each household's
-  spending.
-- **Apply the rules (PolicyEngine).** Taxes and benefits recomputed for every
-  household, before and after.
+- **Assign to people, apply the rules (PolicyEngine).** Sector changes are
+  assigned to survey employees and households, and taxes and benefits are
+  recomputed for every household, before and after. Static microsimulation:
+  there is no general equilibrium in PolicyEngine, so wages, prices and
+  firms' responses come from the other model.
+- **Household and fiscal results (PolicyEngine).** Income deciles, poverty,
+  regions and the net Exchequer cost, which is the change in the model's
+  government balance.
+- **Optional feedback (not built).** Household and fiscal totals could go
+  back to the macro model, and the two could repeat until they agree: the
+  macro–micro loop on slide 12.
+- **The deal.** Its general terms became operative on 8 May 2025. They
+  provide for a quota of 100,000 UK vehicles at a 10% tariff and, subject to
+  supply-chain conditions, a steel and aluminium quota at most-favoured-nation
+  rates.
+- The trade study's code includes a deal schedule, but we have no published
+  results for it. The study's results are for the schedule before the deal
+  (slide 11).
+
+### 10. Disaggregation: how sector results reach people
+
+- The mechanism inside the PolicyEngine step of the previous slide: which
+  survey records receive each sector result. The mapping in the middle
+  column is the concordance, which is not built.
+- **Earnings and jobs by sector.** Mapped to two-digit SIC divisions.
+  Earnings changes are assigned to the employees who work in that sector. A
+  sector result does not say which employees lose a job, so who does is
+  drawn at random, over repeated draws; studies report the mean and the
+  standard deviation across draws (appendix, slide 25).
+- **Wages by labour type.** A trade model's labour types would be mapped to
+  occupation groups, and assigned to employees in those occupations.
+  Occupation comes from the survey's job record. This mapping is part of the
+  proposed interface (slide 13) and is not built.
+- **Prices.** Mapped to COICOP spending divisions, and assigned to each
+  household's spending in that category.
+- Then the tax and benefit rules are recomputed for every household, before
+  and after.
 - Breakdowns PolicyEngine returns:
   - Income deciles: the average change, and the shares gaining and losing
     within each decile.
@@ -109,7 +294,7 @@ Microcosm UK**.
 - Today the trade study assigns shocks by two-digit SIC division. The
   survey's sample size limits sector detail.
 
-### 6. The tariff bridge: steps a trade model could replace
+### 11. The tariff bridge: steps a trade model could replace
 
 - How the trade study turns the 2025 US tariffs into an earnings shock for
   survey employees.
@@ -134,194 +319,7 @@ Microcosm UK**.
 - The study's code includes a deal schedule, but we have no published results
   for it.
 
-### 7. Assignment variability: repeated random draws
-
-- A sector-level shock does not say which survey employees are affected.
-- A scenario sets the chance that an employee loses their job, by sector or
-  occupation. Who does is drawn at random.
-- In the tariff study, whether a newly entitled family claims Universal
-  Credit is also drawn, at the scenario's take-up rate.
-- Every draw is a full run of the tax and benefit rules. Studies report the
-  mean and the standard deviation across draws.
-- 50 draws in the AI study's central scenario; 100 in the tariff bridge.
-- £17.7bn: the Exchequer cost of the illustrative AI scenario, as the mean of
-  50 draws, on the survey-weighted FRS 2024–25, not Microcosm UK.
-- £1.2bn: the standard deviation across draws. The 2.5th to 97.5th percentile
-  of the 50 draws runs from £15.5bn to £19.8bn.
-- £18.2bn → £29.5bn: one draw of the same scenario costs £18.2bn on the
-  survey-weighted FRS and £29.5bn on the enhanced FRS 2023–24. The dataset
-  moves the cost more than the draws do.
-- The draws cover random assignment only, not sampling error in the survey,
-  error in the calibrated weights or doubt about the scenario.
-- The trade study also reports household-bootstrap sampling intervals for its
-  energy results.
-
-### 8. How the rules are encoded
-
-- Law as dated parameters, formulas and tests. The example is the personal
-  allowance, abridged; the counts are at version 2.179.0 (the bundle
-  certifies 2.174.1).
-- **Parameter: dated values, with legal references.** The personal allowance
-  is 12,500 from 6 April 2019 and 12,570 from 6 April 2021, the second with a
-  reference to the Income Tax (Indexation) Order 2021. The parameter file is
-  linked in the sources row.
-- **Variable: a formula over arrays, one value per person.** This is the
-  snippet on the slide. It reduces the allowance by the reduction rate for
-  adjusted net income above the limit, and never below zero.
-- **Test: inputs and the expected output.** The linked test file includes the
-  case "Personal Allowance eliminated": for 2020, an adjusted net income of
-  150,000 gives a personal allowance of 0.
-- **Three entities.** Person, benefit unit and household. Each variable
-  belongs to one.
-- **1,086 parameter files.** Dated rates and thresholds; 998 carry a
-  reference.
-- **1,504 variables, 6,779 tests.** A test gives inputs and the expected
-  output.
-
-### 9. Microcosm UK 2024–25: how the household file is built
-
-- An open-source pipeline from licensed surveys and published statistics to a
-  weighted file.
-- **Survey spine (FRS 2024–25).** Households, benefit units and people, with
-  incomes, housing and each main job's sector.
-- **Tax-record incomes (HMRC SPI 2022–23).** Copies of survey households draw
-  incomes from the public-use file; extra records above £200,000.
-- **Wealth and spending (WAS, LCFS, ETB, NTS).** Wealth, spending by
-  category, VAT, public services and travel, drawn from donor surveys.
-- **Benefit take-up (DWP and HMRC).** Who claims, drawn to published rates
-  among those the rules find entitled.
-- **Calibrated weights (official totals).** Household weights fitted to
-  official totals by the calibration step.
-- **Imputation.** Quantile regression forests, weighted and chained across
-  variables. Draws sample the conditional distribution.
-- **Sector and occupation.** From the survey's job record; redrawn for the
-  tax-record copies. No weight target is by industry.
-- **Reproducible.** Every survey microdata file is pinned by SHA-256. Draws
-  are seeded.
-- **In the code.** 56 declared stages, each naming its survey and source
-  (commit 429d7a0, 15 November).
-- Abbreviations. FRS: Family Resources Survey. SPI: Survey of Personal
-  Incomes. WAS: Wealth and Assets Survey, round 8. LCFS: Living Costs and
-  Food Survey 2024–25. ETB: Effects of Taxes and Benefits. NTS: National
-  Travel Survey.
-- The shock studies in this deck were run on earlier datasets, not on
-  Microcosm UK.
-
-### 10. Calibration: weights fitted to official statistics
-
-- The certified national build of 7 November 2026, as its public dashboard
-  reports it.
-- 1,514 targets, in 44 statistics.
-- 98.7% of targets are within 10% of the official figure.
-- 0.51% is the final loss: the weighted, capped relative error.
-- 78.2k household records have a non-zero weight.
-- What the solver minimises (the equation on the slide):
-  - *w* are the household weights (*w*⁰ at the start). *a_j* is a
-    household's contribution to target *j*, from data and rules. *t_j* is the
-    official figure.
-  - The target weights *ω_j* sum to one: each group of related targets
-    carries equal total weight, split evenly within it.
-  - Gradient descent (Adam) on log-weights: 1,500 steps, a fixed seed, and
-    each weight at most 10 times its start.
-- Targets by publisher:
-  - HMRC, 776: incomes by band and region, capital gains, tax liabilities.
-  - ONS, 365: population by age and region, employment by occupation.
-  - DWP, 213: Universal Credit, State Pension and other benefit caseloads.
-  - MHCLG, 82: council tax dwellings by band.
-  - Others, 78: OBR receipts and spending, bus journeys, student loans.
-- This is in-sample fit; the dashboard has no out-of-sample test for the UK.
-- Solver settings in the code (429d7a0) match the build's diagnostics.
-
-### 11. Business policy beyond tax: from firm costs to households
-
-- Example: the British Industrial Competitiveness Scheme, which exempts
-  eligible manufacturers in Great Britain from three electricity policy
-  costs. Not built; no results.
-- **Cost change by sector (scheme design).** Relief from three electricity
-  policy costs for eligible manufacturers: the impact assessment estimates
-  £35 to £40 per MWh, from 2027.
-- **How firms use it (outside PolicyEngine).** Lower prices, higher pay or
-  more jobs, investment, or higher profits. This step comes from another
-  model, or an assumption.
-- **Allocate to households (PolicyEngine).** Prices by spending, earnings and
-  jobs by sector of employment, profits by shareholding.
-- **Household and fiscal effects (PolicyEngine).** Net incomes by decile and
-  region (local areas experimental); poverty; tax and benefit receipts.
-- The same path serves a subsidy or a regulatory cost. PolicyEngine needs the
-  cost change and how firms split it; it computes who gains or loses and the
-  knock-on change in taxes and benefits. The measure's own Exchequer cost
-  comes from outside the model.
-- In the model today, employer NI changes are split between pay, prices and
-  profits (by default, all to pay), and an outside business-tax estimate can
-  be allocated by spending or shareholding. Both are booked as taxes, so a
-  non-tax measure needs an extension.
-
-### 12. What we have on the business side
-
-- Each piece is labelled by how far along it is.
-- **Firm-level VAT microsimulation (working paper).** A synthetic population
-  of UK businesses calibrated to the ONS VAT/PAYE enterprise frame (about 2.7
-  million enterprises) and HMRC's count of VAT-registered traders (about 2.2
-  million). It costs changes to the level and shape of the VAT registration
-  threshold and a reduced-rate band. It does not recover administrative
-  microdata or firm behaviour; turnover responses are sensitivity exercises
-  under assumed elasticities.
-- **Employer costs (in the model).** PolicyEngine UK computes employer
-  National Insurance and total employment costs. We have published analyses
-  of employer NI exemptions for young workers and recently inactive
-  employees.
-- **Linking firms to households (not built).** PolicyEngine UK has no firm
-  entity, and the firm and household populations are not linked. Microcosm
-  can declare firm tables and person–firm job links, but that support is
-  experimental, not production.
-
-### 13. Who bears the AI shock?
-
-- An illustrative 2026 scenario: 7% of employees lose a year's earnings;
-  other employees' wages rise about 2.6%.
-- £17.7bn: the Exchequer cost of the illustrative scenario (mean of 50
-  draws).
-- +1.87pp: absolute poverty before housing costs.
-- Exchequer cost by who loses the jobs: the range across four incidence
-  patterns of the same size, and a deliberately top-loaded fifth. £13.9bn
-  when losses are uniform; £20.6bn with the top-third earners tilt; £32.8bn
-  when top-loaded (a stress test, shown in grey outside the teal band).
-- The central £17.7bn lies inside the band; it is not marked on the scale.
-- The rise in poverty varies much less across the four patterns (1.85–1.96pp).
-- The £20.6bn pattern tilts job losses towards the top third of earners in
-  occupations with above-median AI exposure.
-- The study uses the survey-weighted Family Resources Survey. In a single
-  draw, the central scenario costs £18.2bn on that dataset and £29.5bn on the
-  enhanced FRS, so the fiscal results depend on the dataset.
-
-### 14. Where an agent-based model would link
-
-- Three candidate questions, each naming the behaviour the agent-based model
-  would simulate. None of these links is built.
-- **A supply shock to one product, for example semiconductors.** The
-  agent-based model simulates firms along the product's supply chain losing
-  inputs, switching suppliers, and cutting output and jobs. It passes job and
-  earnings losses by sector and region. PolicyEngine returns affected
-  workers' household incomes, benefit claims and tax receipts.
-- **Electricity-cost relief for manufacturers (BICS).** It simulates firms
-  that differ in electricity use and market power choosing between prices,
-  pay, jobs, investment and profit. It passes changes in prices, earnings and
-  profits by sector. PolicyEngine returns income changes by decile and region
-  (local areas experimental), and tax and benefit receipts.
-- **AI adoption over the business cycle.** It simulates firms adopting
-  technology, entering and exiting, with jobs and wages adjusting, as in
-  Dosi, Fagiolo and Roventini (2010). It passes paths of jobs, wages and
-  profits by sector, in place of the AI study's assumed shock. PolicyEngine
-  returns poverty, inequality and tax and benefit receipts in each year.
-- Trade flows and the response to tariffs stay in a trade model such as GTAP.
-  PolicyEngine models no firm behaviour: it adds the tax and benefit rules
-  and the households.
-- Dosi et al. model technological change and cycles, not AI; a CGE run with
-  technology sectors split out could also supply an AI shock.
-- Youngman et al.'s agent-based model cites our approach to under-sampled
-  wealthy households; it uses neither our model nor our data.
-
-### 15. Links to macroeconomic models
+### 12. Links to macroeconomic models
 
 - **A forecast scenario (mechanism in the model).** PolicyEngine UK projects
   its data forward with OBR growth rates for earnings, prices and other
@@ -340,7 +338,7 @@ Microcosm UK**.
   wages, interest rates and revenue. The fitted functions do not yet reflect
   benefit withdrawal.
 
-### 16. A proposed interface: tables in, tables out
+### 13. A proposed interface: tables in, tables out
 
 - The other model passes (proposed, not built):
   - `scenario, year`: a label and a year (OBR forecasts run to 2031).
@@ -371,26 +369,77 @@ Microcosm UK**.
 - Cells of sector by region have few survey records, so they carry sampling
   error.
 
-### 17. Open code, restricted microdata, synthetic data
+### 14. Business policy beyond tax: from firm costs to households
 
-- **Code (open).** PolicyEngine UK, policyengine.py and the Microcosm data
-  pipeline are open source. Anyone can read, run and change the rules and the
-  methods.
-- **Household microdata (restricted).** Microcosm UK is built from the Family
-  Resources Survey, which is licensed through the UK Data Service, so we
-  cannot share the records. PolicyEngine runs the simulations and shares
-  results as tables.
-- **Synthetic firm data (working paper).** The firm VAT paper's synthetic
-  business population is drawn only from published ONS and HMRC tables, so it
-  can be shared. Data of this kind could help calibrate an agent-based model;
-  we have not tested that.
-- Models can be linked by exchanging tables by sector, decile or region,
-  without microdata changing hands.
-- The synthetic firms do not recover administrative microdata or firm
-  behaviour, and are not linked to households. Microcosm can declare firm
-  tables and person–firm job links, but that support is experimental.
+- Example: the British Industrial Competitiveness Scheme, which exempts
+  eligible manufacturers in Great Britain from three electricity policy
+  costs. Not built; no results.
+- **Cost change by sector (scheme design).** Relief from three electricity
+  policy costs for eligible manufacturers: the impact assessment estimates
+  £35 to £40 per MWh, from 2027.
+- **How firms use it (outside PolicyEngine).** Lower prices, higher pay or
+  more jobs, investment, or higher profits. This step comes from another
+  model, or an assumption.
+- **Allocate to households (PolicyEngine).** Prices by spending, earnings and
+  jobs by sector of employment, profits by shareholding.
+- **Household and fiscal effects (PolicyEngine).** Net incomes by decile and
+  region (local areas experimental); poverty; tax and benefit receipts.
+- The same path serves a subsidy or a regulatory cost. PolicyEngine needs the
+  cost change and how firms split it; it computes who gains or loses and the
+  knock-on change in taxes and benefits. The measure's own Exchequer cost
+  comes from outside the model.
+- In the model today, employer NI changes are split between pay, prices and
+  profits (by default, all to pay), and an outside business-tax estimate can
+  be allocated by spending or shareholding. Both are booked as taxes, so a
+  non-tax measure needs an extension.
 
-### 18. Two candidate pilots
+### 15. What we have on the business side
+
+- Each piece is labelled by how far along it is.
+- **Firm-level VAT microsimulation (working paper).** A synthetic population
+  of UK businesses calibrated to the ONS VAT/PAYE enterprise frame (about 2.7
+  million enterprises) and HMRC's count of VAT-registered traders (about 2.2
+  million). It costs changes to the level and shape of the VAT registration
+  threshold and a reduced-rate band. It does not recover administrative
+  microdata or firm behaviour; turnover responses are sensitivity exercises
+  under assumed elasticities.
+- **Employer costs (in the model).** PolicyEngine UK computes employer
+  National Insurance and total employment costs. We have published analyses
+  of employer NI exemptions for young workers and recently inactive
+  employees.
+- **Linking firms to households (not built).** PolicyEngine UK has no firm
+  entity, and the firm and household populations are not linked. Microcosm's
+  data frame supports firm tables and person–firm job links, but the UK build
+  does not use them; that support is experimental, not production.
+
+### 16. Where an agent-based model would link
+
+- Three candidate questions, each naming the behaviour the agent-based model
+  would simulate. None of these links is built.
+- **A supply shock to one product, for example semiconductors.** The
+  agent-based model simulates firms along the product's supply chain losing
+  inputs, switching suppliers, and cutting output and jobs. It passes in job
+  and earnings losses by sector and region.
+- **Electricity-cost relief for manufacturers (BICS).** It simulates firms
+  that differ in electricity use and market power choosing between prices,
+  pay, jobs, investment and profit. It passes in changes in prices, earnings
+  and profits by sector.
+- **AI adoption over the business cycle.** It simulates firms adopting
+  technology, entering and exiting, with jobs and wages adjusting, as in
+  Dosi, Fagiolo and Roventini (2010). It passes in paths of jobs, wages and
+  profits by sector, in place of the AI study's assumed shock.
+- **PolicyEngine returns (the same for all three).** Household incomes by
+  decile and region (local areas experimental), poverty, inequality, benefit
+  claims, and tax and benefit receipts, by year.
+- Trade flows and the response to tariffs stay in a trade model such as GTAP.
+  PolicyEngine models no firm behaviour: it adds the tax and benefit rules
+  and the households.
+- Dosi et al. model technological change and cycles, not AI; a CGE run with
+  technology sectors split out could also supply an AI shock.
+- Youngman et al.'s agent-based model cites our approach to under-sampled
+  wealthy households; it uses neither our model nor our data.
+
+### 17. Two candidate pilots
 
 - One scenario each, passed one way from another model to PolicyEngine. We
   have no published results for either.
@@ -417,7 +466,7 @@ Microcosm UK**.
 - Later, if a pilot shows it is worth building: a two-way loop with a
   macroeconomic model, OG-UK, and a link between firm and household data.
 
-### 19. Questions for discussion
+### 18. Questions for discussion
 
 1. Which is the better first pilot: tariffs under the Economic Prosperity
    Deal, or BICS?
@@ -430,19 +479,21 @@ Microcosm UK**.
 5. Which household results matter most: deciles, poverty, regions,
    constituencies (experimental)?
 
-### 20. Thank you
+### 19. Thank you
 
 - Contacts are on the slide: vahid@policyengine.org, policyengine.org/uk,
   github.com/PolicyEngine and linkedin.com/company/thepolicyengine.
 
-## Appendix (slides 21 to 25, shown only if asked)
+## Appendix (slides 20 to 27, shown only if asked)
 
-### 21. Appendix
+### 20. Appendix
 
-- Four slides: what the UK model covers; gates, certification and firm
-  support; who bears the trade shocks; use, evaluation and engagement.
+- Seven slides: what the UK model covers; Microcosm UK data: release gates,
+  certification and firm support; who bears the trade shocks; who bears the AI shock; assignment
+  variability; open code, restricted microdata and synthetic data; use,
+  evaluation and engagement.
 
-### 22. What the UK model covers
+### 21. What the UK model covers
 
 - Including how the model allocates business taxes to households.
 - **Taxes on income.** Income tax, with Scottish rates; employee, employer
@@ -459,29 +510,36 @@ Microcosm UK**.
 - Business-tax changes estimated elsewhere can be allocated to households
   through shareholdings or consumption.
 
-### 23. Gates, certification and firm support
+### 22. Microcosm UK data: release gates, certification and firm support
 
 - What is checked before a release, what a certified bundle fixes, and what
   exists for firms.
 - **Release gates (in the pipeline).** 94 declared checks across four phases
-  of the build. A release is refused if, for example, a target misses by more
-  than 25% without a recorded review, the weights' effective sample size
-  falls below its floor, or an imputed value leaves the donor survey's range.
-  Counted in the code at commit 429d7a0.
+  of the build; the certified build passed all 85 that apply to it.
+  - 92 can block a release; 2 only report.
+  - The national build ran 85, and all passed. The other 9 are seven
+    local-area checks and the two that only report.
+  - A release is refused if, for example, a target misses by more than 25%
+    without a recorded review, the weights' effective sample size falls
+    below its floor, or an imputed value leaves the donor survey's range.
+  - The count of 94 is from the code at commit 429d7a0; the 85 is from the
+    certified build's diagnostics
+    (`microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`).
 - **What "certified" means (policyengine.py 6.19.0).** The bundle pins the
   data file by SHA-256 at an immutable revision, with the model version it
   was built with (policyengine-uk 2.174.1) and the core engine. Installing
   the bundle checks the hash. The pair is certified when the package's tests
   pass on it. A cited bundle version identifies rules, data and engine
   together.
-- **Firm support (experimental).** In the code: a firm table and person–firm
-  job links that the data frame can declare and validate; a generator of
+- **Firm support (experimental).** In the code: the data frame supports firm
+  tables and person–firm job links, and the UK build does not use them; a
+  generator of
   synthetic firms ported from the firm VAT paper; eight declared targets (ONS
   enterprise counts, HMRC VAT traders and liabilities). Not production:
   operators that use the links, firm calibration and firm releases. No stage
   of the UK build makes firms. The household file contains no firms.
 
-### 24. Who bears the trade shocks?
+### 23. Who bears the trade shocks?
 
 - Four UK trade events of 2021–26, traced to households:
   - the part of the food price rise that Bakker et al. (2023) attribute to
@@ -501,7 +559,68 @@ Microcosm UK**.
 - Price episodes use the enhanced FRS 2023–24; the tariff stage the
   survey-weighted FRS 2024–25. Neither is Microcosm UK.
 
-### 25. Use, evaluation and engagement
+### 24. Who bears the AI shock?
+
+- An illustrative 2026 scenario: 7% of employees lose a year's earnings;
+  other employees' wages rise about 2.6%.
+- £17.7bn: the Exchequer cost of the illustrative scenario (mean of 50
+  draws).
+- +1.87pp: absolute poverty before housing costs.
+- Exchequer cost by who loses the jobs: the range across four incidence
+  patterns of the same size, and a deliberately top-loaded fifth. £13.9bn
+  when losses are uniform; £20.6bn with the top-third earners tilt; £32.8bn
+  when top-loaded (a stress test, shown in grey outside the teal band).
+- The central £17.7bn lies inside the band; it is not marked on the scale.
+- The rise in poverty varies much less across the four patterns (1.85–1.96pp).
+- The £20.6bn pattern tilts job losses towards the top third of earners in
+  occupations with above-median AI exposure.
+- The study uses the survey-weighted Family Resources Survey. In a single
+  draw, the central scenario costs £18.2bn on that dataset and £29.5bn on the
+  enhanced FRS, so the fiscal results depend on the dataset.
+
+### 25. Assignment variability: repeated random draws
+
+- A sector-level shock does not say which survey employees are affected.
+- A scenario sets the chance that an employee loses their job, by sector or
+  occupation. Who does is drawn at random.
+- In the tariff study, whether a newly entitled family claims Universal
+  Credit is also drawn, at the scenario's take-up rate.
+- Every draw is a full run of the tax and benefit rules. Studies report the
+  mean and the standard deviation across draws.
+- 50 draws in the AI study's central scenario; 100 in the tariff bridge.
+- £17.7bn: the Exchequer cost of the illustrative AI scenario, as the mean of
+  50 draws, on the survey-weighted FRS 2024–25, not Microcosm UK.
+- £1.2bn: the standard deviation across draws. The 2.5th to 97.5th percentile
+  of the 50 draws runs from £15.5bn to £19.8bn.
+- £18.2bn → £29.5bn: one draw of the same scenario costs £18.2bn on the
+  survey-weighted FRS and £29.5bn on the enhanced FRS 2023–24. The dataset
+  moves the cost more than the draws do.
+- The draws cover random assignment only, not sampling error in the survey,
+  error in the calibrated weights or doubt about the scenario.
+- The trade study also reports household-bootstrap sampling intervals for its
+  energy results.
+
+### 26. Open code, restricted microdata, synthetic data
+
+- **Code (open).** PolicyEngine UK, policyengine.py and the Microcosm data
+  pipeline are open source. Anyone can read, run and change the rules and the
+  methods.
+- **Household microdata (restricted).** Microcosm UK is built from the Family
+  Resources Survey, which is licensed through the UK Data Service, so we
+  cannot share the records. PolicyEngine runs the simulations and shares
+  results as tables.
+- **Synthetic firm data (working paper).** The firm VAT paper's synthetic
+  business population is drawn only from published ONS and HMRC tables, so it
+  can be shared. Data of this kind could help calibrate an agent-based model;
+  we have not tested that.
+- Models can be linked by exchanging tables by sector, decile or region,
+  without microdata changing hands.
+- The synthetic firms do not recover administrative microdata or firm
+  behaviour, and are not linked to households. Microcosm's data frame
+  supports firm tables and person–firm job links, but the UK build does not
+  use them.
+
+### 27. Use, evaluation and engagement
 
 - **Government.**
   - 10 Downing Street's data science team (10DS) built 10ds-microsim on

@@ -10,6 +10,7 @@ import {
   CoverageSlide,
   DataSlide,
   DisaggregationSlide,
+  EpdSlide,
   FirmToolsSlide,
   InBriefSlide,
   InterfaceSlide,
@@ -25,34 +26,38 @@ import {
   UncertaintySlide,
   UsesSlide,
   WhatSlide,
+  WhoSlide,
 } from "./slides";
 
 export const bist2026Config: SlideshowConfig = {
   id: "bist-2026",
   title: "From business shocks to household incomes",
   description:
-    "Tax–benefit microsimulation alongside trade, macroeconomic and agent-based models: rules, Microcosm data, tariff impacts, business policy, AI and a proposed interface, for the BIST Modelling Unit.",
+    "PolicyEngine for the BIST Modelling Unit: who we are, the rules and Microcosm data; macro models and microsimulation, with the Economic Prosperity Deal; business policy and agent-based model links.",
   date: "2026-11-19",
   location: "Department for Business, Innovation, Science and Trade",
   footerText: "BIST Modelling Unit · 19 November 2026",
   slides: [
     TitleSlide,
     InBriefSlide,
+    // Part 1. PolicyEngine: who and what.
+    WhoSlide,
     WhatSlide,
     RunSlide,
-    DisaggregationSlide,
-    BridgeSlide,
-    UncertaintySlide,
     RulesSlide,
     MicrocosmBuildSlide,
     CalibrationSlide,
-    BusinessPolicySlide,
-    FirmToolsSlide,
-    AiSlide,
-    AbmSlide,
+    // Part 2. Overlap 1: macro and micro.
+    EpdSlide,
+    DisaggregationSlide,
+    BridgeSlide,
     MacroSlide,
     InterfaceSlide,
-    DataSlide,
+    // Part 3. Overlap 2: business modelling.
+    BusinessPolicySlide,
+    FirmToolsSlide,
+    AbmSlide,
+    // Working together.
     PilotsSlide,
     QuestionsSlide,
     ClosingSlide,
@@ -61,6 +66,9 @@ export const bist2026Config: SlideshowConfig = {
     CoverageSlide,
     ReleaseSlide,
     TradeSlide,
+    AiSlide,
+    UncertaintySlide,
+    DataSlide,
     UsesSlide,
   ],
 };

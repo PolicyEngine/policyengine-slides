@@ -8,6 +8,10 @@
 // slides follow the Microcosm code. The shock studies were run on earlier
 // datasets, and the slides that quote them say so.
 //
+// The talk has three parts: PolicyEngine, who and what; overlap 1, macro
+// modelling and microsimulation; overlap 2, business modelling. The slide
+// order is in config.ts and the part labels in slides/index.tsx.
+//
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
 // policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc,
 // uk-ai-study 5d75106 and firm-microsim-paper e6d5dd6. GOV.UK pages and the
@@ -33,6 +37,7 @@ import {
   IconBuildingFactory2,
   IconCalendar,
   IconCalendarEvent,
+  IconCar,
   IconCertificate,
   IconChartBar,
   IconChartHistogram,
@@ -43,6 +48,7 @@ import {
   IconCpu,
   IconDatabase,
   IconDice,
+  IconFileCode,
   IconFlag,
   IconFlame,
   IconHeartHandshake,
@@ -72,7 +78,6 @@ import {
   IconTargetArrow,
   IconTestPipe,
   IconTrees,
-  IconTrendingDown,
   IconTrendingUp,
   IconUser,
   IconUsers,
@@ -207,6 +212,13 @@ export const sources = {
     label: "PolicyEngine supporters",
     href: "https://www.policyengine.org/uk/supporters",
   },
+  // policyengine.org/uk/donate, read 16 November 2026: "PolicyEngine is a
+  // nonprofit building free, open-source tools that help people understand
+  // tax and benefit policies."
+  about: {
+    label: "About PolicyEngine",
+    href: "https://www.policyengine.org/uk/donate",
+  },
   // Links pinned to the commits read on 15 November 2026.
   parameterExample: {
     label: "Personal allowance parameter",
@@ -296,28 +308,74 @@ export const tags = {
   frsNotMicrocosm: tag("Survey-weighted FRS 2024–25, not Microcosm UK", "muted"),
 };
 
-// The three points of the session. Card 2: no link to another model is
-// built. Card 3: neither candidate has published PolicyEngine results (trade
-// study 06c8bbc reports none for the deal schedule; nothing on BICS exists).
+// The three parts of the talk. Card 2: no link to a trade or macroeconomic
+// model is built, and there are no published PolicyEngine results for the
+// Economic Prosperity Deal (trade study 06c8bbc reports none for the deal
+// schedule). Card 3: PolicyEngine UK has no firm entity and no link to an
+// agent-based model (see firmTools and abmQuestions below).
 export const inBrief = [
   {
-    icon: IconCoins,
-    title: "Incomes, not spending",
-    text: "Household incomes after taxes and benefits. Spending is an input.",
+    icon: IconScale,
+    title: "PolicyEngine: who and what",
+    text: "A nonprofit. Open-source rules, household data and model runs.",
   },
   {
     icon: IconPlugConnected,
-    title: "A household layer for other models",
-    text: "Sector changes in earnings, jobs and prices become household effects.",
+    title: "Overlap 1: macro and micro",
+    text: "A trade or macro model's sector results become household effects.",
     tag: tags.notBuilt,
   },
   {
-    icon: IconTargetArrow,
-    title: "Two candidate pilots",
-    text: "Economic Prosperity Deal tariffs, and BICS electricity-cost relief.",
-    tag: tags.noResults,
+    icon: IconBuildingFactory2,
+    title: "Overlap 2: business modelling",
+    text: "What we hold on firms, and where an agent-based model would link.",
+    tag: tags.notBuilt,
   },
 ];
+
+// Who we are. Every item repeats a claim with a public source:
+// - Nonprofit, free, open source: policyengine.org/uk/donate (source "about").
+// - UK and US models in one package: the policyengine.py paper (source
+//   "joss"), "in the US and UK"; its comparison table gives PolicyEngine's
+//   country coverage as "US and UK". No other country is claimed.
+// - Licences (LICENSE files): policyengine-uk and policyengine.py AGPL-3.0,
+//   microcosm MIT.
+// - Uses: the four items are the "uses" entries below (the appendix slide),
+//   with their caveats kept: sources no10, hmt, obr and hansard.
+// - Funding: as on the appendix slide (source "nuffield").
+export const whoWeAre = {
+  facts: [
+    { icon: IconHeartHandshake, title: "Nonprofit", text: "Free tools for tax and benefit analysis" },
+    { icon: IconLockOpen, title: "Open source", text: "Rules, data pipeline and analysis code" },
+    { icon: IconWorld, title: "UK and US models", text: "One Python package: policyengine.py" },
+  ],
+  uses: [
+    {
+      icon: IconBuildingBank,
+      label: "10 Downing Street",
+      text: "Data science team built 10ds-microsim on PolicyEngine: supplementary, experimental analysis",
+    },
+    {
+      icon: IconCoins,
+      label: "HM Treasury",
+      text: "Pilot evaluation in 2024; its transparency record says HMT does not currently use it",
+    },
+    {
+      icon: IconChartBar,
+      label: "Office for Budget Responsibility",
+      text: "Lists PolicyEngine among organisations it engaged with in 2025–⁠26",
+    },
+    {
+      icon: IconNews,
+      label: "House of Commons Library",
+      text: "Research using PolicyEngine, cited in a House of Lords debate",
+    },
+  ],
+  funding: {
+    icon: IconPigMoney,
+    text: "Nuffield Foundation grants made in 2024 and 2026 fund PolicyEngine UK.",
+  },
+};
 
 // Data: policyengine.py 810a59e, data/bundle/manifest.json, bundle 6.19.0
 // (Microcosm UK 2024-25 national build of 7 November 2026, certified for
@@ -409,24 +467,27 @@ export const tradeEnergy = {
   range: "49–64% across variants",
 };
 
-// From a trade model's sector results to households. The breakdowns are the
-// output classes in policyengine.py 810a59e, src/policyengine/outputs/:
-// decile_impact.py and intra_decile_impact.py; poverty.py; inequality.py;
-// program_statistics.py (the 14 programmes in UK_PROGRAMS, hence "taxes and
-// benefits"); uk_geography_disclosure.py (region); constituency_impact.py
-// and local_authority_impact.py (the local-area file is experimental).
-// Spending is held by COICOP division (policyengine-uk d3db7ac,
-// variables/input/consumption/petrol_spending.py). No concordance from GTAP
-// sectors exists in our code: the trade study assigns by two-digit SIC
-// division of FRS employees (tariff_pipeline/exposure.py:174-230), read from
-// sic_industry_division (policyengine-uk d3db7ac).
-export const tariffDisaggregation = {
+// The Economic Prosperity Deal, end to end: from a trade or macroeconomic
+// model's results for the deal to household and fiscal results. Not built,
+// and no results. Every fact is one the deck already cites:
+// - the deal: source "epd" above (operative 8 May 2025; a quota of 100,000
+//   vehicles at a 10% tariff; a steel and aluminium quota subject to
+//   supply-chain conditions);
+// - "Deal schedule in our study": uk-trade-shock-study 06c8bbc has a deal
+//   schedule and reports no results for it (see tariffBridge below);
+// - static, no general equilibrium: see runFacts below;
+// - the feedback arrow is the macro-micro loop on the macro links slide,
+//   which is not built (see macroLinks below).
+// The standard GTAP model has one wage per labour type and its standard
+// closure fixes aggregate employment, hence "wages by labour type" and
+// "closure stated".
+export const epdTrace = {
   flow: [
     {
       icon: IconWorld,
-      owner: "Trade model",
-      title: "Sector results",
-      text: "Output, jobs, prices; wages by labour type",
+      owner: "Trade or macro model",
+      title: "Results for the deal",
+      text: "Output, jobs, prices by sector; wages by labour type; closure stated",
     },
     {
       icon: IconArrowsExchange,
@@ -437,16 +498,64 @@ export const tariffDisaggregation = {
       dashed: true,
     },
     {
-      icon: IconUsers,
-      owner: "PolicyEngine",
-      title: "Assign to people",
-      text: "Employees by sector; households by spending",
-    },
-    {
       icon: IconScale,
       owner: "PolicyEngine",
-      title: "Apply the rules",
-      text: "Taxes and benefits, before and after",
+      title: "Assign to people, apply the rules",
+      text: "Static microsimulation: no general equilibrium",
+    },
+    {
+      icon: IconHome,
+      owner: "PolicyEngine",
+      title: "Household and fiscal results",
+      text: "Deciles, poverty, regions, net Exchequer cost",
+    },
+  ],
+  feedback: {
+    label: "Optional feedback: household and fiscal totals back to the macro model",
+    tag: tags.notBuilt,
+  },
+  deal: [
+    { icon: IconCalendarEvent, title: "General terms", text: "operative 8 May 2025" },
+    { icon: IconCar, title: "100,000-vehicle quota", text: "at a 10% tariff" },
+    { icon: IconBuildingFactory2, title: "Steel and aluminium quota", text: "with supply-chain conditions" },
+    { icon: IconFileCode, title: "Deal schedule in our study", text: "coded; no published results" },
+  ],
+};
+
+// The mechanism inside the PolicyEngine step: which records receive each
+// sector result. The breakdowns are the
+// output classes in policyengine.py 810a59e, src/policyengine/outputs/:
+// decile_impact.py and intra_decile_impact.py; poverty.py; inequality.py;
+// program_statistics.py (the 14 programmes in UK_PROGRAMS, hence "taxes and
+// benefits"); uk_geography_disclosure.py (region); constituency_impact.py
+// and local_authority_impact.py (the local-area file is experimental).
+// Spending is held by COICOP division (policyengine-uk d3db7ac,
+// variables/input/consumption/petrol_spending.py). No concordance from GTAP
+// sectors exists in our code: the trade study assigns by two-digit SIC
+// division of FRS employees (tariff_pipeline/exposure.py:174-230), read from
+// sic_industry_division (policyengine-uk d3db7ac), and draws who loses a job
+// at random over repeated draws (see uncertainty below). Occupation comes
+// from the survey's job record; a map from a trade model's labour types to
+// occupations is part of the proposed interface and is not built.
+export const tariffDisaggregation = {
+  rows: [
+    {
+      icon: IconBriefcase,
+      result: "Earnings and jobs by sector",
+      key: "Two-digit SIC division",
+      assigned: "Employees in that sector; job losses drawn at random",
+    },
+    {
+      icon: IconUser,
+      result: "Wages by labour type",
+      key: "Occupation group",
+      assigned: "Employees in those occupations",
+    },
+    {
+      icon: IconShoppingCart,
+      result: "Prices",
+      key: "COICOP spending division",
+      assigned: "Households, by what they spend",
     },
   ],
   breakdowns: [
@@ -518,6 +627,7 @@ export const businessPolicy = {
   ],
 };
 
+// An appendix slide, tagged "Illustrative".
 // uk-ai-study 5d75106, paper/sections/results.tex, incidence table (means
 // of 50 paired draws): exposure-proportional 17.7 and +1.87; uniform 13.9;
 // expertise-compression 20.6; Klein-anchored stress test 32.8; poverty
@@ -534,8 +644,9 @@ export const aiShock = {
 // firm-microsim-paper e6d5dd6 (paper and README): the ONS VAT/PAYE
 // enterprise frame (about 2.7 million enterprises) and HMRC's count of
 // VAT-registered traders (about 2.2 million). Microcosm README (429d7a0, 15
-// November 2026): "Firm support is experimental"; its frame can declare firm
-// tables and person-firm job links (see microcosmRelease below). The two
+// November 2026): "Firm support is experimental"; its data frame supports
+// firm tables and person-firm job links, which the UK build does not use
+// (see microcosmRelease below). The two
 // published employer NI analyses are sources youngWorkerNics and
 // inactiveNics.
 export const firmTools = [
@@ -561,7 +672,7 @@ export const firmTools = [
     tags: [tags.notBuilt, tags.experimental],
     title: "Linking firms to households",
     text: "No firm entity: not built.",
-    facts: [{ value: "Experimental", label: "Microcosm's firm tables and job links" }],
+    facts: [{ value: "Experimental", label: "Microcosm's firm tables and job links, unused in the UK build" }],
   },
 ];
 
@@ -607,29 +718,39 @@ export const macroLinks = [
 
 // Candidate questions for a link with an agent-based model. None is built or
 // run. Row 3 refers to the Dosi et al. class of model (source above), which
-// is not about AI; applying it to AI is hypothetical.
+// is not about AI; applying it to AI is hypothetical. Each row says what the
+// agent-based model would pass in; what PolicyEngine returns is the same for
+// all three (abmReturns).
 export const abmQuestions = [
   {
     icon: IconCpu,
     question: "A semiconductor supply shock",
     behaviour: "Firms lose inputs, cut output and jobs",
-    returns: "Household incomes, benefit claims, tax receipts",
+    passes: "Job and earnings losses by sector and region",
   },
   {
     icon: IconBolt,
     question: "Electricity-cost relief (BICS)",
     behaviour: "Firms choose between prices, pay and profit",
-    returns: "Incomes by decile and region",
+    passes: "Prices, earnings and profits by sector",
   },
   {
     icon: IconRobot,
     question: "AI adoption over the cycle",
     behaviour: "Firms adopt, enter and exit; wages adjust",
-    returns: "Poverty, inequality and receipts, by year",
+    passes: "Paths of jobs, wages and profits by sector",
   },
 ];
 
-// Code, data and synthetic data. Licences: policyengine-uk and policyengine.py
+export const abmReturns = [
+  "Household incomes by decile and region",
+  "Poverty and inequality",
+  "Benefit claims",
+  "Tax and benefit receipts",
+  "All by year",
+];
+
+// Code, data and synthetic data (an appendix slide). Licences: policyengine-uk and policyengine.py
 // AGPL-3.0, microcosm MIT (LICENSE files). Microdata: the certified UK dataset
 // is in a private Hugging Face repository (policyengine.py 810a59e,
 // data/bundle/manifest.json); FRS-derived data are licensed through the UK
@@ -715,7 +836,9 @@ export const questions = [
 ];
 
 // Each item follows the public page linked on the slide (sources no10, hmt,
-// obr, hansard and nuffield above).
+// obr, hansard and nuffield above). The "Who we are" slide (whoWeAre above)
+// repeats the three government items, the House of Commons Library item and
+// the funder in short form; this appendix slide keeps the full list.
 export const uses = [
   {
     icon: IconBuildingBank,
@@ -815,19 +938,37 @@ export const runFacts = [
   { icon: IconBuildingFactory2, title: "Not modelled", text: "firms' decisions, general equilibrium" },
 ];
 
-// Microcosm UK 2024-25: what the pipeline builds. Read from microcosm
-// 429d7a0, packages/microcosm-build/src/microcosm/build/uk/source_stages.json
-// (56 stages, each with a "survey" and a "source"; all 52 microdata and
-// administrative artifacts carry a SHA-256):
+// Microcosm UK 2024-25: what the pipeline builds.
+// The slide describes the certified file. Its build
+// (microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e) ran at microcosm
+// dc00d158f, which declares 54 source stages (the certified build's
+// diagnostics); today's code at 429d7a0 declares 56
+// (packages/microcosm-build/src/microcosm/build/uk/source_stages.json, each
+// stage with a "survey" and a "source"; every survey microdata file is
+// pinned by SHA-256 and checked when the build runs). Read at 429d7a0:
 // - frs_spine: Family Resources Survey 2024-25 (UK Data Service SN 9563);
-// - spi_support_channel, hmrc_spi_income_spine, spi_income_band_donors:
-//   incomes from the Survey of Personal Incomes public-use file 2022-23;
-//   reserved records for the HMRC total-income bands "from GBP 200,000";
+// - spi_support_channel, hmrc_spi_income_spine: the build stacks 10,000
+//   copies of FRS households (uk_runtime/spi_support.py,
+//   DEFAULT_SPI_SUPPORT_HOUSEHOLDS) whose adults take taxpayers' incomes
+//   drawn from the Survey of Personal Incomes public-use file 2022-23.
+//   Before calibration the copies carry half the weight of households with
+//   nobody of pension age and a fifth of the weight of the others (the
+//   build's diagnostics; the code's prior mass shares of 0.5 and 0.2 agree);
+// - spi_income_band_donors: a separate step. Further copies are placed in
+//   the four HMRC total-income bands from GBP 200,000, 500,000, 1 million
+//   and 2 million (uk_runtime/spi_band_donors.py);
+// - the copies' SIC division and occupation are imputed from their SPI
+//   incomes, not observed (uk_runtime/spi_employment_shell.py: occupation
+//   is redrawn from the copy's own incomes, and an industry division copied
+//   from an FRS adult with that occupation);
 // - was_wealth (Wealth and Assets Survey round 8), lcfs_consumption (Living
 //   Costs and Food Survey 2024-25), etb_vat and etb_services (Effects of
 //   Taxes and Benefits), nts_bus_travel (National Travel Survey);
 // - uc_take_up, pension_credit_take_up, child_benefit_take_up: DWP and HMRC
-//   statistics "applied to PolicyEngine-UK pre-take-up" entitlement.
+//   statistics "applied to PolicyEngine-UK pre-take-up" entitlement. People
+//   who report a benefit in the FRS always claim it
+//   (uk_runtime/frs_take_up.py, the "reported" anchors); only the others are
+//   drawn, so that totals meet the published rates or caseloads.
 // Imputation method: packages/microcosm-fit/README.md ("regime-gated,
 // sequentially-chained quantile-regression-forest imputer"; "a random
 // quantile is sampled per row (seeded)"). No target is by industry: no row
@@ -843,7 +984,7 @@ export const microcosmFlow = [
     icon: IconReceiptTax,
     owner: "HMRC SPI 2022–23",
     title: "Tax-record incomes",
-    text: "Extra records above £200,000",
+    text: "Copies of survey households take SPI incomes; extra copies above £200,000",
   },
   {
     icon: IconWallet,
@@ -855,7 +996,7 @@ export const microcosmFlow = [
     icon: IconHeartHandshake,
     owner: "DWP and HMRC",
     title: "Benefit take-up",
-    text: "Drawn to published rates",
+    text: "Reported claims kept; others drawn to published rates",
   },
   {
     icon: IconScale,
@@ -868,8 +1009,8 @@ export const microcosmFlow = [
 export const microcosmFacts = [
   { icon: IconTrees, title: "Quantile regression forests" },
   { icon: IconLock, title: "Pinned files, seeded draws" },
-  { icon: IconStack2, title: "56 declared stages" },
-  { icon: IconAlertTriangle, title: "No industry targets" },
+  { icon: IconStack2, title: "54 stages (certified build)" },
+  { icon: IconAlertTriangle, title: "No industry targets; copies’ sectors imputed" },
 ];
 
 // Calibration.
@@ -882,14 +1023,26 @@ export const microcosmFacts = [
 // ratio cap 10, loss cap 10, seed 0, l0_lambda 0, target weight rule
 // "family_equal"). The certified build's public diagnostics record the same
 // settings.
-// Fit (the certified build): the public calibration dashboard, release
-// "2024-25-national · uk-frs-calibration-attempt-20261107T020434Z-eeb6093e",
-// read 15 November 2026: weighted target error 0.51%; 1,514 targets in 44
-// statistics; 98.7% "within 10% of the target value"; 78.2K "synthetic
-// households with a non-zero calibrated weight"; by publisher HMRC 776, ONS
-// 365, DWP 213, MHCLG 82 (so 78 from others). These are in-sample; the
-// dashboard's validation and cross-dataset pages have no UK content, and the
-// slide carries an "In-sample fit" tag.
+// Fit (the certified build,
+// microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e): the public
+// calibration dashboard, release "2024-25-national ·
+// uk-frs-calibration-attempt-20261107T020434Z-eeb6093e", read 15 November
+// 2026: 1,514 targets in 44 statistics (the dashboard's browsing groups, not
+// the loss's families); 98.7% "within 10% of the target value"; 78.2K
+// household records (the build prunes nothing, so no record has a weight of
+// zero); by publisher HMRC 776, ONS 365, DWP 213, MHCLG 82 (so 78 from
+// others). From the certified build's diagnostics: an effective sample size
+// of about 7.2 thousand (9.2% of records); 38 target families in the loss,
+// each 1/38 (about 2.6%) of the total weight, so a family with one target
+// counts as much as the 360 regional SPI targets together; the saved weights
+// are the best of the 1,500 steps (step 1,437); the cap of 10 times the
+// starting weight is enforced after every step; total households are free
+// to move with the targets; every target is at model year 2025, though the
+// file is called 2024-25. The slide does not quote the solver's final
+// objective: it depends on the family weights and the target set, so it is
+// not comparable across releases. These are in-sample; the dashboard's
+// validation and cross-dataset pages have no UK content, and the slide
+// carries an "In-sample fit" tag.
 // The repository's target file at 429d7a0 lists 1,710 national rows, more
 // than the certified build's 1,514, so the slide quotes the build only.
 export const calibrationEquation =
@@ -897,10 +1050,10 @@ export const calibrationEquation =
 
 export const calibrationFit = {
   stats: [
-    { icon: IconTargetArrow, value: "1,514", label: "targets, in 44 statistics" },
+    { icon: IconTargetArrow, value: "1,514", label: "targets; the dashboard browses them as 44 statistics" },
     { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
-    { icon: IconTrendingDown, value: "0.51%", label: "final loss: weighted, capped relative error" },
-    { icon: IconHome, value: "78.2k", label: "household records with a non-zero weight" },
+    { icon: IconUsers, value: "about 7.2k", label: "effective sample size (9.2% of records)" },
+    { icon: IconHome, value: "78.2k", label: "household records" },
   ],
   publishers: [
     { name: "HMRC", count: 776 },
@@ -909,12 +1062,17 @@ export const calibrationFit = {
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  solver: ["Adam on log-weights", "1,500 steps"],
+  solver: ["38 target families, each 1/38 of the total weight", "Adam on log-weights", "1,500 steps, best kept"],
 };
 
 // Gates, certification and firm support.
-// Gates (microcosm 429d7a0, uk/gates.json): 94 gate entries over the phases
-// preflight, assembled, transferred and terminal.
+// Gates (microcosm 429d7a0, uk/gates.json): 94 declared checks over the
+// phases preflight, assembled, transferred and terminal; 92 can block a
+// release ("release_blocking") and 2 only report ("diagnostic"). The
+// certified build's diagnostics
+// (microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e): the national
+// build ran 85 and passed them all; the other 9 are the seven local-area
+// checks and the two that only report.
 // Certification (policyengine.py 810a59e): data/bundle/manifest.json pins
 // policyengine 6.19.0, policyengine-core 3.33.3, policyengine-uk 2.174.1 and
 // microcosm_uk_2024_25.h5 by SHA‑256 at an immutable revision;
@@ -922,6 +1080,8 @@ export const calibrationFit = {
 // docs/engineering/skills/data-certification.md: the certification "is only
 // made good by the test suite passing on the exact pinned pair".
 // Firm support (microcosm 429d7a0): README ("Firm support is experimental");
+// the data frame supports firm tables and person-firm job links, and the UK
+// build does not use them;
 // uk_runtime/firm_generation.py (no build stage calls it);
 // uk/uk_firms_targets.json (eight target declarations without values).
 export const microcosmRelease = [
@@ -930,7 +1090,7 @@ export const microcosmRelease = [
     tag: { label: "In the pipeline", tone: "built" } as Tag,
     title: "Release gates",
     value: "94",
-    text: "declared checks across four phases of the build",
+    text: "declared checks; the certified build passed all 85 that apply to it",
     points: ["Target fit", "Weight spread", "Imputed values in range"],
   },
   {
@@ -947,11 +1107,15 @@ export const microcosmRelease = [
     title: "Firm support",
     value: "",
     text: "The household file contains no firms",
-    points: ["Firm table and job links declared", "Synthetic-firm generator ported", "Eight declared targets"],
+    points: [
+      "The data frame supports firm tables and job links; the UK build does not use them",
+      "Synthetic-firm generator ported",
+      "Eight declared targets",
+    ],
   },
 ];
 
-// Uncertainty in the shock studies.
+// Uncertainty in the shock studies (an appendix slide).
 // AI study (uk-ai-study 5d75106): analysis/monte_carlo_families.py, "50
 // paired draws (seeds 0-49)". results/robustness/central_monte_carlo.json,
 // exchequer_cost_bn: mean 17.69, sd 1.20. Dataset sensitivity:
@@ -1010,7 +1174,11 @@ export const interfaceSpec = {
 
 export const appendixContents = [
   { icon: IconListCheck, title: "What the UK model covers" },
-  { icon: IconShieldCheck, title: "Gates, certification and firm support" },
+  // The long title takes two of the four columns, so the seven cards fill two rows.
+  { icon: IconShieldCheck, title: "Microcosm UK data: release gates, certification and firm support", wide: true },
   { icon: IconShip, title: "Who bears the trade shocks?" },
+  { icon: IconRobot, title: "Who bears the AI shock?" },
+  { icon: IconDice, title: "Assignment variability" },
+  { icon: IconLockOpen, title: "Open code, restricted microdata" },
   { icon: IconBuildingBank, title: "Use, evaluation and engagement" },
 ];
