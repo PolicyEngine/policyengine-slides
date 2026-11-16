@@ -41,7 +41,7 @@ export const l0Ima2026Config: SlideshowConfig = {
   id: "l0-ima-2026",
   title: "L0 regularization for subnational microsimulation calibration",
   description:
-    "PolicyEngine IMA 2026 deck on using L0 regularization to prune a full Populace candidate microdataset while preserving calibration fit.",
+    "PolicyEngine IMA 2026 deck on using L0 regularization to prune a full Microcosm candidate microdataset while preserving calibration fit.",
   date: "2026-07-01",
   location: "IMA 2026, Brussels",
   footerText: "IMA 2026 · L0 regularization",
