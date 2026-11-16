@@ -24,6 +24,7 @@ import {
   businessPolicy,
   calibrationEquation,
   calibrationFit,
+  calibrationTargets,
   coverage,
   dataAccess,
   epdTrace,
@@ -46,14 +47,14 @@ import {
   tariffBridge,
   tariffDisaggregation,
   tradeEvents,
-  tradeProject,
+  tradePath,
   whoWeAre,
   type Logo,
   type PartKey,
   type Tag,
 } from "../content";
 import Embed from "./Embed";
-import { CountUp, Reveal } from "./Reveal";
+import { CountUp, Only, Reveal } from "./Reveal";
 import styles from "./deck.module.css";
 
 /** Which of the talk's seven parts a slide belongs to. */
@@ -113,8 +114,8 @@ function Frame({
   section?: Section;
   title: string;
   subtitle?: string;
-  /** Status tags shown beside the subtitle. */
-  status?: Tag[];
+  /** Status tags shown beside the subtitle; "only" limits one to the live deck or the export. */
+  status?: (Tag & { only?: "live" | "export" })[];
   children: ReactNode;
   /** Size of the body relative to the deck's base unit. */
   scale?: number;
@@ -130,9 +131,15 @@ function Frame({
           {(subtitle || status.length > 0) && (
             <div className={styles.subtitleRow}>
               {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-              {status.map((tag) => (
-                <StatusTag key={tag.label} tag={tag} />
-              ))}
+              {status.map((tag) =>
+                tag.only ? (
+                  <Only key={tag.label} when={tag.only}>
+                    <StatusTag tag={tag} />
+                  </Only>
+                ) : (
+                  <StatusTag key={tag.label} tag={tag} />
+                ),
+              )}
             </div>
           )}
           <div className={`accent-bar ${styles.bar}`} />
@@ -553,10 +560,10 @@ export function BridgeSlide() {
   return (
     <Frame
       section="projects"
-      title="The tariff study: from US tariffs to employees’ earnings"
+      title="Who bears the cost of trade changes: the 2025 US tariffs"
       scale={1.1}
-      subtitle="The 2025 US tariffs, traced to employees and through taxes and benefits"
-      status={[tags.microcosm, { label: "Deal not yet modelled", tone: "muted" }]}
+      subtitle="Inside the trade study: from tariff rates to employees’ earnings"
+      status={[tags.workingPaper, tags.microcosm, { label: "No published results for the deal", tone: "muted" }]}
     >
       <Flow
         steps={steps}
@@ -800,6 +807,53 @@ export function CalibrationSlide() {
   );
 }
 
+const count = (n: number) => n.toLocaleString("en-GB");
+
+// The page a PDF export shows in place of the live dashboard: the same
+// targets by publisher and statistic, with how many the fitted weights
+// reproduce within 10%.
+function TargetsSummary() {
+  const { total, within, publishers } = calibrationTargets;
+  const address = new URL(sources.dashboard.href);
+  return (
+    <div className={styles.targets}>
+      <div className={styles.targetsGrid}>
+        {publishers.map((publisher) => (
+          <section key={publisher.name} className={styles.targetsCard} style={{ borderTopColor: publisher.shade }}>
+            <p className={styles.owner}>{publisher.name}</p>
+            <p className={styles.statValue}>{count(publisher.count)}</p>
+            <p className={styles.statLabel}>
+              targets; {publisher.within === publisher.count ? "all" : count(publisher.within)} within 10% of the
+              official figure
+            </p>
+            <span className={styles.targetsBar} aria-hidden="true">
+              <i style={{ width: `${(100 * publisher.count) / total}%`, background: publisher.shade }} />
+            </span>
+            <ul>
+              {publisher.rows.map((row) => (
+                <li key={row.label}>
+                  <span>{row.label}</span>
+                  <strong>{count(row.count)}</strong>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <p className={styles.targetsFoot}>
+        <strong>
+          {count(within)} of {count(total)}
+        </strong>{" "}
+        targets within 10% of the official figure. The live page, target by target:{" "}
+        <a href={sources.dashboard.href}>
+          {address.host}
+          {address.pathname}
+        </a>
+      </p>
+    </div>
+  );
+}
+
 export function CalibrationLiveSlide() {
   return (
     <Frame
@@ -809,11 +863,17 @@ export function CalibrationLiveSlide() {
       fill
       subtitle="Every target by publisher and statistic: the official figure beside the fitted value"
       status={[
-        { label: "Live", tone: "built" },
+        { label: "Live", tone: "built", only: "live" },
+        { label: "Summary of the live page", tone: "muted", only: "export" },
         { label: "Certified 7 November build", tone: "built" },
       ]}
     >
-      <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
+      <Only when="live">
+        <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
+      </Only>
+      <Only when="export">
+        <TargetsSummary />
+      </Only>
     </Frame>
   );
 }
@@ -1171,28 +1231,40 @@ export function FirmMethodSlide() {
 }
 
 export function TradeSlide() {
-  const { image, caption } = tradeProject;
   return (
     <Frame
       section="projects"
       title="Who bears the cost of trade changes? Four UK episodes, 2021–26"
-      scale={1.15}
-      subtitle="Price and earnings changes from four trade events, traced to households"
+      scale={1.12}
+      subtitle="The trade study: price and earnings changes from four trade events, traced to households"
       status={[tags.workingPaper, tags.microcosm]}
     >
-      <div className="grid grid-cols-[0.85fr_1.15fr] items-center gap-[calc(var(--u)*2.4)]">
-        <div className={styles.episodes} style={columns(1)}>
-          {tradeEvents.map((event, index) => (
-            <div key={event.title} className={`${styles.episode} ${styles.enter}`} style={enter(index)}>
-              <Badge icon={event.icon} />
-              <div>
-                <h3>{event.title}</h3>
-                <p>{event.text}</p>
-              </div>
+      <div className={styles.cards} style={columns(4)}>
+        {tradeEvents.map((event, index) => (
+          <div
+            key={event.title}
+            className={`${styles.card} ${styles.episodeCard} ${event.next ? styles.episodeNext : ""} ${styles.enter}`}
+            style={enter(index)}
+          >
+            <div className={styles.cardHead}>
+              <Badge icon={event.icon} size="large" />
+              <StatusTag tag={{ label: event.years, tone: "muted" }} />
             </div>
-          ))}
-        </div>
-        <Figure image={image} caption={caption} />
+            <p className={styles.owner}>{event.channel}</p>
+            <h2>{event.title}</h2>
+            <p>{event.text}</p>
+            {event.next && (
+              <p className={styles.episodeLink}>
+                Next slide
+                <IconArrowRight stroke={2.2} aria-hidden="true" />
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className={styles.rowsFoot}>
+        <StatusTag tag={{ label: "One path", tone: "built" }} />
+        <p>{tradePath}</p>
       </div>
     </Frame>
   );

@@ -39,7 +39,8 @@ slide, is in [NOTES.md](NOTES.md).
 11. Who bears the cost of an AI scenario? (live page)
 12. How we built synthetic UK firms
 13. Who bears the cost of trade changes? Four UK episodes, 2021–26
-14. The tariff study: from US tariffs to employees' earnings
+14. Who bears the cost of trade changes: the 2025 US tariffs (the second
+    slide of the trade study)
 
 5 · What we could explore further
 
@@ -114,24 +115,22 @@ it if the frames do not run, and it does not run in an export.
   deck's own files do not name it.
 - The AI slide shows what the study does beside the live post, and no
   result of its own; the post's figures are in the notes (see "Data" below).
-- Images in `public/images/bist-2026/`, each copied unchanged from its
-  paper's repository; keep the files as copied:
-  - `firm-vat-revenue-impact-2025-26.png`:
-    `paper/figures/revenue_impact_2025_26.png`,
-    [firm-microsim-paper](https://github.com/PolicyEngine/firm-microsim-paper)
-    at `e6d5dd6` (SHA-256 `c30c82ca…dca38a`), panel (a) of the paper's static
-    threshold sweep. No slide shows it in this version (the slide that did
-    is cut; see the notes for slide 12); the file is kept.
+- One image in `public/images/bist-2026/`, copied unchanged from its
+  paper's repository; keep the file as copied:
   - `firm-vat-model-against-hmrc.png`:
-    `paper/figures/vat_threshold_revenue_impact.png`, same repository and
-    commit (SHA-256 `5e37838f…e91e8c3`), the paper's comparison of its
+    `paper/figures/vat_threshold_revenue_impact.png`,
+    [firm-microsim-paper](https://github.com/PolicyEngine/firm-microsim-paper)
+    at `e6d5dd6` (SHA-256 `5e37838f…e91e8c3`), the paper's comparison of its
     estimates with HMRC's published costing of the April 2024 threshold
     rise; slide 12.
-  - `trade-incidence-by-decile.png`: `paper/figures/fig_incidence_profile.png`,
-    [uk-trade-shock-study](https://github.com/PolicyEngine/uk-trade-shock-study)
-    at `06c8bbc` and unchanged at PR #46, `778557c` (SHA-256
-    `70454aeb…17a07`), household incidence by income
-    decile; slide 13.
+  Two earlier images are deleted: the firm paper's threshold sweep (no slide
+  showed it) and the trade paper's incidence figure (see "The review of 16
+  November" below).
+- In a PDF export the calibration dashboard slide (8) shows a static summary
+  in place of the live page: the 1,514 targets by publisher and statistic,
+  with how many are within 10% of the official figure
+  (`calibrationTargets` in `content.ts`; `Only` in `slides/Reveal.tsx`
+  switches between the two). Live, the slide keeps the dashboard.
 
 ## Sources
 
@@ -173,7 +172,7 @@ notes for that slide.
   dashboard); what we have already (model coverage, including business
   taxes, and what is open); projects we have done (the Autumn Budget 2026
   dashboard, the AI scenario post, the synthetic firms of the firm-level VAT
-  working paper, the trade working paper and its tariff study); what we
+  working paper, the trade working paper and its tariff episode); what we
   could explore further (the Economic Prosperity Deal from macro impacts to
   household impacts, and links to macroeconomic models); ideas that fit the
   unit (business policy, agent-based models and one way to link models by
@@ -335,8 +334,14 @@ notes for that slide.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
     `paper/sections/results.tex` (20 assignment draws at PR #46, `778557c`).
-  - Trade events (slide 13): uk-trade-shock-study `06c8bbc`. The food price
-    estimate is Bakker et al. (2023), as the study cites it.
+  - Trade events (slide 13): uk-trade-shock-study pull request #46,
+    `778557c`, `paper/sections/episodes.tex` (each episode's years and
+    whether it is price-led or earnings-led). The food price estimate is
+    Bakker et al. (2023), as the study cites it.
+  - Calibration targets summary (slide 8 in a PDF export): the dashboard's
+    data route for the pinned build, read 16 November 2026; the counts by
+    statistic sum to each publisher's total and to 1,514, and those within
+    10% to 1,495 (98.7%).
   - Local areas: the bundle lists a local-area file for constituencies and
     local authorities, and the dashboard labels that release experimental.
     Each slide that offers constituency, local-authority or local-area
@@ -362,7 +367,7 @@ notes for that slide.
     [VAT thresholds](https://www.policyengine.org/uk/research/uk-vat-thresholds)
     is a source on the synthetic-firms slide.
     Trade changes: uk-trade-shock-study `06c8bbc`, the four episodes and the
-    energy offset already in the deck, and the paper's incidence figure.
+    energy offset already in the deck.
   - Business taxes (the "Taxes on business" card of slide 9, and the notes
     of the cut business-side slide): policyengine-uk `d3db7ac` (business
     rates and corporate stamp duty allocated to shareholders; the employer
@@ -462,9 +467,43 @@ slide that replaced it.
   Economic Prosperity Deal slide carries "Idea to explore" only on the two
   pieces that are not built; the agent-based model slide lists outputs in
   short form. No figure changed.
-- The trade slide (13) still shows the paper's incidence figure, which is a
-  result; it was added on request in the previous version and is left for
-  the presenter to decide.
+
+## The review of 16 November
+
+A further independent review checked every figure against its source again
+(the counts on slides 5, 7 and 12 were recounted, and the AI post, the GOV.UK
+pages and the dashboard's data re-read) and changed four things. No figure
+changed.
+
+- The tariff bridge is part of the trade study, and the deck now says so.
+  Slide 13 shows the study's four episodes as cards (years, and whether
+  prices or earnings carry the change), with the US tariffs card marked
+  "Next slide". Slide 14 is titled "Who bears the cost of trade changes: the
+  2025 US tariffs", with the subtitle "Inside the trade study", and carries
+  the same "Working paper" and "Microcosm UK" tags as slide 13.
+- The trade paper's incidence figure is off slide 13 and its file is
+  deleted. It was a result chart, and the file is byte-identical at `06c8bbc`
+  and at pull request #46, so it was not regenerated on Microcosm UK and did
+  not match the slide's "Microcosm UK" tag. (The pull request regenerates
+  `fig_decomp`, `fig_episode_map`, `fig_grid` and `fig_paths` only.)
+- Slide 14's tag "Deal not yet modelled" is now "No published results for
+  the deal": the study's code has a schedule for the Economic Prosperity
+  Deal and the repository holds a two-draw test file for it
+  (`results/epd_displacement.json`), but the paper reports no deal results.
+- In a PDF export, slide 8 shows a static summary of the calibration targets
+  in place of the live dashboard, which a capture caught before its map had
+  drawn. The unused image `firm-vat-revenue-impact-2025-26.png` is deleted.
+
+`bun run export` completes for this deck; nothing in the deck holds the
+export open. Against a dev server at `EXPORT_WAIT_MS=12000` it took 5
+minutes on a quiet machine and 11 to 33 minutes on a busy one: after a
+source change the first captures wait for the dev server to recompile, hit
+the script's 132-second watchdog and are retried alone, which succeeds. Run
+it in the background or with a long timeout; a command cut off at two or
+ten minutes looks like a stall at "22 steps". A dev server draws Next.js's round development badge in the
+bottom-left corner of every capture, over the footer logo; an export
+without `--url` captures a production build, which should have no badge
+(not run in this review, because a dev server was in use).
 
 ## Privacy
 

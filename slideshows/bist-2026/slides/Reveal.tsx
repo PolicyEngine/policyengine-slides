@@ -56,6 +56,15 @@ export function Reveal({
   );
 }
 
+/**
+ * Content for the live deck only, or for a PDF export only. A live page that
+ * a capture cannot wait for gets a static page in its place in the export.
+ */
+export function Only({ when, children }: { when: "live" | "export"; children: ReactNode }) {
+  const exporting = isExportMode(useSearchParams());
+  return (when === "export") === exporting ? <>{children}</> : null;
+}
+
 // The figure inside a value such as "about 7.2k", "1,514" or "43.7%".
 const figure = /^(.*?)(\d[\d,]*(?:\.\d+)?)(.*)$/;
 

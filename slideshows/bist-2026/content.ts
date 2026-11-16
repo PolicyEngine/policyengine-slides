@@ -6,8 +6,8 @@
 // them. policyengine.py bundle 6.19.0 (released 13 November 2026; data build
 // of 7 November) certifies Microcosm UK 2024-25 for the UK, and the data
 // slides follow the Microcosm code. The AI study's figures are the published
-// post's, run on Microcosm UK for 2027-28; the trade study was run on
-// earlier datasets, and the slides that quote it say so.
+// post's, run on Microcosm UK for 2027-28; the trade study's are those of
+// its rerun on Microcosm UK (PR #46, open, not merged).
 //
 // The talk has seven parts: an introduction; what PolicyEngine is; what we
 // have already; projects we have done; what we could explore further; ideas
@@ -287,14 +287,10 @@ export const sources = {
     label: "Working paper figure and calibration report, commit e6d5dd6",
     href: "https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/calibration_accuracy.txt",
   },
-  tradeFigure: {
-    label: "Working paper figure, PR #46, 778557c",
-    href: "https://github.com/PolicyEngine/uk-trade-shock-study/blob/778557c/paper/figures/fig_incidence_profile.png",
-  },
-  // The figure on the firm VAT slide, at the commit the deck reads.
-  firmFigure: {
-    label: "Working paper figure, commit e6d5dd6",
-    href: "https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/paper/figures/revenue_impact_2025_26.png",
+  // The trade study's rerun on Microcosm UK: an open pull request.
+  tradePr: {
+    label: "Trade study, PR #46",
+    href: "https://github.com/PolicyEngine/uk-trade-shock-study/pull/46",
   },
 } satisfies Record<string, Source>;
 
@@ -601,27 +597,67 @@ export const coverage = [
   },
 ];
 
-// uk-trade-shock-study 06c8bbc. Food: paper/sections/episodes.tex, "Bakker
-// et al. (2023) attribute roughly 8 percentage points of the 25 per cent
-// food price rise between December 2019 and March 2023 to Brexit non-tariff
-// barriers" (CEP Brexit Analysis No. 18). Datasets: paper/sections/
-// results.tex and roadmap.tex, the three price-led episodes run "on the
-// enhanced Family Resources Survey" (2023-24, 2023 vintage), the tariff
-// pipeline on "the 2024-25 Family Resources Survey" (frs_2024_25.h5).
+// The trade study's four episodes (uk-trade-shock-study PR #46, 778557c,
+// open, not merged; a working paper). Years and channels are the headings of
+// paper/sections/episodes.tex: "Episode 1: the TCA border (2021--23),
+// negative, price-led"; "Episode 2: the terms-of-trade shock (2022--23),
+// negative, price-led, very large"; "Episode 3: the US tariffs (2025--26),
+// negative, earnings-led"; "Episode 4: the India agreement (2026--),
+// positive, price-led". Food: "Bakker et al. (2023) attribute roughly 8
+// percentage points of the 25 per cent food price rise between December 2019
+// and March 2023 to Brexit non-tariff barriers" (CEP Brexit Analysis No. 18).
+// Energy: the Energy Price Guarantee and the Energy Bills Support Scheme
+// (results.tex and appendix.tex). The slide shows no result of the study:
+// the paper's incidence figure (fig_incidence_profile.png) is the same file
+// at 06c8bbc and at PR #46, so it was not regenerated on Microcosm UK, and it
+// is off the slide. The slide lists the US tariffs last, because the next
+// slide is the same study's tariff episode in detail ("next").
 export const tradeEvents = [
   {
     icon: IconBasket,
+    years: "2021–\u206023",
+    channel: "Prices",
     title: "Post-Brexit food prices",
     text: "The part Bakker et\u00a0al. (2023) attribute to trade barriers",
+    next: false,
   },
-  { icon: IconFlame, title: "The 2022 energy price surge", text: "Offset in part by two support schemes" },
+  {
+    icon: IconFlame,
+    years: "2022–\u206023",
+    channel: "Prices",
+    title: "The 2022 energy price surge",
+    text: "Offset in part by two support schemes",
+    next: false,
+  },
   {
     icon: IconArrowsExchange,
+    years: "From 2026",
+    channel: "Prices: a gain",
     title: "The UK–India agreement",
     text: "Projected duty reductions; the same path could serve any trade agreement",
+    next: false,
   },
-  { icon: IconShip, title: "The 2025 US tariffs", text: "An earnings change: the next slide" },
+  {
+    icon: IconShip,
+    years: "2025–\u206026",
+    channel: "Earnings",
+    title: "The 2025 US tariffs",
+    text: "From tariff rates to employees’ earnings",
+    next: true,
+  },
 ];
+
+// The path every episode follows, under the four cards. PR #46, 778557c:
+// each episode has a household stage on the certified Microcosm UK records
+// (README; results.tex, "The second stage: household-level results";
+// vintage_and_tca.py for food, second_stage_energy.py for energy,
+// ceta_second_stage.py for the India agreement, tariff_pipeline/ for the
+// tariffs). Price changes are set against each household's spending in the
+// category; earnings changes against employees' earnings. The line does not
+// say "through taxes and benefits": that holds for the tariff and energy
+// episodes, not for the India duty reductions.
+export const tradePath =
+  "One path for every episode: a price or earnings change, applied to each Microcosm UK household by what it spends or earns";
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
 // 06c8bbc on the enhanced FRS, and the rerun (PR #46, 778557c) reports a
@@ -735,8 +771,14 @@ export const tariffDisaggregation = {
 // displacement draws and 3 wage-cut draws), at uk-trade-shock-study PR #46,
 // head 778557c (open, not merged), run on Microcosm UK at 2026. These
 // replace the figures of 06c8bbc (43.7%, 35.4%, SD 5.1 over 100 draws). Results are
-// for the schedule before the Economic Prosperity Deal; the study reports
-// none for the deal schedule.
+// for the schedule before the Economic Prosperity Deal. The paper reports
+// none for the deal schedule ("the Economic Prosperity Deal's own tariff
+// changes ... are outside the design", episodes.tex); the code has an "epd"
+// schedule and the repository a two-draw test file (results/
+// epd_displacement.json, unchanged since 06c8bbc), which is not a published
+// result, hence the tag "No published results for the deal".
+// This slide is the second slide of the trade study: its title repeats the
+// study's, and the trade slide's US tariffs card points here.
 export const tariffBridge = {
   steps: [
     { icon: IconReceiptTax, title: "Tariff rates", text: "The pre-deal US schedule" },
@@ -1222,6 +1264,89 @@ export const calibrationFit = {
 // target families, each with 1/38 of the weight; the dashboard's fit table
 // has 41 publisher-and-statistic groups.
 
+// The static page a PDF export shows in place of the live dashboard (an
+// export captures the dashboard before its map has drawn). Counts are the
+// "family_fit" rows of the dashboard's data route for the pinned build, read
+// 16 November 2026: for each of its 41 publisher-and-statistic groups, the
+// number of targets and the number within 10% of the official figure.
+// HMRC 776 (761 within 10%): Survey of Personal Incomes 568, capital gains
+// tax 105, income tax liabilities 84, and six smaller groups with 19 (Child
+// Benefit 5, benefits in kind 5, three salary sacrifice groups 3, 2 and 2,
+// Tax-Free Childcare 2). ONS 365 (365): population 179, employment 159,
+// household composition 22, land 3, consumer trends 2. DWP 213 (210):
+// Universal Credit 103, State Pension 57, the two-child limit 15, and five
+// smaller groups with 38 (benefit cap 14, Pension Credit 13, legacy benefits
+// 8, Attendance Allowance 2, workplace pensions 1). MHCLG 82 (82): council
+// tax stock. Ten other publishers 78 (77): OBR 16, Department for Transport
+// 13, Scottish Government 12, Student Loans Company 12, and six more with 25
+// (Welsh Government 11, Department for Education 8, Department for
+// Communities (Northern Ireland) 3, Independent Schools Council 1,
+// Department for Infrastructure (Northern Ireland) 1, Northern Ireland
+// Transport Holding Company 1). Within 10%: 761 + 365 + 210 + 82 + 77 =
+// 1,495 of 1,514, the dashboard's 98.7%.
+export const calibrationTargets = {
+  total: 1514,
+  within: 1495,
+  publishers: [
+    {
+      name: "HMRC",
+      count: 776,
+      within: 761,
+      shade: "var(--pe-teal-dark)",
+      rows: [
+        { label: "Survey of Personal Incomes", count: 568 },
+        { label: "Capital gains tax", count: 105 },
+        { label: "Income tax liabilities", count: 84 },
+        { label: "Six smaller statistics", count: 19 },
+      ],
+    },
+    {
+      name: "ONS",
+      count: 365,
+      within: 365,
+      shade: "var(--pe-teal)",
+      rows: [
+        { label: "Population", count: 179 },
+        { label: "Employment", count: 159 },
+        { label: "Household composition", count: 22 },
+        { label: "Land; consumer trends", count: 5 },
+      ],
+    },
+    {
+      name: "DWP",
+      count: 213,
+      within: 210,
+      shade: "color-mix(in srgb, var(--pe-teal) 55%, white)",
+      rows: [
+        { label: "Universal Credit", count: 103 },
+        { label: "State Pension", count: 57 },
+        { label: "Two-child limit", count: 15 },
+        { label: "Five smaller statistics", count: 38 },
+      ],
+    },
+    {
+      name: "MHCLG",
+      count: 82,
+      within: 82,
+      shade: "var(--pe-amber)",
+      rows: [{ label: "Council tax stock", count: 82 }],
+    },
+    {
+      name: "Ten others",
+      count: 78,
+      within: 77,
+      shade: "var(--color-gray-400)",
+      rows: [
+        { label: "OBR", count: 16 },
+        { label: "Department for Transport", count: 13 },
+        { label: "Scottish Government", count: 12 },
+        { label: "Student Loans Company", count: 12 },
+        { label: "Six more publishers", count: 25 },
+      ],
+    },
+  ],
+};
+
 // Projects we have done: three slides with live or published work.
 // - The Autumn Budget 2026 dashboard: what it models is the Autumn Budget
 //   2026 deck's list (slideshows/autumn-budget-2026/content.ts,
@@ -1230,12 +1355,7 @@ export const calibrationFit = {
 //   The view buttons are that deck's deep links.
 // - The AI post (source "aiPost"), read 16 November 2026: see aiShock
 //   above for its figures, channels and incidence scenarios.
-// - The firm VAT working paper: the figure is paper/figures/
-//   revenue_impact_2025_26.png at firm-microsim-paper e6d5dd6, panel (a) of
-//   the paper's static threshold sweep ("Static effect of moving the VAT
-//   registration threshold, 2025--26, relative to the £90,000 baseline"),
-//   copied unchanged to public/images/bist-2026/. The two counts are the
-//   "about 2.7 million" and "about 2.2 million" in NOTES.md.
+// - The firm VAT working paper: see firmMethod below.
 export const budgetProject = {
   labels: [
     { icon: IconReceiptTax, title: "The Budget measures we model", text: "Energy bills, income from assets, pensions, fuel, carers, the self-employed" },
@@ -1265,8 +1385,9 @@ export const aiProject = {
 // The former slide "Firm-level VAT microsimulation: costing threshold
 // changes" (the paper's static threshold sweep, firm-vat-revenue-impact-
 // 2025-26.png, and three labels: static costing, turnover responses, reforms
-// costed) is cut: its figure was a headline result. Its content is in
-// NOTES.md, and the fourth step of firmMethod below names what was costed.
+// costed) is cut: its figure was a headline result, and the image file is deleted.
+// Its content is in NOTES.md, and the fourth step of firmMethod below names
+// what was costed.
 
 // How the synthetic firms are built (firm-microsim-paper e6d5dd6).
 // - Method: paper/Sections/data.tex. Official statistics publish firm counts
@@ -1341,26 +1462,6 @@ export const firmMethod = {
     alt: "Bar chart from the working paper: revenue impact in £ million of raising the VAT registration threshold from £85,000 to £90,000, 2024–25 to 2028–29, for HMRC's published costing and two model conventions.",
   },
   caption: "The April 2024 rise from £85,000 to £90,000: the model’s static estimates beside HMRC’s published costing",
-};
-
-// The trade study as a project (uk-trade-shock-study 06c8bbc, a working
-// paper). The four episodes and the energy figures are tradeEvents and
-// tradeEvents above. Figure (the same file at 06c8bbc and at PR #46, 778557c): paper/figures/fig_incidence_profile.png,
-// "Household incidence by equivalised disposable income decile, as a share
-// of each decile's total spending. All series are plotted as magnitudes on a
-// log axis ... Costs are plotted as positive; the India CETA series is a
-// gain"; the energy episode is shown on its realised path and as the gross
-// counterfactual the Energy Price Guarantee displaced. Copied unchanged to
-// public/images/bist-2026/. In the figure, "TCA food" is the post-Brexit
-// food price episode and "India CETA" the UK-India agreement.
-export const tradeProject = {
-  image: {
-    src: "/images/bist-2026/trade-incidence-by-decile.png",
-    width: 1600,
-    height: 860,
-    alt: "Line chart from the working paper: burden or gain as a percentage of spending, on a log scale, by income decile, for the energy episode (realised and counterfactual), post-Brexit food prices and the UK–India agreement.",
-  },
-  caption: "Cost or gain by income decile, as a share of spending (log scale); the UK–India series is a gain",
 };
 
 // One way to link models, for discussion; nothing here is a commitment.

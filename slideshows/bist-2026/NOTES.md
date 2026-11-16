@@ -27,7 +27,7 @@ beside it shows the part's place among the seven.
    household and the business side, and what is open.
 4. **Projects we have done** (slides 10 to 14): the Autumn Budget 2026
    dashboard, the AI scenario post, the synthetic firms of the firm-level
-   VAT working paper, the trade working paper and its tariff study.
+   VAT working paper, the trade working paper and its tariff episode.
 5. **What we could explore further** (slides 15 and 16): the Economic
    Prosperity Deal from macro impacts to households, and links to
    macroeconomic models.
@@ -78,7 +78,7 @@ slides, not build steps.
   no firm entity.
 - **4. Projects we have done.** The Autumn Budget 2026 dashboard, the AI
   scenario post, the synthetic firms of the firm-level VAT working paper, the trade
-  working paper and its tariff study.
+  working paper and its tariff episode.
 - **5. What we could explore further.** Trade, macroeconomic and agent-based
   models give changes in earnings, jobs and prices by sector. PolicyEngine
   can turn these into household and fiscal effects by income decile and
@@ -378,7 +378,14 @@ slides, not build steps.
 - The page is shown at 80% of its size so more of it fits.
 - At the top of the page the dashboard shows its header and overview; the
   map of targets by publisher and statistic is further down, so it needs a
-  scroll when presenting, and a PDF export shows only the top of the page.
+  scroll when presenting.
+- In a PDF export this slide shows a static summary in place of the live
+  page, from the same build: HMRC 776 targets (761 within 10% of the official
+  figure), ONS 365 (all), DWP 213 (210), MHCLG 82 (all) and ten other
+  publishers 78 (77), each with its largest statistics; 1,495 of 1,514
+  within 10%. The dashboard has a page that lists every target
+  (`/microcosm/targets`), but it opens on a table, not the map, so the slide
+  keeps the overview page.
 - The dashboard page names the Hugging Face dataset repository that holds
   the build and links to it; that repository is private, so the link does
   not open for the audience.
@@ -589,8 +596,18 @@ slides, not build steps.
   - the 2022 energy price surge;
   - projected duty reductions from the UK–India agreement;
   - the 2025 US tariffs.
+- Each card gives the episode's years and whether prices or earnings carry
+  the change, as the paper's episode headings do: food prices 2021–23 and
+  energy 2022–23, both through prices; the UK–India agreement from 2026,
+  through prices and a gain; the US tariffs 2025–26, through earnings.
+- Every episode follows one path: a price or earnings change, applied to
+  each Microcosm UK household by what it spends or earns. The tax and
+  benefit response is measured for the tariffs (the next slide) and for
+  energy (the support schemes); the UK–India gain is the duty reduction
+  spread over households' spending.
 - The price changes come from published estimates; the tariff earnings
-  change is built from an assumed elasticity (the tariff study, slide 14).
+  change is built from an assumed elasticity (the next slide, which is the
+  same study's tariff episode in detail).
 - The food and energy price rises were largest, as a share of spending, for
   lower-income deciles.
 - The energy rise was offset in part by the Energy Price Guarantee and the
@@ -608,17 +625,12 @@ slides, not build steps.
   2024–25 values, under the rules of 2022–23 and 2023–24; the tariff stage
   runs under 2026–27 rules. The earlier run (06c8bbc) used the enhanced FRS
   2023–24 and the survey-weighted FRS 2024–25.
-- The figure file is the same at 06c8bbc and at PR #46 (778557c): the pull
-  request did not change it. Check with the paper before describing the
-  figure as the Microcosm UK run.
-- **The figure** is the paper's: household incidence by income decile, as a
-  share of each decile's spending, on a log scale, so it compares sizes, not
-  signs. Costs are plotted as positive; the UK–India series ("India CETA")
-  is a gain. "TCA food" is the post-Brexit food price episode. The energy
-  episode is shown on its realised path and as the counterfactual that the
-  Energy Price Guarantee displaced. The slide quotes no number from the
-  figure.
-- The fourth episode, the 2025 US tariffs, is the next slide.
+- The slide shows no result. The paper's incidence figure (household
+  incidence by income decile) is off the slide: its file is the same at
+  06c8bbc and at PR #46 (778557c), so the pull request did not regenerate it
+  on Microcosm UK.
+- The US tariffs card is marked "Next slide": the next slide is the same
+  study's tariff episode in detail.
 - **The UK–India agreement** is the episode closest to a free trade
   agreement assessment: projected duty reductions passed to prices, then to
   each household's spending. Published assessments of trade agreements
@@ -626,14 +638,15 @@ slides, not build steps.
   this path adds income deciles, poverty and tax and benefit effects, and
   could serve any trade agreement.
 - **Sources.** [Ahmadi (2026b), trade
-  study](https://github.com/PolicyEngine/uk-trade-shock-study); [Working paper
-  figure, commit
-  06c8bbc](https://github.com/PolicyEngine/uk-trade-shock-study/blob/06c8bbc/paper/figures/fig_incidence_profile.png).
+  study](https://github.com/PolicyEngine/uk-trade-shock-study); [its rerun on
+  Microcosm UK, pull request
+  #46](https://github.com/PolicyEngine/uk-trade-shock-study/pull/46).
 
-### 14. The tariff study: from US tariffs to employees’ earnings
+### 14. Who bears the cost of trade changes: the 2025 US tariffs
 
-- The tariff stage of the trade working paper (slide 13); it is also the
-  starting point for the first candidate pilot (slide 20).
+- The second slide of the trade study (slide 13), not a separate project:
+  its US tariffs episode in detail. It is also the starting point for the
+  first candidate pilot (slide 20).
 - Builds: the bridge; then the cushion figures; then the bracket under the
   steps a trade model could replace.
 - How the trade study turns the 2025 US tariffs into an earnings change for
@@ -666,7 +679,9 @@ slides, not build steps.
   100,000 UK vehicles at a 10% tariff and, subject to supply-chain
   conditions, a steel and aluminium quota at most-favoured-nation rates.
 - The study's code includes a deal schedule, but we have no published results
-  for it.
+  for it, which is what the slide's tag says. (The repository holds a
+  two-draw test file for the deal schedule; the paper reports nothing from
+  it.)
 - The export-demand elasticity of 1 is a placeholder. A trade model's
   sector results could replace it and the two steps beside it.
 - Tariff revenue is a fiscal channel the study does not model; it could
@@ -679,7 +694,7 @@ slides, not build steps.
 ### 15. The Economic Prosperity Deal: from macro impacts to households
 
 - One deal has macro impacts and household impacts. This slide is the
-  end-to-end path; the tariff study (slide 14) and the linking slide (slide
+  end-to-end path; the trade study’s tariff slide (slide 14) and the linking slide (slide
   19) are its parts. Not built; no results yet. The slide is tagged "Not yet
   modelled"; the two pieces that are not built, the sector mapping and the
   feedback, each carry "Idea to explore".
@@ -1118,11 +1133,11 @@ carried, for questions.
   affected is drawn at random.
 - A scenario sets the chance that an employee loses their job, by sector or
   occupation. Who does is drawn at random.
-- In the tariff study, whether a newly entitled family claims Universal
+- In the trade study’s tariff episode, whether a newly entitled family claims Universal
   Credit is also drawn, at the scenario's take-up rate.
 - Every draw is a full run of the tax and benefit rules. Studies report the
   mean and the standard deviation across draws.
-- 50 draws in the AI study's central scenario; 20 in the tariff study's
+- 50 draws in the AI study's central scenario; 20 in the trade study’s tariff episode’s
   rerun (PR #46, 778557c).
 - The AI study's central scenario: an Exchequer cost of £7.3bn as the mean
   of 50 draws, with a standard deviation of £1.9bn, on Microcosm UK for

@@ -1839,3 +1839,153 @@
   justify-content: center;
   gap: calc(var(--u) * 0.5);
 }
+
+/* ---------- Trade study: four episode cards, the last pointing on ---------- */
+
+.episodeCard {
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 1.6) calc(var(--u) * 1.6);
+}
+
+.episodeCard .cardHead {
+  align-items: center;
+  margin-bottom: calc(var(--u) * 1.1);
+}
+
+.episodeCard .owner {
+  margin-bottom: calc(var(--u) * 0.3);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.episodeCard h2 {
+  min-height: 2.4em;
+  font-size: calc(var(--u) * 1.9);
+}
+
+.episodeCard > p:not(.owner):not(.episodeLink) {
+  font-size: calc(var(--u) * 1.45);
+}
+
+/* The episode the next slide takes up. */
+.episodeNext {
+  border-color: var(--pe-teal);
+  background: var(--tint);
+}
+
+.episodeCard .episodeLink {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.4);
+  margin-top: auto;
+  padding-top: calc(var(--u) * 1);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.episodeCard .episodeLink svg {
+  width: calc(var(--u) * 1.4);
+  height: calc(var(--u) * 1.4);
+}
+
+/* ---------- Calibration targets: the export's page for the live dashboard ---------- */
+
+.targets {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--u) * 1.4);
+}
+
+.targetsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.2);
+}
+
+.targetsCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-top: calc(var(--u) * 0.35) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 1.3) calc(var(--u) * 1.3);
+}
+
+.targetsCard .owner {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.05);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.targetsCard .statValue {
+  margin-top: calc(var(--u) * 0.3);
+  font-size: calc(var(--u) * 3.2);
+  font-variant-numeric: tabular-nums;
+}
+
+.targetsCard .statLabel {
+  min-height: 2.7em;
+  font-size: calc(var(--u) * 1.15);
+}
+
+.targetsBar {
+  display: block;
+  height: calc(var(--u) * 0.5);
+  margin: calc(var(--u) * 0.8) 0 calc(var(--u) * 0.6);
+  border-radius: 999px;
+  background: var(--tint-strong);
+}
+
+.targetsBar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.targetsCard li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.6);
+  border-top: 1px solid var(--line);
+  padding: calc(var(--u) * 0.45) 0;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.15);
+  line-height: 1.25;
+}
+
+.targetsCard li strong {
+  color: var(--pe-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.targetsFoot {
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.3;
+}
+
+.targetsFoot strong {
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+.targetsFoot a {
+  color: var(--pe-teal-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
