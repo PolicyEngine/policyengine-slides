@@ -25,8 +25,6 @@
 //   November), which is eight days newer than that build.
 
 import {
-  IconAdjustments,
-  IconAlertTriangle,
   IconArrowsDiff,
   IconArrowsExchange,
   IconArrowsSplit,
@@ -37,7 +35,6 @@ import {
   IconBuildingFactory2,
   IconCalendar,
   IconCalendarEvent,
-  IconCar,
   IconCertificate,
   IconChartBar,
   IconChartHistogram,
@@ -48,7 +45,6 @@ import {
   IconCpu,
   IconDatabase,
   IconDice,
-  IconFileCode,
   IconFlag,
   IconFlame,
   IconHeartHandshake,
@@ -63,7 +59,6 @@ import {
   IconMathFunction,
   IconNews,
   IconPigMoney,
-  IconPlayerPause,
   IconPlugConnected,
   IconReceiptTax,
   IconRefresh,
@@ -73,11 +68,9 @@ import {
   IconShieldCheck,
   IconShip,
   IconShoppingCart,
-  IconStack2,
   IconTable,
   IconTargetArrow,
   IconTestPipe,
-  IconTrees,
   IconTrendingUp,
   IconUser,
   IconUsers,
@@ -219,6 +212,17 @@ export const sources = {
     label: "About PolicyEngine",
     href: "https://www.policyengine.org/uk/donate",
   },
+  // Think tanks whose published work uses PolicyEngine UK; the same two
+  // links as the Good Growth Foundation deck (its content.ts, "cps" and
+  // "nef").
+  cps: {
+    label: "Centre for Policy Studies, July 2023",
+    href: "https://cps.org.uk/research/family-friendly-taxation/",
+  },
+  nef: {
+    label: "New Economics Foundation, July 2026",
+    href: "https://neweconomics.org/2026/07/insecure-low-quality-work-a-major-driver-of-uks-neets-and-inactivity-crisis",
+  },
   // Links pinned to the commits read on 15 November 2026.
   parameterExample: {
     label: "Personal allowance parameter",
@@ -322,88 +326,186 @@ export const inBrief = [
   {
     icon: IconPlugConnected,
     title: "Overlap 1: macro and micro",
-    text: "A trade or macro model's sector results become household effects.",
+    text: "A trade or macro model's sector results could become household effects.",
     tag: tags.notBuilt,
   },
   {
     icon: IconBuildingFactory2,
     title: "Overlap 2: business modelling",
-    text: "What we hold on firms, and where an agent-based model would link.",
+    text: "What we hold on firms, and where an agent-based model could link.",
     tag: tags.notBuilt,
   },
 ];
 
 // Who we are. Every item repeats a claim with a public source:
 // - Nonprofit, free, open source: policyengine.org/uk/donate (source "about").
+// - Funding, folded into the nonprofit line: Nuffield Foundation grants made
+//   in 2024 and 2026 (source "nuffield"; the years are in NOTES.md and on
+//   the appendix slide).
 // - UK and US models in one package: the policyengine.py paper (source
 //   "joss"), "in the US and UK"; its comparison table gives PolicyEngine's
 //   country coverage as "US and UK". No other country is claimed.
 // - Licences (LICENSE files): policyengine-uk and policyengine.py AGPL-3.0,
 //   microcosm MIT.
-// - Uses: the four items are the "uses" entries below (the appendix slide),
-//   with their caveats kept: sources no10, hmt, obr and hansard.
-// - Funding: as on the appendix slide (source "nuffield").
+// - Government: 10 Downing Street's data science team built 10ds-microsim on
+//   PolicyEngine (source "no10"); that it is used as supplementary,
+//   experimental analysis is said in NOTES.md and on the appendix slide, not
+//   here. "Mention" for HM Treasury, the OBR and Parliament is deliberate:
+//   HMT's transparency record describes a 2024 pilot evaluation and says HMT
+//   does not currently use the model (source "hmt"); the OBR lists
+//   PolicyEngine among organisations it engaged with in 2025-26 (source
+//   "obr"); a House of Lords debate cited House of Commons Library research
+//   that used PolicyEngine (source "hansard"). The full caveats are in
+//   NOTES.md and on the appendix slide ("uses" below).
+// - Think tanks and researchers: the logo files in public/logos/orgs/ and
+//   the pattern of the Good Growth Foundation deck's community slide. The
+//   Centre for Policy Studies and the New Economics Foundation link to
+//   their publications (sources "cps" and "nef"); NIESR links to Mosley and
+//   Cornforth (2023), which combined PolicyEngine UK with NiGEM (source
+//   "niesr"); the Good Growth Foundation and WPI Economics have no public
+//   link, as in that deck. "height" is each logo's height in scale units,
+//   chosen so that square and wide marks look the same size; "width" and
+//   "pixelHeight" are the file's pixel size. The Good Growth Foundation file
+//   is white on transparent, so the slide darkens it ("darken").
+// - Government logos: 10 Downing Street and the House of Lords (for
+//   Parliament: the Hansard source is a Lords debate) are the files already
+//   in public/logos/orgs/. The Office for Budget Responsibility wordmark is
+//   policyengine-app-v2 (ede5cb3), app/public/assets/posts/
+//   obr-november-2025-projections/obr-logo.png, copied to public/logos/orgs/
+//   office-for-budget-responsibility.png; it is white on transparent, so it
+//   is darkened too. No HM Treasury logo exists in this repository or in
+//   policyengine-app-v2, so its name is set as a plain text wordmark.
+export type Logo = {
+  name: string;
+  /** Without a file, the name is set as a plain text wordmark. */
+  logo?: string;
+  width?: number;
+  pixelHeight?: number;
+  height: number;
+  darken?: boolean;
+  source?: Source;
+};
+
 export const whoWeAre = {
   facts: [
-    { icon: IconHeartHandshake, title: "Nonprofit", text: "Free tools for tax and benefit analysis" },
+    {
+      icon: IconHeartHandshake,
+      title: "Nonprofit",
+      text: "Free tools; UK work funded by Nuffield Foundation grants",
+    },
     { icon: IconLockOpen, title: "Open source", text: "Rules, data pipeline and analysis code" },
     { icon: IconWorld, title: "UK and US models", text: "One Python package: policyengine.py" },
   ],
-  uses: [
+  // Two groups in one row: the team that built on PolicyEngine, and the
+  // three bodies whose public records mention it.
+  government: [
     {
-      icon: IconBuildingBank,
-      label: "10 Downing Street",
-      text: "Data science team built 10ds-microsim on PolicyEngine: supplementary, experimental analysis",
+      caption: "Data science team built 10ds-microsim on PolicyEngine",
+      logos: [
+        {
+          name: "10 Downing Street",
+          logo: "/logos/orgs/10-downing-street.png",
+          width: 1280,
+          pixelHeight: 1280,
+          height: 5.4,
+          source: sources.no10,
+        },
+      ] as Logo[],
     },
     {
-      icon: IconCoins,
-      label: "HM Treasury",
-      text: "Pilot evaluation in 2024; its transparency record says HMT does not currently use it",
-    },
-    {
-      icon: IconChartBar,
-      label: "Office for Budget Responsibility",
-      text: "Lists PolicyEngine among organisations it engaged with in 2025–⁠26",
-    },
-    {
-      icon: IconNews,
-      label: "House of Commons Library",
-      text: "Research using PolicyEngine, cited in a House of Lords debate",
+      caption: "Mention PolicyEngine on the public record",
+      logos: [
+        { name: "HM Treasury", height: 3.6, source: sources.hmt },
+        {
+          name: "Office for Budget Responsibility",
+          logo: "/logos/orgs/office-for-budget-responsibility.png",
+          width: 679,
+          pixelHeight: 294,
+          height: 4.4,
+          darken: true,
+          source: sources.obr,
+        },
+        {
+          name: "House of Lords",
+          logo: "/logos/orgs/house-of-lords.svg",
+          width: 755,
+          pixelHeight: 200,
+          height: 3,
+          source: sources.hansard,
+        },
+      ] as Logo[],
     },
   ],
-  funding: {
-    icon: IconPigMoney,
-    text: "Nuffield Foundation grants made in 2024 and 2026 fund PolicyEngine UK.",
-  },
+  thinkTanks: [
+    {
+      name: "New Economics Foundation",
+      logo: "/logos/orgs/new-economics-foundation.png",
+      width: 567,
+      pixelHeight: 241,
+      height: 4.2,
+      source: sources.nef,
+    },
+    {
+      name: "Good Growth Foundation",
+      logo: "/logos/orgs/good-growth-foundation.png",
+      width: 1500,
+      pixelHeight: 413,
+      height: 3,
+      darken: true,
+    },
+    {
+      name: "Centre for Policy Studies",
+      logo: "/logos/orgs/centre-for-policy-studies.png",
+      width: 223,
+      pixelHeight: 223,
+      height: 5.4,
+      source: sources.cps,
+    },
+    {
+      name: "NIESR",
+      logo: "/logos/orgs/niesr.png",
+      width: 400,
+      pixelHeight: 400,
+      height: 5.4,
+      source: sources.niesr,
+    },
+    {
+      name: "WPI Economics",
+      logo: "/logos/orgs/wpi-economics.svg",
+      width: 196,
+      pixelHeight: 60,
+      height: 3.2,
+    },
+  ] as Logo[],
 };
 
 // Data: policyengine.py 810a59e, data/bundle/manifest.json, bundle 6.19.0
 // (Microcosm UK 2024-25 national build of 7 November 2026, certified for
 // policyengine-uk 2.174.1).
+// Spending by category is a model input (policyengine-uk d3db7ac,
+// variables/input/consumption/); it sets VAT and duties. Income after taxes
+// and benefits is the result. The "Input" and "Result" labels carry that
+// message, with the slide's subtitle.
 export const components = [
   {
     icon: IconScale,
+    owner: "Open source",
     title: "The rules",
     text: "Taxes and benefits, coded from legislation",
   },
   {
     icon: IconUsers,
+    owner: "Input",
     title: "The households",
-    text: "Microcosm UK 2024–\u206025: surveys with calibrated weights",
+    text: "Microcosm UK 2024–\u206025: survey incomes and spending by category, with calibrated weights",
   },
   {
     icon: IconChartBar,
+    owner: "Result",
     title: "The results",
-    text: "Incomes, poverty, inequality and Exchequer cost",
+    text: "Income after taxes and benefits; poverty, inequality and Exchequer cost",
   },
 ];
-
-// Spending by category is a model input (policyengine-uk d3db7ac,
-// variables/input/consumption/); it sets VAT and duties.
-export const inputOutput = {
-  input: { icon: IconShoppingCart, label: "Input", text: "Spending by category: sets VAT, duties and price exposure" },
-  output: { icon: IconCoins, label: "Result", text: "Income after taxes and benefits" },
-};
 
 // Programme coverage: policyengine-uk d3db7ac (re-checked at that commit).
 export const coverage = [
@@ -459,7 +561,7 @@ export const tradeEvents = [
   },
   { icon: IconFlame, title: "The 2022 energy price surge", text: "Offset in part by two support schemes" },
   { icon: IconArrowsExchange, title: "The UK–India agreement", text: "Projected duty reductions" },
-  { icon: IconShip, title: "The 2025 US tariffs", text: "An earnings shock: the tariff bridge" },
+  { icon: IconShip, title: "The 2025 US tariffs", text: "An earnings change: the tariff bridge" },
 ];
 
 export const tradeEnergy = {
@@ -472,10 +574,10 @@ export const tradeEnergy = {
 // and no results. Every fact is one the deck already cites:
 // - the deal: source "epd" above (operative 8 May 2025; a quota of 100,000
 //   vehicles at a 10% tariff; a steel and aluminium quota subject to
-//   supply-chain conditions);
+//   supply-chain conditions). These facts are in NOTES.md, not on the slide;
 // - "Deal schedule in our study": uk-trade-shock-study 06c8bbc has a deal
 //   schedule and reports no results for it (see tariffBridge below);
-// - static, no general equilibrium: see runFacts below;
+// - static, no general equilibrium: see runFlow below;
 // - the feedback arrow is the macro-micro loop on the macro links slide,
 //   which is not built (see macroLinks below).
 // The standard GTAP model has one wage per labour type and its standard
@@ -514,12 +616,6 @@ export const epdTrace = {
     label: "Optional feedback: household and fiscal totals back to the macro model",
     tag: tags.notBuilt,
   },
-  deal: [
-    { icon: IconCalendarEvent, title: "General terms", text: "operative 8 May 2025" },
-    { icon: IconCar, title: "100,000-vehicle quota", text: "at a 10% tariff" },
-    { icon: IconBuildingFactory2, title: "Steel and aluminium quota", text: "with supply-chain conditions" },
-    { icon: IconFileCode, title: "Deal schedule in our study", text: "coded; no published results" },
-  ],
 };
 
 // The mechanism inside the PolicyEngine step: which records receive each
@@ -579,7 +675,7 @@ export const tariffBridge = {
     { icon: IconReceiptTax, title: "Tariff rates", text: "The pre-deal US schedule" },
     { icon: IconShip, title: "US export intensity", text: "By two-digit SIC division", dashed: true },
     { icon: IconMathFunction, title: "Export-demand elasticity", text: "Assumed 1", dashed: true },
-    { icon: IconCoins, title: "Earnings shock by sector", text: "About £1.0bn a year", dashed: true },
+    { icon: IconCoins, title: "Earnings change by sector", text: "About £1.0bn a year", dashed: true },
     { icon: IconUsers, title: "Survey employees", text: "Assigned by sector" },
   ],
   replaceable: [1, 3] as [number, number],
@@ -591,7 +687,8 @@ export const tariffBridge = {
 // parameters/gov/contrib/policyengine/employer_ni/*_incidence.yaml and
 // budget/{consumer,corporate}_incident_tax_change.yaml allocate by
 // consumption and by shareholding, booked as tax revenue; a non-tax cost
-// change needs an extension, which is not built.
+// change needs an extension, which is not built. The three channels to
+// households (prices, pay and jobs, profits) are the text of the third step.
 export const businessPolicy = {
   flow: [
     {
@@ -611,7 +708,7 @@ export const businessPolicy = {
       icon: IconArrowsSplit,
       owner: "PolicyEngine",
       title: "Allocate to households",
-      text: "Three channels",
+      text: "Prices by spending; pay and jobs by sector of employment; profits by shareholding",
     },
     {
       icon: IconHome,
@@ -619,11 +716,6 @@ export const businessPolicy = {
       title: "Household and fiscal effects",
       text: "Net incomes, poverty, receipts",
     },
-  ],
-  channels: [
-    { icon: IconShoppingCart, from: "Prices", to: "by spending" },
-    { icon: IconBriefcase, from: "Pay and jobs", to: "by sector of employment" },
-    { icon: IconChartPie, from: "Profits", to: "by shareholding" },
   ],
 };
 
@@ -701,7 +793,7 @@ export const macroLinks = [
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: true,
-    text: "Results would pass both ways until the two agree.",
+    text: "Results could pass both ways until the two agree.",
     source: sources.niesr,
   },
   {
@@ -724,7 +816,7 @@ export const macroLinks = [
 export const abmQuestions = [
   {
     icon: IconCpu,
-    question: "A semiconductor supply shock",
+    question: "A semiconductor supply disruption",
     behaviour: "Firms lose inputs, cut output and jobs",
     passes: "Job and earnings losses by sector and region",
   },
@@ -789,17 +881,17 @@ export const pilots = [
     rows: [
       {
         icon: IconWorld,
-        label: "From a trade model",
+        label: "A trade model could provide",
         text: "Sector output, jobs, prices; wages by labour type",
       },
       {
         icon: IconHome,
-        label: "From PolicyEngine",
+        label: "PolicyEngine could provide",
         text: "Concordance; incomes, poverty, Exchequer cost",
       },
       {
         icon: IconFlag,
-        label: "Starting point",
+        label: "A starting point",
         text: "The trade study's tariff bridge",
       },
     ],
@@ -810,17 +902,17 @@ export const pilots = [
     rows: [
       {
         icon: IconBuildingFactory2,
-        label: "From the Modelling Unit",
+        label: "The Modelling Unit could provide",
         text: "Cost change by sector; the prices–pay–profits split",
       },
       {
         icon: IconHome,
-        label: "From PolicyEngine",
+        label: "PolicyEngine could provide",
         text: "Allocation to households; fiscal effects",
       },
       {
         icon: IconFlag,
-        label: "Starting point",
+        label: "A starting point",
         text: "The business-tax allocation, extended",
       },
     ],
@@ -837,8 +929,9 @@ export const questions = [
 
 // Each item follows the public page linked on the slide (sources no10, hmt,
 // obr, hansard and nuffield above). The "Who we are" slide (whoWeAre above)
-// repeats the three government items, the House of Commons Library item and
-// the funder in short form; this appendix slide keeps the full list.
+// names No 10's use, says only that HM Treasury, the OBR and Parliament
+// mention PolicyEngine, and names the funder; this appendix slide keeps the
+// full list with every caveat.
 export const uses = [
   {
     icon: IconBuildingBank,
@@ -922,21 +1015,14 @@ export const rulesEntities = [
 export const runFlow = [
   { icon: IconDatabase, title: "Certified dataset", text: "Microcosm UK 2024–\u206025" },
   { icon: IconTrendingUp, title: "Project to the year", text: "Inputs grow with OBR indices" },
-  { icon: IconCopy, title: "Run twice", text: "Baseline and counterfactual" },
+  { icon: IconCopy, title: "Run twice", text: "A reform changes parameters; a scenario changes inputs" },
   { icon: IconArrowsDiff, title: "Take the difference", text: "Per household, then weighted" },
 ];
 
-export const runFacts = [
-  {
-    icon: IconAdjustments,
-    title: "A reform",
-    text: "changes parameters",
-    code: "gov.hmrc.income_tax\n  .rates.uk[0].rate: 0.21",
-  },
-  { icon: IconBolt, title: "A shock", text: "changes inputs; the rules stay" },
-  { icon: IconPlayerPause, title: "Mostly static", text: "by default" },
-  { icon: IconBuildingFactory2, title: "Outside the model", text: "firms' decisions, general equilibrium" },
-];
+// Shown as a status tag beside the subtitle. The reform example
+// (gov.hmrc.income_tax.rates.uk[0].rate: 0.21) and what comes from outside
+// the model (firms' decisions, general equilibrium) are in NOTES.md.
+export const runStatus: Tag = { label: "Mostly static by default", tone: "muted" };
 
 // Microcosm UK 2024-25: what the pipeline builds.
 // The slide describes the certified file. Its build
@@ -995,7 +1081,7 @@ export const microcosmFlow = [
   {
     icon: IconHeartHandshake,
     owner: "DWP and HMRC",
-    title: "Benefit take-up",
+    title: "Benefit take\u2011up",
     text: "Reported claims kept; others drawn to published rates",
   },
   {
@@ -1006,12 +1092,13 @@ export const microcosmFlow = [
   },
 ];
 
-export const microcosmFacts = [
-  { icon: IconTrees, title: "Quantile regression forests" },
-  { icon: IconLock, title: "Pinned files, seeded draws" },
-  { icon: IconStack2, title: "54 stages (certified build)" },
-  { icon: IconAlertTriangle, title: "No industry targets; copies’ sectors imputed" },
-];
+// Shown as a status tag beside the subtitle; the stage count (54, the
+// certified build) is in the subtitle. The imputation method and the pinned
+// files and seeded draws are in NOTES.md.
+export const microcosmStatus: Tag = {
+  label: "No industry targets; copies’ sectors imputed",
+  tone: "caution",
+};
 
 // Calibration.
 // Method (microcosm 429d7a0): packages/microcosm-calibrate/README.md and
@@ -1144,6 +1231,10 @@ export const uncertainty = {
   ],
 };
 
+// One way to link models, for discussion; nothing here is a commitment.
+// What runs today: the trade study's code takes earnings changes by two-digit
+// SIC division and applies them to survey employees (uk-trade-shock-study
+// 06c8bbc, runner.py and apply_shocks; tariff_pipeline/exposure.py).
 // A proposed interface for the model links. Not built: no reader for such a
 // table exists. Keys follow what the model holds (policyengine-uk d3db7ac):
 // sic_industry_division (two-digit SIC 2007 division); region (the ITL1
@@ -1152,6 +1243,9 @@ export const uncertainty = {
 // listed under tariffDisaggregation above. Mean and SD across draws are
 // computed in the studies' own code and are not a policyengine.py output, so
 // they sit under "proposed" with the CSV format.
+export const interfaceToday =
+  "The trade study’s code applies earnings changes by two-digit SIC division to survey employees";
+
 export const interfaceSpec = {
   inputs: [
     { icon: IconBuildingFactory2, field: "Sector", text: "Two-digit SIC division" },
@@ -1176,8 +1270,8 @@ export const appendixContents = [
   { icon: IconListCheck, title: "What the UK model covers" },
   // The long title takes two of the four columns, so the seven cards fill two rows.
   { icon: IconShieldCheck, title: "Microcosm UK data: release gates, certification and firm support", wide: true },
-  { icon: IconShip, title: "Who bears the trade shocks?" },
-  { icon: IconRobot, title: "Who bears the AI shock?" },
+  { icon: IconShip, title: "Who bears the cost of trade changes?" },
+  { icon: IconRobot, title: "Who bears the cost of the AI scenario?" },
   { icon: IconDice, title: "Assignment variability" },
   { icon: IconLockOpen, title: "Open code, restricted microdata" },
   { icon: IconBuildingBank, title: "Use, evaluation and engagement" },

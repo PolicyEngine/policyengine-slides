@@ -18,8 +18,8 @@ slide, is in [NOTES.md](NOTES.md).
 PolicyEngine: who and what
 
 3. Who we are
-4. PolicyEngine UK computes incomes, not spending
-5. How a reform or a shock is run
+4. PolicyEngine UK computes household incomes after taxes and benefits
+5. How a reform or a scenario is run
 6. How the rules are encoded
 7. Microcosm UK 2024–25: how the household file is built
 8. Calibration: weights fitted to official statistics
@@ -30,13 +30,13 @@ Overlap 1: macro and micro
 10. Disaggregation: how sector results reach people
 11. The tariff bridge: steps a trade model could replace
 12. Links to macroeconomic models
-13. A proposed interface: tables in, tables out
+13. One way to link: tables in, tables out
 
 Overlap 2: business modelling
 
-14. Business policy beyond tax: from firm costs to households
+14. Business policy: from firm costs to households
 15. What we have on the business side
-16. Where an agent-based model would link
+16. Where an agent-based model could link
 
 Working together
 
@@ -49,8 +49,8 @@ Appendix
 20. Appendix
 21. What the UK model covers, including business taxes
 22. Microcosm UK data: release gates, certification and firm support
-23. Who bears the trade shocks?
-24. Who bears the AI shock?
+23. Who bears the cost of trade changes?
+24. Who bears the cost of the AI scenario?
 25. Assignment variability: repeated random draws
 26. Open code, restricted microdata, synthetic data
 27. Use, evaluation and engagement
@@ -59,7 +59,7 @@ Appendix
 - `content.ts` holds the figures, short labels, icons, status tags and
   sources, with a comment on where each figure and claim comes from.
 - `slides/index.tsx` contains the slides and the deck's building blocks (icon
-  badge, status tag, card, flow, stat); `slides/deck.module.css` styles them
+  badge, status tag, card, flow, stat, logo row); `slides/deck.module.css` styles them
   from one scale unit, so the 1920×1080 and 1440×810 layouts match.
 - `NOTES.md` holds the presenter notes, slide by slide.
 
@@ -73,7 +73,7 @@ notes for that slide.
 
 - **Data.** policyengine.py bundle 6.19.0 (released 13 November 2026, data
   build of 7 November) certifies Microcosm UK 2024–25, and the deck describes
-  that file. The shock studies were run on earlier datasets, and each slide
+  that file. The scenario studies were run on earlier datasets, and each slide
   that quotes them carries a tag saying so: the AI study on the survey-weighted FRS 2024–25
   (uk-ai-study `5d75106`, `paper/sections/methodology.tex`); the trade
   study's price episodes on the enhanced FRS 2023–24 and its tariff stage on
@@ -85,10 +85,10 @@ notes for that slide.
   The second is macro modelling with microsimulation: the Economic Prosperity
   Deal from macro impacts to household impacts, the disaggregation mechanism,
   the tariff bridge, links to macroeconomic models and a proposed interface.
-  The third is business modelling: business policy beyond tax, what we hold
-  on firms, and where an agent-based model would link. The talk ends with two
+  The third is business modelling: business policy, what we hold
+  on firms, and where an agent-based model could link. The talk ends with two
   candidate pilots and questions. Model coverage, release gates, the trade
-  study's four events, the AI shock, assignment variability, data access and
+  study's four events, the AI scenario, assignment variability, data access and
   use, evaluation and engagement are in the appendix.
 - **Status.** Each piece carries its status as a tag: the firm VAT model is a working
   paper, Microcosm's firm support is experimental, OG-UK is an early
@@ -100,11 +100,35 @@ notes for that slide.
     read on 16 November 2026. UK and US models in one package: the
     policyengine.py paper (Ahmadi et al. 2026, JOSS), which gives the
     package's country coverage as the US and UK; the slide claims no other
-    country. Licences: the repositories' LICENSE files. The four items of
-    use, evaluation and engagement and the funder are those of the appendix
-    slide, with the same public pages (the No 10 article, HM Treasury's
-    transparency record, the OBR's annual report, Hansard and the supporters
-    page) and the same caveats.
+    country. Licences: the repositories' LICENSE files. Funding, in the
+    nonprofit line: Nuffield Foundation grants made in 2024 and 2026 (the
+    supporters page). Government: the No 10 article (10ds-microsim; that it
+    is supplementary, experimental analysis is said in the notes and on the
+    appendix slide). The slide says only that HM
+    Treasury, the OBR and Parliament "mention" PolicyEngine: HM Treasury's
+    transparency record (a 2024 pilot evaluation; HMT does not currently use
+    the model), the OBR's annual report (engagement in 2025–26) and Hansard
+    (a House of Lords debate citing House of Commons Library research). The
+    caveats are in the notes and on the appendix slide. Government logos:
+    10 Downing Street and the House of Lords (standing for Parliament; the
+    Hansard source is a Lords debate) were already in `public/logos/orgs/`.
+    The Office for Budget Responsibility wordmark was copied from
+    policyengine-app-v2 (`ede5cb3`,
+    `app/public/assets/posts/obr-november-2025-projections/obr-logo.png`) to
+    `public/logos/orgs/office-for-budget-responsibility.png`; the file is
+    white on transparent, so the slide shows it in dark ink. Neither
+    repository holds an HM Treasury logo, so its name is set as plain text.
+    Think tanks and
+    researchers: the logo files in `public/logos/orgs/`, as on the Good
+    Growth Foundation deck's community slide. The
+    [Centre for Policy Studies](https://cps.org.uk/research/family-friendly-taxation/)
+    (July 2023) and the
+    [New Economics Foundation](https://neweconomics.org/2026/07/insecure-low-quality-work-a-major-driver-of-uks-neets-and-inactivity-crisis)
+    (July 2026) link to their publications; NIESR links to Mosley and
+    Cornforth (2023), which combined PolicyEngine UK with NiGEM; the Good
+    Growth Foundation and WPI Economics are shown without a link, as in that
+    deck. The Good Growth Foundation logo file is white on transparent, so
+    the slide shows it in dark ink.
   - The Economic Prosperity Deal, from macro impacts to households: no new
     fact. The deal's terms are from the general terms on GOV.UK; the deal
     schedule without published results is the trade study's
@@ -224,7 +248,11 @@ notes for that slide.
     local authorities, and the dashboard labels that release experimental.
     Each slide that offers constituency, local-authority or local-area
     results as a model output carries the label.
-  - Interface: a proposal, labelled not built. Its keys are what the model
+  - Interface: one way to link, for discussion, tagged "Proposal". What
+    runs today is the trade study's code, which applies earnings changes by
+    two-digit SIC division to survey employees (uk-trade-shock-study
+    `06c8bbc`, `runner.py`), and the outputs on the right are existing
+    policyengine.py outputs. Its keys are what the model
     holds (policyengine-uk `d3db7ac`: `sic_industry_division`, twelve
     regions, spending by COICOP division); the nearest existing code is the
     trade study's `apply_shocks`. Mean and SD across draws are in the
@@ -249,8 +277,15 @@ an icon on every card, step and figure, and status as tags; the text taken
 off the slides is in `NOTES.md`. This version reorders the talk into three
 parts and adds two slides, "Who we are" and the Economic Prosperity Deal
 from macro impacts to households; the disaggregation slide now shows the
-assignment mechanism. The AI shock, assignment variability and data access
-moved to the appendix. No figure changed. It has 19 talk slides plus an
+assignment mechanism. The AI scenario, assignment variability and data access
+moved to the appendix. The latest pass removed the tinted bands under the
+main content (their key messages moved into subtitles, steps, tags or a
+plain finding; the rest is in `NOTES.md`), reworked "Who we are" with a logo
+row, made the code block light, worded titles and subtitles positively and
+replaced "shock" with "scenario" or "change" in slide text. The ideas
+slides (the deal, macro links, the interface, the agent-based model and the
+pilots) use non-committal wording: "could", "for discussion", "a starting
+point". No figure changed. It has 19 talk slides plus an
 eight-slide appendix. Exports at 1920×1080 and 1440×810 were inspected page
 by page.
 
