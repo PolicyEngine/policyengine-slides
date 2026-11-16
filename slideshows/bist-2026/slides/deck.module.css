@@ -1,0 +1,909 @@
+/* Leave space for the viewer's controls beside the meeting date. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+.takeaway {
+  margin-top: 2.25rem;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.75rem;
+  color: var(--pe-dark);
+  font-size: 1.75rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.finePrint {
+  margin-top: 1rem;
+  padding-left: calc(1.75rem + 4px);
+  color: var(--color-gray-600);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.subtitle {
+  margin-top: 0.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.finePrintFlush {
+  padding-left: 0 !important;
+}
+
+/* Fine print under a figure that needs more air above it. */
+.finePrintSpaced {
+  margin-top: 1.75rem;
+}
+
+.bodyText {
+  color: var(--color-gray-700);
+  font-size: 1.6rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.figureTitle {
+  color: var(--pe-dark);
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.figureSubtitle {
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+/* Figure slides: centre the body below the title, clear of the sources line. */
+.centerBody {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+}
+
+.card {
+  border: 1px solid var(--color-gray-300);
+  border-left: 4px solid var(--pe-teal);
+  background: white;
+  padding: 2rem;
+}
+
+.card h2 {
+  color: var(--pe-dark);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Grids whose card titles may wrap: keep every card's body on one line. */
+.twoLineTitles .card h2 {
+  min-height: 2.5em;
+}
+
+.card p {
+  margin-top: 0.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.6rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pe-teal) 14%, white);
+  padding: 0.3rem 0.9rem;
+  color: var(--pe-teal-dark);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tagMuted {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+/* A second tag part-way down a card, above its own rows. */
+.tagBelow {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+}
+
+.list {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--color-gray-700);
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+.note {
+  margin-top: 0.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+/* Flow diagrams: boxes joined by arrows. */
+.flow {
+  display: grid;
+  align-items: stretch;
+  gap: 2.25rem;
+}
+
+.flowBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.6rem;
+  background: white;
+  padding: 1.25rem 1.35rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.flowBox:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -1.85rem;
+  transform: translateY(-50%);
+  color: var(--pe-teal);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.flowBox h2 {
+  min-height: 2.5em;
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.flowBox p {
+  margin-top: 0.5rem;
+  color: var(--color-gray-600);
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+/* Flows whose titles all fit on one line. */
+.flowCompact .flowBox h2 {
+  min-height: 0;
+}
+
+.flowOwner {
+  margin-bottom: 0.5rem;
+  color: var(--pe-teal-dark);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.flowReplaceable {
+  border: 2px dashed var(--pe-teal);
+  background: color-mix(in srgb, var(--pe-teal) 6%, white);
+}
+
+/* A bracket under the replaceable boxes of the tariff bridge. */
+.bracket {
+  margin-top: 0.75rem;
+}
+
+.bracket::before {
+  content: "";
+  display: block;
+  height: 0.6rem;
+  border: 2px dashed var(--pe-teal);
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.bracket p {
+  padding-top: 0.5rem;
+  color: var(--pe-teal-dark);
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* The two-way return path: a teal U from the last box back to the first. */
+.returnArrow {
+  position: relative;
+  margin: 0 calc((100% - 3 * 2.25rem) / 8) 0;
+  border: 2px dashed var(--pe-teal);
+  border-top: none;
+  border-radius: 0 0 0.75rem 0.75rem;
+  padding: 0.75rem 1rem 0.6rem;
+  color: var(--color-gray-700);
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.returnArrow::before {
+  content: "▲";
+  position: absolute;
+  top: -0.55rem;
+  left: -0.6rem;
+  color: var(--pe-teal);
+  font-size: 1rem;
+}
+
+/* Short facts in columns under a flow diagram. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.25rem;
+  margin-top: 1rem;
+}
+
+.facts > div {
+  border-top: 3px solid var(--pe-teal);
+  padding-top: 0.75rem;
+}
+
+.facts h3 {
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.facts p {
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+/* A table of candidate links: one row per policy question. */
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.matrix thead th {
+  border-bottom: 2px solid var(--pe-teal);
+  padding: 0 1.25rem 0.6rem 0;
+  color: var(--pe-teal-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.matrix tbody th,
+.matrix tbody td {
+  border-bottom: 1px solid var(--color-gray-300);
+  padding: 0.9rem 1.25rem 0.9rem 0;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  text-align: left;
+  vertical-align: top;
+}
+
+.matrix tbody th {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.matrix tbody td {
+  color: var(--color-gray-700);
+}
+
+/* Labelled rows inside a card: who supplies what. */
+.pairs {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.pairs dt {
+  color: var(--pe-teal-dark);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pairs dd {
+  margin-top: 0.15rem;
+  color: var(--color-gray-700);
+  font-size: 1.55rem;
+  line-height: 1.4;
+}
+
+.stat {
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.25rem;
+}
+
+.statValue {
+  color: var(--pe-teal);
+  font-size: 4.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.statLabel {
+  margin-top: 0.6rem;
+  color: var(--color-gray-700);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+/* AI incidence range: a horizontal scale from £0bn to £35bn. */
+.range {
+  position: relative;
+  margin-top: 5.5rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: var(--color-gray-200);
+}
+
+.rangeBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+.rangeMark {
+  position: absolute;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: translate(-50%, -50%);
+  border: 3px solid white;
+  border-radius: 999px;
+  background: var(--pe-teal);
+  box-shadow: 0 0 0 1px var(--pe-teal);
+}
+
+.rangeMarkMuted {
+  background: var(--color-gray-500);
+  box-shadow: 0 0 0 1px var(--color-gray-500);
+}
+
+.rangeLabel {
+  position: absolute;
+  bottom: 1.35rem;
+  transform: translateX(-50%);
+  color: var(--pe-dark);
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.rangeLabel span {
+  display: block;
+  color: var(--color-gray-600);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.rangeTicks {
+  position: relative;
+  height: 1.75rem;
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 1.15rem;
+}
+
+.rangeTicks span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.rangeTicks span:first-child {
+  transform: none;
+}
+
+.rangeTicks span:last-child {
+  transform: translateX(-100%);
+}
+
+.question {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--color-gray-300);
+  padding: 1.2rem 0;
+  color: var(--pe-dark);
+  font-size: 2.2rem;
+  line-height: 1.35;
+}
+
+.question:last-child {
+  border-bottom: none;
+}
+
+.questionNumber {
+  flex-shrink: 0;
+  width: 2.75rem;
+  color: var(--pe-teal);
+  font-weight: 700;
+}
+
+.closingTitle {
+  margin-top: 6rem;
+}
+
+.belowFlow {
+  margin-top: 2rem;
+}
+
+.belowKpis {
+  margin-top: 2rem;
+}
+
+/* Three facts in a row instead of four. */
+.factsThree {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Code: a parameter, a formula and a test side by side. */
+.codeGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.codeColumn {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.code {
+  border-radius: 0.6rem;
+  background: var(--pe-darker);
+  padding: 1rem 1.4rem 1.15rem;
+}
+
+.codeTitle {
+  margin-bottom: 0.5rem;
+  color: var(--pe-teal-light);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.code pre {
+  overflow: hidden;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  line-height: 1.42;
+  white-space: pre;
+}
+
+.inlineCode {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--pe-teal-dark);
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Headline numbers in a row above a figure. */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.25rem;
+}
+
+.kpis > div {
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.1rem;
+}
+
+.kpiValue {
+  color: var(--pe-teal);
+  font-size: 3.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kpiLabel {
+  margin-top: 0.5rem;
+  color: var(--color-gray-700);
+  font-size: 1.4rem;
+  line-height: 1.35;
+}
+
+.equation {
+  margin-top: 0.9rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.6rem;
+  background: var(--color-gray-50);
+  padding: 0.4rem 1rem;
+  color: var(--pe-dark);
+  font-size: 1.7rem;
+}
+
+.equation :global(.katex-display) {
+  margin: 0.6em 0;
+}
+
+.listSmall li {
+  font-size: 1.4rem;
+}
+
+/* A table without a header row, with a numeric second column. */
+.matrixCompact {
+  margin-top: 0.9rem;
+  table-layout: auto;
+}
+
+.matrixCompact tbody tr:first-child th,
+.matrixCompact tbody tr:first-child td {
+  border-top: 2px solid var(--pe-teal);
+}
+
+.matrixCompact tbody th,
+.matrixCompact tbody td {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  font-size: 1.4rem;
+}
+
+.matrixNumber {
+  color: var(--pe-teal-dark) !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.statCompact .statValue {
+  font-size: 3.4rem;
+}
+
+/* Interface specification: a field name and what it holds. */
+.specCard {
+  padding: 1.25rem 1.6rem;
+}
+
+.specCard h2 {
+  font-size: 1.75rem;
+}
+
+/* A card title with its status tag on the same line. */
+.specHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.specHead .tag {
+  margin-bottom: 0;
+}
+
+.spec {
+  margin-top: 0.7rem;
+}
+
+.spec > div {
+  display: grid;
+  grid-template-columns: 13.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  border-top: 1px solid var(--color-gray-300);
+  padding: 0.35rem 0;
+}
+
+.spec dt {
+  color: var(--pe-teal-dark);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.spec dd {
+  color: var(--color-gray-700);
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+@media (max-height: 900px) {
+  .deck :global(h1) {
+    font-size: 2.5rem;
+  }
+
+  .card {
+    padding: 1.15rem 1.3rem;
+  }
+
+  .card h2 {
+    font-size: 1.3rem;
+  }
+
+  .card p,
+  .list li {
+    font-size: 1.1rem;
+  }
+
+  .list {
+    gap: 0.4rem;
+  }
+
+  .tag {
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .flowBox {
+    padding: 0.9rem 1rem;
+  }
+
+  .flowBox h2 {
+    font-size: 1.1rem;
+  }
+
+  .flowBox p {
+    font-size: 1rem;
+  }
+
+  .flowOwner {
+    font-size: 0.85rem;
+  }
+
+  .bracket p {
+    font-size: 1rem;
+  }
+
+  .returnArrow {
+    font-size: 1rem;
+  }
+
+  .takeaway {
+    margin-top: 1.4rem;
+    padding-left: 1.3rem;
+    font-size: 1.25rem;
+  }
+
+  .finePrint {
+    padding-left: calc(1.3rem + 4px);
+  }
+
+  .finePrint,
+  .note {
+    font-size: 1.15rem;
+  }
+
+  .tagBelow {
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+  }
+
+  .bodyText {
+    font-size: 1.15rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .figureTitle {
+    font-size: 1.3rem;
+  }
+
+  .figureSubtitle {
+    font-size: 1.05rem;
+  }
+
+  .statValue {
+    font-size: 2.75rem;
+  }
+
+  .statLabel {
+    font-size: 1.1rem;
+  }
+
+  .range {
+    margin-top: 4.25rem;
+  }
+
+  .rangeLabel {
+    font-size: 1.05rem;
+  }
+
+  .rangeLabel span,
+  .rangeTicks {
+    font-size: 0.9rem;
+  }
+
+  .question {
+    padding: 0.8rem 0;
+    font-size: 1.5rem;
+  }
+
+  .facts {
+    margin-top: 0.7rem;
+  }
+
+  .facts > div {
+    padding-top: 0.5rem;
+  }
+
+  .facts h3 {
+    font-size: 1.1rem;
+  }
+
+  .facts p {
+    font-size: 1rem;
+  }
+
+  .matrix thead th {
+    padding-bottom: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .matrix tbody th,
+  .matrix tbody td {
+    padding: 0.45rem 1rem 0.45rem 0;
+    font-size: 1.05rem;
+  }
+
+  .pairs {
+    gap: 0.55rem;
+  }
+
+  .pairs dt {
+    font-size: 0.85rem;
+  }
+
+  .pairs dd {
+    font-size: 1.1rem;
+  }
+
+  .belowFlow {
+    margin-top: 0.8rem;
+  }
+
+  .belowKpis {
+    margin-top: 0.8rem;
+  }
+
+  .codeGrid {
+    gap: 1.5rem;
+  }
+
+  .codeColumn {
+    gap: 0.9rem;
+  }
+
+  .code {
+    padding: 0.7rem 1rem 0.8rem;
+  }
+
+  .codeTitle {
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+  }
+
+  .code pre {
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .inlineCode {
+    font-size: 0.97rem;
+  }
+
+  .kpis > div {
+    padding-left: 0.9rem;
+  }
+
+  .kpiValue {
+    font-size: 2rem;
+  }
+
+  .kpiLabel {
+    margin-top: 0.35rem;
+    font-size: 1rem;
+  }
+
+  .equation {
+    margin-top: 0.5rem;
+    padding: 0.1rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  .equation :global(.katex-display) {
+    margin: 0.45em 0;
+  }
+
+  .finePrintSpaced {
+    margin-top: 0.7rem;
+  }
+
+  .listSmall li {
+    font-size: 1rem;
+  }
+
+  .matrixCompact {
+    margin-top: 0.6rem;
+  }
+
+  .matrixCompact tbody th,
+  .matrixCompact tbody td {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    font-size: 1rem;
+  }
+
+  .statCompact .statValue {
+    font-size: 2.1rem;
+  }
+
+  .specCard {
+    padding: 0.8rem 1.1rem;
+  }
+
+  .specCard h2 {
+    font-size: 1.2rem;
+  }
+
+  .spec {
+    margin-top: 0.4rem;
+  }
+
+  .spec > div {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 0.8rem;
+    padding: 0.2rem 0;
+  }
+
+  .spec dt {
+    font-size: 0.8rem;
+  }
+
+  .spec dd {
+    font-size: 0.95rem;
+  }
+}
