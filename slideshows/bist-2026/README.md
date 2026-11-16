@@ -111,7 +111,7 @@ notes for that slide.
     (uk-trade-shock-study `06c8bbc`); "static, no general equilibrium" is
     the model-run slide's; the feedback arrow is the macro–micro loop of the
     macroeconomic models slide. The path and the feedback are tagged not
-    built, and the slide is tagged "No results yet".
+    built, and the slide is tagged "Not yet modelled".
   - Disaggregation: the mechanism inside the PolicyEngine step. Earnings and
     jobs by two-digit SIC division and the repeated random draws are the
     trade study's assignment (`tariff_pipeline/exposure.py`); spending is
@@ -232,7 +232,7 @@ notes for that slide.
     proposed. The full field list is in the notes.
 
 PolicyEngine has published no results for the Economic Prosperity Deal or
-BICS, and the deck tags both "No results yet".
+BICS, and the deck tags both "Not yet modelled".
 
 Earlier PolicyEngine decks describe Microcosm at older commits or for the
 US. Where they differ from the code read for this deck, the deck follows the

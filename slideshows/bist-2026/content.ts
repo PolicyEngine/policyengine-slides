@@ -292,14 +292,14 @@ export const sources = {
 export type Tone = "built" | "muted" | "caution";
 export type Tag = { label: string; tone: Tone };
 
-// Status tags. Teal: exists today. Grey: not built, restricted or not
-// modelled. Amber: experimental, proposed, a working paper or illustrative.
+// Status tags. Teal: exists today. Grey: an idea to explore (not built), not yet
+// modelled, restricted or outside the model. Amber: experimental, proposed, a working paper or illustrative.
 const tag = (label: string, tone: Tone): Tag => ({ label, tone });
 export const tags = {
-  notBuilt: tag("Not built", "muted"),
-  noResults: tag("No results yet", "muted"),
+  notBuilt: tag("Idea to explore", "muted"),
+  noResults: tag("Not yet modelled", "muted"),
   experimental: tag("Experimental", "caution"),
-  proposed: tag("Proposed, not built", "caution"),
+  proposed: tag("Proposal", "caution"),
   workingPaper: tag("Working paper", "caution"),
   illustrative: tag("Illustrative", "caution"),
   // The AI study and the trade study's tariff stage use the survey-weighted
@@ -671,7 +671,7 @@ export const firmTools = [
     icon: IconLink,
     tags: [tags.notBuilt, tags.experimental],
     title: "Linking firms to households",
-    text: "No firm entity: not built.",
+    text: "No firm entity yet.",
     facts: [{ value: "Experimental", label: "Microcosm's firm tables and job links, unused in the UK build" }],
   },
 ];
@@ -687,7 +687,7 @@ export const macroLinks = [
   {
     icon: IconTrendingUp,
     title: "A forecast scenario",
-    tags: [{ label: "Mechanism in the model", tone: "built" } as Tag, { label: "Not yet run", tone: "muted" } as Tag],
+    tags: [{ label: "Mechanism in the model", tone: "built" } as Tag, { label: "Possible next step", tone: "muted" } as Tag],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
@@ -935,7 +935,7 @@ export const runFacts = [
   },
   { icon: IconBolt, title: "A shock", text: "changes inputs; the rules stay" },
   { icon: IconPlayerPause, title: "Mostly static", text: "by default" },
-  { icon: IconBuildingFactory2, title: "Not modelled", text: "firms' decisions, general equilibrium" },
+  { icon: IconBuildingFactory2, title: "Outside the model", text: "firms' decisions, general equilibrium" },
 ];
 
 // Microcosm UK 2024-25: what the pipeline builds.

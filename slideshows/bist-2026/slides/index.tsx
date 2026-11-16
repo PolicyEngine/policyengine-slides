@@ -580,7 +580,7 @@ export function BridgeSlide() {
             medium
           />
         </div>
-        <StatusTag tag={{ label: "No results for the deal", tone: "muted" }} />
+        <StatusTag tag={{ label: "Deal not yet modelled", tone: "muted" }} />
       </div>
     </Frame>
   );
@@ -1156,7 +1156,7 @@ export function CoverageSlide() {
             <Bullets items={group.items} />
             {group.notModelled && (
               <div className={styles.cardNote}>
-                <StatusTag tag={{ label: "Not modelled", tone: "muted" }} />
+                <StatusTag tag={{ label: "Outside the model", tone: "muted" }} />
                 {group.notModelled}
               </div>
             )}
