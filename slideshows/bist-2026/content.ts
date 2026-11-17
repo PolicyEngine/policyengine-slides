@@ -16,7 +16,8 @@
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
 // policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc
-// (its figures are now those of its PR #46, head 778557c, read 16 November),
+// (its figures are now those of its PR #46, head 10dc18826, read 17 November;
+// the earlier head 778557c, read 16 November, has the same figures),
 // and firm-microsim-paper e6d5dd6. GOV.UK pages and the Microcosm
 // calibration dashboard were read the same day; the AI post on 16 November.
 //
@@ -54,11 +55,14 @@ import {
   IconHeartHandshake,
   IconHome,
   IconHourglass,
+  IconListSearch,
   IconLock,
   IconLockOpen,
   IconMap,
+  IconMap2,
   IconMapPin,
   IconMathFunction,
+  IconPinned,
   IconPresentationAnalytics,
   IconReceiptTax,
   IconRefresh,
@@ -311,11 +315,12 @@ export const tags = {
   experimental: tag("Experimental", "caution"),
   proposed: tag("Proposal", "caution"),
   workingPaper: tag("Working paper", "caution"),
-  // The trade study's rerun (uk-trade-shock-study PR #46, 778557c, open, not
+  // The trade study's rerun (uk-trade-shock-study PR #46, 10dc18826, open, not
   // merged; README and paper/sections/results.tex): every microsimulation
   // runs on policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the
-  // certified Microcosm UK 2024-25 build; the tariff stage under 2026-27
-  // rules.
+  // certified Microcosm UK 2024-25 build. The tariff stage runs under 2026-27
+  // rules; the energy episode's main run uses 2023-24 rules, and 2022-23
+  // rules only for a comparison.
   microcosm: tag("Microcosm UK", "built"),
   // Doability markers on the ideas slides (see the verification notes in
   // NOTES.md): what the existing code takes, what needs a mapping between
@@ -612,7 +617,7 @@ export const coverage = [
   },
 ];
 
-// The trade study's four episodes (uk-trade-shock-study PR #46, 778557c,
+// The trade study's four episodes (uk-trade-shock-study PR #46, 10dc18826,
 // open, not merged; a working paper). Years and channels are the headings of
 // paper/sections/episodes.tex: "Episode 1: the TCA border (2021--23),
 // negative, price-led"; "Episode 2: the terms-of-trade shock (2022--23),
@@ -662,7 +667,7 @@ export const tradeEvents = [
   },
 ];
 
-// The path every episode follows, under the four cards. PR #46, 778557c:
+// The path every episode follows, under the four cards. PR #46, 10dc18826:
 // each episode has a household stage on the certified Microcosm UK records
 // (README; results.tex, "The second stage: household-level results";
 // vintage_and_tca.py for food, second_stage_energy.py for energy,
@@ -675,7 +680,7 @@ export const tradePath =
   "Every episode is a price or earnings change, applied to each Microcosm UK household by what it spends or earns";
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
-// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 778557c) reports a
+// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 10dc18826) reports a
 // different measure (see NOTES.md).
 
 // The Economic Prosperity Deal, end to end: from a trade or macroeconomic
@@ -785,7 +790,7 @@ export const tariffDisaggregation = {
 // gross_shock_gbp_m_per_year 1007.1; n_draws 20; wagecut_cushion_pct 41.8;
 // displacement_cushion_pct 32.1, displacement_cushion_sd_pct 3.3, over 20
 // displacement draws and 3 wage-cut draws), at uk-trade-shock-study PR #46,
-// head 778557c (open, not merged), run on Microcosm UK at 2026. These
+// head 10dc18826 (open, not merged), run on Microcosm UK at 2026. These
 // replace the figures of 06c8bbc (43.7%, 35.4%, SD 5.1 over 100 draws). Results are
 // for the schedule before the Economic Prosperity Deal. The paper reports
 // none for the deal schedule ("the Economic Prosperity Deal's own tariff
@@ -801,7 +806,7 @@ export const tariffBridge = {
     { icon: IconShip, title: "US export intensity", text: "By two-digit SIC division", dashed: true },
     { icon: IconMathFunction, title: "Export-demand elasticity", text: "Assumed 1, as a placeholder", dashed: true },
     { icon: IconCoins, title: "Earnings change by sector", text: "About £1.0bn a year", dashed: true },
-    { icon: IconUsers, title: "Survey employees", text: "Assigned by sector" },
+    { icon: IconUsers, title: "Employees in Microcosm UK", text: "By sector" },
   ],
   replaceable: [1, 3] as [number, number],
   cushion: { wageCuts: "41.8%", jobLosses: "32.1%", jobLossesSd: "3.3 points", draws: "20 draws" },
@@ -966,7 +971,7 @@ export const abmQuestions = [
 ];
 
 // Doability of each input, checked on 16 November 2026 against
-// uk-trade-shock-study PR #46 (778557c), tariff_pipeline/shocks.py and
+// uk-trade-shock-study PR #46 (10dc18826), tariff_pipeline/shocks.py and
 // runner.py: apply_shocks takes persons with employment_income, sic_division,
 // age and weight, and applies wage cuts or job losses by two-digit SIC
 // division; region is reported (runner.py, region_income_change) but is not
@@ -1015,7 +1020,7 @@ export const dataAccess = [
   },
 ];
 
-// The Axiom Foundation's rules as code (slides 10 and 11). The Axiom
+// The Axiom Foundation's rules as code (slides 11 and 12). The Axiom
 // Foundation is not PolicyEngine: it publishes open, machine-readable
 // encodings of the world's rules, starting with tax and benefit policy (the
 // descriptor on axiom.org/about). Max Ghenis is CEO of both the Axiom
@@ -1118,7 +1123,7 @@ export const axiomRules = [
 export const axiomRelationship =
   "Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he co-founded.";
 
-// What exists today and how a model could call it (slide 11). Same commits
+// What exists today and how a model could call it (slide 12). Same commits
 // as axiomRules, read 16 November 2026. The cards give examples.
 // - Encoded: the five UK modules above, with the status each carries there;
 //   SSCBA 1992 s.166 (statutory maternity pay's earnings-related rate) and
@@ -1376,35 +1381,35 @@ export const microcosmFlow = [
     icon: IconUsers,
     owner: "FRS 2024–25",
     title: "Survey base",
-    text: "Family Resources Survey: households, incomes, job sectors",
+    text: "Households, incomes and job sectors",
   },
   {
     icon: IconReceiptTax,
     owner: "HMRC SPI 2022–23",
     title: "Tax-record incomes",
-    text: "Copies of FRS households take SPI incomes; more above £200,000",
+    text: "FRS copies take SPI incomes; more above £200k",
   },
   {
     icon: IconWallet,
     owner: "Donor surveys",
     title: "Wealth and spending",
-    text: "Wealth (WAS), spending (LCFS, ETB), travel (NTS)",
+    text: "From WAS, LCFS, ETB and NTS",
   },
   {
     icon: IconHeartHandshake,
     owner: "DWP and HMRC",
     title: "Benefit take\u2011up",
-    text: "Reported claims kept; others drawn to published rates",
+    text: "Reported claims kept; others drawn to official rates",
   },
   {
     icon: IconScale,
     owner: "Official totals",
     title: "Calibrated weights",
-    text: "Reweighted to match the totals",
+    text: "Fitted to 1,514 official figures",
   },
 ];
 
-// Where the snake flow ends: the file the pipeline produces.
+// Where the row of steps ends: the file the pipeline produces.
 export const microcosmResult = {
   icon: IconDatabase,
   owner: "The result",
@@ -1412,13 +1417,10 @@ export const microcosmResult = {
   text: "The certified household file",
 };
 
-// Shown as a status tag beside the subtitle; the stage count (54, the
-// certified build) is in the subtitle. The imputation method and the pinned
-// files and seeded draws are in NOTES.md.
-export const microcosmStatus: Tag = {
-  label: "No targets by industry; sectors of SPI copies imputed",
-  tone: "caution",
-};
+// The stage count (54, the certified build) is in the subtitle. No target
+// is by industry, and the SPI copies' sectors are imputed: both are in
+// NOTES.md, for questions, with the imputation method and the pinned files
+// and seeded draws.
 
 // Calibration.
 // Method (microcosm 429d7a0): packages/microcosm-calibrate/README.md and
@@ -1459,113 +1461,84 @@ export const calibrationFit = {
   stats: [
     { icon: IconTargetArrow, value: "1,514", label: "official targets, grouped into 44 statistics" },
     { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
-    { icon: IconUsers, value: "about 7.2k", label: "effective sample size (9.2% of records)" },
     { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
-  ],
-  publishers: [
-    { name: "HMRC", count: 776, shade: "var(--pe-teal-dark)" },
-    { name: "ONS", count: 365, shade: "var(--pe-teal)" },
-    { name: "DWP", count: 213, shade: "color-mix(in srgb, var(--pe-teal) 55%, white)" },
-    { name: "MHCLG", count: 82, shade: "var(--pe-amber)" },
-    { name: "Others", count: 78, shade: "var(--color-gray-400)" },
   ],
   solver: ["38 target families, each 1/38 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
 };
 
-// Targets by publisher (calibrationFit.publishers): HMRC 776, ONS 365, DWP
-// 213, MHCLG 82 and 78 from ten other publishers, read on 16 November 2026
-// from the public calibration dashboard pinned to the certified build
-// (source "dashboard"; the page's own data route, "family_fit"). The former
-// slide "What the weights are fitted to" drew these as a map of publishers
-// and statistics; it is cut, because the live dashboard on the next slide
-// shows the same map. Its counts by statistic are in NOTES.md. Three
-// groupings of the same 1,514 targets exist and are not the same thing: the
-// dashboard's browsing view shows "44 statistics"; the solver's loss has 38
-// target families, each with 1/38 of the weight; the dashboard's fit table
-// has 41 publisher-and-statistic groups.
+// The effective sample size of the certified build, about 7.2 thousand
+// (9.2% of records), is in NOTES.md: a rough guide for averages that varies
+// by statistic. The targets by publisher are the table on the next slide.
 
-// The static page a PDF export shows in place of the live dashboard (an
-// export captures the dashboard before its map has drawn). Counts are the
-// "family_fit" rows of the dashboard's data route for the pinned build, read
-// 16 November 2026: for each of its 41 publisher-and-statistic groups, the
-// number of targets and the number within 10% of the official figure.
-// HMRC 776 (761 within 10%): Survey of Personal Incomes 568, capital gains
-// tax 105, income tax liabilities 84, and six smaller groups with 19 (Child
-// Benefit 5, benefits in kind 5, three salary sacrifice groups 3, 2 and 2,
-// Tax-Free Childcare 2). ONS 365 (365): population 179, employment 159,
-// household composition 22, land 3, consumer trends 2. DWP 213 (210):
-// Universal Credit 103, State Pension 57, the two-child limit 15, and five
-// smaller groups with 38 (benefit cap 14, Pension Credit 13, legacy benefits
-// 8, Attendance Allowance 2, workplace pensions 1). MHCLG 82 (82): council
-// tax stock. Ten other publishers 78 (77): OBR 16, Department for Transport
-// 13, Scottish Government 12, Student Loans Company 12, and six more with 25
-// (Welsh Government 11, Department for Education 8, Department for
-// Communities (Northern Ireland) 3, Independent Schools Council 1,
-// Department for Infrastructure (Northern Ireland) 1, Northern Ireland
-// Transport Holding Company 1). Within 10%: 761 + 365 + 210 + 82 + 77 =
-// 1,495 of 1,514, the dashboard's 98.7%.
-export const calibrationTargets = {
-  total: 1514,
-  within: 1495,
-  publishers: [
-    {
-      name: "HMRC",
-      count: 776,
-      within: 761,
-      shade: "var(--pe-teal-dark)",
-      rows: [
-        { label: "Survey of Personal Incomes", count: 568 },
-        { label: "Capital gains tax", count: 105 },
-        { label: "Income tax liabilities", count: 84 },
-        { label: "Six smaller statistics", count: 19 },
-      ],
-    },
-    {
-      name: "ONS",
-      count: 365,
-      within: 365,
-      shade: "var(--pe-teal)",
-      rows: [
-        { label: "Population", count: 179 },
-        { label: "Employment", count: 159 },
-        { label: "Household composition", count: 22 },
-        { label: "Land; consumer trends", count: 5 },
-      ],
-    },
-    {
-      name: "DWP",
-      count: 213,
-      within: 210,
-      shade: "color-mix(in srgb, var(--pe-teal) 55%, white)",
-      rows: [
-        { label: "Universal Credit", count: 103 },
-        { label: "State Pension", count: 57 },
-        { label: "Two-child limit", count: 15 },
-        { label: "Five smaller statistics", count: 38 },
-      ],
-    },
-    {
-      name: "MHCLG",
-      count: 82,
-      within: 82,
-      shade: "var(--pe-amber)",
-      rows: [{ label: "Council tax stock", count: 82 }],
-    },
-    {
-      name: "Ten others",
-      count: 78,
-      within: 77,
-      shade: "var(--color-gray-400)",
-      rows: [
-        { label: "OBR", count: 16 },
-        { label: "Department for Transport", count: 13 },
-        { label: "Scottish Government", count: 12 },
-        { label: "Student Loans Company", count: 12 },
-        { label: "Six more publishers", count: 25 },
-      ],
-    },
-  ],
+// What the weights are fitted to: the 1,514 targets of the certified build
+// as a table, one row per topic. Counts and the number within 10% of the
+// official figure are the "family_fit" rows of the dashboard's data route
+// for the pinned release (source "dashboard"; /api/microcosm?release=...),
+// read on 17 November 2026: 41 publisher-and-statistic groups. "Where it
+// binds" is the geography of each target in the same release, from the
+// dashboard's target list (/api/microcosm/target-diagnostics?release=...,
+// all 1,514 targets). "Nations" are Wales, Scotland and Northern Ireland
+// (England too where it has its own target); "English regions" are the nine
+// regions of England. Rows group statistics within one publisher block, so
+// the publisher totals can be read off the table:
+// - HMRC 776 (761 within 10%): Survey of Personal Incomes 568 (553; 208 UK,
+//   30 each for Wales, Scotland and Northern Ireland, 270 regional); capital
+//   gains tax 105 (105) and income tax liabilities 84 (84), both UK, nations
+//   and regions; and six UK-level groups with 19 (19): Child Benefit 5,
+//   benefits in kind 5, salary sacrifice 3 + 2 + 2, Tax-Free Childcare 2.
+// - ONS 365 (365): population 179 (by age and sex; UK, England, Wales,
+//   Scotland, Northern Ireland, regions), employment 159 (by occupation; UK,
+//   nations, regions), household composition 22 (UK, nations, regions; it
+//   includes three household counts published by NRS, NISRA and the Welsh
+//   Government), land values 3 and consumer trends 2 (UK).
+// - DWP 213 (210): Universal Credit 103 (100; Great Britain, one Scotland
+//   target); State Pension 57 and Pension Credit 13 (Great Britain, Wales,
+//   Scotland, regions); two-child limit 15, benefit cap 14, legacy benefits
+//   8, Attendance Allowance 2 (England, Wales) and workplace pensions 1.
+// - MHCLG 82 (82): council tax dwelling stock by band, England and its
+//   regions.
+// - Ten other publishers 78 (77): OBR 16 (UK, Great Britain, England and
+//   Wales); Student Loans Company 12 (11), Department for Education 8 and the
+//   Independent Schools Council 1 (England, Wales, UK); Welsh Government 11,
+//   Scottish Government 12, Department for Transport 13 and three Northern
+//   Ireland bodies 5 (council tax stock in Wales and Scotland, buses and
+//   public transport, Northern Ireland pensions, Scottish Child Payment).
+// Within 10%: 761 + 365 + 210 + 82 + 77 = 1,495 of 1,514, the dashboard's
+// 98.7%. The component adds the rows up for the total row.
+export type TargetRow = {
+  topic: string;
+  binds: string;
+  source: string;
+  count: number;
+  /** Targets the fitted weights reproduce within 10% of the official figure. */
+  within: number;
 };
+
+export const targetTable: TargetRow[] = [
+  { topic: "Incomes by band (Survey of Personal Incomes)", binds: "UK, nations, English regions", source: "HMRC", count: 568, within: 553 },
+  { topic: "Capital gains and income tax liabilities", binds: "UK, nations, English regions", source: "HMRC", count: 189, within: 189 },
+  { topic: "Child Benefit, salary sacrifice, other tax totals", binds: "UK", source: "HMRC", count: 19, within: 19 },
+  { topic: "Population by age and sex", binds: "UK, nations, English regions", source: "ONS", count: 179, within: 179 },
+  { topic: "Employment by occupation", binds: "UK, nations, English regions", source: "ONS", count: 159, within: 159 },
+  { topic: "Household composition", binds: "UK, nations, English regions", source: "ONS", count: 22, within: 22 },
+  { topic: "Land values and household spending", binds: "UK", source: "ONS", count: 5, within: 5 },
+  { topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 103, within: 100 },
+  { topic: "State Pension and Pension Credit", binds: "Great Britain, Wales, Scotland, English regions", source: "DWP", count: 70, within: 70 },
+  { topic: "Two-child limit, benefit cap, other benefits", binds: "Great Britain, England, Wales", source: "DWP", count: 40, within: 40 },
+  { topic: "Council tax dwellings by band", binds: "England, English regions", source: "MHCLG", count: 82, within: 82 },
+  { topic: "Tax receipts and benefit spending", binds: "UK, Great Britain, England and Wales", source: "OBR", count: 16, within: 16 },
+  { topic: "Student loans, funded childcare, school pupils", binds: "England, Wales, UK", source: "SLC, DfE, ISC", count: 21, within: 20 },
+  { topic: "Devolved council tax, buses, other totals", binds: "Nations, English regions", source: "DfT and devolved bodies", count: 41, within: 41 },
+];
+
+// What the live dashboard slide shows in a PDF export, where the page itself
+// cannot be captured once its map has drawn: what the live page offers, and
+// its address. The table on the slide before carries the numbers.
+export const dashboardFeatures = [
+  { icon: IconListSearch, title: "Every target", text: "Official figure beside fitted value" },
+  { icon: IconMap2, title: "By publisher and statistic", text: "For the UK, nations and regions" },
+  { icon: IconPinned, title: "Pinned to the certified build", text: "The 7 November 2026 release" },
+];
 
 // Projects we have done: three slides with live or published work.
 // - The Autumn Budget 2026 dashboard: what it models is the Autumn Budget
@@ -1687,7 +1660,7 @@ export const firmMethod = {
 
 // One way to link models, for discussion; nothing here is a commitment.
 // What runs today: the trade study's code takes earnings changes by two-digit
-// SIC division and applies them to survey employees (uk-trade-shock-study
+// SIC division and applies them to employees in Microcosm UK (uk-trade-shock-study
 // 06c8bbc, runner.py and apply_shocks; tariff_pipeline/exposure.py).
 // A proposed interface for the model links. Not built: no reader for such a
 // table exists. Keys follow what the model holds (policyengine-uk d3db7ac):
@@ -1698,7 +1671,7 @@ export const firmMethod = {
 // computed in the studies' own code and are not a policyengine.py output, so
 // they sit under "proposed" with the CSV format.
 export const interfaceToday =
-  "The trade study’s code applies earnings changes by two-digit SIC division to survey employees";
+  "The trade study’s code applies earnings changes by two-digit SIC division to employees in Microcosm UK";
 
 // Different kinds of model report different things, so the link takes
 // whichever a model has (the "from" lines of tariffDisaggregation above). A

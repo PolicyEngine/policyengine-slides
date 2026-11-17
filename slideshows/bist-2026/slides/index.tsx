@@ -1,8 +1,6 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import katex from "katex";
 import {
-  IconArrowDown,
-  IconArrowLeft,
   IconArrowRight,
   IconArrowsLeftRight,
   IconBrandGithub,
@@ -29,8 +27,8 @@ import {
   businessPolicy,
   calibrationEquation,
   calibrationFit,
-  calibrationTargets,
   coverage,
+  dashboardFeatures,
   dataAccess,
   epdTrace,
   firmMethod,
@@ -38,7 +36,6 @@ import {
   macroLinks,
   microcosmFlow,
   microcosmResult,
-  microcosmStatus,
   modelFlow,
   parts,
   pilots,
@@ -49,6 +46,7 @@ import {
   runStatus,
   sources,
   tags,
+  targetTable,
   tariffBridge,
   tariffDisaggregation,
   tradeEvents,
@@ -666,98 +664,69 @@ export function RulesSlide() {
   );
 }
 
-/** One stop on the snake: a numbered step, wide and short. */
-function SnakeStep({
-  step,
-  number,
-  area,
-  result = false,
-}: {
-  step: Step;
-  number?: number;
-  area: string;
-  result?: boolean;
-}) {
-  return (
-    <Reveal
-      step={number ?? 5}
-      ghost
-      className={`${styles.snakeStep} ${result ? styles.snakeResult : ""}`}
-      style={{ gridArea: area }}
-    >
-      <div className={styles.snakeLead}>
-        {number && <span className={styles.snakeNumber}>{number}</span>}
-        <Badge icon={step.icon} size="large" />
-      </div>
-      <div>
-        {step.owner && <p className={styles.owner}>{step.owner}</p>}
-        <h2>{step.title}</h2>
-        <p>{step.text}</p>
-      </div>
-    </Reveal>
-  );
-}
-
-function SnakeLink({ step, area, icon: LinkIcon }: { step: number; area: string; icon: Icon }) {
-  return (
-    <Reveal step={step} motion="fade" className={styles.snakeLink} style={{ gridArea: area }}>
-      <LinkIcon stroke={2.2} aria-hidden="true" />
-    </Reveal>
-  );
-}
-
-// The household file's build as a snake: three steps left to right, a turn
-// down, then two steps right to left, ending at the file itself.
+// The household file's build on one row, left to right: five numbered
+// steps, each tall and narrow, then the file itself. Each step comes in with
+// the arrow that leads to it; the file comes in with the last step.
 export function MicrocosmBuildSlide() {
-  const [spine, tax, wealth, takeUp, weights] = microcosmFlow;
+  const blocks = [...microcosmFlow, microcosmResult];
+  const template = blocks.map(() => "minmax(0, 1fr)").join(" auto ");
   return (
     <Frame
       section="what"
       title="Microcosm UK 2024–25: how the household file is built"
-      scale={1.22}
+      scale={1.2}
       subtitle="An open-source pipeline of 54 stages, from surveys and statistics to weights"
-      status={[microcosmStatus]}
     >
-      <div className={styles.snake}>
-        <SnakeStep step={spine} number={1} area="a" />
-        <SnakeLink step={2} area="ab" icon={IconArrowRight} />
-        <SnakeStep step={tax} number={2} area="b" />
-        <SnakeLink step={3} area="bc" icon={IconArrowRight} />
-        <SnakeStep step={wealth} number={3} area="c" />
-        <SnakeLink step={4} area="turn" icon={IconArrowDown} />
-        <SnakeStep step={takeUp} number={4} area="d" />
-        <SnakeLink step={5} area="de" icon={IconArrowLeft} />
-        <SnakeStep step={weights} number={5} area="e" />
-        <SnakeLink step={5} area="ef" icon={IconArrowLeft} />
-        <SnakeStep step={microcosmResult} area="f" result />
+      <div className={styles.buildRow} style={{ gridTemplateColumns: template }}>
+        {blocks.map((step, index) => {
+          const result = index === microcosmFlow.length;
+          const at = Math.min(index + 1, microcosmFlow.length);
+          return (
+            <Fragment key={step.title}>
+              {index > 0 && (
+                <Reveal step={at} motion="wipe" className={styles.arrow}>
+                  <IconArrowRight stroke={2.2} aria-hidden="true" />
+                </Reveal>
+              )}
+              <Reveal step={at} ghost className={`${styles.buildStep} ${result ? styles.buildResult : ""}`}>
+                <div className={styles.buildTop}>
+                  <Badge icon={step.icon} size="large" />
+                  {!result && <span className={styles.snakeNumber}>{index + 1}</span>}
+                </div>
+                <p className={styles.owner}>{step.owner}</p>
+                <h2>{step.title}</h2>
+                <p>{step.text}</p>
+              </Reveal>
+            </Fragment>
+          );
+        })}
       </div>
     </Frame>
   );
 }
 
 export function CalibrationSlide() {
-  const { stats, solver, publishers } = calibrationFit;
+  const { stats, solver } = calibrationFit;
   // The first build shows what goes in (targets and records); the second,
-  // how the fitted weights do (fit and effective sample size).
-  const [targets, fit, sample, records] = stats;
+  // how the fitted weights do.
+  const [targets, fit, records] = stats;
   const tiles = [
     { stat: targets, step: 1 },
     { stat: records, step: 1 },
     { stat: fit, step: 2 },
-    { stat: sample, step: 2 },
   ];
   return (
     <Frame
       section="what"
       title="Calibration: weights fitted to official statistics"
-      scale={1.02}
+      scale={1.22}
       subtitle="The certified national build of 7 November 2026"
       status={[
         { label: "In-sample fit", tone: "caution" },
         { label: "Targets at model year 2025", tone: "muted" },
       ]}
     >
-      <div className="grid grid-cols-[1.1fr_1fr] items-center gap-[calc(var(--u)*3)]">
+      <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
           <h2 className={styles.figureTitle}>What the solver minimises</h2>
           <Tex tex={calibrationEquation} display />
@@ -782,24 +751,8 @@ export function CalibrationSlide() {
               </span>
             ))}
           </div>
-          <div className={styles.divider}>
-            <p className={styles.rowLabel}>The 1,514 targets, by publisher</p>
-            <div className={styles.stack} aria-hidden="true">
-              {publishers.map((publisher) => (
-                <span key={publisher.name} style={{ flexGrow: publisher.count, background: publisher.shade }} />
-              ))}
-            </div>
-            <p className={styles.stackLegend}>
-              {publishers.map((publisher) => (
-                <span key={publisher.name}>
-                  <i style={{ background: publisher.shade }} />
-                  {publisher.name} <strong>{publisher.count}</strong>
-                </span>
-              ))}
-            </p>
-          </div>
         </div>
-        <div className={styles.kpis}>
+        <div className={styles.kpiStack}>
           {tiles.map(({ stat, step }) => (
             <Reveal key={stat.label} step={step} ghost className={styles.kpi}>
               <Badge icon={stat.icon} />
@@ -817,47 +770,91 @@ export function CalibrationSlide() {
 
 const count = (n: number) => n.toLocaleString("en-GB");
 
-// The page a PDF export shows in place of the live dashboard: the same
-// targets by publisher and statistic, with how many the fitted weights
-// reproduce within 10%.
-function TargetsSummary() {
-  const { total, within, publishers } = calibrationTargets;
+/** A share as a percentage: whole when it is all, else to one decimal. */
+const share = (part: number, whole: number) =>
+  part === whole ? "100%" : `${((100 * part) / whole).toFixed(1)}%`;
+
+// The 1,514 targets of the certified build by topic, after the Good Growth
+// Foundation deck's target table: where each binds, who publishes it, how
+// many there are and the share the fitted weights reproduce within 10%.
+function TargetTable() {
+  const total = targetTable.reduce((sum, row) => sum + row.count, 0);
+  const within = targetTable.reduce((sum, row) => sum + row.within, 0);
+  return (
+    <div className={styles.targetTable}>
+      <div className={`${styles.targetRow} ${styles.targetHead}`}>
+        <div>Topic</div>
+        <div>Where it binds</div>
+        <div>Source</div>
+        <div className={styles.targetNumber}>Targets</div>
+        <div className={styles.targetNumber}>Within 10%</div>
+      </div>
+      {targetTable.map((row) => (
+        <div key={row.topic} className={styles.targetRow}>
+          <div className={styles.targetTopic}>{row.topic}</div>
+          <div>{row.binds}</div>
+          <div className={styles.targetSource}>{row.source}</div>
+          <div className={styles.targetNumber}>{count(row.count)}</div>
+          <div className={styles.targetNumber}>{share(row.within, row.count)}</div>
+        </div>
+      ))}
+      <div className={`${styles.targetRow} ${styles.targetTotal}`}>
+        <div>All targets</div>
+        <div />
+        <div className={styles.targetSource}>14 publishers</div>
+        <div className={styles.targetNumber}>{count(total)}</div>
+        <div className={styles.targetNumber}>{share(within, total)}</div>
+      </div>
+    </div>
+  );
+}
+
+export function TargetsSlide() {
+  return (
+    <Frame
+      section="what"
+      title="What the weights are fitted to: 1,514 official figures"
+      scale={0.98}
+      subtitle="Every target of the certified 7 November build, by topic, with the share the weights reproduce within 10%"
+    >
+      <TargetTable />
+    </Frame>
+  );
+}
+
+// The page a PDF export shows in place of the live dashboard: what the live
+// page offers and its address. The table on the slide before carries the
+// numbers.
+function DashboardCard() {
   const address = new URL(sources.dashboard.href);
   return (
-    <div className={styles.targets}>
-      <div className={styles.targetsGrid}>
-        {publishers.map((publisher) => (
-          <section key={publisher.name} className={styles.targetsCard} style={{ borderTopColor: publisher.shade }}>
-            <p className={styles.owner}>{publisher.name}</p>
-            <p className={styles.statValue}>{count(publisher.count)}</p>
-            <p className={styles.statLabel}>
-              targets; {publisher.within === publisher.count ? "all" : count(publisher.within)} within 10% of the
-              official figure
-            </p>
-            <span className={styles.targetsBar} aria-hidden="true">
-              <i style={{ width: `${(100 * publisher.count) / total}%`, background: publisher.shade }} />
-            </span>
-            <ul>
-              {publisher.rows.map((row) => (
-                <li key={row.label}>
-                  <span>{row.label}</span>
-                  <strong>{count(row.count)}</strong>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
-      <p className={styles.targetsFoot}>
-        <strong>
-          {count(within)} of {count(total)}
-        </strong>{" "}
-        targets within 10% of the official figure. The live page, target by target:{" "}
-        <a href={sources.dashboard.href}>
+    <div className={styles.dashCard}>
+      <div className={styles.embedBar}>
+        <span className={styles.embedAddress}>
+          <IconWorld stroke={1.8} aria-hidden="true" />
           {address.host}
-          {address.pathname}
-        </a>
-      </p>
+        </span>
+      </div>
+      <div className={styles.dashBody}>
+        <h2 className={styles.figureTitle}>On the live page, target by target</h2>
+        <div className={styles.dashFeatures}>
+          {dashboardFeatures.map((feature) => (
+            <div key={feature.title} className={styles.mini}>
+              <Badge icon={feature.icon} size="large" />
+              <div>
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className={styles.targetsFoot}>
+          <a href={sources.dashboard.href}>
+            {address.host}
+            {address.pathname}
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
@@ -872,7 +869,6 @@ export function CalibrationLiveSlide() {
       subtitle="Every target by publisher and statistic: the official figure beside the fitted value"
       status={[
         { label: "Live", tone: "built", only: "live" },
-        { label: "Summary of the live page", tone: "muted", only: "export" },
         { label: "Certified 7 November build", tone: "built" },
       ]}
     >
@@ -880,7 +876,7 @@ export function CalibrationLiveSlide() {
         <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
       </Only>
       <Only when="export">
-        <TargetsSummary />
+        <DashboardCard />
       </Only>
     </Frame>
   );

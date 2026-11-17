@@ -20,6 +20,7 @@ import {
   PilotsSlide,
   QuestionsSlide,
   RulesSlide,
+  TargetsSlide,
   TitleSlide,
   TradeSlide,
   WhatSlide,
@@ -50,6 +51,7 @@ export const bist2026Config: SlideshowConfig = {
     RulesSlide,
     { component: MicrocosmBuildSlide, builds: 5, exportBuilds: 1 },
     { component: CalibrationSlide, builds: 2, exportBuilds: 1 },
+    TargetsSlide,
     CalibrationLiveSlide,
     // Part 3. What we have already.
     CoverageSlide,
