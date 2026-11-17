@@ -4,6 +4,7 @@ import {
   AiPostSlide,
   AxiomRulesSlide,
   AxiomTodaySlide,
+  AxiomLiveSlide,
   BridgeSlide,
   BudgetSlide,
   BusinessPolicySlide,
@@ -66,6 +67,7 @@ export const bist2026Config: SlideshowConfig = {
     CoverageSlide,
     AxiomRulesSlide,
     AxiomTodaySlide,
+    AxiomLiveSlide,
     // Part 4. Projects we have done.
     PartProjectsSlide,
     BudgetSlide,

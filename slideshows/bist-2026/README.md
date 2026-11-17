@@ -1,6 +1,6 @@
 # From business shocks to household incomes, 19 November 2026
 
-31 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
+32 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
 Unit of the Department for Business, Innovation, Science and Trade (BIST).
 There is no appendix: backup material for questions is at the end of
 [NOTES.md](NOTES.md).
@@ -43,33 +43,34 @@ slide, is in [NOTES.md](NOTES.md).
 12. What the UK model covers, and what we can share
 13. Rules as code for firms and employers, from the Axiom Foundation
 14. What exists today, and how a model could call it (the Axiom Foundation)
+15. The Axiom Foundation's rules, live (live page)
 
 4 · Projects we have done
 
-15. Part 4: Projects we have done (divider)
-16. The Autumn Budget 2026 dashboard (live page)
-17. Who bears the cost of an AI scenario? (live page)
-18. How we built synthetic UK firms
-19. What the firm model can cost: thresholds, tapers and responses
-20. Who bears the cost of trade changes? Four UK episodes, 2021–26
-21. Who bears the cost of trade changes: the 2025 US tariffs (the second
+16. Part 4: Projects we have done (divider)
+17. The Autumn Budget 2026 dashboard (live page)
+18. Who bears the cost of an AI scenario? (live page)
+19. How we built synthetic UK firms
+20. What the firm model can cost: thresholds, tapers and responses
+21. Who bears the cost of trade changes? Four UK episodes, 2021–26
+22. Who bears the cost of trade changes: the 2025 US tariffs (the second
     slide of the trade study)
 
 5 · What we could explore together
 
-22. Part 5: What we could explore together (divider)
-23. One way to link: tables in, tables out
-24. The UK–US Economic Prosperity Deal: from model results to households
-25. Business policy: from firm costs to households
-26. Where an agent-based model could link
-27. Links to macroeconomic models
+23. Part 5: What we could explore together (divider)
+24. One way to link: tables in, tables out
+25. The UK–US Economic Prosperity Deal: from model results to households
+26. Business policy: from firm costs to households
+27. Where an agent-based model could link
+28. Links to macroeconomic models
 
 6 · How we could collaborate
 
-28. Part 6: How we could collaborate (divider)
-29. Two candidate pilots
-30. Questions for discussion
-31. Thank you
+29. Part 6: How we could collaborate (divider)
+30. Two candidate pilots
+31. Questions for discussion
+32. Thank you
 
 - `config.ts` controls the slide order, the build steps (live only) and the
   meeting metadata.
@@ -103,8 +104,8 @@ from the left. Motion lasts about 0.3 seconds and is off under
 `prefers-reduced-motion`.
 
 Exports show each slide once, complete. Every slide with builds has
-`exportBuilds: 1`, so a PDF has exactly one page per slide (31 pages) and
-the deck index counts 31 slides; `countSlides: true` makes the live counter
+`exportBuilds: 1`, so a PDF has exactly one page per slide (32 pages) and
+the deck index counts 32 slides; `countSlides: true` makes the live counter
 number slides too, not build steps; in an export `Reveal` shows every step, so
 that page is the fully built slide, not its first step. No figure depends on
 an animation: the count-up always ends on the exact text, a timer restores
@@ -112,16 +113,17 @@ it if the frames do not run, and it does not run in an export.
 
 ## Live pages and images
 
-- Three slides embed a live page in a frame with a small toolbar (its
+- Four slides embed a live page in a frame with a small toolbar (its
   address, "Expand" and "New tab"): slide 10 the
   [calibration dashboard, pinned to the certified build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e),
-  slide 16 the
+  slide 15 [axiom.org](https://axiom.org), the Axiom Foundation's site,
+  slide 17 the
   [Autumn Budget 2026 dashboard](https://policyengine.org/uk/budgets/autumn-2026)
-  and slide 17 the PolicyEngine post
+  and slide 18 the PolicyEngine post
   ["Who bears the AI shock? Distributional and fiscal incidence in the UK"](https://www.policyengine.org/uk/research/uk-ai-study)
   (16 November 2026). All need an internet connection. An export captures
-  them as they are at that moment. The calibration dashboard and the post
-  are shown at 80% and 70% of their size, so more of each fits.
+  them as they are at that moment. The calibration dashboard, axiom.org and the post
+  are shown at 80%, 80% and 70% of their size, so more of each fits.
 - The calibration dashboard's page names the Hugging Face dataset repository
   that holds the build and links to it. That repository is private; the
   deck's own files do not name it.
@@ -134,7 +136,7 @@ it if the frames do not run, and it does not run in an export.
     [firm-microsim-paper](https://github.com/PolicyEngine/firm-microsim-paper)
     at `e6d5dd6` (SHA-256 `5e37838f…e91e8c3`), the paper's comparison of its
     estimates with HMRC's published costing of the April 2024 threshold
-    rise; slide 18.
+    rise; slide 19.
   Two earlier images are deleted: the firm paper's threshold sweep (no slide
   showed it) and the trade paper's incidence figure (see "The review of 16
   November" below).
@@ -243,7 +245,7 @@ notes for that slide.
     the model-run slide's; the feedback arrow is the macro–micro loop of the
     macroeconomic models slide. The path and the feedback are tagged not
     built, and the slide is tagged "Not yet modelled".
-  - Linking (slide 23), the mechanism: which records receive each result. Earnings and
+  - Linking (slide 24), the mechanism: which records receive each result. Earnings and
     jobs by two-digit SIC division and the repeated random draws are the
     trade study's assignment (`tariff_pipeline/exposure.py`); spending is
     held by COICOP division (policyengine-uk `d3db7ac`). A map from a trade
@@ -254,7 +256,7 @@ notes for that slide.
     type, not per sector, and its standard closure fixes aggregate
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
-  - The trade study's US-tariff episode (slide 21): uk-trade-shock-study pull request #46, head `10dc18826`
+  - The trade study's US-tariff episode (slide 22): uk-trade-shock-study pull request #46, head `10dc18826`
     (open, not merged), `results/e3_constants.json`: gross change £1,007.1m
     a year; cushion 41.8% for wage cuts and 32.1% for job losses, standard
     deviation 3.3 points across 20 draws; run on Microcosm UK at 2026 with
@@ -380,7 +382,7 @@ notes for that slide.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
     `paper/sections/results.tex` (20 assignment draws at PR #46, `10dc18826`).
-  - Trade events (slide 20): uk-trade-shock-study pull request #46,
+  - Trade events (slide 21): uk-trade-shock-study pull request #46,
     `10dc18826`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
@@ -415,7 +417,7 @@ notes for that slide.
     (`paper/Sections/static.tex`); the related post on
     [VAT thresholds](https://www.policyengine.org/uk/research/uk-vat-thresholds)
     is a source on the synthetic-firms slide. What the firm model can cost
-    (slide 19, firm-microsim-paper `e6d5dd6`): the static costs are
+    (slide 20, firm-microsim-paper `e6d5dd6`): the static costs are
     `results/reform_menu_common_base.txt` (the corrected schedule-cost
     table: £85,000 notch, 2023–24 microdata, unaged, in-scope VAT firms, VAT
     base above the threshold £175.105bn), and the responses
@@ -431,7 +433,7 @@ notes for that slide.
     NI incidence parameters, all to pay by default). The model has no firm
     entity. The earlier card on linking firms to households, which is not
     built, is in the notes.
-  - Linking (slide 23): one way to link, for discussion. What
+  - Linking (slide 24): one way to link, for discussion. What
     runs today is the trade study's code, which applies earnings changes by
     two-digit SIC division to employees in Microcosm UK (uk-trade-shock-study
     `06c8bbc`, `runner.py`), and the outputs on the right are existing
@@ -697,6 +699,22 @@ slide numbers of their time; the slide list at the top is current.
   To avoid repeating the mechanism, the deal's mapping step now reads "As on
   the previous slide", and the agent-based model's BICS row points back to
   the BICS slide. No figure or tag changed.
+
+## The live Axiom Foundation slide and tags that wrap (17 November)
+
+The sections above use the slide numbers of their time; the slide list at
+the top is current.
+
+- Slide 15, after the two Axiom Foundation slides, embeds axiom.org live at
+  80% (`AxiomLiveSlide`, `sources.axiomSite`), tagged "Live", so each slide
+  after it is numbered one higher: 32 slides, with dividers at 4, 11, 16, 23 and 29.
+  axiom.org sends no header that forbids framing.
+- The forecast-scenario card on the macroeconomic slide (28) is tagged
+  "Built, not yet run", in place of "Mechanism built; not yet run", which ran
+  past the card's border at narrow widths. A card's tags now sit beside its
+  icon when they fit and wrap below it when they do not (`.cardHead` wraps;
+  its tags take at most the card's width and wrap their own text), on every
+  card slide. No figure changed.
 
 ## Privacy
 

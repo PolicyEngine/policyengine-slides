@@ -1238,6 +1238,22 @@ export function AxiomTodaySlide() {
   );
 }
 
+/** The Axiom Foundation's site, live. */
+export function AxiomLiveSlide() {
+  return (
+    <Frame
+      section="have"
+      title="The Axiom Foundation's rules, live"
+      scale={1.1}
+      fill
+      subtitle="axiom.org: encoded rules beside their legal text"
+      status={[{ label: "Live", tone: "built" }]}
+    >
+      <Embed href={sources.axiomSite.href} title={sources.axiomSite.label} zoom={0.8} />
+    </Frame>
+  );
+}
+
 // ---------- Projects we have done ----------
 
 export function BudgetSlide() {

@@ -266,6 +266,12 @@ export const sources = {
     label: "UK national solve settings",
     href: `${microcosmRepo}/packages/microcosm-build/src/microcosm/build/uk_runtime/national_doctrine.py`,
   },
+  // The Axiom Foundation's site, embedded live on its own slide. It sends no
+  // header that forbids framing (checked 17 November 2026).
+  axiomSite: {
+    label: "The Axiom Foundation, axiom.org",
+    href: "https://axiom.org",
+  },
   // The dashboard takes a "release" parameter, so the link is pinned to the
   // certified build of 7 November 2026 and keeps showing it after newer
   // releases become the dashboard's default. Read 16 November 2026.
@@ -914,7 +920,7 @@ export const macroLinks = [
   {
     icon: IconTrendingUp,
     title: "A forecast scenario",
-    tags: [{ label: "Mechanism built; not yet run", tone: "muted" } as Tag],
+    tags: [{ label: "Built, not yet run", tone: "muted" } as Tag],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
