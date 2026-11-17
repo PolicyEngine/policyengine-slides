@@ -30,6 +30,7 @@ export function Reveal({
   style,
   motion = "rise",
   ghost = false,
+  as: Tag = "div",
 }: {
   step: number;
   children?: ReactNode;
@@ -39,12 +40,14 @@ export function Reveal({
   motion?: "rise" | "wipe" | "fade";
   /** Before its step, a box shows as an empty dashed outline, not a gap. */
   ghost?: boolean;
+  /** The element to render, for a build step that is a list item. */
+  as?: "div" | "li";
 }) {
   const shown = useBuildStep() >= step;
   const motionClass =
     motion === "wipe" ? styles.revealWipe : motion === "fade" ? styles.revealFade : styles.revealRise;
   return (
-    <div
+    <Tag
       className={`${className} ${
         shown ? (step > 1 ? motionClass : "") : ghost ? styles.revealGhost : styles.revealHidden
       }`}
@@ -52,7 +55,7 @@ export function Reveal({
       aria-hidden={shown ? undefined : true}
     >
       {children}
-    </div>
+    </Tag>
   );
 }
 

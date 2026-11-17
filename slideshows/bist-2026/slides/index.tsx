@@ -8,6 +8,7 @@ import {
   IconChevronUp,
   IconFileCode,
   IconMail,
+  IconSum,
   IconWorld,
   type Icon,
 } from "@tabler/icons-react";
@@ -19,11 +20,9 @@ import {
   abmReturns,
   aiProject,
   axiomAccess,
-  axiomGeography,
   axiomRules,
   axiomToday,
   breakdowns,
-  breakdownsFoot,
   budgetProject,
   businessPolicy,
   calibrationEquation,
@@ -33,7 +32,6 @@ import {
   dataAccess,
   epdTrace,
   firmMethod,
-  interfaceToday,
   macroLinks,
   microcosmFlow,
   microcosmResult,
@@ -44,14 +42,12 @@ import {
   rulesCode,
   rulesEntities,
   rulesFacts,
-  runStatus,
   sources,
   tags,
   targetTable,
   tariffBridge,
   tariffDisaggregation,
   tradeEvents,
-  tradePath,
   vatReforms,
   whoWeAre,
   type Logo,
@@ -75,6 +71,16 @@ function Badge({ icon: IconComponent, size }: { icon: Icon; size?: "small" | "la
     <span className={`${styles.badge} ${sizeClass}`}>
       <IconComponent stroke={1.75} aria-hidden="true" />
     </span>
+  );
+}
+
+/** A table's row label with a small bare icon, aligned with the label's first line. */
+function RowLabel({ icon: IconComponent, children }: { icon: Icon; children: ReactNode }) {
+  return (
+    <div className={`${styles.targetTopic} ${styles.rowLabelIcon}`}>
+      <IconComponent stroke={1.75} aria-hidden="true" />
+      <span>{children}</span>
+    </div>
   );
 }
 
@@ -112,7 +118,6 @@ function Frame({
   section,
   title,
   subtitle,
-  status = [],
   children,
   scale = 1.25,
   fill = false,
@@ -120,8 +125,6 @@ function Frame({
   section?: Section;
   title: string;
   subtitle?: string;
-  /** Status tags shown beside the subtitle; "only" limits one to the live deck or the export. */
-  status?: (Tag & { only?: "live" | "export" })[];
   children: ReactNode;
   /** Size of the body relative to the deck's base unit. */
   scale?: number;
@@ -131,26 +134,17 @@ function Frame({
   return (
     <Slide className={styles.deck}>
       <div className={styles.frame}>
-        <header>
+        <header className={styles.frameIn}>
           {section && <PartNav section={section} />}
           <h1 className={styles.title}>{title}</h1>
-          {(subtitle || status.length > 0) && (
+          {subtitle && (
             <div className={styles.subtitleRow}>
-              {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-              {status.map((tag) =>
-                tag.only ? (
-                  <Only key={tag.label} when={tag.only}>
-                    <StatusTag tag={tag} />
-                  </Only>
-                ) : (
-                  <StatusTag key={tag.label} tag={tag} />
-                ),
-              )}
+              <p className={styles.subtitle}>{subtitle}</p>
             </div>
           )}
           <div className={`accent-bar ${styles.bar}`} />
         </header>
-        <div className={`${styles.body} ${fill ? styles.bodyFill : ""}`} style={bodyScale(scale)}>
+        <div className={`${styles.body} ${styles.frameIn} ${fill ? styles.bodyFill : ""}`} style={bodyScale(scale)}>
           {children}
         </div>
       </div>
@@ -368,7 +362,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="In brief" scale={1.12} subtitle="Five parts after this introduction">
+    <Frame section="intro" title="In brief" scale={1.04} subtitle="Five parts after this introduction">
       <ol className={styles.agenda}>
         {parts.slice(1).map((part, index) => (
           <li key={part.key} className={styles.enter} style={enter(index)}>
@@ -403,11 +397,6 @@ function PartDivider({ section }: { section: Section }) {
           <p className={styles.partBig}>{current + 1}</p>
           <h1 className={styles.partName}>{part.title}</h1>
           <p className={styles.partText}>{part.text}</p>
-          {"tag" in part && (
-            <div className={styles.partTag}>
-              <StatusTag tag={part.tag} />
-            </div>
-          )}
           <div className={`accent-bar ${styles.bar}`} />
         </div>
         <ol className={styles.partList}>
@@ -484,11 +473,12 @@ function LogoCell({ org }: { org: Logo }) {
   );
 }
 
-function LogoSection({ title, logos }: { title: string; logos: Logo[] }) {
+/** A labelled row of logos on the slide's one grid of equal cells. */
+function LogoSection({ title, logos, cells }: { title: string; logos: Logo[]; cells: number }) {
   return (
     <section className={styles.logoSection}>
       <h2 className={styles.rowLabel}>{title}</h2>
-      <div className={styles.logoGrid} style={columns(logos.length)}>
+      <div className={styles.logoGrid} style={columns(cells)}>
         {logos.map((org) => (
           <LogoCell key={org.name} org={org} />
         ))}
@@ -499,11 +489,12 @@ function LogoSection({ title, logos }: { title: string; logos: Logo[] }) {
 
 export function WhoSlide() {
   const { facts, government, thinkTanks } = whoWeAre;
+  const cells = Math.max(government.length, thinkTanks.length);
   return (
     <Frame
       section="intro"
       title="Who we are"
-      scale={1.1}
+      scale={1.2}
       subtitle="The organisation, and where our UK work is used or cited"
     >
       <div className={styles.facts}>
@@ -512,13 +503,36 @@ export function WhoSlide() {
             <Badge icon={fact.icon} />
             <div>
               <h3>{fact.title}</h3>
-              <p>{fact.text}</p>
+              <p>
+                {fact.text}
+                {"cite" in fact && fact.cite && (
+                  <>
+                    {" ("}
+                    <a
+                      href={fact.cite.source.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(event) => event.stopPropagation()}
+                      className={`${styles.factCite} pointer-events-auto`}
+                    >
+                      {fact.cite.text}
+                    </a>
+                    {")"}
+                  </>
+                )}
+              </p>
             </div>
           </div>
         ))}
       </div>
-      <LogoSection title="Used or cited in government" logos={government} />
-      <LogoSection title="Think tanks and researchers using our work" logos={thinkTanks} />
+      <div className={styles.logoGroups}>
+        <Reveal step={2}>
+          <LogoSection title="Used or cited in government" logos={government} cells={cells} />
+        </Reveal>
+        <Reveal step={3}>
+          <LogoSection title="Think tanks and researchers using our work" logos={thinkTanks} cells={cells} />
+        </Reveal>
+      </div>
     </Frame>
   );
 }
@@ -530,7 +544,6 @@ export function WhatSlide() {
       title="PolicyEngine UK computes household incomes after taxes and benefits"
       scale={1.28}
       subtitle="Open-source microsimulation: the same households, run twice"
-      status={[runStatus]}
     >
       <Flow steps={modelFlow} builds={[1, 2, 3, 4]} />
     </Frame>
@@ -545,11 +558,10 @@ export function BreakdownsSlide() {
       title="How far results break down"
       scale={1.12}
       subtitle="By income, people, programme and place, from the UK down to local areas"
-      status={[{ label: "policyengine.py outputs", tone: "built" }]}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {breakdowns.map((group, index) => (
-          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+          <Reveal key={group.title} step={index + 1} className={`${styles.card} ${styles.cardCompact}`}>
             <div className={styles.cardTitleRow}>
               <Badge icon={group.icon} />
               <h2>{group.title}</h2>
@@ -562,12 +574,8 @@ export function BreakdownsSlide() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         ))}
-      </div>
-      <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "Thin cells", tone: "caution" }} />
-        <p>{breakdownsFoot}.</p>
       </div>
     </Frame>
   );
@@ -581,7 +589,6 @@ export function EpdSlide() {
       title="The UK–US Economic Prosperity Deal: from model results to households"
       scale={1.25}
       subtitle="The tables of the previous slide, applied to one deal from end to end"
-      status={[tags.noResults]}
     >
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
     </Frame>
@@ -600,9 +607,8 @@ export function LinkSlide() {
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>A model’s result</p>
         <span />
-        <Reveal step={2} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
-          Mapped into
-          <StatusTag tag={tags.toBuild} />
+        <Reveal step={2} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
+          Code in Microcosm UK
         </Reveal>
         <span />
         <Reveal step={3} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
@@ -624,8 +630,9 @@ export function LinkSlide() {
             <Reveal step={2} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
             </Reveal>
-            <Reveal step={2} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+            <Reveal step={2} ghost className={`${styles.cell} ${row.keyTag ? styles.cellTagged : ""}`}>
               {row.key}
+              {row.keyTag && <StatusTag tag={row.keyTag} />}
             </Reveal>
             <Reveal step={3} motion="wipe" className={styles.arrow}>
               <IconArrowRight stroke={2.2} aria-hidden="true" />
@@ -652,17 +659,10 @@ export function LinkSlide() {
         >
           <ul className={styles.list}>
             {breakdowns.map((item) => (
-              <li key={item.title}>
-                {item.title}
-                {"tag" in item && item.tag && <StatusTag tag={item.tag} />}
-              </li>
+              <li key={item.title}>{item.title}</li>
             ))}
           </ul>
         </Reveal>
-      </div>
-      <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "Runs today", tone: "built" }} />
-        <p>{interfaceToday}</p>
       </div>
     </Frame>
   );
@@ -676,7 +676,6 @@ export function BridgeSlide() {
       title="Who bears the cost of trade changes: the 2025 US tariffs"
       scale={1.1}
       subtitle="Inside the trade study: from tariff rates to employees’ earnings"
-      status={[tags.workingPaper, tags.microcosm, { label: "No published results for the UK–US deal", tone: "muted" }]}
     >
       <Flow
         steps={steps}
@@ -726,10 +725,9 @@ export function RulesSlide() {
       title="How the rules are encoded"
       scale={1.2}
       subtitle="Law as dated parameters, formulas and tests"
-      status={[{ label: "Counts at version 2.179.0", tone: "muted" }]}
     >
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
-        <div className={styles.code}>
+        <Reveal step={1} className={styles.code}>
           <p className={styles.codeTitle}>
             <Badge icon={IconFileCode} size="small" />
             {rulesCode.title}
@@ -739,9 +737,9 @@ export function RulesSlide() {
               index % 2 === 1 ? <span key={index}>{part}</span> : part,
             )}
           </pre>
-        </div>
+        </Reveal>
         <div>
-          <div className={styles.vsteps}>
+          <Reveal step={2} className={styles.vsteps}>
             {rulesFacts.map((fact) => (
               <div key={fact.label} className={`${styles.stat} ${styles.statMedium}`}>
                 <Badge icon={fact.icon} size="large" />
@@ -753,8 +751,8 @@ export function RulesSlide() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className={styles.divider}>
+          </Reveal>
+          <Reveal step={3} className={styles.divider}>
             <p className={styles.rowLabel}>Three entities</p>
             <div className={styles.chips}>
               {rulesEntities.map(({ icon, label }) => (
@@ -764,7 +762,7 @@ export function RulesSlide() {
                 </span>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </Frame>
@@ -814,13 +812,13 @@ export function MicrocosmBuildSlide() {
 
 export function CalibrationSlide() {
   const { stats, solver } = calibrationFit;
-  // The first build shows what goes in (targets and records); the second,
-  // how the fitted weights do.
+  // The first build shows the solver's objective; the second, what goes in
+  // (targets and records); the third, how the fitted weights do.
   const [targets, fit, records] = stats;
   const tiles = [
-    { stat: targets, step: 1 },
-    { stat: records, step: 1 },
-    { stat: fit, step: 2 },
+    { stat: targets, step: 2 },
+    { stat: records, step: 2 },
+    { stat: fit, step: 3 },
   ];
   return (
     <Frame
@@ -828,10 +826,6 @@ export function CalibrationSlide() {
       title="Calibration: weights fitted to official statistics"
       scale={1.22}
       subtitle="The certified national build of 7 November 2026"
-      status={[
-        { label: "In-sample fit", tone: "caution" },
-        { label: "Targets at model year 2025", tone: "muted" },
-      ]}
     >
       <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
@@ -881,6 +875,14 @@ const count = (n: number) => n.toLocaleString("en-GB");
 const share = (part: number, whole: number) =>
   part === whole ? "100%" : `${((100 * part) / whole).toFixed(1)}%`;
 
+// The target table builds one publisher group at a time: HMRC, the ONS, the
+// DWP, MHCLG, then the other publishers with the total.
+const publisherSteps = ["HMRC", "ONS", "DWP", "MHCLG"];
+const publisherStep = (source: string) => {
+  const index = publisherSteps.indexOf(source);
+  return index === -1 ? publisherSteps.length + 1 : index + 1;
+};
+
 // The 1,514 targets of the certified build by topic, after the Good Growth
 // Foundation deck's target table: where each binds, who publishes it, how
 // many there are and the share the fitted weights reproduce within 10%.
@@ -897,21 +899,24 @@ function TargetTable() {
         <div className={styles.targetNumber}>Within 10%</div>
       </div>
       {targetTable.map((row) => (
-        <div key={row.topic} className={styles.targetRow}>
-          <div className={styles.targetTopic}>{row.topic}</div>
+        <Reveal key={row.topic} step={publisherStep(row.source)} className={styles.targetRow}>
+          <RowLabel icon={row.icon}>{row.topic}</RowLabel>
           <div>{row.binds}</div>
           <div className={styles.targetSource}>{row.source}</div>
           <div className={styles.targetNumber}>{count(row.count)}</div>
           <div className={styles.targetNumber}>{share(row.within, row.count)}</div>
-        </div>
+        </Reveal>
       ))}
-      <div className={`${styles.targetRow} ${styles.targetTotal}`}>
-        <div>All targets</div>
+      <Reveal step={publisherSteps.length + 1} className={`${styles.targetRow} ${styles.targetTotal}`}>
+        <div className={styles.rowLabelIcon}>
+          <IconSum stroke={1.75} aria-hidden="true" />
+          <span>All targets</span>
+        </div>
         <div />
         <div className={styles.targetSource}>14 publishers</div>
         <div className={styles.targetNumber}>{count(total)}</div>
         <div className={styles.targetNumber}>{share(within, total)}</div>
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -921,7 +926,7 @@ export function TargetsSlide() {
     <Frame
       section="what"
       title="What the weights are fitted to: 1,514 official figures"
-      scale={0.98}
+      scale={0.9}
       subtitle="Every target of the certified 7 November build, by topic, with the share the weights reproduce within 10%"
     >
       <TargetTable />
@@ -974,10 +979,6 @@ export function CalibrationLiveSlide() {
       scale={1.1}
       fill
       subtitle="Every target by publisher and statistic: the official figure beside the fitted value"
-      status={[
-        { label: "Live", tone: "built", only: "live" },
-        { label: "Certified 7 November build", tone: "built" },
-      ]}
     >
       <Only when="live">
         <Embed href={sources.dashboard.href} title={sources.dashboard.label} zoom={0.8} />
@@ -995,11 +996,14 @@ export function BusinessPolicySlide() {
     <Frame
       section="explore"
       title="Business policy: from firm costs to households"
-      scale={1.38}
+      scale={1.22}
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
-      status={[tags.notBuilt, tags.noResults]}
     >
-      <Flow steps={flow} titleLines={2} />
+      <p className={styles.flowStatus}>
+        <StatusTag tag={tags.notDeveloped} />
+        {businessPolicy.status}
+      </p>
+      <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 4]} />
     </Frame>
   );
 }
@@ -1011,7 +1015,6 @@ export function AbmSlide() {
       title="Where an agent-based model could link"
       scale={1.0}
       subtitle="Three kinds of agent-based model, for discussion"
-      status={[tags.notBuilt]}
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Kind of model</p>
@@ -1026,7 +1029,7 @@ export function AbmSlide() {
           return (
             <Fragment key={row.model}>
               <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellLead} ${lead}`}>
-                <Badge icon={row.icon} />
+                <Badge icon={row.icon} size="small" />
                 <div>
                   {row.lead && <p className={styles.leadKicker}>First candidate</p>}
                   {row.model}
@@ -1101,7 +1104,6 @@ export function PilotsSlide() {
       title="Two possible starting points"
       scale={1.26}
       subtitle="For discussion, if there is appetite: one scenario each, passed one way to PolicyEngine"
-      status={[tags.notBuilt, tags.noResults]}
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(2)}>
         {pilots.map((item, index) => (
@@ -1133,11 +1135,11 @@ export function QuestionsSlide() {
     <Frame section="collaborate" title="Questions for discussion" scale={1.12}>
       <ol className={styles.questions}>
         {questions.map((question, index) => (
-          <li key={question.text} className={`${styles.question} ${styles.enter}`} style={enter(index)}>
+          <Reveal as="li" key={question.text} step={index + 1} className={styles.question}>
             <Badge icon={question.icon} />
             <span className={styles.questionNumber}>{index + 1}</span>
             {question.text}
-          </li>
+          </Reveal>
         ))}
       </ol>
     </Frame>
@@ -1191,7 +1193,7 @@ export function CoverageSlide() {
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {coverage.map((group, index) => (
-          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+          <Reveal key={group.title} step={index + 1} className={`${styles.card} ${styles.cardCompact}`}>
             <div className={styles.cardTitleRow}>
               <Badge icon={group.icon} />
               <h2>{group.title}</h2>
@@ -1203,10 +1205,10 @@ export function CoverageSlide() {
                 {group.notModelled}
               </div>
             )}
-          </div>
+          </Reveal>
         ))}
       </div>
-      <div className={styles.access}>
+      <Reveal step={coverage.length + 1} className={styles.access}>
         {dataAccess.map((item) => (
           <div key={item.title} className={styles.accessItem}>
             <Badge icon={item.icon} size="small" />
@@ -1219,7 +1221,7 @@ export function CoverageSlide() {
             </div>
           </div>
         ))}
-      </div>
+      </Reveal>
     </Frame>
   );
 }
@@ -1235,7 +1237,7 @@ export function AxiomRulesSlide() {
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
         {axiomRules.map((rule, index) => (
-          <div key={rule.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+          <Reveal key={rule.title} step={index < 3 ? 1 : 2} className={`${styles.card} ${styles.cardCompact}`}>
             <div className={styles.cardHead}>
               <Badge icon={rule.icon} />
               <StatusTag tag={rule.tag} />
@@ -1243,7 +1245,7 @@ export function AxiomRulesSlide() {
             <h2>{rule.title}</h2>
             <p>{rule.text}</p>
             <div className={styles.cardNote}>{rule.law}</div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </Frame>
@@ -1258,20 +1260,19 @@ export function AxiomTodaySlide() {
       title="What exists today, and how a model could call it"
       scale={1.0}
       subtitle="Rules on the business side: what the Axiom Foundation has encoded, and what it has not"
-      status={[{ label: "As of 16 November 2026", tone: "muted" }]}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {axiomToday.map((group, index) => (
-          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+          <Reveal key={group.title} step={index + 1} className={`${styles.card} ${styles.cardCompact}`}>
             <div className={styles.cardTitleRow}>
               <Badge icon={group.icon} />
               <h2>{group.title}</h2>
             </div>
             <Bullets items={group.items} />
-          </div>
+          </Reveal>
         ))}
       </div>
-      <div className={styles.access}>
+      <Reveal step={axiomToday.length + 1} className={styles.access}>
         {axiomAccess.map((item) => (
           <div key={item.title} className={styles.accessItem}>
             <Badge icon={item.icon} size="small" />
@@ -1284,11 +1285,7 @@ export function AxiomTodaySlide() {
             </div>
           </div>
         ))}
-      </div>
-      <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "On axiom.org", tone: "built" }} />
-        <p>{axiomGeography}</p>
-      </div>
+      </Reveal>
     </Frame>
   );
 }
@@ -1302,7 +1299,6 @@ export function AxiomLiveSlide() {
       scale={1.1}
       fill
       subtitle="axiom.org: encoded rules beside their legal text"
-      status={[{ label: "Live", tone: "built" }]}
     >
       <Embed href={sources.axiomSite.href} title={sources.axiomSite.label} zoom={0.8} />
     </Frame>
@@ -1320,7 +1316,6 @@ export function BudgetSlide() {
       scale={1.1}
       fill
       subtitle={`${measures.title}, and ${calculator.title.toLowerCase()}`}
-      status={[{ label: "Live", tone: "built" }]}
     >
       <Embed
         href={sources.budgetDashboard.href}
@@ -1338,8 +1333,7 @@ export function AiPostSlide() {
       title="Who bears the cost of an AI scenario?"
       scale={1.1}
       fill
-      subtitle="PolicyEngine post, 16 November 2026: distributional and fiscal incidence in the UK"
-      status={[{ label: "Illustrative scenario", tone: "caution" }, aiProject.tag]}
+      subtitle="Distributional and fiscal incidence in the UK"
     >
       <div className={styles.project}>
         <div className={styles.projectSide}>
@@ -1381,9 +1375,8 @@ export function FirmMethodSlide() {
     <Frame
       section="projects"
       title="How we built synthetic UK firms"
-      scale={0.95}
+      scale={0.92}
       subtitle="Firm-level VAT microsimulation: published tables in, calibrated firm records out"
-      status={[tags.workingPaper]}
     >
       <div className={styles.method}>
         <div>
@@ -1433,70 +1426,34 @@ export function FirmMethodSlide() {
   );
 }
 
-/** What the firm model costs: five reforms by lever, statically, then turnover responses under assumed elasticities. */
+/** What the firm model costs: five reforms by lever, statically, each row marked with its lever's icon. */
 export function VatReformsSlide() {
-  const { rows, elasticities, dynamic, responseModel, responseReading, base } = vatReforms;
+  const { rows } = vatReforms;
   return (
     <Frame
       section="projects"
-      title="What the firm model can cost: thresholds, tapers and responses"
-      scale={1.06}
+      title="What the firm model can cost: thresholds, tapers and reduced rates"
+      scale={1.2}
       subtitle="Five VAT reforms on the synthetic firms, by the lever each one moves"
-      status={[tags.workingPaper]}
     >
       <div className={styles.reforms}>
-        <div>
-          <p className={styles.rowLabel}>Static cost, £m a year, 2023–24, relative to the £85,000 threshold</p>
-          <div className={styles.reformTable}>
-            <div className={`${styles.reformRow} ${styles.targetHead}`}>
-              <div>Reform</div>
-              <div>Lever</div>
-              <div className={styles.targetNumber}>£m</div>
-              <div>Firms</div>
-            </div>
-            {rows.map((row, index) => (
-              <div key={row.reform} className={`${styles.reformRow} ${styles.enter}`} style={enter(index)}>
-                <div className={styles.targetTopic}>{row.reform}</div>
-                <div className={styles.targetSource}>{row.lever}</div>
-                <div className={`${styles.targetNumber} ${styles.reformCost}`}>{row.cost}</div>
-                <div>{row.firms}</div>
-              </div>
-            ))}
+        <p className={styles.rowLabel}>Static cost, £m a year, 2023–24, relative to the £85,000 threshold</p>
+        <div className={styles.reformTable}>
+          <div className={`${styles.reformRow} ${styles.targetHead}`}>
+            <div>Reform</div>
+            <div>Lever</div>
+            <div className={styles.targetNumber}>£m</div>
+            <div>Firms</div>
           </div>
+          {rows.map((row, index) => (
+            <Reveal key={row.reform} step={index + 1} className={styles.reformRow}>
+              <RowLabel icon={row.icon}>{row.reform}</RowLabel>
+              <div className={styles.targetSource}>{row.lever}</div>
+              <div className={`${styles.targetNumber} ${styles.reformCost}`}>{row.cost}</div>
+              <div>{row.firms}</div>
+            </Reveal>
+          ))}
         </div>
-        <div className={styles.responses}>
-          <p className={styles.rowLabel}>Turnover responses at the threshold</p>
-          <p className={styles.responsesText}>{responseModel}.</p>
-          <div className={styles.reformTable}>
-            <div className={`${styles.dynamicRow} ${styles.targetHead}`}>
-              <div>£m a year, by elasticity</div>
-              <div className={styles.targetNumber}>Static</div>
-              {elasticities.map((value) => (
-                <div key={value} className={styles.targetNumber}>
-                  {value}
-                </div>
-              ))}
-            </div>
-            {dynamic.map((row) => (
-              <div key={row.reform} className={styles.dynamicRow}>
-                <div className={styles.targetTopic}>{row.reform}</div>
-                {row.costs.map((cost, index) => (
-                  <div key={elasticities[index - 1] ?? "static"} className={styles.targetNumber}>
-                    {cost}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-          <p className={styles.responsesText}>{responseReading}</p>
-        </div>
-      </div>
-      <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "Elasticity assumed", tone: "caution" }} />
-        <p>
-          The elasticity e is assumed, from 0.05 to 0.32 with 0.17 central, not estimated from the synthetic data.
-          In-scope VAT base above the threshold: {base}.
-        </p>
       </div>
     </Frame>
   );
@@ -1509,14 +1466,13 @@ export function TradeSlide() {
       title="Who bears the cost of trade changes? Four UK episodes, 2021–26"
       scale={1.12}
       subtitle="The trade study: price and earnings changes from four trade events, traced to households"
-      status={[tags.workingPaper, tags.microcosm]}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {tradeEvents.map((event, index) => (
-          <div
+          <Reveal
             key={event.title}
-            className={`${styles.card} ${styles.episodeCard} ${event.next ? styles.episodeNext : ""} ${styles.enter}`}
-            style={enter(index)}
+            step={index + 1}
+            className={`${styles.card} ${styles.episodeCard} ${event.next ? styles.episodeNext : ""}`}
           >
             <div className={styles.cardHead}>
               <Badge icon={event.icon} size="large" />
@@ -1531,12 +1487,8 @@ export function TradeSlide() {
                 <IconArrowRight stroke={2.2} aria-hidden="true" />
               </p>
             )}
-          </div>
+          </Reveal>
         ))}
-      </div>
-      <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "Method", tone: "built" }} />
-        <p>{tradePath}</p>
       </div>
     </Frame>
   );

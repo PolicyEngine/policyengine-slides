@@ -23,15 +23,18 @@
   flex-direction: column;
 }
 
-/* The talk's six parts along the top, as tall as the old part label, so
-   the slide bodies below keep their place. */
+/* The talk's six parts as a header row along the top, set off from the
+   slide title by a thin horizontal rule. */
 .partNav {
   display: flex;
   height: calc(var(--u) * 1.7);
+  box-sizing: content-box;
   align-items: center;
   justify-content: space-between;
   gap: calc(var(--u) * 1.2);
-  margin-bottom: calc(var(--u) * 0.6);
+  padding-bottom: calc(var(--u) * 0.7);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: calc(var(--u) * 2.2);
   color: var(--color-gray-600);
   font-size: calc(var(--u) * 1.15);
   font-weight: 500;
@@ -151,6 +154,13 @@
   animation: wipe 300ms ease-out both;
 }
 
+/* Every slide's title and body come on with a short, gentle fade-up. The
+   fill is "backwards" only, so no transform stays on the body afterwards
+   (a live embed's full-screen view needs none on its ancestors). */
+.frameIn {
+  animation: rise 250ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
 /* A row of items entering one after another when the slide comes on. */
 .enter {
   animation: slide 340ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -194,6 +204,7 @@
   .revealRise,
   .revealFade,
   .revealWipe,
+  .frameIn,
   .enter {
     animation: none;
   }
@@ -885,10 +896,14 @@
   vertical-align: middle;
 }
 
-.rowsHeadTag {
+/* A slide's one status line above a flow: a tag, then a short reason. */
+.flowStatus {
   display: flex;
   align-items: center;
-  gap: calc(var(--u) * 0.7);
+  gap: calc(var(--u) * 0.8);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.3;
 }
 
 .cell {
@@ -944,7 +959,8 @@
   text-wrap: pretty;
 }
 
-/* ---------- Who we are: facts across the top, then two rows of logos ---------- */
+/* ---------- Who we are: three facts across the top, then two rows of logos
+   on one grid of equal cells ---------- */
 
 .facts {
   display: grid;
@@ -954,8 +970,8 @@
 
 .fact {
   display: flex;
-  align-items: center;
-  gap: calc(var(--u) * 1.1);
+  align-items: flex-start;
+  gap: calc(var(--u) * 1);
 }
 
 .fact + .fact {
@@ -965,30 +981,46 @@
 
 .fact h3 {
   color: var(--pe-dark);
-  font-size: calc(var(--u) * 1.8);
+  font-size: calc(var(--u) * 1.6);
   font-weight: 600;
   line-height: 1.2;
 }
 
 .fact p {
-  margin-top: calc(var(--u) * 0.15);
+  margin-top: calc(var(--u) * 0.2);
   color: var(--color-gray-700);
-  font-size: calc(var(--u) * 1.3);
+  font-size: calc(var(--u) * 1.2);
   line-height: 1.3;
   text-wrap: pretty;
 }
 
-.logoSection {
-  border-top: 1px solid var(--line);
-  padding-top: calc(var(--u) * 1.1);
+/* A citation inside a fact's line: the same text, underlined as a link. */
+.factCite {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.15em;
 }
 
-/* Equal cells: every mark is centred in a box of one height, with its
-   caption on one baseline below. */
+.logoGroups {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.4);
+}
+
+.logoSection {
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 1);
+}
+
+/* Equal cells on one grid for both rows: every mark is centred in a box of
+   one height (about 62px at 1920), with a one-line caption on one baseline
+   below. Each mark's own height ("height" in content.ts) sets its optical
+   weight inside the box. */
 .logoGrid {
   display: grid;
   gap: calc(var(--u) * 1.2);
-  margin-top: calc(var(--u) * 0.7);
+  margin-top: calc(var(--u) * 1);
 }
 
 .logoCell {
@@ -1001,13 +1033,14 @@
 .logoMark {
   display: flex;
   width: 100%;
-  height: calc(var(--u) * 4.6);
+  height: calc(var(--u) * 3.1);
   align-items: center;
   justify-content: center;
 }
 
 .logoMark img {
-  max-width: 82%;
+  max-width: 90%;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -1020,20 +1053,23 @@
 /* A name set as text, where we hold no logo file. */
 .wordmark {
   color: var(--pe-dark);
-  font-size: calc(var(--u) * 2.2);
+  font-size: calc(var(--u) * 1.75);
   font-weight: 700;
   letter-spacing: -0.015em;
   white-space: nowrap;
 }
 
 .logoCaption {
-  margin-top: calc(var(--u) * 0.5);
+  width: 100%;
+  margin-top: calc(var(--u) * 0.6);
+  overflow: hidden;
   color: var(--color-gray-700);
-  font-size: calc(var(--u) * 1.15);
+  font-size: calc(var(--u) * 1.05);
   font-weight: 500;
   line-height: 1.3;
   text-align: center;
-  text-wrap: balance;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pairTight {
@@ -1807,17 +1843,6 @@
   line-height: 1.3;
 }
 
-.rowsFoot {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--u) * 0.9);
-  border-top: 1px solid var(--line);
-  padding-top: calc(var(--u) * 1.1);
-  color: var(--color-gray-700);
-  font-size: calc(var(--u) * 1.3);
-  line-height: 1.3;
-}
-
 /* A cell with a doability tag under its text. */
 .cellTagged {
   flex-direction: column;
@@ -1989,6 +2014,23 @@
   text-transform: uppercase;
 }
 
+/* A row label with a small bare teal icon in front, centred on the label's
+   first line; the text keeps the row's baseline, and wrapped lines align
+   with the first. */
+.rowLabelIcon {
+  position: relative;
+  padding-left: 1.75em;
+}
+
+.rowLabelIcon svg {
+  position: absolute;
+  top: 0.1em;
+  left: 0;
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--pe-teal);
+}
+
 .targetTopic {
   color: var(--pe-dark);
   font-weight: 600;
@@ -2010,13 +2052,10 @@
   font-weight: 700;
 }
 
-/* ---------- VAT reforms: a cost table by lever, then responses ---------- */
+/* ---------- VAT reforms: one cost table by lever ---------- */
 
 .reforms {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-  align-items: start;
-  gap: calc(var(--u) * 3);
+  width: 100%;
 }
 
 .reforms .rowLabel {
@@ -2027,8 +2066,7 @@
   border-top: 2px solid var(--pe-teal);
 }
 
-.reformRow,
-.dynamicRow {
+.reformRow {
   display: grid;
   align-items: baseline;
   gap: calc(var(--u) * 1.1);
@@ -2043,10 +2081,6 @@
   grid-template-columns: 2.6fr 1.25fr 0.7fr 1.6fr;
 }
 
-.dynamicRow {
-  grid-template-columns: 2.3fr repeat(4, 0.75fr);
-}
-
 .reformTable .targetHead {
   border-top: 0;
   padding: calc(var(--u) * 0.7) 0 calc(var(--u) * 0.5);
@@ -2056,23 +2090,6 @@
 .reformCost {
   color: var(--pe-dark);
   font-weight: 700;
-}
-
-.responses {
-  border-left: 1px solid var(--line);
-  padding-left: calc(var(--u) * 2.4);
-}
-
-.responsesText {
-  margin: calc(var(--u) * 0.2) 0 calc(var(--u) * 1);
-  color: var(--color-gray-700);
-  font-size: calc(var(--u) * 1.35);
-  line-height: 1.35;
-  text-wrap: pretty;
-}
-
-.reformTable + .responsesText {
-  margin-top: calc(var(--u) * 1);
 }
 
 /* ---------- Live dashboard: the export's page in place of the live one ---------- */
@@ -2257,10 +2274,6 @@
   font-size: calc(var(--u) * 2);
   line-height: 1.35;
   text-wrap: pretty;
-}
-
-.partTag {
-  margin-top: calc(var(--u) * 1.2);
 }
 
 .partList {

@@ -30,12 +30,14 @@
 
 import {
   IconAffiliate,
+  IconArrowBarUp,
   IconArrowsExchange,
   IconArrowsSplit,
   IconBasket,
   IconBolt,
   IconBriefcase,
   IconBuildingFactory2,
+  IconBuilding,
   IconBuildingBank,
   IconCalendar,
   IconCalendarEvent,
@@ -64,6 +66,8 @@ import {
   IconMap2,
   IconMapPin,
   IconMathFunction,
+  IconMinus,
+  IconPercentage,
   IconPinned,
   IconPresentationAnalytics,
   IconReceiptTax,
@@ -110,8 +114,11 @@ export const sources = {
     label: "Microcosm data pipeline",
     href: "https://github.com/PolicyEngine/microcosm",
   },
+  // Ahmadi, V., Ghenis, M., Woodruff, N., Makarchuk, P. and Volk, A. (2026).
+  // policyengine: A Microsimulation Tool for Tax-Benefit Policy Analysis.
+  // Journal of Open Source Software, 11(125), 11115.
   joss: {
-    label: "Ahmadi et al. (2026), JOSS",
+    label: "Ahmadi et al. (2026), Journal of Open Source Software",
     href: "https://doi.org/10.21105/joss.11115",
   },
   trade: {
@@ -333,30 +340,22 @@ export type Tone = "built" | "muted" | "caution";
 export type Tag = { label: string; tone: Tone };
 
 // Status tags. Teal: exists today. Grey: an idea to explore (not built), not yet
-// modelled, restricted or outside the model. Amber: experimental,
-// proposed, a working paper or illustrative; on the Axiom Foundation slides,
+// modelled, restricted or outside the model. Amber: proposed, a working paper or illustrative; on the Axiom Foundation slides,
 // also partly encoded, encoded with its checks paused, incomplete or a preview.
 const tag = (label: string, tone: Tone): Tag => ({ label, tone });
 export const tags = {
   notBuilt: tag("Idea to explore", "muted"),
-  noResults: tag("Not yet modelled", "muted"),
-  experimental: tag("Experimental", "caution"),
   proposed: tag("Proposal", "caution"),
   workingPaper: tag("Working paper", "caution"),
-  // The trade study's rerun (uk-trade-shock-study PR #46, 10dc18826, open, not
-  // merged; README and paper/sections/results.tex): every microsimulation
-  // runs on policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the
-  // certified Microcosm UK 2024-25 build. The tariff stage runs under 2026-27
-  // rules; the energy episode's main run uses 2023-24 rules, and 2022-23
-  // rules only for a comparison.
-  microcosm: tag("Microcosm UK", "built"),
   // Doability markers on the part 5 slides (see the verification notes in
   // NOTES.md): what the existing code takes, what needs a mapping between
   // another model's sectors and SIC or COICOP, and what needs a small change.
-  canToday: tag("Can take today", "built"),
+  inTradeCode: tag("In the trade study’s code", "built"),
   mapping: tag("Needs a sector mapping", "muted"),
   extension: tag("Small extension", "caution"),
   toBuild: tag("Not built yet", "muted"),
+  inData: tag("In the data", "built"),
+  notDeveloped: tag("Not developed yet", "muted"),
   // The Axiom Foundation slides (axiomRules and axiomToday below): "Encoded"
   // only where a RuleSpec module exists on rulespec-uk or rulespec-us main,
   // with companion tests that CI runs before a merge. A module on the public
@@ -473,12 +472,14 @@ export type Logo = {
   caption?: string;
 };
 
-// Layout: the three facts run across the top; below, two rows of equal
-// cells, one organisation each, with a short caption under every mark.
-// "height" is each mark's height in base units (16px at 1920 wide), chosen
-// so that square and wide marks carry similar visual weight, none taller
-// than about 70px at 1920. The government captions keep "mentions" for HM
-// Treasury, the OBR and Parliament, and name the record that does so.
+// Layout: the three facts stacked on the left; on the right, two rows on
+// one grid of equal cells, one organisation each, with a one-line caption
+// under every mark. "height" is each mark's height in base units, inside a
+// box 3.1 units tall (about 62px at 1920 wide); square marks (No 10, CPS,
+// NIESR) are set lower than wide wordmarks so that all carry similar
+// visual weight. The government captions name the record that mentions
+// PolicyEngine; the think-tank captions are names only (the NiGEM link is
+// in NOTES.md).
 export const whoWeAre = {
   facts: [
     {
@@ -487,7 +488,12 @@ export const whoWeAre = {
       text: "Free tools; UK work funded by Nuffield Foundation grants",
     },
     { icon: IconLockOpen, title: "Open source", text: "Rules, data pipeline and analysis code" },
-    { icon: IconWorld, title: "UK and US models", text: "One Python package: policyengine.py" },
+    {
+      icon: IconWorld,
+      title: "UK and US models",
+      text: "One Python package, policyengine.py",
+      cite: { text: "Ahmadi et al., 2026, Journal of Open Source Software", source: sources.joss },
+    },
   ],
   government: [
     {
@@ -495,34 +501,34 @@ export const whoWeAre = {
       logo: "/logos/orgs/10-downing-street.png",
       width: 1280,
       pixelHeight: 1280,
-      height: 4.2,
+      height: 2.7,
       source: sources.no10,
-      caption: "Its data science team built a microsimulation tool on PolicyEngine",
+      caption: "Built a tool on PolicyEngine",
     },
     {
       name: "HM Treasury",
       height: 3.4,
       source: sources.hmt,
-      caption: "Mentions PolicyEngine in a transparency record",
+      caption: "Transparency record",
     },
     {
       name: "Office for Budget Responsibility",
       logo: "/logos/orgs/office-for-budget-responsibility.png",
       width: 679,
       pixelHeight: 294,
-      height: 4,
+      height: 2.9,
       darken: true,
       source: sources.obr,
-      caption: "Mentions PolicyEngine in its annual report",
+      caption: "Annual report 2025–26",
     },
     {
       name: "House of Lords",
       logo: "/logos/orgs/house-of-lords.svg",
       width: 755,
       pixelHeight: 200,
-      height: 3,
+      height: 2.2,
       source: sources.hansard,
-      caption: "PolicyEngine mentioned in a Lords debate",
+      caption: "Cited in debate",
     },
   ] as Logo[],
   thinkTanks: [
@@ -531,7 +537,7 @@ export const whoWeAre = {
       logo: "/logos/orgs/new-economics-foundation.png",
       width: 567,
       pixelHeight: 241,
-      height: 4,
+      height: 2.8,
       source: sources.nef,
       caption: "New Economics Foundation",
     },
@@ -540,7 +546,7 @@ export const whoWeAre = {
       logo: "/logos/orgs/good-growth-foundation.png",
       width: 1500,
       pixelHeight: 413,
-      height: 3,
+      height: 2.4,
       darken: true,
       caption: "Good Growth Foundation",
     },
@@ -549,7 +555,7 @@ export const whoWeAre = {
       logo: "/logos/orgs/centre-for-policy-studies.png",
       width: 223,
       pixelHeight: 223,
-      height: 4.4,
+      height: 2.6,
       source: sources.cps,
       caption: "Centre for Policy Studies",
     },
@@ -558,16 +564,16 @@ export const whoWeAre = {
       logo: "/logos/orgs/niesr.png",
       width: 400,
       pixelHeight: 400,
-      height: 4.2,
+      height: 2.7,
       source: sources.niesr,
-      caption: "NIESR, with its NiGEM model",
+      caption: "NIESR",
     },
     {
       name: "WPI Economics",
       logo: "/logos/orgs/wpi-economics.svg",
       width: 196,
       pixelHeight: 60,
-      height: 3.1,
+      height: 2.6,
       caption: "WPI Economics",
     },
   ] as Logo[],
@@ -582,7 +588,7 @@ export const whoWeAre = {
 // message, with the slide's subtitle.
 // One flow for what the model is and how a run works (the former "computes
 // household incomes" and "how a reform or a scenario is run" slides, merged;
-// the run's own sources are in the comment above runStatus below). The step
+// the run's own sources are in the comment on "Mostly static by default" below). The step
 // labels keep the message that spending is an input and income the result.
 export const modelFlow = [
   {
@@ -709,8 +715,14 @@ export const tradeEvents = [
 // category; earnings changes against employees' earnings. The line does not
 // say "through taxes and benefits": that holds for the tariff and energy
 // episodes, not for the India duty reductions.
-export const tradePath =
-  "Every episode is a price or earnings change, applied to each Microcosm UK household by what it spends or earns";
+// The line is said aloud (NOTES.md, slide 22), not shown on the slide.
+// Microcosm UK (said aloud on slides 22 and 23): the trade study's rerun
+// (uk-trade-shock-study PR #46, 10dc18826, open, not merged; README and
+// paper/sections/results.tex): every microsimulation runs on
+// policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the certified
+// Microcosm UK 2024-25 build. The tariff stage runs under 2026-27 rules; the
+// energy episode's main run uses 2023-24 rules, and 2022-23 rules only for a
+// comparison.
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
 // 06c8bbc on the enhanced FRS, and the rerun (PR #46, 10dc18826) reports a
@@ -724,7 +736,7 @@ export const tradePath =
 //   supply-chain conditions). These facts are in NOTES.md, not on the slide;
 // - "Deal schedule in our study": uk-trade-shock-study 06c8bbc has a deal
 //   schedule and reports no results for it (see tariffBridge below);
-// - static, no general equilibrium: see modelFlow and runStatus below;
+// - static, no general equilibrium: see modelFlow and "Mostly static by default" below;
 // - the feedback arrow is the macro-micro loop on the macro links slide,
 //   which is not built (see macroLinks below).
 // The standard GTAP model has one wage per labour type and its standard
@@ -744,7 +756,7 @@ export const epdTrace = {
       icon: IconArrowsExchange,
       owner: "Agreed mapping",
       title: "Sector mapping",
-      text: "Another model’s sectors and products to SIC and COICOP divisions",
+      text: "Another model’s sectors and products to the SIC and COICOP codes in the data",
       tag: tags.toBuild,
       dashed: true,
     },
@@ -773,7 +785,8 @@ export const epdTrace = {
 // decile_impact.py and intra_decile_impact.py; poverty.py; inequality.py;
 // program_statistics.py (the 14 programmes in UK_PROGRAMS, hence "taxes and
 // benefits"); uk_geography_disclosure.py (region); constituency_impact.py
-// and local_authority_impact.py (the local-area file is experimental).
+// and local_authority_impact.py (constituencies and local authorities come
+// from the certified local-area file).
 // Spending is held by COICOP division (policyengine-uk d3db7ac,
 // variables/input/consumption/petrol_spending.py). No mapping from GTAP
 // sectors exists in our code: the trade study assigns by two-digit SIC
@@ -785,11 +798,37 @@ export const epdTrace = {
 // One economy-wide wage (a quantitative trade model of the Caliendo-Parro
 // kind: multi-sector, input-output links, one wage per country) needs no
 // sector or occupation mapping: the same earnings change in every SIC
-// division is what apply_shocks already takes, hence "Can take today". Such a
+// division is what apply_shocks already takes, hence "In the trade study’s code". Such a
 // model reports a real wage; PolicyEngine needs the nominal wage and prices
 // separately, or the real wage alone, so prices are not counted twice (said
 // in NOTES.md). Sector output and trade flows, which these models also
 // report, have no use in PolicyEngine and are not on the slide.
+// The codes are already in the data (policyengine-uk d3db7ac; microcosm main
+// 5499382): sic_industry_division, carried from the FRS, with the SPI
+// copies taking theirs from an FRS adult of the same drawn occupation
+// (stage spi_employment_shell); soc2020_major_group (FRS) and
+// soc2020_sub_major_group (drawn from the APS, stage aps_occupation), with
+// employment by occupation calibrated to ONS APS figures (the "Employment by
+// occupation" row of targetTable; microcosm changelog 1490); household
+// spending by COICOP division from the LCFS (variables/input/consumption/,
+// e.g. food_and_non_alcoholic_beverages_consumption, transport_consumption;
+// microcosm changelog 1278 and 1113). What is not built is the crosswalk
+// from another model's sectors, products or labour types to these codes;
+// hence "In the data" on the codes; that the crosswalk is the piece to build
+// is said aloud (NOTES.md, slide 25), not shown on the slide.
+
+type LinkRow = {
+  icon: Icon;
+  result: string;
+  from: string;
+  /** The code in Microcosm UK a result is mapped to. */
+  key: string;
+  /** Set where the code is already in the data. */
+  keyTag?: Tag;
+  assigned: string;
+  tag: Tag;
+};
+
 export const tariffDisaggregation = {
   rows: [
     {
@@ -797,14 +836,16 @@ export const tariffDisaggregation = {
       result: "Earnings and jobs by sector",
       from: "Agent-based model; jobs by sector from a CGE model",
       key: "Two-digit SIC division",
+      keyTag: tags.inData,
       assigned: "Employees in that sector; job losses drawn at random",
-      tag: tags.canToday,
+      tag: tags.inTradeCode,
     },
     {
       icon: IconUser,
       result: "Wages by labour type",
       from: "CGE trade model of the GTAP kind",
       key: "Occupation group",
+      keyTag: tags.inData,
       assigned: "Employees in those occupations",
       tag: tags.extension,
     },
@@ -814,23 +855,24 @@ export const tariffDisaggregation = {
       from: "Multi-sector quantitative trade model",
       key: "None: the same change in every sector",
       assigned: "All employees",
-      tag: tags.canToday,
+      tag: tags.inTradeCode,
     },
     {
       icon: IconShoppingCart,
       result: "Prices",
       from: "Partial-equilibrium, CGE and quantitative trade models",
       key: "COICOP spending division",
+      keyTag: tags.inData,
       assigned: "Households, by what they spend",
       tag: tags.mapping,
     },
-  ],
+  ] as LinkRow[],
   breakdowns: [
     { icon: IconChartBar, title: "Income deciles" },
     { icon: IconChartPie, title: "Poverty and inequality" },
     { icon: IconReceiptTax, title: "Taxes and benefits" },
     { icon: IconMap, title: "Regions" },
-    { icon: IconMapPin, title: "Local areas", tag: tags.experimental },
+    { icon: IconMapPin, title: "Constituencies and local authorities" },
   ],
 };
 
@@ -868,9 +910,12 @@ export const tariffBridge = {
 // parameters/gov/contrib/policyengine/employer_ni/*_incidence.yaml and
 // budget/{consumer,corporate}_incident_tax_change.yaml allocate by
 // consumption and by shareholding, booked as tax revenue; a non-tax cost
-// change needs an extension, which is not built. The three channels to
+// change needs an extension, which is not built: hence one "Not developed
+// yet" tag above the flow (the subtitle row carries no tags; a tag on each
+// PolicyEngine step did not fit beside the step numbers). The three channels to
 // households (prices, pay and jobs, profits) are the text of the third step.
 export const businessPolicy = {
+  status: "A possible extension of the business-tax allocation",
   flow: [
     {
       icon: IconBolt,
@@ -958,12 +1003,12 @@ export const aiShock = {
 // parameters/gov/economic_assumptions/yoy_growth.yaml, and a reform to a
 // growth rate re-projects the data
 // (tests/test_uprating_inputs_reach_data.py). No forecasting-model scenario
-// has been run this way.
+// has been run this way, so the card is tagged "Idea to explore", as the loop is.
 export const macroLinks = [
   {
     icon: IconTrendingUp,
     title: "A forecast scenario",
-    tags: [{ label: "Built, not yet run", tone: "muted" } as Tag],
+    tags: [tags.notBuilt],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
@@ -1014,7 +1059,7 @@ export const abmQuestions = [
     detail: "A shock to one product, passed along the firm network",
     behaviour: "Suppliers and buyers lose inputs, cut output and jobs",
     passes: "Job and earnings losses by sector",
-    tag: tags.canToday,
+    tag: tags.notDeveloped,
     lead: true,
   },
   {
@@ -1023,7 +1068,7 @@ export const abmQuestions = [
     detail: "Expectations and uncertainty at its core",
     behaviour: "Firms’ investment, output and hiring paths by sector",
     passes: "Jobs and earnings by sector, one year at a time",
-    tag: tags.canToday,
+    tag: tags.notDeveloped,
     lead: false,
   },
   {
@@ -1032,12 +1077,13 @@ export const abmQuestions = [
     detail: "In the style of Dosi, Fagiolo and Roventini (2010)",
     behaviour: "Firms adopt technology, enter and exit over the cycle",
     passes: "Paths of jobs and wages by sector, one year at a time",
-    tag: tags.canToday,
+    tag: tags.notDeveloped,
     lead: false,
   },
 ];
 
-// Doability of each input, checked on 16 November 2026 against
+// Every input on the slide carries "Not developed yet": the link from an
+// agent-based model is not developed. Doability of each input, checked on 16 November 2026 against
 // uk-trade-shock-study PR #46 (10dc18826), tariff_pipeline/shocks.py and
 // runner.py: apply_shocks takes persons with employment_income, sic_division,
 // age and weight, and applies wage cuts or job losses by two-digit SIC
@@ -1088,7 +1134,7 @@ export const dataAccess = [
   },
 ];
 
-// The Axiom Foundation's rules as code (slides 14 and 15). The Axiom
+// The Axiom Foundation's rules as code (slides 15 and 16). The Axiom
 // Foundation is not PolicyEngine: it publishes open, machine-readable
 // encodings of the world's rules, starting with tax and benefit policy (the
 // descriptor on axiom.org/about). Max Ghenis is CEO of both the Axiom
@@ -1188,7 +1234,7 @@ export const axiomRules = [
 
 // The relationship (axiom.org/about) is in NOTES for the presenter, not on the slide.
 
-// What exists today and how a model could call it (slide 15). Same commits
+// What exists today and how a model could call it (slide 16). Same commits
 // as axiomRules, read 16 November 2026. The cards give examples.
 // - Encoded: the five UK modules above, with the status each carries there;
 //   SSCBA 1992 s.166 (statutory maternity pay's earnings-related rate) and
@@ -1286,8 +1332,7 @@ export const axiomAccess = [
 // Canada, Israel, New Zealand, the UK and the US (Denmark appears with
 // documents only). Never "covers": Israel's README calls its content "a
 // pilot, not coverage".
-export const axiomGeography =
-  "The Axiom Foundation’s site shows encoded rules from six countries: the US, UK, Belgium, Canada, New Zealand and Israel.";
+// The line is said aloud (NOTES.md, slide 16), not shown on the slide.
 
 // Two possible starting points, for discussion if there is appetite; no
 // collaboration is assumed. Neither has published results: the trade study
@@ -1407,10 +1452,9 @@ export const rulesEntities = [
 //   labour_supply_responses/{income,substitution}_elasticity.yaml are 0.
 // - A shock changes inputs, not rules: uk-trade-shock-study 06c8bbc,
 //   uk_trade_shock_study/runner.py (baseline and shocked simulations).
-// Shown as a status tag beside the subtitle. The reform example
+// Said aloud (NOTES.md, slide 5), not shown as a tag. The reform example
 // (gov.hmrc.income_tax.rates.uk[0].rate: 0.21) and what comes from outside
 // the model (firms' decisions, general equilibrium) are in NOTES.md.
-export const runStatus: Tag = { label: "Mostly static by default", tone: "muted" };
 
 // How far results break down (slide 6, after how a run works). Every item is
 // an output of policyengine.py 810a59e or a variable of policyengine-uk
@@ -1446,8 +1490,10 @@ export const runStatus: Tag = { label: "Mostly static by default", tone: "muted"
 //   (data/uk_geography/constituencies_2024.csv, 2024 boundaries); local
 //   authorities: 361 (local_authorities_2023.csv). The bundle routes both to
 //   the separate local-area file (data/bundle/manifest.json,
-//   regional_release_kind "local_area"), labelled experimental, as elsewhere
-//   in the deck. The older constituency_impact.py and
+//   regional_release_kind "local_area"). Bundle 6.19.0 certifies that cut,
+//   microcosm-uk-2024-25-dense-20261107T173210Z-38605444, alongside the national
+//   build (policyengine.py CHANGELOG, the policyengine-uk 2.174.1
+//   certification entry), so the slide shows no "Experimental" tag. The older constituency_impact.py and
 //   local_authority_impact.py outputs are deprecated because they have no
 //   disclosure control.
 // - The foot: the disclosure defaults (disclosure/schema.py,
@@ -1490,14 +1536,14 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
     title: "By place",
     items: [
       { text: "The UK, and its 12 regions and nations (ITL1)" },
-      { text: "650 parliamentary constituencies", tag: tags.experimental },
-      { text: "361 local authorities", tag: tags.experimental },
+      { text: "650 parliamentary constituencies" },
+      { text: "361 local authorities" },
     ],
   },
 ];
 
-export const breakdownsFoot =
-  "Area results are published only with at least 10 survey households behind each number, with intervals; finer cells, such as sector by region, rest on fewer records still";
+// Thin cells: area results are published only with at least 10 survey
+// households behind each number; this is said aloud (NOTES.md, slide 6).
 
 // Microcosm UK 2024-25: what the pipeline builds.
 // The slide describes the certified file. Its build
@@ -1664,6 +1710,8 @@ export const calibrationFit = {
 // Within 10%: 761 + 365 + 210 + 82 + 77 = 1,495 of 1,514, the dashboard's
 // 98.7%. The component adds the rows up for the total row.
 export type TargetRow = {
+  /** The publisher's icon: one per publisher group. */
+  icon: Icon;
   topic: string;
   binds: string;
   source: string;
@@ -1673,20 +1721,20 @@ export type TargetRow = {
 };
 
 export const targetTable: TargetRow[] = [
-  { topic: "Incomes by band (Survey of Personal Incomes)", binds: "UK, nations, English regions", source: "HMRC", count: 568, within: 553 },
-  { topic: "Capital gains and income tax liabilities", binds: "UK, nations, English regions", source: "HMRC", count: 189, within: 189 },
-  { topic: "Child Benefit, salary sacrifice, other tax totals", binds: "UK", source: "HMRC", count: 19, within: 19 },
-  { topic: "Population by age and sex", binds: "UK, nations, English regions", source: "ONS", count: 179, within: 179 },
-  { topic: "Employment by occupation", binds: "UK, nations, English regions", source: "ONS", count: 159, within: 159 },
-  { topic: "Household composition", binds: "UK, nations, English regions", source: "ONS", count: 22, within: 22 },
-  { topic: "Land values and household spending", binds: "UK", source: "ONS", count: 5, within: 5 },
-  { topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 103, within: 100 },
-  { topic: "State Pension and Pension Credit", binds: "Great Britain, Wales, Scotland, English regions", source: "DWP", count: 70, within: 70 },
-  { topic: "Two-child limit, benefit cap, other benefits", binds: "Great Britain, England, Wales", source: "DWP", count: 40, within: 40 },
-  { topic: "Council tax dwellings by band", binds: "England, English regions", source: "MHCLG", count: 82, within: 82 },
-  { topic: "Tax receipts and benefit spending", binds: "UK, Great Britain, England and Wales", source: "OBR", count: 16, within: 16 },
-  { topic: "Student loans, funded childcare, school pupils", binds: "England, Wales, UK", source: "SLC, DfE, ISC", count: 21, within: 20 },
-  { topic: "Devolved council tax, buses, other totals", binds: "Nations, English regions", source: "DfT and devolved bodies", count: 41, within: 41 },
+  { icon: IconCoins, topic: "Incomes by band (Survey of Personal Incomes)", binds: "UK, nations, English regions", source: "HMRC", count: 568, within: 553 },
+  { icon: IconCoins, topic: "Capital gains and income tax liabilities", binds: "UK, nations, English regions", source: "HMRC", count: 189, within: 189 },
+  { icon: IconCoins, topic: "Child Benefit, salary sacrifice, other tax totals", binds: "UK", source: "HMRC", count: 19, within: 19 },
+  { icon: IconUsers, topic: "Population by age and sex", binds: "UK, nations, English regions", source: "ONS", count: 179, within: 179 },
+  { icon: IconUsers, topic: "Employment by occupation", binds: "UK, nations, English regions", source: "ONS", count: 159, within: 159 },
+  { icon: IconUsers, topic: "Household composition", binds: "UK, nations, English regions", source: "ONS", count: 22, within: 22 },
+  { icon: IconUsers, topic: "Land values and household spending", binds: "UK", source: "ONS", count: 5, within: 5 },
+  { icon: IconHeartHandshake, topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 103, within: 100 },
+  { icon: IconHeartHandshake, topic: "State Pension and Pension Credit", binds: "Great Britain, Wales, Scotland, English regions", source: "DWP", count: 70, within: 70 },
+  { icon: IconHeartHandshake, topic: "Two-child limit, benefit cap, other benefits", binds: "Great Britain, England, Wales", source: "DWP", count: 40, within: 40 },
+  { icon: IconBuilding, topic: "Council tax dwellings by band", binds: "England, English regions", source: "MHCLG", count: 82, within: 82 },
+  { icon: IconBuildingBank, topic: "Tax receipts and benefit spending", binds: "UK, Great Britain, England and Wales", source: "OBR", count: 16, within: 16 },
+  { icon: IconBuildingBank, topic: "Student loans, funded childcare, school pupils", binds: "England, Wales, UK", source: "SLC, DfE, ISC", count: 21, within: 20 },
+  { icon: IconBuildingBank, topic: "Devolved council tax, buses, other totals", binds: "Nations, English regions", source: "DfT and devolved bodies", count: 41, within: 41 },
 ];
 
 // What the live dashboard slide shows in a PDF export, where the page itself
@@ -1725,7 +1773,6 @@ export const budgetProject = {
 // figures (aiShock above) are for the presenter and are in NOTES.md; the
 // post itself is the slide's focus.
 export const aiProject = {
-  tag: { label: "Microcosm UK, 2027–28", tone: "built" } as Tag,
   labels: [
     { icon: IconArrowsSplit, title: "Three channels", text: "Job losses, other workers’ wages, capital income" },
     { icon: IconUsers, title: "Five incidence scenarios", text: "By who bears the change" },
@@ -1837,24 +1884,19 @@ export const firmMethod = {
 //   changes). Band firms scale turnover up, which widens the taxed base, so
 //   the reduced-rate costs fall as e rises. The tapers have no behavioural
 //   row: their rate varies continuously with turnover.
+// The in-scope VAT base above the threshold, £175.1bn, and the turnover
+// responses (the costs at each assumed elasticity, figures above) are said
+// aloud (NOTES.md, slide 21), not shown on the slide. Each row's icon marks
+// its lever: the threshold raised, a graduated taper, a flat taper, a
+// reduced rate.
 export const vatReforms = {
-  base: "£175.1bn",
   rows: [
-    { reform: "Raise the threshold to £100,000", lever: "Location", cost: "−742", firms: "117,800 leave the register" },
-    { reform: "Graduated taper, £85,000 to £141,700", lever: "Shape: phase-in", cost: "−1,406", firms: "275,800 in the band" },
-    { reform: "Flat 50% marginal taper, same band", lever: "Shape: constant", cost: "−968", firms: "275,800 in the band" },
-    { reform: "Reduced rate of 10%, £85,000 to £105,000", lever: "Rate step", cost: "−446", firms: "138,000 in the band" },
-    { reform: "Reduced rate of 15%, same band", lever: "Rate step", cost: "−223", firms: "138,000 in the band" },
+    { icon: IconArrowBarUp, reform: "Raise the threshold to £100,000", lever: "Location", cost: "−742", firms: "117,800 leave the register" },
+    { icon: IconTrendingUp, reform: "Graduated taper, £85,000 to £141,700", lever: "Shape: phase-in", cost: "−1,406", firms: "275,800 in the band" },
+    { icon: IconMinus, reform: "Flat 50% marginal taper, same band", lever: "Shape: constant", cost: "−968", firms: "275,800 in the band" },
+    { icon: IconPercentage, reform: "Reduced rate of 10%, £85,000 to £105,000", lever: "Rate step", cost: "−446", firms: "138,000 in the band" },
+    { icon: IconPercentage, reform: "Reduced rate of 15%, same band", lever: "Rate step", cost: "−223", firms: "138,000 in the band" },
   ],
-  elasticities: ["0.05", "0.17", "0.32"],
-  dynamic: [
-    { reform: "Reduced rate 10%", costs: ["−446", "−444", "−437", "−430"] },
-    { reform: "Reduced rate 15%", costs: ["−223", "−221", "−216", "−210"] },
-    { reform: "Raise to £100,000", costs: ["−742", "−742", "−742", "−742"] },
-  ],
-  responseModel: "An iso-elastic model of bunching below the threshold, in the style of Kleven and Waseem",
-  responseReading:
-    "With a response, firms in a reduced-rate band raise turnover, which widens the taxed base. The threshold raise is unchanged by construction; the tapers are costed statically only.",
 };
 
 // One way to link models, for discussion; nothing here is a commitment.
@@ -1869,8 +1911,7 @@ export const vatReforms = {
 // listed under tariffDisaggregation above. Mean and SD across draws are
 // computed in the studies' own code and are not a policyengine.py output, so
 // they sit under "proposed" with the CSV format.
-export const interfaceToday =
-  "The trade study’s code applies earnings changes by two-digit SIC division to employees in Microcosm UK";
+// What runs today is said aloud (NOTES.md, slide 25), not shown on the slide.
 
 // Different kinds of model report different things, so the link takes
 // whichever a model has (the "from" lines of tariffDisaggregation above). A

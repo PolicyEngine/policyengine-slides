@@ -16,7 +16,8 @@ clarity and open layouts" below). Four places where items are read side by
 side use one light card (see "Light cards, a VAT costing slide and one part
 for the ideas" below).
 
-Each slide carries one message, with icons, short labels and status tags.
+Each slide carries one message, with icons, short labels and, inside the
+slide body only, status tags; no tag sits beside a title or subtitle.
 What the presenter says, including every caveat and figure that is not on a
 slide, is in [NOTES.md](NOTES.md).
 
@@ -42,9 +43,9 @@ slide, is in [NOTES.md](NOTES.md).
 
 12. Part 3: What we have already (divider)
 13. What the UK model covers, and what we can share
-14. Rules as code for firms and employers, from the Axiom Foundation
-15. What exists today, and how a model could call it (the Axiom Foundation)
-16. The Axiom Foundation’s rules, live (live page)
+14. The Axiom Foundation’s rules, live (live page)
+15. Rules as code for firms and employers, from the Axiom Foundation
+16. What exists today, and how a model could call it (the Axiom Foundation)
 
 4 · Projects we have done
 
@@ -52,7 +53,7 @@ slide, is in [NOTES.md](NOTES.md).
 18. The Autumn Budget 2026 dashboard (live page)
 19. Who bears the cost of an AI scenario? (live page)
 20. How we built synthetic UK firms
-21. What the firm model can cost: thresholds, tapers and responses
+21. What the firm model can cost: thresholds, tapers and reduced rates
 22. Who bears the cost of trade changes? Four UK episodes, 2021–26
 23. Who bears the cost of trade changes: the 2025 US tariffs (the second
     slide of the trade study)
@@ -97,8 +98,10 @@ slide, is in [NOTES.md](NOTES.md).
 
 Presented live, slides marked with builds reveal their content on clicks
 (`builds` in `config.ts`): flows build one node at a time, the calibration
-figures and the tariff cushion figures appear on cue and count up, and the
-ideas slides show one idea at a time. A step that has not been reached keeps
+figures and the tariff cushion figures appear on cue and count up, the
+ideas slides show one idea at a time, and most other content slides build
+by group (logo rows, columns, table rows by publisher or reform, cards,
+questions). Every slide's title and body come on with a 250ms fade-up. A step that has not been reached keeps
 its place (hidden, or a dashed rule where a table row will be), so nothing
 moves. Rows of columns rise in one after another when a slide comes on, and arrows draw in
 from the left. Motion lasts about 0.3 seconds and is off under
@@ -117,7 +120,7 @@ it if the frames do not run, and it does not run in an export.
 - Four slides embed a live page in a frame with a small toolbar (its
   address, "Expand" and "New tab"): slide 11 the
   [calibration dashboard, pinned to the certified build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e),
-  slide 16 [axiom.org](https://axiom.org), the Axiom Foundation's site,
+  slide 14 [axiom.org](https://axiom.org), the Axiom Foundation's site,
   slide 18 the
   [Autumn Budget 2026 dashboard](https://policyengine.org/uk/budgets/autumn-2026)
   and slide 19 the PolicyEngine post
@@ -165,8 +168,8 @@ notes for that slide.
   `app/src/data/posts/articles/uk-ai-study.md`), read on 16 November 2026,
   with the paper on
   [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7174479). The
-  slide is tagged "Microcosm UK, 2027–28" and "Illustrative scenario" and
-  carries no figure. In the notes: the Exchequer cost of £7.3bn (mean of 50
+  notes say it is an illustrative scenario on Microcosm UK for 2027–28 (no
+  tag on the slide), and the slide carries no figure. In the notes: the Exchequer cost of £7.3bn (mean of 50
   draws, standard deviation £1.9bn), absolute poverty before housing costs
   up 2.40 points, poverty after housing costs (+2.57 points), the Gini (+1.76
   points), the three channels (displacement £42.5bn; survivor wages £17.5bn
@@ -181,7 +184,7 @@ notes for that slide.
   figures): every microsimulation runs on policyengine[uk] 6.20.0 with the
   certified Microcosm UK 2024–25 build. The tariff stage runs under 2026–27
   rules; the energy episode's main run uses 2023–24 rules, and 2022–23 rules
-  only for a comparison. Both slides carry a "Microcosm UK" tag. The earlier "about 60%" energy offset is dropped; the rerun's
+  only for a comparison. The notes say so for both slides (no tag on the slides). The earlier "about 60%" energy offset is dropped; the rerun's
   different measure is in the notes.
 - **Order.** Six parts: an introduction (the title, the talk in brief,
   who we are); what PolicyEngine is (what the model computes and how a
@@ -200,10 +203,11 @@ notes for that slide.
   there is appetite at all). Release gates and certification, assignment variability, data
   access in full and use, evaluation and engagement are under "Backup
   material" in the notes; the deck has no appendix.
-- **Status.** Each piece carries its status as a tag: the firm VAT model is a working
-  paper, Microcosm's firm support is experimental, OG-UK is an early
-  prototype, and no link to a trade, macroeconomic or agent-based model is
-  built.
+- **Status.** Status sits inside the slide bodies (cards, tables, flows)
+  or, where it used to be a tag beside the subtitle or a tagged foot line,
+  in the notes as a "Say it" line: the firm VAT model is a working paper,
+  Microcosm's firm support is experimental, OG-UK is an early prototype,
+  and no link to a trade, macroeconomic or agent-based model is built.
 - **Sources by slide.** The slides carry no "Sources" row: the links for
   each slide are the "Sources" bullet at the end of its notes in `NOTES.md`,
   and the source objects stay in `content.ts`. What each source supports:
@@ -245,8 +249,8 @@ notes for that slide.
     schedule without published results is the trade study's
     (uk-trade-shock-study `06c8bbc`); "static, no general equilibrium" is
     the model-run slide's; the feedback arrow is the macro–micro loop of the
-    macroeconomic models slide. The path and the feedback are tagged not
-    built, and the slide is tagged "Not yet modelled".
+    macroeconomic models slide. The sector mapping is tagged "Not built yet" and the feedback "Idea to
+    explore"; that the deal is not yet modelled is in the notes.
   - Linking (slide 25), the mechanism: which records receive each result. Earnings and
     jobs by two-digit SIC division and the repeated random draws are the
     trade study's assignment (`tariff_pipeline/exposure.py`); spending is
@@ -299,12 +303,15 @@ notes for that slide.
     authority levels; at least 10 survey households behind each published
     number, bootstrap intervals). Counts: 650 constituencies
     (`data/uk_geography/constituencies_2024.csv`) and 361 local authorities
-    (`local_authorities_2023.csv`), both from the experimental local-area
-    file the bundle routes them to. Household type, tenure and number of
+    (`local_authorities_2023.csv`), both from the local-area file the
+    bundle routes them to, which bundle 6.19.0 certifies
+    (`microcosm-uk-2024-25-dense-20261107T173210Z-38605444`, alongside the national build;
+    policyengine.py CHANGELOG, the policyengine-uk 2.174.1 certification
+    entry). Household type, tenure and number of
     children are policyengine-uk `d3db7ac` variables (`family_type`,
     deprecated; `tenure_type`; `num_children`) with no standard output, so
     the slide tags them "Custom analysis".
-  - The Axiom Foundation (slides 14 and 15): every claim was read on 16
+  - The Axiom Foundation (slides 15 and 16): every claim was read on 16
     November 2026 at rulespec-uk `3e07aef` and rulespec-us `8231711` (both
     main), axiom-rules-engine `82cf3aa`, axiom-mcp `cec0d35`, and the public
     pages linked in the notes (axiom.org/about, /coverage, /tariff/schedule,
@@ -377,8 +384,8 @@ notes for that slide.
 
       The deck does not quote the solver's final objective, which is not
       comparable across releases. The fit is in-sample; the dashboard has no
-      out-of-sample check for the UK, and the calibration slide carries an
-      "In-sample fit" tag.
+      out-of-sample check for the UK; the notes say the fit is in-sample (no
+      tag on the slide).
     - *The code* at microcosm `429d7a0` (15 November): 56 source stages
       today, against the certified build's 54 (`uk/source_stages.json`;
       every survey microdata file in it is pinned by SHA-256 and checked when
@@ -412,9 +419,11 @@ notes for that slide.
     publisher totals can be read off the table; the counts sum to 1,514, and
     those within 10% to 1,495 (98.7%).
   - Local areas: the bundle lists a local-area file for constituencies and
-    local authorities, and the dashboard labels that release experimental.
-    Each slide that offers constituency, local-authority or local-area
-    results as a model output carries the label.
+    local authorities, and bundle 6.19.0 certifies it alongside the national
+    build (`microcosm-uk-2024-25-dense-20261107T173210Z-38605444`). The deck describes these
+    results plainly, with no "Experimental" label: 650 parliamentary
+    constituencies and 361 local authorities, from a certified local-area
+    file. The thin-cell caveat is in the notes only.
   - Projects we have done. The Autumn Budget 2026 dashboard: its address
     and view links, and what it models, follow the Autumn Budget 2026 deck
     (`slideshows/autumn-budget-2026/content.ts`). The AI post: read on 16
@@ -465,7 +474,8 @@ notes for that slide.
     from a CGE model, wages by labour type, not by sector.
 
 PolicyEngine has published no results for the Economic Prosperity Deal or
-BICS, and the deck tags both "Not yet modelled".
+BICS; the notes say both are not yet modelled, and the BICS slide carries
+one "Not developed yet" line above its flow.
 
 Earlier PolicyEngine decks describe Microcosm at older commits or for the
 US. Where they differ from the code read for this deck, the deck follows the
@@ -798,6 +808,60 @@ their time. No existing figure changed.
   and the first starting point say "wages by labour type, or one wage".
   The notes add that such a model also reports sector output and trade
   flows, which stay in it, and that a real wage already nets out prices.
+
+## Status out of the title rows, row icons and corrections (17 November)
+
+- Who we are (slide 3): the three facts across the top, then the two logo
+  rows on one grid of equal cells (five columns for both rows), each mark
+  in a box of one height (3.1 units, about 62px at 1920) with square marks
+  set lower than wide wordmarks, and one-line captions: "Built a tool on
+  PolicyEngine", "Transparency record", "Annual report 2025–26", "Cited in
+  debate"; think tanks by name only (NIESR's NiGEM link is in the notes).
+- No status tag beside any title or subtitle, and none under the titles of
+  the part dividers; every tagged foot line ("Thin cells", "Runs today",
+  "On axiom.org", "Elasticity assumed", "Method") is off the slides. What
+  they said is in the notes, under "Say it" for each slide.
+- The VAT slide (21) is the static cost table alone, full width, retitled
+  "What the firm model can cost: thresholds, tapers and reduced rates"; the
+  turnover responses are in the notes, with their figures.
+- Row icons: the VAT table (one per lever) and the target table (one per
+  publisher, a sum sign on the total) carry a small bare teal icon on each
+  row label; the agent-based model table uses the linking table's small
+  icon size.
+- The linking slide (25): the second column is "Code in Microcosm UK", and
+  the SIC, occupation and COICOP codes carry "In the data" (they are in
+  Microcosm UK; the crosswalk from another model is what is not built, which
+  the notes say). The SIC and one-wage rows carry "In
+  the trade study’s code" in place of "Can take today"; the agent-based
+  model slide's inputs carry "Not developed yet". No slide says "Can take
+  today".
+- Local areas: 650 parliamentary constituencies and 361 local authorities
+  come from a certified local-area file (policyengine.py bundle 6.19.0
+  certifies `microcosm-uk-2024-25-dense-20261107T173210Z-38605444`
+  alongside the national build), so no slide labels them experimental.
+- Who we are cites the policyengine.py paper in the "UK and US models"
+  fact, linked to its DOI: Ahmadi, V., Ghenis, M., Woodruff, N.,
+  Makarchuk, P. and Volk, A. (2026). policyengine: A Microsimulation Tool
+  for Tax-Benefit Policy Analysis. Journal of Open Source Software, 11(125),
+  11115. https://doi.org/10.21105/joss.11115.
+- The Axiom Foundation slides now open with the live site (14), then the
+  rules as code (15) and what exists today (16).
+- BICS (slide 27): one line above the flow, tagged "Not developed yet": a
+  possible extension of the business-tax allocation.
+- More builds, live only (each slide stays one page in an export:
+  `exportBuilds: 1`): Who we are (facts, government, think tanks), the
+  breakdowns (four groups), the rules (code, counts, entities), calibration
+  (objective, inputs, fit), the target table (HMRC, ONS, DWP, MHCLG, then
+  the rest with the total), coverage (four columns, then data access), the
+  two Axiom Foundation slides (two rows of rules; three columns, then
+  access), the VAT table (row by row), the trade episodes (card by card),
+  BICS (step by step) and the questions (one at a time). Every slide's
+  title and body come on with a 250ms fade-up; reduced motion turns all
+  of it off.
+- The forecast-scenario card on the macroeconomic slide (29) is tagged "Idea
+  to explore", as the macro–micro loop is, in place of "Built, not yet run".
+- The AI slide's subtitle is "Distributional and fiscal incidence in the
+  UK"; the post's date is in the notes.
 
 ## Privacy
 
