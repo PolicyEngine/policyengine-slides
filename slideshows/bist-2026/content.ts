@@ -1005,7 +1005,7 @@ export const dataAccess = [
     icon: IconLock,
     tag: { label: "Restricted", tone: "muted" } as Tag,
     title: "Household microdata",
-    text: "Licensed survey records. We share results as tables.",
+    text: "Licensed survey records. We share aggregate results as tables, never records.",
   },
   {
     icon: IconBuildingFactory2,
@@ -1460,7 +1460,7 @@ export const calibrationFit = {
     { icon: IconTargetArrow, value: "1,514", label: "official targets, grouped into 44 statistics" },
     { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
     { icon: IconUsers, value: "about 7.2k", label: "effective sample size (9.2% of records)" },
-    { icon: IconHome, value: "78.2k", label: "household records" },
+    { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
   ],
   publishers: [
     { name: "HMRC", count: 776, shade: "var(--pe-teal-dark)" },
