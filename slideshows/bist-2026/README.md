@@ -16,7 +16,7 @@ slide, is in [NOTES.md](NOTES.md).
 
 1 · Introduction
 
-1. Title
+1. From business shocks to household incomes (title)
 2. In brief
 3. Who we are
 
@@ -238,13 +238,13 @@ notes for that slide.
     type, not per sector, and its standard closure fixes aggregate
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
-  - Tariff bridge: uk-trade-shock-study pull request #46, head `778557c`
+  - The trade study's US-tariff episode (slide 14): uk-trade-shock-study pull request #46, head `778557c`
     (open, not merged), `results/e3_constants.json`: gross change £1,007.1m
     a year; cushion 41.8% for wage cuts and 32.1% for job losses, standard
     deviation 3.3 points across 20 draws; run on Microcosm UK at 2026 with
     policyengine[uk] 6.20.0 (policyengine-uk 2.174.1). These replace the
     figures of `06c8bbc` (43.7%, 35.4%, 5.1 points across 100 draws).
-  - Economic Prosperity Deal (its own slide, tariff bridge and pilots): the general terms
+  - Economic Prosperity Deal (its own slide, the US-tariff episode and pilots): the general terms
     on GOV.UK (operative 8 May 2025; a 100,000-vehicle quota at a 10% tariff;
     and, subject to supply-chain conditions, a steel and aluminium quota at
     most-favoured-nation rates).
@@ -409,8 +409,8 @@ The 27-slide version reordered the talk into seven parts and added slides: the
 calibration targets and the live calibration dashboard, the Autumn Budget
 2026 dashboard, the AI scenario post, the synthetic-firm method and the VAT
 threshold costing, the trade working paper (with its figure) and model
-coverage (with a row on what we can share). The tariff bridge is now among the
-projects we have done. The appendix is gone: its slides' content is on talk
+coverage (with a row on what we can share). The US-tariff episode (then
+called the tariff bridge) is now among the projects we have done. The appendix is gone: its slides' content is on talk
 slides or under "Backup material" in the notes. "Who we are" is three facts
 over two rows of equal logo cells; the Microcosm build is a snake flow in
 two rows; the business-side slide kept to what exists today. Icons are
@@ -464,8 +464,9 @@ slide that replaced it.
 - Smaller changes: the "In brief" cards follow the new contents; source
   labels say "trade study" and "AI study"; the forecast-scenario card has one
   tag ("Mechanism built; not yet run"), so the three card titles line up; the
-  Economic Prosperity Deal slide carries "Idea to explore" only on the two
-  pieces that are not built; the agent-based model slide lists outputs in
+  Economic Prosperity Deal slide carries a tag only on the two pieces that
+  are not built (now "Not built yet" on the sector mapping and "Idea to
+  explore" on the feedback arrow); the agent-based model slide lists outputs in
   short form. No figure changed.
 
 ## The review of 16 November
@@ -475,7 +476,8 @@ A further independent review checked every figure against its source again
 pages and the dashboard's data re-read) and changed four things. No figure
 changed.
 
-- The tariff bridge is part of the trade study, and the deck now says so.
+- The US-tariff episode (formerly called the tariff bridge) is part of the
+  trade study, and the deck now says so.
   Slide 13 shows the study's four episodes as cards (years, and whether
   prices or earnings carry the change), with the US tariffs card marked
   "Next slide". Slide 14 is titled "Who bears the cost of trade changes: the
@@ -487,7 +489,7 @@ changed.
   not match the slide's "Microcosm UK" tag. (The pull request regenerates
   `fig_decomp`, `fig_episode_map`, `fig_grid` and `fig_paths` only.)
 - Slide 14's tag "Deal not yet modelled" is now "No published results for
-  the deal": the study's code has a schedule for the Economic Prosperity
+  the UK–US deal": the study's code has a schedule for the Economic Prosperity
   Deal and the repository holds a two-draw test file for it
   (`results/epd_displacement.json`), but the paper reports no deal results.
 - In a PDF export, slide 8 shows a static summary of the calibration targets
@@ -504,6 +506,14 @@ ten minutes looks like a stall at "22 steps". A dev server draws Next.js's round
 bottom-left corner of every capture, over the footer logo; an export
 without `--url` captures a production build, which should have no badge
 (not run in this review, because a dev server was in use).
+
+## The consistency check of 17 November
+
+The deck and the pre-seminar briefing were checked against each other for
+figures, names, status words and what each input needs. No figure changed.
+On slide 19 the prices row is now tagged "Needs a sector mapping", as on
+slide 18 and in the briefing, in place of "Can take today"; the deal is
+"the UK–US Economic Prosperity Deal" throughout the notes.
 
 ## Privacy
 

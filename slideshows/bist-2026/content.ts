@@ -724,7 +724,7 @@ export const epdTrace = {
 // sectors exists in our code: the trade study assigns by two-digit SIC
 // division of FRS employees (tariff_pipeline/exposure.py:174-230), read from
 // sic_industry_division (policyengine-uk d3db7ac), and draws who loses a job
-// at random over repeated draws (100 in the trade study). Occupation comes
+// at random over repeated draws (20 in the trade study's rerun, PR #46). Occupation comes
 // from the survey's job record; a map from a trade model's labour types to
 // occupations is part of the proposed interface and is not built.
 export const tariffDisaggregation = {
@@ -751,7 +751,7 @@ export const tariffDisaggregation = {
       from: "Trade and partial-equilibrium models",
       key: "COICOP spending division",
       assigned: "Households, by what they spend",
-      tag: tags.canToday,
+      tag: tags.mapping,
     },
   ],
   breakdowns: [
@@ -763,7 +763,8 @@ export const tariffDisaggregation = {
   ],
 };
 
-// The tariff bridge: shock = elasticity × tariff × US export share by SIC
+// The trade study's US-tariff episode (formerly called "the tariff bridge";
+// the symbol keeps that name): shock = elasticity × tariff × US export share by SIC
 // division; cushion macros MsUSTariffWageCutCushionPct and
 // MsUSTariffDisplacementCushionPct (results/e3_constants.json:
 // gross_shock_gbp_m_per_year 1007.1; n_draws 20; wagecut_cushion_pct 41.8;
@@ -776,7 +777,7 @@ export const tariffDisaggregation = {
 // changes ... are outside the design", episodes.tex); the code has an "epd"
 // schedule and the repository a two-draw test file (results/
 // epd_displacement.json, unchanged since 06c8bbc), which is not a published
-// result, hence the tag "No published results for the deal".
+// result, hence the tag "No published results for the UK–US deal".
 // This slide is the second slide of the trade study: its title repeats the
 // study's, and the trade slide's US tariffs card points here.
 export const tariffBridge = {
@@ -1001,7 +1002,7 @@ export const dataAccess = [
 
 // Two candidate pilots. Neither has published results: the trade study
 // reports none for the deal schedule and nothing exists on BICS. "Starting
-// point" rows name existing work: the tariff bridge (trade study 06c8bbc)
+// point" rows name existing work: the trade study's US-tariff episode (06c8bbc)
 // and the business-tax allocation parameters (see businessPolicy above).
 export const pilots = [
   {
@@ -1021,7 +1022,7 @@ export const pilots = [
       {
         icon: IconFlag,
         label: "A starting point",
-        text: "The trade study’s tariff-to-earnings steps",
+        text: "The trade study’s US-tariff episode",
       },
     ],
   },

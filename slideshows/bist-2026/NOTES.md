@@ -84,7 +84,7 @@ slides, not build steps.
   can turn these into household and fiscal effects by income decile and
   region, and experimentally by local area. No such link is built: our trade
   and AI studies use published estimates and stated scenarios. The worked
-  example is the US–UK Economic Prosperity Deal.
+  example is the UK–US Economic Prosperity Deal.
 - **6. Ideas that fit the unit.** Business policy beyond tax, with the
   electricity-cost relief of the British Industrial Competitiveness Scheme
   (BICS) as the example; where an agent-based model could link; and one way
@@ -655,7 +655,7 @@ slides, not build steps.
 - The second slide of the trade study (slide 13), not a separate project:
   its US tariffs episode in detail. It is also the starting point for the
   first candidate pilot (slide 20).
-- Builds: the bridge; then the cushion figures; then the bracket under the
+- Builds: the five steps; then the cushion figures; then the bracket under the
   steps a trade model could replace.
 - How the trade study turns the 2025 US tariffs into an earnings change for
   survey employees.
@@ -680,7 +680,7 @@ slides, not build steps.
   only with Universal Credit take-up). The gross earnings loss is £1,007.1m
   a year, the "about £1.0bn" on the slide. This is the Dolls, Fuest and Peichl
   stabilisation coefficient.
-- Results are for the tariff schedule before the US–UK Economic Prosperity
+- Results are for the tariff schedule before the UK–US Economic Prosperity
   Deal, on Microcosm UK at 2026 (policyengine[uk] 6.20.0, policyengine-uk
   2.174.1).
 - These figures are from the study's open pull request #46 (head 778557c,
@@ -769,8 +769,8 @@ slides, not build steps.
 
 - **A forecast scenario (mechanism built; not yet run).** PolicyEngine UK projects
   its data forward with OBR growth rates for earnings, prices and other
-  series. A scenario from a global macroeconomic forecasting model such as
-  NiGEM could replace those paths. We have not run such a scenario.
+  series. A scenario from a macroeconomic forecasting model could replace
+  those paths. We have not run such a scenario.
   Employment is not one of the series: job changes enter as changed inputs,
   assigned to workers.
 - **A macro–micro loop (not built).** The macro model's earnings, jobs and
@@ -989,13 +989,15 @@ slides, not build steps.
     study assigns by occupation, but the trade study's code is keyed by
     sector only, and a map from a trade model's labour types to occupation
     groups does not exist.
-  - Prices: can take today for the spending categories the model holds
-    (`variables/input/consumption/`); the trade study applies price changes
-    to food and energy spending.
+  - Prices: needs a sector mapping. The model holds spending by category
+    (`variables/input/consumption/`) and the trade study applies price changes
+    to food and energy spending, but a model's prices by sector or product
+    must first be mapped to those categories, as on slide 18.
   - "Mapped into" is tagged "Not built yet": the mapping from another
     model's sectors or products to SIC and COICOP is the work in every row.
     The "Can take today" tags in the next column (headed "Once mapped,
-    assigned to") apply once a result is in those keys.
+    assigned to") apply once a result is in those keys; the prices row says
+    "Needs a sector mapping", because that mapping is the work for prices.
   - Outputs: all existing; regions are ITL1; local areas are experimental.
 - **Sources.**
   [policyengine.py](https://github.com/PolicyEngine/policyengine.py); [Ahmadi
@@ -1014,7 +1016,7 @@ slides, not build steps.
   - PolicyEngine could provide: the sector mapping; household incomes by decile
     and region, and experimentally by local area; poverty; net Exchequer
     cost.
-  - A starting point: the trade study's tariff-to-earnings steps (slide 14), with the trade model's
+  - A starting point: the trade study's US-tariff episode (slide 14), with the trade model's
     results in place of its assumed elasticity.
 - **The British Industrial Competitiveness Scheme.**
   - The Modelling Unit could provide: the electricity-cost change by sector, and how
