@@ -84,7 +84,9 @@ slides, not build steps.
   calibration.")
 - **3. What we have already.** The taxes and benefits the UK model covers,
   how business taxes reach households, and what we can share. PolicyEngine UK has
-  no firm entity.
+  no firm entity. Then the Axiom Foundation's rules for firms and employers,
+  and how a model could call them. (The card: "What the UK model covers,
+  what we can share, and the Axiom Foundation's rules for firms.")
 - **4. Projects we have done.** The Autumn Budget 2026 dashboard, the AI
   scenario post, the synthetic firms of the firm-level VAT working paper, the trade
   working paper and its tariff episode.

@@ -555,9 +555,9 @@ this file and in `NOTES.md` follows that order, including those in the
 sections above. The coverage slide's "Outside the model" line (corporation
 tax; firms as entities) is the reason for the place: slide 10 shows rules
 on a firm entity that exist today, and slide 11 says that corporation tax
-is not encoded there either. Slide 10's title and slide 11's subtitle name
-the Axiom Foundation, and slide 10's foot gives the relationship as
-axiom.org/about states it.
+is not encoded there either. Slide 10's title, slide 11's subtitle and the
+In brief card for part 3 name the Axiom Foundation, and slide 10's foot
+gives the relationship as axiom.org/about states it.
 
 ## Privacy
 

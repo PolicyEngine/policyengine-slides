@@ -354,7 +354,7 @@ export const parts = [
     key: "have",
     icon: IconStack2,
     title: "What we have already",
-    text: "The taxes and benefits the UK model covers, and what we can share.",
+    text: "What the UK model covers, what we can share, and the Axiom Foundation’s rules for firms.",
   },
   {
     key: "projects",
