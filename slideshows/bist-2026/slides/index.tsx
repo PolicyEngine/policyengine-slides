@@ -20,6 +20,11 @@ import {
   abmQuestions,
   abmReturns,
   aiProject,
+  axiomAccess,
+  axiomGeography,
+  axiomRelationship,
+  axiomRules,
+  axiomToday,
   budgetProject,
   businessPolicy,
   calibrationEquation,
@@ -1104,6 +1109,78 @@ export function CoverageSlide() {
             </div>
           </div>
         ))}
+      </div>
+    </Frame>
+  );
+}
+
+/** The Axiom Foundation's rules for firms and employers, each with its status and the law it encodes. */
+export function AxiomRulesSlide() {
+  return (
+    <Frame
+      section="have"
+      title="Rules as code for firms and employers, from the Axiom Foundation"
+      scale={0.9}
+      subtitle="It publishes open, machine-readable encodings of the world’s rules, starting with tax and benefit policy"
+    >
+      <div className={styles.cards} style={columns(3)}>
+        {axiomRules.map((rule, index) => (
+          <div key={rule.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+            <div className={styles.cardHead}>
+              <Badge icon={rule.icon} />
+              <StatusTag tag={rule.tag} />
+            </div>
+            <h2>{rule.title}</h2>
+            <p>{rule.text}</p>
+            <div className={styles.cardNote}>{rule.law}</div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.rowsFoot}>
+        <p>{axiomRelationship}</p>
+      </div>
+    </Frame>
+  );
+}
+
+/** Examples of what the Axiom Foundation has encoded, holds as text only or lacks, and three ways to call it. */
+export function AxiomTodaySlide() {
+  return (
+    <Frame
+      section="have"
+      title="What exists today, and how a model could call it"
+      scale={1.0}
+      subtitle="Rules on the business side: what the Axiom Foundation has encoded, and what it has not"
+      status={[{ label: "As of 16 November 2026", tone: "muted" }]}
+    >
+      <div className={styles.cards} style={columns(3)}>
+        {axiomToday.map((group, index) => (
+          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+            <div className={styles.cardTitleRow}>
+              <Badge icon={group.icon} />
+              <h2>{group.title}</h2>
+            </div>
+            <Bullets items={group.items} />
+          </div>
+        ))}
+      </div>
+      <div className={styles.access}>
+        {axiomAccess.map((item) => (
+          <div key={item.title} className={styles.accessItem}>
+            <Badge icon={item.icon} size="small" />
+            <div>
+              <div className={styles.accessHead}>
+                <h3>{item.title}</h3>
+                <StatusTag tag={item.tag} />
+              </div>
+              <p>{item.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.rowsFoot}>
+        <StatusTag tag={{ label: "On axiom.org", tone: "built" }} />
+        <p>{axiomGeography}</p>
       </div>
     </Frame>
   );

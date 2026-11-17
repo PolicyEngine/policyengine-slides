@@ -40,14 +40,17 @@ import {
   IconChartBar,
   IconChartPie,
   IconCircleCheck,
+  IconCircleDashed,
   IconCoins,
   IconCompass,
   IconCopy,
   IconCpu,
   IconDatabase,
   IconDice,
+  IconFileText,
   IconFlag,
   IconFlame,
+  IconGavel,
   IconHeartHandshake,
   IconHome,
   IconHourglass,
@@ -298,7 +301,9 @@ export type Tone = "built" | "muted" | "caution";
 export type Tag = { label: string; tone: Tone };
 
 // Status tags. Teal: exists today. Grey: an idea to explore (not built), not yet
-// modelled, restricted or outside the model. Amber: experimental, proposed, a working paper or illustrative.
+// modelled, restricted or outside the model. Amber: experimental,
+// proposed, a working paper or illustrative; on the Axiom Foundation slides,
+// also partly encoded, encoded with its checks paused, incomplete or a preview.
 const tag = (label: string, tone: Tone): Tag => ({ label, tone });
 export const tags = {
   notBuilt: tag("Idea to explore", "muted"),
@@ -319,6 +324,16 @@ export const tags = {
   mapping: tag("Needs a sector mapping", "muted"),
   extension: tag("Small extension", "caution"),
   toBuild: tag("Not built yet", "muted"),
+  // The Axiom Foundation slides (axiomRules and axiomToday below): "Encoded"
+  // only where a RuleSpec module exists on rulespec-uk or rulespec-us main,
+  // with companion tests that CI runs before a merge. A module on the public
+  // waiver list (known-validation-gaps.yaml) has its checks paused: CI skips
+  // it until the waiver expires. "Incomplete" is the word the Axiom
+  // Foundation's own tariff page uses.
+  encoded: tag("Encoded", "built"),
+  partlyEncoded: tag("Partly encoded", "caution"),
+  checksPaused: tag("Encoded, checks paused", "caution"),
+  incomplete: tag("Incomplete, most checks paused", "caution"),
 };
 
 // The seven parts of the talk: the label above each slide's title, the
@@ -999,6 +1014,210 @@ export const dataAccess = [
     text: "For VAT costing; drawn from published tables, so they can be shared.",
   },
 ];
+
+// The Axiom Foundation's rules as code (slides 10 and 11). The Axiom
+// Foundation is not PolicyEngine: it publishes open, machine-readable
+// encodings of the world's rules, starting with tax and benefit policy (the
+// descriptor on axiom.org/about). Max Ghenis is CEO of both the Axiom
+// Foundation and PolicyEngine, which he co-founded (axiom.org/about, read 16
+// November 2026). Read on 16 November 2026 at rulespec-uk 3e07aef (main) and
+// rulespec-us 8231711 (main):
+// - VAT: uk/statutes/ukpga/1994/23/ 2.yaml (standard rate 0.20 from
+//   2011-01-04), 24.yaml (output tax on standard-rated taxable supplies and
+//   input tax on standard-rated business purchases, Firm), 25.yaml (net
+//   liability: output tax less allowable input tax, Firm), 26.yaml (allowable
+//   input tax; the allowable proportion is an input, Firm), 29A.yaml (reduced
+//   rate 0.05, on a Payment entity; 24 and 25 do not import it). Each has a
+//   .test.yaml. No module for the registration threshold, zero rating,
+//   exemption or partial exemption (no other 1994/23 path), hence "Partly
+//   encoded".
+// - Employer NI: uk/statutes/ukpga/1992/4/9.yaml (secondary percentage 0.15
+//   from 2025-04-06; the Employer charge above the secondary threshold);
+//   thresholds in uk/regulations/uksi/2001/1004/10.yaml. The module reads the
+//   conditions of ss.9A and 9B (under-21s, apprentices) as inputs; their
+//   encoding is queued (rulespec-uk#479, open). No module for the employment
+//   allowance (no National Insurance Contributions Act 2014 path), hence
+//   "Partly encoded".
+// - Minimum wage: uk/regulations/uksi/2015/621/4.yaml (12.71 from
+//   2026-04-01) and 4A.yaml (10.85, 8.00 and the apprenticeship rate 8.00;
+//   apprenticeship_rate_applies is an input). Regulation 5 (who qualifies for
+//   the apprentice rate) is queued (rulespec-uk#495, open).
+// - Small-company test: uk/statutes/ukpga/2006/46/382.yaml (13 rules, 9 on
+//   Firm; versions from 2016-01-01 and 2025-04-06). known-validation-gaps.yaml
+//   holds an active waiver for it (rulespec-uk#137, expires 2027-01-03): its
+//   source-grounding check fails on the factor 1000000 that converts the
+//   statute's "£15 million" to pounds, which the statute's text does not
+//   state. CI skips its checks: "Encoded, checks paused".
+// - Data protection: uk/statutes/ukpga/2018/12/157.yaml (higher maximum
+//   17,500,000 from 2020-12-31, or 0.04 of total annual worldwide turnover,
+//   whichever is greater, for an undertaking).
+// - US tariffs: rulespec-us us/policies/usitc/us-tariff-duty/lines/generated/
+//   (100 chapter tables, "generator b1.2-tables-3" from USITC snapshot
+//   2026HTSRev15, GENERATED-MANIFEST.json). Their general disposition tables
+//   list 13,790 lines, the count axiom.org/tariff/schedule gives; 12,042 carry
+//   a rate (6,247 ad valorem, 5,795 free), and the specific, compound,
+//   conditional, component and empty lines carry none. .../overlays/ holds
+//   166 Chapter 99 modules: 86 IEEPA, 69 Section 301, 3 China Section 301, 5
+//   Section 232 steel and aluminium and 3 Section 122. 296 of the 380 modules under
+//   us/policies/usitc and us/policies/cbp, including all 100 chapter tables,
+//   carry an active validation waiver. axiom.org/tariff/schedule: "Coverage
+//   status: incomplete and not certified"; it lists the Section 232 auto,
+//   copper, semiconductor, vehicle and wood annexes as not encoded. The counts
+//   are in NOTES.md and README.md, not on the slide.
+// The law line: every rule in the ten UK modules names its provision in a
+// source field, and 35 of the 39 quote it (e.g. 25.yaml, "deduct that amount
+// from any output tax that is due from him"); each section's page on
+// axiom.org shows the text beside it.
+export const axiomRules = [
+  {
+    icon: IconReceiptTax,
+    tag: tags.partlyEncoded,
+    title: "VAT liability",
+    text: "Output tax less input tax on a firm’s standard-rated sales and purchases, at 20%",
+    law: "VAT Act 1994 ss.2, 24–26, 29A",
+  },
+  {
+    icon: IconBriefcase,
+    tag: tags.partlyEncoded,
+    title: "Employer NI",
+    text: "The 15% rate on pay above the secondary threshold",
+    law: "SSCBA 1992 s.9",
+  },
+  {
+    icon: IconCoins,
+    tag: tags.encoded,
+    title: "Minimum wage",
+    text: "£12.71 an hour from April 2026, and the rates by age and for apprentices",
+    law: "NMW Regulations 2015 regs 4, 4A",
+  },
+  {
+    icon: IconBuildingFactory2,
+    tag: tags.checksPaused,
+    title: "Small-company test",
+    text: "Turnover, balance sheet and employee thresholds, before and after April 2025",
+    law: "Companies Act 2006 s.382",
+  },
+  {
+    icon: IconGavel,
+    tag: tags.encoded,
+    title: "Data-protection fines",
+    text: "Up to £17.5m or 4% of worldwide turnover, whichever is greater",
+    law: "Data Protection Act 2018 s.157",
+  },
+  {
+    icon: IconShip,
+    tag: tags.incomplete,
+    title: "US tariff schedule",
+    text: "Ad valorem and free rates by tariff line, and some Chapter 99 duties",
+    law: "Harmonized Tariff Schedule of the United States",
+  },
+];
+
+// The relationship, as axiom.org/about states it. The slide's foot carries
+// it.
+export const axiomRelationship =
+  "Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he co-founded.";
+
+// What exists today and how a model could call it (slide 11). Same commits
+// as axiomRules, read 16 November 2026. The cards give examples.
+// - Encoded: the five UK modules above, with the status each carries there;
+//   SSCBA 1992 s.166 (statutory maternity pay's earnings-related rate) and
+//   s.171ZA (statutory paternity pay entitlement conditions, no amount),
+//   Person entity; Hydrocarbon Oil Duties Act 1979 s.6
+//   (uk/statutes/ukpga/1979/5/6.yaml, fuel duty rates as printed in s.6(1A),
+//   versions dated 0001-01-01).
+// - Legal text, no encoding: axiom.org serves the text with no encoding for
+//   VAT Act 1994 s.1 (axiom.org/uk/statute/ukpga/1994/23/1; no 1994/23/1.yaml)
+//   and 29 USC 206, the US minimum wage (axiom.org/us/statute/29/206). The
+//   corpus's Capital Allowances Act 2001 s.1 and ITTOIA 2005 sections are
+//   left off: axiom.org renders no text for them.
+// - Not encoded: no rulespec-uk module, pull request or issue for corporation
+//   tax (CTA 2009, 2010), capital allowances (CAA 2001), R&D relief, UK
+//   customs duty (Taxation (Cross-border Trade) Act 2018), the employment
+//   allowance (NICA 2014), the apprenticeship levy (FA 2016 Part 6) or
+//   statutory sick pay. Business rates bills are not encoded either: the one
+//   module, uk/policies/govuk/business-rates.yaml (Household), multiplies a
+//   household's shareholding by total business rates revenue, both inputs,
+//   and its summary says it "does not compute an individual ratepayer's
+//   bill".
+export const axiomToday = [
+  {
+    icon: IconCircleCheck,
+    title: "Encoded",
+    items: [
+      "The five UK rules on the previous slide, as tagged there",
+      "Statutory maternity pay’s 90% rate, and who qualifies for paternity pay",
+      "Fuel duty rates",
+    ],
+  },
+  {
+    icon: IconFileText,
+    title: "Legal text, no encoding",
+    items: ["VAT Act 1994 s.1, the charge to VAT", "US minimum wage, 29 USC 206"],
+  },
+  {
+    icon: IconCircleDashed,
+    title: "Not encoded",
+    items: [
+      "Corporation tax",
+      "Capital allowances and R&D relief",
+      "UK customs duty",
+      "Business rates bills",
+      "Employment allowance, apprenticeship levy, statutory sick pay",
+    ],
+  },
+];
+
+// How a model could call the rules today (the row under the cards):
+// - Axiom Rules Engine: axiom-rules-engine 82cf3aa, README ("Rust runtime and
+//   Python bindings for executing Axiom RuleSpec"; compiles from a checkout
+//   named rulespec-<country>), LICENSE (MIT). rulespec-uk 3e07aef
+//   .github/workflows/repository-checks.yml runs the shared validate-rulespec
+//   workflow with axiom-rules-engine-ref 05eac9d2, so CI runs the UK modules'
+//   companion tests on the engine, except for modules under an active
+//   validate_failures waiver (s.382 among them; run 43820721836 skipped 18).
+//   Releases v0.1.1 to v0.2.2 on GitHub; not
+//   on PyPI (pypi.org returned 404 on 16 November 2026).
+// - Hosted API: api.axiom.org/docs (200): search rules, get rule, rule
+//   sources and dependencies, calculation; self-serve trial keys that expire
+//   in 14 days. GET /v1/ready on 16 November 2026: "5571 indexed RuleSpec
+//   files", "6 compiled packages configured". The docs list them: SNAP for
+//   Arizona, California, Colorado and New York, the Canada Workers Benefit
+//   and Belgian worker income tax. None is UK. The docs also describe
+//   root-addressed calculation, which compiles an encoded module on request;
+//   we have not tested it on a UK module. axiom-mcp's README says the API is
+//   "open for evaluation", with interfaces that "may change before general
+//   availability".
+// - MCP server: axiom-mcp cec0d35, README "Status: developer preview.";
+//   npm @axiom-foundation/mcp 0.3.0; every call goes through the hosted API.
+export const axiomAccess = [
+  {
+    icon: IconCpu,
+    tag: { label: "Open source", tone: "built" } as Tag,
+    title: "Axiom Rules Engine",
+    text: "Rust, with Python bindings. Runs encoded rules, UK ones included.",
+  },
+  {
+    icon: IconWorld,
+    tag: { label: "Trial access", tone: "caution" } as Tag,
+    title: "Hosted API",
+    text: "Search rules and read their sources. None of its ready-made calculations is UK.",
+  },
+  {
+    icon: IconRobot,
+    tag: { label: "Developer preview", tone: "caution" } as Tag,
+    title: "MCP server",
+    text: "Lets an AI assistant search and run rules through the API, over the Model Context Protocol.",
+  },
+];
+
+// One geography line (research-geo.md, candidate A, scoped to the site).
+// axiom.org/coverage, read 16 November 2026, shows encodings for Belgium,
+// Canada, Israel, New Zealand, the UK and the US (Denmark appears with
+// documents only). Never "covers": Israel's README calls its content "a
+// pilot, not coverage".
+export const axiomGeography =
+  "The Axiom Foundation’s site shows encoded rules from six countries: the US, UK, Belgium, Canada, New Zealand and Israel.";
 
 // Two candidate pilots. Neither has published results: the trade study
 // reports none for the deal schedule and nothing exists on BICS. "Starting
