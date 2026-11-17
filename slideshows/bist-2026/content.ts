@@ -341,36 +341,41 @@ export const tags = {
   incomplete: tag("Incomplete, most checks paused", "caution"),
 };
 
-// The seven parts of the talk: the label above each slide's title, the
-// tracker beside it and the cards of the "In brief" slide. Parts 5 and 6 are
+// The seven parts of the talk: the part navigator along the top of each
+// slide (its short labels), the divider slide before parts 2 to 7 and the
+// agenda of the "In brief" slide (the full titles). Parts 5 and 6 are
 // ideas: no link to a trade, macroeconomic or agent-based model is built, and
 // there are no published PolicyEngine results for the Economic Prosperity
 // Deal or BICS (trade study 06c8bbc reports none for the deal schedule;
 // PolicyEngine UK has no firm entity, see coverage and abmQuestions below).
 export const parts = [
-  { key: "intro", icon: IconFlag, title: "Introduction", text: "Who we are." },
+  { key: "intro", icon: IconFlag, title: "Introduction", short: "Introduction", text: "Who we are." },
   {
     key: "what",
     icon: IconScale,
     title: "What PolicyEngine is",
+    short: "What PolicyEngine is",
     text: "How a run works, the rules, the household data and its calibration.",
   },
   {
     key: "have",
     icon: IconStack2,
     title: "What we have already",
+    short: "What we have",
     text: "What the UK model covers, what we can share, and the Axiom Foundation’s rules for firms.",
   },
   {
     key: "projects",
     icon: IconPresentationAnalytics,
     title: "Projects we have done",
+    short: "Projects",
     text: "A Budget dashboard, an AI scenario, synthetic firms and trade.",
   },
   {
     key: "explore",
     icon: IconCompass,
     title: "What we could explore further",
+    short: "Explore further",
     text: "Tracing a trade or macroeconomic model’s results to households.",
     tag: tags.notBuilt,
   },
@@ -378,6 +383,7 @@ export const parts = [
     key: "ideas",
     icon: IconBulb,
     title: "Ideas that fit the unit",
+    short: "Ideas for the unit",
     text: "Business policy, agent-based models and one way to link models.",
     tag: tags.notBuilt,
   },
@@ -385,6 +391,7 @@ export const parts = [
     key: "collaborate",
     icon: IconHeartHandshake,
     title: "How we could collaborate",
+    short: "Collaborate",
     text: "Two candidate pilots, and questions for discussion.",
   },
 ] as const;
@@ -1020,7 +1027,7 @@ export const dataAccess = [
   },
 ];
 
-// The Axiom Foundation's rules as code (slides 11 and 12). The Axiom
+// The Axiom Foundation's rules as code (slides 13 and 14). The Axiom
 // Foundation is not PolicyEngine: it publishes open, machine-readable
 // encodings of the world's rules, starting with tax and benefit policy (the
 // descriptor on axiom.org/about). Max Ghenis is CEO of both the Axiom
@@ -1123,7 +1130,7 @@ export const axiomRules = [
 export const axiomRelationship =
   "Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he co-founded.";
 
-// What exists today and how a model could call it (slide 12). Same commits
+// What exists today and how a model could call it (slide 14). Same commits
 // as axiomRules, read 16 November 2026. The cards give examples.
 // - Encoded: the five UK modules above, with the status each carries there;
 //   SSCBA 1992 s.166 (statutory maternity pay's earnings-related rate) and

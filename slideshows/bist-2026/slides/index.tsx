@@ -84,24 +84,25 @@ function StatusTag({ tag }: { tag: Tag }) {
 const bodyScale = (scale: number) =>
   ({ "--u": `calc(var(--u0) * ${scale})` }) as CSSProperties;
 
-/** The label above a title, and the talk's seven parts as a row of marks. */
-function PartHeader({ section }: { section: Section }) {
+/**
+ * The talk's seven parts along the top of a slide, by their short names: the
+ * current part in teal, the parts already covered in a lighter grey.
+ */
+function PartNav({ section }: { section: Section }) {
   const current = parts.findIndex((part) => part.key === section);
   return (
-    <div className={styles.partRow}>
-      <p className={styles.section}>
-        <span className={styles.sectionNumber}>{current + 1}</span>
-        {parts[current].title}
-      </p>
-      <div className={styles.tracker} aria-hidden="true">
-        {parts.map((part, index) => (
-          <span
-            key={part.key}
-            className={index === current ? styles.trackerCurrent : index < current ? styles.trackerDone : ""}
-          />
-        ))}
-      </div>
-    </div>
+    <nav className={styles.partNav} aria-label="Parts of the talk">
+      {parts.map((part, index) => (
+        <span
+          key={part.key}
+          className={index === current ? styles.navCurrent : index < current ? styles.navDone : ""}
+          aria-current={index === current ? "step" : undefined}
+        >
+          <span className={styles.navNumber}>{index + 1}</span>
+          {part.short}
+        </span>
+      ))}
+    </nav>
   );
 }
 
@@ -129,7 +130,7 @@ function Frame({
     <Slide className={styles.deck}>
       <div className={styles.frame}>
         <header>
-          {section && <PartHeader section={section} />}
+          {section && <PartNav section={section} />}
           <h1 className={styles.title}>{title}</h1>
           {(subtitle || status.length > 0) && (
             <div className={styles.subtitleRow}>
@@ -366,23 +367,85 @@ export function TitleSlide() {
 export function InBriefSlide() {
   return (
     <Frame section="intro" title="In brief" scale={1.12} subtitle="Six parts after this introduction">
-      <div className={styles.cards} style={columns(3)}>
+      <ol className={styles.agenda}>
         {parts.slice(1).map((part, index) => (
-          <div key={part.key} className={`${styles.card} ${styles.partCard} ${styles.enter}`} style={enter(index)}>
-            <div className={styles.cardHead}>
-              <div className={styles.partCardLead}>
-                <span className={styles.partNumber}>{index + 2}</span>
-                <Badge icon={part.icon} />
+          <li key={part.key} className={styles.enter} style={enter(index)}>
+            <span className={styles.agendaNumber}>{index + 2}</span>
+            <Badge icon={part.icon} />
+            <div>
+              <div className={styles.agendaHead}>
+                <h2>{part.title}</h2>
+                {"tag" in part && <StatusTag tag={part.tag} />}
               </div>
-              {"tag" in part && <StatusTag tag={part.tag} />}
+              <p>{part.text}</p>
             </div>
-            <h2>{part.title}</h2>
-            <p>{part.text}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     </Frame>
   );
+}
+
+/**
+ * The slide that opens a part: its number and title, what it covers, and the
+ * seven parts with this one in teal and those already covered in grey.
+ */
+function PartDivider({ section }: { section: Section }) {
+  const current = parts.findIndex((part) => part.key === section);
+  const part = parts[current];
+  return (
+    <Slide className={styles.deck}>
+      <div className={styles.partSlide}>
+        <div className={styles.partLead}>
+          <p className={styles.partKicker}>Part {current + 1} of {parts.length}</p>
+          <p className={styles.partBig}>{current + 1}</p>
+          <h1 className={styles.partName}>{part.title}</h1>
+          <p className={styles.partText}>{part.text}</p>
+          {"tag" in part && (
+            <div className={styles.partTag}>
+              <StatusTag tag={part.tag} />
+            </div>
+          )}
+          <div className={`accent-bar ${styles.bar}`} />
+        </div>
+        <ol className={styles.partList}>
+          {parts.map((item, index) => (
+            <li
+              key={item.key}
+              className={index === current ? styles.partListCurrent : index < current ? styles.partListDone : ""}
+            >
+              <span className={styles.partListNumber}>{index + 1}</span>
+              {item.title}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Slide>
+  );
+}
+
+export function PartWhatSlide() {
+  return <PartDivider section="what" />;
+}
+
+export function PartHaveSlide() {
+  return <PartDivider section="have" />;
+}
+
+export function PartProjectsSlide() {
+  return <PartDivider section="projects" />;
+}
+
+export function PartExploreSlide() {
+  return <PartDivider section="explore" />;
+}
+
+export function PartIdeasSlide() {
+  return <PartDivider section="ideas" />;
+}
+
+export function PartCollaborateSlide() {
+  return <PartDivider section="collaborate" />;
 }
 
 /** One organisation: its mark in a cell of fixed height, and a caption below. */
@@ -954,7 +1017,7 @@ export function MacroSlide() {
       scale={1.32}
       subtitle="Three possible routes, each at a different stage"
     >
-      <div className={styles.cards} style={columns(3)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {macroLinks.map((link) => (
           <Card
             key={link.title}
@@ -989,7 +1052,7 @@ export function PilotsSlide() {
       subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
       status={[tags.notBuilt, tags.noResults]}
     >
-      <div className={styles.cards} style={columns(2)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(2)}>
         {pilots.map((item, index) => (
           <Reveal key={item.title} step={index + 1} ghost className={styles.card}>
             <div className={`${styles.cardTitleRow} ${styles.titleTwoLines}`}>
@@ -1075,7 +1138,7 @@ export function CoverageSlide() {
       scale={1.12}
       subtitle="Taxes and benefits on households, with business-tax changes allocated to them"
     >
-      <div className={styles.cards} style={columns(4)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {coverage.map((group, index) => (
           <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
             <div className={styles.cardTitleRow}>
@@ -1119,7 +1182,7 @@ export function AxiomRulesSlide() {
       scale={0.9}
       subtitle="It publishes open, machine-readable encodings of the world’s rules, starting with tax and benefit policy"
     >
-      <div className={styles.cards} style={columns(3)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {axiomRules.map((rule, index) => (
           <div key={rule.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
             <div className={styles.cardHead}>
@@ -1149,7 +1212,7 @@ export function AxiomTodaySlide() {
       subtitle="Rules on the business side: what the Axiom Foundation has encoded, and what it has not"
       status={[{ label: "As of 16 November 2026", tone: "muted" }]}
     >
-      <div className={styles.cards} style={columns(3)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {axiomToday.map((group, index) => (
           <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
             <div className={styles.cardTitleRow}>
@@ -1315,7 +1378,7 @@ export function TradeSlide() {
       subtitle="The trade study: price and earnings changes from four trade events, traced to households"
       status={[tags.workingPaper, tags.microcosm]}
     >
-      <div className={styles.cards} style={columns(4)}>
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {tradeEvents.map((event, index) => (
           <div
             key={event.title}

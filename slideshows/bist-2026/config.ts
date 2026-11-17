@@ -17,6 +17,12 @@ import {
   LinkSlide,
   MacroSlide,
   MicrocosmBuildSlide,
+  PartCollaborateSlide,
+  PartExploreSlide,
+  PartHaveSlide,
+  PartIdeasSlide,
+  PartProjectsSlide,
+  PartWhatSlide,
   PilotsSlide,
   QuestionsSlide,
   RulesSlide,
@@ -30,7 +36,8 @@ import {
 // Slides with "builds" reveal their content in steps on clicks when
 // presented live. "exportBuilds: 1" gives each one page in a PDF export and
 // one slide in the deck index's count; in an export the build steps are all
-// shown (slides/Reveal.tsx), so that page is the complete slide.
+// shown (slides/Reveal.tsx), so that page is the complete slide. Parts 2 to 7
+// each open with a divider slide (slides/index.tsx, PartDivider).
 export const bist2026Config: SlideshowConfig = {
   id: "bist-2026",
   title: "From business shocks to household incomes",
@@ -47,6 +54,7 @@ export const bist2026Config: SlideshowConfig = {
     InBriefSlide,
     WhoSlide,
     // Part 2. What PolicyEngine is.
+    PartWhatSlide,
     { component: WhatSlide, builds: 4, exportBuilds: 1 },
     RulesSlide,
     { component: MicrocosmBuildSlide, builds: 5, exportBuilds: 1 },
@@ -54,23 +62,28 @@ export const bist2026Config: SlideshowConfig = {
     TargetsSlide,
     CalibrationLiveSlide,
     // Part 3. What we have already.
+    PartHaveSlide,
     CoverageSlide,
     AxiomRulesSlide,
     AxiomTodaySlide,
     // Part 4. Projects we have done.
+    PartProjectsSlide,
     BudgetSlide,
     AiPostSlide,
     { component: FirmMethodSlide, builds: 3, exportBuilds: 1 },
     TradeSlide,
     { component: BridgeSlide, builds: 3, exportBuilds: 1 },
     // Part 5. What we could explore further.
+    PartExploreSlide,
     { component: EpdSlide, builds: 4, exportBuilds: 1 },
     { component: MacroSlide, builds: 3, exportBuilds: 1 },
     // Part 6. Ideas that fit the unit.
+    PartIdeasSlide,
     BusinessPolicySlide,
     { component: AbmSlide, builds: 3, exportBuilds: 1 },
     { component: LinkSlide, builds: 4, exportBuilds: 1 },
     // Part 7. How we could collaborate.
+    PartCollaborateSlide,
     { component: PilotsSlide, builds: 2, exportBuilds: 1 },
     QuestionsSlide,
     ClosingSlide,
