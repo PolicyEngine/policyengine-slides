@@ -10,8 +10,8 @@
 // its rerun on Microcosm UK (PR #46, open, not merged).
 //
 // The talk has six parts: an introduction; what PolicyEngine is; what we
-// have already; projects we have done; what we could explore together; and
-// how we could collaborate. The slide order is in
+// have already; projects we have done; what could be explored; and possible
+// next steps, if there is interest. The slide order is in
 // config.ts and the part labels are "parts" below.
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
@@ -29,15 +29,18 @@
 //   November), which is eight days newer than that build.
 
 import {
+  IconAffiliate,
   IconArrowsExchange,
   IconArrowsSplit,
   IconBasket,
   IconBolt,
   IconBriefcase,
   IconBuildingFactory2,
+  IconBuildingBank,
   IconCalendar,
   IconCalendarEvent,
   IconChartBar,
+  IconChartLine,
   IconChartPie,
   IconCircleCheck,
   IconCircleDashed,
@@ -66,6 +69,8 @@ import {
   IconReceiptTax,
   IconRefresh,
   IconRobot,
+  IconRocket,
+  IconRoute,
   IconScale,
   IconShip,
   IconShoppingCart,
@@ -78,6 +83,7 @@ import {
   IconUsers,
   IconWallet,
   IconWorld,
+  type Icon,
 } from "@tabler/icons-react";
 
 const microcosmCommit = "429d7a0de624332d3fc8a221d72bd8cb9f7211fe";
@@ -203,6 +209,15 @@ export const sources = {
     label: "Dosi, Fagiolo and Roventini (2010)",
     href: "https://doi.org/10.1016/j.jedc.2010.06.018",
   },
+  // Crossref, DOI 10.1093/restud/rdu035, read 17 November 2026: Caliendo and
+  // Parro, "Estimates of the Trade and Welfare Effects of NAFTA", The Review
+  // of Economic Studies 82(1), 1-44 (2015). Cited as the kind of
+  // quantitative trade model meant: many sectors, input-output links, one
+  // wage per country. It has not been run with PolicyEngine.
+  caliendoParro: {
+    label: "Caliendo and Parro (2015)",
+    href: "https://doi.org/10.1093/restud/rdu035",
+  },
   nuffield: {
     label: "PolicyEngine supporters",
     href: "https://www.policyengine.org/uk/supporters",
@@ -249,6 +264,14 @@ export const sources = {
   impactAnalysis: {
     label: "policyengine.py impact analysis",
     href: `${pythonRepo}/docs/impact-analysis.md`,
+  },
+  outputs: {
+    label: "policyengine.py output classes",
+    href: `https://github.com/PolicyEngine/policyengine.py/tree/${pythonCommit}/src/policyengine/outputs`,
+  },
+  areaDisclosure: {
+    label: "Disclosure control for area results",
+    href: `${pythonRepo}/src/policyengine/disclosure/__init__.py`,
   },
   sourceStages: {
     label: "Microcosm UK source stages",
@@ -355,8 +378,10 @@ export const tags = {
 // PolicyEngine UK has no firm entity, see coverage and abmQuestions below).
 // Its slides run as one argument: the general mechanism (tables in, tables
 // out), then a trade application (the deal), a business application (BICS),
-// the agent-based model that could supply firms' behaviour, and the
-// longer-term routes to macroeconomic models.
+// three kinds of agent-based model that could supply firms' behaviour, and
+// the longer-term routes to macroeconomic models. Part 6 assumes no
+// collaboration: it offers two possible starting points, for discussion, if
+// there is appetite (the part keeps the key "collaborate" in code only).
 export const parts = [
   { key: "intro", icon: IconFlag, title: "Introduction", short: "Introduction", text: "Who we are." },
   {
@@ -364,7 +389,7 @@ export const parts = [
     icon: IconScale,
     title: "What PolicyEngine is",
     short: "What PolicyEngine is",
-    text: "How a run works, the rules, the household data and its calibration.",
+    text: "How a run works, how far results break down, the rules, the household data and its calibration.",
   },
   {
     key: "have",
@@ -383,17 +408,17 @@ export const parts = [
   {
     key: "explore",
     icon: IconCompass,
-    title: "What we could explore together",
-    short: "Explore together",
+    title: "What could be explored",
+    short: "Ideas to explore",
     text: "One way to link models, applied to trade and business policy, then agent-based and macroeconomic models.",
     tag: tags.notBuilt,
   },
   {
     key: "collaborate",
-    icon: IconHeartHandshake,
-    title: "How we could collaborate",
-    short: "Collaborate",
-    text: "Two candidate pilots, and questions for discussion.",
+    icon: IconRoute,
+    title: "Possible next steps",
+    short: "Next steps",
+    text: "If there is interest: two possible starting points, and questions.",
   },
 ] as const;
 
@@ -704,14 +729,16 @@ export const tradePath =
 //   which is not built (see macroLinks below).
 // The standard GTAP model has one wage per labour type and its standard
 // closure fixes aggregate employment, hence "wages by labour type" and
-// "closure stated".
+// "closure stated". A quantitative trade model in the style of Caliendo and
+// Parro (2015) (multi-sector, with input-output links and one wage per
+// country) gives one economy-wide wage, hence "or one wage".
 export const epdTrace = {
   flow: [
     {
       icon: IconWorld,
       owner: "Trade or macro model",
       title: "Results for the deal",
-      text: "Prices and jobs by sector; wages by labour type; closure stated",
+      text: "Prices and jobs by sector; wages by labour type, or one wage; closure stated",
     },
     {
       icon: IconArrowsExchange,
@@ -755,6 +782,14 @@ export const epdTrace = {
 // at random over repeated draws (20 in the trade study's rerun, PR #46). Occupation comes
 // from the survey's job record; a map from a trade model's labour types to
 // occupations is part of the proposed interface and is not built.
+// One economy-wide wage (a quantitative trade model of the Caliendo-Parro
+// kind: multi-sector, input-output links, one wage per country) needs no
+// sector or occupation mapping: the same earnings change in every SIC
+// division is what apply_shocks already takes, hence "Can take today". Such a
+// model reports a real wage; PolicyEngine needs the nominal wage and prices
+// separately, or the real wage alone, so prices are not counted twice (said
+// in NOTES.md). Sector output and trade flows, which these models also
+// report, have no use in PolicyEngine and are not on the slide.
 export const tariffDisaggregation = {
   rows: [
     {
@@ -768,15 +803,23 @@ export const tariffDisaggregation = {
     {
       icon: IconUser,
       result: "Wages by labour type",
-      from: "CGE trade model",
+      from: "CGE trade model of the GTAP kind",
       key: "Occupation group",
       assigned: "Employees in those occupations",
       tag: tags.extension,
     },
     {
+      icon: IconCoins,
+      result: "One economy-wide wage",
+      from: "Multi-sector quantitative trade model",
+      key: "None: the same change in every sector",
+      assigned: "All employees",
+      tag: tags.canToday,
+    },
+    {
       icon: IconShoppingCart,
       result: "Prices",
-      from: "Partial-equilibrium and CGE trade models",
+      from: "Partial-equilibrium, CGE and quantitative trade models",
       key: "COICOP spending division",
       assigned: "Households, by what they spend",
       tag: tags.mapping,
@@ -949,32 +992,48 @@ export const macroLinks = [
   },
 ];
 
-// Candidate questions for a link with an agent-based model. None is built or
-// run. Row 3 refers to the Dosi et al. class of model (source above), which
-// is not about AI; applying it to AI is hypothetical. Each row says what the
-// agent-based model would pass in; what PolicyEngine returns is the same for
-// all three (abmReturns).
+// Three kinds of agent-based model, and what each could pass in. None is
+// built or run, and none is named: the rows describe kinds of model. Row 1,
+// a supply-chain network model, leads ("First candidate"): its result, job
+// and earnings losses by sector, is what the existing code takes. Row 2, a
+// business-investment model with expectations and uncertainty at its core,
+// gives paths of investment, output and hiring by sector; PolicyEngine takes
+// the jobs and earnings, one year at a time. Where such a model also reports
+// profits, PolicyEngine could allocate an economy-wide change by
+// shareholding; that allocation exists for business taxes and is booked as
+// tax, so a profit change needs an extension (NOTES.md, not the slide).
+// Row 3 is the class of model of Dosi, Fagiolo and Roventini (2010) (source
+// above), which is not about AI. Each row says what the agent-based model
+// would pass in; what PolicyEngine returns is the same for all three
+// (abmReturns). The former BICS row (firms choosing between prices, pay and
+// profit) is in NOTES.md: BICS has its own slide.
 export const abmQuestions = [
   {
-    icon: IconCpu,
-    question: "A semiconductor supply disruption",
-    behaviour: "Firms lose inputs, cut output and jobs",
+    icon: IconAffiliate,
+    model: "A supply-chain network model",
+    detail: "A shock to one product, passed along the firm network",
+    behaviour: "Suppliers and buyers lose inputs, cut output and jobs",
     passes: "Job and earnings losses by sector",
     tag: tags.canToday,
+    lead: true,
   },
   {
-    icon: IconBolt,
-    question: "Electricity-cost relief (BICS, previous slide)",
-    behaviour: "Firms choose between prices, pay and profit",
-    passes: "Price changes by spending category; pay by sector",
-    tag: tags.mapping,
-  },
-  {
-    icon: IconRobot,
-    question: "AI adoption over the cycle",
-    behaviour: "Firms adopt, enter and exit; wages adjust",
-    passes: "Jobs and wages by sector, one year at a time",
+    icon: IconChartLine,
+    model: "A business\u2011investment model",
+    detail: "Expectations and uncertainty at its core",
+    behaviour: "Firms’ investment, output and hiring paths by sector",
+    passes: "Jobs and earnings by sector, one year at a time",
     tag: tags.canToday,
+    lead: false,
+  },
+  {
+    icon: IconRocket,
+    model: "An endogenous\u2011growth model",
+    detail: "In the style of Dosi, Fagiolo and Roventini (2010)",
+    behaviour: "Firms adopt technology, enter and exit over the cycle",
+    passes: "Paths of jobs and wages by sector, one year at a time",
+    tag: tags.canToday,
+    lead: false,
   },
 ];
 
@@ -984,13 +1043,14 @@ export const abmQuestions = [
 // age and weight, and applies wage cuts or job losses by two-digit SIC
 // division; region is reported (runner.py, region_income_change) but is not
 // an input, so losses by sector and region would be a small extension.
-// Prices: policyengine-uk holds spending by category
-// (variables/input/consumption/), and the trade study applies price changes
-// to food and energy spending (uk_trade_shock_study/incidence.py); mapping an
-// agent-based model's sectors to those categories is the work. Profits by
-// sector cannot be taken: the model allocates an economy-wide profit change
-// by shareholding and has no link from a sector's profits to its owners, so
-// profits are off the slide. Paths: each year is a separate run.
+// Prices (the former BICS row, now in NOTES.md): policyengine-uk holds
+// spending by category (variables/input/consumption/), and the trade study
+// applies price changes to food and energy spending
+// (uk_trade_shock_study/incidence.py); mapping an agent-based model's sectors
+// to those categories is the work. Profits by sector cannot be taken: the
+// model allocates an economy-wide change by shareholding and has no link from
+// a sector's profits to its owners, so profits are off the slide. Paths:
+// each year is a separate run.
 
 // The full list of outputs is on the linking slide (tariffDisaggregation);
 // this is its short form. "Benefit claims" and "all by year" are in NOTES.md.
@@ -1028,7 +1088,7 @@ export const dataAccess = [
   },
 ];
 
-// The Axiom Foundation's rules as code (slides 13 and 14). The Axiom
+// The Axiom Foundation's rules as code (slides 14 and 15). The Axiom
 // Foundation is not PolicyEngine: it publishes open, machine-readable
 // encodings of the world's rules, starting with tax and benefit policy (the
 // descriptor on axiom.org/about). Max Ghenis is CEO of both the Axiom
@@ -1128,7 +1188,7 @@ export const axiomRules = [
 
 // The relationship (axiom.org/about) is in NOTES for the presenter, not on the slide.
 
-// What exists today and how a model could call it (slide 14). Same commits
+// What exists today and how a model could call it (slide 15). Same commits
 // as axiomRules, read 16 November 2026. The cards give examples.
 // - Encoded: the five UK modules above, with the status each carries there;
 //   SSCBA 1992 s.166 (statutory maternity pay's earnings-related rate) and
@@ -1229,7 +1289,8 @@ export const axiomAccess = [
 export const axiomGeography =
   "The Axiom Foundation’s site shows encoded rules from six countries: the US, UK, Belgium, Canada, New Zealand and Israel.";
 
-// Two candidate pilots. Neither has published results: the trade study
+// Two possible starting points, for discussion if there is appetite; no
+// collaboration is assumed. Neither has published results: the trade study
 // reports none for the deal schedule and nothing exists on BICS. "Starting
 // point" rows name existing work: the trade study's US-tariff episode (06c8bbc)
 // and its UK–India duty reductions, a price change traced to households by
@@ -1244,7 +1305,7 @@ export const pilots = [
       {
         icon: IconWorld,
         label: "A trade model could provide",
-        text: "Prices and jobs by sector; wages by labour type",
+        text: "Prices and jobs by sector; wages by labour type, or one wage",
       },
       {
         icon: IconHome,
@@ -1264,7 +1325,7 @@ export const pilots = [
     rows: [
       {
         icon: IconBuildingFactory2,
-        label: "The Modelling Unit could provide",
+        label: "A firm or sector model could provide",
         text: "Cost change by sector; its split to prices, pay and profits",
       },
       {
@@ -1281,16 +1342,18 @@ export const pilots = [
   },
 ];
 
-// Six questions. The second and third follow from what different kinds of
-// model report (tariffDisaggregation above); tariff revenue and returns to capital
-// as further channels are in NOTES.md.
+// Six questions. The first asks whether there is appetite at all, and on
+// which question (it replaces "Which pilot first"). The second and third
+// follow from what different kinds of model report (tariffDisaggregation
+// above); tariff revenue and returns to capital as further channels are in
+// NOTES.md.
 export const questions = [
-  { icon: IconTargetArrow, text: "Which pilot first: the Economic Prosperity Deal, or BICS?" },
+  { icon: IconTargetArrow, text: "Is there appetite to explore a link, and on which question?" },
   { icon: IconWorld, text: "Which model would supply the scenario, and under which closure?" },
   { icon: IconCalendar, text: "How should a long-run result map to fiscal years?" },
   { icon: IconArrowsSplit, text: "Where should the prices, pay and profits split come from?" },
   { icon: IconBuildingFactory2, text: "Which firm behaviour needs an agent-based model, and what does it report?" },
-  { icon: IconHome, text: "Which household results matter most?" },
+  { icon: IconHome, text: "Which household results matter most: income groups, places or both?" },
 ];
 
 // How the rules are encoded. The snippet is abridged from policyengine-uk
@@ -1348,6 +1411,93 @@ export const rulesEntities = [
 // (gov.hmrc.income_tax.rates.uk[0].rate: 0.21) and what comes from outside
 // the model (firms' decisions, general equilibrium) are in NOTES.md.
 export const runStatus: Tag = { label: "Mostly static by default", tone: "muted" };
+
+// How far results break down (slide 6, after how a run works). Every item is
+// an output of policyengine.py 810a59e or a variable of policyengine-uk
+// d3db7ac; what needs custom analysis says so.
+// - By income: tax_benefit_models/uk/analysis.py (economic_impact_analysis)
+//   returns income deciles and wealth deciles (household_wealth_decile).
+//   The default income decile ranks households by household_net_income with
+//   survey weights times household size (outputs/decile_impact.py); the
+//   model's own deciles of equivalised HBAI income, before and after housing
+//   costs (household_income_decile, household_income_decile_ahc), can be
+//   passed as the grouping variable. Shares gaining and losing: outputs/
+//   intra_decile_impact.py, five bands (lose more than 5%, lose less, no
+//   change within 0.1%, gain less than 5%, gain more). Inequality:
+//   outputs/inequality.py, calculate_uk_inequality on
+//   equiv_hbai_household_net_income: Gini, top 10% and top 1% shares, bottom
+//   50% share.
+// - By people: outputs/poverty.py, four UK measures (absolute and relative,
+//   before and after housing costs: in_poverty_bhc, in_poverty_ahc,
+//   in_relative_poverty_bhc, in_relative_poverty_ahc);
+//   calculate_uk_poverty_by_age (under 18, 18 to 64, 65 and over) and
+//   calculate_uk_poverty_by_gender. Household type, tenure and number of
+//   children are model variables (family_type, deprecated, on the benefit
+//   unit; tenure_type; num_children), not outputs: a breakdown by them is
+//   custom analysis, for example with the outputs' filter_variable.
+// - By programme: UK_PROGRAMS in analysis.py, 14 rows (income tax, National
+//   Insurance, VAT, council tax, fuel duty, employer NI; Universal Credit,
+//   Child Benefit, Pension Credit, Income Support, tax credits and their two
+//   parts, the State Pension). The net Exchequer cost is the change in the
+//   model's government balance, as on the run slide.
+// - By place: outputs/uk_geography_disclosure.py, levels national, region,
+//   constituency and local_authority. Regions: the nine English regions and
+//   three nations (ITL1), in the national file. Constituencies: 650
+//   (data/uk_geography/constituencies_2024.csv, 2024 boundaries); local
+//   authorities: 361 (local_authorities_2023.csv). The bundle routes both to
+//   the separate local-area file (data/bundle/manifest.json,
+//   regional_release_kind "local_area"), labelled experimental, as elsewhere
+//   in the deck. The older constituency_impact.py and
+//   local_authority_impact.py outputs are deprecated because they have no
+//   disclosure control.
+// - The foot: the disclosure defaults (disclosure/schema.py,
+//   DisclosureSettings; uk_geography_disclosure.py) follow the UK Data
+//   Service licence, "at least 10 distinct survey households behind a
+//   number", and attach bootstrap intervals (90% by default). Sector-by-region
+//   cells have fewer records still (see the linking slide).
+export type Breakdown = { text: string; tag?: Tag };
+
+export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
+  {
+    icon: IconChartBar,
+    title: "By income",
+    items: [
+      { text: "Income and wealth deciles: the average change" },
+      { text: "Shares gaining and losing, in five bands" },
+      { text: "Gini; top 10%, top 1% and bottom 50% shares" },
+    ],
+  },
+  {
+    icon: IconUsers,
+    title: "By people",
+    items: [
+      { text: "Poverty before and after housing costs, absolute and relative" },
+      { text: "For children, ages 18–64 and 65 and over, and by sex" },
+      { text: "Household type, tenure, number of children", tag: { label: "Custom analysis", tone: "muted" } },
+    ],
+  },
+  {
+    icon: IconReceiptTax,
+    title: "By programme",
+    items: [
+      { text: "Income tax, NI, VAT, council tax, fuel duty" },
+      { text: "Universal Credit, legacy benefits, Child Benefit, Pension Credit, State Pension" },
+      { text: "Net cost to the Exchequer" },
+    ],
+  },
+  {
+    icon: IconMap,
+    title: "By place",
+    items: [
+      { text: "The UK, and its 12 regions and nations (ITL1)" },
+      { text: "650 parliamentary constituencies", tag: tags.experimental },
+      { text: "361 local authorities", tag: tags.experimental },
+    ],
+  },
+];
+
+export const breakdownsFoot =
+  "Area results are published only with at least 10 survey households behind each number, with intervals; finer cells, such as sector by region, rest on fewer records still";
 
 // Microcosm UK 2024-25: what the pipeline builds.
 // The slide describes the certified file. Its build

@@ -2303,3 +2303,28 @@
 .partListCurrent .partListNumber {
   color: var(--pe-teal);
 }
+
+/* ---------- Agent-based models: the first candidate leads ----------
+   A teal rule over the lead row's model and input, in place of the
+   hairline (no tint), and a small label above the model's name. */
+
+.cellFirst {
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+}
+
+.leadKicker {
+  margin-bottom: calc(var(--u) * 0.25);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+/* ---------- How far results break down: a tag after a list item ---------- */
+
+.breakdownList .tag {
+  margin-left: calc(var(--u) * 0.6);
+  vertical-align: middle;
+}

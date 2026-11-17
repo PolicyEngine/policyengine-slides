@@ -22,6 +22,8 @@ import {
   axiomGeography,
   axiomRules,
   axiomToday,
+  breakdowns,
+  breakdownsFoot,
   budgetProject,
   businessPolicy,
   calibrationEquation,
@@ -535,6 +537,42 @@ export function WhatSlide() {
   );
 }
 
+/** How far a run's results break down: four groups, from income to place. */
+export function BreakdownsSlide() {
+  return (
+    <Frame
+      section="what"
+      title="How far results break down"
+      scale={1.12}
+      subtitle="By income, people, programme and place, from the UK down to local areas"
+      status={[{ label: "policyengine.py outputs", tone: "built" }]}
+    >
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
+        {breakdowns.map((group, index) => (
+          <div key={group.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
+            <div className={styles.cardTitleRow}>
+              <Badge icon={group.icon} />
+              <h2>{group.title}</h2>
+            </div>
+            <ul className={`${styles.list} ${styles.breakdownList}`}>
+              {group.items.map((item) => (
+                <li key={item.text}>
+                  {item.text}
+                  {item.tag && <StatusTag tag={item.tag} />}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className={styles.rowsFoot}>
+        <StatusTag tag={{ label: "Thin cells", tone: "caution" }} />
+        <p>{breakdownsFoot}.</p>
+      </div>
+    </Frame>
+  );
+}
+
 export function EpdSlide() {
   const { flow, feedback } = epdTrace;
   return (
@@ -598,10 +636,20 @@ export function LinkSlide() {
             </Reveal>
           </Fragment>
         ))}
-        <Reveal step={4} motion="wipe" className={`${styles.arrow} ${styles.sharedArrow}`}>
+        <Reveal
+          step={4}
+          motion="wipe"
+          className={`${styles.arrow} ${styles.sharedArrow}`}
+          style={{ gridRow: `2 / span ${rows.length}` }}
+        >
           <IconArrowRight stroke={2.2} aria-hidden="true" />
         </Reveal>
-        <Reveal step={4} ghost className={`${styles.cell} ${styles.sharedCell}`}>
+        <Reveal
+          step={4}
+          ghost
+          className={`${styles.cell} ${styles.sharedCell}`}
+          style={{ gridRow: `2 / span ${rows.length}` }}
+        >
           <ul className={styles.list}>
             {breakdowns.map((item) => (
               <li key={item.title}>
@@ -961,39 +1009,46 @@ export function AbmSlide() {
     <Frame
       section="explore"
       title="Where an agent-based model could link"
-      scale={1.04}
-      subtitle="Three candidate questions, for discussion"
+      scale={1.0}
+      subtitle="Three kinds of agent-based model, for discussion"
       status={[tags.notBuilt]}
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Policy question</p>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Kind of model</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What it would simulate</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What it would pass in</p>
         <span />
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What PolicyEngine reports</p>
-        {abmQuestions.map((row, index) => (
-          <Fragment key={row.question}>
-            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellLead}`}>
-              <Badge icon={row.icon} />
-              {row.question}
-            </Reveal>
-            <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
-              <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </Reveal>
-            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellDashed}`}>
-              {row.behaviour}
-            </Reveal>
-            <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
-              <IconArrowRight stroke={2.2} aria-hidden="true" />
-            </Reveal>
-            <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellTagged}`}>
-              {row.passes}
-              <StatusTag tag={row.tag} />
-            </Reveal>
-          </Fragment>
-        ))}
+        {abmQuestions.map((row, index) => {
+          const lead = row.lead ? styles.cellFirst : "";
+          return (
+            <Fragment key={row.model}>
+              <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellLead} ${lead}`}>
+                <Badge icon={row.icon} />
+                <div>
+                  {row.lead && <p className={styles.leadKicker}>First candidate</p>}
+                  {row.model}
+                  <p className={styles.cellSub}>{row.detail}</p>
+                </div>
+              </Reveal>
+              <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
+                <IconArrowRight stroke={2.2} aria-hidden="true" />
+              </Reveal>
+              <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellDashed}`}>
+                {row.behaviour}
+              </Reveal>
+              <Reveal step={index + 1} motion="wipe" className={styles.arrow}>
+                <IconArrowRight stroke={2.2} aria-hidden="true" />
+              </Reveal>
+              <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellTagged} ${lead}`}>
+                {row.passes}
+                <StatusTag tag={row.tag} />
+              </Reveal>
+            </Fragment>
+          );
+        })}
         <span className={`${styles.arrow} ${styles.sharedArrow}`}>
           <IconArrowRight stroke={2.2} aria-hidden="true" />
         </span>
@@ -1043,9 +1098,9 @@ export function PilotsSlide() {
   return (
     <Frame
       section="collaborate"
-      title="Two candidate pilots"
+      title="Two possible starting points"
       scale={1.26}
-      subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
+      subtitle="For discussion, if there is appetite: one scenario each, passed one way to PolicyEngine"
       status={[tags.notBuilt, tags.noResults]}
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(2)}>

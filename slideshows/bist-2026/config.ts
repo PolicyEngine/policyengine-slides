@@ -5,6 +5,7 @@ import {
   AxiomRulesSlide,
   AxiomTodaySlide,
   AxiomLiveSlide,
+  BreakdownsSlide,
   BridgeSlide,
   BudgetSlide,
   BusinessPolicySlide,
@@ -43,7 +44,7 @@ export const bist2026Config: SlideshowConfig = {
   id: "bist-2026",
   title: "From business shocks to household incomes",
   description:
-    "PolicyEngine for the Modelling Unit: what it is, what we have and have done, what we could explore with trade, macro and agent-based models, and how we could collaborate.",
+    "PolicyEngine for the Modelling Unit: what it is, how far its results break down, what we have and have done, what could be explored with trade, macro and agent-based models, and possible next steps.",
   date: "2026-11-19",
   location: "Modelling Unit, Department for Business, Innovation, Science and Trade",
   footerText: "BIST Modelling Unit · 19 November 2026",
@@ -57,6 +58,7 @@ export const bist2026Config: SlideshowConfig = {
     // Part 2. What PolicyEngine is.
     PartWhatSlide,
     { component: WhatSlide, builds: 4, exportBuilds: 1 },
+    BreakdownsSlide,
     RulesSlide,
     { component: MicrocosmBuildSlide, builds: 5, exportBuilds: 1 },
     { component: CalibrationSlide, builds: 2, exportBuilds: 1 },
@@ -76,15 +78,15 @@ export const bist2026Config: SlideshowConfig = {
     VatReformsSlide,
     TradeSlide,
     { component: BridgeSlide, builds: 3, exportBuilds: 1 },
-    // Part 5. What we could explore together: the mechanism, two
-    // applications, then agent-based and macroeconomic models.
+    // Part 5. What could be explored: the mechanism, two applications, then
+    // agent-based and macroeconomic models.
     PartExploreSlide,
     { component: LinkSlide, builds: 4, exportBuilds: 1 },
     { component: EpdSlide, builds: 4, exportBuilds: 1 },
     BusinessPolicySlide,
     { component: AbmSlide, builds: 3, exportBuilds: 1 },
     { component: MacroSlide, builds: 3, exportBuilds: 1 },
-    // Part 6. How we could collaborate.
+    // Part 6. Possible next steps, if there is interest.
     PartCollaborateSlide,
     { component: PilotsSlide, builds: 2, exportBuilds: 1 },
     QuestionsSlide,
