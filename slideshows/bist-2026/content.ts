@@ -339,7 +339,7 @@ export const parts = [
     key: "have",
     icon: IconStack2,
     title: "What we have already",
-    text: "The taxes and benefits the UK model covers, and what is open.",
+    text: "The taxes and benefits the UK model covers, and what we can share.",
   },
   {
     key: "projects",
@@ -351,7 +351,7 @@ export const parts = [
     key: "explore",
     icon: IconCompass,
     title: "What we could explore further",
-    text: "From a trade or macroeconomic model's results to households.",
+    text: "Tracing a trade or macroeconomic model’s results to households.",
     tag: tags.notBuilt,
   },
   {
@@ -444,7 +444,7 @@ export const whoWeAre = {
       pixelHeight: 1280,
       height: 4.2,
       source: sources.no10,
-      caption: "Data science team built 10ds-microsim on PolicyEngine",
+      caption: "Its data science team built a microsimulation tool on PolicyEngine",
     },
     {
       name: "HM Treasury",
@@ -507,7 +507,7 @@ export const whoWeAre = {
       pixelHeight: 400,
       height: 4.2,
       source: sources.niesr,
-      caption: "NIESR, with NiGEM",
+      caption: "NIESR, with its NiGEM model",
     },
     {
       name: "WPI Economics",
@@ -534,13 +534,13 @@ export const whoWeAre = {
 export const modelFlow = [
   {
     icon: IconScale,
-    owner: "Open source",
+    owner: "Input: policy",
     title: "The rules",
     text: "Taxes and benefits, coded from legislation",
   },
   {
     icon: IconUsers,
-    owner: "Input",
+    owner: "Input: survey data",
     title: "The households",
     text: "Microcosm UK 2024–\u206025: incomes and spending by category, grown with OBR indices",
   },
@@ -572,8 +572,8 @@ export const coverage = [
   },
   {
     icon: IconShoppingCart,
-    title: "Taxes on spending and property",
-    items: ["VAT", "Fuel, alcohol and tobacco duties", "Stamp duty and council tax"],
+    title: "Taxes on spending",
+    items: ["VAT", "Fuel, alcohol and tobacco duties", "Stamp duty and council tax on property"],
     notModelled: "",
   },
   {
@@ -632,7 +632,7 @@ export const tradeEvents = [
   {
     icon: IconArrowsExchange,
     years: "From 2026",
-    channel: "Prices: a gain",
+    channel: "Prices (a gain)",
     title: "The UK–India agreement",
     text: "Projected duty reductions; the same path could serve any trade agreement",
     next: false,
@@ -657,7 +657,7 @@ export const tradeEvents = [
 // say "through taxes and benefits": that holds for the tariff and energy
 // episodes, not for the India duty reductions.
 export const tradePath =
-  "One path for every episode: a price or earnings change, applied to each Microcosm UK household by what it spends or earns";
+  "Every episode is a price or earnings change, applied to each Microcosm UK household by what it spends or earns";
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
 // 06c8bbc on the enhanced FRS, and the rerun (PR #46, 778557c) reports a
@@ -781,7 +781,7 @@ export const tariffDisaggregation = {
 // study's, and the trade slide's US tariffs card points here.
 export const tariffBridge = {
   steps: [
-    { icon: IconReceiptTax, title: "Tariff rates", text: "The pre-deal US schedule" },
+    { icon: IconReceiptTax, title: "Tariff rates", text: "US rates before the UK–US deal of May 2025" },
     { icon: IconShip, title: "US export intensity", text: "By two-digit SIC division", dashed: true },
     { icon: IconMathFunction, title: "Export-demand elasticity", text: "Assumed 1, as a placeholder", dashed: true },
     { icon: IconCoins, title: "Earnings change by sector", text: "About £1.0bn a year", dashed: true },
@@ -803,14 +803,14 @@ export const businessPolicy = {
     {
       icon: IconBolt,
       owner: "Scheme design",
-      title: "Cost change by sector",
-      text: "Estimated £35 to £40 per MWh, from 2027",
+      title: "Electricity cost cut",
+      text: "An estimated £35 to £40 per MWh for eligible firms, from 2027",
     },
     {
       icon: IconBuildingFactory2,
       owner: "Outside PolicyEngine",
-      title: "How firms use it",
-      text: "Another model, or an assumption",
+      title: "How firms pass it on",
+      text: "To prices, pay or profits: another model, or an assumption",
       dashed: true,
     },
     {
@@ -983,7 +983,7 @@ export const dataAccess = [
     icon: IconLockOpen,
     tag: { label: "Open", tone: "built" } as Tag,
     title: "Code",
-    text: "Rules, data pipeline and analysis are open source.",
+    text: "Rules, data pipeline and analysis code are all open source.",
   },
   {
     icon: IconLock,
@@ -1006,7 +1006,7 @@ export const dataAccess = [
 export const pilots = [
   {
     icon: IconShip,
-    title: "The Economic Prosperity Deal",
+    title: "The UK–US Economic Prosperity Deal",
     rows: [
       {
         icon: IconWorld,
@@ -1021,7 +1021,7 @@ export const pilots = [
       {
         icon: IconFlag,
         label: "A starting point",
-        text: "The trade study's tariff bridge",
+        text: "The trade study’s tariff-to-earnings steps",
       },
     ],
   },
@@ -1032,7 +1032,7 @@ export const pilots = [
       {
         icon: IconBuildingFactory2,
         label: "The Modelling Unit could provide",
-        text: "Cost change by sector; the prices–pay–profits split",
+        text: "Cost change by sector; its split to prices, pay and profits",
       },
       {
         icon: IconHome,
@@ -1042,7 +1042,7 @@ export const pilots = [
       {
         icon: IconFlag,
         label: "A starting point",
-        text: "The business-tax allocation, extended",
+        text: "Our business-tax allocation, extended to cost changes",
       },
     ],
   },
@@ -1155,20 +1155,20 @@ export const microcosmFlow = [
   {
     icon: IconUsers,
     owner: "FRS 2024–25",
-    title: "Survey spine",
-    text: "Households, incomes, job sectors",
+    title: "Survey base",
+    text: "Family Resources Survey: households, incomes, job sectors",
   },
   {
     icon: IconReceiptTax,
     owner: "HMRC SPI 2022–23",
     title: "Tax-record incomes",
-    text: "Copies of survey households take SPI incomes; extra copies above £200,000",
+    text: "Copies of FRS households take SPI incomes; more above £200,000",
   },
   {
     icon: IconWallet,
-    owner: "WAS, LCFS, ETB, NTS",
+    owner: "Donor surveys",
     title: "Wealth and spending",
-    text: "Drawn from donor surveys",
+    text: "Wealth (WAS), spending (LCFS, ETB), travel (NTS)",
   },
   {
     icon: IconHeartHandshake,
@@ -1196,7 +1196,7 @@ export const microcosmResult = {
 // certified build) is in the subtitle. The imputation method and the pinned
 // files and seeded draws are in NOTES.md.
 export const microcosmStatus: Tag = {
-  label: "No industry targets; copies’ sectors imputed",
+  label: "No targets by industry; sectors of SPI copies imputed",
   tone: "caution",
 };
 
@@ -1237,7 +1237,7 @@ export const calibrationEquation =
 
 export const calibrationFit = {
   stats: [
-    { icon: IconTargetArrow, value: "1,514", label: "targets; the dashboard browses them as 44 statistics" },
+    { icon: IconTargetArrow, value: "1,514", label: "official targets, grouped into 44 statistics" },
     { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
     { icon: IconUsers, value: "about 7.2k", label: "effective sample size (9.2% of records)" },
     { icon: IconHome, value: "78.2k", label: "household records" },
@@ -1369,15 +1369,16 @@ export const budgetProject = {
   ],
 };
 
-// Beside the live post: what the study does, not its results. The headline
+// Beside the live post: what the study does, not its results; the third
+// label names the outcomes it reports, with no figures. The headline
 // figures (aiShock above) are for the presenter and are in NOTES.md; the
 // post itself is the slide's focus.
 export const aiProject = {
   tag: { label: "Microcosm UK, 2027–28", tone: "built" } as Tag,
   labels: [
-    { icon: IconArrowsSplit, title: "Three channels", text: "Job losses, survivor wages, capital income" },
+    { icon: IconArrowsSplit, title: "Three channels", text: "Job losses, other workers’ wages, capital income" },
     { icon: IconUsers, title: "Five incidence scenarios", text: "By who bears the change" },
-    { icon: IconDatabase, title: "Microcosm UK", text: "The 2027–28 tax year" },
+    { icon: IconChartPie, title: "Three outcomes", text: "Exchequer cost, poverty, inequality" },
     { icon: IconDice, title: "50 random draws", text: "Of who loses a job" },
   ],
 };

@@ -31,7 +31,7 @@ slide, is in [NOTES.md](NOTES.md).
 
 3 · What we have already
 
-9. What the UK model covers, and what is open
+9. What the UK model covers, and what we can share
 
 4 · Projects we have done
 
@@ -44,7 +44,7 @@ slide, is in [NOTES.md](NOTES.md).
 
 5 · What we could explore further
 
-15. The Economic Prosperity Deal: from macro impacts to households
+15. The UK–US Economic Prosperity Deal: from model results to households
 16. Links to macroeconomic models
 
 6 · Ideas that fit the unit
@@ -170,7 +170,7 @@ notes for that slide.
   who we are); what PolicyEngine is (what the model computes and how a
   run works, the rules, the Microcosm data, calibration and the live
   dashboard); what we have already (model coverage, including business
-  taxes, and what is open); projects we have done (the Autumn Budget 2026
+  taxes, and what we can share); projects we have done (the Autumn Budget 2026
   dashboard, the AI scenario post, the synthetic firms of the firm-level VAT
   working paper, the trade working paper and its tariff episode); what we
   could explore further (the Economic Prosperity Deal from macro impacts to
@@ -409,7 +409,7 @@ The 27-slide version reordered the talk into seven parts and added slides: the
 calibration targets and the live calibration dashboard, the Autumn Budget
 2026 dashboard, the AI scenario post, the synthetic-firm method and the VAT
 threshold costing, the trade working paper (with its figure) and model
-coverage (with a row on what is open). The tariff bridge is now among the
+coverage (with a row on what we can share). The tariff bridge is now among the
 projects we have done. The appendix is gone: its slides' content is on talk
 slides or under "Backup material" in the notes. "Who we are" is three facts
 over two rows of equal logo cells; the Microcosm build is a snake flow in
@@ -445,8 +445,8 @@ slide that replaced it.
   calibration accuracy and the comparison with HMRC.
 - "Disaggregation: how sector results reach people" and "One way to link:
   tables in, tables out" are one slide (19), in part 6: each kind of result,
-  the kinds of model that report it, the code it would be mapped by, the
-  records that receive it and what PolicyEngine can already report. The
+  the kinds of model that report it, the key it would be mapped into, the
+  records that receive it once mapped and what PolicyEngine already reports. The
   one-wage trade model, the keys and the possible additions of the earlier
   slide are in the notes.
 - No slide has a "Sources" row any more; each slide's links are in its notes,

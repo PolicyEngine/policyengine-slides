@@ -245,7 +245,10 @@ function Flow({
             >
               <div className={styles.stepTop}>
                 <Badge icon={step.icon} />
-                {step.tag ? <StatusTag tag={step.tag} /> : <span className={styles.stepIndex}>{index + 1}</span>}
+                <span className={styles.stepMarks}>
+                  {step.tag && <StatusTag tag={step.tag} />}
+                  <span className={styles.stepIndex}>{index + 1}</span>
+                </span>
               </div>
               {step.owner && <p className={styles.owner}>{step.owner}</p>}
               <h2 style={titleLines ? { minHeight: `${1.2 * titleLines}em` } : undefined}>{step.title}</h2>
@@ -359,7 +362,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="In brief" scale={1.08} subtitle="The talk in seven parts: this introduction, then six more">
+    <Frame section="intro" title="In brief" scale={1.12} subtitle="Six parts after this introduction">
       <div className={styles.cards} style={columns(3)}>
         {parts.slice(1).map((part, index) => (
           <div key={part.key} className={`${styles.card} ${styles.partCard} ${styles.enter}`} style={enter(index)}>
@@ -388,7 +391,7 @@ function LogoCell({ org }: { org: Logo }) {
       width={org.width ?? 1}
       height={org.pixelHeight ?? 1}
       className={org.darken ? styles.logoDarken : undefined}
-      style={{ height: `calc(var(--u0) * ${org.height})`, width: "auto" }}
+      style={{ height: `calc(var(--u) * ${org.height})`, width: "auto" }}
     />
   ) : (
     <span className={styles.wordmark}>{org.name}</span>
@@ -436,8 +439,8 @@ export function WhoSlide() {
     <Frame
       section="intro"
       title="Who we are"
-      scale={0.97}
-      subtitle="The organisation, and who uses our UK work"
+      scale={1.1}
+      subtitle="The organisation, and where our UK work is used or cited"
     >
       <div className={styles.facts}>
         {facts.map((fact, index) => (
@@ -450,7 +453,7 @@ export function WhoSlide() {
           </div>
         ))}
       </div>
-      <LogoSection title="In government" logos={government} />
+      <LogoSection title="Used or cited in government" logos={government} />
       <LogoSection title="Think tanks and researchers using our work" logos={thinkTanks} />
     </Frame>
   );
@@ -475,7 +478,7 @@ export function EpdSlide() {
   return (
     <Frame
       section="explore"
-      title="The Economic Prosperity Deal: from macro impacts to households"
+      title="The UK–US Economic Prosperity Deal: from model results to households"
       scale={1.25}
       subtitle="How one deal could be traced from a trade or macro model's results to household incomes"
       status={[tags.noResults]}
@@ -498,16 +501,16 @@ export function LinkSlide() {
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>A model’s result</p>
         <span />
         <Reveal step={2} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead} ${styles.rowsHeadTag}`}>
-          Mapped by
+          Mapped into
           <StatusTag tag={tags.toBuild} />
         </Reveal>
         <span />
         <Reveal step={3} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
-          PolicyEngine can assign it to
+          Once mapped, assigned to
         </Reveal>
         <span />
         <Reveal step={4} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
-          PolicyEngine can already report
+          PolicyEngine already reports
         </Reveal>
         {rows.map((row) => (
           <Fragment key={row.result}>
@@ -563,7 +566,7 @@ export function BridgeSlide() {
       title="Who bears the cost of trade changes: the 2025 US tariffs"
       scale={1.1}
       subtitle="Inside the trade study: from tariff rates to employees’ earnings"
-      status={[tags.workingPaper, tags.microcosm, { label: "No published results for the deal", tone: "muted" }]}
+      status={[tags.workingPaper, tags.microcosm, { label: "No published results for the UK–US deal", tone: "muted" }]}
     >
       <Flow
         steps={steps}
@@ -884,7 +887,7 @@ export function BusinessPolicySlide() {
     <Frame
       section="ideas"
       title="Business policy: from firm costs to households"
-      scale={1.45}
+      scale={1.38}
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
       status={[tags.notBuilt, tags.noResults]}
     >
@@ -905,11 +908,11 @@ export function AbmSlide() {
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>Policy question</p>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>An agent-based model could simulate</p>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What it would simulate</p>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>It could pass in</p>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What it would pass in</p>
         <span />
-        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>PolicyEngine can report</p>
+        <p className={`${styles.rowLabel} ${styles.rowsHead}`}>What PolicyEngine reports</p>
         {abmQuestions.map((row, index) => (
           <Fragment key={row.question}>
             <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellLead}`}>
@@ -947,8 +950,8 @@ export function MacroSlide() {
     <Frame
       section="explore"
       title="Links to macroeconomic models"
-      scale={1.25}
-      subtitle="Three possible routes, at three stages"
+      scale={1.32}
+      subtitle="Three possible routes, each at a different stage"
     >
       <div className={styles.cards} style={columns(3)}>
         {macroLinks.map((link) => (
@@ -981,7 +984,7 @@ export function PilotsSlide() {
     <Frame
       section="collaborate"
       title="Two candidate pilots"
-      scale={1.15}
+      scale={1.26}
       subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
       status={[tags.notBuilt, tags.noResults]}
     >
@@ -1012,7 +1015,7 @@ export function PilotsSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame section="collaborate" title="Questions for discussion" scale={1}>
+    <Frame section="collaborate" title="Questions for discussion" scale={1.12}>
       <ol className={styles.questions}>
         {questions.map((question, index) => (
           <li key={question.text} className={`${styles.question} ${styles.enter}`} style={enter(index)}>
@@ -1067,8 +1070,8 @@ export function CoverageSlide() {
   return (
     <Frame
       section="have"
-      title="What the UK model covers, and what is open"
-      scale={1.05}
+      title="What the UK model covers, and what we can share"
+      scale={1.12}
       subtitle="Taxes and benefits on households, with business-tax changes allocated to them"
     >
       <div className={styles.cards} style={columns(4)}>
@@ -1263,7 +1266,7 @@ export function TradeSlide() {
         ))}
       </div>
       <div className={styles.rowsFoot}>
-        <StatusTag tag={{ label: "One path", tone: "built" }} />
+        <StatusTag tag={{ label: "Method", tone: "built" }} />
         <p>{tradePath}</p>
       </div>
     </Frame>

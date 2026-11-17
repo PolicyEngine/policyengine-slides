@@ -24,7 +24,7 @@ beside it shows the part's place among the seven.
    a run works, the rules, the Microcosm data, calibration and the live
    calibration dashboard.
 3. **What we have already** (slide 9): what the UK model covers, on the
-   household and the business side, and what is open.
+   household and the business side, and what we can share.
 4. **Projects we have done** (slides 10 to 14): the Autumn Budget 2026
    dashboard, the AI scenario post, the synthetic firms of the firm-level
    VAT working paper, the trade working paper and its tariff episode.
@@ -74,7 +74,7 @@ slides, not build steps.
   to. (The card: "How a run works, the rules, the household data and its
   calibration.")
 - **3. What we have already.** The taxes and benefits the UK model covers,
-  how business taxes reach households, and what is open. PolicyEngine UK has
+  how business taxes reach households, and what we can share. PolicyEngine UK has
   no firm entity.
 - **4. Projects we have done.** The Autumn Budget 2026 dashboard, the AI
   scenario post, the synthetic firms of the firm-level VAT working paper, the trade
@@ -105,8 +105,9 @@ slides, not build steps.
 - **UK and US models.** One Python package, policyengine.py, runs both
   country models with the same reform and output interface (Ahmadi et al.
   2026, JOSS). This talk is about the UK model.
-- **In government** (the logo row). 10 Downing Street's data science team
-  built 10ds-microsim on PolicyEngine. The slide says only that HM Treasury,
+- **Used or cited in government** (the logo row). 10 Downing Street's data
+  science team built 10ds-microsim on PolicyEngine (the slide says "a
+  microsimulation tool"). The slide says only that HM Treasury,
   the OBR and Parliament (shown by the House of Lords logo) mention
   PolicyEngine on the public record. The detail, which is also under "Backup
   material" below:
@@ -129,7 +130,7 @@ slides, not build steps.
   made in 2024 and 2026, for local-area data and constituency-level Budget
   analysis. The slide folds this into the nonprofit line.
 - Media use is under "Backup material" below.
-- Layout: the three facts run across the top; "In government" and "Think
+- Layout: the three facts run across the top; "Used or cited in government" and "Think
   tanks and researchers using our work" are two rows of equal cells, one
   organisation each, with a caption under every mark. HM Treasury is set as
   a plain wordmark, as we hold no logo file.
@@ -246,7 +247,7 @@ slides, not build steps.
 
 - An open-source pipeline from licensed surveys and published statistics to a
   weighted file.
-- **Survey spine (FRS 2024–25).** Households, benefit units and people, with
+- **Survey base (FRS 2024–25).** Households, benefit units and people, with
   incomes, housing and each main job's sector.
 - **Tax-record incomes (HMRC SPI 2022–23).** The build adds 10,000 copies of
   FRS households whose adults take taxpayers' incomes drawn from the SPI
@@ -255,7 +256,7 @@ slides, not build steps.
     nobody of pension age and a fifth of the weight of the others.
   - The extra records above £200,000 are a separate step: copies placed in
     four income bands, from £200,000, £500,000, £1 million and £2 million.
-- **Wealth and spending (WAS, LCFS, ETB, NTS).** Wealth, spending by
+- **Wealth and spending (donor surveys: WAS, LCFS, ETB, NTS).** Wealth, spending by
   category, VAT, public services and travel, drawn from donor surveys.
 - **Benefit take-up (DWP and HMRC).** People who report a benefit in the FRS
   always claim it. Only the others the rules find entitled are drawn, so that
@@ -297,7 +298,7 @@ slides, not build steps.
 - Builds: first what goes in (the 1,514 targets and the 78.2k household
   records) beside the loss and the targets by publisher; then how the fitted
   weights do (98.7% within 10%, and the effective sample size).
-- 1,514 targets. The dashboard browses them as 44 statistics; these are its
+- 1,514 targets. The slide says "grouped into 44 statistics": the dashboard browses them that way; these are its
   display groups, not the families the loss uses.
 - 98.7% of targets are within 10% of the official figure.
 - An effective sample size of about 7.2k, 9.2% of the records: the weights
@@ -394,14 +395,14 @@ slides, not build steps.
 - **Sources.** [Calibration dashboard, pinned to the 7 November
   build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e).
 
-### 9. What the UK model covers, and what is open
+### 9. What the UK model covers, and what we can share
 
 - The row under the cards is the short form of "Open code, restricted
   microdata, synthetic data" under "Backup material" below.
 - Including how the model allocates business taxes to households.
 - **Taxes on income.** Income tax, with Scottish rates; employee, employer
   and self-employed NI; capital gains tax.
-- **Taxes on spending and property.** VAT; fuel, alcohol and tobacco duties;
+- **Taxes on spending (and property).** VAT; fuel, alcohol and tobacco duties;
   stamp duty and council tax.
 - **Taxes on business.** Employer NI, with rate and threshold changes passed
   to employees' pay by default. Business rates and corporate stamp duty, as
@@ -486,6 +487,10 @@ slides, not build steps.
   (policyengine.org/uk/research/uk-ai-study). The post's title is quoted as
   published; the slide's own words say "scenario". The full paper is on SSRN
   (Ahmadi 2026a).
+- Beside the post: three channels (job losses, other workers' wages, capital
+  income), five incidence scenarios, three outcomes (Exchequer cost, poverty,
+  inequality; no figures on the slide) and 50 random draws of who loses a
+  job. The tag carries Microcosm UK and the 2027–28 tax year.
 - An illustrative scenario, not a forecast, run on Microcosm UK for the
   2027–28 tax year. Microcosm grosses to 29.0 million employees in 2027–28.
 - **The central scenario.** 7% of employees lose their jobs for the full
@@ -631,6 +636,9 @@ slides, not build steps.
   on Microcosm UK.
 - The US tariffs card is marked "Next slide": the next slide is the same
   study's tariff episode in detail.
+- The line under the cards, tagged "Method": every episode is a price or
+  earnings change, applied to each Microcosm UK household by what it spends
+  or earns.
 - **The UK–India agreement** is the episode closest to a free trade
   agreement assessment: projected duty reductions passed to prices, then to
   each household's spending. Published assessments of trade agreements
@@ -651,7 +659,10 @@ slides, not build steps.
   steps a trade model could replace.
 - How the trade study turns the 2025 US tariffs into an earnings change for
   survey employees.
-- **Tariff rates.** The full US schedule before the Economic Prosperity Deal.
+- **Tariff rates.** The full US schedule before the Economic Prosperity Deal
+  (operative 8 May 2025; the slide says "before the UK–US deal of May
+  2025"). The tag "No published results for the UK–US deal" says the same:
+  the paper reports none for the deal's schedule.
 - **US export intensity.** By two-digit SIC division.
 - **Export-demand elasticity.** Assumed 1 (the OBR's March 2025 scenarios use
   0.4).
@@ -691,7 +702,7 @@ slides, not build steps.
   Prosperity Deal: general
   terms](https://www.gov.uk/government/publications/us-uk-economic-prosperity-deal-epd/general-terms-for-the-united-states-of-america-and-the-united-kingdom-of-great-britain-and-northern-ireland-economic-prosperity-deal-web-accessible-v).
 
-### 15. The Economic Prosperity Deal: from macro impacts to households
+### 15. The UK–US Economic Prosperity Deal: from model results to households
 
 - One deal has macro impacts and household impacts. This slide is the
   end-to-end path; the trade study’s tariff slide (slide 14) and the linking slide (slide
@@ -785,10 +796,10 @@ slides, not build steps.
 - Example: the British Industrial Competitiveness Scheme, which exempts
   eligible manufacturers in Great Britain from three electricity policy
   costs. Not built; no results.
-- **Cost change by sector (scheme design).** Relief from three electricity
+- **Electricity cost cut (scheme design).** Relief from three electricity
   policy costs for eligible manufacturers: the impact assessment estimates
   £35 to £40 per MWh, from 2027.
-- **How firms use it (outside PolicyEngine).** Lower prices, higher pay or
+- **How firms pass it on (outside PolicyEngine).** Lower prices, higher pay or
   more jobs, investment, or higher profits. This step comes from another
   model, or an assumption.
 - **Allocate to households (PolicyEngine).** Three channels: prices by
@@ -832,7 +843,7 @@ slides, not build steps.
   technology, entering and exiting, with jobs and wages adjusting, as in
   Dosi, Fagiolo and Roventini (2010). It passes in paths of jobs, wages and
   profits by sector, in place of the AI study's assumed scenario.
-- **PolicyEngine can report (the same for all three).** Household incomes by
+- **What PolicyEngine reports (the same for all three).** Household incomes by
   decile and region (local areas experimental), poverty, inequality, benefit
   claims, and tax and benefit receipts, by year. The slide gives the short
   form (incomes by decile and region; poverty and inequality; taxes and
@@ -844,12 +855,12 @@ slides, not build steps.
   technology sectors split out could also supply an AI scenario.
 - Youngman et al.'s agent-based model cites our approach to under-sampled
   wealthy households; it uses neither our model nor our data.
-- Builds: one question at a time; what PolicyEngine can report is shown from
+- Builds: one question at a time; what PolicyEngine reports is shown from
   the start.
 - A question to ask, not a claim: what does a supply-chain model report? A
   risk index would need a further step before it reaches households; jobs
   and earnings by sector could be passed in directly.
-- **Can we stand behind "It could pass in"?** Checked on 16 November 2026
+- **Can we stand behind "What it would pass in"?** Checked on 16 November 2026
   against the trade study's code (PR #46, 778557c, `tariff_pipeline/shocks.py`
   and `runner.py`) and policyengine-uk (d3db7ac). Each input carries a tag.
   - Job and earnings losses by sector: can take today. `apply_shocks` takes
@@ -879,7 +890,7 @@ slides, not build steps.
   earlier slides: "Disaggregation: how sector results reach people" and the
   earlier "One way to link: tables in, tables out". Each row is one kind of
   result, the code it would be mapped by (not built), the records
-  PolicyEngine can assign it to, and what PolicyEngine can already report.
+  what it is assigned to once mapped, and what PolicyEngine already reports.
   The small line under each result names the kinds of model that report it:
   jobs by sector from a CGE trade model or an agent-based model (which can
   also give earnings by sector); wages by labour type from a CGE trade
@@ -908,7 +919,7 @@ slides, not build steps.
   - `profits` (not built): % change in returns to capital; would be allocated
     by shareholding.
   - `job-loss rule`: equal chances in a cell, or tilted by age or pay.
-- PolicyEngine can already report (existing outputs; the right-hand column):
+- PolicyEngine already reports (existing outputs; the right-hand column):
   - By income decile: net income change; shares gaining and losing.
   - Poverty and inequality: poverty rates, Gini and income shares.
   - By programme: main taxes and benefits; government balance.
@@ -981,8 +992,10 @@ slides, not build steps.
   - Prices: can take today for the spending categories the model holds
     (`variables/input/consumption/`); the trade study applies price changes
     to food and energy spending.
-  - "Mapped by" is tagged "Not built yet": the mapping from another
+  - "Mapped into" is tagged "Not built yet": the mapping from another
     model's sectors or products to SIC and COICOP is the work in every row.
+    The "Can take today" tags in the next column (headed "Once mapped,
+    assigned to") apply once a result is in those keys.
   - Outputs: all existing; regions are ITL1; local areas are experimental.
 - **Sources.**
   [policyengine.py](https://github.com/PolicyEngine/policyengine.py); [Ahmadi
@@ -1001,7 +1014,7 @@ slides, not build steps.
   - PolicyEngine could provide: the sector mapping; household incomes by decile
     and region, and experimentally by local area; poverty; net Exchequer
     cost.
-  - A starting point: the trade study's tariff bridge, with the trade model's
+  - A starting point: the trade study's tariff-to-earnings steps (slide 14), with the trade model's
     results in place of its assumed elasticity.
 - **The British Industrial Competitiveness Scheme.**
   - The Modelling Unit could provide: the electricity-cost change by sector, and how
