@@ -9,9 +9,9 @@
 // post's, run on Microcosm UK for 2027-28; the trade study's are those of
 // its rerun on Microcosm UK (PR #46, open, not merged).
 //
-// The talk has seven parts: an introduction; what PolicyEngine is; what we
-// have already; projects we have done; what we could explore further; ideas
-// that fit the unit; and how we could collaborate. The slide order is in
+// The talk has six parts: an introduction; what PolicyEngine is; what we
+// have already; projects we have done; what we could explore together; and
+// how we could collaborate. The slide order is in
 // config.ts and the part labels are "parts" below.
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
@@ -35,7 +35,6 @@ import {
   IconBolt,
   IconBriefcase,
   IconBuildingFactory2,
-  IconBulb,
   IconCalendar,
   IconCalendarEvent,
   IconChartBar,
@@ -322,7 +321,7 @@ export const tags = {
   // rules; the energy episode's main run uses 2023-24 rules, and 2022-23
   // rules only for a comparison.
   microcosm: tag("Microcosm UK", "built"),
-  // Doability markers on the ideas slides (see the verification notes in
+  // Doability markers on the part 5 slides (see the verification notes in
   // NOTES.md): what the existing code takes, what needs a mapping between
   // another model's sectors and SIC or COICOP, and what needs a small change.
   canToday: tag("Can take today", "built"),
@@ -341,13 +340,17 @@ export const tags = {
   incomplete: tag("Incomplete, most checks paused", "caution"),
 };
 
-// The seven parts of the talk: the part navigator along the top of each
-// slide (its short labels), the divider slide before parts 2 to 7 and the
-// agenda of the "In brief" slide (the full titles). Parts 5 and 6 are
-// ideas: no link to a trade, macroeconomic or agent-based model is built, and
+// The six parts of the talk: the part navigator along the top of each
+// slide (its short labels), the divider slide before parts 2 to 6 and the
+// agenda of the "In brief" slide (the full titles). Part 5 holds the ideas:
+// no link to a trade, macroeconomic or agent-based model is built, and
 // there are no published PolicyEngine results for the Economic Prosperity
 // Deal or BICS (trade study 06c8bbc reports none for the deal schedule;
 // PolicyEngine UK has no firm entity, see coverage and abmQuestions below).
+// Its slides run as one argument: the general mechanism (tables in, tables
+// out), then a trade application (the deal), a business application (BICS),
+// the agent-based model that could supply firms' behaviour, and the
+// longer-term routes to macroeconomic models.
 export const parts = [
   { key: "intro", icon: IconFlag, title: "Introduction", short: "Introduction", text: "Who we are." },
   {
@@ -369,22 +372,14 @@ export const parts = [
     icon: IconPresentationAnalytics,
     title: "Projects we have done",
     short: "Projects",
-    text: "A Budget dashboard, an AI scenario, synthetic firms and trade.",
+    text: "A Budget dashboard, an AI scenario, synthetic firms and their VAT costings, and trade.",
   },
   {
     key: "explore",
     icon: IconCompass,
-    title: "What we could explore further",
-    short: "Explore further",
-    text: "Tracing a trade or macroeconomic model’s results to households.",
-    tag: tags.notBuilt,
-  },
-  {
-    key: "ideas",
-    icon: IconBulb,
-    title: "Ideas that fit the unit",
-    short: "Ideas for the unit",
-    text: "Business policy, agent-based models and one way to link models.",
+    title: "What we could explore together",
+    short: "Explore together",
+    text: "One way to link models, applied to trade and business policy, then agent-based and macroeconomic models.",
     tag: tags.notBuilt,
   },
   {
@@ -716,7 +711,7 @@ export const epdTrace = {
       icon: IconArrowsExchange,
       owner: "Agreed mapping",
       title: "Sector mapping",
-      text: "Another model’s sectors or products to SIC and COICOP divisions",
+      text: "As on the previous slide: sectors and products to SIC and COICOP divisions",
       tag: tags.toBuild,
       dashed: true,
     },
@@ -963,7 +958,7 @@ export const abmQuestions = [
   },
   {
     icon: IconBolt,
-    question: "Electricity-cost relief (BICS)",
+    question: "Electricity-cost relief (BICS, previous slide)",
     behaviour: "Firms choose between prices, pay and profit",
     passes: "Price changes by spending category; pay by sector",
     tag: tags.mapping,
@@ -1125,10 +1120,7 @@ export const axiomRules = [
   },
 ];
 
-// The relationship, as axiom.org/about states it. The slide's foot carries
-// it.
-export const axiomRelationship =
-  "Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he co-founded.";
+// The relationship (axiom.org/about) is in NOTES for the presenter, not on the slide.
 
 // What exists today and how a model could call it (slide 14). Same commits
 // as axiomRules, read 16 November 2026. The cards give examples.
@@ -1588,7 +1580,8 @@ export const aiProject = {
 // 2025-26.png, and three labels: static costing, turnover responses, reforms
 // costed) is cut: its figure was a headline result, and the image file is deleted.
 // Its content is in NOTES.md, and the fourth step of firmMethod below names
-// what was costed.
+// what was costed. The paper's reform costings, static and under assumed
+// turnover elasticities, are now on their own slide: see vatReforms below.
 
 // How the synthetic firms are built (firm-microsim-paper e6d5dd6).
 // - Method: paper/Sections/data.tex. Official statistics publish firm counts
@@ -1663,6 +1656,46 @@ export const firmMethod = {
     alt: "Bar chart from the working paper: revenue impact in £ million of raising the VAT registration threshold from £85,000 to £90,000, 2024–25 to 2028–29, for HMRC's published costing and two model conventions.",
   },
   caption: "The April 2024 rise from £85,000 to £90,000: the model’s static estimates beside HMRC’s published costing",
+};
+
+// What the firm model costs (firm-microsim-paper e6d5dd6):
+// - Static costs: results/reform_menu_common_base.txt, "CORRECTED
+//   tab:schedule_costs": the £85k notch, 2023-24 microdata, unaged, in-scope
+//   VAT firms only; VAT base above the threshold £175.105bn. Costs are the
+//   change against the £85,000 threshold, £m a year: raise to £100,000 -742
+//   (direct band sum, adopted as the headline; firms released 117,846);
+//   graduated taper £85k to £141.7k -1,406.3 and flat 50% marginal taper
+//   -968.1 (275,803 firms in the taper band); reduced rate 10% on £85k-£105k
+//   -446.2 and 15% -223.1 (138,004 firms in the band). Firm counts are
+//   rounded to the nearest hundred.
+// - Responses: results/dynamic_reform_results.txt, an iso-elastic
+//   (Kleven-Waseem) model of bunching at the notch with one turnover
+//   elasticity e in {0.05, 0.17, 0.32}, headline 0.17. In the file's words, e
+//   "is NOT identified from the synthetic data", so the costs are conditional
+//   on the assumed e. Reduced rate 10%: static -446, -444, -437, -430; 15%:
+//   -223, -221, -216, -210. The raise row is -742 at every e "by
+//   construction" (released firms leave the base; no other firm's rate
+//   changes). Band firms scale turnover up, which widens the taxed base, so
+//   the reduced-rate costs fall as e rises. The tapers have no behavioural
+//   row: their rate varies continuously with turnover.
+export const vatReforms = {
+  base: "£175.1bn",
+  rows: [
+    { reform: "Raise the threshold to £100,000", lever: "Location", cost: "−742", firms: "117,800 leave the register" },
+    { reform: "Graduated taper, £85,000 to £141,700", lever: "Shape: phase-in", cost: "−1,406", firms: "275,800 in the band" },
+    { reform: "Flat 50% marginal taper, same band", lever: "Shape: constant", cost: "−968", firms: "275,800 in the band" },
+    { reform: "Reduced rate of 10%, £85,000 to £105,000", lever: "Rate step", cost: "−446", firms: "138,000 in the band" },
+    { reform: "Reduced rate of 15%, same band", lever: "Rate step", cost: "−223", firms: "138,000 in the band" },
+  ],
+  elasticities: ["0.05", "0.17", "0.32"],
+  dynamic: [
+    { reform: "Reduced rate 10%", costs: ["−446", "−444", "−437", "−430"] },
+    { reform: "Reduced rate 15%", costs: ["−223", "−221", "−216", "−210"] },
+    { reform: "Raise to £100,000", costs: ["−742", "−742", "−742", "−742"] },
+  ],
+  responseModel: "An iso-elastic model of bunching below the threshold, in the style of Kleven and Waseem",
+  responseReading:
+    "With a response, firms in a reduced-rate band raise turnover, which widens the taxed base. The threshold raise is unchanged by construction; the tapers are costed statically only.",
 };
 
 // One way to link models, for discussion; nothing here is a commitment.

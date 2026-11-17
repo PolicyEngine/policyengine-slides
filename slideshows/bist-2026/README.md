@@ -6,13 +6,15 @@ There is no appendix: backup material for questions is at the end of
 [NOTES.md](NOTES.md).
 
 The Modelling Unit introduces its work and models first, without slides of
-ours. The deck then has seven parts. Parts 2 to 7 each open with a divider
+ours. The deck then has six parts. Parts 2 to 6 each open with a divider
 slide (the part's number and title, one line on what it covers, and the
-seven parts with the current one in teal), and every other slide shows the
-seven parts along its top by short name, with the current one in teal. Most
+six parts with the current one in teal), and every other slide shows the
+six parts along its top by short name, with the current one in teal. Most
 slides have no boxes: lists and columns sit under thin rules, flows are
 nodes on a line, and tables have horizontal rules only (see "Section
-clarity and open layouts" below).
+clarity and open layouts" below). Four places where items are read side by
+side use one light card (see "Light cards, a VAT costing slide and one part
+for the ideas" below).
 
 Each slide carries one message, with icons, short labels and status tags.
 What the presenter says, including every caveat and figure that is not on a
@@ -48,26 +50,23 @@ slide, is in [NOTES.md](NOTES.md).
 16. The Autumn Budget 2026 dashboard (live page)
 17. Who bears the cost of an AI scenario? (live page)
 18. How we built synthetic UK firms
-19. Who bears the cost of trade changes? Four UK episodes, 2021–26
-20. Who bears the cost of trade changes: the 2025 US tariffs (the second
+19. What the firm model can cost: thresholds, tapers and responses
+20. Who bears the cost of trade changes? Four UK episodes, 2021–26
+21. Who bears the cost of trade changes: the 2025 US tariffs (the second
     slide of the trade study)
 
-5 · What we could explore further
+5 · What we could explore together
 
-21. Part 5: What we could explore further (divider)
-22. The UK–US Economic Prosperity Deal: from model results to households
-23. Links to macroeconomic models
-
-6 · Ideas that fit the unit
-
-24. Part 6: Ideas that fit the unit (divider)
+22. Part 5: What we could explore together (divider)
+23. One way to link: tables in, tables out
+24. The UK–US Economic Prosperity Deal: from model results to households
 25. Business policy: from firm costs to households
 26. Where an agent-based model could link
-27. One way to link: tables in, tables out
+27. Links to macroeconomic models
 
-7 · How we could collaborate
+6 · How we could collaborate
 
-28. Part 7: How we could collaborate (divider)
+28. Part 6: How we could collaborate (divider)
 29. Two candidate pilots
 30. Questions for discussion
 31. Thank you
@@ -76,7 +75,7 @@ slide, is in [NOTES.md](NOTES.md).
   meeting metadata.
 - `content.ts` holds the figures, short labels, icons, status tags and
   sources, with a comment on where each figure and claim comes from. The
-  seven parts are its `parts` list.
+  six parts are its `parts` list.
 - `slides/index.tsx` contains the slides and the deck's building blocks (part
   navigator, part divider, icon badge, status tag, card, flow, the row of
   build steps, stat, target table, logo cell, figure); icons are bare Tabler icons in the teal token colour,
@@ -181,19 +180,19 @@ notes for that slide.
   rules; the energy episode's main run uses 2023–24 rules, and 2022–23 rules
   only for a comparison. Both slides carry a "Microcosm UK" tag. The earlier "about 60%" energy offset is dropped; the rerun's
   different measure is in the notes.
-- **Order.** Seven parts: an introduction (the title, the talk in brief,
+- **Order.** Six parts: an introduction (the title, the talk in brief,
   who we are); what PolicyEngine is (what the model computes and how a
   run works, the rules, the Microcosm data, calibration, the targets by
   topic and the live dashboard); what we have already (model coverage, including business
   taxes, and what we can share, then the Axiom Foundation's rules as code
   for firms and employers and how a model could call them); projects we have
   done (the Autumn Budget 2026 dashboard, the AI scenario post, the
-  synthetic firms of the firm-level VAT working paper, the trade working
-  paper and its tariff episode); what we
-  could explore further (the Economic Prosperity Deal from macro impacts to
-  household impacts, and links to macroeconomic models); ideas that fit the
-  unit (business policy, agent-based models and one way to link models by
-  exchanging tables); and how we could collaborate (two candidate pilots and
+  synthetic firms of the firm-level VAT working paper and what that model
+  costs, the trade working paper and its tariff episode); what we could
+  explore together (one way to link models by exchanging tables, then the
+  Economic Prosperity Deal as a trade application, business policy as a
+  business application, agent-based models and links to macroeconomic
+  models); and how we could collaborate (two candidate pilots and
   questions). Release gates and certification, assignment variability, data
   access in full and use, evaluation and engagement are under "Backup
   material" in the notes; the deck has no appendix.
@@ -244,7 +243,7 @@ notes for that slide.
     the model-run slide's; the feedback arrow is the macro–micro loop of the
     macroeconomic models slide. The path and the feedback are tagged not
     built, and the slide is tagged "Not yet modelled".
-  - Linking (slide 27), the mechanism: which records receive each result. Earnings and
+  - Linking (slide 23), the mechanism: which records receive each result. Earnings and
     jobs by two-digit SIC division and the repeated random draws are the
     trade study's assignment (`tariff_pipeline/exposure.py`); spending is
     held by COICOP division (policyengine-uk `d3db7ac`). A map from a trade
@@ -255,7 +254,7 @@ notes for that slide.
     type, not per sector, and its standard closure fixes aggregate
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
-  - The trade study's US-tariff episode (slide 20): uk-trade-shock-study pull request #46, head `10dc18826`
+  - The trade study's US-tariff episode (slide 21): uk-trade-shock-study pull request #46, head `10dc18826`
     (open, not merged), `results/e3_constants.json`: gross change £1,007.1m
     a year; cushion 41.8% for wage cuts and 32.1% for job losses, standard
     deviation 3.3 points across 20 draws; run on Microcosm UK at 2026 with
@@ -308,8 +307,8 @@ notes for that slide.
     the hosted API "Trial access" (self-serve trial keys that expire after
     14 days, api.axiom.org/docs) and the MCP server "Developer preview" (the
     axiom-mcp README). The six countries are those axiom.org/coverage shows
-    with encodings. The line at the foot of slide 13 gives the relationship
-    as axiom.org/about states it:
+    with encodings. The relationship, as axiom.org/about states it, is in the
+    presenter notes, not on the slide:
     "Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he
     co-founded."
   - Data access (the row on slide 12, and the notes): licences and READMEs of policyengine-uk, policyengine.py,
@@ -381,7 +380,7 @@ notes for that slide.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
     `paper/sections/results.tex` (20 assignment draws at PR #46, `10dc18826`).
-  - Trade events (slide 19): uk-trade-shock-study pull request #46,
+  - Trade events (slide 20): uk-trade-shock-study pull request #46,
     `10dc18826`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
@@ -415,7 +414,15 @@ notes for that slide.
     slide on costing threshold changes used the paper's figure and caption
     (`paper/Sections/static.tex`); the related post on
     [VAT thresholds](https://www.policyengine.org/uk/research/uk-vat-thresholds)
-    is a source on the synthetic-firms slide.
+    is a source on the synthetic-firms slide. What the firm model can cost
+    (slide 19, firm-microsim-paper `e6d5dd6`): the static costs are
+    `results/reform_menu_common_base.txt` (the corrected schedule-cost
+    table: £85,000 notch, 2023–24 microdata, unaged, in-scope VAT firms, VAT
+    base above the threshold £175.105bn), and the responses
+    `results/dynamic_reform_results.txt` (an iso-elastic, Kleven–Waseem
+    style model of bunching at the notch; elasticity 0.05, 0.17 or 0.32,
+    assumed, not estimated from the synthetic data). Firm counts are rounded
+    to the nearest hundred.
     Trade changes: uk-trade-shock-study `06c8bbc`, the four episodes and the
     energy offset already in the deck.
   - Business taxes (the "Taxes on business" card of slide 12, and the notes
@@ -424,7 +431,7 @@ notes for that slide.
     NI incidence parameters, all to pay by default). The model has no firm
     entity. The earlier card on linking firms to households, which is not
     built, is in the notes.
-  - Linking (slide 27): one way to link, for discussion. What
+  - Linking (slide 23): one way to link, for discussion. What
     runs today is the trade study's code, which applies earnings changes by
     two-digit SIC division to employees in Microcosm UK (uk-trade-shock-study
     `06c8bbc`, `runner.py`), and the outputs on the right are existing
@@ -624,6 +631,10 @@ same build.
 
 ## Section clarity and open layouts
 
+(Written for the seven-part deck; slide numbers below are those of that
+version. The current six-part order, its five dividers and the four light
+cards are in "Light cards, a VAT costing slide and one part for the ideas".)
+
 The audience found it hard to tell which part of the talk a slide was in,
 and nearly every slide used bordered cards. Options considered: a divider
 slide before each part; a persistent navigator of the seven part names; or
@@ -653,6 +664,39 @@ slides.
   computes, the Microcosm build, the US tariffs, the Economic Prosperity Deal
   and BICS) are icon nodes on a line, numbered, with a dashed ring for a step
   outside PolicyEngine or not built; the Microcosm file is a filled node.
+
+## Light cards, a VAT costing slide and one part for the ideas
+
+The sections above this one are a record of earlier versions and use the
+slide numbers of their time; the slide list at the top is current.
+
+- Light cards. One card style, `.cardsBoxed > .card` and `.accuracy` in
+  `deck.module.css`: white, a 1px border in the deck's line colour, a small
+  radius, comfortable padding, no tint, no accent bar and no shadow. It is
+  used only where items are read side by side: the six rules on the Axiom
+  Foundation slide (13), the two pilots (29), the three macro routes (27,
+  tags top right) and the calibration-accuracy column on the synthetic-firms
+  slide (18), whose method list and HMRC figure stay open. Every other slide
+  stays open; the navigator and dividers are unchanged.
+- A VAT costing slide (19), after the synthetic-firms slide: five reforms by
+  lever (threshold location, taper shape, a reduced-rate step) with their
+  static cost in £m a year for 2023–24 against the £85,000 threshold and
+  the firms affected, and, beside it, costs under an assumed turnover
+  elasticity for the reduced-rate bands and the threshold raise. The
+  elasticity is assumed, not estimated; the tapers are costed statically
+  only. Tagged "Working paper". Sources are under "Sources by slide".
+- One part for the ideas. "What we could explore further" and "Ideas that
+  fit the unit" are one part, "What we could explore together", tagged
+  "Idea to explore", so the deck has six parts and five dividers (4, 11, 15,
+  22 and 28). Its order reads as one argument: the linking table first, as
+  the general mechanism (what a model passes, how it maps, what PolicyEngine
+  reports); then the Economic Prosperity Deal as a trade application; BICS as
+  a business application, whose pass-through step is the place another
+  model could help; the agent-based model, which could supply that
+  behaviour; and the macroeconomic routes last, as the longer-term links.
+  To avoid repeating the mechanism, the deal's mapping step now reads "As on
+  the previous slide", and the agent-based model's BICS row points back to
+  the BICS slide. No figure or tag changed.
 
 ## Privacy
 

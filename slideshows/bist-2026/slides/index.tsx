@@ -20,7 +20,6 @@ import {
   aiProject,
   axiomAccess,
   axiomGeography,
-  axiomRelationship,
   axiomRules,
   axiomToday,
   budgetProject,
@@ -51,6 +50,7 @@ import {
   tariffDisaggregation,
   tradeEvents,
   tradePath,
+  vatReforms,
   whoWeAre,
   type Logo,
   type PartKey,
@@ -60,7 +60,7 @@ import Embed from "./Embed";
 import { CountUp, Only, Reveal } from "./Reveal";
 import styles from "./deck.module.css";
 
-/** Which of the talk's seven parts a slide belongs to. */
+/** Which of the talk's six parts a slide belongs to. */
 type Section = PartKey;
 
 /** Staggers an element's entrance when its slide comes on screen. */
@@ -85,7 +85,7 @@ const bodyScale = (scale: number) =>
   ({ "--u": `calc(var(--u0) * ${scale})` }) as CSSProperties;
 
 /**
- * The talk's seven parts along the top of a slide, by their short names: the
+ * The talk's six parts along the top of a slide, by their short names: the
  * current part in teal, the parts already covered in a lighter grey.
  */
 function PartNav({ section }: { section: Section }) {
@@ -366,7 +366,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="In brief" scale={1.12} subtitle="Six parts after this introduction">
+    <Frame section="intro" title="In brief" scale={1.12} subtitle="Five parts after this introduction">
       <ol className={styles.agenda}>
         {parts.slice(1).map((part, index) => (
           <li key={part.key} className={styles.enter} style={enter(index)}>
@@ -388,7 +388,7 @@ export function InBriefSlide() {
 
 /**
  * The slide that opens a part: its number and title, what it covers, and the
- * seven parts with this one in teal and those already covered in grey.
+ * six parts with this one in teal and those already covered in grey.
  */
 function PartDivider({ section }: { section: Section }) {
   const current = parts.findIndex((part) => part.key === section);
@@ -438,10 +438,6 @@ export function PartProjectsSlide() {
 
 export function PartExploreSlide() {
   return <PartDivider section="explore" />;
-}
-
-export function PartIdeasSlide() {
-  return <PartDivider section="ideas" />;
 }
 
 export function PartCollaborateSlide() {
@@ -546,7 +542,7 @@ export function EpdSlide() {
       section="explore"
       title="The UK–US Economic Prosperity Deal: from model results to households"
       scale={1.25}
-      subtitle="How one deal could be traced from a trade or macro model's results to household incomes"
+      subtitle="The same tables, applied to one deal: from a trade or macro model's results to household incomes"
       status={[tags.noResults]}
     >
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
@@ -558,7 +554,7 @@ export function LinkSlide() {
   const { rows, breakdowns } = tariffDisaggregation;
   return (
     <Frame
-      section="ideas"
+      section="explore"
       title="One way to link: tables in, tables out"
       scale={0.98}
       subtitle="A starting point for discussion: what a model could pass, and which records receive it"
@@ -949,7 +945,7 @@ export function BusinessPolicySlide() {
   const { flow } = businessPolicy;
   return (
     <Frame
-      section="ideas"
+      section="explore"
       title="Business policy: from firm costs to households"
       scale={1.38}
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
@@ -963,7 +959,7 @@ export function BusinessPolicySlide() {
 export function AbmSlide() {
   return (
     <Frame
-      section="ideas"
+      section="explore"
       title="Where an agent-based model could link"
       scale={1.04}
       subtitle="Three candidate questions, for discussion"
@@ -1017,7 +1013,7 @@ export function MacroSlide() {
       scale={1.32}
       subtitle="Three possible routes, each at a different stage"
     >
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
+      <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
         {macroLinks.map((link) => (
           <Card
             key={link.title}
@@ -1052,7 +1048,7 @@ export function PilotsSlide() {
       subtitle="For discussion: one scenario each, passed one way to PolicyEngine"
       status={[tags.notBuilt, tags.noResults]}
     >
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(2)}>
+      <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(2)}>
         {pilots.map((item, index) => (
           <Reveal key={item.title} step={index + 1} ghost className={styles.card}>
             <div className={`${styles.cardTitleRow} ${styles.titleTwoLines}`}>
@@ -1182,7 +1178,7 @@ export function AxiomRulesSlide() {
       scale={0.9}
       subtitle="It publishes open, machine-readable encodings of the world’s rules, starting with tax and benefit policy"
     >
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
+      <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
         {axiomRules.map((rule, index) => (
           <div key={rule.title} className={`${styles.card} ${styles.cardCompact} ${styles.enter}`} style={enter(index)}>
             <div className={styles.cardHead}>
@@ -1194,9 +1190,6 @@ export function AxiomRulesSlide() {
             <div className={styles.cardNote}>{rule.law}</div>
           </div>
         ))}
-      </div>
-      <div className={styles.rowsFoot}>
-        <p>{axiomRelationship}</p>
       </div>
     </Frame>
   );
@@ -1364,6 +1357,75 @@ export function FirmMethodSlide() {
           <p className={styles.rowLabel}>Beside HMRC’s costing</p>
           <Figure image={image} caption={caption} />
         </Reveal>
+      </div>
+    </Frame>
+  );
+}
+
+/** What the firm model costs: five reforms by lever, statically, then turnover responses under assumed elasticities. */
+export function VatReformsSlide() {
+  const { rows, elasticities, dynamic, responseModel, responseReading, base } = vatReforms;
+  return (
+    <Frame
+      section="projects"
+      title="What the firm model can cost: thresholds, tapers and responses"
+      scale={1.06}
+      subtitle="Five VAT reforms on the synthetic firms, by the lever each one moves"
+      status={[tags.workingPaper]}
+    >
+      <div className={styles.reforms}>
+        <div>
+          <p className={styles.rowLabel}>Static cost, £m a year, 2023–24, relative to the £85,000 threshold</p>
+          <div className={styles.reformTable}>
+            <div className={`${styles.reformRow} ${styles.targetHead}`}>
+              <div>Reform</div>
+              <div>Lever</div>
+              <div className={styles.targetNumber}>£m</div>
+              <div>Firms</div>
+            </div>
+            {rows.map((row, index) => (
+              <div key={row.reform} className={`${styles.reformRow} ${styles.enter}`} style={enter(index)}>
+                <div className={styles.targetTopic}>{row.reform}</div>
+                <div className={styles.targetSource}>{row.lever}</div>
+                <div className={`${styles.targetNumber} ${styles.reformCost}`}>{row.cost}</div>
+                <div>{row.firms}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.responses}>
+          <p className={styles.rowLabel}>Turnover responses at the threshold</p>
+          <p className={styles.responsesText}>{responseModel}.</p>
+          <div className={styles.reformTable}>
+            <div className={`${styles.dynamicRow} ${styles.targetHead}`}>
+              <div>£m a year, by elasticity</div>
+              <div className={styles.targetNumber}>Static</div>
+              {elasticities.map((value) => (
+                <div key={value} className={styles.targetNumber}>
+                  {value}
+                </div>
+              ))}
+            </div>
+            {dynamic.map((row) => (
+              <div key={row.reform} className={styles.dynamicRow}>
+                <div className={styles.targetTopic}>{row.reform}</div>
+                {row.costs.map((cost, index) => (
+                  <div key={elasticities[index - 1] ?? "static"} className={styles.targetNumber}>
+                    {cost}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <p className={styles.responsesText}>{responseReading}</p>
+        </div>
+      </div>
+      <div className={styles.rowsFoot}>
+        <StatusTag tag={{ label: "Elasticity assumed", tone: "caution" }} />
+        <p>
+          The elasticity e is assumed, from 0.05 to 0.32 with 0.17 central, not estimated from the synthetic data.
+          In-scope VAT base above the threshold: {base}.
+        </p>
       </div>
     </Frame>
   );

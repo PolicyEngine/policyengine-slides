@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-/* The talk's seven parts along the top, as tall as the old part label, so
+/* The talk's six parts along the top, as tall as the old part label, so
    the slide bodies below keep their place. */
 .partNav {
   display: flex;
@@ -1499,11 +1499,14 @@
   text-wrap: pretty;
 }
 
+/* The one boxed group on this slide: the accuracy figures, in a light card. */
 .accuracy {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--line);
-  padding-left: calc(var(--u) * 2);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.7);
+  background: white;
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 1.7);
 }
 
 .accuracy .statValue {
@@ -1992,6 +1995,71 @@
   font-weight: 700;
 }
 
+/* ---------- VAT reforms: a cost table by lever, then responses ---------- */
+
+.reforms {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: start;
+  gap: calc(var(--u) * 3);
+}
+
+.reforms .rowLabel {
+  margin-bottom: calc(var(--u) * 0.8);
+}
+
+.reformTable {
+  border-top: 2px solid var(--pe-teal);
+}
+
+.reformRow,
+.dynamicRow {
+  display: grid;
+  align-items: baseline;
+  gap: calc(var(--u) * 1.1);
+  border-top: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 0.75) 0;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.45);
+  line-height: 1.3;
+}
+
+.reformRow {
+  grid-template-columns: 2.6fr 1.25fr 0.7fr 1.6fr;
+}
+
+.dynamicRow {
+  grid-template-columns: 2.3fr repeat(4, 0.75fr);
+}
+
+.reformTable .targetHead {
+  border-top: 0;
+  padding: calc(var(--u) * 0.7) 0 calc(var(--u) * 0.5);
+  font-size: calc(var(--u) * 0.95);
+}
+
+.reformCost {
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+.responses {
+  border-left: 1px solid var(--line);
+  padding-left: calc(var(--u) * 2.4);
+}
+
+.responsesText {
+  margin: calc(var(--u) * 0.2) 0 calc(var(--u) * 1);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.35);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.reformTable + .responsesText {
+  margin-top: calc(var(--u) * 1);
+}
+
 /* ---------- Live dashboard: the export's page in place of the live one ---------- */
 
 .dashCard {
@@ -2061,6 +2129,25 @@
   padding-top: calc(var(--u) * 1.4 - var(--u) * 0.3 + 1px);
 }
 
+/* ---------- Boxed columns: a light card for items compared side by side ----------
+   White, a hairline border and a small radius: no tint, no accent bar, no
+   shadow. Used only where the items on a slide are read against each other. */
+
+.cardsBoxed {
+  gap: calc(var(--u) * 1.6);
+}
+
+.cardsBoxed > .card {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.7);
+  background: white;
+  padding: calc(var(--u) * 1.7) calc(var(--u) * 1.9);
+}
+
+.cardsBoxed > .cardCompact {
+  padding: calc(var(--u) * 1.4) calc(var(--u) * 1.6);
+}
+
 /* ---------- In brief: the six parts as an open, numbered agenda ---------- */
 
 .agenda {
@@ -2110,7 +2197,7 @@
   text-wrap: pretty;
 }
 
-/* ---------- Part divider: the part's number and title, and the seven parts ---------- */
+/* ---------- Part divider: the part's number and title, and the six parts ---------- */
 
 .partSlide {
   display: grid;

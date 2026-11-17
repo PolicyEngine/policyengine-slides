@@ -18,10 +18,10 @@ extension** and **Not built yet**. On the two Axiom Foundation slides (13 and
 2026**, **Open source**, **Trial access**, **Developer preview** and **On
 axiom.org**.
 
-The talk has seven parts, after the Modelling Unit introduces its own work
-and models. Parts 2 to 7 each open with a divider slide: the part's number
-and title, one line on what it covers, and the seven parts with the current
-one in teal. On every other slide the seven parts run along the top by short
+The talk has six parts, after the Modelling Unit introduces its own work
+and models. Parts 2 to 6 each open with a divider slide: the part's number
+and title, one line on what it covers, and the six parts with the current
+one in teal. On every other slide the six parts run along the top by short
 name, with the current one in teal and those already covered in grey.
 
 1. **Introduction** (slides 1 to 3): the title, the talk in brief and who we
@@ -33,32 +33,35 @@ name, with the current one in teal and those already covered in grey.
    the household and the business side, and what we can share; then the Axiom
    Foundation's rules as code for firms and employers, what exists today and
    how a model could call it.
-4. **Projects we have done** (divider 15, slides 16 to 20): the Autumn Budget 2026
+4. **Projects we have done** (divider 15, slides 16 to 21): the Autumn Budget 2026
    dashboard, the AI scenario post, the synthetic firms of the firm-level
-   VAT working paper, the trade working paper and its tariff episode.
-5. **What we could explore further** (divider 21, slides 22 and 23): the Economic
-   Prosperity Deal from macro impacts to households, and links to
-   macroeconomic models.
-6. **Ideas that fit the unit** (divider 24, slides 25 to 27): business policy (BICS),
-   where an agent-based model could link, and one way to link models, by
-   exchanging tables.
-7. **How we could collaborate** (divider 28, slides 29 to 31): two candidate pilots,
+   VAT working paper and what that model can cost, the trade working paper
+   and its tariff episode.
+5. **What we could explore together** (divider 22, slides 23 to 27): one way
+   to link models, by exchanging tables; the Economic Prosperity Deal as a
+   trade application; business policy (BICS) as a business application;
+   where an agent-based model could link; and links to macroeconomic models.
+6. **How we could collaborate** (divider 28, slides 29 to 31): two candidate pilots,
    questions and contacts.
 
-This version has 31 slides: 25 slides of content and six part dividers
-(slides 4, 11, 15, 21, 24 and 28). The core 22, down from 27, fit about 30
+This version has 31 slides: 26 slides of content and five part dividers
+(slides 4, 11, 15, 22 and 28). Slide 19, on what the firm model can cost,
+adds about a minute; skip it if time is short. The core 22, down from 27, fit about 30
 minutes, and the dividers add about a minute in all (a few seconds each); slides 13 and 14, on the Axiom Foundation's rules as code, add
 about two more, so skip them in the talk if time is short; the table of
 calibration targets (slide 9) adds about one. Five slides were
 merged into their neighbours or cut;
 what each carried is in the notes for the slide that replaced it (slides 5,
-8, 12, 18 and 27).
+8, 12, 18 and 23).
 
 Slides marked "Builds" reveal their content in steps: each click or
 right-arrow adds the next piece, and nothing already on the slide moves. Most
 slides have no boxes: lists and columns sit under thin rules, flows are
 nodes on a line (a dashed ring marks a step outside PolicyEngine or not yet
-built), and tables have horizontal rules only. A PDF
+built), and tables have horizontal rules only. Four places where items are read
+side by side use one light card (white, a thin border, no tint): the Axiom
+Foundation's six rules (13), the calibration-accuracy column (18), the
+macroeconomic routes (27) and the two pilots (29). A PDF
 export shows each slide once, complete: one page per slide. Slides 10, 16 and 17 hold live pages and need
 an internet connection. Icons are bare, in the teal ink, with no box behind
 them. The slides carry no "Sources" row: each slide's sources are the
@@ -79,9 +82,9 @@ slides, not build steps.
 
 ### 2. In brief
 
-- The talk has seven parts. The slide lists parts 2 to 7 as a numbered
+- The talk has six parts. The slide lists parts 2 to 6 as a numbered
   agenda; part 1 is this introduction. Each later part opens with a divider
-  slide, and the seven parts run along the top of every slide, with the
+  slide, and the six parts run along the top of every slide, with the
   current one in teal.
 - **1. Introduction.** Who we are.
 - **2. What PolicyEngine is.** PolicyEngine UK computes household incomes
@@ -96,19 +99,18 @@ slides, not build steps.
   and how a model could call them. (On the slide: "What the UK model covers,
   what we can share, and the Axiom Foundation's rules for firms.")
 - **4. Projects we have done.** The Autumn Budget 2026 dashboard, the AI
-  scenario post, the synthetic firms of the firm-level VAT working paper, the trade
-  working paper and its tariff episode.
-- **5. What we could explore further.** Trade, macroeconomic and agent-based
+  scenario post, the synthetic firms of the firm-level VAT working paper and
+  their VAT costings, the trade working paper and its tariff episode.
+- **5. What we could explore together.** Trade, macroeconomic and agent-based
   models give changes in earnings, jobs and prices by sector. PolicyEngine
   can turn these into household and fiscal effects by income decile and
   region, and experimentally by local area. No such link is built: our trade
-  and AI studies use published estimates and stated scenarios. The worked
-  example is the UK–US Economic Prosperity Deal.
-- **6. Ideas that fit the unit.** Business policy beyond tax, with the
-  electricity-cost relief of the British Industrial Competitiveness Scheme
-  (BICS) as the example; where an agent-based model could link; and one way
-  to link models, by exchanging tables.
-- **7. How we could collaborate.** Two candidate pilots (slide 29): tariff
+  and AI studies use published estimates and stated scenarios. The part
+  starts with one way to link models, by exchanging tables, then applies it
+  to the UK–US Economic Prosperity Deal and to the electricity-cost relief of
+  the British Industrial Competitiveness Scheme (BICS), then asks where an
+  agent-based model could link and how macroeconomic models could.
+- **6. How we could collaborate.** Two candidate pilots (slide 29): tariff
   changes under the Economic Prosperity Deal, and BICS. We have no published
   results for either. Then questions for discussion.
 
@@ -196,7 +198,7 @@ slides, not build steps.
 - Spending is an input; income is the result. Each household's spending by
   category sets its VAT and duties and its exposure to a price change. What
   the model computes is income after taxes and benefits.
-- The AI study (slide 17) and the trade study's rerun (slides 19 and 20;
+- The AI study (slide 17) and the trade study's rerun (slides 20 and 21;
   an open pull request) both run on Microcosm UK.
 - Open source. Later slides cover how the rules are written and how the data
   are built.
@@ -510,7 +512,7 @@ slides, not build steps.
   publishes open, machine-readable encodings of the world's rules, starting
   with tax and benefit policy. Its rules can apply to a firm or an employer,
   not only to a household.
-- **The relationship** (the line at the foot of the slide).
+- **The relationship** (say it aloud; it is not on the slide).
   Max Ghenis is CEO of both the Axiom Foundation and PolicyEngine, which he
   co-founded. PolicyEngine asks what a policy would do to households and the
   public finances; the Axiom Foundation publishes what the law says, as
@@ -573,7 +575,7 @@ slides, not build steps.
   says its coverage is "incomplete and not certified". 296 of the 380 tariff
   modules, including all 100 rate tables, carry a validation waiver, so CI
   skips their checks. There is no UK customs encoding (slide 14). The trade
-  study (slides 19 and 20) sets one US tariff rate per SIC division by hand,
+  study (slides 20 and 21) sets one US tariff rate per SIC division by hand,
   a 10% baseline and 25% on autos and steel, from House of Commons Library
   briefing CBP-10240; it does not use this encoding.
 - **Sources.** [About the Axiom Foundation](https://axiom.org/about); [VAT
@@ -642,7 +644,7 @@ slides, not build steps.
 
 ### 15. Part 4: Projects we have done (divider)
 
-- A few seconds. Name the part and what it covers: the Budget dashboard, the AI scenario, synthetic firms and the trade study (slides 16 to 20).
+- A few seconds. Name the part and what it covers: the Budget dashboard, the AI scenario, synthetic firms and the trade study (slides 16 to 21).
 
 ### 16. The Autumn Budget 2026 dashboard
 
@@ -777,7 +779,46 @@ slides, not build steps.
   [VAT threshold
   analysis](https://www.policyengine.org/uk/research/uk-vat-thresholds).
 
-### 19. Who bears the cost of trade changes? Four UK episodes, 2021–26
+### 19. What the firm model can cost: thresholds, tapers and responses
+
+- The same working paper (firm-microsim-paper, commit e6d5dd6), on the
+  synthetic firms of the slide before: five VAT reforms, each moving one
+  lever of the registration threshold. All figures are for 2023–24
+  microdata, unaged, with the £85,000 threshold as the baseline; only
+  in-scope VAT firms count, and the VAT base above the threshold is
+  £175.1 billion.
+- **Static costs (the table), £m a year, against the £85,000 threshold.**
+  - Location: raise the threshold to £100,000, −742 (the direct band sum,
+    which the paper adopts; a smooth counterfactual gives −616). About
+    117,800 firms leave the register.
+  - Shape: a graduated taper from £85,000 to £141,700, −1,406; a flat 50%
+    marginal taper over the same band, −968. About 275,800 firms are in the
+    band.
+  - Rate step: a reduced rate of 10% on turnover from £85,000 to £105,000,
+    −446; at 15%, −223. About 138,000 firms are in the band.
+- **Turnover responses (the right-hand table).** An iso-elastic model of
+  bunching below the threshold notch, in the style of Kleven and Waseem,
+  with one turnover elasticity. The elasticity is assumed, not estimated
+  from the synthetic data: the paper reports costs at 0.05, 0.17 (its
+  central value) and 0.32, so the costs are conditional on that choice.
+  - Reduced rate 10%: −446 static, −444, −437 and −430.
+  - Reduced rate 15%: −223 static, −221, −216 and −210.
+  - Raise to £100,000: −742 at every elasticity, by construction: released
+    firms leave the base and no other firm's rate changes.
+  - With a response, firms in the reduced-rate band raise turnover, which
+    widens the taxed base, so the cost falls a little as the elasticity
+    rises. The tapers have no response row: their rate changes continuously
+    with turnover, outside the model's flat-rate solve.
+- Say that these are the paper's costings on synthetic firms, not official
+  estimates, and that the response figures depend on the assumed
+  elasticity.
+- **Sources.** [Ahmadi (2026c), firm VAT
+  microsimulation](https://github.com/PolicyEngine/firm-microsim-paper):
+  [static reform costs](https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/reform_menu_common_base.txt)
+  and [turnover responses](https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/dynamic_reform_results.txt),
+  commit e6d5dd6.
+
+### 20. Who bears the cost of trade changes? Four UK episodes, 2021–26
 
 - A working paper (Ahmadi 2026b; uk-trade-shock-study). The slide follows
   the study's rerun on Microcosm UK: pull request #46, head 10dc18826, which
@@ -838,9 +879,9 @@ slides, not build steps.
   Microcosm UK, pull request
   #46](https://github.com/PolicyEngine/uk-trade-shock-study/pull/46).
 
-### 20. Who bears the cost of trade changes: the 2025 US tariffs
+### 21. Who bears the cost of trade changes: the 2025 US tariffs
 
-- The second slide of the trade study (slide 19), not a separate project:
+- The second slide of the trade study (slide 20), not a separate project:
   its US tariffs episode in detail. It is also the starting point for the
   first candidate pilot (slide 29).
 - Builds: the five steps; then the cushion figures; then the bracket under the
@@ -891,196 +932,15 @@ slides, not build steps.
   Prosperity Deal: general
   terms](https://www.gov.uk/government/publications/us-uk-economic-prosperity-deal-epd/general-terms-for-the-united-states-of-america-and-the-united-kingdom-of-great-britain-and-northern-ireland-economic-prosperity-deal-web-accessible-v).
 
-### 21. Part 5: What we could explore further (divider)
+### 22. Part 5: What we could explore together (divider)
 
-- A few seconds. Name the part and what it covers: tracing a trade or macroeconomic model's results to households (slides 22 and 23); tagged "Idea to explore".
+- A few seconds. Name the part and what it covers: one way to link models, then a trade application (the Economic Prosperity Deal), a business application (BICS), agent-based models and macroeconomic models (slides 23 to 27); tagged "Idea to explore".
+- The order is one argument: the general mechanism first; two applications
+  of it; then the kind of model that could supply firms' behaviour, which
+  the business application leaves open; and the longer-term macroeconomic
+  routes last.
 
-### 22. The UK–US Economic Prosperity Deal: from model results to households
-
-- One deal has macro impacts and household impacts. This slide is the
-  end-to-end path; the trade study’s tariff slide (slide 20) and the linking slide (slide
-  27) are its parts. Not built; no results yet. The slide is tagged "Not yet
-  modelled"; the two pieces that are not built, the sector mapping and the
-  feedback, each carry "Idea to explore".
-- **Results for the deal (a trade or macro model).** Changes in output,
-  employment and prices by sector, and wages by labour type, under the
-  deal's tariff schedule, with the labour-market closure stated. A GTAP-style
-  model has one wage per labour type, not per sector, and its standard
-  closure fixes aggregate employment.
-- **Sector mapping (to be agreed, not built).** Model sectors to two-digit SIC
-  divisions for earnings and jobs; to COICOP spending divisions for prices.
-- **Assign to people, apply the rules (PolicyEngine).** Sector changes are
-  assigned to survey employees and households, and taxes and benefits are
-  recomputed for every household, before and after. Static microsimulation:
-  there is no general equilibrium in PolicyEngine, so wages, prices and
-  firms' responses come from the other model.
-- **Household and fiscal results (PolicyEngine).** Income deciles, poverty,
-  regions and the net Exchequer cost, which is the change in the model's
-  government balance.
-- **Optional feedback (not built).** Household and fiscal totals could go
-  back to the macro model, and the two could repeat until they agree: the
-  macro–micro loop on slide 23.
-- **The deal.** Its general terms became operative on 8 May 2025. They
-  provide for a quota of 100,000 UK vehicles at a 10% tariff and, subject to
-  supply-chain conditions, a steel and aluminium quota at most-favoured-nation
-  rates.
-- The trade study's code includes a deal schedule, but we have no published
-  results for it. The study's results are for the schedule before the deal
-  (slide 20).
-- Builds: the other model's results; the sector mapping; the two PolicyEngine
-  steps; the optional feedback.
-- **The sector mapping is the practical offer:** a table that maps another
-  model's sectors or products to SIC divisions and COICOP divisions. Trade-model sectors,
-  input–output sectors or the product sectors of partial-equilibrium
-  models would be mapped to two-digit SIC divisions for earnings and jobs
-  and to COICOP divisions for prices. It is not built.
-- **Timing.** A CGE result is a long-run equilibrium; PolicyEngine reports
-  fiscal years. How the one maps to the other is a question for the
-  discussion.
-- **Can we stand behind each step?** Checked on 16 November 2026 against the
-  trade study's code (PR #46, 10dc18826) and policyengine-uk (d3db7ac).
-  - Results for the deal: the other model's. PolicyEngine takes jobs,
-    earnings and prices; it has no use for sector output, so the slide no
-    longer lists it.
-  - Sector mapping: not built (tagged "Not built yet"). No mapping from
-    another model's sectors to SIC or COICOP exists in our code.
-  - Assign to people, apply the rules: doable today for earnings changes and
-    job losses by two-digit SIC division (`tariff_pipeline/shocks.py`,
-    `apply_shocks`) and for price changes on spending categories the model
-    holds (`uk_trade_shock_study/incidence.py`). Wages by labour type need a
-    small extension (slide 27).
-  - Household and fiscal results: existing outputs. Regions are the ITL1
-    regions; local areas come from the experimental file.
-  - Optional feedback to the macro model: an idea only, tagged so.
-- **Sources.** [Economic Prosperity Deal: general
-  terms](https://www.gov.uk/government/publications/us-uk-economic-prosperity-deal-epd/general-terms-for-the-united-states-of-america-and-the-united-kingdom-of-great-britain-and-northern-ireland-economic-prosperity-deal-web-accessible-v);
-  [Ahmadi (2026b), trade
-  study](https://github.com/PolicyEngine/uk-trade-shock-study);
-  [policyengine.py](https://github.com/PolicyEngine/policyengine.py).
-
-### 23. Links to macroeconomic models
-
-- **A forecast scenario (mechanism built; not yet run).** PolicyEngine UK projects
-  its data forward with OBR growth rates for earnings, prices and other
-  series. A scenario from a macroeconomic forecasting model could replace
-  those paths. We have not run such a scenario.
-  Employment is not one of the series: job changes enter as changed inputs,
-  assigned to workers.
-- **A macro–micro loop (not built).** The macro model's earnings, jobs and
-  prices go to PolicyEngine; household incomes and tax and benefit totals go
-  back; repeat until the two agree. Precedent: NIESR combined PolicyEngine UK
-  with NiGEM to estimate the effect of the 2022 cost-of-living payments on
-  GDP. That was a one-off study, not a maintained link.
-- **OG-UK (early prototype).** An open-source overlapping-generations model
-  of the UK. PolicyEngine supplies each adult's income tax and NI; OG-UK fits
-  tax functions to these rates and solves a 60-year transition for output,
-  wages, interest rates and revenue. The fitted functions do not yet reflect
-  benefit withdrawal.
-- Builds: one route at a time.
-- **Sources.** [PolicyEngine UK
-  code](https://github.com/PolicyEngine/policyengine-uk); [Growth
-  parameters](https://github.com/PolicyEngine/policyengine-uk/blob/d3db7ac07d3cc718400f38ba8ede429d38d6855e/policyengine_uk/parameters/gov/economic_assumptions/yoy_growth.yaml);
-  [Mosley and Cornforth
-  (2023)](https://www.lse.ac.uk/CFM/assets/pdf/CFM-Discussion-Papers-2023/CFMDP2023-16-Paper.pdf);
-  [OG-UK](https://github.com/PSLmodels/OG-UK).
-
-### 24. Part 6: Ideas that fit the unit (divider)
-
-- A few seconds. Name the part and what it covers: business policy, agent-based models and one way to link models (slides 25 to 27); tagged "Idea to explore".
-
-### 25. Business policy: from firm costs to households
-
-- Example: the British Industrial Competitiveness Scheme, which exempts
-  eligible manufacturers in Great Britain from three electricity policy
-  costs. Not built; no results.
-- **Electricity cost cut (scheme design).** Relief from three electricity
-  policy costs for eligible manufacturers: the impact assessment estimates
-  £35 to £40 per MWh, from 2027.
-- **How firms pass it on (outside PolicyEngine).** Lower prices, higher pay or
-  more jobs, investment, or higher profits. This step comes from another
-  model, or an assumption.
-- **Allocate to households (PolicyEngine).** Three channels: prices by
-  spending, pay and jobs by sector of employment, profits by shareholding.
-- **Household and fiscal effects (PolicyEngine).** Net incomes by decile and
-  region (local areas experimental); poverty; tax and benefit receipts.
-- The same path serves a subsidy or a regulatory cost. PolicyEngine needs the
-  cost change and how firms split it; it computes who gains or loses and the
-  knock-on change in taxes and benefits. The measure's own Exchequer cost
-  comes from outside the model.
-- In the model today, employer NI changes are split between pay, prices and
-  profits (by default, all to pay), and an outside business-tax estimate can
-  be allocated by spending or shareholding. Both are booked as taxes, so a
-  non-tax measure needs an extension.
-- **Can we stand behind each step?** Prices by spending and pay and jobs by
-  sector use what the code already takes (slide 27). Profits: PolicyEngine
-  can allocate one economy-wide profit change by shareholding; it has no
-  link from a sector's profits to that sector's owners, so the slide says
-  "total profits". The existing allocations are booked as taxes, so a
-  non-tax measure needs an extension; the slide is tagged "Idea to
-  explore".
-- **Sources.** [BICS guidance for
-  applicants](https://www.gov.uk/government/publications/british-industrial-competitiveness-scheme-business-guidance/british-industrial-competitiveness-scheme-guidance-for-applicants);
-  [BICS impact
-  assessment](https://www.legislation.gov.uk/ukia/2026/149/pdfs/ukia_20260149_en.pdf);
-  [PolicyEngine UK code](https://github.com/PolicyEngine/policyengine-uk).
-
-### 26. Where an agent-based model could link
-
-- Three candidate questions, each naming the behaviour the agent-based model
-  would simulate. None of these links is built.
-- **A supply disruption to one product, for example semiconductors.** The
-  agent-based model simulates firms along the product's supply chain losing
-  inputs, switching suppliers, and cutting output and jobs. It passes in job
-  and earnings losses by sector and region.
-- **Electricity-cost relief for manufacturers (BICS).** It simulates firms
-  that differ in electricity use and market power choosing between prices,
-  pay, jobs, investment and profit. It passes in changes in prices, earnings
-  and profits by sector.
-- **AI adoption over the business cycle.** It simulates firms adopting
-  technology, entering and exiting, with jobs and wages adjusting, as in
-  Dosi, Fagiolo and Roventini (2010). It passes in paths of jobs, wages and
-  profits by sector, in place of the AI study's assumed scenario.
-- **What PolicyEngine reports (the same for all three).** Household incomes by
-  decile and region (local areas experimental), poverty, inequality, benefit
-  claims, and tax and benefit receipts, by year. The slide gives the short
-  form (incomes by decile and region; poverty and inequality; taxes and
-  benefits by year); the full list of outputs is on slide 27.
-- Trade flows and the response to tariffs stay in a trade model such as GTAP.
-  PolicyEngine models no firm behaviour: it adds the tax and benefit rules
-  and the households.
-- Dosi et al. model technological change and cycles, not AI; a CGE run with
-  technology sectors split out could also supply an AI scenario.
-- Youngman et al.'s agent-based model cites our approach to under-sampled
-  wealthy households; it uses neither our model nor our data.
-- Builds: one question at a time; what PolicyEngine reports is shown from
-  the start.
-- A question to ask, not a claim: what does a supply-chain model report? A
-  risk index would need a further step before it reaches households; jobs
-  and earnings by sector could be passed in directly.
-- **Can we stand behind "What it would pass in"?** Checked on 16 November 2026
-  against the trade study's code (PR #46, 10dc18826, `tariff_pipeline/shocks.py`
-  and `runner.py`) and policyengine-uk (d3db7ac). Each input carries a tag.
-  - Job and earnings losses by sector: can take today. `apply_shocks` takes
-    employees with their two-digit SIC division and applies wage cuts or job
-    losses by division. Region is reported in the results but is not an
-    input, so losses by sector and region would be a small extension; the
-    slide no longer says "and region".
-  - Price changes by spending category; pay by sector: the model holds
-    spending by category, and the trade study costs food and energy price
-    changes by decile. The work is mapping the agent-based model's sectors
-    to spending categories, hence "Needs a sector mapping".
-  - Profits by sector are off the slide: not doable. PolicyEngine could take
-    one economy-wide profit change and allocate it by shareholding.
-  - Jobs and wages by sector, one year at a time: can take today; each year
-    is a separate run, so a path is a series of runs.
-- **Sources.** [Dosi, Fagiolo and Roventini
-  (2010)](https://doi.org/10.1016/j.jedc.2010.06.018); [GTAP
-  model](https://www.gtap.agecon.purdue.edu/models/cge_gtap_n.asp); [“Who
-  bears the AI shock?”, PolicyEngine, 16 November
-  2026](https://www.policyengine.org/uk/research/uk-ai-study); [Youngman et
-  al. (2026)](https://arxiv.org/abs/2602.15607).
-
-### 27. One way to link: tables in, tables out
+### 23. One way to link: tables in, tables out
 
 - A starting point for discussion, not a commitment.
 - One slide for how a model's results could reach people. It merges two
@@ -1202,7 +1062,195 @@ slides, not build steps.
   (2026b), trade study](https://github.com/PolicyEngine/uk-trade-shock-study);
   [GTAP model](https://www.gtap.agecon.purdue.edu/models/cge_gtap_n.asp).
 
-### 28. Part 7: How we could collaborate (divider)
+### 24. The UK–US Economic Prosperity Deal: from model results to households
+
+- One deal has macro impacts and household impacts. This slide applies the
+  linking table of the previous slide to one deal, end to end; the trade
+  study’s tariff slide (slide 21) is one of its parts. The sector-mapping
+  step reads "As on the previous slide", so the mapping is not explained
+  twice. Not built; no results yet. The slide is tagged "Not yet
+  modelled"; the two pieces that are not built, the sector mapping and the
+  feedback, each carry "Idea to explore".
+- **Results for the deal (a trade or macro model).** Changes in output,
+  employment and prices by sector, and wages by labour type, under the
+  deal's tariff schedule, with the labour-market closure stated. A GTAP-style
+  model has one wage per labour type, not per sector, and its standard
+  closure fixes aggregate employment.
+- **Sector mapping (to be agreed, not built).** Model sectors to two-digit SIC
+  divisions for earnings and jobs; to COICOP spending divisions for prices.
+- **Assign to people, apply the rules (PolicyEngine).** Sector changes are
+  assigned to survey employees and households, and taxes and benefits are
+  recomputed for every household, before and after. Static microsimulation:
+  there is no general equilibrium in PolicyEngine, so wages, prices and
+  firms' responses come from the other model.
+- **Household and fiscal results (PolicyEngine).** Income deciles, poverty,
+  regions and the net Exchequer cost, which is the change in the model's
+  government balance.
+- **Optional feedback (not built).** Household and fiscal totals could go
+  back to the macro model, and the two could repeat until they agree: the
+  macro–micro loop on slide 27.
+- **The deal.** Its general terms became operative on 8 May 2025. They
+  provide for a quota of 100,000 UK vehicles at a 10% tariff and, subject to
+  supply-chain conditions, a steel and aluminium quota at most-favoured-nation
+  rates.
+- The trade study's code includes a deal schedule, but we have no published
+  results for it. The study's results are for the schedule before the deal
+  (slide 21).
+- Builds: the other model's results; the sector mapping; the two PolicyEngine
+  steps; the optional feedback.
+- **The sector mapping is the practical offer:** a table that maps another
+  model's sectors or products to SIC divisions and COICOP divisions. Trade-model sectors,
+  input–output sectors or the product sectors of partial-equilibrium
+  models would be mapped to two-digit SIC divisions for earnings and jobs
+  and to COICOP divisions for prices. It is not built.
+- **Timing.** A CGE result is a long-run equilibrium; PolicyEngine reports
+  fiscal years. How the one maps to the other is a question for the
+  discussion.
+- **Can we stand behind each step?** Checked on 16 November 2026 against the
+  trade study's code (PR #46, 10dc18826) and policyengine-uk (d3db7ac).
+  - Results for the deal: the other model's. PolicyEngine takes jobs,
+    earnings and prices; it has no use for sector output, so the slide no
+    longer lists it.
+  - Sector mapping: not built (tagged "Not built yet"). No mapping from
+    another model's sectors to SIC or COICOP exists in our code.
+  - Assign to people, apply the rules: doable today for earnings changes and
+    job losses by two-digit SIC division (`tariff_pipeline/shocks.py`,
+    `apply_shocks`) and for price changes on spending categories the model
+    holds (`uk_trade_shock_study/incidence.py`). Wages by labour type need a
+    small extension (slide 23).
+  - Household and fiscal results: existing outputs. Regions are the ITL1
+    regions; local areas come from the experimental file.
+  - Optional feedback to the macro model: an idea only, tagged so.
+- **Sources.** [Economic Prosperity Deal: general
+  terms](https://www.gov.uk/government/publications/us-uk-economic-prosperity-deal-epd/general-terms-for-the-united-states-of-america-and-the-united-kingdom-of-great-britain-and-northern-ireland-economic-prosperity-deal-web-accessible-v);
+  [Ahmadi (2026b), trade
+  study](https://github.com/PolicyEngine/uk-trade-shock-study);
+  [policyengine.py](https://github.com/PolicyEngine/policyengine.py).
+
+### 25. Business policy: from firm costs to households
+
+- The business application of the linking table, after the trade one. Its
+  second step, how firms pass the relief on, is outside PolicyEngine: the
+  next slide asks whether an agent-based model could supply it.
+- Example: the British Industrial Competitiveness Scheme, which exempts
+  eligible manufacturers in Great Britain from three electricity policy
+  costs. Not built; no results.
+- **Electricity cost cut (scheme design).** Relief from three electricity
+  policy costs for eligible manufacturers: the impact assessment estimates
+  £35 to £40 per MWh, from 2027.
+- **How firms pass it on (outside PolicyEngine).** Lower prices, higher pay or
+  more jobs, investment, or higher profits. This step comes from another
+  model, or an assumption.
+- **Allocate to households (PolicyEngine).** Three channels: prices by
+  spending, pay and jobs by sector of employment, profits by shareholding.
+- **Household and fiscal effects (PolicyEngine).** Net incomes by decile and
+  region (local areas experimental); poverty; tax and benefit receipts.
+- The same path serves a subsidy or a regulatory cost. PolicyEngine needs the
+  cost change and how firms split it; it computes who gains or loses and the
+  knock-on change in taxes and benefits. The measure's own Exchequer cost
+  comes from outside the model.
+- In the model today, employer NI changes are split between pay, prices and
+  profits (by default, all to pay), and an outside business-tax estimate can
+  be allocated by spending or shareholding. Both are booked as taxes, so a
+  non-tax measure needs an extension.
+- **Can we stand behind each step?** Prices by spending and pay and jobs by
+  sector use what the code already takes (slide 23). Profits: PolicyEngine
+  can allocate one economy-wide profit change by shareholding; it has no
+  link from a sector's profits to that sector's owners, so the slide says
+  "total profits". The existing allocations are booked as taxes, so a
+  non-tax measure needs an extension; the slide is tagged "Idea to
+  explore".
+- **Sources.** [BICS guidance for
+  applicants](https://www.gov.uk/government/publications/british-industrial-competitiveness-scheme-business-guidance/british-industrial-competitiveness-scheme-guidance-for-applicants);
+  [BICS impact
+  assessment](https://www.legislation.gov.uk/ukia/2026/149/pdfs/ukia_20260149_en.pdf);
+  [PolicyEngine UK code](https://github.com/PolicyEngine/policyengine-uk).
+
+### 26. Where an agent-based model could link
+
+- Three candidate questions, each naming the behaviour the agent-based model
+  would simulate. None of these links is built.
+- **A supply disruption to one product, for example semiconductors.** The
+  agent-based model simulates firms along the product's supply chain losing
+  inputs, switching suppliers, and cutting output and jobs. It passes in job
+  and earnings losses by sector and region.
+- **Electricity-cost relief for manufacturers (BICS).** The slide before
+  left the pass-through to another model or an assumption; this row is that
+  other model, so the row points back to it ("BICS, previous slide"). It simulates firms
+  that differ in electricity use and market power choosing between prices,
+  pay, jobs, investment and profit. It passes in changes in prices, earnings
+  and profits by sector.
+- **AI adoption over the business cycle.** It simulates firms adopting
+  technology, entering and exiting, with jobs and wages adjusting, as in
+  Dosi, Fagiolo and Roventini (2010). It passes in paths of jobs, wages and
+  profits by sector, in place of the AI study's assumed scenario.
+- **What PolicyEngine reports (the same for all three).** Household incomes by
+  decile and region (local areas experimental), poverty, inequality, benefit
+  claims, and tax and benefit receipts, by year. The slide gives the short
+  form (incomes by decile and region; poverty and inequality; taxes and
+  benefits by year); the full list of outputs is on slide 23.
+- Trade flows and the response to tariffs stay in a trade model such as GTAP.
+  PolicyEngine models no firm behaviour: it adds the tax and benefit rules
+  and the households.
+- Dosi et al. model technological change and cycles, not AI; a CGE run with
+  technology sectors split out could also supply an AI scenario.
+- Youngman et al.'s agent-based model cites our approach to under-sampled
+  wealthy households; it uses neither our model nor our data.
+- Builds: one question at a time; what PolicyEngine reports is shown from
+  the start.
+- A question to ask, not a claim: what does a supply-chain model report? A
+  risk index would need a further step before it reaches households; jobs
+  and earnings by sector could be passed in directly.
+- **Can we stand behind "What it would pass in"?** Checked on 16 November 2026
+  against the trade study's code (PR #46, 10dc18826, `tariff_pipeline/shocks.py`
+  and `runner.py`) and policyengine-uk (d3db7ac). Each input carries a tag.
+  - Job and earnings losses by sector: can take today. `apply_shocks` takes
+    employees with their two-digit SIC division and applies wage cuts or job
+    losses by division. Region is reported in the results but is not an
+    input, so losses by sector and region would be a small extension; the
+    slide no longer says "and region".
+  - Price changes by spending category; pay by sector: the model holds
+    spending by category, and the trade study costs food and energy price
+    changes by decile. The work is mapping the agent-based model's sectors
+    to spending categories, hence "Needs a sector mapping".
+  - Profits by sector are off the slide: not doable. PolicyEngine could take
+    one economy-wide profit change and allocate it by shareholding.
+  - Jobs and wages by sector, one year at a time: can take today; each year
+    is a separate run, so a path is a series of runs.
+- **Sources.** [Dosi, Fagiolo and Roventini
+  (2010)](https://doi.org/10.1016/j.jedc.2010.06.018); [GTAP
+  model](https://www.gtap.agecon.purdue.edu/models/cge_gtap_n.asp); [“Who
+  bears the AI shock?”, PolicyEngine, 16 November
+  2026](https://www.policyengine.org/uk/research/uk-ai-study); [Youngman et
+  al. (2026)](https://arxiv.org/abs/2602.15607).
+
+### 27. Links to macroeconomic models
+
+- **A forecast scenario (mechanism built; not yet run).** PolicyEngine UK projects
+  its data forward with OBR growth rates for earnings, prices and other
+  series. A scenario from a macroeconomic forecasting model could replace
+  those paths. We have not run such a scenario.
+  Employment is not one of the series: job changes enter as changed inputs,
+  assigned to workers.
+- **A macro–micro loop (not built).** The macro model's earnings, jobs and
+  prices go to PolicyEngine; household incomes and tax and benefit totals go
+  back; repeat until the two agree. Precedent: NIESR combined PolicyEngine UK
+  with NiGEM to estimate the effect of the 2022 cost-of-living payments on
+  GDP. That was a one-off study, not a maintained link.
+- **OG-UK (early prototype).** An open-source overlapping-generations model
+  of the UK. PolicyEngine supplies each adult's income tax and NI; OG-UK fits
+  tax functions to these rates and solves a 60-year transition for output,
+  wages, interest rates and revenue. The fitted functions do not yet reflect
+  benefit withdrawal.
+- Builds: one route at a time.
+- **Sources.** [PolicyEngine UK
+  code](https://github.com/PolicyEngine/policyengine-uk); [Growth
+  parameters](https://github.com/PolicyEngine/policyengine-uk/blob/d3db7ac07d3cc718400f38ba8ede429d38d6855e/policyengine_uk/parameters/gov/economic_assumptions/yoy_growth.yaml);
+  [Mosley and Cornforth
+  (2023)](https://www.lse.ac.uk/CFM/assets/pdf/CFM-Discussion-Papers-2023/CFMDP2023-16-Paper.pdf);
+  [OG-UK](https://github.com/PSLmodels/OG-UK).
+
+### 28. Part 6: How we could collaborate (divider)
 
 - A few seconds. Name the part and what it covers: two candidate pilots and questions for discussion (slides 29 to 31).
 
@@ -1218,7 +1266,7 @@ slides, not build steps.
   - PolicyEngine could provide: the sector mapping; household incomes by decile
     and region, and experimentally by local area; poverty; net Exchequer
     cost.
-  - A starting point: the trade study's US-tariff episode (slide 20), with the trade model's
+  - A starting point: the trade study's US-tariff episode (slide 21), with the trade model's
     results in place of its assumed elasticity.
 - **The British Industrial Competitiveness Scheme.**
   - The Modelling Unit could provide: the electricity-cost change by sector, and how
@@ -1236,8 +1284,8 @@ slides, not build steps.
 - Builds: one pilot at a time.
 - **Can we stand behind each line?** "A trade model could provide" now reads
   "jobs and prices by sector; wages by labour type": PolicyEngine has no use
-  for sector output. What PolicyEngine could provide follows slides 22, 25
-  and 27: the sector mapping is work to do; incomes, poverty and Exchequer
+  for sector output. What PolicyEngine could provide follows slides 23, 24
+  and 25: the sector mapping is work to do; incomes, poverty and Exchequer
   cost are existing outputs; the BICS allocation needs the business-tax
   allocation extended to a non-tax measure.
 - **Sources.** [Economic Prosperity Deal: general
@@ -1274,7 +1322,7 @@ Questions the audience is likely to ask, with short answers:
   equilibrium come from the other model.
 - **Thin cells.** Sector-by-region cells have few survey records, so they
   carry sampling error; results by decile and region are more robust than
-  results by sector and region (slide 27).
+  results by sector and region (slide 23).
 - **Spending baskets by income.** Spending by category comes from the
   Living Costs and Food Survey, imputed to the household file (slide 7), so
   a price change by COICOP division falls differently across deciles.
@@ -1389,5 +1437,5 @@ carried, for questions.
 - The AI study's figures by channel and by incidence scenario are in the
   notes for slide 17.
 - The four trade episodes, with the energy offset and the datasets used, are
-  in the notes for slide 19.
+  in the notes for slide 20.
 - What the UK model covers is slide 12 and its notes.
