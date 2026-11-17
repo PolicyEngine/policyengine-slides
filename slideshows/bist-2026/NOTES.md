@@ -6,9 +6,9 @@ notes carry the sentences, caveats and figures that the presenter says aloud.
 Every figure here is one the deck already cites; the sources are in
 [README.md](README.md) and in the comments of `content.ts`.
 
-Status tags appear only inside slide bodies (cards, tables, flows and the
-In brief list): **Idea to explore**, **Proposal**,
-**Working paper**, **Early prototype**, **Open**,
+Status tags appear only inside slide bodies (cards, tables and flows):
+**Idea to explore**, **Working paper**, **Early prototype**,
+**Custom analysis**, **Outside the model**, **Open**,
 **Restricted**, **In the data**, **Not developed yet**, **In the trade study’s code**, **Needs a sector mapping**, **Small
 extension** and **Not built yet**; on the two Axiom Foundation slides (15
 and 16), **Encoded**, **Partly encoded**, **Encoded, checks paused**,
@@ -63,7 +63,7 @@ built), and tables have horizontal rules only. Four places where items are read
 side by side use one light card (white, a thin border, no tint): the Axiom
 Foundation's six rules (15), the calibration-accuracy column (20), the
 macroeconomic routes (29) and the two possible starting points (31). A PDF
-export shows each slide once, complete: one page per slide. Slides 11, 16, 18 and 19 hold live pages and need
+export shows each slide once, complete: one page per slide. Slides 11, 14, 18 and 19 hold live pages and need
 an internet connection. Icons are bare, in the teal ink, with no box behind
 them. The slides carry no "Sources" row: each slide's sources are the
 "Sources" bullet at the end of its notes below, as links. The deck has no
@@ -269,7 +269,7 @@ slides, not build steps.
   (810a59e) or a variable of the model (policyengine-uk d3db7ac); the one
   item that needs custom analysis is tagged so.
 - Why here, in part 2 and not before the linking slides: this is what the
-  model does today, and part 5 is tagged "Idea to explore". The linking
+  model does today, and part 5 holds ideas only. The linking
   slide (25) then points back to it for "what PolicyEngine already
   reports".
 - **By income.** Income deciles and wealth deciles, with the average change
@@ -1459,8 +1459,8 @@ slides, not build steps.
   - A trade model could provide: changes in prices and employment by sector
     and wages by labour type, or one economy-wide wage, under the deal's
     tariff schedule, with the labour-market closure stated.
-  - PolicyEngine could provide: the sector mapping; household incomes by decile
-    region, constituency and local authority; poverty; net Exchequer
+  - PolicyEngine could provide: the sector mapping; household incomes by
+    decile, region, constituency and local authority; poverty; net Exchequer
     cost.
   - A starting point: the trade study's US-tariff episode (slide 23), with the trade model's
     results in place of its assumed elasticity, and its UK–India episode

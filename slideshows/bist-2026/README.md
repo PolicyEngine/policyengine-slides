@@ -146,7 +146,7 @@ it if the frames do not run, and it does not run in an export.
   November" below).
 - The numbers behind the live dashboard are the table on slide 10 (the
   1,514 targets by topic, `targetTable` in `content.ts`). In a PDF export
-  the dashboard slide (10) shows a short card in place of the live page: what
+  the dashboard slide (11) shows a short card in place of the live page: what
   the page offers and its address (`dashboardFeatures`; `Only` in
   `slides/Reveal.tsx` switches between the two). Live, the slide keeps the
   dashboard.
@@ -862,6 +862,19 @@ their time. No existing figure changed.
   to explore", as the macro–micro loop is, in place of "Built, not yet run".
 - The AI slide's subtitle is "Distributional and fiscal incidence in the
   UK"; the post's date is in the notes.
+
+## Final review (17 November)
+
+- In brief (slide 2): part 5 no longer carries an "Idea to explore" tag, so
+  no part in the agenda or on a divider has one, as no title does. The tag
+  stays where it marks a piece inside a slide body: the Economic Prosperity
+  Deal's feedback arrow (26) and two macroeconomic routes (29).
+- Notes: the live pages are slides 11, 14, 18 and 19; the list of tags adds
+  "Custom analysis" and "Outside the model" and drops "Proposal", which no
+  slide uses. Here, the export card belongs to slide 11.
+- Two possible starting points (31): body scale 1.2, from 1.26, so at
+  1440×810 the cards no longer press against the accent bar. No figure
+  changed.
 
 ## Privacy
 

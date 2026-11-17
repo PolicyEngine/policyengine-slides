@@ -371,7 +371,6 @@ export function InBriefSlide() {
             <div>
               <div className={styles.agendaHead}>
                 <h2>{part.title}</h2>
-                {"tag" in part && <StatusTag tag={part.tag} />}
               </div>
               <p>{part.text}</p>
             </div>
@@ -1102,7 +1101,7 @@ export function PilotsSlide() {
     <Frame
       section="collaborate"
       title="Two possible starting points"
-      scale={1.26}
+      scale={1.2}
       subtitle="For discussion, if there is appetite: one scenario each, passed one way to PolicyEngine"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(2)}>

@@ -370,7 +370,8 @@ export const tags = {
 
 // The six parts of the talk: the part navigator along the top of each
 // slide (its short labels), the divider slide before parts 2 to 6 and the
-// agenda of the "In brief" slide (the full titles). Part 5 holds the ideas:
+// agenda of the "In brief" slide (the full titles; no part carries a tag
+// there, as no title does). Part 5 holds the ideas:
 // no link to a trade, macroeconomic or agent-based model is built, and
 // there are no published PolicyEngine results for the Economic Prosperity
 // Deal or BICS (trade study 06c8bbc reports none for the deal schedule;
@@ -410,7 +411,6 @@ export const parts = [
     title: "What could be explored",
     short: "Ideas to explore",
     text: "One way to link models, applied to trade and business policy, then agent-based and macroeconomic models.",
-    tag: tags.notBuilt,
   },
   {
     key: "collaborate",
