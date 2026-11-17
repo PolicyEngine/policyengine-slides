@@ -642,7 +642,7 @@ slides, not build steps.
   documentation](https://api.axiom.org/docs); [About the Axiom
   Foundation](https://axiom.org/about).
 
-### 15. The Axiom Foundation's rules, live
+### 15. The Axiom Foundation’s rules, live
 
 - The Axiom Foundation's site, live: browse encoded rules beside their legal text.
 - **Sources.** [axiom.org](https://axiom.org).
@@ -1001,7 +1001,10 @@ slides, not build steps.
   whichever a model has. A CGE trade model of the GTAP kind: output,
   employment and prices by sector, and wages by labour type, under a stated
   closure. A trade model with one economy-wide wage: that wage, and prices.
-  Partial-equilibrium models of goods sectors: product prices.
+  Partial-equilibrium models of goods sectors: product prices, sector by
+  sector, which map to COICOP divisions. Estimates of non-tariff measures
+  (for example from structural gravity) enter the trade model as trade
+  costs; their price and earnings effects reach households the same way.
 - **Prices carry as much as earnings and jobs.** A trade model reports the
   welfare of an average consumer. Mapped to each household's spending by
   COICOP division, the same price changes become a distribution by income
@@ -1055,7 +1058,7 @@ slides, not build steps.
   - Prices: needs a sector mapping. The model holds spending by category
     (`variables/input/consumption/`) and the trade study applies price changes
     to food and energy spending, but a model's prices by sector or product
-    must first be mapped to those categories, as on slide 27.
+    must first be mapped to those categories.
   - "Mapped into" is tagged "Not built yet": the mapping from another
     model's sectors or products to SIC and COICOP is the work in every row.
     The "Can take today" tags in the next column (headed "Once mapped,
@@ -1071,13 +1074,13 @@ slides, not build steps.
 
 - One deal has macro impacts and household impacts. This slide applies the
   linking table of the previous slide to one deal, end to end; the trade
-  study’s tariff slide (slide 22) is one of its parts. The sector-mapping
-  step reads "As on the previous slide", so the mapping is not explained
-  twice. Not built; no results yet. The slide is tagged "Not yet
-  modelled"; the two pieces that are not built, the sector mapping and the
-  feedback, each carry "Idea to explore".
-- **Results for the deal (a trade or macro model).** Changes in output,
-  employment and prices by sector, and wages by labour type, under the
+  study’s tariff slide (slide 22) is one of its parts. The subtitle
+  ("The tables of the previous slide, applied to one deal from end to end")
+  points back, so the mapping is not explained twice. Not built; no results yet. The slide is tagged "Not yet
+  modelled"; of the two pieces that are not built, the sector mapping
+  carries "Not built yet" and the feedback "Idea to explore".
+- **Results for the deal (a trade or macro model).** Changes in prices,
+  output and employment by sector, and wages by labour type, under the
   deal's tariff schedule, with the labour-market closure stated. A GTAP-style
   model has one wage per labour type, not per sector, and its standard
   closure fixes aggregate employment.
@@ -1178,17 +1181,17 @@ slides, not build steps.
 - **A supply disruption to one product, for example semiconductors.** The
   agent-based model simulates firms along the product's supply chain losing
   inputs, switching suppliers, and cutting output and jobs. It passes in job
-  and earnings losses by sector and region.
+  and earnings losses by sector.
 - **Electricity-cost relief for manufacturers (BICS).** The slide before
   left the pass-through to another model or an assumption; this row is that
   other model, so the row points back to it ("BICS, previous slide"). It simulates firms
   that differ in electricity use and market power choosing between prices,
-  pay, jobs, investment and profit. It passes in changes in prices, earnings
-  and profits by sector.
+  pay, jobs, investment and profit. It passes in price changes by spending
+  category and pay by sector.
 - **AI adoption over the business cycle.** It simulates firms adopting
   technology, entering and exiting, with jobs and wages adjusting, as in
-  Dosi, Fagiolo and Roventini (2010). It passes in paths of jobs, wages and
-  profits by sector, in place of the AI study's assumed scenario.
+  Dosi, Fagiolo and Roventini (2010). It passes in jobs and wages by sector,
+  one year at a time, in place of the AI study's assumed scenario.
 - **What PolicyEngine reports (the same for all three).** Household incomes by
   decile and region (local areas experimental), poverty, inequality, benefit
   claims, and tax and benefit receipts, by year. The slide gives the short
@@ -1265,14 +1268,20 @@ slides, not build steps.
   PolicyEngine. We have no published results for either. Nothing here is a
   commitment; each row says what a party could provide.
 - **The Economic Prosperity Deal.**
-  - A trade model could provide: changes in output, employment and prices by sector
+  - A trade model could provide: changes in prices and employment by sector
     and wages by labour type under the deal's tariff schedule, with the
     labour-market closure stated.
   - PolicyEngine could provide: the sector mapping; household incomes by decile
     and region, and experimentally by local area; poverty; net Exchequer
     cost.
   - A starting point: the trade study's US-tariff episode (slide 22), with the trade model's
-    results in place of its assumed elasticity.
+    results in place of its assumed elasticity, and its UK–India episode
+    (slide 21), which already passes projected duty reductions to each
+    household's spending by decile. The same path serves any trade
+    agreement: the price side exists; the earnings side, a trade model's
+    sector results assigned to employees, is the new part. Prices carry as
+    much weight as jobs here: a partial-equilibrium or CGE model's price
+    changes, mapped to spending, become a distribution by decile.
 - **The British Industrial Competitiveness Scheme.**
   - The Modelling Unit could provide: the electricity-cost change by sector, and how
     firms split it between prices, pay and profits, from a model or as
@@ -1288,7 +1297,7 @@ slides, not build steps.
   macroeconomic model, OG-UK, and a link between firm and household data.
 - Builds: one pilot at a time.
 - **Can we stand behind each line?** "A trade model could provide" now reads
-  "jobs and prices by sector; wages by labour type": PolicyEngine has no use
+  "prices and jobs by sector; wages by labour type": PolicyEngine has no use
   for sector output. What PolicyEngine could provide follows slides 24, 25
   and 26: the sector mapping is work to do; incomes, poverty and Exchequer
   cost are existing outputs; the BICS allocation needs the business-tax
@@ -1303,25 +1312,45 @@ slides, not build steps.
 
 ### 31. Questions for discussion
 
-1. Which is the better first pilot: tariffs under the Economic Prosperity
-   Deal, or BICS?
-2. What can a trade-model run export: output, employment and prices by
-   sector, wages by labour type? Under which labour-market closure?
-3. For a policy such as BICS, where should the split between prices, pay and
-   profits come from?
-4. Which firm behaviour needs an agent-based model, beyond what a trade or
-   macro model gives?
-5. Which household results matter most: deciles, poverty, regions,
-   constituencies (experimental)?
+The six questions on the slide, with what each is after:
 
-The slide has six questions; the list above is the earlier five, with these
-changes: question 2 now asks which model would supply the scenario and
-under which closure; a new question 3 asks how a long-run result maps to
-fiscal years; and the agent-based model question also asks what the model
-reports. Two more to raise if time allows: tariff revenue as a fiscal
-channel, and returns to capital.
+1. **Which pilot first: the Economic Prosperity Deal, or BICS?**
+2. **Which model would supply the scenario, and under which closure?** A
+   CGE model of the GTAP kind gives prices, employment by sector and wages
+   by labour type under a stated closure; a trade model with one
+   economy-wide wage gives that wage and prices; partial-equilibrium models
+   give product prices across goods sectors.
+3. **How should a long-run result map to fiscal years?** A CGE result is a
+   comparative-static equilibrium; PolicyEngine reports fiscal years, so the
+   result could be applied to one chosen year or phased in over several.
+4. **Where should the prices, pay and profits split come from?** For a
+   policy such as BICS.
+5. **Which firm behaviour needs an agent-based model, and what does it
+   report?** Beyond what a trade or macro model gives.
+6. **Which household results matter most?** Deciles, poverty, regions,
+   constituencies (experimental).
+
+Two more to raise if time allows: tariff revenue as a fiscal channel, and
+returns to capital.
 
 Questions the audience is likely to ask, with short answers:
+- **Where do the elasticities come from?** In the trade study the
+  export-demand elasticity of 1 is a placeholder (the OBR's March 2025
+  scenarios use 0.4); a trade model's sector results would replace it and
+  the steps beside it (slide 22). The firm model's turnover elasticities are
+  assumed, from 0.05 to 0.32 (slide 20).
+- **Closure.** If the trade model holds total employment fixed, its sector
+  results are wage changes and moves between sectors, and PolicyEngine
+  applies wage changes only; job losses are drawn only when the sending
+  model reports them (slide 24).
+- **Timing.** See question 3, which is open: a long-run result could be
+  applied to one fiscal year or phased in; each year is a separate run.
+- **Tariff revenue.** Not in PolicyEngine's Exchequer result, which counts
+  the taxes and benefits in the model; it would come from the trade
+  model as a fiscal total, so the two make one fiscal picture.
+- **Returns to capital.** A CGE model reports them. PolicyEngine allocates
+  business-tax totals by shareholding; a link from returns to capital to
+  households' capital income is an idea to explore, not built (slide 24).
 - **Static or behavioural?** Mostly static by default (slide 5). Labour
   supply responses can be switched on; firms' decisions and general
   equilibrium come from the other model.

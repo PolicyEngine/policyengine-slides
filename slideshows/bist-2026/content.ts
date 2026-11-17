@@ -711,13 +711,13 @@ export const epdTrace = {
       icon: IconWorld,
       owner: "Trade or macro model",
       title: "Results for the deal",
-      text: "Jobs and prices by sector; wages by labour type; closure stated",
+      text: "Prices and jobs by sector; wages by labour type; closure stated",
     },
     {
       icon: IconArrowsExchange,
       owner: "Agreed mapping",
       title: "Sector mapping",
-      text: "As on the previous slide: sectors and products to SIC and COICOP divisions",
+      text: "Another model’s sectors and products to SIC and COICOP divisions",
       tag: tags.toBuild,
       dashed: true,
     },
@@ -776,7 +776,7 @@ export const tariffDisaggregation = {
     {
       icon: IconShoppingCart,
       result: "Prices",
-      from: "Trade and partial-equilibrium models",
+      from: "Partial-equilibrium and CGE trade models",
       key: "COICOP spending division",
       assigned: "Households, by what they spend",
       tag: tags.mapping,
@@ -810,7 +810,7 @@ export const tariffDisaggregation = {
 // study's, and the trade slide's US tariffs card points here.
 export const tariffBridge = {
   steps: [
-    { icon: IconReceiptTax, title: "Tariff rates", text: "US rates before the UK–US deal of May 2025" },
+    { icon: IconReceiptTax, title: "Tariff rates", text: "US rates before the UK–\u2060US deal of May 2025" },
     { icon: IconShip, title: "US export intensity", text: "By two-digit SIC division", dashed: true },
     { icon: IconMathFunction, title: "Export-demand elasticity", text: "Assumed 1, as a placeholder", dashed: true },
     { icon: IconCoins, title: "Earnings change by sector", text: "About £1.0bn a year", dashed: true },
@@ -924,7 +924,7 @@ export const macroLinks = [
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
-    text: "Its earnings and price paths could replace the OBR's.",
+    text: "Its earnings and price paths could replace the OBR’s.",
     source: sources.growth,
   },
   {
@@ -1232,7 +1232,10 @@ export const axiomGeography =
 // Two candidate pilots. Neither has published results: the trade study
 // reports none for the deal schedule and nothing exists on BICS. "Starting
 // point" rows name existing work: the trade study's US-tariff episode (06c8bbc)
-// and the business-tax allocation parameters (see businessPolicy above).
+// and its UK–India duty reductions, a price change traced to households by
+// decile (tradeEvents above), and the business-tax allocation parameters (see
+// businessPolicy above). Prices lead the trade model's row: they carry as
+// much as jobs (see the comment at the end of this file).
 export const pilots = [
   {
     icon: IconShip,
@@ -1241,7 +1244,7 @@ export const pilots = [
       {
         icon: IconWorld,
         label: "A trade model could provide",
-        text: "Jobs and prices by sector; wages by labour type",
+        text: "Prices and jobs by sector; wages by labour type",
       },
       {
         icon: IconHome,
@@ -1251,7 +1254,7 @@ export const pilots = [
       {
         icon: IconFlag,
         label: "A starting point",
-        text: "The trade study’s US-tariff episode",
+        text: "The trade study’s US-tariff and UK–\u2060India episodes",
       },
     ],
   },

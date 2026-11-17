@@ -43,7 +43,7 @@ slide, is in [NOTES.md](NOTES.md).
 12. What the UK model covers, and what we can share
 13. Rules as code for firms and employers, from the Axiom Foundation
 14. What exists today, and how a model could call it (the Axiom Foundation)
-15. The Axiom Foundation's rules, live (live page)
+15. The Axiom Foundation’s rules, live (live page)
 
 4 · Projects we have done
 
@@ -457,6 +457,10 @@ record count is taken from the 2023 build.
 
 ## Review
 
+The dated sections below keep the slide numbers of the version they
+describe; the current order is the list at the top of this file and the
+headings of `NOTES.md`.
+
 Earlier versions had four rounds of Fable 5.2 review: facts against the
 pinned code, and usefulness, neutrality, privacy and layout. Later passes
 cut the text on each slide (the text taken off is in `NOTES.md`), removed
@@ -588,9 +592,8 @@ slide 26 and in the briefing, in place of "Can take today"; the deal is
 Two slides follow the coverage slide, in part 3: the Axiom Foundation's
 rules as code for firms and employers (13), and what exists today and how a
 model could call it (14). The deck then had 25 slides (31 with the part
-dividers added later), and every slide number in
-this file and in `NOTES.md` follows that order, including those in the
-sections above. The coverage slide's "Outside the model" line (corporation
+dividers added later); the slide numbers in this section are
+those of that version. The coverage slide's "Outside the model" line (corporation
 tax; firms as entities) is the reason for the place: slide 13 shows rules
 on a firm entity that exist today, and slide 14 says that corporation tax
 is not encoded there either. Slide 13's title, slide 14's subtitle and the
@@ -601,8 +604,8 @@ gives the relationship as axiom.org/about states it.
 
 A review by a maintainer of the Microcosm data changed the data slides and
 added one, so the deck had 25 slides (31 with the part dividers added
-later); every slide number in this file and in
-`NOTES.md` follows the new order. Every figure below is the certified
+later); the slide numbers in this section are those of that
+version. Every figure below is the certified
 build's, from the calibration dashboard's data for the pinned release.
 
 - Slide 7 lays the household file's build out on one row, left to right:
@@ -715,6 +718,30 @@ the top is current.
   icon when they fit and wrap below it when they do not (`.cardHead` wraps;
   its tags take at most the card's width and wrap their own text), on every
   card slide. No figure changed.
+
+## Fresh-eyes review and audience fit (17 November)
+
+No figure or tag changed.
+
+- Prices lead the trade model's row on the deal slide (25) and the first
+  pilot (30): "Prices and jobs by sector". The linking slide (24) names
+  partial-equilibrium and CGE trade models as the source of prices. The
+  first pilot's starting point is now the trade study's US-tariff and
+  UK–India episodes: the India episode already passes duty reductions to
+  household spending by decile, the part closest to a trade-agreement
+  assessment.
+- The deal slide's subtitle points back to the linking table, and its
+  mapping step names what is mapped ("Another model’s sectors and products
+  to SIC and COICOP divisions").
+- The synthetic-firm slide (19) is set larger (body scale 0.95, from 0.9),
+  so its method column reads at a distance; it still fits at both sizes.
+- Straight apostrophes in slide text are typographic (slides 15 and 28).
+- Notes: the questions slide's notes list its six questions, with short
+  answers on elasticities, closure, timing, tariff revenue and returns to
+  capital; the agent-based slide's notes match its inputs (no "by region",
+  no profits by sector); the deal slide's notes give the sector mapping's
+  tag as "Not built yet"; the linking notes add non-tariff measures as trade
+  costs that reach households the same way.
 
 ## Privacy
 

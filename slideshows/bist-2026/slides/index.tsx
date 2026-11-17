@@ -542,7 +542,7 @@ export function EpdSlide() {
       section="explore"
       title="The UK–US Economic Prosperity Deal: from model results to households"
       scale={1.25}
-      subtitle="The same tables, applied to one deal: from a trade or macro model's results to household incomes"
+      subtitle="The tables of the previous slide, applied to one deal from end to end"
       status={[tags.noResults]}
     >
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
@@ -1243,7 +1243,7 @@ export function AxiomLiveSlide() {
   return (
     <Frame
       section="have"
-      title="The Axiom Foundation's rules, live"
+      title="The Axiom Foundation’s rules, live"
       scale={1.1}
       fill
       subtitle="axiom.org: encoded rules beside their legal text"
@@ -1326,7 +1326,7 @@ export function FirmMethodSlide() {
     <Frame
       section="projects"
       title="How we built synthetic UK firms"
-      scale={0.9}
+      scale={0.95}
       subtitle="Firm-level VAT microsimulation: published tables in, calibrated firm records out"
       status={[tags.workingPaper]}
     >
