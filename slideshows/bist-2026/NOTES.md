@@ -784,10 +784,12 @@ slides, not build steps.
   dashboard](https://policyengine.org/uk/budgets/autumn-2026); [Dashboard
   code](https://github.com/PolicyEngine/uk-autumn-budget-dashboard-2026).
 
-### 19. The potential impact of AI adoption: who bears the cost?
+### 19. An AI adoption scenario: Exchequer cost, poverty and inequality
 
 - **Say it.** An illustrative scenario, not a forecast, on Microcosm UK for the
-  2027–28 tax year. The study assumes the size of the change and who loses
+  2027–28 tax year. The title names what the study computes; the job losses
+  and who bears them are assumptions, and the post's own title ("Who bears
+  the AI shock?") is the citation. The study assumes the size of the change and who loses
   work; the Unit's agent-based model, or a GTAP run split by sector, could
   supply the size and its sector pattern.
 - Data build: the study ran on policyengine 6.16.1, which pins the 7

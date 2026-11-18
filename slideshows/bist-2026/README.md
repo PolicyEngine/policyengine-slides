@@ -51,7 +51,7 @@ slide, is in [NOTES.md](NOTES.md).
 16. What exists today, and how a model could call it (the Axiom Foundation)
 17. Part 4: Projects we have done (divider)
 18. The Autumn Budget 2026 dashboard (live page)
-19. The potential impact of AI adoption: who bears the cost? (live page)
+19. An AI adoption scenario: Exchequer cost, poverty and inequality (live page)
 20. How we built synthetic UK firms
 21. What the firm model can cost: thresholds, tapers and reduced rates
 22. Who pays for trade shocks? Four UK episodes, 2021–26
@@ -937,5 +937,7 @@ The deck is public: it has no password and appears on the home page.
 - Notes: a timing checkpoint (divider 24 by about minute 20); the
   participation response is in the code but no run calls it yet; the AI
   study assumes the size of the change; the firm model's 40.4% by-sector
-  VAT diagnostic for questions.
+  VAT diagnostic for questions.- Slide 19's title names what the study computes: "An AI adoption
+  scenario: Exchequer cost, poverty and inequality", subtitled "Under five
+  assumptions about who loses work". The post's title stays as the citation.
 

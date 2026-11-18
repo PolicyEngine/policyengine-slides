@@ -1326,10 +1326,10 @@ export function AiPostSlide() {
   return (
     <Frame
       section="projects"
-      title="The potential impact of AI adoption: who bears the cost?"
+      title="An AI adoption scenario: Exchequer cost, poverty and inequality"
       scale={1.1}
       fill
-      subtitle="Distributional and fiscal incidence in the UK"
+      subtitle="Under five assumptions about who loses work"
     >
       <div className={styles.project}>
         <div className={styles.projectSide}>
