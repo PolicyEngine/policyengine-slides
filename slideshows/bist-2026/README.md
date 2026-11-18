@@ -1,6 +1,6 @@
 # From business shocks to household incomes, 19 November 2026
 
-31 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
+32 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
 Unit of the Department for Business, Innovation, Science and Trade (BIST).
 There is no appendix: backup material for questions is at the end of
 [NOTES.md](NOTES.md).
@@ -48,29 +48,30 @@ slide, is in [NOTES.md](NOTES.md).
 
 4 · Projects we have done
 
-16. Part 4: Projects we have done (divider)
-17. The Autumn Budget 2026 dashboard (live page)
-18. The potential impact of AI adoption: who bears the cost? (live page)
-19. How we built synthetic UK firms
-20. What the firm model can cost: thresholds, tapers and reduced rates
-21. Who pays for trade shocks? Four UK episodes, 2021–26
-22. Who pays for trade shocks? The 2025 US tariffs (the second
+16. What exists today, and how a model could call it (the Axiom Foundation)
+17. Part 4: Projects we have done (divider)
+18. The Autumn Budget 2026 dashboard (live page)
+19. The potential impact of AI adoption: who bears the cost? (live page)
+20. How we built synthetic UK firms
+21. What the firm model can cost: thresholds, tapers and reduced rates
+22. Who pays for trade shocks? Four UK episodes, 2021–26
+23. Who pays for trade shocks? The 2025 US tariffs (the second
     slide of the trade study)
 
 5 · What could be explored
 
-23. Part 5: What could be explored (divider)
-24. One way to link: tables in, tables out
-25. The UK–US Economic Prosperity Deal: from model results to households
-26. Business policy: from firm costs to households
-27. Where an agent-based model could link
-28. Links to macroeconomic models
+24. Part 5: What could be explored (divider)
+25. One way to link: tables in, tables out
+26. The UK–US Economic Prosperity Deal: from model results to households
+27. Business policy: from firm costs to households
+28. Where an agent-based model could link
+29. Links to macroeconomic models
 
 6 · Possible next steps
 
-29. Part 6: Possible next steps (divider)
-30. Questions for discussion
-31. Thank you
+30. Part 6: Possible next steps (divider)
+31. Questions for discussion
+32. Thank you
 
 - `config.ts` controls the slide order, the build steps (live only) and the
   meeting metadata.
@@ -107,7 +108,7 @@ from the left. Motion lasts about 0.3 seconds and is off under
 
 Exports show each slide once, complete. Every slide with builds has
 `exportBuilds: 1`, so a PDF has exactly one page per slide (33 pages) and
-the deck index counts 31 slides; `countSlides: true` makes the live counter
+the deck index counts 32 slides; `countSlides: true` makes the live counter
 number slides too, not build steps; in an export `Reveal` shows every step, so
 that page is the fully built slide, not its first step. No figure depends on
 an animation: the count-up always ends on the exact text, a timer restores
@@ -181,7 +182,7 @@ notes for that slide.
   2024–25), which earlier versions quoted and which are no longer in the
   deck. The trade study's slides follow
   its rerun on Microcosm UK (uk-trade-shock-study pull request #46, head
-  `090db1b`, read 18 November, open and not merged; the earlier heads
+  `d8e01f2`, read 18 November, open and not merged; the earlier heads
   `185ee5f` and `867293f` have the same figures): every microsimulation runs
   on policyengine[uk] 6.20.0 with the Microcosm UK 2024–25 build of 7
   November that 6.20.0 certifies. The tariff stage runs under 2026–27
@@ -264,7 +265,7 @@ notes for that slide.
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
   - The trade study's US-tariff episode (slide 23): "Who pays for trade
-    shocks?", uk-trade-shock-study pull request #46, head `090db1b`
+    shocks?", uk-trade-shock-study pull request #46, head `d8e01f2`
     (read 18 November 2026, open, not merged), `paper/generated_e3.tex`: gross
     change £1,007m a year; taxes and benefits offset 39.0% for wage cuts and
     34.1% for job losses (the abstract's headline; 41.8% and 37.0% with
@@ -351,8 +352,8 @@ notes for that slide.
   - A model run: policyengine-uk `d3db7ac`, the growth parameters (OBR
     forecasts to 2031) and the labour supply elasticities (zero by default).
     An optional response on hours of work uses the OBR's elasticities
-    (`dynamics/progression.py`); a participation response is in the code but
-    switched off (`dynamics/labour_supply.py`, `docs/book/usage/dynamics.md`).
+    (`dynamics/progression.py`); a participation response is in the code, but
+    no run calls it yet (`dynamics/labour_supply.py`, `docs/book/usage/dynamics.md`).
     Two responses run by default: capital gains realisations (elasticity 1)
     and employer NI changes passed to pay. policyengine.py `810a59e`,
     `docs/impact-analysis.md`.
@@ -405,9 +406,9 @@ notes for that slide.
       `docs/bundles.md` and `docs/engineering/skills/data-certification.md`.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
-    `paper/sections/results.tex` (20 assignment draws at PR #46, `090db1b`).
+    `paper/sections/results.tex` (20 assignment draws at PR #46, `d8e01f2`).
   - Trade events (slide 22): uk-trade-shock-study pull request #46,
-    `090db1b`, `paper/sections/episodes.tex` (each episode's years and
+    `d8e01f2`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
   - Calibration targets by topic (slide 10): the dashboard's data route for
@@ -551,7 +552,7 @@ slide that replaced it.
   and there is no closing sources slide, to keep to the time. The freed
   space goes to the content.
 - The tariff and trade slides follow the trade study's rerun on Microcosm
-  UK (pull request #46, now at `090db1b`, open): 39.0% and 34.1% (taxes and
+  UK (pull request #46, now at `d8e01f2`, open): 39.0% and 34.1% (taxes and
   benefits only) replace 43.7% and 35.4%, and both slides are tagged
   "Microcosm UK".
 - Doability: every "could pass" box was checked against the trade study's
@@ -895,7 +896,7 @@ The deck is public: it has no password and appears on the home page.
 - "By place" is now "By geography", and the notes say the disclosure floor
   of 10 households is policyengine.py's own, stricter than the UK Data
   Service licence.
-- PR #46 is cited at its current head, `090db1b` (figures unchanged).
+- PR #46 is cited at its current head, `d8e01f2` (figures unchanged).
 
 ## Two slides removed; the trade study marked preliminary (18 November)
 
@@ -907,4 +908,34 @@ The deck is public: it has no password and appears on the home page.
 - Slide 10's title no longer carries the target count; the subtitle does.
 - The trade slides' subtitles say "Preliminary work, not yet published".
 - The last question says "geography".
+
+## Max's review (18 November)
+
+- Slide 3: 10 Downing Street's caption is "Built 10ds-microsim on
+  PolicyEngine". Slide 6: geography adds "Published where 10+ survey
+  households lie behind each number, with intervals".
+- Slide 9: a before-calibration tile, 44% of targets within 10% under the
+  starting weights (which include the SPI copies), against 98.8% after,
+  in-sample (Universal Credit 17% to 97%, Pension Credit 8% to 100%, PIP
+  18% to 100%), from the dashboard's target list for the release.
+- The Axiom "what exists today" slide is back (slide 16, 32 slides in
+  all); its fuel duty item reads "Fuel duty's statutory rates (not the 5p
+  temporary cut)": the encoding holds the 57.95p standing rate
+  (rulespec-uk `uk/statutes/ukpga/1979/5/6.yaml`), and 52.95p is in force.
+- Slide 25, row 1: "Agent-based model, or a CGE model that reports
+  unemployment"; assigned as wage changes, with net job losses drawn at
+  random where the model reports them.
+- Per-item "Idea to explore", "Not built yet" and "Not developed yet" tags
+  removed from slides 26 to 29; slide 25's tags and OG-UK's stay.
+- Slide 29: the macro-micro loop was done once by NIESR, without
+  iterating; iterating is the idea. The notes for slides 29 and 31 ask
+  whether the Unit's Oxford Economics model could supply the scenario.
+- Trade study cited at PR #46 head `d8e01f2` (figures unchanged) and linked
+  to its paper PDF; the energy notes follow the current abstract (71.8%
+  energy-specific, 87.5% with Cost of Living Payments), and the elasticity
+  answer uses the paper's OBR-0.4 result (41.9% and 37.0%).
+- Notes: a timing checkpoint (divider 24 by about minute 20); the
+  participation response is in the code but no run calls it yet; the AI
+  study assumes the size of the change; the firm model's 40.4% by-sector
+  VAT diagnostic for questions.
 

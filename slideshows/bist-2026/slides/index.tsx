@@ -811,10 +811,11 @@ export function CalibrationSlide() {
   const { stats, solver } = calibrationFit;
   // The first build shows the solver's objective; the second, what goes in
   // (targets and records); the third, how the fitted weights do.
-  const [targets, fit, records] = stats;
+  const [targets, fit, records, before] = stats;
   const tiles = [
     { stat: targets, step: 2 },
     { stat: records, step: 2 },
+    { stat: before, step: 3 },
     { stat: fit, step: 3 },
   ];
   return (
@@ -997,7 +998,6 @@ export function BusinessPolicySlide() {
       subtitle="Example: the British Industrial Competitiveness Scheme (BICS)"
     >
       <p className={styles.flowStatus}>
-        <StatusTag tag={tags.notDeveloped} />
         {businessPolicy.status}
       </p>
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 4]} />
@@ -1044,7 +1044,6 @@ export function AbmSlide() {
               </Reveal>
               <Reveal step={index + 1} ghost className={`${styles.cell} ${styles.cellTagged} ${lead}`}>
                 {row.passes}
-                <StatusTag tag={row.tag} />
               </Reveal>
             </Fragment>
           );

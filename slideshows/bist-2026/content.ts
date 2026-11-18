@@ -20,7 +20,7 @@
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
 // policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc
-// (its figures are now those of its PR #46, head 090db1b, read 17 November;
+// (its figures are now those of its PR #46, head d8e01f2, read 17 November;
 // the earlier head 778557c, read 16 November, has the same figures),
 // and firm-microsim-paper e6d5dd6. GOV.UK pages and the Microcosm
 // calibration dashboard were read the same day; the AI post on 16 November.
@@ -129,7 +129,7 @@ export const sources = {
   },
   trade: {
     label: "Ahmadi (2026b), trade study",
-    href: "https://github.com/PolicyEngine/uk-trade-shock-study",
+    href: "https://github.com/PolicyEngine/uk-trade-shock-study/blob/d8e01f2/paper/main.pdf",
   },
   ai: {
     label: "Ahmadi (2026a), AI study",
@@ -509,7 +509,7 @@ export const whoWeAre = {
       pixelHeight: 1280,
       height: 2.7,
       source: sources.no10,
-      caption: "Built a tool on PolicyEngine",
+      caption: "Built 10ds-microsim on PolicyEngine",
     },
     {
       name: "HM Treasury",
@@ -662,7 +662,7 @@ export const coverage = [
   },
 ];
 
-// The trade study's four episodes (uk-trade-shock-study PR #46, 090db1b,
+// The trade study's four episodes (uk-trade-shock-study PR #46, d8e01f2,
 // open, not merged; a working paper). Years and channels are the headings of
 // paper/sections/episodes.tex: "Episode 1: the TCA border (2021--23),
 // negative, price-led"; "Episode 2: the terms-of-trade shock (2022--23),
@@ -691,7 +691,7 @@ export const tradeEvents = [
     years: "2022–\u206023",
     channel: "Prices",
     title: "The 2022 energy price surge",
-    text: "Offset in part by two support schemes",
+    text: "Largely offset by energy support",
     next: false,
   },
   {
@@ -712,7 +712,7 @@ export const tradeEvents = [
   },
 ];
 
-// The path every episode follows, under the four cards. PR #46, 090db1b:
+// The path every episode follows, under the four cards. PR #46, d8e01f2:
 // each episode has a household stage on the certified Microcosm UK records
 // (README; results.tex, "The second stage: household-level results";
 // vintage_and_tca.py for food, second_stage_energy.py for energy,
@@ -723,7 +723,7 @@ export const tradeEvents = [
 // episodes, not for the India duty reductions.
 // The line is said aloud (NOTES.md, slide 22), not shown on the slide.
 // Microcosm UK (said aloud on slides 22 and 23): the trade study's rerun
-// (uk-trade-shock-study PR #46, 090db1b, open, not merged; README and
+// (uk-trade-shock-study PR #46, d8e01f2, open, not merged; README and
 // paper/sections/results.tex): every microsimulation runs on
 // policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the Microcosm UK
 // 2024-25 build of 7 November 2026 that 6.20.0 certifies, not the 15
@@ -732,7 +732,7 @@ export const tradeEvents = [
 // comparison.
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
-// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 090db1b) reports a
+// 06c8bbc on the enhanced FRS, and the rerun (PR #46, d8e01f2) reports a
 // different measure (see NOTES.md).
 
 // The Economic Prosperity Deal, end to end: from a trade or macroeconomic
@@ -764,7 +764,6 @@ export const epdTrace = {
       owner: "Agreed mapping",
       title: "Sector mapping",
       text: "Another model’s sectors and products to the SIC and COICOP codes in the data",
-      tag: tags.toBuild,
       dashed: true,
     },
     {
@@ -782,7 +781,6 @@ export const epdTrace = {
   ],
   feedback: {
     label: "Optional feedback: household and fiscal totals back to the macro model",
-    tag: tags.notBuilt,
   },
 };
 
@@ -841,10 +839,10 @@ export const tariffDisaggregation = {
     {
       icon: IconBriefcase,
       result: "Earnings and jobs by sector",
-      from: "Agent-based model; jobs by sector from a CGE model",
+      from: "Agent-based model, or a CGE model that reports unemployment",
       key: "Two-digit SIC division",
       keyTag: tags.inData,
-      assigned: "Employees in that sector; job losses drawn at random",
+      assigned: "Wage changes; net job losses, where the model reports them, drawn at random",
       tag: tags.inTradeCode,
     },
     {
@@ -886,7 +884,7 @@ export const tariffDisaggregation = {
 // The trade study's US-tariff episode (formerly called "the tariff bridge";
 // the symbol keeps that name): shock = elasticity × tariff × US export share by SIC
 // division. Paper "Who pays for trade shocks?", uk-trade-shock-study PR #46,
-// head 090db1b (17 November 2026, open, not merged), policyengine.py 6.20.0 on
+// head d8e01f2 (17 November 2026, open, not merged), policyengine.py 6.20.0 on
 // Microcosm UK. Headline as in the abstract: taxes and benefits offset
 // EThreeWageTaxBenRatePct 39.0% (wage cuts) and EThreeDispTaxBenRatePct 34.1%
 // (displacement, exact expectation over exposed workers) of the gross loss
@@ -897,7 +895,7 @@ export const tariffDisaggregation = {
 // for the schedule before the Economic Prosperity Deal. The paper reports
 // none for the deal schedule ("the Economic Prosperity Deal's own tariff
 // changes ... are outside the design", episodes.tex); the code has an "epd"
-// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at 090db1b)
+// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at d8e01f2)
 // but no published result, hence the tag "No published results for the UK–US deal".
 // This slide is the second slide of the trade study: its title repeats the
 // study's, and the trade slide's US tariffs card points here.
@@ -1016,7 +1014,7 @@ export const macroLinks = [
   {
     icon: IconTrendingUp,
     title: "A forecast scenario",
-    tags: [tags.notBuilt],
+    tags: [],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: false,
@@ -1026,11 +1024,11 @@ export const macroLinks = [
   {
     icon: IconRefresh,
     title: "A macro–⁠micro loop",
-    tags: [tags.notBuilt],
+    tags: [],
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: true,
-    text: "Results could pass both ways until the two agree.",
+    text: "NIESR passed results between NiGEM and PolicyEngine UK once; iterating until the two agree is the idea.",
     source: sources.niesr,
   },
   {
@@ -1067,7 +1065,6 @@ export const abmQuestions = [
     detail: "A shock to one product, passed along the firm network",
     behaviour: "Suppliers and buyers lose inputs, cut output and jobs",
     passes: "Job and earnings losses by sector",
-    tag: tags.notDeveloped,
     lead: true,
   },
   {
@@ -1076,7 +1073,6 @@ export const abmQuestions = [
     detail: "Expectations and uncertainty at its core",
     behaviour: "Firms’ investment, output and hiring paths by sector",
     passes: "Jobs and earnings by sector, one year at a time",
-    tag: tags.notDeveloped,
     lead: false,
   },
   {
@@ -1085,14 +1081,13 @@ export const abmQuestions = [
     detail: "In the style of Dosi, Fagiolo and Roventini (2010)",
     behaviour: "Firms adopt technology, enter and exit over the cycle",
     passes: "Paths of jobs and wages by sector, one year at a time",
-    tag: tags.notDeveloped,
     lead: false,
   },
 ];
 
 // Every input on the slide carries "Not developed yet": the link from an
 // agent-based model is not developed. Doability of each input, checked on 16 November 2026 against
-// uk-trade-shock-study PR #46 (090db1b), tariff_pipeline/shocks.py and
+// uk-trade-shock-study PR #46 (d8e01f2), tariff_pipeline/shocks.py and
 // runner.py: apply_shocks takes persons with employment_income, sic_division,
 // age and weight, and applies wage cuts or job losses by two-digit SIC
 // division; region is reported (runner.py, region_income_change) but is not
@@ -1271,7 +1266,7 @@ export const axiomToday = [
     items: [
       "The five UK rules on the previous slide, as tagged there",
       "Statutory maternity pay’s 90% rate, and who qualifies for paternity pay",
-      "Fuel duty rates",
+      "Fuel duty’s statutory rates (not the 5p temporary cut)",
     ],
   },
   {
@@ -1546,6 +1541,7 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
       { text: "The UK, and its 12 regions and nations (ITL1)" },
       { text: "650 parliamentary constituencies" },
       { text: "361 local authorities" },
+      { text: "Published where 10+ survey households lie behind each number, with intervals" },
     ],
   },
 ];
@@ -1673,8 +1669,14 @@ export const calibrationEquation =
 export const calibrationFit = {
   stats: [
     { icon: IconTargetArrow, value: "1,534", label: "official targets" },
-    { icon: IconCircleCheck, value: "98.8%", label: "of targets within 10% of the official figure" },
+    { icon: IconCircleCheck, value: "98.8%", label: "within 10% after calibration (in-sample): Universal Credit 17% to 97%, Pension Credit 8% to 100%, PIP 18% to 100%" },
     { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
+    // Before calibration: the starting weights, which already include the
+    // SPI copies (not the raw FRS). The dashboard's target list for the
+    // release (initial_relative_error), read 18 November 2026: 675 of 1,534
+    // within 10% (44.0%); Universal Credit 18 of 106 (17%), Pension Credit
+    // 1 of 13 (8%), PIP 3 of 17 (18%); after: 103, 13 and 17.
+    { icon: IconScale, value: "44%", label: "of targets within 10% before calibration (starting weights, incl. SPI copies)" },
   ],
   solver: ["39 target families, each 1/39 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
 };

@@ -3,6 +3,7 @@ import {
   AbmSlide,
   AiPostSlide,
   AxiomRulesSlide,
+  AxiomTodaySlide,
   AxiomLiveSlide,
   BreakdownsSlide,
   BridgeSlide,
@@ -69,6 +70,7 @@ export const bist2026Config: SlideshowConfig = {
     { component: CoverageSlide, builds: 5, exportBuilds: 1 },
     AxiomLiveSlide,
     { component: AxiomRulesSlide, builds: 2, exportBuilds: 1 },
+    { component: AxiomTodaySlide, builds: 4, exportBuilds: 1 },
     // Part 4. Projects we have done.
     PartProjectsSlide,
     BudgetSlide,
