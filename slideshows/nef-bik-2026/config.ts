@@ -20,7 +20,7 @@ import {
 
 export const nefBik2026Config: SlideshowConfig = {
   id: "nef-bik-2026",
-  title: "Modelling benefits in kind: a PolicyEngine and NEF collaboration",
+  title: "Modelling benefits in kind in PolicyEngine UK: scoping with NEF",
   description:
     "A scoping meeting with the New Economics Foundation on benefits in kind in PolicyEngine UK: what the model covers today, the data available, and options.",
   // The exact meeting date isn't fixed; a day of 01 renders as "November 2026".

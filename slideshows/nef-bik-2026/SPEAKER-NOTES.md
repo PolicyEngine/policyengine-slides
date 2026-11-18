@@ -1,4 +1,4 @@
-# Speaker notes: modelling benefits in kind (NEF, November 2026)
+# Speaker notes: modelling benefits in kind in PolicyEngine UK (NEF, November 2026)
 
 A scoping conversation. Nothing has been agreed and nothing has been run for
 this deck: there are no PolicyEngine results on any slide. Every figure is
@@ -20,8 +20,9 @@ today; and scoping the project.
 
 - Benefit in kind (BIK): something an employer provides other than cash.
 - Each benefit has a taxable value ("cash equivalent"). For cars, fuel, vans,
-  loans and living accommodation it is a formula in law (ITEPA 2003); for most
-  other benefits it is the cost to the employer.
+  loans and living accommodation it is a formula in law (ITEPA 2003); for
+  others it is usually the cost to the employer. This general rule was not
+  re-read from HMRC's booklet 480 for this deck.
 - Company car: list price times the "appropriate percentage", which depends
   on CO2 emissions. In 2026-27 it runs from 4% (zero emission) to 37%
   (Budget 2026 overview, Annex A).
@@ -29,8 +30,9 @@ today; and scoping the project.
   The employer reports it on a P11D after the year ends, or taxes it through
   payroll ("payrolling").
 - The employer pays Class 1A National Insurance contributions (NICs) at 15%
-  in 2026-27 (Rates and thresholds for employers 2026 to 2027). There is no
-  employee NIC on a benefit in kind.
+  in 2026-27 (Rates and thresholds for employers 2026 to 2027). There is
+  usually no employee NIC on a benefit in kind (some, such as vouchers that
+  can be exchanged for cash, are charged Class 1 instead).
 - OpRA (optional remuneration arrangement), since 6 April 2017: when an
   employee gives up salary for a benefit, the taxable amount is the greater
   of the salary given up and the normal taxable value. Exempt from this rule:
@@ -38,7 +40,7 @@ today; and scoping the project.
   workplace nurseries, cycle to work, and cars with CO2 of 75 g/km or less
   (HMRC booklet 480, Appendix 12).
 
-## 5. £9.5bn of taxable benefits in 2024-25
+## 5. £9.5bn of benefits liable to Class 1A in 2024-25
 
 - Left: three definitions in plain words. Class 1A has been 15% since April
   2025; it was 13.8% in 2024-25, which is why £1.31bn is 13.8% of £9.5bn.
@@ -51,10 +53,12 @@ today; and scoping the project.
     says the count is probably an underestimate, because some payrolled cars
     are not reported;
   - 51% of company cars are fully electric (Tables 2B and 2D).
-- Right, in its own panel: the last year HMRC published every type of
-  benefit, 2016-17 (Table 4.5, June 2019). Since 2020 the tables cover cars
-  and fuel only, plus the Class 1A total. Shares of the £8,250m total: car
-  55%, medical and dental insurance 23%, car fuel 8%, van 2%, beneficial
+- Right, in its own panel: the last year with final figures for every type of
+  benefit, 2016-17 (Table 4.5 and commentary, June 2019; the same release
+  had provisional figures for 2017-18). Since 2020 the tables cover cars
+  and fuel only, plus the Class 1A total. Shares of the £8.25bn total: car
+  55%, medical and dental insurance 23%, car fuel 8% (HMRC's own
+  percentages), van 2%, beneficial
   loans 2%, accommodation 1%; the rest is mileage allowances, van fuel and
   other benefits. In 2016-17, 3.66 million people had at least one taxable
   benefit, 2.38 million of them medical or dental insurance.
@@ -67,16 +71,22 @@ today; and scoping the project.
 ## 6. The rules are changing each year to 2030-31
 
 - Electric (zero-emission) company car rate: 4% in 2026-27, 5%, 7%, 9%, and
-  10% in 2030-31 (Budget 2026 overview, Annex A). The maximum rate is 37% to
+  10% in 2030-31 (Budget 2026 overview, Annex A). Rates to 2029-30 are
+  legislated (Finance Acts 2023 and 2025); the 10% is announced, for Finance
+  Bill 2026-27 (overview, paragraph 1.25), and PolicyEngine's baseline keeps
+  9% with the rise as a scenario
+  (`policyengine_uk/scenarios/company_car_tax_rise_2030.py`). The maximum rate is 37% to
   2027-28, then 38%, 39% and 40%.
 - 2026-27: car fuel multiplier £29,200; van benefit charge £4,170; van fuel
   £798.
 - 6 April 2027: payrolling (taxing benefits through payroll in real time
   rather than on a P11D) becomes mandatory for cars, vans, car and van fuel
-  and medical benefits; 6 April 2028 for most other benefits. Loans and
+  and medical benefits; 6 April 2028 for most other benefits. Both are
+  announced (overview, paragraphs 1.24 to 1.25). Loans and
   accommodation stay outside.
-- 6 April 2029: NICs relief on pension salary sacrifice capped at £2,000 a
-  year. Budget 2026 recosting (Table 6.4): +£5,350m in 2029-30, +£2,920m in
+- 6 April 2029: NICs relief on pension salary sacrifice only on the first
+  £2,000 sacrificed a year. The costing is the Treasury's, certified by the
+  OBR. Budget 2026 recosting (Table 6.4): +£5,350m in 2029-30, +£2,920m in
   2030-31, +£3,665m in 2031-32. The first year is inflated by timing: the
   OBR's supplementary release (5 February 2026) says a switch to
   relief-at-source schemes adds to 2029-30 and takes from 2030-31.
@@ -99,29 +109,35 @@ Each stage carries a status for company cars. What each rests on:
   reads the job-table items EXPBEN01 (company car), EXPBEN03 (fuel for
   private use), CARVAL (banded list price), FUELTYP, CARCON and CARAMT. The
   FRS question ExpBen lists 13 employer benefits.
-- **Imputation: Partly done.** `uk_runtime/company_cars.py`, stage 18 of 56
-  in `uk/source_stages.json`. List price is drawn within the FRS band from
+- **Imputation: Partly done.** `uk_runtime/company_cars.py`, one of the 56
+  stages in `uk/source_stages.json`. List price is drawn within the FRS band from
   Wealth and Assets Survey round 8 company-car prices; CO2 is assigned to
   match HMRC Table 2A band shares; unknown fuels at Table 2C shares. Not
   imputed: the share of the year the car is available, the employee's
   payments for private use, and electric range (set to 50 miles for 1–50 g/km
   cars), because no survey records them.
 - **Calibration: Done.** The certified national build of 15 November 2026
-  (policyengine.py 6.20.1) has 1,534 targets. Its five
+  (policyengine.py 6.20.1) has 1,534 targets (the build of 18 November has
+  1,535). Its five
   `hmrc.benefits_in_kind` targets are included and fitted within 1%:
   recipients 915,708 against 920,000; taxable value £3,068.6m against
   £3,070m; fully electric 465,215 against 465,000; petrol 390,819 against
-  390,000; diesel 59,674 against 60,000 (calibration dashboard data route,
-  read 18 November 2026). Not targets: car fuel benefit, Class 1A, and
+  390,000; diesel 59,674 against 60,000, the worst at 0.54% (calibration
+  dashboard data route, read 18 November 2026). The file
+  `uk/hmrc_benefits_in_kind_facts.json` still says none is a calibration
+  target; that text is stale. Not targets: car fuel benefit, Class 1A, and
   HMRC's breakdowns by income band and region.
 - **Rules: Partly done.** PolicyEngine/policyengine-uk at `98381bf`
   (2.179.2), added in 2.165.0 (29 October 2026):
   `variables/gov/hmrc/income_tax/benefits_in_kind/company_car_benefit.py`,
   `car_fuel_benefit.py`, `company_car_appropriate_percentage.py`,
   `benefits_in_kind.py`, and `national_insurance/class_1a/ni_class_1a.py`.
-  53 YAML test cases (24 + 10 + 11 + 8) plus `test_company_car_benefit.py`;
-  CI on main passed at that commit. Not modelled, as the code says: optional
-  remuneration arrangements for cars, part-year fuel, vans.
+  53 YAML test cases (24 + 10 + 11 + 8) plus `test_company_car_benefit.py`.
+  The pull request that added them (#2750) passed its checks; CI at `98381bf`
+  itself mostly skipped, and the independent check ran the 53 YAML cases and
+  the 37 cases of `test_company_car_benefit.py` locally, all passing. Not
+  modelled, as the code says: optional remuneration arrangements (ITEPA
+  s. 120A), classic, shared and pool cars, part-year fuel, vans.
 - The benefits enter taxable employment income (so the personal allowance
   taper and the High Income Child Benefit Charge see them), not Class 1 NICs
   and not Universal Credit earnings.
@@ -130,8 +146,9 @@ Each stage carries a status for company cars. What each rests on:
 
 ## 9. What we model today, benefit by benefit
 
-- Company car: rules, data and calibration done, as on slide 8 (the detail
-  that is missing is on slide 8).
+- Company car: calibration done; rules and data partly done, for the reasons
+  on slide 8 (no OpRA, classic, shared or pool cars; availability and
+  private-use payments at defaults).
 - Car fuel: rules done; who gets fuel is from the FRS; not a calibration
   target. HMRC Table 1: 40,000 recipients, £140m taxable value in 2024-25.
 - Class 1A: computed on car and fuel benefits only
@@ -141,7 +158,10 @@ Each stage carries a status for company cars. What each rests on:
   amounts from FRS `SPNAMT` plus an imputation; seven HMRC and OBR targets
   included in the 15 November build, each within 1%.
 - Medical insurance, vans, loans, accommodation, other salary sacrifice:
-  no rules, no data in the household file, no targets. The FRS asks who
+  no rules, no data in the household file, no targets. The FRS asks whether
+  a benefit replaces salary (yes or no: SalSac, FuelBn, VchSac, question
+  instructions pp. 226 to 230) and gives amounts only for pension salary
+  sacrifice and childcare vouchers. The FRS asks who
   receives medical insurance and a van but not the value; the van charge is
   a flat amount in law, so who has one is most of what is needed. Loans and
   accommodation are not separate FRS answers (they fall under "any other
@@ -163,11 +183,12 @@ Each stage carries a status for company cars. What each rests on:
   annual benefits in kind and salary sacrifice. Latest results are 2026,
   provisional (22 October 2026). ONS says the salary sacrifice variable is
   collected but not processed for outputs; HM Treasury's cap costing used
-  ASHE 2024. Access to the microdata was not checked, so "Impute" is a
-  possibility, not a plan.
+  ASHE 2024. Access to the microdata was not checked, so the slide says
+  "Possible".
 - HMRC benefits in kind statistics: cars and fuel by CO2 band, fuel type,
   income band and region, and the Class 1A total. Totals only.
-- HMRC benefits by type: 2016-17, the last year.
+- HMRC benefits by type: 2016-17, the last final year; P11D-only, so it is
+  for validation, or for calibration only with assumptions.
 - HMRC tax relief statistics (January 2026): cycle to work £130m and
   employer-supported childcare £180m in 2025-26 (forecasts); NICs relief on
   employer pension contributions.
@@ -200,15 +221,24 @@ Each stage carries a status for company cars. What each rests on:
   the data are thin.
 - Phase 3, salary sacrifice and OpRA: salary-sacrifice cars, cycle to work,
   childcare; the OpRA rule.
-- Effort is relative. No weeks or costs have been estimated.
+- Effort is our rough ranking. No weeks or costs have been estimated.
+- Class 1A results would be revenue only: the model assigns Class 1A to no
+  household (it stays with employers; policyengine-uk issue #2752).
 
 ## 14. Questions this would answer
 
 Three examples, each with the scenario and the phase it needs. Each would
 report revenue, the effect by income decile, winners and losers, and poverty
-(before housing costs). None has been run.
+(before housing costs). None has been run. Static scores sit below official
+costings: the pension cap test in policyengine-uk expects about £1.8bn
+(plus or minus £1.0bn) in 2030, against the official £5,350m and £2,920m;
+and the Microcosm note expects the 2030-31 car score to be about 30% to 45%
+short of £310m.
 
 ## 15. Questions for NEF
+
+On publishing: the SPI licence requires that HMRC sees material containing
+SPI analyses at least 10 working days before publication.
 
 ## 16. Thank you
 

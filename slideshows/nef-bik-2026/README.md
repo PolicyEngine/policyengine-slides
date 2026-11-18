@@ -1,4 +1,4 @@
-# Modelling benefits in kind: a PolicyEngine and NEF collaboration
+# Modelling benefits in kind in PolicyEngine UK: scoping with NEF
 
 16 slides at `/slides/nef-bik-2026`, for a scoping meeting with the New
 Economics Foundation (NEF) on modelling employer-provided benefits in kind

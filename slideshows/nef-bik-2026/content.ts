@@ -13,7 +13,7 @@ const ukData = `https://github.com/PolicyEngine/policyengine-uk-data/blob/${ukDa
 
 // The cover. The meeting date isn't fixed, so the cover gives the month.
 export const cover = {
-  title: "Modelling benefits in kind: a PolicyEngine and NEF collaboration",
+  title: "Modelling benefits in kind in PolicyEngine UK: scoping with NEF",
   subtitle: "What we cover, the data, and next steps",
   event: "New Economics Foundation",
   date: "November 2026",
@@ -197,11 +197,11 @@ export const size = {
 export const definitions = [
   {
     title: "Benefit in kind",
-    text: "A non-cash perk from an employer, taxed as income",
+    text: "A non-cash benefit from an employer, taxed as income",
   },
   {
     title: "Taxable value",
-    text: "The amount HMRC taxes: a formula for cars, the employer's cost for most others",
+    text: "The amount HMRC taxes: a formula for cars, usually the employer's cost for others",
   },
   {
     title: "Class 1A",
@@ -209,12 +209,13 @@ export const definitions = [
   },
 ];
 
-// sources.bikByType: Table 4.5, tax year 2016-17, the last year for which
-// HMRC published every benefit type (the tables since 2020 cover company
-// cars and fuel only, plus the Class 1A total). P11D-only, before most
-// payrolling. Shares are each type's taxable value over the £8,250m total
-// for all taxable benefits: 4,570; 1,890; 640; 200; 180; 100; the remaining
-// £670m is mileage allowances, van fuel and other benefits.
+// sources.bikByType: Table 4.5 and the June 2019 commentary, tax year
+// 2016-17, the last year with final figures for every benefit type (2017-18
+// was provisional in that release; the tables since 2020 cover company cars
+// and fuel only, plus the Class 1A total). P11D-only, before most
+// payrolling. The commentary gives the first three shares of the £8.25bn
+// total itself (55%, 23%, 8%); the others are the type's taxable value
+// (£200m, £180m, £100m) over that total.
 export const byType2016 = {
   year: "2016-17",
   rows: [
@@ -236,7 +237,9 @@ export const byType2016 = {
 export const timeline: {
   year: string;
   evRate: number;
-  events: { title: string; text?: string }[];
+  /** Announced, not yet legislated (Budget 2026 overview, paras 1.24–1.25). */
+  rateAnnounced?: boolean;
+  events: { title: string; text?: string; announced?: boolean }[];
   yield?: string;
 }[] = [
   {
@@ -247,25 +250,32 @@ export const timeline: {
   {
     year: "2027-28",
     evRate: 5,
-    events: [{ title: "Payrolling required", text: "Taxed through payroll, not a P11D: cars, vans, fuel, medical" }],
+    events: [
+      {
+        title: "Payrolling required",
+        text: "Taxed through payroll, not a P11D: cars, vans, fuel, medical",
+        announced: true,
+      },
+    ],
   },
   {
     year: "2028-29",
     evRate: 7,
-    events: [{ title: "Payrolling: most other benefits" }],
-    yield: "Car rates: +£700m",
+    events: [{ title: "Payrolling: most other benefits", announced: true }],
+    yield: "2028–30 rates: +£700m",
   },
   {
     year: "2029-30",
     evRate: 9,
-    events: [{ title: "Pension salary sacrifice", text: "NICs relief capped at £2,000" }],
+    events: [{ title: "Pension salary sacrifice", text: "NICs relief only on the first £2,000 a year" }],
     yield: "Cap: +£5,350m, then +£2,920m",
   },
   {
     year: "2030-31",
     evRate: 10,
-    events: [{ title: "Car ownership schemes taxed", text: "Announced, from April 2030" }],
-    yield: "Car rates: +£310m",
+    rateAnnounced: true,
+    events: [{ title: "Car ownership schemes taxed", text: "From April 2030", announced: true }],
+    yield: "2030-31 rise: +£310m",
   },
 ];
 
@@ -308,7 +318,7 @@ export const pipeline: {
     text: "Family Resources Survey (FRS) 2024-25 households",
     car: "Who has a car, fuel, list-price band, fuel type",
     status: "done",
-    fact: { value: 13, label: "Employer benefits the FRS asks about" },
+    fact: { value: 13, label: "Employer benefits and expenses the FRS asks about" },
   },
   {
     title: "Imputation",
@@ -321,9 +331,9 @@ export const pipeline: {
   {
     title: "Calibration",
     text: "Household weights fitted to official totals",
-    car: "5 HMRC targets, each fitted within 1%",
+    car: "5 HMRC targets, each within 1% in the 15 November build",
     status: "done",
-    fact: { value: 1534, label: "Targets in the current build" },
+    fact: { value: 1534, label: "Targets in the 15 November build" },
   },
   {
     title: "Rules",
@@ -352,10 +362,10 @@ export const coverage: {
 }[] = [
   {
     benefit: "Company car",
-    rules: "done",
-    data: "done",
+    rules: "partly",
+    data: "partly",
     target: "done",
-    note: "Rates by CO2 band, to 2029-30; targets within 1%",
+    note: "No OpRA, shared or pool cars; some inputs at defaults",
   },
   {
     benefit: "Car fuel",
@@ -406,14 +416,14 @@ export const coverage: {
     rules: "notYet",
     data: "notYet",
     target: "notYet",
-    note: "FRS asks about childcare vouchers",
+    note: "FRS: amounts for pensions and vouchers only",
   },
 ];
 
 // ---------------------------------------------------------------------------
 // Part 3: scoping
 
-export type Use = "Impute" | "Calibrate" | "Validate";
+export type Use = "Impute" | "Calibrate" | "Validate" | "Possible";
 
 // One row per source; the "use" column is our assessment.
 export const dataSources: {
@@ -425,7 +435,7 @@ export const dataSources: {
 }[] = [
   {
     source: "Family Resources Survey (FRS)",
-    measures: "Who gets 13 employer benefits; car price band, fuel type",
+    measures: "Who gets 13 employer benefits and expenses; car price band, fuel type",
     level: "People",
     latest: "2024-25",
     uses: ["Impute"],
@@ -442,7 +452,7 @@ export const dataSources: {
     measures: "Employer-reported benefits and salary sacrifice",
     level: "Jobs",
     latest: "2026, provisional",
-    uses: ["Impute"],
+    uses: ["Possible"],
   },
   {
     source: "HMRC benefits in kind statistics",
@@ -456,7 +466,7 @@ export const dataSources: {
     measures: "Medical, vans, loans, accommodation",
     level: "Totals",
     latest: "2016-17",
-    uses: ["Calibrate"],
+    uses: ["Validate"],
   },
   {
     source: "HMRC tax relief statistics",
@@ -503,8 +513,8 @@ export const gaps = [
     title: "Validation",
     items: [
       "Company cars against HMRC by income and region",
-      "Budget 2026 car-rate costing: £310m in 2030-31",
-      "OBR salary-sacrifice costing",
+      "Static car score expected below the Budget's £310m",
+      "Treasury costing of the cap, certified by the OBR",
     ],
   },
 ];
@@ -523,7 +533,7 @@ export const phases = [
     effort: "Largest",
     effortNote: "New rules, thin data",
     work: ["Medical insurance, loans, accommodation", "Impute values; Class 1A on every benefit"],
-    output: "Reforms to any benefit, or to Class 1A",
+    output: "Reforms to any benefit, or to Class 1A (revenue only)",
   },
   {
     title: "Salary sacrifice and OpRA",
@@ -537,17 +547,17 @@ export const phases = [
 export const exampleQuestions = [
   {
     question: "Who pays if electric company car rates rise faster?",
-    scenario: "Zero-emission rate above the legislated 10% in 2030-31",
+    scenario: "Zero-emission rate above the 10% announced for 2030-31",
     needs: "Phase 1",
   },
   {
     question: "What does capping pension salary sacrifice raise, and from whom?",
-    scenario: "NICs relief capped at £2,000 from April 2029, against no cap",
+    scenario: "NICs relief only on the first £2,000 a year, against no cap. Static result is below the official costing",
     needs: "Runs today",
   },
   {
     question: "What would changing the tax on employer medical insurance do?",
-    scenario: "Exempt it, or charge Class 1A at another rate",
+    scenario: "Exempt it, or charge Class 1A at another rate. Class 1A results are revenue only",
     needs: "Phase 2",
   },
 ];

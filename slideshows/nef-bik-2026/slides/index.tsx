@@ -404,7 +404,7 @@ export function WhatIsBikSlide() {
           <Card
             icon={IconCalculator}
             title="Taxable value"
-            text="Set by a formula in law for each benefit"
+            text="A formula for cars; usually the employer's cost for others"
           >
             <p className={styles.formula}>
               <IconCar stroke={1.8} aria-hidden="true" />
@@ -443,7 +443,7 @@ export function WhatIsBikSlide() {
                   items={[
                     {
                       icon: IconUser,
-                      text: "No employee National Insurance",
+                      text: "Usually no employee National Insurance",
                     },
                   ]}
                 />
@@ -481,7 +481,7 @@ const definitionIcons: Icon[] = [IconGift, IconCalculator, IconBuildingSkyscrape
 export function SizeSlide() {
   const largest = Math.max(...byType2016.rows.map((row) => row.share));
   return (
-    <Frame part={0} title={`${size.allTaxableValueBn} of taxable benefits in ${size.year}`} scale={1.12}>
+    <Frame part={0} title={`${size.allTaxableValueBn} of benefits liable to Class 1A in ${size.year}`} scale={1.12}>
       <div className={styles.sizeGrid}>
         <div className={styles.stack}>
           <p className={styles.listHead}>
@@ -514,7 +514,8 @@ export function SizeSlide() {
                 <IconGift stroke={1.8} aria-hidden="true" />
                 {size.allTaxableValueBn}
               </p>
-              <p className={styles.statLabel}>Taxable value, all benefits</p>
+              <p className={styles.statLabel}>Taxable value of benefits liable to Class 1A</p>
+              <p className={styles.statNote}>Experimental</p>
             </div>
             <div className={styles.card}>
               <p className={styles.stat}>
@@ -531,7 +532,9 @@ export function SizeSlide() {
                 </span>
               </p>
               <p className={styles.statLabel}>People with a company car</p>
-              <p className={styles.statNote}>{size.carTaxableValueBn} taxable value</p>
+              <p className={styles.statNote}>
+                Reported to HMRC, an undercount; {size.carTaxableValueBn} taxable value
+              </p>
             </div>
             <div className={styles.card}>
               <p className={styles.stat}>
@@ -549,7 +552,7 @@ export function SizeSlide() {
             <IconHistory stroke={1.8} aria-hidden="true" />
             Last full split by type: {byType2016.year}
           </p>
-          <p className={styles.pastNote}>Shares of taxable value only. HMRC has not published every type since.</p>
+          <p className={styles.pastNote}>Shares of taxable value only. No final figures by type since.</p>
           <div className={`${styles.hbars} ${styles.typeBars}`}>
             {byType2016.rows.map((row, index) => {
               const TypeIcon = typeIcons[index] ?? IconPoint;
@@ -574,6 +577,11 @@ export function SizeSlide() {
       </div>
     </Frame>
   );
+}
+
+/** Marks a change that is announced but not yet legislated. */
+function Announced() {
+  return <span className={`${styles.chip} ${styles.chipMid} ${styles.announced}`}>Announced</span>;
 }
 
 const eventIcons: Icon[] = [
@@ -606,6 +614,7 @@ export function ChangesSlide() {
                     <b>{year.evRate}%</b>
                     <IconBolt stroke={1.8} aria-hidden="true" />
                     Electric car rate
+                    {year.rateAnnounced && <Announced />}
                   </p>
                 </div>
                 {year.events.map((event) => (
@@ -614,6 +623,7 @@ export function ChangesSlide() {
                     <div>
                       <h2>{event.title}</h2>
                       {event.text && <p>{event.text}</p>}
+                      {event.announced && <Announced />}
                     </div>
                   </div>
                 ))}
@@ -661,7 +671,7 @@ export function HowItWorksSlide() {
                 <div className={styles.layerLine} {...at(2)}>
                   <span className={styles.carHead}>
                     <CarIcon stroke={1.8} aria-hidden="true" />
-                    For company cars
+                    Company cars
                     <StatusChip status={stage.status} />
                   </span>
                   <p>{stage.car}</p>
@@ -765,6 +775,13 @@ const useChip: Record<Use, string> = {
   Impute: styles.chipGood,
   Calibrate: styles.chipMid,
   Validate: styles.chipBad,
+  Possible: styles.chipBad,
+};
+const useLabel: Record<Use, string> = {
+  Impute: "Impute",
+  Calibrate: "Calibrate",
+  Validate: "Validate",
+  Possible: "Possible; access unconfirmed",
 };
 
 export function DataSlide() {
@@ -798,7 +815,7 @@ export function DataSlide() {
                   <span className={styles.chipRow}>
                     {row.uses.map((use) => (
                       <span key={use} className={`${styles.chip} ${useChip[use]}`}>
-                        {use}
+                        {useLabel[use]}
                       </span>
                     ))}
                   </span>
@@ -889,7 +906,7 @@ export function PhasesSlide() {
               <p>{phase.output}</p>
             </div>
             <div className={styles.layerLine}>
-              <span>Effort</span>
+              <span>Effort: our rough ranking</span>
               <p className={styles.effort}>
                 <span className={`${styles.chip} ${effortChip[phase.effort]}`}>{phase.effort}</span>
                 {phase.effortNote}

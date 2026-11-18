@@ -1815,6 +1815,15 @@
   animation: none;
 }
 
+.announced {
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}
+
+.rate .announced {
+  margin-top: 0;
+}
+
 /* Status: one chip per state, and its key. */
 .chip.status {
   gap: 0.35em;
