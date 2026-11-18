@@ -123,4 +123,9 @@ What the deck deliberately does not claim:
   decision;
 - no result numbers on the Claude slide: it shows the steps and the tools;
 - no poverty figures: the platform's population tool returns decile changes and
-  winners and losers, not poverty rates.
+  winners and losers, not poverty rates (slide 19 names poverty as something
+  the microsimulation itself reports, with no number);
+- nothing in Thibault's name beyond the review's own wording: the three
+  headline points on slide 6 use the text of
+  `docs/published_model_review.md` (H1, R1, V2), and the deck attributes no
+  views or plans to him.

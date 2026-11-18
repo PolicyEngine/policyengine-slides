@@ -73,7 +73,7 @@ function MultiplierLegend() {
       </span>
       <span>
         <i className={styles.legendTick} />
-        The OBR&apos;s multiplier
+        The OBR&apos;s multiplier (EFO, July 2015)
       </span>
     </div>
   );
@@ -216,9 +216,9 @@ export function IncomeTaxPath() {
         <g key={index} className={styles.pathPoint} style={{ animationDelay: `${500 + order * 350}ms` }}>
           <circle cx={x(index)} cy={y(values[index])} r="4.5" />
           <text
-            x={x(index) + (index === 0 ? 8 : 0)}
-            y={y(values[index]) + 19}
-            textAnchor={index === 0 ? "start" : index === 11 ? "end" : "middle"}
+            x={x(index) + (index === 11 ? 5 : 0)}
+            y={y(values[index]) - 12}
+            textAnchor={index === 11 ? "end" : "middle"}
           >
             −{Math.abs(values[index])}
           </text>

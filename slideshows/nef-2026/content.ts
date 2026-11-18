@@ -176,11 +176,10 @@ export const judgementStandIns = [
 
 // The solver (model README l.15 and l.152: Gauss-Seidel iteration over ~370
 // equations; l.36: every quarter converges to tolerance under the default
-// closure). That Gauss-Seidel is EViews' standard model solver is general
-// knowledge about EViews, not a claim sourced from the repo.
+// closure; under the published closure no quarter converges, README "Solver
+// convergence").
 export const solver = {
   what: "Each variable from the others' latest values, repeated until nothing changes",
-  why: "EViews' standard model solver, so the OBR's file solves as intended",
 };
 
 export const pipeline = [
@@ -216,7 +215,7 @@ export type ModelModule = {
 export const modelModules: ModelModule[] = [
   { name: "GDP and output", equations: 33, variables: "GDPMPS, GVA, MSGVA", exogenous: "Real GDP exogenous" },
   { name: "Consumption", equations: 5, variables: "CONS, CDUR, PD" },
-  { name: "Investment and inventories", equations: 49, variables: "IBUS, COC, DINV", exogenous: "Total exogenous" },
+  { name: "Investment and inventories", equations: 49, variables: "IBUS, COC, DINV", exogenous: "Total investment exogenous" },
   { name: "Labour market", equations: 17, variables: "ET, ULFS, LFSUR" },
   { name: "Exports", equations: 3, variables: "XNOG, RPRICE, XPS", exogenous: "Volumes exogenous" },
   { name: "Imports", equations: 15, variables: "MNOG, MS, MPS", exogenous: "Volumes exogenous" },
@@ -500,7 +499,9 @@ export const incomeTax = {
   revenuePerQuarter: "£1,725m",
   revenuePerYear: "£6.9bn",
   // PolicyEngine's static costing of the same 1p, a quarter (README limits
-  // table, "Household tax multiplier", l.33; demo.md l.48: same ratios).
+  // table, "Household tax multiplier", l.33; demo.md l.48: same ratios). Kept
+  // for the notes, not shown: the micro-to-macro slide quotes a later vintage
+  // of the same costing (£6.55bn a year), and one deck shows one figure.
   policyEngineRevenuePerQuarter: "£1,616m",
   gdpPath: [-161, -227, -285, -335, -381, -422, -456, -485, -510, -532, -551, -569],
 };
@@ -557,6 +558,8 @@ export type PlatformModel = {
   country: string;
   answers: string;
   scoresReforms: boolean;
+  /** A qualifier the site's comparison table puts beside its Yes or No. */
+  scoresNote?: string;
   runs: string;
 };
 
@@ -607,6 +610,8 @@ export const platformModels: PlatformModel[] = [
     country: "UK",
     answers: "Long-run work, saving and capital",
     scoresReforms: true,
+    // The site's comparison table says "Yes, none published" for OG-UK.
+    scoresNote: "none published",
     runs: "Local",
   },
   {
@@ -690,8 +695,7 @@ export const liveSiteViews = [
   { label: "Forecasts", path: "/forecasts" },
 ];
 
-// Thibault's review (his email of 23 Sep 2026 and the attached list of 53
-// points) and our answer (our emails of 29 Sep and 8 Oct 2026, written up in
-// docs/published_model_review.md). The critic's ratings are counted from that
-// doc's summary table: 6 High, 25 Mid, 22 Low.
+// Thibault's review of September 2026 (53 points) and our check of it, as
+// written up in docs/published_model_review.md. The ratings are counted from
+// that doc's summary table: 6 High, 25 Mid, 22 Low.
 export const thibRatings = { high: 6, mid: 25, low: 22 };

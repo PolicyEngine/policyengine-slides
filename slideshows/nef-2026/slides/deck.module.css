@@ -365,6 +365,11 @@
   color: var(--color-gray-400);
 }
 
+/* A qualifier under a table cell's Yes or No stays on one line. */
+.rowLabel small.oneLine {
+  white-space: nowrap;
+}
+
 /* Layers: three cards with the same rows, so the columns line up. */
 .layerGrid {
   grid-template-rows: repeat(4, auto);

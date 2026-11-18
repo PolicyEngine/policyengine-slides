@@ -159,32 +159,37 @@ Sources: the OBR's model code (`obr_model_code_october_2025.txt`); `module-links
 ## 6. Thibault's review, checked against the code (4 steps)
 
 Steps 1 to 3 bring in his three headline points one at a time, each with our
-check and its result; step 4 adds the three further errors, smaller, below.
+check and its result; step 4 adds three errors in the published files, also
+from his list, smaller, below. The line under each card title is the review's
+own wording for the point, as `docs/published_model_review.md` records it
+(H1, R1, V2), not our paraphrase.
 
 - Thibault is in the room: invite him to introduce his findings, and to
   correct anything on the slide. It's his work.
 - He read the OBR's published EViews code and variable list in September 2026
   and sent a list of 53 points (his ratings: 6 High, 25 Mid, 22 Low).
-- His three headline points, from his email of 23 September: no distributional
-  effect of fiscal policy, total imports fixed, public debt interest fixed.
-- We checked each against the published code and in our Python build (our
-  reply of 29 September, written up in `docs/published_model_review.md`,
-  entries H1, R1, V2). All three hold.
+- His three headline points: no distributional effect of fiscal policy, total
+  imports fixed, public debt interest fixed.
+- We checked each against the published code and in our Python build (written
+  up in `docs/published_model_review.md`, entries H1, R1, V2). All three hold;
+  the write-up's verdict on each is "true but openly documented".
 - Distribution (H1): the consumption equation has more than income in it
   (unemployment, house prices, a rate term and wealth), but every term is an
   aggregate. There is no household split, so a revenue-neutral transfer does
   nothing.
 - Trade (R1): exports and imports never appear on the left-hand side of an
   equation; the exchange rate moves only prices.
-- Debt interest (V2): it holds for the public debt interest bill, which is the
-  refinement. The gilt interest series (DIPLDC, IILG) aren't in the code, and
-  debt (PSND, GGGD) is computed but never used. Household interest payments do
-  respond to Bank Rate (l.623).
+- Debt interest (V2): it holds. The debt interest variables are inputs with no
+  equation, the gilt interest series (DIPLDC, IILG) aren't in the code, and
+  debt (PSND, GGGD) is computed but never used. Only if asked: household
+  interest payments, a different thing, do respond to Bank Rate (l.623).
 
 The subtitle is the whole list: we checked each of the 53 points
-against the published files. 42 are accurate (22 documented by the OBR, 20 not
-flagged), 8 partly true, and 3 are process claims that can't be checked from
-the code.
+against the published files. 42 are confirmed (the write-up says "accurate":
+22 documented by the OBR, 20 not flagged), 8 are confirmed in part ("partly
+true" there), and 3 are about the OBR's forecasting process, which the code
+can't settle. The slide's words are the gentler ones; the counts are the
+write-up's.
 
 Each of the three under the cards carries one plain line on what it does: G7,
 the same identity twice, so unemployment isn't pinned down (in our test,
@@ -216,9 +221,10 @@ the discussion goes there):
 - Documented isn't the same as fine: about half the accurate points (22 of 42)
   are open in the OBR's own variable list, and a documented gap is still a
   gap.
-- The strongest point to lead with: the published model can't reproduce the
-  OBR's own forecast, because the add-factors and calibration that make it
-  work aren't published.
+- A point we could lead with together: the published files alone don't
+  reproduce the OBR's forecast, because the add-factors and calibration aren't
+  published. What we showed is that our build can't; we can't speak for the
+  OBR's own workfile.
 - Any proposed fix can be tested in the open Python build first.
 - What our build adds, if asked: GDP is solved, not imposed; we built the
   add-factors; 355 ONS series fill unpublished inputs.
@@ -246,8 +252,9 @@ Gauss-Seidel, the solver (named on the "Solve" step; the explanation is no
 longer on the slide): it solves the roughly 370 equations together, each
 quarter, by computing each variable from the latest values of the others and
 repeating until nothing changes. It is EViews' standard model solver (general
-knowledge about EViews, not a repo claim), so we solve the file the way it is
-meant to be solved, and it needs no derivatives. Under the default closure
+knowledge about EViews, not a repo claim), and it needs no derivatives. Don't
+say the OBR's file "solves as intended": under the published closure no
+quarter converges. Under the default closure
 every quarter converges to tolerance (`df.attrs["solver_exit_status"]`). Under
 the OBR's published closure it stalls, because the nominal GDP and investment
 deflator pair is undetermined (#42, #50), which is why we pin nominal GDP.
@@ -265,9 +272,11 @@ Sources: the OBR's model code; `transpiler.py`; OBR model README (l.15, l.36, l.
 
 Two mirrored columns: a heading, two stats and three lines each. Step 1 is the
 anchored column, step 2 the free-running one. "Average error" is the mean
-absolute percentage error (MAPE) over 2025Q1–2027Q4. The subtitle carries the
-warning: the free-running gap measures this emulator, not the OBR's forecast
-error.
+absolute percentage error (MAPE) over 2025Q1–2027Q4. The subtitle says what
+both columns are measured against: the OBR's October 2026 EFO path over those
+quarters (the EFO's outturn quarters to 2026Q2, then its forecast), not
+outturn data. It also carries the warning: the free-running gap is this
+emulator's, not an OBR forecast error.
 
 Left, anchored:
 
@@ -344,7 +353,12 @@ Ratios at quarters 1, 4 and 12, from `docs/demo.md`. Tax rows are current-price
 GDP per pound of revenue (the OBR's basis); government consumption is real GDP
 per real pound; government investment is real GDP per nominal pound. OBR
 benchmarks are the June 2010 estimates restated in EFO July 2015 Box 3.2, all
-tapering.
+tapering; the legend dates the orange mark "EFO, July 2015". If asked: the
+OBR's November 2023 dynamic-scoring article gives 0.45 for public services
+(investment 1.00, welfare 0.60, tax 0.33). Our repo still encodes the 2015
+figure of 0.6 for current spending; the review write-up records that as an
+open discrepancy (G11). Against 0.45 the gap to our 1.01 is wider, not
+narrower.
 
 - Government consumption is about 1 by construction: the shock lands in the
   expenditure identity. `published_conventions=True` can impose the OBR's 0.6
@@ -392,8 +406,16 @@ Where the change comes from, which is the route above the chart:
   because our build solves it; in the OBR's file it is fixed.
 - "Real behaviour" means only that consumption equation. Imports don't
   respond: the GDP change equals the consumption change to the pound.
-- PolicyEngine's static costing of the same 1p is £1,616m a quarter (the model
-  README's household-tax row); it gives the same ratios (0.38 at quarter 12).
+- The line under "With PolicyEngine" carries no number. PolicyEngine's static
+  costing of the same 1p is £1,616m a quarter in the model README's
+  household-tax row, and £6.55bn a year (about £1,637m a quarter) in the
+  platform's bridge benchmark on slide 19: two vintages of the same costing.
+  The deck shows only the second. Either gives the same ratios (0.38 at
+  quarter 12): the GDP path scales with the input, only the ratio is the
+  same.
+- "Similar size, opposite path": the README's own words are "right order of
+  magnitude" with the profile reversed. The OBR's 0.3 is an impact multiplier
+  that fades; ours starts at 0.10 and builds.
 
 The OBR model does not return decile impacts: it is an aggregate model with
 one consumption equation and no household split. Deciles come from
@@ -410,7 +432,10 @@ corporation tax; step 3 government investment.
 In the OBR's file total investment is an input (`IF` has no live equation),
 so corporation tax and public investment do nothing to GDP by default, and
 `run_reform` warns. `investment_closure=True` switches on the listing's own
-commented-out `IF` identity (l.86).
+commented-out `IF` identity (l.86). For corporation tax the line that matters
+is the commented-out business-investment equation (l.92), which we rebuilt
+with its missing bracket closed (after `KGAP(-2)`, where the OBR's Briefing
+paper No. 5, equation 2.38, closes it; review write-up N1).
 
 The chip on the switch card ("stop-gap"): the investment closure freezes MSGVA, PIF and PIRHH to keep the run stable; without the guard, a
 zero-shock baseline runs business investment from £86bn to £522bn by 2027Q4.
@@ -457,11 +482,15 @@ from limits of our replication (step 2).
 
 Inherited:
 
-- Bank Rate: about a quarter of the BoE range unconditioned, about half with
-  the mortgage rate moved. Only consumption and household interest respond.
-- Spending multiplier: 1.01 on impact, 1.05 by quarter 12, against 0.6. It is
-  accounting: the shock lands in the expenditure identity, and the equations
-  can't produce the OBR's 0.6. Borrowing doesn't move, because the nominal
+- Bank Rate: −0.057% of GDP unconditioned and −0.149% with the mortgage rate
+  moved, against the Bank of England's −0.2% to −0.35%. Only consumption and
+  household interest respond.
+- Spending: in the OBR's file GDP is an input, so a spending change moves GDP
+  by nothing; the multiplier of about 1 (1.01 on impact, 1.05 by quarter 12)
+  appears once our closure solves GDP. What we inherit is that nothing in the
+  equations damps it: imports and prices don't respond, and there is no
+  crowding out. So the equations can't produce the OBR's 0.6 (the 2015
+  figure; see slide 10 on 0.45). Borrowing doesn't move, because the nominal
   spending identity is commented out. A nominal-consistent spending shock is an
   open decision.
 - CPI has no live equation, so VAT barely transmits. The pass-through overlay
@@ -509,7 +538,8 @@ comparable, and the scoring tool won't average them. FRB/US and HANK refuse
 reform scoring on purpose: no mapping from a PolicyEngine reform exists, and
 inventing one would give plausible-looking wrong numbers.
 
-DEFINE-UK is on the table as one of the seven; its results are scenario deltas from a partial replication, run locally. Don't quote a multiplier for it: which one to headline is open.
+OG-UK's "Yes" under "Scores reforms" carries the site's own qualifier, "none
+published". DEFINE-UK is on the table as one of the seven; its results are scenario deltas from a partial replication, run locally. Don't quote a multiplier for it: which one to headline is open.
 
 Sources: model comparison page; macro platform README.
 

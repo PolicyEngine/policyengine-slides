@@ -70,6 +70,7 @@ import { speakers } from "@/lib/speakers";
 import {
   access,
   anchored,
+  bankRate,
   bridgeBenchmark,
   capitalSpending,
   claudeFlow,
@@ -648,9 +649,11 @@ export function ArchitectureSlide() {
 }
 
 // Thibault's review of the published code (September 2026) and our check of
-// it. Sources: his email of 23 Sep, our replies of 29 Sep and 8 Oct, and the
-// write-up in docs/published_model_review.md (entries H1, R1, V2 for the
-// headline points). He is in the room: the wording credits his work.
+// it, from the write-up in docs/published_model_review.md. `finding` is the
+// review's own wording for the point (entries H1, R1 and V2, shortened only
+// at a semicolon), not our paraphrase; `check` is from each entry's "Why";
+// all three verdicts there are "True but openly documented". He is in the
+// room: the wording credits his work.
 const headlinePoints: {
   icon: Icon;
   point: string;
@@ -661,23 +664,23 @@ const headlinePoints: {
   {
     icon: IconUsers,
     point: "No distributional channel",
-    finding: "Taxing high earners to pay low earners leaves consumption unchanged",
-    check: "Aggregates only: no household split",
+    finding: "Single aggregate consumption function; no distributional dimension",
+    check: "Every term is an aggregate: no household split",
     verdict: "Holds",
   },
   {
     icon: IconShip,
     point: "Total imports fixed",
-    finding: "More activity can't change the trade balance",
-    check: "Exports and imports are never solved for",
+    finding: "Export and import volumes exogenous",
+    check: "Neither is ever solved for; the exchange rate moves only prices",
     verdict: "Holds",
   },
   {
     icon: IconCoins,
     point: "Public debt interest fixed",
-    finding: "More borrowing doesn't raise the interest bill",
-    check: "Gilt interest isn't in the code; household interest follows Bank Rate",
-    verdict: "Holds, narrower",
+    finding: "Debt interest and gilt stock exogenous; no in-code link to rates or borrowing",
+    check: "Debt interest is an input; debt is computed but never used",
+    verdict: "Holds",
   },
 ];
 
@@ -688,11 +691,11 @@ export function ThibReviewSlide() {
     <Frame
       part={0}
       title="Thibault's review, checked against the code"
-      subtitle={`${review.points} points on the OBR's published code, September 2026: ${review.accurate} accurate, ${review.partly} partly true, ${review.uncheckable} can't be checked from the code`}
+      subtitle={`${review.points} points on the OBR's published code, September 2026. Our check: ${review.accurate} confirmed, ${review.partly} confirmed in part, ${review.uncheckable} about process, outside the code`}
       scale={1.08}
     >
       <div className={styles.stack}>
-        <Head icon={IconListCheck}>His three headline points</Head>
+        <Head icon={IconListCheck}>Three headline points, as the review lists them</Head>
         <div className={`${styles.cardGrid} ${styles.cols3} ${styles.verdictGrid}`}>
           {headlinePoints.map(({ icon: PointIcon, ...row }) => (
             <div
@@ -714,7 +717,7 @@ export function ThibReviewSlide() {
           ))}
         </div>
         <div className={styles.quiet} {...at(4)}>
-          <Head icon={IconAlertTriangle}>Beyond these: errors in the published files</Head>
+          <Head icon={IconAlertTriangle}>Also from the review: errors in the published files</Head>
           <div className={`${styles.cardGrid} ${styles.cols3}`}>
             {reviewFindings.slice(0, 3).map((finding) => (
               <p key={finding.code} className={styles.quietItem}>
@@ -752,7 +755,7 @@ export function FitSlide() {
     <Frame
       part={1}
       title="How well it fits: two very different numbers"
-      subtitle="The free-running gap measures this emulator, not the OBR's forecast error"
+      subtitle={`Distance from the OBR's ${listing.efo} path, ${anchored.window}. The free-running gap is this emulator's, not an OBR forecast error`}
       scale={1.12}
     >
       <div className={`${styles.cardGrid} ${styles.cols2} ${styles.mirror}`}>
@@ -794,8 +797,8 @@ export function FitSlide() {
               },
               {
                 icon: IconGitCompare,
-                title: "Reforms scored as deltas",
-                text: "The add-factors cancel",
+                title: "Scenarios scored as differences",
+                text: "Scenario minus baseline: the add-factors cancel",
               },
               {
                 icon: IconUserOff,
@@ -898,7 +901,7 @@ export function IncomeTaxSlide() {
               items={[
                 {
                   icon: IconScale,
-                  title: "About the right size, wrong shape over time",
+                  title: "Similar size, opposite path over time",
                   text: `GDP falls ${pence(multiplierRows[1].q1)} per £1 of tax at first, ${pence(multiplierRows[1].q12)} by quarter 12. The OBR assumes ${pence(multiplierRows[1].obr)}, fading`,
                 },
                 {
@@ -917,8 +920,7 @@ export function IncomeTaxSlide() {
               <small>With PolicyEngine</small>
               <p>
                 <IconEqual stroke={1.8} aria-hidden="true" />
-                Same GDP effect per £1 using PolicyEngine&apos;s costing (
-                {incomeTax.policyEngineRevenuePerQuarter} a quarter)
+                Same GDP effect per £1 with PolicyEngine&apos;s own costing as the input
               </p>
             </div>
           </div>
@@ -952,7 +954,7 @@ export function InvestmentSlide() {
             </div>
             <div className={styles.layerLine}>
               <span>On: our opt-in</span>
-              <p>The listing&apos;s own commented-out investment identity, l.86</p>
+              <p>The listing&apos;s own commented-out lines: total investment, l.86; business investment, l.92</p>
             </div>
             <span className={`${styles.chip} ${styles.chipBad}`}>
               Stop-gap: holds three variables fixed to keep the run stable
@@ -1040,12 +1042,12 @@ export function LimitsSlide() {
               {
                 icon: IconHome,
                 title: "Bank Rate reaches little",
-                text: "Consumption and household interest only: about a quarter to a half of the BoE's range",
+                text: `Consumption and household interest only: GDP ${bankRate[0].display} to ${bankRate[1].display}, against the BoE's ${bankRate[2].display} to ${bankRate[3].display}`,
               },
               {
                 icon: IconScale,
-                title: "Spending multiplier is about 1",
-                text: `By accounting; the equations can't give the OBR's ${multiplierRows[0].obr}`,
+                title: "Nothing damps a spending change",
+                text: `Once GDP is solved the multiplier is about 1: no import or price response. The OBR's published figure is ${multiplierRows[0].obr}`,
               },
               {
                 icon: IconTag,
@@ -1062,7 +1064,7 @@ export function LimitsSlide() {
               {
                 icon: IconUserOff,
                 title: "Unemployment drifts",
-                text: `${unemploymentDrift[1].model}% against ${unemploymentDrift[1].efo}% by ${unemploymentDrift[1].quarter}. From their code (l.163, l.175), visible in ours`,
+                text: `${unemploymentDrift[1].model}% against the EFO's ${unemploymentDrift[1].efo}% by ${unemploymentDrift[1].quarter}. The cause is in the listing (l.163, l.175); it shows in our run`,
               },
               {
                 icon: IconAlertTriangle,
@@ -1145,7 +1147,10 @@ export function PlatformSlide() {
                   ) : (
                     <IconX stroke={2} aria-hidden="true" />
                   )}
-                  {model.scoresReforms ? "Yes" : "No"}
+                  <span>
+                    {model.scoresReforms ? "Yes" : "No"}
+                    {model.scoresNote && <small className={styles.oneLine}>{model.scoresNote}</small>}
+                  </span>
                 </span>
               </td>
               <td>{model.runs}</td>
