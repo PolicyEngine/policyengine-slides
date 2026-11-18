@@ -197,7 +197,7 @@ notes for that slide.
   for firms and employers and how a model could call them); projects we have
   done (a dashboard for the Autumn Budget 2026, an analysis of the
   potential impact of AI adoption, a firm-level model that costs VAT
-  reforms, and who pays for four UK trade shocks); what could be
+  reforms, and who pays in four UK trade episodes); what could be
   explored (one way to link models by exchanging tables, then the
   Economic Prosperity Deal as a trade application, business policy as a
   business application, three kinds of agent-based model and links to
@@ -940,4 +940,18 @@ The deck is public: it has no password and appears on the home page.
   VAT diagnostic for questions.- Slide 19's title names what the study computes: "An AI adoption
   scenario: Exchequer cost, poverty and inequality", subtitled "Under five
   assumptions about who loses work". The post's title stays as the citation.
+
+## Fable 5.2 review (18 November)
+
+- Slide wording: slide 26's subtitle says how the tables could apply; slide
+  21's header is a change in VAT revenue, and "Location" is "Level"; slide
+  20's 98.0% says in-sample; "a disruption to one product" (28); "who pays
+  in four UK trade episodes" (2, 17); slide 25's row 3 is "of the
+  Caliendo–Parro kind", its subtitle "Whichever lens is chosen", and its
+  last column "What PolicyEngine reports", as on 28; slide 29's subtitle
+  "Three possible routes"; slide 9's chip shortened; slide 23's figures
+  top-aligned.
+- Notes: the OBR-0.4 rates (41.9%, 37.0%) are pension-inclusive and are
+  compared with 41.8% and 37.0% at elasticity 1; "the host presents
+  first"; two slide numbers fixed.
 

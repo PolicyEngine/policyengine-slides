@@ -688,7 +688,7 @@
 .finding {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.15fr;
-  align-items: center;
+  align-items: start;
   gap: calc(var(--u) * 3);
   margin-top: calc(var(--u) * 0.6);
 }

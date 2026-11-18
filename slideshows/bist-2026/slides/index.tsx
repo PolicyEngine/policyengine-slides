@@ -587,7 +587,7 @@ export function EpdSlide() {
       section="explore"
       title="The UK–US Economic Prosperity Deal: from model results to households"
       scale={1.25}
-      subtitle="The tables of the previous slide, applied to one deal from end to end"
+      subtitle="How the tables of the previous slide could apply to one deal, end to end"
     >
       <Flow steps={flow} titleLines={2} builds={[1, 2, 3, 3]} feedback={{ ...feedback, step: 4 }} />
     </Frame>
@@ -601,7 +601,7 @@ export function LinkSlide() {
       section="explore"
       title="One way to link: tables in, tables out"
       scale={0.98}
-      subtitle="A starting point for discussion: what a model could pass, and which records receive it"
+      subtitle="Whichever lens is chosen: what it could pass, and which records receive it"
     >
       <div className={`${styles.rows} ${styles.rowsShared}`}>
         <p className={`${styles.rowLabel} ${styles.rowsHead}`}>A model’s result</p>
@@ -615,7 +615,7 @@ export function LinkSlide() {
         </Reveal>
         <span />
         <Reveal step={4} motion="fade" className={`${styles.rowLabel} ${styles.rowsHead}`}>
-          PolicyEngine already reports
+          What PolicyEngine reports
         </Reveal>
         {rows.map((row) => (
           <Fragment key={row.result}>
@@ -1065,7 +1065,7 @@ export function MacroSlide() {
       section="explore"
       title="Links to macroeconomic models"
       scale={1.32}
-      subtitle="Three possible routes, each at a different stage"
+      subtitle="Three possible routes"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
         {macroLinks.map((link) => (
@@ -1433,7 +1433,7 @@ export function VatReformsSlide() {
       subtitle="Five VAT reforms on the synthetic firms, by the lever each one moves"
     >
       <div className={styles.reforms}>
-        <p className={styles.rowLabel}>Static cost, £m a year, 2023–24, relative to the £85,000 threshold</p>
+        <p className={styles.rowLabel}>Static change in VAT revenue, £m a year, 2023–24, relative to the £85,000 threshold</p>
         <div className={styles.reformTable}>
           <div className={`${styles.reformRow} ${styles.targetHead}`}>
             <div>Reform</div>

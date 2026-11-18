@@ -409,7 +409,7 @@ export const parts = [
     icon: IconPresentationAnalytics,
     title: "Projects we have done",
     short: "Projects",
-    text: "A dashboard for the Autumn Budget 2026, an analysis of the potential impact of AI adoption, a firm-level model that costs VAT reforms, and who pays for four UK trade shocks.",
+    text: "A dashboard for the Autumn Budget 2026, an analysis of the potential impact of AI adoption, a firm-level model that costs VAT reforms, and who pays in four UK trade episodes.",
   },
   {
     key: "explore",
@@ -857,7 +857,7 @@ export const tariffDisaggregation = {
     {
       icon: IconCoins,
       result: "One economy-wide wage",
-      from: "Multi-sector quantitative trade model",
+      from: "Quantitative trade model of the Caliendo–Parro kind",
       key: "None: the same change in every sector",
       assigned: "All employees",
       tag: tags.inTradeCode,
@@ -1062,7 +1062,7 @@ export const abmQuestions = [
   {
     icon: IconAffiliate,
     model: "A supply-chain network model",
-    detail: "A shock to one product, passed along the firm network",
+    detail: "A disruption to one product, passed along the firm network",
     behaviour: "Suppliers and buyers lose inputs, cut output and jobs",
     passes: "Job and earnings losses by sector",
     lead: true,
@@ -1413,7 +1413,7 @@ export const questions = [
 // a "reference:" key (grep -rlE '^\s*reference:'); 1,504 "class X(Variable)"
 // definitions under variables/; 6,779 "- name" cases in the YAML files under
 // tests/policy. These counts are for version 2.179.0; the bundle certifies
-// 2.174.1. Entities: entities.py (Household, BenUnit, Person).
+// 2.177.7. Entities: entities.py (Household, BenUnit, Person).
 export const rulesCode = {
   title: "The personal allowance, abridged",
   code: `class personal_allowance(Variable):
@@ -1681,7 +1681,7 @@ export const calibrationFit = {
   solver: [
     "39 target families, each 1/39 of the total weight",
     "Adam on log-weights; 1,500 steps, best kept",
-    "Before → after: Universal Credit 17% → 97%, Pension Credit 8% → 100%, PIP 18% → 100%",
+    "Before → after: UC 17% → 97%, Pension Credit 8% → 100%, PIP 18% → 100%",
   ],
 };
 
@@ -1859,7 +1859,7 @@ export const firmMethod = {
   ],
   accuracy: {
     title: "Calibration accuracy, 2023–24",
-    overall: { value: "98.0%", label: "overall, across the five calibrated dimensions" },
+    overall: { value: "98.0%", label: "overall, in-sample, across the five calibrated dimensions" },
     rows: [
       { label: "HMRC turnover bands", value: "100.0%" },
       { label: "Employment bands", value: "99.8%" },
@@ -1908,7 +1908,7 @@ export const firmMethod = {
 // reduced rate.
 export const vatReforms = {
   rows: [
-    { icon: IconArrowBarUp, reform: "Raise the threshold to £100,000", lever: "Location", cost: "−742", firms: "117,800 leave the register" },
+    { icon: IconArrowBarUp, reform: "Raise the threshold to £100,000", lever: "Level", cost: "−742", firms: "117,800 leave the register" },
     { icon: IconTrendingUp, reform: "Graduated taper, £85,000 to £141,700", lever: "Shape: phase-in", cost: "−1,406", firms: "275,800 in the band" },
     { icon: IconMinus, reform: "Flat 50% marginal taper, same band", lever: "Shape: constant", cost: "−968", firms: "275,800 in the band" },
     { icon: IconPercentage, reform: "Reduced rate of 10%, £85,000 to £105,000", lever: "Rate step", cost: "−446", firms: "138,000 in the band" },

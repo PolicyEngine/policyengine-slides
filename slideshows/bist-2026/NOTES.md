@@ -50,7 +50,7 @@ This version has 32 slides: 27 slides of content and five part dividers
 adds about a minute; skip it if time is short. The core 22, down from 27, fit about 30
 minutes, and the dividers add about a minute in all (a few seconds each); slides 14 to 16, on the Axiom Foundation's rules as code and its live site, add
 about three more, so skip them in the talk if time is short; the table of
-calibration targets (slide 10) adds about one. Robin presents first and
+calibration targets (slide 10) adds about one. The host presents first and
 the notes add up to about 35 minutes, so keep a checkpoint: reach divider
 24 by about minute 20, using the skips above if behind. Five slides were
 merged into their neighbours or cut;
@@ -64,7 +64,7 @@ nodes on a line (a dashed ring marks a step outside PolicyEngine or not yet
 built), and tables have horizontal rules only. Three places where items are read
 side by side use one light card (white, a thin border, no tint): the Axiom
 Foundation's six rules (15), the calibration-accuracy column (20) and the
-macroeconomic routes (28). A PDF
+macroeconomic routes (29). A PDF
 export shows each slide once, complete: one page per slide. Slides 11, 14, 18 and 19 hold live pages and need
 an internet connection. Icons are bare, in the teal ink, with no box behind
 them. The slides carry no "Sources" row: each slide's sources are the
@@ -540,7 +540,7 @@ slides, not build steps.
 
 ### 12. Part 3: What we have already (divider)
 
-- A few seconds. Name the part and what it covers: what the UK model covers and what we can share, then the Axiom Foundation's site, live, and its rules for firms (slides 13 to 15).
+- A few seconds. Name the part and what it covers: what the UK model covers and what we can share, then the Axiom Foundation's site, live, and its rules for firms (slides 13 to 16).
 
 ### 13. What the UK model covers, and what we can share
 
@@ -758,7 +758,7 @@ slides, not build steps.
 
 ### 17. Part 4: Projects we have done (divider)
 
-- A few seconds. Name the part and what it covers: a dashboard for the Autumn Budget 2026, an analysis of the potential impact of AI adoption, a firm-level model that costs VAT reforms, and who pays for four UK trade shocks (slides 18 to 23).
+- A few seconds. Name the part and what it covers: a dashboard for the Autumn Budget 2026, an analysis of the potential impact of AI adoption, a firm-level model that costs VAT reforms, and who pays in four UK trade episodes (slides 18 to 23).
 
 ### 18. The Autumn Budget 2026 dashboard
 
@@ -1031,9 +1031,12 @@ slides, not build steps.
   schedule; say so.
 - **US export intensity.** By two-digit SIC division.
 - **Export-demand elasticity.** Assumed 1 (the OBR's March 2025 scenarios use
-  0.4). The paper answers the question: at the OBR's 0.4 the loss is £403m
-  and taxes and benefits offset 41.9% (wage cuts) and 37.0% (job losses), so
-  the rate does not depend on the elasticity, only the size of the loss does
+  0.4). The paper answers the question: at the OBR's 0.4 the loss is £403m,
+  against £1,007m at 1, and the share cushioned barely moves. Counting
+  pension contributions, it is 41.9% (wage cuts) and 37.0% (job losses) at
+  0.4, against 41.8% and 37.0% at 1 (the slide's 39.0% and 34.1% leave
+  pension contributions out). So the elasticity sets the size of the loss,
+  not the rate
   (PR #46, d8e01f2, `paper/sections/results.tex`).
 - **Earnings change by sector.** About £1.0bn a year (an output of these
   steps), all assumed to fall on employees' earnings.
@@ -1084,7 +1087,9 @@ slides, not build steps.
 
 - **Say it.** What runs today: the trade study's code applies earnings changes by
   two-digit SIC division to employees in Microcosm UK. The codes are in the
-  data; the crosswalk from another model is the piece to build.
+  data; the crosswalk from another model is the piece to build. Say that every
+  row needs that mapping from the sending model's sectors to SIC or COICOP,
+  not only the prices row tagged so.
 - A starting point for discussion, not a commitment.
 - One slide for how a model's results could reach people. It merges two
   earlier slides: "Disaggregation: how sector results reach people" and the
