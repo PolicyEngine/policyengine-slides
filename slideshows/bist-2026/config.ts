@@ -86,7 +86,7 @@ export const bist2026Config: SlideshowConfig = {
     { component: BusinessPolicySlide, builds: 4, exportBuilds: 1 },
     { component: AbmSlide, builds: 3, exportBuilds: 1 },
     { component: MacroSlide, builds: 3, exportBuilds: 1 },
-    // Part 6. Possible next steps, if there is interest.
+    // Part 6. Possible next steps.
     PartCollaborateSlide,
     { component: PilotsSlide, builds: 2, exportBuilds: 1 },
     { component: QuestionsSlide, builds: 6, exportBuilds: 1 },

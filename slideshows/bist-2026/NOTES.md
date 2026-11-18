@@ -7,7 +7,7 @@ Every figure here is one the deck already cites; the sources are in
 [README.md](README.md) and in the comments of `content.ts`.
 
 Status tags appear only inside slide bodies (cards, tables and flows):
-**Idea to explore**, **Working paper**, **Early prototype**,
+**Idea to explore**, **Working paper**, **Open source**,
 **Custom analysis**, **Outside the model**, **Open**,
 **Restricted**, **In the data**, **Not developed yet**, **In the trade study’s code**, **Needs a sector mapping**, **Small
 extension** and **Not built yet**; on the two Axiom Foundation slides (15
@@ -112,7 +112,7 @@ slides, not build steps.
   to the UK–US Economic Prosperity Deal and to the electricity-cost relief of
   the British Industrial Competitiveness Scheme (BICS), then asks where an
   agent-based model could link and how macroeconomic models could.
-- **6. Possible next steps.** If there is interest, two possible starting
+- **6. Possible next steps.** Two possible starting
   points (slide 31): tariff changes under the Economic Prosperity Deal, and
   BICS. We have no published results for either. Then questions for
   discussion, starting with whether there is appetite to explore a link at
@@ -932,15 +932,14 @@ slides, not build steps.
   and [turnover responses](https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/dynamic_reform_results.txt),
   commit e6d5dd6.
 
-### 22. Who bears the cost of trade changes? Four UK episodes, 2021–26
+### 22. Who pays for trade shocks? Four UK episodes, 2021–26
 
 - **Say it.** A working paper, run on Microcosm UK. Method: every episode is a price
   or earnings change, applied to each Microcosm UK household by what it
   spends or earns.
 - A working paper (Ahmadi 2026b; uk-trade-shock-study). The slide follows
-  the study's rerun on Microcosm UK: pull request #46, head 10dc18826, which
-  is open and not yet merged, so its figures can still change. (The earlier
-  head, 778557c, has the same figures.)
+  the study's rerun on Microcosm UK: pull request #46, head 185ee5f, which
+  is open and not yet merged, so its figures can still change.
 - Four UK trade events of 2021–26, traced to households:
   - the part of the food price rise that Bakker et al. (2023) attribute to
     post-Brexit trade barriers;
@@ -966,20 +965,18 @@ slides, not build steps.
   dropped: it came from the older run. The rerun reports a different
   measure: the Energy Price Guarantee absorbed 33.8% of the gross rise on a
   financial-year basis (46.2% as a point-to-point ratio of the price cap;
-  PR #46, 10dc18826, `results/generated_multishock.tex`). Quote it only if
+  PR #46, 185ee5f, `results/generated_multishock.tex`). Quote it only if
   asked, and as a figure from an open pull request.
 - The study models no policy aimed at the food price rise; general
   cost-of-living payments cushioned it.
-- Datasets (PR #46, 10dc18826): every microsimulation runs on policyengine[uk]
+- Datasets (PR #46, 185ee5f): every microsimulation runs on policyengine[uk]
   6.20.0 (policyengine-uk 2.174.1) with the certified Microcosm UK 2024–25
   build. The energy episode uses the Microcosm UK 2024–25 households, held at
   2024–25 values; its main run uses 2023–24 rules, and 2022–23 rules only for
   a comparison. The tariff stage runs under 2026–27 rules. The earlier run (06c8bbc) used the enhanced FRS
   2023–24 and the survey-weighted FRS 2024–25.
 - The slide shows no result. The paper's incidence figure (household
-  incidence by income decile) is off the slide: its file is the same at
-  06c8bbc and at PR #46 (10dc18826), so the pull request did not regenerate it
-  on Microcosm UK.
+  incidence by income decile) is off the slide to keep it short.
 - The US tariffs column, under a teal rule, is marked "Next slide": the next slide is the same
   study's tariff episode in detail.
 - **The UK–India agreement** is the episode closest to a free trade
@@ -994,7 +991,7 @@ slides, not build steps.
   Microcosm UK, pull request
   #46](https://github.com/PolicyEngine/uk-trade-shock-study/pull/46).
 
-### 23. Who bears the cost of trade changes: the 2025 US tariffs
+### 23. Who pays for trade shocks? The 2025 US tariffs
 
 - **Say it.** A working paper, run on Microcosm UK. There are no published results
   for the UK–US deal.
@@ -1019,20 +1016,20 @@ slides, not build steps.
 - The three middle steps are the ones a trade model's sector results could
   replace (the last build draws the bracket under them).
 - The finding: the tax and benefit system cushions part of the earnings
-  loss. When earnings fall, households pay less tax and NI, receive more in
-  benefits and pay lower pension contributions, so net income falls by less
-  than earnings. These absorb 41.8% of the loss when it comes as wage cuts
-  across workers and 32.1% when it comes as job losses (standard deviation
-  3.3 points across 20 draws; the wage-cut case uses 3 draws, as it varies
-  only with Universal Credit take-up). The gross earnings loss is £1,007.1m
-  a year, the "about £1.0bn" on the slide. This is the Dolls, Fuest and Peichl
-  stabilisation coefficient.
+  loss. When earnings fall, households pay less income tax and NI and
+  receive more in benefits, so net income falls by less than earnings.
+  Taxes and benefits offset 39.0% of the loss when it comes as wage cuts
+  across workers and 34.1% when it comes as job losses (the paper's
+  headline). Counting lower pension contributions too, the totals are
+  41.8% and 37.0%. The gross earnings loss is £1,007m a year, the "about
+  £1.0bn" on the slide. This is the Dolls, Fuest and Peichl stabilisation
+  coefficient.
 - Results are for the tariff schedule before the UK–US Economic Prosperity
-  Deal, on Microcosm UK at 2026 (policyengine[uk] 6.20.0, policyengine-uk
-  2.174.1).
-- These figures are from the study's open pull request #46 (head 10dc18826,
-  `results/e3_constants.json`), not yet merged. They replace the earlier
-  run's 43.7% and 35.4%.
+  Deal, on Microcosm UK (policyengine[uk] 6.20.0, policyengine-uk 2.174.1).
+- The paper is "Who pays for trade shocks? Distributional incidence and
+  fiscal cushioning in the UK". These figures are from its open pull
+  request #46 (head 185ee5f, 17 November 2026, `paper/generated_e3.tex`),
+  not yet merged, so they may still change.
 - The deal's general terms (operative 8 May 2025) provide for a quota of
   100,000 UK vehicles at a 10% tariff and, subject to supply-chain
   conditions, a steel and aluminium quota at most-favoured-nation rates.
@@ -1174,7 +1171,7 @@ slides, not build steps.
 - Builds: one column at a time, from a model's result to what PolicyEngine
   can report.
 - **Can we stand behind each row?** Checked on 16 November 2026 against the
-  trade study's code (PR #46, 10dc18826), the AI study's code and
+  trade study's code (PR #46, 185ee5f), the AI study's code and
   policyengine-uk (d3db7ac). The tag in the third column says so.
   - Earnings and jobs by sector: "In the trade study’s code", which
     already applies earnings changes by two-digit SIC division to employees,
@@ -1270,7 +1267,7 @@ slides, not build steps.
   fiscal years. How the one maps to the other is a question for the
   discussion.
 - **Can we stand behind each step?** Checked on 16 November 2026 against the
-  trade study's code (PR #46, 10dc18826) and policyengine-uk (d3db7ac).
+  trade study's code (PR #46, 185ee5f) and policyengine-uk (d3db7ac).
   - Results for the deal: the other model's. PolicyEngine takes jobs,
     earnings and prices; it has no use for sector output, so the slide no
     longer lists it.
@@ -1388,7 +1385,7 @@ slides, not build steps.
 - Builds: one kind of model at a time; what PolicyEngine reports is shown
   from the start.
 - **Can we stand behind "What it would pass in"?** Checked on 16 November 2026
-  against the trade study's code (PR #46, 10dc18826, `tariff_pipeline/shocks.py`
+  against the trade study's code (PR #46, 185ee5f, `tariff_pipeline/shocks.py`
   and `runner.py`) and policyengine-uk (d3db7ac). Each input carries "Not
   developed yet": the link from an agent-based model, on the business side,
   is not developed, even where the trade study's code already does the
@@ -1427,7 +1424,7 @@ slides, not build steps.
   back; repeat until the two agree. Precedent: NIESR combined PolicyEngine UK
   with NiGEM to estimate the effect of the 2022 cost-of-living payments on
   GDP. That was a one-off study, not a maintained link.
-- **OG-UK (early prototype).** An open-source overlapping-generations model
+- **OG-UK (open source).** An open-source overlapping-generations model
   of the UK. PolicyEngine supplies each adult's income tax and NI; OG-UK fits
   tax functions to these rates and solves a 60-year transition for output,
   wages, interest rates and revenue. The fitted functions do not yet reflect
@@ -1443,7 +1440,7 @@ slides, not build steps.
 ### 30. Part 6: Possible next steps (divider)
 
 - **Say it.** An idea to explore: nothing here is built or agreed.
-- A few seconds. Name the part and what it covers: if there is interest,
+- A few seconds. Name the part and what it covers:
   two possible starting points, and questions for discussion (slides 31 to
   33). Nothing here assumes a collaboration: the first question asks
   whether there is appetite at all.
@@ -1630,7 +1627,7 @@ carried, for questions.
 - Every draw is a full run of the tax and benefit rules. Studies report the
   mean and the standard deviation across draws.
 - 50 draws in the AI study's central scenario; 20 in the trade study’s tariff episode’s
-  rerun (PR #46, 10dc18826).
+  rerun (PR #46, 185ee5f).
 - The AI study's central scenario: an Exchequer cost of £7.3bn as the mean
   of 50 draws, with a standard deviation of £1.9bn, on Microcosm UK for
   2027–28.

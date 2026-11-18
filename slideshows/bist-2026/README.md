@@ -54,8 +54,8 @@ slide, is in [NOTES.md](NOTES.md).
 19. Who bears the cost of an AI scenario? (live page)
 20. How we built synthetic UK firms
 21. What the firm model can cost: thresholds, tapers and reduced rates
-22. Who bears the cost of trade changes? Four UK episodes, 2021–26
-23. Who bears the cost of trade changes: the 2025 US tariffs (the second
+22. Who pays for trade shocks? Four UK episodes, 2021–26
+23. Who pays for trade shocks? The 2025 US tariffs (the second
     slide of the trade study)
 
 5 · What could be explored
@@ -180,7 +180,7 @@ notes for that slide.
   2024–25), which earlier versions quoted and which are no longer in the
   deck. The trade study's slides follow
   its rerun on Microcosm UK (uk-trade-shock-study pull request #46, head
-  `10dc18826`, open and not merged; the earlier head `778557c` has the same
+  `185ee5f`, open and not merged; the earlier head `778557c` has the same
   figures): every microsimulation runs on policyengine[uk] 6.20.0 with the
   certified Microcosm UK 2024–25 build. The tariff stage runs under 2026–27
   rules; the energy episode's main run uses 2023–24 rules, and 2022–23 rules
@@ -198,7 +198,7 @@ notes for that slide.
   explored (one way to link models by exchanging tables, then the
   Economic Prosperity Deal as a trade application, business policy as a
   business application, three kinds of agent-based model and links to
-  macroeconomic models); and possible next steps, if there is interest (two
+  macroeconomic models); and possible next steps (two
   possible starting points and questions, the first of which asks whether
   there is appetite at all). Release gates and certification, assignment variability, data
   access in full and use, evaluation and engagement are under "Backup
@@ -206,7 +206,7 @@ notes for that slide.
 - **Status.** Status sits inside the slide bodies (cards, tables, flows)
   or, where it used to be a tag beside the subtitle or a tagged foot line,
   in the notes as a "Say it" line: the firm VAT model is a working paper,
-  Microcosm's firm support is experimental, OG-UK is an early prototype,
+  Microcosm's firm support is experimental, OG-UK is open source and in use,
   and no link to a trade, macroeconomic or agent-based model is built.
 - **Sources by slide.** The slides carry no "Sources" row: the links for
   each slide are the "Sources" bullet at the end of its notes in `NOTES.md`,
@@ -262,12 +262,14 @@ notes for that slide.
     type, not per sector, and its standard closure fixes aggregate
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
-  - The trade study's US-tariff episode (slide 23): uk-trade-shock-study pull request #46, head `10dc18826`
-    (open, not merged), `results/e3_constants.json`: gross change £1,007.1m
-    a year; cushion 41.8% for wage cuts and 32.1% for job losses, standard
-    deviation 3.3 points across 20 draws; run on Microcosm UK at 2026 with
-    policyengine[uk] 6.20.0 (policyengine-uk 2.174.1). These replace the
-    figures of `06c8bbc` (43.7%, 35.4%, 5.1 points across 100 draws).
+  - The trade study's US-tariff episode (slide 23): "Who pays for trade
+    shocks?", uk-trade-shock-study pull request #46, head `185ee5f`
+    (17 November 2026, open, not merged), `paper/generated_e3.tex`: gross
+    change £1,007m a year; taxes and benefits offset 39.0% for wage cuts and
+    34.1% for job losses (the abstract's headline; 41.8% and 37.0% with
+    pension contributions); run on Microcosm UK with policyengine[uk] 6.20.0
+    (policyengine-uk 2.174.1). These replace the figures of `10dc18826`
+    (41.8%, 32.1%) and `06c8bbc` (43.7%, 35.4%).
   - Economic Prosperity Deal (its own slide, the US-tariff episode and the starting points): the general terms
     on GOV.UK (operative 8 May 2025; a 100,000-vehicle quota at a 10% tariff;
     and, subject to supply-chain conditions, a steel and aluminium quota at
@@ -406,9 +408,9 @@ notes for that slide.
       `docs/bundles.md` and `docs/engineering/skills/data-certification.md`.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
-    `paper/sections/results.tex` (20 assignment draws at PR #46, `10dc18826`).
+    `paper/sections/results.tex` (20 assignment draws at PR #46, `185ee5f`).
   - Trade events (slide 22): uk-trade-shock-study pull request #46,
-    `10dc18826`, `paper/sections/episodes.tex` (each episode's years and
+    `185ee5f`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
   - Calibration targets by topic (slide 10): the dashboard's data route for
@@ -552,8 +554,8 @@ slide that replaced it.
   and there is no closing sources slide, to keep to the time. The freed
   space goes to the content.
 - The tariff and trade slides follow the trade study's rerun on Microcosm
-  UK (pull request #46, `778557c`, open): 41.8% and 32.1% (SD 3.3 points
-  across 20 draws) replace 43.7% and 35.4%, and both slides are tagged
+  UK (pull request #46, now at `185ee5f`, open): 39.0% and 34.1% (taxes and
+  benefits only) replace 43.7% and 35.4%, and both slides are tagged
   "Microcosm UK".
 - Doability: every "could pass" box was checked against the trade study's
   code and policyengine-uk, and the notes for slides 22, 25, 26, 27 and 29
@@ -580,7 +582,7 @@ changed.
   trade study, and the deck now says so.
   Slide 19 shows the study's four episodes as cards (years, and whether
   prices or earnings carry the change), with the US tariffs card marked
-  "Next slide". Slide 20 is titled "Who bears the cost of trade changes: the
+  "Next slide". Slide 20 is titled "Who pays for trade shocks: the
   2025 US tariffs", with the subtitle "Inside the trade study", and carries
   the same "Working paper" and "Microcosm UK" tags as slide 19.
 - The trade paper's incidence figure is off slide 19 and its file is
@@ -656,7 +658,7 @@ build's, from the calibration dashboard's data for the pinned release.
 - On slide 20 the last step is "Employees in Microcosm UK", by sector.
 - The notes drop a stale line (the trade study is now rerun on Microcosm
   UK), give the SPI copies' occupation as imputed from their incomes, and
-  cite pull request #46 at head `10dc18826` (its figures are those of
+  cite pull request #46 at head `185ee5f` (its figures are those of
   `778557c`), with the rule years of the tariff and energy runs.
 
 No existing figure changed; slide 9 adds counts and shares by topic from the
@@ -777,7 +779,7 @@ The slide list at the top is current; earlier sections keep the numbers of
 their time. No existing figure changed.
 
 - Tone. Part 6 is "Possible next steps" (navigator "Next steps"), with the
-  line "If there is interest: two possible starting points, and questions".
+  line "Two possible starting points, and questions".
   "Two candidate pilots" is "Two possible starting points", subtitled "For
   discussion, if there is appetite". The first question asks whether there
   is appetite to explore a link, and on which question; it replaces "Which

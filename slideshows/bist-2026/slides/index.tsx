@@ -672,7 +672,7 @@ export function BridgeSlide() {
   return (
     <Frame
       section="projects"
-      title="Who bears the cost of trade changes: the 2025 US tariffs"
+      title="Who pays for trade shocks? The 2025 US tariffs"
       scale={1.1}
       subtitle="Inside the trade study: from tariff rates to employees’ earnings"
     >
@@ -692,7 +692,7 @@ export function BridgeSlide() {
             The tax and benefit system cushions part of the earnings loss
           </h2>
           <p className={styles.statLabel}>
-            Through lower taxes and NI, more benefits and lower pension contributions
+            Through lower income tax and NI and higher benefits
           </p>
         </div>
         <Reveal step={2}>
@@ -705,9 +705,7 @@ export function BridgeSlide() {
           <p className={styles.statValue}>
             <CountUp value={cushion.jobLosses} step={2} />
           </p>
-          <p className={styles.statLabel}>
-            if it comes as job losses (SD {cushion.jobLossesSd} across {cushion.draws})
-          </p>
+          <p className={styles.statLabel}>if it comes as job losses</p>
         </Reveal>
       </div>
     </Frame>
@@ -1462,7 +1460,7 @@ export function TradeSlide() {
   return (
     <Frame
       section="projects"
-      title="Who bears the cost of trade changes? Four UK episodes, 2021–26"
+      title="Who pays for trade shocks? Four UK episodes, 2021–26"
       scale={1.12}
       subtitle="The trade study: price and earnings changes from four trade events, traced to households"
     >
