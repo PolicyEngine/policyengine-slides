@@ -20,7 +20,7 @@
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
 // policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc
-// (its figures are now those of its PR #46, head ee6ad07, read 17 November;
+// (its figures are now those of its PR #46, head 090db1b, read 17 November;
 // the earlier head 778557c, read 16 November, has the same figures),
 // and firm-microsim-paper e6d5dd6. GOV.UK pages and the Microcosm
 // calibration dashboard were read the same day; the AI post on 16 November.
@@ -662,7 +662,7 @@ export const coverage = [
   },
 ];
 
-// The trade study's four episodes (uk-trade-shock-study PR #46, ee6ad07,
+// The trade study's four episodes (uk-trade-shock-study PR #46, 090db1b,
 // open, not merged; a working paper). Years and channels are the headings of
 // paper/sections/episodes.tex: "Episode 1: the TCA border (2021--23),
 // negative, price-led"; "Episode 2: the terms-of-trade shock (2022--23),
@@ -712,7 +712,7 @@ export const tradeEvents = [
   },
 ];
 
-// The path every episode follows, under the four cards. PR #46, ee6ad07:
+// The path every episode follows, under the four cards. PR #46, 090db1b:
 // each episode has a household stage on the certified Microcosm UK records
 // (README; results.tex, "The second stage: household-level results";
 // vintage_and_tca.py for food, second_stage_energy.py for energy,
@@ -723,7 +723,7 @@ export const tradeEvents = [
 // episodes, not for the India duty reductions.
 // The line is said aloud (NOTES.md, slide 22), not shown on the slide.
 // Microcosm UK (said aloud on slides 22 and 23): the trade study's rerun
-// (uk-trade-shock-study PR #46, ee6ad07, open, not merged; README and
+// (uk-trade-shock-study PR #46, 090db1b, open, not merged; README and
 // paper/sections/results.tex): every microsimulation runs on
 // policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the Microcosm UK
 // 2024-25 build of 7 November 2026 that 6.20.0 certifies, not the 15
@@ -732,7 +732,7 @@ export const tradeEvents = [
 // comparison.
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
-// 06c8bbc on the enhanced FRS, and the rerun (PR #46, ee6ad07) reports a
+// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 090db1b) reports a
 // different measure (see NOTES.md).
 
 // The Economic Prosperity Deal, end to end: from a trade or macroeconomic
@@ -886,7 +886,7 @@ export const tariffDisaggregation = {
 // The trade study's US-tariff episode (formerly called "the tariff bridge";
 // the symbol keeps that name): shock = elasticity × tariff × US export share by SIC
 // division. Paper "Who pays for trade shocks?", uk-trade-shock-study PR #46,
-// head ee6ad07 (17 November 2026, open, not merged), policyengine.py 6.20.0 on
+// head 090db1b (17 November 2026, open, not merged), policyengine.py 6.20.0 on
 // Microcosm UK. Headline as in the abstract: taxes and benefits offset
 // EThreeWageTaxBenRatePct 39.0% (wage cuts) and EThreeDispTaxBenRatePct 34.1%
 // (displacement, exact expectation over exposed workers) of the gross loss
@@ -897,7 +897,7 @@ export const tariffDisaggregation = {
 // for the schedule before the Economic Prosperity Deal. The paper reports
 // none for the deal schedule ("the Economic Prosperity Deal's own tariff
 // changes ... are outside the design", episodes.tex); the code has an "epd"
-// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at ee6ad07)
+// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at 090db1b)
 // but no published result, hence the tag "No published results for the UK–US deal".
 // This slide is the second slide of the trade study: its title repeats the
 // study's, and the trade slide's US tariffs card points here.
@@ -1092,7 +1092,7 @@ export const abmQuestions = [
 
 // Every input on the slide carries "Not developed yet": the link from an
 // agent-based model is not developed. Doability of each input, checked on 16 November 2026 against
-// uk-trade-shock-study PR #46 (ee6ad07), tariff_pipeline/shocks.py and
+// uk-trade-shock-study PR #46 (090db1b), tariff_pipeline/shocks.py and
 // runner.py: apply_shocks takes persons with employment_income, sic_division,
 // age and weight, and applies wage cuts or job losses by two-digit SIC
 // division; region is reported (runner.py, region_income_change) but is not

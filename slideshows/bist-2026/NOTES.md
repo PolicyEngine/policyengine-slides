@@ -946,7 +946,7 @@ slides, not build steps.
   or earnings change, applied to each Microcosm UK household by what it
   spends or earns.
 - A working paper (Ahmadi 2026b; uk-trade-shock-study). The slide follows
-  the study's rerun on Microcosm UK: pull request #46, head ee6ad07, which
+  the study's rerun on Microcosm UK: pull request #46, head 090db1b, which
   is open and not yet merged, so its figures can still change.
 - Four UK trade events of 2021–26, traced to households:
   - the part of the food price rise that Bakker et al. (2023) attribute to
@@ -973,11 +973,11 @@ slides, not build steps.
   dropped: it came from the older run. The rerun reports a different
   measure: the Energy Price Guarantee absorbed 33.8% of the gross rise on a
   financial-year basis (46.2% as a point-to-point ratio of the price cap;
-  PR #46, ee6ad07, `results/generated_multishock.tex`). Quote it only if
+  PR #46, 090db1b, `results/generated_multishock.tex`). Quote it only if
   asked, and as a figure from an open pull request.
 - The study models no policy aimed at the food price rise; general
   cost-of-living payments cushioned it.
-- Datasets (PR #46, ee6ad07): every microsimulation runs on policyengine[uk]
+- Datasets (PR #46, 090db1b): every microsimulation runs on policyengine[uk]
   6.20.0 (policyengine-uk 2.174.1) with the Microcosm UK 2024–25 build of 7
   November 2026 that 6.20.0 certifies, not the 15 November build on slides
   8 to 11. The energy episode uses the Microcosm UK 2024–25 households, held at
@@ -1037,7 +1037,7 @@ slides, not build steps.
   Deal, on Microcosm UK (policyengine[uk] 6.20.0, policyengine-uk 2.174.1).
 - The paper is "Who pays for trade shocks? Distributional incidence and
   fiscal cushioning in the UK". These figures are from its open pull
-  request #46 (head ee6ad07, read 18 November 2026, `paper/generated_e3.tex`),
+  request #46 (head 090db1b, read 18 November 2026, `paper/generated_e3.tex`),
   not yet merged, so they may still change.
 - The deal's general terms (operative 8 May 2025) provide for a quota of
   100,000 UK vehicles at a 10% tariff and, subject to supply-chain
@@ -1180,7 +1180,7 @@ slides, not build steps.
 - Builds: one column at a time, from a model's result to what PolicyEngine
   can report.
 - **Can we stand behind each row?** Checked on 16 November 2026 against the
-  trade study's code (PR #46, ee6ad07), the AI study's code and
+  trade study's code (PR #46, 090db1b), the AI study's code and
   policyengine-uk (d3db7ac). The tag in the third column says so.
   - Earnings and jobs by sector: "In the trade study’s code", which
     already applies earnings changes by two-digit SIC division to employees,
@@ -1276,7 +1276,7 @@ slides, not build steps.
   fiscal years. How the one maps to the other is a question for the
   discussion.
 - **Can we stand behind each step?** Checked on 16 November 2026 against the
-  trade study's code (PR #46, ee6ad07) and policyengine-uk (d3db7ac).
+  trade study's code (PR #46, 090db1b) and policyengine-uk (d3db7ac).
   - Results for the deal: the other model's. PolicyEngine takes jobs,
     earnings and prices; it has no use for sector output, so the slide no
     longer lists it.
@@ -1394,7 +1394,7 @@ slides, not build steps.
 - Builds: one kind of model at a time; what PolicyEngine reports is shown
   from the start.
 - **Can we stand behind "What it would pass in"?** Checked on 16 November 2026
-  against the trade study's code (PR #46, ee6ad07, `tariff_pipeline/shocks.py`
+  against the trade study's code (PR #46, 090db1b, `tariff_pipeline/shocks.py`
   and `runner.py`) and policyengine-uk (d3db7ac). Each input carries "Not
   developed yet": the link from an agent-based model, on the business side,
   is not developed, even where the trade study's code already does the
@@ -1637,7 +1637,7 @@ carried, for questions.
 - Every draw is a full run of the tax and benefit rules. Studies report the
   mean and the standard deviation across draws.
 - 50 draws in the AI study's central scenario; 20 in the trade study’s tariff episode’s
-  rerun (PR #46, ee6ad07).
+  rerun (PR #46, 090db1b).
 - The AI study's central scenario: an Exchequer cost of £7.3bn as the mean
   of 50 draws, with a standard deviation of £1.9bn, on Microcosm UK for
   2027–28.

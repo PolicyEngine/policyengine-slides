@@ -183,7 +183,7 @@ notes for that slide.
   2024–25), which earlier versions quoted and which are no longer in the
   deck. The trade study's slides follow
   its rerun on Microcosm UK (uk-trade-shock-study pull request #46, head
-  `ee6ad07`, read 18 November, open and not merged; the earlier heads
+  `090db1b`, read 18 November, open and not merged; the earlier heads
   `185ee5f` and `867293f` have the same figures): every microsimulation runs
   on policyengine[uk] 6.20.0 with the Microcosm UK 2024–25 build of 7
   November that 6.20.0 certifies. The tariff stage runs under 2026–27
@@ -267,7 +267,7 @@ notes for that slide.
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
   - The trade study's US-tariff episode (slide 23): "Who pays for trade
-    shocks?", uk-trade-shock-study pull request #46, head `ee6ad07`
+    shocks?", uk-trade-shock-study pull request #46, head `090db1b`
     (read 18 November 2026, open, not merged), `paper/generated_e3.tex`: gross
     change £1,007m a year; taxes and benefits offset 39.0% for wage cuts and
     34.1% for job losses (the abstract's headline; 41.8% and 37.0% with
@@ -408,9 +408,9 @@ notes for that slide.
       `docs/bundles.md` and `docs/engineering/skills/data-certification.md`.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
-    `paper/sections/results.tex` (20 assignment draws at PR #46, `ee6ad07`).
+    `paper/sections/results.tex` (20 assignment draws at PR #46, `090db1b`).
   - Trade events (slide 22): uk-trade-shock-study pull request #46,
-    `ee6ad07`, `paper/sections/episodes.tex` (each episode's years and
+    `090db1b`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
   - Calibration targets by topic (slide 10): the dashboard's data route for
@@ -554,7 +554,7 @@ slide that replaced it.
   and there is no closing sources slide, to keep to the time. The freed
   space goes to the content.
 - The tariff and trade slides follow the trade study's rerun on Microcosm
-  UK (pull request #46, now at `ee6ad07`, open): 39.0% and 34.1% (taxes and
+  UK (pull request #46, now at `090db1b`, open): 39.0% and 34.1% (taxes and
   benefits only) replace 43.7% and 35.4%, and both slides are tagged
   "Microcosm UK".
 - Doability: every "could pass" box was checked against the trade study's
@@ -898,5 +898,5 @@ The deck is public: it has no password and appears on the home page.
 - "By place" is now "By geography", and the notes say the disclosure floor
   of 10 households is policyengine.py's own, stricter than the UK Data
   Service licence.
-- PR #46 is cited at its current head, `ee6ad07` (figures unchanged).
+- PR #46 is cited at its current head, `090db1b` (figures unchanged).
 
