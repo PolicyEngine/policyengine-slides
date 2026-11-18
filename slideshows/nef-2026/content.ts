@@ -430,6 +430,7 @@ export const bridgeBenchmark = {
   gap: "5.1% below",
 };
 
-// The hosted MCP server's OBR pin (integration/pyproject.toml), which
-// predates the opt-in overlays merged in #70.
+// The hosted MCP server's OBR pin (integration/pyproject.toml). GitHub's
+// compare view puts it 10 commits behind 0fe04c9a, before #70 (VAT price
+// pass-through) and #71; hosted obr_shock exposes no overlay parameter.
 export const hostedObrPin = "2965e82";

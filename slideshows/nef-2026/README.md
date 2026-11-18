@@ -23,9 +23,10 @@ Five parts, after a title, an agenda and a slide on PolicyEngine:
 5. Working together: a demo plan, collaboration areas, questions for NEF and
    proposed next steps (slides 22–25)
 
-It follows PolicyEngine's July 2025 meeting with NEF, which covered the
-tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in
-`PolicyEngine/obr-presentation`, commit `f4f819a7`).
+It follows PolicyEngine's July 2025 deck for NEF, which covered the
+tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in the private
+`PolicyEngine/obr-presentation` repo, commit `f4f819a7`; it isn't linked on
+the slides).
 
 ## Editing and presenting
 

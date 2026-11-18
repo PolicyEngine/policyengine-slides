@@ -50,6 +50,7 @@ import {
   incomeTax,
   layers,
   listing,
+  multiplierRows,
   pipeline,
   platformModels,
   registryStatus,
@@ -269,7 +270,7 @@ export function WhoWeAreSlide() {
     <Frame
       title="PolicyEngine"
       subtitle="A nonprofit building open-source models of tax, benefit and economic policy"
-      references={[sources.macroReadme, sources.priorDeck]}
+      references={[sources.macroReadme]}
       center
     >
       <IconList
@@ -293,7 +294,7 @@ export function WhoWeAreSlide() {
           {
             icon: IconCalendarEvent,
             title: "Since we last met",
-            text: "July 2025: microsimulation for NEF. Today: the macro side",
+            text: "July 2025: microsimulation. Today: the macro side",
           },
         ]}
       />
@@ -596,7 +597,7 @@ export function IncomeTaxSlide() {
         <IconList
           items={[
             { icon: IconUsers, title: "Income falls, then spending", text: "The OBR's consumption equation" },
-            { icon: IconScale, title: "Right size, reverse profile", text: "Ours grows; the OBR's 0.3 fades" },
+            { icon: IconScale, title: "Right order, reverse profile", text: `Ours grows; the OBR's ${multiplierRows[1].obr} fades` },
             { icon: IconBuildingBank, title: "Borrowing moves one for one", text: "No second-round receipts" },
           ]}
         />
@@ -686,7 +687,7 @@ export function LimitsSlide() {
           {
             icon: IconScale,
             title: "Spending multiplier is about 1",
-            text: "By construction, against the OBR's 0.6; borrowing does not move",
+            text: `By construction, against the OBR's ${multiplierRows[0].obr}; borrowing does not move`,
           },
           {
             icon: IconAdjustmentsHorizontal,
@@ -766,7 +767,8 @@ export function DefineSlide() {
       </div>
       <p className={styles.takeaway}>
         Deltas only, never levels. A partial replication of the published
-        model, run locally; public debt and interest are not among its outputs
+        model, run locally; public debt and interest are not among the served
+        outputs
       </p>
     </Frame>
   );
@@ -877,7 +879,7 @@ export function MicroMacroSlide() {
           Decile changes, winners and losers. Poverty from PolicyEngine-UK,
           before housing costs as the headline
         </Card>
-        <Card icon={IconScale} title="Checked against HMRC" amber>
+        <Card icon={IconScale} title="Compared with HMRC" amber>
           {`1p on the basic rate: ${bridgeBenchmark.policyEngine} static, against the ready reckoner's ${bridgeBenchmark.hmrc} (${bridgeBenchmark.gap})`}
         </Card>
       </div>
@@ -911,8 +913,9 @@ const demoSteps = [
 export function DemoSlide() {
   return (
     <Frame
+      section={sections[4]}
       title="Demo"
-      subtitle={`Overlays run locally: the hosted server pins the model at ${hostedObrPin}, before they were added`}
+      subtitle={`Overlays run locally: the hosted tools take no overlay switch, and the hosted model (${hostedObrPin}) predates VAT pass-through`}
       references={[sources.demo, sources.connect, sources.hostedPin]}
       center
     >

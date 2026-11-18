@@ -416,7 +416,7 @@
   justify-content: center;
   border-radius: 9999px;
   background: var(--pe-teal);
-  color: white;
+  color: var(--text-inverse);
   font-size: 0.75rem;
   font-weight: 700;
   transform: translate(-50%, -50%);
@@ -661,7 +661,7 @@
   justify-content: center;
   border-radius: 9999px;
   background: var(--pe-teal);
-  color: white;
+  color: var(--text-inverse);
   font-size: 1.3rem;
   font-weight: 700;
 }

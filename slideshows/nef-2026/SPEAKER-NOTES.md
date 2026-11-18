@@ -16,8 +16,9 @@ direct about limits.
 
 ## 3. PolicyEngine
 
-We met NEF in July 2025 about the tax-benefit microsimulation (the two-child
-limit and a NICs example). This meeting is the macro side.
+Our July 2025 deck for NEF (dated 16 July 2025) covered the tax-benefit
+microsimulation (the two-child limit and a NICs example). Confirm with Max
+whether there has been contact since. This meeting is the macro side.
 
 ## 4. Why an open OBR model
 
@@ -230,9 +231,10 @@ build takes a few minutes. If using `score_reform`, start it through
 1. `run_reform(name="demo", var="CGG", shock=1250, periods=12)`, then income
    tax (`var="TYEM", shock=1725`).
 2. VAT with `price_passthrough=True`; Bank Rate (`var="R", shock=1.0,
-   periods=4`) with `monetary_conditioning=True`. Overlays are local only: the
-   hosted server pins the model at 2965e82, before #70. Defaults match to the
-   pound.
+   periods=4`) with `monetary_conditioning=True`. Run overlays locally: hosted
+   `obr_shock` has no overlay parameter, and the hosted model (2965e82) is 10
+   commits behind main, before #70 and #71. #70 left defaults unchanged to the
+   pound and #71 left reform deltas unchanged, by their own changelogs.
 3. The dashboard at obr-macroeconomic-model.vercel.app.
 4. In Claude with the MCP connector: "Score raising the UK basic rate of income
    tax to 21p."
