@@ -50,8 +50,9 @@ today; and scoping the project.
     Class 1A due (Table 5, which HMRC labels experimental; it excludes
     termination awards and sporting testimonials);
   - 920,000 people with a company car, £3.07bn taxable value (Table 1). HMRC
-    says the count is probably an underestimate, because some payrolled cars
-    are not reported;
+    says the count "may be an underestimate", because some payrolled cars
+    are not reported (commentary, section 8); the slide says "may be an
+    undercount";
   - 51% of company cars are fully electric (Tables 2B and 2D).
 - Right, in its own panel: the last year with final figures for every type of
   benefit, 2016-17 (Table 4.5 and commentary, June 2019; the same release
@@ -78,7 +79,8 @@ today; and scoping the project.
   (`policyengine_uk/scenarios/company_car_tax_rise_2030.py`). The maximum rate is 37% to
   2027-28, then 38%, 39% and 40%.
 - 2026-27: car fuel multiplier £29,200; van benefit charge £4,170; van fuel
-  £798.
+  £798 (The Van Benefit and Car and Van Fuel Benefit Order 2025, SI
+  2025/1254, art. 2; Annex A does not list them).
 - 6 April 2027: payrolling (taxing benefits through payroll in real time
   rather than on a P11D) becomes mandatory for cars, vans, car and van fuel
   and medical benefits; 6 April 2028 for most other benefits. Both are
@@ -125,7 +127,8 @@ Each stage carries a status for company cars. What each rests on:
   recipients 915,708 against 920,000; taxable value £3,068.6m against
   £3,070m; fully electric 465,215 against 465,000; petrol 390,819 against
   390,000; diesel 59,674 against 60,000, the worst at 0.54% (calibration
-  dashboard data route, read 18 November 2026). The file
+  dashboard data route, read 18 November 2026 and again on 19 November:
+  1,534 targets, all included; the 18 November build, 1,535). The file
   `uk/hmrc_benefits_in_kind_facts.json` still says none is a calibration
   target; that text is stale. Not targets: car fuel benefit, Class 1A, and
   HMRC's breakdowns by income band and region.
@@ -162,8 +165,9 @@ Each stage carries a status for company cars. What each rests on:
 - Medical insurance, vans, loans, accommodation, other salary sacrifice:
   no rules, no data in the household file, no targets. The FRS asks whether
   a benefit replaces salary (yes or no: SalSac, FuelBn, VchSac, question
-  instructions pp. 226 to 230) and gives amounts only for pension salary
-  sacrifice and childcare vouchers. The FRS asks who
+  instructions pp. 226 to 230). Of the salary-sacrifice arrangements it gives
+  amounts only for pensions and childcare vouchers; it also asks the value of
+  private fuel and of other vouchers. The FRS asks who
   receives medical insurance and a van but not the value; the van charge is
   a flat amount in law, so who has one is most of what is needed. Loans and
   accommodation are not separate FRS answers (they fall under "any other
@@ -175,7 +179,8 @@ Each stage carries a status for company cars. What each rests on:
 
 - FRS 2024-25: who receives each of 13 employer benefits; for cars, the
   banded list price, fuel type and employee contribution; amounts for
-  pension salary sacrifice and childcare vouchers. No value for medical
+  pension salary sacrifice, childcare vouchers, other vouchers and private
+  fuel. No value for medical
   insurance, no CO2.
 - Survey of Personal Incomes (SPI) Public Use Tape: one field, `EPB`,
   combines expenses payments and benefits. Confirmed in the 2022-23

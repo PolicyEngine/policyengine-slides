@@ -58,6 +58,10 @@ export const sources = {
     href: "https://www.gov.uk/government/publications/changes-to-reporting-of-benefits-in-kind-from-april-2027/mandatory-reporting-of-benefits-in-kind-in-real-time-information-rti-from-april-2027",
     published: "13 July 2026, updated 28 October 2026",
   },
+  fuelOrder: {
+    label: "The Van Benefit and Car and Van Fuel Benefit Order 2025 (SI 2025/1254)",
+    href: "https://www.legislation.gov.uk/uksi/2025/1254/made",
+  },
   // Budgets and the OBR
   budget2026Rates: {
     label: "Budget 2026, overview of tax legislation and rates, Annex A",
@@ -178,7 +182,7 @@ export const rules2026 = {
 
 // sources.bikStats: Table 5 (all Class 1A benefits; experimental) and Table 1
 // (company cars), tax year 2024-25, provisional. Table 2B/2D for the electric
-// share. HMRC says the car count is probably an underestimate, because some
+// share. HMRC says the 920,000 "may be an underestimate", because some
 // payrolled cars are not reported (commentary, section 8).
 export const size = {
   year: "2024-25",
@@ -229,7 +233,8 @@ export const byType2016 = {
 };
 
 // What is legislated or announced, by tax year. Zero-emission company car
-// rates: sources.budget2026Rates. Payrolling dates: sources.payrolling.
+// rates: sources.budget2026Rates. Car fuel multiplier for 2026-27:
+// sources.fuelOrder, art. 2(2). Payrolling dates: sources.payrolling.
 // Salary-sacrifice cap: sources.budget2025Costings (p.47). Employee car
 // ownership schemes: sources.budget2025Costings (p.72). Yields are Exchequer
 // figures from sources.budget2026 (Table 6.1 row 86) and

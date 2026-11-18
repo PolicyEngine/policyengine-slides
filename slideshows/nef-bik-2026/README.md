@@ -81,6 +81,8 @@ Statistics and guidance:
   https://www.gov.uk/government/statistics/number-of-recipients-and-amounts-of-taxable-benefits-by-type-of-benefit
 - HMRC tax relief statistics, January 2026 (22 January 2026):
   https://www.gov.uk/government/statistics/tax-reliefs
+- The Van Benefit and Car and Van Fuel Benefit Order 2025 (SI 2025/1254):
+  https://www.legislation.gov.uk/uksi/2025/1254/made
 - Rates and thresholds for employers 2026 to 2027 (updated 1 September 2026):
   https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027
 - HMRC booklet 480, Appendix 12, optional remuneration arrangements:

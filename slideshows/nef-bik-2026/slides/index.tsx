@@ -533,7 +533,7 @@ export function SizeSlide() {
               </p>
               <p className={styles.statLabel}>People with a company car</p>
               <p className={styles.statNote}>
-                Reported to HMRC, an undercount; {size.carTaxableValueBn} taxable value
+                Reported to HMRC, may be an undercount; {size.carTaxableValueBn} taxable value
               </p>
             </div>
             <div className={styles.card}>
