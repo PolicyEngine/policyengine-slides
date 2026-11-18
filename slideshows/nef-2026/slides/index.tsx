@@ -146,7 +146,7 @@ const agenda: Item[] = [
   {
     icon: IconStack2,
     title: "The macro platform",
-    text: "Seven models, forecasts, AI access",
+    text: "Seven models, the live site, AI access",
   },
   {
     icon: IconUsersGroup,
@@ -404,8 +404,19 @@ export function TitleSlide() {
 
 export function AgendaSlide() {
   return (
-    <Frame title="Today" scale={1.25}>
-      <IconList items={agenda} />
+    <Frame title="Today" scale={1.45}>
+      <ol className={styles.agendaRoad}>
+        {agenda.map(({ icon: PartIcon, title, text }, index) => (
+          <li key={title} className={styles.agendaStop}>
+            <span className={styles.agendaDot}>{index + 1}</span>
+            <div className={styles.agendaCard}>
+              <PartIcon className={styles.agendaIcon} stroke={1.6} aria-hidden="true" />
+              <h2>{title}</h2>
+              <p>{text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </Frame>
   );
 }
