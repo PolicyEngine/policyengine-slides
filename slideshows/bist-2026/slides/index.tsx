@@ -674,7 +674,7 @@ export function BridgeSlide() {
       section="projects"
       title="Who pays for trade shocks? The 2025 US tariffs"
       scale={1.1}
-      subtitle="Inside the working paper (rerun under review): from tariff rates to earnings"
+      subtitle="Preliminary work, not yet published: from tariff rates to earnings"
     >
       <Flow
         steps={steps}
@@ -1462,7 +1462,7 @@ export function TradeSlide() {
       section="projects"
       title="Who pays for trade shocks? Four UK episodes, 2021–26"
       scale={1.12}
-      subtitle="A working paper, its rerun under review: four trade events traced to households"
+      subtitle="Preliminary work, not yet published: four trade events traced to households"
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {tradeEvents.map((event, index) => (

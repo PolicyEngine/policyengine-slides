@@ -945,7 +945,7 @@ slides, not build steps.
 - **Say it.** A working paper, run on Microcosm UK. Method: every episode is a price
   or earnings change, applied to each Microcosm UK household by what it
   spends or earns.
-- A working paper (Ahmadi 2026b; uk-trade-shock-study). The slide follows
+- Preliminary work, not yet published: a working paper (Ahmadi 2026b; uk-trade-shock-study). Say so. The slide follows
   the study's rerun on Microcosm UK: pull request #46, head 090db1b, which
   is open and not yet merged, so its figures can still change.
 - Four UK trade events of 2021–26, traced to households:
