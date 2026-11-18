@@ -509,7 +509,7 @@ export const whoWeAre = {
       name: "HM Treasury",
       height: 3.4,
       source: sources.hmt,
-      caption: "Pilot evaluation (transparency record)",
+      caption: "Pilot evaluation",
     },
     {
       name: "Office for Budget Responsibility",
@@ -519,7 +519,7 @@ export const whoWeAre = {
       height: 2.9,
       darken: true,
       source: sources.obr,
-      caption: "Engaged with (annual report 2025–26)",
+      caption: "Engaged with, 2025–26",
     },
     {
       name: "House of Lords",
