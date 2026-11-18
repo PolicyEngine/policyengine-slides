@@ -45,6 +45,8 @@ export interface SlideshowConfig {
   clickerKeys?: boolean;
   /** Number the counter by slide, so a slide's build steps share one number. */
   countSlides?: boolean;
+  /** Hide the "Click or arrow keys" hint in the navigation bar, for a deck whose footer logo sits under it. */
+  hideNavHint?: boolean;
   slides: SlideConfig[];
 }
 

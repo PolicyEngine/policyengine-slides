@@ -48,6 +48,8 @@ export const bist2026Config: SlideshowConfig = {
   footerText: "BIST Modelling Unit · 19 November 2026",
   // The live counter numbers slides, not build steps.
   countSlides: true,
+  // The footer logo sits where the navigation hint would be.
+  hideNavHint: true,
   slides: [
     // Part 1. Introduction.
     TitleSlide,
