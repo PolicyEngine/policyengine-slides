@@ -650,10 +650,12 @@ export function ArchitectureSlide() {
 
 // Thibault's review of the published code (September 2026) and our check of
 // it, from the write-up in docs/published_model_review.md. `finding` is the
-// review's own wording for the point (entries H1, R1 and V2, shortened only
-// at a semicolon), not our paraphrase; `check` is from each entry's "Why";
-// all three verdicts there are "True but openly documented". He is in the
-// room: the wording credits his work.
+// write-up's heading for the point (entries H1, R1 and V2; R1 shortened at
+// its semicolon), in place of a paraphrase of ours; `check` is from each
+// entry's "Why"; all three verdicts there are "True but openly documented".
+// The card titles (`point`) are his three headline points as the speaker
+// notes record them; they are not in the write-up. He is in the room: the
+// wording credits his work.
 const headlinePoints: {
   icon: Icon;
   point: string;
@@ -695,7 +697,7 @@ export function ThibReviewSlide() {
       scale={1.08}
     >
       <div className={styles.stack}>
-        <Head icon={IconListCheck}>Three headline points, as the review lists them</Head>
+        <Head icon={IconListCheck}>Three headline points, as our write-up records them</Head>
         <div className={`${styles.cardGrid} ${styles.cols3} ${styles.verdictGrid}`}>
           {headlinePoints.map(({ icon: PointIcon, ...row }) => (
             <div

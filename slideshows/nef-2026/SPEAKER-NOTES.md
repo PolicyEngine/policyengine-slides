@@ -160,9 +160,11 @@ Sources: the OBR's model code (`obr_model_code_october_2025.txt`); `module-links
 
 Steps 1 to 3 bring in his three headline points one at a time, each with our
 check and its result; step 4 adds three errors in the published files, also
-from his list, smaller, below. The line under each card title is the review's
-own wording for the point, as `docs/published_model_review.md` records it
-(H1, R1, V2), not our paraphrase.
+from his list, smaller, below. The line under each card title is the heading
+`docs/published_model_review.md` gives the point (H1, R1, V2), in place of a
+paraphrase of ours; the header says "as our write-up records them". The card
+titles are our short names for his three headline points and are not in the
+write-up: ask him to correct them if they don't match.
 
 - Thibault is in the room: invite him to introduce his findings, and to
   correct anything on the slide. It's his work.
@@ -274,8 +276,7 @@ Two mirrored columns: a heading, two stats and three lines each. Step 1 is the
 anchored column, step 2 the free-running one. "Average error" is the mean
 absolute percentage error (MAPE) over 2025Q1–2027Q4. The subtitle says what
 both columns are measured against: the OBR's October 2026 EFO path over those
-quarters (the EFO's outturn quarters to 2026Q2, then its forecast), not
-outturn data. It also carries the warning: the free-running gap is this
+quarters, not outturn data. It also carries the warning: the free-running gap is this
 emulator's, not an OBR forecast error.
 
 Left, anchored:
@@ -377,7 +378,7 @@ Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through chan
 Everything on this slide is the OBR model alone, with HMRC's costing as the
 input: the chart is not a PolicyEngine result and shows no distribution. It is
 the one channel with real behaviour: consumption is the only behavioural
-response here. The two PolicyEngine lines sit apart, under "With
+response here. The PolicyEngine line sits apart, under "With
 PolicyEngine".
 
 The chart is a time series, not a distribution: UK GDP below baseline for the

@@ -125,7 +125,8 @@ What the deck deliberately does not claim:
 - no poverty figures: the platform's population tool returns decile changes and
   winners and losers, not poverty rates (slide 19 names poverty as something
   the microsimulation itself reports, with no number);
-- nothing in Thibault's name beyond the review's own wording: the three
-  headline points on slide 6 use the text of
-  `docs/published_model_review.md` (H1, R1, V2), and the deck attributes no
-  views or plans to him.
+- no views or plans attributed to Thibault. On slide 6 the line under each
+  headline point is the heading `docs/published_model_review.md` gives it
+  (H1, R1, V2). The three card titles are our short names for his headline
+  points; they are not from that write-up and have not been checked with
+  him.
