@@ -504,7 +504,7 @@ export const gaps = [
     items: [
       "No values for medical insurance in the FRS",
       "Loans and accommodation not asked separately in the FRS",
-      "SPI benefits are one combined amount",
+      "SPI: benefits and expenses in one amount",
     ],
   },
   {
@@ -520,7 +520,7 @@ export const gaps = [
     items: [
       "Company cars against HMRC by income and region",
       "Static car score (behaviour held fixed) expected below the Budget's £310m",
-      "Static pension cap score expected below the Treasury's costing",
+      "Static pension cap score expected below the official costing",
     ],
   },
 ];
