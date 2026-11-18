@@ -273,6 +273,12 @@ export function AgendaSlide() {
   );
 }
 
+const layerStatus = {
+  built: { label: "Built", className: styles.chipGood },
+  partial: { label: "Partly built", className: styles.chipMid },
+  gap: { label: "Left to users", className: styles.chipBad },
+} as const;
+
 export function PublishedVsBuiltSlide() {
   return (
     <Frame
