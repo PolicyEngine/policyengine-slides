@@ -230,10 +230,11 @@ Each stage carries a status for company cars. What each rests on:
   been run, so "expected below" is an expectation, from the two checks in the
   notes to slide 12: the car-rate score about 30% to 45% short of the Budget's
   £310m, and the pension cap about £1.8bn in 2030 against the official
-  £5,350m and £2,920m. Don't put the gap down to behaviour: official costings
-  include behavioural responses, which usually lower a yield, so a static
-  score below them points to data coverage and timing, which the project
-  would have to explain.
+  £5,350m and £2,920m. Don't put the gap down to behaviour. For cars the
+  Microcosm note puts it down to the size of the base: HMRC's 2024-25 taxable
+  value implies about half the list-price base that the costing's NICs line
+  implies. For the pension cap the cause is open, and the project would have
+  to explain it.
 - Class 1A results would be revenue only: the model assigns Class 1A to no
   household (it stays with employers; policyengine-uk issue #2752).
 
