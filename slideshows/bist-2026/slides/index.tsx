@@ -922,9 +922,9 @@ export function TargetsSlide() {
   return (
     <Frame
       section="what"
-      title="What the weights are fitted to: 1,534 official figures"
+      title="What the weights are fitted to: official figures by topic"
       scale={0.9}
-      subtitle="Every target of the 15 November build, by topic, with the share the weights reproduce within 10%"
+      subtitle="All 1,534 targets of the 15 November build, with the share the weights reproduce within 10%"
     >
       <TargetTable />
     </Frame>

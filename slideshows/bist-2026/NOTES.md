@@ -455,7 +455,7 @@ slides, not build steps.
   [UK national solve
   settings](https://github.com/PolicyEngine/microcosm/blob/429d7a0de624332d3fc8a221d72bd8cb9f7211fe/packages/microcosm-build/src/microcosm/build/uk_runtime/national_doctrine.py).
 
-### 10. What the weights are fitted to: 1,534 official figures
+### 10. What the weights are fitted to: official figures by topic
 
 - Every target of the certified build, one row per topic: where it binds,
   who publishes it, how many targets there are and the share the fitted

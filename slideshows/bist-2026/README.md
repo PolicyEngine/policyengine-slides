@@ -36,7 +36,7 @@ slide, is in [NOTES.md](NOTES.md).
 7. How the rules are encoded
 8. Microcosm UK 2024–25: how the household file is built
 9. Calibration: weights fitted to official statistics
-10. What the weights are fitted to: 1,534 official figures (a table by topic)
+10. What the weights are fitted to: official figures by topic (a table by topic)
 11. What the weights are fitted to: the live calibration dashboard (live page)
 
 3 · What we have already
