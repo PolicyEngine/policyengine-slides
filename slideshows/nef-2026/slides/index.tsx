@@ -3,7 +3,6 @@ import {
   IconAdjustmentsHorizontal,
   IconAlertTriangle,
   IconAnchor,
-  IconArrowDown,
   IconArrowNarrowRight,
   IconArrowsShuffle,
   IconBolt,
@@ -53,7 +52,6 @@ import {
   IconReceiptTax,
   IconRefresh,
   IconRobot,
-  IconRuler2,
   IconScale,
   IconSearch,
   IconShip,
@@ -61,7 +59,6 @@ import {
   IconStack2,
   IconTag,
   IconTarget,
-  IconTargetArrow,
   IconTerminal2,
   IconToggleRight,
   IconTool,
@@ -90,7 +87,6 @@ import {
   claudeFlow,
   corporationTax,
   equationExamples,
-  forecastRecord,
   freeRunning,
   incomeTax,
   judgementStandIns,
@@ -445,7 +441,6 @@ function SectionSlide({ part }: { part: number }) {
 }
 
 export const ModelSectionSlide = () => <SectionSlide part={0} />;
-export const FitSectionSlide = () => <SectionSlide part={1} />;
 export const ShocksSectionSlide = () => <SectionSlide part={2} />;
 export const PlatformSectionSlide = () => <SectionSlide part={3} />;
 export const TogetherSectionSlide = () => <SectionSlide part={4} />;
@@ -873,8 +868,8 @@ export function MultipliersSlide() {
 }
 
 // These slides point at each other; the numbers are their places in config.ts.
-const incomeTaxSlideNumber = 14;
-const microMacroSlideNumber = 23;
+const incomeTaxSlideNumber = 13;
+const microMacroSlideNumber = 21;
 
 // Where the income-tax shock comes from and how it moves: the model has no
 // tax calculator, so the revenue is an input (demo.md row 2, l.48 and l.53).
@@ -1194,49 +1189,6 @@ export function LiveSiteSlide() {
             icon: liveViewIcons[view.label] ?? IconPoint,
           }))}
         />
-      </div>
-    </Frame>
-  );
-}
-
-export function ForecastRecordSlide() {
-  return (
-    <Frame
-      part={3}
-      title="A scored forecast record"
-      subtitle="Committed before the data arrive, then scored against no change"
-      scale={1.2}
-    >
-      <div className={styles.stack}>
-        <div className={`${styles.cardGrid} ${styles.cols4}`}>
-          <Stat
-            icon={IconListCheck}
-            value={forecastRecord.scored}
-            label="Forecasts scored"
-            note={`${forecastRecord.live} live, ${forecastRecord.retroactive} retroactive`}
-          />
-          <Stat
-            icon={IconTargetArrow}
-            value={`${forecastRecord.liveIn68} of ${forecastRecord.live}`}
-            label="Live, inside 68% band"
-          />
-          <Stat
-            icon={IconRuler2}
-            value={forecastRecord.averageMiss}
-            label="Average miss"
-            note={`No change: ${forecastRecord.noChangeMiss}`}
-          />
-          <Stat
-            icon={IconArrowDown}
-            value={forecastRecord.bias}
-            label="Bias"
-            note={`Ran low on ${forecastRecord.ranLow}`}
-            amber
-          />
-        </div>
-        <Note icon={IconInfoCircle}>
-          Too few to show skill. All from the BoE SVAR, not the OBR emulator
-        </Note>
       </div>
     </Frame>
   );

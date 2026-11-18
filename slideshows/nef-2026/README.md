@@ -1,8 +1,8 @@
 # New Economics Foundation meeting, November 2026
 
-27 slides at `/slides/nef-2026`, for a meeting with the New Economics
+25 slides at `/slides/nef-2026`, for a meeting with the New Economics
 Foundation (NEF) on working together on the OBR macroeconomic model. The deck is
-public. Slide 20 embeds the in-development macro site
+public. Slide 19 embeds the in-development macro site
 (policyengine-macro.vercel.app) live; the site allows this deck's origins to
 frame it (PolicyEngine/macro#276). The exact meeting date isn't fixed, so `config.ts` uses
 `2026-11-01`, which renders as "November 2026"; change it, and the footer,
@@ -15,14 +15,14 @@ and every slide's header carries a tracker of the five parts:
    built, with the inputs; the model's 12 modules and how they connect; how
    it runs, with three example equations; Thibault's review checked against
    the code; how to take it to the OBR
-2. How well it fits (slides 10–11): anchored and free-running, on one slide
-3. Policy shocks and limits (slides 12–17): results against the OBR's
+2. How well it fits (slide 10): anchored and free-running, on one slide, with no divider
+3. Policy shocks and limits (slides 11–16): results against the OBR's
    published multipliers, income tax, investment, Bank Rate, and the known
    limits and whose they are
-4. The macro platform (slides 18–23): the seven models, the site live, the
-   forecast record, using it from Claude, and one reform taken from the
+4. The macro platform (slides 17–21): the seven models, the site live, using
+   it from Claude, and one reform taken from the
    microsimulation to GDP
-5. Working together (slides 24–26): collaboration areas and questions for NEF
+5. Working together (slides 22–24): collaboration areas and questions for NEF
 
 It follows PolicyEngine's July 2025 deck for NEF, which covered the
 tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in the private
@@ -84,8 +84,7 @@ Checked on 18 November 2026:
   the listing's groups map to the 12 modules.
 - `PolicyEngine/macro` main `2e5dffe7a2b35d189c8df60ff2012abbdb675367`, after
   #275: the README model table, the model comparison
-  (`models/index.html`), the Use page (`connect/index.html`), the forecast record
-  (`forecasts/scorecard.json` and `forecasts/index.html`), and the tool counts
+  (`models/index.html`), the Use page (`connect/index.html`), and the tool counts
   (28 `@mcp.tool` functions in `mcp_server.py`, 27 `@main.command` functions
   in `cli.py`; the README's own count of 26 tools is stale).
 
@@ -99,7 +98,6 @@ What the deck deliberately does not claim:
   anchored error (0.44%) is not forecast skill;
 - the held-add-factor forecast fit (0.35% GDP) is left off the slides: the
   forecasting framework calls its GDP line "close to circular";
-- the forecast record contains no OBR-emulator forecasts;
 - no DEFINE-UK results or multiplier: which one to headline is an open
   decision;
 - no result numbers on the Claude slide: it shows the steps and the tools;

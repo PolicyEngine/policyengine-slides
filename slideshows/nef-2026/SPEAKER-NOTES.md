@@ -208,11 +208,7 @@ Sources: published-model review.
 
 Sources: published-model review; OBR model README.
 
-## 10. Part 2: how well it fits
-
-Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
-
-## 11. How well it fits: two very different numbers
+## 10. How well it fits: two very different numbers
 
 Left, anchored:
 
@@ -254,11 +250,11 @@ The full scorecard: real GDP 4.05%, consumption 6.92%, business investment 7.34%
 
 Sources: calibration scorecard; OBR model README; site_figures.json; macro platform README.
 
-## 12. Part 3: policy shocks and limits
+## 11. Part 3: policy shocks and limits
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 13. Shocks against the OBR's multipliers
+## 12. Shocks against the OBR's multipliers
 
 What is simulated, from the shocks table in `docs/demo.md` (rows 1, 2, 4, 4b
 and 7). Every shock is sustained every quarter from 2025Q1 for 12 quarters and
@@ -294,7 +290,7 @@ tapering.
 
 Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through changelog (#70).
 
-## 14. Income tax
+## 13. Income tax
 
 +1p on the basic rate, £1,725m a quarter (HMRC ready reckoner, June 2025,
 2026-27 column, £6.9bn a year divided by four), sustained from 2025Q1. Real
@@ -318,12 +314,12 @@ Where the shock comes from, which is the flow across the top of the slide:
 
 The OBR model does not return decile impacts: it is an aggregate model with
 one consumption equation and no household split. Deciles come from
-PolicyEngine's microsimulation, run alongside (slide 23). The PolicyEngine
+PolicyEngine's microsimulation, run alongside (slide 21). The PolicyEngine
 costing on this slide only changes the size of the input.
 
 Sources: demo shocks; demo_shocks.json; OBR model README (l.33).
 
-## 15. Investment: off by default, on with one switch
+## 14. Investment: off by default, on with one switch
 
 In the OBR's file total investment is an input (`IF` has no live equation),
 so corporation tax and public investment do nothing to GDP by default, and
@@ -347,7 +343,7 @@ and "about £1 of GDP per £1, with no fade" is identity pass-through at about
 
 Sources: demo shocks (rows 5 and 7); OBR model README (l.31, l.34).
 
-## 16. Bank Rate
+## 15. Bank Rate
 
 +1pp for four quarters, peak at quarter 4: −0.057% of GDP in the default run
 (mortgage rate held, a lower bound), −0.149% with `monetary_conditioning=True`
@@ -365,7 +361,7 @@ England range is shown as one bar from −0.2% to −0.35%.
 
 Sources: demo shocks (rows 6 and 6b); monetary conditioning; OBR model README (l.35).
 
-## 17. Known limits, and whose they are
+## 16. Known limits, and whose they are
 
 The slide separates limits we inherit from the OBR's published model from
 limits of our replication.
@@ -402,11 +398,11 @@ Seasonally adjusting the components is the follow-up.
 
 Sources: OBR model README; site_figures.json; TYWHH changelog (#71).
 
-## 18. Part 4: the macro platform
+## 17. Part 4: the macro platform
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 19. The macro platform
+## 18. The macro platform
 
 Not yet launched. Seven public models (`site_contract.py`'s list), each with
 its own repo. Results from different model classes are complementary, not
@@ -418,7 +414,7 @@ DEFINE-UK is on the table as one of the seven; its results are scenario deltas f
 
 Sources: model comparison page; macro platform README.
 
-## 20. The platform, live
+## 19. The platform, live
 
 - Click the frame, then use the buttons: Home, Models, Compare, OBR model,
   OBR validation, Forecasts. Expand fills the screen; New tab opens the site.
@@ -450,18 +446,7 @@ published closure in a demand run (no quarter converges).
 
 Sources: the live site; demo shocks; Use page; `integration/pyproject.toml` (hosted pin).
 
-## 21. A scored forecast record
-
-Rounds are committed to git before the outturn exists and are append-only.
-Nine forecasts of five outturns scored (5 live, 4 retroactive); 4 of 5 live
-forecasts inside the 68% band; average miss 0.34pp against 0.47pp for no
-change; bias −0.33pp, low on 8 of 9. All from the BoE SVAR and its
-unemployment satellite. The page itself says: too few to show skill. The SVAR
-has no forecast skill against a drifting random walk in its own evaluation.
-
-Sources: forecast track record; scorecard.json; forecast archive rules.
-
-## 22. Use it from Claude
+## 20. Use it from Claude
 
 The slide shows the three steps someone takes in Claude; the details are from
 the site's Use page and `mcp_server.py`.
@@ -493,14 +478,14 @@ The strip under the three steps lists the other ways in: the MCP server, the CLI
 
 Sources: Use page; `mcp_server.py`; `cli.py`; macro platform README.
 
-## 23. From a microsimulation reform to GDP
+## 21. From a microsimulation reform to GDP
 
 One worked example, the basic rate +1p, giving two answers. Households: the
 decile changes, winners and losers and poverty come straight from the
 PolicyEngine-UK microsimulation and stay there; the OBR model has no
 households. Economy: the microsimulation's static cost (£6.55bn a year) goes
 through the bridge into the OBR model, and GDP, consumption and investment
-come out. The GDP path on slide 14 is the same reform with HMRC's costing
+come out. The GDP path on slide 13 is the same reform with HMRC's costing
 (£1,725m a quarter) as the input; don't mix the two bases.
 
 `score_reform(model="obr")`: a PolicyEngine-UK reform is costed per year with
@@ -516,11 +501,11 @@ post-behavioural and administrative.
 
 Sources: `mcp_server.py`; `capabilities.py`.
 
-## 24. Part 5: working together
+## 22. Part 5: working together
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 25. Where we could work together
+## 23. Where we could work together
 
 Options to discuss, not commitments. Each maps to something open in the repo:
 the closure choice and a spending shock that moves borrowing; the investment
@@ -529,7 +514,7 @@ listing's open problems (G6, G7, N5); anchoring participation; joint write-ups.
 
 Sources: OBR model README; published-model review; DEFINE-UK model page.
 
-## 26. Questions for NEF
+## 24. Questions for NEF
 
 Listen more than talk here.
 
@@ -542,6 +527,6 @@ and dates in the room:
 3. A shared review of the open equation and closure issues on GitHub.
 4. A check-in date to review results and a possible write-up.
 
-## 27. Thank you
+## 25. Thank you
 
 Contact on the slide: vahid@policyengine.org.
