@@ -1,6 +1,7 @@
 /* NEF deck: every colour comes from a design token (app/globals.css).
    One style each for lists, cards, stats, tables, notes and chips. Sizes in
-   the slide body are in em of .body, which scales with the viewport height,
+   the slide body are in em of .body, which scales with the viewport (the
+   smaller of its height and width),
    so a slide looks the same at 1920x1080 and 1440x810. */
 
 /* Leave space for the viewer's controls beside the footer text. */
@@ -13,13 +14,12 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
-  font-size: calc(clamp(11px, 1.6vh, 22px) * var(--scale, 1));
+  font-size: calc(clamp(11px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1));
 }
 
 /* Centre the body below the title, clear of the sources line. */
 .centerBody {
   justify-content: center;
-  padding-bottom: 2rem;
 }
 
 .stack {
@@ -42,6 +42,15 @@
 .iconList.twoCol {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 3.5em;
+}
+
+.iconList.threeCol {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2.5em;
+}
+
+.iconItem.muted {
+  opacity: 0.35;
 }
 
 .iconItem {
@@ -351,30 +360,6 @@
   color: var(--color-gray-400);
 }
 
-/* Equation examples: the listing line above the Python it becomes. */
-.eqLine {
-  display: grid;
-  grid-template-columns: 4.6em minmax(0, 1fr);
-  align-items: baseline;
-  font-family: var(--font-mono);
-  font-size: 0.82em;
-  line-height: 1.55;
-  color: var(--pe-dark);
-}
-
-.eqLine span {
-  color: var(--color-gray-500);
-  font-family: var(--font-sans);
-  font-size: 0.85em;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.eqPython {
-  color: var(--pe-teal-dark);
-}
-
 /* Model modules. */
 .module {
   display: grid;
@@ -437,13 +422,19 @@
 }
 
 .dotLabel p {
-  color: var(--color-gray-500);
+  color: var(--color-gray-600);
   font-size: 1em;
+  line-height: 1.25;
+}
+
+.dotLabel p + p {
+  color: var(--color-gray-500);
+  font-size: 0.9em;
 }
 
 .track {
   position: relative;
-  height: 3.3em;
+  height: 4em;
   border-bottom: 1px solid var(--color-gray-200);
 }
 
@@ -470,6 +461,21 @@
   font-size: 0.75em;
   font-weight: 700;
   transform: translate(-50%, -50%);
+}
+
+/* Three dots that would overlap are stacked, so each number can be read. */
+.dotSmall {
+  height: 1.75em;
+  width: 1.75em;
+  font-size: 0.68em;
+}
+
+.dotUp {
+  transform: translate(-50%, -160%);
+}
+
+.dotDown {
+  transform: translate(-50%, 60%);
 }
 
 .dotQ1 {
@@ -568,7 +574,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
   gap: 0.6em;
-  height: 10.5em;
+  height: 8.5em;
   border-top: 2px solid var(--color-gray-300);
 }
 
@@ -620,6 +626,18 @@
   font-size: 1.3em;
   font-weight: 600;
   line-height: 1.25;
+}
+
+.hbarLabel small {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: 0.75em;
+  font-weight: 400;
+}
+
+.hbar.hbarRange {
+  border-radius: 0.35em;
+  background: var(--color-gray-400);
 }
 
 .hbarLabel svg {
@@ -685,4 +703,186 @@
 
 .contact:hover {
   background: color-mix(in srgb, var(--text-inverse) 20%, transparent);
+}
+
+/* Where the slide sits in the talk (in the header, so in rem). */
+.tracker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-gray-400);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tracker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.2rem;
+}
+
+.tracker .trackerPast {
+  color: var(--color-gray-600);
+}
+
+.tracker .trackerNow {
+  border-bottom-color: var(--pe-teal);
+  color: var(--pe-teal);
+}
+
+/* The agenda on a section slide. */
+.sectionList {
+  font-size: calc(clamp(11px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1));
+}
+
+.sectionList svg {
+  color: var(--pe-teal);
+}
+
+/* Question and scenario, at the top of a results slide. */
+.ask {
+  display: grid;
+  gap: 0.35em;
+  color: var(--color-gray-700);
+  font-size: 1.2em;
+  line-height: 1.35;
+}
+
+.ask p {
+  display: grid;
+  grid-template-columns: 1.4em 5.2em minmax(0, 1fr);
+  align-items: start;
+  gap: 0.45em;
+}
+
+.ask svg {
+  margin-top: 0.05em;
+  height: 1.4em;
+  width: 1.4em;
+}
+
+.ask b {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+/* Two or three big numbers inside a card. */
+.inlineStats {
+  margin-top: 0.6em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 2.2em;
+  color: var(--color-gray-600);
+  font-size: 1.1em;
+}
+
+.inlineStats b {
+  display: block;
+  color: var(--pe-teal);
+  font-size: 2.1em;
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Maths in a table cell. */
+.maths {
+  color: var(--pe-dark);
+  font-size: 0.95em;
+}
+
+/* Module network: SVG arrows under HTML nodes. */
+.network {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1000 / 270;
+}
+
+.network > svg {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.link {
+  stroke: var(--color-teal-400);
+}
+
+.linkCut {
+  stroke: var(--color-gray-400);
+  stroke-dasharray: 7 5;
+}
+
+.arrowHead path {
+  fill: var(--color-teal-400);
+}
+
+.arrowHeadCut path {
+  fill: var(--color-gray-400);
+}
+
+.linkBadge {
+  fill: var(--bg-card);
+  stroke: var(--color-gray-300);
+  stroke-width: 1;
+}
+
+.linkCount {
+  fill: var(--pe-dark);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.networkNode {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 0 0.7em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+  color: var(--pe-dark);
+  font-size: 1.05em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.networkNode svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+/* One source splitting into lanes. */
+.split {
+  display: grid;
+  grid-template-columns: 19em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6em;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 2em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6em;
+}
+
+.lane > svg {
+  height: 2em;
+  width: 2em;
+  color: var(--color-gray-400);
+}
+
+.lane .stack {
+  gap: 0.6em;
 }

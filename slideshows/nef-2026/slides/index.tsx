@@ -3,11 +3,8 @@ import {
   IconAdjustmentsHorizontal,
   IconAlertTriangle,
   IconAnchor,
-  IconAntennaBars1,
-  IconAntennaBars3,
-  IconAntennaBars5,
   IconArrowDown,
-  IconArrowsExchange,
+  IconArrowNarrowRight,
   IconArrowsShuffle,
   IconBolt,
   IconBook,
@@ -15,7 +12,6 @@ import {
   IconBrandPython,
   IconBriefcase,
   IconBuildingBank,
-  IconBuildingFactory2,
   IconBuildingSkyscraper,
   IconBulb,
   IconCalendarEvent,
@@ -32,9 +28,11 @@ import {
   IconCurrencyDollar,
   IconDatabase,
   IconEngine,
+  IconEqual,
   IconFileCode,
   IconFileText,
-  IconFlag,
+  IconFilter,
+  IconFlask,
   IconGitCompare,
   IconHelpCircle,
   IconHome,
@@ -42,6 +40,7 @@ import {
   IconInfoCircle,
   IconLayoutDashboard,
   IconLeaf,
+  IconLineDashed,
   IconListCheck,
   IconMail,
   IconMathFunction,
@@ -66,8 +65,6 @@ import {
   IconTerminal2,
   IconToggleRight,
   IconTool,
-  IconTrendingDown,
-  IconTrendingUp,
   IconUserOff,
   IconUsers,
   IconUsersGroup,
@@ -93,8 +90,8 @@ import {
   equationExamples,
   forecastRecord,
   freeRunning,
-  hostedObrPin,
   incomeTax,
+  judgementStandIns,
   layers,
   listing,
   liveSiteViews,
@@ -105,10 +102,9 @@ import {
   registryStatus,
   review,
   reviewFindings,
+  solver,
   sources,
-  thibRatings,
   unemploymentDrift,
-  type Source,
 } from "../content";
 import styles from "./deck.module.css";
 import embedStyles from "./embed.module.css";
@@ -116,12 +112,23 @@ import SiteEmbed from "./SiteEmbed";
 import {
   BankRateBars,
   IncomeTaxBars,
+  Maths,
+  ModuleNetwork,
   MultiplierPlot,
   ScorecardTable,
+  moduleIcons,
 } from "./figures";
 
-type Item = { icon: Icon; title: string; text?: ReactNode; aside?: ReactNode };
+type Item = {
+  icon: Icon;
+  title: string;
+  text?: ReactNode;
+  aside?: ReactNode;
+  muted?: boolean;
+};
 
+// The five parts. The agenda slide, the section slides and the tracker in
+// every slide's header all read this list.
 const agenda: Item[] = [
   {
     icon: IconBrandPython,
@@ -150,58 +157,38 @@ const agenda: Item[] = [
   },
 ];
 
-const sections = agenda.map(
-  (item, index) => `${index + 1} · ${item.title}`,
-);
-
-function ExternalLink({
-  children,
-  href,
-  className = "",
-}: {
-  children: ReactNode;
-  href: string;
-  className?: string;
-}) {
+/** Where the slide sits in the talk: past parts, this one, the ones to come. */
+function Tracker({ part }: { part: number }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`pointer-events-auto hover:underline ${className}`}
-    >
-      {children}
-    </a>
-  );
-}
-
-function SourceLine({ items }: { items: Source[] }) {
-  return (
-    <div className="absolute bottom-24 left-16 right-16 flex flex-wrap gap-x-5 gap-y-1 text-sm text-gray-500">
-      <span>Sources</span>
-      {items.map((item) => (
-        <ExternalLink key={item.href} href={item.href}>
-          {item.label}
-        </ExternalLink>
+    <nav className={styles.tracker} aria-label="Sections">
+      {agenda.map(({ icon: PartIcon, title }, index) => (
+        <span
+          key={title}
+          className={
+            index === part ? styles.trackerNow : index < part ? styles.trackerPast : ""
+          }
+        >
+          <PartIcon size={16} stroke={1.8} aria-hidden="true" />
+          {title}
+        </span>
       ))}
-    </div>
+    </nav>
   );
 }
 
 function Frame({
-  section,
+  part,
   title,
   subtitle,
   children,
-  references = [],
   center = true,
   scale = 1,
 }: {
-  section?: string;
+  /** Index of the slide's part in the agenda. */
+  part?: number;
   title: string;
   subtitle?: string;
   children: ReactNode;
-  references?: Source[];
   /** Centre the body in the space below the title. */
   center?: boolean;
   /** Enlarges a sparse slide's body; every component scales together. */
@@ -211,11 +198,7 @@ function Frame({
     <Slide className={styles.deck}>
       <div className="flex h-full flex-col">
         <SlideHeader>
-          {section && (
-            <p className="mb-2 text-base font-semibold uppercase tracking-wide text-pe-teal">
-              {section}
-            </p>
-          )}
+          {part !== undefined && <Tracker part={part} />}
           <SlideTitle>{title}</SlideTitle>
           {subtitle && (
             <p className="mt-3 text-xl leading-relaxed text-gray-600">
@@ -230,21 +213,27 @@ function Frame({
           {children}
         </div>
       </div>
-      {references.length > 0 && <SourceLine items={references} />}
     </Slide>
   );
 }
 
-// The deck's components: one list, one card, one stat, one note, one strip.
-// Each takes an icon.
+// The deck's components: one list, one card, one stat, one note, one strip,
+// one table style. Each takes an icon.
 
-function IconList({ items, twoCol = false }: { items: Item[]; twoCol?: boolean }) {
+function IconList({
+  items,
+  columns = 1,
+}: {
+  items: Item[];
+  columns?: 1 | 2 | 3;
+}) {
+  const grid = columns === 3 ? styles.threeCol : columns === 2 ? styles.twoCol : "";
   return (
-    <div className={`${styles.iconList} ${twoCol ? styles.twoCol : ""}`}>
-      {items.map(({ icon: ItemIcon, title, text, aside }) => (
+    <div className={`${styles.iconList} ${grid}`}>
+      {items.map(({ icon: ItemIcon, title, text, aside, muted }) => (
         <div
           key={title}
-          className={`${styles.iconItem} ${aside ? styles.withAside : ""}`}
+          className={`${styles.iconItem} ${aside ? styles.withAside : ""} ${muted ? styles.muted : ""}`}
         >
           <ItemIcon stroke={1.8} aria-hidden="true" />
           <div>
@@ -317,6 +306,15 @@ function Note({ icon: NoteIcon, children }: { icon: Icon; children: ReactNode })
   );
 }
 
+function Head({ icon: HeadIcon, children }: { icon: Icon; children: ReactNode }) {
+  return (
+    <p className={styles.listHead}>
+      <HeadIcon stroke={1.8} aria-hidden="true" />
+      {children}
+    </p>
+  );
+}
+
 type StripItem = { icon: Icon; label: string; text?: ReactNode };
 
 function Strip({ items }: { items: StripItem[] }) {
@@ -329,6 +327,24 @@ function Strip({ items }: { items: StripItem[] }) {
           {text}
         </span>
       ))}
+    </div>
+  );
+}
+
+/** Opens a results slide: the question, and exactly what was simulated. */
+function Ask({ question, scenario }: { question: string; scenario: string }) {
+  return (
+    <div className={styles.ask}>
+      <p>
+        <IconHelpCircle stroke={1.8} aria-hidden="true" />
+        <b>Question</b>
+        <span>{question}</span>
+      </p>
+      <p>
+        <IconFlask stroke={1.8} aria-hidden="true" />
+        <b>Scenario</b>
+        <span>{scenario}</span>
+      </p>
     </div>
   );
 }
@@ -367,6 +383,10 @@ function RowLabel({
   );
 }
 
+// The baseline every shock is scored against (model README, "Reform
+// baseline": run_reform scores around the baseline anchored to the EFO).
+const baseline = `shocked run minus the baseline anchored to the ${listing.efo}`;
+
 // ---------------------------------------------------------------------------
 // Opening
 
@@ -392,22 +412,57 @@ export function AgendaSlide() {
   );
 }
 
+/** Opens a part: its number and title, and the agenda with this part lit. */
+function SectionSlide({ part }: { part: number }) {
+  const current = agenda[part];
+  return (
+    <Slide className={styles.deck}>
+      <div className="grid h-full grid-cols-[1.15fr_1fr] items-center gap-16">
+        <div>
+          <p className="mb-3 text-base font-bold uppercase tracking-[0.16em] text-pe-teal">
+            Part {part + 1} of {agenda.length}
+          </p>
+          <h1 className="font-display text-6xl font-bold leading-tight tracking-tight text-pe-dark">
+            {current.title}
+          </h1>
+          <div className="accent-bar mt-6 w-32" />
+          <p className="mt-6 text-2xl leading-snug text-gray-600">{current.text}</p>
+        </div>
+        <div className={styles.sectionList} style={{ "--scale": 1.15 } as CSSProperties}>
+          <IconList
+            items={agenda.map((item, index) => ({
+              icon: item.icon,
+              title: item.title,
+              muted: index !== part,
+            }))}
+          />
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+export const ModelSectionSlide = () => <SectionSlide part={0} />;
+export const FitSectionSlide = () => <SectionSlide part={1} />;
+export const ShocksSectionSlide = () => <SectionSlide part={2} />;
+export const PlatformSectionSlide = () => <SectionSlide part={3} />;
+export const TogetherSectionSlide = () => <SectionSlide part={4} />;
+
+// ---------------------------------------------------------------------------
+// Part 1: the OBR model in Python
+
 const layerStatus = {
   built: { label: "Built", className: styles.chipGood },
   partial: { label: "Partly built", className: styles.chipMid },
-  gap: { label: "Left to users", className: styles.chipBad },
+  standin: { label: "Stand-ins, labelled", className: styles.chipMid },
 } as const;
 
 const layerIcons: Icon[] = [IconMathFunction, IconEngine, IconBulb];
+const standInIcons: Icon[] = [IconAnchor, IconToggleRight, IconAdjustmentsHorizontal];
 
 export function PublishedVsBuiltSlide() {
   return (
-    <Frame
-      section={sections[0]}
-      title="What the OBR publishes, and what we built"
-      scale={1.35}
-      references={[sources.roadmap, sources.obrReadme]}
-    >
+    <Frame part={0} title="What the OBR publishes, and what we built" scale={1.12}>
       <div className={styles.stack}>
         <table className={styles.table}>
           <thead>
@@ -435,37 +490,57 @@ export function PublishedVsBuiltSlide() {
             ))}
           </tbody>
         </table>
-        <Note icon={IconInfoCircle}>Same equations, not the OBR&apos;s judgements</Note>
+        <Strip
+          items={[
+            { icon: IconBulb, label: "Stand-ins" },
+            ...judgementStandIns.map((item, index) => ({
+              icon: standInIcons[index] ?? IconPoint,
+              label: item.title,
+              text: item.text,
+            })),
+          ]}
+        />
+        <div className={`${styles.cardGrid} ${styles.cols4}`}>
+          <Stat
+            icon={IconMathFunction}
+            value={listing.equations}
+            label="Equations"
+            note={`EViews listing, ${listing.listingDate}`}
+          />
+          <Stat
+            icon={IconCalendarEvent}
+            value={listing.efoShort}
+            label="EFO baseline"
+            note={`Published ${listing.efoPublished}`}
+          />
+          <Stat
+            icon={IconDatabase}
+            value={listing.onsSeries}
+            label="ONS series"
+            note={`${listing.missingWithOnsCodes} of ${listing.missingEndogenous} missing variables had ONS codes`}
+          />
+          <Stat
+            icon={IconAlertTriangle}
+            value={listing.droppedEquations}
+            label="Equations dropped"
+            note="In some quarter: no input data"
+            amber
+          />
+        </div>
       </div>
     </Frame>
   );
 }
-
-const moduleIcons: Record<string, Icon> = {
-  "GDP and output": IconChartLine,
-  Consumption: IconShoppingCart,
-  "Investment and inventories": IconBuildingFactory2,
-  "Labour market": IconBriefcase,
-  Exports: IconShip,
-  Imports: IconArrowsExchange,
-  "Balance of payments": IconWorld,
-  "North Sea oil": IconEngine,
-  "Prices and wages": IconTag,
-  "Income accounts": IconWallet,
-  "Public sector": IconBuildingBank,
-  "Finance and balance sheets": IconScale,
-};
 
 // The model's modules, from the listing's own section headers. Counts and
 // the mapping from groups to modules are in content.ts.
 export function ModulesSlide() {
   return (
     <Frame
-      section={sections[0]}
+      part={0}
       title="The model's modules"
-      scale={1.05}
       subtitle={`${listing.equations} equations in ${modelModules.length} modules, from the listing's own sections`}
-      references={[sources.listing, sources.review]}
+      scale={1.05}
     >
       <div className={styles.stack}>
         <div className={`${styles.cardGrid} ${styles.cols4}`}>
@@ -502,45 +577,23 @@ export function ModulesSlide() {
   );
 }
 
-export function InputsSlide() {
+// Links counted from the listing (module-links.py, module-links.json).
+export function ModuleLinksSlide() {
   return (
-    <Frame
-      section={sections[0]}
-      title="The inputs"
-      scale={1.15}
-      references={[sources.obrReadme, sources.forecasting]}
-    >
+    <Frame part={0} title="How the modules connect">
       <div className={styles.stack}>
-        <div className={`${styles.cardGrid} ${styles.cols4}`}>
-          <Stat
-            icon={IconMathFunction}
-            value={listing.equations}
-            label="Equations"
-            note={`EViews listing, ${listing.listingDate}`}
-          />
-          <Stat
-            icon={IconCalendarEvent}
-            value={listing.efoShort}
-            label="EFO baseline"
-            note={`Published ${listing.efoPublished}`}
-          />
-          <Stat
-            icon={IconDatabase}
-            value={listing.onsSeries}
-            label="ONS series"
-            note={`Cover ${listing.missingWithOnsCodes} of ${listing.missingEndogenous} variables the EFO omits`}
-          />
-          <Stat
-            icon={IconAlertTriangle}
-            value={listing.droppedEquations}
-            label="Equations dropped"
-            note="In some quarter: no input data"
-            amber
-          />
-        </div>
-        <Note icon={IconInfoCircle}>
-          Unpublished inputs are estimated or seeded, and labelled
-        </Note>
+        <ModuleNetwork />
+        <Strip
+          items={[
+            {
+              icon: IconArrowNarrowRight,
+              label: "Number",
+              text: "equations that use the other module's variables",
+            },
+            { icon: IconLineDashed, label: "Dashed", text: "doesn't reach GDP in the OBR's file" },
+            { icon: IconFilter, label: "Shown", text: "links of 6 or more, plus the demand loop" },
+          ]}
+        />
       </div>
     </Frame>
   );
@@ -558,18 +611,29 @@ const pipelineIcons: Icon[] = [
 
 export function ArchitectureSlide() {
   return (
-    <Frame
-      section={sections[0]}
-      title="How it runs"
-      scale={1.08}
-      references={[sources.listing, sources.transpiler, sources.obrReadme, sources.demo]}
-    >
+    <Frame part={0} title="How it runs" scale={1.05}>
       <div className={styles.stack}>
+        <Flow>
+          {pipeline.map((step, index) => (
+            <Card
+              key={step.title}
+              icon={pipelineIcons[index] ?? IconPoint}
+              title={step.title}
+              text={step.text}
+            />
+          ))}
+        </Flow>
+        <Strip
+          items={[
+            { icon: IconRefresh, label: "Gauss-Seidel", text: solver.what },
+            { icon: IconCircleCheck, label: "Why", text: solver.why },
+          ]}
+        />
         <table className={styles.table}>
           <thead>
             <tr>
               <th>Example equation</th>
-              <th>The OBR&apos;s listing, and the Python it becomes (… marks trimmed terms)</th>
+              <th>In the OBR&apos;s listing (… marks trimmed terms)</th>
             </tr>
           </thead>
           <tbody>
@@ -584,45 +648,21 @@ export function ArchitectureSlide() {
                   </RowLabel>
                 </td>
                 <td>
-                  <div className={styles.eqLine}>
-                    <span>EViews</span>
-                    {example.eviews}
-                  </div>
-                  <div className={`${styles.eqLine} ${styles.eqPython}`}>
-                    <span>Python</span>
-                    {example.python}
-                  </div>
+                  <Maths tex={example.tex} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <Flow>
-          {pipeline.map((step, index) => (
-            <Card
-              key={step.title}
-              icon={pipelineIcons[index] ?? IconPoint}
-              title={step.title}
-              text={step.text}
-            />
-          ))}
-        </Flow>
-        <Strip
-          items={[
-            { icon: IconBrandPython, label: "Python", text: "run_reform()" },
-            { icon: IconLayoutDashboard, label: "Dashboard", text: "scenarios, equations" },
-            { icon: IconRobot, label: "MCP tools", text: "for AI agents" },
-          ]}
-        />
       </div>
     </Frame>
   );
 }
 
 // Thibault's review of the published code (September 2026) and our check of
-// his three headline points. Sources: his email of 23 Sep, our replies of
-// 29 Sep and 8 Oct, and the write-up in docs/published_model_review.md
-// (entries H1, R1, V2). He is in the room: the wording credits his work.
+// it. Sources: his email of 23 Sep, our replies of 29 Sep and 8 Oct, and the
+// write-up in docs/published_model_review.md (entries H1, R1, V2 for the
+// headline points). He is in the room: the wording credits his work.
 const headlinePoints: {
   icon: Icon;
   point: string;
@@ -633,40 +673,52 @@ const headlinePoints: {
   {
     icon: IconUsers,
     point: "Distribution",
-    finding: "No channel: taxing high earners to pay low earners leaves consumption unchanged",
-    check: "Consumption uses aggregates only, with no household split",
+    finding: "Taxing high earners to pay low earners leaves consumption unchanged",
+    check: "Aggregates only: no household split",
     verdict: "Holds",
   },
   {
     icon: IconShip,
     point: "Total imports",
-    finding: "Fixed: more activity can't change the trade balance",
-    check: "Exports and imports are never solved for; sterling moves only prices",
+    finding: "More activity can't change the trade balance",
+    check: "Exports and imports are never solved for",
     verdict: "Holds",
   },
   {
     icon: IconCoins,
     point: "Public debt interest",
-    finding: "Fixed: more borrowing doesn't raise the interest bill",
-    check: "Gilt interest isn't in the code; household interest does follow Bank Rate",
+    finding: "More borrowing doesn't raise the interest bill",
+    check: "Gilt interest isn't in the code; household interest follows Bank Rate",
     verdict: "Holds, narrower",
   },
 ];
 
+const findingIcons: Icon[] = [IconUserOff, IconChartLine, IconPlusMinus];
+
 export function ThibReviewSlide() {
   return (
     <Frame
-      section={sections[0]}
-      title="Thibault's review: three headline points, checked"
-      scale={1.25}
-      subtitle={`September 2026: the OBR's published EViews code and variable list, ${review.points} points`}
-      references={[sources.review]}
+      part={0}
+      title="Thibault's review, checked against the code"
+      subtitle="September 2026: the OBR's published EViews code and variable list"
     >
       <div className={styles.stack}>
+        <Strip
+          items={[
+            { icon: IconListCheck, label: `${review.points} points` },
+            { icon: IconCircleCheck, label: `${review.accurate}`, text: "accurate" },
+            { icon: IconCircleHalf2, label: `${review.partly}`, text: "partly true" },
+            {
+              icon: IconHelpCircle,
+              label: `${review.uncheckable}`,
+              text: "can't be checked from the code",
+            },
+          ]}
+        />
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Point</th>
+              <th>Headline point</th>
               <th>Thibault&apos;s finding</th>
               <th>Our check, in the Python build</th>
               <th>Result</th>
@@ -687,12 +739,113 @@ export function ThibReviewSlide() {
             ))}
           </tbody>
         </table>
+        <Head icon={IconAlertTriangle}>Problems in the published files</Head>
+        <IconList
+          columns={3}
+          items={reviewFindings.slice(0, 3).map((finding, index) => ({
+            icon: findingIcons[index] ?? IconPoint,
+            title: finding.title,
+            text: `${finding.code} · ${finding.text}`,
+          }))}
+        />
+        <Note icon={IconChecks}>
+          We agree: as published, fiscal feedback can&apos;t reach output, because GDP is an
+          input
+        </Note>
+      </div>
+    </Frame>
+  );
+}
+
+export function ThibNextSlide() {
+  return (
+    <Frame part={0} title="How to take it to the OBR" scale={1.35}>
+      <IconList
+        items={[
+          {
+            icon: IconFileText,
+            title: "Documented isn't the same as fine",
+            text: "Thibault's view. About half the accurate points are in the OBR's own variable list; a documented gap is still a gap",
+          },
+          {
+            icon: IconTarget,
+            title: "The strongest point: it can't reproduce the OBR's own forecast",
+            text: "Our suggestion. The add-factors and calibration that make it work aren't published",
+          },
+          {
+            icon: IconBrandPython,
+            title: "Test any fix in the open build first",
+            text: "Thibault writes to the OBR; any proposed fix can be run in our Python version",
+          },
+        ]}
+      />
+    </Frame>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Part 2: fit
+
+export function FitSlide() {
+  return (
+    <Frame part={1} title="How well it fits: two very different numbers">
+      <div className={styles.stack}>
+        <div
+          className={`${styles.cardGrid} ${styles.cols2}`}
+          style={{ columnGap: "3em", alignItems: "start" }}
+        >
+          <div className={styles.stack}>
+            <Head icon={IconAnchor}>Anchored to the {listing.efo}</Head>
+            <div className={`${styles.cardGrid} ${styles.cols2}`}>
+              <Stat icon={IconChartLine} value={`${anchored.gdpMape}%`} label="GDP error" />
+              <Stat
+                icon={IconShoppingCart}
+                value={`${anchored.consMape}%`}
+                label="Consumption error"
+              />
+            </div>
+            <IconList
+              items={[
+                {
+                  icon: IconInfoCircle,
+                  title: "By construction",
+                  text: "Add-factors are EFO minus model",
+                },
+                {
+                  icon: IconGitCompare,
+                  title: "Reforms scored as deltas",
+                  text: "The add-factors cancel",
+                },
+                {
+                  icon: IconUserOff,
+                  title: "Unemployment isn't anchored",
+                  text: `${unemploymentDrift[0].model}% against the EFO's ${unemploymentDrift[0].efo}% by ${unemploymentDrift[0].quarter}`,
+                },
+              ]}
+            />
+          </div>
+          <div className={styles.stack}>
+            <Head icon={IconPlayerPlay}>Free-running, add-factors off</Head>
+            <Stat
+              icon={IconChartLine}
+              value={`${freeRunning.gdpMape}%`}
+              label="GDP error"
+              note={`${freeRunning.withinBand} of ${freeRunning.computed} computed variables within band`}
+              amber
+            />
+            <ScorecardTable variables={["Consumption", "Unemployment rate", "Company profits"]} />
+          </div>
+        </div>
+        <Note icon={IconInfoCircle}>
+          The free-running gap measures this emulator, not the OBR&apos;s forecast error
+        </Note>
         <Strip
           items={[
-            { icon: IconListCheck, label: `${review.points} points`, text: "rated by Thibault" },
-            { icon: IconAntennaBars5, label: `${thibRatings.high}`, text: "high" },
-            { icon: IconAntennaBars3, label: `${thibRatings.mid}`, text: "mid" },
-            { icon: IconAntennaBars1, label: `${thibRatings.low}`, text: "low" },
+            {
+              icon: IconTag,
+              label: "Our platform's label",
+              text: <>&ldquo;{registryStatus.split(";")[0]}&rdquo;</>,
+            },
           ]}
         />
       </div>
@@ -700,229 +853,63 @@ export function ThibReviewSlide() {
   );
 }
 
-const findingIcons: Icon[] = [IconUserOff, IconChartLine, IconPlusMinus, IconFlag];
-
-export function ReviewSlide() {
-  return (
-    <Frame
-      section={sections[0]}
-      title={`Thibault's ${review.points} points, checked line by line`}
-      scale={1.15}
-      subtitle="Each one against the OBR's published code and variable list"
-      references={[sources.review]}
-    >
-      <div className={styles.stack}>
-        <div className={`${styles.cardGrid} ${styles.cols3}`}>
-          <Stat
-            icon={IconCircleCheck}
-            value={review.accurate}
-            label="Accurate"
-            note={`${review.documented} documented, ${review.notFlagged} not flagged`}
-          />
-          <Stat icon={IconCircleHalf2} value={review.partly} label="Partly true" />
-          <Stat
-            icon={IconHelpCircle}
-            value={review.uncheckable}
-            label="Can't be checked"
-            note="Process, outside the code"
-          />
-        </div>
-        <p className={styles.listHead}>
-          <IconAlertTriangle stroke={1.8} aria-hidden="true" />
-          Problems in the published files
-        </p>
-        <IconList
-          twoCol
-          items={reviewFindings.map((finding, index) => ({
-            icon: findingIcons[index] ?? IconPoint,
-            title: finding.title,
-            text: `${finding.code} · ${finding.text}`,
-          }))}
-        />
-      </div>
-    </Frame>
-  );
-}
-
-export function ThibDifferSlide() {
-  return (
-    <Frame
-      section={sections[0]}
-      title="Where we agree, and one open question"
-      scale={1.35}
-      references={[sources.review, sources.obrReadme]}
-    >
-      <IconList
-        twoCol
-        items={[
-          {
-            icon: IconChecks,
-            title: "We agree",
-            text: "Fiscal feedback can't reach output: GDP is an input",
-          },
-          {
-            icon: IconAdjustmentsHorizontal,
-            title: "Two refinements",
-            text: "Bank Rate and real wages reach consumption; the current account feeds back",
-          },
-          {
-            icon: IconFileText,
-            title: "The open question",
-            text: "About half the accurate points are documented by the OBR",
-          },
-          {
-            icon: IconMessageCircle,
-            title: "Thibault's view",
-            text: "A documented gap is still a gap",
-          },
-          {
-            icon: IconTarget,
-            title: "Our suggestion",
-            text: "Lead with: the model can't reproduce the OBR's own forecast",
-          },
-          {
-            icon: IconBuildingBank,
-            title: "Taking it to the OBR",
-            text: "Any fix can be tested in the open build first",
-          },
-        ]}
-      />
-    </Frame>
-  );
-}
-
 // ---------------------------------------------------------------------------
-// Fit
-
-export function AnchoringSlide() {
-  return (
-    <Frame
-      section={sections[1]}
-      title="Anchored to the October 2026 EFO"
-      scale={1.5}
-      references={[sources.obrReadme, sources.siteFigures]}
-    >
-      <IconList
-        twoCol
-        items={[
-          {
-            icon: IconAnchor,
-            title: `GDP ${anchored.gdpMape}% MAPE, consumption ${anchored.consMape}%`,
-            text: `${anchored.window}, by construction`,
-          },
-          {
-            icon: IconGitCompare,
-            title: "Reforms scored as deltas",
-            text: "The add-factors cancel",
-          },
-          {
-            icon: IconBolt,
-            title: `Converges in ${anchored.convergedQuarters} of ${anchored.convergedQuarters} quarters`,
-            text: "Every demo solve, default closure",
-          },
-          {
-            icon: IconAlertTriangle,
-            title: "Unemployment is not anchored",
-            text: `${unemploymentDrift[0].model}% against the EFO's ${unemploymentDrift[0].efo}% by ${unemploymentDrift[0].quarter}`,
-          },
-        ]}
-      />
-    </Frame>
-  );
-}
-
-export function FitSlide() {
-  return (
-    <Frame
-      section={sections[1]}
-      title="Two numbers that are easy to misread"
-      scale={1.5}
-      references={[sources.scorecard, sources.obrReadme, sources.macroReadme]}
-    >
-      <div className={styles.stack}>
-        <div className={`${styles.cardGrid} ${styles.cols2}`}>
-          <Stat
-            icon={IconAnchor}
-            value={`${anchored.gdpMape}%`}
-            label="Anchored GDP error"
-            note="The anchoring works. Not forecast skill"
-          />
-          <Stat
-            icon={IconPlayerPlay}
-            value={`${freeRunning.gdpMape}%`}
-            label="Free-running GDP error, add-factors off"
-            note="This emulator's gap. Not an OBR forecast error"
-            amber
-          />
-        </div>
-        <Note icon={IconTag}>
-          Our platform&apos;s label: &ldquo;{registryStatus.split(";")[0]}&rdquo;
-        </Note>
-      </div>
-    </Frame>
-  );
-}
-
-export function ScorecardSlide() {
-  return (
-    <Frame
-      section={sections[1]}
-      title="Free-running scorecard"
-      scale={1.3}
-      subtitle={`${freeRunning.computed} of ${freeRunning.headline} headline variables computed; ${freeRunning.withinBand} of ${freeRunning.computed} within band`}
-      references={[sources.scorecard]}
-    >
-      <ScorecardTable />
-    </Frame>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Shocks and limits
+// Part 3: shocks and limits
 
 export function MultipliersSlide() {
   return (
-    <Frame
-      section={sections[2]}
-      title="Shocks against the OBR's multipliers"
-      scale={1.2}
-      subtitle="GDP per pound at quarters 1, 4 and 12; sustained shocks from 2025Q1"
-      references={[sources.demo, sources.demoResults, sources.passthrough]}
-    >
-      <MultiplierPlot />
+    <Frame part={2} title="Shocks against the OBR's multipliers">
+      <div className={styles.stack}>
+        <Ask
+          question="How much does GDP change per £1 of tax or spending, against the OBR's own multipliers?"
+          scenario={`Each change is sustained every quarter from 2025Q1 for 12 quarters; ${baseline}`}
+        />
+        <MultiplierPlot />
+      </div>
     </Frame>
   );
 }
+
+// These slides point at each other; the numbers are their places in config.ts.
+const incomeTaxSlideNumber = 14;
+const microMacroSlideNumber = 23;
 
 // Where the income-tax shock comes from and how it moves: the model has no
 // tax calculator, so the revenue is an input (demo.md row 2, l.48 and l.53).
 export function IncomeTaxSlide() {
   return (
     <Frame
-      section={sections[2]}
+      part={2}
       title="Income tax: the channel with real behaviour"
-      scale={1.12}
-      subtitle="Basic rate +1p, sustained from 2025Q1. Real GDP change, £m a quarter"
-      references={[sources.demo, sources.demoResults, sources.obrReadme]}
+      subtitle="An aggregate model: one consumption equation, no household split, no deciles"
     >
       <div className={styles.stack}>
+        <Ask
+          question="If the basic rate rises 1p, how much does GDP fall, and when?"
+          scenario={`${incomeTax.revenuePerQuarter} a quarter of income tax from 2025Q1 for 12 quarters; ${baseline}`}
+        />
         <Flow>
           <Card
             icon={IconReceiptTax}
             title="HMRC ready reckoner"
             text={`${incomeTax.revenuePerQuarter} a quarter, an input`}
           />
-          <Card icon={IconWallet} title="Household income falls" text="HHDI, l.654" />
-          <Card icon={IconShoppingCart} title="Consumption equation" text="The OBR's own, l.4" />
+          <Card
+            icon={IconWallet}
+            title="Household income falls"
+            text={`HHDI, l.${equationExamples[2].line}`}
+          />
+          <Card
+            icon={IconShoppingCart}
+            title="Consumption equation"
+            text={`The OBR's own, l.${equationExamples[0].line}`}
+          />
           <Card icon={IconChartLine} title="GDP" text="Solved here; fixed in the OBR's file" />
         </Flow>
-        <div className="grid grid-cols-[1fr_30em] items-center gap-[3em]">
+        <div className="grid grid-cols-[1fr_29em] items-center gap-[3em]">
           <div className={styles.stack}>
+            <Head icon={IconChartBar}>Real GDP change, £m a quarter</Head>
             <IncomeTaxBars />
-            <Note icon={IconUsersGroup}>
-              PolicyEngine microsim costing ({incomeTax.policyEngineRevenuePerQuarter}) gives
-              the same ratios
-            </Note>
           </div>
           <IconList
             items={[
@@ -944,63 +931,79 @@ export function IncomeTaxSlide() {
             ]}
           />
         </div>
+        <Strip
+          items={[
+            {
+              icon: IconEqual,
+              label: "Same result",
+              text: `with PolicyEngine's own costing (${incomeTax.policyEngineRevenuePerQuarter} a quarter) as the input: still aggregate`,
+            },
+            {
+              icon: IconArrowNarrowRight,
+              label: "Deciles",
+              text: `come from PolicyEngine's microsimulation, run alongside: slide ${microMacroSlideNumber}`,
+            },
+          ]}
+        />
       </div>
     </Frame>
   );
 }
 
-export function ClosuresSlide() {
+const pounds = (value: number) =>
+  `${value < 0 ? "−" : "+"}£${Math.abs(value).toLocaleString("en-GB")}m`;
+
+export function InvestmentSlide() {
   return (
-    <Frame
-      section={sections[2]}
-      title="Corporation tax and capital spending"
-      scale={1.15}
-      subtitle="Both need the opt-in investment closure, a stop-gap"
-      references={[sources.demo, sources.obrReadme]}
-    >
-      <div className={`${styles.cardGrid} ${styles.cols2}`} style={{ columnGap: "3em" }}>
-        <div className={styles.stack}>
-          <p className={styles.listHead}>
-            <IconBuildingSkyscraper stroke={1.8} aria-hidden="true" />
-            Corporation tax +5pp
-          </p>
-          <div className={`${styles.cardGrid} ${styles.cols2}`}>
-            <Stat
-              icon={IconTrendingDown}
-              value={`£${Math.abs(corporationTax.gdpQ4)}m`}
-              label="GDP fall, quarter 4"
-            />
-            <Stat
-              icon={IconTrendingDown}
-              value={`£${Math.abs(corporationTax.gdpQ12)}m`}
-              label="GDP fall, quarter 12"
-            />
-          </div>
-          <Note icon={IconInfoCircle}>
-            {corporationTax.plateauFraction} of the way to a {corporationTax.plateau} plateau.
-            No sourced OBR benchmark
-          </Note>
+    <Frame part={2} title="Investment: off by default, on with one switch">
+      <div className={styles.stack}>
+        <Ask
+          question="Does corporation tax or public investment move GDP in this model?"
+          scenario={`Each change is sustained from 2025Q1 for 12 quarters, with the investment switch on; ${baseline}`}
+        />
+        <Note icon={IconToggleRight}>
+          In the OBR&apos;s file total investment is an input, so these shocks do nothing. Our
+          opt-in switch turns on the listing&apos;s own commented-out investment identity (l.86)
+        </Note>
+        <div className={`${styles.cardGrid} ${styles.cols2}`}>
+          <Card
+            icon={IconBuildingSkyscraper}
+            title="Corporation tax +5pp"
+            text="Dearer capital, so investment falls slowly"
+          >
+            <div className={styles.inlineStats}>
+              <span>
+                <b>{pounds(corporationTax.gdpQ4)}</b>GDP, quarter 4
+              </span>
+              <span>
+                <b>{pounds(corporationTax.gdpQ12)}</b>GDP, quarter 12
+              </span>
+            </div>
+            <p>
+              Still falling, towards about −{corporationTax.plateau} a quarter. No OBR number
+              to compare with
+            </p>
+          </Card>
+          <Card
+            icon={IconCrane}
+            title={`Government investment +${capitalSpending.shock} a quarter`}
+            text="About £1 of GDP per £1, with no fade"
+          >
+            <div className={styles.inlineStats}>
+              <span>
+                <b>{pounds(capitalSpending.gdpQ1)}</b>GDP, quarter 1
+              </span>
+              <span>
+                <b>{pounds(capitalSpending.gdpQ12)}</b>GDP, quarter 12
+              </span>
+            </div>
+            <p>The OBR&apos;s multiplier: {multiplierRows[4].obrLabel}</p>
+          </Card>
         </div>
-        <div className={styles.stack}>
-          <p className={styles.listHead}>
-            <IconCrane stroke={1.8} aria-hidden="true" />
-            Government investment +{capitalSpending.shock} a quarter
-          </p>
-          <div className={`${styles.cardGrid} ${styles.cols2}`}>
-            <Stat
-              icon={IconTrendingUp}
-              value={`£${capitalSpending.gdpQ1.toLocaleString("en-GB")}m`}
-              label="GDP rise, quarter 1"
-            />
-            <Stat
-              icon={IconTrendingUp}
-              value={`£${capitalSpending.gdpQ12.toLocaleString("en-GB")}m`}
-              label="GDP rise, quarter 12"
-            />
-          </div>
-          <Note icon={IconInfoCircle}>
-            Pass-through at about 1.0, no taper. Dead under the default closure
-          </Note>
+        <div>
+          <span className={`${styles.chip} ${styles.chipBad}`}>
+            Stop-gap: freezes a few variables to keep the run stable
+          </span>
         </div>
       </div>
     </Frame>
@@ -1009,16 +1012,23 @@ export function ClosuresSlide() {
 
 export function BankRateSlide() {
   return (
-    <Frame
-      section={sections[2]}
-      title="Bank Rate: weaker than the Bank of England's range"
-      scale={1.4}
-      subtitle="+1pp held for four quarters. Peak fall in GDP"
-      references={[sources.demo, sources.monetary]}
-    >
+    <Frame part={2} title="Bank Rate: most channels are missing" scale={1.15}>
       <div className={styles.stack}>
+        <Ask
+          question="If Bank Rate rises 1pp for a year, how much does GDP fall?"
+          scenario={`Bank Rate +1pp from 2025Q1 for four quarters, then back; ${baseline}. Bars show the biggest fall in GDP`}
+        />
         <BankRateBars />
-        <Note icon={IconInfoCircle}>Only consumption and household interest respond</Note>
+        <Strip
+          items={[
+            { icon: IconCheck, label: "Responds", text: "consumption, household interest" },
+            {
+              icon: IconX,
+              label: "Doesn't",
+              text: "business investment, sterling, house prices, inflation, unemployment",
+            },
+          ]}
+        />
       </div>
     </Frame>
   );
@@ -1026,53 +1036,67 @@ export function BankRateSlide() {
 
 export function LimitsSlide() {
   return (
-    <Frame
-      section={sections[2]}
-      title="Known limits"
-      scale={1.35}
-      references={[sources.obrReadme, sources.siteFigures, sources.tywhh]}
-    >
-      <IconList
-        twoCol
-        items={[
-          {
-            icon: IconBuildingBank,
-            title: "Bank Rate response is weak",
-            text: "A quarter to a half of the BoE's range",
-          },
-          {
-            icon: IconUserOff,
-            title: "Unemployment drifts",
-            text: `${unemploymentDrift[1].model}% against ${unemploymentDrift[1].efo}% by ${unemploymentDrift[1].quarter}`,
-          },
-          {
-            icon: IconScale,
-            title: "Spending multiplier is about 1",
-            text: `By construction, against the OBR's ${multiplierRows[0].obr}`,
-          },
-          {
-            icon: IconAdjustmentsHorizontal,
-            title: "VAT needs an opt-in overlay",
-            text: "CPI is exogenous in the listing",
-          },
-          {
-            icon: IconCalendarEvent,
-            title: "Household-tax seasonal fix",
-            text: `GDP error ${freeRunning.gdpMapeBefore71}% → ${freeRunning.gdpMape}%: an artefact removed, not better fit`,
-          },
-          {
-            icon: IconChartLine,
-            title: "Point estimates only",
-            text: "No confidence bands",
-          },
-        ]}
-      />
+    <Frame part={2} title="Known limits, and whose they are" scale={1.15}>
+      <div
+        className={`${styles.cardGrid} ${styles.cols2}`}
+        style={{ columnGap: "3.5em", alignItems: "start" }}
+      >
+        <div className={styles.stack}>
+          <Head icon={IconBuildingBank}>In the OBR&apos;s published model (we inherit them)</Head>
+          <IconList
+            items={[
+              {
+                icon: IconHome,
+                title: "Bank Rate reaches little",
+                text: "Consumption and household interest only: about a quarter to a half of the BoE's range",
+              },
+              {
+                icon: IconScale,
+                title: "Spending multiplier is about 1",
+                text: `By accounting; the equations can't give the OBR's ${multiplierRows[0].obr}`,
+              },
+              {
+                icon: IconTag,
+                title: "CPI has no live equation",
+                text: "VAT barely transmits without our opt-in overlay",
+              },
+            ]}
+          />
+        </div>
+        <div className={styles.stack}>
+          <Head icon={IconBrandPython}>In our replication</Head>
+          <IconList
+            items={[
+              {
+                icon: IconUserOff,
+                title: "Unemployment drifts",
+                text: `${unemploymentDrift[1].model}% against ${unemploymentDrift[1].efo}% by ${unemploymentDrift[1].quarter}. From their code (l.163, l.175), visible in ours`,
+              },
+              {
+                icon: IconAlertTriangle,
+                title: `${listing.droppedEquations} equations dropped`,
+                text: "In some quarter: no input data",
+              },
+              {
+                icon: IconDatabase,
+                title: "Unpublished inputs seeded or estimated",
+                text: "Each one labelled",
+              },
+              {
+                icon: IconChartLine,
+                title: "Point estimates only",
+                text: "No uncertainty bands",
+              },
+            ]}
+          />
+        </div>
+      </div>
     </Frame>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Platform
+// Part 4: the platform
 
 const platformIcons: Record<string, Icon> = {
   "PolicyEngine microsimulation": IconUsersGroup,
@@ -1087,11 +1111,10 @@ const platformIcons: Record<string, Icon> = {
 export function PlatformSlide() {
   return (
     <Frame
-      section={sections[3]}
+      part={3}
       title="The macro platform: models side by side"
-      scale={1.2}
       subtitle="In development, not yet launched. Each model answers a different question"
-      references={[sources.compare, sources.macroReadme]}
+      scale={1.2}
     >
       <table className={styles.table}>
         <thead>
@@ -1144,7 +1167,7 @@ const liveViewIcons: Record<string, Icon> = {
 export function LiveSiteSlide() {
   return (
     <Frame
-      section={sections[3]}
+      part={3}
       title="The platform, live"
       subtitle={new URL(sources.liveSite.href).host}
       center={false}
@@ -1166,11 +1189,10 @@ export function LiveSiteSlide() {
 export function ForecastRecordSlide() {
   return (
     <Frame
-      section={sections[3]}
+      part={3}
       title="A scored forecast record"
-      scale={1.2}
       subtitle="Committed before the data arrive, then scored against no change"
-      references={[sources.forecastPage, sources.forecastScores, sources.forecastRules]}
+      scale={1.2}
     >
       <div className={styles.stack}>
         <div className={`${styles.cardGrid} ${styles.cols4}`}>
@@ -1211,12 +1233,7 @@ export function ForecastRecordSlide() {
 // mcp_server.py). No result numbers: the third card names what comes back.
 export function AccessSlide() {
   return (
-    <Frame
-      section={sections[3]}
-      title="Use it from Claude"
-      scale={1.2}
-      references={[sources.connect, sources.mcpServer, sources.cli, sources.macroReadme]}
-    >
+    <Frame part={3} title="Use it from Claude" scale={1.1}>
       <div className={styles.stack}>
         <Flow>
           <Card icon={IconPlugConnected} title="1 · Connect" text={claudeFlow.settingsPath}>
@@ -1243,10 +1260,11 @@ export function AccessSlide() {
         </Flow>
         <Strip
           items={[
-            { icon: IconRobot, label: "MCP server", text: `${access.mcpTools} tools, hosted` },
+            { icon: IconRobot, label: "MCP server", text: `${access.mcpTools} tools` },
             { icon: IconTerminal2, label: "CLI", text: `${access.cliCommands} commands` },
-            { icon: IconCode, label: "Python", text: "each model's own API" },
-            { icon: IconDatabase, label: "Data snapshots", text: "dated, never edited" },
+            { icon: IconBrandPython, label: "Python", text: "run_reform()" },
+            { icon: IconLayoutDashboard, label: "Dashboard", text: "scenarios, equations" },
+            { icon: IconDatabase, label: "Data snapshots", text: "dated" },
           ]}
         />
       </div>
@@ -1254,106 +1272,85 @@ export function AccessSlide() {
   );
 }
 
+// One worked example: the same reform gives a household answer, straight
+// from the microsimulation, and an economy answer, through the OBR model.
 export function MicroMacroSlide() {
   return (
-    <Frame
-      section={sections[3]}
-      title="From a microsimulation reform to GDP"
-      scale={1.25}
-      references={[sources.mcpServer, sources.capabilities]}
-    >
+    <Frame part={3} title="From a microsimulation reform to GDP" scale={1.1}>
       <div className={styles.stack}>
-        <Flow>
-          <Card icon={IconWritingSign} title="Reform" text="A PolicyEngine-UK parameter change" />
-          <Card icon={IconUsersGroup} title="Static costing" text="Microsimulation, £bn a year" />
+        <Ask
+          question="One reform, two answers: who pays, and what happens to the economy?"
+          scenario="Basic rate +1p, entered once in the PolicyEngine-UK microsimulation"
+        />
+        <div className={styles.split}>
           <Card
-            icon={IconArrowsShuffle}
-            title="Bridge"
-            text={
-              <>
-                Quarterly <span className={styles.mono}>HHDI_ADDFACTOR</span> path
-              </>
-            }
+            icon={IconUsersGroup}
+            title="PolicyEngine-UK microsimulation"
+            text="Basic rate +1p"
           />
-          <Card icon={IconChartLine} title="OBR model" text="GDP, consumption, investment" />
-        </Flow>
-        <div className={`${styles.cardGrid} ${styles.cols2}`}>
-          <Card
-            icon={IconChartBar}
-            title="Distribution stays in the microsimulation"
-            text="Deciles, winners and losers; poverty before housing costs"
-          />
-          <Card
-            icon={IconScale}
-            title="Compared with HMRC"
-            text={`1p basic rate: ${bridgeBenchmark.policyEngine} static, HMRC ${bridgeBenchmark.hmrc} (${bridgeBenchmark.gap})`}
-            amber
-          />
+          <div className={styles.stack}>
+            <div className={styles.lane}>
+              <IconChevronRight stroke={2} aria-hidden="true" />
+              <div className={styles.stack}>
+                <Head icon={IconUsers}>Households: stays in the microsimulation</Head>
+                <Card
+                  icon={IconChartBar}
+                  title="Who pays"
+                  text="Deciles, winners and losers, poverty (before housing costs)"
+                />
+              </div>
+            </div>
+            <div className={styles.lane}>
+              <IconChevronRight stroke={2} aria-hidden="true" />
+              <div className={styles.stack}>
+                <Head icon={IconChartLine}>Economy: through the OBR model</Head>
+                <Flow>
+                  <Card
+                    icon={IconCoins}
+                    title="Static cost"
+                    text={`${bridgeBenchmark.policyEngine} a year`}
+                  />
+                  <Card
+                    icon={IconArrowsShuffle}
+                    title="Household income path"
+                    text={
+                      <>
+                        Quarterly <span className={styles.mono}>HHDI_ADDFACTOR</span>
+                      </>
+                    }
+                  />
+                  <Card icon={IconBuildingBank} title="OBR model" text="Solved by quarter" />
+                  <Card icon={IconChartLine} title="GDP" text="And consumption, investment" />
+                </Flow>
+              </div>
+            </div>
+          </div>
         </div>
+        <Strip
+          items={[
+            {
+              icon: IconScale,
+              label: "Check",
+              text: `static cost ${bridgeBenchmark.policyEngine} against HMRC's ${bridgeBenchmark.hmrc} (${bridgeBenchmark.gap})`,
+            },
+            {
+              icon: IconArrowNarrowRight,
+              label: "GDP path",
+              text: `with HMRC's costing as the input: slide ${incomeTaxSlideNumber}`,
+            },
+          ]}
+        />
       </div>
     </Frame>
   );
 }
 
-const demoSteps: { icon: Icon; title: string; text: string; code: string }[] = [
-  {
-    icon: IconBrandPython,
-    title: "Run a shock in Python",
-    text: "Government consumption, then income tax",
-    code: "run_reform(var=\"CGG\", shock=1250)",
-  },
-  {
-    icon: IconToggleRight,
-    title: "Switch on a labelled overlay",
-    text: "VAT pass-through; Bank Rate with mortgage rates",
-    code: "price_passthrough=True",
-  },
-  {
-    icon: IconLayoutDashboard,
-    title: "Open the dashboard",
-    text: "Scenarios, variables, equations",
-    code: "obr-macroeconomic-model.vercel.app",
-  },
-  {
-    icon: IconRobot,
-    title: "Ask an AI agent",
-    text: "A 21p basic rate, microsimulation to OBR model",
-    code: "start_job · score_reform",
-  },
-];
-
-export function DemoSlide() {
-  return (
-    <Frame
-      section={sections[4]}
-      title="Demo"
-      scale={1.3}
-      subtitle={`Overlays run locally: the hosted model (${hostedObrPin}) predates VAT pass-through`}
-      references={[sources.demo, sources.connect, sources.hostedPin]}
-    >
-      <IconList
-        items={demoSteps.map((step) => ({
-          icon: step.icon,
-          title: step.title,
-          text: step.text,
-          aside: <code className={styles.code}>{step.code}</code>,
-        }))}
-      />
-    </Frame>
-  );
-}
-
 // ---------------------------------------------------------------------------
-// Working together
+// Part 5: working together
 
 export function CollaborateSlide() {
   return (
-    <Frame
-      section={sections[4]}
-      title="Where we could work together"
-      scale={1.3}
-      references={[sources.obrReadme, sources.review, sources.definePage]}
-    >
+    <Frame part={4} title="Where we could work together" scale={1.3}>
       <div className={`${styles.cardGrid} ${styles.cols3}`}>
         <Card
           icon={IconAdjustmentsHorizontal}
@@ -1392,7 +1389,7 @@ export function CollaborateSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame section={sections[4]} title="Questions for NEF" scale={1.4}>
+    <Frame part={4} title="Questions for NEF" scale={1.4}>
       <IconList
         items={[
           {
@@ -1422,38 +1419,9 @@ export function QuestionsSlide() {
   );
 }
 
-export function NextStepsSlide() {
-  return (
-    <Frame section={sections[4]} title="Proposed next steps" scale={1.4}>
-      <div className={`${styles.cardGrid} ${styles.cols2}`}>
-        <Card
-          icon={IconCode}
-          title="1 · Hands-on session"
-          text="Run a scenario NEF chooses, together"
-        />
-        <Card
-          icon={IconTarget}
-          title="2 · Pick two or three questions"
-          text="Agree scope, closures and checks"
-        />
-        <Card
-          icon={IconSearch}
-          title="3 · Shared review"
-          text="The open equation and closure issues on GitHub"
-        />
-        <Card
-          icon={IconCalendarEvent}
-          title="4 · Check in"
-          text="A date to review results and a possible write-up"
-        />
-      </div>
-    </Frame>
-  );
-}
-
 const contacts = [
   { label: "policyengine.org", url: "https://policyengine.org", Icon: IconWorld },
-  { label: "hello@policyengine.org", url: "mailto:hello@policyengine.org", Icon: IconMail },
+  { label: "vahid@policyengine.org", url: "mailto:vahid@policyengine.org", Icon: IconMail },
   { label: sources.obrRepo.label, url: sources.obrRepo.href, Icon: IconBrandGithub },
   { label: sources.macroRepo.label, url: sources.macroRepo.href, Icon: IconBrandGithub },
 ];

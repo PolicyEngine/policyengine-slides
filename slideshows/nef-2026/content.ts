@@ -1,3 +1,5 @@
+import moduleLinkMatrix from "./module-links.json";
+
 // Every figure on the slides comes from a file read at a pinned commit, checked
 // on 18 November 2026:
 // - PolicyEngine/obr-macroeconomic-model main 0fe04c9a (after #70, #71, #72);
@@ -138,10 +140,33 @@ export const layers = [
   {
     title: "The judgement",
     obr: "Add-factors and assumptions, unpublished",
-    ours: "Not reproduced: users supply their own",
-    status: "gap",
+    ours: "EFO anchoring + 3 labelled opt-in overlays",
+    status: "standin",
   },
 ] as const;
+
+// How the judgement layer is stood in for (model README at the pinned
+// commit): anchoring, l.27-28 (add-factors are EFO minus model; reforms are
+// scored around the anchored baseline, so they cancel); the three opt-in
+// overlays in run_reform, l.141 (labelled judgement, not model dynamics),
+// with l.30 (published_conventions: the OBR's multipliers and taper), l.35
+// (monetary_conditioning: mortgage rate at the listing's 0.9 pass-through)
+// and l.32 (price_passthrough: VAT into CPI); and a user's own assumptions,
+// by shocking any input path through run_reform.
+export const judgementStandIns = [
+  { title: "Anchoring", text: "EFO minus model" },
+  { title: "Opt-in overlays", text: "multipliers, mortgage rate, VAT" },
+  { title: "Your own", text: "shock any input path" },
+];
+
+// The solver (model README l.15 and l.152: Gauss-Seidel iteration over ~370
+// equations; l.36: every quarter converges to tolerance under the default
+// closure). That Gauss-Seidel is EViews' standard model solver is general
+// knowledge about EViews, not a claim sourced from the repo.
+export const solver = {
+  what: "Each variable from the others' latest values, repeated until nothing changes",
+  why: "EViews' standard model solver, so the OBR's file solves as intended",
+};
 
 export const pipeline = [
   { title: "Transpile", text: "EViews to Python" },
@@ -188,36 +213,74 @@ export const modelModules: ModelModule[] = [
   { name: "Finance and balance sheets", equations: 69, variables: "M4, NFWPE, NIIP" },
 ];
 
-// Three equations from the listing and the right-hand side our transpiler
-// emits for each (EViewsTranspiler.parse_equation(...).python_expr, run on
-// the pinned commit). Runs of spaces are collapsed; "…" marks terms trimmed
-// for the slide. Line numbers are lines of the listing file.
+// Three equations from the listing, written as maths (KaTeX source).
+// Coefficients are rounded to 3 decimal places for the slide (l.4: 0.2645906,
+// 0.1029795, 0.1250582, 0.4392933); \dots marks terms trimmed for the slide.
+// Line numbers are lines of the listing file; `eviews` is the listing's own
+// text with runs of spaces collapsed and the same terms trimmed.
 export const equationExamples = [
   {
     label: "Consumption",
     kind: "Error correction",
     line: 4,
     eviews:
-      "dlog(CONS) = 0.2645906 + 0.1029795 * dlog(RHHDI) … - 0.1250582 * (log(CONS(-1)) …)",
-    python:
-      "0.2645906 + 0.1029795 * (np.log(v['RHHDI']) - np.log(_lag('RHHDI', 1))) … - 0.1250582 * (np.log(_lag('CONS', 1)) …)",
+      "dlog(CONS) = 0.2645906 + 0.1029795 * dlog(RHHDI) … - 0.1250582 * (log(CONS(-1)) - 0.4392933 * log(RHHDI(-1)) …)",
+    tex: String.raw`\Delta \ln \mathit{CONS}_t = 0.265 + 0.103\,\Delta \ln \mathit{RHHDI}_t - \dots - 0.125\,\bigl(\ln \mathit{CONS}_{t-1} - 0.439 \ln \mathit{RHHDI}_{t-1} - \dots\bigr)`,
   },
   {
     label: "Unemployment",
     kind: "Identity",
     line: 163,
     eviews: "ULFS = ((POP16 * PART16 / 100) - ETLFS)",
-    python: "((v['POP16'] * v['PART16'] / 100) - v['ETLFS'])",
+    tex: String.raw`\mathit{ULFS}_t = \dfrac{\mathit{POP16}_t \times \mathit{PART16}_t}{100} - \mathit{ETLFS}_t`,
   },
   {
     label: "Household income",
     kind: "Accounting identity",
     line: 654,
     eviews: "HHDI = MI + FYEMP - EMPSC - EESC - TYWHH + NMTRHH + SBHH + …",
-    python:
-      "v['MI'] + v['FYEMP'] - v['EMPSC'] - v['EESC'] - v['TYWHH'] + v['NMTRHH'] + v['SBHH'] + …",
+    tex: String.raw`\mathit{HHDI}_t = \mathit{MI}_t + \mathit{FYEMP}_t - \mathit{EMPSC}_t - \mathit{EESC}_t - \mathit{TYWHH}_t + \mathit{NMTRHH}_t + \mathit{SBHH}_t + \dots`,
   },
 ];
+
+// Links between the modules: module-links.json is the full matrix, written by
+// module-links.py from the listing (for each pair, the equations in the
+// target module whose right-hand side uses a variable the source module
+// determines; lags count, commented-out lines don't). The slide shows every
+// link of 6 or more equations, plus the demand loop. `cut` marks links that
+// don't reach GDP in the OBR's file: real GDP is an input (review G1) and
+// trade volumes are exogenous (R1).
+export type ModuleLink = {
+  from: string;
+  to: string;
+  cut?: boolean;
+  /** Where the count sits along the arrow (0 to 1), to keep labels apart. */
+  labelAt?: number;
+};
+
+export const moduleLinks: ModuleLink[] = [
+  { from: "GDP and output", to: "Prices and wages" },
+  { from: "GDP and output", to: "Finance and balance sheets" },
+  { from: "Income accounts", to: "Prices and wages" },
+  { from: "Balance of payments", to: "Prices and wages" },
+  { from: "Public sector", to: "Income accounts" },
+  { from: "Public sector", to: "GDP and output" },
+  { from: "Labour market", to: "Prices and wages" },
+  { from: "Finance and balance sheets", to: "Income accounts" },
+  { from: "Prices and wages", to: "Investment and inventories" },
+  { from: "GDP and output", to: "Income accounts" },
+  { from: "Prices and wages", to: "Consumption" },
+  { from: "Income accounts", to: "Consumption", labelAt: 0.78 },
+  { from: "Consumption", to: "GDP and output", cut: true },
+  { from: "Exports", to: "GDP and output", cut: true },
+  { from: "Imports", to: "GDP and output", cut: true },
+];
+
+export const moduleLinkCount = (from: string, to: string) =>
+  moduleLinkMatrix.matrix[moduleLinkMatrix.order.indexOf(from)]?.[
+    moduleLinkMatrix.order.indexOf(to)
+  ] ?? 0;
+
 
 // ---------------------------------------------------------------------------
 // Line-by-line review of the published listing (published_model_review.md,
@@ -300,6 +363,8 @@ export type MultiplierRow = {
   obrLabel: string;
   /** The q1 / q4 / q12 ratios exactly as demo.md prints them. */
   display: string;
+  /** What was simulated (demo.md "The shocks": var and size per quarter). */
+  shock: string;
 };
 
 export const multiplierRows: MultiplierRow[] = [
@@ -312,6 +377,7 @@ export const multiplierRows: MultiplierRow[] = [
     obr: 0.6,
     obrLabel: "0.6, fading",
     display: "1.01 / 1.03 / 1.05",
+    shock: "+£1.25bn a quarter, real spending (CGG)",
   },
   {
     label: "Income tax, basic rate +1p",
@@ -322,6 +388,7 @@ export const multiplierRows: MultiplierRow[] = [
     obr: 0.3,
     obrLabel: "0.3, fading",
     display: "0.10 / 0.21 / 0.38",
+    shock: "£1.725bn a quarter of revenue (TYEM)",
   },
   {
     label: "VAT +1pp",
@@ -332,6 +399,7 @@ export const multiplierRows: MultiplierRow[] = [
     obr: 0.35,
     obrLabel: "0.35, fading",
     display: "0.013 / 0.026 / 0.043",
+    shock: "£2.2bn a quarter of revenue (VREC)",
   },
   {
     label: "VAT +1pp",
@@ -342,6 +410,7 @@ export const multiplierRows: MultiplierRow[] = [
     obr: 0.35,
     obrLabel: "0.35, fading",
     display: "0.175 / 0.345 / 0.643",
+    shock: "The same £2.2bn a quarter (VREC)",
   },
   {
     label: "Government investment",
@@ -352,6 +421,7 @@ export const multiplierRows: MultiplierRow[] = [
     obr: 1.0,
     obrLabel: "1.0, tapering",
     display: "1.03 / 0.97 / 0.98",
+    shock: "+£3bn a quarter (CGIPS)",
   },
 ];
 
@@ -388,11 +458,15 @@ export const capitalSpending = {
 // Bank Rate +1pp for four quarters, peak fall in real GDP (demo.md rows 6 and
 // 6b; BoE range from Quarterly Bulletin 1999 Q2, as cited there).
 export const bankRate = [
-  { label: "Default run (mortgage rate held)", value: 0.057, display: "−0.057%", kind: "model" },
-  { label: "Mortgage rate moved with Bank Rate", value: 0.149, display: "−0.149%", kind: "model" },
+  { label: "Our model, mortgage rate held", value: 0.057, display: "−0.057%", kind: "model" },
+  { label: "Our model, mortgage rate follows Bank Rate", value: 0.149, display: "−0.149%", kind: "model" },
   { label: "Bank of England, low end", value: 0.2, display: "−0.2%", kind: "benchmark" },
   { label: "Bank of England, high end", value: 0.35, display: "−0.35%", kind: "benchmark" },
 ] as const;
+
+// The opt-in run moves the mortgage rate at the listing's own pass-through
+// (README l.35; monetary_conditioning.md).
+export const mortgagePassThrough = "Opt-in: the OBR's own 0.9 pass-through, l.623";
 
 // Unemployment rate under the anchored long horizon, model vs EFO
 // (site_figures.json "anchored_horizon.lfsur_pct").
