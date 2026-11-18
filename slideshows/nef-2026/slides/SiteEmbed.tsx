@@ -5,6 +5,7 @@ import {
   IconArrowsMaximize,
   IconArrowsMinimize,
   IconExternalLink,
+  type Icon,
 } from "@tabler/icons-react";
 import styles from "./embed.module.css";
 
@@ -17,6 +18,7 @@ import styles from "./embed.module.css";
  */
 export type SiteView = {
   label: string;
+  icon: Icon;
   /** The page path to load, such as "/models/compare". */
   path: string;
 };
@@ -55,6 +57,7 @@ export default function SiteEmbed({
                   setLoad(load + 1);
                 }}
               >
+                <view.icon size={16} stroke={1.8} aria-hidden="true" />
                 {view.label}
               </button>
             ))}

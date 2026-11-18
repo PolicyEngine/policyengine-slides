@@ -1,110 +1,101 @@
-/* NEF deck: every colour comes from a design token (app/globals.css). */
+/* NEF deck: every colour comes from a design token (app/globals.css).
+   One style each for lists, cards, stats, tables, notes and chips. Sizes in
+   the slide body are in em of .body, which scales with the viewport height,
+   so a slide looks the same at 1920x1080 and 1440x810. */
 
 /* Leave space for the viewer's controls beside the footer text. */
 .deck :global(.gradient-footer) {
   padding-right: 15rem;
 }
 
-/* Figure slides: centre the body below the title, clear of the sources line. */
-.centerBody {
+.body {
   display: flex;
   min-height: 0;
   flex: 1;
   flex-direction: column;
+  font-size: calc(clamp(11px, 1.6vh, 22px) * var(--scale, 1));
+}
+
+/* Centre the body below the title, clear of the sources line. */
+.centerBody {
   justify-content: center;
-  padding-bottom: 2.5rem;
+  padding-bottom: 2rem;
 }
 
-.takeaway {
-  margin-top: 1.75rem;
-  border-left: 4px solid var(--pe-teal);
-  padding-left: 1.25rem;
-  color: var(--pe-dark);
-  font-size: 1.45rem;
-  line-height: 1.4;
-}
-
-/* Agenda rows. */
-.agenda {
+.stack {
   display: grid;
+  gap: 1.4em;
 }
 
-.agendaRow {
-  display: grid;
-  grid-template-columns: 4.5rem 1fr;
-  align-items: baseline;
-  gap: 1.5rem;
-  border-bottom: 1px solid var(--color-gray-200);
-  padding: 0.7rem 0;
-}
-
-.agendaRow > span {
+/* Every icon: bare, teal, no box behind it. */
+.body svg {
+  flex-shrink: 0;
   color: var(--pe-teal);
-  font-size: 2.25rem;
-  font-weight: 600;
 }
 
-.agendaRow h2 {
-  color: var(--pe-dark);
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.agendaRow p {
-  margin-top: 0.2rem;
-  color: var(--color-gray-600);
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-/* Icon list: short items, one icon each. */
+/* Lists: one icon, a few words, an optional second line. */
 .iconList {
   display: grid;
-  gap: 1.35rem;
+  gap: 1.5em;
 }
 
 .iconList.twoCol {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 3rem;
+  column-gap: 3.5em;
 }
 
 .iconItem {
   display: grid;
-  grid-template-columns: 3.25rem 1fr;
+  grid-template-columns: 2.3em minmax(0, 1fr);
   align-items: start;
-  gap: 1.1rem;
+  gap: 1em;
 }
 
-.iconBadge {
-  display: flex;
-  height: 3.25rem;
-  width: 3.25rem;
+.iconItem.withAside {
+  grid-template-columns: 2.3em minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: var(--pe-light);
-  color: var(--pe-teal);
+}
+
+.iconItem > svg {
+  margin-top: 0.1em;
+  height: 2.3em;
+  width: 2.3em;
 }
 
 .iconItem h2 {
   color: var(--pe-dark);
-  font-size: 1.6rem;
+  font-size: 1.55em;
   font-weight: 600;
   line-height: 1.25;
 }
 
 .iconItem p {
-  margin-top: 0.2rem;
+  margin-top: 0.15em;
   color: var(--color-gray-600);
-  font-size: 1.25rem;
-  line-height: 1.4;
+  font-size: 1.2em;
+  line-height: 1.35;
+}
+
+.listHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-gray-500);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.listHead svg {
+  height: 1.4em;
+  width: 1.4em;
 }
 
 /* Cards in a grid. */
 .cardGrid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.2em;
 }
 
 .cols2 {
@@ -120,51 +111,62 @@
 }
 
 .card {
+  min-width: 0;
   border: 1px solid var(--color-gray-200);
   border-left: 4px solid var(--pe-teal);
-  border-radius: 0.5rem;
+  border-radius: 0.5em;
   background: var(--bg-card);
-  padding: 1.25rem 1.4rem;
+  padding: 1em 1.2em;
   box-shadow: 0 1px 2px var(--shadow-light);
 }
 
 .card h2 {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5em;
   color: var(--pe-dark);
-  font-size: 1.45rem;
+  font-size: 1.4em;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .card h2 svg {
-  flex-shrink: 0;
-  color: var(--pe-teal);
+  height: 1.3em;
+  width: 1.3em;
 }
 
 .card p {
-  margin-top: 0.5rem;
+  margin-top: 0.45em;
   color: var(--color-gray-600);
-  font-size: 1.2rem;
-  line-height: 1.4;
+  font-size: 1.15em;
+  line-height: 1.35;
 }
 
 .cardAmber {
   border-left-color: var(--pe-amber);
 }
 
-.cardAmber h2 svg {
+.cardAmber svg {
   color: var(--pe-amber-dark);
 }
 
-/* Big numbers. */
+/* Stats: a card with an icon and a big number. */
 .card .stat {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-top: 0;
   color: var(--pe-teal);
-  font-size: 3.25rem;
+  font-size: 3em;
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.card .stat svg {
+  height: 0.8em;
+  width: 0.8em;
 }
 
 .card .statAmber {
@@ -172,65 +174,91 @@
 }
 
 .card .statLabel {
-  margin-top: 0.4rem;
+  margin-top: 0.3em;
   color: var(--pe-dark);
-  font-size: 1.3rem;
+  font-size: 1.3em;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .card .statNote {
-  margin-top: 0.35rem;
+  margin-top: 0.25em;
   color: var(--color-gray-600);
-  font-size: 1.1rem;
-  line-height: 1.35;
+  font-size: 1.1em;
+  line-height: 1.3;
 }
 
-/* Three layers: what the OBR publishes and what we built. */
-.layers {
-  display: grid;
-  grid-template-columns: 14rem 1fr 1fr 9rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: var(--bg-card);
+/* Cards in a row with arrows between them. */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4em;
 }
 
-.layers > div {
-  border-bottom: 1px solid var(--color-gray-200);
-  padding: 1.15rem 1.35rem;
-  font-size: 1.3rem;
-  line-height: 1.35;
-  color: var(--color-gray-700);
+.flow > .card {
+  flex: 1 1 0;
 }
 
-.layers .layerHead {
-  background: var(--bg-secondary);
-  color: var(--color-gray-500);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.flow > svg {
+  align-self: center;
+  height: 1.6em;
+  width: 1.6em;
+  color: var(--color-gray-400);
 }
 
-.layers .layerName {
+/* A strip of short icon items on one line. */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 2.5em;
+  row-gap: 0.5em;
+  color: var(--color-gray-600);
+  font-size: 1.2em;
+}
+
+.strip > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.strip svg {
+  height: 1.4em;
+  width: 1.4em;
+}
+
+.strip b {
   color: var(--pe-dark);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.layers > div:nth-last-child(-n + 4) {
-  border-bottom: none;
+/* Notes: one line under a figure. */
+.takeaway {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 0.8em;
+  color: var(--pe-dark);
+  font-size: 1.3em;
+  line-height: 1.35;
 }
 
+.takeaway svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+/* Chips. */
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
   border-radius: 9999px;
-  padding: 0.25rem 0.8rem;
-  font-size: 1rem;
+  padding: 0.2em 0.75em;
+  font-size: 0.85em;
   font-weight: 600;
+  line-height: 1.3;
   white-space: nowrap;
 }
 
@@ -249,96 +277,35 @@
   color: var(--color-gray-700);
 }
 
-/* Pipeline: six steps with arrows. */
-.pipeline {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1.1rem;
-}
-
-.step {
-  position: relative;
-  border: 1px solid var(--color-gray-200);
-  border-top: 4px solid var(--pe-teal);
-  border-radius: 0.5rem;
-  background: var(--bg-card);
-  padding: 1.1rem 1rem 1.2rem;
-  box-shadow: 0 1px 2px var(--shadow-light);
-}
-
-.step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -0.85rem;
-  border-top: 0.45rem solid transparent;
-  border-bottom: 0.45rem solid transparent;
-  border-left: 0.55rem solid var(--color-gray-400);
-  transform: translateY(-50%);
-}
-
-.step .stepNum {
-  color: var(--pe-teal);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.step h2 {
-  margin-top: 0.35rem;
-  color: var(--pe-dark);
-  font-size: 1.45rem;
-  font-weight: 700;
-}
-
-.step p {
-  margin-top: 0.35rem;
-  color: var(--color-gray-600);
-  font-size: 1.1rem;
-  line-height: 1.35;
-}
-
-.surfaces {
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.1rem;
-}
-
-.surface {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  border-radius: 0.5rem;
+/* Code on a light background. */
+.code {
+  border-radius: 0.4em;
   background: var(--bg-secondary);
-  padding: 0.9rem 1.1rem;
+  padding: 0.3em 0.6em;
   color: var(--pe-dark);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  overflow-wrap: anywhere;
 }
 
-.surface svg {
-  color: var(--pe-teal);
-  flex-shrink: 0;
-}
-
-.surface span {
-  color: var(--color-gray-600);
-  font-weight: 400;
+.mono {
+  color: var(--pe-dark);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
 }
 
 /* Tables. */
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .table th {
   border-bottom: 2px solid var(--color-gray-300);
-  padding: 0.55rem 0.9rem;
+  padding: 0.4em 0.8em;
   color: var(--color-gray-500);
-  font-size: 0.95rem;
+  font-size: 0.75em;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-align: left;
@@ -347,7 +314,7 @@
 
 .table td {
   border-bottom: 1px solid var(--color-gray-200);
-  padding: 0.42rem 0.9rem;
+  padding: 0.5em 0.8em;
   color: var(--color-gray-700);
   line-height: 1.3;
 }
@@ -357,51 +324,134 @@
   font-weight: 600;
 }
 
+.rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.rowLabel svg {
+  height: 1.35em;
+  width: 1.35em;
+}
+
+.rowLabel small {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 400;
+}
+
 .num {
   text-align: right !important;
   font-variant-numeric: tabular-nums;
 }
 
-.yes {
-  color: var(--pe-teal);
+.no svg {
+  color: var(--color-gray-400);
 }
 
-.no {
-  color: var(--color-gray-400);
+/* Equation examples: the listing line above the Python it becomes. */
+.eqLine {
+  display: grid;
+  grid-template-columns: 4.6em minmax(0, 1fr);
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  line-height: 1.55;
+  color: var(--pe-dark);
+}
+
+.eqLine span {
+  color: var(--color-gray-500);
+  font-family: var(--font-sans);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eqPython {
+  color: var(--pe-teal-dark);
+}
+
+/* Model modules. */
+.module {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.8em;
+  row-gap: 0.5em;
+  padding: 0.8em 1.1em;
+}
+
+.module h2 {
+  font-size: 1.2em;
+}
+
+.moduleCount {
+  color: var(--pe-teal);
+  font-size: 1.7em;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.card.module .moduleFoot {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3em 0.8em;
+  margin-top: 0;
+  min-height: 1.8em;
+  font-size: 1em;
 }
 
 /* Multiplier dot plot. */
 .dotPlot {
   display: grid;
-  grid-template-columns: 20rem 1fr 15rem;
+  grid-template-columns: 24em 1fr 13em;
   align-items: center;
-  row-gap: 0.4rem;
-  column-gap: 1.5rem;
+  row-gap: 0.3em;
+  column-gap: 1.5em;
+}
+
+.dotLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.dotLabel svg {
+  height: 1.9em;
+  width: 1.9em;
 }
 
 .dotLabel h2 {
   color: var(--pe-dark);
-  font-size: 1.35rem;
+  font-size: 1.3em;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .dotLabel p {
   color: var(--color-gray-500);
-  font-size: 1.05rem;
+  font-size: 1em;
 }
 
 .track {
   position: relative;
-  height: 3.6rem;
+  height: 3.3em;
   border-bottom: 1px solid var(--color-gray-200);
 }
 
 .trackLine {
   position: absolute;
   top: 50%;
-  height: 4px;
-  border-radius: 2px;
+  height: 0.25em;
+  border-radius: 0.125em;
   background: var(--color-teal-200);
   transform: translateY(-50%);
 }
@@ -410,14 +460,14 @@
   position: absolute;
   top: 50%;
   display: flex;
-  height: 1.9rem;
-  width: 1.9rem;
+  height: 2.4em;
+  width: 2.4em;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   background: var(--pe-teal);
   color: var(--text-inverse);
-  font-size: 0.75rem;
+  font-size: 0.75em;
   font-weight: 700;
   transform: translate(-50%, -50%);
 }
@@ -437,10 +487,10 @@
 
 .benchmark {
   position: absolute;
-  top: 0.15rem;
-  bottom: 0.15rem;
-  width: 4px;
-  border-radius: 2px;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 0.25em;
+  border-radius: 0.125em;
   background: var(--pe-amber);
   transform: translateX(-50%);
 }
@@ -448,51 +498,67 @@
 .dotValue {
   white-space: nowrap;
   color: var(--color-gray-600);
-  font-size: 1.1rem;
+  font-size: 1.05em;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
+.dotValue span {
+  color: var(--pe-amber-dark);
+}
+
 .axis {
   position: relative;
-  height: 1.8rem;
+  height: 1.8em;
   color: var(--color-gray-500);
-  font-size: 1rem;
+  font-size: 0.95em;
 }
 
 .axis span {
   position: absolute;
-  top: 0.25rem;
+  top: 0.25em;
   transform: translateX(-50%);
 }
 
 .legend {
-  margin-top: 1.25rem;
+  margin-top: 0.8em;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem;
+  gap: 1.75em;
   color: var(--color-gray-600);
-  font-size: 1.1rem;
+  font-size: 1.05em;
 }
 
 .legend span {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 .legendDot {
   display: inline-block;
-  height: 1rem;
-  width: 1rem;
+  height: 1em;
+  width: 1em;
   border-radius: 9999px;
+}
+
+.legendQ1 {
+  background: var(--color-teal-200);
+}
+
+.legendQ4 {
+  background: var(--color-teal-400);
+}
+
+.legendQ12 {
+  background: var(--color-teal-700);
 }
 
 .legendTick {
   display: inline-block;
-  height: 1.2rem;
-  width: 4px;
-  border-radius: 2px;
+  height: 1.2em;
+  width: 0.25em;
+  border-radius: 0.125em;
   background: var(--pe-amber);
 }
 
@@ -501,8 +567,8 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
-  gap: 0.7rem;
-  height: 22rem;
+  gap: 0.6em;
+  height: 10.5em;
   border-top: 2px solid var(--color-gray-300);
 }
 
@@ -515,14 +581,14 @@
 
 .bar {
   width: 100%;
-  border-radius: 0 0 0.3rem 0.3rem;
+  border-radius: 0 0 0.3em 0.3em;
   background: var(--pe-teal);
 }
 
 .barValue {
-  margin-top: 0.35rem;
+  margin-top: 0.25em;
   color: var(--pe-dark);
-  font-size: 1rem;
+  font-size: 0.95em;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -530,38 +596,46 @@
 .barAxis {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 0.7rem;
-  margin-top: 0.5rem;
+  gap: 0.6em;
+  margin-top: 0.3em;
   color: var(--color-gray-500);
-  font-size: 1rem;
+  font-size: 0.95em;
   text-align: center;
 }
 
 /* Horizontal bars (Bank Rate). */
 .hbars {
   display: grid;
-  grid-template-columns: 30rem 1fr;
+  grid-template-columns: 27em 1fr;
   align-items: center;
-  row-gap: 1.1rem;
-  column-gap: 1.5rem;
+  row-gap: 1em;
+  column-gap: 1.5em;
 }
 
 .hbarLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
   color: var(--pe-dark);
-  font-size: 1.3rem;
+  font-size: 1.3em;
   font-weight: 600;
   line-height: 1.25;
+}
+
+.hbarLabel svg {
+  height: 1.4em;
+  width: 1.4em;
 }
 
 .hbarTrack {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.8em;
 }
 
 .hbar {
-  height: 2.6rem;
-  border-radius: 0 0.35rem 0.35rem 0;
+  height: 2.4em;
+  border-radius: 0 0.35em 0.35em 0;
   background: var(--pe-teal);
 }
 
@@ -571,132 +645,44 @@
 
 .hbarValue {
   color: var(--pe-dark);
-  font-size: 1.35rem;
+  font-size: 1.35em;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
-/* Flow: microsim to macro. */
-.flow {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.6rem;
-}
-
-.flowBox {
-  position: relative;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 0.6rem;
-  background: var(--bg-card);
-  padding: 1.15rem 1.2rem;
-  box-shadow: 0 1px 2px var(--shadow-light);
-}
-
-.flowBox:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -1.15rem;
-  border-top: 0.5rem solid transparent;
-  border-bottom: 0.5rem solid transparent;
-  border-left: 0.6rem solid var(--color-gray-400);
-  transform: translateY(-50%);
-}
-
-.flowBox h2 {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
+/* The prompt typed into Claude. */
+.bubble {
+  display: inline-block;
+  margin-top: 0.6em;
+  border-radius: 1em 1em 1em 0.2em;
+  background: var(--pe-light);
+  padding: 0.55em 0.9em;
   color: var(--pe-dark);
-  font-size: 1.35rem;
-  font-weight: 700;
-}
-
-.flowBox h2 svg {
-  color: var(--pe-teal);
-  flex-shrink: 0;
-}
-
-.flowBox p {
-  margin-top: 0.4rem;
-  color: var(--color-gray-600);
-  font-size: 1.15rem;
+  font-size: 1.15em;
   line-height: 1.35;
 }
 
-.flowBox code,
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.95em;
-  color: var(--pe-dark);
-}
-
-.flowOut {
-  margin-top: 1.6rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.6rem;
-}
-
-/* Demo steps. */
-.demoSteps {
-  display: grid;
-  gap: 1rem;
-}
-
-.demoStep {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr 26rem;
-  align-items: center;
-  gap: 1.25rem;
-  border-bottom: 1px solid var(--color-gray-200);
-  padding-bottom: 1rem;
-}
-
-.demoStep > span {
+.chipRow {
+  margin-top: 0.6em;
   display: flex;
-  height: 3rem;
-  width: 3rem;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+/* Closing slide contacts. */
+.contact {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: var(--pe-teal);
-  color: var(--text-inverse);
-  font-size: 1.3rem;
-  font-weight: 700;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--text-inverse) 15%, transparent);
+  background: color-mix(in srgb, var(--text-inverse) 10%, transparent);
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: background-color 150ms;
 }
 
-.demoStep h2 {
-  color: var(--pe-dark);
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.demoStep p {
-  margin-top: 0.15rem;
-  color: var(--color-gray-600);
-  font-size: 1.15rem;
-}
-
-.demoStep code {
-  border-radius: 0.4rem;
-  background: var(--bg-secondary);
-  padding: 0.5rem 0.75rem;
-  color: var(--pe-dark);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-}
-
-/* Section slide. */
-.sectionKicker {
-  margin-bottom: 0.75rem;
-  color: var(--pe-teal);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.cols1 {
-  grid-template-columns: minmax(0, 1fr);
+.contact:hover {
+  background: color-mix(in srgb, var(--text-inverse) 20%, transparent);
 }

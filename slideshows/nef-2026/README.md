@@ -1,6 +1,6 @@
 # New Economics Foundation meeting, November 2026
 
-28 slides at `/slides/nef-2026`, for a meeting with the New Economics
+27 slides at `/slides/nef-2026`, for a meeting with the New Economics
 Foundation (NEF) on working together on the OBR macroeconomic model. The deck is
 public. Slide 19 embeds the in-development macro site
 (policyengine-macro.vercel.app) live; the site allows this deck's origins to
@@ -10,19 +10,20 @@ once the date is set.
 
 Five parts, after a title and an agenda:
 
-1. The OBR model in Python: what the OBR publishes and
-   what we built, the inputs, how it runs, and Thibault's review of the published code
-   and our answer (slides 3–9)
+1. The OBR model in Python: what the OBR publishes and what we built, the
+   model's modules, the inputs, how it runs (with three example equations),
+   and Thibault's review of the published code with our check of it
+   (slides 3–9)
 2. How well it fits: anchoring to the October 2026 EFO, the two numbers that
    are easy to misread, and the free-running scorecard (slides 10–12)
 3. Policy shocks and limits: results against the OBR's published multipliers,
    income tax, corporation tax and capital spending, Bank Rate, and the known
    limits (slides 13–17)
-4. The macro platform: the seven models, the site live, a DEFINE-UK green investment example,
-   the forecast record, code and AI-agent access, and the link from
-   microsimulation to the OBR model (slides 18–23)
+4. The macro platform: the seven models, the site live, the forecast record,
+   using it from Claude, and the link from microsimulation to the OBR model
+   (slides 18–22)
 5. Working together: a demo plan, collaboration areas, questions for NEF and
-   proposed next steps (slides 24–27)
+   proposed next steps (slides 23–26)
 
 It follows PolicyEngine's July 2025 deck for NEF, which covered the
 tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in the private
@@ -34,7 +35,12 @@ the slides).
 - `config.ts` controls the slide order and meeting metadata.
 - `content.ts` holds every number on the slides, each with its source pinned
   to a commit, plus the tables and lists.
-- `slides/index.tsx` contains the slides.
+- `slides/index.tsx` contains the slides and the deck's components (one list,
+  one card, one stat, one note, one strip, one table style; every item takes
+  a Tabler icon).
+- `slides/deck.module.css` sizes the slide body in em of a base that follows
+  the viewport height, so a slide looks the same at 1920x1080 and 1440x810. A
+  slide's `scale` enlarges a sparse body.
 - `slides/SiteEmbed.tsx` frames the live site, with buttons for its main
   pages, Expand and New tab (copied from autumn-budget-2026's `DashboardEmbed`).
 - `slides/figures.tsx` draws the scorecard table, the multiplier dot plot, the
@@ -59,10 +65,15 @@ Checked on 18 November 2026:
   number comes from this repo: the README limits table,
   `docs/calibration_scorecard.md`, `docs/demo.md`,
   `results/demo_shocks.json` (model commit `f0f61c5`, the #70 branch; demo.md
-  says defaults are unchanged by it) and `results/site_figures.json`.
+  says defaults are unchanged by it) and `results/site_figures.json`. The
+  module counts on slide 4 and the example equations on slide 6 come from
+  the OBR's listing in that repo
+  (`obr_macro/_data/obr_model_code_october_2025.txt`) and what
+  `obr_macro/transpiler.py` reads and emits for it; `content.ts` records how
+  the listing's groups map to the 12 modules.
 - `PolicyEngine/macro` main `2e5dffe7a2b35d189c8df60ff2012abbdb675367`, after
   #275: the README model table, the model comparison
-  (`models/index.html`), the DEFINE-UK page, the forecast record
+  (`models/index.html`), the Use page (`connect/index.html`), the forecast record
   (`forecasts/scorecard.json` and `forecasts/index.html`), and the tool counts
   (28 `@mcp.tool` functions in `mcp_server.py`, 27 `@main.command` functions
   in `cli.py`; the README's own count of 26 tools is stale).
@@ -78,6 +89,8 @@ What the deck deliberately does not claim:
 - the held-add-factor forecast fit (0.35% GDP) is left off the slides: the
   forecasting framework calls its GDP line "close to circular";
 - the forecast record contains no OBR-emulator forecasts;
-- no DEFINE-UK multiplier: which one to headline is an open decision;
+- no DEFINE-UK results or multiplier: which one to headline is an open
+  decision;
+- no result numbers on the Claude slide: it shows the steps and the tools;
 - no poverty figures: the platform's population tool returns decile changes and
   winners and losers, not poverty rates.

@@ -1,5 +1,26 @@
 import { Fragment } from "react";
 import {
+  IconArrowsExchange,
+  IconBriefcase,
+  IconBuildingBank,
+  IconBuildingFactory2,
+  IconChartLine,
+  IconCoins,
+  IconCrane,
+  IconHome,
+  IconHomeDollar,
+  IconLock,
+  IconPoint,
+  IconReceiptTax,
+  IconShip,
+  IconShoppingCart,
+  IconTag,
+  IconTrendingUp,
+  IconUserOff,
+  IconWallet,
+  type Icon,
+} from "@tabler/icons-react";
+import {
   bankRate,
   incomeTax,
   multiplierRows,
@@ -8,7 +29,8 @@ import {
 } from "../content";
 import styles from "./deck.module.css";
 
-// HTML and CSS figures, no chart library. Every value comes from content.ts.
+// HTML and CSS figures, no chart library. Every value comes from content.ts;
+// this file only adds an icon to each row label.
 
 const statusChip: Record<ScoreRow["status"], { label: string; className: string }> = {
   good: { label: "Good", className: styles.chipGood },
@@ -17,12 +39,26 @@ const statusChip: Record<ScoreRow["status"], { label: string; className: string 
   trivial: { label: "Trivial identity", className: styles.chipBad },
 };
 
+const scoreIcons: Record<string, Icon> = {
+  "Real GDP": IconChartLine,
+  Consumption: IconShoppingCart,
+  "Business investment": IconBuildingFactory2,
+  "Household income": IconWallet,
+  "Real household income": IconHomeDollar,
+  "Current account": IconArrowsExchange,
+  "Trade balance": IconShip,
+  Employment: IconBriefcase,
+  "Unemployment rate": IconUserOff,
+  "RPI inflation": IconTrendingUp,
+  "Company profits": IconCoins,
+};
+
 /** Free-running scorecard: the 11 computed headline variables. */
 export function ScorecardTable() {
   const half = Math.ceil(scorecardRows.length / 2);
   const columns = [scorecardRows.slice(0, half), scorecardRows.slice(half)];
   return (
-    <div className="grid grid-cols-2 gap-12">
+    <div className="grid grid-cols-2 items-start gap-[3.5em]">
       {columns.map((rows, index) => (
         <table key={index} className={styles.table}>
           <thead>
@@ -33,17 +69,25 @@ export function ScorecardTable() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.variable}>
-                <td>{row.variable}</td>
-                <td className={styles.num}>{row.error}</td>
-                <td>
-                  <span className={`${styles.chip} ${statusChip[row.status].className}`}>
-                    {statusChip[row.status].label}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {rows.map((row) => {
+              const RowIcon = scoreIcons[row.variable] ?? IconPoint;
+              return (
+                <tr key={row.variable}>
+                  <td>
+                    <span className={styles.rowLabel}>
+                      <RowIcon stroke={1.8} aria-hidden="true" />
+                      {row.variable}
+                    </span>
+                  </td>
+                  <td className={styles.num}>{row.error}</td>
+                  <td>
+                    <span className={`${styles.chip} ${statusChip[row.status].className}`}>
+                      {statusChip[row.status].label}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       ))}
@@ -54,6 +98,13 @@ export function ScorecardTable() {
 const plotMax = 1.1;
 const pct = (value: number) => `${(Math.min(value, plotMax) / plotMax) * 100}%`;
 
+const multiplierIcons: Record<string, Icon> = {
+  "Government consumption": IconBuildingBank,
+  "Income tax, basic rate +1p": IconReceiptTax,
+  "VAT +1pp": IconTag,
+  "Government investment": IconCrane,
+};
+
 /** GDP per pound at q1, q4 and q12 against the OBR's published multiplier. */
 export function MultiplierPlot() {
   const ticks = [0, 0.25, 0.5, 0.75, 1];
@@ -63,11 +114,15 @@ export function MultiplierPlot() {
         {multiplierRows.map((row) => {
           const low = Math.min(row.q1, row.q4, row.q12);
           const high = Math.max(row.q1, row.q4, row.q12);
+          const RowIcon = multiplierIcons[row.label] ?? IconPoint;
           return (
             <Fragment key={`${row.label}-${row.setting}`}>
               <div className={styles.dotLabel}>
-                <h2>{row.label}</h2>
-                <p>{row.setting}</p>
+                <RowIcon stroke={1.8} aria-hidden="true" />
+                <div>
+                  <h2>{row.label}</h2>
+                  <p>{row.setting}</p>
+                </div>
               </div>
               <div className={styles.track}>
                 <div
@@ -88,7 +143,7 @@ export function MultiplierPlot() {
               <div className={styles.dotValue}>
                 {row.display}
                 <br />
-                <span className="text-pe-amber">OBR {row.obrLabel}</span>
+                <span>OBR {row.obrLabel}</span>
               </div>
             </Fragment>
           );
@@ -105,15 +160,15 @@ export function MultiplierPlot() {
       </div>
       <div className={styles.legend}>
         <span>
-          <i className={styles.legendDot} style={{ background: "var(--color-teal-200)" }} />
+          <i className={`${styles.legendDot} ${styles.legendQ1}`} />
           Quarter 1
         </span>
         <span>
-          <i className={styles.legendDot} style={{ background: "var(--color-teal-400)" }} />
+          <i className={`${styles.legendDot} ${styles.legendQ4}`} />
           Quarter 4
         </span>
         <span>
-          <i className={styles.legendDot} style={{ background: "var(--color-teal-700)" }} />
+          <i className={`${styles.legendDot} ${styles.legendQ12}`} />
           Quarter 12
         </span>
         <span>
@@ -135,7 +190,7 @@ export function IncomeTaxBars() {
           <div key={index} className={styles.barCol}>
             <div
               className={styles.bar}
-              style={{ height: `${(Math.abs(value) / max) * 85}%` }}
+              style={{ height: `${(Math.abs(value) / max) * 82}%` }}
             />
             <span className={styles.barValue}>{value.toLocaleString("en-GB")}</span>
           </div>
@@ -150,23 +205,31 @@ export function IncomeTaxBars() {
   );
 }
 
+const bankRateIcons: Icon[] = [IconLock, IconHome, IconBuildingBank, IconBuildingBank];
+
 /** Peak fall in GDP for a 1pp Bank Rate rise held four quarters. */
 export function BankRateBars() {
   const max = Math.max(...bankRate.map((row) => row.value));
   return (
     <div className={styles.hbars}>
-      {bankRate.map((row) => (
-        <Fragment key={row.label}>
-          <p className={styles.hbarLabel}>{row.label}</p>
-          <div className={styles.hbarTrack}>
-            <div
-              className={`${styles.hbar} ${row.kind === "benchmark" ? styles.hbarBenchmark : ""}`}
-              style={{ width: `${(row.value / max) * 80}%` }}
-            />
-            <span className={styles.hbarValue}>{row.display}</span>
-          </div>
-        </Fragment>
-      ))}
+      {bankRate.map((row, index) => {
+        const RowIcon = bankRateIcons[index] ?? IconPoint;
+        return (
+          <Fragment key={row.label}>
+            <p className={styles.hbarLabel}>
+              <RowIcon stroke={1.8} aria-hidden="true" />
+              {row.label}
+            </p>
+            <div className={styles.hbarTrack}>
+              <div
+                className={`${styles.hbar} ${row.kind === "benchmark" ? styles.hbarBenchmark : ""}`}
+                style={{ width: `${(row.value / max) * 80}%` }}
+              />
+              <span className={styles.hbarValue}>{row.display}</span>
+            </div>
+          </Fragment>
+        );
+      })}
     </div>
   );
 }

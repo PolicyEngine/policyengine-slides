@@ -20,6 +20,11 @@ export const sources = {
     href: "https://policyengine-macro.vercel.app",
   },
   obrReadme: { label: "OBR model README", href: `${obr}/README.md` },
+  listing: {
+    label: "OBR model code, October 2025",
+    href: `${obr}/obr_macro/_data/obr_model_code_october_2025.txt`,
+  },
+  transpiler: { label: "transpiler.py", href: `${obr}/obr_macro/transpiler.py` },
   scorecard: {
     label: "Calibration scorecard",
     href: `${obr}/docs/calibration_scorecard.md`,
@@ -113,37 +118,105 @@ export const listing = {
   missingWithOnsCodes: 199,
   listingDate: "15 October 2025",
   efo: "October 2026 EFO",
+  efoShort: "Oct 2026",
   efoPublished: "28 October 2026",
 };
 
 export const layers = [
   {
     title: "The model",
-    obr: "372 equations and a variable list, published as EViews code",
-    ours: "All 372 parsed and transpiled to Python",
+    obr: "372 equations, as EViews code",
+    ours: "All 372 transpiled to Python",
     status: "built",
   },
   {
     title: "The engine",
-    obr: "EViews solves the system, swaps closures, holds add-factors",
-    ours: "A Gauss-Seidel solver, closures and add-factors in Python",
+    obr: "EViews solver, closures, add-factors",
+    ours: "Gauss-Seidel solver, closures, add-factors",
     status: "partial",
   },
   {
     title: "The judgement",
-    obr: "Forecasters' add-factors and off-model assumptions, not published",
-    ours: "Not reproduced: a user supplies their own, labelled as such",
+    obr: "Add-factors and assumptions, unpublished",
+    ours: "Not reproduced: users supply their own",
     status: "gap",
   },
 ] as const;
 
 export const pipeline = [
-  { title: "Transpile", text: "EViews listing to Python equations" },
-  { title: "Fill inputs", text: "355 ONS series for what the EFO omits" },
-  { title: "Close", text: "GDP endogenous; inventories held on the EFO path" },
-  { title: "Solve", text: "Gauss-Seidel, quarter by quarter" },
-  { title: "Anchor", text: "Add-factors put the baseline on the EFO" },
-  { title: "Score", text: "Shocked run minus baseline, per quarter" },
+  { title: "Transpile", text: "EViews to Python" },
+  { title: "Fill inputs", text: "355 ONS series" },
+  { title: "Close", text: "GDP made endogenous" },
+  { title: "Solve", text: "Gauss-Seidel, by quarter" },
+  { title: "Anchor", text: "Add-factors to the EFO" },
+  { title: "Score", text: "Shock minus baseline" },
+];
+
+// ---------------------------------------------------------------------------
+// The model's modules, from the section headers of the OBR's listing
+// (obr_macro/_data/obr_model_code_october_2025.txt at the pinned commit).
+// Counts are the equations our parser (transpiler.parse_equation) reads under
+// each header; they sum to 372. The listing has no Group 13 or Group 17.
+// Mapping: GDP and output = Group 16 (29) + market sector GVA satellite (4);
+// consumption = Group 1; investment and inventories = Groups 2 (7) + 3 (42);
+// labour market = Group 4; exports = Group 5; imports = Group 6; prices and
+// wages = Group 7; North Sea oil = Group 8; public sector = Groups 9 (15) +
+// 10 (13) + 12 (31); balance of payments = Group 11; income accounts =
+// Group 15; finance and balance sheets = Group 14 (5) + Group 18
+// (households 28, rest of world 23, non-financial companies 13).
+// "exogenous" notes are from docs/published_model_review.md (G1, N1, R1, G3,
+// V1). Variables are left-hand sides in that section of the listing.
+export type ModelModule = {
+  name: string;
+  equations: number;
+  variables: string;
+  exogenous?: string;
+};
+
+export const modelModules: ModelModule[] = [
+  { name: "GDP and output", equations: 33, variables: "GDPMPS, GVA, MSGVA", exogenous: "Real GDP exogenous" },
+  { name: "Consumption", equations: 5, variables: "CONS, CDUR, PD" },
+  { name: "Investment and inventories", equations: 49, variables: "IBUS, COC, DINV", exogenous: "Total exogenous" },
+  { name: "Labour market", equations: 17, variables: "ET, ULFS, LFSUR" },
+  { name: "Exports", equations: 3, variables: "XNOG, RPRICE, XPS", exogenous: "Volumes exogenous" },
+  { name: "Imports", equations: 15, variables: "MNOG, MS, MPS", exogenous: "Volumes exogenous" },
+  { name: "Balance of payments", equations: 31, variables: "TB, CB, NIPD" },
+  { name: "North Sea oil", equations: 5, variables: "TDOIL, PXOIL, NSGTP" },
+  { name: "Prices and wages", equations: 44, variables: "EARN, CPIX, RPI", exogenous: "CPI: no live equation" },
+  { name: "Income accounts", equations: 42, variables: "HHDI, RHHDI, FYEMP" },
+  { name: "Public sector", equations: 59, variables: "CGG, PSCR, CGNB", exogenous: "Most taxes exogenous" },
+  { name: "Finance and balance sheets", equations: 69, variables: "M4, NFWPE, NIIP" },
+];
+
+// Three equations from the listing and the right-hand side our transpiler
+// emits for each (EViewsTranspiler.parse_equation(...).python_expr, run on
+// the pinned commit). Runs of spaces are collapsed; "…" marks terms trimmed
+// for the slide. Line numbers are lines of the listing file.
+export const equationExamples = [
+  {
+    label: "Consumption",
+    kind: "Error correction",
+    line: 4,
+    eviews:
+      "dlog(CONS) = 0.2645906 + 0.1029795 * dlog(RHHDI) … - 0.1250582 * (log(CONS(-1)) …)",
+    python:
+      "0.2645906 + 0.1029795 * (np.log(v['RHHDI']) - np.log(_lag('RHHDI', 1))) … - 0.1250582 * (np.log(_lag('CONS', 1)) …)",
+  },
+  {
+    label: "Unemployment",
+    kind: "Identity",
+    line: 163,
+    eviews: "ULFS = ((POP16 * PART16 / 100) - ETLFS)",
+    python: "((v['POP16'] * v['PART16'] / 100) - v['ETLFS'])",
+  },
+  {
+    label: "Household income",
+    kind: "Accounting identity",
+    line: 654,
+    eviews: "HHDI = MI + FYEMP - EMPSC - EESC - TYWHH + NMTRHH + SBHH + …",
+    python:
+      "v['MI'] + v['FYEMP'] - v['EMPSC'] - v['EESC'] - v['TYWHH'] + v['NMTRHH'] + v['SBHH'] + …",
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -159,16 +232,10 @@ export const review = {
 };
 
 export const reviewFindings = [
-  {
-    code: "G7",
-    text: "Unemployment is undetermined: l.163 and l.175 are one identity",
-  },
-  {
-    code: "G6",
-    text: "Nominal GDP and the investment deflator: l.337 and l.688 repeat",
-  },
-  { code: "N5", text: "Apparent sign error in corporate FISIM (l.637)" },
-  { code: "V5", text: "Pre-Brexit EU payment equations are still live" },
+  { code: "G7", title: "Unemployment undetermined", text: "l.163 and l.175 are one identity" },
+  { code: "G6", title: "Nominal GDP, investment deflator", text: "l.337 and l.688 repeat" },
+  { code: "N5", title: "Apparent sign error", text: "Corporate FISIM, l.637" },
+  { code: "V5", title: "Pre-Brexit EU payments", text: "Equations still live" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -295,6 +362,9 @@ export const multiplierRows: MultiplierRow[] = [
 export const incomeTax = {
   revenuePerQuarter: "£1,725m",
   revenuePerYear: "£6.9bn",
+  // PolicyEngine's static costing of the same 1p, a quarter (README limits
+  // table, "Household tax multiplier", l.33; demo.md l.48: same ratios).
+  policyEngineRevenuePerQuarter: "£1,616m",
   gdpPath: [-161, -227, -285, -335, -381, -422, -456, -485, -510, -532, -551, -569],
 };
 
@@ -394,18 +464,6 @@ export const platformModels: PlatformModel[] = [
   },
 ];
 
-// DEFINE-UK green public investment scenario minus the current-policies
-// baseline, cached pinned run (upstream commit 846081a), from the DEFINE-UK
-// model page. Deltas only; partial replication.
-export const defineGreen = {
-  spending: "£15–16bn a year in 2027–31",
-  gdp2035: "+0.91%",
-  emissions2035: "−54 Mt",
-  emissionsShare2035: "−18.4%",
-  unemployment2035: "−0.22pp",
-  consumption2035: "+1.01%",
-};
-
 // Forecast track record (forecasts/scorecard.json and the generated status
 // block of forecasts/index.html, last scored 16 Nov 2026).
 export const forecastRecord = {
@@ -425,6 +483,22 @@ export const forecastRecord = {
 // @main.command functions in cli.py (the README's own count of 26 tools is
 // stale against the code).
 export const access = { mcpTools: 28, cliCommands: 27, publicModels: 7 };
+
+// Using the platform from Claude, from the macro site's Use page
+// (connect/index.html at the pinned commit): the hosted server URL, where to
+// add it, the Claude Code command and one of the page's example prompts. The
+// tool chain is from mcp_server.py: score_reform runs through start_job on
+// the hosted server, get_job_result polls it and format_score_report renders
+// it; score_reform(model="obr") returns the costing and GDP, consumption and
+// investment.
+export const claudeFlow = {
+  url: "https://policyengine--policyengine-macro-mcp-serve.modal.run/mcp",
+  settingsPath: "Settings → Connectors → Add custom connector",
+  claudeCode:
+    "claude mcp add --transport http policyengine-macro https://policyengine--policyengine-macro-mcp-serve.modal.run/mcp",
+  prompt: "Score raising the UK basic rate of income tax to 21p.",
+  tools: ["start_job", "score_reform", "get_job_result", "format_score_report"],
+};
 
 // The OBR bridge's own benchmark (capabilities.py): static costing of a 1p
 // basic-rate rise against HMRC's ready reckoner, 2026-27.
