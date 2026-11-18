@@ -887,6 +887,8 @@
 .pathPlot {
   display: block;
   width: 100%;
+  /* In em, so the chart follows the slide's base size (and the fit guard). */
+  max-height: 21em;
 }
 
 .pathGrid {
