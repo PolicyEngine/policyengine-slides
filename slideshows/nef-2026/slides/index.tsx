@@ -273,43 +273,6 @@ export function AgendaSlide() {
   );
 }
 
-export function WhoWeAreSlide() {
-  return (
-    <Frame
-      title="PolicyEngine"
-      subtitle="A nonprofit building open-source models of tax, benefit and economic policy"
-      references={[sources.macroReadme]}
-      center
-    >
-      <IconList
-        twoCol
-        items={[
-          {
-            icon: IconUsersGroup,
-            title: "Tax-benefit microsimulation",
-            text: "Households in the UK and US, the engine behind policyengine.org",
-          },
-          {
-            icon: IconBrandGithub,
-            title: "Open code",
-            text: "Models, data pipelines and tests are public on GitHub",
-          },
-          {
-            icon: IconChartLine,
-            title: "Now adding macro",
-            text: "The OBR model, and a platform that runs it beside other models",
-          },
-          {
-            icon: IconCalendarEvent,
-            title: "Since we last met",
-            text: "July 2025: microsimulation. Today: the macro side",
-          },
-        ]}
-      />
-    </Frame>
-  );
-}
-
 export function WhyOpenSlide() {
   return (
     <Frame

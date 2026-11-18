@@ -28,7 +28,6 @@ import {
   ThibDifferSlide,
   ThibFoundSlide,
   TitleSlide,
-  WhoWeAreSlide,
   WhyOpenSlide,
 } from "./slides";
 
@@ -45,7 +44,6 @@ export const nef2026Config: SlideshowConfig = {
   slides: [
     TitleSlide,
     AgendaSlide,
-    WhoWeAreSlide,
     WhyOpenSlide,
     PublishedVsBuiltSlide,
     InputsSlide,
