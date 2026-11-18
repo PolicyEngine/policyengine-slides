@@ -423,7 +423,7 @@ export const parts = [
     icon: IconRoute,
     title: "Possible next steps",
     short: "Next steps",
-    text: "Two possible starting points, and questions.",
+    text: "Questions for discussion.",
   },
 ] as const;
 
@@ -1406,7 +1406,7 @@ export const questions = [
   { icon: IconCalendar, text: "How should a long-run result map to fiscal years?" },
   { icon: IconArrowsSplit, text: "Where should the prices, pay and profits split come from?" },
   { icon: IconBuildingFactory2, text: "Which firm behaviour needs an agent-based model, and what does it report?" },
-  { icon: IconHome, text: "Which household results matter most: income groups, places or both?" },
+  { icon: IconHome, text: "Which household results matter most: income groups, geography or both?" },
 ];
 
 // How the rules are encoded. The snippet is abridged from policyengine-uk

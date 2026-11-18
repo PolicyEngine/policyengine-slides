@@ -3,7 +3,6 @@ import {
   AbmSlide,
   AiPostSlide,
   AxiomRulesSlide,
-  AxiomTodaySlide,
   AxiomLiveSlide,
   BreakdownsSlide,
   BridgeSlide,
@@ -24,7 +23,6 @@ import {
   PartHaveSlide,
   PartProjectsSlide,
   PartWhatSlide,
-  PilotsSlide,
   QuestionsSlide,
   RulesSlide,
   TargetsSlide,
@@ -69,7 +67,6 @@ export const bist2026Config: SlideshowConfig = {
     { component: CoverageSlide, builds: 5, exportBuilds: 1 },
     AxiomLiveSlide,
     { component: AxiomRulesSlide, builds: 2, exportBuilds: 1 },
-    { component: AxiomTodaySlide, builds: 4, exportBuilds: 1 },
     // Part 4. Projects we have done.
     PartProjectsSlide,
     BudgetSlide,
@@ -88,7 +85,6 @@ export const bist2026Config: SlideshowConfig = {
     { component: MacroSlide, builds: 3, exportBuilds: 1 },
     // Part 6. Possible next steps.
     PartCollaborateSlide,
-    { component: PilotsSlide, builds: 2, exportBuilds: 1 },
     { component: QuestionsSlide, builds: 6, exportBuilds: 1 },
     ClosingSlide,
   ],

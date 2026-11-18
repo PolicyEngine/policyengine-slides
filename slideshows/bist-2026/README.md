@@ -1,6 +1,6 @@
 # From business shocks to household incomes, 19 November 2026
 
-33 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
+31 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
 Unit of the Department for Business, Innovation, Science and Trade (BIST).
 There is no appendix: backup material for questions is at the end of
 [NOTES.md](NOTES.md).
@@ -45,34 +45,32 @@ slide, is in [NOTES.md](NOTES.md).
 13. What the UK model covers, and what we can share
 14. The Axiom Foundation’s rules, live (live page)
 15. Rules as code for firms and employers, from the Axiom Foundation
-16. What exists today, and how a model could call it (the Axiom Foundation)
 
 4 · Projects we have done
 
-17. Part 4: Projects we have done (divider)
-18. The Autumn Budget 2026 dashboard (live page)
-19. The potential impact of AI adoption: who bears the cost? (live page)
-20. How we built synthetic UK firms
-21. What the firm model can cost: thresholds, tapers and reduced rates
-22. Who pays for trade shocks? Four UK episodes, 2021–26
-23. Who pays for trade shocks? The 2025 US tariffs (the second
+16. Part 4: Projects we have done (divider)
+17. The Autumn Budget 2026 dashboard (live page)
+18. The potential impact of AI adoption: who bears the cost? (live page)
+19. How we built synthetic UK firms
+20. What the firm model can cost: thresholds, tapers and reduced rates
+21. Who pays for trade shocks? Four UK episodes, 2021–26
+22. Who pays for trade shocks? The 2025 US tariffs (the second
     slide of the trade study)
 
 5 · What could be explored
 
-24. Part 5: What could be explored (divider)
-25. One way to link: tables in, tables out
-26. The UK–US Economic Prosperity Deal: from model results to households
-27. Business policy: from firm costs to households
-28. Where an agent-based model could link
-29. Links to macroeconomic models
+23. Part 5: What could be explored (divider)
+24. One way to link: tables in, tables out
+25. The UK–US Economic Prosperity Deal: from model results to households
+26. Business policy: from firm costs to households
+27. Where an agent-based model could link
+28. Links to macroeconomic models
 
 6 · Possible next steps
 
-30. Part 6: Possible next steps (divider)
-31. Two possible starting points
-32. Questions for discussion
-33. Thank you
+29. Part 6: Possible next steps (divider)
+30. Questions for discussion
+31. Thank you
 
 - `config.ts` controls the slide order, the build steps (live only) and the
   meeting metadata.
@@ -109,7 +107,7 @@ from the left. Motion lasts about 0.3 seconds and is off under
 
 Exports show each slide once, complete. Every slide with builds has
 `exportBuilds: 1`, so a PDF has exactly one page per slide (33 pages) and
-the deck index counts 33 slides; `countSlides: true` makes the live counter
+the deck index counts 31 slides; `countSlides: true` makes the live counter
 number slides too, not build steps; in an export `Reveal` shows every step, so
 that page is the fully built slide, not its first step. No figure depends on
 an animation: the count-up always ends on the exact text, a timer restores
@@ -202,9 +200,8 @@ notes for that slide.
   explored (one way to link models by exchanging tables, then the
   Economic Prosperity Deal as a trade application, business policy as a
   business application, three kinds of agent-based model and links to
-  macroeconomic models); and possible next steps (two
-  possible starting points and questions, the first of which asks whether
-  there is appetite at all). Release gates and certification, assignment variability, data
+  macroeconomic models); and possible next steps (questions,
+  the first of which asks whether there is appetite at all). Release gates and certification, assignment variability, data
   access in full and use, evaluation and engagement are under "Backup
   material" in the notes; the deck has no appendix.
 - **Status.** Status sits inside the slide bodies (cards, tables, flows)
@@ -899,4 +896,15 @@ The deck is public: it has no password and appears on the home page.
   of 10 households is policyengine.py's own, stricter than the UK Data
   Service licence.
 - PR #46 is cited at its current head, `090db1b` (figures unchanged).
+
+## Two slides removed; the trade study marked preliminary (18 November)
+
+- Removed "What exists today, and how a model could call it" (the Axiom
+  Foundation, old slide 16) and "Two possible starting points" (old slide
+  31). The deck has 31 slides. Part 6 now holds the questions only, and
+  its divider and the "In brief" card read "Questions for discussion."
+  `AxiomTodaySlide` and `PilotsSlide` stay in `slides/index.tsx`, unused.
+- Slide 10's title no longer carries the target count; the subtitle does.
+- The trade slides' subtitles say "Preliminary work, not yet published".
+- The last question says "geography".
 
