@@ -3,12 +3,20 @@
 Meeting with the New Economics Foundation, November 2026. Presenters: Vahid
 Ahmadi and Max Ghenis. Goal: show the open OBR model and the macro platform,
 and agree where to work together. About 30 minutes plus discussion: 7 on part
-1, 4 on part 2, 7 on part 3, 7 on part 4, 5 on part 5 (the live demo under slide 20 can stretch part 4).
+1, 4 on part 2, 7 on part 3, 7 on part 4, 5 on part 5 (the live demo under slide 17 can stretch part 4).
 
 Every number below is in `content.ts`, with its source pinned to a commit.
 
 The slides carry no source line; each section below ends with its sources,
 and `content.ts` pins every one to a commit.
+
+Builds: twelve slides reveal step by step when presenting (the count is in
+each heading below; `builds` in `config.ts`). Each click moves one step, so
+the deck has 44 steps for 23 slides. A PDF export shows every slide once,
+complete. The viewer's counter counts slides, not steps. Motion is off under the reduced-motion setting.
+
+On the slides a simulated change is a "scenario"; in the code and below, the
+argument is still `shock=`.
 
 ## 1. Title
 
@@ -21,18 +29,36 @@ direct about limits.
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 4. What the OBR publishes, and what we built
+## 4. What the OBR publishes, and what we built (3 steps)
 
-Three layers, from the repo's roadmap: the model (published, all 372 equations
-transpiled), the engine (EViews; we have a Gauss-Seidel solver, closures and
-add-factors, not the full engine, and no stochastic simulation), and the
-judgement (the forecasters' add-factors and off-model assumptions, not
-published). 
+Three cards, one per layer, from the repo's roadmap; each click adds a card.
+Every card reads top to bottom: what the OBR has, what we built, and the
+number that belongs to that layer.
 
+1. The model: published, 372 equations as EViews code; all 372 transpiled.
+   The number is 372: the OBR's listing and variable list of 15 October 2025,
+   still the latest on obr.uk on 16 November 2026.
+2. The engine: EViews; we have a Gauss-Seidel solver, closures and
+   add-factors, not the full engine, and no stochastic simulation. The number
+   is 355 ONS series, pulled 11 July 2026 with 8 recovered on 22 September: of
+   261 endogenous variables the EFO doesn't publish, 199 had ONS codes. The
+   amber caveat: 82 of the 372 equations drop in at least one quarter of the
+   pinned reform solve because an input has no data; each is listed in the
+   code, or the solve raises.
+3. The judgement: the forecasters' add-factors and off-model assumptions, not
+   published. We stand in for it, and label every stand-in. The number is the
+   October 2026 EFO (detailed forecast tables, 28 October 2026), the forecast
+   the baseline is anchored to.
 
+Terms glossed on this slide, where they first appear: closure (which variables
+are solved and which are inputs), add-factor (an adjustment added to an
+equation's result) and the Economic and Fiscal Outlook (EFO), the OBR's
+twice-yearly forecast. Later slides say "EFO". The model names are spelled out
+in the platform table, MAPE as "average error" on the fit slide, and MCP on
+the Claude slide.
 
-Same equations, not the OBR's judgements. How we stand in for the judgement
-(the third row, and the strip under the table):
+Same equations, not the OBR's judgements. The three stand-ins in the third
+card:
 
 - Anchoring: the add-factors are computed as EFO minus model, so the baseline
   sits on the OBR's published forecast. The EFO stands in for the OBR's
@@ -43,33 +69,27 @@ Same equations, not the OBR's judgements. How we stand in for the judgement
   their taper), `monetary_conditioning=True` (the mortgage rate follows Bank
   Rate at the listing's 0.9 pass-through) and `price_passthrough=True` (VAT
   passes into CPI).
-- Your own assumptions: shock any input path (Bank Rate, trade, CPI) through
+- Your own assumptions: change any input path (Bank Rate, trade, CPI) through
   `run_reform`.
 
-The four numbers under the table are the inputs:
-
-- The OBR listing and variable list of 15 October 2025, still the latest on
-  obr.uk on 16 November 2026.
-- The October 2026 EFO detailed forecast tables (28 October 2026).
-- 355 ONS series, pulled 11 July 2026 with 8 recovered on 22 September: of 261
-  endogenous variables the EFO doesn't publish, 199 had ONS codes.
-- 82 of the 372 equations drop in at least one quarter of the pinned reform
-  solve because an input has no data; each is listed in the code, or the
-  solve raises.
-- Cost-of-capital constants (DB, DP, DV) are estimated from statute and the
-  EFO gilt path; COCU is a declared seed. Two large level anchors (OSHH, GGVA)
-  are documented in the README.
-
-Unpublished inputs are estimated or seeded, and labelled as such.
+Not on the slide: cost-of-capital constants (DB, DP, DV) are estimated from
+statute and the EFO gilt path; COCU is a declared seed. Two large level
+anchors (OSHH, GGVA) are documented in the README. Unpublished inputs are
+estimated or seeded, and labelled as such.
 
 Sources: OBR model roadmap; OBR model README (limits table l.27–35, l.141); forecasting framework.
 
-## 5. The model's modules
+## 5. The model's modules, and how they connect (5 steps)
 
-A map of the listing, to give a sense of what is in the 372 equations before
-the detail. The 12 modules follow the section headers in the OBR's own code
-file (`obr_model_code_october_2025.txt`); the number on each tile is the count
-of equations our parser reads under those headers, and they sum to 372.
+One map of the listing, built in five steps. Step 1 shows the 12 modules in
+three groups. Steps 2 to 4 draw the arrows between the groups, one colour per
+click: teal for what leaves demand (output), amber for what leaves supply and
+prices, dark for what leaves income and sectors. Step 5 adds the grey dashed
+links that don't reach GDP in the OBR's file. The key is inside the map.
+
+The modules follow the section headers in the OBR's own code file
+(`obr_model_code_october_2025.txt`); the number on each tile is the count of
+equations our parser reads under those headers, and they sum to 372.
 
 - GDP and output 33 (Group 16, 29, plus the market sector GVA satellite, 4);
   consumption 5 (Group 1); investment and inventories 49 (Groups 2 and 3, 7 and
@@ -83,71 +103,63 @@ of equations our parser reads under those headers, and they sum to 372.
 - The amber tags mark what the OBR's file takes as given, from the review
   write-up: real GDP (G1), total investment (N1), export and import volumes
   (R1), CPI, which has no live equation (G3), and most tax receipts (V1). These
-  are the points Thibault's review builds on, three slides later.
-- The variables on each tile are examples of left-hand sides in that section,
-  not a full list.
+  are the points Thibault's review builds on, on the next slide.
+- Example variables, no longer on the tiles: GDP and output GDPMPS, GVA,
+  MSGVA; consumption CONS, CDUR, PD; investment and inventories IBUS, COC,
+  DINV; labour market ET, ULFS, LFSUR; exports XNOG, RPRICE, XPS; imports
+  MNOG, MS, MPS; balance of payments TB, CB, NIPD; North Sea oil TDOIL,
+  PXOIL, NSGTP; prices and wages EARN, CPIX, RPI; income accounts HHDI,
+  RHHDI, FYEMP; public sector CGG, PSCR, CGNB; finance and balance sheets M4,
+  NFWPE, NIIP.
 
-Sources: the OBR's model code (`obr_model_code_october_2025.txt`); published-model review.
+The three groups are ours, for the slide (defined in `module-links.py`):
 
-## 6. How the modules connect
+- Demand, 105 equations: consumption, investment and inventories, exports,
+  imports, GDP and output.
+- Supply and prices, 66: labour market, prices and wages, North Sea oil.
+- Income and sectors, 201: income accounts, public sector, balance of
+  payments, finance and balance sheets.
 
-The same 12 modules, with arrows for how the listing wires them together. For
-each pair we count the equations in the target module whose right-hand side
-uses a variable the source module determines (lags count, commented-out lines
-don't). The number on an arrow is that count. `module-links.py` computes the
-full matrix from the listing and writes `module-links.json`.
+The arrows. For each pair of groups we count the equations in the target group
+whose right-hand side uses a variable the source group determines (lags count,
+commented-out lines don't; an equation counts once per source group). The
+number on an arrow is that count, and its width follows it. Each label names
+the largest module links inside the flow:
 
-- Shown: every link of 6 or more equations, plus the demand loop. In order:
-  GDP and output → prices and wages 16; GDP and output → finance and balance
-  sheets 11; income accounts → prices and wages 10; balance of payments →
-  prices and wages 8 (the exchange rate into costs and trade prices); public
-  sector → income accounts 7; public sector → GDP and output 7; labour market
-  → prices and wages 7; finance and balance sheets → income accounts 7; prices
-  and wages → investment 6.
-- The demand loop: GDP and output → income accounts 5; prices and wages →
-  consumption 5; income accounts → consumption 2 (real household income into
-  the consumption equations).
-- Dashed: consumption → GDP 2, exports → GDP 1, imports → GDP 1. These reach
-  total final expenditure, but in the OBR's file real GDP is an input and
-  trade volumes are exogenous, so they don't move GDP. Our build opens the
-  consumption one by making GDP endogenous.
-- A count is the number of equations, not the size of an effect. North Sea oil
-  has no link above the cut-off.
+- Demand → supply and prices, 19: "output → prices". GDP and output → prices
+  and wages is 16 of them.
+- Supply and prices → demand, 21: "prices → spending". Prices and wages →
+  investment 6, consumption 5, imports 3; labour market → GDP and output 3.
+- Demand → income and sectors, 32: "output → incomes, balance sheets". GDP and
+  output → finance and balance sheets 11, income accounts 5; investment →
+  public sector 4.
+- Income and sectors → demand, 24: "government → output, imports". Public
+  sector → GDP and output 7, imports 5. Income accounts → consumption (real
+  household income into the consumption equations) is 2.
+- Supply and prices → income and sectors, 9: "prices, jobs → incomes". Prices
+  and wages → income accounts 3; labour market → public sector 2, finance 2.
+- Income and sectors → supply and prices, 22: "incomes, exchange rate →
+  prices". Income accounts → prices and wages 10; balance of payments → prices
+  and wages 8 (the exchange rate into costs and trade prices).
 
-Sources: the OBR's model code; `module-links.py` and `module-links.json` in this folder; published-model review (G1, R1).
+Dashed, inside the demand group: consumption → GDP and output 2, investment
+and inventories 3, exports 1, imports 1 (module-level counts). The spending
+components feed total final expenditure (TFE, TFEPS; imports feed GDPMPS), but
+in the OBR's file real GDP is an input and trade volumes are exogenous, so
+they don't move GDP there. Our build opens the consumption one by making GDP
+endogenous. One of investment's three is not an expenditure link (stock
+appreciation into company profits, FYCPR).
 
-## 7. How it runs
+A count is the number of equations, not the size of an effect.
+`module-links.py` computes both matrices from the listing and writes
+`module-links.json`.
 
-The six steps: transpile the EViews listing to Python; fill the inputs the EFO
-omits with 355 ONS series; close the model; solve quarter by quarter; anchor
-the baseline to the EFO with add-factors; score a reform as the shocked run
-minus the baseline.
+Sources: the OBR's model code (`obr_model_code_october_2025.txt`); `module-links.py` and `module-links.json` in this folder; published-model review (G1, N1, R1, G3, V1).
 
-The key step is the third (close): in the OBR's file GDP is an input and inventories balance
-the expenditure identity. We delete that equation, hold inventories on the EFO
-path and make GDP endogenous, so a demand shock can move GDP. The default
-closure also switches on the OBR's commented-out l.690 (the nominal-GDP pin);
-without it no quarter converges.
+## 6. Thibault's review, checked against the code (4 steps)
 
-Gauss-Seidel, the solver: it solves the roughly 370 equations together, each
-quarter, by computing each variable from the latest values of the others and
-repeating until nothing changes. It is EViews' standard model solver (general
-knowledge about EViews, not a repo claim), so we solve the file the way it is
-meant to be solved, and it needs no derivatives. Under the default closure
-every quarter converges to tolerance (`df.attrs["solver_exit_status"]`). Under
-the OBR's published closure it stalls, because the nominal GDP and investment
-deflator pair is undetermined (#42, #50), which is why we pin nominal GDP.
-
-The three equations are from the OBR's listing, written as maths to give a
-feel for the model, not as a specification: the consumption error-correction
-equation (l.4), the unemployment identity (l.163) and the household income
-identity (l.654). Coefficients are rounded to three decimal places on the
-slide (0.2645906, 0.1029795, 0.1250582 and 0.4392933 in the listing), and …
-marks terms left out. The Python the transpiler emits is not on the slide.
-
-Sources: the OBR's model code; `transpiler.py`; OBR model README (l.15, l.36, l.152); demo shocks.
-
-## 8. Thibault's review, checked against the code
+Steps 1 to 3 bring in his three headline points one at a time, each with our
+check and its result; step 4 adds the three further errors, smaller, below.
 
 - Thibault is in the room: invite him to introduce his findings, and to
   correct anything on the slide. It's his work.
@@ -169,12 +181,21 @@ Sources: the OBR's model code; `transpiler.py`; OBR model README (l.15, l.36, l.
   debt (PSND, GGGD) is computed but never used. Household interest payments do
   respond to Bank Rate (l.623).
 
-The strip at the top is the whole list: we checked each of the 53 points
+The subtitle is the whole list: we checked each of the 53 points
 against the published files. 42 are accurate (22 documented by the OBR, 20 not
 flagged), 8 partly true, and 3 are process claims that can't be checked from
 the code.
 
-The four on the slide are problems in
+Each of the three under the cards carries one plain line on what it does: G7,
+the same identity twice, so unemployment isn't pinned down (in our test,
+raising the participation starting value 2% moved unemployment from 5.4% to
+7.3%); G6, nominal GDP and the investment deflator are one equation short, so
+our build pins nominal GDP; N5, the foreign-currency term of the corporate
+FISIM equation (the margin banks earn on loans and deposits) is added where
+its neighbours subtract, about £3.3bn a quarter of cumulative drift as
+printed, which we can't tell whether the OBR offsets.
+
+The three under the cards (G7, G6, N5) are problems in
 the published files rather than design choices; G6 and G7 leave nominal GDP /
 the investment deflator and unemployment / participation not uniquely
 determined. The OBR's workfile may resolve them; the release doesn't show how.
@@ -184,31 +205,69 @@ design choice with the clearest behavioural consequence, if asked.
 The slide shows three of the four problems in the published files; the fourth
 is V5, pre-Brexit EU payment equations that are still live.
 
-We agree on the main point: as published, the model can't carry fiscal
+Say this; it is no longer a line on the slide. We agree on the main point: as published, the model can't carry fiscal
 feedback to output, because GDP is an input. Two refinements, if asked: G2
 (Bank Rate and real wages do reach consumption, just not output) and R2 (the
 current account feeds back through investment income).
 
-Sources: published-model review.
+Where this could go next (talking points, not on a slide; raise them only if
+the discussion goes there):
 
-## 9. How to take it to the OBR
-
-- Thibault's view: a documented gap is still a gap. About half the accurate
-  points (22 of 42) are open in the OBR's own variable list. Present it as his
-  position, in his words if he wants to put it, not as something we rebut.
-- Our suggestion: lead with the fact that the published model can't reproduce
-  the OBR's own forecast, because the add-factors and calibration that make it
+- Documented isn't the same as fine: about half the accurate points (22 of 42)
+  are open in the OBR's own variable list, and a documented gap is still a
+  gap.
+- The strongest point to lead with: the published model can't reproduce the
+  OBR's own forecast, because the add-factors and calibration that make it
   work aren't published.
-- Thibault writes to the OBR; any proposed fix can be run in our Python
-  version first. Check with him in the room that this is still the plan.
-- His reply of 13 October put our agreement at about 80%. Mention it only if
-  it comes up.
+- Any proposed fix can be tested in the open Python build first.
 - What our build adds, if asked: GDP is solved, not imposed; we built the
   add-factors; 355 ONS series fill unpublished inputs.
 
 Sources: published-model review; OBR model README.
 
-## 10. How well it fits: two very different numbers
+## 7. How it runs (2 steps)
+
+After the review of the OBR's file, this is our build: how the same equations
+are run. Step 1 is the pipeline, step 2 the three example equations. The last
+two steps of the pipeline (anchor, score) lead into the next slide.
+
+The six steps: transpile the EViews listing to Python; fill the inputs the EFO
+omits with 355 ONS series; close the model; solve quarter by quarter; anchor
+the baseline to the EFO with add-factors; score a reform as the scenario run
+minus the baseline.
+
+The key step is the third (close): in the OBR's file GDP is an input and inventories balance
+the expenditure identity. We delete that equation, hold inventories on the EFO
+path and make GDP endogenous, so a demand shock can move GDP. The default
+closure also switches on the OBR's commented-out l.690 (the nominal-GDP pin);
+without it no quarter converges.
+
+Gauss-Seidel, the solver (named on the "Solve" step; the explanation is no
+longer on the slide): it solves the roughly 370 equations together, each
+quarter, by computing each variable from the latest values of the others and
+repeating until nothing changes. It is EViews' standard model solver (general
+knowledge about EViews, not a repo claim), so we solve the file the way it is
+meant to be solved, and it needs no derivatives. Under the default closure
+every quarter converges to tolerance (`df.attrs["solver_exit_status"]`). Under
+the OBR's published closure it stalls, because the nominal GDP and investment
+deflator pair is undetermined (#42, #50), which is why we pin nominal GDP.
+
+The three equations are from the OBR's listing, written as maths to give a
+feel for the model, not as a specification: the consumption error-correction
+equation (l.4), the unemployment identity (l.163) and the household income
+identity (l.654). Coefficients are rounded to three decimal places on the
+slide (0.2645906, 0.1029795, 0.1250582 and 0.4392933 in the listing), and …
+marks terms left out. The Python the transpiler emits is not on the slide.
+
+Sources: the OBR's model code; `transpiler.py`; OBR model README (l.15, l.36, l.152); demo shocks.
+
+## 8. How well it fits: two very different numbers (2 steps)
+
+Two mirrored columns: a heading, two stats and three lines each. Step 1 is the
+anchored column, step 2 the free-running one. "Average error" is the mean
+absolute percentage error (MAPE) over 2025Q1–2027Q4. The subtitle carries the
+warning: the free-running gap measures this emulator, not the OBR's forecast
+error.
 
 Left, anchored:
 
@@ -217,10 +276,10 @@ Left, anchored:
   GDP terms sit on the EFO.
 - Reforms are scored as deltas from the anchored baseline, so the add-factors
   cancel.
-- Every baseline and shocked solve in the demo set converges in 12 of 12
+- Every baseline and scenario solve in the demo set converges in 12 of 12
   quarters ("converged" covers the equations that evaluate).
 - Unemployment is not anchored: 3.75% against 5.07% at 2027Q4 (and 1.05%
-  against 4.17% by 2031Q1, on slide 17). The anchored GDP gap reaches 1.24% by
+  against 4.17% by 2031Q1, on slide 14). The anchored GDP gap reaches 1.24% by
   2031Q1.
 
 Right, free-running (add-factors off, GDP made endogenous, unpublished inputs seeded):
@@ -228,7 +287,7 @@ Right, free-running (add-factors off, GDP made endogenous, unpublished inputs se
 Say this one carefully. The ~4% free-running error is not the OBR's forecast
 error: in the OBR's model GDP is an input, so it can't miss it. The gap
 measures our closure swap plus the inputs the OBR doesn't publish. The
-platform's registry labels the emulator "anchored to the October 2026 EFO, not
+platform's registry labels the emulator (the label is no longer on the slide) "anchored to the October 2026 EFO, not
 validated as a forecaster; predictive and policy checks weak".
 
 If asked about the held-add-factor forecast (0.35% GDP, 7 of 8 in band): its
@@ -237,7 +296,9 @@ model, so it isn't evidence of forecast skill.
 
 The free-running figure has the add-factors off, GDP made endogenous and unpublished inputs seeded.
 
-The three rows on the slide are from the full scorecard:
+The right column's figures are from the full scorecard (the table is no longer
+on the slide): consumption 6.92%, 8 of 11 within band, and the three poor
+ones.
 
 Default closure, October 2026 EFO, 2025Q1–2027Q4. Bands: rates within 1.0pp,
 net balances within 1.5% of GDP, levels within 10% MAPE. Employment scores
@@ -250,15 +311,18 @@ The full scorecard: real GDP 4.05%, consumption 6.92%, business investment 7.34%
 
 Sources: calibration scorecard; OBR model README; site_figures.json; macro platform README.
 
-## 11. Part 3: policy shocks and limits
+## 9. Part 3: policy scenarios and limits
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 12. Shocks against the OBR's multipliers
+## 10. Policy scenarios against the OBR's multipliers (2 steps)
+
+Step 1 is the default setup (three rows); step 2 adds the two rows that need
+an opt-in switch. The variable names are no longer on the slide.
 
 What is simulated, from the shocks table in `docs/demo.md` (rows 1, 2, 4, 4b
 and 7). Every shock is sustained every quarter from 2025Q1 for 12 quarters and
-scored as the shocked run minus the baseline anchored to the October 2026 EFO:
+scored as the scenario run minus the baseline anchored to the October 2026 EFO:
 
 - Government consumption: +£1.25bn a quarter of real spending (`CGG` +1,250).
 - Income tax: basic rate +1p, £1.725bn a quarter (`TYEM` +1,725, HMRC ready
@@ -268,9 +332,13 @@ scored as the shocked run minus the baseline anchored to the October 2026 EFO:
 - Government investment: +£3bn a quarter (`CGIPS` +3,000), opt-in investment
   closure.
 
-Each dot is the change in GDP per £1 of the shock after 1, 4 and 12 quarters;
-the orange line is the OBR's published impact multiplier. Where the three dots
-would overlap they are stacked.
+Each row has the same marks on one line: a dot for the change in GDP per £1
+after 1, 4 and 12 quarters, joined by a line, and an orange tick for the OBR's
+published impact multiplier. Every row has the same three dots in the same colours. Where the
+values are too close for numbered dots (government consumption, VAT by default
+and government investment), the dots are smaller, at their true places, with
+the quarter above each. The three values are in the right
+column, with the OBR's under them.
 
 Ratios at quarters 1, 4 and 12, from `docs/demo.md`. Tax rows are current-price
 GDP per pound of revenue (the OBR's basis); government consumption is real GDP
@@ -290,16 +358,23 @@ tapering.
 
 Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through changelog (#70).
 
-## 13. Income tax
+## 11. Income tax (2 steps)
+
+Step 1 is the chart, with the four-step route above it (HMRC costing →
+household income → consumption → GDP); step 2 is the panel of three takeaways.
+Only quarters 1, 4, 8 and 12 carry a value; the others are 227, 285, 381, 422,
+456, 510, 532 and 551 (£m, falls).
 
 +1p on the basic rate, £1,725m a quarter (HMRC ready reckoner, June 2025,
 2026-27 column, £6.9bn a year divided by four), sustained from 2025Q1. Real
 GDP falls 161 at quarter 1, 335 at quarter 4 and 569 at quarter 12 (£m). Ratio
-0.10 / 0.21 / 0.38 against the OBR's 0.3, which fades. Receipts and borrowing
+0.10 / 0.21 / 0.38 against the OBR's 0.3, which fades; the panel says the
+same in pence per £1 of tax (10p, 38p, 30p), which is current-price GDP per
+pound of current-price revenue. Receipts and borrowing
 move one for one; lower consumption doesn't reduce other receipts. GDP change
 equals the consumption change to the pound.
 
-Where the shock comes from, which is the flow across the top of the slide:
+Where the change comes from, which is the route above the chart:
 
 - The OBR model has no tax calculator. The revenue is an input: `TYEM` (income
   tax) is exogenous in the listing, and we shock it by £1,725m a quarter, the
@@ -314,19 +389,22 @@ Where the shock comes from, which is the flow across the top of the slide:
 
 The OBR model does not return decile impacts: it is an aggregate model with
 one consumption equation and no household split. Deciles come from
-PolicyEngine's microsimulation, run alongside (slide 21). The PolicyEngine
+PolicyEngine's microsimulation, run alongside (slide 19). The PolicyEngine
 costing on this slide only changes the size of the input.
 
 Sources: demo shocks; demo_shocks.json; OBR model README (l.33).
 
-## 14. Investment: off by default, on with one switch
+## 12. Investment: off by default, on with one switch (3 steps)
+
+Step 1 is the switch card (off: the OBR's file; on: our opt-in); step 2
+corporation tax; step 3 government investment.
 
 In the OBR's file total investment is an input (`IF` has no live equation),
 so corporation tax and public investment do nothing to GDP by default, and
 `run_reform` warns. `investment_closure=True` switches on the listing's own
 commented-out `IF` identity (l.86).
 
-The investment closure freezes MSGVA, PIF and PIRHH; without the guard, a
+The chip on the switch card ("stop-gap"): the investment closure freezes MSGVA, PIF and PIRHH to keep the run stable; without the guard, a
 zero-shock baseline runs business investment from £86bn to £522bn by 2027Q4.
 
 - Corporation tax +5pp: nothing in quarters 1–2, then −£78m at quarter 4 and
@@ -343,7 +421,10 @@ and "about £1 of GDP per £1, with no fade" is identity pass-through at about
 
 Sources: demo shocks (rows 5 and 7); OBR model README (l.31, l.34).
 
-## 15. Bank Rate
+## 13. Bank Rate (2 steps)
+
+Step 1 is the three bars; step 2 the channels beside them (two respond, five
+don't).
 
 +1pp for four quarters, peak at quarter 4: −0.057% of GDP in the default run
 (mortgage rate held, a lower bound), −0.149% with `monetary_conditioning=True`
@@ -361,10 +442,10 @@ England range is shown as one bar from −0.2% to −0.35%.
 
 Sources: demo shocks (rows 6 and 6b); monetary conditioning; OBR model README (l.35).
 
-## 16. Known limits, and whose they are
+## 14. Known limits, and whose they are (2 steps)
 
-The slide separates limits we inherit from the OBR's published model from
-limits of our replication.
+The slide separates limits we inherit from the OBR's published model (step 1)
+from limits of our replication (step 2).
 
 Inherited:
 
@@ -398,13 +479,23 @@ Seasonally adjusting the components is the follow-up.
 
 Sources: OBR model README; site_figures.json; TYWHH changelog (#71).
 
-## 17. Part 4: the macro platform
+## 15. Part 4: the macro platform
+
+Every slide in this part carries an amber "Preview, not yet launched" marker
+under its title.
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 18. The macro platform
+## 16. The macro platform
 
-Not yet launched. Seven public models (`site_contract.py`'s list), each with
+Not yet launched. The status column quotes the site's own label for each
+model, word for word (its "Where each model fails" section): exact for
+implemented rules (the microsimulation), anchored, not validated (the OBR
+emulator), partial replication (BoE SVAR, DEFINE-UK, US HANK), calibrated, no
+outcome benchmark (OG-UK), replicates the Fed's solver (FRB/US). The site
+says none is validated as a forecaster.
+
+Seven public models (`site_contract.py`'s list), each with
 its own repo. Results from different model classes are complementary, not
 comparable, and the scoring tool won't average them. FRB/US and HANK refuse
 reform scoring on purpose: no mapping from a PolicyEngine reform exists, and
@@ -414,7 +505,7 @@ DEFINE-UK is on the table as one of the seven; its results are scenario deltas f
 
 Sources: model comparison page; macro platform README.
 
-## 19. The platform, live
+## 17. The platform, live
 
 - Click the frame, then use the buttons: Home, Models, Compare, OBR model,
   OBR validation, Forecasts. Expand fills the screen; New tab opens the site.
@@ -446,7 +537,7 @@ published closure in a demand run (no quarter converges).
 
 Sources: the live site; demo shocks; Use page; `integration/pyproject.toml` (hosted pin).
 
-## 20. Use it from Claude
+## 18. Use it from Claude (3 steps)
 
 The slide shows the three steps someone takes in Claude; the details are from
 the site's Use page and `mcp_server.py`.
@@ -474,18 +565,22 @@ the site's Use page and `mcp_server.py`.
 - Dated data snapshots under `data/vintages/`, never edited, so any score can
   be reproduced against the data it saw.
 
-The strip under the three steps lists the other ways in: the MCP server, the CLI, Python (`run_reform()`), the dashboard and the dated data snapshots.
+One click per step. The first card also lists the other ways in: the MCP server, the CLI, Python (`run_reform()`) and the dashboard. The dated data snapshots are no longer on the slide.
 
 Sources: Use page; `mcp_server.py`; `cli.py`; macro platform README.
 
-## 21. From a microsimulation reform to GDP
+## 19. From a microsimulation reform to GDP (3 steps)
+
+Step 1 is the reform, entered once; step 2 the household answer; step 3 the
+route to the economy answer. The check against HMRC sits in the static-cost
+card, and the GDP card points back to the income-tax slide.
 
 One worked example, the basic rate +1p, giving two answers. Households: the
 decile changes, winners and losers and poverty come straight from the
 PolicyEngine-UK microsimulation and stay there; the OBR model has no
 households. Economy: the microsimulation's static cost (£6.55bn a year) goes
 through the bridge into the OBR model, and GDP, consumption and investment
-come out. The GDP path on slide 13 is the same reform with HMRC's costing
+come out. The GDP path on slide 11 is the same reform with HMRC's costing
 (£1,725m a quarter) as the input; don't mix the two bases.
 
 `score_reform(model="obr")`: a PolicyEngine-UK reform is costed per year with
@@ -501,11 +596,11 @@ post-behavioural and administrative.
 
 Sources: `mcp_server.py`; `capabilities.py`.
 
-## 22. Part 5: working together
+## 20. Part 5: working together
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 23. Where we could work together
+## 21. Where we could work together
 
 Options to discuss, not commitments. Each maps to something open in the repo:
 the closure choice and a spending shock that moves borrowing; the investment
@@ -514,7 +609,7 @@ listing's open problems (G6, G7, N5); anchoring participation; joint write-ups.
 
 Sources: OBR model README; published-model review; DEFINE-UK model page.
 
-## 24. Questions for NEF
+## 22. Questions for NEF
 
 Listen more than talk here.
 
@@ -527,6 +622,6 @@ and dates in the room:
 3. A shared review of the open equation and closure issues on GitHub.
 4. A check-in date to review results and a possible write-up.
 
-## 25. Thank you
+## 23. Thank you
 
 Contact on the slide: vahid@policyengine.org.

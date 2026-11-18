@@ -183,5 +183,48 @@
       1,
       0
     ]
+  ],
+  "groupNote": "groupMatrix[i][j]: equations in group j that use a variable group i determines",
+  "groups": {
+    "Demand": [
+      "Consumption",
+      "Investment and inventories",
+      "Exports",
+      "Imports",
+      "GDP and output"
+    ],
+    "Supply and prices": [
+      "Labour market",
+      "Prices and wages",
+      "North Sea oil"
+    ],
+    "Income and sectors": [
+      "Income accounts",
+      "Public sector",
+      "Balance of payments",
+      "Finance and balance sheets"
+    ]
+  },
+  "groupOrder": [
+    "Demand",
+    "Supply and prices",
+    "Income and sectors"
+  ],
+  "groupMatrix": [
+    [
+      0,
+      19,
+      32
+    ],
+    [
+      21,
+      0,
+      9
+    ],
+    [
+      24,
+      22,
+      0
+    ]
   ]
 }

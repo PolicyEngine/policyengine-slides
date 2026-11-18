@@ -1,4 +1,4 @@
-"""Count the links between the modules on the NEF deck's module slides.
+"""Count the links between the modules on the NEF deck's module slide.
 
 Usage: python module-links.py /path/to/obr-macroeconomic-model module-links.json
 
@@ -9,6 +9,11 @@ Equations are read with the model repo's own parser
 (obr_macro/transpiler.py), and each belongs to the module of the listing
 section it sits under (the mapping is in MODULE_OF, and in content.ts). A
 variable defined in more than one section belongs to the first.
+
+The slide draws the modules in three groups (GROUPS). The group matrix counts,
+for each pair of groups, the equations in the target group whose right-hand
+side uses a variable any module of the source group determines; an equation
+counts once, however many of the source group's modules it draws on.
 """
 
 import importlib.util
@@ -50,6 +55,28 @@ ORDER = [
     "Public sector",
     "Finance and balance sheets",
 ]
+GROUPS = {
+    "Demand": [
+        "Consumption",
+        "Investment and inventories",
+        "Exports",
+        "Imports",
+        "GDP and output",
+    ],
+    "Supply and prices": [
+        "Labour market",
+        "Prices and wages",
+        "North Sea oil",
+    ],
+    "Income and sectors": [
+        "Income accounts",
+        "Public sector",
+        "Balance of payments",
+        "Finance and balance sheets",
+    ],
+}
+GROUP_OF = {module: group for group, modules in GROUPS.items() for module in modules}
+assert sorted(GROUP_OF) == sorted(ORDER)
 HEADER = re.compile(r"^'\s*(Group \d+:|Market sector GVA satellite)")
 NAME = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 
@@ -103,12 +130,25 @@ def main(repo: str, out: str) -> None:
         for source in {owner[u] for u in used if u in owner and owner[u] != mod}:
             counts[source][mod] += 1
 
+    group_counts = {a: {b: 0 for b in GROUPS} for a in GROUPS}
+    for mod, _, rhs in equations:
+        used = {name.upper() for name in NAME.findall(rhs)}
+        target = GROUP_OF[mod]
+        for source in {GROUP_OF[owner[u]] for u in used if u in owner} - {target}:
+            group_counts[source][target] += 1
+
     Path(out).write_text(
         json.dumps(
             {
                 "note": "matrix[i][j]: equations in module j that use a variable module i determines",
                 "order": ORDER,
                 "matrix": [[counts[a][b] for b in ORDER] for a in ORDER],
+                "groupNote": "groupMatrix[i][j]: equations in group j that use a variable group i determines",
+                "groups": GROUPS,
+                "groupOrder": list(GROUPS),
+                "groupMatrix": [
+                    [group_counts[a][b] for b in GROUPS] for a in GROUPS
+                ],
             },
             indent=2,
         )

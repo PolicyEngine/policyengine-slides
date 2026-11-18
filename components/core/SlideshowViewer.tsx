@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SlideshowProvider, SlideshowContextValue } from './SlideshowContext';
-import { SlideshowConfig, flattenSlides, getSlideComponent } from '@/lib/types';
+import { SlideshowConfig, counterLabel, flattenSlides, getSlideComponent } from '@/lib/types';
 import { buildSlideUrl, exportSettleMs, isExportMode, parseSlideParam } from '@/lib/slide-url';
 import { MAX_SETTLE_MS, releaseExportHold } from '@/lib/export-hold';
 
@@ -153,7 +153,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
               </button>
 
               <span className="text-base font-medium text-white min-w-[4rem] text-center">
-                {currentStep + 1} / {totalSteps}
+                {counterLabel(steps, currentStep, config.counter)}
               </span>
 
               <button

@@ -14,7 +14,10 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
-  font-size: calc(clamp(11px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1));
+  /* Always a clear gap above the footer; BuildScope lowers --fit when the
+     content would otherwise run into it. */
+  padding-bottom: 1.25rem;
+  font-size: calc(clamp(8px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1) * var(--fit, 1));
 }
 
 /* Centre the body below the title, clear of the sources line. */
@@ -215,48 +218,43 @@
   color: var(--color-gray-400);
 }
 
-/* A strip of short icon items on one line. */
-.strip {
+/* Steps on one line, with an arrow between each pair. */
+.steps {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 2.5em;
-  row-gap: 0.5em;
+  gap: 0.5em 0.6em;
   color: var(--color-gray-600);
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
-.strip > span {
+.steps > span {
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
 }
 
-.strip svg {
+.steps svg {
   height: 1.4em;
   width: 1.4em;
 }
 
-.strip b {
+.steps b {
   color: var(--pe-dark);
   font-weight: 600;
 }
 
-/* Notes: one line under a figure. */
-.takeaway {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  border-left: 4px solid var(--pe-teal);
-  padding-left: 0.8em;
-  color: var(--pe-dark);
-  font-size: 1.3em;
-  line-height: 1.35;
+.steps .stepArrow {
+  height: 1.1em;
+  width: 1.1em;
+  color: var(--color-gray-400);
 }
 
-.takeaway svg {
-  height: 1.3em;
-  width: 1.3em;
+/* A line of plain text under a figure. */
+.caption {
+  color: var(--color-gray-600);
+  font-size: 1.15em;
+  line-height: 1.35;
 }
 
 /* Chips. */
@@ -333,6 +331,13 @@
   font-weight: 600;
 }
 
+/* A table with many rows. */
+.tight td {
+  padding-top: 0.32em;
+  padding-bottom: 0.32em;
+  line-height: 1.2;
+}
+
 .rowLabel {
   display: flex;
   align-items: center;
@@ -360,58 +365,323 @@
   color: var(--color-gray-400);
 }
 
-/* Model modules. */
-.module {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: 0.8em;
-  row-gap: 0.5em;
-  padding: 0.8em 1.1em;
+/* Layers: three cards with the same rows, so the columns line up. */
+.layerGrid {
+  grid-template-rows: repeat(4, auto);
+  column-gap: 1.6em;
 }
 
-.module h2 {
-  font-size: 1.2em;
+.layer {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 1.1em;
+  padding: 1.3em 1.5em;
+}
+
+.layer h2 {
+  font-size: 1.6em;
+}
+
+.layer h2 .chip {
+  margin-left: auto;
+  font-size: 0.55em;
+}
+
+.layerLine > span {
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card .layerLine p {
+  margin-top: 0.15em;
+  color: var(--pe-dark);
+  font-size: 1.3em;
+}
+
+.standIns {
+  margin-top: 0.5em;
+  display: grid;
+  gap: 0.4em;
+  color: var(--color-gray-600);
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+
+.standIns li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.standIns svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.standIns b {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.layerFacts {
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1em;
+}
+
+.card .caveat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
+  color: var(--pe-amber-dark);
+}
+
+.caveat svg {
+  margin-top: 0.1em;
+  height: 1.2em;
+  width: 1.2em;
+  color: var(--pe-amber-dark);
+}
+
+/* Cards that end in a verdict; the rows line up across the cards. */
+.verdictGrid {
+  grid-template-rows: repeat(3, auto);
+}
+
+.verdictCard {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0.6em;
+  padding: 1.2em 1.4em;
+}
+
+.card.verdictCard p {
+  margin-top: 0;
+}
+
+.verdict {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 0.3em;
+  margin-top: 0.3em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.8em;
+}
+
+.verdict small {
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card .verdict p {
+  color: var(--pe-dark);
+  font-size: 1.05em;
+}
+
+.verdict .chip {
+  margin-top: 0.4em;
+  font-size: 0.95em;
+}
+
+/* A second, quieter block under the slide's main one. */
+.quiet {
+  display: grid;
+  gap: 0.8em;
+  margin-top: 0.6em;
+}
+
+.quietItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+  color: var(--color-gray-600);
+  font-size: 1em;
+  line-height: 1.35;
+}
+
+.quietItem b {
+  display: block;
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.quietItem small {
+  margin-left: 0.4em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 400;
+}
+
+/* A hero figure with a panel of takeaways beside it. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 3.5em;
+}
+
+.panel {
+  display: grid;
+  gap: 1.3em;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.8em;
+}
+
+.footnotes {
+  display: grid;
+  justify-items: start;
+  gap: 0.5em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1em;
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.3;
+}
+
+.footnotes p {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.footnotes svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+/* A switch card, then what it turns on. */
+.switchRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.2fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 2.5em;
+}
+
+.switchRow .stat {
+  font-size: 2.5em;
+}
+
+.hero .hbars {
+  grid-template-columns: 19em 1fr;
+}
+
+.switch {
+  display: grid;
+  justify-items: start;
+  gap: 1em;
+  padding: 1.3em 1.5em;
+}
+
+.switch .chip {
+  border-radius: 0.7em;
+  white-space: normal;
+}
+
+.switch .layerLine > span {
+  color: var(--color-gray-500);
+}
+
+.card .or {
+  margin-top: 1.1em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.8em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.panel .chipRow {
+  margin-top: 0;
+}
+
+.panel .chip {
+  font-size: 1.1em;
+}
+
+/* Two columns with the same rows on each side. */
+.mirror {
+  column-gap: 3.5em;
+  row-gap: 1.3em;
+  align-items: start;
+}
+
+.statNote small {
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+}
+
+/* Preview marker (in the header, so in rem). */
+.preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  border-radius: 9999px;
+  background: var(--bg-secondary);
+  padding: 0.25rem 0.85rem;
+  color: var(--pe-amber-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.preview svg {
+  color: var(--pe-amber-dark);
 }
 
 .moduleCount {
   color: var(--pe-teal);
-  font-size: 1.7em;
+  font-size: 1.5em;
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 
-.card.module .moduleFoot {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.3em 0.8em;
-  margin-top: 0;
-  min-height: 1.8em;
-  font-size: 1em;
-}
-
-/* Multiplier dot plot. */
+/* Multiplier dot plot: every row has the same marks on one baseline. */
 .dotPlot {
   display: grid;
-  grid-template-columns: 24em 1fr 13em;
+  grid-template-columns: 30em 1fr 15em;
   align-items: center;
-  row-gap: 0.3em;
-  column-gap: 1.5em;
+  column-gap: 1.8em;
+}
+
+.dotGroup,
+.dotHead {
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
+  padding-bottom: 0.3em;
+  color: var(--color-gray-500);
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dotRule {
+  align-self: stretch;
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
 }
 
 .dotLabel {
   display: flex;
   align-items: center;
-  gap: 0.7em;
+  gap: 0.8em;
 }
 
 .dotLabel svg {
-  height: 1.9em;
-  width: 1.9em;
+  height: 2em;
+  width: 2em;
 }
 
 .dotLabel h2 {
@@ -421,26 +691,26 @@
   line-height: 1.2;
 }
 
-.dotLabel p {
-  color: var(--color-gray-600);
-  font-size: 1em;
-  line-height: 1.25;
+.dotLabel p .chip {
+  margin-left: 0.7em;
+  font-size: 0.8em;
 }
 
-.dotLabel p + p {
-  color: var(--color-gray-500);
-  font-size: 0.9em;
+.dotLabel p {
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.3;
 }
 
 .track {
   position: relative;
-  height: 4em;
+  height: 4.6em;
   border-bottom: 1px solid var(--color-gray-200);
 }
 
 .trackLine {
   position: absolute;
-  top: 50%;
+  top: 58%;
   height: 0.25em;
   border-radius: 0.125em;
   background: var(--color-teal-200);
@@ -449,10 +719,10 @@
 
 .dot {
   position: absolute;
-  top: 50%;
+  top: 58%;
   display: flex;
   height: 2.4em;
-  width: 2.4em;
+  min-width: 2.4em;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -460,22 +730,33 @@
   color: var(--text-inverse);
   font-size: 0.75em;
   font-weight: 700;
+  white-space: nowrap;
   transform: translate(-50%, -50%);
 }
 
-/* Three dots that would overlap are stacked, so each number can be read. */
+/* Values too close for numbered dots: the same three dots, smaller, at
+   their true places, each with its quarter above it. */
 .dotSmall {
-  height: 1.75em;
-  width: 1.75em;
-  font-size: 0.68em;
+  height: 1em;
+  min-width: 1em;
+  width: 1em;
+  font-size: 1em;
 }
 
-.dotUp {
-  transform: translate(-50%, -160%);
+.dotSmall span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 0.15em;
+  color: var(--pe-dark);
+  font-size: 0.72em;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateX(-50%);
 }
 
-.dotDown {
-  transform: translate(-50%, 60%);
+.dotSmall.dotRaised span {
+  margin-bottom: 1.25em;
 }
 
 .dotQ1 {
@@ -493,24 +774,39 @@
 
 .benchmark {
   position: absolute;
-  top: 0.15em;
-  bottom: 0.15em;
+  top: 1.2em;
+  bottom: 0.25em;
   width: 0.25em;
   border-radius: 0.125em;
   background: var(--pe-amber);
   transform: translateX(-50%);
 }
 
+.benchmark span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  color: var(--pe-amber-dark);
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1.4;
+  transform: translateX(-50%);
+}
+
 .dotValue {
   white-space: nowrap;
-  color: var(--color-gray-600);
-  font-size: 1.05em;
+  color: var(--pe-dark);
+  font-size: 1.2em;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  text-align: right;
+  line-height: 1.3;
 }
 
 .dotValue span {
+  display: block;
   color: var(--pe-amber-dark);
+  font-size: 0.85em;
+  font-weight: 400;
 }
 
 .axis {
@@ -526,13 +822,23 @@
   transform: translateX(-50%);
 }
 
+.axisLabel {
+  color: var(--color-gray-500);
+  font-size: 0.95em;
+  text-align: right;
+}
+
 .legend {
-  margin-top: 0.8em;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75em;
+  align-self: stretch;
+  align-items: center;
+  gap: 0.2em 1.5em;
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
+  padding-bottom: 0.3em;
   color: var(--color-gray-600);
-  font-size: 1.05em;
+  font-size: 0.95em;
 }
 
 .legend span {
@@ -548,17 +854,6 @@
   border-radius: 9999px;
 }
 
-.legendQ1 {
-  background: var(--color-teal-200);
-}
-
-.legendQ4 {
-  background: var(--color-teal-400);
-}
-
-.legendQ12 {
-  background: var(--color-teal-700);
-}
 
 .legendTick {
   display: inline-block;
@@ -574,7 +869,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
   gap: 0.6em;
-  height: 8.5em;
+  height: 15em;
   border-top: 2px solid var(--color-gray-300);
 }
 
@@ -662,6 +957,7 @@
 }
 
 .hbarValue {
+  white-space: nowrap;
   color: var(--pe-dark);
   font-size: 1.35em;
   font-weight: 700;
@@ -743,31 +1039,69 @@
   color: var(--pe-teal);
 }
 
-/* Question and scenario, at the top of a results slide. */
+/* Question and scenario: one panel in two halves at the top of a results
+   slide, with extra room before the figure under it. */
 .ask {
   display: grid;
-  gap: 0.35em;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  margin-bottom: 0.9em;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.8em;
+  background: var(--bg-secondary);
+}
+
+.body .ask {
+  animation: nefFade 600ms ease-out 100ms both;
+}
+
+.ask > div {
+  padding: 1em 1.5em;
+}
+
+.ask > div + div {
+  border-left: 1px solid var(--color-gray-300);
+}
+
+.askLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.askLabel svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.askQuestion {
+  margin-top: 0.3em;
+  color: var(--pe-dark);
+  font-size: 1.45em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.askScenario {
+  margin-top: 0.4em;
   color: var(--color-gray-700);
-  font-size: 1.2em;
+  font-size: 1.15em;
   line-height: 1.35;
 }
 
-.ask p {
-  display: grid;
-  grid-template-columns: 1.4em 5.2em minmax(0, 1fr);
-  align-items: start;
-  gap: 0.45em;
-}
+@media (max-width: 900px) {
+  .ask {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-.ask svg {
-  margin-top: 0.05em;
-  height: 1.4em;
-  width: 1.4em;
-}
-
-.ask b {
-  color: var(--pe-dark);
-  font-weight: 600;
+  .ask > div + div {
+    border-top: 1px solid var(--color-gray-300);
+    border-left: 0;
+  }
 }
 
 /* Maths in a table cell. */
@@ -776,34 +1110,131 @@
   font-size: 0.95em;
 }
 
-/* Module network: SVG arrows under HTML nodes. */
-.network {
+/* Module map: group boxes, SVG arrows over them, module tiles on top. All
+   three are placed in the same units, so they keep their places at any size. */
+.moduleMap {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1000 / 270;
+  /* As wide as the slide, unless that would make it taller than the space
+     under the header (a short window). */
+  width: min(100%, calc((100vh - 25rem) * 1000 / 338));
+  margin-inline: auto;
+  /* Text inside is sized from the map's width (cqw), like its boxes. */
+  container-type: inline-size;
+  aspect-ratio: 1000 / 338;
 }
 
-.network > svg {
+.moduleMap > svg {
   position: absolute;
   inset: 0;
   height: 100%;
   width: 100%;
 }
 
-.link {
-  stroke: var(--color-teal-400);
+.groupBox {
+  position: absolute;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.8em;
+  background: var(--bg-secondary);
+  padding: 0.5em 1em;
+  color: var(--color-gray-600);
+  font-size: 0.96cqw;
+  line-height: 1.3;
+}
+
+.groupBox b {
+  margin-right: 0.7em;
+  color: var(--pe-dark);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.moduleTile {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-content: center;
+  align-items: center;
+  gap: 0.25em 0.6em;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 0 0.8em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+  font-size: 0.96cqw;
+}
+
+.moduleTile svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.moduleTile h2 {
+  color: var(--pe-dark);
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.moduleTile .chip {
+  grid-column: 2 / -1;
+  justify-self: start;
+  padding: 0.1em 0.6em;
+  font-size: 0.72em;
+}
+
+/* Flows between groups: one colour for each group they leave. */
+.flowOutput {
+  --flow: var(--pe-teal);
+}
+
+.flowPrices {
+  --flow: var(--pe-amber);
+}
+
+.flowIncomes {
+  --flow: var(--pe-dark);
+}
+
+.flowLine {
+  stroke: var(--flow);
+  stroke-dasharray: 1;
+}
+
+.flowHead {
+  fill: var(--flow);
+}
+
+.keyLine {
+  display: inline-block;
+  height: 0;
+  width: 1.8em;
+  flex-shrink: 0;
+  border-top: 0.3em solid var(--flow, var(--color-gray-400));
+}
+
+
+.flowLabel {
+  fill: var(--pe-dark);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.flowCount {
+  fill: var(--pe-dark);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
 }
 
 .linkCut {
   stroke: var(--color-gray-400);
-  stroke-dasharray: 7 5;
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
 }
 
-.arrowHead path {
-  fill: var(--color-teal-400);
-}
-
-.arrowHeadCut path {
+.linkCutHead {
   fill: var(--color-gray-400);
 }
 
@@ -813,34 +1244,46 @@
   stroke-width: 1;
 }
 
-.linkCount {
-  fill: var(--pe-dark);
-  font-size: 11px;
-  font-weight: 700;
-  text-anchor: middle;
-  dominant-baseline: central;
+.mapKey {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  gap: 0.15em;
+  color: var(--color-gray-600);
+  font-size: 0.77cqw;
+  line-height: 1.25;
 }
 
-.networkNode {
-  position: absolute;
+.mapKey li {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  border: 1px solid var(--color-gray-200);
-  border-left: 4px solid var(--pe-teal);
-  border-radius: 0.5em;
-  background: var(--bg-card);
-  padding: 0 0.7em;
-  box-shadow: 0 1px 2px var(--shadow-light);
-  color: var(--pe-dark);
-  font-size: 1.05em;
-  font-weight: 600;
-  line-height: 1.15;
 }
 
-.networkNode svg {
-  height: 1.5em;
-  width: 1.5em;
+.mapKey .chip {
+  padding: 0.05em 0.6em;
+  font-size: 0.85em;
+}
+
+.cutLabel {
+  fill: var(--color-gray-500);
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.keyBadge {
+  display: inline-flex;
+  height: 1.7em;
+  width: 1.8em;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 9999px;
+  background: var(--bg-card);
+  color: var(--pe-dark);
+  font-size: 0.85em;
+  font-weight: 700;
 }
 
 /* One source splitting into lanes. */
@@ -984,11 +1427,238 @@
 .body > * > *:nth-child(7) { animation-delay: 640ms; }
 .body > * > *:nth-child(n + 8) { animation-delay: 700ms; }
 
+/* Builds: BuildScope puts the slide's step on the body; an element with
+   data-step above it is hidden (and keeps its place), and animates in when
+   its step arrives. An export shows every step (data-build="all"). */
+@keyframes nefReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.body [data-step] {
+  animation: nefReveal 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.body svg [data-step] {
+  animation-name: nefFade;
+}
+
+/* A flow's line draws on from its start (pathLength is 1). */
+.body svg .flowLine[data-step] {
+  animation-name: nefDraw;
+  animation-duration: 600ms;
+}
+
+@keyframes nefDraw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes nefFade {
+  from {
+    opacity: 0;
+  }
+}
+
+.deck .body[data-build="1"] [data-step="2"],
+.deck .body[data-build="1"] [data-step="3"],
+.deck .body[data-build="1"] [data-step="4"],
+.deck .body[data-build="1"] [data-step="5"],
+.deck .body[data-build="2"] [data-step="3"],
+.deck .body[data-build="2"] [data-step="4"],
+.deck .body[data-build="2"] [data-step="5"],
+.deck .body[data-build="3"] [data-step="4"],
+.deck .body[data-build="3"] [data-step="5"],
+.deck .body[data-build="4"] [data-step="5"] {
+  visibility: hidden;
+  animation: none;
+}
+
+/* Motion inside figures: bars grow, marks slide along their track, hero
+   numbers count up. Each ends at the element's own size, place or value. */
+@keyframes nefGrowDown {
+  from {
+    height: 0;
+  }
+}
+
+@keyframes nefGrowRight {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes nefSlideIn {
+  from {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.bar {
+  animation: nefGrowDown 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hbar {
+  animation: nefGrowRight 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both;
+}
+
+.trackLine {
+  animation: nefGrowRight 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 700ms both;
+}
+
+.dot,
+.benchmark {
+  animation: nefSlideIn 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms both;
+}
+
+/* Choreography: each kind of element has its own motion, in order after the
+   title: the accent bar sweeps, list rows and table rows come in from the
+   left, comparison columns from the right, numbers and chips pop, footnotes
+   fade in last. Keyframes with only a start end at the element's own style. */
+@keyframes nefSweep {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes nefFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+}
+
+@keyframes nefFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
+
+@keyframes nefPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes nefPulse {
+  50% {
+    background: var(--pe-light);
+  }
+}
+
+.deck :global(.accent-bar) {
+  transform-origin: left;
+  animation: nefSweep 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+}
+
+.deck :global(h1) + p {
+  animation: nefFade 600ms ease-out 250ms both;
+}
+
+.iconItem,
+.table tbody tr,
+.standIns li {
+  animation: nefFromLeft 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 350ms both;
+}
+
+.iconItem:nth-child(2),
+.table tbody tr:nth-child(2),
+.standIns li:nth-child(2) { animation-delay: 470ms; }
+.iconItem:nth-child(3),
+.table tbody tr:nth-child(3),
+.standIns li:nth-child(3) { animation-delay: 590ms; }
+.iconItem:nth-child(4),
+.table tbody tr:nth-child(4) { animation-delay: 710ms; }
+.iconItem:nth-child(5),
+.table tbody tr:nth-child(5) { animation-delay: 830ms; }
+.iconItem:nth-child(6),
+.table tbody tr:nth-child(6) { animation-delay: 950ms; }
+.table tbody tr:nth-child(n + 7) { animation-delay: 1070ms; }
+
+/* Comparison columns arrive from the right. */
+.body .mirror > [data-step],
+.body .fromRight[data-step] {
+  animation-name: nefFromRight;
+}
+
+.chip,
+.card .stat,
+.agendaDot,
+.preview {
+  animation: nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both;
+}
+
+.flow > svg,
+.stepArrow,
+.lane > svg {
+  animation: nefFade 400ms ease-out 700ms both;
+}
+
+.footnotes,
+.caption,
+.layerFacts .statNote,
+.quietItem {
+  animation: nefFade 700ms ease-out 900ms both;
+}
+
+.agendaRoad::before {
+  transform-origin: left;
+  animation: nefSweep 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+}
+
+/* The slide's last word gets one soft pulse. */
+.verdict .chip,
+.caveat {
+  border-radius: 9999px;
+  animation:
+    nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both,
+    nefPulse 900ms ease-in-out 1300ms 1;
+}
+
+.caveat {
+  border-radius: 0.3em;
+}
+
+@property --count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes nefCount {
+  from {
+    --count: 0;
+  }
+}
+
+.countUp {
+  counter-reset: count var(--count);
+  animation: nefCount 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms both;
+}
+
+.countUp::after {
+  content: counter(count);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .deck :global(h1),
-  .tracker,
-  .body > *,
-  .body > * > * {
-    animation: none;
+  .deck *,
+  .deck *::before,
+  .deck *::after {
+    animation: none !important;
   }
 }

@@ -124,10 +124,20 @@ export const listing = {
   efoPublished: "28 October 2026",
 };
 
+// One entry per layer; the slide shows each as a card. `obr` is what the OBR
+// has, `ours` what the Python build has. The stand-ins sit in the judgement
+// card (model README at the pinned commit): anchoring, l.27-28 (add-factors
+// are EFO minus model; reforms are scored around the anchored baseline, so
+// they cancel); the three opt-in overlays in run_reform, l.141 (labelled
+// judgement, not model dynamics), with l.30 (published_conventions: the
+// OBR's multipliers and taper), l.35 (monetary_conditioning: mortgage rate at
+// the listing's 0.9 pass-through) and l.32 (price_passthrough: VAT into CPI);
+// and a user's own assumptions, by changing any input path through
+// run_reform.
 export const layers = [
   {
     title: "The model",
-    obr: "372 equations, as EViews code",
+    obr: "372 equations, published as EViews code",
     ours: "All 372 transpiled to Python",
     status: "built",
   },
@@ -140,23 +150,28 @@ export const layers = [
   {
     title: "The judgement",
     obr: "Add-factors and assumptions, unpublished",
-    ours: "EFO anchoring + 3 labelled opt-in overlays",
+    ours: "Stand-ins, each labelled",
     status: "standin",
   },
 ] as const;
 
-// How the judgement layer is stood in for (model README at the pinned
-// commit): anchoring, l.27-28 (add-factors are EFO minus model; reforms are
-// scored around the anchored baseline, so they cancel); the three opt-in
-// overlays in run_reform, l.141 (labelled judgement, not model dynamics),
-// with l.30 (published_conventions: the OBR's multipliers and taper), l.35
-// (monetary_conditioning: mortgage rate at the listing's 0.9 pass-through)
-// and l.32 (price_passthrough: VAT into CPI); and a user's own assumptions,
-// by shocking any input path through run_reform.
+// Terms glossed where they first appear, in the engine card (standard
+// definitions, not claims from the repo).
+export const engineTerms = [
+  { title: "Closure", text: "which variables are solved, which are inputs" },
+  { title: "Add-factor", text: "an adjustment added to an equation's result" },
+];
+
+// The EFO, spelled out where it first appears (the judgement card).
+export const efoGloss = {
+  name: "Economic and Fiscal Outlook (EFO)",
+  what: "The OBR's twice-yearly forecast: our baseline",
+};
+
 export const judgementStandIns = [
-  { title: "Anchoring", text: "EFO minus model" },
+  { title: "Anchoring", text: "the OBR's forecast minus model" },
   { title: "Opt-in overlays", text: "multipliers, mortgage rate, VAT" },
-  { title: "Your own", text: "shock any input path" },
+  { title: "Your own", text: "change any input path" },
 ];
 
 // The solver (model README l.15 and l.152: Gauss-Seidel iteration over ~370
@@ -171,10 +186,10 @@ export const solver = {
 export const pipeline = [
   { title: "Transpile", text: "EViews to Python" },
   { title: "Fill inputs", text: "355 ONS series" },
-  { title: "Close", text: "GDP made endogenous" },
+  { title: "Close", text: "GDP solved, not an input" },
   { title: "Solve", text: "Gauss-Seidel, by quarter" },
   { title: "Anchor", text: "Add-factors to the EFO" },
-  { title: "Score", text: "Shock minus baseline" },
+  { title: "Score", text: "Scenario minus baseline" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -243,44 +258,69 @@ export const equationExamples = [
   },
 ];
 
-// Links between the modules: module-links.json is the full matrix, written by
-// module-links.py from the listing (for each pair, the equations in the
-// target module whose right-hand side uses a variable the source module
-// determines; lags count, commented-out lines don't). The slide shows every
-// link of 6 or more equations, plus the demand loop. `cut` marks links that
-// don't reach GDP in the OBR's file: real GDP is an input (review G1) and
-// trade volumes are exogenous (R1).
-export type ModuleLink = {
-  from: string;
-  to: string;
-  cut?: boolean;
-  /** Where the count sits along the arrow (0 to 1), to keep labels apart. */
-  labelAt?: number;
-};
+// Links between the modules: module-links.json is written by module-links.py
+// from the listing. Its 12 x 12 matrix counts, for each pair of modules, the
+// equations in the target module whose right-hand side uses a variable the
+// source module determines (lags count, commented-out lines don't). The
+// script also sorts the modules into three groups and counts the same thing
+// between groups (an equation counts once per source group).
+const groupsOf: Record<string, string[]> = moduleLinkMatrix.groups;
 
-export const moduleLinks: ModuleLink[] = [
-  { from: "GDP and output", to: "Prices and wages" },
-  { from: "GDP and output", to: "Finance and balance sheets" },
-  { from: "Income accounts", to: "Prices and wages" },
-  { from: "Balance of payments", to: "Prices and wages" },
-  { from: "Public sector", to: "Income accounts" },
-  { from: "Public sector", to: "GDP and output" },
-  { from: "Labour market", to: "Prices and wages" },
-  { from: "Finance and balance sheets", to: "Income accounts" },
-  { from: "Prices and wages", to: "Investment and inventories" },
-  { from: "GDP and output", to: "Income accounts" },
-  { from: "Prices and wages", to: "Consumption" },
-  { from: "Income accounts", to: "Consumption", labelAt: 0.78 },
-  { from: "Consumption", to: "GDP and output", cut: true },
-  { from: "Exports", to: "GDP and output", cut: true },
-  { from: "Imports", to: "GDP and output", cut: true },
-];
+export const moduleGroups = moduleLinkMatrix.groupOrder.map((name) => ({
+  name,
+  modules: groupsOf[name] ?? [],
+}));
 
-export const moduleLinkCount = (from: string, to: string) =>
-  moduleLinkMatrix.matrix[moduleLinkMatrix.order.indexOf(from)]?.[
-    moduleLinkMatrix.order.indexOf(to)
+export const groupLinkCount = (from: string, to: string) =>
+  moduleLinkMatrix.groupMatrix[moduleLinkMatrix.groupOrder.indexOf(from)]?.[
+    moduleLinkMatrix.groupOrder.indexOf(to)
   ] ?? 0;
 
+// The six flows between the groups. Each label names the largest module
+// links inside the flow (from the 12 x 12 matrix): GDP and output → prices
+// and wages 16; prices and wages → investment 6, consumption 5, imports 3;
+// GDP and output → finance and balance sheets 11, income accounts 5; public
+// sector → GDP and output 7, imports 5; income accounts → prices and wages
+// 10, balance of payments → prices and wages 8 (the exchange rate into costs
+// and trade prices); prices and wages → income accounts 3, labour market →
+// public sector 2, finance 2.
+export type GroupFlow = { from: string; to: string; label: string[] };
+
+export const groupFlows: GroupFlow[] = [
+  { from: "Demand", to: "Supply and prices", label: ["Output → prices"] },
+  { from: "Supply and prices", to: "Demand", label: ["Prices → spending"] },
+  {
+    from: "Demand",
+    to: "Income and sectors",
+    label: ["Output → incomes,", "balance sheets"],
+  },
+  {
+    from: "Income and sectors",
+    to: "Demand",
+    label: ["Government →", "output, imports"],
+  },
+  {
+    from: "Supply and prices",
+    to: "Income and sectors",
+    label: ["Prices, jobs →", "incomes"],
+  },
+  {
+    from: "Income and sectors",
+    to: "Supply and prices",
+    label: ["Incomes, exchange", "rate → prices"],
+  },
+];
+
+// Module links drawn dashed inside the demand group: the spending components
+// feed total final expenditure (TFE, TFEPS; imports feed GDPMPS), but real
+// GDP is an input in the OBR's file (review G1) and trade volumes are
+// exogenous (R1), so they don't move GDP there.
+export const cutLinks = [
+  "Consumption",
+  "Investment and inventories",
+  "Exports",
+  "Imports",
+].map((from) => ({ from, to: "GDP and output" }));
 
 // ---------------------------------------------------------------------------
 // Line-by-line review of the published listing (published_model_review.md,
@@ -294,11 +334,36 @@ export const review = {
   uncheckable: 3,
 };
 
+// `means` says in plain words what each error does (published_model_review.md
+// entries G7, G6 and N5; N5's "about £3.3bn a quarter" is that entry's own
+// figure for the printed form, with foreign-currency lending of about £235bn).
 export const reviewFindings = [
-  { code: "G7", title: "Unemployment undetermined", text: "l.163 and l.175 are one identity" },
-  { code: "G6", title: "Nominal GDP, investment deflator", text: "l.337 and l.688 repeat" },
-  { code: "N5", title: "Apparent sign error", text: "Corporate FISIM, l.637" },
-  { code: "V5", title: "Pre-Brexit EU payments", text: "Equations still live" },
+  {
+    code: "G7",
+    title: "Unemployment undetermined",
+    refs: "l.163 and l.175",
+    means: "The same equation is written twice, so nothing pins down unemployment as published",
+  },
+  {
+    code: "G6",
+    title: "Nominal GDP has no unique solution",
+    refs: "l.337 and l.688",
+    means:
+      "Two equations are one identity, so nominal GDP and the investment price index aren't pinned down. Our build pins nominal GDP",
+  },
+  {
+    code: "N5",
+    title: "Apparent sign error",
+    refs: "l.637, bank margins (FISIM)",
+    means:
+      "One term is added where its neighbours subtract: about £3.3bn a quarter of drift into company profits, as printed",
+  },
+  {
+    code: "V5",
+    title: "Pre-Brexit EU payments",
+    refs: "",
+    means: "Equations still live",
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -349,13 +414,14 @@ export const scorecardRows: ScoreRow[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Shocks against the OBR's published multipliers (demo.md table; ratios are
+// Scenarios against the OBR's published multipliers (demo.md table; ratios are
 // current-price GDP per pound of current-price revenue for the tax rows, real
 // GDP per pound for spending; OBR benchmarks from EFO July 2015 Box 3.2 as
 // encoded in the repo).
 export type MultiplierRow = {
   label: string;
-  setting: string;
+  /** The opt-in switch the row runs under, if any. */
+  setting?: string;
   q1: number;
   q4: number;
   q12: number;
@@ -363,65 +429,66 @@ export type MultiplierRow = {
   obrLabel: string;
   /** The q1 / q4 / q12 ratios exactly as demo.md prints them. */
   display: string;
-  /** What was simulated (demo.md "The shocks": var and size per quarter). */
-  shock: string;
+  /** What was simulated (demo.md "The shocks": size per quarter). */
+  size: string;
+  /** Rows under an opt-in switch sit in their own group on the slide. */
+  optIn?: boolean;
 };
 
 export const multiplierRows: MultiplierRow[] = [
   {
     label: "Government consumption",
-    setting: "Default closure",
-    q1: 1.01,
+        q1: 1.01,
     q4: 1.03,
     q12: 1.05,
     obr: 0.6,
     obrLabel: "0.6, fading",
     display: "1.01 / 1.03 / 1.05",
-    shock: "+£1.25bn a quarter, real spending (CGG)",
+    size: "+£1.25bn a quarter of real spending",
   },
   {
     label: "Income tax, basic rate +1p",
-    setting: "Default closure",
-    q1: 0.1,
+        q1: 0.1,
     q4: 0.21,
     q12: 0.38,
     obr: 0.3,
     obrLabel: "0.3, fading",
     display: "0.10 / 0.21 / 0.38",
-    shock: "£1.725bn a quarter of revenue (TYEM)",
+    size: "£1.725bn a quarter of revenue",
   },
   {
     label: "VAT +1pp",
-    setting: "Default closure",
-    q1: 0.013,
+        q1: 0.013,
     q4: 0.026,
     q12: 0.043,
     obr: 0.35,
     obrLabel: "0.35, fading",
     display: "0.013 / 0.026 / 0.043",
-    shock: "£2.2bn a quarter of revenue (VREC)",
+    size: "£2.2bn a quarter of revenue",
   },
   {
     label: "VAT +1pp",
-    setting: "Opt-in price pass-through",
+    setting: "Price pass-through on",
     q1: 0.175,
     q4: 0.345,
     q12: 0.643,
     obr: 0.35,
     obrLabel: "0.35, fading",
     display: "0.175 / 0.345 / 0.643",
-    shock: "The same £2.2bn a quarter (VREC)",
+    size: "The same £2.2bn a quarter",
+    optIn: true,
   },
   {
     label: "Government investment",
-    setting: "Opt-in investment closure",
+    setting: "Investment closure on",
     q1: 1.03,
     q4: 0.97,
     q12: 0.98,
     obr: 1.0,
     obrLabel: "1.0, tapering",
     display: "1.03 / 0.97 / 0.98",
-    shock: "+£3bn a quarter (CGIPS)",
+    size: "+£3bn a quarter",
+    optIn: true,
   },
 ];
 
@@ -449,7 +516,7 @@ export const corporationTax = {
 };
 
 export const capitalSpending = {
-  shock: "£3bn",
+  size: "£3bn",
   gdpQ1: 3075,
   gdpQ4: 2901,
   gdpQ12: 2932,
@@ -478,8 +545,15 @@ export const unemploymentDrift = [
 // ---------------------------------------------------------------------------
 // The macro platform (macro README model table; models/index.html compare
 // section, "compared by country, question, reform scoring and run surface").
+// `status` is the macro site's one label per model, verbatim, from the "Where
+// each model fails" section of models/index.html at the pinned commit; `level`
+// is the colour class the site gives it there (lv-gain, lv-mid, lv-loss).
 export type PlatformModel = {
   name: string;
+  /** The name spelled out, under it in the table. */
+  gloss?: string;
+  status: string;
+  level: "gain" | "mid" | "loss";
   country: string;
   answers: string;
   scoresReforms: boolean;
@@ -489,6 +563,8 @@ export type PlatformModel = {
 export const platformModels: PlatformModel[] = [
   {
     name: "PolicyEngine microsimulation",
+    status: "Exact for implemented rules",
+    level: "gain",
     country: "UK, US",
     answers: "Household and population tax-benefit effects",
     scoresReforms: true,
@@ -496,6 +572,9 @@ export const platformModels: PlatformModel[] = [
   },
   {
     name: "OBR emulator",
+    status: "Anchored, not validated",
+    level: "loss",
+    gloss: "Our Python build of the OBR's model",
     country: "UK",
     answers: "Near-term UK fiscal and macro scenarios",
     scoresReforms: true,
@@ -503,6 +582,9 @@ export const platformModels: PlatformModel[] = [
   },
   {
     name: "BoE SVAR",
+    status: "Partial replication",
+    level: "mid",
+    gloss: "Bank of England structural VAR",
     country: "UK",
     answers: "What drove the UK economy; short-run forecasts",
     scoresReforms: false,
@@ -510,6 +592,8 @@ export const platformModels: PlatformModel[] = [
   },
   {
     name: "DEFINE-UK",
+    status: "Partial replication",
+    level: "mid",
     country: "UK",
     answers: "UK climate-policy scenario deltas",
     scoresReforms: false,
@@ -517,6 +601,9 @@ export const platformModels: PlatformModel[] = [
   },
   {
     name: "OG-UK",
+    status: "Calibrated, no outcome benchmark",
+    level: "loss",
+    gloss: "Overlapping generations",
     country: "UK",
     answers: "Long-run work, saving and capital",
     scoresReforms: true,
@@ -524,17 +611,23 @@ export const platformModels: PlatformModel[] = [
   },
   {
     name: "FRB/US",
+    status: "Replicates the Fed's solver",
+    level: "gain",
+    gloss: "The Federal Reserve Board's US model",
     country: "US",
-    answers: "US monetary and fiscal shocks, by quarter",
+    answers: "US monetary and fiscal scenarios, by quarter",
     scoresReforms: false,
-    runs: "Hosted, raw shocks",
+    runs: "Hosted, raw scenarios",
   },
   {
     name: "US HANK",
+    status: "Partial replication",
+    level: "mid",
+    gloss: "Heterogeneous-agent New Keynesian",
     country: "US",
-    answers: "How US shocks spread across household wealth",
+    answers: "How US scenarios spread across household wealth",
     scoresReforms: false,
-    runs: "Hosted, stylized shocks",
+    runs: "Hosted, stylized scenarios",
   },
 ];
 

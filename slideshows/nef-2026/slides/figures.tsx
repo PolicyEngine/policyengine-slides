@@ -5,11 +5,9 @@ import {
   IconBuildingBank,
   IconBuildingFactory2,
   IconChartLine,
-  IconCoins,
   IconCrane,
   IconEngine,
   IconHome,
-  IconHomeDollar,
   IconLock,
   IconPoint,
   IconReceiptTax,
@@ -17,8 +15,6 @@ import {
   IconShip,
   IconShoppingCart,
   IconTag,
-  IconTrendingUp,
-  IconUserOff,
   IconWallet,
   IconWorld,
   type Icon,
@@ -26,12 +22,13 @@ import {
 import {
   bankRate,
   incomeTax,
-  moduleLinkCount,
-  moduleLinks,
+  cutLinks,
+  groupFlows,
+  groupLinkCount,
+  modelModules,
+  moduleGroups,
   mortgagePassThrough,
   multiplierRows,
-  scorecardRows,
-  type ScoreRow,
 } from "../content";
 import MathText from "@/slideshows/l0-ima-2026/components/MathText";
 import styles from "./deck.module.css";
@@ -44,64 +41,6 @@ export function Maths({ tex }: { tex: string }) {
   return <MathText tex={tex} className={styles.maths} />;
 }
 
-const statusChip: Record<ScoreRow["status"], { label: string; className: string }> = {
-  good: { label: "Good", className: styles.chipGood },
-  fair: { label: "Fair", className: styles.chipGood },
-  poor: { label: "Poor", className: styles.chipMid },
-  trivial: { label: "Trivial identity", className: styles.chipBad },
-};
-
-const scoreIcons: Record<string, Icon> = {
-  "Real GDP": IconChartLine,
-  Consumption: IconShoppingCart,
-  "Business investment": IconBuildingFactory2,
-  "Household income": IconWallet,
-  "Real household income": IconHomeDollar,
-  "Current account": IconArrowsExchange,
-  "Trade balance": IconShip,
-  Employment: IconBriefcase,
-  "Unemployment rate": IconUserOff,
-  "RPI inflation": IconTrendingUp,
-  "Company profits": IconCoins,
-};
-
-/** Rows of the free-running scorecard, picked by variable name. */
-export function ScorecardTable({ variables }: { variables: string[] }) {
-  const rows = scorecardRows.filter((row) => variables.includes(row.variable));
-  return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th className={styles.num}>Error, 3 years</th>
-          <th>Band</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => {
-          const RowIcon = scoreIcons[row.variable] ?? IconPoint;
-          return (
-            <tr key={row.variable}>
-              <td>
-                <span className={styles.rowLabel}>
-                  <RowIcon stroke={1.8} aria-hidden="true" />
-                  {row.variable}
-                </span>
-              </td>
-              <td className={styles.num}>{row.error}</td>
-              <td>
-                <span className={`${styles.chip} ${statusChip[row.status].className}`}>
-                  {statusChip[row.status].label}
-                </span>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-}
-
 const plotMax = 1.1;
 const pct = (value: number) => `${(Math.min(value, plotMax) / plotMax) * 100}%`;
 
@@ -112,94 +51,132 @@ const multiplierIcons: Record<string, Icon> = {
   "Government investment": IconCrane,
 };
 
-/** GDP per pound at q1, q4 and q12 against the OBR's published multiplier. */
-export function MultiplierPlot() {
-  const ticks = [0, 0.25, 0.5, 0.75, 1];
+// A row whose values sit closer than this on the axis draws small dots with
+// the quarter above each, in place of numbered dots that would overlap.
+const closeWithin = 0.07;
+const quarterTone = [styles.dotQ1, styles.dotQ4, styles.dotQ12];
+
+function MultiplierLegend() {
   return (
-    <div>
-      <div className={styles.dotPlot}>
-        {multiplierRows.map((row) => {
-          const low = Math.min(row.q1, row.q4, row.q12);
-          const high = Math.max(row.q1, row.q4, row.q12);
-          // Where the three dots would sit on top of each other, stack them
-          // so each quarter's number can be read.
-          const tight = high - low < 0.1;
-          const RowIcon = multiplierIcons[row.label] ?? IconPoint;
-          const dots = [
-            { quarter: 1, value: row.q1, tone: styles.dotQ1, shift: styles.dotUp },
-            { quarter: 4, value: row.q4, tone: styles.dotQ4, shift: "" },
-            { quarter: 12, value: row.q12, tone: styles.dotQ12, shift: styles.dotDown },
-          ];
-          return (
-            <Fragment key={`${row.label}-${row.setting}`}>
-              <div className={styles.dotLabel}>
-                <RowIcon stroke={1.8} aria-hidden="true" />
-                <div>
-                  <h2>{row.label}</h2>
-                  <p>{row.shock}</p>
-                  <p>{row.setting}</p>
-                </div>
-              </div>
-              <div className={styles.track}>
-                {!tight && (
-                  <div
-                    className={styles.trackLine}
-                    style={{ left: pct(low), width: `calc(${pct(high)} - ${pct(low)})` }}
-                  />
-                )}
-                <div className={styles.benchmark} style={{ left: pct(row.obr) }} />
-                {dots.map((dot) => (
-                  <div
-                    key={dot.quarter}
-                    className={`${styles.dot} ${dot.tone} ${tight ? `${styles.dotSmall} ${dot.shift}` : ""}`}
-                    style={{ left: pct(dot.value) }}
-                  >
-                    {dot.quarter}
-                  </div>
-                ))}
-              </div>
-              <div className={styles.dotValue}>
-                {row.display}
-                <br />
-                <span>OBR {row.obrLabel}</span>
-              </div>
-            </Fragment>
-          );
-        })}
-        <div />
-        <div className={styles.axis}>
-          {ticks.map((tick) => (
-            <span key={tick} style={{ left: pct(tick) }}>
-              {tick.toFixed(2)}
-            </span>
-          ))}
-        </div>
-        <div />
-      </div>
-      <div className={styles.legend}>
-        <span>
-          <i className={`${styles.legendDot} ${styles.legendQ1}`} />
-          After 1 quarter
-        </span>
-        <span>
-          <i className={`${styles.legendDot} ${styles.legendQ4}`} />
-          After 4
-        </span>
-        <span>
-          <i className={`${styles.legendDot} ${styles.legendQ12}`} />
-          After 12
-        </span>
-        <span>
-          <i className={styles.legendTick} />
-          OBR&apos;s published impact multiplier
-        </span>
-        <span>GDP change per £1 of shock</span>
-      </div>
+    <div className={styles.legend}>
+      <span>
+        <i className={`${styles.legendDot} ${styles.dotQ1}`} />
+        After 1 quarter
+      </span>
+      <span>
+        <i className={`${styles.legendDot} ${styles.dotQ4}`} />
+        After 4
+      </span>
+      <span>
+        <i className={`${styles.legendDot} ${styles.dotQ12}`} />
+        After 12
+      </span>
+      <span>
+        <i className={styles.legendTick} />
+        The OBR&apos;s multiplier
+      </span>
     </div>
   );
 }
 
-/** Real GDP change per quarter for the income-tax shock (bars hang down). */
+/** GDP per pound at q1, q4 and q12 against the OBR's published multiplier. */
+export function MultiplierPlot() {
+  const ticks = [0, 0.25, 0.5, 0.75, 1];
+  const groups = [
+    { title: "Default setup", rows: multiplierRows.filter((row) => !row.optIn) },
+    { title: "Opt-in switches", rows: multiplierRows.filter((row) => row.optIn) },
+  ];
+  return (
+    <div className={styles.dotPlot}>
+      {groups.map((group, index) => {
+        // The opt-in rows arrive at the slide's second build step.
+        const step = index === 0 ? undefined : 2;
+        return (
+        <Fragment key={group.title}>
+          <p className={styles.dotGroup} data-step={step}>
+            {group.title}
+          </p>
+          {index === 0 ? (
+            <>
+              <MultiplierLegend />
+              <p className={styles.dotHead}>After 1 / 4 / 12 quarters</p>
+            </>
+          ) : (
+            <>
+              <span className={styles.dotRule} data-step={step} />
+              <span className={styles.dotRule} data-step={step} />
+            </>
+          )}
+          {group.rows.map((row) => {
+            const low = Math.min(row.q1, row.q4, row.q12);
+            const high = Math.max(row.q1, row.q4, row.q12);
+            const RowIcon = multiplierIcons[row.label] ?? IconPoint;
+            const points = [
+              { quarter: 1, value: row.q1 },
+              { quarter: 4, value: row.q4 },
+              { quarter: 12, value: row.q12 },
+            ];
+            const sorted = points.map((point) => point.value).sort((a, b) => a - b);
+            const close = sorted[1] - sorted[0] < closeWithin || sorted[2] - sorted[1] < closeWithin;
+            return (
+              <Fragment key={`${row.label}-${row.setting}`}>
+                <div className={styles.dotLabel} data-step={step}>
+                  <RowIcon stroke={1.8} aria-hidden="true" />
+                  <div>
+                    <h2>{row.label}</h2>
+                    <p>
+                      {row.size}
+                      {row.setting && (
+                        <span className={`${styles.chip} ${styles.chipMid}`}>{row.setting}</span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.track} data-step={step}>
+                  <div
+                    className={styles.trackLine}
+                    style={{ left: pct(low), width: `calc(${pct(high)} - ${pct(low)})` }}
+                  />
+                  <div className={styles.benchmark} style={{ left: pct(row.obr) }}>
+                    <span>OBR</span>
+                  </div>
+                  {points.map((point, index) => (
+                    <div
+                      key={point.quarter}
+                      className={`${styles.dot} ${quarterTone[index]} ${close ? styles.dotSmall : ""} ${close && index === 1 ? styles.dotRaised : ""}`}
+                      style={{ left: pct(point.value) }}
+                    >
+                      {close ? <span>{point.quarter}</span> : point.quarter}
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.dotValue} data-step={step}>
+                  {row.display}
+                  <span>OBR {row.obrLabel}</span>
+                </div>
+              </Fragment>
+            );
+          })}
+        </Fragment>
+        );
+      })}
+      <p className={styles.axisLabel}>GDP change per £1</p>
+      <div className={styles.axis}>
+        {ticks.map((tick) => (
+          <span key={tick} style={{ left: pct(tick) }}>
+            {tick.toFixed(2)}
+          </span>
+        ))}
+      </div>
+      <div />
+    </div>
+  );
+}
+
+/**
+ * Real GDP change per quarter for the income-tax scenario (bars hang down).
+ * Quarters 1, 4, 8 and 12 carry their value.
+ */
 export function IncomeTaxBars() {
   const max = Math.max(...incomeTax.gdpPath.map((value) => Math.abs(value)));
   return (
@@ -209,9 +186,16 @@ export function IncomeTaxBars() {
           <div key={index} className={styles.barCol}>
             <div
               className={styles.bar}
-              style={{ height: `${(Math.abs(value) / max) * 80}%` }}
+              style={{
+                height: `${(Math.abs(value) / max) * 80}%`,
+                animationDelay: `${300 + index * 90}ms`,
+              }}
             />
-            <span className={styles.barValue}>{value.toLocaleString("en-GB")}</span>
+            {[0, 3, 7, 11].includes(index) && (
+              <span className={styles.barValue}>
+                {value.toLocaleString("en-GB").replace("-", "−")}
+              </span>
+            )}
           </div>
         ))}
       </div>
@@ -269,7 +253,7 @@ export function BankRateBars() {
   );
 }
 
-export const moduleIcons: Record<string, Icon> = {
+const moduleIcons: Record<string, Icon> = {
   "GDP and output": IconChartLine,
   Consumption: IconShoppingCart,
   "Investment and inventories": IconBuildingFactory2,
@@ -284,111 +268,211 @@ export const moduleIcons: Record<string, Icon> = {
   "Finance and balance sheets": IconScale,
 };
 
-// The module network: a 1000 x 270 canvas, nodes placed so that no arrow
-// runs through a node it doesn't belong to.
-const canvas = { width: 1000, height: 270 };
-const node = { width: 172, height: 50 };
-const nodeAt: Record<string, [number, number]> = {
-  Exports: [100, 32],
-  Imports: [300, 32],
-  Consumption: [500, 32],
-  "North Sea oil": [700, 32],
-  "Labour market": [900, 32],
-  "Public sector": [100, 135],
-  "GDP and output": [330, 135],
-  "Prices and wages": [670, 135],
-  "Balance of payments": [900, 135],
-  "Finance and balance sheets": [330, 238],
-  "Income accounts": [560, 238],
-  "Investment and inventories": [900, 238],
+// The module map: one canvas, in units of a thousandth of its width. Group
+// boxes, module tiles and arrows are all placed from these constants, so the
+// figure keeps its proportions at any size.
+const map = { width: 1000, height: 338 };
+type Box = { x: number; y: number; w: number; h: number };
+
+const groupBox: Record<string, Box> = {
+  Demand: { x: 0, y: 0, w: 600, h: 184 },
+  "Supply and prices": { x: 720, y: 0, w: 280, h: 184 },
+  "Income and sectors": { x: 0, y: 252, w: 1000, h: 86 },
 };
 
-/** The point where the line from one node's centre to another's leaves it. */
-function edgePoint(from: [number, number], to: [number, number], gap: number) {
-  const dx = to[0] - from[0];
-  const dy = to[1] - from[1];
-  const reach = Math.min(
-    dx === 0 ? Infinity : (node.width / 2 + gap) / Math.abs(dx),
-    dy === 0 ? Infinity : (node.height / 2 + gap) / Math.abs(dy),
-  );
-  return [from[0] + dx * reach, from[1] + dy * reach];
+const row = (y: number, h: number, x: number, w: number, names: string[], gap = 8) => {
+  const width = (w - gap * (names.length - 1)) / names.length;
+  return names.map((name, index): [string, Box] => [
+    name,
+    { x: x + index * (width + gap), y, w: width, h },
+  ]);
+};
+
+const tileBox: Record<string, Box> = Object.fromEntries([
+  ...row(30, 46, 10, 580, ["Consumption", "Investment and inventories", "Exports", "Imports"]),
+  ...row(128, 46, 10, 580, ["GDP and output"]),
+  ...row(30, 44, 730, 260, ["Labour market"]),
+  ...row(80, 44, 730, 260, ["Prices and wages"]),
+  ...row(130, 44, 730, 260, ["North Sea oil"]),
+  ...row(280, 48, 10, 980, [
+    "Income accounts",
+    "Public sector",
+    "Balance of payments",
+    "Finance and balance sheets",
+  ]),
+]);
+
+// The key sits in the gap between the two pairs of vertical arrows.
+const keyBox: Box = { x: 478, y: 186, w: 220, h: 64 };
+
+// Where each arrow between two groups runs, and where its label sits.
+type Route = {
+  from: [number, number];
+  to: [number, number];
+  label: [number, number];
+  anchor: "start" | "middle" | "end";
+};
+
+const routes: Record<string, Route> = {
+  "Demand>Supply and prices": { from: [604, 66], to: [716, 66], label: [660, 46], anchor: "middle" },
+  "Supply and prices>Demand": { from: [716, 118], to: [604, 118], label: [660, 142], anchor: "middle" },
+  "Demand>Income and sectors": { from: [260, 188], to: [260, 248], label: [238, 215], anchor: "end" },
+  "Income and sectors>Demand": { from: [330, 248], to: [330, 188], label: [352, 215], anchor: "start" },
+  "Supply and prices>Income and sectors": {
+    from: [800, 188],
+    to: [800, 248],
+    label: [778, 215],
+    anchor: "end",
+  },
+  "Income and sectors>Supply and prices": {
+    from: [870, 248],
+    to: [870, 188],
+    label: [892, 215],
+    anchor: "start",
+  },
+};
+
+// One colour and one build step for the flows out of each group; the dashed
+// links come last.
+const flowStyle: Record<string, { step: number; className: string; key: string }> = {
+  Demand: { step: 2, className: styles.flowOutput, key: "Out of demand: output" },
+  "Supply and prices": { step: 3, className: styles.flowPrices, key: "Out of supply and prices" },
+  "Income and sectors": { step: 4, className: styles.flowIncomes, key: "Out of income and sectors" },
+};
+const cutStep = 5;
+// The dashed links' label sits between the second and third of them.
+const cutLabelAt: [number, number] = [300, 104];
+
+/** A straight arrow: where its shaft ends, and its head as a triangle. */
+function arrow([x1, y1]: [number, number], [x2, y2]: [number, number], width: number) {
+  const length = Math.hypot(x2 - x1, y2 - y1);
+  const ux = (x2 - x1) / length;
+  const uy = (y2 - y1) / length;
+  const head = 8 + width;
+  const wing = 4 + width * 0.9;
+  const bx = x2 - ux * head;
+  const by = y2 - uy * head;
+  return {
+    end: [bx + ux, by + uy],
+    head: `M${bx - uy * wing} ${by + ux * wing} L${x2} ${y2} L${bx + uy * wing} ${by - ux * wing} Z`,
+  };
 }
 
-/** How the modules connect: arrow weight is the number of linking equations. */
-export function ModuleNetwork() {
+const place = (box: Box) => ({
+  left: `${(box.x / map.width) * 100}%`,
+  top: `${(box.y / map.height) * 100}%`,
+  width: `${(box.w / map.width) * 100}%`,
+  height: `${(box.h / map.height) * 100}%`,
+});
+
+/**
+ * The 12 modules in three groups, with one arrow for each flow between two
+ * groups (weight and number: the equations that carry it; colour: the group
+ * it leaves) and dashed arrows for the spending links that don't reach GDP
+ * in the OBR's file. The arrows arrive one colour per build step.
+ */
+export function ModuleMap() {
+  const modules = new Map(modelModules.map((module) => [module.name, module]));
   return (
-    <div className={styles.network}>
-      <svg viewBox={`0 0 ${canvas.width} ${canvas.height}`} aria-hidden="true">
-        <defs>
-          <marker
-            id="nef-arrow"
-            className={styles.arrowHead}
-            markerUnits="userSpaceOnUse"
-            markerWidth="12"
-            markerHeight="12"
-            refX="10"
-            refY="6"
-            orient="auto"
-          >
-            <path d="M0 1 L11 6 L0 11 Z" />
-          </marker>
-          <marker
-            id="nef-arrow-cut"
-            className={styles.arrowHeadCut}
-            markerUnits="userSpaceOnUse"
-            markerWidth="12"
-            markerHeight="12"
-            refX="10"
-            refY="6"
-            orient="auto"
-          >
-            <path d="M0 1 L11 6 L0 11 Z" />
-          </marker>
-        </defs>
-        {moduleLinks.map((link) => {
-          const from = nodeAt[link.from];
-          const to = nodeAt[link.to];
-          if (!from || !to) return null;
-          const count = moduleLinkCount(link.from, link.to);
-          const [x1, y1] = edgePoint(from, to, 2);
-          const [x2, y2] = edgePoint(to, from, 5);
-          const at = link.labelAt ?? 0.5;
-          const mx = x1 + (x2 - x1) * at;
-          const my = y1 + (y2 - y1) * at;
+    <div className={styles.moduleMap}>
+      {moduleGroups.map((group) => (
+        <div key={group.name} className={styles.groupBox} style={place(groupBox[group.name])}>
+          <b>{group.name}</b>
+          {group.modules.reduce((sum, name) => sum + (modules.get(name)?.equations ?? 0), 0)}{" "}
+          equations
+        </div>
+      ))}
+      <svg viewBox={`0 0 ${map.width} ${map.height}`} aria-hidden="true">
+        {cutLinks.map((link, index) => {
+          const from = tileBox[link.from];
+          const to = tileBox[link.to];
+          const x = from.x + from.w / 2;
           return (
-            <g key={`${link.from}-${link.to}`}>
-              <line
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                className={link.cut ? styles.linkCut : styles.link}
-                strokeWidth={1.2 + count * 0.28}
-                markerEnd={link.cut ? "url(#nef-arrow-cut)" : "url(#nef-arrow)"}
+            <g key={link.from} data-step={cutStep} style={{ animationDelay: `${index * 120}ms` }}>
+              <line x1={x} y1={from.y + from.h + 3} x2={x} y2={to.y - 9} className={styles.linkCut} />
+              <path
+                d={`M${x - 5} ${to.y - 10} L${x} ${to.y - 2} L${x + 5} ${to.y - 10} Z`}
+                className={styles.linkCutHead}
               />
-              <circle cx={mx} cy={my} r="9.5" className={styles.linkBadge} />
-              <text x={mx} y={my} className={styles.linkCount}>
-                {count}
-              </text>
+            </g>
+          );
+        })}
+        <text className={styles.cutLabel} textAnchor="middle" data-step={cutStep}>
+          <tspan x={cutLabelAt[0]} y={cutLabelAt[1] - 6}>
+            Doesn&apos;t reach GDP
+          </tspan>
+          <tspan x={cutLabelAt[0]} y={cutLabelAt[1] + 6}>
+            in the OBR&apos;s file
+          </tspan>
+        </text>
+        {groupFlows.map((flow, index) => {
+          const route = routes[`${flow.from}>${flow.to}`];
+          if (!route) return null;
+          const count = groupLinkCount(flow.from, flow.to);
+          const cx = (route.from[0] + route.to[0]) / 2;
+          const cy = (route.from[1] + route.to[1]) / 2;
+          const top = route.label[1] - (flow.label.length - 1) * 6.5;
+          const { step, className } = flowStyle[flow.from];
+          const shape = arrow(route.from, route.to, 2.5 + count * 0.2);
+          // The two arrows of a step draw one after the other.
+          const delay = (index % 2) * 500;
+          return (
+            <g key={`${flow.from}-${flow.to}`} className={className}>
+              <line
+                x1={route.from[0]}
+                y1={route.from[1]}
+                x2={shape.end[0]}
+                y2={shape.end[1]}
+                pathLength={1}
+                strokeWidth={2.5 + count * 0.2}
+                className={styles.flowLine}
+                data-step={step}
+                style={{ animationDelay: `${delay}ms` }}
+              />
+              <g data-step={step} style={{ animationDelay: `${delay + 550}ms` }}>
+                <path d={shape.head} className={styles.flowHead} />
+                <circle cx={cx} cy={cy} r="10" className={styles.linkBadge} />
+                <text x={cx} y={cy} className={styles.flowCount}>
+                  {count}
+                </text>
+                <text className={styles.flowLabel} textAnchor={route.anchor}>
+                  {flow.label.map((line, row) => (
+                    <tspan key={line} x={route.label[0]} y={top + row * 13}>
+                      {line}
+                    </tspan>
+                  ))}
+                </text>
+              </g>
             </g>
           );
         })}
       </svg>
-      {Object.entries(nodeAt).map(([name, [x, y]]) => {
-        const NodeIcon = moduleIcons[name] ?? IconPoint;
+      <ul className={styles.mapKey} style={place(keyBox)}>
+        {Object.values(flowStyle).map(({ step, className, key }) => (
+          <li key={key} className={className} data-step={step}>
+            <i className={styles.keyLine} />
+            {key}
+          </li>
+        ))}
+        <li data-step={2}>
+          <span className={styles.keyBadge}>19</span>
+          Equations linking the groups; thicker, more
+        </li>
+        <li>
+          <span className={`${styles.chip} ${styles.chipMid}`}>Amber</span>
+          An input in the OBR&apos;s file
+        </li>
+      </ul>
+      {modelModules.map((module) => {
+        const TileIcon = moduleIcons[module.name] ?? IconPoint;
         return (
-          <div
-            key={name}
-            className={styles.networkNode}
-            style={{
-              left: `${((x - node.width / 2) / canvas.width) * 100}%`,
-              top: `${((y - node.height / 2) / canvas.height) * 100}%`,
-              width: `${(node.width / canvas.width) * 100}%`,
-              height: `${(node.height / canvas.height) * 100}%`,
-            }}
-          >
-            <NodeIcon stroke={1.8} aria-hidden="true" />
-            {name}
+          <div key={module.name} className={styles.moduleTile} style={place(tileBox[module.name])}>
+            <TileIcon stroke={1.8} aria-hidden="true" />
+            <h2>{module.name}</h2>
+            <span className={styles.moduleCount}>{module.equations}</span>
+            {module.exogenous && (
+              <span className={`${styles.chip} ${styles.chipMid}`}>{module.exogenous}</span>
+            )}
           </div>
         );
       })}
