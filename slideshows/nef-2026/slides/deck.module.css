@@ -770,25 +770,6 @@
   font-weight: 600;
 }
 
-/* Two or three big numbers inside a card. */
-.inlineStats {
-  margin-top: 0.6em;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4em 2.2em;
-  color: var(--color-gray-600);
-  font-size: 1.1em;
-}
-
-.inlineStats b {
-  display: block;
-  color: var(--pe-teal);
-  font-size: 2.1em;
-  font-weight: 700;
-  line-height: 1.15;
-  font-variant-numeric: tabular-nums;
-}
-
 /* Maths in a table cell. */
 .maths {
   color: var(--pe-dark);

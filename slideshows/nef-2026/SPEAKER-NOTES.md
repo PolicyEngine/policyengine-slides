@@ -3,7 +3,7 @@
 Meeting with the New Economics Foundation, November 2026. Presenters: Vahid
 Ahmadi and Max Ghenis. Goal: show the open OBR model and the macro platform,
 and agree where to work together. About 30 minutes plus discussion: 7 on part
-1, 4 on part 2, 7 on part 3, 7 on part 4, 5 on part 5 (the demo can stretch).
+1, 4 on part 2, 7 on part 3, 7 on part 4, 5 on part 5 (the live demo under slide 20 can stretch part 4).
 
 Every number below is in `content.ts`, with its source pinned to a commit.
 

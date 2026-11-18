@@ -65,6 +65,8 @@ import {
   IconTerminal2,
   IconToggleRight,
   IconTool,
+  IconTrendingDown,
+  IconTrendingUp,
   IconUserOff,
   IconUsers,
   IconUsersGroup,
@@ -797,11 +799,11 @@ export function FitSlide() {
           <div className={styles.stack}>
             <Head icon={IconAnchor}>Anchored to the {listing.efo}</Head>
             <div className={`${styles.cardGrid} ${styles.cols2}`}>
-              <Stat icon={IconChartLine} value={`${anchored.gdpMape}%`} label="GDP error" />
+              <Stat icon={IconChartLine} value={`${anchored.gdpMape}%`} label="GDP, MAPE" />
               <Stat
                 icon={IconShoppingCart}
                 value={`${anchored.consMape}%`}
-                label="Consumption error"
+                label="Consumption, MAPE"
               />
             </div>
             <IconList
@@ -965,40 +967,51 @@ export function InvestmentSlide() {
           In the OBR&apos;s file total investment is an input, so these shocks do nothing. Our
           opt-in switch turns on the listing&apos;s own commented-out investment identity (l.86)
         </Note>
-        <div className={`${styles.cardGrid} ${styles.cols2}`}>
-          <Card
-            icon={IconBuildingSkyscraper}
-            title="Corporation tax +5pp"
-            text="Dearer capital, so investment falls slowly"
-          >
-            <div className={styles.inlineStats}>
-              <span>
-                <b>{pounds(corporationTax.gdpQ4)}</b>GDP, quarter 4
-              </span>
-              <span>
-                <b>{pounds(corporationTax.gdpQ12)}</b>GDP, quarter 12
-              </span>
+        <div
+          className={`${styles.cardGrid} ${styles.cols2}`}
+          style={{ columnGap: "3em", alignItems: "start" }}
+        >
+          <div className={styles.stack}>
+            <Head icon={IconBuildingSkyscraper}>
+              Corporation tax +5pp: dearer capital, investment falls slowly
+            </Head>
+            <div className={`${styles.cardGrid} ${styles.cols2}`}>
+              <Stat
+                icon={IconTrendingDown}
+                value={pounds(corporationTax.gdpQ4)}
+                label="GDP, quarter 4"
+              />
+              <Stat
+                icon={IconTrendingDown}
+                value={pounds(corporationTax.gdpQ12)}
+                label="GDP, quarter 12"
+              />
             </div>
-            <p>
+            <Note icon={IconInfoCircle}>
               Still falling, towards about −{corporationTax.plateau} a quarter. No OBR number
               to compare with
-            </p>
-          </Card>
-          <Card
-            icon={IconCrane}
-            title={`Government investment +${capitalSpending.shock} a quarter`}
-            text="About £1 of GDP per £1, with no fade"
-          >
-            <div className={styles.inlineStats}>
-              <span>
-                <b>{pounds(capitalSpending.gdpQ1)}</b>GDP, quarter 1
-              </span>
-              <span>
-                <b>{pounds(capitalSpending.gdpQ12)}</b>GDP, quarter 12
-              </span>
+            </Note>
+          </div>
+          <div className={styles.stack}>
+            <Head icon={IconCrane}>
+              Government investment +{capitalSpending.shock} a quarter: about £1 of GDP per £1
+            </Head>
+            <div className={`${styles.cardGrid} ${styles.cols2}`}>
+              <Stat
+                icon={IconTrendingUp}
+                value={pounds(capitalSpending.gdpQ1)}
+                label="GDP, quarter 1"
+              />
+              <Stat
+                icon={IconTrendingUp}
+                value={pounds(capitalSpending.gdpQ12)}
+                label="GDP, quarter 12"
+              />
             </div>
-            <p>The OBR&apos;s multiplier: {multiplierRows[4].obrLabel}</p>
-          </Card>
+            <Note icon={IconInfoCircle}>
+              No fade. The OBR&apos;s multiplier: {multiplierRows[4].obrLabel}
+            </Note>
+          </div>
         </div>
         <div>
           <span className={`${styles.chip} ${styles.chipBad}`}>
