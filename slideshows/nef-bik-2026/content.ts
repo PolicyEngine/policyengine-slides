@@ -268,7 +268,8 @@ export const timeline: {
     year: "2029-30",
     evRate: 9,
     events: [{ title: "Pension salary sacrifice", text: "NICs relief only on the first £2,000 a year" }],
-    yield: "Cap: +£5,350m, then +£2,920m",
+    // U+2060 keeps the sign with its figure when the chip wraps.
+    yield: "Cap: +£5,350m, then +\u2060£2,920m",
   },
   {
     year: "2030-31",
@@ -288,8 +289,8 @@ export type Status = "done" | "partly" | "notYet";
 // A stage is "done" only if it is in released code and in use:
 // - Survey: microcosm @ bcb5cba (main), uk_runtime/frs_spine.py reads the FRS
 //   job-table items EXPBEN01, EXPBEN03, CARVAL, FUELTYP, CARCON, CARAMT.
-// - Imputation: sources.companyCarsStage (stage 18 of 56 in
-//   sources.sourceStages). List price is drawn within the FRS band from
+// - Imputation: sources.companyCarsStage (`company_cars`, the 19th of the 56
+//   entries in the `stages` list of sources.sourceStages, counted from 1). List price is drawn within the FRS band from
 //   Wealth and Assets Survey round 8 prices; CO2 from HMRC Table 2A shares.
 //   Availability, private-use payments and electric range are left at
 //   defaults ("no survey records them"), hence "partly".
@@ -513,20 +514,25 @@ export const gaps = [
     title: "Validation",
     items: [
       "Company cars against HMRC by income and region",
-      "Static car score expected below the Budget's £310m",
-      "Treasury costing of the cap, certified by the OBR",
+      "Static car score (behaviour held fixed) expected below the Budget's £310m",
+      "Static pension cap score expected below the Treasury's costing",
     ],
   },
 ];
 
 // Effort is relative, in words: nothing here has been estimated in weeks.
+// Outputs would be static scores (behaviour held fixed). Nothing has been run:
+// "expected below" rests on microcosm's docs/uk-company-cars-316.md (a static
+// score of the 2030-31 car-rate rise about 30% to 45% short of the Budget's
+// £310m) and policyengine-uk's test of the pension cap (about £1.8bn in 2030
+// against the official £5,350m and £2,920m).
 export const phases = [
   {
     title: "Cars, fuel and vans",
     effort: "Smallest",
     effortNote: "Car rules and data exist",
     work: ["Validate cars against HMRC by income", "Target fuel and Class 1A; add the van charge"],
-    output: "Electric car rate reforms: revenue and who pays",
+    output: "Electric car rate reforms: revenue and who pays. Expected below the Budget's score",
   },
   {
     title: "Other benefits",
@@ -538,9 +544,9 @@ export const phases = [
   {
     title: "Salary sacrifice and OpRA",
     effort: "Medium",
-    effortNote: "Pensions done; cars and cycles not",
+    effortNote: "Only pensions done",
     work: ["Salary-sacrifice cars, cycle to work, childcare", "The OpRA rule"],
-    output: "Caps and exemptions, across schemes",
+    output: "Caps and exemptions, across schemes. Pension cap expected below the official costing",
   },
 ];
 
@@ -552,7 +558,7 @@ export const exampleQuestions = [
   },
   {
     question: "What does capping pension salary sacrifice raise, and from whom?",
-    scenario: "NICs relief only on the first £2,000 a year, against no cap. Static result is below the official costing",
+    scenario: "NICs relief only on the first £2,000 a year, against no cap. The static score is expected below the official costing",
     needs: "Runs today",
   },
   {

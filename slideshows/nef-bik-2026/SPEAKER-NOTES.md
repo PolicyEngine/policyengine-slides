@@ -92,10 +92,12 @@ today; and scoping the project.
   relief-at-source schemes adds to 2029-30 and takes from 2030-31.
 - 6 April 2030: employee car ownership schemes brought into the benefit in
   kind rules (announced; delayed at Budget 2025).
-- Chips: Exchequer yield from Budget 2026. "Car rates: +£700m" is the
+- Chips: Exchequer yield from Budget 2026. "2028–30 rates: +£700m" is the
   2028-29 yield of the rates set for 2028-29 and 2029-30 (Table 6.4; +£975m
-  in 2029-30). "Car rates: +£310m" is the 2030-31 yield of the rates
-  announced at Budget 2026 (Table 6.1; +£345m in 2031-32).
+  in 2029-30). "Cap: +£5,350m, then +£2,920m" is the pension salary-sacrifice
+  cap in 2029-30 and 2030-31 (Table 6.4). "2030-31 rise: +£310m" is the
+  2030-31 yield of the rates announced at Budget 2026 (Table 6.1; +£345m in
+  2031-32).
 
 ## 7. Part 2: what PolicyEngine covers
 
@@ -109,8 +111,8 @@ Each stage carries a status for company cars. What each rests on:
   reads the job-table items EXPBEN01 (company car), EXPBEN03 (fuel for
   private use), CARVAL (banded list price), FUELTYP, CARCON and CARAMT. The
   FRS question ExpBen lists 13 employer benefits.
-- **Imputation: Partly done.** `uk_runtime/company_cars.py`, one of the 56
-  stages in `uk/source_stages.json`. List price is drawn within the FRS band from
+- **Imputation: Partly done.** `uk_runtime/company_cars.py`, the 19th of the
+  56 stages listed in `uk/source_stages.json`. List price is drawn within the FRS band from
   Wealth and Assets Survey round 8 company-car prices; CO2 is assigned to
   match HMRC Table 2A band shares; unknown fuels at Table 2C shares. Not
   imputed: the share of the year the car is available, the employee's
@@ -205,6 +207,8 @@ Each stage carries a status for company cars. What each rests on:
   SPI-drawn records.
 - Calibration: no by-type totals since 2016-17; car fuel, Class 1A and cars
   by income band are published but not yet targets.
+- "Static" first appears here: a static score holds behaviour fixed (no one
+  changes car, pay or pension contributions in response).
 - Validation, known in advance: the repository's own note
   (`docs/uk-company-cars-316.md` in microcosm) expects a static score of the
   2030-31 car-rate rise to fall about 30% to 45% short of the Budget's £310m;
@@ -222,6 +226,14 @@ Each stage carries a status for company cars. What each rests on:
 - Phase 3, salary sacrifice and OpRA: salary-sacrifice cars, cycle to work,
   childcare; the OpRA rule.
 - Effort is our rough ranking. No weeks or costs have been estimated.
+- Every output would be a static score: behaviour held fixed. Nothing has
+  been run, so "expected below" is an expectation, from the two checks in the
+  notes to slide 12: the car-rate score about 30% to 45% short of the Budget's
+  £310m, and the pension cap about £1.8bn in 2030 against the official
+  £5,350m and £2,920m. Don't put the gap down to behaviour: official costings
+  include behavioural responses, which usually lower a yield, so a static
+  score below them points to data coverage and timing, which the project
+  would have to explain.
 - Class 1A results would be revenue only: the model assigns Class 1A to no
   household (it stays with employers; policyengine-uk issue #2752).
 
@@ -229,8 +241,8 @@ Each stage carries a status for company cars. What each rests on:
 
 Three examples, each with the scenario and the phase it needs. Each would
 report revenue, the effect by income decile, winners and losers, and poverty
-(before housing costs). None has been run. Static scores sit below official
-costings: the pension cap test in policyengine-uk expects about £1.8bn
+(before housing costs). None has been run. We expect static scores below
+official costings: the pension cap test in policyengine-uk expects about £1.8bn
 (plus or minus £1.0bn) in 2030, against the official £5,350m and £2,920m;
 and the Microcosm note expects the 2030-31 car score to be about 30% to 45%
 short of £310m.

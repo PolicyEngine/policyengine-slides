@@ -902,7 +902,7 @@ export function PhasesSlide() {
               />
             </div>
             <div className={styles.layerLine}>
-              <span>Output</span>
+              <span>Output: static scores</span>
               <p>{phase.output}</p>
             </div>
             <div className={styles.layerLine}>
