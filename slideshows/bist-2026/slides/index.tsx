@@ -549,14 +549,14 @@ export function WhatSlide() {
   );
 }
 
-/** How far a run's results break down: four groups, from income to place. */
+/** How far a run's results break down: four groups, from income to geography. */
 export function BreakdownsSlide() {
   return (
     <Frame
       section="what"
       title="How far results break down"
       scale={1.12}
-      subtitle="By income, people, programme and place, from the UK down to local areas"
+      subtitle="By income, people, programme and geography, from the UK down to local areas"
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {breakdowns.map((group, index) => (
@@ -777,7 +777,7 @@ export function MicrocosmBuildSlide() {
       section="what"
       title="Microcosm UK 2024–25: how the household file is built"
       scale={1.2}
-      subtitle="An open-source pipeline of 54 stages, from surveys and statistics to weights"
+      subtitle="An open-source pipeline of 56 stages, from surveys and statistics to weights"
     >
       <div className={styles.buildRow} style={{ gridTemplateColumns: template }}>
         {blocks.map((step, index) => {
@@ -822,7 +822,7 @@ export function CalibrationSlide() {
       section="what"
       title="Calibration: weights fitted to official statistics"
       scale={1.22}
-      subtitle="The national build of 7 November 2026, certified in policyengine.py 6.19.0"
+      subtitle="The national build of 15 November 2026, certified in policyengine.py 6.20.1"
     >
       <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
@@ -880,7 +880,7 @@ const publisherStep = (source: string) => {
   return index === -1 ? publisherSteps.length + 1 : index + 1;
 };
 
-// The 1,514 targets of the certified build by topic, after the Good Growth
+// The 1,534 targets of the certified build by topic, after the Good Growth
 // Foundation deck's target table: where each binds, who publishes it, how
 // many there are and the share the fitted weights reproduce within 10%.
 function TargetTable() {
@@ -922,9 +922,9 @@ export function TargetsSlide() {
   return (
     <Frame
       section="what"
-      title="What the weights are fitted to: 1,514 official figures"
+      title="What the weights are fitted to: 1,534 official figures"
       scale={0.9}
-      subtitle="Every target of the 7 November build, by topic, with the share the weights reproduce within 10%"
+      subtitle="Every target of the 15 November build, by topic, with the share the weights reproduce within 10%"
     >
       <TargetTable />
     </Frame>
@@ -1327,7 +1327,7 @@ export function AiPostSlide() {
   return (
     <Frame
       section="projects"
-      title="Who bears the cost of an AI scenario?"
+      title="The potential impact of AI adoption: who bears the cost?"
       scale={1.1}
       fill
       subtitle="Distributional and fiscal incidence in the UK"

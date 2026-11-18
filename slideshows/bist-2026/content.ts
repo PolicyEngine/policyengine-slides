@@ -3,11 +3,15 @@
 //
 // Every figure is pinned to a commit of its study, and every claim about
 // the model or the data to a commit of the code; the comments below name
-// them. policyengine.py bundle 6.19.0 (released 13 November 2026; data build
-// of 7 November) certifies Microcosm UK 2024-25 for the UK, and the data
-// slides follow the Microcosm code. The AI study's figures are the published
-// post's, run on Microcosm UK for 2027-28; the trade study's are those of
-// its rerun on Microcosm UK (PR #46, open, not merged).
+// them. policyengine.py bundle 6.20.1 (released 16 November 2026; national
+// build of 15 November, policyengine-uk 2.177.7) certifies Microcosm UK
+// 2024-25 for the UK, and 6.20.2 keeps the same pair; the data slides
+// describe that build. The AI study's figures are the published post's, run
+// on Microcosm UK for 2027-28 with policyengine 6.16.1; the trade study's
+// are those of its rerun on Microcosm UK with policyengine 6.20.0 (PR #46,
+// open, not merged). Both ran on the earlier certified build of 7 November
+// (microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e), which 6.16.1 to
+// 6.20.0 pin; the notes say so.
 //
 // The talk has six parts: an introduction; what PolicyEngine is; what we
 // have already; projects we have done; what could be explored; and possible
@@ -16,15 +20,17 @@
 //
 // Code claims were read on 15 November 2026 at: policyengine-uk d3db7ac,
 // policyengine.py 810a59e, microcosm 429d7a0, uk-trade-shock-study 06c8bbc
-// (its figures are now those of its PR #46, head 185ee5f, read 17 November;
+// (its figures are now those of its PR #46, head ee6ad07, read 17 November;
 // the earlier head 778557c, read 16 November, has the same figures),
 // and firm-microsim-paper e6d5dd6. GOV.UK pages and the Microcosm
 // calibration dashboard were read the same day; the AI post on 16 November.
 //
 // Two kinds of Microcosm number appear and are never mixed in one figure:
-// - "the certified build": the national build of 7 November 2026 that
-//   policyengine.py 6.19.0 pins (microcosm-uk-2024-25-national-
-//   20261107T020434Z-eeb6093e), as the public calibration dashboard reports it;
+// - "the certified build": the national build of 15 November 2026 that
+//   policyengine.py 6.20.1 and 6.20.2 pin (microcosm-uk-2024-25-national/
+//   uk-frs-calibration-attempt-20261115T104657Z-fcfac709, built at microcosm
+//   3a7067f), as the public calibration dashboard reports it, read 18
+//   November 2026;
 // - "the code": counts read from the repository at commit 429d7a0 (15
 //   November), which is eight days newer than that build.
 
@@ -303,11 +309,11 @@ export const sources = {
     href: "https://axiom.org",
   },
   // The dashboard takes a "release" parameter, so the link is pinned to the
-  // certified build of 7 November 2026 and keeps showing it after newer
-  // releases become the dashboard's default. Read 16 November 2026.
+  // certified build of 15 November 2026 and keeps showing it after newer
+  // releases become the dashboard's default. Read 18 November 2026.
   dashboard: {
-    label: "Calibration dashboard, pinned to the 7 November build",
-    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e",
+    label: "Calibration dashboard, pinned to the 15 November build",
+    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709",
   },
   // The Autumn Budget 2026 dashboard, at its policyengine.org address, as in
   // the Autumn Budget 2026 deck (slideshows/autumn-budget-2026/content.ts).
@@ -403,7 +409,7 @@ export const parts = [
     icon: IconPresentationAnalytics,
     title: "Projects we have done",
     short: "Projects",
-    text: "A Budget dashboard, an AI scenario, synthetic firms and their VAT costings, and trade.",
+    text: "A dashboard for the Autumn Budget 2026, an analysis of the potential impact of AI adoption, a firm-level model that costs VAT reforms, and who pays for four UK trade shocks.",
   },
   {
     key: "explore",
@@ -579,9 +585,9 @@ export const whoWeAre = {
   ] as Logo[],
 };
 
-// Data: policyengine.py 810a59e, data/bundle/manifest.json, bundle 6.19.0
-// (Microcosm UK 2024-25 national build of 7 November 2026, certified for
-// policyengine-uk 2.174.1).
+// Data: policyengine.py 6.20.1 (CHANGELOG, 16 November 2026) certifies the
+// Microcosm UK 2024-25 national build of 15 November 2026 for
+// policyengine-uk 2.177.7; 6.20.2 keeps the same pair.
 // Spending by category is a model input (policyengine-uk d3db7ac,
 // variables/input/consumption/); it sets VAT and duties. Income after taxes
 // and benefits is the result. The "Input" and "Result" labels carry that
@@ -656,7 +662,7 @@ export const coverage = [
   },
 ];
 
-// The trade study's four episodes (uk-trade-shock-study PR #46, 185ee5f,
+// The trade study's four episodes (uk-trade-shock-study PR #46, ee6ad07,
 // open, not merged; a working paper). Years and channels are the headings of
 // paper/sections/episodes.tex: "Episode 1: the TCA border (2021--23),
 // negative, price-led"; "Episode 2: the terms-of-trade shock (2022--23),
@@ -706,7 +712,7 @@ export const tradeEvents = [
   },
 ];
 
-// The path every episode follows, under the four cards. PR #46, 185ee5f:
+// The path every episode follows, under the four cards. PR #46, ee6ad07:
 // each episode has a household stage on the certified Microcosm UK records
 // (README; results.tex, "The second stage: household-level results";
 // vintage_and_tca.py for food, second_stage_energy.py for energy,
@@ -717,15 +723,16 @@ export const tradeEvents = [
 // episodes, not for the India duty reductions.
 // The line is said aloud (NOTES.md, slide 22), not shown on the slide.
 // Microcosm UK (said aloud on slides 22 and 23): the trade study's rerun
-// (uk-trade-shock-study PR #46, 185ee5f, open, not merged; README and
+// (uk-trade-shock-study PR #46, ee6ad07, open, not merged; README and
 // paper/sections/results.tex): every microsimulation runs on
-// policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the certified
-// Microcosm UK 2024-25 build. The tariff stage runs under 2026-27 rules; the
+// policyengine[uk] 6.20.0 (policyengine-uk 2.174.1) with the Microcosm UK
+// 2024-25 build of 7 November 2026 that 6.20.0 certifies, not the 15
+// November build that the data slides describe. The tariff stage runs under 2026-27 rules; the
 // energy episode's main run uses 2023-24 rules, and 2022-23 rules only for a
 // comparison.
 
 // The earlier "about 60% (49-64%)" energy offset is dropped: it came from
-// 06c8bbc on the enhanced FRS, and the rerun (PR #46, 185ee5f) reports a
+// 06c8bbc on the enhanced FRS, and the rerun (PR #46, ee6ad07) reports a
 // different measure (see NOTES.md).
 
 // The Economic Prosperity Deal, end to end: from a trade or macroeconomic
@@ -879,7 +886,7 @@ export const tariffDisaggregation = {
 // The trade study's US-tariff episode (formerly called "the tariff bridge";
 // the symbol keeps that name): shock = elasticity × tariff × US export share by SIC
 // division. Paper "Who pays for trade shocks?", uk-trade-shock-study PR #46,
-// head 185ee5f (17 November 2026, open, not merged), policyengine.py 6.20.0 on
+// head ee6ad07 (17 November 2026, open, not merged), policyengine.py 6.20.0 on
 // Microcosm UK. Headline as in the abstract: taxes and benefits offset
 // EThreeWageTaxBenRatePct 39.0% (wage cuts) and EThreeDispTaxBenRatePct 34.1%
 // (displacement, exact expectation over exposed workers) of the gross loss
@@ -890,7 +897,7 @@ export const tariffDisaggregation = {
 // for the schedule before the Economic Prosperity Deal. The paper reports
 // none for the deal schedule ("the Economic Prosperity Deal's own tariff
 // changes ... are outside the design", episodes.tex); the code has an "epd"
-// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at 185ee5f)
+// schedule (tariff_rates("epd"), analysis/build_measured_shocks.py at ee6ad07)
 // but no published result, hence the tag "No published results for the UK–US deal".
 // This slide is the second slide of the trade study: its title repeats the
 // study's, and the trade slide's US tariffs card points here.
@@ -1085,7 +1092,7 @@ export const abmQuestions = [
 
 // Every input on the slide carries "Not developed yet": the link from an
 // agent-based model is not developed. Doability of each input, checked on 16 November 2026 against
-// uk-trade-shock-study PR #46 (185ee5f), tariff_pipeline/shocks.py and
+// uk-trade-shock-study PR #46 (ee6ad07), tariff_pipeline/shocks.py and
 // runner.py: apply_shocks takes persons with employment_income, sic_division,
 // age and weight, and applies wage cuts or job losses by two-digit SIC
 // division; region is reported (runner.py, region_income_change) but is not
@@ -1491,16 +1498,16 @@ export const rulesEntities = [
 //   (data/uk_geography/constituencies_2024.csv, 2024 boundaries); local
 //   authorities: 361 (local_authorities_2023.csv). The bundle routes both to
 //   the separate local-area file (data/bundle/manifest.json,
-//   regional_release_kind "local_area"). Bundle 6.19.0 certifies that cut,
-//   microcosm-uk-2024-25-dense-20261107T173210Z-38605444, alongside the national
-//   build (policyengine.py CHANGELOG, the policyengine-uk 2.174.1
-//   certification entry), so the slide shows no "Experimental" tag. The older constituency_impact.py and
+//   regional_release_kind "local_area"). Bundle 6.20.1 certifies that cut,
+//   uk-local-candidate-f100-s42-20261116T102715Z-e2745e59 (hub commit
+//   4c594d72), alongside the national build (policyengine.py CHANGELOG,
+//   6.20.1 entry), so the slide shows no "Experimental" tag. The older constituency_impact.py and
 //   local_authority_impact.py outputs are deprecated because they have no
 //   disclosure control.
-// - The foot: the disclosure defaults (disclosure/schema.py,
-//   DisclosureSettings; uk_geography_disclosure.py) follow the UK Data
-//   Service licence, "at least 10 distinct survey households behind a
-//   number", and attach bootstrap intervals (90% by default). Sector-by-region
+// - The foot: disclosure control under the UK Data Service licence, with
+//   a stricter floor in policyengine.py (disclosure/schema.py,
+//   DisclosureSettings, unchanged at 6.20.2: min_sources 10, a dominance
+//   rule, 90% intervals by default). The licence's own minimum is lower. Sector-by-region
 //   cells have fewer records still (see the linking slide).
 export type Breakdown = { text: string; tag?: Tag };
 
@@ -1534,7 +1541,7 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
   },
   {
     icon: IconMap,
-    title: "By place",
+    title: "By geography",
     items: [
       { text: "The UK, and its 12 regions and nations (ITL1)" },
       { text: "650 parliamentary constituencies" },
@@ -1548,9 +1555,10 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
 
 // Microcosm UK 2024-25: what the pipeline builds.
 // The slide describes the certified file. Its build
-// (microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e) ran at microcosm
-// dc00d158f, which declares 54 source stages (the certified build's
-// diagnostics); today's code at 429d7a0 declares 56
+// (uk-frs-calibration-attempt-20261115T104657Z-fcfac709) ran at microcosm
+// 3a7067f (the dashboard's git_commit for the release), which declares 56
+// source stages: the 54 of the 7 November build (dc00d158f) plus
+// uc_limited_capability and pip_points. Code at 429d7a0 also declares 56
 // (packages/microcosm-build/src/microcosm/build/uk/source_stages.json, each
 // stage with a "survey" and a "source"; every survey microdata file is
 // pinned by SHA-256 and checked when the build runs). Read at 429d7a0:
@@ -1610,7 +1618,7 @@ export const microcosmFlow = [
     icon: IconScale,
     owner: "Official totals",
     title: "Calibrated weights",
-    text: "Fitted to 1,514 official figures",
+    text: "Fitted to 1,534 official figures",
   },
 ];
 
@@ -1619,10 +1627,10 @@ export const microcosmResult = {
   icon: IconDatabase,
   owner: "The result",
   title: "Microcosm UK 2024–\u206025",
-  text: "Certified in policyengine.py 6.19.0",
+  text: "Certified in policyengine.py 6.20.1",
 };
 
-// The stage count (54, the certified build) is in the subtitle. No target
+// The stage count (56, the certified build) is in the subtitle. No target
 // is by industry, and the SPI copies' sectors are imputed: both are in
 // NOTES.md, for questions, with the imputation method and the pinned files
 // and seeded draws.
@@ -1638,51 +1646,51 @@ export const microcosmResult = {
 // "family_equal"). The certified build's public diagnostics record the same
 // settings.
 // Fit (the certified build,
-// microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e): the public
-// calibration dashboard, release "2024-25-national ·
-// uk-frs-calibration-attempt-20261107T020434Z-eeb6093e", read 15 November
-// 2026: 1,514 targets in 44 statistics (the dashboard's browsing groups, not
-// the loss's families); 98.7% "within 10% of the target value"; 78.2K
-// household records (the build prunes nothing, so no record has a weight of
-// zero); by publisher HMRC 776, ONS 365, DWP 213, MHCLG 82 (so 78 from
-// others). From the certified build's diagnostics: an effective sample size
-// of about 7.2 thousand (9.2% of records); 38 target families in the loss,
-// each 1/38 (about 2.6%) of the total weight, so a family with one target
-// counts as much as the 360 regional SPI targets together; the saved weights
-// are the best of the 1,500 steps (step 1,437); the cap of 10 times the
-// starting weight is enforced after every step; total households are free
-// to move with the targets; every target is at model year 2025, though the
-// file is called 2024-25. The slide does not quote the solver's final
-// objective: it depends on the family weights and the target set, so it is
-// not comparable across releases. These are in-sample; the dashboard's
-// validation and cross-dataset pages have no UK content, and the slide
-// carries an "In-sample fit" tag.
-// The repository's target file at 429d7a0 lists 1,710 national rows, more
-// than the certified build's 1,514, so the slide quotes the build only.
+// uk-frs-calibration-attempt-20261115T104657Z-fcfac709): the public
+// calibration dashboard's data route for that release (/calibration/
+// dashboard/api/microcosm?country=uk&release=...), read 18 November 2026:
+// 1,534 targets; fraction_within_10pct 0.9876 (98.8%); 78,164 household
+// records (n_nonzero equals n_records, so no record has a weight of zero);
+// by publisher HMRC 776, ONS 365, DWP 233, MHCLG 82 (so 78 from others); an
+// effective sample size of about 7.4 thousand (7,380, 9.4% of records); the
+// loss weights' maximum is 1/39, so 39 target families, each 1/39 (about
+// 2.6%) of the total weight, and a family with one target counts as much as
+// the 360 regional SPI targets together; the saved weights are the best of
+// the 1,500 steps (selected_epoch 1,491); max_weight_ratio 10; learning rate
+// 0.02, seed 0. Every target is at model year 2025, though the file is called
+// 2024-25. Against the 7 November build (1,514 targets, 98.7%, 78,181
+// records, 38 families, best step 1,437, ESS 7.2 thousand) the only target
+// changes are 17 new DWP Personal Independence Payment targets (England and
+// Wales, all within 10%) and three more Universal Credit targets (106, 103
+// within 10%). The slide does not quote the solver's final objective: it
+// depends on the family weights and the target set, so it is not comparable
+// across releases. These are in-sample; the dashboard's validation and
+// cross-dataset pages have no UK content, and the slide carries an
+// "In-sample fit" tag.
 export const calibrationEquation =
   String.raw`\min_{0<w\,\le\,10\,w^{0}}\ \sum_{j}\,\omega_j\,\min\!\left(\frac{\lvert a_j^{\top}w-t_j\rvert}{\max(\lvert t_j\rvert,\,1)},\ 10\right)`;
 
 export const calibrationFit = {
   stats: [
-    { icon: IconTargetArrow, value: "1,514", label: "official targets" },
-    { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
+    { icon: IconTargetArrow, value: "1,534", label: "official targets" },
+    { icon: IconCircleCheck, value: "98.8%", label: "of targets within 10% of the official figure" },
     { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
   ],
-  solver: ["38 target families, each 1/38 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
+  solver: ["39 target families, each 1/39 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
 };
 
-// The effective sample size of the certified build, about 7.2 thousand
-// (9.2% of records), is in NOTES.md: a rough guide for averages that varies
+// The effective sample size of the certified build, about 7.4 thousand
+// (9.4% of records), is in NOTES.md: a rough guide for averages that varies
 // by statistic. The targets by publisher are the table on the next slide.
 
-// What the weights are fitted to: the 1,514 targets of the certified build
+// What the weights are fitted to: the 1,534 targets of the certified build
 // as a table, one row per topic. Counts and the number within 10% of the
 // official figure are the "family_fit" rows of the dashboard's data route
 // for the pinned release (source "dashboard"; /api/microcosm?release=...),
-// read on 17 November 2026: 41 publisher-and-statistic groups. "Where it
+// read on 18 November 2026: 42 publisher-and-statistic groups. "Where it
 // binds" is the geography of each target in the same release, from the
 // dashboard's target list (/api/microcosm/target-diagnostics?release=...,
-// all 1,514 targets). "Nations" are Wales, Scotland and Northern Ireland
+// all 1,534 targets). "Nations" are Wales, Scotland and Northern Ireland
 // (England too where it has its own target); "English regions" are the nine
 // regions of England. Rows group statistics within one publisher block, so
 // the publisher totals can be read off the table:
@@ -1696,10 +1704,12 @@ export const calibrationFit = {
 //   nations, regions), household composition 22 (UK, nations, regions; it
 //   includes three household counts published by NRS, NISRA and the Welsh
 //   Government), land values 3 and consumer trends 2 (UK).
-// - DWP 213 (210): Universal Credit 103 (100; Great Britain, one Scotland
+// - DWP 233 (230): Universal Credit 106 (103; Great Britain, one Scotland
 //   target); State Pension 57 and Pension Credit 13 (Great Britain, Wales,
-//   Scotland, regions); two-child limit 15, benefit cap 14, legacy benefits
-//   8, Attendance Allowance 2 (England, Wales) and workplace pensions 1.
+//   Scotland, regions); Personal Independence Payment 17 (17; England and
+//   Wales, by component, award level and age), two-child limit 15, benefit
+//   cap 14, legacy benefits 8, Attendance Allowance 2 (England, Wales) and
+//   workplace pensions 1.
 // - MHCLG 82 (82): council tax dwelling stock by band, England and its
 //   regions.
 // - Ten other publishers 78 (77): OBR 16 (UK, Great Britain, England and
@@ -1708,8 +1718,8 @@ export const calibrationFit = {
 //   Scottish Government 12, Department for Transport 13 and three Northern
 //   Ireland bodies 5 (council tax stock in Wales and Scotland, buses and
 //   public transport, Northern Ireland pensions, Scottish Child Payment).
-// Within 10%: 761 + 365 + 210 + 82 + 77 = 1,495 of 1,514, the dashboard's
-// 98.7%. The component adds the rows up for the total row.
+// Within 10%: 761 + 365 + 230 + 82 + 77 = 1,515 of 1,534, the dashboard's
+// 98.8%. The 19 misses: 15 SPI, 3 Universal Credit, 1 student support. The component adds the rows up for the total row.
 export type TargetRow = {
   /** The publisher's icon: one per publisher group. */
   icon: Icon;
@@ -1729,9 +1739,9 @@ export const targetTable: TargetRow[] = [
   { icon: IconUsers, topic: "Employment by occupation", binds: "UK, nations, English regions", source: "ONS", count: 159, within: 159 },
   { icon: IconUsers, topic: "Household composition", binds: "UK, nations, English regions", source: "ONS", count: 22, within: 22 },
   { icon: IconUsers, topic: "Land values and household spending", binds: "UK", source: "ONS", count: 5, within: 5 },
-  { icon: IconHeartHandshake, topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 103, within: 100 },
+  { icon: IconHeartHandshake, topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 106, within: 103 },
   { icon: IconHeartHandshake, topic: "State Pension and Pension Credit", binds: "Great Britain, Wales, Scotland, English regions", source: "DWP", count: 70, within: 70 },
-  { icon: IconHeartHandshake, topic: "Two-child limit, benefit cap, other benefits", binds: "Great Britain, England, Wales", source: "DWP", count: 40, within: 40 },
+  { icon: IconHeartHandshake, topic: "PIP, two-child limit, benefit cap, other benefits", binds: "Great Britain, England, Wales", source: "DWP", count: 57, within: 57 },
   { icon: IconBuilding, topic: "Council tax dwellings by band", binds: "England, English regions", source: "MHCLG", count: 82, within: 82 },
   { icon: IconBuildingBank, topic: "Tax receipts and benefit spending", binds: "UK, Great Britain, England and Wales", source: "OBR", count: 16, within: 16 },
   { icon: IconBuildingBank, topic: "Student loans, funded childcare, school pupils", binds: "England, Wales, UK", source: "SLC, DfE, ISC", count: 21, within: 20 },
@@ -1744,7 +1754,7 @@ export const targetTable: TargetRow[] = [
 export const dashboardFeatures = [
   { icon: IconListSearch, title: "Every target", text: "Official figure beside fitted value" },
   { icon: IconMap2, title: "By publisher and statistic", text: "For the UK, nations and regions" },
-  { icon: IconPinned, title: "Pinned to the 7 November build", text: "Certified in policyengine.py 6.19.0" },
+  { icon: IconPinned, title: "Pinned to the 15 November build", text: "Certified in policyengine.py 6.20.1" },
 ];
 
 // Projects we have done: three slides with live or published work.

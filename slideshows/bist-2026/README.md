@@ -36,7 +36,7 @@ slide, is in [NOTES.md](NOTES.md).
 7. How the rules are encoded
 8. Microcosm UK 2024–25: how the household file is built
 9. Calibration: weights fitted to official statistics
-10. What the weights are fitted to: 1,514 official figures (a table by topic)
+10. What the weights are fitted to: 1,534 official figures (a table by topic)
 11. What the weights are fitted to: the live calibration dashboard (live page)
 
 3 · What we have already
@@ -51,7 +51,7 @@ slide, is in [NOTES.md](NOTES.md).
 
 17. Part 4: Projects we have done (divider)
 18. The Autumn Budget 2026 dashboard (live page)
-19. Who bears the cost of an AI scenario? (live page)
+19. The potential impact of AI adoption: who bears the cost? (live page)
 20. How we built synthetic UK firms
 21. What the firm model can cost: thresholds, tapers and reduced rates
 22. Who pays for trade shocks? Four UK episodes, 2021–26
@@ -119,7 +119,7 @@ it if the frames do not run, and it does not run in an export.
 
 - Four slides embed a live page in a frame with a small toolbar (its
   address, "Expand" and "New tab"): slide 11 the
-  [calibration dashboard, pinned to the certified build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e),
+  [calibration dashboard, pinned to the certified build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709),
   slide 14 [axiom.org](https://axiom.org), the Axiom Foundation's site,
   slide 18 the
   [Autumn Budget 2026 dashboard](https://policyengine.org/uk/budgets/autumn-2026)
@@ -145,7 +145,7 @@ it if the frames do not run, and it does not run in an export.
   showed it) and the trade paper's incidence figure (see "The review of 16
   November" below).
 - The numbers behind the live dashboard are the table on slide 10 (the
-  1,514 targets by topic, `targetTable` in `content.ts`). In a PDF export
+  1,534 targets by topic, `targetTable` in `content.ts`). In a PDF export
   the dashboard slide (11) shows a short card in place of the live page: what
   the page offers and its address (`dashboardFeatures`; `Only` in
   `slides/Reveal.tsx` switches between the two). Live, the slide keeps the
@@ -159,9 +159,12 @@ commit of policyengine-uk, policyengine.py or microcosm. Each has a comment
 in `content.ts` naming its source, read on 15 November 2026. Where a point below is not on a slide, it is in the presenter
 notes for that slide.
 
-- **Data.** policyengine.py bundle 6.19.0 (released 13 November 2026, data
-  build of 7 November) certifies Microcosm UK 2024–25, and the deck describes
-  that file. The AI study runs on Microcosm UK for the 2027–28 tax year:
+- **Data.** policyengine.py 6.20.1 (released 16 November 2026; national
+  build of 15 November, policyengine-uk 2.177.7) certifies Microcosm UK
+  2024–25, and 6.20.2 keeps the same pair; the deck's data slides describe
+  that file. The AI study (policyengine 6.16.1) and the trade rerun
+  (policyengine 6.20.0) ran on the earlier certified build of 7 November;
+  the notes say so. The AI study runs on Microcosm UK for the 2027–28 tax year:
   its figures are those of the published post,
   ["Who bears the AI shock?"](https://www.policyengine.org/uk/research/uk-ai-study)
   (16 November 2026; PolicyEngine/policyengine-app-v2,
@@ -180,9 +183,10 @@ notes for that slide.
   2024–25), which earlier versions quoted and which are no longer in the
   deck. The trade study's slides follow
   its rerun on Microcosm UK (uk-trade-shock-study pull request #46, head
-  `185ee5f`, open and not merged; the earlier head `778557c` has the same
-  figures): every microsimulation runs on policyengine[uk] 6.20.0 with the
-  certified Microcosm UK 2024–25 build. The tariff stage runs under 2026–27
+  `ee6ad07`, read 18 November, open and not merged; the earlier heads
+  `185ee5f` and `867293f` have the same figures): every microsimulation runs
+  on policyengine[uk] 6.20.0 with the Microcosm UK 2024–25 build of 7
+  November that 6.20.0 certifies. The tariff stage runs under 2026–27
   rules; the energy episode's main run uses 2023–24 rules, and 2022–23 rules
   only for a comparison. The notes say so for both slides (no tag on the slides). The earlier "about 60%" energy offset is dropped; the rerun's
   different measure is in the notes.
@@ -192,9 +196,9 @@ notes for that slide.
   topic and the live dashboard); what we have already (model coverage, including business
   taxes, and what we can share, then the Axiom Foundation's rules as code
   for firms and employers and how a model could call them); projects we have
-  done (the Autumn Budget 2026 dashboard, the AI scenario post, the
-  synthetic firms of the firm-level VAT working paper and what that model
-  costs, the trade working paper and its tariff episode); what could be
+  done (a dashboard for the Autumn Budget 2026, an analysis of the
+  potential impact of AI adoption, a firm-level model that costs VAT
+  reforms, and who pays for four UK trade shocks); what could be
   explored (one way to link models by exchanging tables, then the
   Economic Prosperity Deal as a trade application, business policy as a
   business application, three kinds of agent-based model and links to
@@ -263,8 +267,8 @@ notes for that slide.
     employment, so the deck asks for wages by labour type and, in the
     questions and the notes, for the labour-market closure to be stated.
   - The trade study's US-tariff episode (slide 23): "Who pays for trade
-    shocks?", uk-trade-shock-study pull request #46, head `185ee5f`
-    (17 November 2026, open, not merged), `paper/generated_e3.tex`: gross
+    shocks?", uk-trade-shock-study pull request #46, head `ee6ad07`
+    (read 18 November 2026, open, not merged), `paper/generated_e3.tex`: gross
     change £1,007m a year; taxes and benefits offset 39.0% for wage cuts and
     34.1% for job losses (the abstract's headline; 41.8% and 37.0% with
     pension contributions); run on Microcosm UK with policyengine[uk] 6.20.0
@@ -306,10 +310,9 @@ notes for that slide.
     number, bootstrap intervals). Counts: 650 constituencies
     (`data/uk_geography/constituencies_2024.csv`) and 361 local authorities
     (`local_authorities_2023.csv`), both from the local-area file the
-    bundle routes them to, which bundle 6.19.0 certifies
-    (`microcosm-uk-2024-25-dense-20261107T173210Z-38605444`, alongside the national build;
-    policyengine.py CHANGELOG, the policyengine-uk 2.174.1 certification
-    entry). Household type, tenure and number of
+    bundle routes them to, which policyengine.py 6.20.1 certifies
+    (`uk-local-candidate-f100-s42-20261116T102715Z-e2745e59`, alongside the
+    national build; policyengine.py CHANGELOG, 6.20.1 entry). Household type, tenure and number of
     children are policyengine-uk `d3db7ac` variables (`family_type`,
     deprecated; `tenure_type`; `num_children`) with no standard output, so
     the slide tags them "Custom analysis".
@@ -347,7 +350,7 @@ notes for that slide.
     are linked in the sources row and described in the notes); the
     counts (1,086 parameter files, 998 with a reference; 1,504 variables;
     6,779 YAML test cases under `tests/policy`) were counted at that commit,
-    which is version 2.179.0; the bundle certifies 2.174.1.
+    which is version 2.179.0; the bundle certifies 2.177.7.
   - A model run: policyengine-uk `d3db7ac`, the growth parameters (OBR
     forecasts to 2031) and the labour supply elasticities (zero by default).
     An optional response on hours of work uses the OBR's elasticities
@@ -357,39 +360,36 @@ notes for that slide.
     and employer NI changes passed to pay. policyengine.py `810a59e`,
     `docs/impact-analysis.md`.
   - Microcosm uses two kinds of number and keeps them apart:
-    - *The certified build* (the national build of 7 November 2026 that
-      policyengine.py 6.19.0 pins,
-      `microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e`), from two
-      places:
-      - the public
-        [calibration dashboard, pinned to that build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261107T020434Z-eeb6093e)
-        with its `release` parameter, read on 15 and 16 November 2026: 1,514
-        targets, which the dashboard browses as 44 statistics, 98.7% within
-        10%, 78.2 thousand household records, and the table of targets by
-        topic on slide 10 (from the page's own data for that release, read
-        again on 17 November: the `family_fit` rows for the counts and the
-        number within 10%, and the target list for where each target binds;
-        they add up to HMRC 776 (761 within 10%), ONS 365 (365), DWP 213
-        (210), MHCLG 82 (82) and 78 (77) from ten other publishers, 1,495 of
-        1,514 in all). The pinned link is the
-        calibration source on the slides, so it keeps showing the certified
-        build after newer releases become the dashboard's default;
-      - the certified build's diagnostics: an effective sample size of about
-        7.2 thousand (9.2% of records); 38 target families in the loss, each
-        1/38 of the total weight; saved weights from step 1,437 of 1,500;
-        targets at model year 2025; 85 checks run, all passed; and the
-        build's commit, `dc00d158f`, which declares 54 source stages. The
-        10,000 copies of survey households that take SPI incomes, their
-        weights before calibration, and the take-up rule (reported claims
-        kept, the others drawn) are from the diagnostics and agree with the
-        code.
+    - *The certified build* (the national build of 15 November 2026 that
+      policyengine.py 6.20.1 and 6.20.2 pin,
+      `microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709`,
+      built at microcosm `3a7067f` on policyengine-uk 2.177.7), from the public
+      [calibration dashboard, pinned to that build](https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709)
+      and its data route for that release (`/calibration/dashboard/api/microcosm`
+      and `/api/microcosm/target-diagnostics`), read on 18 November 2026:
+      1,534 targets; 98.8% within 10% (1,515); 78,164 household records; the
+      table of targets by topic on slide 10 (the `family_fit` rows for the
+      counts and the number within 10%, and the target list for where each
+      binds: HMRC 776 (761), ONS 365 (365), DWP 233 (230), MHCLG 82 (82) and
+      78 (77) from ten other publishers); an effective sample size of about
+      7.4 thousand (9.4% of records); 39 target families in the loss, each
+      1/39 of the total weight; saved weights from step 1,491 of 1,500. The
+      build's commit `3a7067f` declares 56 source stages; its SPI copy code
+      (`uk_runtime/spi_support.py`) is the same file as the 7 November
+      build's. Against the 7 November build (1,514 targets, 98.7%, 38
+      families, step 1,437, ESS 7.2 thousand, 54 stages), the targets add 17
+      for Personal Independence Payment and 3 for Universal Credit. The 85
+      release checks run and passed are the 7 November build's diagnostics;
+      the 15 November build's were not read. The pinned link keeps showing
+      the certified build after newer releases become the dashboard's
+      default.
 
       The deck does not quote the solver's final objective, which is not
       comparable across releases. The fit is in-sample; the dashboard has no
       out-of-sample check for the UK; the notes say the fit is in-sample (no
       tag on the slide).
-    - *The code* at microcosm `429d7a0` (15 November): 56 source stages
-      today, against the certified build's 54 (`uk/source_stages.json`;
+    - *The code* at microcosm `429d7a0` (15 November): 56 source stages,
+      as in the certified build (`uk/source_stages.json`;
       every survey microdata file in it is pinned by SHA-256 and checked when
       the build runs, the public reference tables are not), the SPI copies
       (`uk_runtime/spi_support.py`, `spi_band_donors.py`,
@@ -403,26 +403,26 @@ notes for that slide.
       supports firm tables and job links, and the UK build does not use
       them). The target
       file at that commit lists 1,710 national rows, more than the certified
-      build's 1,514, so the deck quotes the build.
+      build's 1,534, so the deck quotes the build.
     - "Certified": policyengine.py `810a59e`, `data/bundle/manifest.json`,
       `docs/bundles.md` and `docs/engineering/skills/data-certification.md`.
   - Assignment variability (notes only): the AI post (50 draws: mean £7.3bn,
     SD £1.9bn); uk-trade-shock-study `06c8bbc`, `runner.py` and
-    `paper/sections/results.tex` (20 assignment draws at PR #46, `185ee5f`).
+    `paper/sections/results.tex` (20 assignment draws at PR #46, `ee6ad07`).
   - Trade events (slide 22): uk-trade-shock-study pull request #46,
-    `185ee5f`, `paper/sections/episodes.tex` (each episode's years and
+    `ee6ad07`, `paper/sections/episodes.tex` (each episode's years and
     whether it is price-led or earnings-led). The food price estimate is
     Bakker et al. (2023), as the study cites it.
   - Calibration targets by topic (slide 10): the dashboard's data route for
-    the pinned build, read 17 November 2026 (`/api/microcosm` with the
+    the pinned build, read 18 November 2026 (`/api/microcosm` with the
     `release` parameter, `family_fit`; where each target binds from
-    `/api/microcosm/target-diagnostics` for the same release, all 1,514
+    `/api/microcosm/target-diagnostics` for the same release, all 1,534
     targets). The rows group statistics within each publisher, so the
-    publisher totals can be read off the table; the counts sum to 1,514, and
-    those within 10% to 1,495 (98.7%).
+    publisher totals can be read off the table; the counts sum to 1,534, and
+    those within 10% to 1,515 (98.8%).
   - Local areas: the bundle lists a local-area file for constituencies and
-    local authorities, and bundle 6.19.0 certifies it alongside the national
-    build (`microcosm-uk-2024-25-dense-20261107T173210Z-38605444`). The deck describes these
+    local authorities, and policyengine.py 6.20.1 certifies it alongside the
+    national build (`uk-local-candidate-f100-s42-20261116T102715Z-e2745e59`). The deck describes these
     results plainly, with no "Experimental" label: 650 parliamentary
     constituencies and 361 local authorities, from a certified local-area
     file. The thin-cell caveat is in the notes only.
@@ -554,7 +554,7 @@ slide that replaced it.
   and there is no closing sources slide, to keep to the time. The freed
   space goes to the content.
 - The tariff and trade slides follow the trade study's rerun on Microcosm
-  UK (pull request #46, now at `185ee5f`, open): 39.0% and 34.1% (taxes and
+  UK (pull request #46, now at `ee6ad07`, open): 39.0% and 34.1% (taxes and
   benefits only) replace 43.7% and 35.4%, and both slides are tagged
   "Microcosm UK".
 - Doability: every "could pass" box was checked against the trade study's
@@ -881,3 +881,22 @@ their time. No existing figure changed.
 ## Privacy
 
 The deck is public: it has no password and appears on the home page.
+
+## Maria's review and the move to the 15 November build (18 November)
+
+- Data slides (6, 8 to 11) now describe the national build of 15 November
+  2026 that policyengine.py 6.20.1 and 6.20.2 certify, with its local-area
+  build of 16 November. Figures read from the calibration dashboard for that
+  release: 1,534 targets, 98.8% within 10%, 78.2k records, 39 loss
+  families, 56 stages; slide 10 adds Personal Independence Payment to the
+  DWP row (57) and Universal Credit is 106 (103). The dashboard slide and
+  links are pinned to the new release.
+- The AI study and the trade rerun ran on the 7 November build; the notes
+  for slides 19, 22 and 23 say so.
+- Project names in full on slides 2 and 17, and slide 19's title is "The
+  potential impact of AI adoption: who bears the cost?".
+- "By place" is now "By geography", and the notes say the disclosure floor
+  of 10 households is policyengine.py's own, stricter than the UK Data
+  Service licence.
+- PR #46 is cited at its current head, `ee6ad07` (figures unchanged).
+
