@@ -509,7 +509,7 @@ export const whoWeAre = {
       pixelHeight: 1280,
       height: 2.7,
       source: sources.no10,
-      caption: "Built 10ds-microsim on PolicyEngine",
+      caption: "Built 10ds-microsim on it",
     },
     {
       name: "HM Treasury",
@@ -1669,7 +1669,7 @@ export const calibrationEquation =
 export const calibrationFit = {
   stats: [
     { icon: IconTargetArrow, value: "1,534", label: "official targets" },
-    { icon: IconCircleCheck, value: "98.8%", label: "within 10% after calibration (in-sample): Universal Credit 17% to 97%, Pension Credit 8% to 100%, PIP 18% to 100%" },
+    { icon: IconCircleCheck, value: "98.8%", label: "of targets within 10% after calibration (in-sample)" },
     { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
     // Before calibration: the starting weights, which already include the
     // SPI copies (not the raw FRS). The dashboard's target list for the
@@ -1678,7 +1678,11 @@ export const calibrationFit = {
     // 1 of 13 (8%), PIP 3 of 17 (18%); after: 103, 13 and 17.
     { icon: IconScale, value: "44%", label: "of targets within 10% before calibration (starting weights, incl. SPI copies)" },
   ],
-  solver: ["39 target families, each 1/39 of the total weight", "Adam on log-weights; 1,500 steps, best kept"],
+  solver: [
+    "39 target families, each 1/39 of the total weight",
+    "Adam on log-weights; 1,500 steps, best kept",
+    "Before → after: Universal Credit 17% → 97%, Pension Credit 8% → 100%, PIP 18% → 100%",
+  ],
 };
 
 // The effective sample size of the certified build, about 7.4 thousand
