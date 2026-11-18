@@ -485,7 +485,7 @@ export const whoWeAre = {
     {
       icon: IconHeartHandshake,
       title: "Nonprofit",
-      text: "Free tools; UK work funded by Nuffield Foundation grants",
+      text: "Free tools; UK work funded mainly by Nuffield Foundation grants",
     },
     { icon: IconLockOpen, title: "Open source", text: "Rules, data pipeline and analysis code" },
     {
@@ -509,7 +509,7 @@ export const whoWeAre = {
       name: "HM Treasury",
       height: 3.4,
       source: sources.hmt,
-      caption: "Transparency record",
+      caption: "Pilot evaluation (transparency record)",
     },
     {
       name: "Office for Budget Responsibility",
@@ -519,7 +519,7 @@ export const whoWeAre = {
       height: 2.9,
       darken: true,
       source: sources.obr,
-      caption: "Annual report 2025–26",
+      caption: "Engaged with (annual report 2025–26)",
     },
     {
       name: "House of Lords",
@@ -693,7 +693,7 @@ export const tradeEvents = [
     years: "From 2026",
     channel: "Prices (a gain)",
     title: "The UK–India agreement",
-    text: "Projected duty reductions; the same path could serve any trade agreement",
+    text: "Projected duty reductions; the same price path could serve other agreements",
     next: false,
   },
   {
@@ -1619,7 +1619,7 @@ export const microcosmResult = {
   icon: IconDatabase,
   owner: "The result",
   title: "Microcosm UK 2024–\u206025",
-  text: "The certified household file",
+  text: "Certified in policyengine.py 6.19.0",
 };
 
 // The stage count (54, the certified build) is in the subtitle. No target
@@ -1664,7 +1664,7 @@ export const calibrationEquation =
 
 export const calibrationFit = {
   stats: [
-    { icon: IconTargetArrow, value: "1,514", label: "official targets, grouped into 44 statistics" },
+    { icon: IconTargetArrow, value: "1,514", label: "official targets" },
     { icon: IconCircleCheck, value: "98.7%", label: "of targets within 10% of the official figure" },
     { icon: IconHome, value: "78.2k", label: "household records, incl. copies with tax-record incomes" },
   ],
@@ -1744,7 +1744,7 @@ export const targetTable: TargetRow[] = [
 export const dashboardFeatures = [
   { icon: IconListSearch, title: "Every target", text: "Official figure beside fitted value" },
   { icon: IconMap2, title: "By publisher and statistic", text: "For the UK, nations and regions" },
-  { icon: IconPinned, title: "Pinned to the certified build", text: "The 7 November 2026 release" },
+  { icon: IconPinned, title: "Pinned to the 7 November build", text: "Certified in policyengine.py 6.19.0" },
 ];
 
 // Projects we have done: three slides with live or published work.

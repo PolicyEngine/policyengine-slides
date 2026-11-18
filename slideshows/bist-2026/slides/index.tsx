@@ -494,7 +494,7 @@ export function WhoSlide() {
       section="intro"
       title="Who we are"
       scale={1.2}
-      subtitle="The organisation, and where our UK work is used or cited"
+      subtitle="The organisation, and where our UK work has been used, piloted or cited"
     >
       <div className={styles.facts}>
         {facts.map((fact, index) => (
@@ -526,7 +526,7 @@ export function WhoSlide() {
       </div>
       <div className={styles.logoGroups}>
         <Reveal step={2}>
-          <LogoSection title="Used or cited in government" logos={government} cells={cells} />
+          <LogoSection title="In government" logos={government} cells={cells} />
         </Reveal>
         <Reveal step={3}>
           <LogoSection title="Think tanks and researchers using our work" logos={thinkTanks} cells={cells} />
@@ -674,7 +674,7 @@ export function BridgeSlide() {
       section="projects"
       title="Who pays for trade shocks? The 2025 US tariffs"
       scale={1.1}
-      subtitle="Inside the trade study: from tariff rates to employees’ earnings"
+      subtitle="Inside the working paper (rerun under review): from tariff rates to earnings"
     >
       <Flow
         steps={steps}
@@ -822,7 +822,7 @@ export function CalibrationSlide() {
       section="what"
       title="Calibration: weights fitted to official statistics"
       scale={1.22}
-      subtitle="The certified national build of 7 November 2026"
+      subtitle="The national build of 7 November 2026, certified in policyengine.py 6.19.0"
     >
       <div className="grid grid-cols-[1.3fr_1fr] items-center gap-[calc(var(--u)*3)]">
         <div>
@@ -924,7 +924,7 @@ export function TargetsSlide() {
       section="what"
       title="What the weights are fitted to: 1,514 official figures"
       scale={0.9}
-      subtitle="Every target of the certified 7 November build, by topic, with the share the weights reproduce within 10%"
+      subtitle="Every target of the 7 November build, by topic, with the share the weights reproduce within 10%"
     >
       <TargetTable />
     </Frame>
@@ -1462,7 +1462,7 @@ export function TradeSlide() {
       section="projects"
       title="Who pays for trade shocks? Four UK episodes, 2021–26"
       scale={1.12}
-      subtitle="The trade study: price and earnings changes from four trade events, traced to households"
+      subtitle="A working paper, its rerun under review: four trade events traced to households"
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {tradeEvents.map((event, index) => (
