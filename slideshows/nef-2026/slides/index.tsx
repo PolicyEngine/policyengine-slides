@@ -273,48 +273,6 @@ export function AgendaSlide() {
   );
 }
 
-export function WhyOpenSlide() {
-  return (
-    <Frame
-      section={sections[0]}
-      title="Why an open OBR model"
-      references={[sources.roadmap, sources.obrReadme]}
-      center
-    >
-      <IconList
-        items={[
-          {
-            icon: IconFileCode,
-            title: "The OBR publishes its model code",
-            text: "EViews equations and a variable list, but no engine to run them outside EViews",
-          },
-          {
-            icon: IconEye,
-            title: "Inspect every equation",
-            text: "Each line of the listing runs, or is flagged as not running, in Python",
-          },
-          {
-            icon: IconAdjustmentsHorizontal,
-            title: "Run your own scenarios",
-            text: "Shock any exogenous variable and compare against the EFO baseline",
-          },
-          {
-            icon: IconLink,
-            title: "Connect to microsimulation",
-            text: "Feed PolicyEngine reform costings in; read GDP effects out",
-          },
-        ]}
-      />
-    </Frame>
-  );
-}
-
-const layerStatus = {
-  built: { label: "Built", className: styles.chipGood },
-  partial: { label: "Partly built", className: styles.chipMid },
-  gap: { label: "Left to users", className: styles.chipBad },
-} as const;
-
 export function PublishedVsBuiltSlide() {
   return (
     <Frame

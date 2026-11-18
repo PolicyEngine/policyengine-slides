@@ -14,15 +14,7 @@ Every number below is in `content.ts`, with its source pinned to a commit.
 Five parts. Say up front that the platform isn't launched, and that we'll be
 direct about limits.
 
-## 3. Why an open OBR model
-
-The OBR publishes its EViews code and variable list. Running them needs an
-engine. Our version makes each equation inspectable and runnable, lets users
-shock any exogenous variable against the EFO baseline, and connects to
-PolicyEngine's microsimulation. Keep it neutral: the point is inspectability,
-not a claim about the OBR's forecasts.
-
-## 4. What the OBR publishes, and what we built
+## 3. What the OBR publishes, and what we built
 
 Three layers, from the repo's roadmap: the model (published, all 372 equations
 transpiled), the engine (EViews; we have a Gauss-Seidel solver, closures and
@@ -30,7 +22,7 @@ add-factors, not the full engine, and no stochastic simulation), and the
 judgement (the forecasters' add-factors and off-model assumptions, not
 published). A user of our model supplies their own judgement.
 
-## 5. The inputs
+## 4. The inputs
 
 - The OBR listing and variable list of 15 October 2025, still the latest on
   obr.uk on 16 November 2026.
@@ -44,7 +36,7 @@ published). A user of our model supplies their own judgement.
   EFO gilt path; COCU is a declared seed. Two large level anchors (OSHH, GGVA)
   are documented in the README.
 
-## 6. How it runs
+## 5. How it runs
 
 The key step is 03: in the OBR's file GDP is an input and inventories balance
 the expenditure identity. We delete that equation, hold inventories on the EFO
@@ -52,7 +44,7 @@ path and make GDP endogenous, so a demand shock can move GDP. The default
 closure also switches on the OBR's commented-out l.690 (the nominal-GDP pin);
 without it no quarter converges.
 
-## 7. What Thibault found
+## 6. What Thibault found
 
 - Vahid: Thibault read the OBR's published EViews code and variable list in
   September and sent a list of 53 points (his ratings: 6 High, 25 Mid, 22 Low).
@@ -60,7 +52,7 @@ without it no quarter converges.
   effect of fiscal policy, total imports fixed, public debt interest fixed.
 - Let Thibault add anything; it's his work.
 
-## 8. Our answer: all three hold
+## 7. Our answer: all three hold
 
 - From our reply of 29 September, written up in `docs/published_model_review.md`
   (entries R1, V2, H1).
@@ -71,7 +63,7 @@ without it no quarter converges.
 - Distribution (H1): the consumption equation has more than income in it, but
   every term is an aggregate.
 
-## 9. All 53 points, checked line by line
+## 8. All 53 points, checked line by line
 
 Thibault's list of 53 points (September 2026); we
 checked each against the published files (`docs/published_model_review.md`).
@@ -82,7 +74,7 @@ determined. The OBR's workfile may resolve them; the release doesn't show how.
 H3 (household interest payments respond to Bank Rate, receipts don't) is the
 design choice with the clearest behavioural consequence, if asked.
 
-## 10. Where we agree, and where we would push
+## 9. Where we agree, and where we would push
 
 - The two corrections are G2 (taper channels reach consumption, not output) and
   R2 (the current account feeds back through investment income).
@@ -92,7 +84,7 @@ design choice with the clearest behavioural consequence, if asked.
 - Our suggested line: the published model can't reproduce the OBR's own
   forecast, because add-factors and calibration aren't published.
 
-## 11. Anchored to the October 2026 EFO
+## 10. Anchored to the October 2026 EFO
 
 - 0.44% GDP and 0.72% consumption MAPE over 2025Q1–2027Q4, by construction:
   add-factors are EFO minus model. Only consumption is re-derived; the other
@@ -105,7 +97,7 @@ design choice with the clearest behavioural consequence, if asked.
   against 4.17% by 2031Q1, on slide 16). The anchored GDP gap reaches 1.24% by
   2031Q1.
 
-## 12. Two numbers that are easy to misread
+## 11. Two numbers that are easy to misread
 
 Say this one carefully. The ~4% free-running error is not the OBR's forecast
 error: in the OBR's model GDP is an input, so it can't miss it. The gap
@@ -117,7 +109,7 @@ If asked about the held-add-factor forecast (0.35% GDP, 7 of 8 in band): its
 GDP line is close to circular, because household income is handed to the
 model, so it isn't evidence of forecast skill.
 
-## 13. Free-running scorecard
+## 12. Free-running scorecard
 
 Default closure, October 2026 EFO, 2025Q1–2027Q4. Bands: rates within 1.0pp,
 net balances within 1.5% of GDP, levels within 10% MAPE. Employment scores
@@ -126,7 +118,7 @@ because the RPI index history the OBR doesn't publish runs out. Company profits
 are a residual of nominal GDP. The other 10 headline variables (exports,
 imports, CPI, earnings and others) are held at the OBR's value.
 
-## 14. Shocks against the OBR's multipliers
+## 13. Shocks against the OBR's multipliers
 
 Ratios at quarters 1, 4 and 12, from `docs/demo.md`. Tax rows are current-price
 GDP per pound of revenue (the OBR's basis); government consumption is real GDP
@@ -144,7 +136,7 @@ tapering.
 - Government investment works only under the opt-in investment closure, as
   identity pass-through with no taper.
 
-## 15. Income tax
+## 14. Income tax
 
 +1p on the basic rate, £1,725m a quarter (HMRC ready reckoner, June 2025,
 2026-27 column, £6.9bn a year divided by four), sustained from 2025Q1. Real
@@ -153,7 +145,7 @@ GDP falls 161 at quarter 1, 335 at quarter 4 and 569 at quarter 12 (£m). Ratio
 move one for one; lower consumption doesn't reduce other receipts. GDP change
 equals the consumption change to the pound.
 
-## 16. Corporation tax and capital spending
+## 15. Corporation tax and capital spending
 
 The investment closure freezes MSGVA, PIF and PIRHH; without the guard, a
 zero-shock baseline runs business investment from £86bn to £522bn by 2027Q4.
@@ -166,7 +158,7 @@ zero-shock baseline runs business investment from £86bn to £522bn by 2027Q4.
   quarters 1 / 4 / 12. Under the default closure IF has no live equation, so
   the channel is dead and `run_reform` warns.
 
-## 17. Bank Rate
+## 16. Bank Rate
 
 +1pp for four quarters, peak at quarter 4: −0.057% of GDP in the default run
 (mortgage rate held, a lower bound), −0.149% with `monetary_conditioning=True`
@@ -175,7 +167,7 @@ England's range for the same experiment is −0.2% to −0.35% after about a yea
 (Quarterly Bulletin 1999 Q2). About −0.16% is the ceiling even with mortgage
 and deposit rates both moved. CPI and unemployment don't respond, by design.
 
-## 18. Known limits
+## 17. Known limits
 
 - Bank Rate: about a quarter of the BoE range unconditioned, about half with
   the mortgage rate moved.
@@ -194,7 +186,7 @@ and deposit rates both moved. CPI and unemployment don't respond, by design.
   the follow-up.
 - Every result is a point estimate.
 
-## 19. The macro platform
+## 18. The macro platform
 
 Not yet launched. Seven public models (`site_contract.py`'s list), each with
 its own repo. Results from different model classes are complementary, not
@@ -202,7 +194,7 @@ comparable, and the scoring tool won't average them. FRB/US and HANK refuse
 reform scoring on purpose: no mapping from a PolicyEngine reform exists, and
 inventing one would give plausible-looking wrong numbers.
 
-## 20. The platform, live
+## 19. The platform, live
 
 - Click the frame, then use the buttons: Home, Models, Compare, OBR model,
   OBR validation, Forecasts. Expand fills the screen; New tab opens the site.
@@ -211,7 +203,7 @@ inventing one would give plausible-looking wrong numbers.
 - If the frame is blank (offline, or the site's frame headers not yet live),
   use New tab.
 
-## 21. DEFINE-UK: green public investment
+## 20. DEFINE-UK: green public investment
 
 Ecological stock-flow consistent model; upstream R code run unmodified at
 commit 846081a. Green public investment of about £15–16bn a year in 2027–31,
@@ -222,7 +214,7 @@ numeric v1.1 scenario results are published, so this is a partial replication.
 Public debt and interest aren't among the served outputs. Don't quote a
 multiplier: which one to headline (2.25, 2.30 or 3.26) is open.
 
-## 22. A scored forecast record
+## 21. A scored forecast record
 
 Rounds are committed to git before the outturn exists and are append-only.
 Nine forecasts of five outturns scored (5 live, 4 retroactive); 4 of 5 live
@@ -231,7 +223,7 @@ change; bias −0.33pp, low on 8 of 9. All from the BoE SVAR and its
 unemployment satellite. The page itself says: too few to show skill. The SVAR
 has no forecast skill against a drifting random walk in its own evaluation.
 
-## 23. Use it from code or an AI agent
+## 22. Use it from code or an AI agent
 
 - Hosted MCP server: 28 tools at the pinned commit (the README still says 26).
   No install, account or key; scales to zero, so the first call may take about
@@ -241,7 +233,7 @@ has no forecast skill against a drifting random walk in its own evaluation.
 - Dated data snapshots under `data/vintages/`, never edited, so any score can
   be reproduced against the data it saw.
 
-## 24. From a microsimulation reform to GDP
+## 23. From a microsimulation reform to GDP
 
 `score_reform(model="obr")`: a PolicyEngine-UK reform is costed per year with
 the population microsimulation, enters the OBR model as a quarterly
@@ -254,7 +246,7 @@ The static costing of 1p on the basic rate (£6.55bn, 2026-27) is 5.1% below
 HMRC's ready reckoner (£6.9bn): static and survey-based against
 post-behavioural and administrative.
 
-## 25. Demo
+## 24. Demo
 
 Before the session: `uv sync` and run one `run_reform` call, because the first
 build takes a few minutes. If using `score_reform`, start it through
@@ -275,19 +267,19 @@ Don't run live: government investment under the default closure (GDP doesn't
 move), corporation tax as receipts (`NNSCTP`, GDP exactly zero), or the
 published closure in a demand run (no quarter converges).
 
-## 26. Where we could work together
+## 25. Where we could work together
 
 Options to discuss, not commitments. Each maps to something open in the repo:
 the closure choice and a spending shock that moves borrowing; the investment
 closure and DEFINE-UK; macro paths back into household results; the published
 listing's open problems (G6, G7, N5); anchoring participation; joint write-ups.
 
-## 27. Questions for NEF
+## 26. Questions for NEF
 
 Listen more than talk here.
 
-## 28. Proposed next steps
+## 27. Proposed next steps
 
 Proposals for NEF to react to; agree owners and dates in the room.
 
-## 29. Thank you
+## 28. Thank you

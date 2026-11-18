@@ -1,8 +1,8 @@
 # New Economics Foundation meeting, November 2026
 
-29 slides at `/slides/nef-2026`, for a meeting with the New Economics
+28 slides at `/slides/nef-2026`, for a meeting with the New Economics
 Foundation (NEF) on working together on the OBR macroeconomic model. The deck is
-public. Slide 20 embeds the in-development macro site
+public. Slide 19 embeds the in-development macro site
 (policyengine-macro.vercel.app) live; the site allows this deck's origins to
 frame it (PolicyEngine/macro#276). The exact meeting date isn't fixed, so `config.ts` uses
 `2026-11-01`, which renders as "November 2026"; change it, and the footer,
@@ -10,19 +10,19 @@ once the date is set.
 
 Five parts, after a title and an agenda:
 
-1. The OBR model in Python: why an open version, what the OBR publishes and
+1. The OBR model in Python: what the OBR publishes and
    what we built, the inputs, how it runs, and Thibault's review of the published code
-   and our answer (slides 3–10)
+   and our answer (slides 3–9)
 2. How well it fits: anchoring to the October 2026 EFO, the two numbers that
-   are easy to misread, and the free-running scorecard (slides 11–13)
+   are easy to misread, and the free-running scorecard (slides 10–12)
 3. Policy shocks and limits: results against the OBR's published multipliers,
    income tax, corporation tax and capital spending, Bank Rate, and the known
-   limits (slides 14–18)
+   limits (slides 13–17)
 4. The macro platform: the seven models, the site live, a DEFINE-UK green investment example,
    the forecast record, code and AI-agent access, and the link from
-   microsimulation to the OBR model (slides 19–24)
+   microsimulation to the OBR model (slides 18–23)
 5. Working together: a demo plan, collaboration areas, questions for NEF and
-   proposed next steps (slides 25–28)
+   proposed next steps (slides 24–27)
 
 It follows PolicyEngine's July 2025 deck for NEF, which covered the
 tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in the private
