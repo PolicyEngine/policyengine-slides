@@ -1,0 +1,698 @@
+/* NEF deck: every colour comes from a design token (app/globals.css). */
+
+/* Leave space for the viewer's controls beside the footer text. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+/* Figure slides: centre the body below the title, clear of the sources line. */
+.centerBody {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+}
+
+.takeaway {
+  margin-top: 1.75rem;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.25rem;
+  color: var(--pe-dark);
+  font-size: 1.45rem;
+  line-height: 1.4;
+}
+
+/* Agenda rows. */
+.agenda {
+  display: grid;
+}
+
+.agendaRow {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.7rem 0;
+}
+
+.agendaRow > span {
+  color: var(--pe-teal);
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.agendaRow h2 {
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.agendaRow p {
+  margin-top: 0.2rem;
+  color: var(--color-gray-600);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* Icon list: short items, one icon each. */
+.iconList {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.iconList.twoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3rem;
+}
+
+.iconItem {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  align-items: start;
+  gap: 1.1rem;
+}
+
+.iconBadge {
+  display: flex;
+  height: 3.25rem;
+  width: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-light);
+  color: var(--pe-teal);
+}
+
+.iconItem h2 {
+  color: var(--pe-dark);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.iconItem p {
+  margin-top: 0.2rem;
+  color: var(--color-gray-600);
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* Cards in a grid. */
+.cardGrid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card {
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5rem;
+  background: var(--bg-card);
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--pe-dark);
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.card h2 svg {
+  flex-shrink: 0;
+  color: var(--pe-teal);
+}
+
+.card p {
+  margin-top: 0.5rem;
+  color: var(--color-gray-600);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.cardAmber {
+  border-left-color: var(--pe-amber);
+}
+
+.cardAmber h2 svg {
+  color: var(--pe-amber-dark);
+}
+
+/* Big numbers. */
+.card .stat {
+  color: var(--pe-teal);
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+.card .statAmber {
+  color: var(--pe-amber-dark);
+}
+
+.card .statLabel {
+  margin-top: 0.4rem;
+  color: var(--pe-dark);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.card .statNote {
+  margin-top: 0.35rem;
+  color: var(--color-gray-600);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+/* Three layers: what the OBR publishes and what we built. */
+.layers {
+  display: grid;
+  grid-template-columns: 14rem 1fr 1fr 9rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.layers > div {
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 1.15rem 1.35rem;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  color: var(--color-gray-700);
+}
+
+.layers .layerHead {
+  background: var(--bg-secondary);
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.layers .layerName {
+  color: var(--pe-dark);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.layers > div:nth-last-child(-n + 4) {
+  border-bottom: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chipGood {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
+}
+
+.chipMid {
+  background: var(--bg-secondary);
+  color: var(--pe-amber-dark);
+}
+
+.chipBad {
+  background: var(--bg-tertiary);
+  color: var(--color-gray-700);
+}
+
+/* Pipeline: six steps with arrows. */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.step {
+  position: relative;
+  border: 1px solid var(--color-gray-200);
+  border-top: 4px solid var(--pe-teal);
+  border-radius: 0.5rem;
+  background: var(--bg-card);
+  padding: 1.1rem 1rem 1.2rem;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.85rem;
+  border-top: 0.45rem solid transparent;
+  border-bottom: 0.45rem solid transparent;
+  border-left: 0.55rem solid var(--color-gray-400);
+  transform: translateY(-50%);
+}
+
+.step .stepNum {
+  color: var(--pe-teal);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.step h2 {
+  margin-top: 0.35rem;
+  color: var(--pe-dark);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.step p {
+  margin-top: 0.35rem;
+  color: var(--color-gray-600);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.surfaces {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.surface {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.9rem 1.1rem;
+  color: var(--pe-dark);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.surface svg {
+  color: var(--pe-teal);
+  flex-shrink: 0;
+}
+
+.surface span {
+  color: var(--color-gray-600);
+  font-weight: 400;
+}
+
+/* Tables. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.2rem;
+}
+
+.table th {
+  border-bottom: 2px solid var(--color-gray-300);
+  padding: 0.55rem 0.9rem;
+  color: var(--color-gray-500);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table td {
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.42rem 0.9rem;
+  color: var(--color-gray-700);
+  line-height: 1.3;
+}
+
+.table td:first-child {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.yes {
+  color: var(--pe-teal);
+}
+
+.no {
+  color: var(--color-gray-400);
+}
+
+/* Multiplier dot plot. */
+.dotPlot {
+  display: grid;
+  grid-template-columns: 20rem 1fr 15rem;
+  align-items: center;
+  row-gap: 0.4rem;
+  column-gap: 1.5rem;
+}
+
+.dotLabel h2 {
+  color: var(--pe-dark);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dotLabel p {
+  color: var(--color-gray-500);
+  font-size: 1.05rem;
+}
+
+.track {
+  position: relative;
+  height: 3.6rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.trackLine {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-teal-200);
+  transform: translateY(-50%);
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  height: 1.9rem;
+  width: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transform: translate(-50%, -50%);
+}
+
+.dotQ1 {
+  background: var(--color-teal-200);
+  color: var(--pe-dark);
+}
+
+.dotQ4 {
+  background: var(--color-teal-400);
+}
+
+.dotQ12 {
+  background: var(--color-teal-700);
+}
+
+.benchmark {
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--pe-amber);
+  transform: translateX(-50%);
+}
+
+.dotValue {
+  white-space: nowrap;
+  color: var(--color-gray-600);
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.axis {
+  position: relative;
+  height: 1.8rem;
+  color: var(--color-gray-500);
+  font-size: 1rem;
+}
+
+.axis span {
+  position: absolute;
+  top: 0.25rem;
+  transform: translateX(-50%);
+}
+
+.legend {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  color: var(--color-gray-600);
+  font-size: 1.1rem;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendDot {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+}
+
+.legendTick {
+  display: inline-block;
+  height: 1.2rem;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--pe-amber);
+}
+
+/* Quarterly bar path (income tax). */
+.bars {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.7rem;
+  height: 22rem;
+  border-top: 2px solid var(--color-gray-300);
+}
+
+.barCol {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 0 0 0.3rem 0.3rem;
+  background: var(--pe-teal);
+}
+
+.barValue {
+  margin-top: 0.35rem;
+  color: var(--pe-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.barAxis {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+  color: var(--color-gray-500);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Horizontal bars (Bank Rate). */
+.hbars {
+  display: grid;
+  grid-template-columns: 30rem 1fr;
+  align-items: center;
+  row-gap: 1.1rem;
+  column-gap: 1.5rem;
+}
+
+.hbarLabel {
+  color: var(--pe-dark);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.hbarTrack {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hbar {
+  height: 2.6rem;
+  border-radius: 0 0.35rem 0.35rem 0;
+  background: var(--pe-teal);
+}
+
+.hbarBenchmark {
+  background: var(--pe-amber);
+}
+
+.hbarValue {
+  color: var(--pe-dark);
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Flow: microsim to macro. */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.flowBox {
+  position: relative;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.6rem;
+  background: var(--bg-card);
+  padding: 1.15rem 1.2rem;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.flowBox:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1.15rem;
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
+  border-left: 0.6rem solid var(--color-gray-400);
+  transform: translateY(-50%);
+}
+
+.flowBox h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--pe-dark);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.flowBox h2 svg {
+  color: var(--pe-teal);
+  flex-shrink: 0;
+}
+
+.flowBox p {
+  margin-top: 0.4rem;
+  color: var(--color-gray-600);
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.flowBox code,
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  color: var(--pe-dark);
+}
+
+.flowOut {
+  margin-top: 1.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+/* Demo steps. */
+.demoSteps {
+  display: grid;
+  gap: 1rem;
+}
+
+.demoStep {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 26rem;
+  align-items: center;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  padding-bottom: 1rem;
+}
+
+.demoStep > span {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.demoStep h2 {
+  color: var(--pe-dark);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.demoStep p {
+  margin-top: 0.15rem;
+  color: var(--color-gray-600);
+  font-size: 1.15rem;
+}
+
+.demoStep code {
+  border-radius: 0.4rem;
+  background: var(--bg-secondary);
+  padding: 0.5rem 0.75rem;
+  color: var(--pe-dark);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+/* Section slide. */
+.sectionKicker {
+  margin-bottom: 0.75rem;
+  color: var(--pe-teal);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
