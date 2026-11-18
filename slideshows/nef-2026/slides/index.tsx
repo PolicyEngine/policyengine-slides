@@ -8,6 +8,10 @@ import {
   IconBrandGithub,
   IconBrandPython,
   IconBuildingBank,
+  IconChecks,
+  IconCoins,
+  IconMessageCircle,
+  IconShip,
   IconCalendarEvent,
   IconChartBar,
   IconChartLine,
@@ -59,8 +63,12 @@ import {
   sources,
   unemploymentDrift,
   type Source,
+  liveSiteViews,
+  thibRatings,
 } from "../content";
 import styles from "./deck.module.css";
+import embedStyles from "./embed.module.css";
+import SiteEmbed from "./SiteEmbed";
 import {
   BankRateBars,
   IncomeTaxBars,
@@ -71,7 +79,7 @@ import {
 const agenda = [
   {
     title: "The OBR model in Python",
-    text: "What the OBR publishes, what we built, how it runs",
+    text: "What we built, Thibault's review and our answer",
   },
   {
     title: "How well it fits",
@@ -452,12 +460,80 @@ export function ArchitectureSlide() {
   );
 }
 
+// Thibault's review of the published code (Sep 2026) and our answer. Sources:
+// his email of 23 Sep, our replies of 29 Sep and 8 Oct, and the write-up in
+// docs/published_model_review.md (entries H1, R1, R2, V2, G2).
+export function ThibFoundSlide() {
+  return (
+    <Frame
+      section={sections[0]}
+      title="What Thibault found"
+      subtitle="He read the OBR's published EViews code and variable list in September 2026"
+      references={[sources.review]}
+      center
+    >
+      <div className="grid grid-cols-[1.5fr_1fr] gap-12">
+        <div className={`${styles.cardGrid} ${styles.cols1}`}>
+          <Card icon={IconUsers} title="No distribution" amber>
+            Taxing high earners to pay low earners leaves consumption unchanged
+          </Card>
+          <Card icon={IconShip} title="Total imports fixed" amber>
+            More activity can't change the trade balance
+          </Card>
+          <Card icon={IconCoins} title="Public debt interest fixed" amber>
+            More borrowing doesn't raise the interest bill
+          </Card>
+        </div>
+        <div className="grid grid-cols-1 gap-5 self-center">
+          <Stat value={review.points} label="Points in his list" note="Each rated by how much it matters" />
+          <Stat
+            value={`${thibRatings.high} · ${thibRatings.mid} · ${thibRatings.low}`}
+            label="High · Mid · Low"
+          />
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+export function ThibAnswerSlide() {
+  return (
+    <Frame
+      section={sections[0]}
+      title="Our answer: all three hold"
+      subtitle="Checked against the published code and in our Python build"
+      references={[sources.review]}
+      center
+    >
+      <IconList
+        items={[
+          {
+            icon: IconShip,
+            title: "Trade: true",
+            text: "Exports and imports never appear on the left-hand side of any equation. Sterling moves only prices",
+          },
+          {
+            icon: IconCoins,
+            title: "Debt interest: true, but narrower",
+            text: "Gilt interest series DIPLDC and IILG are not in the code; debt (PSND, GGGD) is computed and never used. Household interest payments do follow Bank Rate",
+          },
+          {
+            icon: IconUsers,
+            title: "Distribution: true, reworded",
+            text: "Consumption also uses unemployment, house prices, a rate term and wealth, but all as aggregates. No household split, so a revenue-neutral transfer does nothing",
+          },
+        ]}
+      />
+    </Frame>
+  );
+}
+
 export function ReviewSlide() {
   return (
     <Frame
       section={sections[0]}
-      title="Reading the published listing line by line"
-      subtitle={`We checked an external list of ${review.points} points about the OBR's code against the published files`}
+      title="All 53 points, checked line by line"
+      subtitle={`We checked each of Thibault's ${review.points} points against the OBR's published code and variable list`}
       references={[sources.review]}
       center
     >
@@ -481,6 +557,53 @@ export function ReviewSlide() {
           </div>
         </div>
       </div>
+    </Frame>
+  );
+}
+
+export function ThibDifferSlide() {
+  return (
+    <Frame
+      section={sections[0]}
+      title="Where we agree, and where we would push"
+      references={[sources.review, sources.obrReadme]}
+      center
+    >
+      <IconList
+        twoCol
+        items={[
+          {
+            icon: IconChecks,
+            title: "Agree",
+            text: "As published, the model can't carry fiscal feedback to output: GDP is an input",
+          },
+          {
+            icon: IconSearch,
+            title: "Two partial corrections",
+            text: "Bank Rate and real wages do reach consumption, just not output. The current account feeds back through investment income",
+          },
+          {
+            icon: IconMessageCircle,
+            title: "Documented, not fixed",
+            text: "About half the accurate points are open in the OBR's own variable list. Thibault: disclosure doesn't make them acceptable",
+          },
+          {
+            icon: IconTarget,
+            title: "The stronger line",
+            text: "The model can't reproduce the OBR's own forecast: the add-factors and calibration aren't published",
+          },
+          {
+            icon: IconBrandPython,
+            title: "What our build changes",
+            text: "GDP is solved, not imposed; we built the add-factors; 355 ONS series fill unpublished inputs",
+          },
+          {
+            icon: IconBuildingBank,
+            title: "Next for both of us",
+            text: "Thibault writes to the OBR; we can test any fix in the open build first",
+          },
+        ]}
+      />
     </Frame>
   );
 }
@@ -746,6 +869,26 @@ export function PlatformSlide() {
           ))}
         </tbody>
       </table>
+    </Frame>
+  );
+}
+
+// The platform, live: the deployed site in a frame, with buttons for its main
+// pages. The site's headers allow this deck's origins to frame it.
+export function LiveSiteSlide() {
+  return (
+    <Frame
+      section={sections[3]}
+      title="The platform, live"
+      subtitle={new URL(sources.liveSite.href).host}
+    >
+      <div className={embedStyles.liveBody}>
+        <SiteEmbed
+          href={sources.liveSite.href}
+          title={sources.liveSite.label}
+          views={liveSiteViews}
+        />
+      </div>
     </Frame>
   );
 }

@@ -1,0 +1,95 @@
+/* The live site frame, copied from autumn-budget-2026/slides/deck.module.css */
+.liveBody {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 2.5rem;
+}
+
+.embed {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.3);
+  cursor: auto;
+}
+
+/* Expand: the same frame over the whole screen, above the deck's controls */
+.embedExpanded {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  border: 0;
+  border-radius: 0;
+}
+
+.embedBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  background: var(--pe-light);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.embedViews {
+  display: flex;
+  gap: 0.25rem;
+  border-radius: 0.6rem;
+  background: white;
+  padding: 0.2rem;
+  box-shadow: inset 0 0 0 1px var(--color-gray-200);
+}
+
+.embedView {
+  border-radius: 0.45rem;
+  padding: 0.3rem 0.8rem;
+  color: var(--pe-dark);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.embedView:hover,
+.embedView:focus-visible {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
+}
+
+.embedButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.3rem 0.75rem;
+  color: var(--pe-dark);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.embedButton:hover,
+.embedButton:focus-visible {
+  border-color: var(--pe-teal);
+}
+
+/* Puts Expand and New tab at the bar's right end. */
+.embedPush {
+  margin-left: auto;
+}
+
+.embedFrame {
+  min-height: 0;
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: white;
+}

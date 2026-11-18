@@ -696,3 +696,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
+
+.cols1 {
+  grid-template-columns: minmax(0, 1fr);
+}

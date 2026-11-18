@@ -15,6 +15,10 @@ const macro = `https://github.com/PolicyEngine/macro/blob/${macroCommit}`;
 export type Source = { label: string; href: string };
 
 export const sources = {
+  liveSite: {
+    label: "PolicyEngine macro site (live, in development)",
+    href: "https://policyengine-macro.vercel.app",
+  },
   obrReadme: { label: "OBR model README", href: `${obr}/README.md` },
   scorecard: {
     label: "Calibration scorecard",
@@ -434,3 +438,19 @@ export const bridgeBenchmark = {
 // compare view puts it 10 commits behind 0fe04c9a, before #70 (VAT price
 // pass-through) and #71; hosted obr_shock exposes no overlay parameter.
 export const hostedObrPin = "2965e82";
+
+/** Pages the live-site slide can load into its frame. */
+export const liveSiteViews = [
+  { label: "Home", path: "/" },
+  { label: "Models", path: "/models" },
+  { label: "Compare", path: "/models/compare" },
+  { label: "OBR model", path: "/obr" },
+  { label: "OBR validation", path: "/obr/validation" },
+  { label: "Forecasts", path: "/forecasts" },
+];
+
+// Thibault's review (his email of 23 Sep 2026 and the attached list of 53
+// points) and our answer (our emails of 29 Sep and 8 Oct 2026, written up in
+// docs/published_model_review.md). The critic's ratings are counted from that
+// doc's summary table: 6 High, 25 Mid, 22 Low.
+export const thibRatings = { high: 6, mid: 25, low: 22 };

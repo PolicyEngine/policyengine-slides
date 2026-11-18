@@ -1,27 +1,28 @@
 # New Economics Foundation meeting, November 2026
 
-26 slides at `/slides/nef-2026`, for a meeting with the New Economics
-Foundation (NEF) on working together on the OBR macroeconomic model. The deck
-is private (`private: true`), because the macro platform it shows isn't
-launched yet. The exact meeting date isn't fixed, so `config.ts` uses
+30 slides at `/slides/nef-2026`, for a meeting with the New Economics
+Foundation (NEF) on working together on the OBR macroeconomic model. The deck is
+public. Slide 21 embeds the in-development macro site
+(policyengine-macro.vercel.app) live; the site allows this deck's origins to
+frame it (PolicyEngine/macro#276). The exact meeting date isn't fixed, so `config.ts` uses
 `2026-11-01`, which renders as "November 2026"; change it, and the footer,
 once the date is set.
 
 Five parts, after a title, an agenda and a slide on PolicyEngine:
 
 1. The OBR model in Python: why an open version, what the OBR publishes and
-   what we built, the inputs, how it runs, and the line-by-line review of the
-   published listing (slides 4–8)
+   what we built, the inputs, how it runs, and Thibault's review of the published code
+   and our answer (slides 4–11)
 2. How well it fits: anchoring to the October 2026 EFO, the two numbers that
-   are easy to misread, and the free-running scorecard (slides 9–11)
+   are easy to misread, and the free-running scorecard (slides 12–14)
 3. Policy shocks and limits: results against the OBR's published multipliers,
    income tax, corporation tax and capital spending, Bank Rate, and the known
-   limits (slides 12–16)
-4. The macro platform: the seven models, a DEFINE-UK green investment example,
+   limits (slides 15–19)
+4. The macro platform: the seven models, the site live, a DEFINE-UK green investment example,
    the forecast record, code and AI-agent access, and the link from
-   microsimulation to the OBR model (slides 17–21)
+   microsimulation to the OBR model (slides 20–25)
 5. Working together: a demo plan, collaboration areas, questions for NEF and
-   proposed next steps (slides 22–25)
+   proposed next steps (slides 26–29)
 
 It follows PolicyEngine's July 2025 deck for NEF, which covered the
 tax-benefit microsimulation (`NEF x PolicyEngine.pptx` in the private
@@ -34,16 +35,18 @@ the slides).
 - `content.ts` holds every number on the slides, each with its source pinned
   to a commit, plus the tables and lists.
 - `slides/index.tsx` contains the slides.
+- `slides/SiteEmbed.tsx` frames the live site, with buttons for its main
+  pages, Expand and New tab (copied from autumn-budget-2026's `DashboardEmbed`).
 - `slides/figures.tsx` draws the scorecard table, the multiplier dot plot, the
   income-tax bars and the Bank Rate bars (HTML and CSS, no chart library).
 - `SPEAKER-NOTES.md` gives the presenter track, the detail behind each slide
   and what not to claim.
 
 Run `bun install --frozen-lockfile`, then
-`NEXT_PUBLIC_PRIVATE_PASSWORD=<password> bun dev`. Open
+`bun dev`. Open
 `http://localhost:3000/slides/nef-2026`. Arrow keys, Page Up and Page Down
 (a clicker) move between slides. Export with
-`NEXT_PUBLIC_PRIVATE_PASSWORD=<password> bun run export nef-2026 /path/to/output.pdf`.
+`bun run export nef-2026 /path/to/output.pdf`.
 
 ## Evidence
 
