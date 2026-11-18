@@ -38,16 +38,38 @@ export default function BuildScope({
     const fit = () => {
       // A slide that isn't shown has no height: fit it when it appears.
       if (element.clientHeight === 0) return;
+      // Layout heights, which an entrance animation's transform doesn't move
+      // (scrollHeight would count it and shrink a slide that fits).
+      const room =
+        element.clientHeight - parseFloat(getComputedStyle(element).paddingBottom || "0");
+      const content = () =>
+        Array.from(element.children).reduce(
+          (sum, child) => sum + (child as HTMLElement).offsetHeight,
+          0,
+        );
       let scale = 1;
       element.style.setProperty("--fit", "1");
-      while (element.scrollHeight > element.clientHeight + 1 && scale > 0.6) {
+      let before = content();
+      while (before > room + 1 && scale > 0.6) {
         scale -= 0.03;
         element.style.setProperty("--fit", scale.toFixed(2));
+        const after = content();
+        // Content that doesn't follow the base size (the module map sizes
+        // itself from the window) can't be fitted this way: leave it.
+        if (after >= before) {
+          element.style.setProperty("--fit", "1");
+          break;
+        }
+        before = after;
       }
     };
     fit();
+    // Fit again whenever the space or the content changes size (a resized
+    // window, styles or fonts arriving after the first paint).
     const observer = new ResizeObserver(fit);
     observer.observe(element);
+    for (const child of Array.from(element.children)) observer.observe(child);
+    document.fonts?.ready.then(fit);
     return () => observer.disconnect();
   }, []);
 

@@ -358,9 +358,17 @@ tapering.
 
 Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through changelog (#70).
 
-## 11. Income tax (2 steps)
+## 11. Income tax +1p: what the OBR model does to GDP (2 steps)
 
-Step 1 is the chart, with the four-step route above it (HMRC costing →
+Everything on this slide is the OBR model alone, with HMRC's costing as the
+input: the chart is not a PolicyEngine result and shows no distribution. It is
+the one channel with real behaviour: consumption is the only behavioural
+response here. The two PolicyEngine lines sit apart, under "With
+PolicyEngine".
+
+The chart is a time series, not a distribution: UK GDP below baseline for the
+12 quarters 2025Q1 to 2027Q4 (quarter 1 is 2025Q1). Nothing on this slide is by
+decile; who pays is the micro-to-macro slide (19). Step 1 is the chart, with the four-step route above it (HMRC costing →
 household income → consumption → GDP); step 2 is the panel of three takeaways.
 Only quarters 1, 4, 8 and 12 carry a value; the others are 227, 285, 381, 422,
 456, 510, 532 and 551 (£m, falls).

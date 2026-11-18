@@ -173,38 +173,77 @@ export function MultiplierPlot() {
   );
 }
 
+// The income-tax path as a line over time: quarter 1 is 2025Q1 (the scenario
+// runs 2025Q1–2027Q4), so the 12 points are the quarters of 2025 to 2027.
+const pathPlot = { width: 640, height: 250, left: 52, right: 14, top: 14, bottom: 46 };
+const pathYears = [2025, 2026, 2027];
+const pathGrid = [0, -200, -400, -600];
+const pathMarked = [0, 3, 7, 11];
+
 /**
- * Real GDP change per quarter for the income-tax scenario (bars hang down).
- * Quarters 1, 4, 8 and 12 carry their value.
+ * UK GDP below baseline, quarter by quarter, for the income-tax scenario. A
+ * time series: the line draws left to right, and four quarters carry their
+ * value.
  */
-export function IncomeTaxBars() {
-  const max = Math.max(...incomeTax.gdpPath.map((value) => Math.abs(value)));
+export function IncomeTaxPath() {
+  const { width, height, left, right, top, bottom } = pathPlot;
+  const values = incomeTax.gdpPath;
+  const floor = pathGrid[pathGrid.length - 1];
+  const x = (index: number) => left + ((width - left - right) * (index + 0.5)) / values.length;
+  const y = (value: number) => top + ((height - top - bottom) * value) / floor;
+  const line = values.map((value, index) => `${index ? "L" : "M"}${x(index)} ${y(value)}`).join(" ");
   return (
-    <div>
-      <div className={styles.bars}>
-        {incomeTax.gdpPath.map((value, index) => (
-          <div key={index} className={styles.barCol}>
-            <div
-              className={styles.bar}
-              style={{
-                height: `${(Math.abs(value) / max) * 80}%`,
-                animationDelay: `${300 + index * 90}ms`,
-              }}
-            />
-            {[0, 3, 7, 11].includes(index) && (
-              <span className={styles.barValue}>
-                {value.toLocaleString("en-GB").replace("-", "−")}
-              </span>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className={styles.barAxis}>
-        {incomeTax.gdpPath.map((_, index) => (
-          <span key={index}>q{index + 1}</span>
-        ))}
-      </div>
-    </div>
+    <svg
+      className={styles.pathPlot}
+      viewBox={`0 0 ${width} ${height}`}
+      role="img"
+      aria-label="UK GDP below baseline by quarter, 2025 to 2027"
+    >
+      {pathGrid.map((value) => (
+        <g key={value}>
+          <line x1={left} x2={width - right} y1={y(value)} y2={y(value)} className={styles.pathGrid} />
+          <text x={left - 8} y={y(value)} className={styles.pathTick} textAnchor="end">
+            {value === 0 ? "0" : `−${Math.abs(value)}`}
+          </text>
+        </g>
+      ))}
+      <path
+        d={`${line} L${x(values.length - 1)} ${y(0)} L${x(0)} ${y(0)} Z`}
+        className={styles.pathArea}
+      />
+      <path d={line} pathLength={1} className={styles.pathLine} />
+      {pathMarked.map((index, order) => (
+        <g key={index} className={styles.pathPoint} style={{ animationDelay: `${500 + order * 350}ms` }}>
+          <circle cx={x(index)} cy={y(values[index])} r="4.5" />
+          <text
+            x={x(index) + (index === 0 ? 8 : 0)}
+            y={y(values[index]) + 19}
+            textAnchor={index === 0 ? "start" : index === 11 ? "end" : "middle"}
+          >
+            −{Math.abs(values[index])}
+          </text>
+        </g>
+      ))}
+      {values.map((_, index) => (
+        <text key={index} x={x(index)} y={height - bottom + 15} className={styles.pathTick} textAnchor="middle">
+          Q{(index % 4) + 1}
+        </text>
+      ))}
+      {pathYears.map((year, index) => (
+        <g key={year}>
+          <line
+            x1={x(index * 4) - 14}
+            x2={x(index * 4 + 3) + 14}
+            y1={height - bottom + 24}
+            y2={height - bottom + 24}
+            className={styles.pathGrid}
+          />
+          <text x={(x(index * 4) + x(index * 4 + 3)) / 2} y={height - 6} className={styles.pathYear} textAnchor="middle">
+            {year}
+          </text>
+        </g>
+      ))}
+    </svg>
   );
 }
 

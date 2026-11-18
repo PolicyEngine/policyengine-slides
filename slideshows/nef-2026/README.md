@@ -45,8 +45,8 @@ the slides).
   one card, one stat, one table style; every item takes a Tabler icon). Each
   slide is one composition: nothing sits in a separate strip or footnote row
   under it, and detail that doesn't fit goes to the speaker notes. The `agenda` list there drives the agenda slide, the
-  section slides and the header tracker. Two slides point at each other by
-  number (`incomeTaxSlideNumber`, `microMacroSlideNumber`): update them if
+  section slides and the header tracker. One slide points at another by
+  number (`incomeTaxSlideNumber`): update it if
   the order in `config.ts` changes.
 - `slides/deck.module.css` sizes the slide body in em of a base that follows
   the viewport (the smaller of its height and width), so a slide looks the same at 1920x1080 and 1440x810. A
@@ -59,7 +59,7 @@ the slides).
   off under `prefers-reduced-motion`.
 - `slides/SiteEmbed.tsx` frames the live site, with buttons for its main
   pages, Expand and New tab (copied from autumn-budget-2026's `DashboardEmbed`).
-- `slides/figures.tsx` draws the multiplier dot plot, the income-tax bars,
+- `slides/figures.tsx` draws the multiplier dot plot, the income-tax path,
   the Bank Rate bars and the module map (HTML, CSS and SVG, no chart
   library), and renders the example equations with KaTeX.
 - `module-links.json` holds the links between the model's modules, and

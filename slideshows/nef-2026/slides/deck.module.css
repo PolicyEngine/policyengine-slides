@@ -546,6 +546,26 @@
   line-height: 1.3;
 }
 
+.footnotes small {
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.panel > .chip {
+  justify-self: start;
+}
+
+.chartHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em 1em;
+}
+
 .footnotes p {
   display: flex;
   align-items: flex-start;
@@ -863,45 +883,58 @@
   background: var(--pe-amber);
 }
 
-/* Quarterly bar path (income tax). */
-.bars {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: start;
-  gap: 0.6em;
-  height: 15em;
-  border-top: 2px solid var(--color-gray-300);
-}
-
-.barCol {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-
-.bar {
+/* Income-tax path: a line over 12 quarters (viewBox units). */
+.pathPlot {
+  display: block;
   width: 100%;
-  border-radius: 0 0 0.3em 0.3em;
-  background: var(--pe-teal);
 }
 
-.barValue {
-  margin-top: 0.25em;
-  color: var(--pe-dark);
-  font-size: 0.95em;
+.pathGrid {
+  stroke: var(--color-gray-200);
+  stroke-width: 1;
+}
+
+.pathTick {
+  fill: var(--color-gray-500);
+  font-size: 10px;
+  dominant-baseline: central;
+}
+
+.pathYear {
+  fill: var(--pe-dark);
+  font-size: 11px;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
 
-.barAxis {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 0.6em;
-  margin-top: 0.3em;
-  color: var(--color-gray-500);
-  font-size: 0.95em;
-  text-align: center;
+.pathArea {
+  fill: var(--pe-light);
+  animation: nefFade 900ms ease-out 900ms both;
+}
+
+.pathLine {
+  fill: none;
+  stroke: var(--pe-teal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: nefDraw 1500ms ease-in-out 300ms both;
+}
+
+.pathPoint {
+  animation: nefFade 400ms ease-out both;
+}
+
+.pathPoint circle {
+  fill: var(--bg-card);
+  stroke: var(--pe-teal);
+  stroke-width: 2.5;
+}
+
+.pathPoint text {
+  fill: var(--pe-dark);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* Horizontal bars (Bank Rate). */
@@ -1044,7 +1077,7 @@
 .ask {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  margin-bottom: 0.9em;
+  margin-bottom: 0.7em;
   border: 1px solid var(--color-gray-200);
   border-radius: 0.8em;
   background: var(--bg-secondary);
@@ -1055,7 +1088,7 @@
 }
 
 .ask > div {
-  padding: 1em 1.5em;
+  padding: 0.8em 1.5em;
 }
 
 .ask > div + div {
@@ -1116,7 +1149,7 @@
   position: relative;
   /* As wide as the slide, unless that would make it taller than the space
      under the header (a short window). */
-  width: min(100%, calc((100vh - 25rem) * 1000 / 338));
+  width: min(100%, calc((100vh - 28rem) * 1000 / 338));
   margin-inline: auto;
   /* Text inside is sized from the map's width (cqw), like its boxes. */
   container-type: inline-size;
@@ -1484,12 +1517,6 @@
 
 /* Motion inside figures: bars grow, marks slide along their track, hero
    numbers count up. Each ends at the element's own size, place or value. */
-@keyframes nefGrowDown {
-  from {
-    height: 0;
-  }
-}
-
 @keyframes nefGrowRight {
   from {
     width: 0;
@@ -1501,10 +1528,6 @@
     left: 0;
     opacity: 0;
   }
-}
-
-.bar {
-  animation: nefGrowDown 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .hbar {
@@ -1598,7 +1621,6 @@
 
 .chip,
 .card .stat,
-.agendaDot,
 .preview {
   animation: nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both;
 }
@@ -1616,10 +1638,43 @@
   animation: nefFade 700ms ease-out 900ms both;
 }
 
+/* Agenda: the line draws left to right; as it reaches each stop the number
+   pops and the card rises; then one highlight passes along the five. */
 .agendaRoad::before {
   transform-origin: left;
-  animation: nefSweep 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+  animation: nefSweep 1000ms linear 200ms both;
 }
+
+.body .agendaStop {
+  animation: none;
+}
+
+@keyframes nefGlow {
+  50% {
+    border-top-color: var(--pe-amber);
+    box-shadow: 0 0 0 3px var(--pe-light);
+  }
+}
+
+.agendaStop .agendaDot {
+  animation: nefPop 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(250ms + var(--stop) * 200ms);
+}
+
+.agendaStop .agendaCard {
+  animation:
+    nefRise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    nefGlow 500ms ease-in-out 1;
+  animation-delay:
+    calc(380ms + var(--stop) * 200ms),
+    calc(1700ms + var(--stop) * 130ms);
+}
+
+.agendaStop:nth-child(1) { --stop: 0; }
+.agendaStop:nth-child(2) { --stop: 1; }
+.agendaStop:nth-child(3) { --stop: 2; }
+.agendaStop:nth-child(4) { --stop: 3; }
+.agendaStop:nth-child(5) { --stop: 4; }
 
 /* The slide's last word gets one soft pulse. */
 .verdict .chip,

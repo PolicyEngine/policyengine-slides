@@ -3,7 +3,6 @@ import {
   IconAdjustmentsHorizontal,
   IconAlertTriangle,
   IconAnchor,
-  IconArrowNarrowRight,
   IconArrowsShuffle,
   IconBolt,
   IconBook,
@@ -100,7 +99,7 @@ import BuildScope from "./BuildScope";
 import SiteEmbed from "./SiteEmbed";
 import {
   BankRateBars,
-  IncomeTaxBars,
+  IncomeTaxPath,
   Maths,
   ModuleMap,
   MultiplierPlot,
@@ -847,9 +846,9 @@ export function MultipliersSlide() {
   );
 }
 
-// These slides point at each other; the numbers are their places in config.ts.
+// The micro-to-macro slide points back at this one; the number is its place
+// in config.ts.
 const incomeTaxSlideNumber = 11;
-const microMacroSlideNumber = 19;
 
 const pence = (perPound: number) => `${Math.round(perPound * 100)}p`;
 
@@ -857,7 +856,7 @@ const pence = (perPound: number) => `${Math.round(perPound * 100)}p`;
 // tax calculator, so the revenue is an input (demo.md row 2, l.48 and l.53).
 export function IncomeTaxSlide() {
   return (
-    <Frame part={2} title="Income tax: the channel with real behaviour">
+    <Frame part={2} title="Income tax +1p: what the OBR model does to GDP">
       <div className={styles.stack}>
         <Ask
           question="If the basic rate rises 1p, how much does GDP fall, and when?"
@@ -885,8 +884,13 @@ export function IncomeTaxSlide() {
                 { icon: IconChartLine, label: "GDP", text: "solved here" },
               ]}
             />
-            <Head icon={IconChartBar}>Real GDP change, £m a quarter</Head>
-            <IncomeTaxBars />
+            <div className={styles.chartHead}>
+              <Head icon={IconChartLine}>UK GDP, £m a quarter below baseline, 2025–2027</Head>
+              <span className={`${styles.chip} ${styles.chipGood}`}>
+                Our Python OBR model · input: HMRC costing
+              </span>
+            </div>
+            <IncomeTaxPath />
           </div>
           <div className={styles.panel} {...at(2)}>
             <Head icon={IconBulb}>What to take from it</Head>
@@ -910,18 +914,11 @@ export function IncomeTaxSlide() {
               ]}
             />
             <div className={styles.footnotes}>
-              <span className={`${styles.chip} ${styles.chipMid}`}>
-                Whole-economy model: it can&apos;t show who pays
-              </span>
+              <small>With PolicyEngine</small>
               <p>
                 <IconEqual stroke={1.8} aria-hidden="true" />
-                Same result per £1 with PolicyEngine&apos;s own costing (
+                Same GDP effect per £1 using PolicyEngine&apos;s costing (
                 {incomeTax.policyEngineRevenuePerQuarter} a quarter)
-              </p>
-              <p>
-                <IconArrowNarrowRight stroke={1.8} aria-hidden="true" />
-                Who pays, by income decile: slide {microMacroSlideNumber} (PolicyEngine
-                microsimulation)
               </p>
             </div>
           </div>
@@ -1103,11 +1100,12 @@ const platformIcons: Record<string, Icon> = {
   "US HANK": IconHome,
 };
 
-// The site's three colour classes for its status labels.
+// The site's three colour classes for its status labels: its best in teal,
+// its middle in grey, its weakest in amber (the deck has no red).
 const statusChip = {
   gain: styles.chipGood,
-  mid: styles.chipMid,
-  loss: styles.chipBad,
+  mid: styles.chipBad,
+  loss: styles.chipMid,
 } as const;
 
 export function PlatformSlide() {
