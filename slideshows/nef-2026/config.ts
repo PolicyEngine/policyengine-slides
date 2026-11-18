@@ -37,6 +37,8 @@ export const nef2026Config: SlideshowConfig = {
   clickerKeys: true,
   // The counter shows the slide, not the build step within it.
   counter: "slides",
+  // The hint sits on the footer logo in this deck.
+  hideControlsHint: true,
   // Builds reveal a slide step by step when presenting; a PDF export shows
   // each slide once, complete (exportBuilds: 1, and BuildScope shows every step).
   slides: [

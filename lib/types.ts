@@ -48,6 +48,8 @@ export interface SlideshowConfig {
    * step; "slides" counts slides, so a slide's builds don't move it.
    */
   counter?: 'steps' | 'slides';
+  /** Hide the "Click or arrow keys" hint in the viewer's bottom bar (shown by default). */
+  hideControlsHint?: boolean;
   slides: SlideConfig[];
 }
 
