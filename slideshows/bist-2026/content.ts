@@ -331,6 +331,14 @@ export const sources = {
     label: "“Who bears the AI shock?”, PolicyEngine, 16 November 2026",
     href: "https://www.policyengine.org/uk/research/uk-ai-study",
   },
+  // "AI and the UK economy: Beyond the forecast": provisional and not yet
+  // published. A Vercel deployment of the uk-growth-with-ai project
+  // (PolicyEngine team), public and frameable when read on 19 November
+  // 2026; the project's production address still serves an older page.
+  aiEconomy: {
+    label: "“AI and the UK economy: Beyond the forecast”, PolicyEngine (provisional)",
+    href: "https://uk-growth-with-mjl646jhp-policy-engine.vercel.app",
+  },
   firmHmrcFigure: {
     label: "Working paper figure and calibration report, commit e6d5dd6",
     href: "https://github.com/PolicyEngine/firm-microsim-paper/blob/e6d5dd6/results/calibration_accuracy.txt",
@@ -1789,6 +1797,21 @@ export const budgetProject = {
 // label names the outcomes it reports, with no figures. The headline
 // figures (aiShock above) are for the presenter and are in NOTES.md; the
 // post itself is the slide's focus.
+// "AI and the UK economy: Beyond the forecast" (source "aiEconomy"), read
+// 19 November 2026: four scenarios from 2027 (UK low, central and high, and
+// Korinek et al.'s substantial US case), run in OG-UK for the whole economy
+// and in the household study (PolicyEngine UK, FY 2027-28), shown side by
+// side and never added. Provisional and not yet published, so the slide
+// quotes no figure.
+export const aiEconomyProject = {
+  labels: [
+    { icon: IconTrendingUp, title: "Four scenarios", text: "AI doing more than the OBR expects, from 2027" },
+    { icon: IconChartLine, title: "The whole economy", text: "OG-UK: output, pay rates, national income, birth years" },
+    { icon: IconHome, title: "Households", text: "PolicyEngine UK: Exchequer cost, poverty, inequality" },
+    { icon: IconArrowsSplit, title: "Two lenses", text: "Side by side, never added" },
+  ],
+};
+
 export const aiProject = {
   labels: [
     { icon: IconArrowsSplit, title: "Three channels", text: "Job losses, other workers’ wages, capital income" },

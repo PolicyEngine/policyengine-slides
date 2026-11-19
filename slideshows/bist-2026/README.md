@@ -1,6 +1,6 @@
 # From business shocks to household incomes, 19 November 2026
 
-32 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
+33 slides at `/slides/bist-2026`: PolicyEngine's seminar for the Modelling
 Unit of the Department for Business, Innovation, Science and Trade (BIST).
 There is no appendix: backup material for questions is at the end of
 [NOTES.md](NOTES.md).
@@ -52,26 +52,27 @@ slide, is in [NOTES.md](NOTES.md).
 17. Part 4: Projects we have done (divider)
 18. The Autumn Budget 2026 dashboard (live page)
 19. An AI adoption scenario: Exchequer cost, poverty and inequality (live page)
-20. How we built synthetic UK firms
-21. What the firm model can cost: thresholds, tapers and reduced rates
-22. Who pays for trade shocks? Four UK episodes, 2021–26
-23. Who pays for trade shocks? The 2025 US tariffs (the second
+20. AI and the UK economy: beyond the forecast (live page, provisional)
+21. How we built synthetic UK firms
+22. What the firm model can cost: thresholds, tapers and reduced rates
+23. Who pays for trade shocks? Four UK episodes, 2021–26
+24. Who pays for trade shocks? The 2025 US tariffs (the second
     slide of the trade study)
 
 5 · What could be explored
 
-24. Part 5: What could be explored (divider)
-25. One way to link: tables in, tables out
-26. The UK–US Economic Prosperity Deal: from model results to households
-27. Business policy: from firm costs to households
-28. Where an agent-based model could link
-29. Links to macroeconomic models
+25. Part 5: What could be explored (divider)
+26. One way to link: tables in, tables out
+27. The UK–US Economic Prosperity Deal: from model results to households
+28. Business policy: from firm costs to households
+29. Where an agent-based model could link
+30. Links to macroeconomic models
 
 6 · Possible next steps
 
-30. Part 6: Possible next steps (divider)
-31. Questions for discussion
-32. Thank you
+31. Part 6: Possible next steps (divider)
+32. Questions for discussion
+33. Thank you
 
 - `config.ts` controls the slide order, the build steps (live only) and the
   meeting metadata.
@@ -108,7 +109,7 @@ from the left. Motion lasts about 0.3 seconds and is off under
 
 Exports show each slide once, complete. Every slide with builds has
 `exportBuilds: 1`, so a PDF has exactly one page per slide (33 pages) and
-the deck index counts 32 slides; `countSlides: true` makes the live counter
+the deck index counts 33 slides; `countSlides: true` makes the live counter
 number slides too, not build steps; in an export `Reveal` shows every step, so
 that page is the fully built slide, not its first step. No figure depends on
 an animation: the count-up always ends on the exact text, a timer restores
@@ -954,4 +955,12 @@ The deck is public: it has no password and appears on the home page.
 - Notes: the OBR-0.4 rates (41.9%, 37.0%) are pension-inclusive and are
   compared with 41.8% and 37.0% at elasticity 1; "the host presents
   first"; two slide numbers fixed.
+
+## AI and the UK economy slide (19 November)
+
+- New slide 20, after the AI study: the live page "AI and the UK economy:
+  Beyond the forecast" (OG-UK and the household study, four scenarios from
+  2027), embedded from its Vercel deployment. The subtitle says it is
+  provisional and not yet published, and the slide quotes no figure. The
+  deck has 33 slides; the notes are renumbered.
 

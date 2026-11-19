@@ -19,6 +19,7 @@ import {
   abmQuestions,
   abmReturns,
   aiProject,
+  aiEconomyProject,
   axiomAccess,
   axiomRules,
   axiomToday,
@@ -1344,6 +1345,33 @@ export function AiPostSlide() {
           ))}
         </div>
         <Embed href={sources.aiPost.href} title={sources.aiPost.label} zoom={0.7} />
+      </div>
+    </Frame>
+  );
+}
+
+export function AiEconomySlide() {
+  return (
+    <Frame
+      section="projects"
+      title="AI and the UK economy: beyond the forecast"
+      scale={1.1}
+      fill
+      subtitle="Provisional, not yet published: the whole economy and households, side by side"
+    >
+      <div className={styles.project}>
+        <div className={styles.projectSide}>
+          {aiEconomyProject.labels.map((label) => (
+            <div key={label.title} className={styles.vstep}>
+              <Badge icon={label.icon} size="large" />
+              <div>
+                <h3>{label.title}</h3>
+                <p>{label.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Embed href={sources.aiEconomy.href} title={sources.aiEconomy.label} zoom={0.7} />
       </div>
     </Frame>
   );

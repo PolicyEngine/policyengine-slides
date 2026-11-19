@@ -2,6 +2,7 @@ import type { SlideshowConfig } from "@/lib/types";
 import {
   AbmSlide,
   AiPostSlide,
+  AiEconomySlide,
   AxiomRulesSlide,
   AxiomTodaySlide,
   AxiomLiveSlide,
@@ -75,6 +76,7 @@ export const bist2026Config: SlideshowConfig = {
     PartProjectsSlide,
     BudgetSlide,
     AiPostSlide,
+    AiEconomySlide,
     { component: FirmMethodSlide, builds: 3, exportBuilds: 1 },
     { component: VatReformsSlide, builds: 5, exportBuilds: 1 },
     { component: TradeSlide, builds: 4, exportBuilds: 1 },
