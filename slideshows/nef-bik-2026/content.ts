@@ -17,7 +17,7 @@ export const cover = {
   date: "19 November 2026",
 };
 
-export type Source = { label: string; href: string; published?: string };
+export type Source = { label: string; href?: string; published?: string };
 
 export const sources = {
   // HMRC
@@ -83,7 +83,7 @@ export const sources = {
   },
   obrSalarySacrifice: {
     label: "OBR, supplementary forecast information: salary sacrifice costing",
-    href: "https://obr.uk/download/supplementary-forecast-information-salary-sacrifice-costing/",
+    href: "https://obr.uk/docs/dlm_uploads/Supplementary-forecast-information-salary-sacrifice-costing-1.pdf",
     published: "5 February 2026",
   },
   budget2026Costings: {
@@ -131,9 +131,10 @@ export const sources = {
     published: "22 October 2026",
   },
   // The certified Microcosm UK build's fitted targets, read 18 November 2026.
+  // No link: the dashboard page shows release names this deck doesn't use.
   dashboard: {
-    label: "Calibration dashboard, pinned to the 15 November 2026 build",
-    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709",
+    label:
+      "Calibration dashboard data API, release microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709 (the 15 November 2026 build)",
   },
   // Code
   bikVariable: {
@@ -284,7 +285,7 @@ export const timeline: {
     year: "2028-29",
     evRate: 7,
     events: [{ title: "Payrolling: most other benefits", announced: true }],
-    yield: "Rates to 2029-30: +£700m",
+    yield: "Rates to 2029-30: +\u2060£700m in 2028-29",
   },
   {
     year: "2029-30",
@@ -314,8 +315,9 @@ export type Status = "done" | "partly" | "notYet";
 // - Imputation: sources.companyCarsStage (`company_cars`, the 19th of the 56
 //   entries in the `stages` list of sources.sourceStages, counted from 1). List price is drawn within the FRS band from
 //   Wealth and Assets Survey round 8 prices; CO2 from HMRC Table 2A shares.
-//   Availability, private-use payments and electric range are left at
-//   defaults ("no survey records them"), hence "partly".
+//   Availability and private-use payments are left at defaults ("no survey
+//   records them"); electric range is set to 50 miles for 1-50 g/km cars and
+//   the 2020 registration flag stays at its default; hence "partly".
 // - Calibration: sources.dashboard, the certified build of 15 November 2026
 //   (1,534 targets): the five hmrc.benefits_in_kind targets are "included"
 //   and fitted within 1% (recipients 915,708 against 920,000; taxable value
@@ -324,8 +326,8 @@ export type Status = "done" | "partly" | "notYet";
 // - Rules: policyengine-uk @ 98381bf (2.179.2), sources.carBenefit,
 //   sources.fuelBenefit, sources.class1a; 53 YAML test cases
 //   (company_car_benefit.yaml 24, car_fuel_benefit.yaml 10,
-//   benefits_in_kind_interactions.yaml 11, ni_class_1a.yaml 8); CI on main
-//   passed at that commit. company_car_benefit.py says optional remuneration
+//   benefits_in_kind_interactions.yaml 11, ni_class_1a.yaml 8). Full CI
+//   passed on 329ae39, which 98381bf only re-versions. company_car_benefit.py says optional remuneration
 //   arrangements (ITEPA s. 120A) are not modelled, hence "partly".
 // 13 benefits: sources.frs, question ExpBen, codes 1 to 13.
 export const pipeline: {
@@ -548,8 +550,9 @@ export const gaps = [
   {
     title: "Behaviour",
     items: [
-      "Pension cap, 2030-31: £5,070m static, £2,585m after responses (Budget 2025)",
-      "Employers passing costs on to pay: modelled for the pension cap only",
+      // U+2011 keeps "2030-31" on one line.
+      "Pension cap, 2030\u201131: £5,070m static, £2,585m after responses (Budget 2025)",
+      "Employers passing costs on to pay: we model it for the pension cap, not for benefits in kind",
       "Car choice after rate rises",
     ],
   },

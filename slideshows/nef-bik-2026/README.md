@@ -69,8 +69,9 @@ Code:
   `packages/microcosm-build/src/microcosm/build/uk_runtime/company_cars.py`,
   `uk_runtime/salary_sacrifice.py`, `uk/source_stages.json`,
   `uk/uk_population_targets.json`, `uk/hmrc_benefits_in_kind_facts.json`
-- The calibration dashboard, pinned to the national build of 15 November 2026:
-  https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709
+- PolicyEngine's calibration dashboard, release
+  `microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709`
+  (the national build of 15 November 2026), read through its data API
 
 Statistics and guidance:
 
@@ -103,7 +104,7 @@ Statistics and guidance:
   https://www.legislation.gov.uk/ukpga/2026/15/section/1
 - OBR, supplementary forecast information: salary sacrifice costing
   (5 February 2026):
-  https://obr.uk/download/supplementary-forecast-information-salary-sacrifice-costing/
+  https://obr.uk/docs/dlm_uploads/Supplementary-forecast-information-salary-sacrifice-costing-1.pdf
 - Family Resources Survey 2024-25, question instructions (UKDS SN 9563):
   https://doc.ukdataservice.ac.uk/doc/9563/mrdoc/pdf/9563_frs_2024-25_question_instructions_final.pdf
 - Survey of Personal Incomes, Public Use Tape: 2022-23 documentation (SN 9422)

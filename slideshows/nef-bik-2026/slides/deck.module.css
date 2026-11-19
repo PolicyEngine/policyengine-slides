@@ -298,10 +298,8 @@
 .card .chipHead {
   margin: 0.8em 0 0.4em;
   color: var(--color-gray-600);
-  font-size: 0.85em;
+  font-size: 0.95em;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 /* Code on a light background. */

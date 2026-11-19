@@ -992,7 +992,7 @@ export function ClosingSlide() {
   return (
     <Slide isEnd>
       <h1 className="font-display text-6xl font-bold mb-12 text-center">Thank you</h1>
-      <div className="grid w-full max-w-6xl grid-cols-3 gap-5">
+      <div className="flex w-full flex-wrap justify-center gap-5">
         {contacts.map(({ label, url, Icon: ContactIcon }) => (
           <a
             key={url}
@@ -1003,7 +1003,7 @@ export function ClosingSlide() {
             className={styles.contact}
           >
             <ContactIcon size={30} stroke={1.8} aria-hidden="true" />
-            <span>{label}</span>
+            <span className="whitespace-nowrap">{label}</span>
           </a>
         ))}
       </div>
