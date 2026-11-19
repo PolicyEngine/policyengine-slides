@@ -17,6 +17,7 @@ import { cliffwatchWebinarConfig } from "@/slideshows/cliffwatch-webinar/config"
 import { cbo2026Config } from "@/slideshows/cbo-2026/config";
 import { civicBuilders2026Config } from "@/slideshows/civic-builders-2026/config";
 import { policybenchWebinarConfig } from "@/slideshows/policybench-webinar/config";
+import { nefBik2026Config } from "@/slideshows/nef-bik-2026/config";
 import { aspenBenefits2026Config } from "@/slideshows/aspen-benefits-2026/config";
 import { l0Ima2026Config } from "@/slideshows/l0-ima-2026/config";
 import { iariw2026Config } from "@/slideshows/iariw-2026/config";
@@ -49,6 +50,7 @@ export const slideshows: SlideshowConfig[] = [
   arnold2026Config,
   iariw2026Config,
   l0Ima2026Config,
+  nefBik2026Config,
   aspenBenefits2026Config,
   policybenchWebinarConfig,
   civicBuilders2026Config,
