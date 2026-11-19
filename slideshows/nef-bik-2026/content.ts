@@ -1,6 +1,7 @@
 // Every figure on the slides is pinned here to the source it was read from,
-// on 18 November 2026: a URL and publication date for web sources, and a
-// repo, commit and path for code. Nothing on a slide is estimated by us.
+// on 18 November 2026: a URL for web sources, most with a publication date;
+// a repo, commit and path for code; and a release name for the calibration
+// dashboard. Nothing on a slide is estimated by us.
 
 // Code, at the commits read.
 const ukCommit = "98381bf4987ce8d30e6d9b7a3061362c5f2a3c84"; // policyengine-uk 2.179.2
@@ -29,6 +30,11 @@ export const sources = {
   bikByType: {
     label: "HMRC, Taxable benefits in kind by type of benefit, Table 4.5 (2016-17)",
     href: "https://www.gov.uk/government/statistics/number-of-recipients-and-amounts-of-taxable-benefits-by-type-of-benefit",
+    published: "27 June 2019",
+  },
+  bikCommentary2019: {
+    label: "HMRC, Benefits in kind statistics: June 2019 (commentary)",
+    href: "https://assets.publishing.service.gov.uk/media/5d148708e5274a0694afe666/Taxable_Benefits_in_Kind_National_Statistics_Commentary_2019.pdf",
     published: "27 June 2019",
   },
   receipts: {
@@ -165,9 +171,9 @@ export const sources = {
     label: "microcosm: uk_runtime/company_cars.py",
     href: `${microcosm}/uk_runtime/company_cars.py`,
   },
+  // No link: the GitHub page shows release names this deck doesn't use.
   sourceStages: {
     label: "microcosm: uk/source_stages.json",
-    href: `${microcosm}/uk/source_stages.json`,
   },
   targets: {
     label: "microcosm: uk/uk_population_targets.json",
@@ -230,7 +236,7 @@ export const definitions = [
   },
 ];
 
-// sources.bikByType: Table 4.5 and the June 2019 commentary, tax year
+// sources.bikByType (Table 4.5) and sources.bikCommentary2019, tax year
 // 2016-17, the last year with final figures for every benefit type (2017-18
 // was provisional in that release; the tables since 2020 cover company cars
 // and fuel only, plus the Class 1A total). P11D-only, before most
@@ -507,7 +513,8 @@ export const dataSources: {
   },
   {
     source: "Budget and OBR costings",
-    measures: "Yield of car-rate and salary-sacrifice measures",
+    // U+2011 keeps "salary-sacrifice" on one line.
+    measures: "Yield of car-rate and salary\u2011sacrifice measures",
     level: "Totals",
     latest: "To 2031-32",
     uses: ["Validate"],
@@ -528,7 +535,8 @@ export const gaps = [
     items: [
       "No values for medical insurance, loans or accommodation in the FRS",
       "SPI: benefits and expenses in one amount",
-      "No car CO2 or part-year use in the FRS",
+      // U+2011 keeps "part-year" on one line.
+      "No car CO2 or part\u2011year use in the FRS",
     ],
   },
   {
@@ -551,7 +559,7 @@ export const gaps = [
     title: "Behaviour",
     items: [
       // U+2011 keeps "2030-31" on one line.
-      "Pension cap, 2030\u201131: £5,070m static, £2,585m after responses (Budget 2025)",
+      "Pension cap, 2030\u201131: £5,070m static, £2,585m after responses (Budget 2025; £2,920m in Budget 2026)",
       "Employers passing costs on to pay: we model it for the pension cap, not for benefits in kind",
       "Car choice after rate rises",
     ],
@@ -561,6 +569,7 @@ export const gaps = [
 // Effort is relative, in words: nothing here has been estimated in weeks.
 // Behaviour: sources.budget2025Costings (pp. 47-48) gives the pension cap
 // £5,070m static and £2,585m after responses in 2030-31;
+// sources.budget2026Recostings (Table 6.4) recosts it to £2,920m in 2030-31;
 // sources.obrSalarySacrifice (Table 1.6) splits the responses;
 // sources.budget2026Costings (p. 95) nets off a switch to cheaper company
 // cars. policyengine-uk cuts all employment income by 0.16% whenever the cap
@@ -570,7 +579,7 @@ export const phases = [
     title: "Cars, fuel and vans",
     effort: "Smallest",
     effortNote: "Car rules and data exist",
-    work: ["Validate cars against HMRC by income", "Target fuel and Class 1A; add the van charge"],
+    work: ["Validate cars against HMRC by income and region", "Target fuel and Class 1A; add the van charge"],
     output: "Electric car rate reforms: revenue and who pays",
   },
   {

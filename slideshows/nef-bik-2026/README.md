@@ -2,8 +2,8 @@
 
 16 slides at `/slides/nef-bik-2026`, for a scoping meeting with the New
 Economics Foundation (NEF) on modelling employer-provided benefits in kind
-(BIK) in PolicyEngine's UK microsimulation. The deck is public. Nothing has
-been agreed: the deck sets out what the model covers today, the data
+(BIK) in PolicyEngine's UK microsimulation. The deck is public. PolicyEngine
+and NEF have agreed nothing yet: the deck sets out what the model covers today, the data
 available, and options. The meeting is on 19 November 2026 (`config.ts`,
 its footer and `cover.date` in `content.ts`). The cover names Vahid
 Ahmadi and Max Ghenis; remove Max in `slides/index.tsx` (`TitleSlide`) if he
@@ -27,8 +27,9 @@ slide, and every slide's header carries a tracker of the three parts:
   shows the slide, not the step (`counter: "slides"`), and the controls hint
   is hidden (`hideControlsHint: true`); both are opt-ins in `lib/types.ts`.
 - `content.ts` holds every number on the slides, each pinned to its source:
-  a URL and publication date for web sources, a repo, commit and path for
-  code. The comments say which table or file each figure is from.
+  a URL for web sources, most with a publication date; a repo, commit and
+  path for code; and a release name for the calibration dashboard, which has
+  no link. The comments say which table or file each figure is from.
 - `slides/index.tsx` contains the slides and the deck's components (one list,
   one card, one table, one chip style; every item takes a Tabler icon). The
   `agenda` list there drives the agenda slide, the section slides and the
@@ -79,6 +80,8 @@ Statistics and guidance:
   https://www.gov.uk/government/statistics/benefits-in-kind-statistics-july-2026
 - HMRC, taxable benefits in kind by type, Table 4.5, 2016-17 (27 June 2019):
   https://www.gov.uk/government/statistics/number-of-recipients-and-amounts-of-taxable-benefits-by-type-of-benefit
+- HMRC, Benefits in kind statistics: June 2019, commentary (27 June 2019):
+  https://assets.publishing.service.gov.uk/media/5d148708e5274a0694afe666/Taxable_Benefits_in_Kind_National_Statistics_Commentary_2019.pdf
 - HMRC tax relief statistics, January 2026 (22 January 2026):
   https://www.gov.uk/government/statistics/tax-reliefs
 - The Van Benefit and Car and Van Fuel Benefit Order 2025 (SI 2025/1254):
