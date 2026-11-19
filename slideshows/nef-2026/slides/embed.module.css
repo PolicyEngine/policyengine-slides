@@ -96,3 +96,17 @@
   border: 0;
   background: var(--bg-card);
 }
+
+/* Tags above an embed: a clear gap from the frame, and from each other. */
+.embedTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.embedTags > span {
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.95rem;
+}

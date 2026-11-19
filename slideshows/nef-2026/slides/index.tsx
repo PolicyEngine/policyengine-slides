@@ -1217,7 +1217,7 @@ export function AiExampleSlide() {
       center={false}
     >
       <div className={embedStyles.liveBody}>
-        <div className={styles.chipRow}>
+        <div className={embedStyles.embedTags}>
           <span className={`${styles.chip} ${styles.chipBad}`}>
             <IconAlertTriangle size={16} stroke={1.8} aria-hidden="true" />
             Not published · provisional results
