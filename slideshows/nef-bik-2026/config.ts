@@ -23,10 +23,9 @@ export const nefBik2026Config: SlideshowConfig = {
   title: "Modelling benefits in kind in PolicyEngine UK: scoping with NEF",
   description:
     "A scoping meeting with the New Economics Foundation on benefits in kind in PolicyEngine UK: what the model covers today, the data available, and options.",
-  // The exact meeting date isn't fixed; a day of 01 renders as "November 2026".
-  date: "2026-11-01",
+  date: "2026-11-19",
   location: "New Economics Foundation",
-  footerText: "New Economics Foundation · November 2026",
+  footerText: "New Economics Foundation · 19 November 2026",
   clickerKeys: true,
   // The counter shows the slide, not the build step within it.
   counter: "slides",
@@ -45,7 +44,7 @@ export const nefBik2026Config: SlideshowConfig = {
     CoverageSlide,
     ScopingSectionSlide,
     DataSlide,
-    { component: GapSlide, builds: 4, exportBuilds: 1 },
+    { component: GapSlide, builds: 5, exportBuilds: 1 },
     { component: PhasesSlide, builds: 3, exportBuilds: 1 },
     { component: ExamplesSlide, builds: 3, exportBuilds: 1 },
     QuestionsSlide,

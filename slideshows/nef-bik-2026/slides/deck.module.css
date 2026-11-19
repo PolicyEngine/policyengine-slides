@@ -122,6 +122,10 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.cols5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .card {
   min-width: 0;
   border: 1px solid var(--color-gray-200);
@@ -282,6 +286,22 @@
 .chipBad {
   background: var(--bg-tertiary);
   color: var(--color-gray-700);
+}
+
+/* A label chip that carries no status: data uses, effort, OpRA exemptions. */
+.chipNeutral {
+  border: 1px solid var(--color-gray-300);
+  background: var(--bg-card);
+  color: var(--pe-dark);
+}
+
+.card .chipHead {
+  margin: 0.8em 0 0.4em;
+  color: var(--color-gray-600);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Code on a light background. */

@@ -255,13 +255,14 @@ function Ask({
   );
 }
 
-/** Cards in a row, with an arrow between each pair. */
+/** Cards in a row, with an arrow between each pair. Card n appears at step
+ * n, and the arrow before it with it. */
 function Flow({ children }: { children: ReactNode[] }) {
   return (
     <div className={styles.flow}>
       {children.map((child, index) => (
         <Fragment key={index}>
-          {index > 0 && <IconChevronRight stroke={2} aria-hidden="true" />}
+          {index > 0 && <IconChevronRight stroke={2} aria-hidden="true" {...at(index + 1)} />}
           {child}
         </Fragment>
       ))}
@@ -458,11 +459,12 @@ export function WhatIsBikSlide() {
               text="Optional remuneration arrangement: taxed on the higher of the salary given up and the taxable value"
               amber
             >
+              <p className={styles.chipHead}>Exempt from OpRA</p>
               <div className={styles.chipRow}>
-                <span className={`${styles.chip} ${styles.chipBad}`}>Exempt: pensions</span>
-                <span className={`${styles.chip} ${styles.chipBad}`}>Cycle to work</span>
-                <span className={`${styles.chip} ${styles.chipBad}`}>Cars up to 75 g/km CO2</span>
-                <span className={`${styles.chip} ${styles.chipBad}`}>Childcare vouchers</span>
+                <span className={`${styles.chip} ${styles.chipNeutral}`}>Pensions</span>
+                <span className={`${styles.chip} ${styles.chipNeutral}`}>Cycle to work</span>
+                <span className={`${styles.chip} ${styles.chipNeutral}`}>Cars up to 75 g/km CO2</span>
+                <span className={`${styles.chip} ${styles.chipNeutral}`}>Childcare vouchers</span>
               </div>
             </Card>
           </div>
@@ -523,6 +525,7 @@ export function SizeSlide() {
                 {size.class1aLiabilityBn}
               </p>
               <p className={styles.statLabel}>Class 1A due from employers</p>
+              <p className={styles.statNote}>Experimental</p>
             </div>
             <div className={styles.card}>
               <p className={styles.stat}>
@@ -543,7 +546,7 @@ export function SizeSlide() {
                   <CountUp value={size.electricShare} />%
                 </span>
               </p>
-              <p className={styles.statLabel}>Of company cars are electric</p>
+              <p className={styles.statLabel}>Of company cars are fully electric</p>
             </div>
           </div>
         </div>
@@ -771,13 +774,10 @@ const sourceIcons: Icon[] = [
   IconBuildingBank,
 ];
 
-const useChip: Record<Use, string> = {
-  Impute: styles.chipGood,
-  Calibrate: styles.chipMid,
-  Validate: styles.chipBad,
-  Possible: styles.chipBad,
-};
+// Use chips share one neutral style, so they don't read as the Done, Partly
+// done and Not yet status chips of slides 8 and 9.
 const useLabel: Record<Use, string> = {
+  Base: "Base dataset",
   Impute: "Impute",
   Calibrate: "Calibrate",
   Validate: "Validate",
@@ -786,7 +786,7 @@ const useLabel: Record<Use, string> = {
 
 export function DataSlide() {
   return (
-    <Frame part={2} title="Data: surveys say who, HMRC says how much" scale={1.35}>
+    <Frame part={2} title="Data: surveys mostly say who, HMRC says how much" scale={1.35}>
       <table className={`${styles.table} ${styles.tight}`}>
         <thead>
           <tr>
@@ -814,7 +814,7 @@ export function DataSlide() {
                 <td>
                   <span className={styles.chipRow}>
                     {row.uses.map((use) => (
-                      <span key={use} className={`${styles.chip} ${useChip[use]}`}>
+                      <span key={use} className={`${styles.chip} ${styles.chipNeutral}`}>
                         {useLabel[use]}
                       </span>
                     ))}
@@ -829,18 +829,19 @@ export function DataSlide() {
   );
 }
 
-const gapIcons: Icon[] = [IconScale, IconDatabase, IconTarget, IconChecklist];
+const gapIcons: Icon[] = [IconScale, IconDatabase, IconTarget, IconChecklist, IconUsersGroup];
 const gapItemIcons: Icon[][] = [
   [IconHeartbeat, IconArrowsSplit, IconBuildingSkyscraper],
-  [IconHeartbeat, IconHome, IconReceiptTax],
+  [IconHeartbeat, IconReceiptTax, IconCar],
   [IconListSearch, IconGasStation, IconChartBar],
   [IconCar, IconBuildingBank, IconPigMoney],
+  [IconPigMoney, IconCoins, IconCar],
 ];
 
 export function GapSlide() {
   return (
-    <Frame part={2} title="The gap, in four layers" scale={1.4}>
-      <div className={`${styles.cardGrid} ${styles.cols4}`}>
+    <Frame part={2} title="The gap, in five layers" scale={1.2}>
+      <div className={`${styles.cardGrid} ${styles.cols5}`}>
         {gaps.map((gap, index) => (
           <Card
             key={gap.title}
@@ -868,11 +869,6 @@ const phaseWorkIcons: Icon[][] = [
   [IconHeartbeat, IconDatabase],
   [IconBike, IconScale],
 ];
-const effortChip: Record<string, string> = {
-  Smallest: styles.chipGood,
-  Medium: styles.chipBad,
-  Largest: styles.chipMid,
-};
 
 export function PhasesSlide() {
   return (
@@ -902,13 +898,13 @@ export function PhasesSlide() {
               />
             </div>
             <div className={styles.layerLine}>
-              <span>Output: static scores</span>
+              <span>Output</span>
               <p>{phase.output}</p>
             </div>
             <div className={styles.layerLine}>
               <span>Effort: our rough ranking</span>
               <p className={styles.effort}>
-                <span className={`${styles.chip} ${effortChip[phase.effort]}`}>{phase.effort}</span>
+                <span className={`${styles.chip} ${styles.chipNeutral}`}>{phase.effort}</span>
                 {phase.effortNote}
               </p>
             </div>
@@ -920,7 +916,7 @@ export function PhasesSlide() {
 }
 
 // Three questions, each with the scenario that would answer it and the
-// phase it needs. No results: nothing has been run for this deck.
+// phase it needs. No results on this slide.
 export function ExamplesSlide() {
   return (
     <Frame part={2} title="Questions this would answer" scale={1.4}>
@@ -961,8 +957,8 @@ export function QuestionsSlide() {
           },
           {
             icon: IconAdjustmentsHorizontal,
-            title: "Static results, or with behaviour?",
-            text: "Employers and employees switching between pay and benefits",
+            title: "Which responses matter most to you?",
+            text: "Pay restructuring, switching schemes, car choice",
           },
           {
             icon: IconSearch,
@@ -990,18 +986,13 @@ const contacts = [
     url: "https://github.com/PolicyEngine/policyengine-uk",
     Icon: IconBrandGithub,
   },
-  {
-    label: "PolicyEngine/microcosm",
-    url: "https://github.com/PolicyEngine/microcosm",
-    Icon: IconBrandGithub,
-  },
 ];
 
 export function ClosingSlide() {
   return (
     <Slide isEnd>
       <h1 className="font-display text-6xl font-bold mb-12 text-center">Thank you</h1>
-      <div className="grid w-full max-w-5xl grid-cols-2 gap-5">
+      <div className="grid w-full max-w-6xl grid-cols-3 gap-5">
         {contacts.map(({ label, url, Icon: ContactIcon }) => (
           <a
             key={url}

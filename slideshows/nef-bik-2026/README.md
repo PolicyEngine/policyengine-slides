@@ -4,9 +4,8 @@
 Economics Foundation (NEF) on modelling employer-provided benefits in kind
 (BIK) in PolicyEngine's UK microsimulation. The deck is public. Nothing has
 been agreed: the deck sets out what the model covers today, the data
-available, and options. The exact meeting date isn't fixed, so `config.ts`
-uses `2026-11-01`, which renders as "November 2026"; change it, the footer
-and `cover.date` in `content.ts` once the date is set. The cover names Vahid
+available, and options. The meeting is on 19 November 2026 (`config.ts`,
+its footer and `cover.date` in `content.ts`). The cover names Vahid
 Ahmadi and Max Ghenis; remove Max in `slides/index.tsx` (`TitleSlide`) if he
 isn't presenting.
 
@@ -17,7 +16,7 @@ slide, and every slide's header carries a tracker of the three parts:
    it is taxed; its size; the rule changes to 2030-31
 2. What PolicyEngine covers (slides 7–9): how the model works, with company
    cars carried through each stage and a status on each; the coverage map
-3. Scoping the project (slides 10–15): the data sources, the gap in four
+3. Scoping the project (slides 10–15): the data sources, the gap in five
    layers, three phases, example questions, questions for NEF
 
 ## Editing and presenting
@@ -63,13 +62,13 @@ Code:
   `.../national_insurance/class_1a/`; parameters under
   `policyengine_uk/parameters/gov/hmrc/income_tax/benefits_in_kind/`; the
   salary-sacrifice cap at
-  `parameters/gov/hmrc/national_insurance/salary_sacrifice_pension_cap.yaml`
+  `parameters/gov/hmrc/national_insurance/salary_sacrifice_pension_cap.yaml`;
+  the pay cut that applies with it at
+  `parameters/gov/contrib/behavioral_responses/salary_sacrifice_broad_base_haircut_rate.yaml`
 - PolicyEngine/microcosm at `bcb5cba`:
   `packages/microcosm-build/src/microcosm/build/uk_runtime/company_cars.py`,
-  `uk/source_stages.json`, `uk/uk_population_targets.json`,
-  `uk/hmrc_benefits_in_kind_facts.json`
-- PolicyEngine/policyengine-uk-data at `ed19e33` (1.59.2):
-  `policyengine_uk_data/datasets/imputations/salary_sacrifice.py`
+  `uk_runtime/salary_sacrifice.py`, `uk/source_stages.json`,
+  `uk/uk_population_targets.json`, `uk/hmrc_benefits_in_kind_facts.json`
 - The calibration dashboard, pinned to the national build of 15 November 2026:
   https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709
 
@@ -94,8 +93,14 @@ Statistics and guidance:
   https://www.gov.uk/government/publications/budget-2026-overview-of-tax-legislation-and-rates-ootlar/annex-a-rates-and-allowances ;
   Table 6.1 https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html ;
   Table 6.4 https://assets.publishing.service.gov.uk/media/6ae0f93fe4367e5c8b0467d6/Table_6.4_Recostings_Table.xlsx
+- Budget 2026 policy costings (28 October 2026), p. 95:
+  https://assets.publishing.service.gov.uk/media/6ae1883fe4367e5c8b0467df/AB26_Policy_Costing.pdf
 - Budget 2025 policy costings (26 November 2025):
   https://assets.publishing.service.gov.uk/media/692872fd2a37784b16ecf676/Budget_2025-Policy_Costings.pdf
+- Finance Act 2026, s. 17 (employee car and van ownership schemes):
+  https://www.legislation.gov.uk/ukpga/2026/11/section/17
+- National Insurance Contributions (Employer Pensions Contributions) Act 2026, s. 1:
+  https://www.legislation.gov.uk/ukpga/2026/15/section/1
 - OBR, supplementary forecast information: salary sacrifice costing
   (5 February 2026):
   https://obr.uk/download/supplementary-forecast-information-salary-sacrifice-costing/

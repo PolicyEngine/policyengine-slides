@@ -5,18 +5,16 @@
 // Code, at the commits read.
 const ukCommit = "98381bf4987ce8d30e6d9b7a3061362c5f2a3c84"; // policyengine-uk 2.179.2
 const microcosmCommit = "bcb5cba9d7be2b5907503878248f8ce533f044e9";
-const ukDataCommit = "ed19e336b47b2ca462d6e0d5cc30c08459710fef"; // policyengine-uk-data 1.59.2
 
 const uk = `https://github.com/PolicyEngine/policyengine-uk/blob/${ukCommit}/policyengine_uk`;
 const microcosm = `https://github.com/PolicyEngine/microcosm/blob/${microcosmCommit}/packages/microcosm-build/src/microcosm/build`;
-const ukData = `https://github.com/PolicyEngine/policyengine-uk-data/blob/${ukDataCommit}`;
 
-// The cover. The meeting date isn't fixed, so the cover gives the month.
+// The cover. The meeting is on 19 November 2026.
 export const cover = {
   title: "Modelling benefits in kind in PolicyEngine UK: scoping with NEF",
   subtitle: "What we cover, the data, and next steps",
   event: "New Economics Foundation",
-  date: "November 2026",
+  date: "19 November 2026",
 };
 
 export type Source = { label: string; href: string; published?: string };
@@ -87,6 +85,20 @@ export const sources = {
     label: "OBR, supplementary forecast information: salary sacrifice costing",
     href: "https://obr.uk/download/supplementary-forecast-information-salary-sacrifice-costing/",
     published: "5 February 2026",
+  },
+  budget2026Costings: {
+    label: "Budget 2026 policy costings",
+    href: "https://assets.publishing.service.gov.uk/media/6ae1883fe4367e5c8b0467df/AB26_Policy_Costing.pdf",
+    published: "28 October 2026",
+  },
+  // Legislation
+  financeAct2026s17: {
+    label: "Finance Act 2026, s. 17: employee car and van ownership schemes",
+    href: "https://www.legislation.gov.uk/ukpga/2026/11/section/17",
+  },
+  pensionsNicsAct2026: {
+    label: "National Insurance Contributions (Employer Pensions Contributions) Act 2026, s. 1",
+    href: "https://www.legislation.gov.uk/ukpga/2026/15/section/1",
   },
   // Surveys
   frs: {
@@ -164,9 +176,13 @@ export const sources = {
     label: "microcosm: uk/hmrc_benefits_in_kind_facts.json",
     href: `${microcosm}/uk/hmrc_benefits_in_kind_facts.json`,
   },
-  ukDataSalarySacrifice: {
-    label: "policyengine-uk-data: imputations/salary_sacrifice.py",
-    href: `${ukData}/policyengine_uk_data/datasets/imputations/salary_sacrifice.py`,
+  salarySacrificeStage: {
+    label: "microcosm: uk_runtime/salary_sacrifice.py",
+    href: `${microcosm}/uk_runtime/salary_sacrifice.py`,
+  },
+  salarySacrificeHaircut: {
+    label: "policyengine-uk: salary_sacrifice_broad_base_haircut_rate.yaml",
+    href: `${uk}/parameters/gov/contrib/behavioral_responses/salary_sacrifice_broad_base_haircut_rate.yaml`,
   },
 } satisfies Record<string, Source>;
 
@@ -209,7 +225,7 @@ export const definitions = [
   },
   {
     title: "Class 1A",
-    text: "Employer National Insurance contributions (NICs) on benefits: 15% since April 2025",
+    text: "Employer National Insurance contributions (NICs) on benefits: 13.8% in 2024-25, 15% since April 2025",
   },
 ];
 
@@ -235,14 +251,15 @@ export const byType2016 = {
 // What is legislated or announced, by tax year. Zero-emission company car
 // rates: sources.budget2026Rates. Car fuel multiplier for 2026-27:
 // sources.fuelOrder, art. 2(2). Payrolling dates: sources.payrolling.
-// Salary-sacrifice cap: sources.budget2025Costings (p.47). Employee car
-// ownership schemes: sources.budget2025Costings (p.72). Yields are Exchequer
+// Salary-sacrifice cap: sources.budget2025Costings (p.47), legislated by
+// sources.pensionsNicsAct2026. Employee car and van ownership schemes:
+// sources.financeAct2026s17, for 2030-31 on. Yields are Exchequer
 // figures from sources.budget2026 (Table 6.1 row 86) and
 // sources.budget2026Recostings (Table 6.4 rows 14 and 15).
 export const timeline: {
   year: string;
   evRate: number;
-  /** Announced, not yet legislated (Budget 2026 overview, paras 1.24–1.25). */
+  /** Announced, not yet legislated (Budget 2026 overview, para 1.25). */
   rateAnnounced?: boolean;
   events: { title: string; text?: string; announced?: boolean }[];
   yield?: string;
@@ -267,7 +284,7 @@ export const timeline: {
     year: "2028-29",
     evRate: 7,
     events: [{ title: "Payrolling: most other benefits", announced: true }],
-    yield: "2028–30 rates: +£700m",
+    yield: "Rates to 2029-30: +£700m",
   },
   {
     year: "2029-30",
@@ -280,7 +297,7 @@ export const timeline: {
     year: "2030-31",
     evRate: 10,
     rateAnnounced: true,
-    events: [{ title: "Car ownership schemes taxed", text: "From April 2030", announced: true }],
+    events: [{ title: "Car ownership schemes taxed", text: "From April 2030" }],
     yield: "2030-31 rise: +£310m",
   },
 ];
@@ -357,7 +374,12 @@ export const pipeline: {
 // certified build of 15 November 2026: five company-car and seven
 // salary-sacrifice targets included, each within 1%). FRS flags:
 // sources.frs (question ExpBen). Pension salary sacrifice: sources.
-// salarySacrificeCap, sources.ukDataSalarySacrifice.
+// salarySacrificeCap, sources.salarySacrificeStage. Car fuel: no part-year
+// fuel in sources.fuelBenefit, and it reads the same imputed CO2 and default
+// availability as the car. Loans and accommodation: sources.frs asks AccJob
+// (p. 52), whether the landlord employs someone in the household (p. 49),
+// and about loans from an employer (OthDed p. 208, DLOANTY p. 359), but not
+// their value.
 export const coverage: {
   benefit: string;
   detail?: string;
@@ -375,10 +397,10 @@ export const coverage: {
   },
   {
     benefit: "Car fuel",
-    rules: "done",
-    data: "done",
+    rules: "partly",
+    data: "partly",
     target: "notYet",
-    note: "Who gets fuel is from the FRS",
+    note: "No part-year fuel; CO2 and availability as for cars",
   },
   {
     benefit: "Class 1A",
@@ -414,7 +436,7 @@ export const coverage: {
     rules: "notYet",
     data: "notYet",
     target: "notYet",
-    note: "Not asked separately in the FRS",
+    note: "FRS asks who, not the value",
   },
   {
     benefit: "Other salary sacrifice",
@@ -429,7 +451,7 @@ export const coverage: {
 // ---------------------------------------------------------------------------
 // Part 3: scoping
 
-export type Use = "Impute" | "Calibrate" | "Validate" | "Possible";
+export type Use = "Base" | "Impute" | "Calibrate" | "Validate" | "Possible";
 
 // One row per source; the "use" column is our assessment.
 export const dataSources: {
@@ -444,7 +466,7 @@ export const dataSources: {
     measures: "Who gets 13 employer benefits and expenses; car price band, fuel type",
     level: "People",
     latest: "2024-25",
-    uses: ["Impute"],
+    uses: ["Base"],
   },
   {
     source: "Survey of Personal Incomes (SPI)",
@@ -455,7 +477,7 @@ export const dataSources: {
   },
   {
     source: "Annual Survey of Hours and Earnings (ASHE)",
-    measures: "Employer-reported benefits and salary sacrifice",
+    measures: "Value of all benefits in kind per job; pension salary sacrifice",
     level: "Jobs",
     latest: "2026, provisional",
     uses: ["Possible"],
@@ -471,7 +493,7 @@ export const dataSources: {
     source: "HMRC benefits by type",
     measures: "Medical, vans, loans, accommodation",
     level: "Totals",
-    latest: "2016-17",
+    latest: "2016-17, last final",
     uses: ["Validate"],
   },
   {
@@ -502,15 +524,15 @@ export const gaps = [
   {
     title: "Data",
     items: [
-      "No values for medical insurance in the FRS",
-      "Loans and accommodation not asked separately in the FRS",
+      "No values for medical insurance, loans or accommodation in the FRS",
       "SPI: benefits and expenses in one amount",
+      "No car CO2 or part-year use in the FRS",
     ],
   },
   {
     title: "Calibration",
     items: [
-      "No HMRC totals by type since 2016-17",
+      "No final HMRC totals for other benefit types since 2016-17",
       "Car fuel and Class 1A not yet targets",
       "Cars by income band not yet targets",
     ],
@@ -519,39 +541,48 @@ export const gaps = [
     title: "Validation",
     items: [
       "Company cars against HMRC by income and region",
-      "Static car score (behaviour held fixed) expected below the Budget's £310m",
-      "Static pension cap score expected below the official costing",
+      "Compare a static car score with the official costing",
+      "Compare the pension cap score with the official costing",
+    ],
+  },
+  {
+    title: "Behaviour",
+    items: [
+      "Pension cap, 2030-31: £5,070m static, £2,585m after responses (Budget 2025)",
+      "Employers passing costs on to pay: modelled for the pension cap only",
+      "Car choice after rate rises",
     ],
   },
 ];
 
 // Effort is relative, in words: nothing here has been estimated in weeks.
-// Outputs would be static scores (behaviour held fixed). Nothing has been run:
-// "expected below" rests on microcosm's docs/uk-company-cars-316.md (a static
-// score of the 2030-31 car-rate rise about 30% to 45% short of the Budget's
-// £310m) and policyengine-uk's test of the pension cap (about £1.8bn in 2030
-// against the official £5,350m and £2,920m).
+// Behaviour: sources.budget2025Costings (pp. 47-48) gives the pension cap
+// £5,070m static and £2,585m after responses in 2030-31;
+// sources.obrSalarySacrifice (Table 1.6) splits the responses;
+// sources.budget2026Costings (p. 95) nets off a switch to cheaper company
+// cars. policyengine-uk cuts all employment income by 0.16% whenever the cap
+// applies (sources.salarySacrificeHaircut), so its cap run is not static.
 export const phases = [
   {
     title: "Cars, fuel and vans",
     effort: "Smallest",
     effortNote: "Car rules and data exist",
     work: ["Validate cars against HMRC by income", "Target fuel and Class 1A; add the van charge"],
-    output: "Electric car rate reforms: revenue and who pays. Expected below the Budget's score",
+    output: "Electric car rate reforms: revenue and who pays",
   },
   {
     title: "Other benefits",
     effort: "Largest",
     effortNote: "New rules, thin data",
     work: ["Medical insurance, loans, accommodation", "Impute values; Class 1A on every benefit"],
-    output: "Reforms to any benefit, or to Class 1A (revenue only)",
+    output: "Reforms to medical insurance, loans or accommodation, or to Class 1A (revenue only)",
   },
   {
     title: "Salary sacrifice and OpRA",
     effort: "Medium",
     effortNote: "Only pensions done",
     work: ["Salary-sacrifice cars, cycle to work, childcare", "The OpRA rule"],
-    output: "Caps and exemptions, across schemes. Pension cap expected below the official costing",
+    output: "Caps and exemptions, across schemes",
   },
 ];
 
@@ -563,7 +594,7 @@ export const exampleQuestions = [
   },
   {
     question: "What does capping pension salary sacrifice raise, and from whom?",
-    scenario: "NICs relief only on the first £2,000 a year, against no cap. The static score is expected below the official costing",
+    scenario: "NICs relief only on the first £2,000 a year, against no cap",
     needs: "Runs today",
   },
   {
