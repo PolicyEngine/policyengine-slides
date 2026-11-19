@@ -1,0 +1,230 @@
+{
+  "note": "matrix[i][j]: equations in module j that use a variable module i determines",
+  "order": [
+    "GDP and output",
+    "Consumption",
+    "Investment and inventories",
+    "Labour market",
+    "Exports",
+    "Imports",
+    "Balance of payments",
+    "North Sea oil",
+    "Prices and wages",
+    "Income accounts",
+    "Public sector",
+    "Finance and balance sheets"
+  ],
+  "matrix": [
+    [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      3,
+      1,
+      16,
+      5,
+      0,
+      11
+    ],
+    [
+      2,
+      0,
+      2,
+      0,
+      0,
+      3,
+      0,
+      0,
+      1,
+      1,
+      0,
+      3
+    ],
+    [
+      3,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      2,
+      2,
+      4,
+      3
+    ],
+    [
+      3,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      7,
+      1,
+      2,
+      2
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      3,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      3,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      3,
+      8,
+      5,
+      3,
+      3
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      5,
+      6,
+      1,
+      2,
+      3,
+      0,
+      1,
+      0,
+      3,
+      1,
+      1
+    ],
+    [
+      3,
+      2,
+      0,
+      0,
+      0,
+      0,
+      4,
+      0,
+      10,
+      0,
+      2,
+      2
+    ],
+    [
+      7,
+      0,
+      2,
+      0,
+      0,
+      5,
+      1,
+      0,
+      1,
+      7,
+      0,
+      0
+    ],
+    [
+      0,
+      3,
+      2,
+      0,
+      0,
+      0,
+      4,
+      0,
+      1,
+      7,
+      1,
+      0
+    ]
+  ],
+  "groupNote": "groupMatrix[i][j]: equations in group j that use a variable group i determines",
+  "groups": {
+    "Demand": [
+      "Consumption",
+      "Investment and inventories",
+      "Exports",
+      "Imports",
+      "GDP and output"
+    ],
+    "Supply and prices": [
+      "Labour market",
+      "Prices and wages",
+      "North Sea oil"
+    ],
+    "Income and sectors": [
+      "Income accounts",
+      "Public sector",
+      "Balance of payments",
+      "Finance and balance sheets"
+    ]
+  },
+  "groupOrder": [
+    "Demand",
+    "Supply and prices",
+    "Income and sectors"
+  ],
+  "groupMatrix": [
+    [
+      0,
+      19,
+      32
+    ],
+    [
+      21,
+      0,
+      9
+    ],
+    [
+      24,
+      22,
+      0
+    ]
+  ]
+}

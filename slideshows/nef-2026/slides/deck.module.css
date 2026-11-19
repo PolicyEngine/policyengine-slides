@@ -1,0 +1,1748 @@
+/* NEF deck: every colour comes from a design token (app/globals.css).
+   One style each for lists, cards, stats, tables, notes and chips. Sizes in
+   the slide body are in em of .body, which scales with the viewport (the
+   smaller of its height and width),
+   so a slide looks the same at 1920x1080 and 1440x810. */
+
+/* Leave space for the viewer's controls beside the footer text. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+.body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  /* Always a clear gap above the footer; BuildScope lowers --fit when the
+     content would otherwise run into it. */
+  padding-bottom: 1.25rem;
+  font-size: calc(clamp(8px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1) * var(--fit, 1));
+}
+
+/* Centre the body below the title, clear of the sources line. */
+.centerBody {
+  justify-content: center;
+}
+
+.stack {
+  display: grid;
+  gap: 1.4em;
+}
+
+/* Every icon: bare, teal, no box behind it. */
+.body svg {
+  flex-shrink: 0;
+  color: var(--pe-teal);
+}
+
+/* Lists: one icon, a few words, an optional second line. */
+.iconList {
+  display: grid;
+  gap: 1.5em;
+}
+
+.iconList.twoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3.5em;
+}
+
+.iconList.threeCol {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2.5em;
+}
+
+.iconItem.muted {
+  opacity: 0.35;
+}
+
+.iconItem {
+  display: grid;
+  grid-template-columns: 2.3em minmax(0, 1fr);
+  align-items: start;
+  gap: 1em;
+}
+
+.iconItem.withAside {
+  grid-template-columns: 2.3em minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.iconItem > svg {
+  margin-top: 0.1em;
+  height: 2.3em;
+  width: 2.3em;
+}
+
+.iconItem h2 {
+  color: var(--pe-dark);
+  font-size: 1.55em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.iconItem p {
+  margin-top: 0.15em;
+  color: var(--color-gray-600);
+  font-size: 1.2em;
+  line-height: 1.35;
+}
+
+.listHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-gray-500);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.listHead svg {
+  height: 1.4em;
+  width: 1.4em;
+}
+
+/* Cards in a grid. */
+.cardGrid {
+  display: grid;
+  gap: 1.2em;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 1em 1.2em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--pe-dark);
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.card h2 svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.card p {
+  margin-top: 0.45em;
+  color: var(--color-gray-600);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+.cardAmber {
+  border-left-color: var(--pe-amber);
+}
+
+.cardAmber svg {
+  color: var(--pe-amber-dark);
+}
+
+/* Stats: a card with an icon and a big number. */
+.card .stat {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-top: 0;
+  color: var(--pe-teal);
+  font-size: 3em;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.card .stat svg {
+  height: 0.8em;
+  width: 0.8em;
+}
+
+.card .statAmber {
+  color: var(--pe-amber-dark);
+}
+
+.card .statLabel {
+  margin-top: 0.3em;
+  color: var(--pe-dark);
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.card .statNote {
+  margin-top: 0.25em;
+  color: var(--color-gray-600);
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+
+/* Cards in a row with arrows between them. */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4em;
+}
+
+.flow > .card {
+  flex: 1 1 0;
+}
+
+.flow > svg {
+  align-self: center;
+  height: 1.6em;
+  width: 1.6em;
+  color: var(--color-gray-400);
+}
+
+/* Steps on one line, with an arrow between each pair. */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em 0.6em;
+  color: var(--color-gray-600);
+  font-size: 1em;
+}
+
+.steps > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.steps svg {
+  height: 1.4em;
+  width: 1.4em;
+}
+
+.steps b {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.steps .stepArrow {
+  height: 1.1em;
+  width: 1.1em;
+  color: var(--color-gray-400);
+}
+
+/* A line of plain text under a figure. */
+.caption {
+  color: var(--color-gray-600);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+/* Chips. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.2em 0.75em;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.chipGood {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
+}
+
+.chipMid {
+  background: var(--bg-secondary);
+  color: var(--pe-amber-dark);
+}
+
+.chipBad {
+  background: var(--bg-tertiary);
+  color: var(--color-gray-700);
+}
+
+/* Code on a light background. */
+.code {
+  border-radius: 0.4em;
+  background: var(--bg-secondary);
+  padding: 0.3em 0.6em;
+  color: var(--pe-dark);
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  overflow-wrap: anywhere;
+}
+
+.mono {
+  color: var(--pe-dark);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* Tables. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.2em;
+}
+
+.table th {
+  border-bottom: 2px solid var(--color-gray-300);
+  padding: 0.4em 0.8em;
+  color: var(--color-gray-500);
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table td {
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.5em 0.8em;
+  color: var(--color-gray-700);
+  line-height: 1.3;
+}
+
+.table td:first-child {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+/* A table with many rows. */
+.tight td {
+  padding-top: 0.32em;
+  padding-bottom: 0.32em;
+  line-height: 1.2;
+}
+
+.rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.rowLabel svg {
+  height: 1.35em;
+  width: 1.35em;
+}
+
+.rowLabel small {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 400;
+}
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.no svg {
+  color: var(--color-gray-400);
+}
+
+/* A qualifier under a table cell's Yes or No stays on one line. */
+.rowLabel small.oneLine {
+  white-space: nowrap;
+}
+
+/* Layers: three cards with the same rows, so the columns line up. */
+.layerGrid {
+  grid-template-rows: repeat(4, auto);
+  column-gap: 1.6em;
+}
+
+.layer {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 1.1em;
+  padding: 1.3em 1.5em;
+}
+
+.layer h2 {
+  font-size: 1.6em;
+}
+
+.layer h2 .chip {
+  margin-left: auto;
+  font-size: 0.55em;
+}
+
+.layerLine > span {
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card .layerLine p {
+  margin-top: 0.15em;
+  color: var(--pe-dark);
+  font-size: 1.3em;
+}
+
+.standIns {
+  margin-top: 0.5em;
+  display: grid;
+  gap: 0.4em;
+  color: var(--color-gray-600);
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+
+.standIns li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.standIns svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.standIns b {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.layerFacts {
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1em;
+}
+
+.card .caveat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4em;
+  color: var(--pe-amber-dark);
+}
+
+.caveat svg {
+  margin-top: 0.1em;
+  height: 1.2em;
+  width: 1.2em;
+  color: var(--pe-amber-dark);
+}
+
+/* Cards that end in a verdict; the rows line up across the cards. */
+.verdictGrid {
+  grid-template-rows: repeat(3, auto);
+}
+
+.verdictCard {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0.6em;
+  padding: 1.2em 1.4em;
+}
+
+.card.verdictCard p {
+  margin-top: 0;
+}
+
+.verdict {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 0.3em;
+  margin-top: 0.3em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.8em;
+}
+
+.verdict small {
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card .verdict p {
+  color: var(--pe-dark);
+  font-size: 1.05em;
+}
+
+.verdict .chip {
+  margin-top: 0.4em;
+  font-size: 0.95em;
+}
+
+/* A second, quieter block under the slide's main one. */
+.quiet {
+  display: grid;
+  gap: 0.8em;
+  margin-top: 0.6em;
+}
+
+.quietItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+  color: var(--color-gray-600);
+  font-size: 1em;
+  line-height: 1.35;
+}
+
+.quietItem b {
+  display: block;
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.quietItem small {
+  margin-left: 0.4em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 400;
+}
+
+/* A hero figure with a panel of takeaways beside it. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 3.5em;
+}
+
+.panel {
+  display: grid;
+  gap: 1.3em;
+  border-left: 4px solid var(--pe-teal);
+  padding-left: 1.8em;
+}
+
+.footnotes {
+  display: grid;
+  justify-items: start;
+  gap: 0.5em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1em;
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.3;
+}
+
+.footnotes small {
+  color: var(--color-gray-500);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.panel > .chip {
+  justify-self: start;
+}
+
+.chartHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em 1em;
+}
+
+.footnotes p {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.footnotes svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+/* A switch card, then what it turns on. */
+.switchRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.2fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 2.5em;
+}
+
+.switchRow .stat {
+  font-size: 2.5em;
+}
+
+.hero .hbars {
+  grid-template-columns: 19em 1fr;
+}
+
+.switch {
+  display: grid;
+  justify-items: start;
+  gap: 1em;
+  padding: 1.3em 1.5em;
+}
+
+.switch .chip {
+  border-radius: 0.7em;
+  white-space: normal;
+}
+
+.switch .layerLine > span {
+  color: var(--color-gray-500);
+}
+
+.card .or {
+  margin-top: 1.1em;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.8em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.panel .chipRow {
+  margin-top: 0;
+}
+
+.panel .chip {
+  font-size: 1.1em;
+}
+
+/* Two columns with the same rows on each side. */
+.mirror {
+  column-gap: 3.5em;
+  row-gap: 1.3em;
+  align-items: start;
+}
+
+.statNote small {
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+}
+
+/* Preview marker (in the header, so in rem). */
+.preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  border-radius: 9999px;
+  background: var(--bg-secondary);
+  padding: 0.25rem 0.85rem;
+  color: var(--pe-amber-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.preview svg {
+  color: var(--pe-amber-dark);
+}
+
+.moduleCount {
+  color: var(--pe-teal);
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Multiplier dot plot: every row has the same marks on one baseline. */
+.dotPlot {
+  display: grid;
+  grid-template-columns: 30em 1fr 15em;
+  align-items: center;
+  column-gap: 1.8em;
+}
+
+.dotGroup,
+.dotHead {
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
+  padding-bottom: 0.3em;
+  color: var(--color-gray-500);
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dotRule {
+  align-self: stretch;
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.dotLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.dotLabel svg {
+  height: 2em;
+  width: 2em;
+}
+
+.dotLabel h2 {
+  color: var(--pe-dark);
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dotLabel p .chip {
+  margin-left: 0.7em;
+  font-size: 0.8em;
+}
+
+.dotLabel p {
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.3;
+}
+
+.track {
+  position: relative;
+  height: 4.6em;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.trackLine {
+  position: absolute;
+  top: 58%;
+  height: 0.25em;
+  border-radius: 0.125em;
+  background: var(--color-teal-200);
+  transform: translateY(-50%);
+}
+
+.dot {
+  position: absolute;
+  top: 58%;
+  display: flex;
+  height: 2.4em;
+  min-width: 2.4em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--pe-teal);
+  color: var(--text-inverse);
+  font-size: 0.75em;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+/* Values too close for numbered dots: the same three dots, smaller, at
+   their true places, each with its quarter above it. */
+.dotSmall {
+  height: 1em;
+  min-width: 1em;
+  width: 1em;
+  font-size: 1em;
+}
+
+.dotSmall span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 0.15em;
+  color: var(--pe-dark);
+  font-size: 0.72em;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateX(-50%);
+}
+
+.dotSmall.dotRaised span {
+  margin-bottom: 1.25em;
+}
+
+.dotQ1 {
+  background: var(--color-teal-200);
+  color: var(--pe-dark);
+}
+
+.dotQ4 {
+  background: var(--color-teal-400);
+}
+
+.dotQ12 {
+  background: var(--color-teal-700);
+}
+
+.benchmark {
+  position: absolute;
+  top: 1.2em;
+  bottom: 0.25em;
+  width: 0.25em;
+  border-radius: 0.125em;
+  background: var(--pe-amber);
+  transform: translateX(-50%);
+}
+
+.benchmark span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  color: var(--pe-amber-dark);
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1.4;
+  transform: translateX(-50%);
+}
+
+.dotValue {
+  white-space: nowrap;
+  color: var(--pe-dark);
+  font-size: 1.2em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.dotValue span {
+  display: block;
+  color: var(--pe-amber-dark);
+  font-size: 0.85em;
+  font-weight: 400;
+}
+
+.axis {
+  position: relative;
+  height: 1.8em;
+  color: var(--color-gray-500);
+  font-size: 0.95em;
+}
+
+.axis span {
+  position: absolute;
+  top: 0.25em;
+  transform: translateX(-50%);
+}
+
+.axisLabel {
+  color: var(--color-gray-500);
+  font-size: 0.95em;
+  text-align: right;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: stretch;
+  align-items: center;
+  gap: 0.2em 1.5em;
+  margin-top: 0.5em;
+  border-bottom: 1px solid var(--color-gray-300);
+  padding-bottom: 0.3em;
+  color: var(--color-gray-600);
+  font-size: 0.95em;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.legendDot {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 9999px;
+}
+
+
+.legendTick {
+  display: inline-block;
+  height: 1.2em;
+  width: 0.25em;
+  border-radius: 0.125em;
+  background: var(--pe-amber);
+}
+
+/* Income-tax path: a line over 12 quarters (viewBox units). */
+.pathPlot {
+  display: block;
+  width: 100%;
+  /* In em, so the chart follows the slide's base size (and the fit guard). */
+  max-height: 21em;
+}
+
+.pathGrid {
+  stroke: var(--color-gray-200);
+  stroke-width: 1;
+}
+
+.pathTick {
+  fill: var(--color-gray-500);
+  font-size: 10px;
+  dominant-baseline: central;
+}
+
+.pathYear {
+  fill: var(--pe-dark);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pathArea {
+  fill: var(--pe-light);
+  animation: nefFade 900ms ease-out 900ms both;
+}
+
+.pathLine {
+  fill: none;
+  stroke: var(--pe-teal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: nefDraw 1500ms ease-in-out 300ms both;
+}
+
+.pathPoint {
+  animation: nefFade 400ms ease-out both;
+}
+
+.pathPoint circle {
+  fill: var(--bg-card);
+  stroke: var(--pe-teal);
+  stroke-width: 2.5;
+}
+
+.pathPoint text {
+  fill: var(--pe-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Horizontal bars (Bank Rate). */
+.hbars {
+  display: grid;
+  grid-template-columns: 27em 1fr;
+  align-items: center;
+  row-gap: 1em;
+  column-gap: 1.5em;
+}
+
+.hbarLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--pe-dark);
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.hbarLabel small {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: 0.75em;
+  font-weight: 400;
+}
+
+.hbar.hbarRange {
+  border-radius: 0.35em;
+  background: var(--color-gray-400);
+}
+
+.hbarLabel svg {
+  height: 1.4em;
+  width: 1.4em;
+}
+
+.hbarTrack {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.hbar {
+  height: 2.4em;
+  border-radius: 0 0.35em 0.35em 0;
+  background: var(--pe-teal);
+}
+
+.hbarBenchmark {
+  background: var(--pe-amber);
+}
+
+.hbarValue {
+  white-space: nowrap;
+  color: var(--pe-dark);
+  font-size: 1.35em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The prompt typed into Claude. */
+.bubble {
+  display: inline-block;
+  margin-top: 0.6em;
+  border-radius: 1em 1em 1em 0.2em;
+  background: var(--pe-light);
+  padding: 0.55em 0.9em;
+  color: var(--pe-dark);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+.chipRow {
+  margin-top: 0.6em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+/* Closing slide contacts. */
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--text-inverse) 15%, transparent);
+  background: color-mix(in srgb, var(--text-inverse) 10%, transparent);
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: background-color 150ms;
+}
+
+.contact:hover {
+  background: color-mix(in srgb, var(--text-inverse) 20%, transparent);
+}
+
+/* The header (tracker, title, subtitle) follows the viewport like the body,
+   so on a 1280x720 or 1440x810 screen it doesn't take a larger share of the
+   slide than at 1920x1080, where these sizes equal the shared 3rem title,
+   1.25rem subtitle and 0.95rem tracker. */
+.head :global(h1) {
+  font-size: clamp(1.75rem, min(4.45vh, 2.5vw), 3rem);
+}
+
+.head .subtitle {
+  font-size: clamp(0.875rem, min(1.86vh, 1.05vw), 1.25rem);
+}
+
+.head .tracker {
+  font-size: clamp(0.7rem, min(1.41vh, 0.8vw), 0.95rem);
+}
+
+.head .preview {
+  font-size: clamp(0.75rem, min(1.49vh, 0.84vw), 1rem);
+}
+
+/* Where the slide sits in the talk (in the header; sized by .head above). */
+.tracker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-gray-400);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tracker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.2rem;
+}
+
+.tracker .trackerPast {
+  color: var(--color-gray-600);
+}
+
+.tracker .trackerNow {
+  border-bottom-color: var(--pe-teal);
+  color: var(--pe-teal);
+}
+
+/* The agenda on a section slide. */
+.sectionList {
+  font-size: calc(clamp(11px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1));
+}
+
+.sectionList svg {
+  color: var(--pe-teal);
+}
+
+/* Question and scenario: one panel in two halves at the top of a results
+   slide, with extra room before the figure under it. */
+.ask {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  margin-bottom: 0.7em;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.8em;
+  background: var(--bg-secondary);
+}
+
+.body .ask {
+  animation: nefFade 600ms ease-out 100ms both;
+}
+
+.ask > div {
+  padding: 0.8em 1.5em;
+}
+
+.ask > div + div {
+  border-left: 1px solid var(--color-gray-300);
+}
+
+.askLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-gray-500);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.askLabel svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.askQuestion {
+  margin-top: 0.3em;
+  color: var(--pe-dark);
+  font-size: 1.45em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.askScenario {
+  margin-top: 0.4em;
+  color: var(--color-gray-700);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .ask {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ask > div + div {
+    border-top: 1px solid var(--color-gray-300);
+    border-left: 0;
+  }
+}
+
+/* Maths in a table cell. */
+.maths {
+  color: var(--pe-dark);
+  font-size: 0.95em;
+}
+
+/* Module map: group boxes, SVG arrows over them, module tiles on top. All
+   three are placed in the same units, so they keep their places at any size. */
+.moduleMap {
+  position: relative;
+  /* As wide as the slide, unless that would make it taller than the space
+     under the header (a short window). The header follows the viewport
+     (.head) and the footer doesn't, so the space is about 79vh less a fixed
+     13.4rem: the full width at 1920x1080, about 1,020px at 1280x720. */
+  width: min(100%, calc((78vh - 13.5rem) * 1000 / 338));
+  margin-inline: auto;
+  /* Text inside is sized from the map's width (cqw), like its boxes. */
+  container-type: inline-size;
+  aspect-ratio: 1000 / 338;
+}
+
+.moduleMap > svg {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.groupBox {
+  position: absolute;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.8em;
+  background: var(--bg-secondary);
+  padding: 0.5em 1em;
+  color: var(--color-gray-600);
+  font-size: 0.96cqw;
+  line-height: 1.3;
+}
+
+.groupBox b {
+  margin-right: 0.7em;
+  color: var(--pe-dark);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.moduleTile {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-content: center;
+  align-items: center;
+  gap: 0.25em 0.6em;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 0 0.8em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+  font-size: 0.96cqw;
+}
+
+.moduleTile svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.moduleTile h2 {
+  color: var(--pe-dark);
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.moduleTile .chip {
+  grid-column: 2 / -1;
+  justify-self: start;
+  padding: 0.1em 0.6em;
+  font-size: 0.72em;
+}
+
+/* Flows between groups: one colour for each group they leave. */
+.flowOutput {
+  --flow: var(--pe-teal);
+}
+
+.flowPrices {
+  --flow: var(--pe-amber);
+}
+
+.flowIncomes {
+  --flow: var(--pe-dark);
+}
+
+.flowLine {
+  stroke: var(--flow);
+  stroke-dasharray: 1;
+}
+
+.flowHead {
+  fill: var(--flow);
+}
+
+.keyLine {
+  display: inline-block;
+  height: 0;
+  width: 1.8em;
+  flex-shrink: 0;
+  border-top: 0.3em solid var(--flow, var(--color-gray-400));
+}
+
+
+.flowLabel {
+  fill: var(--pe-dark);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.flowCount {
+  fill: var(--pe-dark);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.linkCut {
+  stroke: var(--color-gray-400);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 4;
+}
+
+.linkCutHead {
+  fill: var(--color-gray-400);
+}
+
+.linkBadge {
+  fill: var(--bg-card);
+  stroke: var(--color-gray-300);
+  stroke-width: 1;
+}
+
+.mapKey {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  gap: 0.15em;
+  color: var(--color-gray-600);
+  font-size: 0.77cqw;
+  line-height: 1.25;
+}
+
+.mapKey li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.mapKey .chip {
+  padding: 0.05em 0.6em;
+  font-size: 0.85em;
+}
+
+.cutLabel {
+  fill: var(--color-gray-500);
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.keyBadge {
+  display: inline-flex;
+  height: 1.7em;
+  width: 1.8em;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 9999px;
+  background: var(--bg-card);
+  color: var(--pe-dark);
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+/* One source splitting into lanes. */
+.split {
+  display: grid;
+  grid-template-columns: 19em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6em;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 2em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6em;
+}
+
+.lane > svg {
+  height: 2em;
+  width: 2em;
+  color: var(--color-gray-400);
+}
+
+.lane .stack {
+  gap: 0.6em;
+}
+
+/* Agenda: the five parts as stops on one line, in talk order */
+.agendaRoad {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.2em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agendaRoad::before {
+  position: absolute;
+  top: 1.1em;
+  right: 10%;
+  left: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pe-teal), var(--pe-amber, var(--pe-teal)));
+  content: "";
+}
+
+.agendaStop {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.agendaDot {
+  position: relative;
+  display: grid;
+  width: 2.2em;
+  height: 2.2em;
+  place-items: center;
+  border: 2px solid var(--pe-teal);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--pe-teal);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.agendaCard {
+  display: flex;
+  width: 100%;
+  min-height: 11em;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+  border: 1px solid var(--color-gray-200);
+  border-top: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 1.2em 1.1em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.agendaIcon {
+  width: 2.2em;
+  height: 2.2em;
+  color: var(--pe-teal);
+}
+
+.agendaCard h2 {
+  color: var(--pe-dark);
+  font-size: 1.35em;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.agendaCard p {
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.35;
+}
+
+/* Entrance: each time a slide is shown (the viewer switches it from
+   display:none, which restarts the animation), the title rises in and the
+   body's items follow one after another. Ends fully visible; off for
+   reduced motion. */
+@keyframes nefRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.deck :global(h1),
+.tracker {
+  animation: nefRise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.body > * {
+  animation: nefRise 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}
+
+.body > * > * {
+  animation: nefRise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 180ms;
+}
+
+.body > * > *:nth-child(2) { animation-delay: 260ms; }
+.body > * > *:nth-child(3) { animation-delay: 340ms; }
+.body > * > *:nth-child(4) { animation-delay: 420ms; }
+.body > * > *:nth-child(5) { animation-delay: 500ms; }
+.body > * > *:nth-child(6) { animation-delay: 580ms; }
+.body > * > *:nth-child(7) { animation-delay: 640ms; }
+.body > * > *:nth-child(n + 8) { animation-delay: 700ms; }
+
+/* Builds: BuildScope puts the slide's step on the body; an element with
+   data-step above it is hidden (and keeps its place), and animates in when
+   its step arrives. An export shows every step (data-build="all"). */
+@keyframes nefReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.body [data-step] {
+  animation: nefReveal 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.body svg [data-step] {
+  animation-name: nefFade;
+}
+
+/* A flow's line draws on from its start (pathLength is 1). */
+.body svg .flowLine[data-step] {
+  animation-name: nefDraw;
+  animation-duration: 600ms;
+}
+
+@keyframes nefDraw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes nefFade {
+  from {
+    opacity: 0;
+  }
+}
+
+.deck .body[data-build="1"] [data-step="2"],
+.deck .body[data-build="1"] [data-step="3"],
+.deck .body[data-build="1"] [data-step="4"],
+.deck .body[data-build="1"] [data-step="5"],
+.deck .body[data-build="2"] [data-step="3"],
+.deck .body[data-build="2"] [data-step="4"],
+.deck .body[data-build="2"] [data-step="5"],
+.deck .body[data-build="3"] [data-step="4"],
+.deck .body[data-build="3"] [data-step="5"],
+.deck .body[data-build="4"] [data-step="5"] {
+  visibility: hidden;
+  animation: none;
+}
+
+/* Motion inside figures: bars grow, marks slide along their track, hero
+   numbers count up. Each ends at the element's own size, place or value. */
+@keyframes nefGrowRight {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes nefSlideIn {
+  from {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.hbar {
+  animation: nefGrowRight 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both;
+}
+
+.trackLine {
+  animation: nefGrowRight 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 700ms both;
+}
+
+.dot,
+.benchmark {
+  animation: nefSlideIn 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms both;
+}
+
+/* Choreography: each kind of element has its own motion, in order after the
+   title: the accent bar sweeps, list rows and table rows come in from the
+   left, comparison columns from the right, numbers and chips pop, footnotes
+   fade in last. Keyframes with only a start end at the element's own style. */
+@keyframes nefSweep {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes nefFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+}
+
+@keyframes nefFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
+
+@keyframes nefPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes nefPulse {
+  50% {
+    background: var(--pe-light);
+  }
+}
+
+.deck :global(.accent-bar) {
+  transform-origin: left;
+  animation: nefSweep 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+}
+
+.deck :global(h1) + p {
+  animation: nefFade 600ms ease-out 250ms both;
+}
+
+.iconItem,
+.table tbody tr,
+.standIns li {
+  animation: nefFromLeft 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 350ms both;
+}
+
+.iconItem:nth-child(2),
+.table tbody tr:nth-child(2),
+.standIns li:nth-child(2) { animation-delay: 470ms; }
+.iconItem:nth-child(3),
+.table tbody tr:nth-child(3),
+.standIns li:nth-child(3) { animation-delay: 590ms; }
+.iconItem:nth-child(4),
+.table tbody tr:nth-child(4) { animation-delay: 710ms; }
+.iconItem:nth-child(5),
+.table tbody tr:nth-child(5) { animation-delay: 830ms; }
+.iconItem:nth-child(6),
+.table tbody tr:nth-child(6) { animation-delay: 950ms; }
+.table tbody tr:nth-child(n + 7) { animation-delay: 1070ms; }
+
+/* Comparison columns arrive from the right. */
+.body .mirror > [data-step],
+.body .fromRight[data-step] {
+  animation-name: nefFromRight;
+}
+
+.chip,
+.card .stat,
+.preview {
+  animation: nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both;
+}
+
+.flow > svg,
+.stepArrow,
+.lane > svg {
+  animation: nefFade 400ms ease-out 700ms both;
+}
+
+.footnotes,
+.caption,
+.layerFacts .statNote,
+.quietItem {
+  animation: nefFade 700ms ease-out 900ms both;
+}
+
+/* Agenda: the line draws left to right; as it reaches each stop the number
+   pops and the card rises; then one highlight passes along the five. */
+.agendaRoad::before {
+  transform-origin: left;
+  animation: nefSweep 1000ms linear 200ms both;
+}
+
+.body .agendaStop {
+  animation: none;
+}
+
+@keyframes nefGlow {
+  50% {
+    border-top-color: var(--pe-amber);
+    box-shadow: 0 0 0 3px var(--pe-light);
+  }
+}
+
+.agendaStop .agendaDot {
+  animation: nefPop 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(250ms + var(--stop) * 200ms);
+}
+
+.agendaStop .agendaCard {
+  animation:
+    nefRise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    nefGlow 500ms ease-in-out 1;
+  animation-delay:
+    calc(380ms + var(--stop) * 200ms),
+    calc(1700ms + var(--stop) * 130ms);
+}
+
+.agendaStop:nth-child(1) { --stop: 0; }
+.agendaStop:nth-child(2) { --stop: 1; }
+.agendaStop:nth-child(3) { --stop: 2; }
+.agendaStop:nth-child(4) { --stop: 3; }
+.agendaStop:nth-child(5) { --stop: 4; }
+
+/* The slide's last word gets one soft pulse. */
+.verdict .chip,
+.caveat {
+  border-radius: 9999px;
+  animation:
+    nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both,
+    nefPulse 900ms ease-in-out 1300ms 1;
+}
+
+.caveat {
+  border-radius: 0.3em;
+}
+
+@property --count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes nefCount {
+  from {
+    --count: 0;
+  }
+}
+
+.countUp {
+  counter-reset: count var(--count);
+  animation: nefCount 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms both;
+}
+
+.countUp::after {
+  content: counter(count);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck *,
+  .deck *::before,
+  .deck *::after {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,71 @@
+import type { SlideshowConfig } from "@/lib/types";
+import {
+  AccessSlide,
+  AiExampleSlide,
+  AgendaSlide,
+  ArchitectureSlide,
+  BankRateSlide,
+  ClosingSlide,
+  CollaborateSlide,
+  FitSlide,
+  IncomeTaxSlide,
+  InvestmentSlide,
+  LimitsSlide,
+  LiveSiteSlide,
+  MicroMacroSlide,
+  ModelSectionSlide,
+  ModulesSlide,
+  MultipliersSlide,
+  PlatformSectionSlide,
+  PlatformSlide,
+  PublishedVsBuiltSlide,
+  QuestionsSlide,
+  ScenariosSectionSlide,
+  ThibReviewSlide,
+  TitleSlide,
+  TogetherSectionSlide,
+} from "./slides";
+
+export const nef2026Config: SlideshowConfig = {
+  id: "nef-2026",
+  title: "Opening up the OBR macroeconomic model",
+  description:
+    "PolicyEngine's open-source Python implementation of the OBR's published macroeconomic model: how it runs, how well it fits, and where to work together.",
+  // The exact meeting date isn't fixed; a day of 01 renders as "November 2026".
+  date: "2026-11-01",
+  location: "New Economics Foundation",
+  footerText: "New Economics Foundation · November 2026",
+  clickerKeys: true,
+  // The counter shows the slide, not the build step within it.
+  counter: "slides",
+  // The hint sits on the footer logo in this deck.
+  hideControlsHint: true,
+  // Builds reveal a slide step by step when presenting; a PDF export shows
+  // each slide once, complete (exportBuilds: 1, and BuildScope shows every step).
+  slides: [
+    TitleSlide,
+    AgendaSlide,
+    ModelSectionSlide,
+    { component: PublishedVsBuiltSlide, builds: 3, exportBuilds: 1 },
+    { component: ModulesSlide, builds: 5, exportBuilds: 1 },
+    { component: ThibReviewSlide, builds: 4, exportBuilds: 1 },
+      { component: ArchitectureSlide, builds: 2, exportBuilds: 1 },
+    { component: FitSlide, builds: 2, exportBuilds: 1 },
+    ScenariosSectionSlide,
+    { component: MultipliersSlide, builds: 2, exportBuilds: 1 },
+    { component: IncomeTaxSlide, builds: 2, exportBuilds: 1 },
+    { component: InvestmentSlide, builds: 3, exportBuilds: 1 },
+    { component: BankRateSlide, builds: 2, exportBuilds: 1 },
+    { component: LimitsSlide, builds: 2, exportBuilds: 1 },
+    PlatformSectionSlide,
+    PlatformSlide,
+    LiveSiteSlide,
+    { component: AccessSlide, builds: 3, exportBuilds: 1 },
+    AiExampleSlide,
+    { component: MicroMacroSlide, builds: 3, exportBuilds: 1 },
+    TogetherSectionSlide,
+    CollaborateSlide,
+    QuestionsSlide,
+    ClosingSlide,
+  ],
+};

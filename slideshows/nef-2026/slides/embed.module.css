@@ -1,0 +1,122 @@
+/* The live site frame, copied from autumn-budget-2026/slides/deck.module.css */
+.liveBody {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 2.5rem;
+}
+
+.embed {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 1rem;
+  background: var(--bg-card);
+  box-shadow: 0 1.5rem 3rem -1.5rem var(--shadow-light), 0 0.5rem 1.5rem var(--shadow-light);
+  cursor: auto;
+}
+
+/* Expand: the same frame over the whole screen, above the deck's controls */
+.embedExpanded {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  border: 0;
+  border-radius: 0;
+}
+
+.embedBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  background: var(--pe-light);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.embedViews {
+  display: flex;
+  gap: 0.25rem;
+  border-radius: 0.6rem;
+  background: var(--bg-card);
+  padding: 0.2rem;
+  box-shadow: inset 0 0 0 1px var(--color-gray-200);
+}
+
+.embedView {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.45rem;
+  padding: 0.3rem 0.8rem;
+  color: var(--pe-dark);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.embedView:hover,
+.embedView:focus-visible {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
+}
+
+.embedButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.5rem;
+  background: var(--bg-card);
+  padding: 0.3rem 0.75rem;
+  color: var(--pe-dark);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.embedButton:hover,
+.embedButton:focus-visible {
+  border-color: var(--pe-teal);
+}
+
+/* Puts Expand and New tab at the bar's right end. */
+.embedPush {
+  margin-left: auto;
+}
+
+.embedFrame {
+  min-height: 0;
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: var(--bg-card);
+}
+
+/* Tags above an embed: a clear gap from the frame, and from each other. */
+.embedTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.embedTags > span {
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.95rem;
+}
+
+/* The deck's entrance animation moves blocks with transform, and a transformed
+   ancestor turns position: fixed into position: absolute inside it, so Expand
+   would fill the block instead of the screen. Live embeds don't animate. */
+.liveBody,
+.liveBody > *,
+.liveBody > * > * {
+  animation: none !important;
+  transform: none !important;
+}

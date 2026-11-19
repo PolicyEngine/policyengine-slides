@@ -33,8 +33,10 @@ import { autumnBudget2026Config } from "@/slideshows/autumn-budget-2026/config";
 import { prop40Webinar2026Config } from "@/slideshows/prop40-webinar-2026/config";
 import { appam2026Config } from "@/slideshows/appam-2026/config";
 import { studentDebt2026Config } from "@/slideshows/student-debt-2026/config";
+import { nef2026Config } from "@/slideshows/nef-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  nef2026Config,
   appam2026Config,
   prop40Webinar2026Config,
   autumnBudget2026Config,
