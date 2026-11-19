@@ -1199,6 +1199,44 @@ export function LiveSiteSlide() {
   );
 }
 
+// An example of the platform's models in use: PolicyEngine's unpublished AI
+// study, which pairs OG-UK with a PolicyEngine UK household study. Its preview
+// is public but not published; every figure in it is provisional.
+const aiReportViews = [
+  { label: "Story", icon: IconBook, path: "/" },
+  { label: "Explore", icon: IconChartLine, path: "/?tab=explore" },
+  { label: "Method and sources", icon: IconChecks, path: "/?tab=method" },
+];
+
+export function AiExampleSlide() {
+  return (
+    <Frame
+      part={3}
+      title="An example in use: AI and the UK economy"
+      subtitle="Two of the platform's models on one question: OG-UK for the whole economy, PolicyEngine UK for households"
+      center={false}
+    >
+      <div className={embedStyles.liveBody}>
+        <div className={styles.chipRow}>
+          <span className={`${styles.chip} ${styles.chipBad}`}>
+            <IconAlertTriangle size={16} stroke={1.8} aria-hidden="true" />
+            Not published · provisional results
+          </span>
+          <span className={`${styles.chip} ${styles.chipMid}`}>
+            <IconFlask size={16} stroke={1.8} aria-hidden="true" />
+            Scenarios, not forecasts
+          </span>
+        </div>
+        <SiteEmbed
+          href={sources.aiReport.href}
+          title={sources.aiReport.label}
+          views={aiReportViews}
+        />
+      </div>
+    </Frame>
+  );
+}
+
 // How someone uses the platform from Claude (the macro site's Use page and
 // mcp_server.py). No result numbers: the third card names what comes back.
 export function AccessSlide() {

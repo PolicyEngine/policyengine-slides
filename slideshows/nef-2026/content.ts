@@ -19,6 +19,10 @@ const macro = `https://github.com/PolicyEngine/macro/blob/${macroCommit}`;
 export type Source = { label: string; href: string };
 
 export const sources = {
+  aiReport: {
+    label: "AI and the UK economy: Beyond the forecast (preview, not published)",
+    href: "https://uk-growth-with-mjl646jhp-policy-engine.vercel.app",
+  },
   liveSite: {
     label: "PolicyEngine macro site (live, in development)",
     href: "https://policyengine-macro.vercel.app",

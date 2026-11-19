@@ -1,6 +1,7 @@
 import type { SlideshowConfig } from "@/lib/types";
 import {
   AccessSlide,
+  AiExampleSlide,
   AgendaSlide,
   ArchitectureSlide,
   BankRateSlide,
@@ -60,6 +61,7 @@ export const nef2026Config: SlideshowConfig = {
     PlatformSlide,
     LiveSiteSlide,
     { component: AccessSlide, builds: 3, exportBuilds: 1 },
+    AiExampleSlide,
     { component: MicroMacroSlide, builds: 3, exportBuilds: 1 },
     TogetherSectionSlide,
     CollaborateSlide,

@@ -1,8 +1,10 @@
 # New Economics Foundation meeting, November 2026
 
-23 slides at `/slides/nef-2026`, for a meeting with the New Economics
+24 slides at `/slides/nef-2026`, for a meeting with the New Economics
 Foundation (NEF) on working together on the OBR macroeconomic model. The deck is
-public. Slide 17 embeds the in-development macro site
+public. Slide 17 embeds the in-development macro site, and slide 19 the
+unpublished AI study ("AI and the UK economy: Beyond the forecast", a public
+Vercel preview; provisional)
 (policyengine-macro.vercel.app) live; the site allows this deck's origins to
 frame it (PolicyEngine/macro#276). The exact meeting date isn't fixed, so `config.ts` uses
 `2026-11-01`, which renders as "November 2026"; change it, and the footer,
@@ -18,11 +20,11 @@ and every slide's header carries a tracker of the five parts:
 3. Policy scenarios and limits (slides 9–14): results against the OBR's
    published multipliers, income tax, investment, Bank Rate, and the known
    limits and whose they are
-4. The macro platform (slides 15–19): the seven models, the site live, using
-   it from Claude, and one reform taken from the
+4. The macro platform (slides 15–20): the seven models, the site live, using
+   it from Claude, an example in use (the unpublished AI study), and one reform taken from the
    microsimulation to GDP. Every slide of this part is marked "Preview, not
    yet launched"
-5. Working together (slides 20–22): collaboration areas and questions for NEF
+5. Working together (slides 21–23): collaboration areas and questions for NEF
 
 On the slides a simulated change is a "scenario"; `shock` stays in code
 identifiers and in the notes where it is the argument's name.

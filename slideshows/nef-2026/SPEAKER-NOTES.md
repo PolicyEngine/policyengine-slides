@@ -641,7 +641,20 @@ One click per step. The first card also lists the other ways in: the MCP server,
 
 Sources: Use page; `mcp_server.py`; `cli.py`; macro platform README.
 
-## 19. From a microsimulation reform to GDP (3 steps)
+## 19. An example in use: AI and the UK economy
+
+- Live embed of PolicyEngine's unpublished AI study, "AI and the UK economy:
+  Beyond the forecast" (Vercel preview of `uk-growth-with-ai`, deployed 19 Nov
+  2026). Say clearly: not published, results provisional.
+- Why it's here: one question answered with two of the platform's models,
+  side by side and never added together. OG-UK covers the whole economy over
+  decades; PolicyEngine UK covers households in one year, FY 2027-28.
+- Use the Story tab for the four parts. Explore has results by topic, and
+  Method and sources lists every input.
+- Don't quote its figures as findings; they're scenarios, not forecasts.
+- If the frame is blank, press New tab.
+
+## 20. From a microsimulation reform to GDP (3 steps)
 
 Step 1 is the reform, entered once; step 2 the household answer; step 3 the
 route to the economy answer. The check against HMRC sits in the static-cost
@@ -668,11 +681,11 @@ post-behavioural and administrative.
 
 Sources: `mcp_server.py`; `capabilities.py`.
 
-## 20. Part 5: working together
+## 21. Part 5: working together
 
 Section slide: say what the part covers in one sentence and move on. The tracker at the top of every slide shows the same five parts.
 
-## 21. Where we could work together
+## 22. Where we could work together
 
 Options to discuss, not commitments. Each maps to something open in the repo:
 the closure choice and receipts that respond to the economy (receipts have no
@@ -685,7 +698,7 @@ moves borrowing (#75) and the forecast population follows the EFO (#74).
 
 Sources: OBR model README; published-model review; DEFINE-UK model page.
 
-## 22. Questions for NEF
+## 23. Questions for NEF
 
 Listen more than talk here.
 
@@ -698,6 +711,6 @@ and dates in the room:
 3. A shared review of the open equation and closure issues on GitHub.
 4. A check-in date to review results and a possible write-up.
 
-## 23. Thank you
+## 24. Thank you
 
 Contact on the slide: vahid@policyengine.org.
