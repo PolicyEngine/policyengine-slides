@@ -2,12 +2,14 @@ import moduleLinkMatrix from "./module-links.json";
 
 // Every figure on the slides comes from a file read at a pinned commit, checked
 // on 18 November 2026:
-// - PolicyEngine/obr-macroeconomic-model main 0fe04c9a (after #70, #71, #72);
+// - PolicyEngine/obr-macroeconomic-model main 0e44ec87 (after #70–#72, #74 and
+//   #75: the forecast 16+ population on the EFO-implied path, and the
+//   nominal-consistent government-consumption shock);
 // - PolicyEngine/macro main 2e5dffe7 (after #275);
 // - PolicyEngine/obr-presentation main f4f819a7 (the July 2025 NEF deck).
 // OBR-model numbers are taken from the model repo, not from the macro site,
-// which still quoted the pre-#71 scorecard (4.25%) at this commit.
-const obrCommit = "0fe04c9afa8e4e316d24bae40aacc9bba9cd5084";
+// which still quoted the pre-#71 scorecard (4.25%) at its pinned commit.
+const obrCommit = "0e44ec87681eba0a1f61d634875f5431ac2344c8";
 const macroCommit = "2e5dffe7a2b35d189c8df60ff2012abbdb675367";
 const priorDeckCommit = "f4f819a786dc6d33f5836aae22d4d5f93aa778da";
 
@@ -56,6 +58,14 @@ export const sources = {
   tywhh: {
     label: "TYWHH changelog (#71)",
     href: `${obr}/changelog.d/tywhh-seasonal-basis.fixed.md`,
+  },
+  pop16: {
+    label: "Population changelog (#74)",
+    href: `${obr}/changelog.d/pop16-efo-path.fixed.md`,
+  },
+  nominalSpending: {
+    label: "Spending-shock changelog (#75)",
+    href: `${obr}/changelog.d/nominal-consistent-spending.changed.md`,
   },
   passthrough: {
     label: "Price pass-through changelog (#70)",
@@ -367,22 +377,22 @@ export const reviewFindings = [
 
 // ---------------------------------------------------------------------------
 // Anchoring and fit (README "Read this before quoting a number";
-// calibration_scorecard.md; site_figures.json "anchored_horizon").
+// calibration_scorecard.md; site_figures.json "anchored_horizon": 0.242 and
+// 0.397, shown to two decimals as the README does).
 export const anchored = {
-  gdpMape: 0.44,
-  consMape: 0.72,
+  gdpMape: "0.24",
+  consMape: "0.40",
   window: "2025Q1–2027Q4",
   convergedQuarters: 12,
 };
 
+// calibration_scorecard.md, default closure, 18 Nov 2026 (after #74): 9 of 11
+// computed variables within band.
 export const freeRunning = {
-  gdpMape: 4.05,
-  gdpMapeBefore71: 4.25,
-  householdIncome: 3.08,
-  householdIncomeBefore71: 4.3,
+  gdpMape: "4.24",
   computed: 11,
   headline: 21,
-  withinBand: 8,
+  withinBand: 9,
 };
 
 // The macro platform's registry status for the emulator, verbatim
@@ -397,19 +407,19 @@ export type ScoreRow = {
 };
 
 // calibration_scorecard.md table, default closure (nominal-GDP pin),
-// October 2026 EFO, 2025Q1–2027Q4.
+// October 2026 EFO, 2025Q1–2027Q4 (CI run 44392267520, 18 Nov 2026).
 export const scorecardRows: ScoreRow[] = [
-  { variable: "Real GDP", error: "4.05%", status: "fair" },
-  { variable: "Consumption", error: "6.92%", status: "fair" },
+  { variable: "Real GDP", error: "4.24%", status: "fair" },
+  { variable: "Consumption", error: "7.23%", status: "fair" },
   { variable: "Business investment", error: "7.34%", status: "fair" },
-  { variable: "Household income", error: "3.08%", status: "fair" },
-  { variable: "Real household income", error: "3.29%", status: "fair" },
+  { variable: "Household income", error: "3.10%", status: "fair" },
+  { variable: "Real household income", error: "3.30%", status: "fair" },
   { variable: "Current account", error: "0.91% of GDP", status: "fair" },
   { variable: "Trade balance", error: "0.41% of GDP", status: "good" },
   { variable: "Employment", error: "0.00%", status: "trivial" },
-  { variable: "Unemployment rate", error: "1.17pp", status: "poor" },
+  { variable: "Unemployment rate", error: "0.62pp", status: "fair" },
   { variable: "RPI inflation", error: "2.32pp", status: "poor" },
-  { variable: "Company profits", error: "11.66%", status: "poor" },
+  { variable: "Company profits", error: "12.88%", status: "poor" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -437,27 +447,27 @@ export type MultiplierRow = {
 export const multiplierRows: MultiplierRow[] = [
   {
     label: "Government consumption",
-        q1: 1.01,
-    q4: 1.03,
-    q12: 1.05,
+    q1: 1.01,
+    q4: 1.02,
+    q12: 1.04,
     obr: 0.6,
     obrLabel: "0.6, fading",
-    display: "1.01 / 1.03 / 1.05",
+    display: "1.01 / 1.02 / 1.04",
     size: "+£1.25bn a quarter of real spending",
   },
   {
     label: "Income tax, basic rate +1p",
-        q1: 0.1,
+    q1: 0.1,
     q4: 0.21,
-    q12: 0.38,
+    q12: 0.37,
     obr: 0.3,
     obrLabel: "0.3, fading",
-    display: "0.10 / 0.21 / 0.38",
+    display: "0.10 / 0.21 / 0.37",
     size: "£1.725bn a quarter of revenue",
   },
   {
     label: "VAT +1pp",
-        q1: 0.013,
+    q1: 0.013,
     q4: 0.026,
     q12: 0.043,
     obr: 0.35,
@@ -470,10 +480,10 @@ export const multiplierRows: MultiplierRow[] = [
     setting: "Price pass-through on",
     q1: 0.175,
     q4: 0.345,
-    q12: 0.643,
+    q12: 0.638,
     obr: 0.35,
     obrLabel: "0.35, fading",
-    display: "0.175 / 0.345 / 0.643",
+    display: "0.175 / 0.345 / 0.638",
     size: "The same £2.2bn a quarter",
     optIn: true,
   },
@@ -482,10 +492,10 @@ export const multiplierRows: MultiplierRow[] = [
     setting: "Investment closure on",
     q1: 1.03,
     q4: 0.97,
-    q12: 0.98,
+    q12: 0.97,
     obr: 1.0,
     obrLabel: "1.0, tapering",
-    display: "1.03 / 0.97 / 0.98",
+    display: "1.03 / 0.97 / 0.97",
     size: "+£3bn a quarter",
     optIn: true,
   },
@@ -499,11 +509,11 @@ export const incomeTax = {
   revenuePerQuarter: "£1,725m",
   revenuePerYear: "£6.9bn",
   // PolicyEngine's static costing of the same 1p, a quarter (README limits
-  // table, "Household tax multiplier", l.33; demo.md l.48: same ratios). Kept
+  // table, "Household tax multiplier", l.33; demo.md l.44: same ratios). Kept
   // for the notes, not shown: the micro-to-macro slide quotes a later vintage
   // of the same costing (£6.55bn a year), and one deck shows one figure.
   policyEngineRevenuePerQuarter: "£1,616m",
-  gdpPath: [-161, -227, -285, -335, -381, -422, -456, -485, -510, -532, -551, -569],
+  gdpPath: [-161, -227, -285, -335, -381, -420, -454, -482, -507, -528, -548, -565],
 };
 
 // Corporation tax +5pp under the investment closure (demo.md row 5 and
@@ -520,7 +530,7 @@ export const capitalSpending = {
   size: "£3bn",
   gdpQ1: 3075,
   gdpQ4: 2901,
-  gdpQ12: 2932,
+  gdpQ12: 2903,
 };
 
 // Bank Rate +1pp for four quarters, peak fall in real GDP (demo.md rows 6 and
@@ -537,11 +547,24 @@ export const bankRate = [
 export const mortgagePassThrough = "Opt-in: the OBR's own 0.9 pass-through, l.623";
 
 // Unemployment rate under the anchored long horizon, model vs EFO
-// (site_figures.json "anchored_horizon.lfsur_pct").
-export const unemploymentDrift = [
-  { quarter: "2027Q4", model: 3.75, efo: 5.07 },
-  { quarter: "2031Q1", model: 1.05, efo: 4.17 },
+// (site_figures.json "anchored_horizon.lfsur_pct"). Since #74 the forecast
+// 16+ population follows the path the EFO implies through l.175, so the
+// labour-force identity (l.163) returns the EFO's rate: by construction, not
+// a forecast (README "Anchored fit"). Before #74 it drained to 3.75% and 1.05%.
+export const unemploymentAnchored = [
+  { quarter: "2027Q4", model: 5.07, efo: 5.07 },
+  { quarter: "2031Q1", model: 4.17, efo: 4.17 },
 ];
+
+// Government consumption +£1.25bn a quarter, default closure (demo.md row 1;
+// demo_shocks.json "cgg", pair deltas): real GDP and central government net
+// borrowing (CGNB), £m at q1 / q4 / q12. Since #75 the shock carries its cash
+// cost into nominal spending, so borrowing rises by it; receipts (PSCR) don't
+// respond.
+export const governmentConsumption = {
+  gdp: [1266, 1280, 1300],
+  borrowing: [1336, 1364, 1419],
+};
 
 // ---------------------------------------------------------------------------
 // The macro platform (macro README model table; models/index.html compare
@@ -680,9 +703,10 @@ export const bridgeBenchmark = {
   gap: "5.1% below",
 };
 
-// The hosted MCP server's OBR pin (integration/pyproject.toml). GitHub's
-// compare view puts it 10 commits behind 0fe04c9a, before #70 (VAT price
-// pass-through) and #71; hosted obr_shock exposes no overlay parameter.
+// The hosted MCP server's OBR pin (integration/pyproject.toml at the macro
+// commit above). GitHub's compare view puts it 21 commits behind 0e44ec87,
+// before #70 (VAT price pass-through), #71, #74 and #75; hosted obr_shock
+// exposes no overlay parameter.
 export const hostedObrPin = "2965e82";
 
 /** Pages the live-site slide can load into its frame. */

@@ -87,16 +87,19 @@ Run `bun install --frozen-lockfile`, then
 
 ## Evidence
 
-Checked on 18 November 2026:
+Checked on 19 November 2026:
 
 - `PolicyEngine/obr-macroeconomic-model` main
-  `0fe04c9afa8e4e316d24bae40aacc9bba9cd5084`, after #70 (opt-in VAT price
+  `0e44ec87681eba0a1f61d634875f5431ac2344c8`, after #70 (opt-in VAT price
   pass-through and the capital-spending investment closure), #71 (household
-  taxes held on their data path) and #72 (docs and caveats). Every OBR-model
-  number comes from this repo: the README limits table,
-  `docs/calibration_scorecard.md`, `docs/demo.md`,
-  `results/demo_shocks.json` (model commit `f0f61c5`, the #70 branch; demo.md
-  says defaults are unchanged by it) and `results/site_figures.json`. The
+  taxes held on their data path), #72 (docs and caveats), #74 (the forecast
+  16+ population on the EFO-implied path, so anchored unemployment is the
+  EFO's) and #75 (the government-consumption shock carries its cash cost, so
+  borrowing moves). Every OBR-model number comes from this repo: the README
+  limits table, `docs/calibration_scorecard.md`, `docs/demo.md`,
+  `results/demo_shocks.json` (model commit `a822045`, the #75 branch, Actions
+  run 44394699022; demo.md says to regenerate it after the merge) and
+  `results/site_figures.json`. The
   module counts and links on slide 5 and the example equations on
   slide 7 come from
   the OBR's listing in that repo
@@ -115,9 +118,11 @@ calls capital spending dead without the #70 investment-closure route.
 
 What the deck deliberately does not claim:
 
-- the free-running GDP error (4.05%) is not an OBR forecast error, and the
-  anchored error (0.44%) is not forecast skill;
-- the held-add-factor forecast fit (0.35% GDP) is left off the slides: the
+- the free-running GDP error (4.24%) is not an OBR forecast error, and the
+  anchored error (0.24%) is not forecast skill;
+- anchored unemployment matching the EFO is by construction, not a forecast:
+  no scenario moves unemployment;
+- the held-add-factor forecast fit (0.63% GDP) is left off the slides: the
   forecasting framework calls its GDP line "close to circular";
 - no DEFINE-UK results or multiplier: which one to headline is an open
   decision;

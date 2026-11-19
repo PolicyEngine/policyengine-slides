@@ -53,6 +53,7 @@ import {
   IconToggleRight,
   IconTool,
   IconUserOff,
+  IconUserCheck,
   IconUsers,
   IconUsersGroup,
   IconWallet,
@@ -92,7 +93,7 @@ import {
   reviewFindings,
   scorecardRows,
   sources,
-  unemploymentDrift,
+  unemploymentAnchored,
 } from "../content";
 import styles from "./deck.module.css";
 import embedStyles from "./embed.module.css";
@@ -744,6 +745,7 @@ export function ThibReviewSlide() {
 
 // Two mirrored columns: a heading, two stats and three lines on each side.
 const poor = scorecardRows.filter((row) => row.status === "poor");
+const countWords: Record<number, string> = { 1: "one", 2: "two", 3: "three", 4: "four" };
 const consumptionFreeRunning =
   scorecardRows.find((row) => row.variable === "Consumption")?.error ?? "";
 
@@ -803,9 +805,9 @@ export function FitSlide() {
                 text: "Scenario minus baseline: the add-factors cancel",
               },
               {
-                icon: IconUserOff,
-                title: "Unemployment isn't anchored",
-                text: `${unemploymentDrift[0].model}% against the EFO's ${unemploymentDrift[0].efo}% by ${unemploymentDrift[0].quarter}`,
+                icon: IconUserCheck,
+                title: "Unemployment on the EFO path",
+                text: `${unemploymentAnchored[0].model}% at ${unemploymentAnchored[0].quarter}, also by construction`,
               },
             ]}
           />
@@ -824,7 +826,7 @@ export function FitSlide() {
               },
               {
                 icon: IconAlertTriangle,
-                title: "Poor on three",
+                title: `Poor on ${countWords[poor.length] ?? poor.length}`,
                 text: poor.map((row) => `${row.variable} ${row.error}`).join(" · "),
               },
             ]}
@@ -1063,11 +1065,6 @@ export function LimitsSlide() {
           <Head icon={IconBrandPython}>In our replication</Head>
           <IconList
             items={[
-              {
-                icon: IconUserOff,
-                title: "Unemployment drifts",
-                text: `${unemploymentDrift[1].model}% against the EFO's ${unemploymentDrift[1].efo}% by ${unemploymentDrift[1].quarter}. The cause is in the listing (l.163, l.175); it shows in our run`,
-              },
               {
                 icon: IconAlertTriangle,
                 title: `${listing.droppedEquations} equations dropped`,
@@ -1317,7 +1314,7 @@ export function CollaborateSlide() {
         <Card
           icon={IconAdjustmentsHorizontal}
           title="Closures and fiscal rules"
-          text="Other closures; spending that moves borrowing"
+          text="Other closures; receipts that respond to the economy"
         />
         <Card
           icon={IconLeaf}
@@ -1337,7 +1334,7 @@ export function CollaborateSlide() {
         <Card
           icon={IconBriefcase}
           title="Labour market"
-          text="Anchoring participation to the EFO"
+          text="Unemployment that responds to demand"
         />
         <Card
           icon={IconBook}

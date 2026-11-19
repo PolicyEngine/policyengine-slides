@@ -281,16 +281,22 @@ emulator's, not an OBR forecast error.
 
 Left, anchored:
 
-- 0.44% GDP and 0.72% consumption MAPE over 2025Q1–2027Q4, by construction:
+- 0.24% GDP and 0.40% consumption MAPE over 2025Q1–2027Q4, by construction:
   add-factors are EFO minus model. Only consumption is re-derived; the other
   GDP terms sit on the EFO.
 - Reforms are scored as deltas from the anchored baseline, so the add-factors
   cancel.
 - Every baseline and scenario solve in the demo set converges in 12 of 12
   quarters ("converged" covers the equations that evaluate).
-- Unemployment is not anchored: 3.75% against 5.07% at 2027Q4 (and 1.05%
-  against 4.17% by 2031Q1, on slide 14). The anchored GDP gap reaches 1.24% by
-  2031Q1.
+- Unemployment is on the EFO path, also by construction: 5.07% at 2027Q4
+  and 4.17% at 2031Q1, the EFO's own figures. Employment and participation
+  are EFO inputs, and since 18 November (OBR model #74) the forecast 16+
+  population follows the path they imply (l.175), so the labour-force
+  identity (l.163) returns the EFO's rate. It is not an unemployment
+  forecast: nothing in the model moves unemployment in response to a
+  scenario. Before #74 the population was held flat and the anchored rate
+  drained to 3.75% by 2027Q4 and 1.05% by 2031Q1. The anchored GDP gap grows
+  with the horizon, to 0.77% by 2031Q1.
 
 Right, free-running (add-factors off, GDP made endogenous, unpublished inputs seeded):
 
@@ -300,15 +306,21 @@ measures our closure swap plus the inputs the OBR doesn't publish. The
 platform's registry labels the emulator (the label is no longer on the slide) "anchored to the October 2026 EFO, not
 validated as a forecaster; predictive and policy checks weak".
 
-If asked about the held-add-factor forecast (0.35% GDP, 7 of 8 in band): its
+If asked about the held-add-factor forecast (0.63% GDP, 7 of 8 in band, two
+of the seven being identities on EFO inputs): its
 GDP line is close to circular, because household income is handed to the
 model, so it isn't evidence of forecast skill.
 
 The free-running figure has the add-factors off, GDP made endogenous and unpublished inputs seeded.
 
 The right column's figures are from the full scorecard (the table is no longer
-on the slide): consumption 6.92%, 8 of 11 within band, and the three poor
-ones.
+on the slide): consumption 7.23%, 9 of 11 within band, and the two poor
+ones. Putting the forecast population on the EFO path (#74) moved the
+free-running figures: GDP 4.05% to 4.24%, consumption 6.92% to 7.23%,
+unemployment 1.17pp (poor) to 0.62pp (fair). GDP and consumption read worse
+because the drained unemployment had been lifting raw consumption through
+the unemployment term of the consumption equation (l.4): an artefact of the
+frozen population, not fit.
 
 Default closure, October 2026 EFO, 2025Q1–2027Q4. Bands: rates within 1.0pp,
 net balances within 1.5% of GDP, levels within 10% MAPE. Employment scores
@@ -317,9 +329,9 @@ because the RPI index history the OBR doesn't publish runs out. Company profits
 are a residual of nominal GDP. The other 10 headline variables (exports,
 imports, CPI, earnings and others) are held at the OBR's value.
 
-The full scorecard: real GDP 4.05%, consumption 6.92%, business investment 7.34%, household income 3.08%, real household income 3.29%, current account 0.91% of GDP (all fair); trade balance 0.41% of GDP (good); employment 0.00% (trivial identity); unemployment rate 1.17pp, RPI inflation 2.32pp, company profits 11.66% (poor). 8 of the 11 computed variables are within band.
+The full scorecard: real GDP 4.24%, consumption 7.23%, business investment 7.34%, unemployment rate 0.62pp, household income 3.10%, real household income 3.30%, current account 0.91% of GDP (all fair); trade balance 0.41% of GDP (good); employment 0.00% (trivial identity); RPI inflation 2.32pp, company profits 12.88% (poor). 9 of the 11 computed variables are within band (CI run 44392267520, 18 Nov 2026).
 
-Sources: calibration scorecard; OBR model README; site_figures.json; macro platform README.
+Sources: calibration scorecard; OBR model README; site_figures.json; population changelog (#74); macro platform README.
 
 ## 9. Part 3: policy scenarios and limits
 
@@ -362,16 +374,19 @@ open discrepancy (G11). Against 0.45 the gap to our 1.01 is wider, not
 narrower.
 
 - Government consumption is about 1 by construction: the shock lands in the
-  expenditure identity. `published_conventions=True` can impose the OBR's 0.6
+  expenditure identity. GDP +£1,266m / +£1,280m / +£1,300m at quarters 1 / 4 /
+  12. Since 18 November (OBR model #75) the shock carries its cash cost into
+  nominal spending, so borrowing rises by +£1,336m / +£1,364m / +£1,419m;
+  receipts have no equation and don't respond. `published_conventions=True` can impose the OBR's 0.6
   fading path as a labelled add-factor (0.60 / 0.51 / 0.27).
 - Income tax and employee NICs: the same channel and the same ratios.
 - VAT barely moves GDP by default: CPI is exogenous in the listing. The opt-in
   pass-through overlay lands near the OBR at quarter 4 (0.345 against 0.35) but
-  keeps building; the match isn't a calibration.
+  keeps building (0.638 by quarter 12); the match isn't a calibration.
 - Government investment works only under the opt-in investment closure, as
   identity pass-through with no taper.
 
-Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through changelog (#70).
+Sources: demo shocks (`docs/demo.md`); demo_shocks.json; price pass-through changelog (#70); spending-shock changelog (#75).
 
 ## 11. Income tax +1p: what the OBR model does to GDP (2 steps)
 
@@ -385,14 +400,15 @@ The chart is a time series, not a distribution: UK GDP below baseline for the
 12 quarters 2025Q1 to 2027Q4 (quarter 1 is 2025Q1). Nothing on this slide is by
 decile; who pays is the micro-to-macro slide (19). Step 1 is the chart, with the four-step route above it (HMRC costing →
 household income → consumption → GDP); step 2 is the panel of three takeaways.
-Only quarters 1, 4, 8 and 12 carry a value; the others are 227, 285, 381, 422,
-456, 510, 532 and 551 (£m, falls).
+Only quarters 1, 4, 8 and 12 carry a value; the others are 227, 285, 381, 420,
+454, 507, 528 and 548 (£m, falls).
 
 +1p on the basic rate, £1,725m a quarter (HMRC ready reckoner, June 2025,
 2026-27 column, £6.9bn a year divided by four), sustained from 2025Q1. Real
-GDP falls 161 at quarter 1, 335 at quarter 4 and 569 at quarter 12 (£m). Ratio
-0.10 / 0.21 / 0.38 against the OBR's 0.3, which fades; the panel says the
-same in pence per £1 of tax (10p, 38p, 30p), which is current-price GDP per
+GDP falls 161 at quarter 1, 335 at quarter 4, 482 at quarter 8 and 565 at
+quarter 12 (£m; quarters 1 to 4 are unchanged by OBR model #74, later ones
+moved under 1%). Ratio 0.10 / 0.21 / 0.37 against the OBR's 0.3, which fades;
+the panel says the same in pence per £1 of tax (10p, 37p, 30p), which is current-price GDP per
 pound of current-price revenue. Receipts and borrowing
 move one for one; lower consumption doesn't reduce other receipts. GDP change
 equals the consumption change to the pound.
@@ -411,7 +427,7 @@ Where the change comes from, which is the route above the chart:
   costing of the same 1p is £1,616m a quarter in the model README's
   household-tax row, and £6.55bn a year (about £1,637m a quarter) in the
   platform's bridge benchmark on slide 19: two vintages of the same costing.
-  The deck shows only the second. Either gives the same ratios (0.38 at
+  The deck shows only the second. Either gives the same ratios (0.37 at
   quarter 12): the GDP path scales with the input, only the ratio is the
   same.
 - "Similar size, opposite path": the README's own words are "right order of
@@ -445,7 +461,7 @@ zero-shock baseline runs business investment from £86bn to £522bn by 2027Q4.
   −£384m at quarter 12 (0.05% of GDP), 40% of a plateau of about £0.96bn a
   quarter. The OBR multiplier table the repo encodes has no corporation-tax
   row.
-- Government investment +£3bn a quarter: +£3,075m / +£2,901m / +£2,932m at
+- Government investment +£3bn a quarter: +£3,075m / +£2,901m / +£2,903m at
   quarters 1 / 4 / 12. Under the default closure IF has no live equation, so
   the channel is dead and `run_reform` warns.
 
@@ -487,22 +503,21 @@ Inherited:
   moved, against the Bank of England's −0.2% to −0.35%. Only consumption and
   household interest respond.
 - Spending: in the OBR's file GDP is an input, so a spending change moves GDP
-  by nothing; the multiplier of about 1 (1.01 on impact, 1.05 by quarter 12)
+  by nothing; the multiplier of about 1 (1.01 on impact, 1.04 by quarter 12)
   appears once our closure solves GDP. What we inherit is that nothing in the
   equations damps it: imports and prices don't respond, and there is no
   crowding out. So the equations can't produce the OBR's 0.6 (the 2015
-  figure; see slide 10 on 0.45). Borrowing doesn't move, because the nominal
-  spending identity is commented out. A nominal-consistent spending shock is an
-  open decision.
+  figure; see slide 10 on 0.45). Borrowing now moves by the cash cost: since
+  18 November (OBR model #75) the default spending shock also raises nominal
+  spending, so borrowing rises by £1,336m to £1,419m a quarter for £1.25bn of
+  real spending. That is accounting: receipts have no equation and don't
+  respond. `nominal_consistent=False` gives the earlier real-only shock, with
+  borrowing unchanged.
 - CPI has no live equation, so VAT barely transmits. The pass-through overlay
   is labelled judgement, not the shipped listing.
 
 Ours:
 
-- Unemployment drifts to 1.05% against 4.17% by 2031Q1. The root cause is in
-  their code (l.163 and l.175 are one identity, so nothing holds participation
-  on the EFO path), but it shows up in our anchored run. Anchoring PART16 is an
-  open decision.
 - 82 of the 372 equations drop in at least one quarter because an input has no
   data.
 - Unpublished inputs are seeded or estimated, and labelled.
@@ -515,7 +530,16 @@ data path took the free-running GDP error from 4.25% to 4.05% and household
 income from 4.30% to 3.08%. That is an artefact removed, not better fit.
 Seasonally adjusting the components is the follow-up.
 
-Sources: OBR model README; site_figures.json; TYWHH changelog (#71).
+No longer a limit, so off the slide: unemployment drift. Before 18 November
+the forecast 16+ population was held flat, and the anchored unemployment rate
+drained to 1.05% against the EFO's 4.17% by 2031Q1 (l.163 and l.175 are one
+identity, so nothing held participation on the EFO path). OBR model #74 puts
+the population on the path the EFO implies, so anchored unemployment is now
+the EFO's (slide 8). That is by construction, not a forecast: unemployment
+still doesn't respond to any scenario.
+
+Sources: OBR model README; site_figures.json; demo shocks; TYWHH changelog
+(#71); population changelog (#74); spending-shock changelog (#75).
 
 ## 15. Part 4: the macro platform
 
@@ -563,9 +587,11 @@ build takes a few minutes. If using `score_reform`, start it through
    tax (`var="TYEM", shock=1725`).
 2. VAT with `price_passthrough=True`; Bank Rate (`var="R", shock=1.0,
    periods=4`) with `monetary_conditioning=True`. Run overlays locally: hosted
-   `obr_shock` has no overlay parameter, and the hosted model (2965e82) is 10
-   commits behind main, before #70 and #71. #70 left defaults unchanged to the
-   pound and #71 left reform deltas unchanged, by their own changelogs.
+   `obr_shock` has no overlay parameter, and the hosted model (2965e82) is 21
+   commits behind main, before #70, #71, #74 and #75. #70 left defaults
+   unchanged to the pound and #71 left reform deltas unchanged, by their own
+   changelogs; #74 leaves quarters 1 to 4 unchanged and moves later ones by
+   under 1%; #75 means a hosted spending run still shows borrowing unchanged.
 3. The dashboard at obr-macroeconomic-model.vercel.app.
 4. In Claude with the MCP connector: "Score raising the UK basic rate of income
    tax to 21p."
@@ -642,9 +668,13 @@ Section slide: say what the part covers in one sentence and move on. The tracker
 ## 21. Where we could work together
 
 Options to discuss, not commitments. Each maps to something open in the repo:
-the closure choice and a spending shock that moves borrowing; the investment
+the closure choice and receipts that respond to the economy (receipts have no
+equation, so a scenario moves only the revenue it is given); the investment
 closure and DEFINE-UK; macro paths back into household results; the published
-listing's open problems (G6, G7, N5); anchoring participation; joint write-ups.
+listing's open problems (G6, G7, N5); an unemployment rate that responds to
+demand (on the anchored path it is the EFO's by construction, and no scenario
+moves it); joint write-ups. Two earlier items are done: the spending shock now
+moves borrowing (#75) and the forecast population follows the EFO (#74).
 
 Sources: OBR model README; published-model review; DEFINE-UK model page.
 
