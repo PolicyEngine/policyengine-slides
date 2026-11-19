@@ -202,14 +202,16 @@ function Frame({
     <Slide className={styles.deck}>
       <div className="flex h-full flex-col">
         <SlideHeader>
-          {part !== undefined && <Tracker part={part} />}
-          <SlideTitle>{title}</SlideTitle>
-          {part === platformPart && <Preview />}
-          {subtitle && (
-            <p className="mt-3 text-xl leading-relaxed text-gray-600">
-              {subtitle}
-            </p>
-          )}
+          <div className={styles.head}>
+            {part !== undefined && <Tracker part={part} />}
+            <SlideTitle>{title}</SlideTitle>
+            {part === platformPart && <Preview />}
+            {subtitle && (
+              <p className={`mt-3 leading-relaxed text-gray-600 ${styles.subtitle}`}>
+                {subtitle}
+              </p>
+            )}
+          </div>
         </SlideHeader>
         <BuildScope
           className={`${styles.body} ${center ? styles.centerBody : ""}`}

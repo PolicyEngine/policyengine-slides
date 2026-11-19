@@ -1041,6 +1041,26 @@
   background: color-mix(in srgb, var(--text-inverse) 20%, transparent);
 }
 
+/* The header (tracker, title, subtitle) follows the viewport like the body,
+   so on a 1280x720 or 1440x810 screen it doesn't take a larger share of the
+   slide than at 1920x1080, where these sizes equal the shared 3rem title,
+   1.25rem subtitle and 0.95rem tracker. */
+.head :global(h1) {
+  font-size: clamp(1.75rem, min(4.45vh, 2.5vw), 3rem);
+}
+
+.head .subtitle {
+  font-size: clamp(0.875rem, min(1.85vh, 1.04vw), 1.25rem);
+}
+
+.head .tracker {
+  font-size: clamp(0.7rem, min(1.4vh, 0.79vw), 0.95rem);
+}
+
+.head .preview {
+  font-size: clamp(0.75rem, min(1.48vh, 0.83vw), 1rem);
+}
+
 /* Where the slide sits in the talk (in the header, so in rem). */
 .tracker {
   display: flex;
@@ -1155,8 +1175,10 @@
 .moduleMap {
   position: relative;
   /* As wide as the slide, unless that would make it taller than the space
-     under the header (a short window). */
-  width: min(100%, calc((100vh - 28rem) * 1000 / 338));
+     under the header (a short window). The header follows the viewport
+     (.head) and the footer doesn't, so the space is about 79vh less a fixed
+     13.4rem: the full width at 1920x1080, about 1,020px at 1280x720. */
+  width: min(100%, calc((78vh - 13.5rem) * 1000 / 338));
   margin-inline: auto;
   /* Text inside is sized from the map's width (cqw), like its boxes. */
   container-type: inline-size;

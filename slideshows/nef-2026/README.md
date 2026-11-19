@@ -49,7 +49,10 @@ the slides).
   number (`incomeTaxSlideNumber`): update it if
   the order in `config.ts` changes.
 - `slides/deck.module.css` sizes the slide body in em of a base that follows
-  the viewport (the smaller of its height and width), so a slide looks the same at 1920x1080 and 1440x810. A
+  the viewport (the smaller of its height and width), and scales the header
+  (tracker, title, subtitle) with the viewport too, so a slide keeps its
+  proportions at 1920x1080, 1440x810 and 1280x720; the 1920x1080 sizes are
+  the shared components' own. A
   slide's `scale` enlarges a sparse body.
 - `slides/BuildScope.tsx` puts the current build step on the slide body. An
   element with `data-step="N"` stays hidden, keeping its place, until step N,
