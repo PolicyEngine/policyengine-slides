@@ -22,7 +22,6 @@ import {
   IconCurrencyDollar,
   IconDatabase,
   IconEngine,
-  IconEqual,
   IconEye,
   IconFileCode,
   IconFlask,
@@ -922,13 +921,6 @@ export function IncomeTaxSlide() {
                 },
               ]}
             />
-            <div className={styles.footnotes}>
-              <small>With PolicyEngine</small>
-              <p>
-                <IconEqual stroke={1.8} aria-hidden="true" />
-                Same GDP effect per £1 with PolicyEngine&apos;s own costing as the input
-              </p>
-            </div>
           </div>
         </div>
       </div>
