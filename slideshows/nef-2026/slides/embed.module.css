@@ -110,3 +110,13 @@
   padding: 0.4rem 0.95rem;
   font-size: 0.95rem;
 }
+
+/* The deck's entrance animation moves blocks with transform, and a transformed
+   ancestor turns position: fixed into position: absolute inside it, so Expand
+   would fill the block instead of the screen. Live embeds don't animate. */
+.liveBody,
+.liveBody > *,
+.liveBody > * > * {
+  animation: none !important;
+  transform: none !important;
+}
