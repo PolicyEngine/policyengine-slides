@@ -117,7 +117,10 @@ Checked on 19 November 2026:
 
 Where the two repos disagree, the model repo wins: at `2e5dffe7` the macro
 site's OBR page still quotes the pre-#71 free-running GDP error (4.25%) and
-calls capital spending dead without the #70 investment-closure route.
+calls capital spending dead without the #70 investment-closure route. On 19
+November the live site's OBR and OBR validation pages still showed the
+pre-#74 figures (anchored 0.44%, unemployment drifting); slide 17's notes
+warn the presenter.
 
 What the deck deliberately does not claim:
 

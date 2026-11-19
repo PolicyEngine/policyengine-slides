@@ -572,8 +572,13 @@ Sources: model comparison page; macro platform README.
 
 - Click the frame, then use the buttons: Home, Models, Compare, OBR model,
   OBR validation, Forecasts. Expand fills the screen; New tab opens the site.
-- Say it's in development and not launched; numbers on it follow the pinned
-  model runs shown on the earlier slides.
+- Say it's in development and not launched. Its OBR numbers are older than
+  the deck's: on 19 November the live OBR and OBR validation pages still
+  quoted the anchored GDP error as 0.44% and the free-running one as 4.25%,
+  and described unemployment as drifting. The deck follows the model repo
+  after #74 and #75 (0.24%, 4.24%, unemployment on the EFO path); the site
+  catches up when it is re-pinned (PolicyEngine/macro #278). If someone
+  reads a number off the frame, say so.
 - If the frame is blank (offline, or the site's frame headers not yet live),
   use New tab.
 
@@ -587,7 +592,9 @@ build takes a few minutes. If using `score_reform`, start it through
    tax (`var="TYEM", shock=1725`).
 2. VAT with `price_passthrough=True`; Bank Rate (`var="R", shock=1.0,
    periods=4`) with `monetary_conditioning=True`. Run overlays locally: hosted
-   `obr_shock` has no overlay parameter, and the hosted model (2965e82) is 21
+   `obr_shock` has no overlay parameter, and the hosted model (2965e82, the pin
+   in the macro repo at 2e5dffe7, which the deck uses; the OBR repo's demo.md
+   names e4d7faa instead) is 21
    commits behind main, before #70, #71, #74 and #75. #70 left defaults
    unchanged to the pound and #71 left reform deltas unchanged, by their own
    changelogs; #74 leaves quarters 1 to 4 unchanged and moves later ones by

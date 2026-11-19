@@ -1050,18 +1050,18 @@
 }
 
 .head .subtitle {
-  font-size: clamp(0.875rem, min(1.85vh, 1.04vw), 1.25rem);
+  font-size: clamp(0.875rem, min(1.86vh, 1.05vw), 1.25rem);
 }
 
 .head .tracker {
-  font-size: clamp(0.7rem, min(1.4vh, 0.79vw), 0.95rem);
+  font-size: clamp(0.7rem, min(1.41vh, 0.8vw), 0.95rem);
 }
 
 .head .preview {
-  font-size: clamp(0.75rem, min(1.48vh, 0.83vw), 1rem);
+  font-size: clamp(0.75rem, min(1.49vh, 0.84vw), 1rem);
 }
 
-/* Where the slide sits in the talk (in the header, so in rem). */
+/* Where the slide sits in the talk (in the header; sized by .head above). */
 .tracker {
   display: flex;
   flex-wrap: wrap;

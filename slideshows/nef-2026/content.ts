@@ -1,7 +1,7 @@
 import moduleLinkMatrix from "./module-links.json";
 
 // Every figure on the slides comes from a file read at a pinned commit, checked
-// on 18 November 2026:
+// on 18 November 2026 and, for the OBR model, again on 19 November:
 // - PolicyEngine/obr-macroeconomic-model main 0e44ec87 (after #70–#72, #74 and
 //   #75: the forecast 16+ population on the EFO-implied path, and the
 //   nominal-consistent government-consumption shock);
