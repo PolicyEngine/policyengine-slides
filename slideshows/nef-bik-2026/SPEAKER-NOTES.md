@@ -282,10 +282,11 @@ Each stage carries a status for company cars. What each rests on:
   childcare; the OpRA rule.
 - Effort is our rough ranking. No weeks or costs have been estimated.
 - Outputs: static scores, except that the pension cap run includes
-  policyengine-uk's 0.16% pay cut. Which responses to add is a question for
-  NEF (slide 15). For both the car rates and the pension cap, the gap to the
-  official costings is open, and the project would have to explain it. For
-  the pension cap, an October Microcosm UK run came in well short of the
+  policyengine-uk's 0.16% pay cut and passes employer NICs on to pay. Which
+  responses to add is a question for NEF (slide 15). For both the car rates
+  and the pension cap, the gap to the official costings is open, and the
+  project would have to explain it.
+  For the pension cap, an October Microcosm UK run came in well short of the
   OBR's static yield, mostly because it lacked bonus sacrifice
   (PolicyEngine/microcosm#1340); the build now imputes bonus sacrifice, but
   its base still falls short of the OBR's (PolicyEngine/microcosm#1390).
