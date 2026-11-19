@@ -1808,7 +1808,6 @@ export const aiEconomyProject = {
     { icon: IconTrendingUp, title: "Four scenarios", text: "AI doing more than the OBR expects, from 2027" },
     { icon: IconChartLine, title: "The whole economy", text: "OG-UK: output, pay rates, national income, birth years" },
     { icon: IconHome, title: "Households", text: "PolicyEngine UK: Exchequer cost, poverty, inequality" },
-    { icon: IconArrowsSplit, title: "Two lenses", text: "Side by side, never added" },
   ],
 };
 
