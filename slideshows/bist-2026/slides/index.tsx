@@ -1354,7 +1354,7 @@ export function AiEconomySlide() {
   return (
     <Frame
       section="projects"
-      title="AI and the UK economy: beyond the forecast"
+      title="AI and the UK economy: scenarios from 2027"
       scale={1.1}
       fill
       subtitle="Provisional, not yet published: the whole economy and households, side by side"

@@ -52,7 +52,7 @@ slide, is in [NOTES.md](NOTES.md).
 17. Part 4: Projects we have done (divider)
 18. The Autumn Budget 2026 dashboard (live page)
 19. An AI adoption scenario: Exchequer cost, poverty and inequality (live page)
-20. AI and the UK economy: beyond the forecast (live page, provisional)
+20. AI and the UK economy: scenarios from 2027 (live page, provisional)
 21. How we built synthetic UK firms
 22. What the firm model can cost: thresholds, tapers and reduced rates
 23. Who pays for trade shocks? Four UK episodes, 2021–26
@@ -958,8 +958,8 @@ The deck is public: it has no password and appears on the home page.
 
 ## AI and the UK economy slide (19 November)
 
-- New slide 20, after the AI study: the live page "AI and the UK economy:
-  Beyond the forecast" (OG-UK and the household study, four scenarios from
+- New slide 20, after the AI study: the live page "AI and the UK economy"
+  (OG-UK and the household study, four scenarios from
   2027), embedded from its Vercel deployment. The subtitle says it is
   provisional and not yet published, and the slide quotes no figure. The
   deck has 33 slides; the notes are renumbered.

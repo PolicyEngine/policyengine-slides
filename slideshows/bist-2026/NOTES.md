@@ -840,12 +840,12 @@ slides, not build steps.
   (2026a), AI
   study](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7174479).
 
-### 20. AI and the UK economy: beyond the forecast
+### 20. AI and the UK economy: scenarios from 2027
 
 - **Say it.** Provisional and not yet published: no figure from it is on the
   slide, and none should be quoted as a result.
-- The page is live in the slide: "AI and the UK economy: Beyond the
-  forecast", PolicyEngine. It asks what happens if, from 2027, AI does more
+- The page is live in the slide: "AI and the UK economy",
+  PolicyEngine. It asks what happens if, from 2027, AI does more
   than the OBR already expects, in four scenarios (UK low, central and high,
   and Korinek et al.'s substantial US case).
 - Two lenses on the same question: OG-UK, the overlapping-generations model,
@@ -859,7 +859,7 @@ slides, not build steps.
   an idea, with OG-UK in place of a macroeconomic model such as the Unit's.
 - "Expand" stretches it over the screen; "New tab" opens it. Click the slide
   outside the frame before moving on. Needs an internet connection.
-- **Sources.** [AI and the UK economy: Beyond the forecast
+- **Sources.** [AI and the UK economy
   (provisional)](https://uk-growth-with-mjl646jhp-policy-engine.vercel.app).
 
 ### 21. How we built synthetic UK firms
