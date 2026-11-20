@@ -78,7 +78,7 @@ export default function Embed({
           <ToggleIcon stroke={1.8} aria-hidden="true" />
           {expanded ? "Back to the slide" : "Expand"}
         </button>
-        <a href={href} target="_blank" rel="noopener noreferrer" className={styles.embedButton}>
+        <a href={src} target="_blank" rel="noopener noreferrer" className={styles.embedButton}>
           <IconExternalLink stroke={1.8} aria-hidden="true" />
           New tab
         </a>

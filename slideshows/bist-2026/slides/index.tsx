@@ -44,7 +44,6 @@ import {
   rulesEntities,
   rulesFacts,
   sources,
-  tags,
   targetTable,
   tariffBridge,
   tariffDisaggregation,
@@ -722,7 +721,7 @@ export function RulesSlide() {
       section="what"
       title="How the rules are encoded"
       scale={1.2}
-      subtitle="Law as dated parameters, formulas and tests"
+      subtitle="Law as dated parameters, formulas and tests (PolicyEngine UK 2.179.0)"
     >
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
         <Reveal step={1} className={styles.code}>
@@ -878,7 +877,7 @@ const share = (part: number, whole: number) =>
 // DWP, MHCLG, then the other publishers with the total.
 const publisherSteps = ["HMRC", "ONS", "DWP", "MHCLG"];
 const publisherStep = (source: string) => {
-  const index = publisherSteps.indexOf(source);
+  const index = publisherSteps.indexOf(source.split(",")[0]);
   return index === -1 ? publisherSteps.length + 1 : index + 1;
 };
 
@@ -912,7 +911,7 @@ function TargetTable() {
           <span>All targets</span>
         </div>
         <div />
-        <div className={styles.targetSource}>14 publishers</div>
+        <div className={styles.targetSource}>16 publishers</div>
         <div className={styles.targetNumber}>{count(total)}</div>
         <div className={styles.targetNumber}>{share(within, total)}</div>
       </Reveal>

@@ -1036,7 +1036,7 @@ export const macroLinks = [
     from: "Macro model",
     to: "PolicyEngine",
     twoWay: true,
-    text: "NIESR passed results between NiGEM and PolicyEngine UK once; iterating until the two agree is the idea.",
+    text: "NIESR used PolicyEngine UK’s household estimates to calibrate NiGEM once; passing results both ways until the two agree is the idea.",
     source: sources.niesr,
   },
   {
@@ -1203,7 +1203,7 @@ export const axiomRules = [
     icon: IconReceiptTax,
     tag: tags.partlyEncoded,
     title: "VAT liability",
-    text: "Output tax less input tax on a firm’s standard-rated sales and purchases, at 20%",
+    text: "Output tax less allowable input tax on a firm’s standard-rated sales and purchases, at 20%",
     law: "VAT Act 1994 ss.2, 24–26, 29A",
   },
   {
@@ -1439,9 +1439,9 @@ export const rulesCode = {
 };
 
 export const rulesFacts = [
-  { icon: IconCalendarEvent, value: "1,086", label: "parameter files", text: "Dated values; 998 carry a reference" },
+  { icon: IconCalendarEvent, value: "1,086", label: "government parameter files", text: "Dated values; 998 carry a reference" },
   { icon: IconMathFunction, value: "1,504", label: "variables", text: "A formula over arrays" },
-  { icon: IconTestPipe, value: "6,779", label: "tests", text: "Inputs and the expected output" },
+  { icon: IconTestPipe, value: "6,779", label: "YAML test cases", text: "Inputs and the expected output" },
 ];
 
 export const rulesEntities = [
@@ -1751,7 +1751,7 @@ export const targetTable: TargetRow[] = [
   { icon: IconCoins, topic: "Child Benefit, salary sacrifice, other tax totals", binds: "UK", source: "HMRC", count: 19, within: 19 },
   { icon: IconUsers, topic: "Population by age and sex", binds: "UK, nations, English regions", source: "ONS", count: 179, within: 179 },
   { icon: IconUsers, topic: "Employment by occupation", binds: "UK, nations, English regions", source: "ONS", count: 159, within: 159 },
-  { icon: IconUsers, topic: "Household composition", binds: "UK, nations, English regions", source: "ONS", count: 22, within: 22 },
+  { icon: IconUsers, topic: "Household composition", binds: "UK, nations, English regions", source: "ONS, NRS, NISRA, Welsh Government", count: 22, within: 22 },
   { icon: IconUsers, topic: "Land values and household spending", binds: "UK", source: "ONS", count: 5, within: 5 },
   { icon: IconHeartHandshake, topic: "Universal Credit", binds: "Great Britain, Scotland", source: "DWP", count: 106, within: 103 },
   { icon: IconHeartHandshake, topic: "State Pension and Pension Credit", binds: "Great Britain, Wales, Scotland, English regions", source: "DWP", count: 70, within: 70 },
@@ -1930,7 +1930,7 @@ export const firmMethod = {
 // reduced rate.
 export const vatReforms = {
   rows: [
-    { icon: IconArrowBarUp, reform: "Raise the threshold to £100,000", lever: "Level", cost: "−742", firms: "117,800 leave the register" },
+    { icon: IconArrowBarUp, reform: "Raise the threshold to £100,000", lever: "Level", cost: "−742", firms: "117,800 no longer liable" },
     { icon: IconTrendingUp, reform: "Graduated taper, £85,000 to £141,700", lever: "Shape: phase-in", cost: "−1,406", firms: "275,800 in the band" },
     { icon: IconMinus, reform: "Flat 50% marginal taper, same band", lever: "Shape: constant", cost: "−968", firms: "275,800 in the band" },
     { icon: IconPercentage, reform: "Reduced rate of 10%, £85,000 to £105,000", lever: "Rate step", cost: "−446", firms: "138,000 in the band" },

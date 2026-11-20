@@ -963,4 +963,3 @@ The deck is public: it has no password and appears on the home page.
   2027), embedded from its Vercel deployment. The subtitle says it is
   provisional and not yet published, and the slide quotes no figure. The
   deck has 33 slides; the notes are renumbered.
-
