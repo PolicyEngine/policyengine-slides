@@ -39,7 +39,7 @@ the slides).
 - `config.ts` controls the slide order, the build steps and meeting metadata.
   Twelve slides reveal step by step when presenting (`builds`), 44 steps in
   all; a PDF export shows each slide once, complete (`exportBuilds: 1`).
-  The viewer's counter shows the slide, not the step (`counter: "slides"`, an
+  The viewer's counter shows the slide, not the step (`countSlides: true`, an
   opt-in in `lib/types.ts`; other decks still count steps).
 - `content.ts` holds every number on the slides, each with its source pinned
   to a commit, plus the tables and lists.

@@ -43,13 +43,10 @@ export interface SlideshowConfig {
   private?: boolean;
   /** Move the deck on PageDown and PageUp, which presentation clickers send. Leave it off for a deck with a region that scrolls. */
   clickerKeys?: boolean;
-  /**
-   * What the viewer's counter counts. "steps" (the default) counts every build
-   * step; "slides" counts slides, so a slide's builds don't move it.
-   */
-  counter?: 'steps' | 'slides';
-  /** Hide the "Click or arrow keys" hint in the viewer's bottom bar (shown by default). */
-  hideControlsHint?: boolean;
+  /** Number the counter by slide, so a slide's build steps share one number. */
+  countSlides?: boolean;
+  /** Hide the "Click or arrow keys" hint in the navigation bar, for a deck whose footer logo sits under it. */
+  hideNavHint?: boolean;
   slides: SlideConfig[];
 }
 
@@ -94,18 +91,4 @@ export function flattenSlides(
     }
   });
   return steps;
-}
-
-/** The viewer's "N / total" counter for a step, in steps or in slides. */
-export function counterLabel(
-  steps: { slideIndex: number }[],
-  currentStep: number,
-  counter: 'steps' | 'slides' = 'steps',
-): string {
-  if (counter === 'slides') {
-    const slide = steps[currentStep]?.slideIndex ?? 0;
-    const total = (steps[steps.length - 1]?.slideIndex ?? 0) + 1;
-    return `${slide + 1} / ${total}`;
-  }
-  return `${currentStep + 1} / ${steps.length}`;
 }
