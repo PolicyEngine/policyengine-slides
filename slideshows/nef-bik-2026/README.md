@@ -24,8 +24,8 @@ slide, and every slide's header carries a tracker of the three parts:
 - `config.ts` controls the slide order, the build steps and meeting metadata.
   Seven slides reveal step by step when presenting (`builds`; the two tables appear whole); a PDF export
   shows each slide once, complete (`exportBuilds: 1`). The viewer's counter
-  shows the slide, not the step (`counter: "slides"`), and the controls hint
-  is hidden (`hideControlsHint: true`); both are opt-ins in `lib/types.ts`.
+  shows the slide, not the step (`countSlides: true`), and the controls hint
+  is hidden (`hideNavHint: true`); both are opt-ins in `lib/types.ts`.
 - `content.ts` holds every number on the slides, each pinned to its source:
   a URL for web sources, most with a publication date; a repo, commit and
   path for code; and a release name for the calibration dashboard, which has

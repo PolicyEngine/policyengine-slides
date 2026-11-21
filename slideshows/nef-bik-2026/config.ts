@@ -28,8 +28,8 @@ export const nefBik2026Config: SlideshowConfig = {
   footerText: "New Economics Foundation · 19 November 2026",
   clickerKeys: true,
   // The counter shows the slide, not the build step within it.
-  counter: "slides",
-  hideControlsHint: true,
+  countSlides: true,
+  hideNavHint: true,
   // Builds reveal a slide step by step when presenting; a PDF export shows
   // each slide once, complete (exportBuilds: 1, and BuildScope shows every step).
   slides: [

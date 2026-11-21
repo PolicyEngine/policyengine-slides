@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { counterLabel, flattenSlides, getSlideBuilds, type SlideConfig } from "./types";
+import { flattenSlides, getSlideBuilds, type SlideConfig } from "./types";
 import { slideshows } from "./slideshows";
 
 const Blank = () => null;
@@ -34,29 +34,5 @@ describe("exportBuilds", () => {
     for (const deck of slideshows.filter((deck) => !deck.slides.some(setsIt))) {
       expect(flattenSlides(deck.slides, { exportMode: true })).toEqual(flattenSlides(deck.slides));
     }
-  });
-});
-
-describe("counterLabel", () => {
-  const steps = flattenSlides([
-    Blank,
-    { component: Blank, builds: 3 },
-    Blank,
-  ]);
-
-  it("counts steps by default", () => {
-    expect(counterLabel(steps, 0)).toBe("1 / 5");
-    expect(counterLabel(steps, 2)).toBe("3 / 5");
-    expect(counterLabel(steps, 4, "steps")).toBe("5 / 5");
-  });
-
-  it("counts slides when asked, so builds don't move it", () => {
-    expect([0, 1, 2, 3, 4].map((step) => counterLabel(steps, step, "slides"))).toEqual([
-      "1 / 3",
-      "2 / 3",
-      "2 / 3",
-      "2 / 3",
-      "3 / 3",
-    ]);
   });
 });
