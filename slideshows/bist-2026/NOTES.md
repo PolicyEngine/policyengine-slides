@@ -553,8 +553,9 @@ slides, not build steps.
   and self-employed NI; capital gains tax.
 - **Taxes on spending (and property).** VAT; fuel, alcohol and tobacco duties;
   stamp duty and council tax.
-- **Taxes on business.** Employer NI, with rate and threshold changes passed
-  to employees' pay by default. Business rates and corporate stamp duty, as
+- **Taxes on business.** Employer NI, with eligible secondary Class 1
+  changes passed to employees' pay by default (Class 1A stays outside the
+  household channels). Business rates and corporate stamp duty, as
   published totals allocated to shareholders. Corporation tax is not
   modelled, and the model has no firm entity (the "Outside the model" line
   in the column).
@@ -1139,10 +1140,11 @@ slides, not build steps.
   change in prices, so pass the nominal wage and the prices separately, or
   the real wage alone with no price change, so that prices are not counted
   twice.
-- **Runs today** (the line under the rows). The trade study's code already
-  takes earnings changes by two-digit SIC division and applies them to
-  employees in Microcosm UK. The outputs on the right are existing policyengine.py
-  outputs.
+- **What runs today.** The trade study's code applies earnings losses by
+  two-digit SIC division to employees in Microcosm UK, as wage cuts or random
+  job losses; it works those losses out from its own tariff scenario, so
+  reading another model's division values is a small extension. The outputs
+  on the right are existing policyengine.py outputs.
 - What another model could pass (a proposal, not built; the full field list
   was summarised on the earlier slide as "Keyed by": two-digit SIC division,
   COICOP spending division, ITL1 region (optional), scenario and year to
@@ -1229,9 +1231,11 @@ slides, not build steps.
   trade study's code (PR #46, d8e01f2), the AI study's code and
   policyengine-uk (d3db7ac). The tag in the third column says so.
   - Earnings and jobs by sector: "In the trade study’s code", which
-    already applies earnings changes by two-digit SIC division to employees,
-    once results are in those divisions (`apply_shocks`; `sic_industry_division` in the
-    data). By region too would be a small extension.
+    applies earnings losses by two-digit SIC division to employees as wage
+    cuts or random job losses (`apply_shocks`; `sic_industry_division` in the
+    data). It computes those losses from its own tariff scenario
+    (`_person_shock`), so reading another model's division values is a small
+    extension, and so is a breakdown by region.
   - Wages by labour type: a small extension. The model holds each worker's
     occupation as a SOC 2020 major group (`soc2020_major_group`), and the AI
     study assigns by occupation, but the trade study's code is keyed by

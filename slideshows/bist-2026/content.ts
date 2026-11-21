@@ -1418,8 +1418,9 @@ export const questions = [
 // "personal_allowance = PA.amount" is inlined in the last line). The
 // parameter and test for the same allowance are linked in the sources row.
 // Counts at the same commit: 1,086 YAML files under parameters/gov, 998 with
-// a "reference:" key (grep -rlE '^\s*reference:'); 1,513 "class X(Variable)"
-// definitions under variables/; 6,782 named cases (parsed, not grepped) in the YAML files under
+// a "reference:" key (grep -rlE '^\s*reference:'); 1,513 Variable subclasses
+// under variables/ (parsed, since a line-based grep misses declarations split
+// across lines); 6,782 named cases (parsed, not grepped) in the YAML files under
 // tests/policy. These counts are for version 2.179.0; the bundle certifies
 // 2.177.7. Entities: entities.py (Household, BenUnit, Person).
 export const rulesCode = {

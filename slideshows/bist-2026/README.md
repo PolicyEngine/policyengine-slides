@@ -924,8 +924,8 @@ The deck is public: it has no password and appears on the home page.
   temporary cut)": the encoding holds the 57.95p standing rate
   (rulespec-uk `uk/statutes/ukpga/1979/5/6.yaml`), and 52.95p is in force.
 - Slide 25, row 1: "Agent-based model, or a CGE model that reports
-  unemployment"; assigned as wage changes, with net job losses drawn at
-  random where the model reports them.
+  unemployment"; assigned as earnings losses by sector, as wage cuts or as
+  job losses drawn at random.
 - Per-item "Idea to explore", "Not built yet" and "Not developed yet" tags
   removed from slides 26 to 29; slide 25's tags and OG-UK's stay.
 - Slide 29: the macro-micro loop was done once by NIESR, without
