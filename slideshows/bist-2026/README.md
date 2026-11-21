@@ -347,8 +347,8 @@ notes for that slide.
   - Rules: policyengine-uk `d3db7ac` (version 2.179.0). The snippet is
     abridged from the personal allowance variable (the parameter and the test
     are linked in the sources row and described in the notes); the
-    counts (1,086 parameter files, 998 with a reference; 1,504 variables;
-    6,779 YAML test cases under `tests/policy`) were counted at that commit,
+    counts (1,086 parameter files, 998 with a reference; 1,513 variables;
+    6,782 YAML test cases under `tests/policy`) were counted at that commit,
     which is version 2.179.0; the bundle certifies 2.177.7.
   - A model run: policyengine-uk `d3db7ac`, the growth parameters (OBR
     forecasts to 2031) and the labour supply elasticities (zero by default).

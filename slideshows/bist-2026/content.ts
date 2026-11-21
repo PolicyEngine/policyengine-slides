@@ -653,7 +653,7 @@ export const coverage = [
     icon: IconBuildingFactory2,
     title: "Taxes on business",
     items: [
-      "Employer NI: changes passed to pay by default",
+      "Employer NI: eligible secondary Class 1 changes passed to pay by default",
       "Business rates and corporate stamp duty: published totals, allocated to shareholders",
     ],
     notModelled: "Corporation tax; firms as entities",
@@ -850,7 +850,7 @@ export const tariffDisaggregation = {
       from: "Agent-based model, or a CGE model that reports unemployment",
       key: "Two-digit SIC division",
       keyTag: tags.inData,
-      assigned: "Wage changes; net job losses, where the model reports them, drawn at random",
+      assigned: "Earnings losses by sector, as wage cuts or as job losses drawn at random",
       tag: tags.inTradeCode,
     },
     {
@@ -867,7 +867,7 @@ export const tariffDisaggregation = {
       result: "One economy-wide wage",
       from: "Quantitative trade model of the Caliendo–Parro kind",
       key: "None: the same change in every sector",
-      assigned: "All employees",
+      assigned: "All employees, as the same wage cut",
       tag: tags.inTradeCode,
     },
     {
@@ -1231,7 +1231,7 @@ export const axiomRules = [
     icon: IconGavel,
     tag: tags.encoded,
     title: "Data-protection fines",
-    text: "Up to £17.5m or 4% of worldwide turnover, whichever is greater",
+    text: "For an undertaking, up to £17.5m or 4% of annual worldwide turnover in the preceding financial year, whichever is greater",
     law: "Data Protection Act 2018 s.157",
   },
   {
@@ -1418,8 +1418,8 @@ export const questions = [
 // "personal_allowance = PA.amount" is inlined in the last line). The
 // parameter and test for the same allowance are linked in the sources row.
 // Counts at the same commit: 1,086 YAML files under parameters/gov, 998 with
-// a "reference:" key (grep -rlE '^\s*reference:'); 1,504 "class X(Variable)"
-// definitions under variables/; 6,779 "- name" cases in the YAML files under
+// a "reference:" key (grep -rlE '^\s*reference:'); 1,513 "class X(Variable)"
+// definitions under variables/; 6,782 named cases (parsed, not grepped) in the YAML files under
 // tests/policy. These counts are for version 2.179.0; the bundle certifies
 // 2.177.7. Entities: entities.py (Household, BenUnit, Person).
 export const rulesCode = {
@@ -1440,8 +1440,8 @@ export const rulesCode = {
 
 export const rulesFacts = [
   { icon: IconCalendarEvent, value: "1,086", label: "government parameter files", text: "Dated values; 998 carry a reference" },
-  { icon: IconMathFunction, value: "1,504", label: "variables", text: "A formula over arrays" },
-  { icon: IconTestPipe, value: "6,779", label: "YAML test cases", text: "Inputs and the expected output" },
+  { icon: IconMathFunction, value: "1,513", label: "variables", text: "Inputs, and formulas over arrays" },
+  { icon: IconTestPipe, value: "6,782", label: "YAML policy test cases", text: "Inputs and the expected output" },
 ];
 
 export const rulesEntities = [

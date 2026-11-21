@@ -339,7 +339,7 @@ slides, not build steps.
   belongs to one.
 - **1,086 parameter files.** Dated rates and thresholds; 998 carry a
   reference.
-- **1,504 variables, 6,779 tests.** A test gives inputs and the expected
+- **1,513 variables, 6,782 YAML policy test cases.** A test gives inputs and the expected
   output.
 - **Builds.** The code first; click for the counts, then the three entities.
 - **Sources.** [Personal allowance
