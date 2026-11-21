@@ -138,9 +138,11 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
         {!isFullscreen && !exportMode && (
           <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-between px-8 pointer-events-none">
             <div className="flex items-center gap-3 pointer-events-auto">
-              <span className="text-white/60 text-xs">
-                Click or arrow keys &middot; F for fullscreen
-              </span>
+              {!config.hideNavHint && (
+                <span className="text-white/60 text-xs">
+                  Click or arrow keys &middot; F for fullscreen
+                </span>
+              )}
             </div>
 
             <div className="flex items-center gap-4 pointer-events-auto">
@@ -153,7 +155,9 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
               </button>
 
               <span className="text-base font-medium text-white min-w-[4rem] text-center">
-                {currentStep + 1} / {totalSteps}
+                {config.countSlides
+                  ? `${(currentStepData?.slideIndex ?? 0) + 1} / ${config.slides.length}`
+                  : `${currentStep + 1} / ${totalSteps}`}
               </span>
 
               <button
