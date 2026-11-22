@@ -17,6 +17,7 @@ import { cliffwatchWebinarConfig } from "@/slideshows/cliffwatch-webinar/config"
 import { cbo2026Config } from "@/slideshows/cbo-2026/config";
 import { civicBuilders2026Config } from "@/slideshows/civic-builders-2026/config";
 import { policybenchWebinarConfig } from "@/slideshows/policybench-webinar/config";
+import { nefPublicServices2026Config } from "@/slideshows/nef-public-services-2026/config";
 import { aspenBenefits2026Config } from "@/slideshows/aspen-benefits-2026/config";
 import { l0Ima2026Config } from "@/slideshows/l0-ima-2026/config";
 import { iariw2026Config } from "@/slideshows/iariw-2026/config";
@@ -36,6 +37,7 @@ import { appam2026Config } from "@/slideshows/appam-2026/config";
 import { studentDebt2026Config } from "@/slideshows/student-debt-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  nefPublicServices2026Config,
   bist2026Config,
   appam2026Config,
   prop40Webinar2026Config,
