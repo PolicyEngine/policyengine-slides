@@ -133,15 +133,12 @@ function Frame({
   part,
   title,
   children,
-  center = true,
   scale = 1,
 }: {
   /** Index of the slide's part in the agenda. */
   part?: number;
   title: string;
   children: ReactNode;
-  /** Centre the body in the space below the title. */
-  center?: boolean;
   /** Enlarges a sparse slide's body; every component scales together. */
   scale?: number;
 }) {
@@ -153,7 +150,7 @@ function Frame({
           <SlideTitle>{title}</SlideTitle>
         </SlideHeader>
         <BuildScope
-          className={`${styles.body} ${center ? styles.centerBody : ""}`}
+          className={styles.body}
           style={{ "--scale": scale } as CSSProperties}
         >
           {children}
@@ -257,7 +254,7 @@ const tone: Record<Tone, { className: string; icon: Icon }> = {
 function StatusChip({ of, label }: { of: Tone; label: string }) {
   const { className, icon: ChipIcon } = tone[of];
   return (
-    <span className={`${styles.chip} ${styles.status} ${className}`}>
+    <span className={`${styles.chip} ${className}`}>
       <ChipIcon stroke={2} aria-hidden="true" />
       {label}
     </span>
@@ -325,7 +322,7 @@ export function TitleSlide() {
 export function AgendaSlide() {
   return (
     <Frame title="In this proposal" scale={1.5}>
-      <ol className={`${styles.agendaRoad} ${styles.road3}`}>
+      <ol className={styles.agendaRoad}>
         {agenda.map(({ icon: PartIcon, title, text }, index) => (
           <li key={title} className={styles.agendaStop}>
             <span className={styles.agendaDot}>{index + 1}</span>
@@ -616,7 +613,7 @@ export function BenchmarksSlide() {
             <tr>
               <th />
               {benchmarks.columns.map((column) => (
-                <th key={column.name}>{column.name}</th>
+                <th key={column}>{column}</th>
               ))}
             </tr>
           </thead>
@@ -751,7 +748,8 @@ export function MetricsSlide() {
       <div className={styles.stack}>
         <div className={styles.legendRow}>
           <p className={styles.caption}>
-            Today poverty is reported on HBAI income only, which leaves out most services.
+            Today PolicyEngine UK reports poverty on HBAI income only, which leaves out most
+            services.
           </p>
           <StatusLegend of="Each measure" labels={["Exists", "Partly exists", "To build"]} />
         </div>
@@ -837,7 +835,7 @@ const peIcons: Icon[] = [IconCode, IconDatabase, IconNotebook, IconFileText];
 
 export function RolesSlide() {
   return (
-    <Frame part={2} title="Who brings what" scale={1.75}>
+    <Frame part={2} title="NEF brings the policy designs, PolicyEngine the model and results" scale={1.75}>
       <div className={`${styles.cardGrid} ${styles.cols2}`}>
         <Card icon={IconUsersGroup} title="What NEF brings">
           <Points
@@ -869,7 +867,7 @@ const questionIcons: Icon[] = [
 
 export function QuestionsSlide() {
   return (
-    <Frame part={2} title="Open questions for NEF" scale={1.2}>
+    <Frame part={2} title="Seven open questions for NEF" scale={1.2}>
       <div className={styles.stack}>
         <IconList
           className={styles.twoCol}

@@ -100,7 +100,7 @@ export const scope = {
     "Local buses and rail",
     "Social housing",
     "Social care",
-    "Candidate new services: energy, water, food",
+    "Candidate new universal services: energy, water, food",
   ],
   question:
     "How public services and cash benefits compare in what they add to living standards, economic security and adequacy, and at what fiscal and carbon cost",
@@ -111,7 +111,7 @@ export const scope = {
     "Capital spending, unless it changes what households receive",
     "Social security targeting: a separate strand of the wider programme",
   ],
-  notBik: "Company cars, medical insurance and other P11D items: PolicyEngine treats these as part of the tax system",
+  notBik: "Company cars, medical insurance and other items reported on form P11D: PolicyEngine treats these as part of the tax system",
 };
 
 // ---------------------------------------------------------------------------
@@ -202,7 +202,7 @@ export const services: ServiceRow[] = [
   {
     service: "Social care",
     valued: "no",
-    valuedNote: "Not in the model",
+    valuedNote: "No value today",
     source: "n/a",
     calibrated: null,
     calibratedNote: "n/a",
@@ -237,7 +237,8 @@ export const services: ServiceRow[] = [
   },
 ];
 
-/** The abbreviations in each half of the status table, spelled out under it. */
+/** The abbreviations in each half of the status table, spelled out under it.
+ * FRS is spelled out on the scope slide, before both. */
 export const statusKeyValued = [
   ["ETB", "ONS Effects of Taxes and Benefits"],
   ["DfE", "Department for Education"],
@@ -246,7 +247,7 @@ export const statusKeyValued = [
 
 export const statusKeyNotValued = [
   ["LCFS", "Living Costs and Food Survey"],
-  ["DESNZ", "the energy department"],
+  ["DESNZ", "Department for Energy Security and Net Zero"],
 ] as const;
 
 // How services count in income today (proposal, "How services count in
@@ -262,9 +263,10 @@ export const incomeCount = [
 
 // Benchmarks (proposal, "Benchmarks").
 export const benchmarks = {
+  // sources.onsEtb and sources.hmtImpact.
   columns: [
-    { name: "ONS Effects of Taxes and Benefits (ETB)", source: sources.onsEtb },
-    { name: "HM Treasury, Impact on households (Budget 2026)", source: sources.hmtImpact },
+    "ONS Effects of Taxes and Benefits (ETB)",
+    "HM Treasury, Impact on households (Budget 2026)",
   ],
   rows: [
     {
@@ -300,7 +302,7 @@ export const benchmarks = {
     },
     {
       title: "Housing subsidy differs",
-      text: "ETB allocates a notional council housing subsidy. The Institute for Fiscal Studies (IFS) values the gap to market rents: about £40 a week in England in 2015 (29% of market rent). We propose the rent gap, beside ETB's",
+      text: "ETB allocates a notional council housing subsidy. The Institute for Fiscal Studies values the gap to market rents: about £40 a week in England in 2015 (29% of market rent). We propose the rent gap, reported beside ETB's",
     },
     {
       title: "Coverage share",
@@ -336,7 +338,7 @@ export const otherGaps = [
   },
   {
     title: "Rail",
-    text: "Well below published support, so not for use until re-anchored. In earlier tests, forcing the match made household weights less reliable",
+    text: "Our total is well below published support, so not for use until re-anchored. In earlier tests, forcing the match made household weights less reliable",
   },
   {
     title: "NHS coverage",
@@ -344,7 +346,7 @@ export const otherGaps = [
   },
   {
     title: "New candidate services",
-    text: "Energy is well measured and can be valued now. Water and food are spending only, and need a design first",
+    text: "Energy is well measured, so an energy service can be valued from existing data. Water and food are spending only, and need a design first",
   },
   {
     title: "Geography",
@@ -413,7 +415,7 @@ export const metrics: { title: string; text: string; status: MetricStatus; note?
 export const misNotes = [
   {
     title: "MIS and services interact",
-    text: "MIS budgets already assume some services, such as free childcare hours and pensioner bus passes. A new service lowers the cash needed: we count that saving, not add it to income",
+    text: "MIS budgets already assume some services, such as free childcare hours and pensioner bus passes. A new service lowers the cash needed: we would count that saving, not add it to income",
   },
   {
     title: "MIS has been microsimulated before",

@@ -4,8 +4,9 @@
 the New Economics Foundation (NEF) on valuing public services that households
 receive in kind (NHS, education, childcare, school meals, buses and rail,
 social housing, social care, and candidate new services) in PolicyEngine UK.
-It is not about employer benefits in kind (P11D); that is the separate
-`nef-bik-2026` deck. The deck is public.
+It is not about employer benefits in kind (the items reported on form
+P11D); that is the separate `nef-bik-2026` deck, which is on its own branch
+and not on main yet. The deck is public.
 
 The deck follows one document, the proposal of 21 November 2026 (`config.ts`,
 its footer and `cover.date` in `content.ts`). Every claim and number on the
@@ -22,7 +23,7 @@ slide, and every slide's header carries a tracker of the three parts:
    valued today, services not yet valued); how services count in income;
    the two official benchmarks; gaps; carbon; outcome measures
 3. The plan (slides 13 to 16): four phases with months and check-ins; who
-   brings what; the seven open questions for NEF
+   brings what; the seven open questions for NEF, with the next steps
 
 ## Editing and presenting
 
@@ -42,8 +43,9 @@ slide, and every slide's header carries a tracker of the three parts:
   (yes, partly, no), with its key (`StatusLegend`) inside the figure; the
   label names what the tone means on that slide.
 - `slides/BuildScope.tsx` and `slides/deck.module.css` are copied from the
-  NEF benefits-in-kind deck (`nef-bik-2026`), keeping only the styles this
-  deck uses, with its own styles at the end of the stylesheet.
+  NEF benefits-in-kind deck (`nef-bik-2026`, not on main yet), keeping only
+  the styles this deck uses, with its own styles at the end of the
+  stylesheet. This deck does not import from that one.
 - `SPEAKER-NOTES.md` has the fuller proposal wording behind each slide and
   lists what the slides condense or leave out.
 
@@ -55,8 +57,10 @@ care, state education, funded childcare, local buses, rail) have a household
 value; free school meals have a value per pupil as reported; social housing,
 social care, energy, water and food do not. "Calibrated to official figures"
 is "Yes" for the two the proposal calls calibrated in detail (childcare and
-buses), "Partly" where it describes a partial check, and "No" where it says
-none or not yet. The proposal's words sit under each chip.
+buses), "Partly" where it describes a partial or indirect link (NHS: one
+loose check on the total; social housing: only through benefit caseloads;
+energy: electricity spending and kWh, gas spending not yet), and "No" where
+it says none or not yet. The proposal's words sit under each chip.
 
 ## Sources
 

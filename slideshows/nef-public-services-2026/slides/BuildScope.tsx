@@ -54,8 +54,8 @@ export default function BuildScope({
         scale -= 0.03;
         element.style.setProperty("--fit", scale.toFixed(2));
         const after = content();
-        // Content that doesn't follow the base size (the module map sizes
-        // itself from the window) can't be fitted this way: leave it.
+        // Content that doesn't follow the base size can't be fitted this
+        // way: leave it.
         if (after >= before) {
           element.style.setProperty("--fit", "1");
           break;

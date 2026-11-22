@@ -86,7 +86,7 @@ Second half of the table:
 - Social housing: tenure only, from FRS tenure; calibrated only through
   benefit caseloads. No value for below-market rent; tenure changes and
   waiting lists not modelled.
-- Social care: not in the model. Care received is not in our dataset;
+- Social care: no, not in PolicyEngine UK today. Care received is not in our dataset;
   care-home residents are outside the FRS.
 - Energy: spending and kWh, not an in-kind value. Living Costs and Food
   Survey (LCFS) 2024-25, converted to kWh with energy department (DESNZ)
@@ -240,7 +240,7 @@ the scope questions are agreed.
    tenure-change and waiting-list rules agreed with NEF; each delivered as a
    tested method note; results for these may need a later phase.
 
-## 15. Who brings what
+## 15. NEF brings the policy designs, PolicyEngine the model and results
 
 - NEF: the policy designs and priorities, the scenarios to test, review of
   each phase's results, and expertise on adequacy measures and universal
@@ -250,7 +250,7 @@ the scope questions are agreed.
   shareable notebook or dashboard at each phase; and a methods note for each
   service.
 
-## 16. Open questions for NEF
+## 16. Seven open questions for NEF
 
 All seven, as in the proposal. Next steps: NEF's answers, then a short call
 to agree phase 1.
@@ -264,7 +264,12 @@ to agree phase 1.
   person" and "age band" for NHS spending, and "England, January 2026" for
   the DfE headcounts are in these notes only.
 - Benchmarks: the ONS method's examples (pupils, age and sex) and "account"
-  in "council housing account subsidy" are left off the slide.
+  in "council housing account subsidy" are left off the slide. The links on
+  the proposal's two column headings are in `content.ts` and the README.
+- Gaps: "in proportion" (values can only be scaled) and "that is not
+  trivial" (re-anchoring rail) are left off the slide.
+- Measures: "independent" before the Minimum Income Guarantee Expert Group
+  is left off the slide.
 - Gaps: the social care options are listed without the ONS method's detail
   (two age groups and region, allocated mainly to recipients of specific cash
   benefits) and without "with that limit stated"; the FRS check on cost and

@@ -1,5 +1,5 @@
 /* NEF deck: every colour comes from a design token (app/globals.css).
-   One style each for lists, cards, stats, tables, notes and chips. Sizes in
+   One style each for lists, cards, tables and chips. Sizes in
    the slide body are in em of .body, which scales with the viewport (the
    smaller of its height and width),
    so a slide looks the same at 1920x1080 and 1440x810. */
@@ -14,15 +14,12 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
+  /* Centred below the title. */
+  justify-content: center;
   /* Always a clear gap above the footer; BuildScope lowers --fit when the
      content would otherwise run into it. */
   padding-bottom: 1.25rem;
   font-size: calc(clamp(8px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1) * var(--fit, 1));
-}
-
-/* Centre the body below the title, clear of the sources line. */
-.centerBody {
-  justify-content: center;
 }
 
 .stack {
@@ -175,17 +172,22 @@
   color: var(--color-gray-400);
 }
 
-/* A line of plain text under a figure. */
+/* A line of plain text under a figure, with an optional icon. */
 .caption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2em 0.4em;
   color: var(--color-gray-600);
   font-size: 1.15em;
   line-height: 1.35;
 }
 
-/* Chips. */
+/* Chips: a status, with its icon. */
 .chip {
   display: inline-flex;
   align-items: center;
+  gap: 0.35em;
   border-radius: 9999px;
   padding: 0.2em 0.75em;
   font-size: 0.85em;
@@ -250,13 +252,6 @@
   width: 1.35em;
 }
 
-.rowLabel small {
-  display: block;
-  color: var(--color-gray-500);
-  font-size: 0.8em;
-  font-weight: 400;
-}
-
 .standIns {
   margin-top: 0.5em;
   display: grid;
@@ -275,11 +270,6 @@
 .standIns svg {
   height: 1.3em;
   width: 1.3em;
-}
-
-.standIns b {
-  color: var(--pe-dark);
-  font-weight: 600;
 }
 
 /* Closing slide contacts. */
@@ -342,8 +332,8 @@
 .agendaRoad {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 1.2em;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2em;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -352,8 +342,8 @@
 .agendaRoad::before {
   position: absolute;
   top: 1.1em;
-  right: 10%;
-  left: 10%;
+  right: 16.6%;
+  left: 16.6%;
   height: 2px;
   background: linear-gradient(90deg, var(--pe-teal), var(--pe-amber, var(--pe-teal)));
   content: "";
@@ -473,10 +463,6 @@
   animation: nefReveal 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-.body svg [data-step] {
-  animation-name: nefFade;
-}
-
 @keyframes nefFade {
   from {
     opacity: 0;
@@ -486,21 +472,16 @@
 .deck .body[data-build="1"] [data-step="2"],
 .deck .body[data-build="1"] [data-step="3"],
 .deck .body[data-build="1"] [data-step="4"],
-.deck .body[data-build="1"] [data-step="5"],
 .deck .body[data-build="2"] [data-step="3"],
 .deck .body[data-build="2"] [data-step="4"],
-.deck .body[data-build="2"] [data-step="5"],
-.deck .body[data-build="3"] [data-step="4"],
-.deck .body[data-build="3"] [data-step="5"],
-.deck .body[data-build="4"] [data-step="5"] {
+.deck .body[data-build="3"] [data-step="4"] {
   visibility: hidden;
   animation: none;
 }
 
 /* Choreography: each kind of element has its own motion, in order after the
    title: the accent bar sweeps, list rows and table rows come in from the
-   left, comparison columns from the right, numbers and chips pop, footnotes
-   fade in last. Keyframes with only a start end at the element's own style. */
+   left, chips pop, captions fade in last. Keyframes with only a start end at the element's own style. */
 @keyframes nefSweep {
   from {
     transform: scaleX(0);
@@ -530,10 +511,6 @@
   animation: nefSweep 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
 }
 
-.deck :global(h1) + p {
-  animation: nefFade 600ms ease-out 250ms both;
-}
-
 .iconItem,
 .table tbody tr,
 .standIns li {
@@ -552,7 +529,6 @@
 .table tbody tr:nth-child(5) { animation-delay: 830ms; }
 .iconItem:nth-child(6),
 .table tbody tr:nth-child(6) { animation-delay: 950ms; }
-.table tbody tr:nth-child(n + 7) { animation-delay: 1070ms; }
 
 .chip {
   animation: nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both;
@@ -567,7 +543,7 @@
 }
 
 /* Agenda: the line draws left to right; as it reaches each stop the number
-   pops and the card rises; then one highlight passes along the five. */
+   pops and the card rises; then one highlight passes along them. */
 .agendaRoad::before {
   transform-origin: left;
   animation: nefSweep 1000ms linear 200ms both;
@@ -601,26 +577,10 @@
 .agendaStop:nth-child(1) { --stop: 0; }
 .agendaStop:nth-child(2) { --stop: 1; }
 .agendaStop:nth-child(3) { --stop: 2; }
-.agendaStop:nth-child(4) { --stop: 3; }
-.agendaStop:nth-child(5) { --stop: 4; }
 
 /* ---- Public services deck ---- */
 
-.agendaRoad.road3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2em;
-}
-
-.agendaRoad.road3::before {
-  right: 16.6%;
-  left: 16.6%;
-}
-
-.chip.status {
-  gap: 0.35em;
-}
-
-.body .chip.status svg {
+.body .chip svg {
   height: 1.15em;
   width: 1.15em;
   color: currentColor;
@@ -628,16 +588,14 @@
 
 .statusLegend {
   display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
   align-items: center;
   justify-content: flex-end;
   gap: 0.7em;
   color: var(--color-gray-500);
   font-size: 1.15em;
   font-weight: 600;
-}
-
-.table .chip {
-  font-size: 0.78em;
 }
 
 .phase {
@@ -648,6 +606,9 @@
 }
 
 .card .phaseNumber {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
   margin: 0;
   color: var(--pe-teal);
   font-size: 0.9em;
@@ -661,8 +622,9 @@
 }
 
 .phase .standIns {
-  font-size: 1.2em;
+  margin-top: 0;
   color: var(--pe-dark);
+  font-size: 1.1em;
 }
 
 /* Scope: the services in scope, two to a row. */
@@ -706,7 +668,7 @@
   display: block;
   margin-top: 0.2em;
   color: var(--color-gray-600);
-  font-size: 0.88em;
+  font-size: 0.92em;
   line-height: 1.2;
 }
 
@@ -729,10 +691,6 @@
 .matrix .chip {
   min-width: 5.2em;
   font-size: 0.85em;
-}
-
-.matrix td small {
-  font-size: 0.92em;
 }
 
 /* Counted or not: a tick or a cross in a table cell. */
@@ -866,12 +824,6 @@
 }
 
 /* Phases: months, the work, and the check-in that ends each. */
-.card .phaseNumber {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-}
-
 .phaseNumber .chip {
   letter-spacing: 0;
   text-transform: none;
@@ -892,11 +844,6 @@
   width: 1.2em;
 }
 
-.phase .standIns {
-  margin-top: 0;
-  font-size: 1.1em;
-}
-
 .card .checkIn {
   display: flex;
   align-items: center;
@@ -914,13 +861,6 @@
   width: 1.3em;
 }
 
-.caption {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.2em 0.4em;
-}
-
 .caption svg {
   height: 1.3em;
   width: 1.3em;
@@ -933,8 +873,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .deck *,
-.deck *::before,
-.deck *::after {
+  .deck *::before,
+  .deck *::after {
     animation: none !important;
   }
 }
