@@ -7,7 +7,7 @@ PolicyEngine results.
 
 ## 1. Cover
 
-Vahid Ahmadi and Max Ghenis are both named. Remove Max if needed.
+Vahid Ahmadi and Max Ghenis are both named.
 
 ## 2. In this proposal
 
@@ -48,21 +48,26 @@ on household incomes, the Minimum Income Standard and carbon.
 
 The proposal's 11-row status table, first half. Full wording:
 
-- NHS (hospital care): A&E, outpatient and admitted patient spending per
-  person. Average use and cost by age band and sex, scaled to a 2025-26
-  health budget total. One loose check on the total. No GP, community,
-  mental health, prescribing or dental care; no variation by income, health
-  or region.
+- NHS: a share of England's 2025-26 health budget per person. England's
+  2025-26 health budget (£202bn, Spending Review of June 2025), spread across
+  the UK by hospital use (A&E, outpatient and admitted patient care) by age
+  band and sex. The total is set to the budget before calibration; no target
+  holds it afterwards. GP, community, mental health and prescribing spending
+  follow hospital use, not their own patterns; England's budget is spread
+  over the whole UK, so devolved health spending is missing and English
+  values are diluted; no variation by income or health.
 - State education: spending per household. Machine-learning imputation
   (quantile regression forest) from ONS Effects of Taxes and Benefits (ETB)
-  microdata, 2023-24. Not calibrated. No anchor to Department for Education
-  outturn; no split by phase.
-- Funded childcare: universal, extended and targeted hours, modelled from
-  the rules. Eligibility rules in law, valued at DfE hourly funding rates;
+  microdata, 2023-24. Not calibrated. No anchor to education outturn by
+  country (DfE for England plus the devolved governments, or HM Treasury's
+  spending statistics, PESA); no split by phase.
+- Funded childcare: England's universal, extended and targeted hours and the
+  Wales Childcare Offer, modelled from the rules. Eligibility rules in law, valued at DfE hourly funding rates;
   take-up fitted to DfE and HMRC counts. Calibrated to DfE headcounts
   (England, January 2026) and Tax-Free Childcare, mostly within 0.5%.
-  Headcounts only, not hours or spending; funded-hours targets cover England
-  only.
+  Headcounts only, not hours or spending; Scotland's 1,140 hours have
+  eligibility rules but no value in household income, and Northern Ireland
+  has neither.
 - Free school meals: partly, value per pupil as reported, from FRS 2024-25.
   Not calibrated. No eligibility rules, so an extension cannot yet be
   simulated.
@@ -71,13 +76,15 @@ The proposal's 11-row status table, first half. Full wording:
   Transport (DfT) support per boarding. Calibrated to DfT, Scottish, Welsh
   and Northern Ireland bus support, fares and journeys, mostly within 1%.
   Fare-cap changes do not yet flow into subsidy or household income.
-- Rail: subsidy per household, imputed from ETB microdata. Not yet matched to
-  the official total. Modelled total is well below published government
-  support (£11.86bn, 2024-25).
+- Rail: subsidy per household, imputed from ETB microdata; subsidy is usage
+  times a fare index. Not yet matched to the official total. Modelled total
+  is well below published government support (£11.86bn, Office of Rail and
+  Road table 7271, 2024-25); a fare cut lowers the modelled subsidy, so rail
+  fare reforms cannot be modelled yet.
 
 Chips: "Yes", "Partly" and "No" restate the table. Only buses and childcare
-are calibrated to official figures in detail; the NHS "loose check" shows as
-"Partly".
+are calibrated to official figures in detail; the NHS total, set to the
+budget before calibration but not held after, shows as "Partly".
 
 ## 7. Not yet valued in kind: housing, care, energy, water, food
 
@@ -86,8 +93,8 @@ Second half of the table:
 - Social housing: tenure only, from FRS tenure; calibrated only through
   benefit caseloads. No value for below-market rent; tenure changes and
   waiting lists not modelled.
-- Social care: no, not in PolicyEngine UK today. Care received is not in our dataset;
-  care-home residents are outside the FRS.
+- Social care: no, not in PolicyEngine UK today. Care received is in the FRS but not
+  yet in our dataset; care-home residents are outside the FRS.
 - Energy: spending and kWh, not an in-kind value. Living Costs and Food
   Survey (LCFS) 2024-25, converted to kWh with energy department (DESNZ)
   prices. Electricity spending calibrated to ONS totals; kWh set to DESNZ
@@ -125,7 +132,9 @@ PolicyEngine yet.
 - Housing subsidy differs: ETB allocates a notional council housing account
   subsidy. The Institute for Fiscal Studies instead values the gap between
   social and market rents: about £40 a week in England in 2015 (29% of market
-  rent). We propose the rent-gap approach, reported beside ETB's.
+  rent). We propose the rent-gap approach, reported beside ETB's. ONS final
+  income includes housing subsidy, so our phase 2 comparison will lack it,
+  mostly in the lower deciles, until social rent is valued in phase 3.
 - Coverage share: we would report the share of day-to-day departmental
   spending our services cover. The Treasury last stated its own share,
   around two-thirds, in its Spending Review 2010 edition.
@@ -133,40 +142,57 @@ PolicyEngine yet.
 ## 10. Gaps: social care and social housing are the hardest
 
 Build: the two hardest first, then the rest ("mostly work we know how to
-do").
+do"). They are hardest because the survey data miss care-home residents and
+the value of below-market rents.
 
-- Social care: our dataset carries the unpaid care people give. The FRS also
-  records who receives help; we do not yet use it, and would check what it
-  holds on cost and funding. Care-home residents are outside the survey
+- Social care: the FRS records care received, from local-authority carers,
+  nurses, paid helpers and privately arranged care, with hours in bands and
+  whether the council pays all, some or none of it. Our dataset does not use
+  it yet. Care at home could be valued at the unit costs in the Adult Social
+  Care Finance Report and checked against its client counts for ages 18 to
+  64 and 65 and over; before promising regional splits we would check how
+  many survey households report council-funded care. Care-home residents are outside the survey
   frame, and they are among the heaviest users of care and of the NHS.
   Options: follow the ONS method (non-residential care spending by two age
   groups and region, allocated mainly to recipients of specific cash
-  benefits), impute care received from other surveys, add a modelled
+  benefits), value care at home from the FRS, add a modelled
   care-home population, or report care separately with that limit stated.
 - Social housing: we know who rents from a council or housing association,
   but not the value of the below-market rent. Valuing it needs a market-rent
-  estimate for each social tenant. Simulating a large expansion also needs
+  estimate for each social tenant: private renters in the FRS (rent,
+  bedrooms, accommodation type) can serve as donors, checked against ONS
+  private rents by local authority and bedroom count. The national dataset
+  places households only by region, so that check is coarse there. The method note would
+  say how the rent gap sits beside housing benefit. Simulating a large expansion also needs
   rules for who moves tenure and who waits on a list; that is a modelling
   choice to agree, not a data fix.
-- Values, not rules: NHS, education and rail are stored as values per
-  household, so policy can only scale them up or down in proportion. Testing
+- Values, not rules: NHS and education are stored as values per household,
+  so policy can only scale them up or down in proportion. Rail subsidy is
+  usage times a fare index, so a fare cut lowers the modelled subsidy and
+  household income, the wrong direction for a fare reform. Testing
   a new universal service means writing eligibility, take-up and cost rules,
   as we have done for childcare.
 - Rail: our total is well below published government support, so rail values
   should not be used until re-anchored. Not trivial: in earlier tests,
   forcing the data to match the official total made the household weights
-  less reliable.
-- NHS coverage: hospital care only, varying by age and sex. GP, community,
-  mental health and prescribing are missing, and nothing varies by income or
-  health.
+  less reliable. What worked for buses was pricing support from journeys
+  rather than reweighting; National Travel Survey rail trips for England
+  would allow the same for rail.
+- NHS coverage: England's health budget, spread across the UK by hospital use
+  by age and sex. GP, community, mental health and prescribing spending are
+  in the value but follow hospital use, and Scotland's, Wales's and Northern
+  Ireland's health spending is missing. Nothing varies by income or health:
+  that needs a survey we do not hold yet (Understanding Society records GP,
+  outpatient and inpatient use).
 - New candidate services: energy is well measured, so an energy service can
   be valued from existing data. Water and food are recorded as spending
   only; a water or food service needs a design (what is provided, to whom)
   before it can be valued.
 - Geography: the national dataset is calibrated to UK, country and
-  English-region totals. A separate local-area build, still in development,
-  has energy targets for local authorities and constituencies and tenure for
-  local authorities; services have no local targets yet.
+  English-region totals. The local-area dataset (constituencies and local
+  authorities) adds energy, tenure and private-rent targets, including ONS
+  private rents by local authority and Broad Rental Market Area; services
+  have no local targets yet.
 - Sample size: small groups (rail users, free school meal recipients, social
   renters in one region) will have wide uncertainty; results for them should
   carry ranges.
@@ -187,7 +213,9 @@ do").
   Footprint of the services: emissions per pound of service spending (NHS,
   education, transport), so a universal service and a cash transfer of equal
   cost can be compared on carbon as well as income.
-- Step 1 is in phase 2. Steps 2 and 3 are not yet scheduled; we would agree
+- Step 1 is in phase 2. It replaces the energy share of the spending-based
+  footprint rather than adding to it, so energy emissions are not counted
+  twice. Steps 2 and 3 are not yet scheduled; we would agree
   their timing in phase 1.
 - We have not found a UK microsimulation that does step 3. The UCL 2017
   universal basic services report modelled the distribution of free
@@ -222,22 +250,33 @@ in something NEF can use. The timings are estimates and would be fixed once
 the scope questions are agreed.
 
 1. Scope (December 2026 to January 2027): agree priority services, scenarios,
-   metrics and geography (UK, regional or local); deliver this catalogue in
+   metrics and geography (UK, regional or local); settle which income MIS is
+   compared with (usually income after rent and childcare) and how its
+   household types map onto survey households; deliver this catalogue in
    final form; walk NEF through our existing carbon code.
 2. Baseline (February to March 2027): one extended income measure, with and
    without services, by decile and household type; the MIS measure and
-   household carbon by fuel from kWh; anchor NHS and education to published
-   outturn and start re-anchoring rail (a known risk); compare with ONS final
+   household carbon by fuel from kWh; anchor NHS and education to outturn
+   by country (HM Treasury's PESA) and, for the NHS, by service type, giving
+   GP and prescribing spending their own age profiles from NHS England's
+   allocation formulae; start re-anchoring rail by pricing support from
+   journeys (a known risk); compare with ONS final
    income and the Treasury's decile results, and share the comparison with
    NEF.
-3. Policy levers (April to May 2027): rules for free school meal eligibility,
-   bus fares feeding through to subsidy and household income, and childcare
-   expansion; value social rent as the gap to market rent; design and value
-   one new universal service with NEF (for example an energy allowance),
-   including its carbon footprint.
-4. Hard services (June to July 2027, exploratory): social care received and a
-   modelled care-home population; housing expansion scenarios using
-   tenure-change and waiting-list rules agreed with NEF; each delivered as a
+3. Policy levers (April to May 2027): rules for free school meal eligibility
+   (England's change from September 2026, the universal schemes in
+   Scotland (P1 to P5) and Wales (all primary pupils), and London's scheme, checked against DfE school census
+   counts), bus and rail fares feeding through to subsidy and household
+   income, and childcare expansion; value social rent as the gap to market
+   rent, with private renters as donors, and social care at home from the
+   care received recorded in the FRS; design and value one new universal
+   service with NEF (for example an energy allowance, whose carbon follows
+   from fuel use, step 1 of the carbon work).
+4. Hard services (June to July 2027, exploratory): a modelled care-home
+   population (synthetic records built from 2021 Census counts and published
+   costs); housing expansion scenarios using tenure-change and waiting-list
+   rules agreed with NEF; NHS variation by income or health, using
+   Understanding Society (a new data licence); each delivered as a
    tested method note; results for these may need a later phase.
 
 ## 15. NEF brings the policy designs, PolicyEngine the model and results
@@ -252,8 +291,11 @@ the scope questions are agreed.
 
 ## 16. Seven open questions for NEF
 
-All seven, as in the proposal. Next steps: NEF's answers, then a short call
-to agree phase 1.
+All seven, as in the proposal. Q1 adds that social rent follows in phase 3,
+and asks whether housing should come first instead. Q5: the local-area
+dataset exists; services would need local targets. Q7 is about publication
+only. Next steps: NEF's answers, then a short call to agree phase 1 and how
+the work is resourced.
 
 ## 17. Thank you
 
@@ -261,29 +303,44 @@ to agree phase 1.
 
 - The status table is split over two slides; its cells are shortened (full
   wording under slides 6 and 7). The quantile regression forest, "per
-  person" and "age band" for NHS spending, and "England, January 2026" for
-  the DfE headcounts are in these notes only.
+  person", "age band" and the A&E, outpatient and admitted patient detail
+  for NHS spending, "diluted" English values, DfE plus devolved governments
+  for education outturn, and "England, January 2026" for the DfE headcounts
+  are in these notes only.
 - Benchmarks: the ONS method's examples (pupils, age and sex) and "account"
-  in "council housing account subsidy" are left off the slide. The links on
+  in "council housing account subsidy" are left off the slide, as is the
+  note that the phase 2 comparison with ONS lacks housing subsidy. The links on
   the proposal's two column headings are in `content.ts` and the README.
-- Gaps: "in proportion" (values can only be scaled) and "that is not
-  trivial" (re-anchoring rail) are left off the slide.
+- Gaps: "in proportion" (values can only be scaled), "that is not trivial"
+  (re-anchoring rail), the National Travel Survey for rail trips, Scotland,
+  Wales and Northern Ireland named one by one, and Understanding Society for
+  NHS variation are left off the slide.
 - Measures: "independent" before the Minimum Income Guarantee Expert Group
   is left off the slide.
 - Gaps: the social care options are listed without the ONS method's detail
   (two age groups and region, allocated mainly to recipients of specific cash
-  benefits) and without "with that limit stated"; the FRS check on cost and
-  funding is left out.
+  benefits) and without "with that limit stated". The FRS care detail
+  (providers, hours in bands), valuing care at home at Adult Social Care
+  Finance Report unit costs, and the check on council-funded cases are in
+  the notes only. For social housing, the private-renter donor detail, the
+  check against ONS private rents (coarse nationally, by region only) and the note on housing benefit are in the
+  notes only.
 - Carbon: "published government projections could supply future factors"
   and the UCL 2017 report are in the notes only.
 - Out of scope: the examples of shocks (pandemics, AI-driven job changes)
   are in the notes only.
-- Plan: "(UK, regional or local)" after geography, "by decile and household
-  type", "to published outturn", "share the comparison with NEF" and "for
-  example an energy allowance" are in the notes only.
-- Geography: "local authorities and constituencies" (energy targets) and
-  "tenure for local authorities" are shortened to "energy and tenure
-  targets".
+- Plan: "(UK, regional or local)" after geography, "usually income after
+  rent and childcare" for MIS, "by decile and household type", PESA and the
+  NHS England allocation formulae for the anchors, "share the comparison with
+  NEF", the free school meal schemes and school census check, "for example
+  an energy allowance", and the 2021 Census and new data licence in phase 4
+  are in the notes only.
+- Geography: "(constituencies and local authorities)" and the ONS private
+  rents by local authority and Broad Rental Market Area are in the notes
+  only.
+- Gaps: why social care and social housing are hardest (the survey data miss
+  care-home residents and the value of below-market rents) is in the notes
+  only.
 - The proposal's summary bullets ("the aim", "what is missing") appear in
   the notes to slide 2, not on a slide.
 - The proposal's NEF publications (universal basic services; the universal

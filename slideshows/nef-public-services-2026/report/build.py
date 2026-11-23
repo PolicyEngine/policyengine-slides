@@ -1,4 +1,4 @@
-"""Build the A4 report HTML for the public services in kind proposal (doc rev 67).
+"""Build the A4 report HTML for the public services in kind proposal (doc rev 109, revised 23 Nov 2026 after review).
 
 Run from the repo root:
     python3 slideshows/nef-public-services-2026/report/build.py
@@ -12,7 +12,7 @@ from pathlib import Path
 import markdown
 
 HERE = Path(__file__).parent
-SRC = HERE / "PROPOSAL.md"  # the proposal doc at rev 67, 21 Nov 2026
+SRC = HERE / "PROPOSAL.md"  # the proposal doc at rev 109, 23 Nov 2026
 REPO = HERE.parents[2]
 LOGO = REPO / "public/logos/teal.svg"
 OUT_DIR = REPO / "public/reports"
@@ -51,11 +51,11 @@ ROADMAP = """
 
     <rect x="357" y="34" width="166" height="38" rx="5" fill="#2C7A7B"/>
     <text x="367" y="51" font-size="12" font-weight="700" fill="#fff">3 Policy levers</text>
-    <text x="367" y="65" font-size="10" fill="#fff">rules, social rent, new service</text>
+    <text x="367" y="65" font-size="10" fill="#fff">fares, social rent, home care</text>
 
     <rect x="527" y="34" width="166" height="38" rx="5" fill="#fff" stroke="#2C7A7B" stroke-dasharray="4 3"/>
     <text x="537" y="51" font-size="12" font-weight="700" fill="#234E52">4 Hard services</text>
-    <text x="537" y="65" font-size="10" fill="#285E61">exploratory: care, housing</text>
+    <text x="537" y="65" font-size="10" fill="#285E61">care homes and housing</text>
   </g>
   <g fill="#D69E2E">
     <polygon points="185,88 191,96 185,104 179,96"/><polygon points="355,88 361,96 355,104 349,96"/>
@@ -120,7 +120,7 @@ page = f"""<!doctype html>
   </div>
   <div class="cover-meta">
     <div><span>Authors</span>Vahid Ahmadi, Max Ghenis</div>
-    <div><span>Date</span>21 November 2026</div>
+    <div><span>Date</span>21 November 2026, revised 23 November</div>
     <div><span>Status</span>Proposal for discussion</div>
   </div>
 </section>

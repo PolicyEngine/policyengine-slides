@@ -879,7 +879,7 @@ export function QuestionsSlide() {
         />
         <p className={styles.caption}>
           <IconChevronRight stroke={1.8} aria-hidden="true" />
-          Next: NEF&apos;s answers to these, then a short call to agree phase 1.
+          Next: NEF&apos;s answers to these, then a short call to agree phase 1 and how the work is resourced.
         </p>
       </div>
     </Frame>

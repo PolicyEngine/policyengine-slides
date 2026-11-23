@@ -86,6 +86,21 @@ export const sources = {
     label: "Scottish Government, Minimum income guarantee modelling",
     href: "https://www.gov.scot/publications/minimum-income-guarantee-level-modelling/",
   },
+  orrRailSupport: {
+    label:
+      "Office of Rail and Road, table 7271, government support to the rail industry by source, all sources, 2024-25 (£11.86bn)",
+  },
+  spendingReview2025: {
+    label: "HM Treasury, Spending Review 2025 (June 2025): England's 2025-26 health budget, £202bn",
+  },
+  ascFinance: {
+    label: "DHSC, Adult social care finance report, England, 2024 to 2025",
+    href: "https://www.gov.uk/government/statistics/adult-social-care-finance-report-england-2024-to-2025",
+  },
+  nhsAllocations: {
+    label: "NHS England, Technical guide to allocation formulae, 2026-27",
+    href: "https://www.england.nhs.uk/wp-content/uploads/2025/12/allocations-2627-technical-guide-to-formulae-v2.pdf",
+  },
 } satisfies Record<string, Source>;
 
 // ---------------------------------------------------------------------------
@@ -137,13 +152,13 @@ export type ServiceRow = {
 // not. Only buses and childcare are calibrated to official figures in detail."
 export const services: ServiceRow[] = [
   {
-    service: "NHS hospital care",
+    service: "NHS",
     valued: "yes",
-    valuedNote: "A&E, outpatient and admitted patient spending",
-    source: "Use and cost by age and sex, scaled to a 2025-26 health budget",
+    valuedNote: "A share of England's 2025-26 health budget",
+    source: "England's budget (£202bn), spread across the UK by hospital use by age and sex",
     calibrated: "partly",
-    calibratedNote: "One loose check on the total",
-    gap: "No GP, community, mental health, prescribing or dental care; no variation by income, health or region",
+    calibratedNote: "Total set to the budget before calibration, not held after",
+    gap: "GP, community, mental health and prescribing follow hospital use; devolved health spending missing; no variation by income or health",
   },
   {
     service: "State education",
@@ -152,16 +167,16 @@ export const services: ServiceRow[] = [
     source: "Imputed from ETB microdata, 2023-24",
     calibrated: "no",
     calibratedNote: "None",
-    gap: "No anchor to DfE outturn; no split by phase",
+    gap: "No anchor to outturn by country (PESA); no split by phase",
   },
   {
     service: "Funded childcare",
     valued: "yes",
-    valuedNote: "Universal, extended and targeted hours, from the rules",
+    valuedNote: "England's hours and the Wales Childcare Offer, from the rules",
     source: "Rules in law at DfE hourly rates; take-up fitted to DfE and HMRC counts",
     calibrated: "yes",
     calibratedNote: "DfE headcounts and Tax-Free Childcare, mostly within 0.5%",
-    gap: "Headcounts only, not hours or spending; funded-hours targets cover England only",
+    gap: "Headcounts only, not hours or spending; Scotland's 1,140 hours have rules but no value; Northern Ireland neither",
   },
   {
     service: "Free school meals",
@@ -185,10 +200,10 @@ export const services: ServiceRow[] = [
     service: "Rail",
     valued: "yes",
     valuedNote: "Subsidy per household",
-    source: "Imputed from ETB microdata",
+    source: "Imputed from ETB microdata; subsidy is usage times a fare index",
     calibrated: "no",
     calibratedNote: "Not yet matched to the official total",
-    gap: "Modelled total well below published government support (£11.86bn, 2024-25)",
+    gap: "Total well below government support (£11.86bn, ORR, 2024-25); a fare cut lowers modelled subsidy",
   },
   {
     service: "Social housing",
@@ -206,7 +221,7 @@ export const services: ServiceRow[] = [
     source: "n/a",
     calibrated: null,
     calibratedNote: "n/a",
-    gap: "Care received is not in our dataset; care-home residents are outside the FRS",
+    gap: "Care received is in the FRS but not yet in our dataset; care-home residents are outside the FRS",
   },
   {
     service: "Energy",
@@ -243,6 +258,8 @@ export const statusKeyValued = [
   ["ETB", "ONS Effects of Taxes and Benefits"],
   ["DfE", "Department for Education"],
   ["DfT", "Department for Transport"],
+  ["PESA", "HM Treasury spending statistics"],
+  ["ORR", "Office of Rail and Road"],
 ] as const;
 
 export const statusKeyNotValued = [
@@ -316,16 +333,16 @@ export const hardGaps = [
   {
     title: "Social care",
     points: [
-      "Our dataset has the unpaid care people give; the FRS records who receives help, which we do not yet use",
+      "The FRS records care received, its hours and who pays; our dataset does not use it yet",
       "Care-home residents are outside the survey, and among the heaviest users of care and the NHS",
-      "Options: the ONS method, imputing from other surveys, a modelled care-home population, or reporting care separately",
+      "Options: the ONS method, care at home valued from the FRS, a modelled care-home population, or reporting care separately",
     ],
   },
   {
     title: "Social housing",
     points: [
       "We know who rents from a council or housing association, not the value of the below-market rent",
-      "Valuing it needs a market-rent estimate for each social tenant",
+      "Valuing it needs a market rent for each social tenant, with private renters as donors",
       "A large expansion needs rules on who moves tenure and who waits: a modelling choice to agree, not a data fix",
     ],
   },
@@ -334,15 +351,15 @@ export const hardGaps = [
 export const otherGaps = [
   {
     title: "Values, not rules",
-    text: "NHS, education and rail are values per household, so policy can only scale them. A new service needs eligibility, take-up and cost rules, as for childcare",
+    text: "NHS and education are values, so policy can only scale them; a rail fare cut lowers modelled subsidy. A new service needs rules, as for childcare",
   },
   {
     title: "Rail",
-    text: "Our total is well below published support, so not for use until re-anchored. In earlier tests, forcing the match made household weights less reliable",
+    text: "Well below published support, so not for use until re-anchored. Forcing the match hurt the weights; pricing support from journeys worked for buses",
   },
   {
     title: "NHS coverage",
-    text: "Hospital care only, by age and sex. No GP, community, mental health or prescribing; nothing varies by income or health",
+    text: "England's budget spread by hospital use. GP and prescribing follow it; devolved spending missing; no variation by income or health",
   },
   {
     title: "New candidate services",
@@ -350,7 +367,7 @@ export const otherGaps = [
   },
   {
     title: "Geography",
-    text: "Calibrated to UK, country and English-region totals. A local build in development has energy and tenure targets; no service targets yet",
+    text: "Calibrated to UK, country and English-region totals. The local-area dataset adds energy, tenure and private-rent targets; no service targets yet",
   },
   {
     title: "Sample size",
@@ -368,7 +385,7 @@ export const carbon = {
   add: [
     {
       title: "Energy by fuel",
-      text: "Household kWh times official factors, such as DESNZ's 2026 factor for electricity: 0.144 kg CO2e per kWh, including grid losses",
+      text: "Household kWh times official factors (electricity: 0.144 kg CO2e per kWh, DESNZ 2026). Replaces the energy share, so nothing is counted twice",
       scheduled: true,
     },
     {
@@ -436,6 +453,7 @@ export const phases = [
     months: "December 2026 to January 2027",
     work: [
       "Agree services, scenarios, metrics and geography",
+      "Settle the MIS income measure and household-type mapping",
       "This service catalogue in final form",
       "Walk NEF through our carbon code",
     ],
@@ -446,7 +464,8 @@ export const phases = [
     work: [
       "Extended income, with and without services",
       "MIS measure; household carbon by fuel",
-      "Anchor NHS and education; start re-anchoring rail (a known risk)",
+      "Anchor NHS and education by country, NHS by service type",
+      "Start re-anchoring rail from journeys (a known risk)",
       "Compare with ONS and Treasury results",
     ],
   },
@@ -454,9 +473,9 @@ export const phases = [
     title: "Policy levers",
     months: "April to May 2027",
     work: [
-      "Rules for free school meals, bus fares and childcare expansion",
-      "Social rent valued as the gap to market rent",
-      "One new universal service with NEF, with its carbon footprint",
+      "Rules for free school meals, bus and rail fares, childcare expansion",
+      "Social rent as the gap to market rent; social care at home",
+      "One new universal service with NEF; an energy allowance's carbon from fuel use",
     ],
   },
   {
@@ -464,8 +483,9 @@ export const phases = [
     months: "June to July 2027",
     exploratory: true,
     work: [
-      "Social care received; a modelled care-home population",
+      "A modelled care-home population (synthetic records)",
       "Housing expansion scenarios, with rules agreed with NEF",
+      "NHS variation by income or health, from Understanding Society",
       "Tested method notes; results may need a later phase",
     ],
   },
@@ -489,7 +509,7 @@ export const roles = {
 export const openQuestions = [
   {
     title: "Which services come first?",
-    text: "Our suggestion: childcare, buses and energy, where the data are strongest",
+    text: "Our suggestion: childcare, buses and energy, where the data are strongest; social rent follows in phase 3. Should housing come first instead?",
   },
   {
     title: "Which universal service designs, at what level?",
@@ -505,14 +525,14 @@ export const openQuestions = [
   },
   {
     title: "Is a UK-wide picture enough?",
-    text: "Or English regions or local areas, such as Greater Manchester; local results need more development",
+    text: "Or English regions or local areas, such as Greater Manchester; the local-area dataset exists, services need local targets",
   },
   {
     title: "Which housing expansion and allocation rule?",
     text: "Who moves in, and from which tenure",
   },
   {
-    title: "How will results be published and resourced?",
+    title: "How will results be published?",
     text: "Joint report, NEF report with our methods note, or an interactive tool",
   },
 ];

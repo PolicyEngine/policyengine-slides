@@ -11,8 +11,10 @@ and not on main yet. The deck is public.
 The deck follows one document, the proposal of 21 November 2026 (`config.ts`,
 its footer and `cover.date` in `content.ts`). Every claim and number on the
 slides comes from it, condensed; nothing is added. The cover names Vahid
-Ahmadi and Max Ghenis; remove Max in `slides/index.tsx` (`TitleSlide`) if
-needed.
+Ahmadi and Max Ghenis. The deck reflects the proposal as revised after review
+(NHS valued from England's health budget, devolved coverage of education and
+childcare, rail fares, social care in the FRS, the local-area dataset, and
+the revised phases and open questions).
 
 Three parts, after a title and an agenda. Each part opens with a section
 slide, and every slide's header carries a tracker of the three parts:
@@ -52,13 +54,13 @@ slide, and every slide's header carries a tracker of the three parts:
 ## What a status means
 
 On the status tables, "Yes", "Partly" and "No" restate the proposal's table.
-"In-kind value today" follows its lead sentence: five services (NHS hospital
-care, state education, funded childcare, local buses, rail) have a household
+"In-kind value today" follows its lead sentence: five services (NHS, state
+education, funded childcare, local buses, rail) have a household
 value; free school meals have a value per pupil as reported; social housing,
 social care, energy, water and food do not. "Calibrated to official figures"
 is "Yes" for the two the proposal calls calibrated in detail (childcare and
-buses), "Partly" where it describes a partial or indirect link (NHS: one
-loose check on the total; social housing: only through benefit caseloads;
+buses), "Partly" where it describes a partial or indirect link (NHS:
+total set to the budget before calibration, not held after; social housing: only through benefit caseloads;
 energy: electricity spending and kWh, gas spending not yet), and "No" where
 it says none or not yet. The proposal's words sit under each chip.
 
@@ -104,3 +106,11 @@ Official analyses and statistics:
   https://www.jrf.org.uk/income-savings-and-debt/a-minimum-income-standard-for-the-united-kingdom-in-2026 ;
   Scottish Government, Minimum income guarantee modelling:
   https://www.gov.scot/publications/minimum-income-guarantee-level-modelling/
+- Office of Rail and Road, table 7271, government support to the rail
+  industry by source, all sources, 2024-25 (£11.86bn)
+- HM Treasury, Spending Review 2025 (June 2025): England's 2025-26 health
+  budget, £202bn
+- DHSC, Adult social care finance report, England, 2024 to 2025:
+  https://www.gov.uk/government/statistics/adult-social-care-finance-report-england-2024-to-2025 ;
+  NHS England, Technical guide to allocation formulae, 2026-27:
+  https://www.england.nhs.uk/wp-content/uploads/2025/12/allocations-2627-technical-guide-to-formulae-v2.pdf
