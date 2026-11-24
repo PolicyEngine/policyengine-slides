@@ -1,0 +1,480 @@
+/* Layouts specific to the Berlin deck. Sizes use the deck unit --u from
+   deck.module.css (16px on a 1920×1080 page). */
+
+/* ---------- Headline numbers ---------- */
+
+.kpis {
+  display: grid;
+  gap: calc(var(--u) * 2.4);
+}
+
+.kpi {
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+  padding-top: calc(var(--u) * 1.2);
+}
+
+.kpiMuted {
+  border-top-color: var(--color-gray-300);
+}
+
+.kpiValue {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 4.2);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.kpiSmall .kpiValue {
+  font-size: calc(var(--u) * 3.3);
+}
+
+.kpiTitle {
+  margin-top: calc(var(--u) * 0.2);
+  margin-bottom: calc(var(--u) * 0.9);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.9);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.kpiLabel {
+  margin-top: calc(var(--u) * 0.7);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.55);
+  line-height: 1.32;
+  text-wrap: pretty;
+}
+
+.kpiHead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+}
+
+/* ---------- Two-column layouts ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+  gap: calc(var(--u) * 4);
+}
+
+.splitEven {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.splitWide {
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+}
+
+.sideHead {
+  margin-bottom: calc(var(--u) * 0.6);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.05);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.note {
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.lead {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.1);
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.lead strong {
+  color: var(--pe-teal-dark);
+  font-weight: 700;
+}
+
+/* ---------- Tables with horizontal rules only ---------- */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid var(--pe-teal);
+  font-variant-numeric: tabular-nums;
+}
+
+.table th {
+  padding: calc(var(--u) * 0.7) calc(var(--u) * 0.8) calc(var(--u) * 0.5);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+
+.table td {
+  border-top: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 0.6) calc(var(--u) * 0.8);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.5);
+  line-height: 1.25;
+  vertical-align: baseline;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 0;
+}
+
+.table .num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table .rowName {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.table .rowText {
+  display: block;
+  margin-top: calc(var(--u) * 0.15);
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 1.15);
+  font-weight: 400;
+}
+
+.table .sd {
+  color: var(--color-gray-400);
+  font-size: 0.8em;
+}
+
+.rowCentral td {
+  background: var(--tint);
+}
+
+.rowCentral td:first-child {
+  box-shadow: inset calc(var(--u) * 0.3) 0 0 var(--pe-teal);
+  padding-left: calc(var(--u) * 0.9);
+}
+
+.rowStress td {
+  color: var(--color-gray-500);
+}
+
+.compact td {
+  padding-top: calc(var(--u) * 0.38);
+  padding-bottom: calc(var(--u) * 0.38);
+  font-size: calc(var(--u) * 1.35);
+}
+
+/* An inline bar for a rate column. */
+.rateCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: calc(var(--u) * 0.8);
+}
+
+.rateTrack {
+  width: calc(var(--u) * 9);
+  height: calc(var(--u) * 0.9);
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  overflow: hidden;
+}
+
+.rateFill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+/* ---------- Waterfall of the three channels ---------- */
+
+.waterfall {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 13) minmax(0, 1fr);
+  row-gap: calc(var(--u) * 1.1);
+  column-gap: calc(var(--u) * 1.4);
+  align-items: center;
+}
+
+.wfLabel {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.wfLabel span {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 1.15);
+  font-weight: 400;
+}
+
+.wfTrack {
+  position: relative;
+  height: calc(var(--u) * 3.2);
+}
+
+.wfBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  border-radius: calc(var(--u) * 0.35);
+  padding: 0 calc(var(--u) * 0.8);
+  color: white;
+  font-size: calc(var(--u) * 1.5);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.wfCost {
+  background: var(--pe-amber-dark);
+}
+
+.wfGain {
+  justify-content: flex-end;
+  background: var(--pe-teal);
+}
+
+.wfNet {
+  background: var(--pe-dark);
+}
+
+/* ---------- Two margins side by side ---------- */
+
+.margins {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 24) repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--pe-teal);
+}
+
+.margins > div {
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 0.8) calc(var(--u) * 1.2);
+}
+
+.marginHead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.9);
+  font-weight: 700;
+}
+
+.marginLabel {
+  padding-left: 0 !important;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.5);
+  line-height: 1.25;
+}
+
+.marginLabel span {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 1.1);
+}
+
+.marginValue {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.8);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.marginHigh {
+  color: var(--pe-teal-dark);
+}
+
+/* ---------- Figures ---------- */
+
+.figure {
+  margin: 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(var(--u0) * 34);
+  object-fit: contain;
+}
+
+.figure figcaption {
+  margin-top: calc(var(--u) * 0.6);
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.15);
+  line-height: 1.3;
+}
+
+/* ---------- Break-evens ---------- */
+
+.breakEven {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: calc(var(--u) * 1.6);
+  border-top: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 1.1) 0;
+}
+
+.breakEven:first-of-type {
+  border-top: 2px solid var(--pe-teal);
+}
+
+.breakEvenLabel {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.9);
+  font-weight: 600;
+}
+
+.breakEvenFrom,
+.breakEvenTo {
+  min-width: calc(var(--u) * 9);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.breakEvenFrom {
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 2.4);
+  font-weight: 600;
+}
+
+.breakEvenTo {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 3);
+  font-weight: 700;
+}
+
+.breakEvenCaption {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Closure range ---------- */
+
+.rangeBox {
+  margin-top: calc(var(--u) * 1);
+}
+
+.rangeLine {
+  position: relative;
+  height: calc(var(--u) * 3.4);
+  margin: calc(var(--u) * 3.2) calc(var(--u) * 2) calc(var(--u) * 4.2);
+  border-radius: calc(var(--u) * 0.4);
+  background: linear-gradient(90deg, var(--pe-teal) 0%, var(--tint-strong) 40%, var(--amber-tint) 70%, var(--pe-amber-dark) 100%);
+}
+
+.rangeZero {
+  position: absolute;
+  top: calc(var(--u) * -1.2);
+  bottom: calc(var(--u) * -1.2);
+  width: 2px;
+  background: var(--pe-dark);
+}
+
+.rangeTick {
+  position: absolute;
+  top: calc(var(--u) * -1);
+  bottom: calc(var(--u) * -1);
+  width: calc(var(--u) * 0.35);
+  border-radius: 999px;
+  background: var(--pe-dark);
+  transform: translateX(-50%);
+}
+
+.rangeTag {
+  position: absolute;
+  transform: translateX(-50%);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.rangeTag strong {
+  display: block;
+  font-size: calc(var(--u) * 2);
+  font-variant-numeric: tabular-nums;
+}
+
+.rangeAbove {
+  bottom: calc(100% + var(--u) * 1.4);
+}
+
+.rangeBelow {
+  top: calc(100% + var(--u) * 1.4);
+}
+
+/* ---------- Conclusions ---------- */
+
+.numbered {
+  display: grid;
+  gap: calc(var(--u) * 1.6);
+}
+
+.numbered > div {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 3.4) minmax(0, 1fr);
+  align-items: baseline;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: calc(var(--u) * 1.2);
+}
+
+.numbered .num {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 2.6);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.numbered h2 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.2);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.numbered p {
+  margin-top: calc(var(--u) * 0.4);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.6);
+  line-height: 1.35;
+}
+
+.backupTag {
+  display: inline-block;
+  margin-right: calc(var(--u) * 0.8);
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  padding: calc(var(--u) * 0.15) calc(var(--u) * 0.8);
+  color: var(--color-gray-600);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
