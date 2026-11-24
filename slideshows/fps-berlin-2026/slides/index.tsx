@@ -394,11 +394,11 @@ export function CentralSlide() {
           </div>
           <p className={fps.wfLabel}>
             Net cost
-            <span>channels sum to within £0.1bn</span>
+            <span>20-draw mean; the channels sum to it within £0.1bn</span>
           </p>
           <div className={fps.wfTrack}>
-            <div className={`${fps.wfBar} ${fps.wfNet}`} style={{ left: 0, width: pct(7.3) }}>
-              7.3
+            <div className={`${fps.wfBar} ${fps.wfNet}`} style={{ left: 0, width: pct(7.2) }}>
+              7.2
             </div>
           </div>
         </div>
@@ -442,7 +442,7 @@ export function AbsorptionSlide() {
   return (
     <Frame
       section="central"
-      title="The tax system, not benefits, absorbs most of the loss"
+      title="The system absorbs 29% of the loss, almost all through lower taxes"
       subtitle="Job loss alone, sized to the OBR's technological-displacement scenario (1.67% of employees, 20 draws)"
       scale={1.12}
     >
@@ -738,7 +738,7 @@ const contacts: { label: string; url: string; Icon: Icon }[] = [
   { label: "vahid@policyengine.org", url: "mailto:vahid@policyengine.org", Icon: IconMail },
   { label: sources.post.label, url: sources.post.href, Icon: IconWorld },
   { label: sources.paper.label, url: sources.paper.href, Icon: IconBrandGithub },
-  { label: "policyengine.org/slides/fps-berlin-2026", url: "https://www.policyengine.org/slides/fps-berlin-2026", Icon: IconFileText },
+  { label: "The paper (PDF)", url: "https://github.com/PolicyEngine/uk-ai-study/blob/main/paper/main.pdf", Icon: IconFileText },
 ];
 
 export function ClosingSlide() {

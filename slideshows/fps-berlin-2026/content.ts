@@ -88,9 +88,9 @@ export const openQuestions = [
     icon: IconUsers,
     title: "Who loses the job?",
     views: [
-      "Exposure: highly paid cognitive work (Felten et al. 2021; Eloundou et al. 2023)",
+      "Exposure: highly paid cognitive work (Felten et al. 2021; Eloundou et al. 2024)",
       "Expertise compression: experienced workers' premia erode (Autor 2024)",
-      "Junior workers in exposed jobs (Brynjolfsson et al. 2025; Klein Teeselink 2025)",
+      "Junior workers in exposed jobs (Brynjolfsson et al. 2026; Klein Teeselink 2025)",
     ],
   },
   {
@@ -255,7 +255,7 @@ export const conclusions: { title: string; text: string }[] = [
   },
   {
     title: "The sign rests on the offsets",
-    text: "Survivor wages, capital income and spell length each have a break-even close to the central values",
+    text: "£7.3bn is zero at survivor wages of +3.7% (not +2.6%), a 55% capital uplift (not 40%) or 9.5-month spells",
   },
 ];
 
