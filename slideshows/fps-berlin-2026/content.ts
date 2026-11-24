@@ -315,12 +315,6 @@ export const dataFacts: { value: string; label: string }[] = [
   { value: "99.7%", label: "of weighted employees have an occupation group" },
 ];
 
-export const dataBuild = [
-  "Family Resources Survey 2024–25 (UK Data Service SN 9563)",
-  "Top incomes from records drawn from the HMRC Survey of Personal Incomes",
-  "Imputes what the survey does not collect",
-  "Weights calibrated to SPI income bands up to £1m, ONS occupational employment, DWP caseloads and OBR receipts",
-];
 
 // Section 3.3: what the shock does to each person.
 export const shockSteps: { icon: Icon; title: string; tex: string; text: string }[] = [
@@ -371,4 +365,65 @@ export const drawFacts: { value: string; label: string }[] = [
   { value: "72,504", label: "employee records" },
   { value: "≈5,810", label: "their effective sample size, given the uneven calibrated weights" },
   { value: "1.85–2.25m", label: "displaced across 50 central draws, around the 7% quota" },
+];
+
+// ---------- How Microcosm is built: imputation and calibration ----------
+//
+// Sources. The paper ran on the Microcosm UK 2024-25 national build of
+// 7 November 2026 (paper: 1,514 targets, 98.7% within 10%, 78,181
+// households). Build figures for that release are from the BIST deck's
+// sourced comments (bist-2026/content.ts: 1,514 targets, 98.7%, 78,181
+// records, 38 target families, best step 1,437 of 1,500, effective sample
+// size about 7.2 thousand). Method from the Microcosm code (microcosm
+// 4addf2ae9, 9 November 2026):
+// - imputation: packages/microcosm-fit/README.md: "a regime-gated,
+//   sequentially-chained quantile-regression-forest imputer"; zero-inflated
+//   targets get a zero-vs-nonzero gate; "targets are imputed sequentially;
+//   each conditions on the predictors plus the targets already drawn"; "a
+//   random quantile is sampled per row (seeded)"; training rows are
+//   "importance-resampled by weight before each forest is grown";
+// - calibration: packages/microcosm-calibrate/README.md: "capped weighted
+//   MAPE", weighted_mean(min(abs((A w - b) / scale), cap)), scale =
+//   max(|target|, 1), cap = 10; Adam on log-weights; max_weight_ratio a hard
+//   bound; UK national doctrine (uk_runtime/national_doctrine.py):
+//   family_equal target weights, 1,500 epochs, learning rate 0.02, weight
+//   ratio cap 10.
+// - stages: the BIST deck's microcosmFlow comment (FRS spine; FRS copies
+//   with SPI 2022-23 incomes and band donors from £200k; occupation of the
+//   copies imputed from their incomes; WAS, LCFS, ETB, NTS donors; benefit
+//   take-up: reported claims kept, others drawn to official rates).
+
+export const buildStages: { icon: Icon; owner: string; title: string; text: string }[] = [
+  { icon: IconUsers, owner: "FRS 2024–25", title: "Survey base", text: "Households, incomes, occupations, benefits" },
+  { icon: IconReceiptTax, owner: "HMRC SPI", title: "Top incomes", text: "FRS copies take tax-record incomes; more above £200k" },
+  { icon: IconDatabase, owner: "Donor surveys", title: "Imputed variables", text: "Wealth (WAS), spending (LCFS) and others, by QRF" },
+  { icon: IconUsers, owner: "DWP and HMRC", title: "Benefit take-up", text: "Reported claims kept; the rest drawn to official rates" },
+  { icon: IconScale, owner: "Official totals", title: "Calibrated weights", text: "Fitted to 1,514 targets" },
+];
+
+export const imputationTex = {
+  gate: String.raw`\Pr\bigl(y_{ik}\neq 0 \mid x_i,\, y_{i,<k}\bigr)\ \text{(gate)}`,
+  draw: String.raw`y_{ik} = \hat F_k^{-1}\!\bigl(u_{ik} \mid x_i,\, y_{i,<k}\bigr),\qquad u_{ik}\sim U(0,1)`,
+};
+
+export const imputationPoints = [
+  "Quantile-regression forests trained on a donor survey estimate the whole conditional distribution, not just its mean",
+  "Chained: each variable conditions on the shared predictors x and on the variables already imputed, so joint structure is kept",
+  "Gated: a zero-or-not step first keeps the exact share of zeros (no one gets a little wealth by interpolation)",
+  "Weighted: donor rows are resampled by survey weight before each forest; draws are seeded, so the file is reproducible",
+];
+
+export const calibrationTex = String.raw`\min_{0<w_i\,\le\,10\,w_i^{0}}\ \sum_{j}\omega_j\,\min\!\left(\frac{\lvert a_j^{\top}w - t_j\rvert}{\max(\lvert t_j\rvert,\,1)},\ 10\right)`;
+
+export const calibrationPoints = [
+  "w: household weights; w⁰ the survey's starting weights; tⱼ an official total; aⱼᵀw the file's estimate of it",
+  "Relative errors, capped at 1,000% so no single target dominates",
+  "ωⱼ: each of 38 target families gets an equal share, split within the family",
+  "No weight may exceed 10 times its starting value; Adam on log-weights, 1,500 steps, best step kept",
+];
+
+export const calibrationFacts: { value: string; label: string }[] = [
+  { value: "1,514", label: "targets from HMRC, ONS, DWP, OBR and others" },
+  { value: "98.7%", label: "within 10% of the official figure (in sample)" },
+  { value: "≈7.2k", label: "effective sample size of the 78,181 households" },
 ];

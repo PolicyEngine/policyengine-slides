@@ -552,3 +552,20 @@
 .figureShort .figure img {
   max-height: calc(var(--u0) * 31);
 }
+
+.kpiInline {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 13) minmax(0, 1fr);
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 0.9);
+}
+
+.kpiInline .kpiValue {
+  font-size: calc(var(--u) * 3);
+}
+
+.kpiInline .kpiLabel {
+  margin-top: 0;
+}

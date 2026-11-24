@@ -23,8 +23,13 @@ import {
   channels,
   closure,
   conclusions,
-  dataBuild,
+  buildStages,
+  calibrationFacts,
+  calibrationPoints,
+  calibrationTex,
   dataFacts,
+  imputationPoints,
+  imputationTex,
   drawFacts,
   exposureBuild,
   microsimRules,
@@ -458,18 +463,84 @@ export function DataSlide() {
   return (
     <Frame
       section="method"
-      title="Microcosm: calibrated UK household microdata"
-      subtitle="PolicyEngine's enhanced Family Resources Survey 2024–25, grossing to 2027–28"
-      scale={1.1}
+      title="Microcosm: the Family Resources Survey, completed and reweighted"
+      subtitle="PolicyEngine's calibrated UK household microdata, 2024–25 survey grossing to 2027–28"
+      scale={1.02}
     >
       <div className={fps.kpis} style={columns(4)}>
         {dataFacts.map((fact) => (
           <Kpi key={fact.value} value={fact.value} label={fact.label} small />
         ))}
       </div>
-      <div>
-        <p className={fps.sideHead}>How the file is built</p>
-        <Bullets items={dataBuild} />
+      <div className={styles.flow} style={{ gridTemplateColumns: buildStages.map(() => "minmax(0, 1fr)").join(" auto ") }}>
+        {buildStages.map((step, index) => (
+          <Fragment key={step.title}>
+            {index > 0 && (
+              <div className={styles.arrow} style={{ gridRow: 1 }}>
+                <IconArrowRight stroke={2.2} aria-hidden="true" />
+              </div>
+            )}
+            <div className={styles.step} style={{ gridRow: 1 }}>
+              <div className={styles.stepTop}>
+                <Badge icon={step.icon} />
+                <span className={styles.stepMarks}>
+                  <span className={styles.stepIndex}>{index + 1}</span>
+                </span>
+              </div>
+              <p className={styles.owner}>{step.owner}</p>
+              <h2>{step.title}</h2>
+              <p>{step.text}</p>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    </Frame>
+  );
+}
+
+export function ImputationSlide() {
+  return (
+    <Frame
+      section="method"
+      title="Imputation: chained quantile-regression forests"
+      subtitle="Variables the survey lacks are drawn from donor surveys, one at a time, from their full conditional distribution"
+      scale={1.05}
+    >
+      <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
+        <div>
+          <p className={fps.sideHead}>For household i and variable k, in order k = 1, …, K</p>
+          <Tex tex={imputationTex.gate} />
+          <Tex tex={imputationTex.draw} />
+          <p className={fps.note} style={{ marginTop: "calc(var(--u) * 0.8)" }}>
+            x: predictors the survey and the donor share; y<sub>i,&lt;k</sub>: variables already imputed; F̂<sub>k</sub>: the forest&apos;s
+            conditional distribution; u: a seeded random quantile.
+          </p>
+        </div>
+        <Bullets items={imputationPoints} />
+      </div>
+    </Frame>
+  );
+}
+
+export function CalibrationSlide() {
+  return (
+    <Frame
+      section="method"
+      title="Calibration: household weights fitted to official totals"
+      subtitle="One weight per household, chosen so the file reproduces published aggregates"
+      scale={1.05}
+    >
+      <Tex tex={calibrationTex} />
+      <div className={fps.split}>
+        <Bullets items={calibrationPoints} />
+        <div className={fps.kpis} style={{ gridTemplateColumns: "1fr", gap: "calc(var(--u) * 1)" }}>
+          {calibrationFacts.map((fact) => (
+            <div key={fact.value} className={fps.kpiInline}>
+              <p className={fps.kpiValue}>{fact.value}</p>
+              <p className={fps.kpiLabel}>{fact.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </Frame>
   );
