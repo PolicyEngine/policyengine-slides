@@ -203,7 +203,7 @@
 .waterfall {
   display: grid;
   grid-template-columns: calc(var(--u) * 13) minmax(0, 1fr);
-  row-gap: calc(var(--u) * 1.1);
+  row-gap: calc(var(--u) * 0.8);
   column-gap: calc(var(--u) * 1.4);
   align-items: center;
 }
@@ -433,7 +433,7 @@
 
 .numbered {
   display: grid;
-  gap: calc(var(--u) * 1.6);
+  gap: calc(var(--u) * 1.1);
 }
 
 .numbered > div {
@@ -477,4 +477,61 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   vertical-align: middle;
+}
+
+/* ---------- Logos and equations ---------- */
+
+.logos {
+  display: grid;
+  gap: calc(var(--u) * 2);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 1.4);
+}
+
+.logoCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  text-align: center;
+}
+
+.logoMark {
+  display: flex;
+  height: calc(var(--u) * 4);
+  align-items: center;
+  justify-content: center;
+}
+
+.logoDarken {
+  filter: brightness(0.35);
+}
+
+.wordmark {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.7);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.logoCaption {
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.25;
+}
+
+.eqBox {
+  margin: calc(var(--u) * 0.8) 0 calc(var(--u) * 0.2);
+  font-size: 0.8em;
+}
+
+.eqBox :global(.katex-display) {
+  overflow: hidden;
+}
+
+.breakEvenNote {
+  display: block;
+  color: var(--color-gray-500);
+  font-size: calc(var(--u) * 1.1);
+  font-weight: 400;
 }

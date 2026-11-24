@@ -6,7 +6,10 @@ import {
   ClosingSlide,
   ClosureSlide,
   ConclusionsSlide,
+  DataSlide,
   DecompositionBackupSlide,
+  DrawsSlide,
+  ExposureMethodSlide,
   ExposureSlide,
   GridBackupSlide,
   InBriefSlide,
@@ -15,18 +18,20 @@ import {
   IndexBackupSlide,
   MarginSlide,
   MethodSlide,
+  MicrosimSlide,
   ObrBackupSlide,
+  PolicyEngineSlide,
   PolicySlide,
   QuestionsSlide,
   ScenarioSlide,
+  ShockSlide,
   TitleSlide,
   TransitionSlide,
 } from "./slides";
 
 // A 25-minute paper presentation followed by 20 minutes of discussion. The
 // ministry runs the deck from its own machine, so it goes to them as a PDF
-// export: no slide has build steps or live embeds. Slides after the closing
-// slide are backup for the discussion.
+// export: no slide has build steps or live embeds.
 export const fpsBerlin2026Config: SlideshowConfig = {
   id: "fps-berlin-2026",
   title: "Who bears the AI shock?",
@@ -44,26 +49,31 @@ export const fpsBerlin2026Config: SlideshowConfig = {
     ExposureSlide,
     QuestionsSlide,
     // 2. Data and method
+    PolicyEngineSlide,
     MethodSlide,
+    ExposureMethodSlide,
+    DataSlide,
     ScenarioSlide,
+    ShockSlide,
+    MicrosimSlide,
+    DrawsSlide,
     // 3. The central case
     CentralSlide,
     TransitionSlide,
+    DecompositionBackupSlide,
     AbsorptionSlide,
+    ObrBackupSlide,
     // 4. Who loses the job, and how
     IncidenceSlide,
     IncidenceFigureSlide,
     MarginSlide,
     // 5. What moves the cost, and policy
     BreakEvenSlide,
+    GridBackupSlide,
+    IndexBackupSlide,
     ClosureSlide,
     PolicySlide,
     ConclusionsSlide,
     ClosingSlide,
-    // Backup
-    ObrBackupSlide,
-    IndexBackupSlide,
-    DecompositionBackupSlide,
-    GridBackupSlide,
   ],
 };

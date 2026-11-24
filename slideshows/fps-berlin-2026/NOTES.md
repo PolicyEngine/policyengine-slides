@@ -10,157 +10,181 @@ by 27 November. No slide has build steps or live embeds.
 Every number is the merged paper's (PolicyEngine/uk-ai-study main at
 c42be9f, tax year 2027–28). The unmerged revision on PR #26 (calibrated
 spells, closed capital account) is not in the deck. If asked about spell
-length, say that it is the main revision under way and point to the
-break-even slide.
+length, say it is the main revision under way and point to slide 21.
 
-Timing guide: about 1.5 minutes a slide, 25 minutes for slides 1–16.
+## Timing
 
-## 1. Title (0:00)
+27 slides in 25 minutes is under a minute each, so pace by part rather
+than by slide:
 
-Thank the organisers. One sentence: I take an AI labour-market shock of a
-given size and ask how much of it the UK tax-benefit system absorbs, and
-who bears the rest.
+| Part | Slides | Minutes | Ends by |
+|---|---|---|---|
+| Opening | 1–2 | 1.5 | 1:30 |
+| 1 The question | 3–4 | 2 | 3:30 |
+| 2 Data and method | 5–12 | 6.5 | 10:00 |
+| 3 The central case | 13–17 | 5 | 15:00 |
+| 4 Who and how | 18–20 | 4 | 19:00 |
+| 5 What moves it | 21–25 | 4.5 | 23:30 |
+| Close | 26–27 | 1.5 | 25:00 |
 
-## 2. In brief (0:30)
+If running late, say one sentence each on slides 15, 17, 22 and 23 and
+move on: they hold detail for the discussion.
 
-Three results. Who loses the job sets the Exchequer cost: £1.9 to £11.3
-billion a year across four rules for the same 7 per cent. How the loss
-arrives sets who bears it: as wage cuts, the same earnings loss raises
-poverty by 0.3 points instead of 2.4, but costs £12 billion more. And the
-sign of the central cost rests on assumed offsets: survivor wages of 3.7
-rather than 2.6 per cent take it to zero. Scenario analysis, not a
-forecast.
+Three bases appear, and the slides label them: 50-draw means (the central
+case, the five rules, the reforms), 20-draw means (the channel split, the
+margin comparison, the take-up and capital variants) and single draws at
+seed 0 (the grid, the survivor-wage panel, the index table, the closure).
+The central cost is £7.3bn over 50 draws and £7.2bn over 20.
 
-## 3. Exposure by occupation (2:00)
+## Opening
 
-The occupations with the highest exposure (administrative, managerial,
-professional) pay well, and carry much of the income tax and NI base.
-Universal Credit responds lower down. The job-loss rates are the central
-quotas: proportional to employment times exposure, shifted so the
-least-exposed group (elementary) scores zero. Exposure varies across nine
-groups only; that is a limit I come back to.
+**1. Title.** Thank the organisers. One sentence: I take an AI
+labour-market shock of a given size and ask how much the UK tax-benefit
+system absorbs, and who bears the rest.
 
-## 4. Two open questions (3:30)
+**2. In brief.** Three results. Who loses the job moves the Exchequer
+cost: £1.9bn to £11.3bn a year across four rules for the same 7 per cent.
+How the loss arrives sets who bears it: as wage cuts, the same loss raises
+poverty 0.3 points instead of 2.4, but costs £12bn more. And the sign
+rests on assumed offsets. Stress the caveat on the slide: a decade of
+adoption applied in one year, an impact-year stress test.
 
-The evidence on incidence is unsettled: exposure indices point at highly
-paid cognitive work, expertise compression at experienced workers' premia,
-and the early empirical work at juniors in exposed jobs. The margin is
-open too: task models allow displacement to show up as relative wage
-declines. I hold the size of the shock fixed and vary both.
+## 1. The question
 
-## 5. Method (5:00)
+**3. Exposure by occupation.** The most exposed groups (administrative,
+managerial, professional) pay well and carry much of the income tax and
+NI base; Universal Credit, the UK's main means-tested benefit, responds
+lower down. Job-loss rates are the central quotas, proportional to
+employment times exposure.
 
-Four steps. Felten's AIOE adjusted for complementarity (Pizzinelli et al.),
-aggregated to nine SOC2020 groups. Microcosm: PolicyEngine's calibrated
-version of the FRS 2024–25. The shock sets displaced workers' earnings,
-hours and pension contributions to zero; 50 random draws of who is
-displaced. PolicyEngine UK computes taxes and benefits under the rules
-legislated or announced for 2027–28. Outcomes: Exchequer cost, absolute
-poverty BHC and AHC, the Gini.
+**4. Two open questions.** Incidence is unsettled (exposure, expertise
+compression, juniors), and so is the margin (job loss or relative wage
+decline). I hold the size fixed and vary both.
 
-## 6. Scenario inputs (6:30)
+## 2. Data and method
 
-The Irish study by Doorley et al. (2026): 7 per cent displaced, 2.6 per
-cent survivor wage rise, 0.4 points on the return to capital. Their inputs
-describe a decade of adoption; I apply them within one year, so the
-central case is an impact-year stress test. Say plainly what is left out:
-no re-employment within the year, survey take-up flags, no new-style JSA
-for the newly displaced, no reduced hiring.
+**5. PolicyEngine.** A nonprofit; the rules, data pipeline and analysis
+code are open source; UK and US models in one Python package (JOSS 2026).
+No 10 built a microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR engaged with it in 2025–26, and it has been cited in a Lords debate. Keep it to 30 seconds: the point is that
+the model is open and can be checked.
 
-## 7. Central case (8:00)
+**6. Overview.** Four steps: exposure, microdata, a person-level shock, the
+tax-benefit model, run twice on the same records.
 
-2.04 million displaced, £7.3 billion a year, poverty +2.4 points, Gini
-+1.8. The £7.3 billion is a net: displacement alone costs £42.5 billion,
-and the survivor-wage and capital channels each bring back about £18
-billion. That is why the sign is fragile (slide 13).
+**7. Exposure.** Felten et al.'s AIOE times a complementarity factor from
+Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
+DfE crosswalk, weighted by ASHE employment. I shift the score so the least
+exposed group is zero, my normalisation. Exposure varies between nine
+groups only.
 
-## 8. Transition by decile (9:30)
+**8. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
+imputations, and weights calibrated to 1,514 targets (98.7 per cent within
+10 per cent). 29 million employees in 2027–28; 99.7 per cent have an
+occupation group.
 
-0.78 per cent of people in the bottom decile move into unemployment
-against 5.57 per cent in the top. Most of that is where employees sit;
-uniform incidence gives a similar gradient. Women are 49 per cent of
-employment and 53 per cent of the displaced.
+**9. Scenario.** Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
+per cent survivor wage rise, interest and dividends up 39.8 per cent (the
+return on capital up 0.4 points from 1.005 per cent; read it as a 39.8 per
+cent uplift). Name what is left out.
 
-## 9. Absorption (10:30)
+**10. The shock.** Job losses allocated by employment times shifted
+exposure; survivor wages rise in proportion to complementarity; capital
+income scaled by 1.398. Within each group, systematic sampling picks the
+displaced. The model takes no spell length: the displaced are out all year.
 
-To isolate job loss, the OBR-sized run (1.67 per cent, no other channels).
-Tax and benefits absorb 29 per cent of the market-income loss, and almost
-all of that is lower income tax and NI: UC adds 2.9p per pound lost. Why
-so little? The displaced earn £49,500 on average; 42 per cent of their
-benefit units hold capital above the UC limit; most have another earner;
-only about half of those entitled claim. Full take-up and JSA raise cash
-benefits to 8.7p per pound. Not comparable with Dolls et al.'s 41.5 per
-cent for the UK: different take-up, different people.
+**11. Microsimulation.** PolicyEngine UK under the rules legislated or
+announced for 2027–28 (frozen thresholds; higher dividend, savings and
+property rates). The cost is the fall in the government balance, including
+employer NI, with no VAT response. Absolute poverty uses the official
+fixed line; 12.0 per cent before housing costs at baseline.
 
-## 10. Who loses the job (12:00)
+**12. Draws.** 72,504 employee records, but uneven weights give an
+effective sample of about 5,810, so one draw's displaced count runs from
+1.85 to 2.25 million. "±" is the spread across draws, not a confidence
+interval.
 
-Same expected count, five rules. Cost runs from £1.9 billion (uniform) to
-£11.3 billion (expertise compression), £27.7 billion in the stress test.
-Cost tracks the earnings of those displaced. Poverty barely moves across
-the four stylised rules: the uniform-versus-exposure gap is not robust
-over 2,000 draws.
+## 3. The central case
 
-## 11. Incidence figure (13:30)
+**13. Central case.** 2.04 million displaced, £7.3bn a year, poverty +2.4
+points, Gini +1.8. The £7.3bn nets £42.5bn of displacement cost against
+about £18bn from each offsetting channel, so the sign depends on the offset
+assumptions. Read the qualifier line: upper bound for spell length; +0.82
+on the relative line; +1.99 with full take-up and JSA.
 
-Every rule displaces more in the upper half, because employees concentrate
-there. Right panel: cost against poverty, one standard deviation either
-way. Keep this short.
+**14. By decile.** 0.78 per cent of the bottom decile against 5.57 per
+cent of the top move into unemployment, mostly because that is where
+employees are. Women are 53 per cent of the displaced.
 
-## 12. Margin (14:30)
+**15. Decomposition.** Losses peak in the upper-middle deciles; decile 8
+loses 3.7 per cent of disposable income. Ignore decile 1: its gain reverses
+under another household ranking.
 
-The key slide. Same gross earnings loss: job loss costs £7.18 billion and
-raises poverty 2.38 points; wage cuts cost £19.13 billion and raise
-poverty 0.28 points. Per pound, channels off: 42p against 55p. Why: a wage
-cut removes pounds taxed at the margin and replaced by UC at the taper;
-job loss removes whole earnings including the untaxed slice; and job loss
-concentrates the loss on fewer households, who cross the line. The
-ordering is a result for this shock (above-average earners), not a
-property of the UK system. Shorter spells narrow the gap.
+**16. Absorption.** Job loss alone, OBR-sized. Tax and benefits absorb 29
+per cent, nearly all through lower income tax and NI; cash benefits add
+3.0p per pound lost (8.7p with full take-up and JSA). The displaced are
+better off than the existing unemployed: capital, partners' earnings, owned
+homes. This audience will know Dolls et al.: 47 per cent in the EU and 34
+in the US, but they assume full take-up and add people like the existing
+unemployed, so the numbers are not comparable.
 
-## 13. Break-evens (17:00)
+**17. OBR benchmark.** £10.2bn against the OBR's £9bn, close only because
+the lines offset: more lost receipts, less welfare.
 
-Three assumptions each reach zero close to their central values: survivor
-wages 3.7 against 2.6 per cent; capital uplift 55 against 40 per cent;
-spells of 9.5 rather than 12 months (an upper bound). Without the survivor
-wage rise, £24.9 billion. Full take-up and JSA add £5.5 billion.
+## 4. Who loses the job, and how
 
-## 14. Closure (18:30)
+**18. Five rules.** Cost runs from £1.9bn to £11.3bn (£27.7bn in the
+stress test) and tracks the earnings of those displaced. Poverty varies
+much less; the uniform-versus-exposure gap fails a 2,000-draw check.
 
-The central capital uplift is not tied to the labour shock. A closed
-account: a share of the net £68.3 billion fall in labour income becomes
-profit, taxed at 25 per cent, half paid out. Results run from a £0.9
-billion gain (all of it becomes UK-owned profit) to a £14.4 billion cost
-(half becomes profit and UK households own half). The central dividend
-uplift exceeds what the labour shock can fund by £12.6 billion.
+**19. Figure.** Every rule displaces more in the upper half. Ten seconds.
 
-## 15. Policy (20:00)
+**20. Margin.** The key slide. Same gross loss: job loss £7.18bn and +2.38
+points; wage cuts £19.13bn and +0.28 points (channels on in both). Without
+the channels, +2.88 against +0.92. Per pound, 42p against 55p. Why: wage
+cuts remove pounds at the margin; job loss removes whole earnings and
+concentrates the loss. A result for this shock, not a property of the UK
+system.
 
-Three stylised responses inside the shocked world. Wage insurance (50 per
-cent of lost earnings, capped at £15,000) cuts poverty most but costs
-£14.3 billion per point, against £8.6 and £6.7 billion for the UC
-allowance and the cap-and-taper reform, because the displaced sit mostly
-in the upper half. Not a recommendation: the designs have different aims.
+## 5. What moves the cost, and policy
 
-## 16. Conclusions (21:30)
+**21. Break-evens.** Survivor wages +3.7 against +2.6 per cent (seed 0);
+capital uplift 55 against 40 per cent; spells of at most 9.5 months (20
+draws). Without the survivor wage rise, £24.9bn.
 
-Three results, then limits: nine groups, a one-year stock, no hiring
-margin. Next: calibrate spells and re-employment pay to UK displacement
-evidence (Upward and Wright 2019), and model take-up and JSA for the newly
-displaced. Close by inviting questions. Aim to finish by 24:00.
+**22. Grid.** At 7 per cent displacement, average income falls unless
+survivor wages grow by 5 per cent.
 
-## Backup for the discussion
+**23. Indices.** £4bn to £8bn on one draw, adjusted for the displaced
+count; the three AIOE-type indices are indistinguishable.
 
-- **OBR benchmark.** Sized to the OBR's March 2026 scenario (unemployment
-  up 1.4 points), £10.2 billion against the OBR's £9 billion; the
-  simulation loses more receipts (£9.7 against £6 billion) and adds less
-  welfare (£0.7 against £3 billion).
-- **Exposure indices.** Adjusted costs £4.2 to £8.2 billion; the Gini rises
-  under every index.
-- **Decomposition.** Decile 8 loses most; benefits and lower taxes offset
-  about a fifth of its market loss. Decile 1 depends on the ranking.
-- **Grid.** At 7 per cent displacement, average income falls with up to 4
-  per cent wage growth and rises with 5.
-- **Historical benchmark (no slide).** A 2008–10 backcast over-predicts the
-  poverty response; uprating and mixed spell lengths are outside the model.
-- **Public sector (no slide).** Displaced public-sector employees cost
-  £26.6 billion a year in pay, not netted from the cost.
+**24. Closure.** The capital uplift is not tied to the labour shock. If a
+share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
+cent, the result runs from a £0.9bn gain to a £14.4bn cost. This is where
+the tax-base question for this audience sits.
+
+**25. Policy.** Three stylised responses, compared on cost and poverty only.
+R1 replaces 50 per cent of lost earnings (capped at £15,000): poverty −1.89
+points at £26.9bn, £14.3bn per point; R2 and R3 cost £8.6bn and £6.7bn per
+point. They aim at different things: R1 replaces earnings for the
+displaced, R2 and R3 pay all UC claimants. Static, no behavioural response.
+
+## Close
+
+**26. Conclusions.** Four results, then the limits: a one-year stress test,
+nine groups, no hiring margin. Next: calibrate spells and re-employment pay
+to UK evidence (Upward and Wright 2019), and model take-up and JSA for the
+newly displaced.
+
+**27. Thank you.** Leave this up for the discussion.
+
+## For the discussion
+
+- **Historical benchmark.** A 2008–10 backcast over-predicts the poverty
+  response; uprating and mixed spell lengths are outside the model.
+- **Public sector.** Displaced public-sector employees cost £26.6bn a year
+  in pay, employer NI and employer pensions (20 draws), not netted from the
+  cost.
+- **Earnings-related unemployment insurance.** The UK has none: new-style
+  JSA is flat (£95.55 a week, 26 weeks), and UC is means-tested with a
+  £16,000 capital limit. That limits the benefit response here; the paper does not
+  model other countries' systems.

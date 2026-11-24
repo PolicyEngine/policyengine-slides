@@ -52,13 +52,13 @@ export const inBrief: { icon: Icon; title: string; value: string; text: string }
     icon: IconUsers,
     title: "Who loses the job",
     value: "£1.9–11.3bn",
-    text: "Exchequer cost of displacing 7% of employees, across four incidence rules",
+    text: "Exchequer cost a year of displacing 7% of employees (2.04m), across four incidence rules",
   },
   {
     icon: IconArrowsSplit,
     title: "How the loss arrives",
     value: "0.3 vs 2.4pp",
-    text: "Rise in absolute poverty from wage cuts against job loss of the same size, though wage cuts cost £12bn more",
+    text: "Rise in absolute poverty: wage cuts against job loss of the same size, though wage cuts cost £12bn more",
   },
   {
     icon: IconScale,
@@ -132,7 +132,7 @@ export const methodFlow: { icon: Icon; title: string; text: string }[] = [
 export const scenarioInputs: { value: string; label: string }[] = [
   { value: "7%", label: "of employees lose their job for the full year" },
   { value: "+2.6%", label: "average wage rise for the employees who keep theirs" },
-  { value: "+0.4pp", label: "return on capital (interest and dividends up 39.8%)" },
+  { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4 points, from 1.005% to 1.405%" },
 ];
 
 export const scenarioCaveats = [
@@ -161,14 +161,14 @@ export const channels: { label: string; value: number; text: string }[] = [
 // paragraph of Section 4.1.
 export const absorption: { value: string; label: string }[] = [
   { value: "29%", label: "of the market-income loss absorbed by income tax, employee NI and benefits" },
-  { value: "2.9p", label: "of UC per pound of earnings lost; lower taxes do the rest" },
-  { value: "53%", label: "of displaced benefit units entitled to UC claim it (survey flags)" },
+  { value: "3.0p", label: "of cash benefits per pound of earnings lost; lower taxes do the rest" },
+  { value: "53%", label: "of displaced benefit units entitled to Universal Credit claim it (survey take-up flags)" },
 ];
 
 export const absorptionVariants = [
-  "Full UC take-up for the displaced: UC response doubles to £1.36bn",
-  "Plus 26 weeks of new-style JSA: cash benefits 8.7p per pound lost",
-  "Displaced lose £49,500 on average; 42% of their benefit units hold capital above the UC limit",
+  "The displaced lose £49,500 on average: 42% of their benefit units hold capital above UC's £16,000 limit, 59% have another earner, 70% own their home",
+  "Contributory new-style JSA (£95.55 a week for 26 weeks) is not paid to the newly displaced",
+  "Cash benefits per pound lost: 3.0p; 5.9p with full UC take-up; 8.7p with JSA as well",
 ];
 
 // Table 4 (tab:incidence), 50 paired draws, means ± s.d.
@@ -200,7 +200,7 @@ export const marginWhy: { icon: Icon; title: string; text: string }[] = [
   {
     icon: IconReceiptTax,
     title: "Wage cuts remove pounds at the margin",
-    text: "Taxed at the worker's marginal rates of income tax and NI, and replaced by UC at the 55% taper",
+    text: "Taxed at the worker's marginal rates of income tax and NI and, for UC claimants, replaced at the 55% taper",
   },
   {
     icon: IconWallet,
@@ -215,15 +215,15 @@ export const marginWhy: { icon: Icon; title: string; text: string }[] = [
 ];
 
 // Table 6 (tab:breakeven) and the take-up paragraph of Section 4.5.
-export const breakEvens: { icon: Icon; label: string; central: string; breakEven: string }[] = [
-  { icon: IconTrendingUp, label: "Survivor wage rise", central: "+2.6%", breakEven: "+3.7%" },
-  { icon: IconCoins, label: "Capital-income uplift", central: "+39.8%", breakEven: "+55%" },
-  { icon: IconHourglass, label: "Months out of work", central: "12", breakEven: "9.5" },
+export const breakEvens: { icon: Icon; label: string; note: string; central: string; breakEven: string }[] = [
+  { icon: IconTrendingUp, label: "Survivor wage rise", note: "seed 0", central: "+2.6%", breakEven: "+3.7%" },
+  { icon: IconCoins, label: "Capital-income uplift", note: "20 draws", central: "+39.8%", breakEven: "+55%" },
+  { icon: IconHourglass, label: "Months out of work", note: "20 draws, upper bound", central: "12", breakEven: "≤9.5" },
 ];
 
 export const costMovers = [
-  "No survivor wage rise: £24.9bn; a 2.6% fall: £42.4bn",
-  "Full UC take-up for the displaced: +£2.8bn; with new-style JSA: +£5.5bn",
+  "No survivor wage rise: £24.9bn; a 2.6% fall: £42.4bn (seed 0)",
+  "Full UC take-up for the displaced: +£2.8bn; with new-style JSA: +£5.5bn (20 draws)",
   "Dividends scaled to the HMRC SPI total: +£2.2bn",
 ];
 
@@ -238,7 +238,7 @@ export const closure = {
 
 // Table 8 (tab:policy), 50 draws, shocked-plus-reform minus shocked.
 export const policyRows: { reform: string; text: string; cost: string; bhc: string; perPoint: string }[] = [
-  { reform: "R1 Wage insurance", text: "50% of lost earnings, capped at £15,000", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
+  { reform: "R1 Earnings replacement", text: "wage-insurance style: 50% of lost earnings, capped at £15,000", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
   { reform: "R2 UC allowance +20%", text: "standard allowance", cost: "6.9", bhc: "−0.79", perPoint: "8.6" },
   { reform: "R3 Cap and taper", text: "no benefit cap, taper 55% to 45%", cost: "5.1", bhc: "−0.76", perPoint: "6.7" },
 ];
@@ -246,20 +246,25 @@ export const policyRows: { reform: string; text: string; cost: string; bhc: stri
 // Section 5.
 export const conclusions: { title: string; text: string }[] = [
   {
-    title: "Who loses the job sets the cost",
-    text: "£9.3bn between the four rules: the UK tax base leans on the most exposed occupations",
+    title: "Who loses the job moves the cost by £9.3bn",
+    text: "Across the four rules, poverty moves far less: each displaced worker takes their income tax and NI with them",
   },
   {
-    title: "The margin sets who bears it",
-    text: "Wage cuts cost the Exchequer more per pound (55p against 42p); job loss raises poverty far more",
+    title: "For this shock, the margin sets who bears it",
+    text: "Wage cuts cost the Exchequer more per pound (55p against 42p); job loss raises poverty far more, for a shock on above-average earners",
+  },
+  {
+    title: "With job loss, inequality rises under every rule",
+    text: "And in every shocked cell of the grid, even without the capital channel; wage cuts on their own lower it",
   },
   {
     title: "The sign rests on the offsets",
-    text: "£7.3bn is zero at survivor wages of +3.7% (not +2.6%), a 55% capital uplift (not 40%) or 9.5-month spells",
+    text: "The cost is zero at survivor wages of +3.7% (not +2.6%), a 55% capital uplift (not 40%) or spells of at most 9.5 months",
   },
 ];
 
 export const limits = [
+  "A decade of adoption applied within one year, with full-year job loss: an impact-year stress test",
   "Exposure varies across nine occupation groups only",
   "Displacement is a one-year stock with no re-employment",
   "Reduced hiring of young workers lies outside the framework",
@@ -279,4 +284,91 @@ export const indexRows: { index: string; raw: string; adjusted: string; bhc: str
   { index: "DfE AIOE", raw: "5.9", adjusted: "7.6", bhc: "+2.42", gini: "+1.79" },
   { index: "DfE LLM", raw: "5.0", adjusted: "5.5", bhc: "+2.21", gini: "+1.67" },
   { index: "Eloundou β", raw: "3.2", adjusted: "4.2", bhc: "+2.27", gini: "+1.86" },
+];
+
+// ---------- Data and method detail (Section 3) ----------
+
+// Section 3.1.
+export const exposureBuild: { icon: Icon; title: string; text: string }[] = [
+  {
+    icon: IconChartBar,
+    title: "AIOE (Felten et al. 2021)",
+    text: "Progress in ten AI applications linked to O*NET ability requirements; standardised, so it can be negative",
+  },
+  {
+    icon: IconArrowsSplit,
+    title: "Complementarity θ (Pizzinelli et al. 2023)",
+    text: "Rebuilt from O*NET 27.3 work context and job zones: high θ means AI more likely complements than replaces",
+  },
+  {
+    icon: IconDatabase,
+    title: "Mapped to UK SOC2020",
+    text: "Via the DfE (2023) crosswalk; aggregated to nine major groups with ASHE 2025 employment weights",
+  },
+];
+
+// Section 3.4 (Microcosm) and 3.5 (draws).
+export const dataFacts: { value: string; label: string }[] = [
+  { value: "78,181", label: "households and 182,418 people in the file" },
+  { value: "29.0m", label: "employees in 2027–28 (69.4m people)" },
+  { value: "1,514", label: "calibration targets; 98.7% fitted within 10%" },
+  { value: "99.7%", label: "of weighted employees have an occupation group" },
+];
+
+export const dataBuild = [
+  "Family Resources Survey 2024–25 (UK Data Service SN 9563)",
+  "Top incomes from records drawn from the HMRC Survey of Personal Incomes",
+  "Imputes what the survey does not collect",
+  "Weights calibrated to SPI income bands up to £1m, ONS occupational employment, DWP caseloads and OBR receipts",
+];
+
+// Section 3.3: what the shock does to each person.
+export const shockSteps: { icon: Icon; title: string; tex: string; text: string }[] = [
+  {
+    icon: IconUserMinus,
+    title: "Job loss",
+    tex: "\\text{JobLoss}_l = \\text{Total}\\times\\dfrac{\\text{EMP}_l\\,\\widetilde{C}_l}{\\sum_k \\text{EMP}_k\\,\\widetilde{C}_k}",
+    text: "Earnings, hours, pension contributions and statutory pay set to zero for the year; status unemployed",
+  },
+  {
+    icon: IconTrendingUp,
+    title: "Survivor wages",
+    tex: "\\Delta w_l = g\\times\\dfrac{\\theta_l}{\\bar\\theta}\\times w_l",
+    text: "Higher-complementarity groups gain more; g = 2.6% averaged over baseline employees",
+  },
+  {
+    icon: IconCoins,
+    title: "Capital income",
+    tex: "\\times\\,\\dfrac{1.405}{1.005} = 1.398",
+    text: "Savings interest and dividends; rent and pension returns unchanged",
+  },
+];
+
+// Section 3.5.
+export const microsimRules = [
+  "PolicyEngine UK 2.174.1 (policyengine.py 6.16.1)",
+  "Income tax and NI thresholds frozen",
+  "Basic and higher dividend rates +2 points from April 2026",
+  "Savings and property income (outside Scotland) +4 points from April 2027, 2 of them announced, not yet legislated",
+];
+
+export const outcomeDefs: { title: string; text: string }[] = [
+  {
+    title: "Exchequer cost",
+    text: "Fall in the government balance: income tax, employee and employer National Insurance, benefits. No VAT response",
+  },
+  {
+    title: "Absolute poverty",
+    text: "UK official (HBAI) line: 60% of the 2024–25 median, fixed in real terms; 12.0% before housing costs at baseline",
+  },
+  {
+    title: "Inequality",
+    text: "Gini on equivalised HBAI disposable income, negatives set to zero",
+  },
+];
+
+export const drawFacts: { value: string; label: string }[] = [
+  { value: "72,504", label: "employee records" },
+  { value: "≈5,810", label: "their effective sample size, given the uneven calibrated weights" },
+  { value: "1.85–2.25m", label: "displaced across 50 central draws, around the 7% quota" },
 ];
