@@ -137,7 +137,7 @@ export const scenarioInputs: { value: string; label: string }[] = [
 
 export const scenarioCaveats = [
   "A one-year stock: no re-employment, redundancy pay or partner response",
-  "Newly displaced workers keep their survey UC take-up flag and get no new-style JSA",
+  "Newly displaced workers claim Universal Credit only if their survey record is flagged as a claimant, and get no contributory Jobseeker's Allowance",
   "Self-employed outside the labour shocks; no reduced hiring of the young",
 ];
 
@@ -152,7 +152,7 @@ export const central: { value: string; label: string }[] = [
 
 // Section 4.1: each channel alone, 20 paired draws, £bn a year.
 export const channels: { label: string; value: number; text: string }[] = [
-  { label: "Displacement", value: 42.5, text: "lost income tax and NI, more UC" },
+  { label: "Displacement", value: 42.5, text: "lost tax and NI, more UC" },
   { label: "Survivor wages", value: -17.5, text: "tax on the 2.6% rise" },
   { label: "Capital income", value: -17.9, text: "dividend and savings tax" },
 ];
@@ -167,7 +167,7 @@ export const absorption: { value: string; label: string }[] = [
 
 export const absorptionVariants = [
   "The displaced lose £49,500 on average: 42% of their benefit units hold capital above UC's £16,000 limit, 59% have another earner, 70% own their home",
-  "Contributory new-style JSA (£95.55 a week for 26 weeks) is not paid to the newly displaced",
+  "Contributory Jobseeker's Allowance is flat-rate, not earnings-related (£95.55 a week for 26 weeks), and is not paid to the newly displaced",
   "Cash benefits per pound lost: 3.0p; 5.9p with full UC take-up; 8.7p with JSA as well",
 ];
 
@@ -200,12 +200,12 @@ export const marginWhy: { icon: Icon; title: string; text: string }[] = [
   {
     icon: IconReceiptTax,
     title: "Wage cuts remove pounds at the margin",
-    text: "Taxed at the worker's marginal rates of income tax and NI and, for UC claimants, replaced at the 55% taper",
+    text: "Taxed at the worker's marginal rates and, for UC claimants, replaced at UC's 55% withdrawal rate",
   },
   {
     icon: IconWallet,
     title: "Job loss removes whole earnings",
-    text: "Including the slice under the personal allowance; the UC it adds is less than the tax forgone",
+    text: "Including the tax-free personal allowance; the UC it adds is less than the tax forgone",
   },
   {
     icon: IconUserMinus,
@@ -349,7 +349,7 @@ export const microsimRules = [
   "PolicyEngine UK 2.174.1 (policyengine.py 6.16.1)",
   "Income tax and NI thresholds frozen",
   "Basic and higher dividend rates +2 points from April 2026",
-  "Savings and property income (outside Scotland) +4 points from April 2027, 2 of them announced, not yet legislated",
+  "Savings income, and property income outside Scotland, +4 points from April 2027; 2 of them announced, not yet legislated",
 ];
 
 export const outcomeDefs: { title: string; text: string }[] = [
@@ -359,7 +359,7 @@ export const outcomeDefs: { title: string; text: string }[] = [
   },
   {
     title: "Absolute poverty",
-    text: "UK official (HBAI) line: 60% of the 2024–25 median, fixed in real terms; 12.0% before housing costs at baseline",
+    text: "The UK official line (HBAI, the low-income statistics): 60% of the 2024–25 median, fixed in real terms; 12.0% before housing costs at baseline",
   },
   {
     title: "Inequality",

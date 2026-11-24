@@ -82,7 +82,7 @@
 
 .note {
   color: var(--color-gray-600);
-  font-size: calc(var(--u) * 1.2);
+  font-size: calc(var(--u) * 1.3);
   line-height: 1.35;
   text-wrap: pretty;
 }
@@ -148,7 +148,7 @@
   display: block;
   margin-top: calc(var(--u) * 0.15);
   color: var(--color-gray-500);
-  font-size: calc(var(--u) * 1.15);
+  font-size: calc(var(--u) * 1.3);
   font-weight: 400;
 }
 
@@ -202,7 +202,7 @@
 
 .waterfall {
   display: grid;
-  grid-template-columns: calc(var(--u) * 13) minmax(0, 1fr);
+  grid-template-columns: calc(var(--u) * 17) minmax(0, 1fr);
   row-gap: calc(var(--u) * 0.8);
   column-gap: calc(var(--u) * 1.4);
   align-items: center;
@@ -218,7 +218,7 @@
 .wfLabel span {
   display: block;
   color: var(--color-gray-500);
-  font-size: calc(var(--u) * 1.15);
+  font-size: calc(var(--u) * 1.3);
   font-weight: 400;
 }
 
@@ -258,6 +258,7 @@
 /* ---------- Two margins side by side ---------- */
 
 .margins {
+  margin-top: calc(var(--u) * 1.2);
   display: grid;
   grid-template-columns: calc(var(--u) * 24) repeat(2, minmax(0, 1fr));
   border-top: 2px solid var(--pe-teal);
@@ -287,7 +288,7 @@
 .marginLabel span {
   display: block;
   color: var(--color-gray-500);
-  font-size: calc(var(--u) * 1.1);
+  font-size: calc(var(--u) * 1.25);
 }
 
 .marginValue {
@@ -312,14 +313,14 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: calc(var(--u0) * 34);
+  max-height: calc(var(--u0) * 35);
   object-fit: contain;
 }
 
 .figure figcaption {
   margin-top: calc(var(--u) * 0.6);
   color: var(--color-gray-600);
-  font-size: calc(var(--u) * 1.15);
+  font-size: calc(var(--u) * 1.3);
   line-height: 1.3;
 }
 
@@ -498,7 +499,7 @@
 
 .logoMark {
   display: flex;
-  height: calc(var(--u) * 4);
+  height: calc(var(--u) * 4.4);
   align-items: center;
   justify-content: center;
 }
@@ -534,4 +535,20 @@
   color: var(--color-gray-500);
   font-size: calc(var(--u) * 1.1);
   font-weight: 400;
+}
+
+/* Slide number in the footer bar, for questions in the discussion. */
+.pageNumber {
+  position: absolute;
+  right: calc(var(--u0) * 4);
+  bottom: calc(var(--u0) * 1.9);
+  z-index: 20;
+  color: rgb(255 255 255 / 0.8);
+  font-size: calc(var(--u0) * 1.4);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.figureShort .figure img {
+  max-height: calc(var(--u0) * 31);
 }

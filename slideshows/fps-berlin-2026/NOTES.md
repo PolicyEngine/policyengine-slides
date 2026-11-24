@@ -27,14 +27,18 @@ than by slide:
 | 5 What moves it | 21–25 | 4.5 | 23:30 |
 | Close | 26–27 | 1.5 | 25:00 |
 
-If running late, say one sentence each on slides 15, 17, 22 and 23 and
-move on: they hold detail for the discussion.
+The plan assumes about 15 seconds each on slides 15, 17, 19, 22 and 23
+(one sentence, then move on: they hold detail for the discussion), with
+the time going to slides 13, 16, 20 and 21. Slide numbers are in the
+footer for questions.
 
 Three bases appear, and the slides label them: 50-draw means (the central
 case, the five rules, the reforms), 20-draw means (the channel split, the
 margin comparison, the take-up and capital variants) and single draws at
-seed 0 (the grid, the survivor-wage panel, the index table, the closure).
-The central cost is £7.3bn over 50 draws and £7.2bn over 20.
+seed 0 (the grid, the survivor-wage panel, the index table, the closure,
+the decomposition); the half-year-spell policy run uses 5 draws. The
+central cost is £7.3bn over 50 draws and £7.2bn over 20. Seed 0 ranks 19th
+of 50 on cost, and 2nd lowest on the poverty and Gini changes.
 
 ## Opening
 
@@ -65,6 +69,7 @@ decline). I hold the size fixed and vary both.
 
 **5. PolicyEngine.** A nonprofit; the rules, data pipeline and analysis
 code are open source; UK and US models in one Python package (JOSS 2026).
+Use by these bodies is not endorsement of this paper.
 No 10 built a microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR engaged with it in 2025–26, and it has been cited in a Lords debate. Keep it to 30 seconds: the point is that
 the model is open and can be checked.
 
@@ -74,8 +79,9 @@ tax-benefit model, run twice on the same records.
 **7. Exposure.** Felten et al.'s AIOE times a complementarity factor from
 Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
 DfE crosswalk, weighted by ASHE employment. I shift the score so the least
-exposed group is zero, my normalisation. Exposure varies between nine
-groups only.
+exposed group is zero, my normalisation. θ enters only relative to its
+minimum and mean, so the rebuilt series' level offset does not matter.
+Exposure varies between nine groups only.
 
 **8. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
 imputations, and weights calibrated to 1,514 targets (98.7 per cent within
@@ -115,8 +121,9 @@ on the relative line; +1.99 with full take-up and JSA.
 cent of the top move into unemployment, mostly because that is where
 employees are. Women are 53 per cent of the displaced.
 
-**15. Decomposition.** Losses peak in the upper-middle deciles; decile 8
-loses 3.7 per cent of disposable income. Ignore decile 1: its gain reverses
+**15. Decomposition.** Losses peak in the upper-middle deciles; on this
+draw decile 8 loses 3.7 per cent of disposable income, 2.9 per cent over
+20 draws, and which of deciles 6–9 loses most depends on the ranking. Ignore decile 1: its gain reverses
 under another household ranking.
 
 **16. Absorption.** Job loss alone, OBR-sized. Tax and benefits absorb 29
@@ -143,7 +150,7 @@ points; wage cuts £19.13bn and +0.28 points (channels on in both). Without
 the channels, +2.88 against +0.92. Per pound, 42p against 55p. Why: wage
 cuts remove pounds at the margin; job loss removes whole earnings and
 concentrates the loss. A result for this shock, not a property of the UK
-system.
+system; shorter spells narrow the cost gap.
 
 ## 5. What moves the cost, and policy
 
@@ -155,7 +162,9 @@ draws). Without the survivor wage rise, £24.9bn.
 survivor wages grow by 5 per cent.
 
 **23. Indices.** £4bn to £8bn on one draw, adjusted for the displaced
-count; the three AIOE-type indices are indistinguishable.
+count; the three AIOE-type indices are indistinguishable. If asked why the
+adjusted C-AIOE (£8.2bn) differs from £7.3bn: it is one draw, within the
+±£1.7bn scatter.
 
 **24. Closure.** The capital uplift is not tied to the labour shock. If a
 share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
@@ -167,10 +176,13 @@ R1 replaces 50 per cent of lost earnings (capped at £15,000): poverty −1.89
 points at £26.9bn, £14.3bn per point; R2 and R3 cost £8.6bn and £6.7bn per
 point. They aim at different things: R1 replaces earnings for the
 displaced, R2 and R3 pay all UC claimants. Static, no behavioural response.
+If asked where the money goes: at seed 0, 63 per cent of R1 spending
+reaches deciles 8–10; R2 and R3 place 77 and 73 per cent in deciles 1–5.
 
 ## Close
 
-**26. Conclusions.** Four results, then the limits: a one-year stress test,
+**26. Conclusions.** Four results (the £9.3bn is from unrounded means,
+so it differs from 11.3 − 1.9), then the limits: a one-year stress test,
 nine groups, no hiring margin. Next: calibrate spells and re-employment pay
 to UK evidence (Upward and Wright 2019), and model take-up and JSA for the
 newly displaced.
