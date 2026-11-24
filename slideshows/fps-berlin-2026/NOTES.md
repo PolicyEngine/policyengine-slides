@@ -210,6 +210,41 @@ newly displaced.
 
 **29. Thank you.** Leave this up for the discussion.
 
+## Hardest questions, with answers from the paper
+
+1. **"On a realistic base, isn't the capital uplift far too large, so the
+   true cost is much higher?"** The 1.005 per cent base return is the
+   Irish calibration; the same 0.4 points on a 4 per cent base is a 10 per
+   cent uplift. With 10 per cent the cost is £20.6bn, with 20 per cent
+   £16.2bn, with the uplift on dividends only £11.0bn (20 draws). That is
+   why slide 26 replaces the uplift with an explicit account.
+2. **"Dolls et al. find unemployment shocks absorbed more than income
+   shocks; you find the reverse."** For this shock the job losses fall on
+   above-average earners with capital, working partners and owned homes,
+   and the wage cuts are graded to exposure, so they hit higher marginal
+   rates. With full UC take-up and JSA the seed-0 job-loss figure rises
+   from 43p to 48p per pound, still below 55p. The comparison neither
+   confirms nor contradicts their result: take-up, who becomes unemployed,
+   contributory benefits and incidence all differ.
+3. **"Would earnings-related insurance, as in Germany or France, change
+   the ranking?"** The closest runs: full take-up plus JSA raises cash
+   benefits from 3.0p to 8.7p per pound lost, and R1 (50 per cent of lost
+   earnings, capped at £15,000 a year) costs £26.9bn and cuts poverty by
+   1.89 points. R1 is not a model of any country's scheme; the paper does
+   not model other systems.
+4. **"Has the framework been validated?"** A backcast displacing 2.6 per
+   cent uniformly (the 2008–10 unemployment rise) gives +0.99pp absolute
+   poverty and +0.33 Gini, where outturns were roughly flat: uprating with
+   high inflation, mixed spell lengths and behavioural responses are outside
+   the model. Per point of displacement it gives +0.38pp against +0.36pp for
+   the uniform 7 per cent rule. The OBR benchmark (slide 19) is the other
+   check. Microcosm's 98.7 per cent is in-sample fit, not validation.
+5. **"What if less of the wage bill becomes profit, or more is foreign
+   owned?"** Payouts not reaching UK households go to overseas owners and
+   pension funds, untaxed here. Simulated with the whole payout UK-owned,
+   the cost is −£1.6bn at φ = 1, £11.7bn at φ = 0.5 and £18.4bn at
+   φ = 0.25 (20 draws).
+
 ## For the discussion
 
 - **Historical benchmark.** A 2008–10 backcast over-predicts the poverty

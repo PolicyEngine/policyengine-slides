@@ -99,7 +99,7 @@ export const openQuestions = [
     views: [
       "Job loss: whole earnings go, for fewer people",
       "Wage cuts: the same pounds, spread across many workers (Acemoglu and Restrepo 2022)",
-      "The size of the shock settles neither question",
+      "If AI shifts income from labour to capital, labour-tax bases erode (Korinek 2026)",
     ],
   },
 ];
@@ -132,12 +132,12 @@ export const methodFlow: { icon: Icon; title: string; text: string }[] = [
 export const scenarioInputs: { value: string; label: string }[] = [
   { value: "7%", label: "of employees lose their job for the full year" },
   { value: "+2.6%", label: "average wage rise, paid to the employees who keep their jobs" },
-  { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4pp, from 1.005% to 1.405%" },
+  { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4pp, from 1.005% to 1.405% (on a 4% base the same 0.4pp is +10%)" },
 ];
 
 export const scenarioCaveats = [
   "A one-year stock: no re-employment, redundancy pay or partner response",
-  "Newly displaced workers claim Universal Credit only if their benefit unit's drawn take-up flag is on, and get no contributory Jobseeker's Allowance",
+  "Newly displaced workers claim Universal Credit only if their benefit unit (adult, any partner and children, assessed together) is simulated as a claimant, and get no contributory Jobseeker's Allowance",
   "Self-employed outside the labour shocks; no reduced hiring of the young",
 ];
 
@@ -146,7 +146,7 @@ export const scenarioCaveats = [
 export const central: { value: string; label: string }[] = [
   { value: "2.04m", label: "employees displaced (50-draw mean)" },
   { value: "£7.3bn", label: "a year net Exchequer cost (s.d. £1.9bn)" },
-  { value: "+2.40pp", label: "absolute poverty before housing costs" },
+  { value: "+2.40pp", label: "absolute poverty before housing costs (+0.82pp on the relative line)" },
   { value: "+1.76pp", label: "Gini, from a baseline of 30.3" },
 ];
 

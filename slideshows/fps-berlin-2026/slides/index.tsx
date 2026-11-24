@@ -216,8 +216,9 @@ export function InBriefSlide() {
         ))}
       </div>
       <p className={fps.note}>
-        Scenario analysis, not a forecast: a decade of adoption applied within one year, with full-year job loss, run through the UK
-        rules for 2027–28. An impact-year stress test.
+        Why beyond the UK: the job-loss against wage-cut comparison is the extensive-versus-intensive contrast of Dolls et al. (2012),
+        applied to an AI shock, and labour-tax bases lean on the occupations most exposed to AI. Scenario analysis, not a forecast: a decade
+        of adoption applied within one year, an impact-year stress test.
       </p>
     </Frame>
   );
@@ -347,7 +348,7 @@ export function ScenarioSlide() {
   return (
     <Frame
       section="method"
-      title="The central case follows an Irish study"
+      title="The central case: 7% displaced, wages +2.6%, capital income +39.8%"
       subtitle="Doorley et al. (2026), from one investment-bank scenario of a decade of adoption, applied within one year"
       scale={1.15}
     >
@@ -431,7 +432,7 @@ export function ExposureMethodSlide() {
   return (
     <Frame
       section="method"
-      title="Measuring AI exposure: complementarity-adjusted AIOE"
+      title="Exposure: AIOE scaled down where AI complements the work"
       subtitle="No published UK series of complementarity-adjusted exposure exists at the level needed, so I build one for the nine SOC2020 groups"
       scale={1.1}
     >
@@ -505,7 +506,7 @@ export function ImputationSlide() {
   return (
     <Frame
       section="method"
-      title="Imputation: chained quantile-regression forests"
+      title="Imputation draws from the conditional distribution, not the mean"
       subtitle="Variables the survey lacks are drawn from donor surveys, one at a time, from their full conditional distribution"
       scale={1.05}
     >
@@ -530,7 +531,7 @@ export function CalibrationSlide() {
   return (
     <Frame
       section="method"
-      title="Calibration: household weights fitted to official totals"
+      title="Calibration: 98.7% of 1,514 official totals matched within 10%"
       subtitle="One weight per household, chosen so the file reproduces published aggregates"
       scale={1.05}
     >
@@ -554,7 +555,7 @@ export function ShockSlide() {
   return (
     <Frame
       section="method"
-      title="Implementing the shock person by person"
+      title="The shock: three changes to each person's record"
       subtitle="Three changes to the baseline records, then the same model on both"
       scale={1.05}
     >
@@ -585,7 +586,7 @@ export function MicrosimSlide() {
   return (
     <Frame
       section="method"
-      title="Microsimulation with PolicyEngine UK for 2027–28"
+      title="Three outcomes, from PolicyEngine UK under the 2027–28 rules"
       subtitle="A baseline and a shocked run on identical records: no resampling noise, but the survey's sampling error remains"
       scale={1.1}
     >
@@ -654,8 +655,8 @@ export function CentralSlide() {
         ))}
       </div>
       <p className={fps.note}>
-        Poverty is an upper bound for spell length; +0.82pp on the relative line; +1.99pp with full UC take-up and JSA (20 draws). Cost
-        excludes corporation tax, VAT and the £26.6bn public-sector pay bill.
+        Poverty is an upper bound for spell length; +1.99pp with full UC take-up and JSA (20 draws). Cost excludes corporation tax, VAT and
+        the £26.6bn public-sector pay bill.
       </p>
       <div>
         <p className={fps.sideHead}>Each channel alone, £bn a year (20 paired draws)</p>
@@ -749,7 +750,7 @@ export function AbsorptionSlide() {
         ))}
       </div>
       <div>
-        <p className={fps.sideHead}>What limits the benefit response</p>
+        <p className={fps.sideHead}>What limits the benefit response: no earnings-related insurance, and well-off claimants</p>
         <Bullets items={absorptionVariants} />
       </div>
       <p className={fps.note}>
@@ -833,7 +834,7 @@ export function MarginSlide() {
     <Frame
       section="comparisons"
       title="As wage cuts, the same loss costs more but raises poverty far less"
-      subtitle="For this shock: the displaced workers' gross earnings, removed instead as exposure-graded pay cuts (20 paired draws)"
+      subtitle="For this shock: the displaced workers' gross earnings, removed instead as pay cuts graded to exposure across employees outside the least-exposed group (20 draws)"
       scale={0.98}
     >
       <div className={fps.margins}>
@@ -856,8 +857,8 @@ export function MarginSlide() {
           Rise in absolute poverty before housing costs, pp
           <span>same draws</span>
         </div>
-        <div className={`${fps.marginValue} ${fps.marginHigh}`}>+{margins.job.bhc.toFixed(2)}</div>
-        <div className={fps.marginValue}>+{margins.wage.bhc.toFixed(2)}</div>
+        <div className={fps.marginValue}>+{margins.job.bhc.toFixed(2)}</div>
+        <div className={`${fps.marginValue} ${fps.marginHigh}`}>+{margins.wage.bhc.toFixed(2)}</div>
         <div className={fps.marginLabel}>
           Exchequer cost per £ of earnings lost
           <span>channels off, employer NI included</span>
@@ -963,6 +964,7 @@ export function ClosureSlide() {
           `Displaced workers lose £${closure.displacedEarnings}bn; survivors gain £${closure.survivorGain}bn`,
           "Half of post-tax profit is paid out; dividends taxed at the 36% average rate of the capital channel",
           "The central capital uplift adds £12.6bn more dividends than the labour shock can fund",
+          "The rest of the payout goes to overseas owners and pension funds, untaxed here",
           "Static accounting: no profit shifting; public-sector pay cannot become profit, so the gain end is overstated",
         ]}
       />
@@ -1003,7 +1005,8 @@ export function PolicySlide() {
       </table>
       <p className={fps.note}>
         Cost per point measures one objective only: R1 replaces earnings for displaced workers, while R2 and R3 raise UC for all
-        claimants, including households the shock does not touch. Not a ranking. Static: no labour-supply or re-employment response.
+        claimants, including households the shock does not touch. Not a ranking. Static: no labour-supply or re-employment response. R1 is
+        untaxed and ignored by means tests, so at the top of its cost range.
         With half-year spells (5 draws), R1 costs £31bn per point and cuts poverty less than R2.
       </p>
     </Frame>

@@ -236,7 +236,7 @@
   border-radius: calc(var(--u) * 0.35);
   padding: 0 calc(var(--u) * 0.8);
   color: white;
-  font-size: calc(var(--u) * 1.5);
+  font-size: calc(var(--u) * 1.9);
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
