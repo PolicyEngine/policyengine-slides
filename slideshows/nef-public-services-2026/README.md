@@ -11,7 +11,7 @@ and not on main yet. The deck is public.
 The deck follows one document, the proposal of 21 November 2026 (`config.ts`,
 its footer and `cover.date` in `content.ts`). Every claim and number on the
 slides comes from it, condensed; nothing is added. The cover names Vahid
-Ahmadi and Max Ghenis. The deck reflects the proposal as revised after review
+Ahmadi. The deck reflects the proposal as revised after review
 (NHS valued from England's health budget, devolved coverage of education and
 childcare, rail fares, social care in the FRS, the local-area dataset, and
 the revised phases and open questions).

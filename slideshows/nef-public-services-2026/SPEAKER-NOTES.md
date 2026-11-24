@@ -7,7 +7,7 @@ PolicyEngine results.
 
 ## 1. Cover
 
-Vahid Ahmadi and Max Ghenis are both named.
+Vahid Ahmadi is named.
 
 ## 2. In this proposal
 

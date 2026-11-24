@@ -290,7 +290,6 @@ const metricLabel: Record<MetricStatus, string> = {
 export function TitleSlide() {
   const people = [
     { ...speakers["vahid-ahmadi"], title: "Research Associate" },
-    { ...speakers["max-ghenis"], title: "CEO" },
   ];
   return (
     <Slide isCover>
