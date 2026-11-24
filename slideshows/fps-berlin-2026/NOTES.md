@@ -81,7 +81,9 @@ Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
 DfE crosswalk, weighted by ASHE employment. I shift the score so the least
 exposed group is zero, my normalisation. θ enters only relative to its
 minimum and mean, so the rebuilt series' level offset does not matter.
-Exposure varies between nine groups only.
+Exposure varies between nine groups only. If asked: for the four groups
+with a negative AIOE, a higher θ raises the score; the unadjusted AIOE
+gives £8.0bn against £8.2bn on the same draw (slide 25).
 
 **8. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
 imputations, and weights calibrated to 1,514 targets (98.7 per cent within
@@ -186,7 +188,9 @@ adjusted C-AIOE (£8.2bn) differs from £7.3bn: it is one draw, within the
 
 **26. Closure.** The capital uplift is not tied to the labour shock. If a
 share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
-cent, the result runs from a £0.9bn gain to a £14.4bn cost. This is where
+cent, the result runs from a £0.9bn gain to a £14.4bn cost. That range spans
+half to all of the fall becoming profit; the cost falls linearly in that
+share. This is where
 the tax-base question for this audience sits.
 
 **27. Policy.** Three stylised responses, compared on cost and poverty only.
@@ -199,8 +203,7 @@ reaches deciles 8–10; R2 and R3 place 77 and 73 per cent in deciles 1–5.
 
 ## Close
 
-**28. Conclusions.** Four results (the £9.3bn is from unrounded means,
-so it differs from 11.3 − 1.9), then the limits: a one-year stress test,
+**28. Conclusions.** Four results, then the limits: a one-year stress test,
 nine groups, no hiring margin. Next: calibrate spells and re-employment pay
 to UK evidence (Upward and Wright 2019), and model take-up and JSA for the
 newly displaced.

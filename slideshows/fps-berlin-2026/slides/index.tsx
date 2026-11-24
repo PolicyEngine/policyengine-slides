@@ -266,7 +266,7 @@ export function ExposureSlide() {
         <div>
           <p className={fps.sideHead}>Why incidence matters</p>
           <p className={fps.lead}>
-            Professional, managerial and administrative work scores highest on AI exposure, and <strong>pays well</strong>.
+            Managerial and professional work scores high on AI exposure and <strong>pays well</strong>; administrative work scores highest.
           </p>
           <Bullets
             items={[
@@ -391,7 +391,7 @@ export function PolicyEngineSlide() {
             </div>
             <p className={fps.kpiLabel}>
               {fact.text}
-              {"cite" in fact && fact.cite ? ` (${fact.cite.text})` : ""}
+              {"cite" in fact && fact.cite ? ` (${fact.cite.text.replace("et al., 2026,", "et al. 2026,")})` : ""}
             </p>
           </div>
         ))}
@@ -419,6 +419,9 @@ export function PolicyEngineSlide() {
             </div>
           ))}
         </div>
+        <p className={fps.note} style={{ marginTop: "calc(var(--u) * 1)" }}>
+          Use by these bodies is not an endorsement of this paper.
+        </p>
       </div>
     </Frame>
   );
@@ -512,9 +515,9 @@ export function ImputationSlide() {
           <Tex tex={imputationTex.gate} />
           <Tex tex={imputationTex.draw} />
           <p className={fps.note} style={{ marginTop: "calc(var(--u) * 0.8)" }}>
-            x: predictors both surveys record; y<sub>&lt;v</sub>: variables already imputed; π̂<sub>v</sub>: a classifier&apos;s probability of
-            a non-zero value; Q̂<sub>v</sub>: the forest&apos;s conditional quantile function among non-zero donors; u: a seeded uniform draw.
-            Occupation, which carries exposure here, is observed in the FRS; only records drawn from tax data have it imputed from income.
+            x: predictors both surveys record; y<sub>&lt;v</sub>: variables already imputed; π: a classifier&apos;s estimated probability of a
+            non-zero value; Q: the forest&apos;s estimated conditional quantile function among non-zero donors; u: a seeded uniform draw.
+            Occupation, which carries exposure here, is observed in the FRS; only the FRS copies given tax-record incomes have it imputed from income.
           </p>
         </div>
         <Bullets items={imputationPoints} />
@@ -651,8 +654,8 @@ export function CentralSlide() {
         ))}
       </div>
       <p className={fps.note}>
-        Poverty is an upper bound for spell length: +1.99pp with full UC take-up and JSA. Cost excludes corporation tax, VAT and the £26.6bn
-        public-sector pay bill.
+        Poverty is an upper bound for spell length; +0.82pp on the relative line; +1.99pp with full UC take-up and JSA (20 draws). Cost
+        excludes corporation tax, VAT and the £26.6bn public-sector pay bill.
       </p>
       <div>
         <p className={fps.sideHead}>Each channel alone, £bn a year (20 paired draws)</p>
@@ -863,8 +866,7 @@ export function MarginSlide() {
         <div className={`${fps.marginValue} ${fps.marginHigh}`}>{margins.wage.perPound}p</div>
       </div>
       <p className={fps.note}>
-        Channels off: poverty +2.88pp against +0.92pp, and wage cuts alone lower the Gini by 0.63pp (20 draws). A result for this shock,
-        on above-average earners, not a property of the UK system.
+        Channels off: poverty +2.88pp against +0.92pp; wage cuts alone lower the Gini by 0.63pp (20 draws).
       </p>
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {marginWhy.map((item) => (

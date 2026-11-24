@@ -131,7 +131,7 @@ export const methodFlow: { icon: Icon; title: string; text: string }[] = [
 // Section 3.2 (Doorley et al. 2026 conventions).
 export const scenarioInputs: { value: string; label: string }[] = [
   { value: "7%", label: "of employees lose their job for the full year" },
-  { value: "+2.6%", label: "average wage rise for the employees who keep theirs" },
+  { value: "+2.6%", label: "average wage rise, paid to the employees who keep their jobs" },
   { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4pp, from 1.005% to 1.405%" },
 ];
 
@@ -238,7 +238,7 @@ export const closure = {
 
 // Table 8 (tab:policy), 50 draws, shocked-plus-reform minus shocked.
 export const policyRows: { reform: string; text: string; cost: string; bhc: string; perPoint: string }[] = [
-  { reform: "R1 Earnings replacement", text: "wage-insurance style: 50% of lost earnings, capped at £15,000", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
+  { reform: "R1 Earnings replacement", text: "wage-insurance style: 50% of lost earnings, capped at £15,000 a year", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
   { reform: "R2 UC allowance +20%", text: "standard allowance", cost: "6.9", bhc: "−0.79", perPoint: "8.6" },
   { reform: "R3 Cap and taper", text: "no benefit cap, taper 55% to 45%", cost: "5.1", bhc: "−0.76", perPoint: "6.7" },
 ];
@@ -246,7 +246,7 @@ export const policyRows: { reform: string; text: string; cost: string; bhc: stri
 // Section 5.
 export const conclusions: { title: string; text: string }[] = [
   {
-    title: "Who loses the job moves the cost by £9.3bn (unrounded)",
+    title: "Who loses the job moves the cost from £1.9bn to £11.3bn",
     text: "Across the four rules, poverty moves far less: each displaced worker takes their income tax and NI with them",
   },
   {
@@ -395,8 +395,8 @@ export const drawFacts: { value: string; label: string }[] = [
 
 export const buildStages: { icon: Icon; owner: string; title: string; text: string }[] = [
   { icon: IconUsers, owner: "FRS 2024–25", title: "Survey base", text: "Households, incomes, occupations, benefits" },
-  { icon: IconReceiptTax, owner: "HMRC SPI", title: "Top incomes", text: "FRS copies take tax-record incomes; more above £200k" },
-  { icon: IconDatabase, owner: "Donor surveys", title: "Imputed variables", text: "Wealth (WAS), spending (LCFS) and others, by QRF" },
+  { icon: IconReceiptTax, owner: "HMRC SPI", title: "Top incomes", text: "FRS copies take tax-record incomes, with extra copies for each band above £200k" },
+  { icon: IconDatabase, owner: "Donor surveys", title: "Imputed variables", text: "Wealth, spending and others, by quantile-regression forest" },
   { icon: IconUsers, owner: "DWP and HMRC", title: "Benefit take-up", text: "Reported claims kept; the rest drawn to official rates" },
   { icon: IconScale, owner: "Official totals", title: "Calibrated weights", text: "Household weights fitted to official totals" },
 ];
@@ -416,7 +416,7 @@ export const imputationPoints = [
 export const calibrationTex = String.raw`\min_{w}\ \sum_{j=1}^{J}\lambda_j\,\min\!\left(\frac{\lvert \hat T_j(w)-T_j\rvert}{\max(\lvert T_j\rvert,\,1)},\ 10\right)\quad\text{s.t.}\ \ 0<w_i\le 10\,w_i^{0}`;
 
 export const calibrationPoints = [
-  "T̂ⱼ(w) = Σᵢ aⱼᵢwᵢ: the file's estimate of official total Tⱼ; w⁰: starting weights; J = 1,514",
+  "Σᵢ aⱼᵢwᵢ is the file's estimate of official total Tⱼ; w⁰ are the starting weights; J = 1,514 targets",
   "Relative errors, each capped at 1,000% so no single target dominates",
   "λⱼ: each of 38 target families has equal weight, split evenly among its targets",
   "Adam on log-weights, 1,500 steps, best step kept",
