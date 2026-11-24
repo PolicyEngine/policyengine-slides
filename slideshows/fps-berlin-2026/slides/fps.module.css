@@ -569,3 +569,10 @@
 .kpiInline .kpiLabel {
   margin-top: 0;
 }
+
+.eqLabel {
+  margin-bottom: calc(var(--u) * 0.4);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.35);
+  font-weight: 600;
+}

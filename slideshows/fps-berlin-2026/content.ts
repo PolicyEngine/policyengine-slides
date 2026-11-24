@@ -52,7 +52,7 @@ export const inBrief: { icon: Icon; title: string; value: string; text: string }
     icon: IconUsers,
     title: "Who loses the job",
     value: "£1.9–11.3bn",
-    text: "Exchequer cost a year of displacing 7% of employees (2.04m), across four incidence rules",
+    text: "Exchequer cost a year of displacing 7% of employees (2.04m), across four displacement rules",
   },
   {
     icon: IconArrowsSplit,
@@ -132,12 +132,12 @@ export const methodFlow: { icon: Icon; title: string; text: string }[] = [
 export const scenarioInputs: { value: string; label: string }[] = [
   { value: "7%", label: "of employees lose their job for the full year" },
   { value: "+2.6%", label: "average wage rise for the employees who keep theirs" },
-  { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4 points, from 1.005% to 1.405%" },
+  { value: "+39.8%", label: "interest and dividends: the return on capital rises 0.4pp, from 1.005% to 1.405%" },
 ];
 
 export const scenarioCaveats = [
   "A one-year stock: no re-employment, redundancy pay or partner response",
-  "Newly displaced workers claim Universal Credit only if their survey record is flagged as a claimant, and get no contributory Jobseeker's Allowance",
+  "Newly displaced workers claim Universal Credit only if their benefit unit's drawn take-up flag is on, and get no contributory Jobseeker's Allowance",
   "Self-employed outside the labour shocks; no reduced hiring of the young",
 ];
 
@@ -162,7 +162,7 @@ export const channels: { label: string; value: number; text: string }[] = [
 export const absorption: { value: string; label: string }[] = [
   { value: "29%", label: "of the market-income loss absorbed by income tax, employee NI and benefits" },
   { value: "3.0p", label: "of cash benefits per pound of earnings lost; lower taxes do the rest" },
-  { value: "53%", label: "of displaced benefit units entitled to Universal Credit claim it (survey take-up flags)" },
+  { value: "53%", label: "of displaced benefit units entitled to Universal Credit claim it (take-up flags drawn in the data build)" },
 ];
 
 export const absorptionVariants = [
@@ -246,7 +246,7 @@ export const policyRows: { reform: string; text: string; cost: string; bhc: stri
 // Section 5.
 export const conclusions: { title: string; text: string }[] = [
   {
-    title: "Who loses the job moves the cost by £9.3bn",
+    title: "Who loses the job moves the cost by £9.3bn (unrounded)",
     text: "Across the four rules, poverty moves far less: each displaced worker takes their income tax and NI with them",
   },
   {
@@ -259,7 +259,7 @@ export const conclusions: { title: string; text: string }[] = [
   },
   {
     title: "The sign rests on the offsets",
-    text: "The cost is zero at survivor wages of +3.7% (not +2.6%), a 55% capital uplift (not 40%) or spells of at most 9.5 months",
+    text: "The cost is zero at survivor wages of +3.7% (not +2.6%), a 55% capital uplift (not 39.8%) or spells of at most 9.5 months",
   },
 ];
 
@@ -342,8 +342,8 @@ export const shockSteps: { icon: Icon; title: string; tex: string; text: string 
 export const microsimRules = [
   "PolicyEngine UK 2.174.1 (policyengine.py 6.16.1)",
   "Income tax and NI thresholds frozen",
-  "Basic and higher dividend rates +2 points from April 2026",
-  "Savings income, and property income outside Scotland, +4 points from April 2027; 2 of them announced, not yet legislated",
+  "Basic and higher dividend rates +2pp from April 2026",
+  "Savings income, and property income outside Scotland, +4pp from April 2027; 2pp of them announced, not yet legislated",
 ];
 
 export const outcomeDefs: { title: string; text: string }[] = [
@@ -398,32 +398,33 @@ export const buildStages: { icon: Icon; owner: string; title: string; text: stri
   { icon: IconReceiptTax, owner: "HMRC SPI", title: "Top incomes", text: "FRS copies take tax-record incomes; more above £200k" },
   { icon: IconDatabase, owner: "Donor surveys", title: "Imputed variables", text: "Wealth (WAS), spending (LCFS) and others, by QRF" },
   { icon: IconUsers, owner: "DWP and HMRC", title: "Benefit take-up", text: "Reported claims kept; the rest drawn to official rates" },
-  { icon: IconScale, owner: "Official totals", title: "Calibrated weights", text: "Fitted to 1,514 targets" },
+  { icon: IconScale, owner: "Official totals", title: "Calibrated weights", text: "Household weights fitted to official totals" },
 ];
 
 export const imputationTex = {
-  gate: String.raw`\Pr\bigl(y_{ik}\neq 0 \mid x_i,\, y_{i,<k}\bigr)\ \text{(gate)}`,
-  draw: String.raw`y_{ik} = \hat F_k^{-1}\!\bigl(u_{ik} \mid x_i,\, y_{i,<k}\bigr),\qquad u_{ik}\sim U(0,1)`,
+  gate: String.raw`d_{iv}\sim\mathrm{Bernoulli}\bigl(\hat\pi_v(x_i,\,y_{i,<v})\bigr)`,
+  draw: String.raw`y_{iv}=d_{iv}\,\hat Q_v\bigl(u_{iv}\mid x_i,\,y_{i,<v}\bigr),\qquad u_{iv}\sim U(0,1)`,
 };
 
 export const imputationPoints = [
-  "Quantile-regression forests trained on a donor survey estimate the whole conditional distribution, not just its mean",
-  "Chained: each variable conditions on the shared predictors x and on the variables already imputed, so joint structure is kept",
-  "Gated: a zero-or-not step first keeps the exact share of zeros (no one gets a little wealth by interpolation)",
-  "Weighted: donor rows are resampled by survey weight before each forest; draws are seeded, so the file is reproducible",
+  "Wealth from the Wealth and Assets Survey (round 8), spending from the Living Costs and Food Survey 2024–25; predictors are incomes by source, household composition, tenure and region",
+  "Chained: each variable conditions on x and on the variables already drawn, so the joint structure is kept",
+  "Gated: a classifier first draws zero or non-zero, so zeros stay exact zeros (no one gets a little wealth by interpolation)",
+  "Weighted and reproducible: donor rows are resampled by survey weight before each forest, and every draw is seeded",
 ];
 
-export const calibrationTex = String.raw`\min_{0<w_i\,\le\,10\,w_i^{0}}\ \sum_{j}\omega_j\,\min\!\left(\frac{\lvert a_j^{\top}w - t_j\rvert}{\max(\lvert t_j\rvert,\,1)},\ 10\right)`;
+export const calibrationTex = String.raw`\min_{w}\ \sum_{j=1}^{J}\lambda_j\,\min\!\left(\frac{\lvert \hat T_j(w)-T_j\rvert}{\max(\lvert T_j\rvert,\,1)},\ 10\right)\quad\text{s.t.}\ \ 0<w_i\le 10\,w_i^{0}`;
 
 export const calibrationPoints = [
-  "w: household weights; w⁰ the survey's starting weights; tⱼ an official total; aⱼᵀw the file's estimate of it",
-  "Relative errors, capped at 1,000% so no single target dominates",
-  "ωⱼ: each of 38 target families gets an equal share, split within the family",
-  "No weight may exceed 10 times its starting value; Adam on log-weights, 1,500 steps, best step kept",
+  "T̂ⱼ(w) = Σᵢ aⱼᵢwᵢ: the file's estimate of official total Tⱼ; w⁰: starting weights; J = 1,514",
+  "Relative errors, each capped at 1,000% so no single target dominates",
+  "λⱼ: each of 38 target families has equal weight, split evenly among its targets",
+  "Adam on log-weights, 1,500 steps, best step kept",
+  "A fit criterion, not a distance criterion: unlike raking or GREG, only the ×10 bound limits how far weights move, and the total weight is free",
 ];
 
 export const calibrationFacts: { value: string; label: string }[] = [
   { value: "1,514", label: "targets from HMRC, ONS, DWP, OBR and others" },
   { value: "98.7%", label: "within 10% of the official figure (in sample)" },
-  { value: "≈7.2k", label: "effective sample size of the 78,181 households" },
+  { value: "≈7,200", label: "Kish effective sample size, (Σw)²/Σw², of the 78,181 households" },
 ];

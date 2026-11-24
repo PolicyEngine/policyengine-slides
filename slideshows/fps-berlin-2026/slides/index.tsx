@@ -347,7 +347,7 @@ export function ScenarioSlide() {
   return (
     <Frame
       section="method"
-      title="The central scenario follows an Irish study"
+      title="The central case follows an Irish study"
       subtitle="Doorley et al. (2026), from one investment-bank scenario of a decade of adoption, applied within one year"
       scale={1.15}
     >
@@ -397,7 +397,7 @@ export function PolicyEngineSlide() {
         ))}
       </div>
       <div>
-        <p className={fps.sideHead}>UK government</p>
+        <p className={fps.sideHead}>UK public bodies</p>
         <div className={fps.logos} style={columns(government.length)}>
           {government.map((org) => (
             <div key={org.name} className={fps.logoCell}>
@@ -464,7 +464,7 @@ export function DataSlide() {
     <Frame
       section="method"
       title="Microcosm: the Family Resources Survey, completed and reweighted"
-      subtitle="PolicyEngine's calibrated UK household microdata, 2024–25 survey grossing to 2027–28"
+      subtitle="PolicyEngine's calibrated UK household microdata: the 2024–25 survey, grossed up to 2027–28"
       scale={1.02}
     >
       <div className={fps.kpis} style={columns(4)}>
@@ -508,12 +508,13 @@ export function ImputationSlide() {
     >
       <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
         <div>
-          <p className={fps.sideHead}>For household i and variable k, in order k = 1, …, K</p>
+          <p className={fps.eqLabel}>For record i and variable v = 1, …, V, in a fixed order</p>
           <Tex tex={imputationTex.gate} />
           <Tex tex={imputationTex.draw} />
           <p className={fps.note} style={{ marginTop: "calc(var(--u) * 0.8)" }}>
-            x: predictors the survey and the donor share; y<sub>i,&lt;k</sub>: variables already imputed; F̂<sub>k</sub>: the forest&apos;s
-            conditional distribution; u: a seeded random quantile.
+            x: predictors both surveys record; y<sub>&lt;v</sub>: variables already imputed; π̂<sub>v</sub>: a classifier&apos;s probability of
+            a non-zero value; Q̂<sub>v</sub>: the forest&apos;s conditional quantile function among non-zero donors; u: a seeded uniform draw.
+            Occupation, which carries exposure here, is observed in the FRS; only records drawn from tax data have it imputed from income.
           </p>
         </div>
         <Bullets items={imputationPoints} />
@@ -640,7 +641,7 @@ export function CentralSlide() {
   return (
     <Frame
       section="central"
-      title="£7.3 billion a year, the net of flows several times larger"
+      title="£7.3bn a year, the net of flows several times larger"
       subtitle="The exposure-proportional central case, 2027–28"
       scale={0.9}
     >
@@ -713,7 +714,7 @@ export function TransitionSlide() {
           width={1600}
           height={900}
           alt="Share of each income decile moving from employment to unemployment, rising from about 0.8 per cent in the bottom decile to about 5.6 per cent in the top"
-          caption="Central scenario, 50-draw means with 95% intervals for the mean."
+          caption="Central case, 50-draw means with 95% intervals for the mean (assignment noise only)."
         />
         <div>
           <Kpi value="0.78%" label="of people in the bottom decile move into unemployment" small />
@@ -749,7 +750,7 @@ export function AbsorptionSlide() {
         <Bullets items={absorptionVariants} />
       </div>
       <p className={fps.note}>
-        Not comparable with Dolls et al.: 47% of an unemployment shock in the EU, 34% in the US, 41.5% in the UK (16.3 points from
+        Not comparable with Dolls et al.: 47% of an unemployment shock in the EU, 34% in the US, 41.5% in the UK (16.3pp from
         benefits). They assume full take-up and add people like the existing unemployed.
       </p>
     </Frame>
@@ -980,8 +981,8 @@ export function PolicySlide() {
           <tr>
             <th>Reform</th>
             <th className={fps.num}>Annual cost (£bn)</th>
-            <th className={fps.num}>Poverty BHC (pp)</th>
-            <th className={fps.num}>£bn per point of poverty</th>
+            <th className={fps.num}>Poverty before housing costs (pp)</th>
+            <th className={fps.num}>£bn per pp of poverty</th>
           </tr>
         </thead>
         <tbody>
@@ -1075,7 +1076,7 @@ export function ObrBackupSlide() {
     <Frame
       section="central"
       title="Close to the OBR's £9bn, but only because offsetting lines differ"
-      subtitle="Unemployment up 1.4 points, no survivor-wage or capital change (20 draws, £bn a year)"
+      subtitle="Unemployment up 1.4pp, no survivor wage rise or capital-income uplift (20 draws, £bn a year)"
       scale={1.15}
     >
       <div className={fps.split}>
@@ -1175,8 +1176,8 @@ export function GridBackupSlide() {
   return (
     <Frame
       section="sensitivity"
-      title="Survivor wage growth decides whether average incomes fall"
-      subtitle="Change in average household disposable income (%), capital shock on (seed 0)"
+      title="The survivor wage rise decides whether average incomes fall"
+      subtitle="Change in average household disposable income (%), capital-income uplift on (seed 0)"
       scale={1.1}
       fill
     >
@@ -1185,7 +1186,7 @@ export function GridBackupSlide() {
         width={2000}
         height={1000}
         alt="Grid of disposable income changes by displacement rate and wage uplift"
-        caption="At 7% displacement, average income falls with wage growth up to 4% (−0.32%) and rises with 5% (+0.15%)."
+        caption="At 7% displacement, average income falls with a survivor wage rise of up to 4% (−0.32%) and rises with 5% (+0.15%)."
       />
     </Frame>
   );

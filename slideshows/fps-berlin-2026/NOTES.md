@@ -88,9 +88,10 @@ imputations, and weights calibrated to 1,514 targets (98.7 per cent within
 10 per cent). 29 million employees in 2027–28; 99.7 per cent have an
 occupation group.
 
-**9. Imputation.** What the FRS lacks (wealth, spending and others) comes
-from donor surveys through chained quantile-regression forests: a gate
-for zero or not, then a draw at a seeded random quantile of the forest's
+**9. Imputation.** What the FRS lacks (wealth from the Wealth and Assets
+Survey, spending from the Living Costs and Food Survey, and others) comes
+through chained quantile-regression forests: a classifier draws zero or
+not, then a draw at a seeded random quantile of the forest's
 conditional distribution, each variable conditioning on those already
 imputed. Drawing from the distribution, not the mean, keeps the spread
 that tax and benefit rules respond to.
@@ -98,7 +99,9 @@ that tax and benefit rules respond to.
 **10. Calibration.** One weight per household, chosen to minimise capped
 relative errors against 1,514 official totals, each of 38 families weighted
 equally, with no weight above ten times its survey value. 98.7 per cent of
-targets end within 10 per cent; this is in-sample fit, not validation. The
+targets end within 10 per cent; this is in-sample fit, not validation. If asked about raking or GREG: this minimises fit
+error, not distance from the starting weights; only the ten-times bound
+limits how far weights move, and the total weight is free. The
 price is uneven weights: an effective sample of about 7,200 households
 (5,810 for employees, slide 14). Method as in the Microcosm code at the time
 of the 7 November build that the paper used.
