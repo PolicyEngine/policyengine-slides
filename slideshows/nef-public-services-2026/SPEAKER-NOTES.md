@@ -13,7 +13,7 @@ Vahid Ahmadi and Max Ghenis are both named.
 
 Three parts: what we mean; status today; the plan. In one line: PolicyEngine
 UK already values five public services for each household; we propose a
-scoping phase, then three build phases from February 2027, to compare
+scoping phase, then three build phases, to compare
 universal services with cash on income, adequacy and carbon. The aim is one
 microsimulation in which public services and cash benefits can be compared
 on household incomes, the Minimum Income Standard and carbon.
@@ -215,8 +215,7 @@ the value of below-market rents.
   cost can be compared on carbon as well as income.
 - Step 1 is in phase 2. It replaces the energy share of the spending-based
   footprint rather than adding to it, so energy emissions are not counted
-  twice. Steps 2 and 3 are not yet scheduled; we would agree
-  their timing in phase 1.
+  twice. Steps 2 and 3 are not yet scheduled; we would agree them in phase 1.
 - We have not found a UK microsimulation that does step 3. The UCL 2017
   universal basic services report modelled the distribution of free
   transport and communications, not carbon.
@@ -245,16 +244,14 @@ the value of below-market rents.
 
 ## 14. Four phases, each ending in a check-in with NEF
 
-A scoping phase now, then three build phases from February 2027, each ending
-in something NEF can use. The timings are estimates and would be fixed once
-the scope questions are agreed.
+A scoping phase, then three build phases, each ending in something NEF can use. The content of each phase would be fixed once the scope questions are agreed.
 
-1. Scope (December 2026 to January 2027): agree priority services, scenarios,
+1. Scope: agree priority services, scenarios,
    metrics and geography (UK, regional or local); settle which income MIS is
    compared with (usually income after rent and childcare) and how its
    household types map onto survey households; deliver this catalogue in
    final form; walk NEF through our existing carbon code.
-2. Baseline (February to March 2027): one extended income measure, with and
+2. Baseline: one extended income measure, with and
    without services, by decile and household type; the MIS measure and
    household carbon by fuel from kWh; anchor NHS and education to outturn
    by country (HM Treasury's PESA) and, for the NHS, by service type, giving
@@ -263,7 +260,7 @@ the scope questions are agreed.
    journeys (a known risk); compare with ONS final
    income and the Treasury's decile results, and share the comparison with
    NEF.
-3. Policy levers (April to May 2027): rules for free school meal eligibility
+3. Policy levers: rules for free school meal eligibility
    (England's change from September 2026, the universal schemes in
    Scotland (P1 to P5) and Wales (all primary pupils), and London's scheme, checked against DfE school census
    counts), bus and rail fares feeding through to subsidy and household
@@ -272,7 +269,7 @@ the scope questions are agreed.
    care received recorded in the FRS; design and value one new universal
    service with NEF (for example an energy allowance, whose carbon follows
    from fuel use, step 1 of the carbon work).
-4. Hard services (June to July 2027, exploratory): a modelled care-home
+4. Hard services (exploratory): a modelled care-home
    population (synthetic records built from 2021 Census counts and published
    costs); housing expansion scenarios using tenure-change and waiting-list
    rules agreed with NEF; NHS variation by income or health, using

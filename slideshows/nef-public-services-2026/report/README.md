@@ -1,6 +1,6 @@
 # Proposal report (A4 PDF)
 
-The A4 report version of the proposal "Public services in kind: status in PolicyEngine UK and a plan" (21 November 2026, revised 23 November after review). The text is the proposal doc at revision 109, unchanged; `PROPOSAL.md` holds it.
+The A4 report version of the proposal "Public services in kind: status in PolicyEngine UK and a plan" (21 November 2026, revised 23 November after review and 24 November). The text is the proposal doc at revision 109, with the phase timings and roadmap chart removed (the proposal gives no timings) and the cover marked as a draft for review and feedback; `PROPOSAL.md` holds it.
 
 Published file: `public/reports/nef-public-services-proposal-2026.pdf` (served at `/reports/nef-public-services-proposal-2026.pdf`).
 

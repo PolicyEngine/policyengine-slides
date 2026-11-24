@@ -2,12 +2,12 @@
 
 Nov 21, 2026 · @Vahid Ahmadi
 
-PolicyEngine UK already values five public services for each household. We propose a scoping phase, then three build phases from February 2027, to compare universal services with cash on income, adequacy and carbon.
+PolicyEngine UK already values five public services for each household. We propose a scoping phase, then three build phases, to compare universal services with cash on income, adequacy and carbon.
 
 - **The aim:** one microsimulation in which public services and cash benefits can be compared on household incomes, the Minimum Income Standard and carbon.
 - **What exists:** household values for health (England's health budget, spread across the UK by hospital use), state education, funded childcare, local buses and rail, built on official survey and administrative data. Buses and childcare are calibrated to official figures (headcounts for childcare).
 - **What is missing:** social care, the value of social rents, in-kind energy, water and food, a single "extended income" measure, and rules that let services respond to policy rather than scale in proportion.
-- **The plan:** scope by January; a baseline with extended income, the Minimum Income Standard and carbon by fuel by March; policy levers and social care at home by May; exploratory work on care homes and housing by July 2027.
+- **The plan:** first scope the work; then a baseline with extended income, the Minimum Income Standard and carbon by fuel; then policy levers and social care at home; then exploratory work on care homes and housing.
 - **Next steps:** NEF's answers to the open questions at the end of this note, then a short call to agree phase 1 and how the work is resourced.
 
 ## What we mean by benefits in kind
@@ -84,7 +84,7 @@ PolicyEngine UK already estimates each household's consumption carbon footprint,
 2. **Finer spending categories.** Footprints by detailed category (food, transport fuel, bus, rail, car), following the Defra and University of Leeds input-output method that underlies the official footprint.
 3. **Footprint of the services.** Emissions per pound of service spending (NHS, education, transport), so that a universal service and a cash transfer of equal cost can be compared on carbon as well as on income.
 
-Step 1 is in phase 2. It replaces the energy share of the spending-based footprint rather than adding to it, so energy emissions are not counted twice. Steps 2 and 3 are not yet scheduled; we would agree their timing in phase 1.
+Step 1 is in phase 2. It replaces the energy share of the spending-based footprint rather than adding to it, so energy emissions are not counted twice. Steps 2 and 3 are not yet scheduled; we would agree them in phase 1.
 
 We have not found a UK microsimulation that does this third step. The [UCL 2017 universal basic services report](https://basicincome.org/wp-content/uploads/2018/09/Social-prosperity-for-the-future.pdf) modelled the distribution of free transport and communications, not carbon.
 
@@ -105,21 +105,20 @@ We propose four measures, so that services and cash are compared on the same foo
 
 ## Proposed plan
 
-We propose a scoping phase now, then three build phases from February 2027, each ending in something NEF can use, with a check-in at the end of every phase. The timings are estimates and would be fixed once the scope questions below are agreed.
+We propose a scoping phase, then three build phases, each ending in something NEF can use, with a check-in at the end of every phase. The content of each phase would be fixed once the scope questions below are agreed.
 
-&#91;embedded content: project roadmap · 4 phases, 4 check-ins\]
 
-1. **Scope (December 2026 to January 2027).** Agree priority services, scenarios, metrics and geography (UK, regional or local). Settle which income MIS is compared with (usually income after rent and childcare) and how its household types map onto survey households. Deliver this catalogue in final form, and walk NEF through our existing [carbon code](https://github.com/PolicyEngine/policyengine-uk/blob/main/policyengine_uk/variables/household/consumption/carbon.py).
-2. **Baseline (February to March 2027).**
+1. **Scope.** Agree priority services, scenarios, metrics and geography (UK, regional or local). Settle which income MIS is compared with (usually income after rent and childcare) and how its household types map onto survey households. Deliver this catalogue in final form, and walk NEF through our existing [carbon code](https://github.com/PolicyEngine/policyengine-uk/blob/main/policyengine_uk/variables/household/consumption/carbon.py).
+2. **Baseline.**
    - One "extended income" measure, with and without services, by decile and household type.
    - The Minimum Income Standard measure, and household carbon by fuel from kWh.
    - Anchor NHS and education to outturn by country (HM Treasury's PESA) and, for the NHS, by service type, giving GP and prescribing spending their own age profiles from NHS England's [allocation formulae](https://www.england.nhs.uk/wp-content/uploads/2025/12/allocations-2627-technical-guide-to-formulae-v2.pdf). Start re-anchoring rail by pricing support from journeys (a known risk).
    - Compare with ONS final income and the Treasury's decile results, and share the comparison with NEF.
-3. **Policy levers (April to May 2027).**
+3. **Policy levers.**
    - Rules for free school meal eligibility (England's change from September 2026, the universal schemes in Scotland (P1 to P5) and Wales (all primary pupils), and London's scheme, checked against DfE school census counts), bus and rail fares feeding through to subsidy and household income, and childcare expansion.
    - Value social rent as the gap to market rent, with private renters as donors, and social care at home from the care received recorded in the FRS.
    - Design and value one new universal service with NEF (for example an energy allowance, whose carbon follows from fuel use, step 1 of the carbon work).
-4. **Hard services (June to July 2027, exploratory).**
+4. **Hard services (exploratory).**
    - A modelled care-home population (synthetic records built from 2021 Census counts and published costs).
    - Housing expansion scenarios, using tenure-change and waiting-list rules agreed with NEF.
    - NHS variation by income or health, using Understanding Society (a new data licence).

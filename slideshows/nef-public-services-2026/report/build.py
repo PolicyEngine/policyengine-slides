@@ -26,50 +26,6 @@ first_h2 = next(i for i, l in enumerate(lines) if l.startswith("## "))
 lead_md = "\n".join(lines[4:first_h2]).strip()
 body_md = "\n".join(lines[first_h2:])
 
-# Roadmap: replace the embedded widget placeholder with an SVG drawn here.
-ROADMAP = """
-<figure class="roadmap">
-<svg viewBox="0 0 705 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four phases, December 2026 to July 2027">
-  <g font-family="Inter, sans-serif" font-size="11" fill="#4A5568">
-    <text x="20" y="18">Dec 2026</text><text x="105" y="18">Jan 2027</text><text x="190" y="18">Feb</text>
-    <text x="275" y="18">Mar</text><text x="360" y="18">Apr</text><text x="445" y="18">May</text>
-    <text x="530" y="18">Jun</text><text x="615" y="18">Jul</text>
-  </g>
-  <g stroke="#E2E8F0">
-    <line x1="15" y1="26" x2="15" y2="108"/><line x1="100" y1="26" x2="100" y2="108"/><line x1="185" y1="26" x2="185" y2="108"/>
-    <line x1="270" y1="26" x2="270" y2="108"/><line x1="355" y1="26" x2="355" y2="108"/><line x1="440" y1="26" x2="440" y2="108"/>
-    <line x1="525" y1="26" x2="525" y2="108"/><line x1="610" y1="26" x2="610" y2="108"/><line x1="695" y1="26" x2="695" y2="108"/>
-  </g>
-  <g font-family="Inter, sans-serif">
-    <rect x="17" y="34" width="166" height="38" rx="5" fill="#E6FFFA" stroke="#319795"/>
-    <text x="27" y="51" font-size="12" font-weight="700" fill="#234E52">1 Scope</text>
-    <text x="27" y="65" font-size="10" fill="#285E61">services, scenarios, metrics</text>
-
-    <rect x="187" y="34" width="166" height="38" rx="5" fill="#319795"/>
-    <text x="197" y="51" font-size="12" font-weight="700" fill="#fff">2 Baseline</text>
-    <text x="197" y="65" font-size="10" fill="#fff">extended income, MIS, carbon</text>
-
-    <rect x="357" y="34" width="166" height="38" rx="5" fill="#2C7A7B"/>
-    <text x="367" y="51" font-size="12" font-weight="700" fill="#fff">3 Policy levers</text>
-    <text x="367" y="65" font-size="10" fill="#fff">fares, social rent, home care</text>
-
-    <rect x="527" y="34" width="166" height="38" rx="5" fill="#fff" stroke="#2C7A7B" stroke-dasharray="4 3"/>
-    <text x="537" y="51" font-size="12" font-weight="700" fill="#234E52">4 Hard services</text>
-    <text x="537" y="65" font-size="10" fill="#285E61">care homes and housing</text>
-  </g>
-  <g fill="#D69E2E">
-    <polygon points="185,88 191,96 185,104 179,96"/><polygon points="355,88 361,96 355,104 349,96"/>
-    <polygon points="525,88 531,96 525,104 519,96"/><polygon points="695,88 701,96 695,104 689,96"/>
-  </g>
-  <g font-family="Inter, sans-serif" font-size="10" fill="#744210" text-anchor="middle">
-    <text x="185" y="120">check-in</text><text x="355" y="120">check-in</text>
-    <text x="525" y="120">check-in</text><text x="695" y="120" text-anchor="end">check-in</text>
-  </g>
-</svg>
-<figcaption>Four phases, each ending in a check-in with NEF. Phase 4 is exploratory; timings are estimates until phase 1 is agreed.</figcaption>
-</figure>
-"""
-body_md = re.sub(r"^&#91;embedded content:.*$", "ROADMAP_PLACEHOLDER", body_md, flags=re.M)
 
 # Open questions: task boxes -> numbered list.
 body_md = re.sub(r"^- \[ \] ", "1. ", body_md, flags=re.M)
@@ -78,7 +34,7 @@ body_md = re.sub(r"^   - ", "    - ", body_md, flags=re.M)
 
 conv = lambda s: markdown.markdown(s, extensions=["tables", "sane_lists"])
 lead_html = conv(lead_md)
-body_html = conv(body_md).replace("<p>ROADMAP_PLACEHOLDER</p>", ROADMAP)
+body_html = conv(body_md)
 
 # Number the h2 sections and build a contents list.
 sections = []
@@ -114,14 +70,15 @@ page = f"""<!doctype html>
 <section class="cover">
   <div class="logo">{logo_svg}</div>
   <div class="cover-main">
+    <p class="draft-tag">Draft, not a finished proposal: shared for review and feedback only</p>
     <p class="kicker">Proposal for the New Economics Foundation</p>
     <h1>Public services in kind in PolicyEngine&nbsp;UK</h1>
     <p class="subtitle">Status today and a plan to compare universal services with cash on income, adequacy and carbon</p>
   </div>
   <div class="cover-meta">
-    <div><span>Authors</span>Vahid Ahmadi, Max Ghenis</div>
-    <div><span>Date</span>21 November 2026, revised 23 November</div>
-    <div><span>Status</span>Proposal for discussion</div>
+    <div><span>Author</span>Vahid Ahmadi</div>
+    <div><span>Date</span>21 November 2026, revised 24 November</div>
+    <div><span>Status</span>Draft for review and feedback</div>
   </div>
 </section>
 

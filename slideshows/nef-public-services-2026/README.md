@@ -24,7 +24,7 @@ slide, and every slide's header carries a tracker of the three parts:
 2. Status today (slides 5 to 12): the status table in two halves (services
    valued today, services not yet valued); how services count in income;
    the two official benchmarks; gaps; carbon; outcome measures
-3. The plan (slides 13 to 16): four phases with months and check-ins; who
+3. The plan (slides 13 to 16): four phases with check-ins; who
    brings what; the seven open questions for NEF, with the next steps
 
 ## Editing and presenting

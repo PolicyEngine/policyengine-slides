@@ -823,25 +823,10 @@
   font-size: 1.05em;
 }
 
-/* Phases: months, the work, and the check-in that ends each. */
+/* Phases: the work, and the check-in that ends each. */
 .phaseNumber .chip {
   letter-spacing: 0;
   text-transform: none;
-}
-
-.card .months {
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
-  margin-top: -0.4em;
-  color: var(--color-gray-600);
-  font-size: 1.1em;
-  font-weight: 600;
-}
-
-.months svg {
-  height: 1.2em;
-  width: 1.2em;
 }
 
 .card .checkIn {

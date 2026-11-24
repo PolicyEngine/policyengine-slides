@@ -7,7 +7,6 @@ import {
   IconBrandGithub,
   IconBuildingCommunity,
   IconBus,
-  IconCalendarEvent,
   IconChartBar,
   IconCheck,
   IconChevronRight,
@@ -731,7 +730,7 @@ export function CarbonSlide() {
           </div>
         </div>
         <p className={styles.caption} {...at(2)}>
-          We would agree the timing of steps 2 and 3 in phase 1. We have not found a UK
+          We would agree steps 2 and 3 in phase 1. We have not found a UK
           microsimulation that does step 3.
         </p>
       </div>
@@ -808,10 +807,6 @@ export function PhasesSlide() {
                   <PhaseIcon stroke={1.8} aria-hidden="true" />
                   {phase.title}
                 </h2>
-                <p className={styles.months}>
-                  <IconCalendarEvent stroke={1.8} aria-hidden="true" />
-                  {phase.months}
-                </p>
                 <Points items={phase.work.map((text) => ({ icon: IconPoint, text }))} />
                 <p className={styles.checkIn}>
                   <IconMessageQuestion stroke={1.8} aria-hidden="true" />
@@ -823,7 +818,7 @@ export function PhasesSlide() {
         </Flow>
         <p className={styles.caption}>
           <IconAlertTriangle stroke={1.8} aria-hidden="true" />
-          Timings are estimates, to be fixed once the scope questions are agreed.
+          The content of each phase would be fixed once the scope questions are agreed.
         </p>
       </div>
     </Frame>

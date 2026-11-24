@@ -63,7 +63,8 @@ p { margin: 0 0 6pt; orphans: 3; widows: 3; }
 }
 .cover h1 { font-size: 32pt; line-height: 1.12; font-weight: 700; color: var(--teal-deep); margin: 0 0 7mm; letter-spacing: -0.01em; }
 .subtitle { font-size: 14pt; line-height: 1.4; color: var(--muted); max-width: 140mm; }
-.cover-meta { margin-top: auto; display: flex; gap: 14mm; border-top: 1pt solid var(--teal); padding-top: 5mm; font-size: 10pt; }
+.cover-meta { margin-top: auto; display: flex; justify-content: space-between; gap: 6mm; border-top: 1pt solid var(--teal); padding-top: 5mm; font-size: 10pt; }
+.cover-meta > div { white-space: nowrap; }
 .cover-meta span { display: block; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); font-weight: 600; margin-bottom: 1mm; }
 
 /* Front matter */
@@ -121,11 +122,6 @@ td:first-child { font-weight: 600; color: var(--teal-deep); }
 .status td:nth-child(3) { width: 25%; }
 .status td:nth-child(4) { width: 19%; }
 
-/* Roadmap */
-.roadmap { margin: 4mm 0 5mm; break-inside: avoid; }
-.roadmap svg { width: 100%; height: auto; }
-.roadmap figcaption { font-size: 8pt; color: var(--muted); margin-top: 1mm; }
-
 /* Open questions */
 #open-questions-for-nef + ol { counter-reset: q; list-style: none; padding: 0; }
 #open-questions-for-nef + ol li {
@@ -142,3 +138,6 @@ td:first-child { font-weight: 600; color: var(--teal-deep); }
 .sources { font-size: 8pt; color: var(--muted); }
 .sources h2 { font-size: 12pt; }
 .sources li { margin-bottom: 2pt; }
+
+/* Draft tag on the cover */
+.draft-tag { display: inline-block; margin: 0 0 6mm; padding: 2mm 3.5mm; border: 0.5mm solid #D69E2E; border-radius: 1mm; background: #FFFAF0; color: #7B341E; font-size: 9.5pt; font-weight: 700; letter-spacing: .02em; }

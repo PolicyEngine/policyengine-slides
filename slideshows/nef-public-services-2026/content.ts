@@ -450,7 +450,6 @@ export const misNotes = [
 export const phases = [
   {
     title: "Scope",
-    months: "December 2026 to January 2027",
     work: [
       "Agree services, scenarios, metrics and geography",
       "Settle the MIS income measure and household-type mapping",
@@ -460,7 +459,6 @@ export const phases = [
   },
   {
     title: "Baseline",
-    months: "February to March 2027",
     work: [
       "Extended income, with and without services",
       "MIS measure; household carbon by fuel",
@@ -471,7 +469,6 @@ export const phases = [
   },
   {
     title: "Policy levers",
-    months: "April to May 2027",
     work: [
       "Rules for free school meals, bus and rail fares, childcare expansion",
       "Social rent as the gap to market rent; social care at home",
@@ -480,7 +477,6 @@ export const phases = [
   },
   {
     title: "Hard services",
-    months: "June to July 2027",
     exploratory: true,
     work: [
       "A modelled care-home population (synthetic records)",
