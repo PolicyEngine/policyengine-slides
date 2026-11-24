@@ -1,0 +1,865 @@
+/* NEF deck: every colour comes from a design token (app/globals.css).
+   One style each for lists, cards, tables and chips. Sizes in
+   the slide body are in em of .body, which scales with the viewport (the
+   smaller of its height and width),
+   so a slide looks the same at 1920x1080 and 1440x810. */
+
+/* Leave space for the viewer's controls beside the footer text. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+.body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  /* Centred below the title. */
+  justify-content: center;
+  /* Always a clear gap above the footer; BuildScope lowers --fit when the
+     content would otherwise run into it. */
+  padding-bottom: 1.25rem;
+  font-size: calc(clamp(8px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1) * var(--fit, 1));
+}
+
+.stack {
+  display: grid;
+  gap: 1.4em;
+}
+
+/* Every icon: bare, teal, no box behind it. */
+.body svg {
+  flex-shrink: 0;
+  color: var(--pe-teal);
+}
+
+/* Lists: one icon, a few words, an optional second line. */
+.iconList {
+  display: grid;
+  gap: 1.5em;
+}
+
+.iconList.twoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3.5em;
+}
+
+.iconList.threeCol {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2.5em;
+}
+
+.iconItem.muted {
+  opacity: 0.35;
+}
+
+.iconItem {
+  display: grid;
+  grid-template-columns: 2.3em minmax(0, 1fr);
+  align-items: start;
+  gap: 1em;
+}
+
+.iconItem > svg {
+  margin-top: 0.1em;
+  height: 2.3em;
+  width: 2.3em;
+}
+
+.iconItem h2 {
+  color: var(--pe-dark);
+  font-size: 1.55em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.iconItem p {
+  margin-top: 0.15em;
+  color: var(--color-gray-600);
+  font-size: 1.2em;
+  line-height: 1.35;
+}
+
+.listHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-gray-500);
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.listHead svg {
+  height: 1.4em;
+  width: 1.4em;
+}
+
+/* Cards in a grid. */
+.cardGrid {
+  display: grid;
+  gap: 1.2em;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 1em 1.2em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--pe-dark);
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.card h2 svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.card p {
+  margin-top: 0.45em;
+  color: var(--color-gray-600);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+.cardAmber {
+  border-left-color: var(--pe-amber);
+}
+
+.cardAmber svg {
+  color: var(--pe-amber-dark);
+}
+
+/* Cards in a row with arrows between them. */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4em;
+}
+
+.flow > .card {
+  flex: 1 1 0;
+}
+
+.flow > svg {
+  align-self: center;
+  height: 1.6em;
+  width: 1.6em;
+  color: var(--color-gray-400);
+}
+
+/* A line of plain text under a figure, with an optional icon. */
+.caption {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2em 0.4em;
+  color: var(--color-gray-600);
+  font-size: 1.15em;
+  line-height: 1.35;
+}
+
+/* Chips: a status, with its icon. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  border-radius: 9999px;
+  padding: 0.2em 0.75em;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.chipGood {
+  background: var(--pe-light);
+  color: var(--pe-teal-dark);
+}
+
+.chipMid {
+  background: var(--bg-secondary);
+  color: var(--pe-amber-dark);
+}
+
+.chipBad {
+  background: var(--bg-tertiary);
+  color: var(--color-gray-700);
+}
+
+/* Tables. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.2em;
+}
+
+.table th {
+  border-bottom: 2px solid var(--color-gray-300);
+  padding: 0.4em 0.8em;
+  color: var(--color-gray-500);
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table td {
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.5em 0.8em;
+  color: var(--color-gray-700);
+  line-height: 1.3;
+}
+
+.table td:first-child {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.rowLabel svg {
+  height: 1.35em;
+  width: 1.35em;
+}
+
+.standIns {
+  margin-top: 0.5em;
+  display: grid;
+  gap: 0.4em;
+  color: var(--color-gray-600);
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+
+.standIns li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.standIns svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+/* Closing slide contacts. */
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--text-inverse) 15%, transparent);
+  background: color-mix(in srgb, var(--text-inverse) 10%, transparent);
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: background-color 150ms;
+}
+
+.contact:hover {
+  background: color-mix(in srgb, var(--text-inverse) 20%, transparent);
+}
+
+/* Where the slide sits in the talk (in the header, so in rem). */
+.tracker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-gray-400);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tracker span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.2rem;
+}
+
+.tracker .trackerPast {
+  color: var(--color-gray-600);
+}
+
+.tracker .trackerNow {
+  border-bottom-color: var(--pe-teal);
+  color: var(--pe-teal);
+}
+
+/* The agenda on a section slide. */
+.sectionList {
+  font-size: calc(clamp(11px, min(1.6vh, 0.9vw), 22px) * var(--scale, 1));
+}
+
+.sectionList svg {
+  color: var(--pe-teal);
+}
+
+/* Agenda: the parts as stops on one line, in order */
+.agendaRoad {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agendaRoad::before {
+  position: absolute;
+  top: 1.1em;
+  right: 16.6%;
+  left: 16.6%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pe-teal), var(--pe-amber, var(--pe-teal)));
+  content: "";
+}
+
+.agendaStop {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.agendaDot {
+  position: relative;
+  display: grid;
+  width: 2.2em;
+  height: 2.2em;
+  place-items: center;
+  border: 2px solid var(--pe-teal);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--pe-teal);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.agendaCard {
+  display: flex;
+  width: 100%;
+  min-height: 11em;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+  border: 1px solid var(--color-gray-200);
+  border-top: 4px solid var(--pe-teal);
+  border-radius: 0.5em;
+  background: var(--bg-card);
+  padding: 1.2em 1.1em;
+  box-shadow: 0 1px 2px var(--shadow-light);
+}
+
+.agendaIcon {
+  width: 2.2em;
+  height: 2.2em;
+  color: var(--pe-teal);
+}
+
+.agendaCard h2 {
+  color: var(--pe-dark);
+  font-size: 1.35em;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.agendaCard p {
+  color: var(--color-gray-600);
+  font-size: 1.05em;
+  line-height: 1.35;
+}
+
+/* Entrance: each time a slide is shown (the viewer switches it from
+   display:none, which restarts the animation), the title rises in and the
+   body's items follow one after another. Ends fully visible; off for
+   reduced motion. */
+@keyframes nefRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.deck :global(h1),
+.tracker {
+  animation: nefRise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.body > * {
+  animation: nefRise 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}
+
+.body > * > * {
+  animation: nefRise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 180ms;
+}
+
+.body > * > *:nth-child(2) { animation-delay: 260ms; }
+.body > * > *:nth-child(3) { animation-delay: 340ms; }
+.body > * > *:nth-child(4) { animation-delay: 420ms; }
+.body > * > *:nth-child(5) { animation-delay: 500ms; }
+.body > * > *:nth-child(6) { animation-delay: 580ms; }
+.body > * > *:nth-child(7) { animation-delay: 640ms; }
+.body > * > *:nth-child(n + 8) { animation-delay: 700ms; }
+
+/* Builds: BuildScope puts the slide's step on the body; an element with
+   data-step above it is hidden (and keeps its place), and animates in when
+   its step arrives. An export shows every step (data-build="all"). */
+@keyframes nefReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.body [data-step] {
+  animation: nefReveal 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes nefFade {
+  from {
+    opacity: 0;
+  }
+}
+
+.deck .body[data-build="1"] [data-step="2"],
+.deck .body[data-build="1"] [data-step="3"],
+.deck .body[data-build="1"] [data-step="4"],
+.deck .body[data-build="2"] [data-step="3"],
+.deck .body[data-build="2"] [data-step="4"],
+.deck .body[data-build="3"] [data-step="4"] {
+  visibility: hidden;
+  animation: none;
+}
+
+/* Choreography: each kind of element has its own motion, in order after the
+   title: the accent bar sweeps, list rows and table rows come in from the
+   left, chips pop, captions fade in last. Keyframes with only a start end at the element's own style. */
+@keyframes nefSweep {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes nefFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+}
+
+@keyframes nefPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+}
+
+.deck :global(.accent-bar) {
+  transform-origin: left;
+  animation: nefSweep 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+}
+
+.iconItem,
+.table tbody tr,
+.standIns li {
+  animation: nefFromLeft 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 350ms both;
+}
+
+.iconItem:nth-child(2),
+.table tbody tr:nth-child(2),
+.standIns li:nth-child(2) { animation-delay: 470ms; }
+.iconItem:nth-child(3),
+.table tbody tr:nth-child(3),
+.standIns li:nth-child(3) { animation-delay: 590ms; }
+.iconItem:nth-child(4),
+.table tbody tr:nth-child(4) { animation-delay: 710ms; }
+.iconItem:nth-child(5),
+.table tbody tr:nth-child(5) { animation-delay: 830ms; }
+.iconItem:nth-child(6),
+.table tbody tr:nth-child(6) { animation-delay: 950ms; }
+
+.chip {
+  animation: nefPop 420ms cubic-bezier(0.2, 0.7, 0.2, 1) 650ms both;
+}
+
+.flow > svg {
+  animation: nefFade 400ms ease-out 700ms both;
+}
+
+.caption {
+  animation: nefFade 700ms ease-out 900ms both;
+}
+
+/* Agenda: the line draws left to right; as it reaches each stop the number
+   pops and the card rises; then one highlight passes along them. */
+.agendaRoad::before {
+  transform-origin: left;
+  animation: nefSweep 1000ms linear 200ms both;
+}
+
+.body .agendaStop {
+  animation: none;
+}
+
+@keyframes nefGlow {
+  50% {
+    border-top-color: var(--pe-amber);
+    box-shadow: 0 0 0 3px var(--pe-light);
+  }
+}
+
+.agendaStop .agendaDot {
+  animation: nefPop 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(250ms + var(--stop) * 200ms);
+}
+
+.agendaStop .agendaCard {
+  animation:
+    nefRise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+    nefGlow 500ms ease-in-out 1;
+  animation-delay:
+    calc(380ms + var(--stop) * 200ms),
+    calc(1700ms + var(--stop) * 130ms);
+}
+
+.agendaStop:nth-child(1) { --stop: 0; }
+.agendaStop:nth-child(2) { --stop: 1; }
+.agendaStop:nth-child(3) { --stop: 2; }
+
+/* ---- Public services deck ---- */
+
+.body .chip svg {
+  height: 1.15em;
+  width: 1.15em;
+  color: currentColor;
+}
+
+.statusLegend {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.7em;
+  color: var(--color-gray-500);
+  font-size: 1.15em;
+  font-weight: 600;
+}
+
+.phase {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1.3em 1.5em;
+}
+
+.card .phaseNumber {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin: 0;
+  color: var(--pe-teal);
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.phase h2 {
+  font-size: 1.6em;
+}
+
+.phase .standIns {
+  margin-top: 0;
+  color: var(--pe-dark);
+  font-size: 1.1em;
+}
+
+/* Scope: the services in scope, two to a row. */
+.scopeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55em 1em;
+  margin-top: 0.8em;
+  color: var(--pe-dark);
+  font-size: 1.15em;
+  line-height: 1.25;
+}
+
+.scopeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.scopeItem svg {
+  height: 1.35em;
+  width: 1.35em;
+}
+
+/* The status matrix: a chip with its words under it in each status cell. */
+.matrix {
+  font-size: 1em;
+}
+
+.matrix td {
+  padding: 0.38em 0.7em;
+  vertical-align: top;
+  line-height: 1.25;
+}
+
+.matrix th {
+  padding: 0.35em 0.7em;
+}
+
+.matrix td small {
+  display: block;
+  margin-top: 0.2em;
+  color: var(--color-gray-600);
+  font-size: 0.92em;
+  line-height: 1.2;
+}
+
+.matrix th:nth-child(1) {
+  width: 14%;
+}
+
+.matrix th:nth-child(2) {
+  width: 17%;
+}
+
+.matrix th:nth-child(3) {
+  width: 21%;
+}
+
+.matrix th:nth-child(4) {
+  width: 20%;
+}
+
+.matrix .chip {
+  min-width: 5.2em;
+  font-size: 0.85em;
+}
+
+/* Counted or not: a tick or a cross in a table cell. */
+.center {
+  text-align: center !important;
+}
+
+.mark {
+  display: inline-grid;
+  place-items: center;
+}
+
+.mark svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.mark.markNo svg {
+  color: var(--color-gray-400);
+}
+
+.incomeGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2.5em;
+}
+
+/* The benchmarks: a label column and the two analyses. */
+.bench td {
+  vertical-align: top;
+}
+
+.bench td:first-child {
+  width: 10%;
+  white-space: nowrap;
+}
+
+.bench th:not(:first-child) {
+  width: 45%;
+}
+
+/* Carbon: what exists, and the numbered steps we would add. */
+.carbonGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+  align-items: start;
+  gap: 2.5em;
+}
+
+.carbonGrid > .stack {
+  gap: 0.9em;
+}
+
+.compactList {
+  gap: 1.1em;
+}
+
+.compactList .iconItem {
+  grid-template-columns: 1.9em minmax(0, 1fr);
+  gap: 0.8em;
+}
+
+.compactList .iconItem > svg {
+  height: 1.9em;
+  width: 1.9em;
+}
+
+.compactList .iconItem h2 {
+  font-size: 1.25em;
+  font-weight: 500;
+}
+
+.compactList .iconItem p {
+  font-size: 1.08em;
+}
+
+.threeCol .iconItem h2 {
+  font-weight: 600;
+}
+
+.stepCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.9em;
+}
+
+.stepCard h2 {
+  flex-wrap: wrap;
+}
+
+.stepCard h2 .chip {
+  margin-left: auto;
+  font-size: 0.62em;
+}
+
+.stepCard > div > p {
+  margin-top: 0.3em;
+}
+
+/* Measures: the chip at the top of each card. */
+.legendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2em;
+}
+
+.metricCard h2 {
+  min-height: 2.4em;
+}
+
+.metricCard > .chip {
+  margin-top: 0.5em;
+}
+
+.card .metricNote {
+  margin-top: auto;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.5em;
+  color: var(--pe-dark);
+  font-size: 1.05em;
+}
+
+/* Phases: the work, and the check-in that ends each. */
+.phaseNumber .chip {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.card .checkIn {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: auto;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 0.8em;
+  color: var(--pe-teal-dark);
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.checkIn svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.caption svg {
+  height: 1.3em;
+  width: 1.3em;
+}
+
+.caption b {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck *,
+  .deck *::before,
+  .deck *::after {
+    animation: none !important;
+  }
+}

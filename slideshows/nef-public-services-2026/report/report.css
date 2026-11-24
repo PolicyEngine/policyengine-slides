@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500&display=swap");
+
+:root {
+  --teal: #319795;
+  --teal-dark: #285e61;
+  --teal-deep: #234e52;
+  --teal-tint: #e6fffa;
+  --ink: #1a202c;
+  --muted: #4a5568;
+  --rule: #e2e8f0;
+  --zebra: #f7fafc;
+}
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+  @bottom-left {
+    content: "Public services in kind in PolicyEngine UK · Proposal, November 2026";
+    font: 7.5pt Inter, sans-serif;
+    color: #718096;
+  }
+  @bottom-right {
+    content: counter(page);
+    font: 600 8pt Inter, sans-serif;
+    color: #285e61;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font: 9.6pt/1.5 Inter, system-ui, sans-serif;
+  hyphens: manual;
+}
+a { color: var(--teal-dark); text-decoration: none; border-bottom: 0.5pt solid #81e6d9; }
+strong { font-weight: 600; color: var(--ink); }
+p { margin: 0 0 6pt; orphans: 3; widows: 3; }
+
+/* Cover */
+.cover {
+  height: 297mm;
+  width: 210mm;
+  padding: 24mm 22mm 22mm;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #fff 0%, #fff 55%, var(--teal-tint) 100%);
+  border-left: 9mm solid var(--teal);
+  page-break-after: always;
+}
+.cover .logo svg { width: 56mm; height: auto; }
+.cover-main { margin-top: 62mm; }
+.kicker {
+  font-size: 10pt; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 8mm;
+}
+.cover h1 { font-size: 32pt; line-height: 1.12; font-weight: 700; color: var(--teal-deep); margin: 0 0 7mm; letter-spacing: -0.01em; }
+.subtitle { font-size: 14pt; line-height: 1.4; color: var(--muted); max-width: 140mm; }
+.cover-meta { margin-top: auto; display: flex; justify-content: space-between; gap: 6mm; border-top: 1pt solid var(--teal); padding-top: 5mm; font-size: 10pt; }
+.cover-meta > div { white-space: nowrap; }
+.cover-meta span { display: block; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); font-weight: 600; margin-bottom: 1mm; }
+
+/* Front matter */
+.front { page-break-after: always; }
+.summary-h, .toc-h { font-size: 15pt; color: var(--teal-deep); margin: 0 0 4mm; }
+.summary {
+  background: var(--teal-tint);
+  border-left: 3pt solid var(--teal);
+  padding: 5mm 6mm 3mm;
+  border-radius: 0 4pt 4pt 0;
+  font-size: 10.2pt;
+  margin-bottom: 7mm;
+}
+.summary > p:first-child { font-size: 11.5pt; font-weight: 500; color: var(--teal-deep); margin-bottom: 4mm; }
+.summary ul { padding-left: 4.5mm; margin: 0 0 2mm; }
+.summary li { margin-bottom: 2.5mm; }
+.toc { list-style: none; padding: 0; margin: 0; columns: 1; }
+.toc li { border-bottom: 0.5pt solid var(--rule); }
+.toc a { display: flex; gap: 5mm; padding: 1.7mm 0; border: 0; color: var(--ink); font-size: 10.5pt; }
+.toc .n { width: 6mm; color: var(--teal); font-weight: 700; }
+
+/* Body */
+h2 {
+  font-size: 15pt; line-height: 1.25; color: var(--teal-deep);
+  margin: 9mm 0 3.5mm; padding-bottom: 2mm; border-bottom: 1pt solid var(--teal);
+  page-break-after: avoid; break-after: avoid;
+}
+main > h2:first-child { margin-top: 0; }
+h2 .num {
+  display: inline-block; min-width: 7mm; color: var(--teal); margin-right: 2mm;
+}
+main h2#open-questions-for-nef { break-before: page; margin-top: 0; }
+h2 + p, h2 + .tbl { break-before: avoid; }
+.tbl { break-before: avoid; }
+ul, ol { padding-left: 5mm; margin: 0 0 6pt; }
+li { margin-bottom: 3pt; }
+li::marker { color: var(--teal); font-weight: 600; }
+
+/* Tables */
+.tbl { margin: 4mm 0 5mm; break-inside: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 8.2pt; line-height: 1.38; }
+thead { display: table-header-group; }
+th {
+  background: var(--teal-deep); color: #fff; font-weight: 600; text-align: left;
+  padding: 2mm 2.2mm; vertical-align: bottom;
+}
+th a { color: #fff; border-bottom-color: #81e6d9; }
+td { padding: 1.8mm 2.2mm; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+tr { break-inside: avoid; }
+tbody tr:nth-child(even) td { background: var(--zebra); }
+td:first-child { font-weight: 600; color: var(--teal-deep); }
+.status table { font-size: 7.6pt; }
+.status td:nth-child(1) { width: 14%; }
+.status td:nth-child(2) { width: 18%; }
+.status td:nth-child(3) { width: 25%; }
+.status td:nth-child(4) { width: 19%; }
+
+/* Open questions */
+#open-questions-for-nef + ol { counter-reset: q; list-style: none; padding: 0; }
+#open-questions-for-nef + ol li {
+  counter-increment: q; position: relative; padding: 3mm 4mm 3mm 12mm; margin-bottom: 2.5mm;
+  border: 0.75pt solid var(--rule); border-radius: 4pt; break-inside: avoid;
+}
+#open-questions-for-nef + ol li::before {
+  content: counter(q); position: absolute; left: 3.5mm; top: 2.6mm; width: 5.5mm; height: 5.5mm;
+  border-radius: 50%; background: var(--teal); color: #fff; font-weight: 700; font-size: 8pt;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Sources */
+.sources { font-size: 8pt; color: var(--muted); }
+.sources h2 { font-size: 12pt; }
+.sources li { margin-bottom: 2pt; }
+
+/* Draft tag on the cover */
+.draft-tag { display: inline-block; margin: 0 0 6mm; padding: 2mm 3.5mm; border: 0.5mm solid #D69E2E; border-radius: 1mm; background: #FFFAF0; color: #7B341E; font-size: 9.5pt; font-weight: 700; letter-spacing: .02em; }
