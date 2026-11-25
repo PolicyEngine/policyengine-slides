@@ -39,9 +39,6 @@ export const rf2026Config: SlideshowConfig = {
   date: "2026-11-30",
   location: "Resolution Foundation (video call)",
   footerText: "Resolution Foundation · 30 November 2026",
-  // The slides characterise two other models and are password-protected on
-  // the site until they have been checked in discussion.
-  private: true,
   countSlides: true,
   hideNavHint: true,
   slides: [

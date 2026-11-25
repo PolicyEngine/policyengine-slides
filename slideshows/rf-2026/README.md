@@ -1,9 +1,8 @@
 # PolicyEngine UK and the Resolution Foundation's modelling, 30 November 2026
 
 25 slides at `/slides/rf-2026`, for a video call with the Resolution
-Foundation. The deck is private (`private: true`): the page asks for the
-deck password. Its title and description still show on the home page, and
-this folder is public on GitHub, so everything here is written to be read
+Foundation. The deck is public: anyone with the link can open it, and this
+folder is public on GitHub, so everything here is written to be read
 publicly.
 
 Six parts, shown by the part tracker along the top of every slide; there
@@ -222,8 +221,6 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Exporting
 
-Private decks need the password at build and export time:
-
 ```bash
-NEXT_PUBLIC_PRIVATE_PASSWORD=... bun run export rf-2026 rf-2026.pdf --size 1440x810 --scale 2
+bun run export rf-2026 rf-2026.pdf --size 1440x810 --scale 2
 ```
