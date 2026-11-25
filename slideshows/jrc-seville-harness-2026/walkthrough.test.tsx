@@ -97,6 +97,7 @@ describe('the uses figure', () => {
   it('makes no claim about every value, and scopes citations and dates to the section 2017(a) rules', () => {
     expect(JSON.stringify(uses)).not.toMatch(/every/i);
     expect(uses.source.lines.join(' ')).toBe('The § 2017(a) rules carry source citations and effective dates.');
+    expect(words('uses')).toContain('The § 2017(a) rules carry source citations and effective dates.');
   });
 });
 
