@@ -5,11 +5,13 @@
 // links are in "sources", pinned to a commit or a publication date. Two
 // kinds of source appear:
 // - Figures about the Microcosm UK data come from one build only: the
-//   certified national build of 15 November 2026
+//   certified national build of 22 November 2026
 //   (microcosm-uk-2024-25-national/uk-frs-calibration-attempt-
-//   20261115T104657Z-fcfac709, certified in policyengine.py 6.20.1), as the
-//   BIST deck (slideshows/bist-2026, this repository, commit ed87705) and the
-//   public calibration dashboard report it. Four results shown in the deck
+//   20261122T100732Z-b891aa69, certified in policyengine.py 6.20.3 on 24
+//   November; manifest at tag 6.20.3, commit 81bac43), as the public
+//   calibration dashboard reports it (its data routes, read 25 November
+//   2026; the method reproduces every 15 November figure the BIST deck
+//   cites). Four results shown in the deck
 //   were run on other builds; each carries its own run label on the slide.
 // - Statements about what the code can do (the mapping tables on slides 13
 //   and 14, the routes on slide 21) were read on 25 November 2026 at
@@ -214,11 +216,22 @@ export const sources = {
   },
   appSearch: { label: "Web app parameter search", href: `${appRepo}/libs/parameterSearch.ts` },
   // ---- Dashboards and analyses ----
-  // The calibration dashboard, pinned to the certified build of 15 November
-  // 2026 (the same link as the BIST deck).
+  // The calibration dashboard, pinned to the certified build of 22 November
+  // 2026.
   dashboard: {
-    label: "Calibration dashboard, pinned to the 15 November build",
-    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261115T104657Z-fcfac709",
+    label: "Calibration dashboard, pinned to the 22 November build",
+    href: "https://calibration-diagnostics.vercel.app/calibration/dashboard/microcosm?country=uk&release=microcosm-uk-2024-25-national/uk-frs-calibration-attempt-20261122T100732Z-b891aa69",
+  },
+  // Untargeted checks against HBAI (HBAI is not a calibration target):
+  // microcosm#1334 on the 19 October build (absolute poverty before housing
+  // costs 12.2% against HBAI's 15.9%; relative after housing costs 18.1%
+  // against 19.6%; median income about 6% high), and microcosm#1710 on the
+  // 22 November build (children below the AHC line: 3.40m, 23.7%, against
+  // HBAI's 3.97m, 27%).
+  hbaiCheck: { label: "microcosm#1334: Microcosm against HBAI", href: "https://github.com/PolicyEngine/microcosm/issues/1334" },
+  hbaiCheckChildren: {
+    label: "microcosm#1710: child poverty on the 22 November build",
+    href: "https://github.com/PolicyEngine/microcosm/issues/1710#issuecomment-7133021113",
   },
   budgetDashboard: { label: "Autumn Budget 2026 dashboard", href: "https://policyengine.org/uk/budgets/autumn-2026" },
   // The Autumn Budget 2026 briefing (policyengine-app-v2 9cdc75a, 31
@@ -605,15 +618,16 @@ export const coverageFoot =
   "In the code but not yet in the programme registry: Welsh LTT, Local Housing Allowance, the two-child limit, the high-value council tax surcharge.";
 
 // ---------- Slide 9: the household file ----------
-// The BIST deck's Microcosm build slide (15 November build, microcosm
-// 3a7067f): 56 source stages, each survey file pinned by SHA-256; FRS
+// The Microcosm build (22 November build, microcosm 41053d9, whose
+// source_stages.json lists 57 stages; the BIST deck's 15 November build had
+// 56, without uc_new_claimant_draw): 57 source stages, each survey file pinned by SHA-256; FRS
 // 2024-25 base; copies of FRS households take incomes from the SPI 2022-23
 // public-use file, with more copies in the bands above £200k, £500k, £1m
 // and £2m; WAS round 8, LCFS 2024-25, the Effects of Taxes and Benefits
 // (ETB) and the National Travel Survey (NTS); quantile-regression forests;
 // take-up drawn to DWP and HMRC rates or caseloads, reporters always claim;
-// calibration to 1,534 targets with each weight bounded at 10 times its
-// starting weight; 78,164 household records.
+// calibration to 1,536 targets with each weight bounded at 10 times its
+// starting weight; 78,450 household records.
 export const microcosmFlow = [
   { icon: IconUsers, owner: "FRS 2024–25", title: "Base", text: "Family Resources Survey households" },
   {
@@ -638,7 +652,7 @@ export const microcosmFlow = [
     icon: IconTargetArrow,
     owner: "Official totals",
     title: "Calibration",
-    text: "1,534 targets; each weight at most 10 times its start",
+    text: "1,536 targets; each weight at most 10 times its start",
   },
 ];
 
@@ -646,11 +660,11 @@ export const microcosmResult = {
   icon: IconDatabase,
   owner: "The result",
   title: "Microcosm UK 2024–⁠25",
-  text: "78,164 household records; certified build of 15 Nov 2026",
+  text: "78,450 household records; certified build of 22 Nov 2026",
 };
 
 export const microcosmFoot =
-  "56 source stages, each survey file pinned to a fixed copy. The code is open; the records are FRS-derived under the UK Data Service licence: not public; access is by token, and a route for RF is to be agreed.";
+  "57 source stages, each survey file pinned to a fixed copy. The code is open; the records are FRS-derived under the UK Data Service licence: not public; access is by token, and a route for RF is to be agreed.";
 
 // ---------- Slide 10: breakdowns ----------
 // The BIST deck's breakdowns (policyengine.py 810a59e outputs). Vigintiles:
@@ -706,7 +720,9 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
 //   policyengine-uk; Nuffield also names adult social care, which a search
 //   of policyengine-uk 5987eb3 did not find.
 // - Local areas: 650 constituencies and 361 local authorities, certified
-//   local-area file of 16 November 2026 (BIST deck).
+//   local-area file of 23 November 2026 (7081d968, certified in
+//   policyengine.py 6.20.3; the constituency and local authority lists are
+//   unchanged).
 // - Comparison dashboard: Nuffield describes a dashboard validating against
 //   other microsimulation models at household level. What exists is the
 //   public scorecard ("scorecard", "scorecardCode"); its IPPR rows are the
@@ -752,7 +768,7 @@ export const grantRows: { icon: Icon; area: string; today: string; tag: Tag }[] 
   {
     icon: IconMap2,
     area: "Local-authority and constituency datasets",
-    today: "650 constituencies and 361 local authorities; certified local-area file (16 Nov 2026 build)",
+    today: "650 constituencies and 361 local authorities; certified local-area file (23 Nov 2026 build)",
     tag: tags.done,
   },
   {
@@ -867,13 +883,18 @@ export const rfReportsFoot =
 // through the IPPR Tax Benefit Model" and lists the wage floor, spillovers,
 // earnings uprating and the RPI cap under that heading; the WAS savings
 // imputation is RF's. Rents follow ONS PIPR, then earnings with a 12-month
-// lag. HBAI incomes carry DWP's SPI adjustment for top incomes.
+// lag. Annex 1 names "DWP's Family Resources Survey and Households Below
+// Average Income statistics, 2023-24" (p.34) and does not mention the SPI;
+// that HBAI incomes carry DWP's SPI adjustment is our inference from HBAI's
+// published method, so the slide says so. Annex 1 also says benefit
+// deductions (debt and advance repayments) are modelled and sanctions are
+// not (p.37).
 export const rfMethod = [
   {
     icon: IconDatabase,
     owner: "RF",
     title: "Base data",
-    text: "FRS and HBAI 2023–24, with HBAI’s SPI adjustment (2024–25 in the October 2026 work)",
+    text: "FRS and HBAI 2023–24 (2024–25 in the October 2026 work); HBAI’s SPI adjustment, our inference",
   },
   {
     icon: IconScale,
@@ -891,7 +912,7 @@ export const rfMethod = [
     icon: IconCalculator,
     owner: "IPPR model",
     title: "Taxes and benefits",
-    text: "Each year’s rules; UC take-up 80%, Pension Credit 65% rising to 70%",
+    text: "Each year’s rules, with benefit deductions; UC take-up 80%, Pension Credit 65% rising to 70%",
   },
   {
     icon: IconChartLine,
@@ -1046,7 +1067,7 @@ export const stepsTable: MapRow[] = [
     icon: IconDatabase,
     label: "Latest FRS and HBAI",
     where: "RF",
-    today: "FRS 2024–25; HBAI income computed, not yet checked against HBAI",
+    today: "FRS 2024–25; HBAI income computed; poverty below HBAI in checks so far",
     tags: [tags.partly],
     step: 1,
   },
@@ -1155,10 +1176,25 @@ export const energy = {
 // the Scottish Government's 2018 description, the MMU staff page); UKMOD
 // cells from CeMPA's 2026 country report (UKMOD Country Report 2023-2030,
 // working paper 8/26, April 2026) and microsimulation.ac.uk ("ukmod"): FRS
-// 2023-24, 16,754 households; FRS grossing weights, "no other updating
-// adjustments"; no data on capital gains, inheritances, property
-// transactions or property value. "Not found in published sources" means
-// only that. On-slide cells are short; the fuller wording is in NOTES.md.
+// 2023-24, 16,754 households (Table 3.1, p.74); FRS grossing weights, "no
+// other updating adjustments"; no data on capital gains, inheritances,
+// property transactions or property value. Since then: CeMPA's release
+// B2026.03 (22 June 2026, "ukmodB202603") added input data from the 2024
+// wave of the FRS (2024-25 in CeMPA's naming), single-year and three-year
+// pooled. HBAI extension: recommended for cross-sectional analysis with
+// data from 2018 (p.101), used in the validation (p.83), off by default
+// (p.31), with "adjustments that account for high income tax payers" (p.85;
+// the report does not name the SPI). Take-up: on by default (p.79), by
+// claimant type (Table 3.4), reported recipients first (p.31), editable;
+// only tax credits vary by area. Region of residence is in the data; LHA
+// uses the 12 regions (p.47); UKMOD Explore covers the UK, the nations and
+// London. Three-year pooled data (p.81). IPPR model: take-up method from the
+// Scottish Government's 2018 appendix ("scotGov2018": a probit, calibrated
+// to DWP and HMRC take-up statistics); regional results for all 12 regions
+// and nations in IPPR's 2p NI cut analysis ("ipprNics", 10 June 2024);
+// users from CeMPA WP 7/21 ("cempa721", 2021) and the Fraser of Allander
+// Institute ("faiChildPoverty", March 2025). "Not found in published
+// sources" means only that. On-slide cells are short; the fuller wording is in NOTES.md.
 export type CompareRow = { icon: Icon; label: string; cells: [string, string, string]; step: number };
 
 export const compareHeads: [string, string, string] = [
@@ -1176,7 +1212,7 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "FRS 2024–25",
       "FRS and HBAI 2024–25 (2023–24 in LSO 2026)",
-      "FRS 2023–24, 16,754 households; data via the UK Data Service",
+      "FRS 2024–25 since June 2026; the 2026 report documents 2023–24 (16,754 households)",
     ],
     step: 1,
   },
@@ -1186,7 +1222,7 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "FRS copies take SPI 2022–23 incomes; more above £200k",
       "HBAI incomes; treatment in the model not found published",
-      "None by default; optional SPI-adjusted HBAI extension",
+      "HBAI extension, adjusted for high-income taxpayers; recommended by CeMPA, off by default",
     ],
     step: 1,
   },
@@ -1211,8 +1247,8 @@ export const dataCompare: CompareRow[] = [
     label: "Benefit take-up",
     cells: [
       "Reporters claim; others drawn at build to DWP and HMRC rates or caseloads",
-      "Partial take-up; UC 80%, Pension Credit 65% to 70%",
-      "Official rates, editable by the user",
+      "Take-up model calibrated to DWP and HMRC (2018); in LSO 2026, UC 80%, Pension Credit 65% to 70%",
+      "Official rates by claimant type, on by default; reported recipients first; editable",
     ],
     step: 2,
   },
@@ -1220,16 +1256,20 @@ export const dataCompare: CompareRow[] = [
     icon: IconScale,
     label: "Weights and effective sample",
     cells: [
-      "1,534 official targets; 78,164 records, effective about 7,400",
+      "1,536 official targets; 78,450 records, effective about 7,500",
       "Base weights not found published; RF reweights projection years",
-      "FRS grossing weights; no other reweighting",
+      "FRS grossing weights; a three-year pooled option; no other reweighting",
     ],
     step: 3,
   },
   {
     icon: IconMap,
     label: "Geography",
-    cells: ["12 regions and nations; 650 constituencies, 361 local authorities", notFound, "UK, nations, London; some regional models"],
+    cells: [
+      "12 regions and nations; 650 constituencies, 361 local authorities",
+      "12 regions and nations (IPPR, June 2024)",
+      "Region in the data (regional LHA); UKMOD Explore: UK, nations, London",
+    ],
     step: 3,
   },
   {
@@ -1276,7 +1316,7 @@ export const rulesCompare: CompareRow[] = [
     label: "Direct taxes and benefits",
     cells: [
       "Income tax incl. Scottish rates, NI, CGT; UC, legacy, pensions, disability",
-      "On the FRS (2018 description)",
+      "On the FRS (Scottish Government, 2018)",
       "Income tax incl. Scottish and Welsh rates, NI, UC, legacy, Scottish benefits",
     ],
     step: 2,
@@ -1286,7 +1326,7 @@ export const rulesCompare: CompareRow[] = [
     label: "Council tax and support",
     cells: [
       "Council tax; CTR for Scotland, Wales, pensioners, five English schemes",
-      "Modelled (2018 description); RF does not model CTS variation",
+      "Modelled (Scottish Government, 2018); RF does not model CTS variation",
       "Council tax from the data; CTR modelled",
     ],
     step: 2,
@@ -1322,42 +1362,43 @@ export const rulesCompare: CompareRow[] = [
     label: "Published work using it",
     cells: [
       "No 10 (10ds-microsim, experimental), NEF, CPS, Mosley and Cornforth (with NiGEM)",
-      "IPPR, RF, JRF, NEF, Legatum (2021)",
-      "Scottish and Welsh Governments, SPICe, GLA, Commons Library",
+      "IPPR, RF, JRF, NEF, Legatum (CeMPA, 2021); Fraser of Allander (2025)",
+      "Scottish and Welsh Governments, SFC, SPICe, GLA, Commons Library, CPAG, WBG",
     ],
     step: 3,
   },
 ];
 
 // ---------- Slide 18: calibration ----------
-// The certified build of 15 November 2026, as the BIST deck reads the
-// public calibration dashboard ("dashboard"), 18 November 2026: 1,534
-// targets; 98.8% within 10% (in-sample); 78,164 household records;
-// effective sample size about 7,380 (shown as about 7,400). Starting weights
-// (already including the SPI copies): 675 of 1,534 within 10% (44%);
-// Universal Credit 17% to 97%, Pension Credit 8% to 100%, PIP 18% to 100%.
-// By publisher: HMRC 776, ONS 365, DWP 233, MHCLG 82, others 78.
+// The certified build of 22 November 2026, from the public calibration
+// dashboard's data routes ("dashboard"), read 25 November 2026: 1,536
+// targets; 1,517 within 10% (98.8%, in-sample); 78,450 household records;
+// effective sample size 7,471 (shown as about 7,500). Starting weights
+// (already including the SPI copies): 679 of 1,536 within 10% (44%);
+// Universal Credit 19 of 107 (18%) to 104 (97%), Pension Credit 1 of 13 (8%)
+// to 13 (100%), PIP 3 of 18 (17%) to 18 (100%). By publisher: HMRC 776, ONS
+// 366, DWP 234, MHCLG 82, others 78. Still no out-of-sample page for the UK.
 export const calibration = {
   stats: [
-    { value: "1,534", label: "official targets" },
+    { value: "1,536", label: "official targets" },
     { value: "98.8%", label: "within 10% of the official figure" },
-    { value: "78,164", label: "household records, including the SPI copies of FRS households" },
-    { value: "about 7,400", label: "effective sample size" },
+    { value: "78,450", label: "household records, including the SPI copies of FRS households" },
+    { value: "about 7,500", label: "effective sample size" },
   ],
   beforeAfter: [
     { label: "All targets", before: "44%", after: "98.8%" },
-    { label: "Universal Credit", before: "17%", after: "97%" },
+    { label: "Universal Credit", before: "18%", after: "97%" },
     { label: "Pension Credit", before: "8%", after: "100%" },
-    { label: "PIP", before: "18%", after: "100%" },
+    { label: "PIP", before: "17%", after: "100%" },
   ],
   publishers: [
     { name: "HMRC", count: 776 },
-    { name: "ONS", count: 365 },
-    { name: "DWP", count: 233 },
+    { name: "ONS", count: 366 },
+    { name: "DWP", count: 234 },
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  foot: "The fit says nothing about statistics that were not targeted. Targets are for 2025; the calibration dashboard has no out-of-sample page for the UK.",
+  foot: "The fit says nothing about statistics that were not targeted; those are checked case by case (poverty against HBAI, microcosm#1334 and #1710), and the dashboard has no out-of-sample page for the UK. Targets are for 2025.",
 };
 
 // ---------- Slide 19: Autumn Budget 2026 against the OBR ----------
@@ -1483,7 +1524,7 @@ export const notClaimed = [
 export const knownLimits = [
   "No firms and no corporation tax",
   "No reweighting for future years: one set of weights, fitted to 2025",
-  "Thin cells: effective sample about 7,400; areas need 10+ households",
+  "Thin cells: effective sample about 7,500; areas need 10+ households",
   "The SPI copies’ industry is imputed",
 ];
 
@@ -1602,7 +1643,7 @@ export const pilotScope =
 export const pilotCandidates = [
   {
     title: "Candidate 1: the Autumn Budget 2026 distribution chart",
-    text: "Spread thin, Fig 8; both sides have published on the same Budget. Vigintiles on an effective sample of about 7,400 give about 370 per group, so deciles would be shown alongside",
+    text: "Spread thin, Fig 8; both sides have published on the same Budget. Vigintiles on an effective sample of about 7,500 give about 375 per group, so deciles would be shown alongside",
   },
   { title: "Candidate 2, smaller: Billing me softly", text: "The proposal is already encoded; the pilot would add the non-take-up method" },
 ];
@@ -1626,7 +1667,7 @@ export const closingLinks: { label: string; href: string }[] = [
   { label: "policyengine.org/uk", href: sources.home.href },
   { label: "github.com/PolicyEngine/policyengine-uk", href: sources.model.href },
   { label: "github.com/PolicyEngine/microcosm", href: sources.data.href },
-  { label: "Calibration dashboard (15 Nov 2026 build)", href: sources.dashboard.href },
+  { label: "Calibration dashboard (22 Nov 2026 build)", href: sources.dashboard.href },
   { label: "policyengine.org/uk/budgets/autumn-2026", href: sources.budgetDashboard.href },
   { label: "policyengine.org/uk/targeted-energy-discount", href: sources.energyDiscount.href },
   { label: "doi.org/10.21105/joss.11115", href: sources.joss.href },

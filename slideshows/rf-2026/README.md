@@ -75,10 +75,12 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Where the figures come from
 
-- **Microcosm UK data (slides 9, 16, 18)**: one build only, the certified
-  national build of 15 November 2026 (fcfac709, policyengine.py 6.20.1), as
-  the BIST deck (commit ed87705) and the public calibration dashboard
-  report it.
+- **Microcosm UK data (slides 4, 9, 10, 16, 18)**: one build only, the
+  certified national build of 22 November 2026 (b891aa69, policyengine.py
+  6.20.3), with the local-area build of 23 November (7081d968), as the
+  public calibration dashboard reports it.
+- **Untargeted checks against HBAI (slides 14, 18, 20)**: microcosm#1334
+  (19 October build) and microcosm#1710 (22 November build, children).
 - **Rule-base counts (slide 7)**: policyengine-uk 2.179.0, from the BIST
   deck; the programme registry line from `programs.yaml` at 2.180.0.
 - **Coverage (slide 8)**: `programs.yaml` at policyengine-uk 2.180.0.
@@ -189,7 +191,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   caption says only that it used NIESR's NiGEM).
 - Scorecard: re-read the counts at the commit shown before the meeting.
 - Slide 18: the raw FRS 2024–25 household count, as a comparator for
-  78,164 records and an effective sample of about 7,400, once sourced.
+  78,450 records and an effective sample of about 7,500, once sourced.
 - Slide 19: the Pension Tax Allowance net cost in the briefing's Table 6
   equals the OBR's income tax line in 2028–29 and 2029–30; confirm that it
   is a coincidence and not a copying error in the briefing.

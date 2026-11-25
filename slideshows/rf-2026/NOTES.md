@@ -15,11 +15,13 @@ Foundation's method, it relies on published sources only, each dated.
 not exist. Corrections are welcome throughout.
 
 One Microcosm build is used for every data figure: the certified national
-build of 15 November 2026 (fcfac709, certified in policyengine.py 6.20.1;
-"certified" means the build passed the release gates that policyengine.py
-checks before it ships a dataset). A newer certified build exists
-(24 November, policyengine.py 6.20.3: 1,536 targets, 98.76% within 10%);
-the deck does not mix the two. Four results were run on other builds and
+build of 22 November 2026 (b891aa69, certified in policyengine.py 6.20.3 on
+24 November; "certified" means the build passed the release gates that
+policyengine.py checks before it ships a dataset), with the local-area
+build of 23 November (7081d968). Against the 15 November build in the BIST
+deck: 1,536 targets (two more), 78,450 records, an effective sample of
+about 7,500, and 57 source stages (a new-claimant UC draw); 98.8% within
+10% is unchanged. Four results were run on other builds and
 carry a run label on their slide: the Autumn Budget 2026 dashboard
 (slides 5 and 19), the Billing me softly dashboard (slide 15), the
 scorecard rows and the £46k example in the notes to slide 20.
@@ -165,7 +167,7 @@ choices:
    records with quantile-regression forests (a machine-learning method that
    predicts a whole distribution, not just an average), so one file serves
    direct taxes, indirect taxes and wealth.
-3. The weights are fitted to 1,534 official totals, each weight bounded at
+3. The weights are fitted to 1,536 official totals, each weight bounded at
    10 times its starting weight.
 
 Take-up: people who report a benefit always claim; others are drawn to DWP
@@ -175,9 +177,9 @@ entitles claim at a rate fixed at build (for Pension Credit, DWP's Savings
 Credit-only take-up; for Universal Credit and Child Benefit, the early
 single-rate draw). It cannot be set per run.
 
-The costs: an effective sample size of about 7,400 from 78,164 records; the
+The costs: an effective sample size of about 7,500 from 78,450 records; the
 SPI copies' industry is imputed; the targets are for 2025. The build has
-56 source stages, each survey file pinned by SHA-256. The records are not
+57 source stages, each survey file pinned by SHA-256. The records are not
 public: access is by token, and how RF could hold them is to be agreed
 (question 5 on slide 24). Slide 16 sets this beside the IPPR model and
 UKMOD.
@@ -339,8 +341,8 @@ Full rows:
 
 - **B1. Base data: latest FRS and HBAI** (RF). Microcosm UK on FRS
   2024–25; HBAI-definition income and equivalisation computed in the model.
-  No check of Microcosm's poverty rates against HBAI is published (an
-  earlier check used the previous dataset). Partly.
+  HBAI is not a calibration target, and checks against it are made case by
+  case: they find poverty below HBAI's (see slide 18). Partly.
 - **B2. Reweight to ONS population projections and OBR participation and
   unemployment for future years** (RF). One calibrated dataset, fitted to
   2025 targets. Later years uprate money values only; household weights
@@ -422,28 +424,46 @@ the 42%.
 Frame these as design differences, not a ranking. UKMOD keeps the FRS
 grossing weights and makes no other updating adjustments, so results stay
 traceable to the survey; PolicyEngine fits weights to official totals and
-pays for it in effective sample size (about 7,400 from 78,164 records); RF
+pays for it in effective sample size (about 7,500 from 78,450 records); RF
 reweights for projection years with its own code. All three inherit the
 FRS's under-recording of top incomes and of benefit receipt and handle it
 differently.
 
 Fuller cells:
 
-- Base survey, UKMOD: FRS 2023–24, 36,248 individuals and 16,754
-  households, as of the April 2026 country report (UKMOD Country Report
-  2023–2030, CeMPA working paper 8/26).
-- Top incomes, UKMOD: none by default; an optional HBAI extension swaps in
-  SPI-adjusted HBAI incomes and weights.
+- Base survey, UKMOD: input data on the 2024 wave of the FRS (2024–25)
+  since release B2026.03 of 22 June 2026, single-year and three-year
+  pooled. The April 2026 country report (UKMOD Country Report 2023–2030,
+  CeMPA working paper 8/26) documents FRS 2023–24: 36,248 individuals and
+  16,754 households.
+- Top incomes, UKMOD: the HBAI extension swaps in HBAI incomes and weights,
+  with "adjustments that account for high income tax payers" (p.85). CeMPA
+  recommends it for cross-sectional analysis with data from 2018 (p.101),
+  while still recommending FRS data for historical consistency; the
+  validation uses it (p.83); it is off by default (p.31). The report does
+  not name the SPI; that HBAI's adjustment uses it is our reading of DWP's
+  method.
 - Wealth, PolicyEngine: WAS round 8 imputed onto FRS records; savings
   interest from the FRS and SPI, not WAS. UKMOD: we found no wealth
   variables in the country report; it records no data on capital gains,
   inheritances, property transactions or property value, so capital gains
   tax, inheritance tax and stamp duty are excluded.
-- Take-up, IPPR model: a partial take-up algorithm since 2017, calibrated
-  to DWP and HMRC (Scottish Government, 2018); UC 80% and Pension Credit 65%
-  rising to 70% in LSO 2026.
-- Weights, PolicyEngine: 1,534 targets (HMRC 776, ONS 365, DWP 233, MHCLG
-  82, others 78); 98.8% within 10%, in-sample. IPPR model: starting weights
+- Take-up, IPPR model: a partial take-up algorithm since 2017, a probit on
+  reported receipt used to rank entitled non-recipients, calibrated so
+  that modelled take-up matches DWP and HMRC statistics (Scottish
+  Government, 2018); UC 80% and Pension Credit 65% rising to 70% in LSO
+  2026. UKMOD: imperfect take-up on by default (p.79), rates by claimant
+  type (Table 3.4), allocated first to units reported as receiving the
+  benefit (p.31), editable by the user; only tax credits vary by area
+  (London, Scotland, Wales). CeMPA calls its rates "now somewhat dated".
+- Geography, IPPR model: IPPR published average gains for all 12 regions
+  and nations from its model (2p NI cut, 10 June 2024). UKMOD: the FRS end
+  user licence reports region of residence only; LHA uses the 12 regions
+  (p.47); UKMOD Explore covers the UK, the four nations and London.
+- Weights, PolicyEngine: 1,536 targets (HMRC 776, ONS 366, DWP 234, MHCLG
+  82, others 78); 98.8% within 10%, in-sample. UKMOD: FRS grossing weights;
+  a three-year pooled dataset (UK_2023_b2: 58,163 households, p.82) eases
+  thin cells. IPPR model: starting weights
   not found in published sources; for projections RF reweights to ONS
   population projections, OBR participation and unemployment, and PIP
   caseloads.
@@ -457,9 +477,17 @@ country report validating against administrative data and HBAI. In
 PolicyEngine the rules, tests and data pipeline are all open source under
 AGPL/MIT, and changes go through public pull requests." The IPPR coverage
 cells come from the Scottish Government's 2018 description and may be out
-of date. The licence cell is from CeMPA working paper 7/21 (2021): the
-IPPR model is maintained by PERU at Manchester Metropolitan University and
-licensed to users for a fee. Version IPPRTBM 02_93 is cited in JRF work of
+of date. The licence cell is from CeMPA working paper 7/21 (2021), written by
+UKMOD's developers: it says the IPPR model is "licensed to users for a
+hefty fee", that structural reforms are commissioned from PERU, and also
+that, with UKMOD, it completes the list of "publicly available" UK
+tax-benefit models. It does not call the IPPR model closed, so neither do
+we. PERU at Manchester Metropolitan University maintains it. Users: WP 7/21
+names IPPR, RF, JRF, NEF and Legatum; the Fraser of Allander Institute used
+it (v2.7.8) for its Scottish child poverty modelling (March 2025). UKMOD
+users named in WP 7/21 also include the Scottish Fiscal Commission, NHS
+Scotland, the Tony Blair Institute, Save the Children UK, Citizens Advice
+and the Citizen's Basic Income Trust. Version IPPRTBM 02_93 is cited in JRF work of
 June 2026. Indirect taxes are not a row here (they are on slides 14 and
 16); interfaces are folded into the platform row. "Mosley and Cornforth
 (with NiGEM)" is the NIESR-related paper on slide 3.
@@ -474,10 +502,32 @@ Say first what this is not: it is how well the weights reproduce the totals
 they were fitted to, so 98.8% is not a measure of accuracy on anything
 else, and the fit says nothing about statistics that were not targeted.
 Its value is transparency (every target and its fit is on a public page)
-and that benefit caseloads the raw FRS under-records are matched (UC: 17%
+and that benefit caseloads the raw FRS under-records are matched (UC: 18%
 of targets within 10% before calibration, 97% after, in-sample). The
-78,164 records include the SPI copies of FRS households; the raw FRS
+78,450 records include the SPI copies of FRS households; the raw FRS
 2024–25 household count is not on the slide until it is sourced.
+
+Untargeted checks against HBAI, which is not a calibration target. RF's
+work centres on poverty levels, so have these ready:
+
+- microcosm#1334, on the 19 October build, against HBAI 2024–25: absolute
+  poverty before housing costs 12.2% against 15.9%; relative poverty after
+  housing costs 18.1% against 19.6%; median income about 6% high; Gini
+  0.302 against 0.327. At the FRS grossing weights the same rows reproduce
+  HBAI (absolute BHC 16.0%, AHC 19.5%), so the gap comes from calibration
+  (for example, pensioner absolute BHC poverty falls from 15.9% to 10.7%).
+- microcosm#1344 changed UC take-up draws and the income targets. On an
+  uncertified run it moved relative BHC poverty from 13.7% to 14.3% (HBAI
+  15.9%) and relative AHC child poverty from 24.5% to 25.3% (27.4%).
+- On the 22 November build (microcosm#1710, children only): 3.40m children
+  (23.7%) below the AHC line against HBAI's 3.97m (27%); 2.42m below the
+  BHC line against 3.09m; larger families are under-represented. At the
+  starting weights the AHC figure was 4.02m, so calibration removes about
+  0.6m. No all-person comparison on this build is public yet.
+
+Say it plainly: poverty levels on the calibrated file run below HBAI's, we
+are working on it, and growth rates and policy differences are less
+affected than levels (which is also why RF anchors to outturn).
 
 ### 19. Autumn Budget 2026: PolicyEngine's costings beside the OBR's (spoken, 1.5 minutes)
 
@@ -547,8 +597,11 @@ the NI upper earnings limit to £46,000 (RF £9.0bn, PolicyEngine £6.62bn).
 The scorecard grades nothing, and the deck quotes no agreement rate from
 it.
 
-An earlier comparison of poverty rates with HBAI used the previous dataset,
-not Microcosm; an equivalent check on Microcosm is not yet published.
+The calibration bullet: untargeted checks against HBAI are made case by
+case (microcosm#1334 on the 19 October build; microcosm#1710 on the 22
+November build, children only; figures in the notes to slide 18), and the
+OBR costings on slide 19 are untargeted too. What is missing is a standing,
+published method, not checks.
 
 ## Part 6. Routes in and a possible pilot
 
@@ -595,7 +648,7 @@ in about two short calls.
   list of measures. What it needs exists in Python: vigintiles, with RF's
   equivalised ranking passed in as a grouping, and indirect taxes on LCFS
   2024–25 spending. Thin cells: vigintiles on an effective sample of about
-  7,400 give about 370 effective households per group, so deciles would be
+  7,500 give about 375 effective households per group, so deciles would be
   shown alongside.
 - Candidate 2, Billing me softly. The proposal is already encoded (slide
   15); the pilot would add the report's non-take-up method. PolicyEngine can

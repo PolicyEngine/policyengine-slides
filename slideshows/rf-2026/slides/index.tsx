@@ -1003,7 +1003,7 @@ export function CalibrationSlide() {
       section="compare"
       title="Calibration: weights fitted to official statistics"
       scale={1.1}
-      subtitle="Certified build of 15 November 2026. In-sample fit"
+      subtitle="Certified build of 22 November 2026. In-sample fit"
     >
       <div className={styles.calib}>
         <Reveal step={1} className={styles.calibStats}>
