@@ -425,3 +425,9 @@ a {
   from { stroke-dashoffset: 0; }
   to { stroke-dashoffset: -72; }
 }
+
+/* An export capture shows the slide alone: hide the Next.js dev overlay and
+   its issue badge, which exist only under `next dev`. */
+body:has(main[data-export]) nextjs-portal {
+  display: none !important;
+}

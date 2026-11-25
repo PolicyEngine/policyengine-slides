@@ -110,6 +110,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
         onClick={handleMainClick}
         data-total-steps={totalSteps}
         data-current-step={currentStep}
+        data-export={exportMode ? '' : undefined}
       >
         {mounted && config.slides.map((slide, slideIndex) => {
           const SlideComponent = getSlideComponent(slide);
