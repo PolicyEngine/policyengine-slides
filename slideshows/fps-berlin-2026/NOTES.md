@@ -9,7 +9,8 @@ by 27 November. No slide has build steps or live embeds.
 
 Every number is the merged paper's (PolicyEngine/uk-ai-study main at
 c42be9f, tax year 2027–28). The unmerged revision on PR #26 (calibrated
-spells, closed capital account) is not in the deck. If asked about spell
+spells, and a closed capital account built into every run) is not in the
+deck; slide 26 is the merged paper's own static closed account. If asked about spell
 length, say it is the main revision under way and point to slide 23.
 
 ## Timing
@@ -199,7 +200,7 @@ R1 replaces 50 per cent of lost earnings (capped at £15,000): poverty −1.89
 points at £26.9bn, £14.3bn per point; R2 and R3 cost £8.6bn and £6.7bn per
 point. They aim at different things: R1 replaces earnings for the
 displaced, R2 and R3 pay all UC claimants. Static, no behavioural response.
-If asked where the money goes: at seed 0, 63 per cent of R1 spending
+Per-point costs are the paper's, from unrounded means. If asked where the money goes: at seed 0, 63 per cent of R1 spending
 reaches deciles 8–10; R2 and R3 place 77 and 73 per cent in deciles 1–5.
 
 ## Close
