@@ -1,4 +1,5 @@
 import { SlideshowConfig, SlideshowMetadata, flattenSlides } from "./types";
+import { jrcSevilleHarness2026Config } from "@/slideshows/jrc-seville-harness-2026/config";
 import { aiWebinarConfig } from "@/slideshows/ai-webinar/config";
 import { abundanceDmvConfig } from "@/slideshows/abundance-dmv/config";
 import { vanderbilt2025Config } from "@/slideshows/vanderbilt-2025/config";
@@ -36,6 +37,7 @@ import { appam2026Config } from "@/slideshows/appam-2026/config";
 import { studentDebt2026Config } from "@/slideshows/student-debt-2026/config";
 
 export const slideshows: SlideshowConfig[] = [
+  jrcSevilleHarness2026Config,
   bist2026Config,
   appam2026Config,
   prop40Webinar2026Config,

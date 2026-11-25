@@ -1,0 +1,142 @@
+{
+  "source": "github.com/PolicyEngine/llm-econ-beliefs at commit d177a3423d95cc9c3d2b64c100894e63e2029d6f (main, 2026-11-16): results/<model>-elasticities-batch15/summary.csv, column pooled_point_estimate, row quantity_id tax.elasticity_of_taxable_income.top_earners (the per-model files the dashboard reads; one experiment per model, 15 successful runs each). Literature range from paper/tables/benchmark-comparison-labor-tax.csv line 3 at the same commit.",
+  "read": "2026-11-22",
+  "quantity": "tax.elasticity_of_taxable_income.top_earners",
+  "literatureRange": [
+    0.25,
+    0.5
+  ],
+  "check": {
+    "models": 31,
+    "insideRange": 28,
+    "minCenter": 0.3347,
+    "maxCenter": 0.554,
+    "matchesCsv": "28 / 31, 0.335, 0.554"
+  },
+  "models": [
+    {
+      "model": "claude-opus-5",
+      "center": 0.3347
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "center": 0.35
+    },
+    {
+      "model": "gemini-3.5-flash",
+      "center": 0.3553
+    },
+    {
+      "model": "gpt-5.5",
+      "center": 0.3667
+    },
+    {
+      "model": "kimi-k3",
+      "center": 0.37
+    },
+    {
+      "model": "qwen3.8-max",
+      "center": 0.3713
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "center": 0.3733
+    },
+    {
+      "model": "claude-opus-4.8",
+      "center": 0.3833
+    },
+    {
+      "model": "gemini-3.1-flash-lite-preview",
+      "center": 0.3867
+    },
+    {
+      "model": "claude-opus-4.7",
+      "center": 0.4
+    },
+    {
+      "model": "gemini-3-flash-preview",
+      "center": 0.4
+    },
+    {
+      "model": "grok-4.1-fast",
+      "center": 0.4
+    },
+    {
+      "model": "grok-4.5",
+      "center": 0.41
+    },
+    {
+      "model": "gpt-5.4",
+      "center": 0.4167
+    },
+    {
+      "model": "gemini-3.6-flash",
+      "center": 0.42
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "center": 0.43
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "center": 0.43
+    },
+    {
+      "model": "claude-fable-5",
+      "center": 0.4367
+    },
+    {
+      "model": "grok-4.3",
+      "center": 0.4367
+    },
+    {
+      "model": "inkling",
+      "center": 0.4367
+    },
+    {
+      "model": "minimax-m3",
+      "center": 0.4367
+    },
+    {
+      "model": "claude-sonnet-5",
+      "center": 0.4733
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "center": 0.49
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "center": 0.4933
+    },
+    {
+      "model": "glm-5.2",
+      "center": 0.4967
+    },
+    {
+      "model": "claude-sonnet-4.6",
+      "center": 0.5
+    },
+    {
+      "model": "grok-4.20",
+      "center": 0.5
+    },
+    {
+      "model": "kimi-k2.6",
+      "center": 0.5
+    },
+    {
+      "model": "claude-haiku-4.5",
+      "center": 0.5073
+    },
+    {
+      "model": "gpt-5.4-nano",
+      "center": 0.552
+    },
+    {
+      "model": "qwen-3.7-max",
+      "center": 0.554
+    }
+  ]
+}
