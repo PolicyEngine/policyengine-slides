@@ -112,7 +112,11 @@ error, not distance from the starting weights; only the ten-times bound
 limits how far weights move, and the total weight is free. The
 price is uneven weights: an effective sample of about 7,200 households
 (5,810 for employees, slide 14). Method as in the Microcosm code at the time
-of the 7 November build that the paper used.
+of the 7 November build that the paper used. The table is the 7 November build's targets by publisher and topic
+(HMRC 776, ONS 365, DWP 213, MHCLG 82, others 78); the 19 misses are 15
+SPI income bands, 3 Universal Credit and 1 student support. Relative errors
+are capped at 10 (1,000 per cent); only the ×10 weight bound limits how far
+weights move, unlike raking or GREG, and the total weight is free.
 
 **12. Exposure.** After the data: what we do to it. Felten et al.'s AIOE times a complementarity factor from
 Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the

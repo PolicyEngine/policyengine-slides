@@ -22,7 +22,7 @@ import {
   breakEvens,
   buildStages,
   calibrationFacts,
-  calibrationPoints,
+  targetRows,
   calibrationTex,
   central,
   centralChips,
@@ -574,13 +574,40 @@ export function CalibrationSlide() {
     <Frame
       section="method"
       title="Calibration: 98.7% of 1,514 official totals matched within 10%"
-      subtitle="One weight per household, fitted to published aggregates"
-      scale={1.05}
+      subtitle="One weight per household, fitted to published totals (7 November build, in sample)"
+      scale={0.92}
     >
-      <Tex tex={calibrationTex} />
-      <div className={fps.split}>
-        <Points items={calibrationPoints} />
+      <div className={fps.split} style={{ alignItems: "start" }}>
+        <table className={`${fps.table} ${fps.compact}`}>
+          <thead>
+            <tr>
+              <th>Publisher</th>
+              <th>Targets by topic</th>
+              <th className={fps.num}>Targets</th>
+              <th className={fps.num}>Within 10%</th>
+            </tr>
+          </thead>
+          <tbody>
+            {targetRows.map((row) => (
+              <tr key={row.topic}>
+                <td className={fps.rowName}>{row.source}</td>
+                <td>{row.topic}</td>
+                <td className={fps.num}>{row.count.toLocaleString("en-GB")}</td>
+                <td className={fps.num}>{row.within.toLocaleString("en-GB")}</td>
+              </tr>
+            ))}
+            <tr className={fps.rowCentral}>
+              <td className={fps.rowName}>Total</td>
+              <td>38 families, equal weight</td>
+              <td className={fps.num}>{targetRows.reduce((t, r) => t + r.count, 0).toLocaleString("en-GB")}</td>
+              <td className={fps.num}>{targetRows.reduce((t, r) => t + r.within, 0).toLocaleString("en-GB")}</td>
+            </tr>
+          </tbody>
+        </table>
         <div className={fps.kpis} style={{ gridTemplateColumns: "1fr", gap: "calc(var(--u) * 1.4)" }}>
+          <div className={fps.eqBox}>
+            <Tex tex={calibrationTex} />
+          </div>
           {calibrationFacts.map((fact) => (
             <div key={fact.value} className={fps.kpiInline}>
               <div className={fps.kpiTop}>

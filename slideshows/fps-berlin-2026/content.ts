@@ -630,6 +630,31 @@ export const calibrationPoints: Point[] = [
   { icon: IconLock, lead: "Only the ×10 bound limits weights", text: "Unlike raking or GREG; total weight free" },
 ];
 
+// What the weights are fitted to: the 1,514 targets of the 7 November build
+// the paper used (microcosm-uk-2024-25-national-20261107T020434Z-eeb6093e,
+// uk-ai-study README), from the calibration dashboard's data route for that
+// release (/calibration/dashboard/api/microcosm?country=uk&release=...,
+// "family_fit", 41 groups), read 25 November 2026: 1,514 targets, 1,495
+// within 10% (98.7%), 78,181 records, effective sample size 7,195. Rows group
+// families as the BIST deck does (bist-2026/content.ts, targetTable, for the
+// 15 November build); this build has no PIP targets and 103 UC targets.
+// Others: OBR 16, Scottish Government 12, Student Loans Company 12 (11),
+// Department for Transport 13, Welsh Government 11, DfE 8, Northern Ireland
+// bodies 5, Independent Schools Council 1.
+export const targetRows: { source: string; topic: string; count: number; within: number }[] = [
+  { source: "HMRC", topic: "Incomes by band (Survey of Personal Incomes)", count: 568, within: 553 },
+  { source: "HMRC", topic: "Capital gains and income tax liabilities", count: 189, within: 189 },
+  { source: "HMRC", topic: "Child Benefit, salary sacrifice, other tax totals", count: 19, within: 19 },
+  { source: "ONS", topic: "Population by age and sex", count: 179, within: 179 },
+  { source: "ONS", topic: "Employment by occupation", count: 159, within: 159 },
+  { source: "ONS", topic: "Household composition, land, spending", count: 27, within: 27 },
+  { source: "DWP", topic: "Universal Credit", count: 103, within: 100 },
+  { source: "DWP", topic: "State Pension and Pension Credit", count: 70, within: 70 },
+  { source: "DWP", topic: "Two-child limit, benefit cap, other benefits", count: 40, within: 40 },
+  { source: "MHCLG", topic: "Council tax dwellings by band", count: 82, within: 82 },
+  { source: "Others", topic: "OBR, devolved governments, DfT, DfE, student loans", count: 78, within: 77 },
+];
+
 export const calibrationFacts: Stat[] = [
   { icon: IconTarget, value: "1,514", label: "targets: HMRC, ONS, DWP, OBR, others" },
   { icon: IconCircleCheck, value: "98.7%", label: "within 10% of the official figure (in sample)" },
