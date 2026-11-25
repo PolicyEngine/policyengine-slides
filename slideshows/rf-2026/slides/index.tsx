@@ -15,6 +15,7 @@ import { speakers } from "@/lib/speakers";
 import {
   breakdowns,
   budgetBehaviour,
+  budgetYears,
   budgetLabel,
   budgetNotes,
   budgetPackage,
@@ -69,7 +70,6 @@ import {
   sources,
   stepsAlsoLabel,
   stepsCaution,
-  stepsFoot,
   stepsTable,
   tags,
   usesFoot,
@@ -418,12 +418,12 @@ function LogoSection({ title, logos, cells }: { title: string; logos: Logo[]; ce
 
 export function WhoSlide() {
   const { facts, government, thinkTanks } = whoWeAre;
-  const cells = Math.max(government.length, thinkTanks.length);
+  const cells = government.length;
   return (
     <Frame
       section="intro"
       title="Who we are"
-      scale={1.2}
+      scale={1.1}
       subtitle="A nonpartisan nonprofit building open-source tax-benefit models"
     >
       <Reveal step={1} className={styles.facts}>
@@ -459,7 +459,7 @@ export function WhoSlide() {
           <LogoSection title="Government and Parliament: where PolicyEngine has appeared" logos={government} cells={cells} />
         </Reveal>
         <Reveal step={3}>
-          <LogoSection title="Think tanks and researchers: published work using PolicyEngine" logos={thinkTanks} cells={cells} />
+          <LogoSection title="Think tanks and researchers: published work using PolicyEngine" logos={thinkTanks} cells={thinkTanks.length} />
         </Reveal>
       </div>
     </Frame>
@@ -741,7 +741,7 @@ export function ReportsSlide() {
       section="uses"
       title="The Resolution Foundation’s 2026 research we have read"
       scale={1.0}
-      subtitle="And where each uses the IPPR tax-benefit model, where the figure notes say so"
+      subtitle="And how each uses the IPPR tax-benefit model, per its figure notes"
     >
       <Table
         template="1.15fr 0.7fr 2.2fr 2fr"
@@ -851,7 +851,7 @@ export function StepsSlide() {
     <Frame
       section="uses"
       title="Each step of the projection method, mapped to PolicyEngine"
-      scale={0.81}
+      scale={0.87}
       subtitle="Which steps are the model’s, which are RF’s own, and what PolicyEngine does today"
     >
       <MapTable
@@ -864,9 +864,6 @@ export function StepsSlide() {
       <Foot step={3} tone="caution">
         {stepsCaution}
       </Foot>
-      <Foot step={3}>
-        <span className={styles.footMuted}>{stepsFoot}</span>
-      </Foot>
     </Frame>
   );
 }
@@ -877,7 +874,7 @@ export function EnergySlide() {
   return (
     <Frame
       section="uses"
-      title="A Resolution Foundation proposal already modelled: the targeted energy bill discount"
+      title="An RF proposal already modelled: the targeted energy bill discount"
       scale={1.12}
       subtitle="PolicyEngine’s dashboard of the Billing me softly proposal, 5 October 2026"
     >
@@ -963,7 +960,7 @@ export function RulesCompareSlide() {
     <Frame
       section="compare"
       title="The rules engine and access: PolicyEngine, the IPPR model and UKMOD"
-      scale={0.82}
+      scale={0.9}
       subtitle="UKMOD column from CeMPA’s 2026 country report; IPPR column from published descriptions, dated"
     >
       <CompareTable rows={rulesCompare} />
@@ -1085,7 +1082,7 @@ export function BudgetObrSlide() {
         </div>
       </div>
       <Foot step={3}>
-        {budgetBehaviour}
+        {budgetYears} {budgetBehaviour}
         <br />
         <span className={styles.footMuted}>{budgetLabel}</span>
       </Foot>

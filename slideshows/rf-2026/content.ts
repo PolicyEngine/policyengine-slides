@@ -364,11 +364,11 @@ export type PartKey = (typeof parts)[number]["key"];
 export const inBrief = [
   {
     label: "Nuffield",
-    text: "Local-area data, childcare and public-service variables exist today; the cross-model scorecard and AI interface are in progress.",
+    text: "Local-area data exists today; childcare and public-service variables in part; the cross-model scorecard and AI interface are in progress.",
   },
   {
     label: "RF’s uses",
-    text: "Most map today in Python; the main gaps are future-year reweighting, take-up fixed at build and an earlier-policy baseline.",
+    text: "Most map at least partly today, in Python; the main gaps are future-year reweighting, take-up fixed at build and an earlier-policy baseline.",
   },
 ];
 
@@ -504,7 +504,7 @@ export const modelFlow = [
     icon: IconCopy,
     title: "Run twice",
     text: "Baseline law and a reform: a parameter path and a value",
-    code: "gov.hmrc.income_tax.rates.uk[0].rate: 0.21",
+    code: "gov.hmrc.income_tax.\u200Brates.uk[0].rate: 0.21",
   },
   {
     icon: IconChartBar,
@@ -657,7 +657,7 @@ export const microcosmResult = {
 };
 
 export const microcosmFoot =
-  "56 source stages, each survey file pinned to a fixed copy. The code is open; the records are FRS-derived under the UK Data Service licence: not public, access by token, a route for RF to be agreed.";
+  "56 source stages, each survey file pinned to a fixed copy. The code is open; the records are FRS-derived under the UK Data Service licence: not public; access is by token, and a route for RF is to be agreed.";
 
 // ---------- Slide 10: breakdowns ----------
 // The BIST deck's breakdowns (policyengine.py 810a59e outputs). Vigintiles:
@@ -776,13 +776,14 @@ export const grantRows: { icon: Icon; area: string; today: string; tag: Tag }[] 
   },
   {
     icon: IconUsers,
-    area: "A symposium (also listed: training, beta testing)",
+    area: "A symposium",
     today: "London event, 3 Nov 2025, supported by the Nuffield Foundation",
     tag: tags.done,
   },
 ];
 
-export const grant1Foot = "Shows what exists today, not what was delivered within the grant period.";
+export const grant1Foot =
+  "Shows what exists today, not what was delivered within the grant period. Nuffield also lists training and beta testing, not shown here.";
 
 export const grant2Foot =
   "Grant 2, under way: constituency-level Budget analysis (the Autumn Budget 2026 dashboard and its constituency map); local Council Tax Reduction variation; outreach to local journalists.";
@@ -796,7 +797,7 @@ export const grant2Foot =
 export const budgetTabs = [
   { icon: IconBuildingBank, title: "Public finances", text: "With an OBR comparison" },
   { icon: IconMap2, title: "Constituency map", text: "Every measure by constituency" },
-  { icon: IconUsers, title: "By age, living standards, poverty", text: "Who gains and loses" },
+  { icon: IconUsers, title: "Living standards, poverty", text: "By age; who gains and loses" },
   { icon: IconCalculator, title: "Household calculator", text: "Enter any household" },
   { icon: IconChartLine, title: "Pre-measures forecast", text: "The baseline the measures change" },
   { icon: IconBook, title: "Policies and methodology", text: "What is and is not modelled" },
@@ -975,7 +976,7 @@ export const usesTable: MapRow[] = [
     icon: IconUsers,
     label: "Child poverty, with and without a policy",
     where: "LSO, Feb 2026",
-    today: "Policy difference on four HBAI measures; child is 17 or under; levels as projections",
+    today: "Policy difference on four HBAI measures; standard output counts age 17 or under, HBAI dependent children in Python; levels as projections",
     tags: [tags.done, tags.partly],
     step: 2,
   },
@@ -1084,7 +1085,7 @@ export const stepsTable: MapRow[] = [
     tags: [tags.partly],
     step: 2,
   },
-  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Outside the model", tags: [tags.notYet], step: 2 },
+  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Stays in RF’s code, or to be added", tags: [tags.notYet], step: 2 },
   {
     icon: IconShoppingCart,
     label: "Indirect taxes",
@@ -1116,13 +1117,11 @@ export const stepsTable: MapRow[] = [
 
 export const stepsAlsoLabel = "Also in RF’s analysis, outside the five steps";
 
-export const stepsCaution = "Known gap: Microcosm’s calibration targets are for 2025; RF projects to 2029–30.";
-
-// Managed migration: legacy_benefits_closed, modelled year by year
-// (legacy_benefits_closed in policyengine-uk). Sanctions: none found by a
-// search of policyengine-uk 5987eb3.
-export const stepsFoot =
-  "PolicyEngine: no labour-supply response by default; two responses are on (capital gains realisations, employer NI passed through to pay); RF’s method describes none. Managed migration to UC: year by year. Sanctions: in neither.";
+// The known gap makes slide 9's point (one calibrated year; take-up drawn
+// at build). Behaviour, managed migration and sanctions are in NOTES.md
+// (sanctions: none found by a search of policyengine-uk 5987eb3).
+export const stepsCaution =
+  "Known gap: Microcosm is calibrated to one year (2025) and draws take-up when it is built (slide 9); RF projects to 2029–30.";
 
 // ---------- Slide 15: Billing me softly ----------
 // Left: "billingMeSoftly" (Great Britain; passported by a means-tested
@@ -1144,7 +1143,7 @@ export const energy = {
     { icon: IconHome, title: "About 40% pass the income test", text: "A £2bn scheme, about £175 each" },
   ],
   run: [
-    { icon: IconHome, title: "28.6 million households", text: "Flat option, 2026–27" },
+    { icon: IconHome, title: "28.6 million GB households", text: "In the run; flat option, 2026–27" },
     {
       icon: IconUsers,
       title: "11.95 million recipients",
@@ -1255,11 +1254,11 @@ export const dataCompare: CompareRow[] = [
 export const rulesCompare: CompareRow[] = [
   {
     icon: IconCode,
-    label: "Platform and language",
+    label: "Platform and interfaces",
     cells: [
-      "Python package; rules as YAML parameters and Python formulas",
+      "Python package (YAML parameters, Python formulas); web app; Claude connector (preview)",
       notFound,
-      "EUROMOD platform, Windows; own rule language; Python connector",
+      "EUROMOD platform, own rule language; Windows interface, UKMOD Explore web tool, Python connector",
     ],
     step: 1,
   },
@@ -1287,12 +1286,6 @@ export const rulesCompare: CompareRow[] = [
       "On the FRS (2018 description)",
       "Income tax incl. Scottish and Welsh rates, NI, UC, legacy, Scottish benefits",
     ],
-    step: 2,
-  },
-  {
-    icon: IconShoppingCart,
-    label: "Indirect taxes",
-    cells: ["VAT and duties on imputed LCFS spending", "On the LCF (2018 description)", "Through the indirect-tax add-on"],
     step: 2,
   },
   {
@@ -1332,17 +1325,11 @@ export const rulesCompare: CompareRow[] = [
     step: 3,
   },
   {
-    icon: IconWorld,
-    label: "Interfaces",
-    cells: ["Web app, Python, Claude connector (preview)", notFound, "Windows interface; UKMOD Explore web tool"],
-    step: 3,
-  },
-  {
     icon: IconUsers,
     label: "Published work using it",
     cells: [
-      "No 10 (10ds-microsim, experimental), NEF, CPS, NIESR",
-      "IPPR, RF, JRF, NEF, Legatum",
+      "No 10 (10ds-microsim, experimental), NEF, CPS, Mosley and Cornforth (with NiGEM)",
+      "IPPR, RF, JRF, NEF, Legatum (2021)",
       "Scottish and Welsh Governments, SPICe, GLA, Commons Library",
     ],
     step: 3,
@@ -1474,9 +1461,12 @@ export const budgetPackage = {
 
 export const budgetNotes = [
   "* The OBR used the government’s estimate for fuel duty but did not certify it.",
-  "† Income tax only. Net of lower Pension Credit, Housing Benefit and CTR, −144, the figure in the package.",
+  "† Income tax only (briefing text). After lower Pension Credit, Housing Benefit and CTR, PolicyEngine’s net cost is smaller (briefing Table 6).",
   "‡ Before income tax, like the OBR’s spending line; net of income tax, −48.",
 ];
+
+export const budgetYears =
+  "Income tax measures shown for 2029–30, after the Self Assessment timing gap; the trading allowance is 53% in 2028–29. Negative = cost.";
 
 export const budgetBehaviour = `Most official costings include behavioural responses. PolicyEngine: ${behaviourLine.charAt(0).toLowerCase()}${behaviourLine.slice(1)}`;
 
@@ -1525,7 +1515,7 @@ export const scorecardRows = [
 export const scorecardHead = "The only like-for-like model runs against RF";
 
 export const scorecardNote =
-  "3 of 755 rows with a result from RF, UKMOD, the IFS, IPPR and four others; most ran on an earlier dataset (e.g. higher-rate threshold and NI upper earnings limit to £46k: RF £9.0bn, PolicyEngine £6.62bn). The scorecard grades nothing.";
+  "The scorecard has 755 rows with a result published by RF, UKMOD, the IFS, IPPR or four others. These three are the only reform runs marked like-for-like against RF; most others ran on an earlier dataset (e.g. higher-rate threshold and NI upper earnings limit to £46k: RF £9.0bn, PolicyEngine £6.62bn). The scorecard grades nothing.";
 
 export const scorecardLabel =
   "2029–30. RF: No half measures, Oct 2025. PolicyEngine: policyengine-uk 2.132.6, Microcosm build of 19 Oct 2026";

@@ -1,12 +1,13 @@
 # Presenter notes: PolicyEngine UK and the Resolution Foundation's modelling
 
-25 slides, about 14 minutes of talk, then discussion. The spoken path is
-1, 2, 4, 12, 13, 14, 9, 19 (with one line of 20), 22 and 23 together, and
-24. The others (3, 5, 6, 7, 8, 10, 11, 15, 16, 17, 18, 20, 21 and 25) are
-reference, for questions and to leave behind. Rough checkpoints: slide 4 by
-minute 1, slide 12 by minute 3, slide 19 by minute 10, slide 24 by minute
-14. If time is short, take 9 and 19 in a sentence each; keep 13, 14, 23 and
-24.
+25 slides, about 13 minutes of talk, then discussion. The spoken path is
+1, 2, 4, 12, 13, 14, 19 (with one line of 20), 22 and 23 together, and 24,
+always moving forward. The others (3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17,
+18, 20, 21 and 25) are reference, for questions and to leave behind.
+Slide 9's point (one calibrated year; take-up drawn at build) is made from
+the "Known gap" line on slide 14. Rough checkpoints: slide 4 by minute 1,
+slide 12 by minute 3, slide 19 by minute 9, slide 24 by minute 13. If time
+is short, take 19 in a sentence; keep 13, 14, 23 and 24.
 
 Where the deck describes the IPPR tax-benefit model or the Resolution
 Foundation's method, it relies on published sources only, each dated.
@@ -45,9 +46,9 @@ us.
 ### 2. In brief (spoken, 40 seconds)
 
 Give the two answers first, from the box at the bottom. Nuffield: the
-local-area data, childcare and public-service variables exist today; the
-cross-model scorecard and the AI interface are in progress. RF's uses: most
-map today in Python; the main gaps are future-year reweighting, take-up
+local-area data exists today, the childcare and public-service variables in
+part; the cross-model scorecard and the AI interface are in progress. RF's
+uses: most map at least partly today, in Python; the main gaps are future-year reweighting, take-up
 fixed at build and an earlier-policy baseline. Then one sentence on the
 parts; part 4 is the core.
 
@@ -97,6 +98,10 @@ each item was completed inside the grant period, and the foot says so.
 - The symposium: a London event on 3 November 2025, which PolicyEngine's
   event report says was supported by the Nuffield Foundation. It falls
   after grant 1's stated end; the slide does not call it a deliverable.
+  Nuffield also lists training and beta testing; the slide does not show
+  them, and their public record is an open check.
+- Council Tax Reduction (slide 4) and Council Tax Support (slides 12 and
+  14) are the same scheme; RF's annex uses the second name.
 
 Grant 2 runs from July 2026 to June 2029 and funds constituency-level
 Budget analysis, local Council Tax Reduction variation and outreach to
@@ -107,8 +112,7 @@ gap on slide 14.
 
 Open only if asked what local output looks like. The dashboard models the
 Budget's household measures, including the energy payment, zero VAT on
-electricity, fuel duty, the Pension Tax Allowance, property and savings
-income tax, the trading allowance and the Carer's Allowance taper; sources
+electricity, fuel duty, the Pension Tax Allowance, property income tax, the trading allowance and the Carer's Allowance taper; sources
 differ on the count, so the slide gives none. The run that produced all the
 measures took 8.1 minutes with one machine per measure in parallel; it is
 not a single-run speed. The web app's own estimate for a UK national run is
@@ -148,10 +152,11 @@ alcohol, tobacco and gambling duties as partial; the code models them on
 imputed spending, and slide 14 follows the registry. Wealth tax, land value
 tax and carbon tax exist only as hypothetical reforms.
 
-### 9. Microcosm UK 2024–25: how the household file is built (spoken after 14, 1 minute)
+### 9. Microcosm UK 2024–25: how the household file is built (reference)
 
-Come back to this slide after slide 14, as the reason for the gaps: one
-calibrated year and take-up drawn at build. Three choices:
+The reason for the main gaps on slide 14, whose "Known gap" line makes the
+point when spoken: one calibrated year and take-up drawn at build. Three
+choices:
 
 1. Top incomes come from the SPI 2022–23 public-use file at record level:
    10,000 copies of FRS households whose adults take SPI incomes, plus more
@@ -186,7 +191,9 @@ from `calculate_decile_impacts(..., quantiles=20)` in Python; the default
 ranking income is unequivalised household net income, and a pre-computed
 grouping can be passed with `decile_variable=`. Relative poverty is 60% of
 the contemporary median; the absolute line is the 2024–25 line held in real
-terms; "child" in the standard output is age 17 or under.
+terms; "child" in the standard output is age 17 or under, and HBAI's
+dependent children (`is_hbai_dependent_child`) can be used in Python
+through the poverty output's `filter_variable`.
 
 ## Part 4. The Resolution Foundation's research and the IPPR model
 
@@ -244,8 +251,9 @@ Three things worth saying up front: vigintiles exist in Python but the web
 app shows deciles, and the default ranking income is unequivalised, so RF's
 equivalised vigintiles would be passed in as a grouping; there is no
 ready-made "earlier policy, uprated" baseline for a cumulative chart; the
-standard child poverty output counts everyone aged 17 or under, not HBAI's
-dependent children. For anyone reading the code: `in_poverty_bhc` is
+standard child poverty output counts everyone aged 17 or under, and HBAI's
+dependent children are available in Python (`is_hbai_dependent_child`, as
+the two poverty rows on slide 20 use). For anyone reading the code: `in_poverty_bhc` is
 absolute poverty; relative poverty is `in_relative_poverty_bhc`.
 
 Full rows (checked against policyengine-uk 5987eb3, microcosm cac12ab,
@@ -274,8 +282,10 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 - **A4. Child poverty with and without a policy** (LSO 2026, Fig 15).
   Relative and absolute poverty, before and after housing costs, on the HBAI
   modified OECD scale; baseline against reform. Done for the policy
-  difference. Partly for the rest: "child" is age 17 or under, not HBAI's
-  dependent children, and projected levels are as A3. The two-child limit
+  difference. Partly for the rest: the standard output counts age 17 or
+  under; HBAI's dependent children (`is_hbai_dependent_child`,
+  `variables/household/demographic/hbai/`) can be passed as a filter in
+  Python; projected levels are as A3. The two-child limit
   is abolished from 6 April 2026 in the baseline.
 - **A5. The LHA freeze** (Spread thin, Fig 9). Published LHA rates by BRMA
   and category, 2014 to 2026; a freeze parameter, on from April 2025 and
@@ -318,8 +328,9 @@ SPI rather than WAS; private pensions on an OBR index), say it is
 different, not better. The steps marked "RF" could stay in RF's own code
 whichever model sits in the middle, or move into PolicyEngine: question 3
 on slide 24. The last row is the natural form of option C on slide 22: RF
-keeps its own prepared file and runs PolicyEngine's rules on it. Then go
-back to slide 9 for a minute.
+keeps its own prepared file and runs PolicyEngine's rules on it. Finish
+on the "Known gap" line: it is slide 9's point, so there is no need to go
+back.
 
 The main group follows slide 12's five steps; the second group, "Also in
 RF's analysis", holds rows that are not among them (indirect taxes are not
@@ -384,12 +395,14 @@ Also in RF's analysis:
   Benefit's, default to claiming. Not tried on an RF file. Partly.
   (policyengine-uk `data/dataset_schema.py`; docs `usage/simulations.md`.)
 
-Foot: PolicyEngine has no labour-supply response by default; two
-responses are on (capital gains realisations, employer NI passed through
-to pay); RF's method describes none. Sanctions are modelled in neither (a
-search of policyengine-uk found none).
+Not on the slide, if asked: PolicyEngine has no labour-supply response by
+default; two responses are on (capital gains realisations, employer NI
+passed through to pay); RF's method describes none. Managed migration to
+Universal Credit is modelled year by year. Sanctions are modelled in
+neither (a search of policyengine-uk found none). "Growth rates applied to
+outturn" would stay in RF's code or be added to PolicyEngine.
 
-### 15. A Resolution Foundation proposal already modelled: the targeted energy bill discount (reference)
+### 15. An RF proposal already modelled: the targeted energy bill discount (reference)
 
 Mention in one sentence on slide 13 or 23. The proposal, for Great
 Britain, passports households on a means-tested benefit or applies a test
@@ -399,7 +412,9 @@ passing the test, and its income test alone gives 35% in 2026–27 (38% on
 2024–25 incomes). It is not validation: the two figures share the FRS and
 say nothing about which model is closer to the truth. It is the smaller of
 the two pilot candidates on slide 23. The analysis code is at
-uk-energy-reforms 14bf3b0, `analyses/rf-billing-me-softly`.
+uk-energy-reforms 14bf3b0, `analyses/rf-billing-me-softly`; its README
+gives 28.6m Great Britain households in the run for 2026–27, the base of
+the 42%.
 
 ## Part 5. How PolicyEngine compares
 
@@ -446,7 +461,9 @@ cells come from the Scottish Government's 2018 description and may be out
 of date. The licence cell is from CeMPA working paper 7/21 (2021): the
 IPPR model is maintained by PERU at Manchester Metropolitan University and
 licensed to users for a fee. Version IPPRTBM 02_93 is cited in JRF work of
-June 2026.
+June 2026. Indirect taxes are not a row here (they are on slides 14 and
+16); interfaces are folded into the platform row. "Mosley and Cornforth
+(with NiGEM)" is the NIESR-related paper on slide 3.
 
 TAXBEN is not a column because we hold too little published detail for a
 fair one: in use since 1983, on the FRS and LCF, entitlement or reported
@@ -485,10 +502,11 @@ Allowance taper.
   taper 114%, both not yet explained.
 - Like for like: the Pension Tax Allowance row is income tax only (£42m,
   £112m and £193m against the OBR's £44m, £83m and £144m for 2027–28 to
-  2029–30). The briefing's Table 6 shows the net cost after Pension Credit,
-  Housing Benefit and Council Tax Reduction (−30, −83, −144), which the
-  package uses; that net figure happens to equal the OBR's income tax line
-  in two years. The Carer's Allowance row is before income tax (£79m, like
+  2029–30), from the briefing's text. The briefing's Table 6 shows a
+  smaller net cost after Pension Credit, Housing Benefit and Council Tax
+  Reduction (−30, −83, −144), which the package uses; that net figure
+  equals the OBR's income tax line in two years, which is not yet
+  confirmed as more than a coincidence, so the slide gives no net figure. The Carer's Allowance row is before income tax (£79m, like
   the OBR's £69m spending line); net of income tax, £48m.
 - The package: all seven run together; in 2026–27 only the first three are
   non-zero, so the total is their sum.
@@ -517,8 +535,12 @@ policyengine-uk 2.132.6 on the Microcosm UK 2024–25 build of 19 October
 - A three-child limit instead, fewer children in relative poverty after
   housing costs, 2029–30: RF 350,000; PolicyEngine 318,000 (−9%).
 
-These are 3 of the 755 rows with a result from RF, UKMOD, the IFS, IPPR
-and four others. Most ran on policyengine-uk 2.89.2 and the dataset before
+The scorecard has 755 rows with a result published by RF, UKMOD, the IFS,
+IPPR or four others. These three are the only reform runs marked
+like-for-like against RF: `populations.json` has 14 "comparable" RF rows,
+and the other 11 are benefit uprating rates in the baseline (from Catching
+up? and the Living Standards Outlook 2026), not reform runs. Most others
+ran on policyengine-uk 2.89.2 and the dataset before
 Microcosm, including the example of cutting the higher-rate threshold and
 the NI upper earnings limit to £46,000 (RF £9.0bn, PolicyEngine £6.62bn).
 The scorecard grades nothing, and the deck quotes no agreement rate from

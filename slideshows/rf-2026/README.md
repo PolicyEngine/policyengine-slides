@@ -37,8 +37,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 12. How the Resolution Foundation projects incomes, as we read it
 13. RF's published analyses, mapped to PolicyEngine
 14. Each step of the projection method, mapped to PolicyEngine
-15. A Resolution Foundation proposal already modelled: the targeted energy
-    bill discount
+15. An RF proposal already modelled: the targeted energy bill discount
 
 5 · How PolicyEngine compares
 
@@ -56,8 +55,9 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 24. Questions for discussion
 25. Thank you
 
-The spoken path, about 14 minutes, is 1, 2, 4, 12, 13, 14, 9, 19 (with one
-line of 20), 22 and 23, and 24; NOTES.md has the timings.
+The spoken path, about 13 minutes, is 1, 2, 4, 12, 13, 14, 19 (with one
+line of 20), 22 and 23, and 24, always moving forward; slide 9's point is
+made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Files
 
@@ -122,8 +122,13 @@ line of 20), 22 and 23, and 24; NOTES.md has the timings.
   In-sample (calibration), Outside the model, and Different method (savings
   income on slide 14). No tally of statuses anywhere.
 - Slide 4 is headed "what exists today" and its foot says it does not show
-  what was delivered within the grant period. The London event is shown as
-  an event, not as a grant deliverable.
+  what was delivered within the grant period, and that training and beta
+  testing are not shown. The London event is shown as an event, not as a
+  grant deliverable.
+- Slide 14 keeps one foot line, the known gap, which also makes slide 9's
+  point; behaviour, managed migration and sanctions are in NOTES.md.
+- Slide 17 has no indirect-tax row (it is on slides 14 and 16), and
+  interfaces sit in the platform row, so the table fits at a readable size.
 - Slide 13 lists RF's published analyses; slide 14 follows slide 12's five
   steps, then a separate group, "Also in RF's analysis", for rows outside
   them (indirect taxes, Council Tax Support, running PolicyEngine's rules
@@ -136,8 +141,10 @@ line of 20), 22 and 23, and 24; NOTES.md has the timings.
   measures; 2031–32 for the Carer's Allowance taper), a main reason
   per row ("not yet explained" where the briefing gives none) and
   like-for-like rows: the Pension Tax Allowance as income tax only and the
-  Carer's Allowance taper before income tax, each footnoted with its net
-  figure. Fuel duty is footnoted: the OBR used the government's estimate.
+  Carer's Allowance taper before income tax, each footnoted. The slide
+  gives no Pension Tax Allowance net figure until the coincidence below is
+  confirmed. The foot states the year choice and that the trading allowance
+  is 53% in 2028–29. Fuel duty is footnoted: the OBR used the government's estimate.
 - Slide 20's centre panel is "the only like-for-like model runs against
   RF", with the run label naming RF's report and PolicyEngine's build, and
   a note that most of the 755 rows ran on the earlier dataset.

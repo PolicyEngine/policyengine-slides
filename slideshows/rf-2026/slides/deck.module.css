@@ -2539,7 +2539,7 @@
   color: var(--pe-teal-dark);
   font-family: var(--font-mono, ui-monospace, monospace);
   font-size: calc(var(--u) * 1.05);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .columnTag {
