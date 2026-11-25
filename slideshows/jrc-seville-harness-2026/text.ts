@@ -145,7 +145,6 @@ const walkthroughSteps: WalkthroughCaption[] = [
 
 export const walkthrough = {
   title: 'How Axiom’s encoder drafts and checks one provision',
-  label: 'Illustration using 7 U.S.C. § 2017(a)',
   steps: walkthroughSteps,
   // The words on the three figures this deck draws. In an array of strings (`label`, `lines`, `caveat`, `rule`), each
   // entry is one line of type.

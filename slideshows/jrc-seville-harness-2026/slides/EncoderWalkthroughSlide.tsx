@@ -5,7 +5,7 @@
 // Most builds show one step of axiom.org's walkthrough in a frame (the caption's `n`). A caption with a `figure` shows
 // a figure this deck draws instead (slides/WalkthroughFigures.tsx), adapted from axiom.org's drawing of that step.
 //
-// The slide prints its title, the label "Illustration using 7 U.S.C. § 2017(a)" and the card. Our caption for the
+// The slide prints its title and the card, as large as the slide allows. Our caption for the
 // build, title and explanation, is visually hidden text in a polite live region. The slide writes it there once the
 // slide is on screen and again at each build, so a screen reader announces it; the frame and the figures are hidden
 // from screen readers. The caption axiom.org sends is
@@ -254,8 +254,10 @@ export default function EncoderWalkthroughSlide({ buildStep }: { buildStep?: num
 
   return (
     <Frame title={walkthrough.title}>
-      <div className="flex h-full flex-col">
-        <p className="mb-[1.2vh] text-center text-[2.5vh] text-gray-600">{walkthrough.label}</p>
+      {/* The card reaches 2vh, at most 1.5rem, into the space above (the header's margin) and below (the slide's
+          bottom padding), so it shows larger. The cap keeps it clear of the fixed-height footer on tall exports. A
+          bare capture has neither space, so there it keeps to its box. */}
+      <div className={`flex flex-col ${bare ? 'h-full' : '-my-[min(2vh,1.5rem)] h-[calc(100%+min(4vh,3rem))]'}`}>
         <div className="flex min-h-0 flex-1 items-center justify-center" style={{ containerType: 'size' }}>
           {/* The card's fill is axiom.org's stage colour, so a few pixels the frame leaves at an edge do not show. */}
           <div
