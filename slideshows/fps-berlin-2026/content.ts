@@ -43,7 +43,6 @@ import {
   IconPigMoney,
   IconReceiptTax,
   IconRepeat,
-  IconRoute,
   IconScale,
   IconSchool,
   IconTarget,
@@ -66,15 +65,19 @@ export type Stat = { icon: Icon; value: string; label: string };
 
 export type PartKey = "question" | "method" | "central" | "comparisons" | "sensitivity";
 
-export const parts: { key: PartKey; short: string; title: string }[] = [
-  { key: "question", short: "Question", title: "The question" },
-  { key: "method", short: "Method", title: "Data and method" },
-  { key: "central", short: "Central case", title: "The central case" },
-  { key: "comparisons", short: "Who and how", title: "Who loses the job, and how" },
-  { key: "sensitivity", short: "What moves it", title: "What moves the cost, and policy" },
+export const parts: { key: PartKey; short: string; title: string; icon: Icon; agenda: string }[] = [
+  { key: "question", short: "Question", title: "The question", icon: IconTarget, agenda: "Exposed jobs, and what the shock's size leaves open" },
+  { key: "method", short: "Method", title: "Data and method", icon: IconDatabase, agenda: "Exposure, Microcosm data, the shock, the microsimulation" },
+  { key: "central", short: "Central case", title: "The central case", icon: IconReceiptTax, agenda: "Cost, poverty and inequality; who absorbs the loss" },
+  { key: "comparisons", short: "Who and how", title: "Who loses the job, and how", icon: IconArrowsSplit, agenda: "Five displacement rules; job loss vs wage cuts" },
+  { key: "sensitivity", short: "What moves it", title: "What moves the cost, and policy", icon: IconScale, agenda: "Break-evens, indices, the closed account, three reforms" },
 ];
 
 export const sources = {
+  linkedin: {
+    label: "linkedin.com/in/vahidahmadi",
+    href: "https://www.linkedin.com/in/vahidahmadi/",
+  },
   ssrn: {
     label: "Paper on SSRN: abstract 7174479",
     href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7174479",
@@ -366,7 +369,46 @@ export const limits: Point[] = [
   { icon: IconUsersGroup, lead: "Nine occupation groups only" },
   { icon: IconHourglass, lead: "One-year stock", text: "No re-employment" },
   { icon: IconSchool, lead: "Reduced youth hiring outside the frame" },
-  { icon: IconRoute, lead: "Next", text: "Calibrate spells and re-employment pay; model take-up and JSA" },
+];
+
+// Section 5 (discussion): the limits that point to further work.
+export const futureWork: { icon: Icon; title: string; now: string; next: string }[] = [
+  {
+    icon: IconUsersGroup,
+    title: "Within-group incidence",
+    now: "Exposure varies across nine groups only",
+    next: "UK-native index (Henseke et al. 2025), detailed occupations from the LFS",
+  },
+  {
+    icon: IconHourglass,
+    title: "Spells and re-employment",
+    now: "Out of work all year, no re-employment",
+    next: "Calibrate to UK displacement evidence (Upward and Wright 2019)",
+  },
+  {
+    icon: IconLifebuoy,
+    title: "The benefit response",
+    now: "No new-style JSA; drawn UC take-up",
+    next: "JSA, take-up, council tax reduction, benefit-cap grace period",
+  },
+  {
+    icon: IconSchool,
+    title: "Hiring and retraining",
+    now: "Reduced youth hiring outside the frame",
+    next: "Entry margin (Brynjolfsson et al. 2026); retraining (Hyman et al. 2025)",
+  },
+  {
+    icon: IconCoins,
+    title: "Wider capital channel",
+    now: "Interest and dividends only",
+    next: "Rent and pension returns as well",
+  },
+  {
+    icon: IconBriefcase,
+    title: "Self-employed",
+    now: "Outside the labour shocks",
+    next: "Bring them into the displacement and wage shocks",
+  },
 ];
 
 // Appendix: OBR benchmark (Section 4.1 and Appendix), 20 draws.

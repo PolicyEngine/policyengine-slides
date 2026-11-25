@@ -3,8 +3,6 @@ import katex from "katex";
 import {
   IconArrowRight,
   IconArrowsSplit,
-  IconBrandGithub,
-  IconFileText,
   IconInfoCircle,
   IconMail,
   IconUserMinus,
@@ -40,11 +38,10 @@ import {
   exposureBuild,
   exposureNotes,
   exposureWhy,
+  futureWork,
   imputationLegend,
   imputationPoints,
   imputationTex,
-  inBrief,
-  inBriefChips,
   incidenceChips,
   incidenceRows,
   indexPoints,
@@ -175,7 +172,7 @@ function Points({ items, cols = 1, head }: { items: Point[]; cols?: number; head
 /** Small grey chips in place of footnote paragraphs. */
 function Chips({ items }: { items: Chip[] }) {
   return (
-    <div className={fps.chips}>
+    <div className={`${fps.chips} ${fps.chipsNote}`}>
       {items.map((item) => (
         <span key={item.text} className={fps.chip}>
           <item.icon stroke={1.9} aria-hidden="true" />
@@ -244,45 +241,69 @@ export function TitleSlide() {
         <p className="text-center text-2xl text-white opacity-80">The distributional and fiscal incidence in the UK</p>
         <div className="mt-2 flex flex-col items-center text-center">
           <div className="relative mb-3 h-28 w-28 overflow-hidden rounded-full border-2 border-white/40">
-            <BasePathImage src={speaker.photo} alt={speaker.name} fill className="object-cover" />
+            <BasePathImage src="/images/fps-berlin-2026/vahid-ahmadi.jpg" alt={speaker.name} fill className="object-cover" />
           </div>
           <p className="text-xl font-semibold text-white">{speaker.name}</p>
-          <p className="text-base font-light text-white/80">Research Associate, PolicyEngine</p>
+          <p className="text-base font-light text-white/80">Research Associate</p>
         </div>
         <div className="pt-2 text-center text-lg text-white opacity-80">
-          <p>2026 Franco-German Fiscal Policy Seminar: AI and the Future of Public Finances</p>
-          <p>Federal Ministry of Finance, Berlin, 1–2 December 2026</p>
+          <p>2026 Franco-German Fiscal Policy Seminar</p>
+          <p>AI and the Future of Public Finances</p>
         </div>
       </div>
     </Slide>
   );
 }
 
-export function InBriefSlide() {
+export function AgendaSlide() {
   return (
-    <Frame title="In brief" subtitle="An AI labour-market shock, household by household, UK tax-benefit rules 2027–28" scale={1.15}>
-      <div className={fps.kpis} style={columns(3)}>
-        {inBrief.map((item, index) => (
-          <div key={item.title} className={`${fps.kpi} ${styles.enter}`} style={enter(index)}>
-            <div className={fps.kpiHead}>
-              <span className={fps.kpiIcon}>
-                <item.icon stroke={1.75} aria-hidden="true" />
-              </span>
-              <p className={fps.kpiTitle} style={{ margin: 0 }}>
-                {item.title}
-              </p>
-            </div>
-            <p className={fps.kpiValue} style={{ marginTop: "calc(var(--u) * 1.2)" }}>
-              {item.value}
-            </p>
-            <p className={fps.kpiLabel}>{item.text}</p>
+    <Frame title="Agenda" subtitle="Five parts, then conclusions and future work" scale={1.15}>
+      <div className={fps.agenda}>
+        {parts.map((part, index) => (
+          <div key={part.key} className={`${fps.agendaRow} ${styles.enter}`} style={enter(index)}>
+            <span className={fps.agendaNum}>{index + 1}</span>
+            <span className={fps.kpiIcon}>
+              <part.icon stroke={1.75} aria-hidden="true" />
+            </span>
+            <span className={fps.agendaTitle}>{part.title}</span>
+            <span className={fps.agendaText}>{part.agenda}</span>
           </div>
         ))}
       </div>
-      <Chips items={inBriefChips} />
     </Frame>
   );
 }
+
+/** A divider slide that opens one of the five parts. */
+function SectionSlide({ section }: { section: PartKey }) {
+  const index = parts.findIndex((part) => part.key === section);
+  const part = parts[index];
+  const current = useSlideshowContextSafe()?.currentSlide;
+  return (
+    <Slide className={styles.deck}>
+      {current !== undefined && <span className={fps.pageNumber}>{current + 1}</span>}
+      <div className={styles.frame}>
+        <header className={styles.frameIn}>
+          <PartNav section={section} />
+        </header>
+        <div className={fps.section}>
+          <span className={fps.sectionIcon}>
+            <part.icon stroke={1.5} aria-hidden="true" />
+          </span>
+          <p className={fps.sectionNum}>Part {index + 1}</p>
+          <h1 className={fps.sectionTitle}>{part.title}</h1>
+          <p className={fps.sectionText}>{part.agenda}</p>
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
+export const SectionQuestionSlide = () => <SectionSlide section="question" />;
+export const SectionMethodSlide = () => <SectionSlide section="method" />;
+export const SectionCentralSlide = () => <SectionSlide section="central" />;
+export const SectionComparisonsSlide = () => <SectionSlide section="comparisons" />;
+export const SectionSensitivitySlide = () => <SectionSlide section="sensitivity" />;
 
 // ---------- 1. The question ----------
 
@@ -968,7 +989,34 @@ export function ConclusionsSlide() {
             </div>
           ))}
         </div>
-        <Points items={limits} head="Limits and next steps" />
+        <Points items={limits} head="Limits" />
+      </div>
+    </Frame>
+  );
+}
+
+export function FutureWorkSlide() {
+  return (
+    <Frame title="Future work" subtitle="The limits of this paper, and what would lift each one" scale={1.05}>
+      <div className={fps.futureGrid}>
+        {futureWork.map((item, index) => (
+          <div key={item.title} className={`${fps.futureCard} ${styles.enter}`} style={enter(index)}>
+            <div className={fps.kpiHead}>
+              <span className={fps.kpiIcon}>
+                <item.icon stroke={1.75} aria-hidden="true" />
+              </span>
+              <h2>{item.title}</h2>
+            </div>
+            <p className={fps.futureRow}>
+              <span className={fps.futureTag}>Now</span>
+              {item.now}
+            </p>
+            <p className={fps.futureRow}>
+              <span className={`${fps.futureTag} ${fps.futureTagNext}`}>Next</span>
+              {item.next}
+            </p>
+          </div>
+        ))}
       </div>
     </Frame>
   );
@@ -976,44 +1024,50 @@ export function ConclusionsSlide() {
 
 const contacts: { label: string; url: string; Icon: Icon }[] = [
   { label: "vahid@policyengine.org", url: "mailto:vahid@policyengine.org", Icon: IconMail },
-  { label: sources.post.label, url: sources.post.href, Icon: IconWorld },
-  { label: sources.paper.label, url: sources.paper.href, Icon: IconBrandGithub },
-  { label: sources.ssrn.label, url: sources.ssrn.href, Icon: IconFileText },
+  { label: "policyengine.org", url: "https://www.policyengine.org", Icon: IconWorld },
+];
+
+const qrCodes: { src: string; url: string; caption: string; alt: string }[] = [
+  { src: "/images/fps-berlin-2026/ssrn-qr.svg", url: sources.ssrn.href, caption: "Read the paper on SSRN", alt: "QR code linking to the paper on SSRN" },
+  { src: "/images/fps-berlin-2026/linkedin-qr.svg", url: sources.linkedin.href, caption: "Connect with me on LinkedIn", alt: "QR code linking to Vahid Ahmadi's LinkedIn profile" },
 ];
 
 export function ClosingSlide() {
   return (
     <Slide isEnd className={styles.deck}>
-      <h1 className={`${styles.closingTitle} font-display font-bold text-center`} style={{ marginTop: "calc(var(--u0) * 5)" }}>
+      <h1 className={`${styles.closingTitle} font-display font-bold text-center`} style={{ marginTop: "calc(var(--u0) * 4)" }}>
         Thank you
       </h1>
       <p className={`${styles.closingSubtitle} text-center text-white/85`}>Who bears the AI shock?</p>
+      <div className={`${styles.closingContacts} grid grid-cols-2 self-center`} style={{ marginTop: "calc(var(--u0) * 2.5)", width: "calc(var(--u0) * 56)" }}>
+        {contacts.map(({ label, url, Icon: ContactIcon }) => (
+          <a
+            key={label}
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            className="flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
+          >
+            <Badge icon={ContactIcon} size="small" />
+            <span className="text-lg font-medium">{label}</span>
+          </a>
+        ))}
+      </div>
       <div className={fps.qrRow}>
-        <div className={`${styles.closingContacts} grid grid-cols-1`} style={{ marginTop: 0, width: "calc(var(--u0) * 42)" }}>
-          {contacts.map(({ label, url, Icon: ContactIcon }) => (
-            <a
-              key={label}
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              onClick={(event) => event.stopPropagation()}
-              className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
-            >
-              <Badge icon={ContactIcon} size="small" />
-              <span className="text-lg font-medium">{label}</span>
-            </a>
-          ))}
-        </div>
-        <a
-          className={fps.qrBox}
-          href={sources.ssrn.href}
-          target="_blank"
-          rel="noreferrer"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <BasePathImage src="/images/fps-berlin-2026/ssrn-qr.svg" alt="QR code linking to the paper on SSRN" width={370} height={370} />
-          <p>Scan for the paper on SSRN</p>
-        </a>
+        {qrCodes.map((qr) => (
+          <a
+            key={qr.src}
+            className={fps.qrBox}
+            href={qr.url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <BasePathImage src={qr.src} alt={qr.alt} width={370} height={370} />
+            <p>{qr.caption}</p>
+          </a>
+        ))}
       </div>
     </Slide>
   );

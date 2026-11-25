@@ -108,7 +108,7 @@
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  gap: calc(var(--u) * 1.6);
+  gap: calc(var(--u) * 2.8);
   padding: calc(var(--u) * 1.4) 0 calc(var(--u) * 1.2);
 }
 
