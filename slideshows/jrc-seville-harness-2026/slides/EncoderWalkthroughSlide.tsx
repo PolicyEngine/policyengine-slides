@@ -254,9 +254,10 @@ export default function EncoderWalkthroughSlide({ buildStep }: { buildStep?: num
 
   return (
     <Frame title={walkthrough.title}>
-      {/* The card reaches 2vh into the space above (the header's margin) and below (the slide's bottom padding), so
-          it shows larger; a bare capture has neither, so there it keeps to its box. */}
-      <div className={`flex flex-col ${bare ? 'h-full' : '-my-[2vh] h-[calc(100%+4vh)]'}`}>
+      {/* The card reaches 2vh, at most 1.5rem, into the space above (the header's margin) and below (the slide's
+          bottom padding), so it shows larger. The cap keeps it clear of the fixed-height footer on tall exports. A
+          bare capture has neither space, so there it keeps to its box. */}
+      <div className={`flex flex-col ${bare ? 'h-full' : '-my-[min(2vh,1.5rem)] h-[calc(100%+min(4vh,3rem))]'}`}>
         <div className="flex min-h-0 flex-1 items-center justify-center" style={{ containerType: 'size' }}>
           {/* The card's fill is axiom.org's stage colour, so a few pixels the frame leaves at an edge do not show. */}
           <div
