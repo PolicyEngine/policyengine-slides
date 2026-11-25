@@ -6,7 +6,7 @@ forward. The others (3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17,
 18, 20, 21 and 25) are reference, for questions and to leave behind.
 Slide 9's point (one calibrated year; take-up drawn at build) is made from
 the "Known gap" line on slide 14. Rough checkpoints: slide 4 by minute 1,
-slide 12 by minute 3, slide 19 by minute 9, slide 24 by minute 13. If time
+slide 12 by minute 3, slide 19 by minute 9, slide 24 by minute 12. If time
 is short, take 19 in a sentence; keep 13, 14, 23 and 24.
 
 Where the deck describes the IPPR tax-benefit model or the Resolution
@@ -301,7 +301,11 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   continuing awards only and cannot rise. No switch in the web app. Partly.
   (`claims_all_entitled_benefits.py`; Microcosm `uk/take_up_contract.json`.)
 - **A7. Pensions costings** (What a ratchet). The State Pension is modelled;
-  its rate follows a triple-lock index that a reform can change. Done.
+  its rate follows a triple-lock index that a reform can change. RF's
+  reform is a smoothed earnings link (prices when they exceed earnings,
+  then prices until the pension is back to its share of earnings), which
+  in PolicyEngine is an index path written by hand, not a built-in option.
+  Partly.
   PolicyEngine's post "The adjusted Triple Lock" (28 October 2026) is
   related work.
 - **A8. Counterfactual histories** (Counting the cost). Growth rates are
@@ -525,9 +529,8 @@ work centres on poverty levels, so have these ready:
   starting weights the AHC figure was 4.02m, so calibration removes about
   0.6m. No all-person comparison on this build is public yet.
 
-Say it plainly: poverty levels on the calibrated file run below HBAI's, we
-are working on it, and growth rates and policy differences are less
-affected than levels (which is also why RF anchors to outturn).
+Say it plainly: poverty levels on the calibrated file run below HBAI's, and
+we are working on it.
 
 ### 19. Autumn Budget 2026: PolicyEngine's costings beside the OBR's (spoken, 1.5 minutes)
 
@@ -629,6 +632,10 @@ Microcosm under its own UK Data Service terms, and which steps on slide 14
 would need building (or RF's own file is run through PolicyEngine's rules,
 the last row of slide 14). Smaller pieces in Python today but not in the
 web app: vigintiles, and entitlement runs for five benefits.
+
+Option C's "What it costs" row is there to be even-handed: a change of
+model breaks the continuity of RF's published series, and past figures
+would need reconciling to the new model.
 
 ### 23. A possible pilot: one published analysis, side by side (spoken with 22)
 

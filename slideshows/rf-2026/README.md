@@ -122,7 +122,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   are static (no count-up), to match the in-sample tag.
 - One Microcosm build for every data figure; results from other builds
   always carry a run label.
-- Behaviour has one wording everywhere (slides 6, 14, 17, 19, 20 and the
+- Behaviour has one wording everywhere (slides 6, 14, 17, 19 and the
   notes): no labour-supply response by default; two responses are on
   (capital gains realisations, employer NI passed through to pay).
 - Status tags: Done, Partly, Not yet; muted Preview (the Claude connector),

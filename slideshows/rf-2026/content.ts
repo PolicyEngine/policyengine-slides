@@ -310,6 +310,44 @@ export const sources = {
   // CeMPA, University of Essex: microsimulation.ac.uk and its 2026 UKMOD
   // country report (CeMPA working paper 8/26, April 2026).
   ukmod: { label: "UKMOD, CeMPA", href: "https://www.microsimulation.ac.uk/" },
+  // UKMOD Country Report 2023-2030 (van de Ven and Popova, CeMPA working
+  // paper 8/26, April 2026). Printed page = PDF page minus 1.
+  ukmodReport: {
+    label: "UKMOD Country Report 2023–2030, CeMPA WP 8/26",
+    href: "https://www.iser.essex.ac.uk/wp-content/uploads/files/working-papers/cempa/cempa8-26.pdf",
+  },
+  // CeMPA's release B2026.03, 22 June 2026: input data from the 2024 wave
+  // of the FRS (UK_2024_a1 single year, UK_2024_b1 three-year pooled,
+  // UK_2024_d1).
+  ukmodB202603: {
+    label: "UKMOD release B2026.03, 22 June 2026",
+    href: "https://www.microsimulation.ac.uk/about/news/2026/06/22/ukmod-b2026-03/",
+  },
+  // UKMOD Explore: the UK, its four nations and London.
+  ukmodExplore: { label: "UKMOD Explore", href: "https://www.microsimulation.ac.uk/ukmod/ukmod-explore/" },
+  // Richiardi, Collado and Popova, CeMPA working paper 7/21 (July 2021),
+  // IJM page 2: the IPPR model "is licensed to users for a hefty fee";
+  // structural reforms are commissioned from PERU; with UKMOD it "completes
+  // the list of publicly available tax-benefit models for the UK". Users
+  // named for UKMOD and for the IPPR model.
+  cempa721: {
+    label: "CeMPA working paper 7/21, July 2021",
+    href: "https://www.iser.essex.ac.uk/wp-content/uploads/files/working-papers/cempa/cempa7-21.pdf",
+  },
+  // IPPR, 10 June 2024: a 2p cut to National Insurance, average gains for
+  // working-age households in all 12 regions and nations ("Source: IPPR Tax
+  // and Benefit Model" on the chart beside the list).
+  ipprNics: {
+    label: "IPPR, 10 June 2024: the 2p National Insurance cut",
+    href: "https://www.ippr.org/media-office/national-insurance-cut-would-disproportionately-benefit-highest-earners-and-londoners-finds-ippr",
+  },
+  // Fraser of Allander Institute, Meeting Scotland's child poverty targets
+  // (March 2025); its technical appendix: "We use the IPPR tax-benefit
+  // microsimulation model (v2.7.8)".
+  faiChildPoverty: {
+    label: "Fraser of Allander Institute, March 2025",
+    href: "https://fraserofallander.org/publications/meeting-scotlands-child-poverty-targets-modelling-and-policy-packages",
+  },
 } satisfies Record<string, Source>;
 
 export type Tone = "built" | "muted" | "caution";
