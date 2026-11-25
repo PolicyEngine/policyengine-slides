@@ -5,7 +5,8 @@ Finances", Federal Ministry of Finance, Berlin, 1–2 December 2026. 25
 minutes of presentation, then 20 minutes of open discussion.
 
 The ministry runs the deck from its own machine, so it is sent as a PDF
-by 27 November. No slide has build steps or live embeds.
+by 27 November. No slide has build steps. Slide 28 embeds the live
+dashboard in the browser deck; the PDF shows a screenshot and a QR code.
 
 Every number is the merged paper's (PolicyEngine/uk-ai-study main at
 c42be9f, tax year 2027–28). The unmerged revision on PR #26 (calibrated
@@ -90,21 +91,12 @@ employer NI, with no VAT response. Absolute poverty uses the official
 fixed line; 12.0 per cent before housing costs at baseline. The Gini uses
 equivalised HBAI disposable income with negatives set to zero.
 
-**9. Exposure.** Felten et al.'s AIOE times a complementarity factor from
-Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
-DfE crosswalk, weighted by ASHE employment. I shift the score so the least
-exposed group is zero, my normalisation. θ enters only relative to its
-minimum and mean, so the rebuilt series' level offset does not matter.
-Exposure varies between nine groups only. If asked: for the four groups
-with a negative AIOE, a higher θ raises the score; the unadjusted AIOE
-gives £8.0bn against £8.2bn after the displaced-count adjustment (slide 24).
-
-**10. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
+**9. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
 imputations, and weights calibrated to 1,514 targets (98.7 per cent within
 10 per cent). 29 million employees in 2027–28; 99.7 per cent have an
 occupation group.
 
-**11. Imputation.** What the FRS lacks (wealth from the Wealth and Assets
+**10. Imputation.** What the FRS lacks (wealth from the Wealth and Assets
 Survey, spending from the Living Costs and Food Survey, and others) comes
 through chained quantile-regression forests: a classifier draws zero or
 not, then a draw at a seeded random quantile of the forest's
@@ -112,7 +104,7 @@ conditional distribution, each variable conditioning on those already
 imputed. Drawing from the distribution, not the mean, keeps the spread
 that tax and benefit rules respond to.
 
-**12. Calibration.** One weight per household, chosen to minimise capped
+**11. Calibration.** One weight per household, chosen to minimise capped
 relative errors against 1,514 official totals, each of 38 families weighted
 equally, with no weight above ten times its survey value. 98.7 per cent of
 targets end within 10 per cent; this is in-sample fit, not validation. If asked about raking or GREG: this minimises fit
@@ -122,7 +114,19 @@ price is uneven weights: an effective sample of about 7,200 households
 (5,810 for employees, slide 14). Method as in the Microcosm code at the time
 of the 7 November build that the paper used.
 
-**13. Scenario.** Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
+**12. Exposure.** After the data: what we do to it. Felten et al.'s AIOE times a complementarity factor from
+Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
+DfE crosswalk, weighted by ASHE employment. I shift the score so the least
+exposed group is zero, my normalisation. θ enters only relative to its
+minimum and mean, so the rebuilt series' level offset does not matter.
+Exposure varies between nine groups only. If asked: for the four groups
+with a negative AIOE, a higher θ raises the score; the unadjusted AIOE
+gives £8.0bn against £8.2bn after the displaced-count adjustment (slide 24).
+
+**13. The shock (scenario inputs).** The 2.6 per cent averages over all
+baseline employees; paid to survivors only, their mean uplift runs 2.56–2.74
+per cent by decile. The inputs come from Briggs and Kodnani (2023) via
+Doorley et al.'s Irish design. Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
 per cent survivor wage rise, interest and dividends up 39.8 per cent (the
 return on capital up 0.4 points from 1.005 per cent; read it as a 39.8 per
 cent uplift). Name what is left out. The newly displaced get UC only if
@@ -190,7 +194,9 @@ survivor wages grow by 5 per cent.
 **24. Indices.** £4bn to £8bn on one draw, adjusted for the displaced
 count; the three AIOE-type indices are indistinguishable. If asked why the
 adjusted C-AIOE (£8.2bn) differs from £7.3bn: it is one draw, within the
-±£1.7bn scatter.
+±£1.7bn scatter. If asked why the adjusted C-AIOE (£8.2bn) is above the 50-draw
+mean (£7.3bn): seed 0 sits above the fitted cost-count line, and the
+gap is inside the £1.7bn single-draw scatter. Seed 0 ranks 19th of 50 on cost.
 
 **25. Closure.** The capital uplift is not tied to the labour shock. If a
 share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
@@ -224,7 +230,9 @@ government, people and firms; and the token tax project (household
 incidence of a UK tax on AI tokens, in progress). Name them in one breath. (The whole-economy lens, live:) PolicyEngine's dashboard "AI and the
 UK economy: Beyond the forecast" (OG-UK with this household study). Leave
 it for the discussion; scroll it only if asked. The PDF shows its first
-screen only.
+screen only. Frame the dashboard first: a different model (OG-UK, no
+unemployment) asking a different question, so its pay-rate fall (−1.27%)
+and this paper's 7 per cent job loss are not two answers to one question.
 
 **29. Thank you.** Leave this up for the discussion. Two QR codes: the
 paper on SSRN (abstract 7174479) and my LinkedIn.

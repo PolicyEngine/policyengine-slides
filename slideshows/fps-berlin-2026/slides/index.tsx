@@ -69,6 +69,7 @@ import {
   type Point,
   type Stat,
 } from "../content";
+import DashboardEmbed from "./DashboardEmbed";
 import styles from "./deck.module.css";
 import fps from "./fps.module.css";
 
@@ -307,7 +308,7 @@ export function ExposureSlide() {
   return (
     <Frame
       section="question"
-      title="The jobs most exposed to AI carry much of the tax base"
+      title="Job loss concentrates in the most AI-exposed occupations"
       subtitle="AI exposure and job-loss rate by occupation group (SOC2020)"
       scale={1.05}
       fill
@@ -413,8 +414,8 @@ export function ScenarioSlide() {
   return (
     <Frame
       section="method"
-      title="The central case: 7% displaced, wages +2.6%, capital income +39.8%"
-      subtitle="Doorley et al. (2026): one investment-bank scenario of a decade of adoption, in one year"
+      title="The shock: 7% displaced, wages +2.6%, capital income +39.8%"
+      subtitle="Briggs and Kodnani (2023), via Doorley et al.'s (2026) Irish design: a decade of adoption, in one year"
       scale={0.98}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
@@ -488,7 +489,9 @@ export function PolicyEngineSlide() {
                   <span className={fps.wordmark}>{org.name}</span>
                 )}
               </span>
-              <p className={fps.logoCaption}>{org.caption}</p>
+              <p className={fps.logoCaption}>
+                {org.caption === "Built 10ds-microsim on it" ? "No 10's data science team built a microsimulation on it" : org.caption}
+              </p>
             </div>
           ))}
         </div>
@@ -547,7 +550,9 @@ export function ImputationSlide() {
       <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
         <div>
           <p className={fps.eqLabel}>For record i and variable v = 1, …, V, in a fixed order</p>
+          <p className={fps.eqTag}>Regime gate (zero or positive)</p>
           <Tex tex={imputationTex.gate} />
+          <p className={fps.eqTag}>Draw among non-zero donors</p>
           <Tex tex={imputationTex.draw} />
           <div className={fps.chips} style={{ marginTop: "calc(var(--u) * 1)" }}>
             {imputationLegend.map((item) => (
@@ -698,7 +703,7 @@ export function AbsorptionSlide() {
       section="central"
       title="The system absorbs 29% of the loss, almost all through lower taxes"
       subtitle="Job loss alone, OBR-sized: 1.67% of employees (20 draws)"
-      scale={1.02}
+      scale={0.94}
     >
       <Stats items={absorption} small />
       <Points items={absorptionVariants} cols={3} head="What limits the benefit response" />
@@ -771,8 +776,8 @@ export function MarginSlide() {
           Exchequer cost, £bn a year
           <span>survivor-wage and capital channels on in both</span>
         </div>
-        <div className={fps.marginValue}>{margins.job.cost.toFixed(2)}</div>
-        <div className={`${fps.marginValue} ${fps.marginHigh}`}>{margins.wage.cost.toFixed(2)}</div>
+        <div className={fps.marginValue}>{margins.job.cost.toFixed(1)}</div>
+        <div className={`${fps.marginValue} ${fps.marginHigh}`}>{margins.wage.cost.toFixed(1)}</div>
         <div className={fps.marginLabel}>
           Rise in absolute poverty (BHC), pp
           <span>same draws</span>
@@ -937,11 +942,16 @@ export function DirectionsSlide() {
     <Frame title="Beyond this paper" subtitle="Other directions for the same tools" scale={1.05} fill>
       <div className={fps.directionsSplit}>
         <div className={fps.embed}>
-          <iframe src={growthDashboard.href} title={growthDashboard.title} loading="eager" />
+          <DashboardEmbed src={growthDashboard.href} title={growthDashboard.title} image="/images/fps-berlin-2026/dashboard.jpg" />
         </div>
-        <Points items={directionPoints} />
+        <div style={{ display: "grid", gap: "calc(var(--u) * 2)" }}>
+          <Points items={directionPoints} />
+          <div className={fps.qrInline}>
+            <BasePathImage src="/images/fps-berlin-2026/dashboard-qr.svg" alt="QR code linking to the dashboard" width={330} height={330} />
+            <p>{growthDashboard.title}: scan for the live dashboard</p>
+          </div>
+        </div>
       </div>
-      <Chips items={[{ icon: IconWorld, text: `Live: ${growthDashboard.title}` }]} />
     </Frame>
   );
 }

@@ -33,7 +33,7 @@ import {
 
 // A 25-minute paper presentation followed by 20 minutes of discussion. The
 // ministry runs the deck from its own machine, so it goes to them as a PDF
-// export: no slide has build steps; slide 28 embeds a live dashboard.
+// export: no slide has build steps; slide 28 embeds a live dashboard (a screenshot in the PDF).
 export const fpsBerlin2026Config: SlideshowConfig = {
   id: "fps-berlin-2026",
   title: "Who bears the AI shock?",
@@ -55,29 +55,30 @@ export const fpsBerlin2026Config: SlideshowConfig = {
     // 2. Data and method
     SectionMethodSlide,
     MethodSlide,
-    ExposureMethodSlide,
     DataSlide,
     ImputationSlide,
     CalibrationSlide,
+    ExposureMethodSlide,
     ScenarioSlide,
-        DrawsSlide,
+    DrawsSlide,
     // 3. The central case
     SectionCentralSlide,
     CentralSlide,
     TransitionSlide,
-      AbsorptionSlide,
-      // 4. Who loses the job, and how
+    AbsorptionSlide,
+    // 4. Who loses the job, and how
     SectionComparisonsSlide,
     IncidenceSlide,
-      MarginSlide,
+    MarginSlide,
     // 5. What moves the cost, and policy
     SectionSensitivitySlide,
     BreakEvenSlide,
-      IndexBackupSlide,
+    IndexBackupSlide,
     ClosureSlide,
     PolicySlide,
+    // Close
     ConclusionsSlide,
-      DirectionsSlide,
-      ClosingSlide,
+    DirectionsSlide,
+    ClosingSlide,
   ],
 };

@@ -96,34 +96,6 @@ export const sources = {
   },
 };
 
-// Abstract and Section 1.
-export const inBrief: { icon: Icon; title: string; value: string; text: string }[] = [
-  {
-    icon: IconUsers,
-    title: "Who loses the job",
-    value: "£1.9–11.3bn",
-    text: "Exchequer cost a year: 7% displaced (2.04m), four displacement rules",
-  },
-  {
-    icon: IconArrowsSplit,
-    title: "How the loss arrives",
-    value: "0.3 vs 2.4pp",
-    text: "Poverty rise: wage cuts vs job loss of the same size; wage cuts cost £12bn more",
-  },
-  {
-    icon: IconScale,
-    title: "What sets the sign",
-    value: "3.7%",
-    text: "Survivor wage rise that takes the £7.3bn cost to zero (2.6% assumed)",
-  },
-];
-
-export const inBriefChips: Chip[] = [
-  { icon: IconWorld, text: "Beyond the UK: extensive vs intensive margin (Dolls et al. 2012)" },
-  { icon: IconReceiptTax, text: "Labour-tax bases lean on AI-exposed jobs" },
-  { icon: IconAlertTriangle, text: "Scenario, not forecast: a decade of adoption in one year" },
-];
-
 // Table 1 (tab:jobloss): C-AIOE before the min-zero shift, calibrated
 // employment (m), prescribed quota rate (%).
 export const jobLoss: { group: string; exposure: string; employment: string; rate: number }[] = [
@@ -172,7 +144,7 @@ export const openQuestions: { icon: Icon; title: string; views: Point[] }[] = [
 export const methodFlow: { icon: Icon; title: string; text: string }[] = [
   { icon: IconChartBar, title: "AI exposure", text: "Felten AIOE × Pizzinelli complementarity (C-AIOE), nine SOC2020 groups" },
   { icon: IconDatabase, title: "Household microdata", text: "Microcosm: calibrated FRS 2024–25, 72,504 employee records" },
-  { icon: IconUserMinus, title: "Person-level shock", text: "Job loss, survivor wages, capital income; 50 random draws" },
+  { icon: IconUserMinus, title: "Person-level shock", text: "Job loss, survivor wages, capital income; random draws of who is displaced" },
   { icon: IconCalculator, title: "PolicyEngine UK", text: "Tax and benefit rules legislated or announced for 2027–28" },
 ];
 
@@ -185,7 +157,7 @@ export const methodOutcomes: Chip[] = [
 // Section 3.2 (Doorley et al. 2026 conventions).
 export const scenarioInputs: Stat[] = [
   { icon: IconUserMinus, value: "7%", label: "of employees lose their job for the full year" },
-  { icon: IconTrendingUp, value: "+2.6%", label: "average wage rise for those who keep their jobs" },
+  { icon: IconTrendingUp, value: "+2.6%", label: "average wage rise, over all baseline employees; paid to those who keep their jobs" },
   { icon: IconCoins, value: "+39.8%", label: "interest and dividends: return on capital 1.005% → 1.405%" },
 ];
 
@@ -194,7 +166,7 @@ export const scenarioChips: Chip[] = [
   { icon: IconLifebuoy, text: "UC only for simulated claimants; no new JSA" },
   { icon: IconBriefcase, text: "Labour shocks: employees only" },
   { icon: IconDice5, text: "Displaced drawn by systematic sampling within groups" },
-  { icon: IconInfoCircle, text: "+0.4pp on a 4% base would be +10%" },
+  { icon: IconInfoCircle, text: "+0.4 points is +40% on the 1% base used here; on a 4% base it would be +10%" },
 ];
 
 export const scenarioCaveats: Point[] = [
@@ -208,14 +180,14 @@ export const scenarioCaveats: Point[] = [
 export const central: Stat[] = [
   { icon: IconUserMinus, value: "2.04m", label: "employees displaced (50-draw mean)" },
   { icon: IconReceiptTax, value: "£7.3bn", label: "a year net Exchequer cost (s.d. £1.9bn)" },
-  { icon: IconHome, value: "+2.40pp", label: "absolute poverty before housing costs (+0.82pp relative)" },
+  { icon: IconHome, value: "+2.40pp", label: "absolute poverty before housing costs (relative poverty +0.82pp)" },
   { icon: IconScale, value: "+1.76pp", label: "Gini, from a baseline of 30.3" },
 ];
 
 export const centralChips: Chip[] = [
-  { icon: IconAlertTriangle, text: "Poverty rise: upper bound (full-year spells)" },
+  { icon: IconAlertTriangle, text: "Poverty rise: an upper bound on spell length only" },
   { icon: IconLifebuoy, text: "Poverty +1.99pp with full UC take-up and JSA (20 draws)" },
-  { icon: IconInfoCircle, text: "Cost excludes corporation tax, VAT, £26.6bn public pay" },
+  { icon: IconInfoCircle, text: "Cost excludes corporation tax, VAT and the £26.6bn public pay bill saved" },
 ];
 
 // Section 4.1: each channel alone, 20 paired draws, £bn a year.
@@ -241,7 +213,7 @@ export const transitionPoints: Point[] = [
 // paragraph of Section 4.1.
 export const absorption: Stat[] = [
   { icon: IconScale, value: "29%", label: "of the market-income loss absorbed by income tax, employee NI and benefits" },
-  { icon: IconCoins, value: "3.0p", label: "of benefits per £1 of earnings lost; lower taxes do the rest" },
+  { icon: IconCoins, value: "3.0p", label: "of cash benefits per £1 lost (1.8p on the model's benefit total); lower taxes do the rest" },
   { icon: IconLifebuoy, value: "53%", label: "of entitled displaced benefit units claim UC" },
 ];
 
@@ -251,11 +223,12 @@ export const absorptionVariants: Point[] = [
   { icon: IconUsers, lead: "59% have another earner" },
   { icon: IconWallet, lead: "JSA is flat-rate", text: "£95.55 a week for 26 weeks; not paid to the displaced" },
   { icon: IconArrowsDiff, lead: "3.0p → 5.9p → 8.7p per £1", text: "With full UC take-up, then JSA as well" },
-  { icon: IconBuildingBank, lead: "OBR check: £10.2bn vs £9bn", text: "Receipts 9.7 vs 6; welfare 0.7 vs 3 (£bn, 20 draws)" },
 ];
 
 export const absorptionChips: Chip[] = [
-  { icon: IconWorld, text: "Dolls et al.: EU 47%, US 34%, UK 41.5% (16.3pp benefits)" },
+  { icon: IconBuildingBank, text: "OBR check: £10.2bn vs £9bn; receipts 9.7 vs 6, welfare 0.7 vs 3 (£bn, 20 draws)" },
+  { icon: IconLifebuoy, text: "Germany and France pay earnings-related unemployment insurance; R1 is the closest UK analogue (their systems not modelled)" },
+  { icon: IconWorld, text: "Dolls et al.: EU 47%, US 34% (2012); UK 41.5%, 16.3pp benefits (2010)" },
   { icon: IconInfoCircle, text: "Not comparable: Dolls assume full take-up, typical unemployed" },
 ];
 
@@ -339,7 +312,7 @@ export const closurePoints: Point[] = [
 
 // Table 8 (tab:policy), 50 draws, shocked-plus-reform minus shocked.
 export const policyRows: { reform: string; text: string; cost: string; bhc: string; perPoint: string }[] = [
-  { reform: "R1 Earnings replacement", text: "wage-insurance style: 50% of lost earnings, capped at £15,000 a year", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
+  { reform: "R1 Wage insurance", text: "50% of lost earnings, capped at £15,000 a year", cost: "26.9", bhc: "−1.89", perPoint: "14.3" },
   { reform: "R2 UC allowance +20%", text: "standard allowance", cost: "6.9", bhc: "−0.79", perPoint: "8.6" },
   { reform: "R3 Cap and taper", text: "no benefit cap, taper 55% to 45%", cost: "5.1", bhc: "−0.76", perPoint: "6.7" },
 ];
@@ -360,7 +333,7 @@ export const conclusions: { icon: Icon; title: string; text: string }[] = [
   },
   {
     icon: IconArrowsSplit,
-    title: "For this shock, the margin sets who bears it",
+    title: "For this shock, the margin changes how the loss is shared",
     text: "Wage cuts cost the Exchequer 55p vs 42p per £1; job loss raises poverty far more",
   },
   {
@@ -470,7 +443,7 @@ export const futureLines: Point[] = [
 ];
 
 export const directionPoints: Point[] = [
-  { icon: IconChartBar, lead: "The whole economy, over time", text: "OG-UK macro model beside this study (left, live)" },
+  { icon: IconChartBar, lead: "The whole economy, over time", text: "OG-UK macro model: no unemployment, so AI shows in pay rates; a different question" },
   { icon: IconNetwork, lead: "Firms and production networks", text: "Firm microsimulation, linked to households" },
   { icon: IconPlayerPause, lead: "If the US slows AI development", text: "Future effects on government, people and firms" },
   { icon: IconCpu, lead: "The token tax project", text: "Household incidence of a UK tax on AI tokens (in progress)" },
@@ -501,7 +474,7 @@ export const indexRows: { index: string; raw: string; adjusted: string; bhc: str
 
 export const indexPoints: Point[] = [
   { icon: IconCash, lead: "+£11.6bn per extra million displaced", text: "Adjustment removes each draw's luck in its count" },
-  { icon: IconEqual, lead: "Top three indistinguishable", text: "C-AIOE, Felten, DfE AIOE, given ±£1.7bn" },
+  { icon: IconEqual, lead: "Felten and C-AIOE: £8.0bn vs £8.2bn", text: "Within single-draw scatter (s.d. £1.7bn around the fitted line)" },
   { icon: IconScale, lead: "Gini rises under every index" },
   { icon: IconChartBar, lead: "Top decile transitions exceed bottom", text: "Under every index" },
 ];
@@ -516,13 +489,14 @@ export const exposureBuild: { icon: Icon; title: string; text: string }[] = [
 ];
 
 export const exposureNotes: Point[] = [
+  { icon: IconArrowsDiff, lead: "Negative AIOE: higher θ raises the score", text: "The factor pulls the four negative scores towards zero" },
   { icon: IconTarget, lead: "Least-exposed group set to zero", text: "Elementary: my normalisation, no displacement" },
   { icon: IconUsersGroup, lead: "Varies between groups only", text: "Not within them" },
 ];
 
 // Section 3.4 (Microcosm) and 3.5 (draws).
 export const dataFacts: Stat[] = [
-  { icon: IconHome, value: "78,181", label: "households (182,418 people)" },
+  { icon: IconHome, value: "78,181", label: "household records (182,418 people), incl. copies with tax-record incomes" },
   { icon: IconBriefcase, value: "29.0m", label: "employees in 2027–28 (69.4m people)" },
   { icon: IconTarget, value: "1,514", label: "calibration targets; 98.7% within 10%" },
   { icon: IconCircleCheck, value: "99.7%", label: "of weighted employees have an occupation" },
@@ -540,7 +514,7 @@ export const shockSteps: { icon: Icon; title: string; tex: string; text: string 
     icon: IconTrendingUp,
     title: "Survivor wages",
     tex: "\\Delta w_l = g\\times\\dfrac{\\theta_l}{\\bar\\theta}\\times w_l",
-    text: "More complementary groups gain more; g = 2.6%",
+    text: "More complementary groups gain more; g\u00a0=\u00a02.6%",
   },
   {
     icon: IconCoins,
@@ -633,7 +607,7 @@ export const imputationLegend: { tex: string; text: string }[] = [
   { tex: String.raw`x`, text: "predictors in both surveys" },
   { tex: String.raw`y_{<v}`, text: "variables already imputed" },
   { tex: String.raw`\hat\pi`, text: "classifier's P(non-zero)" },
-  { tex: String.raw`\hat Q`, text: "forest's conditional quantile" },
+  { tex: String.raw`\hat Q`, text: "forest fitted on non-zero donors" },
   { tex: String.raw`u`, text: "seeded uniform draw" },
 ];
 
@@ -641,7 +615,7 @@ export const imputationPoints: Point[] = [
   { icon: IconDatabase, lead: "Donor surveys", text: "Wealth: WAS round 8; spending: LCFS 2024–25" },
   { icon: IconAdjustments, lead: "Predictors", text: "Incomes by source, household type, tenure, region" },
   { icon: IconLink, lead: "Chained", text: "Each draw conditions on those before" },
-  { icon: IconFilter, lead: "Gated", text: "A classifier draws zero or not: zeros stay exact" },
+  { icon: IconFilter, lead: "Gated", text: "Signed variables: a three-way sign gate, a forest per sign" },
   { icon: IconRepeat, lead: "Weighted and seeded", text: "Donors resampled by survey weight" },
   { icon: IconBriefcase, lead: "Occupation observed in the FRS", text: "Imputed only for the tax-record copies" },
 ];
