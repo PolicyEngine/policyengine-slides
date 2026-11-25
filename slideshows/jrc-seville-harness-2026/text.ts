@@ -123,7 +123,7 @@ const walkthroughSteps: WalkthroughCaption[] = [
     n: 6,
     title: 'The rules run as one graph.',
     about:
-      'This graph shows selected dependencies for an eligible one-person test case in January 2026. Section 2017(a) takes the household’s net income as 7 U.S.C. § 2014(d) and (e) define it. The monthly allotment is the greater of $182 and the $24 minimum.',
+      'This graph shows selected dependencies for an eligible one-person test case in January 2026. Section 2017(a) takes the household’s net income as 7 U.S.C. § 2014(d) and (e) define it: $386.50 here. The household contributes 30 percent of that, $115.95. The household’s maximum allotment is $298, from USDA’s table for fiscal year 2026 in the 48 states and DC, so the allotment before the minimum is $298 less $115.95, rounded down to $182. The minimum allotment, for households of one or two, is 8 percent of the one-person thrifty food plan cost of $298, rounded to $24. The regular monthly allotment is the greater of $182 and $24: $182.',
     figure: 'graph',
   },
   {
@@ -132,12 +132,13 @@ const walkthroughSteps: WalkthroughCaption[] = [
     // The title describes axiom.org's drawing, a map of bodies of law. The drawing shows no manifest; `about` adds it.
     title: 'Map of legal sources with 7 U.S.C. § 2017(a) highlighted.',
     about:
-      'This map shows where the provision sits in the corpus. When the encoder applies an AI-drafted rule, it publishes a signed manifest that names the source citation and model.',
+      'This map shows where the provision sits in the corpus. When the encoder applies an AI-drafted rule, it leaves a signed manifest naming the source citation and the model.',
   },
   {
     n: 8,
     title: 'Different tools could use the same rules.',
-    about: 'Axiom publishes the rules as open, versioned code. AI, government, navigation and research tools are potential uses of the same rules.',
+    about:
+      'Axiom publishes the rules as open, versioned code, and the rules carry source citations and effective dates. Four kinds of tool are potential uses of the same rules: AI tools, such as the chatbots and assistants residents and staff already ask; government tools, such as eligibility systems, caseworker guidance and training, and tests of policy changes before they land; navigation tools, such as community screeners and navigators that say what to apply for; and research tools, such as microsimulation and policy analysis that show how a change reaches households and budgets.',
     figure: 'uses',
   },
 ];
@@ -173,7 +174,8 @@ export const walkthrough = {
         inputs: [
           { kind: 'Import', label: ['Net income under', '7 U.S.C. § 2014(d) and (e)'], value: '$386.50' },
           { kind: 'Parameter', label: ['Household contribution rate'], value: '0.30' },
-          { kind: 'Import', label: ['Maximum allotment, USDA FY 2026,', '48 states and DC'], value: '$298 · 1 person' },
+          { kind: 'Import', label: ['Household maximum allotment', 'USDA FY 2026, 48 states and DC'], value: '$298 · 1 person' },
+          { kind: 'Import', label: ['One-person thrifty food plan cost', 'USDA FY 2026, 48 states and DC'], value: '$298' },
           { kind: 'Parameter', label: ['Household size limit', 'for the minimum'], value: '2' },
           { kind: 'Parameter', label: ['Minimum allotment rate'], value: '0.08' },
         ],
@@ -236,12 +238,12 @@ export const ladder = {
 export const surveys = {
   title: 'Household surveys can undercount income and benefit receipt',
   rows: [
-    { label: 'US SNAP benefit dollars', sub: '2025', share: 45 },
-    { label: 'US pension and retirement income', sub: '2017', share: 56 },
-    { label: 'GB Universal Credit benefit units', sub: '2023–24', share: 67 },
+    { label: 'US SNAP benefit dollars', sub: 'USDA benefit totals, 2025', share: 45 },
+    { label: 'US pension and retirement income', sub: 'Linked tax records, 2017', share: 56 },
+    { label: 'GB Universal Credit benefit units', sub: 'DWP records, 2023–24', share: 67 },
     // Eurostat's 53% is a mean of country ratios, not an EU total, so the row says "Country average".
     // The label names the survey (EU-SILC), since the average covers EU and EFTA countries except Norway.
-    { label: 'EU-SILC self-employment income', sub: 'Country average, 2015', share: 53 },
+    { label: 'EU-SILC self-employment income', sub: 'National accounts, country average, 2015', share: 53 },
   ],
   axis: 'Survey estimate as a share of its comparison benchmark',
   line: 'Benchmark',

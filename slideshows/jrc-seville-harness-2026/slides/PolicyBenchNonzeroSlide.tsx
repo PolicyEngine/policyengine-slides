@@ -14,7 +14,6 @@ import { pbNonzero } from '../text';
  * gave the models a tool that runs PolicyEngine, which also computes the reference answers) and a link to the pilot's
  * note. The lead's first sentence, the overall scores and the footnotes in text.pbNonzero are not rendered.
  */
-export const POLICYBENCH_BUILDS = 2;
 
 const W = 1400;
 const LEFT = 300;
@@ -122,7 +121,12 @@ export default function PolicyBenchNonzeroSlide({ buildStep }: { buildStep?: num
           <span className="block">{pbNonzero.lead[1]}</span>
           <span className="block">
             Source:{' '}
-            <a href={pbNonzero.source.href} className="underline" tabIndex={withTool ? undefined : -1}>
+            {/* pointer-events-auto keeps a click on the link from also advancing the deck; hidden, the link takes none. */}
+            <a
+              href={pbNonzero.source.href}
+              className={`underline ${withTool ? 'pointer-events-auto' : 'pointer-events-none'}`}
+              tabIndex={withTool ? undefined : -1}
+            >
               {pbNonzero.source.label}
             </a>
           </span>

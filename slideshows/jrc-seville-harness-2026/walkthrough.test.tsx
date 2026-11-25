@@ -61,15 +61,24 @@ describe('the rule graph figure', () => {
   });
 
   it('carries values that follow from one another', () => {
-    const [net, rate, max, , minimumRate] = graph.inputs.map((input) => dollars(input.value.split('·')[0]));
+    const [net, rate, max, onePersonCost, sizeLimit, minimumRate] = graph.inputs.map((input) => dollars(input.value.split('·')[0]));
     expect(dollars(graph.net.value)).toBe(net);
     // The household contributes 30 percent of its net income.
     expect(dollars(graph.contribution.value)).toBeCloseTo(net * rate, 2);
     // The allotment before the minimum rounds down to a whole dollar.
     expect(dollars(graph.before.value)).toBe(Math.floor(max - dollars(graph.contribution.value)));
-    // The minimum allotment is 8 percent of the one-person maximum, to the nearest dollar.
-    expect(dollars(graph.minimum.value)).toBe(Math.round(max * minimumRate));
+    // The minimum allotment is 8 percent of the one-person thrifty food plan cost, to the nearest dollar; it reaches
+    // households of one or two. That cost is its own input: it equals the household's maximum only for one person.
+    expect(sizeLimit).toBe(2);
+    expect(dollars(graph.minimum.value)).toBe(Math.floor(onePersonCost * minimumRate + 0.5));
     expect(dollars(graph.output.value)).toBe(Math.max(dollars(graph.before.value), dollars(graph.minimum.value)));
+  });
+
+  it('reads the household maximum and the one-person cost as separate inputs', () => {
+    const labels = graph.inputs.map((input) => input.label[0]);
+    expect(labels).toContain('Household maximum allotment');
+    expect(labels).toContain('One-person thrifty food plan cost');
+    expect(graph.inputs.filter((input) => input.label[1] === 'USDA FY 2026, 48 states and DC')).toHaveLength(2);
   });
 
   it('names the rule that picks the allotment', () => {

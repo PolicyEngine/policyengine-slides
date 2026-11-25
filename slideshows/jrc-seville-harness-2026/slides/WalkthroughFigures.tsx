@@ -10,7 +10,7 @@ export type FigureId = keyof typeof walkthrough.figures.byId;
 const W = 1300;
 const H = 604;
 
-const LINE = { stroke: 'var(--pe-amber-dark)' };
+const LINE = { stroke: 'var(--color-pe-700)' };
 const VALUE = { fill: 'var(--pe-teal-dark)' };
 
 type Box = { x: number; y: number; w: number; h: number };
@@ -22,7 +22,7 @@ function Defs() {
         <feDropShadow dx="0" dy="3" stdDeviation="5" floodOpacity="0.1" />
       </filter>
       <marker id="wf-arrow" viewBox="0 0 8 8" refX="7.2" refY="4" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-        <path d="M0.5 0.8 L7.2 4 L0.5 7.2 z" style={{ fill: 'var(--pe-amber-dark)' }} />
+        <path d="M0.5 0.8 L7.2 4 L0.5 7.2 z" style={{ fill: 'var(--color-pe-700)' }} />
       </marker>
     </defs>
   );
@@ -48,7 +48,7 @@ function Card({ x, y, w, h, dashed, children }: Box & { dashed?: boolean; childr
 
 function Kicker({ x, y, children, anchor }: { x: number; y: number; children: string; anchor?: 'start' | 'end' }) {
   return (
-    <text x={x} y={y} textAnchor={anchor} className="fill-gray-500 font-mono" fontSize={12.5} letterSpacing="0.14em">
+    <text x={x} y={y} textAnchor={anchor} className="fill-gray-700 font-mono" fontSize={12.5} letterSpacing="0.14em">
       {children.toUpperCase()}
     </text>
   );
@@ -94,7 +94,7 @@ function curve(x1: number, y1: number, x2: number, y2: number) {
 
 function Credit() {
   return (
-    <text x={W - 26} y={H - 18} textAnchor="end" fontSize={12.5} className="fill-gray-500">
+    <text x={W - 26} y={H - 18} textAnchor="end" fontSize={12.5} className="fill-gray-700">
       {walkthrough.figures.credit}
     </text>
   );
@@ -150,18 +150,22 @@ function GatesFigure() {
 function GraphNode({ box, kicker, label, value }: { box: Box; kicker: string; label: readonly string[]; value: string }) {
   return (
     <Card {...box}>
-      <Kicker x={box.x + 16} y={box.y + 21}>
+      <Kicker x={box.x + 16} y={box.y + 19}>
         {kicker}
       </Kicker>
-      <Lines x={box.x + 16} y={box.y + 41} lines={label} size={15} gap={19} className="fill-gray-900" />
-      <text x={box.x + 16} y={box.y + box.h - 11} fontSize={14} className="font-mono font-semibold" style={VALUE}>
+      <Lines x={box.x + 16} y={box.y + 38} lines={label} size={15} gap={18} className="fill-gray-900" />
+      <text x={box.x + 16} y={box.y + box.h - 10} fontSize={14} className="font-mono font-semibold" style={VALUE}>
         {value}
       </text>
     </Card>
   );
 }
 
-/** Step 6: selected dependencies of one test case, with the two lines into the allotment drawn apart. */
+/**
+ * Step 6: selected dependencies of one test case. The allotment before the minimum reads the household's maximum
+ * allotment; the minimum reads the one-person thrifty food plan cost. The two are separate inputs that share a value in
+ * a one-person case. The lines from each into the regular allotment are drawn apart.
+ */
 function GraphFigure() {
   const f = walkthrough.figures.byId.graph;
   const aX = 36;
@@ -169,34 +173,37 @@ function GraphFigure() {
   const bX = 392;
   const cX = 704;
   const w = 262;
+  const h = 64;
   const outX = 1016;
   const outW = 250;
   // Inputs, top to bottom; a two-line label takes a taller card.
-  const inputs = f.inputs.map((node) => ({ ...node, h: node.label.length > 1 ? 88 : 68 }));
-  const tops = inputs.map((_, i) => 84 + inputs.slice(0, i).reduce((sum, node) => sum + node.h + 16, 0));
+  const inputs = f.inputs.map((node) => ({ ...node, h: node.label.length > 1 ? 84 : 62 }));
+  const tops = inputs.map((_, i) => 72 + inputs.slice(0, i).reduce((sum, node) => sum + node.h + 8, 0));
   const a = inputs.map((node, i) => ({ ...node, x: aX, y: tops[i], w: aW, cy: tops[i] + node.h / 2 }));
-  const [netIn, rate, max, size, minRate] = a;
-  const net = { x: bX, y: netIn.cy - 34, w, h: 68, cy: netIn.cy };
-  const minimum = { x: bX, y: (size.cy + minRate.cy) / 2 - 34, w, h: 68, cy: (size.cy + minRate.cy) / 2 };
-  const contribution = { x: cX, y: (netIn.cy + rate.cy) / 2 - 34, w, h: 68, cy: (netIn.cy + rate.cy) / 2 };
-  const before = { x: cX, y: max.cy - 34, w, h: 68, cy: max.cy };
+  const [netIn, rate, max, onePerson, size, minRate] = a;
+  const at = (x: number, cy: number) => ({ x, y: cy - h / 2, w, h, cy });
+  const net = at(bX, netIn.cy);
+  const minimum = at(bX, (onePerson.cy + size.cy + minRate.cy) / 3);
+  const contribution = at(cX, (netIn.cy + rate.cy) / 2);
+  const before = at(cX, max.cy);
   const out = { x: outX, y: before.cy - 62, w: outW, h: 196 };
   const outLow = out.y + out.h - 44;
+  const fromA = aX + aW + 4;
 
   return (
     <>
-      <Kicker x={aX} y={54}>
+      <Kicker x={aX} y={50}>
         {f.testCase}
       </Kicker>
 
-      <Edge d={`M${aX + aW + 4} ${netIn.cy} H${bX - 6}`} />
+      <Edge d={`M${fromA} ${netIn.cy} H${bX - 6}`} />
       <Edge d={curve(bX + w + 4, net.cy, cX - 6, contribution.cy - 12)} />
-      <Edge d={curve(aX + aW + 4, rate.cy, cX - 6, contribution.cy + 12)} />
-      <Edge d={`M${aX + aW + 4} ${max.cy} H${cX - 6}`} />
-      <Edge d={`M${cX + w / 2} ${contribution.y + 68 + 4} V${before.y - 6}`} />
-      <Edge d={curve(aX + aW + 4, max.cy + 14, bX - 6, minimum.cy - 16)} />
-      <Edge d={curve(aX + aW + 4, size.cy, bX - 6, minimum.cy)} />
-      <Edge d={curve(aX + aW + 4, minRate.cy, bX - 6, minimum.cy + 16)} />
+      <Edge d={curve(fromA, rate.cy, cX - 6, contribution.cy + 12)} />
+      <Edge d={`M${fromA} ${max.cy} H${cX - 6}`} />
+      <Edge d={`M${cX + w / 2} ${contribution.y + h + 4} V${before.y - 6}`} />
+      <Edge d={curve(fromA, onePerson.cy, bX - 6, minimum.cy - 16)} />
+      <Edge d={curve(fromA, size.cy, bX - 6, minimum.cy)} />
+      <Edge d={curve(fromA, minRate.cy, bX - 6, minimum.cy + 16)} />
       <Edge d={`M${cX + w + 4} ${before.cy} H${outX - 6}`} />
       <Edge d={curve(bX + w + 4, minimum.cy, outX - 6, outLow)} />
 

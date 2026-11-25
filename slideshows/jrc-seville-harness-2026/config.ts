@@ -11,7 +11,7 @@ import {
   ResponsesSection,
   RulesSection,
 } from './slides/SectionSlide';
-import EncoderWalkthroughSlide, { WALKTHROUGH_BUILDS } from './slides/EncoderWalkthroughSlide';
+import EncoderWalkthroughSlide from './slides/EncoderWalkthroughSlide';
 import LadderSlide from './slides/LadderSlide';
 import SurveysSlide from './slides/SurveysSlide';
 import TargetsSlide from './slides/TargetsSlide';
@@ -23,12 +23,13 @@ import MacroSlide from './slides/MacroSlide';
 import PredictSlide from './slides/PredictSlide';
 import ForecastSlide from './slides/ForecastSlide';
 import { ThesisBill, ThesisConditional, ThesisUnconditional } from './slides/ThesisSlides';
-import PolicyBenchNonzeroSlide, { POLICYBENCH_BUILDS } from './slides/PolicyBenchNonzeroSlide';
+import PolicyBenchNonzeroSlide from './slides/PolicyBenchNonzeroSlide';
 import NextSkillsSlide from './slides/NextSkillsSlide';
 import MillionsSlide from './slides/MillionsSlide';
 import AbundanceSlide from './slides/AbundanceSlide';
 import DeliberationSlide from './slides/DeliberationSlide';
 import EndSlide from './slides/EndSlide';
+import { POLICYBENCH_BUILDS, WALKTHROUGH_BUILDS } from './builds';
 import { cover } from './text';
 
 /**

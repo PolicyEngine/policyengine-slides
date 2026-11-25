@@ -6,8 +6,9 @@
 // a figure this deck draws instead (slides/WalkthroughFigures.tsx), adapted from axiom.org's drawing of that step.
 //
 // The slide prints its title, the label "Illustration using 7 U.S.C. § 2017(a)" and the card. Our caption for the
-// build, title and explanation, sits in the page as visually hidden text in a polite live region, so a screen reader
-// reads it at each build; the frame and the figures are hidden from screen readers. The caption axiom.org sends is
+// build, title and explanation, is visually hidden text in a polite live region. The slide writes it there once the
+// slide is on screen and again at each build, so a screen reader announces it; the frame and the figures are hidden
+// from screen readers. The caption axiom.org sends is
 // never shown. data-walkthrough-site on the card says whether the frame's picture belongs to the caption: "match",
 // "differs" (the site reports another step, or a title other than the caption's `site`), "waiting" or "figure". The
 // slide does not act on that value; it is there for a check that loads the page.
@@ -17,11 +18,10 @@ import { type CSSProperties, type RefObject, useCallback, useEffect, useRef, use
 import { useSearchParams } from 'next/navigation';
 import { useSlideshowContext } from '@/components/core/SlideshowContext';
 import { Frame, useBare } from '../deck';
+import { WALKTHROUGH_BUILDS } from '../builds';
 import { walkthrough } from '../text';
 import WalkthroughFigure from './WalkthroughFigures';
 
-/** One build per caption in text.walkthrough.steps, one for each of axiom.org's eight steps. */
-export const WALKTHROUGH_BUILDS = walkthrough.steps.length;
 /** How many steps axiom.org's walkthrough has. */
 const SITE_STEPS = 8;
 
@@ -35,6 +35,8 @@ const SITE_STEPS = 8;
 const WALKTHROUGH_ORIGIN = (process.env.NEXT_PUBLIC_WALKTHROUGH_ORIGIN ?? 'https://axiom.org').replace(/\/$/, '');
 const WALKTHROUGH_SRC = `${WALKTHROUGH_ORIGIN}/present/encoder?embed=1`;
 const MSG = 'axiom-walkthrough';
+/** How long a caption waits before it enters the live region, so the region is in the page, empty, first. */
+export const ANNOUNCE_MS = 150;
 /** How long the frame has to say anything before the card shows where to find the walkthrough. */
 const ANSWER_MS = 6000;
 /**
@@ -209,6 +211,30 @@ function ScaledFrame({
   );
 }
 
+/**
+ * Write the caption into the live region while the slide is on screen. The region stays in the page between builds
+ * and holds nothing until the slide comes up, so a screen reader announces every caption, the first one included: a
+ * region that arrives already filled can go unannounced. Leaving the slide empties it, so the next visit announces
+ * again.
+ */
+function useAnnounce({ up, title, about }: { up: boolean; title: string; about: string }) {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const aboutRef = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    const write = (heading: string, body: string) => {
+      if (titleRef.current) titleRef.current.textContent = heading;
+      if (aboutRef.current) aboutRef.current.textContent = body;
+    };
+    if (!up) {
+      write('', '');
+      return;
+    }
+    const timer = setTimeout(() => write(title, about), ANNOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [up, title, about]);
+  return { titleRef, aboutRef };
+}
+
 export default function EncoderWalkthroughSlide({ buildStep }: { buildStep?: number }) {
   // The deck's build step (1 to WALKTHROUGH_BUILDS) picks the caption, and the caption names axiom.org's step (n). The
   // prop is set only while this slide is on screen.
@@ -220,7 +246,9 @@ export default function EncoderWalkthroughSlide({ buildStep }: { buildStep?: num
   const bare = useBare();
   const still = params?.get('export') === '1' || bare;
   const figure = caption.figure;
-  const { frameRef, now, failed, state } = useWalkthrough({ step, up: buildStep !== undefined, still, live: !figure });
+  const up = buildStep !== undefined;
+  const { frameRef, now, failed, state } = useWalkthrough({ step, up, still, live: !figure });
+  const { titleRef, aboutRef } = useAnnounce({ up, title: caption.title, about: caption.about });
   // Does the picture in the frame belong to the caption? Unknown until the site reports its step. A figure is ours.
   const site = figure ? 'figure' : !now ? 'waiting' : now.step === step && now.title === caption.site ? 'match' : 'differs';
 
@@ -241,9 +269,9 @@ export default function EncoderWalkthroughSlide({ buildStep }: { buildStep?: num
             data-walkthrough-want={step}
             data-walkthrough-site={site}
           >
-            <div className="sr-only" aria-live="polite" aria-atomic="true">
-              <h2 data-walkthrough-caption={build}>{caption.title}</h2>
-              <p>{caption.about}</p>
+            <div className="sr-only" aria-live="polite" aria-atomic="true" data-walkthrough-caption={build}>
+              <h2 ref={titleRef} />
+              <p ref={aboutRef} />
             </div>
             <ScaledFrame frameRef={frameRef} hidden={failed || !!figure} ratio={FRAME_RATIO} shift={SHIFT[step] ?? 0} />
             {figure && <WalkthroughFigure id={figure} />}
