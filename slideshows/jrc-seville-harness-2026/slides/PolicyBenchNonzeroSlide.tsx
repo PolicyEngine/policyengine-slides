@@ -117,11 +117,13 @@ export default function PolicyBenchNonzeroSlide({ buildStep }: { buildStep?: num
           className="pt-[1vh] text-center leading-snug text-gray-500"
           style={{ fontSize: 'clamp(11px, 1.7vh, 19px)', ...reveal(withTool) }}
           aria-hidden={!withTool}
+          inert={!withTool}
         >
           <span className="block">{pbNonzero.lead[1]}</span>
           <span className="block">
             Source:{' '}
-            {/* pointer-events-auto keeps a click on the link from also advancing the deck; hidden, the link takes none. */}
+            {/* pointer-events-auto keeps a click on the link from also advancing the deck. On build 1 the paragraph is
+                inert, so the hidden link takes no click, focus or key. */}
             <a
               href={pbNonzero.source.href}
               className={`underline ${withTool ? 'pointer-events-auto' : 'pointer-events-none'}`}
