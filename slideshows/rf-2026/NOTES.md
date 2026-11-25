@@ -45,7 +45,7 @@ us.
 
 ### 2. In brief (spoken, 40 seconds)
 
-Give the two answers first, from the box at the bottom. Nuffield: the
+Start from the bottom line in the box at the bottom. Nuffield: the
 local-area data exists today, the childcare and public-service variables in
 part; the cross-model scorecard and the AI interface are in progress. RF's
 uses: most map at least partly today, in Python; the main gaps are future-year reweighting, take-up

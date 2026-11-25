@@ -353,7 +353,7 @@ export function InBriefSlide() {
         ))}
       </ol>
       <div className={styles.answers}>
-        <p className={styles.rowLabel}>The two answers, up front</p>
+        <p className={styles.rowLabel}>Bottom line</p>
         {inBrief.map((answer) => (
           <p key={answer.label}>
             <strong>{answer.label}:</strong> {answer.text}

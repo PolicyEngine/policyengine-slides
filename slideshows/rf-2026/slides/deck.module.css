@@ -2452,7 +2452,7 @@
   color: var(--color-gray-500);
 }
 
-/* Slide 2: the two answers under the agenda. */
+/* Slide 2: the bottom line under the agenda. */
 .answers {
   display: grid;
   gap: calc(var(--u) * 0.45);

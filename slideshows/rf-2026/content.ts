@@ -359,7 +359,7 @@ export const parts = [
 
 export type PartKey = (typeof parts)[number]["key"];
 
-// ---------- Slide 2: the two answers up front ----------
+// ---------- Slide 2: the bottom line ----------
 // Summaries of slides 4 and 13 to 14, with no tally of statuses.
 export const inBrief = [
   {

@@ -14,7 +14,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 1 · Introduction
 
 1. PolicyEngine UK and the Resolution Foundation's modelling (title)
-2. In brief (the six parts, and the two answers up front)
+2. In brief (the six parts, and the bottom line)
 3. Who we are
 
 2 · The Nuffield Foundation grants
@@ -110,9 +110,9 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Decisions
 
-- Part order: Nuffield second, so the first of the two questions is
-  answered by minute 2; slide 2 states both answers up front, with no tally
-  of statuses.
+- Part order: Nuffield second, so the grants come up by minute 2; slide 2
+  gives the bottom line on the grants and on the mapping, with no tally of
+  statuses.
 - One Microcosm build for every data figure; results from other builds
   always carry a run label.
 - Behaviour has one wording everywhere (slides 6, 14, 17, 19, 20 and the
