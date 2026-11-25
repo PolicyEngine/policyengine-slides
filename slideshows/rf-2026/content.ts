@@ -359,8 +359,10 @@ export const parts = [
 
 export type PartKey = (typeof parts)[number]["key"];
 
-// ---------- Slide 2: the bottom line ----------
-// Summaries of slides 4 and 13 to 14, with no tally of statuses.
+// ---------- Slide 24: our reading so far, before the questions ----------
+// Summaries of slides 4 and 13 to 14, with no tally of statuses. On slide 24,
+// not slide 2, so RF has seen the mapping before the summary, and question 1
+// asks whether it is right.
 export const inBrief = [
   {
     label: "Nuffield",
@@ -379,13 +381,14 @@ export const inBrief = [
 // (policyengine-uk and policyengine.py AGPL-3.0, microcosm MIT).
 // Government row: 10 Downing Street built 10ds-microsim, described as
 // experimental, on PolicyEngine ("no10"); HM Treasury's pilot, recorded on 17
-// December 2024, not deployed ("hmt"); the OBR's annual report 2025-26 lists
-// PolicyEngine among organisations it engaged with ("obr"); a Lords debate of
-// 24 February 2026 cited House of Commons Library research that used
-// PolicyEngine ("hansard"). Logos as in the BIST deck; no HM Treasury logo
-// file exists, so its name is a wordmark. Think tanks: only those with a
-// public source (the BIST deck's links); the Good Growth Foundation and WPI
-// Economics, which have none, are left off.
+// December 2024, not deployed ("hmt"); a Lords debate of 24 February 2026
+// cited House of Commons Library research that used PolicyEngine
+// ("hansard"). Shown as a text list, not logos: the links are a use, a pilot
+// and a citation, and official logos would overstate them (Parliament's
+// portcullis is also restricted in use). The OBR's listing of PolicyEngine
+// among organisations it engaged with ("obr") is left off as too weak.
+// Think tanks: only those with a public source (the BIST deck's links); the
+// Good Growth Foundation and WPI Economics, which have none, are left off.
 export type Logo = {
   name: string;
   logo?: string;
@@ -428,23 +431,13 @@ export const whoWeAre = {
     },
     { name: "HM Treasury", height: 3.4, source: sources.hmt, caption: "Pilot (record of 17 Dec 2024); not deployed" },
     {
-      name: "Office for Budget Responsibility",
-      logo: "/logos/orgs/office-for-budget-responsibility.png",
-      width: 679,
-      pixelHeight: 294,
-      height: 2.9,
-      darken: true,
-      source: sources.obr,
-      caption: "Listed among organisations the OBR engaged with, 2025–\u206026",
-    },
-    {
       name: "House of Lords",
       logo: "/logos/orgs/house-of-lords.svg",
       width: 755,
       pixelHeight: 200,
       height: 2.2,
       source: sources.hansard,
-      caption: "Lords debate cited Library research using it, 24 Feb 2026",
+      caption: "A Lords debate cited Commons Library research that used it, 24 Feb 2026",
     },
   ] as Logo[],
   thinkTanks: [
@@ -1000,8 +993,8 @@ export const usesTable: MapRow[] = [
     icon: IconPigMoney,
     label: "Pensions costings",
     where: "What a ratchet, Jun 2026",
-    today: "State Pension; triple-lock index",
-    tags: [tags.done],
+    today: "State Pension; a smoothed earnings link is an index path written by hand",
+    tags: [tags.partly],
     step: 3,
   },
   {
@@ -1065,7 +1058,7 @@ export const stepsTable: MapRow[] = [
     where: "IPPR model (largely)",
     today: "OBR October 2026 forecast, to 2031",
     tags: [tags.done],
-    step: 2,
+    step: 1,
   },
   {
     icon: IconCoins,
@@ -1073,7 +1066,7 @@ export const stepsTable: MapRow[] = [
     where: "IPPR model (largely)",
     today: "OBR pension index; no wage floor found",
     tags: [tags.partly],
-    step: 2,
+    step: 1,
   },
   { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 2 },
   { icon: IconHome, label: "Rents", where: "RF", today: "ONS private rents by region; AHC deflator unchecked", tags: [tags.partly], step: 2 },
@@ -1083,7 +1076,7 @@ export const stepsTable: MapRow[] = [
     where: "IPPR model",
     today: "Drawn at build, also for those not entitled today; not set per run",
     tags: [tags.partly],
-    step: 2,
+    step: 1,
   },
   { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Stays in RF’s code, or to be added", tags: [tags.notYet], step: 2 },
   {
@@ -1092,7 +1085,7 @@ export const stepsTable: MapRow[] = [
     where: "IPPR model",
     today: "LCFS 2024–25; VAT and fuel duty; three other duties partial",
     tags: [tags.done, tags.partly],
-    step: 3,
+    step: 2,
     also: true,
   },
   {
@@ -1101,7 +1094,7 @@ export const stepsTable: MapRow[] = [
     where: "Not modelled by RF",
     today: "Five English schemes, Scotland, Wales, pensioners",
     tags: [tags.partly],
-    step: 3,
+    step: 2,
     also: true,
   },
   {
@@ -1110,7 +1103,7 @@ export const stepsTable: MapRow[] = [
     where: "In place of step 4",
     today: "Possible in Python; variables to map, take-up flags to supply",
     tags: [tags.partly],
-    step: 3,
+    step: 2,
     also: true,
   },
 ];
@@ -1473,29 +1466,28 @@ export const budgetBehaviour = `Most official costings include behavioural respo
 export const budgetLabel = "As published, 31 Oct 2026: policyengine 6.11.1; Microcosm build of 25 Oct 2026";
 
 // ---------- Slide 20: what we do not claim ----------
-// Not claimed: "scorecard", "scorecardCode"; the BIST deck (in-sample, no
-// UK out-of-sample page); "hmt"; "ukmod" (annual country report).
-// Known limits: the BIST deck; "manifest" and "bundleSpec" (one dataset,
-// fitted to 2025); "takeUp" (take-up drawn at build); "ctr".
+// Not claimed: "scorecard", "scorecardCode"; "hbaiCheck" (untargeted
+// checks against HBAI, case by case); "hmt".
+// Known limits, only those no other slide states (behaviour is on slides 6,
+// 17 and 19; take-up at build on 14; restricted data on 9 and 21; CTR on 8
+// and 14): the BIST deck; "manifest" and "bundleSpec" (one dataset).
+// The scorecard rows that were on this slide are in NOTES.md (slide 20):
+// RF's figures predate the two-child limit's abolition and use an earlier
+// forecast, data year and baseline, so they are not like-for-like.
 export const notClaimed = [
-  "No reconciled comparison with the IPPR model, UKMOD or TAXBEN; a public scorecard sets published results beside ours, in progress",
-  "The calibration fit is in-sample; there is no out-of-sample check for the UK",
-  "HM Treasury piloted the model (record of 17 Dec 2024): NI results close, income tax comparisons “less promising”; not deployed. Model and data have changed since; no repeat comparison has been published",
-  "UKMOD publishes an annual country report validating against administrative data and HBAI",
+  "No reconciled comparison with the IPPR model, UKMOD or TAXBEN; a public scorecard that sets published results beside ours is in progress",
+  "The calibration fit is in-sample. Untargeted checks are made case by case (poverty and median income against HBAI; the OBR costings, slide 19), not yet by a standing published method",
+  "HM Treasury piloted the model (record of 17 Dec 2024): NI results close, income tax “less promising”; not deployed. No repeat comparison has been published",
 ];
 
 export const knownLimits = [
-  "No labour-supply response by default; no general equilibrium",
   "No firms and no corporation tax",
   "No reweighting for future years: one set of weights, fitted to 2025",
-  "Take-up is drawn when the data are built, not set at run time",
-  "English working-age CTR: reported amounts outside five schemes",
   "Thin cells: effective sample about 7,400; areas need 10+ households",
   "The SPI copies’ industry is imputed",
-  "The microdata are restricted (UK Data Service licence)",
 ];
 
-// The scorecard's like-for-like rows against RF: policyengine-scorecard
+// Source for the scorecard rows now in NOTES.md (slide 20): policyengine-scorecard
 // 771c028, app/public/data/populations.json (built 30 October 2026),
 // harvest sources/harvest-uk-ab2025-2026-09-24/. The three RF rows labelled
 // "comparable", all from RF's No half measures (October 2025). PolicyEngine
@@ -1506,20 +1498,6 @@ export const knownLimits = [
 // policyengine-uk 2.89.2 and the pre-Microcosm data, including the £46k
 // example (higher-rate threshold and NI upper earnings limit to £46k: RF
 // £9.0bn, PolicyEngine £6.62bn). The difference is computed on the slide.
-export const scorecardRows = [
-  { label: "Scrap the two-child limit: Exchequer cost", rf: 3.5, pe: 3.19, unit: "£bn" },
-  { label: "Scrap the two-child limit: fewer children in relative poverty (AHC)", rf: 480, pe: 445, unit: "k" },
-  { label: "A three-child limit: fewer children in relative poverty (AHC)", rf: 350, pe: 318, unit: "k" },
-];
-
-export const scorecardHead = "The only like-for-like model runs against RF";
-
-export const scorecardNote =
-  "The scorecard has 755 rows with a result published by RF, UKMOD, the IFS, IPPR or four others. These three are the only reform runs marked like-for-like against RF; most others ran on an earlier dataset (e.g. higher-rate threshold and NI upper earnings limit to £46k: RF £9.0bn, PolicyEngine £6.62bn). The scorecard grades nothing.";
-
-export const scorecardLabel =
-  "2029–30. RF: No half measures, Oct 2025. PolicyEngine: policyengine-uk 2.132.6, Microcosm build of 19 Oct 2026";
-
 // ---------- Slide 21: routes in ----------
 // Web app: a parametric reform with a national report needs no data access
 // ("appReport"); structural reforms without code are not available (only
@@ -1588,6 +1566,7 @@ export const options = [
     rows: [
       { label: "What it is", text: "Analysts run PolicyEngine themselves, in Python or with an AI assistant, with RF’s own projection steps around it" },
       { label: "What it needs", text: "An access token, a way to hold FRS-derived data under RF’s own terms, and the missing steps (slides 13 and 14)" },
+      { label: "What it costs", text: "A break in RF’s published series; past figures reconciled to the new model" },
       { label: "What it gives", text: "Open rules and data pipeline, local-area outputs, structural changes by pull request" },
     ],
   },

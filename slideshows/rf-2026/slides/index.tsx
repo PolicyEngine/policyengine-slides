@@ -12,6 +12,7 @@ import {
 import BasePathImage from "@/components/core/BasePathImage";
 import Slide from "@/components/core/Slide";
 import { speakers } from "@/lib/speakers";
+import { SlideshowProvider, useSlideshowContextSafe } from "@/components/core/SlideshowContext";
 import {
   breakdowns,
   budgetBehaviour,
@@ -63,10 +64,6 @@ import {
   rulesEntities,
   rulesFacts,
   rulesRegistry,
-  scorecardHead,
-  scorecardLabel,
-  scorecardNote,
-  scorecardRows,
   sources,
   stepsAlsoLabel,
   stepsCaution,
@@ -82,12 +79,30 @@ import {
   type Tag,
 } from "../content";
 import Embed from "./Embed";
-import { CountUp, Only, Reveal } from "./Reveal";
+import { Only, Reveal } from "./Reveal";
 import styles from "./deck.module.css";
 
 type Section = PartKey;
 
 /** Staggers an element's entrance when its slide comes on screen. */
+/**
+ * Shows a reference slide whole: every build step at once, live and in the
+ * export. Used in config.ts for slides that are jumped to in discussion.
+ */
+export function whole<P extends object>(Component: (props: P) => ReactNode) {
+  function Whole(props: P) {
+    const ctx = useSlideshowContextSafe();
+    if (!ctx) return <Component {...props} />;
+    return (
+      <SlideshowProvider value={{ ...ctx, buildStep: Infinity }}>
+        <Component {...props} />
+      </SlideshowProvider>
+    );
+  }
+  Whole.displayName = `Whole(${Component.name})`;
+  return Whole;
+}
+
 const enter = (index: number) => ({ "--i": index }) as CSSProperties;
 
 /** An icon in the teal ink, with no box behind it: the deck's one icon style. */
@@ -352,14 +367,6 @@ export function InBriefSlide() {
           </li>
         ))}
       </ol>
-      <div className={styles.answers}>
-        <p className={styles.rowLabel}>Bottom line</p>
-        {inBrief.map((answer) => (
-          <p key={answer.label}>
-            <strong>{answer.label}:</strong> {answer.text}
-          </p>
-        ))}
-      </div>
     </Frame>
   );
 }
@@ -418,7 +425,6 @@ function LogoSection({ title, logos, cells }: { title: string; logos: Logo[]; ce
 
 export function WhoSlide() {
   const { facts, government, thinkTanks } = whoWeAre;
-  const cells = government.length;
   return (
     <Frame
       section="intro"
@@ -456,7 +462,25 @@ export function WhoSlide() {
       </Reveal>
       <div className={styles.logoGroups}>
         <Reveal step={2}>
-          <LogoSection title="Government and Parliament: where PolicyEngine has appeared" logos={government} cells={cells} />
+          <section className={styles.logoSection}>
+            <h2 className={styles.rowLabel}>Government and Parliament: where PolicyEngine has been used, trialled or cited</h2>
+            <ul className={styles.govList}>
+              {government.map((org) => (
+                <li key={org.name}>
+                  <a
+                    href={org.source?.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                    className="pointer-events-auto"
+                  >
+                    {org.name}
+                  </a>
+                  : {org.caption}
+                </li>
+              ))}
+            </ul>
+          </section>
         </Reveal>
         <Reveal step={3}>
           <LogoSection title="Think tanks and researchers: published work using PolicyEngine" logos={thinkTanks} cells={thinkTanks.length} />
@@ -861,7 +885,7 @@ export function StepsSlide() {
         alsoLabel={stepsAlsoLabel}
         template="2.15fr 1.35fr 3.3fr 1.3fr"
       />
-      <Foot step={3} tone="caution">
+      <Foot step={2} tone="caution">
         {stepsCaution}
       </Foot>
     </Frame>
@@ -986,7 +1010,7 @@ export function CalibrationSlide() {
           {stats.map((stat) => (
             <div key={stat.label}>
               <p className={styles.statValue}>
-                <CountUp value={stat.value} step={1} />
+                {stat.value}
               </p>
               <p className={styles.statLabel}>{stat.label}</p>
             </div>
@@ -1040,6 +1064,13 @@ export function CalibrationSlide() {
 const money = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : ""}${Math.abs(n).toLocaleString("en-GB")}`;
 const ratio = (pe: number, obr: number) => `${Math.round((100 * pe) / obr)}%`;
 
+// Labels for the two build groups: the 2026-27 measures, then those scored
+// in a later year (each row gives its year), with the package total.
+const budgetGroups = [
+  { before: 0, label: "Measures with a figure in 2026–27" },
+  { before: 3, label: "Later years, as each row shows; then the package" },
+];
+
 export function BudgetObrSlide() {
   const all = [...budgetRows, { ...budgetPackage, step: 2 }];
   return (
@@ -1061,19 +1092,29 @@ export function BudgetObrSlide() {
             <span key="r" className={styles.num}>PE as % of OBR</span>,
             "Main reason",
           ]}
-          rows={all.map((row) => ({
-            key: row.measure,
-            step: row.step,
-            className: row.measure === budgetPackage.measure ? styles.mapTotal : undefined,
-            cells: [
-              <span key="m" className={styles.targetTopic}>{row.measure}</span>,
-              row.year,
-              <span key="p" className={styles.num}>{money(row.pe)}</span>,
-              <span key="o" className={styles.num}>{money(row.obr)}</span>,
-              <span key="r" className={`${styles.num} ${styles.targetSource}`}>{ratio(row.pe, row.obr)}</span>,
-              <span key="w" className={styles.reasonCell}>{row.reason}</span>,
-            ],
-          }))}
+          rows={all.flatMap((row, index) => {
+            const group = budgetGroups.find((g) => g.before === index);
+            const groupRow = group
+              ? [{ key: group.label, step: row.step, span: true, className: styles.mapGroup, cells: [<span key="g" className={styles.rowLabel}>{group.label}</span>] as ReactNode[] }]
+              : [];
+            return [
+              ...groupRow,
+              {
+                key: row.measure,
+                step: row.step,
+                span: false,
+                className: row.measure === budgetPackage.measure ? styles.mapTotal : undefined,
+                cells: [
+                  <span key="m" className={styles.targetTopic}>{row.measure}</span>,
+                  row.year,
+                  <span key="p" className={styles.num}>{money(row.pe)}</span>,
+                  <span key="o" className={styles.num}>{money(row.obr)}</span>,
+                  <span key="r" className={`${styles.num} ${styles.targetSource}`}>{ratio(row.pe, row.obr)}</span>,
+                  <span key="w" className={styles.reasonCell}>{row.reason}</span>,
+                ] as ReactNode[],
+              },
+            ];
+          })}
         />
         <div className={styles.tableNotes}>
           {budgetNotes.map((note) => (
@@ -1092,44 +1133,18 @@ export function BudgetObrSlide() {
 
 // ---------- 20. What we do not claim ----------
 
-const pct = (pe: number, rf: number) => {
-  const d = Math.round((100 * (pe - rf)) / rf);
-  return `${d < 0 ? "−" : "+"}${Math.abs(d)}%`;
-};
-
 export function LimitsSlide() {
   return (
-    <Frame section="compare" title="What we do not claim, and known limits" scale={0.98} subtitle="What has and has not been tested">
+    <Frame section="compare" title="What we do not claim, and known limits" scale={1.1} subtitle="What has and has not been tested">
       <div className={styles.limits}>
-        <Reveal step={1} className={styles.limitCol}>
+        <div className={styles.limitCol}>
           <p className={styles.rowLabel}>Not claimed</p>
           <Bullets items={notClaimed} />
-        </Reveal>
-        <Reveal step={1} className={styles.limitCol}>
-          <p className={styles.rowLabel}>{scorecardHead}</p>
-          <div className={styles.scoreRows}>
-            <div className={styles.scoreHead}>
-              <span />
-              <span>RF</span>
-              <span>PolicyEngine</span>
-            </div>
-            {scorecardRows.map((row) => (
-              <div key={row.label} className={styles.scoreRow}>
-                <span>{row.label}</span>
-                <span>{row.unit === "£bn" ? `£${row.rf}bn` : `${row.rf}k`}</span>
-                <span>
-                  {row.unit === "£bn" ? `£${row.pe}bn` : `${row.pe}k`} <em>({pct(row.pe, row.rf)})</em>
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className={styles.scoreLabel}>{scorecardLabel}</p>
-          <p className={styles.scoreNote}>{scorecardNote}</p>
-        </Reveal>
-        <Reveal step={2} className={styles.limitCol}>
-          <p className={styles.rowLabel}>Known limits</p>
+        </div>
+        <div className={styles.limitCol}>
+          <p className={styles.rowLabel}>Known limits not stated on other slides</p>
           <Bullets items={knownLimits} />
-        </Reveal>
+        </div>
       </div>
     </Frame>
   );
@@ -1182,7 +1197,7 @@ export function OptionsSlide() {
     <Frame
       section="next"
       title="Three ways the Resolution Foundation could use PolicyEngine"
-      scale={0.96}
+      scale={0.86}
       subtitle="Options for discussion; none depends on the others"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
@@ -1245,14 +1260,22 @@ export function PilotSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame section="next" title="Questions for discussion" scale={1.0} subtitle="Where we need RF’s view">
+    <Frame section="next" title="Questions for discussion" scale={0.92} subtitle="Our reading so far, and where we need RF’s view">
+      <div className={`${styles.answers} ${styles.answersTop}`}>
+        <p className={styles.rowLabel}>Our reading so far, for you to correct</p>
+        {inBrief.map((answer) => (
+          <p key={answer.label}>
+            <strong>{answer.label}:</strong> {answer.text}
+          </p>
+        ))}
+      </div>
       <ol className={styles.questions}>
         {questions.map((question, index) => (
-          <Reveal as="li" key={question.text} step={index + 1} className={styles.question}>
+          <li key={question.text} className={styles.question}>
             <Badge icon={question.icon} />
             <span className={styles.questionNumber}>{index + 1}</span>
             {question.text}
-          </Reveal>
+          </li>
         ))}
       </ol>
     </Frame>
@@ -1265,7 +1288,7 @@ export function ClosingSlide() {
   return (
     <Slide isEnd className={styles.deck}>
       <h1 className={`${styles.closingTitle} font-display font-bold text-center`}>Thank you</h1>
-      <p className={`${styles.closingSubtitle} text-center text-white/85`}>Everything in this deck is open to check</p>
+      <p className={`${styles.closingSubtitle} text-center text-white/85`}>Every figure has a linked source</p>
       <div className={`${styles.closingContacts} grid w-full max-w-5xl grid-cols-2 self-center`}>
         {closingLinks.map(({ label, href }) => (
           <a
