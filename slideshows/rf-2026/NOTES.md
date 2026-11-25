@@ -1,8 +1,8 @@
 # Presenter notes: PolicyEngine UK and the Resolution Foundation's modelling
 
-25 slides, about 13 minutes of talk, then discussion. The spoken path is
-1, 2, 4, 12, 13, 14, 19 (with one line of 20), 22 and 23 together, and 24,
-always moving forward. The others (3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17,
+25 slides, about 12 minutes of talk, then discussion. The spoken path is
+1, 2, 4, 12, 13, 14, 19, 22 and 23 together, and 24, always moving
+forward. The others (3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17,
 18, 20, 21 and 25) are reference, for questions and to leave behind.
 Slide 9's point (one calibrated year; take-up drawn at build) is made from
 the "Known gap" line on slide 14. Rough checkpoints: slide 4 by minute 1,
@@ -22,7 +22,7 @@ checks before it ships a dataset). A newer certified build exists
 the deck does not mix the two. Four results were run on other builds and
 carry a run label on their slide: the Autumn Budget 2026 dashboard
 (slides 5 and 19), the Billing me softly dashboard (slide 15), the
-scorecard's like-for-like rows (slide 20) and the £46k example on slide 20.
+scorecard rows and the £46k example in the notes to slide 20.
 
 Behaviour, in one wording everywhere: no labour-supply response by
 default; two responses are on (capital gains realisations, employer NI
@@ -43,14 +43,10 @@ talk follows about ten, and the rest is reference. Our descriptions of the
 IPPR model and of RF's method come from published sources; please correct
 us.
 
-### 2. In brief (spoken, 40 seconds)
+### 2. In brief (spoken, 20 seconds)
 
-Start from the bottom line in the box at the bottom. Nuffield: the
-local-area data exists today, the childcare and public-service variables in
-part; the cross-model scorecard and the AI interface are in progress. RF's
-uses: most map at least partly today, in Python; the main gaps are future-year reweighting, take-up
-fixed at build and an earlier-policy baseline. Then one sentence on the
-parts; part 4 is the core.
+One sentence on the six parts; part 4 is the core. The summary of what we
+found comes at the end, on slide 24, after RF has seen the mapping.
 
 ### 3. Who we are (reference)
 
@@ -61,7 +57,10 @@ parts; part 4 is the core.
   PolicyEngine. The record gives no start year; PolicyEngine's event report
   of 10 November 2025 says the pilot began in March 2025. Slide 20 gives
   the record's findings.
-- The OBR item is engagement listed in its annual report, not use.
+- Shown as text, not logos: a use (No 10), a pilot that was not deployed
+  (HMT) and a citation (the Lords). The OBR's annual report lists
+  PolicyEngine among organisations it engaged with; that is too weak a link
+  to show, so it is left off.
 - The Lords citation is of House of Commons Library research that used
   PolicyEngine.
 - NIESR: Mosley and Cornforth (2023), an LSE Centre for Macroeconomics
@@ -511,17 +510,19 @@ Allowance taper.
 - The package: all seven run together; in 2026–27 only the first three are
   non-zero, so the total is their sum.
 
-Then one line from slide 20: the scorecard's three like-for-like rows
-against RF are within 7% to 9%. We make no claim about accuracy relative to
-the IPPR model, UKMOD or TAXBEN.
+We make no claim about accuracy relative to the IPPR model, UKMOD or
+TAXBEN.
 
-### 20. What we do not claim, and known limits (reference, one line with 19)
+### 20. What we do not claim, and known limits (reference)
 
 Show it if asked "how do you know it is right" or about HM Treasury. On HMT,
 say what the record says and no more.
 
-The middle panel lists the only model runs on the scorecard labelled
-"comparable" against RF (policyengine-scorecard 771c028, `app/public/data/
+The scorecard rows are not on the slide, because they are not like-for-like
+with RF: RF's figures predate the two-child limit's abolition and use an
+earlier forecast, data year and baseline, and reconciling them needs a
+rebuilt baseline (slide 23). If asked, these are the only model runs on the
+scorecard labelled "comparable" against RF (policyengine-scorecard 771c028, `app/public/data/
 populations.json`, built 30 October 2026; harvest
 `sources/harvest-uk-ab2025-2026-09-24/`). PolicyEngine's runs used
 policyengine-uk 2.132.6 on the Microcosm UK 2024–25 build of 19 October
@@ -536,8 +537,8 @@ policyengine-uk 2.132.6 on the Microcosm UK 2024–25 build of 19 October
   housing costs, 2029–30: RF 350,000; PolicyEngine 318,000 (−9%).
 
 The scorecard has 755 rows with a result published by RF, UKMOD, the IFS,
-IPPR or four others. These three are the only reform runs marked
-like-for-like against RF: `populations.json` has 14 "comparable" RF rows,
+IPPR or four others. These three are the only reform runs the scorecard labels
+"comparable" against RF: `populations.json` has 14 "comparable" RF rows,
 and the other 11 are benefit uprating rates in the baseline (from Catching
 up? and the Living Standards Outlook 2026), not reform runs. Most others
 ran on policyengine-uk 2.89.2 and the dataset before
@@ -581,8 +582,7 @@ web app: vigintiles, and entitlement runs for five benefits.
 The output that matters is the reconciliation, not agreement: a table that
 splits each difference into data, rules, take-up and uprating. We know of
 no published reconciled comparison between PolicyEngine and the IPPR
-model; the scorecard sets published figures side by side, with three
-like-for-like rows (slide 20), and reconciles nothing.
+model; the scorecard sets published figures side by side and reconciles nothing.
 
 Indicative scope, as on the slide: one chart; PolicyEngine does the run and
 writes the reconciliation note; RF gives the specification and reviews it,
@@ -612,8 +612,13 @@ No commitment on timing; the scope is RF's to choose.
 
 ### 24. Questions for discussion (discussion)
 
-Stop presenting and leave this slide up. Start with question 1, because the
-other answers depend on it.
+Stop presenting and leave this slide up. Read the two-line summary at the
+top as our reading, for RF to correct: Nuffield, the local-area data exists
+today, the childcare and public-service variables in part, and the
+cross-model scorecard and the AI interface are in progress; RF's uses, most
+map at least partly today, in Python, and the main gaps are future-year
+reweighting, take-up fixed at build and an earlier-policy baseline. Then
+start with question 1, because the other answers depend on it.
 
 ### 25. Thank you (reference)
 

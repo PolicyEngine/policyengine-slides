@@ -1260,7 +1260,7 @@ export const rulesCompare: CompareRow[] = [
     label: "Licence and maintainer",
     cells: [
       "AGPL-3.0 and MIT; PolicyEngine, public pull requests",
-      "Licensed for a fee, not open (CeMPA WP 7/21); PERU, Manchester Metropolitan University",
+      "Licensed for a fee (CeMPA WP 7/21, 2021); PERU, Manchester Metropolitan University",
       "EUPL-1.2 software, CC BY-NC-ND model, free; CeMPA, Essex",
     ],
     step: 1,
@@ -1294,7 +1294,7 @@ export const rulesCompare: CompareRow[] = [
   {
     icon: IconHomeDollar,
     label: "Capital and property taxes",
-    cells: ["CGT, SDLT, LBTT", notFound, "Not simulated; no data on gains or property sales"],
+    cells: ["CGT, SDLT, LBTT, on imputed gains and drawn property purchases", notFound, "Not simulated; no data on gains or property sales"],
     step: 2,
   },
   {

@@ -13,7 +13,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 1 · Introduction
 
 1. PolicyEngine UK and the Resolution Foundation's modelling (title)
-2. In brief (the six parts, and the bottom line)
+2. In brief (the six parts)
 3. Who we are
 
 2 · The Nuffield Foundation grants
@@ -100,18 +100,24 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - **Results run on other builds**, each with a run label on its slide:
   Autumn Budget 2026 against the OBR (slides 5, 19: policyengine 6.11.1,
   Microcosm build of 25 October 2026, as published 31 October); the Billing
-  me softly dashboard (slide 15: policyengine-uk 2.102.3); the scorecard's
-  like-for-like rows (slide 20: policyengine-uk 2.132.6, Microcosm build of
-  19 October 2026); the £46k example (slide 20: policyengine-uk 2.89.2, the
+  me softly dashboard (slide 15: policyengine-uk 2.102.3); the scorecard
+  rows in the notes to slide 20 (policyengine-uk 2.132.6, Microcosm build of
+  19 October 2026); the £46k example there (policyengine-uk 2.89.2, the
   dataset before Microcosm).
 - **Scorecard (slides 4, 20)**: policyengine-scorecard 771c028
   (`app/public/data/lanes.json` and `populations.json`).
 
 ## Decisions
 
-- Part order: Nuffield second, so the grants come up by minute 2; slide 2
-  gives the bottom line on the grants and on the mapping, with no tally of
-  statuses.
+- Part order: Nuffield second, so the grants come up by minute 2. The
+  summary of the grants and the mapping is on slide 24, before the
+  questions, not on slide 2: RF sees the mapping first, and question 1 asks
+  whether it is right. No tally of statuses.
+- Builds only where the order carries meaning (slides 4, 12, 14's second
+  group, 19, 22 and 23). Reference slides, which are jumped to in
+  discussion, are shown whole, and slide 24 shows all six questions at once.
+- Slide 3's government row is a text list, not logos; slide 18's figures
+  are static (no count-up), to match the in-sample tag.
 - One Microcosm build for every data figure; results from other builds
   always carry a run label.
 - Behaviour has one wording everywhere (slides 6, 14, 17, 19, 20 and the
@@ -144,9 +150,10 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   gives no Pension Tax Allowance net figure until the coincidence below is
   confirmed. The foot states the year choice and that the trading allowance
   is 53% in 2028–29. Fuel duty is footnoted: the OBR used the government's estimate.
-- Slide 20's centre panel is "the only like-for-like model runs against
-  RF", with the run label naming RF's report and PolicyEngine's build, and
-  a note that most of the 755 rows ran on the earlier dataset.
+- Slide 20 has no scorecard panel: RF's three rows (No half measures,
+  October 2025) predate the two-child limit's abolition and use an earlier
+  forecast, data year and baseline, so they are not like-for-like. They are
+  in the notes to slide 20, for questions only.
 - IPPR model column: headed "what we found published", with "please
   correct us"; empty cells read "Not found in published sources". No quote
   from the 2018 description.
