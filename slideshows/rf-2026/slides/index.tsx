@@ -875,7 +875,7 @@ export function StepsSlide() {
     <Frame
       section="uses"
       title="Each step of the projection method, mapped to PolicyEngine"
-      scale={0.87}
+      scale={0.85}
       subtitle="Which steps are the model’s, which are RF’s own, and what PolicyEngine does today"
     >
       <MapTable
@@ -984,7 +984,7 @@ export function RulesCompareSlide() {
     <Frame
       section="compare"
       title="The rules engine and access: PolicyEngine, the IPPR model and UKMOD"
-      scale={0.9}
+      scale={0.86}
       subtitle="UKMOD column from CeMPA’s 2026 country report; IPPR column from published descriptions, dated"
     >
       <CompareTable rows={rulesCompare} />
@@ -1077,7 +1077,7 @@ export function BudgetObrSlide() {
     <Frame
       section="compare"
       title="Autumn Budget 2026: PolicyEngine’s costings beside the OBR’s"
-      scale={0.96}
+      scale={0.92}
       subtitle="All seven measures, as published on 31 October 2026, with the main reason for each gap"
     >
       <div>
@@ -1142,7 +1142,7 @@ export function LimitsSlide() {
           <Bullets items={notClaimed} />
         </div>
         <div className={styles.limitCol}>
-          <p className={styles.rowLabel}>Known limits not stated on other slides</p>
+          <p className={styles.rowLabel}>Known limits</p>
           <Bullets items={knownLimits} />
         </div>
       </div>

@@ -11,8 +11,8 @@
 //   November; manifest at tag 6.20.3, commit 81bac43), as the public
 //   calibration dashboard reports it (its data routes, read 25 November
 //   2026; the method reproduces every 15 November figure the BIST deck
-//   cites). Four results shown in the deck
-//   were run on other builds; each carries its own run label on the slide.
+//   cites). Results run on other builds carry a run label where they are
+//   shown (on the slide, or in the notes for the scorecard rows).
 // - Statements about what the code can do (the mapping tables on slides 13
 //   and 14, the routes on slide 21) were read on 25 November 2026 at
 //   policyengine-uk 5987eb3 (v2.180.0), microcosm cac12ab, policyengine.py
@@ -224,8 +224,9 @@ export const sources = {
   },
   // Untargeted checks against HBAI (HBAI is not a calibration target):
   // microcosm#1334 on the 19 October build (absolute poverty before housing
-  // costs 12.2% against HBAI's 15.9%; relative after housing costs 18.1%
-  // against 19.6%; median income about 6% high), and microcosm#1710 on the
+  // costs 12.2% against HBAI's 15.9%; median income about 6% high; the
+  // relative-after-housing-costs figure, 18.1% against 19.6%, is from
+  // uk-living-standards-outlook#1 on the same file), and microcosm#1710 on the
   // 22 November build (children below the AHC line: 3.40m, 23.7%, against
   // HBAI's 3.97m, 27%).
   hbaiCheck: { label: "microcosm#1334: Microcosm against HBAI", href: "https://github.com/PolicyEngine/microcosm/issues/1334" },
@@ -281,6 +282,18 @@ export const sources = {
   homeEconomics: {
     label: "Home economics, 24 September 2026",
     href: "https://www.resolutionfoundation.org/publications/home-economics/",
+  },
+  // Brewer and others, 8 October 2026: median non-pensioner income −1.3%
+  // (£450), 2020-21 to 2026-27.
+  countingTheCost: {
+    label: "Counting the cost, 8 October 2026",
+    href: "https://www.resolutionfoundation.org/publications/counting-the-cost/",
+  },
+  // Curtice and Clegg, 10 June 2026, p.5: a smoothed earnings link from
+  // 2027-28 would save around £650 million in 2029-30, net.
+  whatARatchet: {
+    label: "What a ratchet!, 10 June 2026",
+    href: "https://www.resolutionfoundation.org/publications/what-a-ratchet/",
   },
   // Brewer, Clegg and Marshall.
   billingMeSoftly: {
@@ -511,13 +524,10 @@ export const whoWeAre = {
       caption: "Centre for Policy Studies",
     },
     {
-      name: "NIESR",
-      logo: "/logos/orgs/niesr.png",
-      width: 400,
-      pixelHeight: 400,
+      name: "Mosley and Cornforth (2023)",
       height: 2.7,
       source: sources.niesr,
-      caption: "With NIESR’s NiGEM (Mosley and Cornforth, 2023)",
+      caption: "LSE CFM paper, with NIESR’s NiGEM model",
     },
   ] as Logo[],
 };
@@ -1127,8 +1137,8 @@ export const stepsTable: MapRow[] = [
     tags: [tags.partly],
     step: 1,
   },
-  { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 2 },
-  { icon: IconHome, label: "Rents", where: "RF", today: "ONS private rents by region; AHC deflator unchecked", tags: [tags.partly], step: 2 },
+  { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 1 },
+  { icon: IconHome, label: "Rents", where: "RF", today: "ONS private rents by region; AHC deflator unchecked", tags: [tags.partly], step: 1 },
   {
     icon: IconUsers,
     label: "Partial take-up",
@@ -1137,7 +1147,7 @@ export const stepsTable: MapRow[] = [
     tags: [tags.partly],
     step: 1,
   },
-  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Stays in RF’s code, or to be added", tags: [tags.notYet], step: 2 },
+  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Stays in RF’s code, or to be added", tags: [tags.notYet], step: 1 },
   {
     icon: IconShoppingCart,
     label: "Indirect taxes",
@@ -1260,7 +1270,7 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "FRS copies take SPI 2022–23 incomes; more above £200k",
       "HBAI incomes; treatment in the model not found published",
-      "HBAI extension, adjusted for high-income taxpayers; recommended by CeMPA, off by default",
+      "HBAI extension, adjusted for high-income taxpayers; off by default, recommended for cross-sections",
     ],
     step: 1,
   },
@@ -1269,7 +1279,7 @@ export const dataCompare: CompareRow[] = [
     label: "Wealth",
     cells: [
       "WAS round 8, imputed; savings interest from FRS and SPI",
-      "Savings income modelled in WAS, imputed by RF",
+      "Savings income modelled in WAS, imputed by RF (LSO 2026)",
       "Not found in the report; no data on gains, inheritances or property sales",
     ],
     step: 2,
@@ -1277,7 +1287,7 @@ export const dataCompare: CompareRow[] = [
   {
     icon: IconShoppingCart,
     label: "Spending",
-    cells: ["LCFS 2024–25, imputed; also ETB and NTS", "LCF", "LCF, through the indirect-tax add-on"],
+    cells: ["LCFS 2024–25, imputed; also ETB and NTS", "LCF (Scottish Government, 2018)", "LCF, through the indirect-tax add-on"],
     step: 2,
   },
   {
@@ -1380,7 +1390,7 @@ export const rulesCompare: CompareRow[] = [
     label: "Behaviour",
     cells: [
       "No labour-supply response by default; capital gains and employer NI responses on",
-      "No behavioural response described",
+      "No behavioural response in published descriptions",
       "Static; behavioural add-on",
     ],
     step: 3,
@@ -1401,7 +1411,7 @@ export const rulesCompare: CompareRow[] = [
     cells: [
       "No 10 (10ds-microsim, experimental), NEF, CPS, Mosley and Cornforth (with NiGEM)",
       "IPPR, RF, JRF, NEF, Legatum (CeMPA, 2021); Fraser of Allander (2025)",
-      "Scottish and Welsh Governments, SFC, SPICe, GLA, Commons Library, CPAG, WBG",
+      "Scottish and Welsh Governments, SFC, SPICe, GLA, Commons Library, CPAG, WBG (CeMPA, 2021)",
     ],
     step: 3,
   },
@@ -1576,7 +1586,8 @@ export const knownLimits = [
 // have a result from RF, UKMOD, the IFS, IPPR and four others; most ran on
 // policyengine-uk 2.89.2 and the pre-Microcosm data, including the £46k
 // example (higher-rate threshold and NI upper earnings limit to £46k: RF
-// £9.0bn, PolicyEngine £6.62bn). The difference is computed on the slide.
+// £9.0bn, PolicyEngine £6.62bn). The notes give the rows; they do not quote
+// the gaps as agreement.
 // ---------- Slide 21: routes in ----------
 // Web app: a parametric reform with a national report needs no data access
 // ("appReport"); structural reforms without code are not available (only
@@ -1699,8 +1710,7 @@ export const questions = [
 // ---------- Slide 25: closing ----------
 // Emails as used in other decks in this repository. The Nuffield credit
 // follows the Autumn Budget 2026 deck: "Funded by" and the white logo on a
-// dark background, as the Foundation asked on 22 October 2026, linking to
-// the grant 1 project page.
+// dark background, linking to the grant 1 project page.
 export const closingLinks: { label: string; href: string }[] = [
   { label: "policyengine.org/uk", href: sources.home.href },
   { label: "github.com/PolicyEngine/policyengine-uk", href: sources.model.href },

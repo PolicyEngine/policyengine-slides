@@ -21,10 +21,10 @@ policyengine.py checks before it ships a dataset), with the local-area
 build of 23 November (7081d968). Against the 15 November build in the BIST
 deck: 1,536 targets (two more), 78,450 records, an effective sample of
 about 7,500, and 57 source stages (a new-claimant UC draw); 98.8% within
-10% is unchanged. Four results were run on other builds and
-carry a run label on their slide: the Autumn Budget 2026 dashboard
-(slides 5 and 19), the Billing me softly dashboard (slide 15), the
-scorecard rows and the £46k example in the notes to slide 20.
+10% is unchanged. Results run on other builds carry a run label: the
+Autumn Budget 2026 dashboard (slides 5 and 19) and the Billing me softly
+dashboard (slide 15) on the slide; the scorecard rows and the £46k example
+in the notes to slide 20.
 
 Behaviour, in one wording everywhere: no labour-supply response by
 default; two responses are on (capital gains realisations, employer NI
@@ -67,8 +67,9 @@ found comes at the end, on slide 24, after RF has seen the mapping.
   PolicyEngine.
 - NIESR: Mosley and Cornforth (2023), an LSE Centre for Macroeconomics
   discussion paper, combined PolicyEngine UK with NIESR's NiGEM model.
-- Only organisations with a public source are shown. PolicyEngine has also
-  presented to the Scottish Government; that is not on the slide.
+- Only organisations with a public source are shown. The Mosley and
+  Cornforth paper is shown as text, not with NIESR's logo, because it is an
+  LSE paper that used NiGEM, not NIESR's own work.
 
 ## Part 2. The Nuffield Foundation grants
 
@@ -224,7 +225,8 @@ IPPR model" still the right name for what RF runs?
 Fuller wording of the steps (LSO 2026, Annex 1):
 
 1. Base data: FRS and HBAI 2023–24 (2024–25 in the October 2026 work).
-   HBAI incomes carry DWP's SPI adjustment for top incomes.
+   That HBAI incomes carry DWP's SPI adjustment for top incomes is our
+   inference from HBAI's method; Annex 1 does not mention the SPI.
 2. Reweight: to ONS population projections, OBR participation and
    unemployment, and PIP caseload projections (Stata reweight2).
 3. Uprate and impute, largely through the IPPR model: earnings to OBR
@@ -254,7 +256,7 @@ equivalised vigintiles would be passed in as a grouping; there is no
 ready-made "earlier policy, uprated" baseline for a cumulative chart; the
 standard child poverty output counts everyone aged 17 or under, and HBAI's
 dependent children are available in Python (`is_hbai_dependent_child`, as
-the two poverty rows on slide 20 use). For anyone reading the code: `in_poverty_bhc` is
+the scorecard's poverty rows in the notes to slide 20 use). For anyone reading the code: `in_poverty_bhc` is
 absolute poverty; relative poverty is `in_relative_poverty_bhc`.
 
 Full rows (checked against policyengine-uk 5987eb3, microcosm cac12ab,
@@ -491,14 +493,15 @@ names IPPR, RF, JRF, NEF and Legatum; the Fraser of Allander Institute used
 it (v2.7.8) for its Scottish child poverty modelling (March 2025). UKMOD
 users named in WP 7/21 also include the Scottish Fiscal Commission, NHS
 Scotland, the Tony Blair Institute, Save the Children UK, Citizens Advice
-and the Citizen's Basic Income Trust. Version IPPRTBM 02_93 is cited in JRF work of
-June 2026. Indirect taxes are not a row here (they are on slides 14 and
+and the Citizen's Basic Income Trust. The Scottish Government's 2018 text
+describes the "IPPR/Resolution Foundation/Landman Economics" model, jointly
+maintained by the three before PERU took it on, so its cells may be out of
+date. Indirect taxes are not a row here (they are on slides 14 and
 16); interfaces are folded into the platform row. "Mosley and Cornforth
 (with NiGEM)" is the NIESR-related paper on slide 3.
 
 TAXBEN is not a column because we hold too little published detail for a
-fair one: in use since 1983, on the FRS and LCF, entitlement or reported
-take-up, static, proprietary.
+fair one.
 
 ### 18. Calibration: weights fitted to official statistics (reference)
 
@@ -515,9 +518,10 @@ Untargeted checks against HBAI, which is not a calibration target. RF's
 work centres on poverty levels, so have these ready:
 
 - microcosm#1334, on the 19 October build, against HBAI 2024–25: absolute
-  poverty before housing costs 12.2% against 15.9%; relative poverty after
-  housing costs 18.1% against 19.6%; median income about 6% high; Gini
-  0.302 against 0.327. At the FRS grossing weights the same rows reproduce
+  poverty before housing costs 12.2% against 15.9%; median income about 6%
+  high; Gini 0.302 against 0.327. On the same file,
+  uk-living-standards-outlook#1 gives relative poverty after housing costs
+  of 18.1% against 19.6%. At the FRS grossing weights the same rows reproduce
   HBAI (absolute BHC 16.0%, AHC 19.5%), so the gap comes from calibration
   (for example, pensioner absolute BHC poverty falls from 15.9% to 10.7%).
 - microcosm#1344 changed UC take-up draws and the income targets. On an
@@ -574,8 +578,9 @@ say what the record says and no more.
 The scorecard rows are not on the slide, because they are not like-for-like
 with RF: RF's figures predate the two-child limit's abolition and use an
 earlier forecast, data year and baseline, and reconciling them needs a
-rebuilt baseline (slide 23). If asked, these are the only model runs on the
-scorecard labelled "comparable" against RF (policyengine-scorecard 771c028, `app/public/data/
+rebuilt baseline (slide 23). If asked, give the figures but do not quote
+the gaps as agreement. These are the only model runs on the scorecard
+labelled "comparable" against RF (policyengine-scorecard 771c028, `app/public/data/
 populations.json`, built 30 October 2026; harvest
 `sources/harvest-uk-ab2025-2026-09-24/`). PolicyEngine's runs used
 policyengine-uk 2.132.6 on the Microcosm UK 2024–25 build of 19 October

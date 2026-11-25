@@ -54,8 +54,8 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 24. Questions for discussion
 25. Thank you
 
-The spoken path, about 13 minutes, is 1, 2, 4, 12, 13, 14, 19 (with one
-line of 20), 22 and 23, and 24, always moving forward; slide 9's point is
+The spoken path, about 12 minutes, is 1, 2, 4, 12, 13, 14, 19, 22 and 23,
+and 24, always moving forward; slide 9's point is
 made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Files
@@ -187,8 +187,8 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   wording is needed beside "Funded by"; what AI interface work counts
   under grant 1; whether the scorecard counts as grant 1's comparison
   dashboard; whether training and beta testing have a public record.
-- Slide 3: confirm that Mosley and Cornforth (2023) is NIESR work (the
-  caption says only that it used NIESR's NiGEM).
+- Slide 3: Mosley and Cornforth (2023) is shown as text (an LSE CFM paper
+  that used NIESR's NiGEM), not with NIESR's logo.
 - Scorecard: re-read the counts at the commit shown before the meeting.
 - Slide 18: the raw FRS 2024–25 household count, as a comparator for
   78,450 records and an effective sample of about 7,500, once sourced.
@@ -217,10 +217,8 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   2018; whether Home economics states the model it used; whether RF's
   top-income treatment can be described more precisely than "HBAI
   incomes".
-- Sources without a pinned link in `content.ts`: Counting the cost (RF's
-  2019 report of the same name is not linked), What a ratchet, CeMPA's
-  2026 country report and the JRF note of June 2026 are cited by title and
-  date.
+- Sources: Counting the cost, What a ratchet, CeMPA's 2026 country report
+  and working paper 7/21 now have links in `content.ts`.
 - RF figures and figure numbers: re-read against the published PDFs.
 - The Claude connector's status on the day.
 - Slide 5's live frame: load it once on the day (it needs a network
