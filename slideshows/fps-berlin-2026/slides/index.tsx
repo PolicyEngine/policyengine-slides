@@ -419,7 +419,6 @@ export function PolicyEngineSlide() {
   const { facts, government } = whoWeAre;
   return (
     <Frame
-      section="method"
       title="PolicyEngine: the open-source model behind the paper"
       subtitle="Tax-benefit microsimulation for the UK and the US"
       scale={1.15}

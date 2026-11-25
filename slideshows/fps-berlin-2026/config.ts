@@ -46,12 +46,12 @@ export const fpsBerlin2026Config: SlideshowConfig = {
   clickerKeys: true,
   slides: [
     TitleSlide,
+    PolicyEngineSlide,
     InBriefSlide,
     // 1. The question
     ExposureSlide,
     QuestionsSlide,
     // 2. Data and method
-    PolicyEngineSlide,
     MethodSlide,
     ExposureMethodSlide,
     DataSlide,

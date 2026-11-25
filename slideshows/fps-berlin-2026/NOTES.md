@@ -20,9 +20,9 @@ than by slide:
 
 | Part | Slides | Minutes | Ends by |
 |---|---|---|---|
-| Opening | 1–2 | 1.5 | 1:30 |
-| 1 The question | 3–4 | 2 | 3:30 |
-| 2 Data and method | 5–14 | 7.5 | 11:00 |
+| Opening | 1–3 | 2 | 2:00 |
+| 1 The question | 4–5 | 2 | 4:00 |
+| 2 Data and method | 6–14 | 7 | 11:00 |
 | 3 The central case | 15–19 | 4.5 | 15:30 |
 | 4 Who and how | 20–22 | 3.5 | 19:00 |
 | 5 What moves it | 23–27 | 4.5 | 23:30 |
@@ -47,7 +47,13 @@ of 50 on cost, and 2nd lowest on the poverty and Gini changes.
 labour-market shock of a given size and ask how much the UK tax-benefit
 system absorbs, and who bears the rest.
 
-**2. In brief.** Three results. Who loses the job moves the Exchequer
+**2. PolicyEngine.** Who we are, before the paper. A nonprofit; the rules, data pipeline and analysis
+code are open source; UK and US models in one Python package (JOSS 2026).
+Use by these bodies is not endorsement of this paper.
+No 10 built a microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR engaged with it in 2025–26, and it has been cited in a Lords debate. Keep it to 30 seconds: the point is that
+the model is open and can be checked.
+
+**3. In brief.** Three results. Who loses the job moves the Exchequer
 cost: £1.9bn to £11.3bn a year across four rules for the same 7 per cent.
 How the loss arrives sets who bears it: as wage cuts, the same loss raises
 poverty 0.3 points instead of 2.4, but costs £12bn more. And the sign
@@ -56,23 +62,17 @@ adoption applied in one year, an impact-year stress test.
 
 ## 1. The question
 
-**3. Exposure by occupation.** The most exposed groups (administrative,
+**4. Exposure by occupation.** The most exposed groups (administrative,
 managerial, professional) pay well and carry much of the income tax and
 NI base; Universal Credit, the UK's main means-tested benefit, responds
 lower down. Job-loss rates are the central quotas, proportional to
 employment times exposure.
 
-**4. Two open questions.** Incidence is unsettled (exposure, expertise
+**5. Two open questions.** Incidence is unsettled (exposure, expertise
 compression, juniors), and so is the margin (job loss or relative wage
 decline). I hold the size fixed and vary both.
 
 ## 2. Data and method
-
-**5. PolicyEngine.** A nonprofit; the rules, data pipeline and analysis
-code are open source; UK and US models in one Python package (JOSS 2026).
-Use by these bodies is not endorsement of this paper.
-No 10 built a microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR engaged with it in 2025–26, and it has been cited in a Lords debate. Keep it to 30 seconds: the point is that
-the model is open and can be checked.
 
 **6. Overview.** Four steps: exposure, microdata, a person-level shock, the
 tax-benefit model, run twice on the same records.
