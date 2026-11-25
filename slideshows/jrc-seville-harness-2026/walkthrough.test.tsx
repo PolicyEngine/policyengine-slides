@@ -41,7 +41,7 @@ describe('the checks figure', () => {
     expect(gates.aside.map((item) => item.kicker)).toEqual(['AI review', 'Program comparison']);
     const drawn = words('gates');
     expect(drawn).toContain('Advisory by default');
-    expect(drawn).toContain('Runs separately');
+    expect(drawn).toContain('Runs separately, on selected outputs, where another calculator covers them');
     expect(drawn).not.toMatch(/✓|passes|compared|read\b/);
   });
 
@@ -94,8 +94,9 @@ describe('the uses figure', () => {
     expect(words('uses')).toContain('POTENTIAL USES OF THE SAME RULES');
   });
 
-  it('makes no claim about every value', () => {
+  it('makes no claim about every value, and scopes citations and dates to the section 2017(a) rules', () => {
     expect(JSON.stringify(uses)).not.toMatch(/every/i);
+    expect(uses.source.lines.join(' ')).toBe('The § 2017(a) rules carry source citations and effective dates.');
   });
 });
 

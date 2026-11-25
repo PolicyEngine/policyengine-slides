@@ -128,17 +128,17 @@ function GatesFigure() {
       <Edge d={`M${rail[1].x + 150} ${railY + railH + 8} V${railY + railH + 38} Q${rail[1].x + 150} ${railY + railH + 50} ${rail[1].x + 138} ${railY + railH + 50} H${rail[0].x + 157} Q${rail[0].x + 145} ${railY + railH + 50} ${rail[0].x + 145} ${railY + railH + 38} V${railY + railH + 10}`} />
       <Lines x={(rail[0].x + 145 + rail[1].x + 150) / 2} y={railY + railH + 78} lines={[f.loop]} size={16.5} anchor="middle" className="fill-gray-700" />
 
-      <Card x={64} y={asideY} w={400} h={104} dashed>
+      <Card x={64} y={asideY} w={310} h={104} dashed>
         <Kicker x={88} y={asideY + 38}>
           {f.aside[0].kicker}
         </Kicker>
         <Lines x={88} y={asideY + 74} lines={f.aside[0].lines} size={18.5} className="fill-gray-900" />
       </Card>
-      <Card x={496} y={asideY} w={740} h={104} dashed>
-        <Kicker x={520} y={asideY + 38}>
+      <Card x={398} y={asideY} w={838} h={104} dashed>
+        <Kicker x={422} y={asideY + 38}>
           {f.aside[1].kicker}
         </Kicker>
-        <Lines x={520} y={asideY + 74} lines={f.aside[1].lines} size={18.5} className="fill-gray-900" />
+        <Lines x={422} y={asideY + 74} lines={f.aside[1].lines} size={18.5} className="fill-gray-900" />
       </Card>
 
       <Lines x={64} y={482} lines={f.caveat} size={16.5} gap={26} className="fill-gray-700" />

@@ -110,7 +110,7 @@ const walkthroughSteps: WalkthroughCaption[] = [
     n: 4,
     title: 'The encoder drafts a rule, then checks it.',
     about:
-      'A failed check can send the encoder back for another draft. Before the encoder applies a draft, the draft must compile, ground its sources in the law and pass its tests. By default, AI review advises. Program comparisons run separately, where another calculator covers the program. This workflow is an illustration: the published manifest for 7 U.S.C. § 2017(a) records a manual repair, and the published module is on a validation waiver list, so repository CI skips its checks (listed on 2 October and 24 November 2026).',
+      'A failed check can send the encoder back for another draft. Before the encoder applies a draft, the draft must compile, ground its sources in the law and pass its tests. By default, AI review advises. Program comparisons run separately, on selected outputs, where another calculator covers them. This workflow is an illustration: the published manifest for 7 U.S.C. § 2017(a) records a manual repair, and the published module is on a validation waiver list, so repository CI skips its checks (listed on 2 October and 24 November 2026).',
     figure: 'gates',
   },
   {
@@ -138,7 +138,7 @@ const walkthroughSteps: WalkthroughCaption[] = [
     n: 8,
     title: 'Different tools could use the same rules.',
     about:
-      'Axiom publishes the rules as open, versioned code, and the rules carry source citations and effective dates. Four kinds of tool are potential uses of the same rules: AI tools, such as the chatbots and assistants residents and staff already ask; government tools, such as eligibility systems, caseworker guidance and training, and tests of policy changes before they land; navigation tools, such as community screeners and navigators that say what to apply for; and research tools, such as microsimulation and policy analysis that show how a change reaches households and budgets.',
+      'Axiom publishes the rules as open, versioned code, and the § 2017(a) rules carry source citations and effective dates. Four kinds of tool are potential uses of the same rules: AI tools, such as the chatbots and assistants residents and staff already ask; government tools, such as eligibility systems, caseworker guidance and training, and tests of policy changes before they land; navigation tools, such as community screeners and navigators that say what to apply for; and research tools, such as microsimulation and policy analysis that show how a change reaches households and budgets.',
     figure: 'uses',
   },
 ];
@@ -161,7 +161,7 @@ export const walkthrough = {
         loop: 'Failed check → redraft',
         aside: [
           { kicker: 'AI review', lines: ['Advisory by default'] },
-          { kicker: 'Program comparison', lines: ['Runs separately, where another calculator covers the program'] },
+          { kicker: 'Program comparison', lines: ['Runs separately, on selected outputs, where another calculator covers them'] },
         ],
         caveat: [
           'Illustration. The published manifest for 7 U.S.C. § 2017(a) records a manual repair.',
@@ -186,7 +186,7 @@ export const walkthrough = {
         output: { kicker: 'Output', label: ['Regular monthly allotment'], value: '$182', rule: ['The greater of $182 and $24'] },
       },
       uses: {
-        source: { kicker: 'One source', title: 'Encoded, cited rules', lines: ['The rules carry source citations', 'and effective dates.'] },
+        source: { kicker: 'One source', title: 'Encoded, cited rules', lines: ['The § 2017(a) rules carry source', 'citations and effective dates.'] },
         usesKicker: 'Potential uses of the same rules',
         uses: [
           { name: 'AI tools', lines: ['The chatbots and assistants residents and staff already ask'] },
@@ -198,7 +198,7 @@ export const walkthrough = {
     },
   },
   footnotes: [
-    'Before the encoder applies a draft, the draft must compile, ground its sources and pass its tests. By default, the AI review advises. Program comparisons run separately where another calculator covers the program. The published module is on the rulespec-us validation waiver list, so repository CI skips its checks (listed on 2 October and 24 November 2026). The published manifest for 7 U.S.C. § 2017(a) records a manual repair.',
+    'Before the encoder applies a draft, the draft must compile, ground its sources and pass its tests. By default, the AI review advises. Program comparisons run separately, on selected outputs, where another calculator covers them. The published module is on the rulespec-us validation waiver list, so repository CI skips its checks (listed on 2 October and 24 November 2026). The published manifest for 7 U.S.C. § 2017(a) records a manual repair.',
     'Sources: axiom.org/slides/encoder-walkthrough, axiom.org/about, axiom.org/receipts and axiom.org/docs (the waiver); 7 U.S.C. §§ 2014 and 2017; github.com/TheAxiomFoundation, axiom-encode and rulespec-us (us/statutes/7/2017/a.yaml and a.test.yaml; .axiom/encoding-manifests/statutes/7/2017/a.json; known-validation-gaps.yaml); USDA SNAP maximum and minimum allotments, FY 2026.',
   ],
 };
