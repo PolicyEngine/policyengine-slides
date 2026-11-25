@@ -299,7 +299,7 @@ function Tags({ list }: { list: Tag[] }) {
 // ---------- 1. Cover ----------
 
 const coverSpeakers = [
-  { ...speakers["vahid-ahmadi"], title: "Research Associate" },
+  { ...speakers["vahid-ahmadi"], title: "Research Associate", photo: "/images/rf-2026/vahid-ahmadi.jpg" },
   { ...speakers["max-ghenis"], title: "CEO" },
 ];
 
