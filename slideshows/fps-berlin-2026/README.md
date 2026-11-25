@@ -19,6 +19,10 @@ main at c42be9f, tax year 2027–28); `content.ts` names the table each comes
 from. The figures in `public/images/fps-berlin-2026/` come from the same
 commit. Speaker notes and timings are in [NOTES.md](NOTES.md).
 
+Slides use short icon rows and chips rather than sentences; the fuller
+wording is in the notes. The closing slide links the paper on SSRN, with a
+QR code (`public/images/fps-berlin-2026/ssrn-qr.svg`, made with segno).
+
 The design follows the BIST deck (`bist-2026`): `slides/deck.module.css`
 is copied from it, and `slides/fps.module.css` adds this deck's tables,
 headline numbers, waterfall and range.

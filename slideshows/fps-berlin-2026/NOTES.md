@@ -112,7 +112,9 @@ of the 7 November build that the paper used.
 **11. Scenario.** Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
 per cent survivor wage rise, interest and dividends up 39.8 per cent (the
 return on capital up 0.4 points from 1.005 per cent; read it as a 39.8 per
-cent uplift). Name what is left out.
+cent uplift). Name what is left out. The newly displaced get UC only if
+their benefit unit (adult, any partner and children, assessed together)
+is simulated as a claimant.
 
 **12. The shock.** Job losses allocated by employment times shifted
 exposure; survivor wages rise in proportion to complementarity; capital
@@ -123,7 +125,8 @@ displaced. The model takes no spell length: the displaced are out all year.
 announced for 2027–28 (frozen thresholds; higher dividend, savings and
 property rates). The cost is the fall in the government balance, including
 employer NI, with no VAT response. Absolute poverty uses the official
-fixed line; 12.0 per cent before housing costs at baseline.
+fixed line; 12.0 per cent before housing costs at baseline. The Gini uses
+equivalised HBAI disposable income with negatives set to zero.
 
 **14. Draws.** 72,504 employee records, but uneven weights give an
 effective sample of about 5,810, so one draw's displaced count runs from
@@ -210,7 +213,8 @@ nine groups, no hiring margin. Next: calibrate spells and re-employment pay
 to UK evidence (Upward and Wright 2019), and model take-up and JSA for the
 newly displaced.
 
-**29. Thank you.** Leave this up for the discussion.
+**29. Thank you.** Leave this up for the discussion. The QR code opens the
+paper on SSRN (abstract 7174479).
 
 ## Hardest questions, with answers from the paper
 

@@ -2,12 +2,13 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
 import katex from "katex";
 import {
   IconArrowRight,
+  IconArrowsSplit,
   IconBrandGithub,
   IconFileText,
+  IconInfoCircle,
   IconMail,
   IconUserMinus,
   IconWorld,
-  IconArrowsSplit,
   type Icon,
 } from "@tabler/icons-react";
 import BasePathImage from "@/components/core/BasePathImage";
@@ -17,41 +18,64 @@ import { speakers } from "@/lib/speakers";
 import { whoWeAre } from "../../bist-2026/content";
 import {
   absorption,
+  absorptionChips,
   absorptionVariants,
+  breakEvenChips,
   breakEvens,
-  central,
-  channels,
-  closure,
-  conclusions,
   buildStages,
   calibrationFacts,
   calibrationPoints,
   calibrationTex,
+  central,
+  centralChips,
+  channels,
+  closure,
+  closurePoints,
+  conclusions,
+  costMovers,
   dataFacts,
+  drawFacts,
+  drawPoints,
+  drawUses,
+  exposureBuild,
+  exposureNotes,
+  exposureWhy,
+  imputationLegend,
   imputationPoints,
   imputationTex,
-  drawFacts,
-  exposureBuild,
-  microsimRules,
-  outcomeDefs,
-  shockSteps,
-  costMovers,
   inBrief,
+  inBriefChips,
+  incidenceChips,
   incidenceRows,
+  indexPoints,
   indexRows,
   jobLoss,
   limits,
+  marginChips,
   marginWhy,
   margins,
   methodFlow,
+  methodOutcomes,
+  microsimRules,
   obr,
+  obrPoints,
   openQuestions,
+  outcomeDefs,
   parts,
+  policyPoints,
   policyRows,
   scenarioCaveats,
+  scenarioChips,
   scenarioInputs,
+  shockChips,
+  shockSteps,
   sources,
+  transitionPoints,
+  transitionStats,
+  type Chip,
   type PartKey,
+  type Point,
+  type Stat,
 } from "../content";
 import styles from "./deck.module.css";
 import fps from "./fps.module.css";
@@ -110,9 +134,7 @@ function Frame({
       <div className={styles.frame}>
         <header className={styles.frameIn}>
           {section && <PartNav section={section} />}
-          <h1 className={styles.title}>
-            {title}
-          </h1>
+          <h1 className={styles.title}>{title}</h1>
           {subtitle && (
             <div className={styles.subtitleRow}>
               <p className={styles.subtitle}>{subtitle}</p>
@@ -128,21 +150,63 @@ function Frame({
   );
 }
 
-function Bullets({ items }: { items: string[] }) {
+/** Icon rows: a tinted icon, a bold lead and a one-line tail. */
+function Points({ items, cols = 1, head }: { items: Point[]; cols?: number; head?: string }) {
   return (
-    <ul className={styles.list}>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
+    <div>
+      {head && <p className={fps.sideHead}>{head}</p>}
+      <div className={fps.points} style={columns(cols)}>
+        {items.map((item, index) => (
+          <div key={item.lead} className={`${fps.point} ${styles.enter}`} style={enter(index)}>
+            <span className={fps.pointIcon}>
+              <item.icon stroke={1.75} aria-hidden="true" />
+            </span>
+            <div>
+              <p className={fps.pointLead}>{item.lead}</p>
+              {item.text && <p className={fps.pointText}>{item.text}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-function Kpi({ value, label, small = false }: { value: string; label: string; small?: boolean }) {
+/** Small grey chips in place of footnote paragraphs. */
+function Chips({ items }: { items: Chip[] }) {
   return (
-    <div className={`${fps.kpi} ${small ? fps.kpiSmall : ""}`}>
-      <p className={fps.kpiValue}>{value}</p>
-      <p className={fps.kpiLabel}>{label}</p>
+    <div className={fps.chips}>
+      {items.map((item) => (
+        <span key={item.text} className={fps.chip}>
+          <item.icon stroke={1.9} aria-hidden="true" />
+          {item.text}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** A headline number with a tinted icon beside it. */
+function StatKpi({ stat, small = false, index = 0 }: { stat: Stat; small?: boolean; index?: number }) {
+  return (
+    <div className={`${fps.kpi} ${small ? fps.kpiSmall : ""} ${styles.enter}`} style={enter(index)}>
+      <div className={fps.kpiTop}>
+        <span className={fps.kpiIcon}>
+          <stat.icon stroke={1.75} aria-hidden="true" />
+        </span>
+        <p className={fps.kpiValue}>{stat.value}</p>
+      </div>
+      <p className={fps.kpiLabel}>{stat.label}</p>
+    </div>
+  );
+}
+
+function Stats({ items, small = false }: { items: Stat[]; small?: boolean }) {
+  return (
+    <div className={fps.kpis} style={columns(items.length)}>
+      {items.map((stat, index) => (
+        <StatKpi key={stat.value} stat={stat} small={small} index={index} />
+      ))}
     </div>
   );
 }
@@ -156,10 +220,14 @@ function Figure({ src, width, height, alt, caption }: { src: string; width: numb
   );
 }
 
-/** Display maths, rendered to HTML when the slide renders. */
-function Tex({ tex }: { tex: string }) {
-  const html = katex.renderToString(tex, { displayMode: true, throwOnError: false });
+/** Maths, rendered to HTML when the slide renders. */
+function Tex({ tex, inline = false }: { tex: string; inline?: boolean }) {
+  const html = katex.renderToString(tex, { displayMode: !inline, throwOnError: false });
   // KaTeX output from fixed strings in this file, not user input.
+  if (inline) {
+    // eslint-disable-next-line react/no-danger
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  }
   // eslint-disable-next-line react/no-danger
   return <div className={styles.equation} dangerouslySetInnerHTML={{ __html: html }} />;
 }
@@ -173,9 +241,7 @@ export function TitleSlide() {
       <div className="relative z-10 flex flex-col items-center justify-center space-y-9">
         <div className="h-1 w-20 rounded-full bg-white/30" />
         <h1 className="font-display text-center text-6xl font-bold text-white">Who bears the AI shock?</h1>
-        <p className="text-center text-2xl text-white opacity-80">
-          The distributional and fiscal incidence in the UK
-        </p>
+        <p className="text-center text-2xl text-white opacity-80">The distributional and fiscal incidence in the UK</p>
         <div className="mt-2 flex flex-col items-center text-center">
           <div className="relative mb-3 h-28 w-28 overflow-hidden rounded-full border-2 border-white/40">
             <BasePathImage src={speaker.photo} alt={speaker.name} fill className="object-cover" />
@@ -194,16 +260,14 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame
-      title="In brief"
-      subtitle="An AI labour-market shock run through the UK tax-benefit system for 2027–28, household by household"
-      scale={1.15}
-    >
+    <Frame title="In brief" subtitle="An AI labour-market shock, household by household, UK tax-benefit rules 2027–28" scale={1.15}>
       <div className={fps.kpis} style={columns(3)}>
         {inBrief.map((item, index) => (
           <div key={item.title} className={`${fps.kpi} ${styles.enter}`} style={enter(index)}>
             <div className={fps.kpiHead}>
-              <Badge icon={item.icon} size="small" />
+              <span className={fps.kpiIcon}>
+                <item.icon stroke={1.75} aria-hidden="true" />
+              </span>
               <p className={fps.kpiTitle} style={{ margin: 0 }}>
                 {item.title}
               </p>
@@ -215,11 +279,7 @@ export function InBriefSlide() {
           </div>
         ))}
       </div>
-      <p className={fps.note}>
-        Why beyond the UK: the job-loss against wage-cut comparison is the extensive-versus-intensive contrast of Dolls et al. (2012),
-        applied to an AI shock, and labour-tax bases lean on the occupations most exposed to AI. Scenario analysis, not a forecast: a decade
-        of adoption applied within one year, an impact-year stress test.
-      </p>
+      <Chips items={inBriefChips} />
     </Frame>
   );
 }
@@ -232,7 +292,7 @@ export function ExposureSlide() {
     <Frame
       section="question"
       title="The jobs most exposed to AI carry much of the tax base"
-      subtitle="Exposure and the central scenario's job-loss rate by occupation group (SOC2020)"
+      subtitle="AI exposure and job-loss rate by occupation group (SOC2020)"
       scale={1.05}
       fill
     >
@@ -264,19 +324,7 @@ export function ExposureSlide() {
             ))}
           </tbody>
         </table>
-        <div>
-          <p className={fps.sideHead}>Why incidence matters</p>
-          <p className={fps.lead}>
-            Managerial and professional work scores high on AI exposure and <strong>pays well</strong>; administrative work scores highest.
-          </p>
-          <Bullets
-            items={[
-              "Those earnings carry much of the income tax and National Insurance (NI, social contributions) base",
-              "Universal Credit (UC), the main means-tested benefit, responds mainly to losses lower down",
-              "So the same shock costs different amounts depending on where it lands",
-            ]}
-          />
-        </div>
+        <Points items={exposureWhy} head="Why incidence matters" />
       </div>
     </Frame>
   );
@@ -284,20 +332,17 @@ export function ExposureSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame
-      section="question"
-      title="Two things the size of the shock does not settle"
-      subtitle="I hold the shock's size fixed and vary both"
-      scale={1.15}
-    >
+    <Frame section="question" title="Two things the size of the shock does not settle" subtitle="Shock size fixed; both varied" scale={1.15}>
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(2)}>
         {openQuestions.map((question, index) => (
           <div key={question.title} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
-            <div className={styles.cardHead}>
+            <div className={fps.kpiHead}>
               <Badge icon={question.icon} size="large" />
+              <h2 style={{ margin: 0 }}>{question.title}</h2>
             </div>
-            <h2>{question.title}</h2>
-            <Bullets items={question.views} />
+            <div style={{ marginTop: "calc(var(--u) * 1.6)" }}>
+              <Points items={question.views} />
+            </div>
           </div>
         ))}
       </div>
@@ -307,39 +352,46 @@ export function QuestionsSlide() {
 
 // ---------- 2. Data and method ----------
 
+function Flow({ steps }: { steps: { icon: Icon; title: string; text: string; owner?: string }[] }) {
+  return (
+    <div className={styles.flow} style={{ gridTemplateColumns: steps.map(() => "minmax(0, 1fr)").join(" auto ") }}>
+      {steps.map((step, index) => (
+        <Fragment key={step.title}>
+          {index > 0 && (
+            <div className={styles.arrow} style={{ gridRow: 1 }}>
+              <IconArrowRight stroke={2.2} aria-hidden="true" />
+            </div>
+          )}
+          <div className={`${styles.step} ${styles.enter}`} style={{ gridRow: 1, ...enter(index) }}>
+            <div className={styles.stepTop}>
+              <Badge icon={step.icon} />
+              <span className={styles.stepMarks}>
+                <span className={styles.stepIndex}>{index + 1}</span>
+              </span>
+            </div>
+            {step.owner && <p className={styles.owner}>{step.owner}</p>}
+            <h2>{step.title}</h2>
+            <p>{step.text}</p>
+          </div>
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
 export function MethodSlide() {
   return (
     <Frame
       section="method"
       title="From occupation exposure to household incomes"
-      subtitle="Baseline and shocked data pass through the same tax-benefit model"
+      subtitle="Baseline and shocked data, same tax-benefit model"
       scale={1.15}
     >
-      <div className={styles.flow} style={{ gridTemplateColumns: methodFlow.map(() => "minmax(0, 1fr)").join(" auto ") }}>
-        {methodFlow.map((step, index) => (
-          <Fragment key={step.title}>
-            {index > 0 && (
-              <div className={styles.arrow} style={{ gridRow: 1 }}>
-                <IconArrowRight stroke={2.2} aria-hidden="true" />
-              </div>
-            )}
-            <div className={`${styles.step} ${styles.enter}`} style={{ gridRow: 1, ...enter(index) }}>
-              <div className={styles.stepTop}>
-                <Badge icon={step.icon} />
-                <span className={styles.stepMarks}>
-                  <span className={styles.stepIndex}>{index + 1}</span>
-                </span>
-              </div>
-              <h2>{step.title}</h2>
-              <p>{step.text}</p>
-            </div>
-          </Fragment>
-        ))}
+      <Flow steps={methodFlow} />
+      <div>
+        <p className={fps.sideHead}>Outcomes</p>
+        <Chips items={methodOutcomes} />
       </div>
-      <p className={fps.note}>
-        Outcomes: Exchequer cost (fall in the government balance), absolute poverty before and after housing costs, and the Gini.
-        Each displaced worker is drawn by systematic sampling within occupation quotas.
-      </p>
     </Frame>
   );
 }
@@ -349,24 +401,15 @@ export function ScenarioSlide() {
     <Frame
       section="method"
       title="The central case: 7% displaced, wages +2.6%, capital income +39.8%"
-      subtitle="Doorley et al. (2026), from one investment-bank scenario of a decade of adoption, applied within one year"
+      subtitle="Doorley et al. (2026): one investment-bank scenario of a decade of adoption, in one year"
       scale={1.15}
     >
-      <div className={fps.kpis} style={columns(3)}>
-        {scenarioInputs.map((input, index) => (
-          <div key={input.value} className={styles.enter} style={enter(index)}>
-            <Kpi value={input.value} label={input.label} />
-          </div>
-        ))}
-      </div>
-      <div>
-        <p className={fps.sideHead}>What the central case leaves out</p>
-        <Bullets items={scenarioCaveats} />
-      </div>
+      <Stats items={scenarioInputs} />
+      <Chips items={scenarioChips} />
+      <Points items={scenarioCaveats} cols={3} head="What the central case leaves out" />
     </Frame>
   );
 }
-
 
 // ---------- PolicyEngine and the method in detail ----------
 
@@ -378,14 +421,16 @@ export function PolicyEngineSlide() {
     <Frame
       section="method"
       title="PolicyEngine: the open-source model behind the paper"
-      subtitle="Tax-benefit microsimulation for the UK and the US, and where its UK work has been used"
+      subtitle="Tax-benefit microsimulation for the UK and the US"
       scale={1.15}
     >
       <div className={fps.kpis} style={columns(3)}>
         {facts.map((fact, index) => (
           <div key={fact.title} className={`${fps.kpi} ${styles.enter}`} style={enter(index)}>
             <div className={fps.kpiHead}>
-              <Badge icon={fact.icon} size="small" />
+              <span className={fps.kpiIcon}>
+                <fact.icon stroke={1.75} aria-hidden="true" />
+              </span>
               <p className={fps.kpiTitle} style={{ margin: 0 }}>
                 {fact.title}
               </p>
@@ -420,9 +465,9 @@ export function PolicyEngineSlide() {
             </div>
           ))}
         </div>
-        <p className={fps.note} style={{ marginTop: "calc(var(--u) * 1)" }}>
-          Use by these bodies is not an endorsement of this paper.
-        </p>
+        <div style={{ marginTop: "calc(var(--u) * 1.2)" }}>
+          <Chips items={[{ icon: IconInfoCircle, text: "Use by these bodies is not an endorsement of this paper" }]} />
+        </div>
       </div>
     </Frame>
   );
@@ -433,31 +478,16 @@ export function ExposureMethodSlide() {
     <Frame
       section="method"
       title="Exposure: AIOE scaled down where AI complements the work"
-      subtitle="No published UK series of complementarity-adjusted exposure exists at the level needed, so I build one for the nine SOC2020 groups"
+      subtitle="No UK complementarity-adjusted series exists at this level, so I build one"
       scale={1.1}
     >
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
-        {exposureBuild.map((item, index) => (
-          <div key={item.title} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
-            <div className={styles.cardHead}>
-              <Badge icon={item.icon} />
-            </div>
-            <h2 style={{ fontSize: "calc(var(--u) * 1.8)" }}>{item.title}</h2>
-            <p style={{ fontSize: "calc(var(--u) * 1.45)" }}>{item.text}</p>
-          </div>
-        ))}
-      </div>
+      <Flow steps={exposureBuild} />
       <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
         <div>
           <Tex tex="\text{C-AIOE}_l = \text{AIOE}_l \times \bigl(1 - (\theta_l - \theta_{\min})\bigr)" />
           <Tex tex="\widetilde{C}_l = \text{C-AIOE}_l - \min_k \text{C-AIOE}_k \;\ge 0" />
         </div>
-        <Bullets
-          items={[
-            "The shift makes the least-exposed group (elementary) score zero: my normalisation, so it gets no displacement",
-            "Exposure varies between groups only, not within them",
-          ]}
-        />
+        <Points items={exposureNotes} />
       </div>
     </Frame>
   );
@@ -468,35 +498,12 @@ export function DataSlide() {
     <Frame
       section="method"
       title="Microcosm: the Family Resources Survey, completed and reweighted"
-      subtitle="PolicyEngine's calibrated UK household microdata: the 2024–25 survey, grossed up to 2027–28"
+      subtitle="PolicyEngine's calibrated UK microdata: 2024–25 survey, grossed up to 2027–28"
       scale={1.02}
     >
-      <div className={fps.kpis} style={columns(4)}>
-        {dataFacts.map((fact) => (
-          <Kpi key={fact.value} value={fact.value} label={fact.label} small />
-        ))}
-      </div>
-      <div className={styles.flow} style={{ gridTemplateColumns: buildStages.map(() => "minmax(0, 1fr)").join(" auto ") }}>
-        {buildStages.map((step, index) => (
-          <Fragment key={step.title}>
-            {index > 0 && (
-              <div className={styles.arrow} style={{ gridRow: 1 }}>
-                <IconArrowRight stroke={2.2} aria-hidden="true" />
-              </div>
-            )}
-            <div className={styles.step} style={{ gridRow: 1 }}>
-              <div className={styles.stepTop}>
-                <Badge icon={step.icon} />
-                <span className={styles.stepMarks}>
-                  <span className={styles.stepIndex}>{index + 1}</span>
-                </span>
-              </div>
-              <p className={styles.owner}>{step.owner}</p>
-              <h2>{step.title}</h2>
-              <p>{step.text}</p>
-            </div>
-          </Fragment>
-        ))}
+      <Stats items={dataFacts} small />
+      <div style={{ marginTop: "calc(var(--u) * 1.5)" }}>
+        <Flow steps={buildStages} />
       </div>
     </Frame>
   );
@@ -507,7 +514,7 @@ export function ImputationSlide() {
     <Frame
       section="method"
       title="Imputation draws from the conditional distribution, not the mean"
-      subtitle="Variables the survey lacks are drawn from donor surveys, one at a time, from their full conditional distribution"
+      subtitle="Missing variables drawn from donor surveys, one at a time"
       scale={1.05}
     >
       <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
@@ -515,13 +522,16 @@ export function ImputationSlide() {
           <p className={fps.eqLabel}>For record i and variable v = 1, …, V, in a fixed order</p>
           <Tex tex={imputationTex.gate} />
           <Tex tex={imputationTex.draw} />
-          <p className={fps.note} style={{ marginTop: "calc(var(--u) * 0.8)" }}>
-            x: predictors both surveys record; y<sub>&lt;v</sub>: variables already imputed; π: a classifier&apos;s estimated probability of a
-            non-zero value; Q: the forest&apos;s estimated conditional quantile function among non-zero donors; u: a seeded uniform draw.
-            Occupation, which carries exposure here, is observed in the FRS; only the FRS copies given tax-record incomes have it imputed from income.
-          </p>
+          <div className={fps.chips} style={{ marginTop: "calc(var(--u) * 1)" }}>
+            {imputationLegend.map((item) => (
+              <span key={item.text} className={fps.chip}>
+                <Tex tex={item.tex} inline />
+                {item.text}
+              </span>
+            ))}
+          </div>
         </div>
-        <Bullets items={imputationPoints} />
+        <Points items={imputationPoints} />
       </div>
     </Frame>
   );
@@ -532,16 +542,21 @@ export function CalibrationSlide() {
     <Frame
       section="method"
       title="Calibration: 98.7% of 1,514 official totals matched within 10%"
-      subtitle="One weight per household, chosen so the file reproduces published aggregates"
+      subtitle="One weight per household, fitted to published aggregates"
       scale={1.05}
     >
       <Tex tex={calibrationTex} />
       <div className={fps.split}>
-        <Bullets items={calibrationPoints} />
-        <div className={fps.kpis} style={{ gridTemplateColumns: "1fr", gap: "calc(var(--u) * 1)" }}>
+        <Points items={calibrationPoints} />
+        <div className={fps.kpis} style={{ gridTemplateColumns: "1fr", gap: "calc(var(--u) * 1.4)" }}>
           {calibrationFacts.map((fact) => (
             <div key={fact.value} className={fps.kpiInline}>
-              <p className={fps.kpiValue}>{fact.value}</p>
+              <div className={fps.kpiTop}>
+                <span className={fps.kpiIcon}>
+                  <fact.icon stroke={1.75} aria-hidden="true" />
+                </span>
+                <p className={fps.kpiValue}>{fact.value}</p>
+              </div>
               <p className={fps.kpiLabel}>{fact.label}</p>
             </div>
           ))}
@@ -556,15 +571,17 @@ export function ShockSlide() {
     <Frame
       section="method"
       title="The shock: three changes to each person's record"
-      subtitle="Applied to the baseline records; the same tax-benefit model then runs on both"
+      subtitle="Applied to baseline records; the same model runs on both"
       scale={1.05}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {shockSteps.map((step, index) => (
           <div key={step.title} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
             <div className={fps.kpiHead}>
-              <Badge icon={step.icon} size="small" />
-              <h2 style={{ fontSize: "calc(var(--u) * 1.9)" }}>{step.title}</h2>
+              <span className={fps.kpiIcon}>
+                <step.icon stroke={1.75} aria-hidden="true" />
+              </span>
+              <h2 style={{ fontSize: "calc(var(--u) * 1.9)", margin: 0 }}>{step.title}</h2>
             </div>
             <div className={fps.eqBox}>
               <Tex tex={step.tex} />
@@ -573,11 +590,7 @@ export function ShockSlide() {
           </div>
         ))}
       </div>
-      <p className={fps.note}>
-        Within each group, systematic sampling on a random permutation picks the displaced: every record has the same inclusion
-        probability, and the quota holds in expectation. The self-employed are outside both labour shocks. PolicyEngine UK takes no spell
-        length, so the displaced are unemployed for the whole year.
-      </p>
+      <Chips items={shockChips} />
     </Frame>
   );
 }
@@ -587,26 +600,18 @@ export function MicrosimSlide() {
     <Frame
       section="method"
       title="Three outcomes, from PolicyEngine UK under the 2027–28 rules"
-      subtitle="A baseline and a shocked run on identical records: no resampling noise, but the survey's sampling error remains"
+      subtitle="Baseline and shocked runs on identical records"
       scale={1.1}
     >
-      <div className={fps.split}>
-        <div className={fps.numbered}>
-          {outcomeDefs.map((item, index) => (
-            <div key={item.title}>
-              <span className={fps.num}>{index + 1}</span>
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <p className={fps.sideHead}>Rules legislated or announced for 2027–28</p>
-          <Bullets items={microsimRules} />
-        </div>
+      <div className={`${fps.split} ${fps.splitEven}`}>
+        <Points items={outcomeDefs} head="Outcomes" />
+        <Points items={microsimRules} head="Rules legislated or announced for 2027–28" />
       </div>
+      <Chips
+        items={[
+          { icon: IconInfoCircle, text: "Identical records: no resampling noise; survey sampling error remains" },
+        ]}
+      />
     </Frame>
   );
 }
@@ -616,21 +621,12 @@ export function DrawsSlide() {
     <Frame
       section="method"
       title="Who is displaced is random, so headline results average draws"
-      subtitle="50 draws: central case, five rules, reforms. 20 draws: channel split, margin comparison. One draw (seed 0): grid, indices, closure"
+      subtitle="Random draws of who is displaced, within occupation quotas"
       scale={1.12}
     >
-      <div className={fps.kpis} style={columns(3)}>
-        {drawFacts.map((fact) => (
-          <Kpi key={fact.value} value={fact.value} label={fact.label} />
-        ))}
-      </div>
-      <Bullets
-        items={[
-          "Calibrated weights are uneven, so one draw's displaced count varies around the quota",
-          '"a ± b" is a mean and the standard deviation across draws, not a confidence interval',
-          "Neither the ± nor the draw range reflects survey sampling or parameter uncertainty",
-        ]}
-      />
+      <Stats items={drawFacts} />
+      <Points items={drawPoints} cols={3} />
+      <Chips items={drawUses} />
     </Frame>
   );
 }
@@ -643,21 +639,9 @@ export function CentralSlide() {
   const pct = (value: number) => `${(Math.abs(value) / top) * 100}%`;
   const afterWage = top + channels[1].value;
   return (
-    <Frame
-      section="central"
-      title="£7.3bn a year, the net of flows several times larger"
-      subtitle="The exposure-proportional central case, 2027–28"
-      scale={0.9}
-    >
-      <div className={fps.kpis} style={columns(4)}>
-        {central.map((stat) => (
-          <Kpi key={stat.value} value={stat.value} label={stat.label} small />
-        ))}
-      </div>
-      <p className={fps.note}>
-        The poverty rise is an upper bound with respect to spell length; +1.99pp with full UC take-up and JSA (20 draws). Cost excludes corporation tax, VAT and
-        the £26.6bn public-sector pay bill.
-      </p>
+    <Frame section="central" title="£7.3bn a year, the net of flows several times larger" subtitle="The exposure-proportional central case, 2027–28" scale={0.9}>
+      <Stats items={central} small />
+      <Chips items={centralChips} />
       <div>
         <p className={fps.sideHead}>Each channel alone, £bn a year (20 paired draws)</p>
         <div className={fps.waterfall}>
@@ -718,16 +702,13 @@ export function TransitionSlide() {
           width={1600}
           height={900}
           alt="Share of each income decile moving from employment to unemployment, rising from about 0.8 per cent in the bottom decile to about 5.6 per cent in the top"
-          caption="Central case, 50-draw means with 95% intervals for the mean (assignment noise only)."
+          caption="Central case, 50-draw means, 95% intervals for the mean (assignment noise only)"
         />
-        <div>
-          <Kpi value="0.78%" label="of people in the bottom decile move into unemployment" small />
-          <div style={{ height: "calc(var(--u) * 2)" }} />
-          <Kpi value="5.57%" label="in the top decile" small />
-          <p className={fps.note} style={{ marginTop: "calc(var(--u) * 2)" }}>
-            Mostly because employees sit higher in the distribution: uniform incidence gives a similar gradient.
-            Women are 49% of employees and 53% of the displaced (20 draws).
-          </p>
+        <div style={{ display: "grid", gap: "calc(var(--u) * 2)" }}>
+          {transitionStats.map((stat, index) => (
+            <StatKpi key={stat.value} stat={stat} small index={index} />
+          ))}
+          <Points items={transitionPoints} />
         </div>
       </div>
     </Frame>
@@ -739,24 +720,12 @@ export function AbsorptionSlide() {
     <Frame
       section="central"
       title="The system absorbs 29% of the loss, almost all through lower taxes"
-      subtitle="Job loss alone, sized to the OBR's technological-displacement scenario (1.67% of employees, 20 draws)"
-      scale={1.12}
+      subtitle="Job loss alone, OBR-sized: 1.67% of employees (20 draws)"
+      scale={1.02}
     >
-      <div className={fps.kpis} style={columns(3)}>
-        {absorption.map((stat, index) => (
-          <div key={stat.value} className={styles.enter} style={enter(index)}>
-            <Kpi value={stat.value} label={stat.label} />
-          </div>
-        ))}
-      </div>
-      <div>
-        <p className={fps.sideHead}>What limits the benefit response: no earnings-related insurance, and well-off claimants</p>
-        <Bullets items={absorptionVariants} />
-      </div>
-      <p className={fps.note}>
-        Not comparable with Dolls et al.: 47% of an unemployment shock in the EU, 34% in the US, 41.5% in the UK (16.3pp from
-        benefits). They assume full take-up and add people like the existing unemployed.
-      </p>
+      <Stats items={absorption} small />
+      <Points items={absorptionVariants} cols={3} head="What limits the benefit response" />
+      <Chips items={absorptionChips} />
     </Frame>
   );
 }
@@ -768,7 +737,7 @@ export function IncidenceSlide() {
     <Frame
       section="comparisons"
       title="Who loses the job sets the cost far more than the poverty rise"
-      subtitle="The same expected 2.04 million displaced under five rules (50 paired draws, means ± s.d.)"
+      subtitle="Same expected 2.04m displaced, five rules (50 paired draws, means ± s.d.)"
       scale={1.05}
     >
       <table className={fps.table}>
@@ -783,10 +752,7 @@ export function IncidenceSlide() {
         </thead>
         <tbody>
           {incidenceRows.map((row) => (
-            <tr
-              key={row.rule}
-              className={row.rule === "Exposure-proportional" ? fps.rowCentral : row.stress ? fps.rowStress : ""}
-            >
+            <tr key={row.rule} className={row.rule === "Exposure-proportional" ? fps.rowCentral : row.stress ? fps.rowStress : ""}>
               <td>
                 <span className={fps.rowName}>{row.rule}</span>
                 <span className={fps.rowText}>{row.text}</span>
@@ -801,10 +767,7 @@ export function IncidenceSlide() {
           ))}
         </tbody>
       </table>
-      <p className={fps.note}>
-        Cost tracks the earnings of those displaced: the displacement channel alone costs £18,300 per displaced worker under uniform
-        incidence and £22,900 under expertise compression. Uniform and exposure-proportional poverty rises do not differ over 2,000 draws.
-      </p>
+      <Chips items={incidenceChips} />
     </Frame>
   );
 }
@@ -814,7 +777,7 @@ export function IncidenceFigureSlide() {
     <Frame
       section="comparisons"
       title="Every rule displaces more in the upper half"
-      subtitle="Who is displaced by decile (seed 0), and cost against the poverty rise (50-draw means ± 1 s.d.)"
+      subtitle="Who is displaced by decile (seed 0); cost against poverty rise (50-draw means ± 1 s.d.)"
       scale={1.1}
       fill
     >
@@ -823,7 +786,7 @@ export function IncidenceFigureSlide() {
         width={2179}
         height={915}
         alt="Left: share displaced by decile under five rules. Right: Exchequer cost against the rise in absolute poverty for each rule."
-        caption="Uniform costs least yet raises poverty about as much as exposure-proportional; the high-earner tilt raises both."
+        caption="Uniform costs least yet raises poverty about as much as central; the high-earner tilt raises both"
       />
     </Frame>
   );
@@ -834,7 +797,7 @@ export function MarginSlide() {
     <Frame
       section="comparisons"
       title="As wage cuts, the same loss costs more but raises poverty far less"
-      subtitle="For this shock: the same gross earnings, removed as wage cuts graded to exposure instead of job losses (20 draws)"
+      subtitle="Same gross earnings, removed as exposure-graded wage cuts (20 draws)"
       scale={0.98}
     >
       <div className={fps.margins}>
@@ -854,29 +817,20 @@ export function MarginSlide() {
         <div className={fps.marginValue}>{margins.job.cost.toFixed(2)}</div>
         <div className={`${fps.marginValue} ${fps.marginHigh}`}>{margins.wage.cost.toFixed(2)}</div>
         <div className={fps.marginLabel}>
-          Rise in absolute poverty before housing costs, pp
+          Rise in absolute poverty (BHC), pp
           <span>same draws</span>
         </div>
         <div className={fps.marginValue}>+{margins.job.bhc.toFixed(2)}</div>
         <div className={`${fps.marginValue} ${fps.marginHigh}`}>+{margins.wage.bhc.toFixed(2)}</div>
         <div className={fps.marginLabel}>
-          Exchequer cost per £ of earnings lost
+          Exchequer cost per £1 of earnings lost
           <span>channels off, employer NI included</span>
         </div>
         <div className={fps.marginValue}>{margins.job.perPound}p</div>
         <div className={`${fps.marginValue} ${fps.marginHigh}`}>{margins.wage.perPound}p</div>
       </div>
-      <p className={fps.note}>
-        Channels off: poverty +2.88pp against +0.92pp; wage cuts alone lower the Gini by 0.63pp (20 draws).
-      </p>
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
-        {marginWhy.map((item) => (
-          <div key={item.title} className={styles.card} style={{ paddingTop: "calc(var(--u) * 1)" }}>
-            <h2 style={{ fontSize: "calc(var(--u) * 1.7)" }}>{item.title}</h2>
-            <p style={{ fontSize: "calc(var(--u) * 1.4)" }}>{item.text}</p>
-          </div>
-        ))}
-      </div>
+      <Chips items={marginChips} />
+      <Points items={marginWhy} cols={3} />
     </Frame>
   );
 }
@@ -888,14 +842,16 @@ export function BreakEvenSlide() {
     <Frame
       section="sensitivity"
       title="Three assumptions can each turn the cost to zero"
-      subtitle="The value of each at which the central cost reaches zero, the other two held at their central values"
+      subtitle="Value at which the central cost reaches zero, the other two held fixed"
       scale={1.1}
     >
       <div className={fps.split}>
         <div>
           {breakEvens.map((row) => (
             <div key={row.label} className={fps.breakEven}>
-              <Badge icon={row.icon} />
+              <span className={fps.kpiIcon}>
+                <row.icon stroke={1.75} aria-hidden="true" />
+              </span>
               <span className={fps.breakEvenLabel}>
                 {row.label}
                 <span className={fps.breakEvenNote}>{row.note}</span>
@@ -911,15 +867,9 @@ export function BreakEvenSlide() {
             </div>
           ))}
         </div>
-        <div>
-          <p className={fps.sideHead}>Other assumptions, central cost</p>
-          <Bullets items={costMovers} />
-          <p className={fps.note} style={{ marginTop: "calc(var(--u) * 1.4)" }}>
-            Full UC take-up and JSA move every break-even further away. The 9.5-month figure is an upper bound: half a year of earnings
-            also withdraws UC a six-month spell would pay.
-          </p>
-        </div>
+        <Points items={costMovers} head="Other assumptions, central cost" />
       </div>
+      <Chips items={breakEvenChips} />
     </Frame>
   );
 }
@@ -933,8 +883,8 @@ export function ClosureSlide() {
     <Frame
       section="sensitivity"
       title="Where the displaced wage bill goes decides the sign"
-      subtitle="A closed account: part of the £68.3bn net fall in labour income returns as profit, taxed at 25% (seed 0)"
-      scale={1.1}
+      subtitle={`Closed account: part of the £${closure.labourFall}bn labour-income fall returns as profit, taxed at 25% (seed 0)`}
+      scale={1.05}
     >
       <div className={fps.rangeBox}>
         <div className={fps.rangeLine}>
@@ -959,15 +909,9 @@ export function ClosureSlide() {
           </span>
         </div>
       </div>
-      <Bullets
-        items={[
-          `Displaced workers lose £${closure.displacedEarnings}bn; survivors gain £${closure.survivorGain}bn`,
-          "Half of post-tax profit is paid out; dividends taxed at the 36% average rate of the capital channel",
-          "The central capital uplift adds £12.6bn more dividends than the labour shock can fund",
-          "The rest of the payout goes to overseas owners and pension funds, untaxed here",
-          "Static accounting: no profit shifting; public-sector pay cannot become profit, so the gain end is overstated",
-        ]}
-      />
+      <div style={{ marginTop: "calc(var(--u) * 3)" }}>
+        <Points items={closurePoints} cols={3} />
+      </div>
     </Frame>
   );
 }
@@ -977,8 +921,8 @@ export function PolicySlide() {
     <Frame
       section="sensitivity"
       title="Three policy responses: cost and poverty reduction inside the shocked world"
-      subtitle="Each reform on top of the central shock, 2027–28 (50 draws; shocked-plus-reform minus shocked)"
-      scale={1.1}
+      subtitle="Each reform on top of the central shock, 2027–28 (50 draws)"
+      scale={1.05}
     >
       <table className={fps.table}>
         <thead>
@@ -1003,24 +947,21 @@ export function PolicySlide() {
           ))}
         </tbody>
       </table>
-      <p className={fps.note}>
-        Cost per point measures one objective only: R1 replaces earnings for displaced workers, while R2 and R3 raise UC for all
-        claimants, including households the shock does not touch. Not a ranking. Static: no labour-supply or re-employment response. R1 is
-        untaxed and ignored by means tests, so at the top of its cost range.
-        With half-year spells (5 draws), R1 costs £31bn per point and cuts poverty less than R2.
-      </p>
+      <Points items={policyPoints} cols={2} />
     </Frame>
   );
 }
 
 export function ConclusionsSlide() {
   return (
-    <Frame title="Conclusions" subtitle="Holding the size of the shock fixed" scale={0.92}>
+    <Frame title="Conclusions" subtitle="Holding the size of the shock fixed" scale={0.95}>
       <div className={fps.split}>
         <div className={fps.numbered}>
           {conclusions.map((item, index) => (
             <div key={item.title} className={styles.enter} style={enter(index)}>
-              <span className={fps.num}>{index + 1}</span>
+              <span className={fps.kpiIcon}>
+                <item.icon stroke={1.75} aria-hidden="true" />
+              </span>
               <div>
                 <h2>{item.title}</h2>
                 <p>{item.text}</p>
@@ -1028,16 +969,7 @@ export function ConclusionsSlide() {
             </div>
           ))}
         </div>
-        <div>
-          <p className={fps.sideHead}>Limits and next steps</p>
-          <div style={{ "--u": "calc(var(--u0) * 1.12)" } as CSSProperties}>
-            <Bullets items={limits} />
-          </div>
-          <p className={fps.lead} style={{ marginTop: "calc(var(--u) * 1.6)", fontSize: "calc(var(--u) * 1.6)" }}>
-            Next: calibrate spell length and re-employment pay to UK displacement evidence, and model take-up and JSA for the newly
-            displaced.
-          </p>
-        </div>
+        <Points items={limits} head="Limits and next steps" />
       </div>
     </Frame>
   );
@@ -1047,28 +979,42 @@ const contacts: { label: string; url: string; Icon: Icon }[] = [
   { label: "vahid@policyengine.org", url: "mailto:vahid@policyengine.org", Icon: IconMail },
   { label: sources.post.label, url: sources.post.href, Icon: IconWorld },
   { label: sources.paper.label, url: sources.paper.href, Icon: IconBrandGithub },
-  { label: "Paper: uk-ai-study/blob/main/paper/main.pdf", url: "https://github.com/PolicyEngine/uk-ai-study/blob/main/paper/main.pdf", Icon: IconFileText },
+  { label: sources.ssrn.label, url: sources.ssrn.href, Icon: IconFileText },
 ];
 
 export function ClosingSlide() {
   return (
     <Slide isEnd className={styles.deck}>
-      <h1 className={`${styles.closingTitle} font-display font-bold text-center`}>Thank you</h1>
+      <h1 className={`${styles.closingTitle} font-display font-bold text-center`} style={{ marginTop: "calc(var(--u0) * 5)" }}>
+        Thank you
+      </h1>
       <p className={`${styles.closingSubtitle} text-center text-white/85`}>Who bears the AI shock?</p>
-      <div className={`${styles.closingContacts} grid w-full max-w-5xl grid-cols-2 self-center`}>
-        {contacts.map(({ label, url, Icon: ContactIcon }) => (
-          <a
-            key={label}
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-            className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
-          >
-            <Badge icon={ContactIcon} size="small" />
-            <span className="text-lg font-medium">{label}</span>
-          </a>
-        ))}
+      <div className={fps.qrRow}>
+        <div className={`${styles.closingContacts} grid grid-cols-1`} style={{ marginTop: 0, width: "calc(var(--u0) * 42)" }}>
+          {contacts.map(({ label, url, Icon: ContactIcon }) => (
+            <a
+              key={label}
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(event) => event.stopPropagation()}
+              className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 transition-colors hover:bg-white/20"
+            >
+              <Badge icon={ContactIcon} size="small" />
+              <span className="text-lg font-medium">{label}</span>
+            </a>
+          ))}
+        </div>
+        <a
+          className={fps.qrBox}
+          href={sources.ssrn.href}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <BasePathImage src="/images/fps-berlin-2026/ssrn-qr.svg" alt="QR code linking to the paper on SSRN" width={370} height={370} />
+          <p>Scan for the paper on SSRN</p>
+        </a>
       </div>
     </Slide>
   );
@@ -1081,7 +1027,7 @@ export function ObrBackupSlide() {
     <Frame
       section="central"
       title="Close to the OBR's £9bn, but only because offsetting lines differ"
-      subtitle="Unemployment up 1.4pp, no survivor wage rise or capital-income uplift (20 draws, £bn a year)"
+      subtitle="Unemployment +1.4pp; no survivor wage rise or capital uplift (20 draws, £bn a year)"
       scale={1.15}
     >
       <div className={fps.split}>
@@ -1103,18 +1049,7 @@ export function ObrBackupSlide() {
             ))}
           </tbody>
         </table>
-        <div>
-          <p className={fps.lead}>
-            The OBR&apos;s technological-displacement scenario, <strong>simulated on the same scale</strong>.
-          </p>
-          <Bullets
-            items={[
-              "The simulation loses more receipts and adds less welfare spending",
-              "Timing and coverage differ too: one simulated year against an average",
-              "The simulated total also nets −£0.3bn of childcare support and statutory pay that end with the job",
-            ]}
-          />
-        </div>
+        <Points items={obrPoints} />
       </div>
     </Frame>
   );
@@ -1125,34 +1060,32 @@ export function IndexBackupSlide() {
     <Frame
       section="sensitivity"
       title="Five exposure indices give £4–8bn on one draw"
-      subtitle="Seed 0, shifted to the 50-draw mean displaced count; draws scatter ±£1.7bn around that adjustment"
-      scale={1.1}
+      subtitle="Seed 0, adjusted to the 50-draw mean displaced count"
+      scale={1.05}
     >
-      <table className={fps.table}>
-        <thead>
-          <tr>
-            <th>Index</th>
-            <th className={fps.num}>Cost on the draw (£bn)</th>
-            <th className={fps.num}>Adjusted cost (£bn)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {indexRows.map((row) => (
-            <tr key={row.index} className={row.index.startsWith("C-AIOE") ? fps.rowCentral : ""}>
-              <td className={fps.rowName}>{row.index}</td>
-              <td className={fps.num}>{row.raw}</td>
-              <td className={fps.num}>
-                <strong>{row.adjusted}</strong>
-              </td>
+      <div className={fps.split}>
+        <table className={fps.table}>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th className={fps.num}>Cost on the draw (£bn)</th>
+              <th className={fps.num}>Adjusted (£bn)</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className={fps.note}>
-        Each extra million displaced adds £11.6bn across the 50 draws, so the adjustment removes the draw&apos;s luck in its count. Given
-        the ±£1.7bn scatter, C-AIOE, Felten and DfE AIOE are indistinguishable. Under every index the Gini rises, and the transition share
-        is higher in the top decile than the bottom.
-      </p>
+          </thead>
+          <tbody>
+            {indexRows.map((row) => (
+              <tr key={row.index} className={row.index.startsWith("C-AIOE") ? fps.rowCentral : ""}>
+                <td className={fps.rowName}>{row.index}</td>
+                <td className={fps.num}>{row.raw}</td>
+                <td className={fps.num}>
+                  <strong>{row.adjusted}</strong>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Points items={indexPoints} />
+      </div>
     </Frame>
   );
 }
@@ -1162,7 +1095,7 @@ export function DecompositionBackupSlide() {
     <Frame
       section="central"
       title="Losses peak in the upper-middle deciles"
-      subtitle="Market income, benefits, and taxes and contributions, as a share of baseline disposable income (seed 0)"
+      subtitle="Market income, benefits, taxes and contributions, % of baseline disposable income (seed 0)"
       scale={1.1}
       fill
     >
@@ -1171,7 +1104,7 @@ export function DecompositionBackupSlide() {
         width={1800}
         height={900}
         alt="Change in market income, benefits and taxes by income decile"
-        caption="Seed 0: decile 8 loses 3.7% (2.9% over 20 draws). Decile 1's gain reverses under another household ranking: not a finding."
+        caption="Decile 8 loses 3.7% (2.9% over 20 draws); decile 1's gain is not robust to ranking"
       />
     </Frame>
   );
@@ -1182,7 +1115,7 @@ export function GridBackupSlide() {
     <Frame
       section="sensitivity"
       title="The survivor wage rise decides whether average incomes fall"
-      subtitle="Change in average household disposable income (%), capital-income uplift on (seed 0)"
+      subtitle="Change in average household disposable income (%), capital uplift on (seed 0)"
       scale={1.1}
       fill
     >
@@ -1191,7 +1124,7 @@ export function GridBackupSlide() {
         width={2000}
         height={1000}
         alt="Grid of disposable income changes by displacement rate and wage uplift"
-        caption="At 7% displacement, average income falls with a survivor wage rise of up to 4% (−0.32%) and rises with 5% (+0.15%)."
+        caption="At 7% displaced: incomes fall up to a 4% wage rise (−0.32%), rise at 5% (+0.15%)"
       />
     </Frame>
   );
