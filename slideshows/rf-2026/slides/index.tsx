@@ -14,9 +14,10 @@ import Slide from "@/components/core/Slide";
 import { speakers } from "@/lib/speakers";
 import {
   breakdowns,
+  budgetBehaviour,
   budgetLabel,
+  budgetNotes,
   budgetPackage,
-  budgetReasons,
   budgetRows,
   budgetRunLabel,
   budgetTabs,
@@ -29,9 +30,11 @@ import {
   dataCompare,
   energy,
   funder,
+  grant1Foot,
   grant2Foot,
   grantRows,
   grants,
+  inBrief,
   knownLimits,
   microcosmFlow,
   microcosmFoot,
@@ -39,12 +42,14 @@ import {
   modelFlow,
   modelFoot,
   notClaimed,
+  notFound,
   options,
   optionsFoot,
   parts,
   pilotBrings,
   pilotCandidates,
   pilotFlow,
+  pilotScope,
   questions,
   rfMethod,
   rfMethodFoot,
@@ -57,10 +62,12 @@ import {
   rulesEntities,
   rulesFacts,
   rulesRegistry,
+  scorecardHead,
   scorecardLabel,
   scorecardNote,
   scorecardRows,
   sources,
+  stepsAlsoLabel,
   stepsCaution,
   stepsFoot,
   stepsTable,
@@ -255,7 +262,7 @@ function Table({
 }: {
   template: string;
   heads: ReactNode[];
-  rows: { key: string; step: number; cells: ReactNode[]; className?: string }[];
+  rows: { key: string; step: number; cells: ReactNode[]; className?: string; span?: boolean }[];
   dense?: boolean;
 }) {
   const rowStyle = { gridTemplateColumns: template };
@@ -268,9 +275,11 @@ function Table({
       </div>
       {rows.map((row) => (
         <Reveal key={row.key} step={row.step} className={`${styles.mapRow} ${row.className ?? ""}`} style={rowStyle}>
-          {row.cells.map((cell, index) => (
-            <div key={index}>{cell}</div>
-          ))}
+          {row.span ? (
+            <div style={{ gridColumn: "1 / -1" }}>{row.cells[0]}</div>
+          ) : (
+            row.cells.map((cell, index) => <div key={index}>{cell}</div>)
+          )}
         </Reveal>
       ))}
     </div>
@@ -303,7 +312,7 @@ export function TitleSlide() {
           PolicyEngine UK and the Resolution Foundation’s modelling
         </h1>
         <p className="text-center text-2xl text-balance text-white opacity-80">
-          The model, the Microcosm data, and how the uses of a static tax-benefit model map across
+          The model, the Microcosm data, and how the Resolution Foundation’s uses of the IPPR model map across
         </p>
         <div className="mt-4 flex items-start justify-center gap-16">
           {coverSpeakers.map((speaker) => (
@@ -328,7 +337,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="In brief" scale={1.04} subtitle="Six parts; about twenty minutes, then discussion">
+    <Frame section="intro" title="In brief" scale={1.0} subtitle="Six parts, then discussion">
       <ol className={styles.agenda}>
         {parts.map((part, index) => (
           <li key={part.key} className={styles.enter} style={enter(index)}>
@@ -343,6 +352,14 @@ export function InBriefSlide() {
           </li>
         ))}
       </ol>
+      <div className={styles.answers}>
+        <p className={styles.rowLabel}>The two answers, up front</p>
+        {inBrief.map((answer) => (
+          <p key={answer.label}>
+            <strong>{answer.label}:</strong> {answer.text}
+          </p>
+        ))}
+      </div>
     </Frame>
   );
 }
@@ -439,17 +456,17 @@ export function WhoSlide() {
       </Reveal>
       <div className={styles.logoGroups}>
         <Reveal step={2}>
-          <LogoSection title="Government and Parliament" logos={government} cells={cells} />
+          <LogoSection title="Government and Parliament: where PolicyEngine has appeared" logos={government} cells={cells} />
         </Reveal>
         <Reveal step={3}>
-          <LogoSection title="Think tanks and researchers" logos={thinkTanks} cells={cells} />
+          <LogoSection title="Think tanks and researchers: published work using PolicyEngine" logos={thinkTanks} cells={cells} />
         </Reveal>
       </div>
     </Frame>
   );
 }
 
-// ---------- 4. How a run works ----------
+// ---------- 6. How a run works ----------
 
 export function ModelSlide() {
   return (
@@ -457,7 +474,7 @@ export function ModelSlide() {
       section="model"
       title="PolicyEngine UK computes household incomes after taxes and benefits"
       scale={1.25}
-      subtitle="A static model by default: rules applied to a household file, twice, and the difference"
+      subtitle="Rules applied to a household file, twice, and the difference"
     >
       <Flow steps={modelFlow} builds={[1, 2, 3, 4]} />
       <Foot step={4}>{modelFoot}</Foot>
@@ -465,7 +482,7 @@ export function ModelSlide() {
   );
 }
 
-// ---------- 5. How the rules are encoded ----------
+// ---------- 7. How the rules are encoded ----------
 
 const codeAccent = /(\b(?:class|def|return)\b|"[^"]*")/;
 
@@ -475,7 +492,7 @@ export function RulesSlide() {
       section="model"
       title="How the rules are encoded"
       scale={1.12}
-      subtitle="Parameters with legal references, formulas and tests, in the open"
+      subtitle="Parameters with references, formulas and tests, in the open"
     >
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
         <Reveal step={1} className={styles.code}>
@@ -525,7 +542,7 @@ export function RulesSlide() {
   );
 }
 
-// ---------- 6. Coverage ----------
+// ---------- 8. Coverage ----------
 
 export function CoverageSlide() {
   return (
@@ -549,7 +566,7 @@ export function CoverageSlide() {
   );
 }
 
-// ---------- 7. The household file ----------
+// ---------- 9. The household file ----------
 
 export function MicrocosmBuildSlide() {
   const blocks = [...microcosmFlow, microcosmResult];
@@ -590,7 +607,7 @@ export function MicrocosmBuildSlide() {
   );
 }
 
-// ---------- 8. Breakdowns ----------
+// ---------- 10. Breakdowns ----------
 
 export function BreakdownsSlide() {
   return (
@@ -617,15 +634,15 @@ export function BreakdownsSlide() {
   );
 }
 
-// ---------- 9. The Nuffield Foundation grants ----------
+// ---------- 4. The Nuffield Foundation grants ----------
 
 export function NuffieldSlide() {
   return (
     <Frame
       section="nuffield"
-      title="What the Nuffield Foundation grants funded"
-      scale={0.98}
-      subtitle="Two grants: local-area analysis first, then Budget analysis by constituency and council tax"
+      title="The Nuffield Foundation grants: what they named and what exists today"
+      scale={0.88}
+      subtitle="Local-area analysis first, then Budget analysis by constituency and Council Tax Reduction"
     >
       <Reveal step={1} className={styles.grants}>
         {grants.map((grant) => (
@@ -651,12 +668,15 @@ export function NuffieldSlide() {
           }))}
         />
       </Reveal>
+      <Foot step={2}>
+        <span className={styles.footStrong}>{grant1Foot}</span>
+      </Foot>
       <Foot step={3}>{grant2Foot}</Foot>
     </Frame>
   );
 }
 
-// ---------- 10. The Autumn Budget 2026 dashboard ----------
+// ---------- 5. The Autumn Budget 2026 dashboard ----------
 
 function BudgetCard() {
   const address = new URL(sources.budgetDashboard.href);
@@ -721,7 +741,7 @@ export function ReportsSlide() {
       section="uses"
       title="The Resolution Foundation’s 2026 research we have read"
       scale={1.0}
-      subtitle="And where each uses the IPPR tax-benefit model, from the figure notes"
+      subtitle="And where each uses the IPPR tax-benefit model, where the figure notes say so"
     >
       <Table
         template="1.15fr 0.7fr 2.2fr 2fr"
@@ -748,7 +768,7 @@ export function MethodSlide() {
       subtitle="From Living Standards Outlook 2026, Annex 1 (10 February 2026). Please correct us"
     >
       <Flow
-        steps={rfMethod.map((step) => ({ ...step, teal: step.owner === "IPPR model" }))}
+        steps={rfMethod.map((step) => ({ ...step, teal: step.owner.includes("IPPR model") }))}
         builds={[1, 2, 3, 4, 5]}
         titleLines={1}
       />
@@ -757,7 +777,7 @@ export function MethodSlide() {
           <i className={styles.keyRf} /> RF’s own processing
         </span>
         <span>
-          <i className={styles.keyModel} /> The IPPR tax-benefit model
+          <i className={styles.keyModel} /> The IPPR tax-benefit model (step 3 largely, per Annex 1)
         </span>
       </div>
       <Foot step={5}>{rfMethodFoot}</Foot>
@@ -767,23 +787,44 @@ export function MethodSlide() {
 
 // ---------- 13 and 14. The mapping tables ----------
 
-function MapTable({ rows, whereHead, firstHead }: { rows: MapRow[]; whereHead: string; firstHead: string }) {
+function MapTable({
+  rows,
+  whereHead,
+  firstHead,
+  alsoLabel,
+  template = "2.3fr 1.55fr 2.75fr 1.25fr",
+}: {
+  rows: MapRow[];
+  whereHead: string;
+  firstHead: string;
+  /** Heads the rows marked "also", a second group under the main rows. */
+  alsoLabel?: string;
+  template?: string;
+}) {
+  const firstAlso = rows.findIndex((row) => row.also);
+  const tableRows = rows.map((row) => ({
+    key: row.label,
+    step: row.step,
+    cells: [
+      <RowLabel key="l" icon={row.icon}>{row.label}</RowLabel>,
+      <span key="w" className={styles.targetSource}>{row.where}</span>,
+      row.today,
+      <Tags key="t" list={row.tags} />,
+    ] as ReactNode[],
+    span: false,
+    className: undefined as string | undefined,
+  }));
+  if (alsoLabel && firstAlso >= 0) {
+    tableRows.splice(firstAlso, 0, {
+      key: "also",
+      step: rows[firstAlso].step,
+      cells: [<span key="g" className={styles.rowLabel}>{alsoLabel}</span>],
+      span: true,
+      className: styles.mapGroup,
+    });
+  }
   return (
-    <Table
-      dense
-      template="2.3fr 1.55fr 2.75fr 1.25fr"
-      heads={[firstHead, whereHead, "PolicyEngine today", "Status"]}
-      rows={rows.map((row) => ({
-        key: row.label,
-        step: row.step,
-        cells: [
-          <RowLabel key="l" icon={row.icon}>{row.label}</RowLabel>,
-          <span key="w" className={styles.targetSource}>{row.where}</span>,
-          row.today,
-          <Tags key="t" list={row.tags} />,
-        ],
-      }))}
-    />
+    <Table dense template={template} heads={[firstHead, whereHead, "PolicyEngine today", "Status"]} rows={tableRows} />
   );
 }
 
@@ -791,11 +832,11 @@ export function UsesSlide() {
   return (
     <Frame
       section="uses"
-      title="Each published use of the IPPR model, mapped to PolicyEngine: analyses"
-      scale={1.0}
-      subtitle="What RF publishes with the model, and what PolicyEngine does today"
+      title="RF’s published analyses, mapped to PolicyEngine"
+      scale={0.9}
+      subtitle="What RF publishes, and what PolicyEngine does today"
     >
-      <MapTable rows={usesTable} firstHead="RF’s use" whereHead="Where" />
+      <MapTable rows={usesTable} firstHead="RF’s use" whereHead="Where" template="2.2fr 1.5fr 3.1fr 1.3fr" />
       <Foot step={3}>
         {usesFoot[0]}
         <br />
@@ -810,10 +851,16 @@ export function StepsSlide() {
     <Frame
       section="uses"
       title="Each step of the projection method, mapped to PolicyEngine"
-      scale={0.94}
+      scale={0.81}
       subtitle="Which steps are the model’s, which are RF’s own, and what PolicyEngine does today"
     >
-      <MapTable rows={stepsTable} firstHead="Step" whereHead="Whose" />
+      <MapTable
+        rows={stepsTable}
+        firstHead="Step"
+        whereHead="Whose"
+        alsoLabel={stepsAlsoLabel}
+        template="2.15fr 1.35fr 3.3fr 1.3fr"
+      />
       <Foot step={3} tone="caution">
         {stepsCaution}
       </Foot>
@@ -860,7 +907,7 @@ export function EnergySlide() {
         </a>
         <a href={sources.energyCode.href} target="_blank" rel="noopener noreferrer" className="pointer-events-auto" onClick={(event) => event.stopPropagation()}>
           <IconBrandGithub stroke={1.8} aria-hidden="true" />
-          github.com/PolicyEngine/uk-energy-reforms (14bf3b0, analyses/rf-billing-me-softly)
+          github.com/PolicyEngine/uk-energy-reforms
         </a>
       </Reveal>
       <Foot step={2}>{energy.foot}</Foot>
@@ -890,7 +937,7 @@ function CompareTable({ rows }: { rows: CompareRow[] }) {
         cells: [
           <RowLabel key="l" icon={row.icon}>{row.label}</RowLabel>,
           row.cells[0],
-          <span key="i" className={row.cells[1] === "Not public" ? styles.notPublic : undefined}>{row.cells[1]}</span>,
+          <span key="i" className={row.cells[1] === notFound ? styles.notPublic : undefined}>{row.cells[1]}</span>,
           row.cells[2],
         ],
       }))}
@@ -903,7 +950,7 @@ export function DataCompareSlide() {
     <Frame
       section="compare"
       title="The data: PolicyEngine, the IPPR model and UKMOD"
-      scale={1.0}
+      scale={0.94}
       subtitle="Three ways of preparing the same survey. IPPR column: as RF uses it, from published notes"
     >
       <CompareTable rows={dataCompare} />
@@ -916,7 +963,7 @@ export function RulesCompareSlide() {
     <Frame
       section="compare"
       title="The rules engine and access: PolicyEngine, the IPPR model and UKMOD"
-      scale={0.9}
+      scale={0.82}
       subtitle="UKMOD column from CeMPA’s 2026 country report; IPPR column from published descriptions, dated"
     >
       <CompareTable rows={rulesCompare} />
@@ -1002,40 +1049,46 @@ export function BudgetObrSlide() {
     <Frame
       section="compare"
       title="Autumn Budget 2026: PolicyEngine’s costings beside the OBR’s"
-      scale={1.05}
-      subtitle="Static estimates, as published on 31 October 2026, including the gaps"
+      scale={0.96}
+      subtitle="All seven measures, as published on 31 October 2026, with the main reason for each gap"
     >
-      <div className={styles.budgetGrid}>
-        <div>
-          <Table
-            template="2.3fr 0.9fr 1.1fr 1fr 1fr"
-            heads={[
-              "Measure, £m",
-              "Year",
-              <span key="p" className={styles.num}>PolicyEngine</span>,
-              <span key="o" className={styles.num}>OBR</span>,
-              <span key="r" className={styles.num}>PE as % of OBR</span>,
-            ]}
-            rows={all.map((row) => ({
-              key: row.measure,
-              step: row.step,
-              className: row.measure === budgetPackage.measure ? styles.mapTotal : undefined,
-              cells: [
-                <span key="m" className={styles.targetTopic}>{row.measure}</span>,
-                row.year,
-                <span key="p" className={styles.num}>{money(row.pe)}</span>,
-                <span key="o" className={styles.num}>{money(row.obr)}</span>,
-                <span key="r" className={`${styles.num} ${styles.targetSource}`}>{ratio(row.pe, row.obr)}</span>,
-              ],
-            }))}
-          />
-          <p className={styles.runLabel}>{budgetLabel}</p>
+      <div>
+        <Table
+          dense
+          template="2.1fr 0.7fr 0.95fr 0.7fr 0.85fr 3.9fr"
+          heads={[
+            "Measure, £m",
+            "Year",
+            <span key="p" className={styles.num}>PolicyEngine</span>,
+            <span key="o" className={styles.num}>OBR</span>,
+            <span key="r" className={styles.num}>PE as % of OBR</span>,
+            "Main reason",
+          ]}
+          rows={all.map((row) => ({
+            key: row.measure,
+            step: row.step,
+            className: row.measure === budgetPackage.measure ? styles.mapTotal : undefined,
+            cells: [
+              <span key="m" className={styles.targetTopic}>{row.measure}</span>,
+              row.year,
+              <span key="p" className={styles.num}>{money(row.pe)}</span>,
+              <span key="o" className={styles.num}>{money(row.obr)}</span>,
+              <span key="r" className={`${styles.num} ${styles.targetSource}`}>{ratio(row.pe, row.obr)}</span>,
+              <span key="w" className={styles.reasonCell}>{row.reason}</span>,
+            ],
+          }))}
+        />
+        <div className={styles.tableNotes}>
+          {budgetNotes.map((note) => (
+            <p key={note}>{note}</p>
+          ))}
         </div>
-        <Reveal step={3} className={styles.why}>
-          <p className={styles.rowLabel}>Why they differ</p>
-          <Bullets items={budgetReasons} />
-        </Reveal>
       </div>
+      <Foot step={3}>
+        {budgetBehaviour}
+        <br />
+        <span className={styles.footMuted}>{budgetLabel}</span>
+      </Foot>
     </Frame>
   );
 }
@@ -1049,14 +1102,14 @@ const pct = (pe: number, rf: number) => {
 
 export function LimitsSlide() {
   return (
-    <Frame section="compare" title="What we do not claim, and known limits" scale={0.98} subtitle="For an honest comparison">
+    <Frame section="compare" title="What we do not claim, and known limits" scale={0.98} subtitle="What has and has not been tested">
       <div className={styles.limits}>
         <Reveal step={1} className={styles.limitCol}>
           <p className={styles.rowLabel}>Not claimed</p>
           <Bullets items={notClaimed} />
         </Reveal>
         <Reveal step={1} className={styles.limitCol}>
-          <p className={styles.rowLabel}>The only like-for-like rows on the scorecard</p>
+          <p className={styles.rowLabel}>{scorecardHead}</p>
           <div className={styles.scoreRows}>
             <div className={styles.scoreHead}>
               <span />
@@ -1091,7 +1144,7 @@ export function RoutesSlide() {
   return (
     <Frame
       section="next"
-      title="Routes in for teams that don’t write Python"
+      title="Four routes in: web app, assistant, plugin, Python"
       scale={1.05}
       subtitle="From a web page to a prompt to code"
     >
@@ -1132,7 +1185,7 @@ export function OptionsSlide() {
     <Frame
       section="next"
       title="Three ways the Resolution Foundation could use PolicyEngine"
-      scale={1.05}
+      scale={0.96}
       subtitle="Options for discussion; none depends on the others"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
@@ -1165,7 +1218,7 @@ export function PilotSlide() {
     <Frame
       section="next"
       title="A possible pilot: one published analysis, side by side"
-      scale={1.0}
+      scale={0.88}
       subtitle="Reproduce one Resolution Foundation chart in PolicyEngine and account for every difference"
     >
       <Flow steps={pilotFlow} />
@@ -1186,6 +1239,7 @@ export function PilotSlide() {
           </p>
         ))}
       </Reveal>
+      <Foot step={3}>{pilotScope}</Foot>
     </Frame>
   );
 }

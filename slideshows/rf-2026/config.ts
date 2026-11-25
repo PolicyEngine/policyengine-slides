@@ -35,7 +35,7 @@ export const rf2026Config: SlideshowConfig = {
   id: "rf-2026",
   title: "PolicyEngine UK and the Resolution Foundation's modelling",
   description:
-    "PolicyEngine UK and its Microcosm data, the Nuffield Foundation grants, RF's published uses of the IPPR tax-benefit model mapped to PolicyEngine, and comparisons with the IPPR model and UKMOD.",
+    "The Nuffield Foundation grants, PolicyEngine UK and its Microcosm data, RF's published analyses mapped to PolicyEngine, and comparisons with the IPPR model and UKMOD.",
   date: "2026-11-30",
   location: "Resolution Foundation (video call)",
   footerText: "Resolution Foundation · 30 November 2026",
@@ -49,15 +49,15 @@ export const rf2026Config: SlideshowConfig = {
     TitleSlide,
     InBriefSlide,
     { component: WhoSlide, builds: 3, exportBuilds: 1 },
-    // Part 2. The model and the data.
+    // Part 2. The Nuffield Foundation grants.
+    { component: NuffieldSlide, builds: 3, exportBuilds: 1 },
+    BudgetDashboardSlide,
+    // Part 3. The model and the data.
     { component: ModelSlide, builds: 4, exportBuilds: 1 },
     { component: RulesSlide, builds: 3, exportBuilds: 1 },
     { component: CoverageSlide, builds: 5, exportBuilds: 1 },
     { component: MicrocosmBuildSlide, builds: 5, exportBuilds: 1 },
     { component: BreakdownsSlide, builds: 4, exportBuilds: 1 },
-    // Part 3. The Nuffield Foundation grants.
-    { component: NuffieldSlide, builds: 3, exportBuilds: 1 },
-    BudgetDashboardSlide,
     // Part 4. The Resolution Foundation's research and the IPPR model.
     ReportsSlide,
     { component: MethodSlide, builds: 5, exportBuilds: 1 },
