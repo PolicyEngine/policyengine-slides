@@ -83,7 +83,7 @@ exposed group is zero, my normalisation. θ enters only relative to its
 minimum and mean, so the rebuilt series' level offset does not matter.
 Exposure varies between nine groups only. If asked: for the four groups
 with a negative AIOE, a higher θ raises the score; the unadjusted AIOE
-gives £8.0bn against £8.2bn on the same draw (slide 25).
+gives £8.0bn against £8.2bn after the displaced-count adjustment (slide 25).
 
 **8. Microcosm.** The FRS 2024–25 plus SPI records for top incomes,
 imputations, and weights calibrated to 1,514 targets (98.7 per cent within
@@ -188,9 +188,10 @@ adjusted C-AIOE (£8.2bn) differs from £7.3bn: it is one draw, within the
 
 **26. Closure.** The capital uplift is not tied to the labour shock. If a
 share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
-cent, the result runs from a £0.9bn gain to a £14.4bn cost. That range spans
-half to all of the fall becoming profit; the cost falls linearly in that
-share. This is where
+cent, the result runs from a £0.9bn gain to a £14.4bn cost. The range runs
+from half the fall becoming profit, half of it UK-owned (£14.4bn cost), to
+all of it becoming UK-owned profit (£0.9bn gain); the cells between are
+£12.1bn and £3.6bn. This is where
 the tax-base question for this audience sits.
 
 **27. Policy.** Three stylised responses, compared on cost and poverty only.

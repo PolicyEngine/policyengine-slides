@@ -99,7 +99,7 @@ export const openQuestions = [
     views: [
       "Job loss: whole earnings go, for fewer people",
       "Wage cuts: the same pounds, spread across many workers (Acemoglu and Restrepo 2022)",
-      "If AI shifts income from labour to capital, labour-tax bases erode (Korinek 2026)",
+      "If AI shifts income from labour to capital, labour-tax bases erode (Korinek and Lockwood 2026)",
     ],
   },
 ];
@@ -137,7 +137,7 @@ export const scenarioInputs: { value: string; label: string }[] = [
 
 export const scenarioCaveats = [
   "A one-year stock: no re-employment, redundancy pay or partner response",
-  "Newly displaced workers claim Universal Credit only if their benefit unit (adult, any partner and children, assessed together) is simulated as a claimant, and get no contributory Jobseeker's Allowance",
+  "Newly displaced workers claim Universal Credit only if their benefit unit (adult, any partner and children, assessed together) is simulated as a claimant, and get no contributory Jobseeker's Allowance (JSA)",
   "Self-employed outside the labour shocks; no reduced hiring of the young",
 ];
 
@@ -223,7 +223,7 @@ export const breakEvens: { icon: Icon; label: string; note: string; central: str
 
 export const costMovers = [
   "No survivor wage rise: £24.9bn; a 2.6% fall: £42.4bn (seed 0)",
-  "Full UC take-up for the displaced: +£2.8bn; with new-style JSA: +£5.5bn (20 draws)",
+  "Full UC take-up for the displaced: +£2.8bn; with contributory JSA: +£5.5bn (20 draws)",
   "Dividends scaled to the HMRC SPI total: +£2.2bn",
 ];
 
@@ -328,7 +328,7 @@ export const shockSteps: { icon: Icon; title: string; tex: string; text: string 
     icon: IconTrendingUp,
     title: "Survivor wages",
     tex: "\\Delta w_l = g\\times\\dfrac{\\theta_l}{\\bar\\theta}\\times w_l",
-    text: "Higher-complementarity groups gain more; g = 2.6% averaged over baseline employees",
+    text: "Higher-complementarity groups gain more; g = 2.6% averaged over baseline employees",
   },
   {
     icon: IconCoins,
@@ -416,7 +416,7 @@ export const imputationPoints = [
 export const calibrationTex = String.raw`\min_{w}\ \sum_{j=1}^{J}\lambda_j\,\min\!\left(\frac{\lvert \hat T_j(w)-T_j\rvert}{\max(\lvert T_j\rvert,\,1)},\ 10\right)\quad\text{s.t.}\ \ 0<w_i\le 10\,w_i^{0}`;
 
 export const calibrationPoints = [
-  "Σᵢ aⱼᵢwᵢ is the file's estimate of official total Tⱼ; w⁰ are the starting weights; J = 1,514 targets",
+  "The estimate in the numerator is Σᵢ aⱼᵢwᵢ, the file's total for official total Tⱼ; w⁰ are the starting weights; J = 1,514 targets",
   "Relative errors, each capped at 1,000% so no single target dominates",
   "λⱼ: each of 38 target families has equal weight, split evenly among its targets",
   "Adam on log-weights, 1,500 steps, best step kept",

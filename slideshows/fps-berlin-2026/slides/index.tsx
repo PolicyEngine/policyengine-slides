@@ -556,7 +556,7 @@ export function ShockSlide() {
     <Frame
       section="method"
       title="The shock: three changes to each person's record"
-      subtitle="Three changes to the baseline records, then the same model on both"
+      subtitle="Applied to the baseline records; the same tax-benefit model then runs on both"
       scale={1.05}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
@@ -627,7 +627,7 @@ export function DrawsSlide() {
       <Bullets
         items={[
           "Calibrated weights are uneven, so one draw's displaced count varies around the quota",
-          "“a ± b” is a mean and the standard deviation across draws, not a confidence interval",
+          '"a ± b" is a mean and the standard deviation across draws, not a confidence interval',
           "Neither the ± nor the draw range reflects survey sampling or parameter uncertainty",
         ]}
       />
@@ -655,7 +655,7 @@ export function CentralSlide() {
         ))}
       </div>
       <p className={fps.note}>
-        Poverty is an upper bound for spell length; +1.99pp with full UC take-up and JSA (20 draws). Cost excludes corporation tax, VAT and
+        The poverty rise is an upper bound with respect to spell length; +1.99pp with full UC take-up and JSA (20 draws). Cost excludes corporation tax, VAT and
         the £26.6bn public-sector pay bill.
       </p>
       <div>
@@ -726,7 +726,7 @@ export function TransitionSlide() {
           <Kpi value="5.57%" label="in the top decile" small />
           <p className={fps.note} style={{ marginTop: "calc(var(--u) * 2)" }}>
             Mostly because employees sit higher in the distribution: uniform incidence gives a similar gradient.
-            Women are 49% of employment and 53% of the displaced (20 draws).
+            Women are 49% of employees and 53% of the displaced (20 draws).
           </p>
         </div>
       </div>
@@ -834,7 +834,7 @@ export function MarginSlide() {
     <Frame
       section="comparisons"
       title="As wage cuts, the same loss costs more but raises poverty far less"
-      subtitle="For this shock: the displaced workers' gross earnings, removed instead as pay cuts graded to exposure across employees outside the least-exposed group (20 draws)"
+      subtitle="For this shock: the same gross earnings, removed as wage cuts graded to exposure instead of job losses (20 draws)"
       scale={0.98}
     >
       <div className={fps.margins}>
@@ -1171,7 +1171,7 @@ export function DecompositionBackupSlide() {
         width={1800}
         height={900}
         alt="Change in market income, benefits and taxes by income decile"
-        caption="Seed 0: decile 8 loses 3.7% (2.9% over 20 draws). Decile 1’s gain reverses under another household ranking: not a finding."
+        caption="Seed 0: decile 8 loses 3.7% (2.9% over 20 draws). Decile 1's gain reverses under another household ranking: not a finding."
       />
     </Frame>
   );
