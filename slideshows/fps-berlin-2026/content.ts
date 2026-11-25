@@ -14,6 +14,10 @@
 
 import {
   IconAdjustments,
+  IconBuildingBank,
+  IconCpu,
+  IconNetwork,
+  IconPlayerPause,
   IconAlertTriangle,
   IconArrowsDiff,
   IconArrowsSplit,
@@ -186,6 +190,10 @@ export const scenarioInputs: Stat[] = [
 ];
 
 export const scenarioChips: Chip[] = [
+  { icon: IconHourglass, text: "One-year stock: no re-employment or redundancy pay" },
+  { icon: IconLifebuoy, text: "UC only for simulated claimants; no new JSA" },
+  { icon: IconBriefcase, text: "Labour shocks: employees only" },
+  { icon: IconDice5, text: "Displaced drawn by systematic sampling within groups" },
   { icon: IconInfoCircle, text: "+0.4pp on a 4% base would be +10%" },
 ];
 
@@ -224,6 +232,7 @@ export const transitionStats: Stat[] = [
 ];
 
 export const transitionPoints: Point[] = [
+  { icon: IconTrendingDown, lead: "Losses peak in decile 8", text: "−3.7% (seed 0); −2.9% over 20 draws" },
   { icon: IconUsers, lead: "Mostly where employees sit", text: "Uniform incidence gives a similar gradient" },
   { icon: IconGenderFemale, lead: "Women: 53% of the displaced", text: "49% of employees (20 draws)" },
 ];
@@ -240,9 +249,9 @@ export const absorptionVariants: Point[] = [
   { icon: IconCash, lead: "£49,500 lost on average", text: "By each displaced worker" },
   { icon: IconPigMoney, lead: "42% hold capital above £16,000", text: "Of their benefit units: UC's capital limit" },
   { icon: IconUsers, lead: "59% have another earner" },
-  { icon: IconHome, lead: "70% own their home" },
   { icon: IconWallet, lead: "JSA is flat-rate", text: "£95.55 a week for 26 weeks; not paid to the displaced" },
   { icon: IconArrowsDiff, lead: "3.0p → 5.9p → 8.7p per £1", text: "With full UC take-up, then JSA as well" },
+  { icon: IconBuildingBank, lead: "OBR check: £10.2bn vs £9bn", text: "Receipts 9.7 vs 6; welfare 0.7 vs 3 (£bn, 20 draws)" },
 ];
 
 export const absorptionChips: Chip[] = [
@@ -269,6 +278,7 @@ export const incidenceRows: {
 ];
 
 export const incidenceChips: Chip[] = [
+  { icon: IconChartBar, text: "Every rule displaces more in the upper half (seed 0)" },
   { icon: IconCash, text: "Displacement channel per worker: £18,300 uniform, £22,900 expertise" },
   { icon: IconEqual, text: "Uniform and central poverty rises do not differ over 2,000 draws" },
 ];
@@ -305,6 +315,7 @@ export const costMovers: Point[] = [
 ];
 
 export const breakEvenChips: Chip[] = [
+  { icon: IconTrendingUp, text: "At 7% displaced: average income falls up to a 4% wage rise, rises at 5% (seed 0)" },
   { icon: IconLifebuoy, text: "Full take-up and JSA push every break-even further" },
   { icon: IconHourglass, text: "≤9.5 months: half-year earnings also withdraw UC" },
 ];
@@ -409,6 +420,60 @@ export const futureWork: { icon: Icon; title: string; now: string; next: string 
     now: "Outside the labour shocks",
     next: "Bring them into the displacement and wage shocks",
   },
+];
+
+// Other directions beyond the paper (not results). The macro dashboard is
+// PolicyEngine's "AI and the UK economy: Beyond the forecast" (OG-UK plus
+// this household study); the token tax project is PolicyEngine/uk-token-tax
+// (work in progress; the repo names the client only as the token tax project).
+export const growthDashboard = {
+  title: "AI and the UK economy: Beyond the forecast",
+  href: "https://uk-growth-with-jadm03obk-policy-engine.vercel.app",
+};
+
+export const directions: { icon: Icon; title: string; text: string; rows?: Point[] }[] = [
+  {
+    icon: IconChartBar,
+    title: "The whole economy, over time",
+    text: "A macro model (OG-UK) alongside this household study: output, pay, national income and debt to 2036",
+  },
+  {
+    icon: IconNetwork,
+    title: "Firms and production networks",
+    text: "Firm-level microsimulation on the input–output network, linked to the households that work in and own the firms",
+  },
+  {
+    icon: IconPlayerPause,
+    title: "If the US slows AI development",
+    text: "Future effects of a slower frontier pace on:",
+    rows: [
+      { icon: IconBuildingBank, lead: "Government", text: "Revenue, spending, debt" },
+      { icon: IconUsers, lead: "People", text: "Jobs, incomes, poverty" },
+      { icon: IconBuildingFactory, lead: "Firms", text: "Adoption, productivity, profits" },
+    ],
+  },
+  {
+    icon: IconCpu,
+    title: "The token tax project",
+    text: "Household incidence of a UK tax on AI tokens, on PolicyEngine UK (in progress)",
+  },
+];
+
+// The future-work cards, one line each, for the merged conclusions slide.
+export const futureLines: Point[] = [
+  { icon: IconUsersGroup, lead: "Within-group incidence", text: "Nine groups only → detailed occupations (LFS)" },
+  { icon: IconHourglass, lead: "Spells and re-employment", text: "Out all year → calibrate to UK displacement evidence" },
+  { icon: IconLifebuoy, lead: "The benefit response", text: "No new JSA, drawn take-up → model both" },
+  { icon: IconSchool, lead: "Hiring and retraining", text: "Outside the frame → entry margin, retraining" },
+  { icon: IconCoins, lead: "Wider capital channel", text: "Interest, dividends only → rent, pensions too" },
+  { icon: IconBriefcase, lead: "Self-employed", text: "Outside the labour shocks → bring them in" },
+];
+
+export const directionPoints: Point[] = [
+  { icon: IconChartBar, lead: "The whole economy, over time", text: "OG-UK macro model beside this study (left, live)" },
+  { icon: IconNetwork, lead: "Firms and production networks", text: "Firm microsimulation, linked to households" },
+  { icon: IconPlayerPause, lead: "If the US slows AI development", text: "Future effects on government, people and firms" },
+  { icon: IconCpu, lead: "The token tax project", text: "Household incidence of a UK tax on AI tokens (in progress)" },
 ];
 
 // Appendix: OBR benchmark (Section 4.1 and Appendix), 20 draws.

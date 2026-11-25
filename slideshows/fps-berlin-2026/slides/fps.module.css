@@ -825,3 +825,46 @@
   color: var(--color-gray-600);
   font-size: calc(var(--u0) * 2);
 }
+
+/* ---------- Live embed ---------- */
+
+.embed {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+}
+
+/* Render the page at desktop width, then scale it down to fit. */
+.embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 166.667%;
+  height: 166.667%;
+  border: 0;
+  transform: scale(0.6);
+  transform-origin: 0 0;
+}
+
+.directionsSplit {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: calc(var(--u) * 2.6);
+  align-items: stretch;
+}
+
+.directionsSplit > div:last-child {
+  align-self: center;
+}
+
+.directionsSplit .embed iframe {
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+}

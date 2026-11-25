@@ -38,7 +38,9 @@ import {
   exposureBuild,
   exposureNotes,
   exposureWhy,
-  futureWork,
+  futureLines,
+  directionPoints,
+  growthDashboard,
   imputationLegend,
   imputationPoints,
   imputationTex,
@@ -47,24 +49,17 @@ import {
   indexPoints,
   indexRows,
   jobLoss,
-  limits,
   marginChips,
   marginWhy,
   margins,
   methodFlow,
-  methodOutcomes,
-  microsimRules,
-  obr,
-  obrPoints,
   openQuestions,
   outcomeDefs,
   parts,
   policyPoints,
   policyRows,
-  scenarioCaveats,
   scenarioChips,
   scenarioInputs,
-  shockChips,
   shockSteps,
   sources,
   transitionPoints,
@@ -409,10 +404,7 @@ export function MethodSlide() {
       scale={1.15}
     >
       <Flow steps={methodFlow} />
-      <div>
-        <p className={fps.sideHead}>Outcomes</p>
-        <Chips items={methodOutcomes} />
-      </div>
+      <Points items={outcomeDefs} cols={3} head="Three outcomes, PolicyEngine UK 2.174.1, 2027–28 rules" />
     </Frame>
   );
 }
@@ -423,11 +415,26 @@ export function ScenarioSlide() {
       section="method"
       title="The central case: 7% displaced, wages +2.6%, capital income +39.8%"
       subtitle="Doorley et al. (2026): one investment-bank scenario of a decade of adoption, in one year"
-      scale={1.15}
+      scale={0.98}
     >
-      <Stats items={scenarioInputs} />
+      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
+        {scenarioInputs.map((stat, index) => (
+          <div key={stat.value} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
+            <div className={fps.kpiTop}>
+              <span className={fps.kpiIcon}>
+                <stat.icon stroke={1.75} aria-hidden="true" />
+              </span>
+              <p className={fps.kpiValue}>{stat.value}</p>
+            </div>
+            <p className={fps.kpiLabel}>{stat.label}</p>
+            <div className={fps.eqBox}>
+              <Tex tex={shockSteps[index].tex} />
+            </div>
+            <p className={fps.pointText}>{shockSteps[index].text}</p>
+          </div>
+        ))}
+      </div>
       <Chips items={scenarioChips} />
-      <Points items={scenarioCaveats} cols={3} head="What the central case leaves out" />
     </Frame>
   );
 }
@@ -586,56 +593,6 @@ export function CalibrationSlide() {
   );
 }
 
-export function ShockSlide() {
-  return (
-    <Frame
-      section="method"
-      title="The shock: three changes to each person's record"
-      subtitle="Applied to baseline records; the same model runs on both"
-      scale={1.05}
-    >
-      <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
-        {shockSteps.map((step, index) => (
-          <div key={step.title} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
-            <div className={fps.kpiHead}>
-              <span className={fps.kpiIcon}>
-                <step.icon stroke={1.75} aria-hidden="true" />
-              </span>
-              <h2 style={{ fontSize: "calc(var(--u) * 1.9)", margin: 0 }}>{step.title}</h2>
-            </div>
-            <div className={fps.eqBox}>
-              <Tex tex={step.tex} />
-            </div>
-            <p style={{ fontSize: "calc(var(--u) * 1.45)" }}>{step.text}</p>
-          </div>
-        ))}
-      </div>
-      <Chips items={shockChips} />
-    </Frame>
-  );
-}
-
-export function MicrosimSlide() {
-  return (
-    <Frame
-      section="method"
-      title="Three outcomes, from PolicyEngine UK under the 2027–28 rules"
-      subtitle="Baseline and shocked runs on identical records"
-      scale={1.1}
-    >
-      <div className={`${fps.split} ${fps.splitEven}`}>
-        <Points items={outcomeDefs} head="Outcomes" />
-        <Points items={microsimRules} head="Rules legislated or announced for 2027–28" />
-      </div>
-      <Chips
-        items={[
-          { icon: IconInfoCircle, text: "Identical records: no resampling noise; survey sampling error remains" },
-        ]}
-      />
-    </Frame>
-  );
-}
-
 export function DrawsSlide() {
   return (
     <Frame
@@ -788,26 +745,6 @@ export function IncidenceSlide() {
         </tbody>
       </table>
       <Chips items={incidenceChips} />
-    </Frame>
-  );
-}
-
-export function IncidenceFigureSlide() {
-  return (
-    <Frame
-      section="comparisons"
-      title="Every rule displaces more in the upper half"
-      subtitle="Who is displaced by decile (seed 0); cost against poverty rise (50-draw means ± 1 s.d.)"
-      scale={1.1}
-      fill
-    >
-      <Figure
-        src="/images/fps-berlin-2026/incidence_families.png"
-        width={2179}
-        height={915}
-        alt="Left: share displaced by decile under five rules. Right: Exchequer cost against the rise in absolute poverty for each rule."
-        caption="Uniform costs least yet raises poverty about as much as central; the high-earner tilt raises both"
-      />
     </Frame>
   );
 }
@@ -974,7 +911,7 @@ export function PolicySlide() {
 
 export function ConclusionsSlide() {
   return (
-    <Frame title="Conclusions" subtitle="Holding the size of the shock fixed" scale={0.95}>
+    <Frame title="Conclusions and future work" subtitle="Holding the size of the shock fixed" scale={0.92}>
       <div className={fps.split}>
         <div className={fps.numbered}>
           {conclusions.map((item, index) => (
@@ -989,35 +926,22 @@ export function ConclusionsSlide() {
             </div>
           ))}
         </div>
-        <Points items={limits} head="Limits" />
+        <Points items={futureLines} head="Limits → future work" />
       </div>
     </Frame>
   );
 }
 
-export function FutureWorkSlide() {
+export function DirectionsSlide() {
   return (
-    <Frame title="Future work" subtitle="The limits of this paper, and what would lift each one" scale={1.05}>
-      <div className={fps.futureGrid}>
-        {futureWork.map((item, index) => (
-          <div key={item.title} className={`${fps.futureCard} ${styles.enter}`} style={enter(index)}>
-            <div className={fps.kpiHead}>
-              <span className={fps.kpiIcon}>
-                <item.icon stroke={1.75} aria-hidden="true" />
-              </span>
-              <h2>{item.title}</h2>
-            </div>
-            <p className={fps.futureRow}>
-              <span className={fps.futureTag}>Now</span>
-              {item.now}
-            </p>
-            <p className={fps.futureRow}>
-              <span className={`${fps.futureTag} ${fps.futureTagNext}`}>Next</span>
-              {item.next}
-            </p>
-          </div>
-        ))}
+    <Frame title="Beyond this paper" subtitle="Other directions for the same tools" scale={1.05} fill>
+      <div className={fps.directionsSplit}>
+        <div className={fps.embed}>
+          <iframe src={growthDashboard.href} title={growthDashboard.title} loading="eager" />
+        </div>
+        <Points items={directionPoints} />
       </div>
+      <Chips items={[{ icon: IconWorld, text: `Live: ${growthDashboard.title}` }]} />
     </Frame>
   );
 }
@@ -1075,39 +999,6 @@ export function ClosingSlide() {
 
 // ---------- Former backup slides, now in the main flow ----------
 
-export function ObrBackupSlide() {
-  return (
-    <Frame
-      section="central"
-      title="Close to the OBR's £9bn, but only because offsetting lines differ"
-      subtitle="Unemployment +1.4pp; no survivor wage rise or capital uplift (20 draws, £bn a year)"
-      scale={1.15}
-    >
-      <div className={fps.split}>
-        <table className={fps.table}>
-          <thead>
-            <tr>
-              <th />
-              <th className={fps.num}>Simulation</th>
-              <th className={fps.num}>OBR, March 2026</th>
-            </tr>
-          </thead>
-          <tbody>
-            {obr.map((row) => (
-              <tr key={row.line}>
-                <td className={fps.rowName}>{row.line}</td>
-                <td className={fps.num}>{row.sim}</td>
-                <td className={fps.num}>{row.obr}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Points items={obrPoints} />
-      </div>
-    </Frame>
-  );
-}
-
 export function IndexBackupSlide() {
   return (
     <Frame
@@ -1143,42 +1034,3 @@ export function IndexBackupSlide() {
   );
 }
 
-export function DecompositionBackupSlide() {
-  return (
-    <Frame
-      section="central"
-      title="Losses peak in the upper-middle deciles"
-      subtitle="Market income, benefits, taxes and contributions, % of baseline disposable income (seed 0)"
-      scale={1.1}
-      fill
-    >
-      <Figure
-        src="/images/fps-berlin-2026/fig4_4_decomposition.png"
-        width={1800}
-        height={900}
-        alt="Change in market income, benefits and taxes by income decile"
-        caption="Decile 8 loses 3.7% (2.9% over 20 draws); decile 1's gain is not robust to ranking"
-      />
-    </Frame>
-  );
-}
-
-export function GridBackupSlide() {
-  return (
-    <Frame
-      section="sensitivity"
-      title="The survivor wage rise decides whether average incomes fall"
-      subtitle="Change in average household disposable income (%), capital uplift on (seed 0)"
-      scale={1.1}
-      fill
-    >
-      <Figure
-        src="/images/fps-berlin-2026/fig4_5_disposable_grid.png"
-        width={2000}
-        height={1000}
-        alt="Grid of disposable income changes by displacement rate and wage uplift"
-        caption="At 7% displaced: incomes fall up to a 4% wage rise (−0.32%), rise at 5% (+0.15%)"
-      />
-    </Frame>
-  );
-}
