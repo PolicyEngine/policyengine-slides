@@ -1,0 +1,2343 @@
+/* One scale unit drives every size in the deck: 16px on a 1920×1080 page,
+   12px at 1440×810, clamped by width on narrower screens. */
+.deck {
+  --u0: min(calc(100vh / 67.5), calc(100vw / 120));
+  --u: var(--u0);
+  --tint: color-mix(in srgb, var(--pe-teal) 11%, white);
+  --tint-strong: color-mix(in srgb, var(--pe-teal) 20%, white);
+  --line: var(--color-gray-300);
+  --amber-tint: color-mix(in srgb, var(--pe-amber) 16%, white);
+  --amber-ink: color-mix(in srgb, var(--pe-amber-dark) 62%, var(--pe-darker));
+}
+
+/* Leave space for the viewer's controls beside the meeting date. */
+.deck :global(.gradient-footer) {
+  padding-right: 15rem;
+}
+
+/* ---------- Frame ---------- */
+
+.frame {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+/* The talk's six parts as a header row along the top, set off from the
+   slide title by a thin horizontal rule. */
+.partNav {
+  display: flex;
+  height: calc(var(--u) * 1.7);
+  box-sizing: content-box;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 1.2);
+  padding-bottom: calc(var(--u) * 0.7);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: calc(var(--u) * 2.2);
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.15);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.partNav > span {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.5);
+}
+
+.navNumber {
+  display: inline-flex;
+  width: calc(var(--u) * 1.7);
+  height: calc(var(--u) * 1.7);
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-gray-300);
+  border-radius: 999px;
+  font-size: calc(var(--u) * 0.95);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.partNav > .navDone {
+  color: var(--color-gray-400);
+}
+
+.partNav > .navCurrent {
+  color: var(--pe-teal-dark);
+  font-weight: 700;
+}
+
+.navCurrent .navNumber {
+  border-color: var(--pe-teal);
+  background: var(--pe-teal);
+  color: white;
+}
+
+.title {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.subtitleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--u) * 0.6) calc(var(--u) * 1);
+  margin-top: calc(var(--u) * 0.7);
+}
+
+.subtitle {
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.65);
+  line-height: 1.35;
+}
+
+.bar {
+  width: calc(var(--u) * 8);
+  margin-top: calc(var(--u) * 1.1);
+}
+
+.body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--u) * 2.8);
+  padding: calc(var(--u) * 1.4) 0 calc(var(--u) * 1.2);
+}
+
+/* A live page or a figure: the body runs from under the title to the sources. */
+.bodyFill {
+  justify-content: flex-start;
+  gap: calc(var(--u) * 0.9);
+  padding: calc(var(--u) * 1.1) 0 calc(var(--u) * 0.8);
+}
+
+/* ---------- Build steps and entrances ----------
+   A build step that has not been reached is hidden but keeps its space, so
+   nothing moves when it appears. Everything is visible unless "revealHidden"
+   says otherwise. */
+
+.revealHidden {
+  visibility: hidden;
+}
+
+/* A box that has not been reached: an empty dashed outline in its place. */
+.revealGhost {
+  border-style: dashed !important;
+  border-color: var(--color-gray-300) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: transparent !important;
+}
+
+.revealGhost > * {
+  visibility: hidden;
+}
+
+.revealRise {
+  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.revealFade {
+  animation: fade 320ms ease-out both;
+}
+
+/* Arrows and connectors draw in from the left. */
+.revealWipe {
+  animation: wipe 300ms ease-out both;
+}
+
+/* Every slide's title and body come on with a short, gentle fade-up. The
+   fill is "backwards" only, so no transform stays on the body afterwards
+   (a live embed's full-screen view needs none on its ancestors). */
+.frameIn {
+  animation: rise 250ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+/* A row of items entering one after another when the slide comes on. */
+.enter {
+  animation: slide 340ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* An entrance moves and never hides: the content is visible whether or
+   not the animation runs. */
+@keyframes slide {
+  from {
+    transform: translateY(calc(var(--u0) * 0.9));
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--u0) * 0.9));
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes wipe {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealRise,
+  .revealFade,
+  .revealWipe,
+  .frameIn,
+  .enter {
+    animation: none;
+  }
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u0) * 0.15) calc(var(--u0) * 1.25);
+  color: var(--color-gray-500);
+  font-size: min(0.875rem, calc(var(--u0) * 1.15));
+  line-height: 1.3;
+}
+
+/* ---------- Icons: bare, in the teal ink, in three sizes ---------- */
+
+.badge {
+  display: inline-flex;
+  width: calc(var(--u) * 2.7);
+  height: calc(var(--u) * 2.7);
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--pe-teal);
+}
+
+.badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.badgeSmall {
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 2);
+}
+
+.badgeLarge {
+  width: calc(var(--u) * 3.4);
+  height: calc(var(--u) * 3.4);
+}
+
+/* ---------- Status tags ---------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--tint-strong);
+  padding: calc(var(--u) * 0.25) calc(var(--u) * 0.8);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tagMuted {
+  background: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+.tagCaution {
+  background: var(--amber-tint);
+  color: var(--amber-ink);
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.5);
+}
+
+/* ---------- Cards ---------- */
+
+.cards {
+  display: grid;
+  gap: calc(var(--u) * 1.6);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.8);
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.8);
+  margin-bottom: calc(var(--u) * 1.2);
+}
+
+.cardHead .tagRow {
+  min-width: 0;
+  max-width: 100%;
+  justify-content: flex-end;
+}
+
+/* A card's tags sit beside its icon when they fit, and wrap below it when
+   they do not, so a tag never runs past the card's border; a tag still
+   wider than the card wraps its own text. */
+.cardHead {
+  flex-wrap: wrap;
+}
+
+.cardHead .tag {
+  max-width: 100%;
+  white-space: normal;
+}
+
+.card h2 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.1);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.card > p {
+  margin-top: calc(var(--u) * 0.6);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.7);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.cardCompact {
+  padding: calc(var(--u) * 1.3) calc(var(--u) * 1.5);
+}
+
+.cardCompact h2 {
+  font-size: calc(var(--u) * 1.7);
+}
+
+.cardNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--u) * 0.5);
+  margin-top: auto;
+  padding-top: calc(var(--u) * 1);
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.3);
+}
+
+/* Bulleted lists (appendix cards). */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  margin-top: calc(var(--u) * 0.9);
+}
+
+.list li {
+  position: relative;
+  padding-left: calc(var(--u) * 1.3);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.45);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: calc(var(--u) * 0.5);
+  height: calc(var(--u) * 0.5);
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+/* Small facts at the foot of a card: a figure and what it counts. */
+.cardFacts {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.4);
+  margin-top: auto;
+  padding-top: calc(var(--u) * 1.2);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.4);
+  line-height: 1.3;
+}
+
+.cardFacts strong {
+  color: var(--pe-teal-dark);
+  font-weight: 700;
+}
+
+/* A two-box link diagram inside a card: one model to another. */
+.link {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  margin-top: auto;
+  padding-top: calc(var(--u) * 1.4);
+  color: var(--pe-teal);
+}
+
+.link span {
+  flex: 1;
+  border-radius: calc(var(--u) * 0.5);
+  background: var(--tint);
+  padding: calc(var(--u) * 0.55) calc(var(--u) * 0.6);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.link svg {
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 2);
+  flex-shrink: 0;
+}
+
+/* ---------- Flow: icon steps joined by arrows ---------- */
+
+.flow {
+  display: grid;
+  align-items: stretch;
+  column-gap: calc(var(--u) * 0.9);
+}
+
+/* A step is open text under a node on the flow's line: the icon in a ring,
+   joined to the next step by the line and an arrow. */
+.step {
+  display: flex;
+  flex-direction: column;
+}
+
+.step .stepTop,
+.buildTop {
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* The line through the nodes, from this node to the step's right edge. */
+.step .stepTop::before,
+.buildTop::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--tint-strong);
+}
+
+.step .stepTop > *,
+.buildTop > * {
+  position: relative;
+}
+
+.step .stepTop .badge,
+.buildTop .badge {
+  width: calc(var(--u) * 4.8);
+  height: calc(var(--u) * 4.8);
+  border: 2px solid var(--pe-teal);
+  border-radius: 999px;
+  background: white;
+  padding: calc(var(--u) * 1);
+}
+
+/* The step's number, and any tag, beside its node on the line. */
+.step .stepMarks,
+.buildTop .snakeNumber {
+  background: white;
+  padding: 0 calc(var(--u) * 0.6);
+}
+
+.step .stepMarks {
+  flex-direction: row-reverse;
+}
+
+.step .stepIndex {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 1.9);
+}
+
+/* A step outside PolicyEngine or not built yet: a dashed ring. */
+.stepDashed .stepTop .badge {
+  border-style: dashed;
+}
+
+/* In a flow the arrows sit on the line, level with the nodes. */
+.flow > .arrow,
+.buildRow > .arrow {
+  align-self: start;
+  height: calc(var(--u) * 4.8);
+}
+
+/* The step's place in the flow, opposite its icon. */
+.stepIndex {
+  color: var(--color-gray-400);
+  font-size: calc(var(--u) * 1.3);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stepTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.6);
+  margin-bottom: calc(var(--u) * 1.1);
+}
+
+.step .owner {
+  margin-top: 0;
+  margin-bottom: calc(var(--u) * 0.25);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 0.95);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.step h2 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.75);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.step p {
+  margin-top: calc(var(--u) * 0.45);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.45);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pe-teal);
+}
+
+.arrow svg {
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 2);
+}
+
+/* A bracket under a run of dashed steps. */
+.bracket {
+  grid-row: 2;
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.bracket::before {
+  content: "";
+  display: block;
+  height: calc(var(--u) * 0.6);
+  border: 2px dashed var(--pe-teal);
+  border-top: none;
+  border-radius: 0 0 calc(var(--u) * 0.5) calc(var(--u) * 0.5);
+}
+
+.bracket p {
+  padding-top: calc(var(--u) * 0.4);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.35);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* A return arrow under a flow, from the last step back to the first: a
+   feedback that is not built, so it is grey and dashed. */
+.feedback {
+  display: grid;
+  grid-row: 2;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.feedbackLine {
+  position: relative;
+  grid-row: 1;
+  height: calc(var(--u) * 1.7);
+  margin-top: calc(var(--u) * 0.7);
+  border: 0 dashed var(--color-gray-400);
+  border-bottom-width: 2px;
+  color: var(--color-gray-500);
+}
+
+.feedbackStart {
+  width: 50%;
+  justify-self: end;
+  border-left-width: 2px;
+  border-bottom-left-radius: calc(var(--u) * 0.5);
+}
+
+.feedbackStart svg {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: calc(var(--u) * 1.8);
+  height: calc(var(--u) * 1.8);
+  transform: translate(-50%, -55%);
+}
+
+.feedbackMiddle {
+  margin-right: calc(var(--u) * -0.5);
+  margin-left: calc(var(--u) * -0.5);
+}
+
+.feedbackEnd {
+  width: 50%;
+  justify-self: start;
+  border-right-width: 2px;
+  border-bottom-right-radius: calc(var(--u) * 0.5);
+}
+
+.feedbackLabel {
+  display: flex;
+  grid-row: 2;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 0.8);
+  padding-top: calc(var(--u) * 0.5);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.35);
+  font-weight: 600;
+}
+
+/* ---------- Minis: an icon with a short label ---------- */
+
+.minis {
+  display: grid;
+  gap: calc(var(--u) * 1.4);
+}
+
+.mini {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.9);
+  min-width: 0;
+}
+
+.mini h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.55);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.mini p {
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.4);
+  line-height: 1.3;
+}
+
+.rowLabel {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.05);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Stats ---------- */
+
+/* A slide's key finding under a flow: a heading, then plain big figures. */
+.finding {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.15fr;
+  align-items: start;
+  gap: calc(var(--u) * 3);
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.finding .figureTitle {
+  font-size: calc(var(--u) * 2.1);
+}
+
+.finding .statValue {
+  font-size: calc(var(--u) * 4.4);
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.3);
+}
+
+.statValue {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 4.2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.statLabel {
+  margin-top: calc(var(--u) * 0.45);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.5);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.statMedium .statValue {
+  font-size: calc(var(--u) * 3.3);
+}
+
+/* Key figures as a column of tiles: icon, figure and label on one line. */
+.kpiStack {
+  display: grid;
+  gap: calc(var(--u) * 1.3);
+}
+
+.kpiStack .kpi:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.kpiStack .kpi {
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--line);
+  padding: calc(var(--u) * 1.1) 0 0;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: calc(var(--u) * 1.2);
+}
+
+.kpiStack .kpi .statValue {
+  margin-top: 0;
+}
+
+.kpiStack .kpi .statLabel {
+  margin-top: 0;
+  hyphens: manual;
+  text-wrap: balance;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 1.4) calc(var(--u) * 1.3);
+}
+
+.kpi .statValue {
+  margin-top: calc(var(--u) * 0.8);
+  font-size: calc(var(--u) * 3.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi .statLabel {
+  font-size: calc(var(--u) * 1.35);
+}
+
+.figureTitle {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.75);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Vertical list of icon steps. */
+.vsteps {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.7);
+}
+
+.vstep {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+}
+
+.vstep h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.1);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.vstep p {
+  margin-top: calc(var(--u) * 0.25);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.6);
+  line-height: 1.3;
+}
+
+.vstep .rowLabel {
+  margin-bottom: calc(var(--u) * 0.15);
+}
+
+/* ---------- Horizontal bars ---------- */
+
+.bars {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: calc(var(--u) * 0.7) calc(var(--u) * 1);
+  margin-top: calc(var(--u) * 1);
+}
+
+.barName {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.45);
+  font-weight: 600;
+}
+
+.barTrack {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+.barFill {
+  height: calc(var(--u) * 1.5);
+  min-width: calc(var(--u) * 0.4);
+  border-radius: calc(var(--u) * 0.35);
+  background: var(--pe-teal);
+}
+
+.barCount {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.45);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* ---------- Rows: a question, what one model does, what the other returns ---------- */
+
+.rows {
+  display: grid;
+  grid-template-columns: 1.05fr auto 1fr auto 1fr;
+  align-items: stretch;
+  gap: calc(var(--u) * 0.9) calc(var(--u) * 0.6);
+}
+
+.rowsHead {
+  align-self: end;
+  padding-left: calc(var(--u) * 0.2);
+}
+
+/* Three rows that share one result box: the last column spans them. */
+.rowsShared {
+  grid-template-columns: 1.2fr auto 1fr auto 1fr auto 1.2fr;
+}
+
+.sharedArrow {
+  grid-column: 6;
+  grid-row: 2 / span 3;
+}
+
+.rowsShared .sharedCell {
+  grid-column: 7;
+  grid-row: 2 / span 3;
+  border-top: 0;
+  border-left: 2px solid var(--pe-teal);
+  padding: calc(var(--u) * 0.4) 0 calc(var(--u) * 0.4) calc(var(--u) * 1.4);
+}
+
+.sharedCell .list {
+  margin-top: 0;
+  gap: calc(var(--u) * 0.9);
+}
+
+.sharedCell .list .tag {
+  margin-left: calc(var(--u) * 0.6);
+  vertical-align: middle;
+}
+
+/* A slide's one status line above a flow: a tag, then a short reason. */
+.flowStatus {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.3;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+  border-top: 1px solid var(--line);
+  padding: calc(var(--u) * 1) calc(var(--u) * 0.2) calc(var(--u) * 0.4);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.55);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.cellLead {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.75);
+  font-weight: 600;
+}
+
+/* Outside PolicyEngine or not built yet: a dashed teal rule. */
+.cellDashed {
+  border-top: 2px dashed var(--pe-teal);
+}
+
+/* ---------- Pairs: labelled icon rows inside a card ---------- */
+
+.pairs {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.1);
+  margin-top: calc(var(--u) * 1.3);
+}
+
+.pair {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+}
+
+.pair dt {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pair dd {
+  color: var(--color-gray-800);
+  font-size: calc(var(--u) * 1.6);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+/* ---------- Who we are: three facts across the top, then two rows of logos
+   on one grid of equal cells ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.4);
+}
+
+.fact {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 1);
+}
+
+.fact + .fact {
+  border-left: 1px solid var(--line);
+  padding-left: calc(var(--u) * 1.6);
+}
+
+.fact h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.fact p {
+  margin-top: calc(var(--u) * 0.2);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+/* A citation inside a fact's line: the same text, underlined as a link. */
+.factCite {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.15em;
+}
+
+.logoGroups {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.4);
+}
+
+.logoSection {
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 1);
+}
+
+/* Equal cells on one grid for both rows: every mark is centred in a box of
+   one height (about 62px at 1920), with a one-line caption on one baseline
+   below. Each mark's own height ("height" in content.ts) sets its optical
+   weight inside the box. */
+.logoGrid {
+  display: grid;
+  gap: calc(var(--u) * 1.2);
+  margin-top: calc(var(--u) * 1);
+}
+
+.logoCell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoMark {
+  display: flex;
+  width: 100%;
+  height: calc(var(--u) * 3.1);
+  align-items: center;
+  justify-content: center;
+}
+
+.logoMark img {
+  max-width: 90%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* A white-on-transparent mark, shown in the deck's dark ink. */
+.logoDarken {
+  filter: brightness(0);
+  opacity: 0.85;
+}
+
+/* A name set as text, where we hold no logo file. */
+.wordmark {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.75);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.logoCaption {
+  width: 100%;
+  margin-top: calc(var(--u) * 0.6);
+  overflow: hidden;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.05);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pairTight {
+  gap: calc(var(--u) * 0.75);
+  margin-top: calc(var(--u) * 1);
+}
+
+.pairTight dd {
+  font-size: calc(var(--u) * 1.4);
+}
+
+.pairTight dt {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.1);
+}
+
+.cardTitleRow h2 {
+  flex: 1;
+}
+
+/* Reserve two title lines, so rows line up across cards. */
+.titleTwoLines {
+  min-height: calc(var(--u) * 5.1);
+}
+
+.divider {
+  margin-top: calc(var(--u) * 1.1);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 0.9);
+}
+
+.dividerText {
+  color: var(--color-gray-800);
+  font-size: calc(var(--u) * 1.4);
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.divider > .dividerText {
+  margin-top: calc(var(--u) * 0.5);
+}
+
+.cardTitleRow > .dividerText {
+  flex: 1;
+  font-weight: 600;
+}
+
+/* Interface: tables in, the model, tables out. */
+.interface {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+}
+
+.interface > .card {
+  align-self: stretch;
+}
+
+.hub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  color: var(--pe-teal);
+}
+
+.hubRow {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.5);
+}
+
+.hub svg {
+  width: calc(var(--u) * 2.2);
+  height: calc(var(--u) * 2.2);
+}
+
+.hub .badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hub p {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- AI incidence range: a scale from £0bn to £35bn ---------- */
+
+.range {
+  position: relative;
+  margin-top: calc(var(--u) * 5.2);
+  height: calc(var(--u) * 0.8);
+  border-radius: 999px;
+  background: var(--color-gray-200);
+}
+
+.rangeBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+.rangeMark {
+  position: absolute;
+  top: 50%;
+  width: calc(var(--u) * 1.3);
+  height: calc(var(--u) * 1.3);
+  transform: translate(-50%, -50%);
+  border: 3px solid white;
+  border-radius: 999px;
+  background: var(--pe-teal);
+  box-shadow: 0 0 0 1px var(--pe-teal);
+}
+
+.rangeMarkMuted {
+  background: var(--color-gray-500);
+  box-shadow: 0 0 0 1px var(--color-gray-500);
+}
+
+.rangeLabel {
+  position: absolute;
+  bottom: calc(var(--u) * 1.4);
+  transform: translateX(-50%);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.7);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.rangeLabel span {
+  display: block;
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.2);
+  font-weight: 400;
+}
+
+.rangeTicks {
+  position: relative;
+  height: calc(var(--u) * 1.8);
+  margin-top: calc(var(--u) * 0.5);
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.15);
+}
+
+.rangeTicks span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.rangeTicks span:first-child {
+  transform: none;
+}
+
+.rangeTicks span:last-child {
+  transform: translateX(-100%);
+}
+
+/* ---------- Questions ---------- */
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.1);
+}
+
+.question:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.4);
+  border-top: 1px solid var(--line);
+  padding: calc(var(--u) * 1.1) 0 0;
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.1);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.questionNumber {
+  width: calc(var(--u) * 2.2);
+  font-size: calc(var(--u) * 2.6);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  flex-shrink: 0;
+  color: var(--pe-teal);
+  font-weight: 700;
+}
+
+/* ---------- Code and maths ---------- */
+
+.code {
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: color-mix(in srgb, var(--pe-teal) 4%, white);
+  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.4) calc(var(--u) * 1.3);
+}
+
+.codeTitle {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  margin-bottom: calc(var(--u) * 0.6);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.15);
+  font-weight: 600;
+}
+
+/* An entity: an icon badge and its name. */
+.entity {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.4);
+  font-weight: 600;
+}
+
+.chips:has(.entity) {
+  gap: calc(var(--u) * 1.6);
+}
+
+.code pre {
+  overflow: hidden;
+  color: var(--pe-dark);
+  font-family: var(--font-mono);
+  font-size: calc(var(--u0) * 1.32);
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.code pre span {
+  color: var(--pe-teal-dark);
+  font-weight: 600;
+}
+
+.equation {
+  margin-top: calc(var(--u) * 0.6);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: calc(var(--u) * 0.2) 0;
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+}
+
+.equation :global(.katex-display) {
+  margin: 0.55em 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.3) calc(var(--u) * 1.4);
+  margin-top: calc(var(--u) * 0.7);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--u) * 0.5);
+  margin-top: calc(var(--u) * 0.8);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.5);
+  border-radius: 999px;
+  background: var(--tint);
+  padding: calc(var(--u) * 0.35) calc(var(--u) * 0.9);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 600;
+}
+
+.chip svg {
+  width: calc(var(--u) * 1.5);
+  height: calc(var(--u) * 1.5);
+  color: var(--pe-teal-dark);
+}
+
+/* ---------- Appendix divider and closing ---------- */
+
+.dividerTitle {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 3.75);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.closingTitle {
+  margin-top: calc(var(--u0) * 8);
+  font-size: calc(var(--u0) * 5);
+  line-height: 1;
+}
+
+.closingSubtitle {
+  margin-top: calc(var(--u0) * 2);
+  font-size: calc(var(--u0) * 2);
+}
+
+.closingContacts .badge {
+  color: white;
+}
+
+.closingContacts {
+  gap: calc(var(--u0) * 1.3);
+  margin-top: calc(var(--u0) * 4);
+  font-size: calc(var(--u0) * 1.3);
+}
+
+/* ---------- In brief: one numbered card per part ---------- */
+
+.partCard {
+  padding: calc(var(--u) * 1.4) calc(var(--u) * 1.6) calc(var(--u) * 1.5);
+}
+
+.partCard .cardHead {
+  align-items: center;
+  margin-bottom: calc(var(--u) * 1);
+}
+
+.partCardLead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.9);
+}
+
+.partNumber {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 2.6);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.partCard h2 {
+  font-size: calc(var(--u) * 1.95);
+}
+
+.partCard > p {
+  font-size: calc(var(--u) * 1.5);
+}
+
+/* ---------- What is open: a row under the coverage cards ---------- */
+
+.access {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--u) * 1.6);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 1.3);
+}
+
+.accessItem {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.9);
+}
+
+.accessHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+.accessItem h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.accessItem p {
+  margin-top: calc(var(--u) * 0.2);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.35);
+  line-height: 1.3;
+}
+
+/* ---------- Snake flow: three steps across, a turn, then back ---------- */
+
+.snakeLead {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+/* The step's number: a plain teal numeral. */
+.snakeNumber {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 1.9);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* The end of the path: the file itself. */
+/* ---------- Accuracy: a headline figure and its five parts ---------- */
+
+.method {
+  display: grid;
+  grid-template-columns: 0.95fr 0.95fr 1.25fr;
+  align-items: stretch;
+  gap: calc(var(--u) * 2);
+}
+
+.method > div > .rowLabel {
+  margin-bottom: calc(var(--u) * 0.8);
+}
+
+.method .figure img {
+  max-height: calc(var(--u0) * 22);
+}
+
+.methodSteps {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.8);
+}
+
+.methodSteps li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1);
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 0.8);
+}
+
+.methodSteps li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.methodSteps .snakeLead {
+  flex-direction: row;
+}
+
+.methodSteps h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.methodSteps p {
+  margin-top: calc(var(--u) * 0.15);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+/* The one boxed group on this slide: the accuracy figures, in a light card. */
+.accuracy {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.7);
+  background: white;
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 1.7);
+}
+
+.accuracy .statValue {
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.accuracyPopulation {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: calc(var(--u) * 0.9);
+}
+
+.accuracyRows {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  margin: calc(var(--u) * 1) 0;
+}
+
+.accuracyRows li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: calc(var(--u) * 0.3) calc(var(--u) * 0.8);
+  color: var(--color-gray-800);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.2;
+}
+
+.accuracyRows strong {
+  color: var(--pe-dark);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.accuracyRows i {
+  grid-column: 1 / -1;
+  height: calc(var(--u) * 0.5);
+  border-radius: 999px;
+  background: var(--pe-teal);
+}
+
+/* ---------- Episodes: a short list of icon rows, then one figure ---------- */
+
+.episodes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--u) * 1);
+}
+
+.episode {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.9);
+  border: 1px solid var(--line);
+  border-left: calc(var(--u) * 0.3) solid var(--pe-teal);
+  border-radius: calc(var(--u) * 0.6);
+  background: white;
+  padding: calc(var(--u) * 1) calc(var(--u) * 1.1);
+}
+
+.episode h3 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.episode p {
+  margin-top: calc(var(--u) * 0.25);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.25);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.episodeStat {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: calc(var(--u) * 1.3);
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.episodeStat .statLabel {
+  font-size: calc(var(--u) * 1.3);
+}
+
+/* ---------- Projects: a live page or a figure with a few labels ---------- */
+
+.project {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+  gap: calc(var(--u) * 2.4);
+}
+
+/* The live page takes the row's height, which the slide bounds. */
+.project > .embed {
+  min-height: 0;
+  height: 100%;
+}
+
+/* Beside a live page: two figures, a rule, then what the work covers,
+   spread over the frame's height. */
+.projectSide {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: calc(var(--u) * 0.4) 0;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.figure {
+  margin: 0;
+}
+
+.figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(var(--u0) * 28);
+  margin: 0 auto;
+}
+
+.figure figcaption {
+  margin-top: calc(var(--u) * 0.8);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+/* ---------- Embed: a live page in a framed window with a small toolbar ---------- */
+
+.embed {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.9);
+  background: white;
+  box-shadow: 0 calc(var(--u0) * 1) calc(var(--u0) * 2.4) calc(var(--u0) * -1.4) color-mix(in srgb, var(--pe-dark) 45%, transparent);
+  cursor: auto;
+}
+
+/* Expand: the same frame over the whole screen, above the deck's controls. */
+.embedExpanded {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  border: 0;
+  border-radius: 0;
+}
+
+.embedBar {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u0) * 0.7);
+  border-bottom: 1px solid var(--line);
+  background: var(--color-gray-50);
+  padding: calc(var(--u0) * 0.45) calc(var(--u0) * 0.7);
+  font-size: calc(var(--u0) * 0.95);
+}
+
+.embedAddress {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u0) * 0.4);
+  border-radius: 999px;
+  background: white;
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.8);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--color-gray-700);
+  font-weight: 500;
+}
+
+.embedAddress svg,
+.embedButton svg {
+  width: calc(var(--u0) * 1.15);
+  height: calc(var(--u0) * 1.15);
+}
+
+.embedViews {
+  display: flex;
+  gap: calc(var(--u0) * 0.2);
+}
+
+.embedView {
+  border-radius: calc(var(--u0) * 0.45);
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.7);
+  color: var(--pe-dark);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.embedView:hover,
+.embedView:focus-visible {
+  background: var(--tint);
+  color: var(--pe-teal-dark);
+}
+
+.embedButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(var(--u0) * 0.4);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.5);
+  background: white;
+  padding: calc(var(--u0) * 0.25) calc(var(--u0) * 0.75);
+  color: var(--pe-dark);
+  font-size: calc(var(--u0) * 0.95);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.embedButton:hover,
+.embedButton:focus-visible {
+  border-color: var(--pe-teal);
+  color: var(--pe-teal-dark);
+}
+
+/* Puts Expand and New tab at the bar's right end. */
+.embedPush {
+  margin-left: auto;
+}
+
+/* The page's window; a zoomed frame is drawn larger and scaled down into it. */
+.embedView2 {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.embedFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+  transform-origin: top left;
+}
+
+/* Keys of the table interface: icon badges with a label, two to a row. */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--u) * 0.6) calc(var(--u) * 1);
+  margin-top: calc(var(--u) * 0.6);
+}
+
+.keys .entity {
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 500;
+}
+
+/* ---------- Linking: which kind of model reports a result, and what runs today ---------- */
+
+.cellSub {
+  margin-top: calc(var(--u) * 0.25);
+  text-wrap: balance;
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 1.2);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* A cell with a doability tag under its text. */
+.cellTagged {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: calc(var(--u) * 0.5);
+}
+
+/* ---------- Trade study: four episode cards, the last pointing on ---------- */
+
+.episodeCard {
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 1.6) calc(var(--u) * 1.6);
+}
+
+.episodeCard .cardHead {
+  align-items: center;
+  margin-bottom: calc(var(--u) * 1.1);
+}
+
+.episodeCard .owner {
+  margin-bottom: calc(var(--u) * 0.3);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.episodeCard h2 {
+  min-height: 2.4em;
+  font-size: calc(var(--u) * 1.9);
+}
+
+.episodeCard > p:not(.owner):not(.episodeLink) {
+  font-size: calc(var(--u) * 1.45);
+}
+
+/* The episode the next slide takes up. */
+.episodeNext {
+  border-color: var(--pe-teal);
+  background: var(--tint);
+}
+
+.episodeCard .episodeLink {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.4);
+  margin-top: auto;
+  padding-top: calc(var(--u) * 1);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.episodeCard .episodeLink svg {
+  width: calc(var(--u) * 1.4);
+  height: calc(var(--u) * 1.4);
+}
+
+.targetsFoot {
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.2);
+  line-height: 1.3;
+}
+
+.targetsFoot strong {
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+.targetsFoot a {
+  color: var(--pe-teal-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* A step's status tag and its place in the flow, side by side. */
+.stepMarks {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+}
+
+/* ---------- Microcosm build: six tall blocks on one row ---------- */
+
+.buildRow {
+  display: grid;
+  align-items: stretch;
+  column-gap: calc(var(--u) * 0.9);
+}
+
+.buildStep {
+  display: flex;
+  flex-direction: column;
+}
+
+.buildTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: calc(var(--u) * 1.3);
+}
+
+.buildStep .owner {
+  margin-bottom: calc(var(--u) * 0.4);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 0.95);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.buildStep h2 {
+  min-height: 2.4em;
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 1.75);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.buildStep p:not(.owner) {
+  margin-top: calc(var(--u) * 0.6);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.4);
+  line-height: 1.35;
+}
+
+/* The end of the row: the file itself. */
+.buildResult .buildTop .badge {
+  background: var(--pe-teal);
+  color: white;
+}
+
+/* The line ends at the file. */
+.buildResult .buildTop::before {
+  content: none;
+}
+
+/* ---------- Calibration targets: a table by topic ---------- */
+
+.targetTable {
+  border-top: 2px solid var(--pe-teal);
+}
+
+.targetRow {
+  display: grid;
+  grid-template-columns: 2.5fr 2.4fr 1.75fr 0.75fr 0.85fr;
+  align-items: baseline;
+  gap: calc(var(--u) * 1.2);
+  border-top: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 0.36) 0;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.3);
+  line-height: 1.3;
+}
+
+.targetHead {
+  border-top: 0;
+  padding-bottom: calc(var(--u) * 0.5);
+  padding-top: calc(var(--u) * 0.7);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 0.95);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* A row label with a small bare teal icon in front, centred on the label's
+   first line; the text keeps the row's baseline, and wrapped lines align
+   with the first. */
+.rowLabelIcon {
+  position: relative;
+  padding-left: 1.75em;
+}
+
+.rowLabelIcon svg {
+  position: absolute;
+  top: 0.1em;
+  left: 0;
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--pe-teal);
+}
+
+.targetTopic {
+  color: var(--pe-dark);
+  font-weight: 600;
+}
+
+.targetSource {
+  color: var(--color-gray-600);
+}
+
+.targetNumber {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.targetTotal {
+  border-top: 2px solid var(--pe-teal);
+  padding-bottom: calc(var(--u) * 0.7);
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+/* ---------- VAT reforms: one cost table by lever ---------- */
+
+.reforms {
+  width: 100%;
+}
+
+.reforms .rowLabel {
+  margin-bottom: calc(var(--u) * 0.8);
+}
+
+.reformTable {
+  border-top: 2px solid var(--pe-teal);
+}
+
+.reformRow {
+  display: grid;
+  align-items: baseline;
+  gap: calc(var(--u) * 1.1);
+  border-top: 1px solid var(--color-gray-200);
+  padding: calc(var(--u) * 0.75) 0;
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.45);
+  line-height: 1.3;
+}
+
+.reformRow {
+  grid-template-columns: 2.6fr 1.25fr 0.7fr 1.6fr;
+}
+
+.reformTable .targetHead {
+  border-top: 0;
+  padding: calc(var(--u) * 0.7) 0 calc(var(--u) * 0.5);
+  font-size: calc(var(--u) * 0.95);
+}
+
+.reformCost {
+  color: var(--pe-dark);
+  font-weight: 700;
+}
+
+/* ---------- Live dashboard: the export's page in place of the live one ---------- */
+
+.dashCard {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.9);
+  background: white;
+}
+
+.dashBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--u) * 3);
+  padding: calc(var(--u) * 2) calc(var(--u) * 4);
+}
+
+.dashBody .figureTitle {
+  font-size: calc(var(--u) * 2.3);
+}
+
+.dashFeatures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--u) * 2.4);
+}
+
+.dashFeatures .mini {
+  align-items: flex-start;
+}
+
+.dashFeatures .mini h3 {
+  font-size: calc(var(--u) * 1.85);
+}
+
+.dashFeatures .mini p {
+  margin-top: calc(var(--u) * 0.3);
+  font-size: calc(var(--u) * 1.5);
+}
+
+.dashBody .targetsFoot {
+  font-size: calc(var(--u) * 1.4);
+}
+
+/* ---------- Open columns: cards without a box, under a hairline ---------- */
+
+.cardsOpen {
+  column-gap: calc(var(--u) * 2.6);
+}
+
+.cardsOpen > .card {
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  padding: calc(var(--u) * 1.4) 0 0;
+}
+
+/* The episode the next slide takes up: a teal rule in place of the hairline. */
+.cardsOpen > .episodeNext {
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+  padding-top: calc(var(--u) * 1.4 - var(--u) * 0.3 + 1px);
+}
+
+/* ---------- Boxed columns: a light card for items compared side by side ----------
+   White, a hairline border and a small radius: no tint, no accent bar, no
+   shadow. Used only where the items on a slide are read against each other. */
+
+.cardsBoxed {
+  gap: calc(var(--u) * 1.6);
+}
+
+.cardsBoxed > .card {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--u0) * 0.7);
+  background: white;
+  padding: calc(var(--u) * 1.7) calc(var(--u) * 1.9);
+}
+
+.cardsBoxed > .cardCompact {
+  padding: calc(var(--u) * 1.4) calc(var(--u) * 1.6);
+}
+
+/* ---------- In brief: the six parts as an open, numbered agenda ---------- */
+
+.agenda {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
+  gap: 0 calc(var(--u) * 4);
+}
+
+.agenda li {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 3) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: calc(var(--u) * 1.2);
+  border-top: 1px solid var(--line);
+  padding: calc(var(--u) * 1.6) 0 calc(var(--u) * 1.7);
+}
+
+.agendaNumber {
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 3.2);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.agendaHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.5);
+}
+
+.agenda h2 {
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 2.1);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.agenda p {
+  margin-top: calc(var(--u) * 0.4);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.6);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+/* ---------- Part divider: the part's number and title, and the six parts ---------- */
+
+.partSlide {
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: calc(var(--u) * 6);
+}
+
+.partKicker {
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.partBig {
+  margin-top: calc(var(--u) * 0.6);
+  color: var(--pe-teal);
+  font-size: calc(var(--u) * 12);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.partName {
+  margin-top: calc(var(--u) * 1.4);
+  color: var(--pe-dark);
+  font-size: calc(var(--u) * 4.4);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.partText {
+  margin-top: calc(var(--u) * 1.2);
+  max-width: 36em;
+  color: var(--color-gray-600);
+  font-size: calc(var(--u) * 2);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.partList {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--line);
+}
+
+.partList li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+  margin-left: -1px;
+  border-left: calc(var(--u) * 0.3) solid transparent;
+  padding: calc(var(--u) * 0.85) 0 calc(var(--u) * 0.85) calc(var(--u) * 2);
+  color: var(--color-gray-700);
+  font-size: calc(var(--u) * 1.9);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.partListNumber {
+  width: calc(var(--u) * 1.6);
+  color: var(--color-gray-400);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.partList .partListDone {
+  color: var(--color-gray-400);
+}
+
+.partList .partListCurrent {
+  border-left-color: var(--pe-teal);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 2.2);
+  font-weight: 700;
+}
+
+.partListCurrent .partListNumber {
+  color: var(--pe-teal);
+}
+
+/* ---------- Agent-based models: the first candidate leads ----------
+   A teal rule over the lead row's model and input, in place of the
+   hairline (no tint), and a small label above the model's name. */
+
+.cellFirst {
+  border-top: calc(var(--u) * 0.3) solid var(--pe-teal);
+}
+
+.leadKicker {
+  margin-bottom: calc(var(--u) * 0.25);
+  color: var(--pe-teal-dark);
+  font-size: calc(var(--u) * 1);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+/* ---------- How far results break down: a tag after a list item ---------- */
+
+.breakdownList .tag {
+  margin-left: calc(var(--u) * 0.6);
+  vertical-align: middle;
+}
