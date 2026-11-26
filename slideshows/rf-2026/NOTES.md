@@ -764,6 +764,45 @@ below HBAI's, future-year reweighting, take-up fixed at build and an
 earlier-policy baseline. Then
 start with question 1, because the other answers depend on it.
 
+## Likely questions, with what we can say
+
+Short answers for the five questions most likely to come up. "Say we will
+follow up" marks what is not sourced; do not guess.
+
+### Q1. Why does calibration lower poverty, and what are all-person poverty, the median and the Gini against HBAI?
+
+If asked for all-person figures: none is public on the 22 November build; say we will follow up. On the 19 October build (microcosm#1334, uk-living-standards-outlook#1 and #4): median BHC income £762 a week against HBAI's £719; relative AHC poverty 18.1% against 19.6%; Gini 0.302 against 0.327. At the FRS grossing weights the same rows reproduce HBAI (absolute BHC 16.0% against 15.9%; the median matches), so the gap is the weights, not the incomes or the rules.
+
+Which targets do it: #1334 named three families that pull weight off low-income households (HMRC income bands below £30k, UC caseloads through the take-up draw, pensioner benefit caseloads). On the 22 November build, #1710's attribution of the children's gap gives OBR spending lines 0.10m, UC payment bands 0.08m, the benefit cap 0.05m, and disability, carer and LCWRA rows 0.13m as a block. It is not fully traced.
+
+### Q2. How many of the 78,450 are real FRS households, and how precise is a decile or vigintile?
+
+If asked how many records are real FRS households: 10,000 are SPI copies, plus more copies in the four top bands; the raw FRS 2024–25 count and the number of band copies are not sourced, so say we will follow up. Every record has a positive weight. Weights are concentrated: the top 1% of records hold 24% of the weight, and the largest weight sits at the 10 times bound. On the 19 October build, calibration roughly halved the effective sample from the FRS's own weights (#1334).
+
+Precision: the effective sample of about 7,500 gives about 750 effective households per decile and 375 per vigintile. We publish no standard errors for national results; the 90% intervals are for local areas only. Say we will follow up on national intervals.
+
+### Q3. Which benefits are simulated and which taken as reported, and what take-up rate does the file imply?
+
+If asked what is simulated: Universal Credit, Pension Credit, Child Benefit, pension-age Housing Benefit and Council Tax Reduction (where the scheme is modelled) are computed from the rules and gated by a stored claim flag. Working-age Housing Benefit and the legacy benefits are continuing awards only and cannot rise under a reform. Other English working-age Council Tax Reduction keeps reported amounts. For PIP, DLA, Attendance Allowance, Carer's Allowance and the State Pension, say we will follow up with a simulated-or-reported list; do not guess.
+
+If asked for the take-up rate: there is no single rate to quote. Reporters claim; others are drawn to DWP's 2025 UC caseloads by family type and award band, Pension Credit rates for 2023–24 and HMRC's Child Benefit rates. The UC take-up parameter is read by no formula, so "80%" cannot be set for a run today; a full-take-up run can (the claim flag set to true). The implied UC rate on this build: say we will follow up.
+
+### Q4. What external evidence is there beyond the in-sample fit, and what has changed since HM Treasury's pilot?
+
+If asked what has changed since the pilot: the record is dated 17 December 2024 and predates the Microcosm UK builds used here. Whether its income tax finding still holds has not been re-tested with HMT; say so. Do not claim it is fixed. Whether the pilot used the earlier Enhanced FRS file: say we will follow up.
+
+External checks we can point to, none of them a calibration target: the seven OBR costings on slide 19 (52% to 134% of the OBR's figure, two gaps not yet explained); one held-out statistic, NEET 16–24, 3.0% below ONS; the HBAI checks on slide 18, which the file fails on poverty levels. There is no out-of-sample page for the UK and no reconciled comparison with another model. That is what the pilot on slide 23 is for.
+
+If asked how the constituency figures are made: a separate file of 150,000 records fitted to 28,725 local targets (98.6% within 10%, in-sample; effective sample about 97,000), published only where 10 or more survey households lie behind a number, with 90% intervals. How the intervals are computed, whether copies count towards the 10, and any out-of-sample check of local results: say we will follow up.
+
+### Q5. How would RF reproduce a number in a year, on what terms are the records held, and who maintains it?
+
+If asked about reproducing a result: each run records the package versions, the data build and the forecast (the run receipt). A build is named by a release ID that resolves to a fixed revision, with its files pinned by SHA-256, and policyengine.py ships a manifest naming the certified build at each version. So a result can be rerun on the versions and build it was made with. How long old builds stay available: say we will follow up.
+
+Be straight on movement: builds change often (15 and 22 November), and results move with them. In microcosm#1710 a three-child-limit result moved from 336,000 to 300,000 between two builds, not yet traced. A user who needs a stable series pins one version and one build.
+
+If asked on what terms we hold and share the records: they are FRS-derived under the UK Data Service licence, kept in a private repository, reached by token; we publish tables, not records. The terms on which another organisation could hold them are not settled: that is question 5 on slide 24. Say we will follow up in writing, and do not describe the licence from memory.
+
 ### 25. Thank you (reference)
 
 Offer to send the deck as a PDF, with the mapping tables updated once the
