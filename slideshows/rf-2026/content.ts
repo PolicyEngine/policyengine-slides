@@ -1230,7 +1230,7 @@ export const stepsTable: MapRow[] = [
     label: "PolicyEngine’s rules on RF’s own file",
     where: "In place of step 4",
     today: "Possible in Python, not yet tried; variables to map, take-up flags to supply",
-    tags: [tags.partly],
+    tags: [tags.notYet],
     step: 2,
     also: true,
   },
@@ -1377,7 +1377,7 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "12 regions and nations; 650 constituencies, 361 local authorities (separate file, same survey)",
       "12 regions and nations (IPPR, June 2024)",
-      "Region in the data (regional LHA); UKMOD Explore: UK, nations, London",
+      "Region in the data; nation and London extensions; UKMOD Explore",
     ],
     step: 3,
   },
@@ -1640,7 +1640,7 @@ export const notClaimed = [
 ];
 
 export const knownLimits = [
-  { icon: IconUsers, text: "Poverty below HBAI’s: 3.40m children against 3.97m (slide 18)" },
+  { icon: IconUsers, text: "Poverty below HBAI’s: 3.40m children (AHC) against 3.97m (slide 18)" },
   { icon: IconBuildingFactory2, text: "No firms, no corporation tax" },
   { icon: IconCalendarStats, text: "One set of weights, fitted to 2025" },
   { icon: IconChartBar, text: "Effective sample about 7,500; areas need 10+ households" },
@@ -1736,7 +1736,7 @@ export const options = [
       { label: "What it is", text: "RF analysts run it, in Python or with an AI assistant" },
       { label: "What it needs", text: "A token, a data route and the missing steps" },
       { label: "What it costs", text: "A break in RF’s series; past figures reconciled" },
-      { label: "What it gives", text: "Open rules and data, local-area outputs, changes by pull request" },
+      { label: "What it gives", text: "Open code, local-area outputs, changes by pull request" },
     ],
   },
 ];
@@ -1769,7 +1769,7 @@ export const pilotBrings = {
   pe: [
     { icon: IconCode, text: "The run, with code, versions and data recorded" },
     { icon: IconTable, text: "The reconciliation table and note" },
-    { icon: IconPuzzle, text: "Small missing pieces, such as a vigintile view" },
+    { icon: IconPuzzle, text: "Small missing pieces, such as vigintiles in the web app" },
   ],
 };
 

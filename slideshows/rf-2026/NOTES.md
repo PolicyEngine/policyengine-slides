@@ -197,6 +197,11 @@ UKMOD.
 
 ### 10. How far results break down (reference)
 
+The local-area file is a separate build (7081d968, 23 November 2026):
+150,000 households, 28,725 targets, 98.6% within 10%, effective sample
+about 97,000, weights bounded at 10 times their start; all seven local
+gates passed.
+
 Household type, tenure and number of children are variables without a
 standard output, so a breakdown by them is custom analysis. Vigintiles come
 from `calculate_decile_impacts(..., quantiles=20)` in Python; the default
@@ -438,7 +443,7 @@ Also in RF's analysis:
   run without PolicyEngine's uprating. The file must be mapped to
   PolicyEngine's variable names, and take-up flags must be supplied:
   without them the main claim flags, such as Universal Credit's and Child
-  Benefit's, default to claiming. Not tried on an RF file. Partly.
+  Benefit's, default to claiming. Not tried on an RF file. Not yet.
   (policyengine-uk `data/dataset_schema.py`; docs `usage/simulations.md`.)
 
 Not on the slide, if asked: PolicyEngine has no labour-supply response by
@@ -548,6 +553,11 @@ TAXBEN is not a column because we hold too little published detail for a
 fair one.
 
 ### 18. Calibration: weights fitted to official statistics (reference)
+
+If asked: the 19 targets outside 10% after calibration are 15 HMRC SPI
+rows, 3 UC household-type rows and 1 student-support row. One held-out
+check is public: NEET 16–24, left out of the solve, came out 3.0% below
+ONS. Each weight is bounded at 10 times its starting value.
 
 Say first what this is not: it is how well the weights reproduce the totals
 they were fitted to, so 98.8% is not a measure of accuracy on anything

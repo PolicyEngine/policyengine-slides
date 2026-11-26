@@ -1127,7 +1127,7 @@ export function BudgetObrSlide() {
       section="compare"
       title="Autumn Budget 2026: PolicyEngine’s costings beside the OBR’s"
       scale={0.92}
-      subtitle="All seven measures, as published on 31 October 2026, with the main reason for each gap"
+      subtitle="All seven measures, as published on 31 October 2026, with the main reason where known"
     >
       <div>
         <Table
