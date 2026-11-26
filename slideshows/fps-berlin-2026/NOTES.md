@@ -5,37 +5,37 @@ Finances", Federal Ministry of Finance, Berlin, 1–2 December 2026. 25
 minutes of presentation, then 20 minutes of open discussion.
 
 The ministry runs the deck from its own machine, so it is sent as a PDF
-by 27 November. No slide has build steps. Slide 25 embeds the live
+by 27 November. No slide has build steps. Slide 27 embeds the live
 dashboard in the browser deck; the PDF shows a screenshot (no QR code: the dashboard is not yet published).
 
 Every number is the merged paper's (PolicyEngine/uk-ai-study main at
 c42be9f, tax year 2027–28). The unmerged revision on PR #26 (calibrated
 spells, and a closed capital account built into every run) is not in the
-deck; slide 22 is the merged paper's own static closed account. If asked about spell
+deck; slide 24 is the merged paper's own static closed account. If asked about spell
 length, say it is the main revision under way and point to slide 21.
 
 ## Timing
 
-26 slides (five of them section dividers) in 25 minutes is about a minute each, so pace by part rather
+28 slides (five of them section dividers) in 25 minutes is under a minute each, so pace by part rather
 than by slide:
 
 | Part | Slides | Minutes | Ends by |
 |---|---|---|---|
 | Opening | 1–3 | 1.5 | 1:30 |
 | 1 The question | 4–6 | 2.5 | 4:00 |
-| 2 Data and method | 7–12 | 5.5 | 9:30 |
-| 3 The central case | 13–16 | 5 | 14:30 |
-| 4 Who and how | 17–19 | 4 | 18:30 |
-| 5 What moves it | 20–23 | 4.5 | 23:00 |
-| Close | 24–26 | 2 | 25:00 |
+| 2 Data and method | 7–11 | 4.5 | 8:30 |
+| 3 The central case | 12–16 | 5.5 | 14:00 |
+| 4 Who and how | 17–19 | 4 | 18:00 |
+| 5 What moves it | 20–25 | 5 | 23:00 |
+| Close | 26–28 | 2 | 25:00 |
 
-Slides 4, 7, 13, 17 and 20 are section dividers: say the part's title and
+Slides 4, 7, 12, 17 and 20 are section dividers: say the part's title and
 move on (a few seconds each).
 
 The slides carry one headline per slide; the detail behind each is in
-these notes. Spend about 15 seconds on slide 15 (one sentence, then move
-on), with the time going to slides 14, 16, 19 and 21. Slide numbers are
-in the footer for questions.
+these notes. Spend about 15 seconds each on slides 14, 15 and 23 (one
+sentence, then move on), with the time going to slides 13, 16, 19 and 21.
+Slide numbers are in the footer for questions.
 
 Three bases appear, and the slides label them: 50-draw means (the central
 case, the five rules, the reforms), 20-draw means (the channel split, the
@@ -124,28 +124,34 @@ is simulated as a claimant. (The shock:) Job losses allocated by employment time
 exposure; survivor wages rise in proportion to complementarity; capital
 income scaled by 1.398. Within each group, systematic sampling picks the
 displaced. The model takes no spell length: the displaced are out all year.
-
-**12. Draws.** 72,504 employee records, but uneven weights give an
+(The last chip, on draws:) 72,504 employee records, but uneven weights give an
 effective sample of about 5,810, so one draw's displaced count runs from
 1.85 to 2.25 million. "±" is the spread across draws, not a confidence
 interval.
 
 ## 3. The central case
 
-**13. Section: The central case.** Divider; name the part and move on.
+**12. Section: The central case.** Divider; name the part and move on.
 
-**14. Central case.** 2.04 million displaced, £7.3bn a year, poverty +2.4
+**13. Central case.** 2.04 million displaced, £7.3bn a year, poverty +2.4
 points, Gini +1.8. The £7.3bn nets £42.5bn of displacement cost against
 about £18bn from each offsetting channel, so the sign depends on the offset
 assumptions. Read the qualifier line: upper bound for spell length; +0.82
 on the relative line; +1.99 with full take-up and JSA.
 
-**15. By decile.** 0.78 per cent of the bottom decile against 5.57 per
+**14. By decile.** 0.78 per cent of the bottom decile against 5.57 per
 cent of the top move into unemployment, mostly because that is where
 employees are. Women are 53 per cent of the displaced. (Decomposition:) Losses peak in the upper-middle deciles; on this
 draw decile 8 loses 3.7 per cent of disposable income, 2.9 per cent over
 20 draws, and which of deciles 6–9 loses most depends on the ranking. Ignore decile 1: its gain reverses
 under another household ranking.
+
+**15. Where the income loss falls.** One draw. Decile 8 loses most:
+earnings −5.0 per cent of baseline disposable income, benefits +0.3 and
+lower taxes +0.7, so −3.7 per cent (−2.9 per cent over 20 draws).
+Benefits and lower taxes offset about a fifth of the earnings loss there.
+At the top, the capital gain offsets lost earnings. Decile 1 depends on how
+households are ranked; don't read much into it.
 
 **16. Absorption.** Job loss alone, OBR-sized. Tax and benefits absorb 29
 per cent, nearly all through lower income tax and NI; cash benefits add
@@ -180,7 +186,20 @@ capital uplift 55 against 40 per cent; spells of at most 9.5 months (20
 draws). Without the survivor wage rise, £24.9bn. (Grid:) At 7 per cent displacement, average income falls unless
 survivor wages grow by 5 per cent.
 
-**22. Closure.** The capital uplift is not tied to the labour shock. If a
+**22. Pay rise against job loss.** One draw, capital shock on, central
+rule. At 7 per cent job loss, average household disposable income falls
+with pay rises up to 4 per cent (−0.32 per cent) and rises at 5 per cent
+(+0.15). With no pay rise, it already falls at 4 per cent job loss
+(−0.38). The point: living standards, not only the budget, rest on the
+pay assumption.
+
+**23. Other exposure scores.** On one draw, adjusted for the displaced
+count, five scores give £4bn to £8bn; Felten's AIOE (£8.0bn) and the
+C-AIOE (£8.2bn) are within single-draw scatter (£1.7bn). If asked why the
+adjusted C-AIOE is above the 50-draw mean of £7.3bn: seed 0 sits above
+the fitted cost-count line.
+
+**24. Closure.** The capital uplift is not tied to the labour shock. If a
 share of the £68.3bn net labour-income fall becomes profit taxed at 25 per
 cent, the result runs from a £0.9bn gain to a £14.4bn cost. The range runs
 from half the fall becoming profit, half of it UK-owned (£14.4bn cost), to
@@ -188,7 +207,7 @@ all of it becoming UK-owned profit (£0.9bn gain); the cells between are
 £12.1bn and £3.6bn. This is where
 the tax-base question for this audience sits.
 
-**23. Policy.** Three stylised responses, compared on cost and poverty only.
+**25. Policy.** Three stylised responses, compared on cost and poverty only.
 The slide names the reforms without codes; the paper calls them R1 (wage insurance), R2 (UC allowance +20%) and R3 (no benefit cap, lower taper). R1 replaces 50 per cent of lost earnings (capped at £15,000): poverty −1.89
 points at £26.9bn, £14.3bn per point; R2 and R3 cost £8.6bn and £6.7bn per
 point. They aim at different things: R1 replaces earnings for the
@@ -198,14 +217,23 @@ reaches deciles 8–10; R2 and R3 place 77 and 73 per cent in deciles 1–5.
 
 ## Close
 
-**24. Conclusions and future work.** Four results, then the limits: a one-year stress test,
-nine groups, no hiring margin. Next: calibrate spells and re-employment pay
-to UK evidence (Upward and Wright 2019), and model take-up and JSA for the
-newly displaced. (Future work:) Six limits, each with what would lift it, all from the
-paper's discussion section. Twenty seconds: name two (within-group exposure
-and spell length), the rest are for the discussion.
+**26. Conclusions and next steps.** Three findings in one breath: who
+loses the job drives the budget cost (£1.9bn to £11.3bn across four rules)
+while poverty moves far less; job loss raises poverty far more than wage
+cuts of the same size (+2.4 against +0.3 points); and whether the state
+loses at all depends on where the lost wages go (a £0.9bn gain to a
+£14.4bn cost). Then where next. For Germany and France: the method and
+code carry over and the UK run is a benchmark; what is missing is
+household data with incomes and occupations (EU-SILC through Eurostat,
+SOEP by contract) and their tax-benefit rules; both countries' earnings-
+related insurance is the interesting test. For accuracy: detailed
+occupations from the Labour Force Survey, spells and re-employment
+calibrated to UK evidence (Upward and Wright 2019), contributory JSA and
+take-up for the newly displaced. Hiring and retraining: the entry margin
+for young workers (Brynjolfsson et al. 2026) and the cost of retraining
+(Hyman et al. 2025).
 
-**25. Beyond this paper (with the live dashboard).** Not results: directions for the same tools. The
+**27. Beyond this paper (with the live dashboard).** Not results: directions for the same tools. The
 macro model next to this study; firms and production networks linked to
 households; what a slower US pace of AI development would mean for
 government, people and firms; and the token tax project (household
@@ -216,7 +244,7 @@ screen only. Frame the dashboard first: a different model (OG-UK, no
 unemployment) asking a different question, so its pay-rate fall (−1.27%)
 and this paper's 7 per cent job loss are not two answers to one question. Say the dashboard results are preliminary and not yet published.
 
-**26. Thank you.** Leave this up for the discussion. Two QR codes: the
+**28. Thank you.** Leave this up for the discussion. Two QR codes: the
 paper on SSRN (abstract 7174479) and my LinkedIn.
 
 ## Hardest questions, with answers from the paper
@@ -226,7 +254,7 @@ paper on SSRN (abstract 7174479) and my LinkedIn.
    Irish calibration; the same 0.4 points on a 4 per cent base is a 10 per
    cent uplift. With 10 per cent the cost is £20.6bn, with 20 per cent
    £16.2bn, with the uplift on dividends only £11.0bn (20 draws). That is
-   why slide 22 replaces the uplift with an explicit account.
+   why slide 24 replaces the uplift with an explicit account.
 2. **"Dolls et al. find unemployment shocks absorbed more than income
    shocks; you find the reverse."** For this shock the job losses fall on
    above-average earners with capital, working partners and owned homes,
@@ -275,12 +303,6 @@ paper on SSRN (abstract 7174479) and my LinkedIn.
   is uneven weights: an effective sample of about 7,200 households, 5,810
   for employees. The 19 misses are 15 SPI income bands, 3 Universal Credit
   and 1 student support.
-- **Other exposure indices.** On one draw, adjusted for the displaced
-  count, five indices give £4bn to £8bn; Felten's AIOE (£8.0bn) and the
-  C-AIOE (£8.2bn) are within single-draw scatter (£1.7bn). The adjusted
-  C-AIOE sits above the 50-draw mean of £7.3bn because seed 0 is above the
-  fitted cost-count line.
-
 - **Historical benchmark.** A 2008–10 backcast over-predicts the poverty
   response; uprating and mixed spell lengths are outside the model.
 - **Public sector.** Displaced public-sector employees cost £26.6bn a year

@@ -1,6 +1,7 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import katex from "katex";
 import {
+  IconAlertTriangle,
   IconArrowRight,
   IconArrowsSplit,
   IconBuildingBank,
@@ -31,7 +32,8 @@ import {
   channels,
   closure,
   closurePoints,
-  conclusions,
+  takeaways,
+  nextSteps,
   costMovers,
   dataFacts,
   drawFacts,
@@ -40,14 +42,14 @@ import {
   exposureBuild,
   exposureNotes,
   exposureWhy,
-  futureLines,
   directionPoints,
   growthDashboard,
   imputationLegend,
   imputationPoints,
   imputationTex,
   incidenceChips,
-  incidenceRows,
+  decompositionPoints,
+  gridPoints,
   indexPoints,
   indexRows,
   jobLoss,
@@ -255,7 +257,7 @@ export function TitleSlide() {
 
 export function AgendaSlide() {
   return (
-    <Frame title="Agenda" subtitle="Introduction, five parts, then conclusions and future work" scale={1.05}>
+    <Frame title="Agenda" subtitle="Introduction, five parts, then conclusions and next steps" scale={1.05}>
       <div className={fps.agenda}>
         <div className={`${fps.agendaRow} ${styles.enter}`} style={enter(0)}>
           <span className={fps.agendaNum} />
@@ -356,7 +358,7 @@ export function ExposureSlide() {
 
 export function QuestionsSlide() {
   return (
-    <Frame section="question" title="Two things the size of the shock does not settle" subtitle="I hold the size of the shock fixed and vary both" scale={1.15}>
+    <Frame section="question" title="Two things the size of the shock does not settle" subtitle="I hold the size fixed, then test five rules for who loses the job, and job loss against wage cuts" scale={1.15}>
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(2)}>
         {openQuestions.map((question, index) => (
           <div key={question.title} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
@@ -421,7 +423,7 @@ export function ScenarioSlide() {
   return (
     <Frame
       section="method"
-      title="The shock: 7% displaced, wages +2.6%, capital income +39.8%"
+      title="The shock has three channels: job loss, pay, capital income"
       subtitle="Step 3, a scenario, not a forecast: ten years of adoption in one year (Briggs and Kodnani 2023, via Doorley et al. 2026)"
       scale={0.94}
     >
@@ -443,7 +445,7 @@ export function ScenarioSlide() {
         ))}
       </div>
       <div>
-        <p className={fps.sideHead}>What the shock leaves out</p>
+        <p className={fps.sideHead}>How the shock is applied</p>
         <Chips items={scenarioChips} />
       </div>
     </Frame>
@@ -694,7 +696,7 @@ export function CentralSlide() {
       <Stats items={central} small />
       <Chips items={centralChips} />
       <div>
-        <p className={fps.sideHead}>Each part alone, £bn a year (20 draws)</p>
+        <p className={fps.sideHead}>The three channels alone, £bn a year (20 draws)</p>
         <div className={fps.waterfall}>
           <p className={fps.wfLabel}>
             {channels[0].label}
@@ -766,6 +768,29 @@ export function TransitionSlide() {
   );
 }
 
+export function DecompositionSlide() {
+  return (
+    <Frame
+      section="central"
+      title="The income loss falls in the upper-middle deciles"
+      subtitle="Change by decile in earnings, benefits and taxes, as a share of baseline disposable income (one draw)"
+      scale={1.0}
+      fill
+    >
+      <div className={`${fps.split} ${fps.splitWide} ${fps.figureShort}`} style={{ alignItems: "center" }}>
+        <Figure
+          src="/images/fps-berlin-2026/fig4_4_decomposition.png"
+          width={1800}
+          height={900}
+          alt="Change in disposable income, market income, benefits and taxes by income decile, central case, one draw"
+          caption="Central case, one draw; the residual is council tax and pension deductions"
+        />
+        <Points items={decompositionPoints} />
+      </div>
+    </Frame>
+  );
+}
+
 export function AbsorptionSlide() {
   return (
     <Frame
@@ -788,32 +813,19 @@ export function IncidenceSlide() {
     <Frame
       section="comparisons"
       title="Who loses the job changes the cost a lot, and poverty very little"
-      subtitle="Same 2.04m job losses, allocated five ways (average of 50 draws)"
-      scale={0.96}
+      subtitle="Same 2.04m job losses, allocated five ways: who is displaced by decile (one draw), and cost against poverty (50 draws)"
+      scale={0.92}
+      fill
     >
-      <table className={fps.table}>
-        <thead>
-          <tr>
-            <th>Displacement rule</th>
-            <th className={fps.num}>Cost to the budget (£bn a year)</th>
-            <th className={fps.num}>Rise in absolute poverty (points)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {incidenceRows.map((row) => (
-            <tr key={row.rule} className={row.rule === "Exposure-proportional" ? fps.rowCentral : row.stress ? fps.rowStress : ""}>
-              <td>
-                <span className={fps.rowName}>{row.rule}</span>
-                <span className={fps.rowText}>{row.text}</span>
-              </td>
-              <td className={fps.num}>
-                <strong>{row.cost}</strong>
-              </td>
-              <td className={fps.num}>{row.bhc}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={fps.figureShort}>
+        <Figure
+          src="/images/fps-berlin-2026/incidence_families.png"
+          width={2179}
+          height={915}
+          alt="Left: share displaced by decile under five rules. Right: cost to the budget against the rise in absolute poverty for each rule."
+          caption="Bars on the right show one standard deviation across draws"
+        />
+      </div>
       <Chips items={incidenceChips} />
     </Frame>
   );
@@ -900,6 +912,29 @@ export function BreakEvenSlide() {
   );
 }
 
+export function GridSlide() {
+  return (
+    <Frame
+      section="sensitivity"
+      title="Average income falls unless pay rises keep pace with job loss"
+      subtitle="Change in average household disposable income (%), by job-loss rate and pay rise (one draw)"
+      scale={1.0}
+      fill
+    >
+      <div className={`${fps.split} ${fps.splitWide} ${fps.figureShort}`} style={{ alignItems: "center" }}>
+        <Figure
+          src="/images/fps-berlin-2026/fig4_5_disposable_grid.png"
+          width={2000}
+          height={1000}
+          alt="Grid of changes in average household disposable income by job-loss rate (0 to 10 per cent) and pay rise (0 to 5 per cent)"
+          caption="Job-loss rate across, pay rise for those who stay up"
+        />
+        <Points items={gridPoints} />
+      </div>
+    </Frame>
+  );
+}
+
 export function ClosureSlide() {
   // Position on a scale from −5 to +16 £bn.
   const lo = -5;
@@ -980,22 +1015,24 @@ export function PolicySlide() {
 
 export function ConclusionsSlide() {
   return (
-    <Frame title="Conclusions and future work" subtitle="A scenario, not a forecast; the size of the shock held fixed" scale={0.92}>
-      <div className={fps.split}>
-        <div className={fps.numbered}>
-          {conclusions.map((item, index) => (
-            <div key={item.title} className={styles.enter} style={enter(index)}>
-              <span className={fps.kpiIcon}>
-                <item.icon stroke={1.75} aria-hidden="true" />
-              </span>
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.text}</p>
+    <Frame title="Conclusions and next steps" subtitle="A scenario, not a forecast: the size of the shock held fixed" scale={1.05}>
+      <div className={`${fps.split} ${fps.splitEven}`}>
+        <div>
+          <p className={fps.sideHead}>What we found</p>
+          <div className={fps.numbered}>
+            {takeaways.map((item, index) => (
+              <div key={item.title} className={styles.enter} style={enter(index)}>
+                <span className={fps.kpiIcon}>
+                  <item.icon stroke={1.75} aria-hidden="true" />
+                </span>
+                <div>
+                  <h2>{item.title}</h2>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        <Points items={futureLines} head="Limits and next steps" />
+        <Points items={nextSteps} head="Where next" />
       </div>
     </Frame>
   );
@@ -1010,7 +1047,7 @@ export function DirectionsSlide() {
         </div>
         <div style={{ display: "grid", gap: "calc(var(--u) * 2)" }}>
           <Points items={directionPoints} />
-          <p className={fps.chipsNote}>Left: {growthDashboard.title}, preliminary and not yet published</p>
+          <Chips items={[{ icon: IconAlertTriangle, text: `Left: ${growthDashboard.title} (preliminary, not yet published)` }]} />
         </div>
       </div>
     </Frame>
@@ -1075,7 +1112,7 @@ export function IndexBackupSlide() {
     <Frame
       section="sensitivity"
       title="Five exposure indices give £4–8bn on one draw"
-      subtitle="One draw, adjusted to the average number displaced"
+      subtitle="The cost under five exposure scores, on one draw adjusted to the average number displaced"
       scale={1.05}
     >
       <div className={fps.split}>

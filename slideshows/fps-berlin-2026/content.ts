@@ -73,7 +73,7 @@ export const parts: { key: PartKey; short: string; title: string; icon: Icon; ag
   { key: "method", short: "Method", title: "Data and method", icon: IconDatabase, agenda: "The data, the exposure score, the shock" },
   { key: "central", short: "Central case", title: "The central case", icon: IconReceiptTax, agenda: "Cost, poverty and inequality; who absorbs the loss" },
   { key: "comparisons", short: "Who and how", title: "Who loses the job, and how", icon: IconArrowsSplit, agenda: "Five displacement rules; job loss vs wage cuts" },
-  { key: "sensitivity", short: "What moves it", title: "What moves the cost, and policy", icon: IconScale, agenda: "Break-even assumptions, where the wage bill goes, three policy responses" },
+  { key: "sensitivity", short: "What moves it", title: "What moves the cost, and policy", icon: IconScale, agenda: "What turns the cost to zero, other exposure scores, three policy responses" },
 ];
 
 export const sources = {
@@ -143,7 +143,7 @@ export const openQuestions: { icon: Icon; title: string; views: Point[] }[] = [
 export const methodFlow: { icon: Icon; title: string; text: string }[] = [
   { icon: IconDatabase, title: "Household data", text: "Microcosm: the Family Resources Survey 2024–25, matched to official totals" },
   { icon: IconChartBar, title: "AI exposure", text: "A score for nine occupation groups (Felten et al.), adjusted for complementarity" },
-  { icon: IconUserMinus, title: "The shock, person by person", text: "Job loss, pay rises for those who stay, capital income; who loses the job is drawn at random" },
+  { icon: IconUserMinus, title: "The shock, in three channels", text: "Job loss, pay rises for those who stay, capital income; who loses the job is drawn at random" },
   { icon: IconCalculator, title: "PolicyEngine UK", text: "Tax and benefit rules for 2027–28" },
 ];
 
@@ -164,11 +164,12 @@ export const scenarioChips: Chip[] = [
   { icon: IconHourglass, text: "Out of work for the full year: no re-employment or redundancy pay" },
   { icon: IconLifebuoy, text: "Only households the data mark as claimants get UC; contributory unemployment benefit not modelled" },
   { icon: IconBriefcase, text: "Employees only: the self-employed are outside the shock" },
+  { icon: IconDice5, text: "Who loses the job is drawn at random: results average 50 draws (1.85–2.25m displaced)" },
 ];
 
 // Slide 11: one titled card per shock; the plain line and the detail.
 export const shockCards: { title: string; plain: string; detail: string }[] = [
-  { title: "Job loss", plain: "of employees lose their job for the whole year", detail: "More in more exposed, larger groups; pay, hours and pensions set to zero" },
+  { title: "Job loss", plain: "of employees lose their job for the whole year", detail: "Central rule: more in more exposed groups (four other rules tested later); pay and pensions set to zero" },
   { title: "Pay of those who stay", plain: "average pay rise, paid to those who keep their jobs", detail: "Groups where AI helps the worker (high θ) gain more" },
   { title: "Capital income", plain: "on savings interest and dividends", detail: "Return on capital 1.0% → 1.4%: +40% on this low base, +10% on a 4% base" },
 ];
@@ -207,8 +208,22 @@ export const transitionStats: Stat[] = [
 ];
 
 export const transitionPoints: Point[] = [
-  { icon: IconTrendingDown, lead: "Income falls most in decile 8: −2.9%", text: "At the top, capital gains offset lost earnings" },
   { icon: IconUsers, lead: "Mostly where employees sit", text: "Equal chances for every employee give a similar pattern" },
+];
+
+// Section 4.1, Figure 4.4 (seed 0) and the paragraph on it.
+export const decompositionPoints: Point[] = [
+  { icon: IconTrendingDown, lead: "Decile 8 loses most: −3.7%", text: "Earnings −5.0%; benefits +0.3%, lower taxes +0.7%" },
+  { icon: IconScale, lead: "Taxes and benefits offset about a fifth", text: "Of the earnings loss in decile 8" },
+  { icon: IconCoins, lead: "At the top, capital gains offset lost earnings" },
+  { icon: IconInfoCircle, lead: "Decile 1 depends on how households are ranked" },
+];
+
+// Section 4.5, Figure 4.5 (seed 0) and the paragraph on it.
+export const gridPoints: Point[] = [
+  { icon: IconUserMinus, lead: "At 7% job loss, income falls up to a 4% pay rise", text: "−0.3%; it rises only at 5% (+0.15%)" },
+  { icon: IconTrendingDown, lead: "With no pay rise, it falls from 4% job loss" },
+  { icon: IconCoins, lead: "Capital shock on, central rule" },
 ];
 
 // Section 4.2, Table 3 (OBR-sized displacement, 20 draws) and the take-up
@@ -249,8 +264,8 @@ export const incidenceRows: {
 ];
 
 export const incidenceChips: Chip[] = [
-  { icon: IconChartBar, text: "Every rule hits the upper half of the distribution hardest" },
-  { icon: IconEqual, text: "Uniform and central poverty rises do not differ (2,000 draws)" },
+  { icon: IconReceiptTax, text: "Cost: £1.9bn (uniform) to £11.3bn (expertise compression); £27.7bn in the stress test" },
+  { icon: IconHome, text: "Poverty rises 2.4–3.0 points under every rule" },
 ];
 
 // Table 5 (tab:wagemargin), 20 paired draws, channels on in both rows; and
@@ -314,6 +329,19 @@ export const policyPoints: Point[] = [
   { icon: IconTarget, lead: "Different targets", text: "Wage insurance pays the displaced; the other two pay all claimants" },
   { icon: IconScale, lead: "Not a ranking", text: "No labour-supply or re-employment response" },
   { icon: IconReceiptTax, lead: "Wage insurance is untaxed and not counted for benefits", text: "So at the top of its cost range" },
+];
+
+// Slide 26: three short findings, then where the work goes next.
+export const takeaways: { icon: Icon; title: string }[] = [
+  { icon: IconUsers, title: "Who loses the job drives the cost to the budget; poverty moves far less" },
+  { icon: IconArrowsSplit, title: "Job loss raises poverty far more than wage cuts of the same size" },
+  { icon: IconTrendingUp, title: "Whether the state loses at all depends on where the lost wages go" },
+];
+
+export const nextSteps: Point[] = [
+  { icon: IconWorld, lead: "Extend it to Germany and France", text: "Have: the method, open code, a UK benchmark. Need: household data with incomes and occupations (EU-SILC, SOEP) and their tax-benefit rules" },
+  { icon: IconTarget, lead: "Make this study more accurate", text: "Detailed occupations, realistic spells and re-employment, the full benefit response" },
+  { icon: IconSchool, lead: "Hiring and retraining", text: "Fewer jobs for young entrants; what retraining support would cost" },
 ];
 
 // Section 5.

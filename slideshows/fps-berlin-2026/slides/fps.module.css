@@ -543,10 +543,10 @@
   right: calc(var(--u0) * 4);
   bottom: calc(var(--u0) * 1.9);
   z-index: 20;
-  color: rgb(255 255 255 / 0.8);
-  font-size: calc(var(--u0) * 1.4);
+  color: rgb(255 255 255 / 0.9);
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .figureShort .figure img {
