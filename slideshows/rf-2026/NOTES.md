@@ -514,7 +514,9 @@ Fuller cells:
 - Geography, IPPR model: IPPR published average gains for all 12 regions
   and nations from its model (2p NI cut, 10 June 2024). UKMOD: the FRS end
   user licence reports region of residence only; LHA uses the 12 regions
-  (p.47); UKMOD Explore covers the UK, the four nations and London.
+  (p.47); the model has extensions for England, London, Northern Ireland,
+  Scotland and Wales, off by default (p.31); UKMOD Explore covers the UK,
+  the four nations and London.
 - Weights, PolicyEngine: 1,536 targets (HMRC 776, ONS 366, DWP 234, MHCLG
   82, others 78); 98.8% within 10%, in-sample. UKMOD: FRS grossing weights;
   a three-year pooled dataset (UK_2023_b2: 58,163 households, p.82) eases
