@@ -30,6 +30,10 @@
 
 import {
   IconAdjustments,
+  IconAdjustmentsHorizontal,
+  IconAward,
+  IconPercentage,
+  IconProgress,
   IconArrowsSplit,
   IconBolt,
   IconBook,
@@ -428,7 +432,7 @@ export const parts = [
     icon: IconGitCompare,
     title: "Checks",
     short: "Checks",
-    text: "Data, calibration fit, official costings and known limits",
+    text: "Data, calibration, official costings, known limits",
   },
   {
     key: "next",
@@ -501,7 +505,7 @@ export const whoWeAre = {
       icon: IconWorld,
       title: "UK and US models",
       text: "One Python package, policyengine.py",
-      cite: { text: "Ahmadi, Ghenis, Woodruff, Makarchuk and Volk, 2026, JOSS 11(125), 11115", source: sources.joss },
+      cite: { text: "Ahmadi et al., 2026, JOSS", source: sources.joss },
     },
     {
       icon: IconLockOpen,
@@ -513,9 +517,6 @@ export const whoWeAre = {
     {
       name: "10 Downing Street",
       icon: IconBuildingEstate,
-      logo: "/logos/orgs/10-downing-street.png",
-      width: 1280,
-      pixelHeight: 1280,
       height: 2.7,
       source: sources.no10,
       caption: "Built 10ds-microsim (experimental) on PolicyEngine",
@@ -524,9 +525,6 @@ export const whoWeAre = {
     {
       name: "House of Lords",
       icon: IconBuildingMonument,
-      logo: "/logos/orgs/house-of-lords.svg",
-      width: 755,
-      pixelHeight: 200,
       height: 2.2,
       source: sources.hansard,
       caption: "Debate cited Commons Library research using it, 24 Feb 2026",
@@ -538,7 +536,7 @@ export const whoWeAre = {
       logo: "/logos/orgs/new-economics-foundation.png",
       width: 567,
       pixelHeight: 241,
-      height: 2.8,
+      height: 3.8,
       source: sources.nef,
       caption: "New Economics Foundation",
     },
@@ -547,7 +545,7 @@ export const whoWeAre = {
       logo: "/logos/orgs/centre-for-policy-studies.png",
       width: 223,
       pixelHeight: 223,
-      height: 2.6,
+      height: 3.8,
       source: sources.cps,
       caption: "Centre for Policy Studies",
     },
@@ -625,7 +623,7 @@ export const rulesCode = {
 };
 
 export const rulesFacts = [
-  { icon: IconCalendarEvent, value: "1,086", label: "parameter files", text: "998 with a reference" },
+  { icon: IconAdjustmentsHorizontal, value: "1,086", label: "parameter files", text: "998 with a reference" },
   { icon: IconMathFunction, value: "1,513", label: "variables", text: "Inputs, and formulas over arrays" },
   { icon: IconTestPipe, value: "6,782", label: "YAML test cases", text: "Inputs and the expected output" },
 ];
@@ -669,21 +667,21 @@ export const coverage = [
       "Universal Credit, Pension Credit, State Pension, Housing Benefit, legacy benefits and tax credits",
       "Child Benefit; PIP, DLA, Attendance Allowance, Carer’s Allowance; benefit cap",
       "Winter Fuel Payment; Scottish Child Payment; Household Energy Payment",
-      "England childcare entitlements; Tax-Free Childcare",
+      "England childcare entitlements; Tax‑Free Childcare",
     ],
   },
   {
-    icon: IconAdjustments,
+    icon: IconProgress,
     title: "Partial",
     tag: tags.partly,
     items: [
-      "Council Tax Reduction: Scotland, Wales, England’s pensioner scheme and five English working-age schemes",
+      "Council Tax Reduction: Scotland, Wales, England’s pensioner scheme and five English working‑age schemes",
       "Alcohol, tobacco and gambling duties; vehicle excise duty",
       "Business rates, allocated by shareholding; Warm Home Discount",
     ],
   },
   {
-    icon: IconBuildingBank,
+    icon: IconBuildingFactory2,
     title: "Firms",
     tag: tags.outside,
     items: ["Corporation tax", "Firms as entities"],
@@ -736,11 +734,11 @@ export const microcosmResult = {
   icon: IconDatabase,
   owner: "The result",
   title: "Microcosm UK 2024–⁠25",
-  text: "78,450 household records; release build of 22 Nov 2026",
+  text: "78,450 household records; certified build of 22 Nov 2026",
 };
 
 export const microcosmFoot =
-  "57 source stages, each pinned. Open code; FRS-derived records, so access is by token under the UK Data Service licence.";
+  "57 source stages, each pinned. Open code. Records are FRS-derived (UK Data Service licence): not public, access by token.";
 
 // ---------- Slide 10: breakdowns ----------
 // The BIST deck's breakdowns (policyengine.py 810a59e outputs). Vigintiles:
@@ -757,31 +755,31 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
       { text: "Income and wealth deciles" },
       { text: "Shares gaining and losing, in five bands" },
       { text: "Gini and top shares" },
-      { text: "Vigintiles and custom groups: in Python, not in the web app", tag: tags.partly },
+      { text: "Vigintiles, custom groups: Python only", tag: tags.partly },
     ],
   },
   {
     icon: IconUsers,
     title: "By people",
     items: [
-      { text: "Four HBAI poverty measures: absolute and relative, before and after housing costs" },
+      { text: "Four HBAI poverty measures: absolute, relative; BHC, AHC" },
       { text: "By age and by sex" },
-      { text: "Household type, tenure, number of children: custom grouping in Python", tag: tags.partly },
+      { text: "Household type, tenure, children: in Python", tag: tags.partly },
     ],
-  },
-  {
-    icon: IconReceiptTax,
-    title: "By programme",
-    items: [{ text: "14 programme lines" }, { text: "The net Exchequer cost" }],
   },
   {
     icon: IconMap,
     title: "By geography",
     items: [
       { text: "12 regions and nations" },
-      { text: "650 constituencies and 361 local authorities, from a separate local-area file" },
-      { text: "Published where 10 or more survey households lie behind each number, with 90% intervals" },
+      { text: "650 constituencies, 361 local authorities (separate file)" },
+      { text: "Published where 10+ survey households lie behind a number; 90% intervals" },
     ],
+  },
+  {
+    icon: IconReceiptTax,
+    title: "By programme",
+    items: [{ text: "14 programme lines" }, { text: "The net Exchequer cost" }],
   },
 ];
 
@@ -872,7 +870,7 @@ export const grant1Foot =
   "What exists today, not what was delivered within the grant period.";
 
 export const grant2Foot =
-  "Grant 2, under way: Budget analysis by constituency; local Council Tax Reduction; local journalists.";
+  "Grant 2, under way: Budget analysis by constituency; local Council Tax Reduction; outreach to local journalists.";
 
 // ---------- Slide 5: the Autumn Budget 2026 dashboard ----------
 // Tabs and run: the Autumn Budget 2026 deck (commit c6c7d53) and the
@@ -885,7 +883,7 @@ export const budgetTabs = [
   { icon: IconMap2, title: "Constituency map", text: "Every measure by constituency" },
   { icon: IconUsers, title: "Living standards, poverty", text: "By age; who gains and loses" },
   { icon: IconCalculator, title: "Household calculator", text: "Enter any household" },
-  { icon: IconChartLine, title: "Pre-measures forecast", text: "The baseline the measures change" },
+  { icon: IconChartLine, title: "Pre-measures forecast", text: "Baseline before the measures" },
   { icon: IconBook, title: "Policies and methodology", text: "What is and is not modelled" },
 ];
 
@@ -936,14 +934,14 @@ export const rfReports = [
     report: "Billing me softly",
     icon: IconBolt,
     date: "10 Aug 2026",
-    what: "Targeted energy discount: about 40% of households, £2bn",
+    what: "Energy discount: about 40% of households, £2bn",
     use: "Full take-up run minus reported receipt",
   },
   {
     report: "What a ratchet!",
     icon: IconPigMoney,
     date: "10 Jun 2026",
-    what: "Smoothed earnings link for the triple lock: about £650m saved, 2029–30",
+    what: "Smoothed earnings link in place of the triple lock: about £650m net saving, 2029–30",
     use: "Pensions costing",
   },
   {
@@ -987,13 +985,13 @@ export const rfMethod = [
   },
   {
     icon: IconTrendingUp,
-    owner: "Largely the model",
+    owner: "Largely the model RF uses",
     title: "Uprate and impute",
     text: "OBR earnings with a wage floor; private pensions RPI capped at 5%; WAS savings (RF); rents (whose, not stated)",
   },
   {
     icon: IconCalculator,
-    owner: "The model",
+    owner: "The model RF uses",
     title: "Taxes and benefits",
     text: "Each year’s rules, with benefit deductions; UC take-up 80%, Pension Credit 65% rising to 70%",
   },
@@ -1128,7 +1126,7 @@ export const usesFoot = [
 ];
 
 // Table B. Sources by row:
-// B1 "equivalisation" and the BIST deck; no published check against HBAI on
+// B1 "equivalisation" and the BIST deck; HBAI checks on
 // Microcosm. B2 "manifest", "bundleSpec" (target_period 2025),
 // "staticAging". B3 "targetReferences" (dwp.pip.*). B4 "growth",
 // "uprating"; Annex 1 puts earnings uprating, the wage floor and the RPI
@@ -1156,12 +1154,12 @@ export const stepsTable: MapRow[] = [
     tags: [tags.partly],
     step: 1,
   },
-  { icon: IconScale, label: "Reweight to future populations", where: "RF", today: "One dataset, fitted to 2025–26", tags: [tags.notYet], step: 1 },
-  { icon: IconHeartHandshake, label: "PIP caseloads", where: "RF", today: "Calibrated for 2025–26 only", tags: [tags.partly], step: 1 },
+  { icon: IconScale, label: "Reweight to future populations", where: "RF", today: "One dataset, fitted to 2025", tags: [tags.notYet], step: 1 },
+  { icon: IconHeartHandshake, label: "PIP caseloads", where: "RF", today: "Calibrated for 2025 only", tags: [tags.partly], step: 1 },
   {
     icon: IconTrendingUp,
     label: "OBR uprating",
-    where: "RF’s model (largely)",
+    where: "Model RF uses (largely)",
     today: "OBR October 2026 forecast, to 2031–32",
     tags: [tags.done],
     step: 1,
@@ -1169,7 +1167,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconCoins,
     label: "Minimum-wage floor; private-pension RPI cap",
-    where: "RF’s model (largely)",
+    where: "Model RF uses (largely)",
     today: "OBR private-pension index; no wage floor found",
     tags: [tags.partly],
     step: 1,
@@ -1179,7 +1177,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconUsers,
     label: "Partial take-up",
-    where: "RF’s model",
+    where: "Model RF uses",
     today: "Drawn at build, also for those not entitled today; not set per run",
     tags: [tags.partly],
     step: 1,
@@ -1188,7 +1186,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconShoppingCart,
     label: "Indirect taxes",
-    where: "RF’s model",
+    where: "Model RF uses",
     today: "LCF 2024–25; VAT and fuel duty; three other duties partial",
     tags: [tags.done, tags.partly],
     step: 2,
@@ -1220,7 +1218,7 @@ export const stepsAlsoLabel = "Also in RF’s analysis, outside the five steps";
 // at build). Behaviour, managed migration and sanctions are in NOTES.md
 // (sanctions: none found by a search of policyengine-uk 5987eb3).
 export const stepsCaution =
-  "Known gap: one calibrated year (2025–26) and take-up drawn at build; RF projects to 2029–30.";
+  "Known gap: calibrated to one year (2025), on FRS 2024–25 data; take-up drawn at build; RF projects to 2029–30.";
 
 // ---------- Slide 15: Billing me softly ----------
 // Left: "billingMeSoftly" (Great Britain; passported by a means-tested
@@ -1237,9 +1235,9 @@ export const energy = {
     {
       icon: IconScale,
       title: "£24,000 test, or a means-tested benefit",
-      text: "Income test on the highest individual income in the household; Great Britain",
+      text: "On the highest individual income in the household; GB",
     },
-    { icon: IconHome, title: "About 40% pass the income test", text: "A £2bn scheme, about £175 each" },
+    { icon: IconPercentage, title: "About 40% pass the income test", text: "A £2bn scheme, about £175 each" },
   ],
   run: [
     { icon: IconHome, title: "28.6 million GB households", text: "In the run; flat option, 2026–27" },
@@ -1317,7 +1315,7 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "WAS round 8, imputed; savings interest from FRS and SPI",
       "Savings income modelled in WAS, imputed by RF (LSO 2026)",
-      "Not found in the report; no data on gains, inheritances or property sales",
+      "Financial capital for means tests; no data on gains, inheritances or property sales",
     ],
     step: 2,
   },
@@ -1361,7 +1359,7 @@ export const dataCompare: CompareRow[] = [
     icon: IconCalendarStats,
     label: "Years ahead",
     cells: [
-      "OBR uprating to 2031–32; one set of weights, fitted to 2025–26",
+      "OBR uprating to 2031–32; one set of weights, fitted to 2025",
       "Projected to 2029–30 (LSO 2026)",
       "Policy years 2023–2030; a release after each Budget",
     ],
@@ -1465,10 +1463,10 @@ export const rulesCompare: CompareRow[] = [
 // 366, DWP 234, MHCLG 82, others 78. Still no out-of-sample page for the UK.
 export const calibration = {
   stats: [
-    { value: "1,536", label: "official targets" },
-    { value: "98.8%", label: "within 10% of the official figure" },
-    { value: "78,450", label: "household records, including the SPI copies of FRS households" },
-    { value: "about 7,500", label: "effective sample size" },
+    { value: "1,536", label: "official targets", icon: IconTargetArrow },
+    { value: "98.8%", label: "within 10% of the official figure", icon: IconCircleCheck },
+    { value: "78,450", label: "household records, incl. SPI copies of FRS households", icon: IconDatabase },
+    { value: "about 7,500", label: "effective sample size", icon: IconUsers },
   ],
   beforeAfter: [
     { label: "All targets", before: "44%", after: "98.8%" },
@@ -1483,7 +1481,7 @@ export const calibration = {
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  foot: "Untargeted check (2024–25): 3.40m children below HBAI’s AHC line, against HBAI’s 3.97m; 4.02m before calibration (microcosm#1710). Targets are for 2025–26.",
+  foot: "Untargeted check (2024–25, HBAI’s latest year): 3.40m children below HBAI’s AHC line, against HBAI’s 3.97m; 4.02m before calibration (microcosm#1710). Targets are for 2025.",
 };
 
 // ---------- Slide 19: Autumn Budget 2026 against the OBR ----------
@@ -1593,7 +1591,7 @@ export const budgetNotes = [
 ];
 
 export const budgetYears =
-  "Income tax measures shown for 2029–30 (Self Assessment timing). Negative = cost.";
+  "Income tax measures shown for 2029–30 (Self Assessment timing; trading allowance 53% in 2028–29). Negative = cost.";
 
 export const budgetBehaviour = "Most official costings include behaviour; the briefing calls this run static.";
 
@@ -1611,13 +1609,13 @@ export const budgetLabel = "As published, 31 Oct 2026: policyengine 6.11.1; Micr
 export const notClaimed = [
   { icon: IconGitCompare, text: "No reconciled comparison with other UK models; a scorecard is in progress" },
   { icon: IconTargetArrow, text: "Calibration fit is in-sample; untargeted checks are case by case" },
-  { icon: IconBuildingBank, text: "HM Treasury pilot (Dec 2024): NI close, income tax “less promising”; not deployed" },
+  { icon: IconBuildingBank, text: "HM Treasury pilot (record of Dec 2024): NI close, income tax “less promising”; not deployed" },
 ];
 
 export const knownLimits = [
   { icon: IconUsers, text: "Poverty below HBAI’s: 3.40m children against 3.97m (slide 18)" },
   { icon: IconBuildingFactory2, text: "No firms, no corporation tax" },
-  { icon: IconCalendarStats, text: "One set of weights, fitted to 2025–26" },
+  { icon: IconCalendarStats, text: "One set of weights, fitted to 2025" },
   { icon: IconChartBar, text: "Effective sample about 7,500; areas need 10+ households" },
   { icon: IconCopy, text: "SPI copies’ industry is imputed" },
 ];
@@ -1703,7 +1701,7 @@ export const options = [
     title: "C. RF runs it",
     rows: [
       { label: "What it is", text: "RF analysts run it, in Python or with an AI assistant" },
-      { label: "What it needs", text: "A token, a data route, the missing steps (slides 13–14)" },
+      { label: "What it needs", text: "A token, a data route and the missing steps" },
       { label: "What it costs", text: "A break in RF’s series; past figures reconciled" },
       { label: "What it gives", text: "Open rules and data, local-area outputs, changes by pull request" },
     ],
@@ -1735,7 +1733,7 @@ export const pilotBrings = {
 };
 
 export const pilotScope =
-  "Indicative scope: one chart. PolicyEngine runs it and writes the note; RF specifies and reviews.";
+  "Indicative scope: one chart. PolicyEngine runs it and writes the note; RF specifies, reviews and supplies intermediate results where needed.";
 
 export const pilotCandidates = [
   {

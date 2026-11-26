@@ -336,7 +336,7 @@ export function TitleSlide() {
           PolicyEngine UK and the Resolution Foundation’s modelling
         </h1>
         <p className="text-center text-2xl text-balance text-white opacity-80">
-          PolicyEngine UK, its Microcosm data, and what it can do for the Resolution Foundation’s analysis
+          PolicyEngine UK, its Microcosm data, and how the Resolution Foundation’s analysis maps to it
         </p>
         <div className="mt-4 flex items-start justify-center gap-16">
           {coverSpeakers.map((speaker) => (
@@ -361,7 +361,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="Outline" scale={1.0} subtitle="Six parts; the talk follows about ten slides, then discussion">
+    <Frame section="intro" title="Outline" scale={1.15} subtitle="Six parts; the talk follows about ten slides, then discussion">
       <ol className={styles.agenda}>
         {parts.map((part, index) => (
           <li key={part.key} className={styles.enter} style={enter(index)}>
@@ -527,7 +527,7 @@ export function RulesSlide() {
     <Frame
       section="model"
       title="How the rules are encoded"
-      scale={1.12}
+      scale={1.05}
       subtitle="Parameters with references, formulas and tests, in the open"
     >
       <div className="grid grid-cols-[1.45fr_1fr] items-center gap-[calc(var(--u)*2)]">
@@ -647,7 +647,7 @@ export function MicrocosmBuildSlide() {
 
 export function BreakdownsSlide() {
   return (
-    <Frame section="model" title="How far results break down" scale={1.12} subtitle="Standard outputs of a run">
+    <Frame section="model" title="How far results break down" scale={1.25} subtitle="Standard outputs of a run">
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(4)}>
         {breakdowns.map((group, index) => (
           <Reveal key={group.title} step={index + 1} className={`${styles.card} ${styles.cardCompact}`}>
@@ -677,7 +677,7 @@ export function NuffieldSlide() {
     <Frame
       section="nuffield"
       title="The Nuffield Foundation grants: what they named and what exists today"
-      scale={0.88}
+      scale={0.96}
       subtitle="Local-area analysis first, then Budget analysis by constituency and Council Tax Reduction"
     >
       <Reveal step={1} className={styles.grants}>
@@ -695,7 +695,7 @@ export function NuffieldSlide() {
         <p className={`${styles.rowLabel} ${styles.tableLabel}`}>Grant 1: the areas Nuffield lists, and what exists today</p>
         <Table
           dense
-          template="1.25fr 2.6fr 0.75fr"
+          template="1.5fr 2.6fr 0.7fr"
           heads={["What Nuffield lists", "What exists today", "Status"]}
           rows={grantRows.map((row) => ({
             key: row.area,
@@ -776,7 +776,7 @@ export function ReportsSlide() {
     <Frame
       section="uses"
       title="The Resolution Foundation’s 2026 research we have read"
-      scale={1.1}
+      scale={1.02}
       subtitle="Six pieces of 2026 work, and the modelling behind each"
     >
       <Table
@@ -813,7 +813,7 @@ export function MethodSlide() {
           <i className={styles.keyRf} /> RF’s own processing
         </span>
         <span>
-          <i className={styles.keyModel} /> RF’s tax-benefit model (step 3 largely, per Annex 1)
+          <i className={styles.keyModel} /> The tax-benefit model RF uses (step 3 largely, per Annex 1)
         </span>
       </div>
       <Foot step={5}>{rfMethodFoot}</Foot>
@@ -1015,21 +1015,29 @@ export function CalibrationSlide() {
       section="compare"
       title="Calibration: weights fitted to official statistics"
       scale={1.1}
-      subtitle="Release build of 22 November 2026. In-sample fit"
+      subtitle="Certified build of 22 November 2026. In-sample fit"
     >
       <div className={styles.calib}>
         <Reveal step={1} className={styles.calibStats}>
-          {stats.map((stat) => (
+          {stats.map((stat, index) => (
             <div key={stat.label}>
               <p className={styles.statValue}>
                 {stat.value}
               </p>
-              <p className={styles.statLabel}>{stat.label}</p>
+              <p className={`${styles.statLabel} ${styles.statLabelIcon}`}>
+                <stat.icon stroke={1.75} aria-hidden="true" />
+                <span>
+                  {stat.label}
+                  {index === 1 && (
+                    <>
+                      {" "}
+                      <StatusTag tag={tags.inSample} />
+                    </>
+                  )}
+                </span>
+              </p>
             </div>
           ))}
-          <div className={styles.calibTag}>
-            <StatusTag tag={tags.inSample} />
-          </div>
         </Reveal>
         <Reveal step={2}>
           <p className={styles.rowLabel}>Within 10%: starting weights → fitted</p>
@@ -1172,7 +1180,7 @@ export function RoutesSlide() {
       scale={1.15}
       subtitle="From a web page to a prompt to code"
     >
-      <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(4)}>
+      <div className={`${styles.cards} ${styles.cardsBoxed}`} style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr)) minmax(0, 1.15fr)" }}>
         {routes.map((route, index) => (
           <Reveal key={route.title} step={index + 1} ghost className={`${styles.card} ${styles.cardCompact}`}>
             <div className={styles.cardHead}>

@@ -11,9 +11,11 @@ slide 12 by minute 2, slide 14 by minute 5.5, slide 16 by minute 8, slide
 22 by minute 9.5, slide 24 by minute 12. If RF starts correcting slide 12,
 let it run and drop 19 and 22; keep 13, 14, 16, 23 and 24.
 
-Years: the model's year 2025 is the 2025–26 financial year (its 2024 is
-HBAI's FYE 2025), so "fitted to 2025–26" and "to 2031–32" on the slides
-are financial years, like RF's.
+Years: the weights are fitted to calendar 2025 (fiscal-year sources are
+converted to 2025, 3/12 of 2024–25 plus 9/12 of 2025–26; DWP caseloads
+are averaged over 2025), on FRS 2024–25 data. The rules the model runs for
+2025 are 2025–26 rules, and "to 2031–32" for uprating is a financial year.
+The HBAI comparison is for 2024–25, HBAI's latest year.
 
 Where the deck describes the IPPR tax-benefit model or the Resolution
 Foundation's method, it relies on published sources only, each dated.
@@ -460,15 +462,14 @@ uk-energy-reforms 14bf3b0, `analyses/rf-billing-me-softly`; its README
 gives 28.6m Great Britain households in the run for 2026–27, the base of
 the 42%.
 
-## Part 5. How PolicyEngine compares
+## Part 5. Checks
 
 ### 16. The data: PolicyEngine, the IPPR model and UKMOD (spoken, 1 minute)
 
 The data comparison, in one minute: three ways of
 preparing the same survey; what fitting weights to official totals buys
 (benefit caseloads and top incomes match) and what it costs (an effective
-sample of about 7,500, and poverty levels below HBAI's, slide 18). End on
-that line.
+sample of about 7,500, and the poverty gap from slide 14).
 
 Frame these as design differences, not a ranking. UKMOD keeps the FRS
 grossing weights and makes no other updating adjustments, so results stay
@@ -711,9 +712,9 @@ splits each difference into data, rules, take-up and uprating. We know of
 no published reconciled comparison between PolicyEngine and the IPPR
 model; the scorecard sets published figures side by side and reconciles nothing.
 
-Indicative scope, as on the slide: one chart; PolicyEngine does the run and
-writes the reconciliation note; RF gives the specification, reviews it
-and, where a difference needs it, supplies an intermediate result.
+Indicative scope: one chart. PolicyEngine runs it and writes the
+reconciliation note; RF specifies, reviews and supplies intermediate
+results where needed.
 
 - Candidate 1, the Autumn Budget 2026 distribution chart (Spread thin,
   Fig 8). Both sides have published on the same Budget, but the headlines
@@ -741,7 +742,7 @@ No commitment on timing; the scope is RF's to choose.
 
 ### 24. Questions for discussion (discussion)
 
-Stop presenting and leave this slide up. Read the two-line summary at the
+Stop presenting and leave this slide up. Read the three short cells at the
 top as our reading, for RF to correct: Nuffield, the local-area data exists
 today, the childcare and public-service variables in part, and the
 cross-model scorecard and the AI interface are in progress; RF's uses, a few

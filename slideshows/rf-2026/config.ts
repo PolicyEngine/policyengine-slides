@@ -69,7 +69,7 @@ export const rf2026Config: SlideshowConfig = {
     whole(DataCompareSlide),
     whole(RulesCompareSlide),
     whole(CalibrationSlide),
-    { component: BudgetObrSlide, builds: 3, exportBuilds: 1 },
+    { component: whole(BudgetObrSlide) },
     LimitsSlide,
     // Part 6. Routes in and a possible pilot.
     whole(RoutesSlide),

@@ -107,7 +107,7 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: safe center;
   gap: calc(var(--u) * 1.6);
   padding: calc(var(--u) * 1.4) 0 calc(var(--u) * 1.2);
 }
@@ -1033,7 +1033,7 @@
 .logoMark {
   display: flex;
   width: 100%;
-  height: calc(var(--u) * 3.1);
+  height: calc(var(--u) * 4.2);
   align-items: center;
   justify-content: center;
 }
@@ -2422,7 +2422,8 @@
 }
 
 .mapRow .tag {
-  font-size: calc(var(--u) * 0.9);
+  font-size: calc(var(--u) * 1.05);
+  padding-block: calc(var(--u) * 0.1);
 }
 
 .mapTotal {
@@ -2621,7 +2622,7 @@
 /* Slide 18: stats, before and after, publishers. */
 .calib {
   display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-template-columns: 1.35fr 1fr 1fr;
   align-items: start;
   gap: calc(var(--u) * 3);
 }
@@ -2806,7 +2807,7 @@
 
 .pairsStacked dt {
   color: var(--pe-teal-dark);
-  font-size: calc(var(--u) * 0.95);
+  font-size: calc(var(--u) * 1.05);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2903,6 +2904,8 @@
 /* Slide 24: the summary above the questions, clear of the title rule. */
 .answersTop {
   margin: calc(var(--u) * 0.6) 0 calc(var(--u) * 1.4);
+  border-top: 0;
+  padding-top: 0;
 }
 
 /* Bullets that carry their own icon in place of the dot. */
@@ -2939,4 +2942,18 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: calc(var(--u) * 2);
+}
+
+/* Slide 18: a small icon before each figure's label. */
+.statLabelIcon {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--u) * 0.5);
+}
+.statLabelIcon svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  margin-top: 0.05em;
+  color: var(--pe-teal);
 }
