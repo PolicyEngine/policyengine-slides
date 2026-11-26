@@ -29,10 +29,7 @@
 // The six parts are "parts" below; the slide order is in config.ts.
 
 import {
-  IconAdjustments,
   IconAdjustmentsHorizontal,
-  IconAward,
-  IconPercentage,
   IconProgress,
   IconArrowsSplit,
   IconBolt,
@@ -44,7 +41,6 @@ import {
   IconBuildingFactory2,
   IconBuildingMonument,
   IconCalculator,
-  IconCalendarEvent,
   IconCalendarStats,
   IconChartBar,
   IconChartHistogram,
@@ -63,6 +59,12 @@ import {
   IconGasStation,
   IconPlug,
   IconBriefcase,
+  IconBriefcaseOff,
+  IconChartPie,
+  IconHandStop,
+  IconHistory,
+  IconPin,
+  IconUserCheck,
   IconFlag,
   IconGitCompare,
   IconHeartHandshake,
@@ -598,6 +600,11 @@ export const behaviourLine =
   "No labour-supply response by default; two responses are on (capital gains realisations, employer NI passed through to pay).";
 
 export const modelFoot = behaviourLine;
+export const modelFootItems = [
+  { icon: IconBriefcaseOff, text: "No labour-supply response by default" },
+  { icon: IconTrendingUp, text: "On by default: capital gains realisations" },
+  { icon: IconCoins, text: "On by default: employer NI passed through to pay" },
+];
 
 // ---------- Slide 7: how the rules are encoded ----------
 // The snippet is the BIST deck's (abridged from policyengine-uk 2.179.0,
@@ -688,6 +695,13 @@ export const coverage = [
   },
 ];
 
+export const coverageFootItems = [
+  { icon: IconHomeDollar, text: "Welsh LTT" },
+  { icon: IconHome, text: "LHA" },
+  { icon: IconUsers, text: "The two-child limit" },
+  { icon: IconBuildingCommunity, text: "The council tax surcharge" },
+];
+
 export const coverageFoot =
   "In the code, not yet in the registry: Welsh LTT, LHA, the two-child limit, the council tax surcharge.";
 
@@ -708,7 +722,7 @@ export const microcosmFlow = [
     icon: IconReceiptTax,
     owner: "HMRC SPI 2022–23",
     title: "Top incomes",
-    text: "Copies of FRS households take SPI incomes; more above £200k, £500k, £1m, £2m",
+    text: "FRS copies take SPI incomes; more above £200k",
   },
   {
     icon: IconWallet,
@@ -736,6 +750,12 @@ export const microcosmResult = {
   title: "Microcosm UK 2024–⁠25",
   text: "78,450 household records; certified build of 22 Nov 2026",
 };
+
+export const microcosmFootItems = [
+  { icon: IconPin, text: "57 source stages, each pinned" },
+  { icon: IconLockOpen, text: "Open code" },
+  { icon: IconKey, text: "Records not public: access by token" },
+];
 
 export const microcosmFoot =
   "57 source stages, each pinned. Open code. Records are FRS-derived (UK Data Service licence): not public, access by token.";
@@ -914,7 +934,7 @@ export const rfReports = [
     icon: IconReceiptTax,
     date: "29 Oct 2026",
     what: "Autumn Budget 2026; RF calls the £4.4bn package “poorly targeted”",
-    use: "Vigintiles (Fig 8); cumulative impact (Fig 20); projections",
+    use: "Vigintiles (Fig 8); cumulative impact (Fig 20); projections",
   },
   {
     report: "Counting the cost",
@@ -948,7 +968,7 @@ export const rfReports = [
     report: "Living Standards Outlook 2026",
     icon: IconChartLine,
     date: "10 Feb 2026",
-    what: "Two-child limit repeal: 500,000+ families gain £4,560 a year",
+    what: "Two-child limit repeal: 510,000 families; average gain £4,560",
     use: "Projections to 2029–30 (Annex 1)",
   },
 ];
@@ -1004,6 +1024,10 @@ export const rfMethod = [
 ];
 
 export const rfMethodFoot = "Not modelled by RF (Annex 1): local Council Tax Support, sanctions. Nor sanctions in PolicyEngine.";
+export const rfMethodFootItems = [
+  { icon: IconBuildingCommunity, text: "Local variation in CTS" },
+  { icon: IconHandStop, text: "Sanctions" },
+];
 
 // ---------- Slides 13 and 14: the mapping tables ----------
 // Each row: RF's use (or method step), where RF publishes it (or whose step
@@ -1237,7 +1261,7 @@ export const energy = {
       title: "£24,000 test, or a means-tested benefit",
       text: "On the highest individual income in the household; GB",
     },
-    { icon: IconPercentage, title: "About 40% pass the income test", text: "A £2bn scheme, about £175 each" },
+    { icon: IconChartPie, title: "About 40% pass the income test", text: "A £2bn scheme, about £175 each" },
   ],
   run: [
     { icon: IconHome, title: "28.6 million GB households", text: "In the run; flat option, 2026–27" },
@@ -1315,6 +1339,8 @@ export const dataCompare: CompareRow[] = [
     cells: [
       "WAS round 8, imputed; savings interest from FRS and SPI",
       "Savings income modelled in WAS, imputed by RF (LSO 2026)",
+      // WP 8/26: financial capital ($f_afc, printed p.108) used for capital limits
+      // and tariff income in the means tests (printed p.14).
       "Financial capital for means tests; no data on gains, inheritances or property sales",
     ],
     step: 2,
@@ -1481,7 +1507,8 @@ export const calibration = {
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  foot: "Untargeted check (2024–25, HBAI’s latest year): 3.40m children below HBAI’s AHC line, against HBAI’s 3.97m; 4.02m before calibration (microcosm#1710). Targets are for 2025.",
+  foot: "Untargeted check (2024–25, HBAI’s latest year): 3.40m children below HBAI’s AHC line, against HBAI’s 3.97m; 4.02m before calibration.",
+  footNote: "microcosm#1710. Targets are for 2025.",
 };
 
 // ---------- Slide 19: Autumn Budget 2026 against the OBR ----------
@@ -1607,8 +1634,8 @@ export const budgetLabel = "As published, 31 Oct 2026: policyengine 6.11.1; Micr
 // RF's figures predate the two-child limit's abolition and use an earlier
 // forecast, data year and baseline, so they are not like-for-like.
 export const notClaimed = [
-  { icon: IconGitCompare, text: "No reconciled comparison with other UK models; a scorecard is in progress" },
-  { icon: IconTargetArrow, text: "Calibration fit is in-sample; untargeted checks are case by case" },
+  { icon: IconGitCompare, text: "No reconciled model comparison yet; a scorecard is in progress" },
+  { icon: IconTargetArrow, text: "Calibration fit is in-sample; untargeted checks case by case" },
   { icon: IconBuildingBank, text: "HM Treasury pilot (record of Dec 2024): NI close, income tax “less promising”; not deployed" },
 ];
 
@@ -1673,6 +1700,12 @@ export const routes = [
   },
 ];
 
+export const routesFootItems = [
+  { icon: IconWorld, text: "Web app: no data access" },
+  { icon: IconKey, text: "Population runs: a token for Microcosm UK" },
+  { icon: IconEye, text: "Code and outputs reviewable like any script" },
+];
+
 export const routesFoot =
   "Web app: no data access. Python: an access token for Microcosm UK (FRS-derived). Code and outputs reviewable like any script.";
 
@@ -1706,6 +1739,14 @@ export const options = [
       { label: "What it gives", text: "Open rules and data, local-area outputs, changes by pull request" },
     ],
   },
+];
+
+export const optionsFootItems = [
+  { icon: IconCalendarStats, text: "Future-year weights" },
+  { icon: IconHistory, text: "An earlier-policy baseline" },
+  { icon: IconUserCheck, text: "Run-time take-up" },
+  { icon: IconChartLine, text: "Anchoring to outturn" },
+  { icon: IconUsers, text: "Poverty closer to HBAI’s" },
 ];
 
 export const optionsFoot =

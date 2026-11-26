@@ -30,7 +30,7 @@ import {
 
 // 25 slides in six parts, shown by the part tracker along the top of each
 // slide; there are no divider slides. Builds only where the order carries
-// meaning (slides 4, 12, 14's second group, 19, 22 and 23); reference slides,
+// meaning (slides 4, 12, 14's second group, 22 and 23); reference slides,
 // which are jumped to in discussion, are shown whole ("whole"). Slides with
 // "builds" reveal their content in steps when presented live;
 // "exportBuilds: 1" gives each one page in a PDF export, where every step is

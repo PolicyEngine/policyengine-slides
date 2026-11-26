@@ -2336,7 +2336,8 @@
 /* ---------- How far results break down: a tag after a list item ---------- */
 
 .breakdownList .tag {
-  margin-left: calc(var(--u) * 0.6);
+  margin-left: calc(var(--u) * 0.3);
+  font-size: calc(var(--u) * 0.88);
   vertical-align: middle;
 }
 
@@ -2715,7 +2716,7 @@
 }
 
 .limitCol .list {
-  gap: calc(var(--u) * 0.5);
+  gap: calc(var(--u) * 1);
 }
 
 .limitCol .list li {
@@ -2956,4 +2957,36 @@
   flex: none;
   margin-top: 0.05em;
   color: var(--pe-teal);
+}
+
+/* Feet as short icon items on one row. */
+.footItems {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--u) * 0.4) calc(var(--u) * 2);
+}
+.footItem {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.5);
+}
+.footItem svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  color: var(--pe-teal);
+}
+.footCaution .footItem svg {
+  color: var(--amber-ink);
+}
+
+/* Slides 23 and 24: icons level with the heading, not the middle of the block. */
+.candidates .mini,
+.briefRow .mini {
+  align-items: flex-start;
+}
+.candidates .mini .badge,
+.briefRow .mini .badge {
+  margin-top: calc(var(--u) * 0.1);
 }

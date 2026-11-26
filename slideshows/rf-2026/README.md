@@ -30,7 +30,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 9. Microcosm UK 2024–25: how the household file is built
 10. How far results break down
 
-4 · The Resolution Foundation's research and the IPPR model
+4 · The Resolution Foundation's research
 
 11. The Resolution Foundation's 2026 research we have read
 12. How the Resolution Foundation projects incomes, as we read it
@@ -38,7 +38,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 14. Each step of the projection method, mapped to PolicyEngine
 15. An RF proposal already modelled: the targeted energy bill discount
 
-5 · How PolicyEngine compares
+5 · Checks
 
 16. The data: PolicyEngine, the IPPR model and UKMOD
 17. The rules engine and access: PolicyEngine, the IPPR model and UKMOD
@@ -116,7 +116,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   questions, not on slide 2: RF sees the mapping first, and question 1 asks
   whether it is right. No tally of statuses.
 - Builds only where the order carries meaning (slides 4, 12, 14's second
-  group, 19, 22 and 23). Reference slides, which are jumped to in
+  group, 22 and 23). Reference slides, which are jumped to in
   discussion, are shown whole, and slide 24 shows all six questions at once.
 - Slide 3's government row is a text list, not logos; slide 18's figures
   are static (no count-up), to match the in-sample tag.
@@ -129,8 +129,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   In-sample (calibration), Outside the model, and Different method (savings
   income on slide 14). No tally of statuses anywhere.
 - Slide 4 is headed "what exists today" and its foot says it does not show
-  what was delivered within the grant period, and that training and beta
-  testing are not shown. The London event is shown as an event, not as a
+  what was delivered within the grant period. The London event is shown as an event, not as a
   grant deliverable.
 - Slide 14 keeps one foot line, the known gap, which also makes slide 9's
   point; behaviour, managed migration and sanctions are in NOTES.md.
@@ -140,7 +139,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   steps, then a separate group, "Also in RF's analysis", for rows outside
   them (indirect taxes, Council Tax Support, running PolicyEngine's rules
   on RF's own file).
-- Slide 12 marks step 3 as largely the IPPR model's, as Annex 1 says
+- Slide 12 marks step 3 as largely the model RF uses, as Annex 1 says
   ("largely through the IPPR Tax Benefit Model"), with the WAS savings
   imputation RF's own.
 - Slide 19 shows all seven measures, each with its year (2026–27 for the
@@ -197,8 +196,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   changes capital gains tax or employer NI, so the two default responses
   would not move these figures either way; confirm in the run's code.
 - Slide 16: whether UKMOD's regional models use reweighted data (not found
-  in the 2026 country report); whether its input data hold any wealth
-  variables.
+  in the 2026 country report).
 - Mapping rows to confirm in code: A7 (whether "The adjusted Triple Lock"
   post is a model costing; NOTES.md only), A8 (running the file on
   counterfactual earlier paths), B4 (series for dividends and property

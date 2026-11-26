@@ -28,7 +28,7 @@ build of 22 November 2026 (b891aa69, certified in policyengine.py 6.20.3 on
 policyengine.py checks before it ships a dataset), with the local-area
 build of 23 November (7081d968). Against the 15 November build in the BIST
 deck: 1,536 targets (two more), 78,450 records, an effective sample of
-about 7,500, and 57 source stages (a new-claimant UC draw); 98.8% within
+about 7,500, and 57 source stages (a new-claimant UC draw; the build manifest names microcosm 41053d9, on main, clean); 98.8% within
 10% is unchanged. Results run on other builds carry a run label: the
 Autumn Budget 2026 dashboard (slides 5 and 19) and the Billing me softly
 dashboard (slide 15) on the slide; the scorecard rows and the £46k example
@@ -352,7 +352,7 @@ HBAI's, 3.40m children below the AHC line against 3.97m in 2024–25; at the
 starting weights the file reproduces HBAI's total (4.02m), though families
 of three or more are already under-weighted there; calibration opens the
 rest of the gap, and we are working on it. Then the main method gap: PolicyEngine fits its weights to
-one year (2025–26)
+one year (2025)
 and uprates incomes with OBR growth rates; it does not reweight to
 projected populations, employment or caseloads for future years, which is
 central to RF's method. After 2025, caseloads move only through population
@@ -494,8 +494,8 @@ Fuller cells:
   not name the SPI; that HBAI's adjustment uses it is our reading of DWP's
   method.
 - Wealth, PolicyEngine: WAS round 8 imputed onto FRS records; savings
-  interest from the FRS and SPI, not WAS. UKMOD: we found no wealth
-  variables in the country report; it records no data on capital gains,
+  interest from the FRS and SPI, not WAS. UKMOD: financial capital is in
+  the input data and used in the means tests (WP 8/26); it records no data on capital gains,
   inheritances, property transactions or property value, so capital gains
   tax, inheritance tax and stamp duty are excluded.
 - Take-up, IPPR model: a partial take-up algorithm since 2017, a probit on

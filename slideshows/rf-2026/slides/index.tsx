@@ -1,9 +1,12 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import {
+  IconAlertTriangle,
   IconArrowRight,
+  IconAward,
   IconBrandGithub,
   IconExternalLink,
   IconFileCode,
+  IconHandStop,
   IconLink,
   IconMail,
   IconWorld,
@@ -15,6 +18,12 @@ import { speakers } from "@/lib/speakers";
 import { SlideshowProvider, useSlideshowContextSafe } from "@/components/core/SlideshowContext";
 import {
   breakdowns,
+  coverageFootItems,
+  microcosmFootItems,
+  modelFootItems,
+  optionsFootItems,
+  rfMethodFootItems,
+  routesFootItems,
   budgetBehaviour,
   budgetYears,
   budgetLabel,
@@ -28,7 +37,6 @@ import {
   closingLinks,
   compareHeads,
   coverage,
-  coverageFoot,
   dataCompare,
   energy,
   funder,
@@ -39,14 +47,11 @@ import {
   inBrief,
   knownLimits,
   microcosmFlow,
-  microcosmFoot,
   microcosmResult,
   modelFlow,
-  modelFoot,
   notClaimed,
   notFound,
   options,
-  optionsFoot,
   parts,
   pilotBrings,
   pilotCandidates,
@@ -54,11 +59,9 @@ import {
   pilotScope,
   questions,
   rfMethod,
-  rfMethodFoot,
   rfReports,
   rfReportsFoot,
   routes,
-  routesFoot,
   rulesCode,
   rulesCompare,
   rulesEntities,
@@ -273,6 +276,24 @@ function Foot({ children, step = 1, tone }: { children: ReactNode; step?: number
   return (
     <Reveal step={step} className={`${styles.foot} ${tone === "caution" ? styles.footCaution : ""}`}>
       {children}
+    </Reveal>
+  );
+}
+
+type FootItem = { icon: Icon; text: string };
+
+/** A foot as short icon items on one row, with an optional label and muted note. */
+function FootItems({ label, items, note, step = 1 }: { label?: string; items: FootItem[]; note?: string; step?: number }) {
+  return (
+    <Reveal step={step} className={`${styles.foot} ${styles.footItems}`}>
+      {label && <span className={styles.footStrong}>{label}</span>}
+      {items.map(({ icon: ItemIcon, text }) => (
+        <span key={text} className={styles.footItem}>
+          <ItemIcon stroke={1.75} aria-hidden="true" />
+          {text}
+        </span>
+      ))}
+      {note && <span className={styles.footMuted}>{note}</span>}
     </Reveal>
   );
 }
@@ -513,7 +534,7 @@ export function ModelSlide() {
       subtitle="Rules applied to a household file, twice, and the difference"
     >
       <Flow steps={modelFlow} builds={[1, 2, 3, 4]} />
-      <Foot step={4}>{modelFoot}</Foot>
+      <FootItems step={4} items={modelFootItems} />
     </Frame>
   );
 }
@@ -597,7 +618,7 @@ export function CoverageSlide() {
           </Reveal>
         ))}
       </div>
-      <Foot step={coverage.length + 1}>{coverageFoot}</Foot>
+      <FootItems step={coverage.length + 1} label="In the code, not yet in the registry:" items={coverageFootItems} />
     </Frame>
   );
 }
@@ -638,7 +659,7 @@ export function MicrocosmBuildSlide() {
           );
         })}
       </div>
-      <Foot step={microcosmFlow.length}>{microcosmFoot}</Foot>
+      <FootItems step={microcosmFlow.length} items={microcosmFootItems} note="FRS-derived; UK Data Service licence" />
     </Frame>
   );
 }
@@ -683,7 +704,10 @@ export function NuffieldSlide() {
       <Reveal step={1} className={styles.grants}>
         {grants.map((grant) => (
           <div key={grant.title} className={styles.grant}>
-            <p className={styles.rowLabel}>{grant.title}</p>
+            <p className={`${styles.rowLabel} ${styles.footItem}`}>
+              <IconAward stroke={1.75} aria-hidden="true" />
+              {grant.title}
+            </p>
             <h2>“{grant.name}”</h2>
             <p>
               <strong>{grant.amount}</strong> · {grant.dates}
@@ -816,7 +840,7 @@ export function MethodSlide() {
           <i className={styles.keyModel} /> The tax-benefit model RF uses (step 3 largely, per Annex 1)
         </span>
       </div>
-      <Foot step={5}>{rfMethodFoot}</Foot>
+      <FootItems step={5} label="Not modelled by RF (Annex 1):" items={rfMethodFootItems} note="Nor sanctions in PolicyEngine" />
     </Frame>
   );
 }
@@ -898,7 +922,10 @@ export function StepsSlide() {
         template="2.15fr 1.35fr 3.3fr 1.3fr"
       />
       <Foot step={2} tone="caution">
-        {stepsCaution}
+        <span className={styles.footItem}>
+          <IconAlertTriangle stroke={1.75} aria-hidden="true" />
+          {stepsCaution}
+        </span>
       </Foot>
     </Frame>
   );
@@ -1069,7 +1096,9 @@ export function CalibrationSlide() {
         </Reveal>
       </div>
       <Foot step={3}>
-        {foot}{" "}
+        {foot}
+        <br />
+        <span className={styles.footMuted}>{calibration.footNote} </span>
         <a href={sources.dashboard.href} target="_blank" rel="noopener noreferrer" className={`${styles.footLink} pointer-events-auto`} onClick={(event) => event.stopPropagation()}>
           Calibration dashboard, pinned to the build
           <IconExternalLink stroke={1.8} aria-hidden="true" />
@@ -1143,9 +1172,11 @@ export function BudgetObrSlide() {
         </div>
       </div>
       <Foot step={3}>
-        {budgetYears} {budgetBehaviour}
+        {budgetYears}
         <br />
-        <span className={styles.footMuted}>{budgetLabel}</span>
+        <span className={styles.footMuted}>
+          {budgetBehaviour} {budgetLabel}
+        </span>
       </Foot>
     </Frame>
   );
@@ -1158,11 +1189,17 @@ export function LimitsSlide() {
     <Frame section="compare" title="What we do not claim, and known limits" scale={1.3} subtitle="What has and has not been tested">
       <div className={styles.limits}>
         <div className={styles.limitCol}>
-          <p className={styles.rowLabel}>Not claimed</p>
+          <p className={`${styles.rowLabel} ${styles.footItem}`}>
+            <IconHandStop stroke={1.75} aria-hidden="true" />
+            Not claimed
+          </p>
           <Bullets items={notClaimed} />
         </div>
         <div className={styles.limitCol}>
-          <p className={styles.rowLabel}>Known limits</p>
+          <p className={`${styles.rowLabel} ${styles.footItem}`}>
+            <IconAlertTriangle stroke={1.75} aria-hidden="true" />
+            Known limits
+          </p>
           <Bullets items={knownLimits} />
         </div>
       </div>
@@ -1204,7 +1241,7 @@ export function RoutesSlide() {
           </Reveal>
         ))}
       </div>
-      <Foot step={4}>{routesFoot}</Foot>
+      <FootItems step={4} items={routesFootItems} />
     </Frame>
   );
 }
@@ -1237,7 +1274,7 @@ export function OptionsSlide() {
           </Reveal>
         ))}
       </div>
-      <Foot step={3}>{optionsFoot}</Foot>
+      <FootItems step={3} label="C would also need:" items={optionsFootItems} />
     </Frame>
   );
 }
