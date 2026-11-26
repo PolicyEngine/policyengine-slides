@@ -275,6 +275,16 @@ paper on SSRN (abstract 7174479) and my LinkedIn.
    pension funds, untaxed here. Simulated with the whole payout UK-owned,
    the cost is −£1.6bn at φ = 1, £11.7bn at φ = 0.5 and £18.4bn at
    φ = 0.25 (20 draws).
+6. **"Can you run this for Germany or France?"** Not yet with the same
+   quality. The method carries over, but the data doesn't: the German files
+   it needs most (the 10 per cent income-tax sample, the EVS, the
+   Mikrozensus) leave the statistical offices only for institutions seated
+   in the EU. From the UK or US we could build on EU-SILC through Eurostat,
+   with no tax microdata and no region for Germany. As a rough guide only,
+   scaling our figures by Dolls et al. suggests more of the loss would be
+   absorbed (about 44 per cent in Germany and 40 in France, against 29 for
+   the UK). That is not a model run. Close with the ask: we would like to
+   do it properly with an EU partner institution.
 
 ## For the discussion
 
