@@ -678,7 +678,7 @@ export const coverageFoot =
 // 56, without uc_new_claimant_draw): 57 source stages, each survey file pinned by SHA-256; FRS
 // 2024-25 base; copies of FRS households take incomes from the SPI 2022-23
 // public-use file, with more copies in the bands above £200k, £500k, £1m
-// and £2m; WAS round 8, LCFS 2024-25, the Effects of Taxes and Benefits
+// and £2m; WAS round 8, LCF 2024-25, the Effects of Taxes and Benefits
 // (ETB) and the National Travel Survey (NTS); quantile-regression forests;
 // take-up drawn to DWP and HMRC rates or caseloads, reporters always claim;
 // calibration to 1,536 targets with each weight bounded at 10 times its
@@ -1148,7 +1148,7 @@ export const stepsTable: MapRow[] = [
     step: 1,
   },
   { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 1 },
-  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS rents by region to 2025–26, then the OBR’s UK rent forecast; AHC deflator built in", tags: [tags.partly], step: 1 },
+  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS rents by region to 2025–26, then the OBR’s UK forecast; AHC deflator built in", tags: [tags.partly], step: 1 },
   {
     icon: IconUsers,
     label: "Partial take-up",

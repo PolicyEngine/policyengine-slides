@@ -306,9 +306,9 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   (microcosm#1710), so poverty effects are likely understated. On that
   build, removing a fully rolled-out two-child limit takes about a fifth
   fewer children out of absolute poverty than the IFS's published estimate
-  (630,000, 2025–26; a quarter if the IFS figure adjusts for take-up), while
-  cost and the count of affected families are within about 5% of official
-  figures (UC households by number of children run 9–13% short of DWP's). The
+  (630,000, 2025–26; about a quarter fewer if the IFS figure is adjusted
+  for UC take-up). On the 15 November build, cost and the count of affected
+  families were within about 5% of official figures (UC households by number of children run 9–13% short of DWP's). The
   standard output counts age 17 or under; HBAI's dependent children (`is_hbai_dependent_child`,
   `variables/household/demographic/hbai/`) can be passed as a filter in
   Python; projected levels are as A3. The two-child limit
@@ -424,7 +424,7 @@ Also in RF's analysis:
   the registry (slide 8). Done and Partly. On the 15 November build,
   imputed spending in the bottom income decile ran about a quarter above
   the LCF's (microcosm#1717). Which way that moves a result depends on the
-  measure: shares of spending come out too low, cash effects of duties too
+  measure: shares of spending come out too low (#1717) and, on our reading, cash effects of duties too
   high. Not yet re-measured on the 22 November build.
 - **B11. Council Tax Support: local variation** (not modelled in RF's
   projections). Simulated for English pensioners, Scotland, Wales and five
@@ -598,7 +598,7 @@ questions.
 The briefing calls the run static. The two default responses (capital
 gains realisations, employer NI pass-through) apply only where a measure
 changes capital gains tax or employer NI, and none of the seven does, so
-they would not move these figures.
+they should not move these figures (not yet confirmed in the run's code).
 
 The nearest thing we have to an external test, so show the misses as
 plainly as the hits. The table has all seven measures the briefing models,
