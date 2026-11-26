@@ -1,13 +1,19 @@
 # Presenter notes: PolicyEngine UK and the Resolution Foundation's modelling
 
 25 slides, about 12 minutes of talk, then discussion. The spoken path is
-1, 2, 4, 12, 13, 14, 19, 22 and 23 together, and 24, always moving
-forward. The others (3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17,
-18, 20, 21 and 25) are reference, for questions and to leave behind.
-Slide 9's point (one calibrated year; take-up drawn at build) is made from
-the "Known gap" line on slide 14. Rough checkpoints: slide 4 by minute 1,
-slide 12 by minute 3, slide 19 by minute 9, slide 24 by minute 12. If time
-is short, take 19 in a sentence; keep 13, 14, 23 and 24.
+1, 2, 4, 12, 13, 14, 16 (one minute), 19 in one sentence, 22 and 23
+together, and 24, always moving forward. The others (3, 5, 6, 7, 8, 9, 10,
+11, 15, 17, 18, 20, 21 and 25) are reference, for questions and to leave
+behind. Slide 9's point (one calibrated year; take-up drawn at build) is
+made from the "Known gap" line on slide 14; say on slide 14 that Microcosm
+is PolicyEngine's household file, built from the FRS. Rough checkpoints:
+slide 12 by minute 2, slide 14 by minute 5.5, slide 16 by minute 8, slide
+22 by minute 9.5, slide 24 by minute 12. If RF starts correcting slide 12,
+let it run and drop 19 and 22; keep 13, 14, 16, 23 and 24.
+
+Years: the model's year 2025 is the 2025–26 financial year (its 2024 is
+HBAI's FYE 2025), so "fitted to 2025–26" and "to 2031–32" on the slides
+are financial years, like RF's.
 
 Where the deck describes the IPPR tax-benefit model or the Resolution
 Foundation's method, it relies on published sources only, each dated.
@@ -45,7 +51,7 @@ talk follows about ten, and the rest is reference. Our descriptions of the
 IPPR model and of RF's method come from published sources; please correct
 us.
 
-### 2. In brief (spoken, 20 seconds)
+### 2. Outline (spoken, 20 seconds)
 
 One sentence on the six parts; part 4 is the core. The summary of what we
 found comes at the end, on slide 24, after RF has seen the mapping.
@@ -233,22 +239,25 @@ Fuller wording of the steps (LSO 2026, Annex 1):
    average earnings with a minimum-wage floor and spillovers; private
    pensions by RPI capped at 5%; dividends and property income follow the
    OBR. RF's own: savings income modelled in the Wealth and Assets Survey
-   and imputed into HBAI. Prices: rents on the ONS Price Index of Private
+   and imputed into HBAI. Annex 1 lists prices and housing costs under a
+   separate heading and does not say whose code does them. Prices: rents on
+   the ONS Price Index of Private
    Rents, then average earnings with a 12-month lag; an after-housing-costs
    deflator.
-4. Taxes and benefits (the IPPR model): each year's rules; Universal Credit
-   take-up 80%, Pension Credit 65% rising to 70%.
+4. Taxes and benefits (the IPPR model): each year's rules, with benefit
+   deductions (sanctions are not modelled); Universal Credit take-up 80%,
+   Pension Credit 65% rising to 70%.
 5. Anchor: modelled growth rates, and absolute changes in poverty, applied
    to outturn data.
 
 ### 13. RF's published analyses, mapped to PolicyEngine (spoken, 2.5 minutes)
 
-Go row by row; this slide and the next are the core. "Done" means a
-standard output or the code does it today; "Partly" that the pieces exist
-but something RF's method needs is missing or works only in Python; "Not
-yet" that it would need building. Speak to the first four rows and to
-non-take-up; leave the rest to read and to interrupt on. After the third
-group, ask: which use matters most, and is any use missing?
+This slide and the next are the core. "Done" means a standard output or
+the code does it today; "Partly" that the pieces exist but something RF's
+method needs is missing or works only in Python; "Not yet" that it would
+need building or is untested. Speak to the first four rows and to
+non-take-up; leave the rest to read. At the end of the table, ask: which
+use matters most, and is any use missing?
 
 Three things worth saying up front: vigintiles exist in Python but the web
 app shows deciles, and the default ranking income is unequivalised, so RF's
@@ -284,9 +293,14 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   `uk/spec/bundle.yaml`; `data/uprating_indices.yaml`.)
 - **A4. Child poverty with and without a policy** (LSO 2026, Fig 15).
   Relative and absolute poverty, before and after housing costs, on the HBAI
-  modified OECD scale; baseline against reform. Done for the policy
-  difference. Partly for the rest: the standard output counts age 17 or
-  under; HBAI's dependent children (`is_hbai_dependent_child`,
+  modified OECD scale; baseline against reform. Partly: the difference
+  runs, but on the 22 November build children below the AHC line are 3.40m
+  against HBAI's 3.97m and larger families are under-represented
+  (microcosm#1710), so poverty effects are likely understated. On that
+  build, removing a fully rolled-out two-child limit takes about a fifth
+  fewer children out of absolute poverty than the IFS's published estimate
+  (630,000, 2025–26), while cost and caseload match official figures. The
+  standard output counts age 17 or under; HBAI's dependent children (`is_hbai_dependent_child`,
   `variables/household/demographic/hbai/`) can be passed as a filter in
   Python; projected levels are as A3. The two-child limit
   is abolished from 6 April 2026 in the baseline.
@@ -322,11 +336,15 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 
 ### 14. Each step of the projection method, mapped to PolicyEngine (spoken, 2.5 minutes)
 
-Say the main gap first: PolicyEngine fits its weights to one year (2025)
+Say the poverty gap first: poverty levels on the calibrated file run below
+HBAI's, 3.40m children below the AHC line against 3.97m; at the starting
+weights the file reproduces HBAI, so calibration opens the gap, and we are
+working on it. Then the main method gap: PolicyEngine fits its weights to
+one year (2025–26)
 and uprates incomes with OBR growth rates; it does not reweight to
 projected populations, employment or caseloads for future years, which is
 central to RF's method. After 2025, caseloads move only through population
-growth in the weights, the rules and the stored take-up flags. Second:
+growth in the weights, the rules and the stored take-up flags. Third:
 take-up is drawn when the data are built, so an assumption such as "UC
 take-up of 80%" cannot be set for a run today; people a reform newly
 entitles claim at a rate fixed at build (slide 9). Where PolicyEngine does
@@ -425,7 +443,13 @@ the 42%.
 
 ## Part 5. How PolicyEngine compares
 
-### 16. The data: PolicyEngine, the IPPR model and UKMOD (reference)
+### 16. The data: PolicyEngine, the IPPR model and UKMOD (spoken, 1 minute)
+
+This is the data comparison RF asked about. One minute: three ways of
+preparing the same survey; what fitting weights to official totals buys
+(benefit caseloads and top incomes match) and what it costs (an effective
+sample of about 7,500, and poverty levels below HBAI's, slide 18). End on
+that line.
 
 Frame these as design differences, not a ranking. UKMOD keeps the FRS
 grossing weights and makes no other updating adjustments, so results stay
@@ -533,10 +557,23 @@ work centres on poverty levels, so have these ready:
   starting weights the AHC figure was 4.02m, so calibration removes about
   0.6m. No all-person comparison on this build is public yet.
 
-Say it plainly: poverty levels on the calibrated file run below HBAI's, and
-we are working on it.
+Why calibration moves it (microcosm#1710): within groups it moves weight
+from poor to non-poor families. Workless families are 61% below the AHC
+line at the starting weights and 46% after, against HBAI's 58%; the
+benefit cap rows explain only a small part so far. On HBAI's 15.9% for both
+absolute and relative BHC poverty: HBAI's absolute line is referenced to
+FYE 2025 that year, so the two measures coincide.
 
-### 19. Autumn Budget 2026: PolicyEngine's costings beside the OBR's (spoken, 1.5 minutes)
+Say it plainly: poverty levels on the calibrated file run below HBAI's, and
+we are working on it. Do not argue that RF's anchoring to outturn makes the
+level gap harmless: the two-child limit check above shows policy effects
+are affected too.
+
+### 19. Autumn Budget 2026: PolicyEngine's costings beside the OBR's (one sentence on the spoken path)
+
+On the spoken path, one sentence: the costings, beside the official ones,
+with the misses shown and a reason for each. The detail below is for
+questions.
 
 The nearest thing we have to an external test, so show the misses as
 plainly as the hits. The table has all seven measures the briefing models,

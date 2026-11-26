@@ -352,7 +352,7 @@ export function TitleSlide() {
 
 export function InBriefSlide() {
   return (
-    <Frame section="intro" title="In brief" scale={1.0} subtitle="Six parts, then discussion">
+    <Frame section="intro" title="Outline" scale={1.0} subtitle="Six parts; the talk follows about ten slides, then discussion">
       <ol className={styles.agenda}>
         {parts.map((part, index) => (
           <li key={part.key} className={styles.enter} style={enter(index)}>
@@ -430,7 +430,7 @@ export function WhoSlide() {
       section="intro"
       title="Who we are"
       scale={1.1}
-      subtitle="A nonpartisan nonprofit building open-source tax-benefit models"
+      subtitle="A non-partisan non-profit building open-source tax-benefit models"
     >
       <Reveal step={1} className={styles.facts}>
         {facts.map((fact) => (
@@ -1003,7 +1003,7 @@ export function CalibrationSlide() {
       section="compare"
       title="Calibration: weights fitted to official statistics"
       scale={1.1}
-      subtitle="Certified build of 22 November 2026. In-sample fit"
+      subtitle="Release build of 22 November 2026. In-sample fit"
     >
       <div className={styles.calib}>
         <Reveal step={1} className={styles.calibStats}>
@@ -1068,7 +1068,7 @@ const ratio = (pe: number, obr: number) => `${Math.round((100 * pe) / obr)}%`;
 // in a later year (each row gives its year), with the package total.
 const budgetGroups = [
   { before: 0, label: "Measures with a figure in 2026–27" },
-  { before: 3, label: "Later years, as each row shows; then the package" },
+  { before: 3, label: "Later years (the year is in each row); then the package" },
 ];
 
 export function BudgetObrSlide() {
@@ -1231,7 +1231,7 @@ export function PilotSlide() {
       section="next"
       title="A possible pilot: one published analysis, side by side"
       scale={0.88}
-      subtitle="Reproduce one Resolution Foundation chart in PolicyEngine and account for every difference"
+      subtitle="Reproduce one Resolution Foundation chart in PolicyEngine and explain as much of the difference as we can"
     >
       <Flow steps={pilotFlow} />
       <Reveal step={2} className={`${styles.cards} ${styles.cardsOpen}`} style={columns(2)}>
@@ -1288,7 +1288,7 @@ export function ClosingSlide() {
   return (
     <Slide isEnd className={styles.deck}>
       <h1 className={`${styles.closingTitle} font-display font-bold text-center`}>Thank you</h1>
-      <p className={`${styles.closingSubtitle} text-center text-white/85`}>Every figure has a linked source</p>
+      <p className={`${styles.closingSubtitle} text-center text-white/85`}>Sources for every figure are in the notes and the public repository</p>
       <div className={`${styles.closingContacts} grid w-full max-w-5xl grid-cols-2 self-center`}>
         {closingLinks.map(({ label, href }) => (
           <a

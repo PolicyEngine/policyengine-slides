@@ -13,7 +13,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 1 · Introduction
 
 1. PolicyEngine UK and the Resolution Foundation's modelling (title)
-2. In brief (the six parts)
+2. Outline (the six parts)
 3. Who we are
 
 2 · The Nuffield Foundation grants
@@ -54,8 +54,8 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 24. Questions for discussion
 25. Thank you
 
-The spoken path, about 12 minutes, is 1, 2, 4, 12, 13, 14, 19, 22 and 23,
-and 24, always moving forward; slide 9's point is
+The spoken path, about 12 minutes, is 1, 2, 4, 12, 13, 14, 16, 19 in one
+sentence, 22 and 23, and 24, always moving forward; slide 9's point is
 made from slide 14's "Known gap" line. NOTES.md has the timings.
 
 ## Files
@@ -122,7 +122,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   are static (no count-up), to match the in-sample tag.
 - One Microcosm build for every data figure; results from other builds
   always carry a run label.
-- Behaviour has one wording everywhere (slides 6, 14, 17, 19 and the
+- Behaviour has one wording everywhere (slides 6, 14, 17 and the
   notes): no labour-supply response by default; two responses are on
   (capital gains realisations, employer NI passed through to pay).
 - Status tags: Done, Partly, Not yet; muted Preview (the Claude connector),
@@ -195,10 +195,8 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - Slide 19: the Pension Tax Allowance net cost in the briefing's Table 6
   equals the OBR's income tax line in 2028–29 and 2029–30; confirm that it
   is a coincidence and not a copying error in the briefing.
-- Slide 19: the briefing calls the dashboard's run static, while the deck's
-  one behaviour wording says two responses are on by default; confirm
-  whether the run kept them on (neither is likely to touch these
-  measures).
+- Slide 19: the foot now says the briefing describes the run as static;
+  confirm whether the run kept the two default responses on.
 - Slide 16: whether UKMOD's regional models use reweighted data (not found
   in the 2026 country report); whether its input data hold any wealth
   variables.
