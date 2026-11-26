@@ -1,6 +1,6 @@
 # PolicyEngine UK and the Resolution Foundation's modelling, 30 November 2026
 
-25 slides at `/slides/rf-2026`, for a video call with the Resolution
+25 slides at `/slides/rf-2026`, for a meeting with the Resolution
 Foundation. The deck is public: anyone with the link can open it, and this
 folder is public on GitHub, so everything here is written to be read
 publicly.
@@ -104,8 +104,8 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   Microcosm build of 25 October 2026, as published 31 October); the Billing
   me softly dashboard (slide 15: policyengine-uk 2.102.3); the scorecard
   rows in the notes to slide 20 (policyengine-uk 2.132.6, Microcosm build of
-  19 October 2026); the £46k example there (policyengine-uk 2.89.2, the
-  dataset before Microcosm).
+  19 October 2026); the £46k example there (policyengine-uk 2.89.2, an
+  earlier data build, bundle dated 19 June 2026).
 - **Scorecard (slides 4, 20)**: policyengine-scorecard 771c028
   (`app/public/data/lanes.json` and `populations.json`).
 
@@ -182,8 +182,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 ## Open checks
 
 - Nuffield: whether each area on slide 4 was delivered inside grant 1's
-  dates (the slide says it shows what exists today); grant 2's end date
-  (June 2029) against the Nuffield page; whether Nuffield's disclaimer
+  dates (the slide says it shows what exists today); whether Nuffield's disclaimer
   wording is needed beside "Funded by"; what AI interface work counts
   under grant 1; whether the scorecard counts as grant 1's comparison
   dashboard; whether training and beta testing have a public record.
@@ -203,7 +202,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - Mapping rows to confirm in code: A7 (whether "The adjusted Triple Lock"
   post is a model costing; NOTES.md only), A8 (running the file on
   counterfactual earlier paths), B4 (series for dividends and property
-  income), B5 (no minimum-wage floor), B7 (AHC deflator), B10 (nothing in
+  income), B5 (no minimum-wage floor), B10 (nothing in
   policyengine.py anchors to outturn), B12 (running PolicyEngine's rules on
   an outside file has not been tried on an RF-shaped file), and whether
   alcohol, tobacco and gambling duties should be "partial" in the registry.

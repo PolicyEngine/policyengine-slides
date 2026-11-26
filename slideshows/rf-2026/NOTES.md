@@ -62,9 +62,10 @@ found comes at the end, on slide 24, after RF has seen the mapping.
   analysis.
 - HM Treasury's transparency record (17 December 2024) describes a pilot
   alongside its own model and says HMT does not currently use
-  PolicyEngine. The record gives no start year; PolicyEngine's event report
-  of 10 November 2025 says the pilot began in March 2025. Slide 20 gives
-  the record's findings.
+  PolicyEngine. The record gives no start date. PolicyEngine's event report
+  of 10 November 2025 gives March 2025, which is later than the record
+  itself, so do not quote a start date. Slide 20 gives the record's
+  findings.
 - Shown as text, not logos: a use (No 10), a pilot that was not deployed
   (HMT) and a citation (the Lords). The OBR's annual report lists
   PolicyEngine among organisations it engaged with; that is too weak a link
@@ -99,8 +100,10 @@ each item was completed inside the grant period, and the foot says so.
   differently: its lanes file lists 2,649 claims harvested for the Autumn
   Budget 2025 from UKMOD, IPPR (the think tank's publications, not runs of
   the IPPR model), RF and the IFS, 628 of them with a PolicyEngine
-  counterpart; its populations file has 755 rows with a result from RF,
-  UKMOD, the IFS, IPPR and four others. There are also 758 UKMOD
+  counterpart; its populations file shows 755 of those rows with a
+  scorecard result from RF, UKMOD, the IFS, IPPR and four others: 633 with
+  a PolicyEngine value (628 on policyengine-uk 2.89.2, 5 on 2.132.6) and
+  122 marked as a gap in PolicyEngine. There are also 758 UKMOD
   statistics. The household-level comparison with UKMOD is not done yet,
   and there is no TAXBEN comparison.
 - The symposium: a London event on 3 November 2025, which PolicyEngine's
@@ -124,7 +127,7 @@ electricity, fuel duty, the Pension Tax Allowance, property income tax, the trad
 differ on the count, so the slide gives none. The run that produced all the
 measures took 8.1 minutes with one machine per measure in parallel; it is
 not a single-run speed. The web app's own estimate for a UK national run is
-three minutes. Needs an internet connection; on a video call, share the
+three minutes. Needs an internet connection; if presenting remotely, share the
 browser tab if the embed lags. In a PDF the slide shows a summary card of
 the page's tabs and its run label.
 
@@ -279,8 +282,10 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 - **A1b. Ranking income for distributional charts** (every RF
   distributional chart). The default ranking is unequivalised household
   net income; any pre-computed grouping, such as RF's equivalised income,
-  can be passed in Python (`decile_variable=`). The web app ranks by its
-  default only. Partly.
+  can be passed in Python (`decile_variable=`). For deciles, the built-in
+  `household_income_decile` and `household_income_decile_ahc` rank by
+  equivalised HBAI income; vigintiles need a grouping passed in. The web
+  app ranks by its default only. Partly.
 - **A2. Cumulative impact of a Parliament's measures** (Spread thin,
   Fig 20). No built-in "earlier policy, uprated" baseline; it has to be
   written by hand as a reform. Dated and bounded changes are supported. Not
@@ -307,7 +312,8 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 - **A5. The LHA freeze** (Spread thin, Fig 9). Published LHA rates by BRMA
   and category, 2014 to 2026; a freeze parameter, on from April 2025 and
   kept on from 2027 as announced policy; BRMAs assigned in Microcosm;
-  private rents follow ONS PIPR by region. Done.
+  private rents follow ONS PIPR by region to 2025, then the OBR's UK
+  forecast. Done.
 - **A6. Non-take-up: entitlement at full take-up minus reported receipt**
   (Billing me softly). In Python, a flag override gives full entitlement for
   Universal Credit, Pension Credit, Child Benefit, pension-age Housing
@@ -315,7 +321,7 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   simulated: Scotland, Wales, England's pensioners and five English
   working-age schemes). Working-age Housing Benefit and legacy benefits are
   continuing awards only and cannot rise. No switch in the web app. Partly.
-  (`claims_all_entitled_benefits.py`; Microcosm `uk/take_up_contract.json`.)
+  (`would_claim_*` flags; Microcosm `uk/take_up_contract.json`.)
 - **A7. Pensions costings** (What a ratchet). The State Pension is modelled;
   its rate follows a triple-lock index that a reform can change. RF's
   reform is a smoothed earnings link (prices when they exceed earnings,
@@ -388,8 +394,12 @@ Full rows:
   Savings interest comes from the FRS, with SPI donors at high incomes,
   grown by OBR savings income per head. A different method.
 - **B7. Rents on the ONS Price Index of Private Rents; an AHC deflator**
-  (RF). Private rents follow ONS PIPR by region; social rents follow an OBR
-  series. The AHC deflator has not been checked. Partly.
+  (whose step, not stated in Annex 1). Private rents follow ONS PIPR by
+  region to 2025, then the OBR's UK private-rents forecast for every
+  region; social rents follow an OBR series. An after-housing-costs
+  deflator (CPI less rents, repairs and water, as in HBAI) is in the model
+  (`consumer_price_index_ahc`). RF moves rents with earnings at a 12-month
+  lag, which PolicyEngine does not. Partly.
 - **B8. Partial take-up calibrated to DWP and HMRC** (IPPR model). Take-up
   flags are drawn when the data are built: reporters claim, others are drawn
   to fit DWP 2025 UC caseloads, Pension Credit rates for 2023–24 and HMRC
@@ -631,13 +641,14 @@ policyengine-uk 2.132.6 on the Microcosm UK 2024–25 build of 19 October
 - A three-child limit instead, fewer children in relative poverty after
   housing costs, 2029–30: RF 350,000; PolicyEngine 318,000 (−9%).
 
-The scorecard has 755 rows with a result published by RF, UKMOD, the IFS,
-IPPR or four others. These three are the only reform runs the scorecard labels
+The scorecard has 755 Autumn Budget 2025 rows with a result against RF,
+UKMOD, the IFS, IPPR or four others; 633 of them carry a PolicyEngine
+value. These three are the only reform runs the scorecard labels
 "comparable" against RF: `populations.json` has 14 "comparable" RF rows,
 and the other 11 are benefit uprating rates in the baseline (from Catching
 up? and the Living Standards Outlook 2026), not reform runs. Most others
-ran on policyengine-uk 2.89.2 and the dataset before
-Microcosm, including the example of cutting the higher-rate threshold and
+ran on policyengine-uk 2.89.2 and an earlier data build (bundle dated 19
+June 2026), including the example of cutting the higher-rate threshold and
 the NI upper earnings limit to £46,000 (RF £9.0bn, PolicyEngine £6.62bn).
 The scorecard grades nothing, and the deck quotes no agreement rate from
 it.

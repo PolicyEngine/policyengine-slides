@@ -985,7 +985,7 @@ export function RulesCompareSlide() {
       section="compare"
       title="The rules engine and access: PolicyEngine, the IPPR model and UKMOD"
       scale={0.86}
-      subtitle="UKMOD column from CeMPA’s 2026 country report; IPPR column from published descriptions, dated"
+      subtitle="UKMOD column from CeMPA’s 2026 country report and website; IPPR column from published descriptions, dated"
     >
       <CompareTable rows={rulesCompare} />
     </Frame>
@@ -1178,7 +1178,6 @@ export function RoutesSlide() {
             )}
             {"extra" in route && route.extra && (
               <div className={styles.cardNote}>
-                <StatusTag tag={route.extra.tag} />
                 {route.extra.text}
               </div>
             )}

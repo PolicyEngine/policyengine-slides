@@ -41,7 +41,7 @@ export const rf2026Config: SlideshowConfig = {
   description:
     "The Nuffield Foundation grants, PolicyEngine UK and its Microcosm data, RF's published analyses mapped to PolicyEngine, and comparisons with the IPPR model and UKMOD.",
   date: "2026-11-30",
-  location: "Resolution Foundation (video call)",
+  location: "Resolution Foundation",
   footerText: "Resolution Foundation · 30 November 2026",
   countSlides: true,
   hideNavHint: true,

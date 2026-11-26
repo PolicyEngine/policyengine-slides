@@ -116,8 +116,9 @@ export const sources = {
     href: "https://www.policyengine.org/uk/research/policyengine-10-downing-street",
   },
   // HM Treasury's algorithmic transparency record, 17 December 2024: a pilot
-  // alongside IGOTM (the record gives no start year; PolicyEngine's event
-  // report of 10 November 2025 says the pilot began in March 2025); "not
+  // alongside IGOTM (the record gives no start date; PolicyEngine's event
+  // report of 10 November 2025 gives March 2025, later than the record
+  // itself, so no start date is quoted); "not
   // currently deployed"; National Insurance results close; income tax
   // comparisons "less promising".
   hmt: {
@@ -161,6 +162,10 @@ export const sources = {
   // Funds constituency-level Budget analysis, local Council Tax Reduction
   // variation and outreach to local journalists. Read 24 November 2026.
   supporters: { label: "PolicyEngine supporters", href: "https://www.policyengine.org/uk/supporters" },
+  nuffieldGrant2: {
+    label: "Nuffield Foundation project page, grant 2",
+    href: "https://www.nuffieldfoundation.org/project/advancing-evidence-based-policy-with-ai-tax-benefit-microsimulation",
+  },
   // ---- Code, pinned to the commits read on 25 November 2026 ----
   programs: { label: "policyengine-uk programme registry", href: `${ukRepo}/programs.yaml` },
   growth: {
@@ -181,8 +186,8 @@ export const sources = {
   lha: { label: "LHA parameters", href: `${ukTree}/parameters/gov/dwp/LHA` },
   lhaRate: { label: "LHA rate by BRMA", href: `${ukRepo}/variables/gov/dwp/BRMA_LHA_rate.py` },
   entitlement: {
-    label: "Full-entitlement switch",
-    href: `${ukRepo}/variables/household/income/claims_all_entitled_benefits.py`,
+    label: "Take-up flags (would_claim_uc and others)",
+    href: `${ukRepo}/variables/gov/dwp/universal_credit/would_claim_uc.py`,
   },
   housingBenefit: {
     label: "Housing Benefit eligibility",
@@ -283,11 +288,13 @@ export const sources = {
     label: "Home economics, 24 September 2026",
     href: "https://www.resolutionfoundation.org/publications/home-economics/",
   },
-  // Brewer and others, 8 October 2026: median non-pensioner income −1.3%
-  // (£450), 2020-21 to 2026-27.
+  // Brewer, Clegg, Leather, Marshall and Smith, 8 October 2026 ("The impact
+  // of five years of high inflation on living standards"; not RF's 2019
+  // report of the same name): median non-pensioner income −1.3% (£450),
+  // 2020-21 to 2026-27; its figure notes name the IPPR model and FRS 2024-25.
   countingTheCost: {
     label: "Counting the cost, 8 October 2026",
-    href: "https://www.resolutionfoundation.org/publications/counting-the-cost/",
+    href: "https://www.resolutionfoundation.org/publications/counting-cost/",
   },
   // Curtice and Clegg, 10 June 2026, p.5: a smoothed earnings link from
   // 2027-28 would save around £650 million in 2029-30, net.
@@ -312,7 +319,7 @@ export const sources = {
     href: "https://www.gov.scot/publications/tackling-child-poverty-delivery-plan-forecasting-child-poverty-scotland/pages/8/",
   },
   // Manchester Metropolitan University staff profile (the IPPR model's
-  // maintainer). CeMPA working paper 7/21 (2021), pages 3 to 4: PERU at
+  // maintainer). CeMPA working paper 7/21 (2021), IJM page 2 (PDF page 4): PERU at
   // Manchester Metropolitan University maintains the IPPR model; it is
   // licensed to users for a fee; users named are IPPR, the Resolution
   // Foundation, JRF, NEF and Legatum.
@@ -567,7 +574,7 @@ export const modelFlow = [
   },
 ];
 
-// The one wording for behaviour, used on slides 6, 14, 17, 19 and 20.
+// The one wording for behaviour, used on slides 6 and 17, and the notes.
 export const behaviourLine =
   "No labour-supply response by default; two responses are on (capital gains realisations, employer NI passed through to pay).";
 
@@ -822,7 +829,7 @@ export const grantRows: { icon: Icon; area: string; today: string; tag: Tag }[] 
   {
     icon: IconGitCompare,
     area: "An open dashboard validating against other microsimulation models at household level",
-    today: "A public scorecard setting published Autumn Budget 2025 results from RF, UKMOD, the IFS, IPPR and others beside PolicyEngine’s; household-level UKMOD comparison pending",
+    today: "A public scorecard setting published Autumn Budget 2025 results from RF, UKMOD, the IFS and others beside PolicyEngine’s; household-level UKMOD comparison pending",
     tag: tags.partly,
   },
   {
@@ -1014,7 +1021,7 @@ export const usesTable: MapRow[] = [
     icon: IconScale,
     label: "Ranking income for distributional charts",
     where: "RF’s distributional charts",
-    today: "Unequivalised by default; any grouping can be passed in Python",
+    today: "Unequivalised by default; equivalised HBAI deciles built in; any grouping can be passed in Python",
     tags: [tags.partly],
     step: 1,
   },
@@ -1070,7 +1077,7 @@ export const usesTable: MapRow[] = [
     icon: IconRefresh,
     label: "Counterfactual histories",
     where: "Counting the cost, Oct 2026",
-    today: "Growth rates are parameters; running earlier years on another path is untested",
+    today: "Growth rates are parameters; the file projects forward from 2024–25 only, so earlier years are untested",
     tags: [tags.notYet],
     step: 3,
   },
@@ -1138,7 +1145,7 @@ export const stepsTable: MapRow[] = [
     step: 1,
   },
   { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 1 },
-  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS private rents by region; AHC deflator unchecked", tags: [tags.partly], step: 1 },
+  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS rents by region to 2025, then the OBR’s UK rent forecast; AHC deflator built in", tags: [tags.partly], step: 1 },
   {
     icon: IconUsers,
     label: "Partial take-up",
@@ -1248,7 +1255,7 @@ export type CompareRow = { icon: Icon; label: string; cells: [string, string, st
 export const compareHeads: [string, string, string] = [
   "PolicyEngine UK",
   "IPPR model, as RF uses it: what we found published",
-  "UKMOD, as we read CeMPA’s 2026 country report",
+  "UKMOD, as we read CeMPA’s 2026 country report and website",
 ];
 
 export const notFound = "Not found in published sources";
@@ -1287,7 +1294,7 @@ export const dataCompare: CompareRow[] = [
   {
     icon: IconShoppingCart,
     label: "Spending",
-    cells: ["LCF 2024–25, imputed; also ETB and NTS", "LCF (Scottish Government, 2018)", "LCF, through the indirect-tax add-on"],
+    cells: ["LCF 2024–25, imputed; also ETB and NTS", "LCF (Spread thin, 2026; Scottish Government, 2018)", "LCF, through the indirect-tax add-on"],
     step: 2,
   },
   {
@@ -1339,7 +1346,7 @@ export const rulesCompare: CompareRow[] = [
     cells: [
       "Python package (YAML parameters, Python formulas); web app; Claude connector (preview)",
       notFound,
-      "EUROMOD platform, own rule language; Windows interface, UKMOD Explore web tool, Python connector",
+      "EUROMOD platform, own rule language; Windows interface, UKMOD Explore web tool, EUROMOD’s Python connector (JRC)",
     ],
     step: 1,
   },
@@ -1390,7 +1397,7 @@ export const rulesCompare: CompareRow[] = [
     label: "Behaviour",
     cells: [
       "No labour-supply response by default; capital gains and employer NI responses on",
-      "No behavioural response in published descriptions",
+      "Static (Fraser of Allander, 2025)",
       "Static; behavioural add-on",
     ],
     step: 3,
@@ -1583,9 +1590,11 @@ export const knownLimits = [
 // "comparable", all from RF's No half measures (October 2025). PolicyEngine
 // runs: policyengine-uk 2.132.6, Microcosm UK 2024-25 build
 // 20261019T083323Z-6cba5d71 (read from each row's "latest" record). RF's
-// figures predate the two-child limit's abolition from April 2026. 755 rows
-// have a result from RF, UKMOD, the IFS, IPPR and four others; most ran on
-// policyengine-uk 2.89.2 and the pre-Microcosm data, including the £46k
+// figures predate the two-child limit's abolition from April 2026. 755
+// Autumn Budget 2025 rows have a result from RF, UKMOD, the IFS, IPPR and
+// four others; 633 carry a PolicyEngine value, and most of those ran on
+// policyengine-uk 2.89.2 and an earlier data build (bundle dated 19 June
+// 2026), including the £46k
 // example (higher-rate threshold and NI upper earnings limit to £46k: RF
 // £9.0bn, PolicyEngine £6.62bn). The notes give the rows; they do not quote
 // the gaps as agreement.
@@ -1605,7 +1614,7 @@ export const routes = [
     title: "Web app",
     text: "policyengine.org/uk: a parametric reform with a national report (budget, deciles, poverty, inequality, constituencies) in the browser",
     tag: tags.done,
-    extra: { text: "Structural reforms, vigintiles and entitlement runs need code", tag: tags.notYet },
+    extra: { text: "Not in the web app: structural reforms, vigintiles and entitlement runs need code" },
   },
   {
     icon: IconMessageChatbot,
