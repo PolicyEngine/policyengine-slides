@@ -23,6 +23,7 @@ import {
   breakEvens,
   buildStages,
   calibrationFacts,
+  calibrationLegend,
   targetRows,
   calibrationTex,
   central,
@@ -62,6 +63,8 @@ import {
   scenarioChips,
   scenarioInputs,
   shockSteps,
+  shockCards,
+  capitalNote,
   sources,
   transitionPoints,
   transitionStats,
@@ -319,7 +322,7 @@ export function ExposureSlide() {
   return (
     <Frame
       section="question"
-      title="Job loss concentrates in the most AI-exposed occupations"
+      title="Job-loss rates are set to follow AI exposure"
       subtitle="AI exposure and job-loss rate by occupation group (SOC2020)"
       scale={1.05}
       fill
@@ -427,26 +430,32 @@ export function ScenarioSlide() {
       section="method"
       title="The shock: 7% displaced, wages +2.6%, capital income +39.8%"
       subtitle="Briggs and Kodnani (2023), via Doorley et al.'s (2026) Irish design: a decade of adoption, in one year"
-      scale={0.98}
+      scale={0.94}
     >
       <div className={`${styles.cards} ${styles.cardsOpen}`} style={columns(3)}>
         {scenarioInputs.map((stat, index) => (
-          <div key={stat.value} className={`${styles.card} ${styles.enter}`} style={enter(index)}>
-            <div className={fps.kpiTop}>
+          <div key={stat.value} className={`${styles.card} ${fps.shockCard} ${styles.enter}`} style={enter(index)}>
+            <p className={fps.shockTitle}>
               <span className={fps.kpiIcon}>
                 <stat.icon stroke={1.75} aria-hidden="true" />
               </span>
-              <p className={fps.kpiValue}>{stat.value}</p>
+              {shockCards[index].title}
+            </p>
+            <div className={fps.kpiTop}>
+              <span className={fps.kpiValue}>{stat.value}</span>
+              <span className={fps.kpiLabel} style={{ marginTop: 0 }}>{shockCards[index].plain}</span>
             </div>
-            <p className={fps.kpiLabel}>{stat.label}</p>
             <div className={fps.eqBox}>
               <Tex tex={shockSteps[index].tex} />
             </div>
-            <p className={fps.pointText}>{shockSteps[index].text}</p>
+            <p className={fps.pointText}>{shockCards[index].detail}</p>
           </div>
         ))}
       </div>
-      <Chips items={scenarioChips} />
+      <div>
+        <p className={fps.sideHead}>What the shock leaves out</p>
+        <Chips items={[...scenarioChips, { icon: IconInfoCircle, text: capitalNote }]} />
+      </div>
     </Frame>
   );
 }
@@ -537,9 +546,6 @@ export function PolicyEngineSlide() {
         <LogoRow orgs={government} />
         <p className={fps.sideHead} style={{ marginTop: "calc(var(--u) * 1.6)" }}>US public bodies</p>
         <LogoRow orgs={usBodies} />
-        <div style={{ marginTop: "calc(var(--u) * 1.2)" }}>
-          <Chips items={[{ icon: IconInfoCircle, text: "Use by these bodies is not an endorsement of this paper" }]} />
-        </div>
       </div>
     </Frame>
   );
@@ -549,14 +555,17 @@ export function ExposureMethodSlide() {
   return (
     <Frame
       section="method"
-      title="Exposure: AIOE scaled down where AI complements the work"
+      title="Exposure: what AI can do, scaled down where it helps the worker"
       subtitle="No UK complementarity-adjusted series exists at this level, so I build one"
-      scale={1.1}
+      scale={1.0}
     >
       <Flow steps={exposureBuild} />
       <div className={`${fps.split} ${fps.splitEven}`} style={{ alignItems: "center" }}>
         <div>
+          <p className={fps.eqTag}>Adjusted exposure of group l</p>
           <Tex tex="\text{C-AIOE}_l = \text{AIOE}_l \times \bigl(1 - (\theta_l - \theta_{\min})\bigr)" />
+          <p className={fps.pointText}>Higher θ, smaller factor: AI that helps the worker counts less as exposure</p>
+          <p className={fps.eqTag} style={{ marginTop: "calc(var(--u) * 1.2)" }}>Shift so the least exposed group is zero</p>
           <Tex tex="\widetilde{C}_l = \text{C-AIOE}_l - \min_k \text{C-AIOE}_k \;\ge 0" />
         </div>
         <Points items={exposureNotes} />
@@ -617,10 +626,10 @@ export function CalibrationSlide() {
       section="method"
       title="Calibration: 98.7% of 1,514 official totals matched within 10%"
       subtitle="One weight per household, fitted to published totals (7 November build, in sample)"
-      scale={0.92}
+      scale={0.94}
     >
       <div className={fps.split} style={{ alignItems: "start" }}>
-        <table className={`${fps.table} ${fps.compact}`}>
+        <table className={`${fps.table} ${fps.calTable}`}>
           <thead>
             <tr>
               <th>Publisher</th>
@@ -630,9 +639,9 @@ export function CalibrationSlide() {
             </tr>
           </thead>
           <tbody>
-            {targetRows.map((row) => (
-              <tr key={row.topic}>
-                <td className={fps.rowName}>{row.source}</td>
+            {targetRows.map((row, index) => (
+              <tr key={row.topic} className={index > 0 && targetRows[index - 1].source === row.source ? fps.sameBlock : undefined}>
+                <td className={fps.rowName}>{index > 0 && targetRows[index - 1].source === row.source ? "" : row.source}</td>
                 <td>{row.topic}</td>
                 <td className={fps.num}>{row.count.toLocaleString("en-GB")}</td>
                 <td className={fps.num}>{row.within.toLocaleString("en-GB")}</td>
@@ -650,7 +659,8 @@ export function CalibrationSlide() {
           <div className={fps.eqBox}>
             <Tex tex={calibrationTex} />
           </div>
-          {calibrationFacts.map((fact) => (
+          <Points items={calibrationLegend} />
+          {calibrationFacts.slice(2).map((fact) => (
             <div key={fact.value} className={fps.kpiInline}>
               <div className={fps.kpiTop}>
                 <span className={fps.kpiIcon}>
@@ -690,7 +700,7 @@ export function CentralSlide() {
   const pct = (value: number) => `${(Math.abs(value) / top) * 100}%`;
   const afterWage = top + channels[1].value;
   return (
-    <Frame section="central" title="£7.3bn a year, the net of flows several times larger" subtitle="The exposure-proportional central case, 2027–28" scale={0.9}>
+    <Frame section="central" title="£7.3bn a year, the net of flows several times larger" subtitle="The exposure-proportional central case, 2027–28" scale={0.86}>
       <Stats items={central} small />
       <Chips items={centralChips} />
       <div>
@@ -744,7 +754,7 @@ export function TransitionSlide() {
       section="central"
       title="Job loss falls mostly in the upper half of the distribution"
       subtitle="Share of each income decile moving from employment to unemployment"
-      scale={1.1}
+      scale={1.05}
       fill
     >
       <div className={`${fps.split} ${fps.splitWide} ${fps.figureShort}`} style={{ alignItems: "center" }}>
@@ -772,7 +782,7 @@ export function AbsorptionSlide() {
       section="central"
       title="The system absorbs 29% of the loss, almost all through lower taxes"
       subtitle="Job loss alone, OBR-sized: 1.67% of employees (20 draws)"
-      scale={0.94}
+      scale={0.9}
     >
       <Stats items={absorption} small />
       <Points items={absorptionVariants} cols={3} head="What limits the benefit response" />
@@ -789,7 +799,7 @@ export function IncidenceSlide() {
       section="comparisons"
       title="Who loses the job sets the cost far more than the poverty rise"
       subtitle="Same expected 2.04m displaced, five rules (50 paired draws, means ± s.d.)"
-      scale={1.05}
+      scale={0.96}
     >
       <table className={fps.table}>
         <thead>
@@ -829,7 +839,7 @@ export function MarginSlide() {
       section="comparisons"
       title="As wage cuts, the same loss costs more but raises poverty far less"
       subtitle="Same gross earnings, removed as exposure-graded wage cuts (20 draws)"
-      scale={0.98}
+      scale={0.86}
     >
       <div className={fps.margins}>
         <div />
@@ -874,7 +884,7 @@ export function BreakEvenSlide() {
       section="sensitivity"
       title="Three assumptions can each turn the cost to zero"
       subtitle="Value at which the central cost reaches zero, the other two held fixed"
-      scale={1.1}
+      scale={1.02}
     >
       <div className={fps.split}>
         <div>
@@ -1015,10 +1025,7 @@ export function DirectionsSlide() {
         </div>
         <div style={{ display: "grid", gap: "calc(var(--u) * 2)" }}>
           <Points items={directionPoints} />
-          <div className={fps.qrInline}>
-            <BasePathImage src="/images/fps-berlin-2026/dashboard-qr.svg" alt="QR code linking to the dashboard" width={330} height={330} />
-            <p>{growthDashboard.title}: preliminary, not yet published. Scan for the live dashboard</p>
-          </div>
+          <p className={fps.chipsNote}>Left: {growthDashboard.title}, preliminary and not yet published</p>
         </div>
       </div>
     </Frame>

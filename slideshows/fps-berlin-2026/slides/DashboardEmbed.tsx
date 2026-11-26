@@ -16,7 +16,7 @@ export default function DashboardEmbed({ src, title, image }: { src: string; tit
     () => false,
   );
   return exporting ? (
-    <BasePathImage src={image} alt={`${title}: first screen`} fill className="object-cover object-top" />
+    <BasePathImage src={image} alt={`${title}: first screen`} fill className="object-contain object-top" />
   ) : (
     <iframe src={src} title={title} loading="eager" />
   );

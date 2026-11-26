@@ -6,7 +6,7 @@ minutes of presentation, then 20 minutes of open discussion.
 
 The ministry runs the deck from its own machine, so it is sent as a PDF
 by 27 November. No slide has build steps. Slide 28 embeds the live
-dashboard in the browser deck; the PDF shows a screenshot and a QR code.
+dashboard in the browser deck; the PDF shows a screenshot (no QR code: the dashboard is not yet published).
 
 Every number is the merged paper's (PolicyEngine/uk-ai-study main at
 c42be9f, tax year 2027–28). The unmerged revision on PR #26 (calibrated
@@ -286,12 +286,11 @@ paper on SSRN (abstract 7174479) and my LinkedIn.
    quality. The method carries over, but the data doesn't: the German files
    it needs most (the 10 per cent income-tax sample, the EVS, the
    Mikrozensus) leave the statistical offices only for institutions seated
-   in the EU. From the UK or US we could build on EU-SILC through Eurostat,
-   with no tax microdata and no region for Germany. As a rough guide only,
-   scaling our figures by Dolls et al. suggests more of the loss would be
-   absorbed (about 44 per cent in Germany and 40 in France, against 29 for
-   the UK). That is not a model run. Close with the ask: we would like to
-   do it properly with an EU partner institution.
+   in the EU. From the UK or US we could build on EU-SILC through Eurostat
+   (no tax microdata, and no region for Germany) or the SOEP international
+   edition by contract. Qualitatively: both countries pay earnings-related
+   unemployment insurance, so more of a job loss would be absorbed than in
+   the UK; the paper does not model their systems.
 
 ## For the discussion
 

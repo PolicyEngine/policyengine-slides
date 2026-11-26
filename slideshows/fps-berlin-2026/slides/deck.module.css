@@ -107,9 +107,9 @@
   min-height: 0;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: safe center;
   gap: calc(var(--u) * 2.8);
-  padding: calc(var(--u) * 1.4) 0 calc(var(--u) * 1.2);
+  padding: calc(var(--u) * 2) 0 calc(var(--u) * 1.6);
 }
 
 /* A live page or a figure: the body runs from under the title to the sources. */

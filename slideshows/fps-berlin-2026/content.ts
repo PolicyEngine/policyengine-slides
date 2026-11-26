@@ -71,7 +71,7 @@ export type PartKey = "question" | "method" | "central" | "comparisons" | "sensi
 
 export const parts: { key: PartKey; short: string; title: string; icon: Icon; agenda: string }[] = [
   { key: "question", short: "Question", title: "The question", icon: IconTarget, agenda: "Exposed jobs, and what the shock's size leaves open" },
-  { key: "method", short: "Method", title: "Data and method", icon: IconDatabase, agenda: "Exposure, Microcosm data, the shock, the microsimulation" },
+  { key: "method", short: "Method", title: "Data and method", icon: IconDatabase, agenda: "Microcosm data, exposure, the shock, the microsimulation" },
   { key: "central", short: "Central case", title: "The central case", icon: IconReceiptTax, agenda: "Cost, poverty and inequality; who absorbs the loss" },
   { key: "comparisons", short: "Who and how", title: "Who loses the job, and how", icon: IconArrowsSplit, agenda: "Five displacement rules; job loss vs wage cuts" },
   { key: "sensitivity", short: "What moves it", title: "What moves the cost, and policy", icon: IconScale, agenda: "Break-evens, indices, the closed account, three reforms" },
@@ -142,8 +142,8 @@ export const openQuestions: { icon: Icon; title: string; views: Point[] }[] = [
 
 // Section 3.
 export const methodFlow: { icon: Icon; title: string; text: string }[] = [
-  { icon: IconChartBar, title: "AI exposure", text: "Felten AIOE × Pizzinelli complementarity (C-AIOE), nine SOC2020 groups" },
   { icon: IconDatabase, title: "Household microdata", text: "Microcosm: calibrated FRS 2024–25, 72,504 employee records" },
+  { icon: IconChartBar, title: "AI exposure", text: "Felten AIOE × Pizzinelli complementarity (C-AIOE), nine SOC2020 groups" },
   { icon: IconUserMinus, title: "Person-level shock", text: "Job loss, survivor wages, capital income; random draws of who is displaced" },
   { icon: IconCalculator, title: "PolicyEngine UK", text: "Tax and benefit rules legislated or announced for 2027–28" },
 ];
@@ -166,8 +166,16 @@ export const scenarioChips: Chip[] = [
   { icon: IconLifebuoy, text: "UC only for simulated claimants; no new JSA" },
   { icon: IconBriefcase, text: "Labour shocks: employees only" },
   { icon: IconDice5, text: "Displaced drawn by systematic sampling within groups" },
-  { icon: IconInfoCircle, text: "+0.4 points is +40% on the 1% base used here; on a 4% base it would be +10%" },
 ];
+
+// Slide 13: one titled card per shock; the plain line and the detail.
+export const shockCards: { title: string; plain: string; detail: string }[] = [
+  { title: "Job loss", plain: "of employees lose their job for the whole year", detail: "Shared by exposure × employment; pay, hours, pensions, statutory pay set to zero" },
+  { title: "Wages of those who stay", plain: "average pay rise (over all employees), paid to those who keep their jobs", detail: "Higher-θ (more complementary) groups gain more; g = 2.6%" },
+  { title: "Capital income", plain: "on savings interest and dividends", detail: "Return on capital 1.005% → 1.405%; rent and pensions unchanged" },
+];
+
+export const capitalNote = "+0.4 points is +40% on the 1% base used here; on a 4% base it would be +10%";
 
 export const scenarioCaveats: Point[] = [
   { icon: IconHourglass, lead: "One-year stock", text: "No re-employment, redundancy pay or partner response" },
@@ -483,15 +491,16 @@ export const indexPoints: Point[] = [
 
 // Section 3.1.
 export const exposureBuild: { icon: Icon; title: string; text: string }[] = [
-  { icon: IconChartBar, title: "AIOE (Felten et al. 2021)", text: "Ten AI applications × O*NET abilities; standardised, can be negative" },
-  { icon: IconArrowsSplit, title: "Complementarity θ (Pizzinelli et al. 2023)", text: "Rebuilt from O*NET 27.3; high θ: AI more likely complements" },
-  { icon: IconDatabase, title: "Mapped to UK SOC2020", text: "DfE (2023) crosswalk; nine groups, ASHE 2025 weights" },
+  { icon: IconChartBar, title: "AIOE: what AI can do", text: "How closely ten AI applications match the abilities a job needs (Felten et al. 2021, O*NET)" },
+  { icon: IconArrowsSplit, title: "θ: does AI help or replace?", text: "From 0 to 1; high θ means AI more likely complements the worker (Pizzinelli et al. 2023)" },
+  { icon: IconDatabase, title: "C-AIOE, for nine UK groups", text: "Exposure scaled down where θ is high; DfE (2023) crosswalk, ASHE 2025 weights" },
 ];
 
 export const exposureNotes: Point[] = [
-  { icon: IconArrowsDiff, lead: "Negative AIOE: higher θ raises the score", text: "The factor pulls the four negative scores towards zero" },
-  { icon: IconTarget, lead: "Least-exposed group set to zero", text: "Elementary: my normalisation, no displacement" },
-  { icon: IconUsersGroup, lead: "Varies between groups only", text: "Not within them" },
+  { icon: IconArrowsSplit, lead: "Where θ comes from", text: "O*NET work context and training needs; rebuilt from O*NET 27.3" },
+  { icon: IconArrowsDiff, lead: "Below-average exposure (negative AIOE)", text: "The factor pulls the score towards zero, so there a higher θ raises it" },
+  { icon: IconTarget, lead: "Least-exposed group set to zero", text: "Elementary occupations: no displacement (my normalisation)" },
+  { icon: IconUsersGroup, lead: "Nine groups only", text: "Everyone in a group gets the same score" },
 ];
 
 // Section 3.4 (Microcosm) and 3.5 (draws).
@@ -642,9 +651,9 @@ export const calibrationPoints: Point[] = [
 // Department for Transport 13, Welsh Government 11, DfE 8, Northern Ireland
 // bodies 5, Independent Schools Council 1.
 export const targetRows: { source: string; topic: string; count: number; within: number }[] = [
-  { source: "HMRC", topic: "Incomes by band (Survey of Personal Incomes)", count: 568, within: 553 },
+  { source: "HMRC", topic: "Incomes by band (SPI)", count: 568, within: 553 },
   { source: "HMRC", topic: "Capital gains and income tax liabilities", count: 189, within: 189 },
-  { source: "HMRC", topic: "Child Benefit, salary sacrifice, other tax totals", count: 19, within: 19 },
+  { source: "HMRC", topic: "Child Benefit, salary sacrifice, other", count: 19, within: 19 },
   { source: "ONS", topic: "Population by age and sex", count: 179, within: 179 },
   { source: "ONS", topic: "Employment by occupation", count: 159, within: 159 },
   { source: "ONS", topic: "Household composition, land, spending", count: 27, within: 27 },
@@ -652,7 +661,14 @@ export const targetRows: { source: string; topic: string; count: number; within:
   { source: "DWP", topic: "State Pension and Pension Credit", count: 70, within: 70 },
   { source: "DWP", topic: "Two-child limit, benefit cap, other benefits", count: 40, within: 40 },
   { source: "MHCLG", topic: "Council tax dwellings by band", count: 82, within: 82 },
-  { source: "Others", topic: "OBR, devolved governments, DfT, DfE, student loans", count: 78, within: 77 },
+  { source: "Others", topic: "OBR, devolved, DfT, DfE, student loans", count: 78, within: 77 },
+];
+
+// Slide 11: the three-line legend for the loss (as in calibrationPoints).
+export const calibrationLegend: Point[] = [
+  { icon: IconScale, lead: "λⱼ: each of the 38 families gets an equal share", text: "Split evenly within the family" },
+  { icon: IconPercentage, lead: "Each relative error capped at 10 (1,000%)", text: "No single target dominates" },
+  { icon: IconLock, lead: "Each weight at most 10 times its starting value", text: "w⁰: the survey's starting weights" },
 ];
 
 export const calibrationFacts: Stat[] = [
