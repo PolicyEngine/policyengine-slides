@@ -236,7 +236,7 @@ export function TitleSlide() {
       <div className="relative z-10 flex flex-col items-center justify-center space-y-9">
         <div className="h-1 w-20 rounded-full bg-white/30" />
         <h1 className="font-display text-center text-6xl font-bold text-white">Who bears the AI shock?</h1>
-        <p className="text-center text-2xl text-white opacity-80">The distributional and fiscal incidence in the UK</p>
+        <p className="text-center text-3xl text-white opacity-85">The distributional and fiscal incidence in the UK</p>
         <div className="mt-2 flex flex-col items-center text-center">
           <div className="relative mb-3 h-28 w-28 overflow-hidden rounded-full border-2 border-white/40">
             <BasePathImage src="/images/fps-berlin-2026/vahid-ahmadi.jpg" alt={speaker.name} fill className="object-cover" />
