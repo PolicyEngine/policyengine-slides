@@ -114,7 +114,7 @@ export const jobLoss: { group: string; exposure: string; employment: string; rat
 export const exposureWhy: Point[] = [
   { icon: IconBriefcase, lead: "Exposed work pays well", text: "Managers, professionals; admin the most exposed" },
   { icon: IconReceiptTax, lead: "It carries much of the tax base", text: "Income tax and National Insurance (NI)" },
-  { icon: IconLifebuoy, lead: "Universal Credit acts lower down", text: "UC: the main means-tested benefit" },
+  { icon: IconLifebuoy, lead: "Universal Credit mainly helps low earners", text: "It is means-tested, so well-paid workers who lose income often get little" },
   { icon: IconScale, lead: "So where it lands sets the cost" },
 ];
 
@@ -443,7 +443,7 @@ export const futureLines: Point[] = [
 ];
 
 export const directionPoints: Point[] = [
-  { icon: IconChartBar, lead: "The whole economy, over time", text: "OG-UK macro model: no unemployment, so AI shows in pay rates; a different question" },
+  { icon: IconChartBar, lead: "The whole economy, over time", text: "OG-UK macro model: no unemployment, so AI shows in pay rates; a different question. Preliminary, not yet published" },
   { icon: IconNetwork, lead: "Firms and production networks", text: "Firm microsimulation, linked to households" },
   { icon: IconPlayerPause, lead: "If the US slows AI development", text: "Future effects on government, people and firms" },
   { icon: IconCpu, lead: "The token tax project", text: "Household incidence of a UK tax on AI tokens (in progress)" },

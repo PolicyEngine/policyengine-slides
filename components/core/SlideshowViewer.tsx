@@ -135,7 +135,7 @@ function SlideshowViewerClient({ config }: SlideshowViewerProps) {
           );
         })}
 
-        {!isFullscreen && !exportMode && (
+        {!isFullscreen && !exportMode && !config.hideNavBar && (
           <div className="fixed bottom-0 left-0 right-0 h-20 z-[100] flex items-center justify-between px-8 pointer-events-none">
             <div className="flex items-center gap-3 pointer-events-auto">
               {!config.hideNavHint && (

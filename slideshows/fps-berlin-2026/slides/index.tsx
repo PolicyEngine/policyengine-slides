@@ -3,6 +3,7 @@ import katex from "katex";
 import {
   IconArrowRight,
   IconArrowsSplit,
+  IconBuildingBank,
   IconInfoCircle,
   IconMail,
   IconUserMinus,
@@ -253,10 +254,18 @@ export function TitleSlide() {
 
 export function AgendaSlide() {
   return (
-    <Frame title="Agenda" subtitle="Five parts, then conclusions and future work" scale={1.15}>
+    <Frame title="Agenda" subtitle="Introduction, five parts, then conclusions and future work" scale={1.05}>
       <div className={fps.agenda}>
+        <div className={`${fps.agendaRow} ${styles.enter}`} style={enter(0)}>
+          <span className={fps.agendaNum} />
+          <span className={fps.kpiIcon}>
+            <IconInfoCircle stroke={1.75} aria-hidden="true" />
+          </span>
+          <span className={fps.agendaTitle}>Introduction</span>
+          <span className={fps.agendaText}>PolicyEngine, the open-source model behind the paper</span>
+        </div>
         {parts.map((part, index) => (
-          <div key={part.key} className={`${fps.agendaRow} ${styles.enter}`} style={enter(index)}>
+          <div key={part.key} className={`${fps.agendaRow} ${styles.enter}`} style={enter(index + 1)}>
             <span className={fps.agendaNum}>{index + 1}</span>
             <span className={fps.kpiIcon}>
               <part.icon stroke={1.75} aria-hidden="true" />
@@ -444,13 +453,64 @@ export function ScenarioSlide() {
 
 // The organisation facts and government logos are the BIST deck's
 // (bist-2026/content.ts, whoWeAre), which pins each claim to its source.
+type LogoOrg = {
+  name: string;
+  logo?: string;
+  width?: number;
+  pixelHeight?: number;
+  height?: number;
+  darken?: boolean;
+  caption?: string;
+};
+
+// US public bodies, as the other PolicyEngine decks in this repo state them:
+// BEA (Distribution of Personal Income technical document, June 2026), the
+// Joint Economic Committee (Immigration Fiscal Impact Calculator) and the
+// Atlanta Fed (memorandum of understanding; Policy Rules Database).
+const usBodies: LogoOrg[] = [
+  { name: "Bureau of Economic Analysis", logo: "/logos/organizations/bea.png", width: 1349, pixelHeight: 508, height: 3.4, caption: "Runs it for its personal income distribution" },
+  { name: "Joint Economic Committee", logo: "/logos/organizations/jec.png", width: 400, pixelHeight: 400, height: 3.8, caption: "Republican staff built a calculator on it" },
+  { name: "Federal Reserve Bank of Atlanta", logo: "/logos/organizations/atlanta-fed.png", width: 4118, pixelHeight: 274, height: 1.9, caption: "Partnership on its Policy Rules Database" },
+];
+
+function LogoRow({ orgs }: { orgs: readonly LogoOrg[] }) {
+  return (
+    <div className={fps.logos} style={columns(orgs.length)}>
+      {orgs.map((org) => (
+        <div key={org.name} className={fps.logoCell}>
+          <span className={fps.logoMark}>
+            {org.logo ? (
+              <BasePathImage
+                src={org.logo}
+                alt={`${org.name} logo`}
+                width={org.width ?? 1}
+                height={org.pixelHeight ?? 1}
+                className={org.darken ? fps.logoDarken : undefined}
+                style={{ height: `calc(var(--u) * ${org.height})`, width: "auto" }}
+              />
+            ) : (
+              <span className={fps.wordmark} style={{ display: "inline-flex", alignItems: "center", gap: "calc(var(--u) * 0.6)" }}>
+                <IconBuildingBank stroke={1.6} aria-hidden="true" style={{ width: "calc(var(--u) * 3)", height: "calc(var(--u) * 3)" }} />
+                {org.name}
+              </span>
+            )}
+          </span>
+          <p className={fps.logoCaption}>
+            {org.caption === "Built 10ds-microsim on it" ? "No 10's data science team built a microsimulation on it" : org.caption}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function PolicyEngineSlide() {
   const { facts, government } = whoWeAre;
   return (
     <Frame
       title="PolicyEngine: the open-source model behind the paper"
       subtitle="Tax-benefit microsimulation for the UK and the US"
-      scale={1.15}
+      scale={0.98}
     >
       <div className={fps.kpis} style={columns(3)}>
         {facts.map((fact, index) => (
@@ -472,29 +532,9 @@ export function PolicyEngineSlide() {
       </div>
       <div>
         <p className={fps.sideHead}>UK public bodies</p>
-        <div className={fps.logos} style={columns(government.length)}>
-          {government.map((org) => (
-            <div key={org.name} className={fps.logoCell}>
-              <span className={fps.logoMark}>
-                {org.logo ? (
-                  <BasePathImage
-                    src={org.logo}
-                    alt={`${org.name} logo`}
-                    width={org.width ?? 1}
-                    height={org.pixelHeight ?? 1}
-                    className={org.darken ? fps.logoDarken : undefined}
-                    style={{ height: `calc(var(--u) * ${org.height})`, width: "auto" }}
-                  />
-                ) : (
-                  <span className={fps.wordmark}>{org.name}</span>
-                )}
-              </span>
-              <p className={fps.logoCaption}>
-                {org.caption === "Built 10ds-microsim on it" ? "No 10's data science team built a microsimulation on it" : org.caption}
-              </p>
-            </div>
-          ))}
-        </div>
+        <LogoRow orgs={government} />
+        <p className={fps.sideHead} style={{ marginTop: "calc(var(--u) * 1.6)" }}>US public bodies</p>
+        <LogoRow orgs={usBodies} />
         <div style={{ marginTop: "calc(var(--u) * 1.2)" }}>
           <Chips items={[{ icon: IconInfoCircle, text: "Use by these bodies is not an endorsement of this paper" }]} />
         </div>
@@ -975,7 +1015,7 @@ export function DirectionsSlide() {
           <Points items={directionPoints} />
           <div className={fps.qrInline}>
             <BasePathImage src="/images/fps-berlin-2026/dashboard-qr.svg" alt="QR code linking to the dashboard" width={330} height={330} />
-            <p>{growthDashboard.title}: scan for the live dashboard</p>
+            <p>{growthDashboard.title}: preliminary, not yet published. Scan for the live dashboard</p>
           </div>
         </div>
       </div>

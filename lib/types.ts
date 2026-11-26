@@ -47,6 +47,8 @@ export interface SlideshowConfig {
   countSlides?: boolean;
   /** Hide the "Click or arrow keys" hint in the navigation bar, for a deck whose footer logo sits under it. */
   hideNavHint?: boolean;
+  /** Hide the navigation bar (arrows and counter), for a deck that draws its own page number. Click and the keys still move the deck. */
+  hideNavBar?: boolean;
   slides: SlideConfig[];
 }
 

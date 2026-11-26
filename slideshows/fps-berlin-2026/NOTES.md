@@ -51,19 +51,25 @@ of 50 on cost, and 2nd lowest on the poverty and Gini changes.
 labour-market shock of a given size and ask how much the UK tax-benefit
 system absorbs, and who bears the rest.
 
-**2. PolicyEngine.** Who we are, before the paper. A nonprofit; the rules, data pipeline and analysis
-code are open source; UK and US models in one Python package (JOSS 2026).
-Use by these bodies is not endorsement of this paper.
-No 10 built a microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR engaged with it in 2025–26, and it has been cited in a Lords debate. Keep it to 30 seconds: the point is that
-the model is open and can be checked.
+**2. Agenda.** A short introduction to PolicyEngine, then five parts.
+Give the three results in one breath so the audience knows where it is
+going: who loses the job moves the Exchequer cost (£1.9bn to £11.3bn a year
+across four rules for the same 7 per cent); how the loss arrives sets who
+bears it (as wage cuts, poverty +0.3 points instead of +2.4, at £12bn more
+cost); and the sign rests on assumed offsets. A decade of adoption applied
+in one year: an impact-year stress test.
 
-**3. Agenda.** Five parts. Give the three results in one breath so the
-audience knows where it is going: who loses the job moves the Exchequer
-cost (£1.9bn to £11.3bn a year across four rules for the same 7 per cent);
-how the loss arrives sets who bears it (as wage cuts, poverty +0.3 points
-instead of +2.4, at £12bn more cost); and the sign rests on assumed
-offsets. A decade of adoption applied in one year: an impact-year stress
-test.
+**3. PolicyEngine.** Who we are, before the paper. A nonprofit; the rules,
+data pipeline and analysis code are open source; UK and US models in one
+Python package (JOSS 2026). In the UK, No 10's data science team built a
+microsimulation tool on it, the Treasury ran a pilot evaluation, the OBR
+engaged with it in 2025–26, and it has been cited in a Lords debate. In the
+US, the Bureau of Economic Analysis runs it for its distribution of personal
+income (2021 onwards), Joint Economic Committee Republicans built an
+immigration fiscal impact calculator on it, and the Atlanta Fed works with
+us on its Policy Rules Database. Use by these bodies is not endorsement of
+this paper. Keep it to 30 seconds: the point is that the model is open and
+can be checked.
 
 ## 1. The question
 
@@ -71,8 +77,9 @@ test.
 
 **5. Exposure by occupation.** The most exposed groups (administrative,
 managerial, professional) pay well and carry much of the income tax and
-NI base; Universal Credit, the UK's main means-tested benefit, responds
-lower down. Job-loss rates are the central quotas, proportional to
+NI base. Universal Credit, the UK's main means-tested benefit, mainly
+helps low earners, so well-paid workers who lose income often get little
+from it (savings, a working partner). Job-loss rates are the central quotas, proportional to
 employment times exposure.
 
 **6. Two open questions.** Incidence is unsettled (exposure, expertise
@@ -236,7 +243,7 @@ UK economy: Beyond the forecast" (OG-UK with this household study). Leave
 it for the discussion; scroll it only if asked. The PDF shows its first
 screen only. Frame the dashboard first: a different model (OG-UK, no
 unemployment) asking a different question, so its pay-rate fall (−1.27%)
-and this paper's 7 per cent job loss are not two answers to one question.
+and this paper's 7 per cent job loss are not two answers to one question. Say the dashboard results are preliminary and not yet published.
 
 **29. Thank you.** Leave this up for the discussion. Two QR codes: the
 paper on SSRN (abstract 7174479) and my LinkedIn.

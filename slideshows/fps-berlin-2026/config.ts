@@ -44,10 +44,12 @@ export const fpsBerlin2026Config: SlideshowConfig = {
   footerText: "Franco-German Fiscal Policy Seminar · Berlin · December 2026",
   countSlides: true,
   clickerKeys: true,
+  hideNavHint: true,
+  hideNavBar: true,
   slides: [
     TitleSlide,
-    PolicyEngineSlide,
     AgendaSlide,
+    PolicyEngineSlide,
     // 1. The question
     SectionQuestionSlide,
     ExposureSlide,
