@@ -89,7 +89,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   policyengine.py 81bac43 and policyengine-app-v2 d27867f. These describe
   what the code can do, not a build's results.
 - **Nuffield grants (slide 4)**: the Nuffield project page for grant 1,
-  policyengine.org/uk/supporters, and PolicyEngine's event report of
+  the project page for grant 2, policyengine.org/uk/supporters, and PolicyEngine's event report of
   10 November 2025 for the London event.
 - **RF reports and method (slides 11, 12)**: the reports and their figure
   notes, each dated; the method from the Living Standards Outlook 2026,
@@ -122,8 +122,8 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   are static (no count-up), to match the in-sample tag.
 - One Microcosm build for every data figure; results from other builds
   always carry a run label.
-- Behaviour has one wording everywhere (slides 6, 14, 17 and the
-  notes): no labour-supply response by default; two responses are on
+- Behaviour has one wording (slides 6 and 17, and the notes; slide
+  19's foot says the briefing describes its run as static): no labour-supply response by default; two responses are on
   (capital gains realisations, employer NI passed through to pay).
 - Status tags: Done, Partly, Not yet; muted Preview (the Claude connector),
   In-sample (calibration), Outside the model, and Different method (savings
@@ -159,7 +159,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - IPPR model column: headed "what we found published", with "please
   correct us"; empty cells read "Not found in published sources". No quote
   from the 2018 description.
-- UKMOD column: headed "as we read CeMPA's 2026 country report".
+- UKMOD column: headed "as we read CeMPA's 2026 country report and website".
 - Think tanks on slide 3: only those with a public source.
 - Table cells on slides 13, 14, 16 and 17 are shortened to fit; the full
   wording is in NOTES.md. The method flow on slide 12 is shortened the same
@@ -172,8 +172,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - Slide 5 gives no count of Budget measures, because sources differ.
 - The 1p basic-rate comparison is left off slide 19 until the build behind
   it is named.
-- Slide 23 gives an indicative scope (one chart; who does what; about two
-  short calls) and no dates, prices or commitments.
+- Slide 23 gives an indicative scope (one chart; who does what) and no dates, prices or commitments.
 - The Nuffield credit on the closing slide follows the Autumn Budget 2026
   deck: "Funded by" with the Foundation's white logo.
 - The config description is shorter than first drafted, to fit the
@@ -194,8 +193,9 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
 - Slide 19: the Pension Tax Allowance net cost in the briefing's Table 6
   equals the OBR's income tax line in 2028–29 and 2029–30; confirm that it
   is a coincidence and not a copying error in the briefing.
-- Slide 19: the foot now says the briefing describes the run as static;
-  confirm whether the run kept the two default responses on.
+- Slide 19: the briefing calls the run static. None of the seven measures
+  changes capital gains tax or employer NI, so the two default responses
+  would not move these figures either way; confirm in the run's code.
 - Slide 16: whether UKMOD's regional models use reweighted data (not found
   in the 2026 country report); whether its input data hold any wealth
   variables.
@@ -216,7 +216,7 @@ made from slide 14's "Known gap" line. NOTES.md has the timings.
   incomes".
 - Sources: Counting the cost, What a ratchet, CeMPA's 2026 country report
   and working paper 7/21 now have links in `content.ts`.
-- RF figures and figure numbers: re-read against the published PDFs.
+- Spread thin: figure numbers and 27.7% to 25.1% (no PDF saved; read once in round 1).
 - The Claude connector's status on the day.
 - Slide 5's live frame: load it once on the day (it needs a network
   connection); no view button opens the constituency map tab directly, so

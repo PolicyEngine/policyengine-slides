@@ -261,6 +261,8 @@ method needs is missing or works only in Python; "Not yet" that it would
 need building or is untested. Speak to the first four rows and to
 non-take-up; leave the rest to read. At the end of the table, ask: which
 use matters most, and is any use missing?
+Breakdowns by family type, tenure or number of children are custom
+analysis in Python (slide 10), not a standard output.
 
 Three things worth saying up front: vigintiles exist in Python but the web
 app shows deciles, and the default ranking income is unequivalised, so RF's
@@ -304,7 +306,9 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   (microcosm#1710), so poverty effects are likely understated. On that
   build, removing a fully rolled-out two-child limit takes about a fifth
   fewer children out of absolute poverty than the IFS's published estimate
-  (630,000, 2025–26), while cost and caseload match official figures. The
+  (630,000, 2025–26; a quarter if the IFS figure adjusts for take-up), while
+  cost and the count of affected families are within about 5% of official
+  figures (UC households by number of children run 9–13% short of DWP's). The
   standard output counts age 17 or under; HBAI's dependent children (`is_hbai_dependent_child`,
   `variables/household/demographic/hbai/`) can be passed as a filter in
   Python; projected levels are as A3. The two-child limit
@@ -312,7 +316,7 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 - **A5. The LHA freeze** (Spread thin, Fig 9). Published LHA rates by BRMA
   and category, 2014 to 2026; a freeze parameter, on from April 2025 and
   kept on from 2027 as announced policy; BRMAs assigned in Microcosm;
-  private rents follow ONS PIPR by region to 2025, then the OBR's UK
+  private rents follow ONS PIPR by region to 2025–26, then the OBR's UK
   forecast. Done.
 - **A6. Non-take-up: entitlement at full take-up minus reported receipt**
   (Billing me softly). In Python, a flag override gives full entitlement for
@@ -331,21 +335,22 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   PolicyEngine's post "The adjusted Triple Lock" (28 October 2026) is
   related work.
 - **A8. Counterfactual histories** (Counting the cost). Growth rates are
-  parameters, and changing one re-projects the data. Running the 2024–25
-  file on a counterfactual price and earnings path for earlier years has not
-  been checked. Partly.
+  parameters, and changing one re-projects the data. The file projects
+  forward from 2024–25 only, so running earlier years on a counterfactual
+  price and earnings path is untested. Not yet.
 - **A9. Council tax reform** (Home economics; RF's page does not state the
   model used). Council tax from the FRS, uprated by the OBR; Band D amounts
   held for every local authority (2025–26, 2026–27); property wealth
   imputed from WAS round 8. A proportional property tax would be a new
-  reform. Partly.
+  reform, not yet written. Not yet.
 
 ### 14. Each step of the projection method, mapped to PolicyEngine (spoken, 2.5 minutes)
 
 Say the poverty gap first: poverty levels on the calibrated file run below
-HBAI's, 3.40m children below the AHC line against 3.97m; at the starting
-weights the file reproduces HBAI, so calibration opens the gap, and we are
-working on it. Then the main method gap: PolicyEngine fits its weights to
+HBAI's, 3.40m children below the AHC line against 3.97m in 2024–25; at the
+starting weights the file reproduces HBAI's total (4.02m), though families
+of three or more are already under-weighted there; calibration opens the
+rest of the gap, and we are working on it. Then the main method gap: PolicyEngine fits its weights to
 one year (2025–26)
 and uprates incomes with OBR growth rates; it does not reweight to
 projected populations, employment or caseloads for future years, which is
@@ -382,8 +387,8 @@ Full rows:
   2025 only (England, six age bands); later years move only with population
   weights. Partly.
 - **B4. Uprate earnings and other incomes with the OBR forecast** (largely
-  the IPPR model, per Annex 1). OBR October 2026 forecast for 2026–31,
-  projection to 2032; earnings follow OBR average earnings; benefit rates
+  the IPPR model, per Annex 1). OBR October 2026 forecast for 2026–27
+  to 2031–32; earnings follow OBR average earnings; benefit rates
   follow September CPI. Done.
 - **B5. A minimum-wage floor with spillovers; private pensions by RPI capped
   at 5%** (largely the IPPR model). Private pensions follow an OBR
@@ -395,8 +400,9 @@ Full rows:
   grown by OBR savings income per head. A different method.
 - **B7. Rents on the ONS Price Index of Private Rents; an AHC deflator**
   (whose step, not stated in Annex 1). Private rents follow ONS PIPR by
-  region to 2025, then the OBR's UK private-rents forecast for every
-  region; social rents follow an OBR series. An after-housing-costs
+  region to 2025–26, then the OBR's UK private-rents forecast for every
+  region; social rents follow Regulator of Social Housing outturn, then
+  England's rent cap (September CPI plus 1 point). An after-housing-costs
   deflator (CPI less rents, repairs and water, as in HBAI) is in the model
   (`consumer_price_index_ahc`). RF moves rents with earnings at a 12-month
   lag, which PolicyEngine does not. Partly.
@@ -413,9 +419,13 @@ Full rows:
 Also in RF's analysis:
 
 - **B9. Indirect taxes on the LCF** (IPPR model, per the 2018 description).
-  Spending imputed from LCFS 2024–25; VAT (split from the ETB) and fuel
+  Spending imputed from LCF 2024–25; VAT (split from the ETB) and fuel
   duty are complete; alcohol, tobacco and gambling duties are partial in
-  the registry (slide 8). Done and Partly.
+  the registry (slide 8). Done and Partly. On the 15 November build,
+  imputed spending in the bottom income decile ran about a quarter above
+  the LCF's (microcosm#1717). Which way that moves a result depends on the
+  measure: shares of spending come out too low, cash effects of duties too
+  high. Not yet re-measured on the 22 November build.
 - **B11. Council Tax Support: local variation** (not modelled in RF's
   projections). Simulated for English pensioners, Scotland, Wales and five
   English working-age schemes; other English working-age claimants keep
@@ -455,7 +465,7 @@ the 42%.
 
 ### 16. The data: PolicyEngine, the IPPR model and UKMOD (spoken, 1 minute)
 
-This is the data comparison RF asked about. One minute: three ways of
+The data comparison, in one minute: three ways of
 preparing the same survey; what fitting weights to official totals buys
 (benefit caseloads and top incomes match) and what it costs (an effective
 sample of about 7,500, and poverty levels below HBAI's, slide 18). End on
@@ -585,6 +595,11 @@ On the spoken path, one sentence: the costings, beside the official ones,
 with the misses shown and a reason for each. The detail below is for
 questions.
 
+The briefing calls the run static. The two default responses (capital
+gains realisations, employer NI pass-through) apply only where a measure
+changes capital gains tax or employer NI, and none of the seven does, so
+they would not move these figures.
+
 The nearest thing we have to an external test, so show the misses as
 plainly as the hits. The table has all seven measures the briefing models,
 each with the year compared and the main reason for its gap. Years:
@@ -596,7 +611,7 @@ Allowance taper.
 
 - Under: fuel duty about half (households hold about £13bn of the £24bn
   base; the official figure is the government's estimate, which the OBR
-  used but did not certify); the energy payment three-quarters (the
+  used but could not certify); the energy payment three-quarters (the
   devolved share and £100m for English councils are not modelled); the
   trading allowance 72% in 2029–30 (53% in 2028–29, the OBR's catch-up
   year).
@@ -698,18 +713,20 @@ no published reconciled comparison between PolicyEngine and the IPPR
 model; the scorecard sets published figures side by side and reconciles nothing.
 
 Indicative scope, as on the slide: one chart; PolicyEngine does the run and
-writes the reconciliation note; RF gives the specification and reviews it,
-in about two short calls.
+writes the reconciliation note; RF gives the specification, reviews it
+and, where a difference needs it, supplies an intermediate result.
 
 - Candidate 1, the Autumn Budget 2026 distribution chart (Spread thin,
   Fig 8). Both sides have published on the same Budget, but the headlines
   differ in scope: RF's £4.4bn cost-of-living package against PolicyEngine's
   seven measures (£3.11bn in 2026–27). The pilot would start by agreeing the
   list of measures. What it needs exists in Python: vigintiles, with RF's
-  equivalised ranking passed in as a grouping, and indirect taxes on LCFS
+  equivalised ranking passed in as a grouping, and indirect taxes on LCF
   2024–25 spending. Thin cells: vigintiles on an effective sample of about
   7,500 give about 375 effective households per group, so deciles would be
-  shown alongside.
+  shown alongside. Two things to check first: the bottom-decile spending
+  level (microcosm#1717) and where UC receipt sits in the income
+  distribution on the current build.
 - Candidate 2, Billing me softly. The proposal is already encoded (slide
   15); the pilot would add the report's non-take-up method. PolicyEngine can
   run full entitlement for Universal Credit, Pension Credit, Child Benefit,
@@ -728,9 +745,11 @@ No commitment on timing; the scope is RF's to choose.
 Stop presenting and leave this slide up. Read the two-line summary at the
 top as our reading, for RF to correct: Nuffield, the local-area data exists
 today, the childcare and public-service variables in part, and the
-cross-model scorecard and the AI interface are in progress; RF's uses, most
-map at least partly today, in Python, and the main gaps are future-year
-reweighting, take-up fixed at build and an earlier-policy baseline. Then
+cross-model scorecard and the AI interface are in progress; RF's uses, a few
+are done today (decile charts, the LHA freeze, OBR uprating) and most
+others are part-built and need Python; the main gaps are poverty levels
+below HBAI's, future-year reweighting, take-up fixed at build and an
+earlier-policy baseline. Then
 start with question 1, because the other answers depend on it.
 
 ### 25. Thank you (reference)

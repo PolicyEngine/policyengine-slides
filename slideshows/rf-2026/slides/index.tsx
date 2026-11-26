@@ -971,7 +971,7 @@ export function DataCompareSlide() {
     <Frame
       section="compare"
       title="The data: PolicyEngine, the IPPR model and UKMOD"
-      scale={0.94}
+      scale={0.9}
       subtitle="Three ways of preparing the same survey. IPPR column: as RF uses it, from published notes"
     >
       <CompareTable rows={dataCompare} />

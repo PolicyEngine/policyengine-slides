@@ -693,7 +693,7 @@ export const microcosmFlow = [
   },
   {
     icon: IconWallet,
-    owner: "WAS, LCFS, ETB, NTS",
+    owner: "WAS, LCF, ETB, NTS",
     title: "Wealth and spending",
     text: "Imputed with quantile-regression forests",
   },
@@ -745,6 +745,7 @@ export const breakdowns: { icon: Icon; title: string; items: Breakdown[] }[] = [
     items: [
       { text: "Four HBAI poverty measures: absolute and relative, before and after housing costs" },
       { text: "By age and by sex" },
+      { text: "Household type, tenure, number of children: custom grouping in Python", tag: tags.partly },
     ],
   },
   {
@@ -1045,7 +1046,7 @@ export const usesTable: MapRow[] = [
     icon: IconUsers,
     label: "Child poverty, with and without a policy",
     where: "LSO, Feb 2026",
-    today: "Runs on four HBAI measures, but poor larger families are under-weighted, so effects are likely understated; HBAI dependent children in Python",
+    today: "Runs on four HBAI measures; poor larger families under-weighted, so effects likely understated",
     tags: [tags.partly],
     step: 2,
   },
@@ -1069,7 +1070,7 @@ export const usesTable: MapRow[] = [
     icon: IconPigMoney,
     label: "Pensions costings",
     where: "What a ratchet!, Jun 2026",
-    today: "State Pension; a smoothed earnings link is an uprating path written by hand",
+    today: "State Pension; smoothed earnings link needs a hand-written path",
     tags: [tags.partly],
     step: 3,
   },
@@ -1077,14 +1078,14 @@ export const usesTable: MapRow[] = [
     icon: IconRefresh,
     label: "Counterfactual histories",
     where: "Counting the cost, Oct 2026",
-    today: "Growth rates are parameters; the file projects forward from 2024–25 only, so earlier years are untested",
+    today: "Projects forward from 2024–25 only; earlier years untested",
     tags: [tags.notYet],
     step: 3,
   },
   {
     icon: IconHomeDollar,
-    label: "Council tax reform",
-    where: "Home economics, Sep 2026 (model not stated)",
+    label: "Council tax reform (RF’s model not stated)",
+    where: "Home economics, Sep 2026",
     today: "Inputs held (council tax, WAS property wealth); the reform is not written",
     tags: [tags.notYet],
     step: 3,
@@ -1107,7 +1108,9 @@ export const usesFoot = [
 // cap under market incomes, projected "largely through the IPPR Tax Benefit
 // Model". B5 "growth" (obr.private_pension_index; no minimum-wage floor
 // found). B6 "sourcesSpec" (was_wealth, hmrc_spi_income_spine). B7
-// "uprating" (uprate_rent); the AHC deflator was not checked. B8 "takeUp",
+// "uprating" (uprate_rent), "growth" (ons.private_rental_prices: regional
+// outturn to 2025, the OBR's UK forecast from 2026; obr.consumer_price_index_ahc,
+// the AHC deflator). B8 "takeUp",
 // "ucTakeUp": every benefit unit carries a stored flag, including units not
 // entitled today (microcosm uk_runtime uc_take_up.py,
 // pension_credit_take_up.py, child_benefit_take_up.py). B10 not in the
@@ -1145,7 +1148,7 @@ export const stepsTable: MapRow[] = [
     step: 1,
   },
   { icon: IconWallet, label: "Savings income", where: "RF", today: "WAS wealth; interest from FRS and SPI", tags: [tags.different], step: 1 },
-  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS rents by region to 2025, then the OBR’s UK rent forecast; AHC deflator built in", tags: [tags.partly], step: 1 },
+  { icon: IconHome, label: "Rents", where: "Not stated in Annex 1", today: "ONS rents by region to 2025–26, then the OBR’s UK rent forecast; AHC deflator built in", tags: [tags.partly], step: 1 },
   {
     icon: IconUsers,
     label: "Partial take-up",
@@ -1159,7 +1162,7 @@ export const stepsTable: MapRow[] = [
     icon: IconShoppingCart,
     label: "Indirect taxes",
     where: "IPPR model",
-    today: "LCFS 2024–25; VAT and fuel duty; three other duties partial",
+    today: "LCF 2024–25; VAT and fuel duty; three other duties partial",
     tags: [tags.done, tags.partly],
     step: 2,
     also: true,
@@ -1453,7 +1456,7 @@ export const calibration = {
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  foot: "The fit says nothing about statistics that were not targeted. Against HBAI, which is not a target, this build has 3.40m children (23.7%) below the after-housing-costs poverty line; HBAI has 3.97m (27%). At the starting weights it was 4.02m, so calibration opens the gap (microcosm#1710). No all-person check on this build is public yet, and the dashboard has no out-of-sample page for the UK. Targets are for 2025–26.",
+  foot: "The fit says nothing about statistics that were not targeted. HBAI is not a target: for 2024–25 this build has 3.40m children (23.7%) below HBAI’s after-housing-costs line, against HBAI’s 3.97m (27%). At the starting weights it was 4.02m, so calibration opens the gap (microcosm#1710). No all-person check on this build is public yet, and the dashboard has no out-of-sample page for the UK. Targets are for 2025–26.",
 };
 
 // ---------- Slide 19: Autumn Budget 2026 against the OBR ----------
@@ -1467,7 +1470,7 @@ export const calibration = {
 // figures are close, 42 against 44); 2031-32, the first full year, for the
 // Carer's Allowance taper.
 // - Fuel duty: the official figure is the government's estimate, which the
-//   OBR used but did not certify.
+//   OBR used but could not certify.
 // - Pension Tax Allowance: income tax only, from the briefing's text
 //   (£42m, £112m, £193m against £44m, £83m, £144m for 2027-28 to 2029-30).
 //   Its Table 6 shows the net cost after Pension Credit, Housing Benefit and
@@ -1549,7 +1552,7 @@ export const budgetPackage = {
 };
 
 export const budgetNotes = [
-  "* The OBR used the government’s estimate for fuel duty but did not certify it.",
+  "* The OBR used the government’s estimate for fuel duty but could not certify it.",
   "† Income tax only (briefing text). After lower Pension Credit, Housing Benefit and CTR, PolicyEngine’s net cost is smaller (briefing Table 6).",
   "‡ Before income tax, like the OBR’s spending line; net of income tax, −48.",
 ];
@@ -1577,7 +1580,7 @@ export const notClaimed = [
 ];
 
 export const knownLimits = [
-  "Poverty levels run below HBAI’s after calibration: 3.40m children below the AHC line against 3.97m (slide 18)",
+  "Poverty levels run below HBAI’s after calibration: 3.40m children below the AHC line against 3.97m, 2024–25 (slide 18)",
   "No firms and no corporation tax",
   "No reweighting for future years: one set of weights, fitted to 2025–26",
   "Thin cells: effective sample about 7,500; areas need 10 or more households",
@@ -1673,7 +1676,7 @@ export const options = [
 ];
 
 export const optionsFoot =
-  "What C would need built, from slides 13 and 14: reweighting for future years; an “earlier policy, uprated” baseline; take-up as a run-time setting; anchoring to outturn. Or these stay in RF’s own code.";
+  "What C would need built, from slides 13 and 14: reweighting for future years; an “earlier policy, uprated” baseline; take-up as a run-time setting; anchoring to outturn (or these stay in RF’s own code). And poverty levels closer to HBAI’s (slide 18).";
 
 // ---------- Slide 23: a possible pilot ----------
 export const pilotFlow = [
@@ -1685,12 +1688,12 @@ export const pilotFlow = [
 
 export const pilotBrings = {
   rf: [
-    "The chart’s specification: income measure, equivalisation, how vigintiles are formed, take-up assumptions",
+    "The chart’s specification: income measure, equivalisation, vigintiles, take-up",
     "The published series behind the chart",
     "A reviewer’s time on the differences",
   ],
   pe: [
-    "The run, on the current release build of Microcosm, with its code and a record of the versions and data used",
+    "The run on the current release build, with code and a record of versions and data",
     "The reconciliation table and note",
     "Small pieces the mapping shows missing, such as a vigintile view in the web app; scope to agree",
   ],
@@ -1702,7 +1705,7 @@ export const pilotScope =
 export const pilotCandidates = [
   {
     title: "Candidate 1: the Autumn Budget 2026 distribution chart",
-    text: "Spread thin, Fig 8. Scope differs: RF’s £4.4bn package against PolicyEngine’s seven measures (£3.11bn in 2026–27), so the first step is to agree the list. Vigintiles give about 375 effective households each, so deciles would be shown alongside",
+    text: "Spread thin, Fig 8. Scope differs (RF: a £4.4bn package; PolicyEngine: seven measures, £3.11bn in 2026–27), so first agree the list. About 375 effective households per vigintile, so deciles too",
   },
   { title: "Candidate 2, smaller: Billing me softly", text: "The proposal is already encoded; the pilot would add the non-take-up method" },
 ];
