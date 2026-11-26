@@ -2,7 +2,6 @@ import type { SlideshowConfig } from "@/lib/types";
 import {
   AbsorptionSlide,
   BreakEvenSlide,
-  CalibrationSlide,
   CentralSlide,
   ClosingSlide,
   ClosureSlide,
@@ -19,8 +18,6 @@ import {
   SectionQuestionSlide,
   SectionSensitivitySlide,
   IncidenceSlide,
-  ImputationSlide,
-  IndexBackupSlide,
   MarginSlide,
   MethodSlide,
   PolicyEngineSlide,
@@ -33,7 +30,7 @@ import {
 
 // A 25-minute paper presentation followed by 20 minutes of discussion. The
 // ministry runs the deck from its own machine, so it goes to them as a PDF
-// export: no slide has build steps; slide 28 embeds a live dashboard (a screenshot in the PDF).
+// export: no slide has build steps; slide 25 embeds a live dashboard (a screenshot in the PDF).
 export const fpsBerlin2026Config: SlideshowConfig = {
   id: "fps-berlin-2026",
   title: "Who bears the AI shock?",
@@ -58,8 +55,6 @@ export const fpsBerlin2026Config: SlideshowConfig = {
     SectionMethodSlide,
     MethodSlide,
     DataSlide,
-    ImputationSlide,
-    CalibrationSlide,
     ExposureMethodSlide,
     ScenarioSlide,
     DrawsSlide,
@@ -75,7 +70,6 @@ export const fpsBerlin2026Config: SlideshowConfig = {
     // 5. What moves the cost, and policy
     SectionSensitivitySlide,
     BreakEvenSlide,
-    IndexBackupSlide,
     ClosureSlide,
     PolicySlide,
     // Close
