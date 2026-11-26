@@ -190,7 +190,7 @@ export const central: Stat[] = [
 ];
 
 export const centralChips: Chip[] = [
-  { icon: IconAlertTriangle, text: "Poverty rise is an upper bound: everyone displaced is out of work all year" },
+  { icon: IconAlertTriangle, text: "The cost and the rise in poverty assume a full year out of work; shorter spells lower both" },
   { icon: IconInfoCircle, text: "Cost excludes corporation tax, VAT and the £26.6bn pay bill of displaced public-sector staff" },
 ];
 

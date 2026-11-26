@@ -136,7 +136,9 @@ interval.
 **13. Central case.** 2.04 million displaced, £7.3bn a year, poverty +2.4
 points, Gini +1.8. The £7.3bn nets £42.5bn of displacement cost against
 about £18bn from each offsetting channel, so the sign depends on the offset
-assumptions. Read the qualifier line: upper bound for spell length; +0.82
+assumptions. Read the qualifier line: the cost and the poverty rise both assume a
+full year out of work, and shorter spells lower both (the cost breaks
+even at 9.5 months or less, slide 21); +0.82
 on the relative line; +1.99 with full take-up and JSA.
 
 **14. By decile.** 0.78 per cent of the bottom decile against 5.57 per
