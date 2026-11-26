@@ -121,10 +121,11 @@ function Frame({
   scale?: number;
   fill?: boolean;
 }) {
-  const current = useSlideshowContextSafe()?.currentSlide;
+  const deck = useSlideshowContextSafe();
+  const current = deck?.currentSlide;
   return (
     <Slide className={styles.deck}>
-      {current !== undefined && <span className={fps.pageNumber}>{current + 1}</span>}
+      {current !== undefined && <span className={fps.pageNumber}>{current + 1} / {deck?.totalSteps}</span>}
       <div className={styles.frame}>
         <header className={styles.frameIn}>
           {section && <PartNav section={section} />}
@@ -283,10 +284,11 @@ export function AgendaSlide() {
 function SectionSlide({ section }: { section: PartKey }) {
   const index = parts.findIndex((part) => part.key === section);
   const part = parts[index];
-  const current = useSlideshowContextSafe()?.currentSlide;
+  const deck = useSlideshowContextSafe();
+  const current = deck?.currentSlide;
   return (
     <Slide className={styles.deck}>
-      {current !== undefined && <span className={fps.pageNumber}>{current + 1}</span>}
+      {current !== undefined && <span className={fps.pageNumber}>{current + 1} / {deck?.totalSteps}</span>}
       <div className={styles.frame}>
         <header className={styles.frameIn}>
           <PartNav section={section} />
