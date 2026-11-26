@@ -39,7 +39,7 @@ export const rf2026Config: SlideshowConfig = {
   id: "rf-2026",
   title: "PolicyEngine UK and the Resolution Foundation's modelling",
   description:
-    "The Nuffield Foundation grants, PolicyEngine UK and its Microcosm data, RF's published analyses mapped to PolicyEngine, and comparisons with the IPPR model and UKMOD.",
+    "The Nuffield Foundation grants, PolicyEngine UK and its Microcosm data, RF's published analyses mapped to PolicyEngine, and checks against official figures.",
   date: "2026-11-30",
   location: "Resolution Foundation",
   footerText: "Resolution Foundation · 30 November 2026",
@@ -59,7 +59,7 @@ export const rf2026Config: SlideshowConfig = {
     whole(CoverageSlide),
     whole(MicrocosmBuildSlide),
     whole(BreakdownsSlide),
-    // Part 4. The Resolution Foundation's research and the IPPR model.
+    // Part 4. The Resolution Foundation's research.
     ReportsSlide,
     { component: MethodSlide, builds: 5, exportBuilds: 1 },
     whole(UsesSlide),

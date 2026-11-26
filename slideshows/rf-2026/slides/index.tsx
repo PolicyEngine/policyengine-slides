@@ -249,12 +249,21 @@ function Mini({ icon, title, text }: { icon: Icon; title: string; text?: string 
   );
 }
 
-function Bullets({ items }: { items: readonly string[] }) {
+type BulletItem = string | { icon: Icon; text: string };
+
+function Bullets({ items }: { items: readonly BulletItem[] }) {
   return (
     <ul className={styles.list}>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
+      {items.map((item) => {
+        if (typeof item === "string") return <li key={item}>{item}</li>;
+        const ItemIcon = item.icon;
+        return (
+          <li key={item.text} className={styles.iconItem}>
+            <ItemIcon stroke={1.75} aria-hidden="true" />
+            {item.text}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -327,7 +336,7 @@ export function TitleSlide() {
           PolicyEngine UK and the Resolution Foundation’s modelling
         </h1>
         <p className="text-center text-2xl text-balance text-white opacity-80">
-          The model, the Microcosm data, and how the Resolution Foundation’s uses of the IPPR model map across
+          PolicyEngine UK, its Microcosm data, and what it can do for the Resolution Foundation’s analysis
         </p>
         <div className="mt-4 flex items-start justify-center gap-16">
           {coverSpeakers.map((speaker) => (
@@ -463,20 +472,23 @@ export function WhoSlide() {
       <div className={styles.logoGroups}>
         <Reveal step={2}>
           <section className={styles.logoSection}>
-            <h2 className={styles.rowLabel}>Government and Parliament: where PolicyEngine has been used, trialled or cited</h2>
+            <h2 className={styles.rowLabel}>Government and Parliament: used, trialled or cited</h2>
             <ul className={styles.govList}>
               {government.map((org) => (
                 <li key={org.name}>
-                  <a
-                    href={org.source?.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(event) => event.stopPropagation()}
-                    className="pointer-events-auto"
-                  >
-                    {org.name}
-                  </a>
-                  : {org.caption}
+                  {org.icon && <org.icon stroke={1.75} aria-hidden="true" />}
+                  <span>
+                    <a
+                      href={org.source?.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(event) => event.stopPropagation()}
+                      className="pointer-events-auto"
+                    >
+                      {org.name}
+                    </a>
+                    : {org.caption}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -764,8 +776,8 @@ export function ReportsSlide() {
     <Frame
       section="uses"
       title="The Resolution Foundation’s 2026 research we have read"
-      scale={1.0}
-      subtitle="And how each uses the IPPR tax-benefit model, per its figure notes"
+      scale={1.1}
+      subtitle="Six pieces of 2026 work, and the modelling behind each"
     >
       <Table
         template="1.15fr 0.7fr 2.2fr 2fr"
@@ -773,7 +785,7 @@ export function ReportsSlide() {
         rows={rfReports.map((row) => ({
           key: row.report,
           step: 1,
-          cells: [<span key="r" className={styles.targetTopic}>{row.report}</span>, row.date, row.what, row.use],
+          cells: [<RowLabel key="r" icon={row.icon}>{row.report}</RowLabel>, row.date, row.what, row.use],
         }))}
       />
       <Foot>{rfReportsFoot}</Foot>
@@ -792,7 +804,7 @@ export function MethodSlide() {
       subtitle="From Living Standards Outlook 2026, Annex 1 (10 February 2026). Please correct us"
     >
       <Flow
-        steps={rfMethod.map((step) => ({ ...step, teal: step.owner.includes("IPPR model") }))}
+        steps={rfMethod.map((step) => ({ ...step, teal: step.owner.toLowerCase().includes("model") }))}
         builds={[1, 2, 3, 4, 5]}
         titleLines={1}
       />
@@ -801,7 +813,7 @@ export function MethodSlide() {
           <i className={styles.keyRf} /> RF’s own processing
         </span>
         <span>
-          <i className={styles.keyModel} /> The IPPR tax-benefit model (step 3 largely, per Annex 1)
+          <i className={styles.keyModel} /> RF’s tax-benefit model (step 3 largely, per Annex 1)
         </span>
       </div>
       <Foot step={5}>{rfMethodFoot}</Foot>
@@ -1105,7 +1117,7 @@ export function BudgetObrSlide() {
                 span: false,
                 className: row.measure === budgetPackage.measure ? styles.mapTotal : undefined,
                 cells: [
-                  <span key="m" className={styles.targetTopic}>{row.measure}</span>,
+                  <RowLabel key="m" icon={row.icon}>{row.measure}</RowLabel>,
                   row.year,
                   <span key="p" className={styles.num}>{money(row.pe)}</span>,
                   <span key="o" className={styles.num}>{money(row.obr)}</span>,
@@ -1135,7 +1147,7 @@ export function BudgetObrSlide() {
 
 export function LimitsSlide() {
   return (
-    <Frame section="compare" title="What we do not claim, and known limits" scale={1.1} subtitle="What has and has not been tested">
+    <Frame section="compare" title="What we do not claim, and known limits" scale={1.3} subtitle="What has and has not been tested">
       <div className={styles.limits}>
         <div className={styles.limitCol}>
           <p className={styles.rowLabel}>Not claimed</p>
@@ -1157,7 +1169,7 @@ export function RoutesSlide() {
     <Frame
       section="next"
       title="Four routes in: web app, assistant, plugin, Python"
-      scale={1.05}
+      scale={1.15}
       subtitle="From a web page to a prompt to code"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(4)}>
@@ -1196,7 +1208,7 @@ export function OptionsSlide() {
     <Frame
       section="next"
       title="Three ways the Resolution Foundation could use PolicyEngine"
-      scale={0.86}
+      scale={0.94}
       subtitle="Options for discussion; none depends on the others"
     >
       <div className={`${styles.cards} ${styles.cardsBoxed}`} style={columns(3)}>
@@ -1229,7 +1241,7 @@ export function PilotSlide() {
     <Frame
       section="next"
       title="A possible pilot: one published analysis, side by side"
-      scale={0.88}
+      scale={0.92}
       subtitle="Reproduce one Resolution Foundation chart in PolicyEngine and explain as much of the difference as we can"
     >
       <Flow steps={pilotFlow} />
@@ -1245,9 +1257,7 @@ export function PilotSlide() {
       </Reveal>
       <Reveal step={3} className={styles.candidates}>
         {pilotCandidates.map((item) => (
-          <p key={item.title}>
-            <strong>{item.title}.</strong> {item.text}
-          </p>
+          <Mini key={item.title} icon={item.icon} title={item.title} text={item.text} />
         ))}
       </Reveal>
       <Foot step={3}>{pilotScope}</Foot>
@@ -1262,11 +1272,11 @@ export function QuestionsSlide() {
     <Frame section="next" title="Questions for discussion" scale={0.92} subtitle="Our reading so far, and where we need RF’s view">
       <div className={`${styles.answers} ${styles.answersTop}`}>
         <p className={styles.rowLabel}>Our reading so far, for you to correct</p>
-        {inBrief.map((answer) => (
-          <p key={answer.label}>
-            <strong>{answer.label}:</strong> {answer.text}
-          </p>
-        ))}
+        <div className={styles.briefRow}>
+          {inBrief.map((answer) => (
+            <Mini key={answer.label} icon={answer.icon} title={answer.label} text={answer.text} />
+          ))}
+        </div>
       </div>
       <ol className={styles.questions}>
         {questions.map((question, index) => (

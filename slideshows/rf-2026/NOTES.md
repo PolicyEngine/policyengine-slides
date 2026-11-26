@@ -47,8 +47,7 @@ package versions, data build and forecast it used.
 ### 1. Title (spoken, 20 seconds)
 
 Thank the Resolution Foundation for the time. The deck has 25 slides; the
-talk follows about ten, and the rest is reference. Our descriptions of the
-IPPR model and of RF's method come from published sources; please correct
+talk follows about ten, and the rest is reference. Our reading of RF's method comes from published sources; please correct
 us.
 
 ### 2. Outline (spoken, 20 seconds)
@@ -206,7 +205,7 @@ terms; "child" in the standard output is age 17 or under, and HBAI's
 dependent children (`is_hbai_dependent_child`) can be used in Python
 through the poverty output's `filter_variable`.
 
-## Part 4. The Resolution Foundation's research and the IPPR model
+## Part 4. The Resolution Foundation's research
 
 ### 11. The Resolution Foundation's 2026 research we have read (reference, one sentence)
 

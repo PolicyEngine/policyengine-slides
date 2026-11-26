@@ -36,6 +36,9 @@ import {
   IconBrandPython,
   IconBuildingBank,
   IconBuildingCommunity,
+  IconBuildingEstate,
+  IconBuildingFactory2,
+  IconBuildingMonument,
   IconCalculator,
   IconCalendarEvent,
   IconCalendarStats,
@@ -46,8 +49,16 @@ import {
   IconCode,
   IconCoins,
   IconCopy,
+  IconEye,
+  IconFileDescription,
+  IconKey,
+  IconPuzzle,
+  IconTable,
   IconDatabase,
   IconFileSearch,
+  IconGasStation,
+  IconPlug,
+  IconBriefcase,
   IconFlag,
   IconGitCompare,
   IconHeartHandshake,
@@ -408,16 +419,16 @@ export const parts = [
   {
     key: "uses",
     icon: IconFileSearch,
-    title: "The Resolution Foundation’s research and the IPPR model",
+    title: "The Resolution Foundation’s research",
     short: "RF’s uses",
     text: "RF’s published analyses, mapped to PolicyEngine",
   },
   {
     key: "compare",
     icon: IconGitCompare,
-    title: "How PolicyEngine compares",
-    short: "Comparison",
-    text: "With the IPPR model and UKMOD, and with official figures",
+    title: "Checks",
+    short: "Checks",
+    text: "Data, calibration fit, official costings and known limits",
   },
   {
     key: "next",
@@ -437,11 +448,18 @@ export type PartKey = (typeof parts)[number]["key"];
 export const inBrief = [
   {
     label: "Nuffield",
-    text: "Local-area data exists today; childcare and public-service variables in part; the cross-model scorecard and AI interface are in progress.",
+    icon: IconHeartHandshake,
+    text: "Local-area data done; childcare and public services in part; scorecard and AI interface in progress",
   },
   {
     label: "RF’s uses",
-    text: "A few are done today (decile charts, the LHA freeze, OBR uprating); most others are part-built and need Python. The main gaps are poverty levels below HBAI’s, future-year reweighting, take-up fixed at build and an earlier-policy baseline.",
+    icon: IconFileSearch,
+    text: "Decile charts, the LHA freeze and OBR uprating done; most others part-built, in Python",
+  },
+  {
+    label: "Main gaps",
+    icon: IconPuzzle,
+    text: "Poverty below HBAI’s, future-year weights, take-up fixed at build, an earlier-policy baseline",
   },
 ];
 
@@ -469,6 +487,7 @@ export type Logo = {
   darken?: boolean;
   source?: Source;
   caption?: string;
+  icon?: Icon;
 };
 
 export const whoWeAre = {
@@ -476,7 +495,7 @@ export const whoWeAre = {
     {
       icon: IconHeartHandshake,
       title: "A non-profit",
-      text: "Free, open-source tools that help people understand tax and benefit policies; funded in the UK by the Nuffield Foundation (grants made in 2024 and 2026)",
+      text: "Free, open-source tax and benefit tools; funded in the UK by the Nuffield Foundation",
     },
     {
       icon: IconWorld,
@@ -493,6 +512,7 @@ export const whoWeAre = {
   government: [
     {
       name: "10 Downing Street",
+      icon: IconBuildingEstate,
       logo: "/logos/orgs/10-downing-street.png",
       width: 1280,
       pixelHeight: 1280,
@@ -500,15 +520,16 @@ export const whoWeAre = {
       source: sources.no10,
       caption: "Built 10ds-microsim (experimental) on PolicyEngine",
     },
-    { name: "HM Treasury", height: 3.4, source: sources.hmt, caption: "Pilot (record of 17 Dec 2024); not deployed" },
+    { name: "HM Treasury", icon: IconBuildingBank, height: 3.4, source: sources.hmt, caption: "Pilot (record of 17 Dec 2024); not deployed" },
     {
       name: "House of Lords",
+      icon: IconBuildingMonument,
       logo: "/logos/orgs/house-of-lords.svg",
       width: 755,
       pixelHeight: 200,
       height: 2.2,
       source: sources.hansard,
-      caption: "A Lords debate cited Commons Library research that used it, 24 Feb 2026",
+      caption: "Debate cited Commons Library research using it, 24 Feb 2026",
     },
   ] as Logo[],
   thinkTanks: [
@@ -670,7 +691,7 @@ export const coverage = [
 ];
 
 export const coverageFoot =
-  "In the code but not yet in the programme registry: Welsh LTT, Local Housing Allowance, the two-child limit, the high-value council tax surcharge.";
+  "In the code, not yet in the registry: Welsh LTT, LHA, the two-child limit, the council tax surcharge.";
 
 // ---------- Slide 9: the household file ----------
 // The Microcosm build (22 November build, microcosm 41053d9, whose
@@ -719,7 +740,7 @@ export const microcosmResult = {
 };
 
 export const microcosmFoot =
-  "57 source stages, each survey file pinned to a fixed copy. The code is open. The records are FRS-derived and held under the UK Data Service licence, so they are not public; access is by token, and a route for RF is to be agreed.";
+  "57 source stages, each pinned. Open code; FRS-derived records, so access is by token under the UK Data Service licence.";
 
 // ---------- Slide 10: breakdowns ----------
 // The BIST deck's breakdowns (policyengine.py 810a59e outputs). Vigintiles:
@@ -812,25 +833,25 @@ export const grantRows: { icon: Icon; area: string; today: string; tag: Tag }[] 
   {
     icon: IconSchool,
     area: "Childcare at household level",
-    today: "England entitlements and Tax-Free Childcare; the Wales offer partial; childcare report, 6 Jun 2025",
+    today: "England entitlements, Tax-Free Childcare; Wales in part",
     tag: tags.partly,
   },
   {
     icon: IconBuildingCommunity,
     area: "Public services at household level",
-    today: "Variables for NHS, education and transport subsidy; adult social care not modelled",
+    today: "NHS, education and transport; no adult social care",
     tag: tags.partly,
   },
   {
     icon: IconMap2,
     area: "Local-authority and constituency datasets",
-    today: "650 constituencies and 361 local authorities; local-area file (23 Nov 2026 build)",
+    today: "650 constituencies, 361 local authorities",
     tag: tags.done,
   },
   {
     icon: IconGitCompare,
-    area: "An open dashboard validating against other microsimulation models at household level",
-    today: "A public scorecard setting published Autumn Budget 2025 results from RF, UKMOD, the IFS and others beside PolicyEngine’s; household-level UKMOD comparison pending",
+    area: "Open dashboard validating against other models",
+    today: "Public scorecard of published Autumn Budget 2025 results; household-level check pending",
     tag: tags.partly,
   },
   {
@@ -842,16 +863,16 @@ export const grantRows: { icon: Icon; area: string; today: string; tag: Tag }[] 
   {
     icon: IconUsers,
     area: "A symposium",
-    today: "London event, 3 Nov 2025, supported by the Nuffield Foundation",
+    today: "London event, 3 Nov 2025",
     tag: tags.done,
   },
 ];
 
 export const grant1Foot =
-  "Shows what exists today, not what was delivered within the grant period. Nuffield also lists training and beta testing, not shown here.";
+  "What exists today, not what was delivered within the grant period.";
 
 export const grant2Foot =
-  "Grant 2, under way: constituency-level Budget analysis (the Autumn Budget 2026 dashboard and its constituency map); local Council Tax Reduction variation; outreach to local journalists.";
+  "Grant 2, under way: Budget analysis by constituency; local Council Tax Reduction; local journalists.";
 
 // ---------- Slide 5: the Autumn Budget 2026 dashboard ----------
 // Tabs and run: the Autumn Budget 2026 deck (commit c6c7d53) and the
@@ -892,44 +913,50 @@ export const budgetViews = [
 export const rfReports = [
   {
     report: "Spread thin",
+    icon: IconReceiptTax,
     date: "29 Oct 2026",
-    what: "Autumn Budget 2026: a £4.4bn cost-of-living package, which RF calls “poorly targeted”",
-    use: "Distribution by vigintile (Fig 8); cumulative impact (Fig 20); projections (Figs 21–23)",
+    what: "Autumn Budget 2026; RF calls the £4.4bn package “poorly targeted”",
+    use: "Vigintiles (Fig 8); cumulative impact (Fig 20); projections",
   },
   {
     report: "Counting the cost",
+    icon: IconRefresh,
     date: "8 Oct 2026",
-    what: "Median non-pensioner income −1.3% (£450), 2020–21 to 2026–27",
+    what: "Median non-pensioner income −1.3%, 2020–21 to 2026–27",
     use: "A no-inflation-crisis counterfactual",
   },
   {
     report: "Home economics",
+    icon: IconHomeDollar,
     date: "24 Sep 2026",
-    what: "A 0.7% proportional property tax in place of council tax",
-    use: "Model not stated on RF’s page",
+    what: "A 0.7% property tax in place of council tax",
+    use: "Model not stated",
   },
   {
     report: "Billing me softly",
+    icon: IconBolt,
     date: "10 Aug 2026",
-    what: "A targeted energy discount: about 40% of households, £2bn",
+    what: "Targeted energy discount: about 40% of households, £2bn",
     use: "Full take-up run minus reported receipt",
   },
   {
     report: "What a ratchet!",
+    icon: IconPigMoney,
     date: "10 Jun 2026",
-    what: "A smoothed earnings link in place of the triple lock: net saving about £650m in 2029–30",
+    what: "Smoothed earnings link for the triple lock: about £650m saved, 2029–30",
     use: "Pensions costing",
   },
   {
     report: "Living Standards Outlook 2026",
+    icon: IconChartLine,
     date: "10 Feb 2026",
-    what: "Two-child limit repeal: more than 500,000 families gain £4,560 a year on average",
-    use: "Income and poverty projections to 2029–30 (Annex 1)",
+    what: "Two-child limit repeal: 500,000+ families gain £4,560 a year",
+    use: "Projections to 2029–30 (Annex 1)",
   },
 ];
 
 export const rfReportsFoot =
-  "Some work does not use the model: Hard truths on PIP (survey and DWP data); Saving private renters (VOA and Stat-Xplore).";
+  "Some work uses no model: Hard truths (PIP); Saving private renters.";
 
 // ---------- Slide 12: RF's projection method ----------
 // Living Standards Outlook 2026, Annex 1 ("lso26"), with the October 2026
@@ -960,13 +987,13 @@ export const rfMethod = [
   },
   {
     icon: IconTrendingUp,
-    owner: "Largely the IPPR model",
+    owner: "Largely the model",
     title: "Uprate and impute",
     text: "OBR earnings with a wage floor; private pensions RPI capped at 5%; WAS savings (RF); rents (whose, not stated)",
   },
   {
     icon: IconCalculator,
-    owner: "IPPR model",
+    owner: "The model",
     title: "Taxes and benefits",
     text: "Each year’s rules, with benefit deductions; UC take-up 80%, Pension Credit 65% rising to 70%",
   },
@@ -978,7 +1005,7 @@ export const rfMethod = [
   },
 ];
 
-export const rfMethodFoot = "Annex 1 says RF does not model local variation in Council Tax Support, or sanctions. PolicyEngine does not model sanctions either.";
+export const rfMethodFoot = "Not modelled by RF (Annex 1): local Council Tax Support, sanctions. Nor sanctions in PolicyEngine.";
 
 // ---------- Slides 13 and 14: the mapping tables ----------
 // Each row: RF's use (or method step), where RF publishes it (or whose step
@@ -1134,7 +1161,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconTrendingUp,
     label: "OBR uprating",
-    where: "IPPR model (largely)",
+    where: "RF’s model (largely)",
     today: "OBR October 2026 forecast, to 2031–32",
     tags: [tags.done],
     step: 1,
@@ -1142,7 +1169,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconCoins,
     label: "Minimum-wage floor; private-pension RPI cap",
-    where: "IPPR model (largely)",
+    where: "RF’s model (largely)",
     today: "OBR private-pension index; no wage floor found",
     tags: [tags.partly],
     step: 1,
@@ -1152,7 +1179,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconUsers,
     label: "Partial take-up",
-    where: "IPPR model",
+    where: "RF’s model",
     today: "Drawn at build, also for those not entitled today; not set per run",
     tags: [tags.partly],
     step: 1,
@@ -1161,7 +1188,7 @@ export const stepsTable: MapRow[] = [
   {
     icon: IconShoppingCart,
     label: "Indirect taxes",
-    where: "IPPR model",
+    where: "RF’s model",
     today: "LCF 2024–25; VAT and fuel duty; three other duties partial",
     tags: [tags.done, tags.partly],
     step: 2,
@@ -1193,7 +1220,7 @@ export const stepsAlsoLabel = "Also in RF’s analysis, outside the five steps";
 // at build). Behaviour, managed migration and sanctions are in NOTES.md
 // (sanctions: none found by a search of policyengine-uk 5987eb3).
 export const stepsCaution =
-  "Known gap: Microcosm is calibrated to one year (2025–26) and draws take-up when it is built (slide 9); RF projects to 2029–30.";
+  "Known gap: one calibrated year (2025–26) and take-up drawn at build; RF projects to 2029–30.";
 
 // ---------- Slide 15: Billing me softly ----------
 // Left: "billingMeSoftly" (Great Britain; passported by a means-tested
@@ -1456,7 +1483,7 @@ export const calibration = {
     { name: "MHCLG", count: 82 },
     { name: "Others", count: 78 },
   ],
-  foot: "The fit says nothing about statistics that were not targeted. HBAI is not a target: for 2024–25 this build has 3.40m children (23.7%) below HBAI’s after-housing-costs line, against HBAI’s 3.97m (27%). At the starting weights it was 4.02m, so calibration opens the gap (microcosm#1710). No all-person check on this build is public yet, and the dashboard has no out-of-sample page for the UK. Targets are for 2025–26.",
+  foot: "Untargeted check (2024–25): 3.40m children below HBAI’s AHC line, against HBAI’s 3.97m; 4.02m before calibration (microcosm#1710). Targets are for 2025–26.",
 };
 
 // ---------- Slide 19: Autumn Budget 2026 against the OBR ----------
@@ -1487,6 +1514,7 @@ export const calibration = {
 export const budgetRows = [
   {
     measure: "Household Energy Payment",
+    icon: IconBolt,
     year: "2026–27",
     pe: -1969,
     obr: -2627,
@@ -1495,6 +1523,7 @@ export const budgetRows = [
   },
   {
     measure: "Zero VAT on electricity",
+    icon: IconPlug,
     year: "2026–27",
     pe: -840,
     obr: -734,
@@ -1503,6 +1532,7 @@ export const budgetRows = [
   },
   {
     measure: "Fuel duty*",
+    icon: IconGasStation,
     year: "2026–27",
     pe: -301,
     obr: -574,
@@ -1511,6 +1541,7 @@ export const budgetRows = [
   },
   {
     measure: "Pension Tax Allowance†",
+    icon: IconPigMoney,
     year: "2029–30",
     pe: -193,
     obr: -144,
@@ -1519,6 +1550,7 @@ export const budgetRows = [
   },
   {
     measure: "Property income tax",
+    icon: IconHome,
     year: "2029–30",
     pe: 429,
     obr: 394,
@@ -1527,6 +1559,7 @@ export const budgetRows = [
   },
   {
     measure: "Trading allowance",
+    icon: IconBriefcase,
     year: "2029–30",
     pe: -119,
     obr: -165,
@@ -1535,6 +1568,7 @@ export const budgetRows = [
   },
   {
     measure: "Carer’s Allowance taper‡",
+    icon: IconHeartHandshake,
     year: "2031–32",
     pe: -79,
     obr: -69,
@@ -1545,6 +1579,7 @@ export const budgetRows = [
 
 export const budgetPackage = {
   measure: "All seven, run together",
+  icon: IconCalculator,
   year: "2026–27",
   pe: -3110,
   obr: -3935,
@@ -1558,9 +1593,9 @@ export const budgetNotes = [
 ];
 
 export const budgetYears =
-  "Income tax measures shown for 2029–30, after the Self Assessment timing gap; the trading allowance is 53% in 2028–29. Negative = cost.";
+  "Income tax measures shown for 2029–30 (Self Assessment timing). Negative = cost.";
 
-export const budgetBehaviour = "Most official costings include behavioural responses. The briefing describes PolicyEngine’s run as static.";
+export const budgetBehaviour = "Most official costings include behaviour; the briefing calls this run static.";
 
 export const budgetLabel = "As published, 31 Oct 2026: policyengine 6.11.1; Microcosm build of 25 Oct 2026";
 
@@ -1574,17 +1609,17 @@ export const budgetLabel = "As published, 31 Oct 2026: policyengine 6.11.1; Micr
 // RF's figures predate the two-child limit's abolition and use an earlier
 // forecast, data year and baseline, so they are not like-for-like.
 export const notClaimed = [
-  "No reconciled comparison with the IPPR model, UKMOD or TAXBEN; a public scorecard that sets published results beside ours is in progress",
-  "The calibration fit is in-sample. Untargeted checks are made case by case (poverty and median income against HBAI; the OBR costings, slide 19), not yet by a standing published method",
-  "HM Treasury piloted the model (record of 17 Dec 2024): NI results close, income tax “less promising”; not deployed. No repeat comparison has been published",
+  { icon: IconGitCompare, text: "No reconciled comparison with other UK models; a scorecard is in progress" },
+  { icon: IconTargetArrow, text: "Calibration fit is in-sample; untargeted checks are case by case" },
+  { icon: IconBuildingBank, text: "HM Treasury pilot (Dec 2024): NI close, income tax “less promising”; not deployed" },
 ];
 
 export const knownLimits = [
-  "Poverty levels run below HBAI’s after calibration: 3.40m children below the AHC line against 3.97m, 2024–25 (slide 18)",
-  "No firms and no corporation tax",
-  "No reweighting for future years: one set of weights, fitted to 2025–26",
-  "Thin cells: effective sample about 7,500; areas need 10 or more households",
-  "The SPI copies’ industry is imputed",
+  { icon: IconUsers, text: "Poverty below HBAI’s: 3.40m children against 3.97m (slide 18)" },
+  { icon: IconBuildingFactory2, text: "No firms, no corporation tax" },
+  { icon: IconCalendarStats, text: "One set of weights, fitted to 2025–26" },
+  { icon: IconChartBar, text: "Effective sample about 7,500; areas need 10+ households" },
+  { icon: IconCopy, text: "SPI copies’ industry is imputed" },
 ];
 
 // Source for the scorecard rows now in NOTES.md (slide 20): policyengine-scorecard
@@ -1615,20 +1650,20 @@ export const routes = [
   {
     icon: IconWorld,
     title: "Web app",
-    text: "policyengine.org/uk: a parametric reform with a national report (budget, deciles, poverty, inequality, constituencies) in the browser",
+    text: "policyengine.org/uk: parametric reforms and a national report, in the browser",
     tag: tags.done,
-    extra: { text: "Not in the web app: structural reforms, vigintiles and entitlement runs need code" },
+    extra: { text: "Structural reforms and vigintiles need code" },
   },
   {
     icon: IconMessageChatbot,
     title: "Ask in plain English",
-    text: "A PolicyEngine connector for Claude, e.g. “Score raising the UK basic rate of income tax to 21p”; not yet launched",
+    text: "A Claude connector: “Score a 21p basic rate”; not yet launched",
     tag: tags.preview,
   },
   {
     icon: IconCode,
     title: "An AI coding assistant",
-    text: "The PolicyEngine plugin for Claude Code writes and runs the analysis; the analyst reviews the code and tables",
+    text: "A Claude Code plugin writes and runs it; the analyst reviews",
     tag: tags.done,
   },
   {
@@ -1641,7 +1676,7 @@ export const routes = [
 ];
 
 export const routesFoot =
-  "The web app needs no data access. In Python, population runs need an access token for Microcosm UK, which is FRS-derived and restricted. Each run’s code and outputs can be reviewed like any analysis script; PolicyEngine can review a pilot’s code.";
+  "Web app: no data access. Python: an access token for Microcosm UK (FRS-derived). Code and outputs reviewable like any script.";
 
 // ---------- Slide 22: three options ----------
 export const options = [
@@ -1649,34 +1684,34 @@ export const options = [
     icon: IconWorld,
     title: "A. Use what is public",
     rows: [
-      { label: "What it is", text: "The web app, the Budget dashboards and published analyses, as a second source beside existing modelling" },
-      { label: "What it needs", text: "No data access and no code" },
-      { label: "What it gives", text: "A quick cross-check on a costing or a household case" },
+      { label: "What it is", text: "Web app, dashboards and analyses as a second source" },
+      { label: "What it needs", text: "No data access, no code" },
+      { label: "What it gives", text: "A quick cross-check" },
     ],
   },
   {
     icon: IconArrowsSplit,
     title: "B. PolicyEngine runs, RF specifies",
     rows: [
-      { label: "What it is", text: "RF sets out an analysis; PolicyEngine could run it and return tables and code, in a public repository or not" },
-      { label: "What it needs", text: "A specification and a named output; time to review differences" },
-      { label: "What it gives", text: "A side-by-side with RF’s published numbers, and a first reconciliation between the two models" },
+      { label: "What it is", text: "RF specifies; PolicyEngine runs it and returns tables and code" },
+      { label: "What it needs", text: "A specification; time to review" },
+      { label: "What it gives", text: "A side-by-side and a first reconciliation" },
     ],
   },
   {
     icon: IconCode,
     title: "C. RF runs it",
     rows: [
-      { label: "What it is", text: "Analysts run PolicyEngine themselves, in Python or with an AI assistant, with RF’s own projection steps around it" },
-      { label: "What it needs", text: "An access token, a way to hold FRS-derived data under RF’s own terms, and the missing steps (slides 13 and 14)" },
-      { label: "What it costs", text: "A break in RF’s published series; past figures reconciled to the new model" },
-      { label: "What it gives", text: "Open rules and data pipeline, local-area outputs, structural changes by pull request" },
+      { label: "What it is", text: "RF analysts run it, in Python or with an AI assistant" },
+      { label: "What it needs", text: "A token, a data route, the missing steps (slides 13–14)" },
+      { label: "What it costs", text: "A break in RF’s series; past figures reconciled" },
+      { label: "What it gives", text: "Open rules and data, local-area outputs, changes by pull request" },
     ],
   },
 ];
 
 export const optionsFoot =
-  "What C would need built, from slides 13 and 14: reweighting for future years; an “earlier policy, uprated” baseline; take-up as a run-time setting; anchoring to outturn (or these stay in RF’s own code). And poverty levels closer to HBAI’s (slide 18).";
+  "C would also need: future-year weights, an earlier-policy baseline, run-time take-up, anchoring to outturn, poverty closer to HBAI’s.";
 
 // ---------- Slide 23: a possible pilot ----------
 export const pilotFlow = [
@@ -1688,36 +1723,37 @@ export const pilotFlow = [
 
 export const pilotBrings = {
   rf: [
-    "The chart’s specification: income measure, equivalisation, vigintiles, take-up",
-    "The published series behind the chart",
-    "A reviewer’s time on the differences",
+    { icon: IconFileDescription, text: "The chart’s specification: income, equivalisation, take-up" },
+    { icon: IconChartLine, text: "The published series" },
+    { icon: IconEye, text: "A reviewer’s time" },
   ],
   pe: [
-    "The run on the current release build, with code and a record of versions and data",
-    "The reconciliation table and note",
-    "Small pieces the mapping shows missing, such as a vigintile view in the web app; scope to agree",
+    { icon: IconCode, text: "The run, with code, versions and data recorded" },
+    { icon: IconTable, text: "The reconciliation table and note" },
+    { icon: IconPuzzle, text: "Small missing pieces, such as a vigintile view" },
   ],
 };
 
 export const pilotScope =
-  "Indicative scope: one chart; PolicyEngine does the run and writes the reconciliation note; RF gives the specification, reviews it and, where a difference needs it, supplies an intermediate result.";
+  "Indicative scope: one chart. PolicyEngine runs it and writes the note; RF specifies and reviews.";
 
 export const pilotCandidates = [
   {
-    title: "Candidate 1: the Autumn Budget 2026 distribution chart",
-    text: "Spread thin, Fig 8. Scope differs (RF: a £4.4bn package; PolicyEngine: seven measures, £3.11bn in 2026–27), so first agree the list. About 375 effective households per vigintile, so deciles too",
+    icon: IconReceiptTax,
+    title: "Candidate 1: Spread thin, Fig 8",
+    text: "Agree the measures first (RF £4.4bn; PolicyEngine £3.11bn). Deciles too: about 375 effective households per vigintile",
   },
-  { title: "Candidate 2, smaller: Billing me softly", text: "The proposal is already encoded; the pilot would add the non-take-up method" },
+  { icon: IconBolt, title: "Candidate 2, smaller: Billing me softly", text: "Already encoded; add the non-take-up method" },
 ];
 
 // ---------- Slide 24: questions ----------
 export const questions = [
-  { icon: IconFileSearch, text: "Is the list of uses on slides 13 and 14 right and complete, and which use matters most?" },
-  { icon: IconGitCompare, text: "Which analysis would be the most informative one to reproduce side by side?" },
-  { icon: IconArrowsSplit, text: "Which steps of the projection method would stay in RF’s own code, and which would the model need to do?" },
-  { icon: IconTargetArrow, text: "What agreement with published figures, and against which benchmark, would be useful to see?" },
-  { icon: IconDatabase, text: "How could RF hold FRS-derived data such as Microcosm UK under its own UK Data Service terms?" },
-  { icon: IconMessageQuestion, text: "Which route in would suit: the web app, an AI assistant or code, and should a pilot’s code be public?" },
+  { icon: IconFileSearch, text: "Is our list of RF’s uses right, and which matters most?" },
+  { icon: IconGitCompare, text: "Which analysis is most worth reproducing side by side?" },
+  { icon: IconArrowsSplit, text: "Which projection steps would stay in RF’s own code?" },
+  { icon: IconTargetArrow, text: "What agreement, against which benchmark, would you want to see?" },
+  { icon: IconDatabase, text: "How could RF hold FRS-derived data such as Microcosm UK?" },
+  { icon: IconMessageQuestion, text: "Which route in suits RF, and should a pilot’s code be public?" },
 ];
 
 // ---------- Slide 25: closing ----------
