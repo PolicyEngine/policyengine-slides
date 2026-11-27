@@ -34,7 +34,7 @@ move on (a few seconds each).
 
 The slides carry one headline per slide; the detail behind each is in
 these notes. Spend about 15 seconds each on slides 14, 15 and 23 (one
-sentence, then move on), with the time going to slides 13, 16, 19 and 21.
+sentence, then move on), with the time going to slides 13, 16, 18, 19 and 21.
 Slide numbers are in the footer for questions.
 
 Three bases appear, and the slides label them: 50-draw means (the central
@@ -52,7 +52,7 @@ labour-market shock of a given size and ask how much the UK tax-benefit
 system absorbs, and who bears the rest.
 
 **2. Agenda.** A short introduction to PolicyEngine, then five parts.
-Give the three results in one breath so the audience knows where it is
+Give the three results quickly so the audience knows where it is
 going: who loses the job moves the Exchequer cost (£1.9bn to £11.3bn a year
 across four rules for the same 7 per cent); how the loss arrives sets who
 bears it (as wage cuts, poverty +0.3 points instead of +2.4, at £12bn more
@@ -91,7 +91,7 @@ decline). I hold the size fixed and vary both.
 **7. Section: Data and method.** Divider; name the part and move on.
 
 **8. Overview.** Four steps: microdata, exposure, a person-level shock, the
-tax-benefit model, run twice on the same records. (Microsimulation:) PolicyEngine UK under the rules legislated or
+tax-benefit model, run twice on the same records. PolicyEngine UK under the rules legislated or
 announced for 2027–28 (frozen thresholds; higher dividend, savings and
 property rates). The cost is the fall in the government balance, including
 employer NI, with no VAT response. Absolute poverty uses the official
@@ -103,24 +103,23 @@ imputations, and weights calibrated to 1,514 targets (98.7 per cent within
 10 per cent). 29 million employees in 2027–28; 99.7 per cent have an
 occupation group.
 
-**10. Exposure.** After the data: what we do to it. Felten et al.'s AIOE times a complementarity factor from
+**10. Exposure.** Felten et al.'s AIOE times a complementarity factor from
 Pizzinelli et al., rebuilt from O*NET and mapped to UK SOC2020 through the
 DfE crosswalk, weighted by ASHE employment. I shift the score so the least
 exposed group is zero, my normalisation. θ enters only relative to its
 minimum and mean, so the rebuilt series' level offset does not matter.
 Exposure varies between nine groups only. If asked: for the four groups
 with a negative AIOE, a higher θ raises the score; the unadjusted AIOE
-gives £8.0bn against £8.2bn after the displaced-count adjustment (not on the slides).
+gives £8.0bn against £8.2bn after the displaced-count adjustment (slide 23).
 
 **11. The shock (scenario inputs).** The 2.6 per cent averages over all
 baseline employees; paid to survivors only, their mean uplift runs 2.56–2.74
-per cent by decile. The inputs come from Briggs and Kodnani (2023) via
-Doorley et al.'s Irish design. Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
+per cent by decile. Doorley et al.'s Irish inputs: 7 per cent displaced, 2.6
 per cent survivor wage rise, interest and dividends up 39.8 per cent (the
 return on capital up 0.4 points from 1.005 per cent; read it as a 39.8 per
 cent uplift). Name what is left out. The newly displaced get UC only if
 their benefit unit (adult, any partner and children, assessed together)
-is simulated as a claimant. (The shock:) Job losses allocated by employment times shifted
+is simulated as a claimant. Job losses allocated by employment times shifted
 exposure; survivor wages rise in proportion to complementarity; capital
 income scaled by 1.398. Within each group, systematic sampling picks the
 displaced. The model takes no spell length: the displaced are out all year.
@@ -143,7 +142,7 @@ on the relative line; +1.99 with full take-up and JSA.
 
 **14. By decile.** 0.78 per cent of the bottom decile against 5.57 per
 cent of the top move into unemployment, mostly because that is where
-employees are. Women are 53 per cent of the displaced. (Decomposition:) Losses peak in the upper-middle deciles; on this
+employees are. Women are 53 per cent of the displaced. Losses peak in the upper-middle deciles; on this
 draw decile 8 loses 3.7 per cent of disposable income, 2.9 per cent over
 20 draws, and which of deciles 6–9 loses most depends on the ranking. Ignore decile 1: its gain reverses
 under another household ranking.
@@ -161,7 +160,7 @@ per cent, nearly all through lower income tax and NI; cash benefits add
 better off than the existing unemployed: capital, partners' earnings, owned
 homes. This audience will know Dolls et al.: 47 per cent in the EU and 34
 in the US, but they assume full take-up and add people like the existing
-unemployed, so the numbers are not comparable. (OBR benchmark:) £10.2bn against the OBR's £9bn, close only because
+unemployed, so the numbers are not comparable. If asked about the OBR benchmark: £10.2bn against the OBR's £9bn, close only because
 the lines offset: more lost receipts, less welfare.
 
 ## 4. Who loses the job, and how
@@ -170,9 +169,9 @@ the lines offset: more lost receipts, less welfare.
 
 **18. Five rules.** Cost runs from £1.9bn to £11.3bn (£27.7bn in the
 stress test) and tracks the earnings of those displaced. Poverty varies
-much less; the uniform-versus-exposure gap fails a 2,000-draw check. (Figure:) Every rule displaces more in the upper half. Ten seconds.
+much less; the uniform-versus-exposure gap fails a 2,000-draw check. Every rule displaces more in the upper half. Ten seconds.
 
-**19. Margin.** The key slide. Same gross loss: job loss £7.18bn and +2.38
+**19. Margin.** Same gross loss: job loss £7.18bn and +2.38
 points; wage cuts £19.13bn and +0.28 points (channels on in both). Without
 the channels, +2.88 against +0.92. Per pound, 42p against 55p. Why: wage
 cuts remove pounds at the margin; job loss removes whole earnings and
@@ -184,16 +183,15 @@ system; shorter spells narrow the cost gap.
 **20. Section: What moves the cost, and policy.** Divider; name the part and move on.
 
 **21. Break-evens.** Survivor wages +3.7 against +2.6 per cent (seed 0);
-capital uplift 55 against 40 per cent; spells of at most 9.5 months (20
-draws). Without the survivor wage rise, £24.9bn. (Grid:) At 7 per cent displacement, average income falls unless
-survivor wages grow by 5 per cent.
+capital uplift 55 against 40 per cent; spells of at most 9.5 months (this one on 20
+draws). Without the survivor wage rise, £24.9bn. Full UC take-up gives
+£9.9bn and adding contributory JSA £12.6bn (20 draws).
 
 **22. Pay rise against job loss.** One draw, capital shock on, central
 rule. At 7 per cent job loss, average household disposable income falls
 with pay rises up to 4 per cent (−0.32 per cent) and rises at 5 per cent
 (+0.15). With no pay rise, it already falls at 4 per cent job loss
-(−0.38). The point: living standards, not only the budget, rest on the
-pay assumption.
+(−0.38). The pay assumption drives living standards as well as the budget.
 
 **23. Other exposure scores.** On one draw, adjusted for the displaced
 count, five scores give £4bn to £8bn; Felten's AIOE (£8.0bn) and the
@@ -219,7 +217,7 @@ reaches deciles 8–10; R2 and R3 place 77 and 73 per cent in deciles 1–5.
 
 ## Close
 
-**26. Conclusions and next steps.** Three findings in one breath: who
+**26. Conclusions and next steps.** Three findings, quickly: who
 loses the job drives the budget cost (£1.9bn to £11.3bn across four rules)
 while poverty moves far less; job loss raises poverty far more than wage
 cuts of the same size (+2.4 against +0.3 points); and whether the state
@@ -228,7 +226,7 @@ loses at all depends on where the lost wages go (a £0.9bn gain to a
 code carry over and the UK run is a benchmark; what is missing is
 household data with incomes and occupations (EU-SILC through Eurostat,
 SOEP by contract) and their tax-benefit rules; both countries' earnings-
-related insurance is the interesting test. For accuracy: detailed
+related insurance is the test that matters for this audience. For accuracy: detailed
 occupations from the Labour Force Survey, spells and re-employment
 calibrated to UK evidence (Upward and Wright 2019), contributory JSA and
 take-up for the newly displaced. Hiring and retraining: the entry margin
@@ -239,7 +237,7 @@ for young workers (Brynjolfsson et al. 2026) and the cost of retraining
 macro model next to this study; firms and production networks linked to
 households; what a slower US pace of AI development would mean for
 government, people and firms; and the token tax project (household
-incidence of a UK tax on AI tokens, in progress). Name them in one breath. (The whole-economy lens, live:) PolicyEngine's dashboard "AI and the
+incidence of a UK tax on AI tokens, in progress). Name them quickly. PolicyEngine's dashboard "AI and the
 UK economy: Beyond the forecast" (OG-UK with this household study). Leave
 it for the discussion; scroll it only if asked. The PDF shows its first
 screen only. Frame the dashboard first: a different model (OG-UK, no
