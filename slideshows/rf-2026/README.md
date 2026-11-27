@@ -55,8 +55,9 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 25. Thank you
 
 The spoken path, about 12 minutes, is 1, 2, 4, 12, 13, 14, 16, 19 in one
-sentence, 22 and 23, and 24, always moving forward; slide 9's point is
-made from slide 14's "Known gap" line. NOTES.md has the timings.
+sentence, 22, 23 and 24. The deck only steps forward, so the reference
+slides are clicked through on the way; slide 9's point is made from slide
+14's "Known gap" line. NOTES.md has the timings and checkpoints.
 
 ## Files
 
