@@ -1,15 +1,18 @@
 # Presenter notes: PolicyEngine UK and the Resolution Foundation's modelling
 
-25 slides, about 12 minutes of talk, then discussion. The spoken path is
-1, 2, 4, 12, 13, 14, 16 (one minute), 19 in one sentence, 22 and 23
-together, and 24, always moving forward. The others (3, 5, 6, 7, 8, 9, 10,
-11, 15, 17, 18, 20, 21 and 25) are reference, for questions and to leave
-behind. Slide 9's point (one calibrated year; take-up drawn at build) is
-made from the "Known gap" line on slide 14; say on slide 14 that Microcosm
-is PolicyEngine's household file, built from the FRS. Rough checkpoints:
-slide 12 by minute 2, slide 14 by minute 5.5, slide 16 by minute 8, slide
-22 by minute 9.5, slide 24 by minute 12. If RF starts correcting slide 12,
-let it run and drop 19 and 22; keep 13, 14, 16, 23 and 24.
+25 slides, about 12 minutes of talk, then discussion. The deck only steps
+forward, so every slide is shown. Eleven are spoken: 1, 2, 4, 12, 13, 14,
+16, 19 (one sentence), 22, 23 and 24. The other fourteen (3, 5, 6, 7, 8, 9,
+10, 11, 15, 17, 18, 20, 21 and 25) are reference, for questions and to leave
+behind: click through them without stopping, and say one bridging sentence
+on 11. Use the keyboard, not the mouse, so a click cannot land inside the
+live page on slide 5. Slide 9's point (one calibrated year; take-up drawn at
+build) is made from the "Known gap" line on slide 14. Say on slide 2 that
+Microcosm is PolicyEngine's household file, built from the FRS. Checkpoints,
+on arriving: slide 12 at 2:15, slide 14 at 5:25, slide 16 at 7:50, slide 22
+at 9:10, slide 24 at 11:15; discussion open by 11:45. If RF starts
+correcting slide 12, let it run and drop 19 and 22; keep 13, 14, 16, 23 and
+24.
 
 Years: the weights are fitted to calendar 2025 (fiscal-year sources are
 converted to 2025, 3/12 of 2024–25 plus 9/12 of 2025–26; DWP caseloads
@@ -54,8 +57,10 @@ us.
 
 ### 2. Outline (spoken, 20 seconds)
 
-One sentence on the six parts; part 4 is the core. The summary of what we
-found comes at the end, on slide 24, after RF has seen the mapping.
+One sentence on the six parts; part 4 is the core. One sentence on the word
+on screen: Microcosm is PolicyEngine's household file, built from the FRS.
+The summary of what we found comes at the end, on slide 24, after RF has
+seen the mapping.
 
 ### 3. Who we are (reference)
 
@@ -81,7 +86,7 @@ found comes at the end, on slide 24, after RF has seen the mapping.
 
 ## Part 2. The Nuffield Foundation grants
 
-### 4. The Nuffield Foundation grants: what they named and what exists today (spoken, 1.5 minutes)
+### 4. The Nuffield Foundation grants: what they named and what exists today (spoken, 70 seconds)
 
 Grant 1's aims were comprehensiveness, accuracy and accessibility: making
 the model local (constituencies and local authorities), wider (childcare,
@@ -122,7 +127,9 @@ gap on slide 14.
 
 ### 5. The Autumn Budget 2026 dashboard, by constituency (reference, live page)
 
-Open only if asked what local output looks like. The dashboard models the
+This slide is passed on the way from slide 4 to slide 12: press the arrow
+key and do not wait for the page to load. Do not click inside the page.
+Stop here only if asked what local output looks like. The dashboard models the
 Budget's household measures, including the energy payment, zero VAT on
 electricity, fuel duty, the Pension Tax Allowance, property income tax, the trading allowance and the Carer's Allowance taper; sources
 differ on the count, so the slide gives none. The run that produced all the
@@ -214,7 +221,7 @@ through the poverty output's `filter_variable`.
 
 ## Part 4. The Resolution Foundation's research
 
-### 11. The Resolution Foundation's 2026 research we have read (reference, one sentence)
+### 11. The Resolution Foundation's 2026 research we have read (reference; one bridging sentence on the way to slide 12)
 
 "We read the year's reports and their figure notes to list how the model is
 used; the next slide is the method as we understand it." The slide has no
@@ -228,14 +235,17 @@ does not state the model used.
 
 ### 12. How the Resolution Foundation projects incomes, as we read it (spoken, 1 minute)
 
-This slide exists to be corrected. It separates what the IPPR model does
-from RF's own processing around it, as we read Annex 1 of the Living
-Standards Outlook 2026. Annex 1 says market incomes are projected "largely
-through the IPPR Tax Benefit Model", so step 3 is marked as largely the
-model's, with the WAS savings imputation RF's own. The split decides what
-PolicyEngine would need to do and what could stay as it is. Ask directly:
-is the split right, has the method changed since February, and is "the
-IPPR model" still the right name for what RF runs?
+Say first: "This is how we read RF's projection method, from Annex 1 of the
+Living Standards Outlook 2026. It is here to be corrected." Click through
+the five steps, a few words each. Open circles are RF's own processing;
+filled circles are the tax-benefit model. Annex 1 says market incomes are
+projected "largely through the IPPR Tax Benefit Model", so step 3 is marked
+as largely the model's, with the WAS savings imputation RF's own. The split
+decides what PolicyEngine would need to do and what could stay as it is.
+End with one question, then pause: "Is that split right, and is it still how
+you do it?" Keep two follow-ups for the answer: has the method changed since
+February, and is "the IPPR model" still the right name for what RF runs?
+The slide says "the model RF uses"; slide 16 names the IPPR model.
 
 Fuller wording of the steps (LSO 2026, Annex 1):
 
@@ -259,25 +269,43 @@ Fuller wording of the steps (LSO 2026, Annex 1):
 5. Anchor: modelled growth rates, and absolute changes in poverty, applied
    to outturn data.
 
-### 13. RF's published analyses, mapped to PolicyEngine (spoken, 2.5 minutes)
+### 13. RF's published analyses, mapped to PolicyEngine (spoken, 2 minutes 10)
 
-This slide and the next are the core. "Done" means a standard output or
-the code does it today; "Partly" that the pieces exist but something RF's
-method needs is missing or works only in Python; "Not yet" that it would
-need building or is untested. Speak to the first four rows and to
-non-take-up; leave the rest to read. At the end of the table, ask: which
-use matters most, and is any use missing?
-Breakdowns by family type, tenure or number of children are custom
-analysis in Python (slide 10), not a standard output.
+This slide and the next are the core. Say first: "Each row is something RF
+has published this year, and what PolicyEngine does for it today." Then the
+key: "Done" means a standard output or the code does it today; "Partly"
+that the pieces exist but something RF's method needs is missing or works
+only in Python; "Not yet" that it would need building or is untested.
 
-Three things worth saying up front: vigintiles exist in Python but the web
-app shows deciles, and the default ranking income is unequivalised, so RF's
-equivalised vigintiles would be passed in as a grouping; there is no
-ready-made "earlier policy, uprated" baseline for a cumulative chart; the
-standard child poverty output counts everyone aged 17 or under, and HBAI's
-dependent children are available in Python (`is_hbai_dependent_child`, as
-the scorecard's poverty rows in the notes to slide 20 use). For anyone reading the code: `in_poverty_bhc` is
-absolute poverty; relative poverty is `in_relative_poverty_bhc`.
+Speak to the first five rows and to non-take-up, a sentence or two each;
+leave the rest to read.
+
+1. Budget measures by income group. Deciles are in the web app. Vigintiles
+   are in Python only.
+2. Ranking income. The default ranking is unequivalised. RF's equivalised
+   ranking would be passed in as a grouping.
+3. Cumulative impact. There is no ready-made "earlier policy, uprated"
+   baseline. It has to be written by hand.
+4. Projections. Incomes are uprated with the OBR forecast. The weights are
+   not refitted for future years. The next slide takes this step by step.
+5. Child poverty. A with-and-without comparison runs. Poor larger families
+   are under-weighted, so effects are likely understated. The size of the
+   gap is on the next slide; give no figures here. The standard output
+   counts everyone aged 17 or under; HBAI's dependent children are
+   available in Python.
+
+Non-take-up: a full-entitlement run works in Python for five benefits, not
+in the web app.
+
+Ask nothing here. Say that question 1 on the last slide is about this
+table: which use matters most, and is any missing.
+
+If asked: breakdowns by family type, tenure or number of children are
+custom analysis in Python (slide 10), not a standard output. The
+dependent-child filter is `is_hbai_dependent_child`, as the scorecard's
+poverty rows in the notes to slide 20 use. For anyone reading the code:
+`in_poverty_bhc` is absolute poverty; relative poverty is
+`in_relative_poverty_bhc`.
 
 Full rows (checked against policyengine-uk 5987eb3, microcosm cac12ab,
 policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
@@ -350,29 +378,40 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   imputed from WAS round 8. A proportional property tax would be a new
   reform, not yet written. Not yet.
 
-### 14. Each step of the projection method, mapped to PolicyEngine (spoken, 2.5 minutes)
+### 14. Each step of the projection method, mapped to PolicyEngine (spoken, 2 minutes 25)
 
-Say the poverty gap first: poverty levels on the calibrated file run below
-HBAI's, 3.40m children below the AHC line against 3.97m in 2024–25; at the
-starting weights the file reproduces HBAI's total (4.02m), though families
-of three or more are already under-weighted there; calibration opens the
-rest of the gap, and we are working on it. Then the main method gap: PolicyEngine fits its weights to
-one year (2025)
-and uprates incomes with OBR growth rates; it does not reweight to
-projected populations, employment or caseloads for future years, which is
-central to RF's method. After 2025, caseloads move only through population
-growth in the weights, the rules and the stored take-up flags. Third:
-take-up is drawn when the data are built, so an assumption such as "UC
-take-up of 80%" cannot be set for a run today; people a reform newly
-entitles claim at a rate fixed at build (slide 9). Where PolicyEngine does
-something different rather than less (savings interest from the FRS and
-SPI rather than WAS; private pensions on an OBR index), say it is
-different, not better. The steps marked "RF" could stay in RF's own code
-whichever model sits in the middle, or move into PolicyEngine: question 3
-on slide 24. The last row is the natural form of option C on slide 22: RF
-keeps its own prepared file and runs PolicyEngine's rules on it. Finish
-on the "Known gap" line: it is slide 9's point, so there is no need to go
-back.
+Say first: "The same exercise for the method: the five steps from two
+slides back, whose each one is, and what PolicyEngine does today." Then
+three gaps, in this order.
+
+First, poverty levels (row 1). This is the one place to give the figures.
+On the calibrated file, 3.40m children are below the after-housing-costs
+line. HBAI has 3.97m, for 2024–25. At the starting weights the file gives
+4.02m, in line with HBAI's total, though families of three or more are
+already under-weighted there. Calibration then opens the gap in the total.
+We are working on it.
+
+Second, future years (row 2). PolicyEngine fits its weights to one year,
+2025. It uprates incomes with OBR growth rates. It does not reweight to
+projected populations, employment or caseloads, which is central to RF's
+method. After 2025, caseloads move only through population growth in the
+weights, the rules and the stored take-up flags.
+
+Third, take-up (the "Partial take-up" row). Take-up is drawn when the data
+are built. So an assumption such as "UC take-up of 80%" cannot be set for a
+run today. People a reform newly entitles claim at a rate fixed at build
+(slide 9).
+
+Then, briefly: where PolicyEngine does something different rather than less
+(savings interest from the FRS and SPI rather than WAS; private pensions on
+an OBR index), say it is different, not better. The rows marked "RF" could
+stay in RF's own code whichever model sits in the middle, or move into
+PolicyEngine: question 3 on slide 24.
+
+Click for the second group. Point only at its last row: RF keeps its own
+prepared file and runs PolicyEngine's rules on it. That is the natural form
+of option C on slide 22. Finish on the "Known gap" line: it is slide 9's
+point, so there is no need to go back.
 
 The main group follows slide 12's five steps; the second group, "Also in
 RF's analysis", holds rows that are not among them (indirect taxes are not
@@ -455,7 +494,7 @@ outturn" would stay in RF's code or be added to PolicyEngine.
 
 ### 15. An RF proposal already modelled: the targeted energy bill discount (reference)
 
-Mention in one sentence on slide 13 or 23. The proposal, for Great
+Mentioned on slide 23 as candidate 2; this slide is passed without comment. The proposal, for Great
 Britain, passports households on a means-tested benefit or applies a test
 on the highest individual income in a household. RF's "about 40%" is the
 income test alone; PolicyEngine's 42% counts households passported or
@@ -469,12 +508,14 @@ the 42%.
 
 ## Part 5. Checks
 
-### 16. The data: PolicyEngine, the IPPR model and UKMOD (spoken, 1 minute)
+### 16. The data: PolicyEngine, the IPPR model and UKMOD (spoken, 55 seconds)
 
-The data comparison, in one minute: three ways of
-preparing the same survey; what fitting weights to official totals buys
-(benefit caseloads and top incomes match) and what it costs (an effective
-sample of about 7,500, and the poverty gap from slide 14).
+The data comparison, in under a minute. Say first: three ways of preparing
+the same survey. Then go to one row, "Weights and effective sample".
+Fitting weights to official totals means the benefit caseloads the raw FRS
+under-records are matched, in-sample. The cost is an effective sample of
+about 7,500 from 78,450 records, and the poverty gap already covered (the
+figures are on slide 18; do not repeat them). Leave the other rows to read.
 
 Frame these as design differences, not a ranking. UKMOD keeps the FRS
 grossing weights and makes no other updating adjustments, so results stay
@@ -527,7 +568,7 @@ Fuller cells:
 - Years ahead, UKMOD: policy years 2023–2030; a release after each Budget
   (B2026.05, 30 October 2026).
 
-### 17. The rules engine and access (reference, one sentence)
+### 17. The rules engine and access (reference; one sentence if stopped on)
 
 "The rules comparison is here for reference. UKMOD publishes an annual
 country report validating against administrative data and HBAI. In
@@ -603,9 +644,10 @@ are affected too.
 
 ### 19. Autumn Budget 2026: PolicyEngine's costings beside the OBR's (one sentence on the spoken path)
 
-On the spoken path, one sentence: the costings, beside the official ones,
-with the misses shown and a reason for each. The detail below is for
-questions.
+On the spoken path, one sentence: "These are our costings of the seven
+Budget measures beside the OBR's, from 52% to 134% of the official figure,
+with the main reason for each gap where we know it; two are not yet
+explained." The detail below is for questions.
 
 The briefing calls the run static. The two default responses (capital
 gains realisations, employer NI pass-through) apply only where a measure
@@ -614,7 +656,8 @@ they should not move these figures (not yet confirmed in the run's code).
 
 The nearest thing we have to an external test, so show the misses as
 plainly as the hits. The table has all seven measures the briefing models,
-each with the year compared and the main reason for its gap. Years:
+each with the year compared and the main reason for its gap where known
+(two are not yet explained). Years:
 2026–27 for the three measures with a figure that year; 2029–30 for the
 three income tax measures (after the Self Assessment timing gap, and the
 last year of the Pension Tax Allowance, whose 2027–28 figures are close:
@@ -700,33 +743,44 @@ launched. The web app covers parametric reforms and standard outputs
 Example-household calculations are done in both the web app and Python. An
 API exists; its UK endpoints are not on the slide.
 
-### 22. Three ways the Resolution Foundation could use PolicyEngine (spoken with 23, 2.5 minutes in all)
+### 22. Three ways the Resolution Foundation could use PolicyEngine (spoken, 55 seconds)
 
-These are options, not a proposal with a price or a timetable. Say the
-sense of slide 21 in one sentence: most of these uses need Python, written
-by an analyst or an assistant; the web app covers parametric reforms and
-deciles. A uses only what is already public. B is a low-commitment way to
-learn whether the numbers agree. C is the only one that would touch RF's
-own workflow, and it has two open preconditions: how RF would hold
-Microcosm under its own UK Data Service terms, and which steps on slide 14
-would need building (or RF's own file is run through PolicyEngine's rules,
-the last row of slide 14). Smaller pieces in Python today but not in the
-web app: vigintiles, and entitlement runs for five benefits.
+These are options, not a proposal with a price or a timetable. One sentence
+each as the cards appear. A uses only what is already public: the web app
+and dashboards as a second source. B: RF specifies one analysis;
+PolicyEngine runs it and returns the tables and code. C is the only one
+that would touch RF's own workflow: RF's analysts run it. C needs the three
+things on the card: a token, a route for RF to hold Microcosm under its own
+UK Data Service terms, and the missing steps. The strip along the bottom
+lists those steps. They are the gaps from slide 14, so do not go through
+them again. The alternative is RF's own file run through PolicyEngine's
+rules, the last row of slide 14. Say once, for slide 21: most of these uses
+need Python, written by an analyst or an assistant; the web app covers
+parametric reforms and deciles, not vigintiles or entitlement runs.
 
 Option C's "What it costs" row is there to be even-handed: a change of
 model breaks the continuity of RF's published series, and past figures
 would need reconciling to the new model.
 
-### 23. A possible pilot: one published analysis, side by side (spoken with 22)
+### 23. A possible pilot: one published analysis, side by side (spoken, 70 seconds)
 
-The output that matters is the reconciliation, not agreement: a table that
-splits each difference into data, rules, take-up and uprating. We know of
-no published reconciled comparison between PolicyEngine and the IPPR
-model; the scorecard sets published figures side by side and reconciles nothing.
+Spoken, about a minute. Say first: "The smallest useful step is to
+reproduce one RF chart in PolicyEngine and explain the difference." The
+output that matters is the reconciliation, not agreement: a table that
+splits each difference into data, rules, take-up and uprating. PolicyEngine
+runs it and writes the note. RF specifies, reviews and supplies
+intermediate results where needed. Then the two candidates, one sentence
+each. Candidate 1 is the Budget distribution chart, Spread thin Fig 8; the
+first job is agreeing the list of measures, because the two headlines
+differ in scope. Candidate 2 is smaller: Billing me softly, already
+encoded, adding the non-take-up method. End: no commitment on timing; the
+scope is RF's to choose.
 
-Indicative scope: one chart. PolicyEngine runs it and writes the
-reconciliation note; RF specifies, reviews and supplies intermediate
-results where needed.
+If asked: we know of no published reconciled comparison between
+PolicyEngine and the IPPR model; the scorecard sets published figures side
+by side and reconciles nothing.
+
+Detail on the candidates, for questions:
 
 - Candidate 1, the Autumn Budget 2026 distribution chart (Spread thin,
   Fig 8). Both sides have published on the same Budget, but the headlines
@@ -750,11 +804,11 @@ results where needed.
   rows (RF's figures predate the April 2026 abolition now in PolicyEngine's
   baseline, so it needs a rebuilt baseline).
 
-No commitment on timing; the scope is RF's to choose.
 
 ### 24. Questions for discussion (discussion)
 
-Stop presenting and leave this slide up. Read the three short cells at the
+Stop presenting and leave this slide up. Read the three short cells in
+about 30 seconds, one sentence each. Read the three short cells at the
 top as our reading, for RF to correct: Nuffield, the local-area data exists
 today, the childcare and public-service variables in part, and the
 cross-model scorecard and the AI interface are in progress; RF's uses, a few
