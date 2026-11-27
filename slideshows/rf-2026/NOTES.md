@@ -300,7 +300,7 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
   yet. (`utils/dated_reforms.py`.)
 - **A3. Income and poverty projections to 2029–30** (LSO 2026; Spread thin,
   Figs 21–23). One dataset (FRS 2024–25, calibrated to 2025 targets),
-  uprated with the OBR October 2026 forecast to 2031; weights grow uniformly
+  uprated with the OBR October 2026 forecast to 2031–32; weights grow uniformly
   with ONS population. No reweighting to projected populations, employment
   or caseloads. Partly. (`data/bundle/manifest.json`; Microcosm
   `uk/spec/bundle.yaml`; `data/uprating_indices.yaml`.)
@@ -688,7 +688,7 @@ published method, not checks.
 
 ## Part 6. Routes in and a possible pilot
 
-### 21. Four routes in: web app, assistant, plugin, Python (reference)
+### 21. Four routes in: web app, connector, plugin, Python (reference)
 
 A reform is a parameter path and a value; the code around it can be
 written by hand or by an assistant, and it stays in a repository where it

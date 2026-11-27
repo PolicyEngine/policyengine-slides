@@ -65,7 +65,7 @@ export const rf2026Config: SlideshowConfig = {
     whole(UsesSlide),
     { component: StepsSlide, builds: 2, exportBuilds: 1 },
     whole(EnergySlide),
-    // Part 5. How PolicyEngine compares.
+    // Part 5. Checks.
     whole(DataCompareSlide),
     whole(RulesCompareSlide),
     whole(CalibrationSlide),

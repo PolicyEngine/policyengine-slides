@@ -1213,7 +1213,7 @@ export function RoutesSlide() {
   return (
     <Frame
       section="next"
-      title="Four routes in: web app, assistant, plugin, Python"
+      title="Four routes in: web app, connector, plugin, Python"
       scale={1.15}
       subtitle="From a web page to a prompt to code"
     >

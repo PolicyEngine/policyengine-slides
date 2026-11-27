@@ -603,7 +603,7 @@ export const modelFoot = behaviourLine;
 export const modelFootItems = [
   { icon: IconBriefcaseOff, text: "No labour-supply response by default" },
   { icon: IconTrendingUp, text: "On by default: capital gains realisations" },
-  { icon: IconCoins, text: "On by default: employer NI passed through to pay" },
+  { icon: IconCoins, text: "Also on: employer NI passed through to pay" },
 ];
 
 // ---------- Slide 7: how the rules are encoded ----------
@@ -1206,7 +1206,7 @@ export const stepsTable: MapRow[] = [
     tags: [tags.partly],
     step: 1,
   },
-  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "Stays in RF’s code, or to be added", tags: [tags.notYet], step: 1 },
+  { icon: IconChartLine, label: "Growth rates applied to outturn", where: "RF", today: "In RF’s code, or could be added", tags: [tags.notYet], step: 1 },
   {
     icon: IconShoppingCart,
     label: "Indirect taxes",

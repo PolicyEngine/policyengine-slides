@@ -48,7 +48,7 @@ every shortened table cell, are in [NOTES.md](NOTES.md).
 
 6 · Routes in and a possible pilot
 
-21. Four routes in: web app, assistant, plugin, Python
+21. Four routes in: web app, connector, plugin, Python
 22. Three ways the Resolution Foundation could use PolicyEngine
 23. A possible pilot: one published analysis, side by side
 24. Questions for discussion
