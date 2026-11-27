@@ -838,7 +838,7 @@ Precision: the effective sample of about 7,500 gives about 750 effective househo
 
 If asked what is simulated: Universal Credit, Pension Credit, Child Benefit, pension-age Housing Benefit and Council Tax Reduction (where the scheme is modelled) are computed from the rules and gated by a stored claim flag. Working-age Housing Benefit and the legacy benefits are continuing awards only and cannot rise under a reform. Other English working-age Council Tax Reduction keeps reported amounts. For PIP, DLA, Attendance Allowance, Carer's Allowance and the State Pension, say we will follow up with a simulated-or-reported list; do not guess.
 
-If asked for the take-up rate: there is no single rate to quote. Reporters claim; others are drawn to DWP's 2025 UC caseloads by family type and award band, Pension Credit rates for 2023–24 and HMRC's Child Benefit rates. The UC take-up parameter is read by no formula, so "80%" cannot be set for a run today; a full-take-up run can (the claim flag set to true). The implied UC rate on this build: say we will follow up.
+If asked for the take-up rate: there is no single rate to quote. Reporters claim; others are drawn to DWP's 2025 UC caseloads by family type and award band, Pension Credit rates for 2023–24 and HMRC's Child Benefit rates. The UC take-up parameter is read by no formula (checked at policyengine-uk 2.177.7, microcosm#1710), so "80%" cannot be set for a run today; a full-take-up run can (the claim flag set to true). The implied UC rate on this build: say we will follow up.
 
 ### Q4. What external evidence is there beyond the in-sample fit, and what has changed since HM Treasury's pilot?
 
