@@ -49,13 +49,13 @@ package versions, data build and forecast it used.
 
 ## Part 1. Introduction
 
-### 1. Title (spoken, 20 seconds)
+### 1. Title (spoken, 15 seconds)
 
 Thank the Resolution Foundation for the time. The deck has 25 slides; the
 talk follows about ten, and the rest is reference. Our reading of RF's method comes from published sources; please correct
 us.
 
-### 2. Outline (spoken, 20 seconds)
+### 2. Outline (spoken, 25 seconds)
 
 One sentence on the six parts; part 4 is the core. One sentence on the word
 on screen: Microcosm is PolicyEngine's household file, built from the FRS.
@@ -381,7 +381,7 @@ policyengine.py 81bac43 and policyengine-app-v2 d27867f, 25 November 2026):
 ### 14. Each step of the projection method, mapped to PolicyEngine (spoken, 2 minutes 25)
 
 Say first: "The same exercise for the method: the five steps from two
-slides back, whose each one is, and what PolicyEngine does today." Then
+slides back, who does each one, and what PolicyEngine does today." Then
 three gaps, in this order.
 
 First, poverty levels (row 1). This is the one place to give the figures.
@@ -764,7 +764,7 @@ would need reconciling to the new model.
 
 ### 23. A possible pilot: one published analysis, side by side (spoken, 70 seconds)
 
-Spoken, about a minute. Say first: "The smallest useful step is to
+Say first: "The smallest useful step is to
 reproduce one RF chart in PolicyEngine and explain the difference." The
 output that matters is the reconciliation, not agreement: a table that
 splits each difference into data, rules, take-up and uprating. PolicyEngine
@@ -804,12 +804,11 @@ Detail on the candidates, for questions:
   rows (RF's figures predate the April 2026 abolition now in PolicyEngine's
   baseline, so it needs a rebuilt baseline).
 
-
 ### 24. Questions for discussion (discussion)
 
-Stop presenting and leave this slide up. Read the three short cells in
-about 30 seconds, one sentence each. Read the three short cells at the
-top as our reading, for RF to correct: Nuffield, the local-area data exists
+Stop presenting and leave this slide up. Read the three short cells at
+the top as our reading, for RF to correct, in about 30 seconds, one
+sentence each: Nuffield, the local-area data exists
 today, the childcare and public-service variables in part, and the
 cross-model scorecard and the AI interface are in progress; RF's uses, a few
 are done today (decile charts, the LHA freeze, OBR uprating) and most
